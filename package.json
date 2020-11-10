@@ -4,7 +4,7 @@
   "description": "Lanaco react library components",
   "author": "aleksandar.mitric3",
   "license": "MIT",
-  "repository": "lanaco/lanaco-react-library",
+  "repository": "lanaco/lanaco-react-ui",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
