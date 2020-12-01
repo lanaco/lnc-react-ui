@@ -2,8 +2,7 @@ import React from "react";
 import styles from './styles.module.css'
 
 const TransparentTextInput = React.forwardRef((props, ref) => {
-  const { className = "" } = props;
-  const { onChange, onKeyDown, value, id } = props;
+  const { className = "", inputClassName = "" } = props;
   const {
     onClick = () => {},
     onInput = () => {},
@@ -12,17 +11,17 @@ const TransparentTextInput = React.forwardRef((props, ref) => {
   } = props;
 
   const handleOnChange = (e) => {
-    if (onChange) onChange(props.id, e.target.value);
+    if (props.onChange) props.onChange(props.id, e.target.value);
   };
 
     return (
-      <div className={props.className}>
+      <div className={className}>
         <input
           ref={ref}
-          className={className + " " + styles.inputTransparentText}
-          value={value}
+          className={["lnc", styles.inputTransparentText, inputClassName].join(" ")}
+          value={props.value}
           onChange={handleOnChange}
-          onKeyDown={onKeyDown}
+          onKeyDown={props.onKeyDown}
           onClick={onClick}
           onInput={onInput}
           onFocus={onFocus}
