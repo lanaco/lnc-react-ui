@@ -2,7 +2,7 @@ import React from "react";
 import styles from './styles.module.css'
 
 const TransparentTextInput = React.forwardRef((props, ref) => {
-  const { className = "", inputClassName = "" } = props;
+  const { className = "" } = props;
   const { onChange, onKeyDown, value, id } = props;
   const {
     onClick = () => {},
@@ -19,7 +19,7 @@ const TransparentTextInput = React.forwardRef((props, ref) => {
       <div className={props.className}>
         <input
           ref={ref}
-          className={props.className + " " + styles.inputTransparentText}
+          className={className + " " + styles.inputTransparentText}
           value={value}
           onChange={handleOnChange}
           onKeyDown={onKeyDown}
