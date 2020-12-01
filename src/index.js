@@ -5,7 +5,6 @@ export const ExampleComponent = ({ text }) => {
   return <div className={styles.test}>Example Component: {text}</div>
 }
 
-
 export {default as Button} from './Button';
 export * from './Button';
 
@@ -38,3 +37,6 @@ export * from './TextInput';
 
 export {default as ToggleSwitch} from "./ToggleSwitch";
 export * from './ToggleSwitch';
+
+export {default as TransparentTextInput} from "./TransparentTextInput";
+export * from './TransparentTextInput';
