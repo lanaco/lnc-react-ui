@@ -1,8 +1,8 @@
 {
-  "name": "@lanaco/lanaco-react-library2",
+  "name": "@lanaco/lanaco-react-library",
   "version": "1.0.0",
   "description": "Lanaco react library components",
-  "author": "aleksandar.mitric3",
+  "author": "aleksandar.mitric33",
   "license": "MIT",
   "repository": "lanaco/lanaco-react-ui",
   "main": "dist/index.js",
