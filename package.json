@@ -1,5 +1,5 @@
 {
-  "name": "lanaco-react-library",
+  "name": "@lanaco/lanaco-react-library2",
   "version": "1.0.0",
   "description": "Lanaco react library components",
   "author": "aleksandar.mitric3",
@@ -61,5 +61,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
