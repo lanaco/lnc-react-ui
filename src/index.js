@@ -40,3 +40,6 @@ export * from './ToggleSwitch';
 
 export {default as TransparentTextInput} from "./TransparentTextInput";
 export * from './TransparentTextInput';
+
+export {default as CheckboxLookup} from "./CheckboxLookup";
+export * from './CheckboxLookup';
