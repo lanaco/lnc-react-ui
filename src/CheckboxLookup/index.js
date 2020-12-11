@@ -37,7 +37,7 @@ const CheckboxLookup = (props) => {
     return (
       <IconButton
         onClick={() => handleSelectAll(selectDeselect)}
-        iconClassName={"lnc-checklist"}
+        iconClassName={props.chackAllIconClassName}
       />
     );
   };
