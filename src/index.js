@@ -1,10 +1,3 @@
-import React from 'react'
-import styles from './styles.module.css'
-
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
-
 export {default as Button} from './Button';
 export * from './Button';
 
@@ -43,3 +36,6 @@ export * from './TransparentTextInput';
 
 export {default as CheckboxLookup} from "./CheckboxLookup";
 export * from './CheckboxLookup';
+
+export {default as DropdownLookup} from "./DropdownLookup";
+export * from './DropdownLookup';
