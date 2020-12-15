@@ -1,5 +1,4 @@
 export const styles = () => ({
-
   cardStyle: {
     border: '1px solid rgb(191, 191, 191)',
     border_radius: '4px',
