@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './styles.module.css'
+import {styles} from "./styles.js";
 
 const TextInput = React.forwardRef((props, ref) => {
   const handleOnChange = (e) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import styles from './styles.module.css'
+import {styles} from "./styles.js";
 import IconButton from "../IconButton/index.js";
 
 const usePrevious = (value) => {
