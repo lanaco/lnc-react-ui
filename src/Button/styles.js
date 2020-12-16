@@ -49,7 +49,14 @@ export const styles = () => ({
       padding: '5px 15px'
     },
     
-    standardInputButton:{ '& $span': {
+    standardInputIconButton: {
+      font_weight: 'var(--button-icon-font-weight) !important',
+      font_size: '0.9em !important',
+      height: '100%',
+      width: '100%'
+    },
+
+    standardInputButton:{ '&:$span': {
       align_items: 'center',
       text_align: 'center'
     }},
@@ -58,21 +65,14 @@ export const styles = () => ({
     //   padding_right: 5px
     // },
     
-    standardInputButton:{ '& $hover': {
+    standardInputButton:{ '&:$hover': {
       background: '#004b6f'
     }},
     
-    standardInputButton:{ '& $disabled': {
+    standardInputButton:{ '&:$disabled': {
       background_color: 'var(--disabled-bg-color)',
       color: 'var(--disabled-text-color)'
     }},
-    
-    standardInputIconButton: {
-      font_weight: 'var(--button-icon-font-weight) !important',
-      font_size: '0.9em !important',
-      height: '100%',
-      width: '100%'
-    }
 })
 
 // .containerButton {
