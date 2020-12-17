@@ -1,3 +1,4 @@
+/* Generated code
 export const styles = () => ({
   inputTransparentText: {
     border: 'none',
@@ -9,16 +10,17 @@ export const styles = () => ({
     background_color: 'transparent',
     width: '100%'
   }
-})
+}) */
 
-// .inputTransparentText {
-//   border: none;
-//   margin: 0;
-//   text-decoration: none;
-//   -webkit-appearance: none;
-//   -moz-appearance: none;
-//   outline: none;
-//   margin: 0;
-//   background-color: transparent;
-//   width: 100%;
-// }
+/* Original CSS */
+.inputTransparentText {
+  border: none;
+  margin: 0;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  margin: 0;
+  background-color: transparent;
+  width: 100%;
+}

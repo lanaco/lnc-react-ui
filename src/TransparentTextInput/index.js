@@ -1,5 +1,5 @@
 import React from "react";
-import {styles} from "./styles.js";
+import styles from './styles.module.css'
 
 const TransparentTextInput = React.forwardRef((props, ref) => {
   const { className = "", inputClassName = "" } = props;

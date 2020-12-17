@@ -1,0 +1,142 @@
+/* Generated code
+export const styles = {
+  ".containerButton": {
+    width: "100%",
+    height: "100%",
+    display: "grid",
+    gridTemplateRows:
+      "var(--base-label-size) minmax(55%, auto) var(\n      --base-error-text-size\n    )",
+    paddingTop: "3px",
+    paddingLeft: "1px",
+    paddingRight: "1px",
+    paddingBottom: "1px"
+  },
+  ".labelButton": {
+    fontSize: "var(--base-additional-text-font-size)",
+    fontFamily: "inherit",
+    fontWeight: 400,
+    color: "#545454",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "left",
+    alignItems: "flex-end"
+  },
+  ".errorTextButton": {
+    fontSize: "var(--base-additional-text-font-size)",
+    fontFamily: "inherit",
+    fontWeight: 400,
+    color: "var(--base-error-color)",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "left",
+    alignItems: "flex-start"
+  },
+  ".standardInputButton": {
+    fontFamily: "inherit",
+    WebkitAppearance: "none",
+    appearance: "none",
+    outline: "none",
+    width: "100%",
+    height: "100%",
+    transition: "all var(--transition-duration)",
+    fontSize: "var(--font-size)",
+    backgroundColor: "var(--add-button-bg-color-primary)",
+    background: "var(--lanaco-accent-color)",
+    color: "var(--add-button-text-color)",
+    padding: "5px 15px"
+  },
+  ".standardInputButton span": { alignItems: "center", textAlign: "center" },
+  ".standardInputButton > span > span": { paddingRight: "5px" },
+  ".standardInputButton:hover": { background: "#004b6f" },
+  ".standardInputButton:disabled": {
+    backgroundColor: "var(--disabled-bg-color)",
+    color: "var(--disabled-text-color)"
+  },
+  ".standardInputIconButton": {
+    fontWeight: "var(--button-icon-font-weight) !important",
+    fontSize: "0.9em !important",
+    height: "100%",
+    width: "100%"
+  }
+}*/
+
+/* Original CSS */
+.containerButton {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
+      --base-error-text-size
+    );
+  padding-top: 3px;
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-bottom: 1px;
+}
+
+.labelButton {
+  font-size: var(--base-additional-text-font-size);
+  font-family: inherit;
+  font-weight: 400;
+  color: #545454;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: flex-end;
+}
+
+.errorTextButton {
+  font-size: var(--base-additional-text-font-size);
+  font-family: inherit;
+  font-weight: 400;
+  color: var(--base-error-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+}
+
+.standardInputButton {
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  transition: all var(--transition-duration);
+  font-size: var(--font-size);
+  background-color: var(--add-button-bg-color-primary);
+  background: var(--lanaco-accent-color);
+  color: var(--add-button-text-color);
+  padding: 5px 15px;
+}
+
+.standardInputButton span {
+  /* display: flex; */
+  align-items: center;
+  text-align: center;
+}
+
+.standardInputButton > span > span {
+  padding-right: 5px;
+}
+
+.standardInputButton:hover {
+  background: #004b6f;
+}
+
+.standardInputButton:disabled {
+  background-color: var(--disabled-bg-color);
+  color: var(--disabled-text-color);
+}
+
+.standardInputIconButton {
+  font-weight: var(--button-icon-font-weight) !important;
+  font-size: 0.9em !important;
+  height: 100%;
+  width: 100%;
+}

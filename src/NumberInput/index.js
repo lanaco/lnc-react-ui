@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {styles} from "./styles.js";
+import styles from './styles.module.css'
 
 const NumberInput = (props) => {
   const [val, setVal] = useState(props.value);

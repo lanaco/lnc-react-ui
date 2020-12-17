@@ -1,0 +1,46 @@
+/* Generated code
+export const styles = {
+  ".cardStyle": {
+    border: "1px solid rgb(191, 191, 191)",
+    borderRadius: "4px",
+    boxShadow: "none",
+    padding: "5px !important",
+    paddingTop: "0"
+  },
+  ".cardContent": { padding: "10px !important" },
+  ".title": {
+    padding: "0px 10px",
+    paddingBottom: "0",
+    fontSize: "15px",
+    width: "100%",
+    color: "rgb(88, 88, 88)",
+    display: "flex"
+  },
+  ".selectButton": { padding: "0px 10px" }
+} */
+
+/* Original CSS */
+.cardStyle {
+  border: 1px solid rgb(191, 191, 191);
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 5px !important;
+  padding-top: 0;
+}
+
+.cardContent {
+  padding: 10px !important;
+}
+
+.title {
+  padding: 0px 10px;
+  padding-bottom: 0;
+  font-size: 15px;
+  width: 100%;
+  color: rgb(88, 88, 88);
+  display: flex;
+}
+
+.selectButton {
+  padding: 0px 10px;
+}
