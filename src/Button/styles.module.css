@@ -110,8 +110,8 @@ export const styles = {
   transition: all var(--transition-duration);
   font-size: var(--font-size);
   background-color: hotpink;
-  background: var(--lanaco-accent-color);
-  color: var(--add-button-text-color);
+  background: hotpink;
+  color: green;
   padding: 5px 15px;
 }
 
