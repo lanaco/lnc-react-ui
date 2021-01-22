@@ -109,7 +109,7 @@ export const styles = {
   height: 100%;
   transition: all var(--transition-duration);
   font-size: var(--font-size);
-  background-color: var(--add-button-bg-color-primary);
+  background-color: hotpink;
   background: var(--lanaco-accent-color);
   color: var(--add-button-text-color);
   padding: 5px 15px;
@@ -126,7 +126,7 @@ export const styles = {
 }
 
 .standardInputButton:hover {
-  background: #004b6f;
+  background: red;
 }
 
 .standardInputButton:disabled {
