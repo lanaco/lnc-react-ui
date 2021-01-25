@@ -1,5 +1,5 @@
 :root {
-    /* BASE */
+    /* BASE COLORS */
     --color-base-blue: #00537a;
     --color-base-blue-darker: #003b57;
     --color-base-blue-lighter: #006999;
@@ -15,6 +15,9 @@
     --color-base-dirty-white: #fcfcfc;
 
 
+    /* BASE FONTS */
+
+    --font-base-ubuntu: 'Ubuntu', sans-serif;
   
     /* DISABLED */
     --disabled-bg-color: #dedede;

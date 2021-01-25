@@ -1,5 +1,6 @@
 import React from "react";
 import "../BaseStyle/BaseStyle.css";
+import "../BaseStyle/index.css";
 import styles from './styles.module.css';
 
 const Button = (props) => {
@@ -22,7 +23,7 @@ const Button = (props) => {
           >
             <span>
               <span>{props.label}</span>
-              <i className={props.icon + ((props.classNameIcon) ? (props.classNameIcon) : styles.standardInputIconButton)}></i>
+              <i className={"lnc lnc-arrow-down-up"}></i>
             </span>
           </button>
           <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextButton}>{props.errorText}</div>
