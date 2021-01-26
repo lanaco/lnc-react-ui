@@ -8,7 +8,7 @@ const Button = (props) => {
 
  
 webfont({
-  files: "src/BaseStype/*.svg",
+  files: "src/BaseStyle/*.svg",
   fontName: "LNC_ICONS"
 })
   .then(result => {
