@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lanaco-react-library",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Lanaco react library components",
   "author": "aleksandar.mitric33",
   "license": "MIT",
@@ -63,7 +63,8 @@
     "moment-timezone": "^0.5.28"
   },
   "files": [
-    "dist", "dist/lnclines.eot"
+    "dist",
+    "dist/lnclines.eot"
   ],
   "publishConfig": {
     "access": "public"
