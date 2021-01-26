@@ -1,4 +1,5 @@
 export * from './BaseStyle';
+export { default as BaseStyle } from './BaseStyle';
 export * from './Button';
 export { default as Button } from './Button';
 export * from './CheckBox';
