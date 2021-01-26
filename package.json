@@ -63,7 +63,7 @@
     "moment-timezone": "^0.5.28"
   },
   "files": [
-    "dist"
+    "dist", "dist/lnclines.eot"
   ],
   "publishConfig": {
     "access": "public"
