@@ -1,9 +1,25 @@
 import React from "react";
-import "../BaseStyle/BaseStyle.css";
-import "../BaseStyle/index.css";
+import webfont from "webfont";
+// import "../BaseStyle/BaseStyle.css";
+// import "../BaseStyle/index.css";
 import styles from './styles.module.css';
 
 const Button = (props) => {
+
+ 
+webfont({
+  files: "src/BaseStype/*.svg",
+  fontName: "LNC_ICONS"
+})
+  .then(result => {
+    console.log("SVG:", result);
+ 
+    return result;
+  })
+  .catch(error => {
+    throw error;
+  });
+
 
   const handleOnClick = (e) => {
     if (props.preventDefault) {

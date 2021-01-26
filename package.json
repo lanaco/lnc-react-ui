@@ -12,8 +12,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "copy_lnc_files": "copyfiles -u 2 \"src/BaseStyle/lnclines.eot\" \"src/BaseStyle/lnclines.svg\" \"src/BaseStyle/lnclines.ttf\" \"src/BaseStyle/lnclines.woff\" \"dist\"",
-    "build": "npm run copy_lnc_files && microbundle-crl --no-compress --format modern,cjs",
+    "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
@@ -38,7 +37,6 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
-    "microbundle-crl": "^0.13.10",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -52,19 +50,20 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
+    "microbundle-crl": "^0.13.10",
+    "moment": "2.24.0",
+    "moment-timezone": "^0.5.28",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "^3.4.1",
     "react-datepicker": "^2.12.1",
     "react-day-picker": "^7.4.0",
-    "moment": "2.24.0",
-    "moment-timezone": "^0.5.28"
+    "react-dom": "^16.12.0",
+    "react-scripts": "^3.4.1",
+    "webfont": "^9.0.0"
   },
   "files": [
-    "dist",
-    "dist/lnclines.eot"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
