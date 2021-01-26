@@ -1,6 +1,6 @@
 import React from "react";
 import "../BaseStyle/BaseStyle.css";
-import "../BaseStyle/lnclines.css";
+import "../BaseStyle/styles.module.css";
 import styles from './styles.module.css';
 
 const Button = (props) => {
