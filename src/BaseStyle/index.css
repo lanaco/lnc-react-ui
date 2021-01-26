@@ -4,14 +4,13 @@
 
 @font-face {
   font-family: "lnclines";
-  src:url("src/BaseStyle/lnclines.eot");
-  src:url("src/BaseStyle/lnclines.eot?#iefix") format("embedded-opentype"),
-    url("src/BaseStyle/lnclines.woff") format("woff"),
-    url("src/BaseStyle/lnclines.ttf") format("truetype"),
-    url("src/BaseStyle/lnclines.svg#lncines") format("svg");
+  src:url("./src/BaseStyle/lnclines.eot");
+  src:url("./src/BaseStyle/lnclines.eot?#iefix") format("embedded-opentype"),
+    url("./src/BaseStyle/lnclines.woff") format("woff"),
+    url("./src/BaseStyle/lnclines.ttf") format("truetype"),
+    url("./src/BaseStyle/lnclines.svg#lncines") format("svg");
   font-weight: normal;
   font-style: normal;
-
 }
 
 .lnc {
