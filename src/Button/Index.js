@@ -1,5 +1,5 @@
 import React from "react";
-import BaseStyle from "src/BaseStyle/BaseStyle";
+import BaseStyle from "../BaseStyle/index";
 import styles from './styles.module.css';
 
 const Button = (props) => {
