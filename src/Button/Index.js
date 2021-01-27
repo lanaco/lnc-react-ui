@@ -1,5 +1,5 @@
 import React from "react";
-import "../Base/styles.module.css";
+import baseStyles from "../Base/styles.module.css";
 import styles from './styles.module.css';
 
 const Button = (props) => {
@@ -12,21 +12,21 @@ const Button = (props) => {
   };
 
   return (
-      <div className={styles.containerButton}>
-        <label className={styles.labelButton}></label>
-        <button
-          onClick={handleOnClick}
-          className={(props.className) ? [styles.standardInputButton, props.className].join(" ") : styles.standardInputButton}
-          disabled={props.disabled}
-          title={props.tooltipText}
-        >
-          <span>
-            <span>{props.label}</span>
-            <i className={"lnc lnc-arrow-down-up"}></i>
-          </span>
-        </button>
-        <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextButton}>{props.errorText}</div>
-      </div>
+    <div className={styles.containerButton}>
+      <label className={styles.labelButton}></label>
+      <button
+        onClick={handleOnClick}
+        className={(props.className) ? [styles.standardInputButton, props.className].join(" ") : styles.standardInputButton}
+        disabled={props.disabled}
+        title={props.tooltipText}
+      >
+        <span>
+          <span>{props.label}</span>
+          <i className={[baseStyles.lnc, baseStyles.lnc-creditcard].join(" ")}></i>
+        </span>
+      </button>
+      <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextButton}>{props.errorText}</div>
+    </div>
   );
 };
 
