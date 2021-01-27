@@ -12,7 +12,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "copy-lnc-files": "copyfiles -u 2 \"src/BaseStyle/lnclines.eot\" \"src/BaseStyle/lnclines.svg\" \"src/BaseStyle/lnclines.ttf\" \"src/BaseStyle/lnclines.woff\" \"dist\"",
+    "copy-lnc-files": "copyfiles -u 2 \"src/Base/lnclines.eot\" \"src/Base/lnclines.svg\" \"src/Base/lnclines.ttf\" \"src/Base/lnclines.woff\" \"dist\"",
     "build": "npm run copy-lnc-files && microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
     "prepare": "run-s build",
@@ -64,10 +64,10 @@
   },
   "files": [
     "dist",
-    "src/Base/lnclines.eot",
-    "src/Base/lnclines.svg",
-    "src/Base/lnclines.ttf",
-    "src/Base/lnclines.woff"
+    "dist/lnclines.eot",
+    "dist/lnclines.svg",
+    "dist/lnclines.ttf",
+    "dist/lnclines.woff"
   ],
   "publishConfig": {
     "access": "public"
