@@ -57,6 +57,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.ubuntuFont {
+  font-family: var(--font-base-ubuntu);
+}
+
 .lnc-anchor:before {
   content: "\61";
 }

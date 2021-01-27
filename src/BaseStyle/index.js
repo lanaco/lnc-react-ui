@@ -5,7 +5,7 @@ const BaseStyle = (props) => {
 
     console.log("STILOVI:", styles);
     return (
-        <div className={styles.lnc}>
+        <div className={styles.ubuntuFont}>
             {props.children}
         </div>
     );
