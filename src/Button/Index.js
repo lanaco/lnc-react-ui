@@ -1,5 +1,4 @@
 import React from "react";
-import BaseStyle from "../BaseStyle/index";
 import styles from './styles.module.css';
 
 const Button = (props) => {
@@ -12,7 +11,6 @@ const Button = (props) => {
   };
 
   return (
-    <BaseStyle>
       <div className={styles.containerButton}>
         <label className={styles.labelButton}></label>
         <button
@@ -28,7 +26,6 @@ const Button = (props) => {
         </button>
         <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextButton}>{props.errorText}</div>
       </div>
-    </BaseStyle>
   );
 };
 
