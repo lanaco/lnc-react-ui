@@ -83,7 +83,7 @@ export const styles = {
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
-  speak: none;
+  /* speak: none; */
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1040,8 +1040,4 @@ export const styles = {
 
 
   
-}
-
-.html {
-  /* font-family: "Roboto", sans-serif; */
 }
