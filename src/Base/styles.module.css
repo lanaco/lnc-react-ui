@@ -234,7 +234,7 @@
   .lnc-cpu:before {
     content: "\37";
   }
-  .lnc-creditcard:before {
+  .lnc_creditcard:before {
     content: "\38";
   }
   .lnc-cursor:before {
