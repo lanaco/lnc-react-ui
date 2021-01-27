@@ -63,7 +63,11 @@
     "react-scripts": "^3.4.1"
   },
   "files": [
-    "*"
+    "dist",
+    "src/Base/lnclines.eot",
+    "src/Base/lnclines.svg",
+    "src/Base/lnclines.ttf",
+    "src/Base/lnclines.woff"
   ],
   "publishConfig": {
     "access": "public"
