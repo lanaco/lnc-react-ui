@@ -94,6 +94,12 @@ export const styles = {
 }
 
 .buttonIconIconButton:disabled {
-  color: var(--disabled-bg-color) !important;
-  cursor: default !important;
+  background-color: var(--color-base-gray);
+  color: var(--color-base-gray-darker);
+}
+
+.buttonIconIconButton span {
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
