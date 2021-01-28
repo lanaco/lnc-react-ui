@@ -18,7 +18,7 @@ const Button = (props) => {
   }
 
   return (
-    <div className={styles.containerButton}>
+    <div className={baseStyles.baseContainer}>
       <label className={props.labelCssClass? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}></label>
       <button
         onClick={handleOnClick}
