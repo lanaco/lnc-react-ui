@@ -1,5 +1,6 @@
 import React from "react";
-import styles from './styles.module.css'
+import baseStyles from "../Base/styles.module.css";
+import styles from './styles.module.css';
 
 const IconButton = (props) => {
   const handleOnClick = (e) => {
@@ -14,14 +15,14 @@ const IconButton = (props) => {
         <label className={styles.labelIconButton}></label>
         <button
           onClick={handleOnClick}
-          className={(props.className) ? [styles.buttonIconIconButton, props.className].join(" ") : styles.buttonIconIconButton}
+          className={(props.inputCssClass) ? [styles.buttonIconIconButton, props.inputCssClass].join(" ") : styles.buttonIconIconButton}
           disabled={props.disabled}
           title={props.tooltipText}
         >
           <i className={props.iconClassName + " " + styles.iconIconButton}></i>
         </button>
-        <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextIconButton}>{props.errorText}</div>
-      </div>
+        <div className={props.errorTextCssClass? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
+    </div>
     );
 };
 
