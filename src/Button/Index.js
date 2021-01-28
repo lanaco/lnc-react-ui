@@ -11,21 +11,27 @@ const Button = (props) => {
     props.onClick(props.id, e.target.value);
   };
 
+  let iconClassName = "";
+
+  if (props.iconClassName && props.iconClassName !== ""){
+    iconClassName = props.iconClassName.replace("-", "_");
+  }
+
   return (
     <div className={styles.containerButton}>
-      <label className={styles.labelButton}></label>
+      <label className={props.labelCssClass? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}></label>
       <button
         onClick={handleOnClick}
-        className={(props.className) ? [styles.standardInputButton, props.className].join(" ") : styles.standardInputButton}
+        className={(props.inputCssClass) ? [styles.standardInputButton, props.inputCssClass].join(" ") : styles.standardInputButton}
         disabled={props.disabled}
         title={props.tooltipText}
       >
         <span>
           <span>{props.label}</span>
-          {props.iconClassName ? <i className={[baseStyles.lnc, baseStyles[props.iconClassName]].join(" ")}></i> : ""}
+          {iconClassName !== "" ? <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i> : ""}
         </span>
       </button>
-      <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextButton}>{props.errorText}</div>
+      <div className={props.errorTextCssClass? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
     </div>
   );
 };

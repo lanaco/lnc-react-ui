@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 /* LNC SVG font by LANACO | V1.2 | release date: 08.08.2019 */
-
 @font-face {
   font-family: "lnclines";
   src:url("lnclines.eot");
@@ -12,21 +11,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
-.baseContainer {
-    width: min-content;
-    /* height: 80px; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
-        --base-error-text-size
-      ); */
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-  }
 
 :root {
     /* BASE COLORS */
@@ -44,16 +28,62 @@
     --color-base-green-ligher: #9c1f32;
     --color-base-dirty-white: #fcfcfc;
   
-  
-    /* BASE FONTS */
-  
+    /* BASE FONTS */ 
     --font-base-ubuntu: 'Ubuntu', sans-serif;
   
     /* DISABLED */
     --disabled-bg-color: #dedede;
-    --disabled-text-color: #666666;    
+    --disabled-text-color: #666666;
+
+    /* TRANSITIONS */
+    --transition-base-duration: 400ms;
   }
 
+.baseContainer {
+    width: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+  }
+
+  .baseContainerWithSideLabel {
+    width: min-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+  }
+
+  .baseLabel {
+    font-size: 1em;
+    font-weight: 400;
+    color: var(--color-base-gray-darker);
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+  }
+  
+  .baseErrorText {
+    font-size: 1em;
+    font-weight: 400;
+    color: var(--color-base-red);
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+  }
+
+
+
+  /* ICONS AND FONTS */
   .lnc {
     font-family: "lnclines";
     font-size: 0.7em;
