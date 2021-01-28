@@ -22,7 +22,7 @@ const Button = (props) => {
       >
         <span>
           <span>{props.label}</span>
-          <i className={[baseStyles.lnc, baseStyles.lnc_creditcard].join(" ")}></i>
+          {props.iconClassName ? <i className={[baseStyles.lnc, baseStyles[props.iconClassName]].join(" ")}></i> : ""}
         </span>
       </button>
       <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextButton}>{props.errorText}</div>

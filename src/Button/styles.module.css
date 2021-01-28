@@ -67,11 +67,13 @@ export const styles = {
 .containerButton {
   width: min-content;
   height: 80px;
-  display: grid;
-  grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
       --base-error-text-size
-    );
-  padding-top: 3px;
+    ); */
+  padding-top: 1px;
   padding-left: 1px;
   padding-right: 1px;
   padding-bottom: 1px;

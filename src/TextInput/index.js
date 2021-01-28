@@ -1,5 +1,6 @@
 import React from "react";
-import styles from './styles.module.css'
+import baseStyles from "../Base/styles.module.css";
+import styles from './styles.module.css';
 
 const TextInput = React.forwardRef((props, ref) => {
   const handleOnChange = (e) => {
@@ -13,7 +14,7 @@ const TextInput = React.forwardRef((props, ref) => {
   return (
       <div
         className={
-          props.useSideLabel ? styles.containerWithSideLabelTextInput : styles.containerTextInput
+          props.useSideLabel ? baseStyles.baseContainer : styles.baseContainer
         }
       >
         <label className={styles.labelTextInput}>
