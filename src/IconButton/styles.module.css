@@ -75,6 +75,7 @@ export const styles = {
   background-color: inherit;
   background: inherit;
   color: inherit;
+  padding: 3px;
 }
 
 .buttonIconIconButton:hover,
@@ -95,11 +96,4 @@ export const styles = {
 .buttonIconIconButton:disabled {
   color: var(--disabled-bg-color) !important;
   cursor: default !important;
-}
-
-.iconIconButton {
-  /* color: inherit !important;
-  font-size: var(--font-size); */
-  height: 100%;
-  width: 100%;
 }

@@ -19,7 +19,7 @@ const IconButton = (props) => {
           disabled={props.disabled}
           title={props.tooltipText}
         >
-          <i className={props.iconClassName + " " + styles.iconIconButton}></i>
+          <i className={props.iconClassName}></i>
         </button>
         <div className={props.errorTextCssClass? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
     </div>
