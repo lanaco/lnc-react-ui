@@ -48,6 +48,9 @@
     padding-left: 1px;
     padding-right: 1px;
     padding-bottom: 1px;
+    background-color: inherit;
+    background: inherit;
+    color: inherit;
   }
 
   .baseContainerWithSideLabel {
@@ -59,6 +62,9 @@
     padding-left: 1px;
     padding-right: 1px;
     padding-bottom: 1px;
+    background-color: inherit;
+    background: inherit;
+    color: inherit;
   }
 
   .baseLabel {

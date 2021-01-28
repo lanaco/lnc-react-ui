@@ -75,7 +75,6 @@ export const styles = {
   background-color: var(--color-base-blue);
   background: var(--color-base-blue);
   color: var(--color-base-dirty-white);
-  padding: 5px 15px;
 }
 
 .standardInputButton span {

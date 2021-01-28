@@ -72,10 +72,9 @@ export const styles = {
   /* width: 100%;
   height: 100%; */
   transition: all var(--transition-base-duration);
-  background-color: var(--color-base-blue);
-  background: var(--color-base-blue);
-  color: var(--color-base-dirty-white);
-  padding: 5px 15px;
+  background-color: inherit;
+  background: inherit;
+  color: inherit;
 }
 
 .buttonIconIconButton:hover,
