@@ -75,7 +75,7 @@ export const styles = {
   background-color: inherit;
   background: inherit;
   color: inherit;
-  padding: 3px;
+  padding: 3px 10px;
 }
 
 .buttonIconIconButton:hover,
