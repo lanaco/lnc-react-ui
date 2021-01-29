@@ -1,8 +1,8 @@
 import React from "react";
-import styles from './styles.module.css'
 import CheckBox from "../CheckBox/index.js";
-import ToggleSwitch from "../ToggleSwitch/index.js";
 import IconButton from "../IconButton/index.js";
+import ToggleSwitch from "../ToggleSwitch/index.js";
+import styles from './styles.module.css';
 
 const CheckboxLookup = (props) => {
   const handleCheckboxChange = (id, value) => {

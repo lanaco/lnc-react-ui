@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import styles from './styles.module.css'
+import React, { useEffect, useState } from "react";
+import baseStyles from "../Base/styles.module.css";
+import styles from './styles.module.css';
 
 const TextArea = (props) => {
   const [val, setVal] = useState(props.value);
@@ -35,7 +36,7 @@ const TextArea = (props) => {
     return (
       <div
         className={
-          props.useSideLabel ? styles.containerWithSideLabelTextArea : styles.containerTextArea
+          props.useSideLabel ? baseStyles.baseContainer : baseStyles.baseContainer
         }
       >
         <label className={styles.labelTextArea}>

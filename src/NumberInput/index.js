@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import styles from './styles.module.css'
+import React, { useEffect, useState } from "react";
+import baseStyles from "../Base/styles.module.css";
+import styles from './styles.module.css';
 
 const NumberInput = (props) => {
   const [val, setVal] = useState(props.value);
@@ -70,7 +71,7 @@ const NumberInput = (props) => {
     return (
       <div
         className={
-          props.useSideLabel ? styles.containerWithSideLabelNumberInput : styles.containerNumberInput
+          props.useSideLabel ? baseStyles.baseContainer : baseStyles.baseContainer
         }
       >
         <label className={styles.labelNumberInput}>

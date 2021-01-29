@@ -12,7 +12,9 @@ const IconButton = (props) => {
 
   return (
     <div className={baseStyles.baseContainer}>
-      <label className={props.labelCssClass? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}></label>
+      <label className={props.labelCssClass ? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}>
+        {props.label ? props.label : ""}
+      </label>
       <button
         onClick={handleOnClick}
         className={(props.inputCssClass) ? [styles.buttonIconIconButton, props.inputCssClass].join(" ") : styles.buttonIconIconButton}
