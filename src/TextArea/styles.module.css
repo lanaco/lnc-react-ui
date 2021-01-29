@@ -127,7 +127,7 @@ export const styles = {
   border-bottom: 2.7px solid var(--base-color);
   display: block;
   overflow: hidden;
-  height: 60%;
+  /* height: 60%; */
 }
 
 .containerTextArea > *:focus .container > label {
