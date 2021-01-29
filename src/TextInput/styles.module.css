@@ -127,6 +127,7 @@ export const styles = {
   font-size: var(--font-size);
   border-bottom: 2.7px solid var(--base-color);
   padding: 5px 10px;
+  min-height: 60%;
 }
 
 .standardInputTextInput:focus {

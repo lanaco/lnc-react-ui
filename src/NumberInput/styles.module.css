@@ -78,6 +78,7 @@ export const styles = {
   display: flex;
   justify-content: left;
   align-items: flex-end;
+  min-height: 60%;
 }
 
 .errorTextNumberInput {

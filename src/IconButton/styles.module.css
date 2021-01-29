@@ -76,6 +76,7 @@ export const styles = {
   background: inherit;
   color: inherit;
   padding: 3px 10px;
+  min-height: 60%;
 }
 
 .buttonIconIconButton:hover,
