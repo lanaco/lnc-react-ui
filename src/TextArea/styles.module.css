@@ -100,7 +100,6 @@ export const styles = {
   display: flex;
   justify-content: left;
   align-items: flex-end;
-  min-height: 60%;
 }
 
 .errorTextTextArea {
@@ -129,6 +128,7 @@ export const styles = {
   border-bottom: 2.7px solid var(--base-color);
   display: block;
   overflow: hidden;
+  min-height: 60%;
 }
 
 .containerTextArea > *:focus .container > label {

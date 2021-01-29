@@ -40,7 +40,8 @@
   }
 
 .baseContainer {
-    width: min-content;
+    min-width: min-content;
+    width: calc(min-content + 2em);
     display: flex;
     flex-direction: column;
     justify-content: center;
