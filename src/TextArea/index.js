@@ -24,8 +24,8 @@ const TextArea = (props) => {
   }
 
   const autosize = (e) => {
-    var el = e.target;
-    console.log("AUTOSIZE:", el.style)
+    var el = e.currentTarget;
+    console.log("AUTOSIZE:", el)
     setTimeout(function () {
      // el.style.cssText = "height:auto; padding:0";
       // for box-sizing other than "content-box" use:
