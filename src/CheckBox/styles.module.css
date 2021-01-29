@@ -17,6 +17,7 @@ input[type="checkbox"] {
   height: 20px;
   vertical-align: middle;
   padding-bottom: 3px;
+  cursor: pointer;
 }
 
 input[type="checkbox"]:hover {

@@ -1,8 +1,9 @@
+import moment from "moment";
 import React from "react";
-import styles from './styles.module.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
+import baseStyles from "../Base/styles.module.css";
+import styles from './styles.module.css';
 
 const DateInput = (props) => {
   const callOnChange = (id, value) => {
@@ -20,78 +21,22 @@ const DateInput = (props) => {
     return moment(props.value, "DD.MM.YYYY.").toDate();
   };
 
-  const getLabelData = () => {
-    let labelData = {
-      hasLabel: props.label ? true : false,
-    };
-
-    labelData.color = labelData.hasLabel
-      ? props.label.color
-        ? props.label.color
-        : "black"
-      : null;
-
-    labelData.backgroundColor = labelData.hasLabel
-      ? props.label.background
-        ? props.label.background
-        : "white"
-      : null;
-
-    labelData.doRoundBorders = labelData.hasLabel
-      ? props.label.hasBackground
-        ? props.label.hasBackground
-        : false
-      : false;
-
-    return labelData;
-  };
-
-  const getLabel = () => {
-    let labelData = getLabelData();
-    if (labelData.hasLabel) {
-      return (
-        <div
-          className={
-            styles.labelDateInput +
-            (labelData.doRoundBorders ? " " + styles.labelWithBackgroundDateInput : "")
-          }
-        >
-          {props.label}
-          {props.required ? "*" : ""}
-        </div>
-      );
-    }
-
-    return <></>;
-  };
-
-  const getInput = () => {
-    return (
-      <div className={styles.datePickerWrapperDateInput}>
-        <DatePicker
-          selected={getValue()}
-          onChange={handleChange}
-          dateFormat="dd.MM.yyyy."
-          disabled={props.disabled}
-          className={styles.standardInputDateInput}
-        />
-      </div>
-    );
-  };
-
-    return (
-      <div
-        className={
-          props.useSideLabel ? styles.containerWithSideLabelDateInput : styles.containerDateInput
-        }
-      >
-        {getLabel()}
-        <div>{getInput()}</div>
-        {props.errorText ? (
-          <div className={styles.errorTextDateInput}>{props.errorText}</div>
-        ) : null}
-      </div>
-    );
+  return (
+    <div className={baseStyles.baseContainer}>
+      <label className={props.labelCssClass ? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}>
+        {props.label}
+        {props.required ? "*" : ""}
+      </label>
+      <DatePicker
+        selected={getValue()}
+        onChange={handleChange}
+        dateFormat={props.dateFormat ? props.dateFormat : "dd.MM.yyyy."}
+        disabled={props.disabled}
+        className={(props.inputCssClass) ? [styles.standardInputDateInput, props.inputCssClass].join(" ") : styles.standardInputDateInput}
+      />
+      <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
+    </div>
+  );
 };
 
 export default DateInput;

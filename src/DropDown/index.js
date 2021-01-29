@@ -1,5 +1,6 @@
 import React from "react";
-import styles from './styles.module.css'
+import baseStyles from "../Base/styles.module.css";
+import styles from './styles.module.css';
 
 const DropDown = (props) => {
   const handleOnChange = (e) => {
@@ -25,36 +26,32 @@ const DropDown = (props) => {
     });
   };
 
-    return (
-      <div
-        className={props.useSideLabel ? styles.containerWithSideLabelDropDown : styles.containerDropDown}
+  return (
+    <div className={baseStyles.baseContainer}>
+      <label className={props.labelCssClass ? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}>
+        {props.label}
+        {props.required ? "*" : ""}
+      </label>
+      <select
+        className={(props.inputCssClass) ? [styles.standardInputDropDown, props.inputCssClass].join(" ") : styles.standardInputDropDown}
+        disabled={props.disabled}
+        default={props.value}
+        title={props.tooltipText}
+        onChange={handleOnChange}
+        value={props.value}
       >
-        <label className={styles.labelDropDown}>
-          {props.label}
-          {props.required ? "*" : ""}
-        </label>
-        <select
-          className={(props.className) ? [styles.standardInputDropDown, props.className].join(" ") : styles.standardInputDropDown}
-          disabled={props.disabled}
-          default={props.value}
-          title={props.tooltipText}
-          onChange={handleOnChange}
-          value={props.value}
-        >
-          {!props.withoutEmpty ? (
-            <option key={-1} value={-1}>
-              ???
-            </option>
-          ) : (
+        {!props.withoutEmpty ? (
+          <option key={-1} value={-1}>
+            ???
+          </option>
+        ) : (
             ""
           )}
-          {getItems()}
-        </select>
-        {props.errorText ? (
-          <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextTextInputDropDown}>{props.errorText}</div>
-        ) : null}
-      </div>
-    );
+        {getItems()}
+      </select>
+      <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
+    </div>
+  );
 };
 
 export default DropDown;

@@ -16,8 +16,9 @@ const CheckBox = (props) => {
           onChange={handleChange}
           disabled={props.disabled}
         />
-        <label className={styles.checkBoxLabel}>{props.value}</label>
+        <label className={styles.checkBoxLabel}>{props.label}</label>
       </div>
+      
     );
 };
 
