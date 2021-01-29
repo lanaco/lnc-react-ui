@@ -23,11 +23,14 @@ const TextArea = (props) => {
     props.onChange(props.id, e.target.value);
   }
 
+  const numberOfRows = props.rows ? props.rows : 1;
+  const numberOfColumns = props.cols ? props.cols : 50;
+
   const autosize = (e) => {
     var el = e.currentTarget;
     console.log("AUTOSIZE:", el)
     setTimeout(function () {
-     // el.style.cssText = "height:auto; padding:0";
+      el.style.cssText = "height:auto; padding:0";
       // for box-sizing other than "content-box" use:
       // el.style.cssText = '-moz-box-sizing:content-box';
       el.style.cssText = "height: " + el.scrollHeight + "px;";
@@ -53,8 +56,8 @@ const TextArea = (props) => {
           disabled={props.disabled}
           title={props.tooltipText}
           onKeyDown={autosize}
-          rows={props.rows ? props.rows : 1}
-          cols={props.cols ? props.cols : 50}
+          rows={numberOfRows}
+          cols={numberOfColumns}
         ></textarea>
         <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextTextArea}>{props.errorText}</div>
       </div>
