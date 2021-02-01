@@ -71,7 +71,7 @@
   }
 
   .baseLabel {
-    font-size: 1em;
+    font-size: 0.8em;
     font-weight: 400;
     color: var(--color-base-gray-darker);
     width: 100%;
@@ -81,7 +81,7 @@
   }
   
   .baseErrorText {
-    font-size: 1em;
+    font-size: 0.8em;
     font-weight: 400;
     color: var(--color-base-red);
     width: 100%;
