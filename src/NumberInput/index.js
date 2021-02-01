@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import baseStyles from "../Base/styles.module.css";
+import BaseContainer from "../Base/BaseContainer";
 import styles from './styles.module.css';
 
 const NumberInput = (props) => {
@@ -69,15 +69,7 @@ const NumberInput = (props) => {
   };
 
   return (
-    <div
-      className={
-        props.useSideLabel ? baseStyles.baseContainer : baseStyles.baseContainer
-      }
-    >
-      <label className={props.labelCssClass ? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}>
-        {props.label}
-        {props.required ? "*" : ""}
-      </label>
+    <BaseContainer {...props}>
       <input
         type="text"
         value={val ? val : ""}
@@ -89,8 +81,7 @@ const NumberInput = (props) => {
         disabled={props.disabled}
         title={props.tooltipText}
       />
-      <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
-    </div>
+    </BaseContainer>
   );
 };
 

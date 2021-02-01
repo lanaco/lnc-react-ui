@@ -1,5 +1,5 @@
 import React from "react";
-import baseStyles from "../Base/styles.module.css";
+import BaseContainer from "../Base/BaseContainer";
 import styles from './styles.module.css';
 
 const DropDown = (props) => {
@@ -27,11 +27,7 @@ const DropDown = (props) => {
   };
 
   return (
-    <div className={baseStyles.baseContainer}>
-      <label className={props.labelCssClass ? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}>
-        {props.label}
-        {props.required ? "*" : ""}
-      </label>
+    <BaseContainer {...props}>
       <select
         className={(props.inputCssClass) ? [styles.standardInputDropDown, props.inputCssClass].join(" ") : styles.standardInputDropDown}
         disabled={props.disabled}
@@ -49,8 +45,7 @@ const DropDown = (props) => {
           )}
         {getItems()}
       </select>
-      <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
-    </div>
+    </BaseContainer>
   );
 };
 

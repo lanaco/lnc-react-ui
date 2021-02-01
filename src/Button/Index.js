@@ -1,5 +1,5 @@
 import React from "react";
-import baseStyles from "../Base/styles.module.css";
+import BaseContainer from "../Base/BaseContainer";
 import styles from './styles.module.css';
 
 const Button = (props) => {
@@ -18,9 +18,7 @@ const Button = (props) => {
   }
 
   return (
-    <div className={baseStyles.baseContainer}>
-      <label className={props.labelCssClass ? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}>
-      </label>
+    <BaseContainer {...props}>
       <button
         onClick={handleOnClick}
         className={(props.inputCssClass) ? [styles.standardInputButton, props.inputCssClass].join(" ") : styles.standardInputButton}
@@ -32,8 +30,7 @@ const Button = (props) => {
           {iconClassName !== "" ? <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i> : ""}
         </span>
       </button>
-      <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
-    </div>
+    </BaseContainer>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
-import styles from './styles.module.css'
+import BaseContainer from "../Base/BaseContainer";
+import styles from './styles.module.css';
 
 const ToggleSwitch = (props) => {
   
@@ -8,15 +9,7 @@ const ToggleSwitch = (props) => {
   }
 
     return (
-      <div
-        className={
-          props.useSideLabel ? styles.containerWithSideLabelToggleSwitch : styles.containerToggleSwitch
-        }
-      >
-        <label className={styles.labelToggleSwitch}>
-          {props.label}
-          {props.required ? "*" : ""}
-        </label>
+      <BaseContainer {...props}>
         <label className={styles.switch}>
           <input
             type="checkbox"
@@ -27,8 +20,7 @@ const ToggleSwitch = (props) => {
           />
           <span className={props.disabled ? styles.sliderDisabledToggleSwitch : styles.slider}></span>
         </label>
-        <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextToggleSwitch}>{props.errorTextToggleSwitch}</div>
-      </div>
+        </BaseContainer>
     );
 };
 

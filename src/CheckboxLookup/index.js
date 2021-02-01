@@ -1,4 +1,5 @@
 import React from "react";
+import BaseContainer from "../Base/BaseContainer.js";
 import CheckBox from "../CheckBox/index.js";
 import IconButton from "../IconButton/index.js";
 import ToggleSwitch from "../ToggleSwitch/index.js";
@@ -43,6 +44,7 @@ const CheckboxLookup = (props) => {
   };
 
   return (
+    <BaseContainer {...props}>
     <div className={styles.cardStyle}>
       <div className={styles.title}>
         {props.title}
@@ -84,6 +86,7 @@ const CheckboxLookup = (props) => {
         })}
       </div>
     </div>
+    </BaseContainer>
   );
 };
 

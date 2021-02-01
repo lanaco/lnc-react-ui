@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import styles from './styles.module.css'
+import BaseContainer from "../Base/BaseContainer";
 import IconButton from "../IconButton/index.js";
+import styles from './styles.module.css';
 
 const usePrevious = (value) => {
   const ref = useRef();
@@ -119,38 +120,31 @@ const DropdownLookup = (props) => {
     }
   };
 
-    return (
-      <div className={styles.container}>
-        <label className={styles.label}>
-          {props.label}
-          {props.required ? "*" : ""}
-        </label>
-        <div className={styles.innerContainer}>
-          <input
-            id={props.id}
-            type={"text"}
-            value={value ?? ""}
-            onChange={onTextChange}
-            className={`${styles.standardInput} ${cssThemeClass}`}
-            title={props.tooltipText}
-            onBlur={onBlur}
-            onFocus={() => {
-              setInFocus(true);
-            }}
-          />
-          <span className={styles.clearInputSpan}>
-            <IconButton
-              iconClassName={props.closeIconClassName}
-              onClick={onClearSelection}
-            ></IconButton>
-          </span>
-        </div>
-        {props.errorText ? (
-          <div className={styles.errorText}>{props.errorText}</div>
-        ) : null}
-        {renderSuggestions()}
+  return (
+    <BaseContainer {...props}>
+      <div className={styles.innerContainer}>
+        <input
+          id={props.id}
+          type={"text"}
+          value={value ?? ""}
+          onChange={onTextChange}
+          className={`${styles.standardInput} ${cssThemeClass}`}
+          title={props.tooltipText}
+          onBlur={onBlur}
+          onFocus={() => {
+            setInFocus(true);
+          }}
+        />
+        <span className={styles.clearInputSpan}>
+          <IconButton
+            iconClassName={props.closeIconClassName}
+            onClick={onClearSelection}
+          ></IconButton>
+        </span>
       </div>
-    );
-  };
+      {renderSuggestions()}
+    </BaseContainer>
+  );
+};
 
 export default DropdownLookup;
