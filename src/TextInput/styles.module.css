@@ -126,7 +126,8 @@ export const styles = {
   transition: all var(--transition-duration);
   font-size: var(--font-size);
   border-bottom: 2.7px solid var(--base-color);
-  padding: 5px 10px;
+  border-bottom: 3px solid var(--base-color);
+  padding: 5px 5px;
   min-height: 60%;
 }
 

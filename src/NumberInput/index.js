@@ -37,9 +37,9 @@ const NumberInput = (props) => {
     }
   };
 
-  
+
   let numberOfDecimalPlaces =
-  props.numberOfDecimalPlaces !== undefined ? props.numberOfDecimalPlaces : 2;
+    props.numberOfDecimalPlaces !== undefined ? props.numberOfDecimalPlaces : 2;
 
   const isInputDecimal = (evt) => {
     var ch = String.fromCharCode(evt.which);
@@ -68,30 +68,30 @@ const NumberInput = (props) => {
     }
   };
 
-    return (
-      <div
-        className={
-          props.useSideLabel ? baseStyles.baseContainer : baseStyles.baseContainer
-        }
-      >
-        <label className={styles.labelNumberInput}>
-          {props.label}
-          {props.required ? "*" : ""}
-        </label>
-        <input
-          type="text"
-          value={val ? val : ""}
-          onChange={handleOnChange}
-          onBlur={handleOnBlur}
-          onKeyPress={(props.isDecimal)? isInputDecimal : isInputInteger}
-          onPaste={(props.isDecimal)? isInputDecimal : isInputInteger}
-          className={styles.standardInputNumberInput}
-          disabled={props.disabled}
-          title={props.tooltipText}
-        />
-        <div className={styles.errorTextNumberInput}>{props.errorText}</div>
-      </div>
-    );
+  return (
+    <div
+      className={
+        props.useSideLabel ? baseStyles.baseContainer : baseStyles.baseContainer
+      }
+    >
+      <label className={props.labelCssClass ? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}>
+        {props.label}
+        {props.required ? "*" : ""}
+      </label>
+      <input
+        type="text"
+        value={val ? val : ""}
+        onChange={handleOnChange}
+        onBlur={handleOnBlur}
+        onKeyPress={(props.isDecimal) ? isInputDecimal : isInputInteger}
+        onPaste={(props.isDecimal) ? isInputDecimal : isInputInteger}
+        className={styles.standardInputNumberInput}
+        disabled={props.disabled}
+        title={props.tooltipText}
+      />
+      <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
+    </div>
+  );
 };
 
 export default NumberInput;

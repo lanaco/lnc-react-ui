@@ -124,10 +124,10 @@ export const styles = {
   background-color: var(--input-bg-color);
   transition: all var(--transition-duration);
   font-size: var(--font-size);
-  border-bottom: 2.7px solid var(--base-color);
   display: block;
   overflow: hidden;
-  /* height: 60%; */
+  border-bottom: 3px solid var(--base-color);
+  padding: 5px 5px;
 }
 
 .containerTextArea > *:focus .container > label {

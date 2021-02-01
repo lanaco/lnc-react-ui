@@ -108,12 +108,12 @@ export const styles = {
 .standardInputDropDown {
   font-family: inherit;
   outline: none;
-  width: 100%;
-  height: 100%;
   background-color: var(--input-bg-color);
   transition: all var(--transition-duration);
   font-size: var(--font-size);
-  border-bottom: 2.7px solid var(--base-color);
+  border-bottom: 3px solid var(--base-color);
+  padding: 5px 5px;
+  min-height: 60%;
 }
 
 .standardInputDropDown:focus {

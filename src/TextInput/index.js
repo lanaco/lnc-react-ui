@@ -14,24 +14,24 @@ const TextInput = React.forwardRef((props, ref) => {
   return (
       <div
         className={
-          props.useSideLabel ? baseStyles.baseContainer : styles.baseContainer
+          props.useSideLabel ? baseStyles.baseContainer : baseStyles.baseContainer
         }
       >
-        <label className={styles.labelTextInput}>
-          {props.label}
-          {props.required ? "*" : ""}
-        </label>
+      <label className={props.labelCssClass ? [baseStyles.baseLabel, props.labelCssClass].join(" ") : baseStyles.baseLabel}>
+        {props.label}
+        {props.required ? "*" : ""}
+      </label>
         <input
           ref={ref}
           type={"text"}
           value={props.value}
           onChange={handleOnChange}
           disabled={props.disabled}
-          className={(props.className) ? [styles.standardInputTextInput, props.className].join(" ") : styles.standardInputTextInput}
+          className={(props.inputCssClass) ? [styles.standardInputTextInput, props.inputCssClass].join(" ") : styles.standardInputTextInput}
           title={props.tooltipText}
           onKeyDown={props.onKeyDown}
         />
-        <div className={(props.classNameErrorText) ? (props.classNameErrorText) : styles.errorTextTextInput}>{props.errorText}</div>
+      <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
       </div>
     );
 });
