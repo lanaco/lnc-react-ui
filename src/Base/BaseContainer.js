@@ -15,10 +15,10 @@ const BaseContainer = (props) => {
                     <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
                 </div>
                 :
-                <>
+                <React.Fragment>
                     {props.children}
                     <div className={props.errorTextCssClass ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ") : baseStyles.baseErrorText}>{props.errorText}</div>
-                </>
+                </React.Fragment>
             }
         </div>
     );
