@@ -14,12 +14,13 @@ export const styles = {
 
 /* Original CSS */
 .iconSpanIcon {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   background-color: inherit !important;
   color: inherit !important;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 1px;
 }
