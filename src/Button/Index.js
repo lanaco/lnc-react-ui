@@ -1,5 +1,4 @@
 import React from "react";
-import BaseContainer from "../Base/BaseContainer";
 import baseStyles from "../Base/styles.module.css";
 import styles from './styles.module.css';
 
@@ -19,19 +18,17 @@ const Button = (props) => {
   }
 
   return (
-    <BaseContainer {...props}>
-      <button
-        onClick={handleOnClick}
-        className={(props.inputCssClass) ? [styles.standardInputButton, props.inputCssClass].join(" ") : styles.standardInputButton}
-        disabled={props.disabled}
-        title={props.tooltipText}
-      >
-        <span>
-          <span>{props.label}</span>
-          {iconClassName !== "" ? <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i> : ""}
-        </span>
-      </button>
-    </BaseContainer>
+    <button
+      onClick={handleOnClick}
+      className={(props.inputCssClass) ? [styles.standardInputButton, props.inputCssClass].join(" ") : styles.standardInputButton}
+      disabled={props.disabled}
+      title={props.tooltipText}
+    >
+      <span>
+        <span>{props.label}</span>
+        {iconClassName !== "" ? <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i> : ""}
+      </span>
+    </button>
   );
 };
 
