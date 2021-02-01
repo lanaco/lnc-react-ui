@@ -123,11 +123,10 @@ export const styles = {
   background-color: var(--input-bg-color);
   transition: all var(--transition-duration);
   font-size: var(--font-size);
-  border-bottom: 2.7px solid var(--base-color);
   border-bottom: 3px solid var(--base-color);
   padding: 5px 5px;
-  height: 100%;
-  width: 100%;
+  min-height: 60%;
+  width: min-content;
 }
 
 .standardInputTextInput:focus {
