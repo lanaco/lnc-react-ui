@@ -77,7 +77,7 @@ const NumberInput = (props) => {
         onBlur={handleOnBlur}
         onKeyPress={(props.isDecimal) ? isInputDecimal : isInputInteger}
         onPaste={(props.isDecimal) ? isInputDecimal : isInputInteger}
-        className={styles.standardInputNumberInput}
+        className={(props.inputCssClass) ? [styles.standardInputNumberInput, props.inputCssClass].join(" ") : styles.standardInputNumberInput}
         disabled={props.disabled}
         title={props.tooltipText}
       />

@@ -40,8 +40,6 @@
   }
 
 .baseContainer {
-    /* min-width: min-content; */
-    /* width: calc(min-content + 2em); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,8 +50,6 @@
     background-color: inherit;
     background: inherit;
     color: inherit;
-    border: 1px solid red;
-    /* height: 3em; */
   }
 
   .baseContainerWithSideLabel {

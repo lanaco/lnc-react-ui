@@ -82,9 +82,9 @@ export const styles = {
   text-align: center;
 }
 
-/* .standardInputButton > span > span {
-  padding-right: 5px;
-} */
+.standardInputButton > span > span {
+  margin-right: 5px;
+}
 
 .standardInputButton:hover {
   background-color: var(--color-base-blue-darker);
