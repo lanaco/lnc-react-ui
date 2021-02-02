@@ -52,6 +52,7 @@
     background-color: inherit;
     background: inherit;
     color: inherit;
+    border: 1px solid red;
     /* height: 3em; */
   }
 
