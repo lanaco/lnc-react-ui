@@ -25,7 +25,7 @@ const Button = (props) => {
       title={props.tooltipText}
     >
       <span>
-        <span>{props.label}</span>
+        {props.label && props.label !== "" ? <span>{props.label}</span> : ""}
         {iconClassName !== "" ? <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i> : ""}
       </span>
     </button>
