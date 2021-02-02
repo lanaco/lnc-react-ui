@@ -19,7 +19,7 @@ const DropDown = (props) => {
 
     return props.items.map((el, i) => {
       return (
-        <option className={styles.option} key={i} value={el[value]}>
+        <option key={i} value={el[value]}>
           {el[name]}
         </option>
       );
@@ -37,7 +37,7 @@ const DropDown = (props) => {
         value={props.value}
       >
         {!props.withoutEmpty ? (
-          <option className={styles.option} key={-1} value={-1}>
+          <option key={-1} value={-1}>
             ???
           </option>
         ) : (

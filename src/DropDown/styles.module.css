@@ -131,12 +131,3 @@ export const styles = {
   background-color: var(--disabled-bg-color);
   color: var(--disabled-text-color);
 }
-
-.option {
-  color: red;
-}
-
-.option:hover {
-  background-color: khaki;
-  color: red;
-}
