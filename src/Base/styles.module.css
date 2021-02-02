@@ -43,10 +43,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
+    padding: 1px;
     background-color: inherit;
     background: inherit;
     color: inherit;
@@ -57,14 +54,10 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
+    padding: 1px;
     background-color: inherit;
     background: inherit;
     color: inherit;
-    height: 3em;
   }
 
   .baseLabel {

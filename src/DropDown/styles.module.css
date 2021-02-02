@@ -116,7 +116,7 @@ export const styles = {
   border-bottom: 3px solid var(--base-color);
   padding: 5px 5px;
   min-height: 60%;
-  width: min-content;
+  width: 100%;
 }
 
 .standardInputDropDown:focus {

@@ -183,7 +183,6 @@ export const styles = {
   border-bottom: 3px solid var(--base-color);
   padding: 5px 5px;
   min-height: 60%;
-  height: 100%;
   width: 100%;
 }
 
