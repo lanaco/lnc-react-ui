@@ -75,7 +75,7 @@ export const styles = {
   background-color: inherit;
   background: inherit;
   color: inherit;
-  padding: 5px 5px;
+  /* padding: 5px 5px; */
   margin: 1px;
 }
 
