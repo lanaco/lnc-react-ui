@@ -203,7 +203,7 @@ export const styles = {
   padding-right: 5px;
   width: 15%;
   height: 100%;
-  border-bottom: 2.7px solid var(--base-color);
+  border-bottom: 3px solid var(--base-color);
   background-color: var(--input-bg-color);
   transition: all 400ms;
 }

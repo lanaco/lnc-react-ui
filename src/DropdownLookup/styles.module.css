@@ -94,11 +94,24 @@ export const styles = {
   display: flex;
 }
 
+.innerContainer:focus > input, span {
+  display: flex;
+  background-color: white;
+}
+
 .clearInputSpan {
   background-color: var(--input-bg-color);
   transition: all var(--transition-duration);
   font-size: var(--font-size);
-  border-bottom: 2.7px solid var(--base-color);
+  border-bottom: 3px solid var(--base-color);
+  padding-right: 5px;
+}
+
+.clearInputSpanInFocus {
+  background-color: white;
+  transition: all var(--transition-duration);
+  font-size: var(--font-size);
+  border-bottom: 3px solid var(--base-color);
   padding-right: 5px;
 }
 
@@ -142,9 +155,9 @@ export const styles = {
   width: 100%;
 }
 
-.standardInput:focus {
+/* .standardInput:focus {
   background-color: var(--input-bg-focus-color);
-}
+} */
 
 .standardInput:disabled {
   background-color: var(--disabled-bg-color);
