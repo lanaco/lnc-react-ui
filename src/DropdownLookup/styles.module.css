@@ -102,6 +102,14 @@ export const styles = {
   padding-right: 5px;
 }
 
+.clearInputSpanInFocus {
+  background-color: white;
+  transition: all var(--transition-duration);
+  font-size: var(--font-size);
+  border-bottom: 3px solid var(--base-color);
+  padding-right: 5px;
+}
+
 .label {
   font-size: var(--base-additional-text-font-size);
   font-family: inherit;
