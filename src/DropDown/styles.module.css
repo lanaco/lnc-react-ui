@@ -60,50 +60,6 @@ export const styles = {
 } */
 
 /* Original CSS */
-.containerDropDown {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
-      --base-error-text-size
-    );
-  padding-top: 3px;
-  padding-left: 1px;
-  padding-right: 1px;
-  padding-bottom: 1px;
-}
-
-.containerWithSideLabelDropDown {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  padding-top: 3px;
-  padding-left: 1px;
-  padding-right: 1px;
-  padding-bottom: 1px;
-}
-
-.labelDropDown {
-  font-size: var(--base-additional-text-font-size);
-  font-family: inherit;
-  font-weight: 400;
-  color: #545454;
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-end;
-}
-
-.errorTextDropDown {
-  font-size: var(--base-additional-text-font-size);
-  font-family: inherit;
-  font-weight: 400;
-  color: var(--base-error-color);
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-start;
-}
 
 .standardInputDropDown {
   font-family: inherit;

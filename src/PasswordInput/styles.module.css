@@ -123,55 +123,6 @@ export const styles = {
 } */
 
 /* Original CSS */
-.containerPasswordInput {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
-      --base-error-text-size
-    );
-  padding-top: 3px;
-  padding-left: 1px;
-  padding-right: 1px;
-  padding-bottom: 1px;
-}
-
-.containerWithSideLabelPasswordInput {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  padding-top: 3px;
-  padding-left: 1px;
-  padding-right: 1px;
-  padding-bottom: 1px;
-}
-
-.labelPasswordInput {
-  font-size: var(--base-additional-text-font-size);
-  font-family: inherit;
-  font-weight: 400;
-  color: #545454;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-end;
-  font-size: 0.8em;
-  padding-bottom: 2px;
-}
-
-.errorTextPasswordInput {
-  font-size: var(--base-additional-text-font-size);
-  font-family: inherit;
-  font-weight: 400;
-  /* padding-top: 2px; */
-  color: var(--base-error-color);
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 70% 30%;
-}
-
 .standardInputPasswordInput {
   font-family: inherit;
   -webkit-appearance: none;
@@ -233,6 +184,15 @@ export const styles = {
   width: 100%;
   height: 100%;
   background-color: var(--input-bg-color);
+}
+
+iconButtonPasswordInputInFocus {
+  display: flex;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  background-color: white;
 }
 
 .forgotPasswordLabelPasswordInput {

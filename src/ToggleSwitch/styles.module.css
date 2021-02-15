@@ -125,55 +125,6 @@ export const styles = {
 } */
 
 /* Original CSS */
-.containerToggleSwitch {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
-      --base-error-text-size
-    );
-  padding-top: 3px;
-  padding-left: 1px;
-  padding-right: 1px;
-  padding-bottom: 1px;
-}
-
-.containerWithSideLabelToggleSwitch {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  padding-top: 3px;
-  padding-left: 1px;
-  padding-right: 1px;
-  padding-bottom: 1px;
-}
-
-.labelToggleSwitch {
-  font-size: var(--base-additional-text-font-size);
-  font-family: inherit;
-  font-weight: 400;
-  font-size: 0.8em;
-  color: #545454;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-end;
-  padding-bottom: 2px;
-}
-
-.errorTextToggleSwitch {
-  font-size: var(--base-additional-text-font-size);
-  font-family: inherit;
-  font-weight: 400;
-  color: var(--base-error-color);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-start;
-}
-
 .standardInputToggleSwitch {
   font-family: inherit;
   -webkit-appearance: none;

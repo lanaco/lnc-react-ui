@@ -55,44 +55,6 @@ export const styles = {
 } */
 
 /* Original CSS */
-.containerNumberInput {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
-      --base-error-text-size
-    );
-  padding-top: 3px;
-  padding-left: 1px;
-  padding-right: 1px;
-  padding-bottom: 1px;
-}
-.labelNumberInput {
-  font-size: var(--base-additional-text-font-size);
-  /* padding-bottom: 2px; */
-  font-family: inherit;
-  font-weight: 400;
-  color: #545454;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-end;
-  min-height: 60%;
-}
-
-.errorTextNumberInput {
-  font-size: var(--base-additional-text-font-size);
-  font-family: inherit;
-  font-weight: 400;
-  /* padding-top: 2px; */
-  color: var(--base-error-color);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-start;
-}
 
 .standardInputNumberInput {
   font-family: inherit;
