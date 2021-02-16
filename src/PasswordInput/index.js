@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 const PasswordInput = (props) => {
 
-  const [inFocus, setInFocus] = React.useState(false);
+  // const [inFocus, setInFocus] = React.useState(false);
 
   const handleOnChange = (e) => {
     if (props.preventDefault) {
@@ -25,30 +25,33 @@ const PasswordInput = (props) => {
 
   return (
     <BaseContainer {...props}>
-      <div className={styles.inputWithIconButtonPasswordInput}>
-        <input
-          type={locked ? "password" : "text"}
-          value={props.value}
-          onChange={handleOnChange}
-          className={(props.inputCssClass) ? [styles.standardInputPasswordInput, props.inputCssClass].join(" ") : styles.standardInputPasswordInput}
-          disabled={props.disabled}
-          title={props.tooltipText}
-          onKeyDown={props.onKeyDown}
-          onBlur={() => {
-            setInFocus(false);
-          }}
-          onFocus={() => {
-            setInFocus(true);
-          }}
-        ></input>
+      {/* <div className={styles.inputWithIconButtonPasswordInput}> */}
+      <input
+        type={locked ? "password" : "text"}
+        value={props.value}
+        onChange={handleOnChange}
+        className={(props.inputCssClass) ? [styles.standardInputPasswordInput, props.inputCssClass].join(" ") : styles.standardInputPasswordInput}
+        disabled={props.disabled}
+        title={props.tooltipText}
+        onKeyDown={props.onKeyDown}
+        // onBlur={() => {
+        //   setInFocus(false);
+        // }}
+        // onFocus={() => {
+        //   setInFocus(true);
+        // }}
+      >
         <span
-          className={inFocus ? styles.iconButtonPasswordInputInFocus : styles.iconButtonPasswordInput}
+          // className={inFocus ? styles.iconButtonPasswordInputInFocus : styles.iconButtonPasswordInput}
+          className={styles.iconButtonPasswordInput}
           onClick={handleLockUnlock}
           disabled={props.disabled}
         >
           <i className={locked ? "lnc lnc-eye-no" : "lnc lnc-eye"} />
         </span>
-      </div>
+      </input>
+
+      {/* </div> */}
       {props.dontShowPasswordForgottenOption ? (
         ""
       ) : (
