@@ -183,7 +183,7 @@ export const styles = {
   outline: none;
   width: 100%;
   height: 100%;
-  background-color: var(--color-base-backgroud);
+  /* background-color: var(--color-base-backgroud); */
 }
 
 .iconButtonPasswordInputInFocus {
@@ -223,6 +223,6 @@ export const styles = {
   position: relative;
   cursor: pointer;
   width: 100%;
-  font-size: 1em;
-  padding-top: 9px;
+  font-size: 0.8em;
+  padding-top: 5px;
 }
