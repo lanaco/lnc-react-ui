@@ -66,10 +66,10 @@ export const styles = {
   -webkit-appearance: none;
   appearance: none;
   outline: none;
-  background-color: var(--input-bg-color);
-  transition: all var(--transition-duration);
-  font-size: var(--font-size);
-  border-bottom: 3px solid var(--base-color);
+  background-color: var(--color-base-backgroud);
+  transition: all var(--transition-base-duration);
+  font-size: var(--font-size-base);
+  border-bottom: 3px solid var(--color-base-blue);
   padding: 5px 5px;
   min-height: 60%;
   width: 100%;
@@ -80,10 +80,10 @@ export const styles = {
 }
 
 .standardInputDropDown:focus {
-  background-color: var(--input-bg-focus-color);
+  background-color: var(--color-base-white);
 }
 
 .standardInputDropDown:disabled {
-  background-color: var(--disabled-bg-color);
-  color: var(--disabled-text-color);
+  background-color: var(--color-base-gray-lighter);
+  color: var(--color-base-gray-darker);
 }

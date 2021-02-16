@@ -76,20 +76,20 @@ export const styles = {
   outline: none;
   width: 100%;
   resize: vertical;
-  background-color: var(--input-bg-color);
-  transition: all var(--transition-duration);
-  font-size: var(--font-size);
+  background-color: var(--color-base-backgroud);
+  transition: all var(--transition-base-duration);
+  font-size: var(--font-size-base);
   display: block;
   overflow: hidden;
-  border-bottom: 3px solid var(--base-color);
+  border-bottom: 3px solid var(--color-base-blue);
   padding: 5px 5px;
 }
 
 .standardInputTextArea:focus {
-  background-color: var(--input-bg-focus-color);
+  background-color: var(--color-base-white);
 }
 
 .standardInputTextArea:disabled {
-  background-color: var(--disabled-bg-color);
-  color: var(--disabled-text-color);
+  background-color: var(--color-base-gray-lighter);
+  color: var(--color-base-gray-darker);
 }
