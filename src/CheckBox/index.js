@@ -10,7 +10,7 @@ const CheckBox = (props) => {
     props.onChange(props.id, e.target.checked);
   }
     return (
-      <BaseContainer {...props, label=""}>
+      <BaseContainer {...props} label="">
       <div className={styles.checkBoxLine}>
         <input
           type="checkbox"
