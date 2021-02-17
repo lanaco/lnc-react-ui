@@ -154,9 +154,9 @@ export const styles = {
   padding-right: 5px;
   width: 15%;
   height: 100%;
-  /* border-bottom: 3px solid var(--color-base-blue);
-  background-color: var(--color-base-backgroud); */
-  transition: all 400ms;
+  border-bottom: 3px solid var(--color-base-blue);
+  background-color: var(--color-base-backgroud);
+  transition: all var(--transition-base-duration);
 }
 
 .iconButtonFocusedPasswordInput {
