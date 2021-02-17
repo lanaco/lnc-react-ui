@@ -50,6 +50,7 @@
     background-color: inherit;
     background: inherit;
     color: inherit;
+    width: max-content;
   }
 
   .baseContainerWithSideLabel {
@@ -61,6 +62,7 @@
     background-color: inherit;
     background: inherit;
     color: inherit;
+    width: max-content;
   }
 
   .baseLabel {
