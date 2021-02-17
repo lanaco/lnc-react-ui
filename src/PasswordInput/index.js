@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 const PasswordInput = (props) => {
 
-  // const [inFocus, setInFocus] = React.useState(false);
+  const [inFocus, setInFocus] = React.useState(false);
 
   const handleOnChange = (e) => {
     if (props.preventDefault) {
@@ -34,17 +34,16 @@ const PasswordInput = (props) => {
           disabled={props.disabled}
           title={props.tooltipText}
           onKeyDown={props.onKeyDown}
-        // onBlur={() => {
-        //   setInFocus(false);
-        // }}
-        // onFocus={() => {
-        //   setInFocus(true);
-        // }}
+        onBlur={() => {
+          setInFocus(false);
+        }}
+        onFocus={() => {
+          setInFocus(true);
+        }}
         >
         </input>
         <span
-          // className={inFocus ? styles.iconButtonPasswordInputInFocus : styles.iconButtonPasswordInput}
-          className={styles.iconButtonPasswordInput}
+          className={inFocus ? styles.iconButtonPasswordInputInFocus : styles.iconButtonPasswordInput}
           onClick={handleLockUnlock}
           disabled={props.disabled}
         >
