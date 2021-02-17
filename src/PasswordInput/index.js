@@ -25,22 +25,23 @@ const PasswordInput = (props) => {
 
   return (
     <BaseContainer {...props}>
-      {/* <div className={styles.inputWithIconButtonPasswordInput}> */}
-      <input
-        type={locked ? "password" : "text"}
-        value={props.value}
-        onChange={handleOnChange}
-        className={(props.inputCssClass) ? [styles.standardInputPasswordInput, props.inputCssClass].join(" ") : styles.standardInputPasswordInput}
-        disabled={props.disabled}
-        title={props.tooltipText}
-        onKeyDown={props.onKeyDown}
+      <div className={styles.inputWithIconButtonPasswordInput}>
+        <input
+          type={locked ? "password" : "text"}
+          value={props.value}
+          onChange={handleOnChange}
+          className={(props.inputCssClass) ? [styles.standardInputPasswordInput, props.inputCssClass].join(" ") : styles.standardInputPasswordInput}
+          disabled={props.disabled}
+          title={props.tooltipText}
+          onKeyDown={props.onKeyDown}
         // onBlur={() => {
         //   setInFocus(false);
         // }}
         // onFocus={() => {
         //   setInFocus(true);
         // }}
-      >
+        >
+        </input>
         <span
           // className={inFocus ? styles.iconButtonPasswordInputInFocus : styles.iconButtonPasswordInput}
           className={styles.iconButtonPasswordInput}
@@ -49,9 +50,7 @@ const PasswordInput = (props) => {
         >
           <i className={locked ? "lnc lnc-eye-no" : "lnc lnc-eye"} />
         </span>
-      </input>
-
-      {/* </div> */}
+      </div>
       {props.dontShowPasswordForgottenOption ? (
         ""
       ) : (
