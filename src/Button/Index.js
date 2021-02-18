@@ -4,6 +4,9 @@ import styles from './styles.module.css';
 
 const Button = (props) => {
 
+  const stilJeboGaDaGAJebo = styles.standardInputButton;
+  console.log("stilJeboGaDaGAJebo:", stilJeboGaDaGAJebo);
+
   const handleOnClick = (e) => {
     if (props.preventDefault) {
       e.preventDefault();
@@ -20,7 +23,7 @@ const Button = (props) => {
   return (
     <button
       onClick={handleOnClick}
-      className={(props.inputCssClass) ? [styles.standardInputButton, props.inputCssClass].join(" ") : styles.standardInputButton}
+      className={(props.inputCssClass) ? [stilJeboGaDaGAJebo, props.inputCssClass].join(" ") : stilJeboGaDaGAJebo}
       disabled={props.disabled}
       title={props.tooltipText}
     >

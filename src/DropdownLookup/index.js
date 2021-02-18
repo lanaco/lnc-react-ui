@@ -135,7 +135,7 @@ const DropdownLookup = (props) => {
             setInFocus(true);
           }}
         />
-        <span className={styles.clearInputSpan}>
+        <span className={inFocus ? styles.clearInputSpanInFocus : styles.clearInputSpan}>
           <IconButton
             iconClassName={props.closeIconClassName}
             onClick={onClearSelection}

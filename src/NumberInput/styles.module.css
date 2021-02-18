@@ -55,64 +55,26 @@ export const styles = {
 } */
 
 /* Original CSS */
-.containerNumberInput {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: var(--base-label-size) minmax(55%, auto) var(
-      --base-error-text-size
-    );
-  padding-top: 3px;
-  padding-left: 1px;
-  padding-right: 1px;
-  padding-bottom: 1px;
-}
-.labelNumberInput {
-  font-size: var(--base-additional-text-font-size);
-  /* padding-bottom: 2px; */
-  font-family: inherit;
-  font-weight: 400;
-  color: #545454;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-end;
-  min-height: 60%;
-}
-
-.errorTextNumberInput {
-  font-size: var(--base-additional-text-font-size);
-  font-family: inherit;
-  font-weight: 400;
-  /* padding-top: 2px; */
-  color: var(--base-error-color);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-start;
-}
 
 .standardInputNumberInput {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
   outline: none;
-  background-color: var(--input-bg-color);
-  transition: all var(--transition-duration);
-  font-size: var(--font-size);
-  border-bottom: 3px solid var(--base-color);
+  background-color: var(--color-base-backgroud);
+  transition: all var(--transition-base-duration);
+  font-size: var(--font-size-base);
+  border-bottom: 3px solid var(--color-base-blue);
   padding: 5px 5px;
   min-height: 60%;
   width: 100%;
 }
 
 .standardInputNumberInput:focus {
-  background-color: var(--input-bg-focus-color);
+  background-color: var(--color-base-white);
 }
 
 .standardInputNumberInput:disabled {
-  background-color: var(--disabled-bg-color);
-  color: var(--disabled-text-color);
+  background-color: var(--color-base-gray-lighter);
+  color: var(--color-base-green-darker);
 }

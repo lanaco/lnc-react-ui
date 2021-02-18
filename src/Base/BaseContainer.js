@@ -1,4 +1,5 @@
 import React from "react";
+import "../../dist/index.css";
 import baseStyles from "../Base/styles.module.css";
 
 const BaseContainer = (props) => {

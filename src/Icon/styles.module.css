@@ -14,8 +14,6 @@ export const styles = {
 
 /* Original CSS */
 .iconSpanIcon {
-  /* width: 100%;
-  height: 100%; */
   background-color: inherit !important;
   color: inherit !important;
   display: flex;
@@ -23,4 +21,5 @@ export const styles = {
   align-items: center;
   text-align: center;
   margin: 1px;
+  width: max-content;
 }

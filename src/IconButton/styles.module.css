@@ -75,14 +75,14 @@ export const styles = {
   background-color: inherit;
   background: inherit;
   color: inherit;
-  padding: 5px 5px;
+  /* padding: 5px 5px; */
   margin: 1px;
 }
 
 .buttonIconIconButton:hover,
 .buttonIconIconButton:focus {
   background: radial-gradient(
-    var(--button-icon-bg-color-secondary),
+    var(--color-base-gray-lighter),
     transparent,
     transparent
   );
@@ -95,7 +95,7 @@ export const styles = {
 }
 
 .buttonIconIconButton:disabled {
-  background-color: var(--color-base-gray);
+  background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
 }
 

@@ -27,9 +27,12 @@
     --color-base-red-darker: #e3566b;
     --color-base-red-ligher: #9c1f32;
     --color-base-dirty-white: #fcfcfc;
+    --color-base-white: white;
+    --color-base-backgroud: #dceff5;
   
     /* BASE FONTS */ 
     --font-base-ubuntu: 'Ubuntu', sans-serif;
+    --font-size-base: 1em;
   
     /* DISABLED */
     --disabled-bg-color: #dedede;
@@ -47,6 +50,7 @@
     background-color: inherit;
     background: inherit;
     color: inherit;
+    width: max-content;
   }
 
   .baseContainerWithSideLabel {
@@ -58,6 +62,7 @@
     background-color: inherit;
     background: inherit;
     color: inherit;
+    width: max-content;
   }
 
   .baseLabel {
