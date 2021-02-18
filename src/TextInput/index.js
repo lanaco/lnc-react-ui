@@ -1,6 +1,5 @@
 import React from "react";
 import BaseContainer from "../Base/BaseContainer";
-import styles from './styles.module.css';
 
 const TextInput = React.forwardRef((props, ref) => {
   const handleOnChange = (e) => {
@@ -19,9 +18,21 @@ const TextInput = React.forwardRef((props, ref) => {
         value={props.value}
         onChange={handleOnChange}
         disabled={props.disabled}
-        className={(props.inputCssClass) ? [styles.standardInputTextInput, props.inputCssClass].join(" ") : styles.standardInputTextInput}
+        // className={(props.inputCssClass) ? [styles.standardInputTextInput, props.inputCssClass].join(" ") : styles.standardInputTextInput}
         title={props.tooltipText}
         onKeyDown={props.onKeyDown}
+        style={{
+          fontFamily: "inherit",
+          outline: "none",
+          backgroundColor: " #dceff5",
+          transition: "400ms",
+          fontSize: "1em",
+          borderBottom: "3px solid red",
+          padding: "5px 5px",
+          minHeight: "60%",
+          width: "min-content",
+          width: "100%"
+        }}
       />
     </BaseContainer>
   );
