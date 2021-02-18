@@ -12,8 +12,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "copy-lnc-files": "copyfiles -u 2 \"src/Base/lnclines.eot\" \"src/Base/lnclines.svg\" \"src/Base/lnclines.ttf\" \"src/Base/lnclines.woff\" \"dist\"",
-    "build": "npm run copy-lnc-files && microbundle-crl --no-compress --format modern,cjs",
+    "build": "npm run microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
@@ -34,6 +33,7 @@
     "moment-timezone": "^0.5.28",
     "react-datepicker": "^2.12.1",
     "react-day-picker": "^7.4.0",
+    "save": "^2.4.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.22.0",
     "webpack-cli": "^4.5.0"
