@@ -1,9 +1,8 @@
 import React from "react";
 import baseStyles from "../Base/styles.module.css";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const Button = (props) => {
-
   const stilJeboGaDaGAJebo = styles.standardInputButton;
   console.log("stilJeboGaDaGAJebo:", stilJeboGaDaGAJebo);
 
@@ -23,16 +22,26 @@ const Button = (props) => {
   return (
     <button
       onClick={handleOnClick}
-      className={(props.inputCssClass) ? [stilJeboGaDaGAJebo, props.inputCssClass].join(" ") : stilJeboGaDaGAJebo}
+      className={
+        props.inputCssClass
+          ? [stilJeboGaDaGAJebo, props.inputCssClass].join(" ")
+          : stilJeboGaDaGAJebo
+      }
       disabled={props.disabled}
       title={props.tooltipText}
     >
       <span>
         {props.label && props.label !== "" ? <span>{props.label}</span> : ""}
-        {iconClassName !== "" ? <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i> : ""}
+        {iconClassName !== "" ? (
+          <i
+            className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}
+          ></i>
+        ) : (
+          ""
+        )}
       </span>
     </button>
   );
 };
 
-export default (Button);
+export default Button;
