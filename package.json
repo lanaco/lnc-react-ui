@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lanaco-react-library",
-  "version": "1.0.101",
+  "version": "1.0.107",
   "description": "Lanaco react library components",
   "author": "aleksandar.mitric33",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "mkdir dist &&  babel src -d dist --copy-files",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
@@ -22,7 +22,7 @@
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
-    "ttt": "webpack --config webpack.config.js"
+    "publish:npm": "mkdir dist &&  babel src -d dist --copy-files"
   },
   "dependencies": {
     "@material-ui/styles": "^4.11.2",
@@ -43,6 +43,7 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.17",
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
     "@babel/preset-react": "^7.12.13",
@@ -82,5 +83,13 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }

@@ -43,7 +43,7 @@ module.exports = {
       },
     ],
   },
-  // externals: {
+  // external: {
   //   react: "react",
   // },
 };
