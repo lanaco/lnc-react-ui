@@ -28,4 +28,4 @@ const ConfirmationForm = (props) => {
   );
 };
 
-export default withTranslation()(ConfirmationForm);
+export default ConfirmationForm;
