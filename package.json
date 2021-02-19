@@ -36,7 +36,8 @@
     "save": "^2.4.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.22.0",
-    "webpack-cli": "^4.5.0"
+    "webpack-cli": "^4.5.0",
+    "lodash": "^4.17.15"
   },
   "peerDependencies": {
     "react": "^16.0.0"
