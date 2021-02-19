@@ -19,7 +19,7 @@ jobs:
           node-version: 14.15.1
           registry-url: https://registry.npmjs.org
       # clean install of your projects' deps. We use "npm ci" to avoid package lock changes
-      - run: npm ci
+      # - run: npm ci
       - run: npm run build
       - name: Publish if version has been updated
         uses: houtianze/npm-publish-action@master
