@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lanaco-react-library",
-  "version": "1.0.104",
+  "version": "1.0.103",
   "description": "Lanaco react library components",
   "author": "aleksandar.mitric33",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js && microbundle-crl build --no-compress --format modern,cjs",
+    "build": "webpack --config webpack.config.js",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
@@ -21,8 +21,7 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build",
-    "ttt": "webpack --config webpack.config.js"
+    "deploy": "gh-pages -d example/build"
   },
   "dependencies": {
     "@material-ui/styles": "^4.11.2",
