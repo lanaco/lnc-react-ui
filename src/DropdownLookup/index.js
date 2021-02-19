@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import BaseContainer from "../Base/BaseContainer";
 import IconButton from "../IconButton/index.js";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const usePrevious = (value) => {
   const ref = useRef();
@@ -135,7 +135,11 @@ const DropdownLookup = (props) => {
             setInFocus(true);
           }}
         />
-        <span className={inFocus ? styles.clearInputSpanInFocus : styles.clearInputSpan}>
+        <span
+          className={
+            inFocus ? styles.clearInputSpanInFocus : styles.clearInputSpan
+          }
+        >
           <IconButton
             iconClassName={props.closeIconClassName}
             onClick={onClearSelection}
