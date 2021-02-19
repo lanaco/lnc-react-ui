@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import Button from "../Button/Index.js";
+import Button from "../Button/index.js";
 
 const ConfirmationForm = (props) => {
   const approveFunction = () => {
