@@ -1,6 +1,5 @@
 import React from "react";
 import baseStyles from "../Base/styles.module.css";
-import styles from "./styles.module.css";
 
 const Button = (props) => {
   const handleOnClick = (e) => {
