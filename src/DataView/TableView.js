@@ -166,7 +166,8 @@ const TableView = (props) => {
   const renderHeaderCell = (def, i) => {
     let headerClick = () => {};
     let hideOrdering =
-      !EnableOrdering || (def.sortable ? def.sortable === false : false);
+      !EnableOrdering ||
+      (def.sortable === undefined ? false : def.sortable === false);
     let isAccessor = def.accessor === Accessor;
     let orderingIcon;
 
