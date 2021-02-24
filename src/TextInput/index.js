@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BaseContainer from "../Base/BaseContainer";
 import styles from "./styles.module.css";
 
