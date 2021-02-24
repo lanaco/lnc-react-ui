@@ -1,7 +1,11 @@
 import React from "react";
 import baseStyles from "../Base/styles.module.css";
+import styles from "./styles.module.css";
 
 const Button = (props) => {
+  const stilJeboGaDaGAJebo = styles.standardInputButton;
+  console.log("stilJeboGaDaGAJebo:", stilJeboGaDaGAJebo);
+
   const handleOnClick = (e) => {
     if (props.preventDefault) {
       e.preventDefault();
