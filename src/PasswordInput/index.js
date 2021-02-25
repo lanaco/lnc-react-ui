@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import BaseContainer from "../Base/BaseContainer";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const PasswordInput = (props) => {
-
   const [inFocus, setInFocus] = React.useState(false);
 
   const handleOnChange = (e) => {
@@ -30,20 +29,29 @@ const PasswordInput = (props) => {
           type={locked ? "password" : "text"}
           value={props.value}
           onChange={handleOnChange}
-          className={(props.inputCssClass) ? [styles.standardInputPasswordInput, props.inputCssClass].join(" ") : styles.standardInputPasswordInput}
+          className={
+            props.inputCssClass
+              ? [styles.standardInputPasswordInput, props.inputCssClass].join(
+                  " "
+                )
+              : styles.standardInputPasswordInput
+          }
           disabled={props.disabled}
           title={props.tooltipText}
           onKeyDown={props.onKeyDown}
-        onBlur={() => {
-          setInFocus(false);
-        }}
-        onFocus={() => {
-          setInFocus(true);
-        }}
-        >
-        </input>
+          onBlur={() => {
+            setInFocus(false);
+          }}
+          onFocus={() => {
+            setInFocus(true);
+          }}
+        ></input>
         <span
-          className={inFocus ? styles.iconButtonPasswordInputInFocus : styles.iconButtonPasswordInput}
+          className={
+            inFocus
+              ? styles.iconButtonFocusedPasswordInput
+              : styles.iconButtonPasswordInput
+          }
           onClick={handleLockUnlock}
           disabled={props.disabled}
         >
@@ -53,14 +61,16 @@ const PasswordInput = (props) => {
       {props.dontShowPasswordForgottenOption ? (
         ""
       ) : (
-          <div
-            className={styles.forgottenPasswordDivPasswordInput}
-            onClick={forgotPassword}
-            disabled={props.disabled}
-          >
-            {props.passwordForgottenText ? props.passwordForgottenText : "Password forgotten"}
-          </div>
-        )}
+        <div
+          className={styles.forgottenPasswordDivPasswordInput}
+          onClick={forgotPassword}
+          disabled={props.disabled}
+        >
+          {props.passwordForgottenText
+            ? props.passwordForgottenText
+            : "Password forgotten"}
+        </div>
+      )}
     </BaseContainer>
   );
 };

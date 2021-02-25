@@ -1,27 +1,27 @@
-/* Code copy from stamp app without useles css. NOT CHECKED */
+/* Code copy from stamp app without useles css. CHECKED AND OK */
 .standardInputTextArea {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
   outline: none;
   width: 100%;
+  /* height: 100%; */
   resize: vertical;
-  background-color: var(--color-base-backgroud);
-  transition: all var(--transition-base-duration);
-  font-size: var(--font-size-base);
+  background-color: var(--input-bg-color);
+  transition: all var(--transition-duration);
+  font-size: var(--font-size);
+  border-bottom: 2.7px solid var(--base-color);
   display: block;
   overflow: hidden;
-  border-bottom: 3px solid var(--color-base-blue);
-  padding: 5px 5px;
 }
 
 .standardInputTextArea:focus {
-  background-color: var(--color-base-white);
+  background-color: var(--input-bg-focus-color);
 }
 
 .standardInputTextArea:disabled {
-  background-color: var(--color-base-gray-lighter);
-  color: var(--color-base-gray-darker);
+  background-color: var(--disabled-bg-color);
+  color: var(--disabled-text-color);
 }
 
 /* Neno's code
