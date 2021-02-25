@@ -1,130 +1,4 @@
-/* Generated code
-export const styles = {
-  ".containerToggleSwitch": {
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    gridTemplateRows:
-      "var(--base-label-size) minmax(55%, auto) var(\n      --base-error-text-size\n    )",
-    paddingTop: "3px",
-    paddingLeft: "1px",
-    paddingRight: "1px",
-    paddingBottom: "1px"
-  },
-  ".containerWithSideLabelToggleSwitch": {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    paddingTop: "3px",
-    paddingLeft: "1px",
-    paddingRight: "1px",
-    paddingBottom: "1px"
-  },
-  ".labelToggleSwitch": {
-    fontSize: ["var(--base-additional-text-font-size)", "0.8em"],
-    fontFamily: "inherit",
-    fontWeight: 400,
-    color: "#545454",
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "left",
-    alignItems: "flex-end",
-    paddingBottom: "2px"
-  },
-  ".errorTextToggleSwitch": {
-    fontSize: "var(--base-additional-text-font-size)",
-    fontFamily: "inherit",
-    fontWeight: 400,
-    color: "var(--base-error-color)",
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "left",
-    alignItems: "flex-start"
-  },
-  ".standardInputToggleSwitch": {
-    fontFamily: "inherit",
-    WebkitAppearance: "none",
-    appearance: "none",
-    outline: "none",
-    width: "100%",
-    height: "100%",
-    backgroundColor: "var(--input-bg-color)",
-    transition: "all var(--transition-duration)",
-    fontSize: "var(--font-size)",
-    borderBottom: "2.7px solid var(--base-color)",
-    padding: "5px 10px"
-  },
-  ".switch": { position: "relative", display: "inline-block", width: "40px" },
-  ".switch input": { opacity: 0, width: "0", height: "0" },
-  ".slider": {
-    position: "absolute",
-    cursor: "pointer",
-    top: "25%",
-    left: "0",
-    right: "0",
-    bottom: "0",
-    backgroundColor: "gray",
-    WebkitTransition: "0.4s",
-    transition: "0.4s",
-    height: "20px",
-    width: "45px",
-    border: "1px solid var(--base-color)",
-    borderRadius: "2px"
-  },
-  ".slider:before": {
-    position: "absolute",
-    content: '""',
-    height: "22px",
-    width: "22px",
-    left: "1px",
-    top: "-2px",
-    backgroundColor: "white",
-    WebkitTransition: "0.4s",
-    transition: "0.4s",
-    border: "1px solid var(--base-color)",
-    borderRadius: "2px"
-  },
-  ".sliderDisabledToggleSwitch": {
-    position: "absolute",
-    cursor: "pointer",
-    top: "25%",
-    left: "0",
-    right: "0",
-    bottom: "0",
-    WebkitTransition: "0.4s",
-    transition: "0.4s",
-    height: "20px",
-    width: "45px",
-    borderRadius: "2px",
-    backgroundColor: "#ccc !important"
-  },
-  ".sliderDisabledToggleSwitch:before": {
-    position: "absolute",
-    content: '""',
-    height: "22px",
-    width: "22px",
-    left: "1px",
-    top: "-2px",
-    backgroundColor: "white",
-    WebkitTransition: "0.4s",
-    transition: "0.4s",
-    border: "1px solid gray",
-    borderRadius: "2px"
-  },
-  "input:checked + .slider": { backgroundColor: "var(--lanaco-accent-color)" },
-  "input:focus + .slider": { boxShadow: "0 0 1px var(--lanaco-accent-color)" },
-  "input:checked + .slider:before": {
-    WebkitTransform: "translateX(90%)",
-    msTransform: "translateX(90%)",
-    transform: "translateX(90%)"
-  },
-  ".switchLabel": { paddingLeft: "10px" },
-  ".switchLine": { paddingBottom: "3px" }
-} */
-
-/* Original CSS */
+/* Code copy from stamp app without useles css. NOT CHECKED */
 .standardInputToggleSwitch {
   font-family: inherit;
   -webkit-appearance: none;
@@ -231,3 +105,111 @@ input:checked + .slider:before {
 .switchLine {
   padding-bottom: 3px;
 }
+
+/* Neno's code
+.standardInputToggleSwitch {
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-base-backgroud);
+  transition: all var(--transition-base-duration);
+  font-size: var(--font-size-base);
+  border-bottom: 3px solid var(--color-base-blue);
+  padding: 5px 10px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 25%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 20px;
+  width: 45px;
+  border: 1px solid var(--color-base-blue);
+  border-radius: 2px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 1px;
+  top: -2px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border: 1px solid var(--color-base-blue);
+  border-radius: 2px;
+}
+
+.sliderDisabledToggleSwitch {
+  position: absolute;
+  cursor: pointer;
+  top: 25%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 20px;
+  width: 45px;
+  border-radius: 2px;
+  background-color: #ccc !important;
+}
+
+.sliderDisabledToggleSwitch:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 1px;
+  top: -2px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border: 1px solid gray;
+  border-radius: 2px;
+}
+
+input:checked + .slider {
+  background-color: var(--color-base-blue);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--color-base-blue);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(90%);
+  -ms-transform: translateX(90%);
+  transform: translateX(90%);
+}
+
+.switchLabel {
+  padding-left: 10px;
+}
+
+.switchLine {
+  padding-bottom: 3px;
+} */

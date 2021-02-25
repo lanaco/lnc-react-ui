@@ -22,7 +22,8 @@
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
-    "publish:npm": "mkdir dist &&  babel src -d dist --copy-files"
+    "publish:npm": "mkdir dist &&  babel src -d dist --copy-files",
+    "build webpack": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "@material-ui/styles": "^4.11.2",
