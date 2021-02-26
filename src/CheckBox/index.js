@@ -1,6 +1,6 @@
 import React from "react";
 import BaseContainer from "../Base/BaseContainer";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const CheckBox = (props) => {
   const handleChange = (e) => {
@@ -8,9 +8,9 @@ const CheckBox = (props) => {
       e.preventDefault();
     }
     props.onChange(props.id, e.target.checked);
-  }
-    return (
-      <BaseContainer {...props} label="">
+  };
+  return (
+    <BaseContainer {...props} label="">
       <div className={styles.checkBoxLine}>
         <input
           type="checkbox"
@@ -20,9 +20,8 @@ const CheckBox = (props) => {
         />
         <label className={styles.checkBoxLabel}>{props.label}</label>
       </div>
-      </BaseContainer>
-      
-    );
+    </BaseContainer>
+  );
 };
 
 export default CheckBox;

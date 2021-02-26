@@ -1,0 +1,254 @@
+.editedBorder {
+  border-top: 4.5px solid orange;
+  padding-top: 10px;
+}
+
+.successBorder {
+  border-top: 4.5px solid green;
+  padding-top: 10px;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 1081px) {
+  /* For desktop: */
+  .flexContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .filterContainerHolder {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+.flexInnerContainer {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.filterContainerHolder {
+  min-width: 50%;
+  max-width: 50%;
+}
+
+.flexItem {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1.4em;
+  max-height: 40px;
+}
+
+.view {
+  margin-top: 15px;
+  box-shadow: 0 0 20px #bebebe;
+  height: 100%;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
+}
+
+.contextMenu {
+  margin-left: 20px;
+}
+
+.movementFlexContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+.flexContainerLeft {
+  display: flex;
+  flex-direction: row;
+  padding-left: 15px;
+}
+
+.flexContainerRight {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 22px;
+}
+
+.movementFlexItem {
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell {
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+
+.header {
+  cursor: pointer;
+  background-color: var(--lanaco-accent-color);
+  color: var(--lanaco-text-color);
+  border-right: 1px solid #003954;
+  text-align: left;
+  padding-right: 5px;
+}
+
+.header:hover {
+  background-color: #00496b;
+}
+
+.header:hover .headerInnerIconDiv {
+  color: white;
+}
+
+.specialRenderCell {
+  background-color: inherit;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.header,
+.specialRenderCell {
+  text-align: center;
+  padding-left: 5px;
+}
+
+.withLeftPadding {
+  padding-left: 5px;
+}
+
+.cell,
+.specialRenderCell {
+  border-right: 1px solid #ccc;
+  padding-left: 5px;
+}
+
+.tableRowEven {
+  background: white;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+.tableRowOdd {
+  background: whitesmoke;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+.tableRowEven:hover,
+.tableRowOdd:hover {
+  border: 1px solid #0091a7 !important;
+  position: relative;
+}
+
+.checkedRow {
+  background-color: #ccebf0 !important;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+.table {
+  width: 100%;
+}
+
+@media screen and (max-width: 1400px) {
+  .table {
+    width: 100%;
+    font-size: 0.7em;
+  }
+}
+
+.headerInnerDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerInnerIconDiv {
+  color: #b0b3b5;
+}
+
+.selectColumn {
+  width: 50px !important;
+  padding-right: 5px;
+}
+
+@media (max-width: 576px) {
+  .hide-576 {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-768 {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .hide-992 {
+    display: none;
+  }
+
+  .cell,
+  .header {
+    display: none;
+  }
+
+  .cell:first-child,
+  .cell:nth-child(2),
+  .cell:nth-child(3),
+  .header:first-child,
+  .header:nth-child(2),
+  .header:nth-child(3) {
+    display: table-cell;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hide-1200 {
+    display: none;
+  }
+}
+
+.tablePaginationContainer {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.tablePaginationItem {
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.exportButtons {
+  display: flex;
+  font-size: 2em;
+  justify-content: space-evenly;
+  padding-right: 10px;
+  width: 5%;
+}
+
+.innerPaginationContainer {
+  display: flex;
+}
