@@ -21,13 +21,22 @@ const TextInput = React.forwardRef((props, ref) => {
     if (isFirst) setIsFirst(false);
   };
 
+  const handleOnChange = (e) => {
+    if (props.preventDefault) {
+      e.preventDefault();
+    }
+
+    props.onChange(props.id, e.target.value);
+    setText(e.target.value);
+  };
+
   return (
     <BaseContainer {...props}>
       <input
         ref={ref}
         type={"text"}
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={handleOnChange}
         disabled={props.disabled}
         className={
           props.inputCssClass
