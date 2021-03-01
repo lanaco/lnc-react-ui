@@ -1,10 +1,9 @@
 import React from "react";
+import BaseContainer from "../Base/BaseContainer";
 import baseStyles from "../Base/styles.module.css";
 import styles from "./styles.module.css";
 
 const Button = (props) => {
-  const stilJeboGaDaGAJebo = styles.standardInputButton;
-  console.log("stilJeboGaDaGAJebo:", stilJeboGaDaGAJebo);
 
   const handleOnClick = (e) => {
     if (props.preventDefault) {
@@ -20,27 +19,29 @@ const Button = (props) => {
   }
 
   return (
-    <button
-      onClick={handleOnClick}
-      className={
-        props.inputCssClass
-          ? [stilJeboGaDaGAJebo, props.inputCssClass].join(" ")
-          : stilJeboGaDaGAJebo
-      }
-      disabled={props.disabled}
-      title={props.tooltipText}
-    >
-      <span>
-        {props.label && props.label !== "" ? <span>{props.label}</span> : ""}
-        {iconClassName !== "" ? (
-          <i
-            className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}
-          ></i>
-        ) : (
-          ""
-        )}
-      </span>
-    </button>
+    <BaseContainer {...props}>
+      <button
+        onClick={handleOnClick}
+        className={
+          props.inputCssClass
+            ? [styles.standardInputButton, props.inputCssClass].join(" ")
+            : styles.standardInputButton
+        }
+        disabled={props.disabled}
+        title={props.tooltipText}
+      >
+        <span>
+          {props.label && props.label !== "" ? <span>{props.label}</span> : ""}
+          {iconClassName !== "" ? (
+            <i
+              className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}
+            ></i>
+          ) : (
+              ""
+            )}
+        </span>
+      </button>
+    </BaseContainer>
   );
 };
 

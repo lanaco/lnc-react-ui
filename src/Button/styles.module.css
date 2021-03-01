@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. NOT CHECKED */
-.standardInputButton {
+/* .standardInputButton {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
@@ -31,9 +31,9 @@
 .standardInputButton:disabled {
   background-color: var(--disabled-bg-color);
   color: var(--disabled-text-color);
-}
+} */
 
-/* Neno's code
+ /* Neno's code */
 .standardInputButton {
   font-size: 1em;
   -webkit-appearance: none;
@@ -63,4 +63,4 @@
 .standardInputButton:disabled {
   background-color: var(--color-base-gray);
   color: var(--color-base-gray-darker);
-} */
+}
