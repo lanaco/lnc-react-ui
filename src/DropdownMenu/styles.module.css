@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
-.dropbtn {
+/* .dropbtn {
   font-size: var(--base-additional-text-font-size);
   display: flex;
   flex-direction: row;
@@ -68,9 +68,9 @@
 .dropdown:hover .iconSpan {
   animation: mymove 0.4s;
   animation-iteration-count: infinite;
-}
+} */
 
-/* Neno's code
+/* Neno's code */
 .dropbtn {
   font-size: var(--base-additional-text-font-size);
   display: flex;
@@ -143,4 +143,4 @@
 .dropdown:hover .iconSpan {
   animation: mymove 0.4s;
   animation-iteration-count: infinite;
-} */
+}

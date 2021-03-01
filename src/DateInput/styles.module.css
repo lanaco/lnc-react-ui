@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND NEED TO BE TESTED (datePickerWrapper class) */
-input[type="date"]::-webkit-inner-spin-button {
+/* input[type="date"]::-webkit-inner-spin-button {
   display: none;
   -webkit-appearance: none;
 }
@@ -25,9 +25,9 @@ input[type="date"]::-webkit-inner-spin-button {
 .standardInputDateInput:disabled {
   background-color: var(--disabled-bg-color);
   color: var(--disabled-text-color);
-}
+} */
 
-/* Neno's code
+/* Neno's code */
 input[type="date"]::-webkit-inner-spin-button {
   display: none;
   -webkit-appearance: none;
@@ -54,4 +54,4 @@ input[type="date"]::-webkit-inner-spin-button {
 .standardInputDateInput:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
-} */
+}

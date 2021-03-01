@@ -58,6 +58,7 @@
 
 .standardInputButton:hover {
   background-color: var(--color-base-blue-darker);
+  cursor: pointer;
 }
 
 .standardInputButton:disabled {

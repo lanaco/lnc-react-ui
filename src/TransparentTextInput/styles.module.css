@@ -1,4 +1,17 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
+/* .inputTransparentText {
+  border: none;
+  margin: 0;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  margin: 0;
+  background-color: transparent;
+  width: 100%;
+} */
+
+/* Neno's code */
 .inputTransparentText {
   border: none;
   margin: 0;
@@ -10,16 +23,3 @@
   background-color: transparent;
   width: 100%;
 }
-
-/* Neno's code
-.inputTransparentText {
-  border: none;
-  margin: 0;
-  text-decoration: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  margin: 0;
-  background-color: transparent;
-  width: 100%;
-} */

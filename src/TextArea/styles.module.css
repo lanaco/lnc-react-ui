@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
-.standardInputTextArea {
+/* .standardInputTextArea {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
@@ -22,9 +22,9 @@
 .standardInputTextArea:disabled {
   background-color: var(--disabled-bg-color);
   color: var(--disabled-text-color);
-}
+} */
 
-/* Neno's code
+/* Neno's code */
     .standardInputTextArea {
   font-family: inherit;
   -webkit-appearance: none;
@@ -48,4 +48,4 @@
 .standardInputTextArea:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
-} */
+}

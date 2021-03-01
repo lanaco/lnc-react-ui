@@ -19,7 +19,7 @@ const Button = (props) => {
   }
 
   return (
-    <BaseContainer {...props}>
+    <BaseContainer {...props} label="">
       <button
         onClick={handleOnClick}
         className={

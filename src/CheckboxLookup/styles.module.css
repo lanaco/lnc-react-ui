@@ -1,31 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
-.cardStyle {
-  border: 1px solid rgb(191, 191, 191);
-  border-radius: 4px;
-  box-shadow: none;
-  padding: 5px !important;
-  padding-top: 0;
-}
-
-.cardContent {
-  padding: 10px !important;
-}
-
-.title {
-  padding: 0px 10px;
-  padding-bottom: 0;
-  font-size: 15px;
-  width: 100%;
-  color: rgb(88, 88, 88);
-  display: flex;
-}
-
-.selectButton {
-  padding: 0px 10px;
-}
-
-/* Neno's code
-.cardStyle {
+/* .cardStyle {
   border: 1px solid rgb(191, 191, 191);
   border-radius: 4px;
   box-shadow: none;
@@ -49,3 +23,29 @@
 .selectButton {
   padding: 0px 10px;
 } */
+
+/* Neno's code */
+.cardStyle {
+  border: 1px solid rgb(191, 191, 191);
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 5px !important;
+  padding-top: 0;
+}
+
+.cardContent {
+  padding: 10px !important;
+}
+
+.title {
+  padding: 0px 10px;
+  padding-bottom: 0;
+  font-size: 15px;
+  width: 100%;
+  color: rgb(88, 88, 88);
+  display: flex;
+}
+
+.selectButton {
+  padding: 0px 10px;
+}

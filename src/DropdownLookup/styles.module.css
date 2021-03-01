@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
-.innerContainer {
+/* .innerContainer {
   display: flex;
 }
 
@@ -59,9 +59,9 @@
   z-index: 10000;
   border: 1px solid gray;
   position: relative;
-}
+} */
 
-/* Neno's code
+/* Neno's code */
 .innerContainer {
   display: flex;
 }
@@ -127,4 +127,4 @@
   z-index: 10000;
   border: 1px solid gray;
   position: relative;
-} */
+}

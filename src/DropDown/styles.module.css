@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
-.standardInputDropDown {
+/* .standardInputDropDown {
   font-family: inherit;
   outline: none;
   width: 100%;
@@ -17,9 +17,9 @@
 .standardInputDropDown:disabled {
   background-color: var(--disabled-bg-color);
   color: var(--disabled-text-color);
-}
+} */
 
-/* Neno's code
+/* Neno's code */
 .standardInputDropDown {
   font-family: inherit;
   -webkit-appearance: none;
@@ -45,4 +45,4 @@
 .standardInputDropDown:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
-} */
+}

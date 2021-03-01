@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. NEED TESTING AND CHECKING */
-.buttonIconIconButton {
+/* .buttonIconIconButton {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
@@ -39,14 +39,14 @@
 }
 
 /* This is extra code that exists in STAMP. */
-.icon {
+/* .icon {
   color: inherit !important;
   font-size: var(--font-size);
   height: 100%;
   width: 100%;
-}
+} */ 
 
-/* Neno's code
+/* Neno's code */
 .buttonIconIconButton {
   font-size: 1.2em;
   -webkit-appearance: none;
@@ -83,4 +83,4 @@
   align-items: center;
   text-align: center;
   width: 100%;
-} */
+}

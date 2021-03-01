@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
-.standardInputPasswordInput {
+/* .standardInputPasswordInput {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
@@ -87,9 +87,9 @@
   width: 100%;
   font-size: 1em;
   padding-top: 9px;
-}
+} */
 
-/* Neno's code
+/* Neno's code */
 .standardInputPasswordInput {
   font-family: inherit;
   -webkit-appearance: none;
@@ -191,4 +191,4 @@
   width: 100%;
   font-size: 0.8em;
   padding-top: 5px;
-} */
+}

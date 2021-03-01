@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
-input[type="checkbox"] {
+/* input[type="checkbox"] {
   width: 20px;
   height: 20px;
   vertical-align: middle;
@@ -17,9 +17,9 @@ input[type="checkbox"]:hover {
 
 .checkBoxLine {
   padding-bottom: 3px;
-}
+} */
 
-/* Neno's code
+/* Neno's code */
 input[type="checkbox"] {
   width: 20px;
   height: 20px;
@@ -39,4 +39,4 @@ input[type="checkbox"]:hover {
 
 .checkBoxLine {
   padding-bottom: 3px;
-} */
+}

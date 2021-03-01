@@ -1,5 +1,5 @@
 /* Code copy from stamp app without useles css. CHECKED AND OK */
-.standardInputToggleSwitch {
+/* .standardInputToggleSwitch {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
@@ -104,9 +104,9 @@ input:checked + .slider:before {
 
 .switchLine {
   padding-bottom: 3px;
-}
+} */
 
-/* Neno's code
+/* Neno's code */
 .standardInputToggleSwitch {
   font-family: inherit;
   -webkit-appearance: none;
@@ -212,4 +212,4 @@ input:checked + .slider:before {
 
 .switchLine {
   padding-bottom: 3px;
-} */
+}
