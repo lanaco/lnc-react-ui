@@ -62,6 +62,7 @@
 }
 
 .standardInputButton:disabled {
-  background-color: var(--color-base-gray);
+  background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
+  cursor: inherit;
 }

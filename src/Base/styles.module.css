@@ -51,6 +51,7 @@
     background: inherit;
     color: inherit;
     width: max-content;
+    font-family: var(--font-base-ubuntu);
   }
 
   .baseContainerWithSideLabel {
@@ -63,6 +64,7 @@
     background: inherit;
     color: inherit;
     width: max-content;
+    font-family: var(--font-base-ubuntu);
   }
 
   .baseLabel {
