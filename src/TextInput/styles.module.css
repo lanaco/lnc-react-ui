@@ -32,9 +32,7 @@
   transition: all var(--transition-base-duration);
   font-size: var(--font-size-base);
   border-bottom: 3px solid var(--color-base-blue);
-  padding: 5px 5px;
   min-height: 60%;
-  width: min-content;
   width: 100%;
 }
 

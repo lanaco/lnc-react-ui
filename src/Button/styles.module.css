@@ -35,7 +35,7 @@
 
  /* Neno's code */
 .standardInputButton {
-  font-size: 1em;
+  font-size: var(--font-size-base);
   -webkit-appearance: none;
   appearance: none;
   outline: none;
@@ -44,16 +44,12 @@
   background: var(--color-base-blue);
   color: var(--color-base-dirty-white);
   padding: 5px;
-  margin: 1px;
+  min-height: 60%;
 }
 
 .standardInputButton span {
   align-items: center;
   text-align: center;
-}
-
-.standardInputButton > span > span {
-  margin-right: 5px;
 }
 
 .standardInputButton:hover {
