@@ -76,14 +76,14 @@
     display: flex;
     justify-content: left;
     align-items: flex-end;
-    height: 1.25em;
-    min-height: 1.25em;
+    height: 1em;
+    min-height: 1em;
   }
 
   .baseInputHolder {
     border:0px;
-    height: 2.5em;
-    min-height: 2.5em;
+    height: 2em;
+    min-height: 2em;
     width: 100%;
   }
   
@@ -95,8 +95,8 @@
     display: flex;
     justify-content: left;
     align-items: flex-start;
-    height: 1.25em;
-    min-height: 1.25em;
+    height: 1em;
+    min-height: 1em;
   }
 
 
