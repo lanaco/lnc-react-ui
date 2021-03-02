@@ -27,6 +27,7 @@ const PasswordInput = (props) => {
       <div className={styles.inputWithIconButtonPasswordInput}>
         <input
           type={locked ? "password" : "text"}
+          autoComplete={props.autoComplete}
           value={props.value}
           onChange={handleOnChange}
           className={
