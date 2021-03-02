@@ -1,4 +1,3 @@
-import 'https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap';
 import React from "react";
 import baseStyles from "../Base/styles.module.css";
 
