@@ -75,6 +75,7 @@
     display: flex;
     justify-content: left;
     align-items: flex-end;
+    min-height: 1em;
   }
   
   .baseErrorText {
@@ -85,6 +86,7 @@
     display: flex;
     justify-content: left;
     align-items: flex-start;
+    min-height: 1em;
   }
 
 
