@@ -37,8 +37,8 @@
   font-size: var(--font-size-base);
   display: block;
   overflow: hidden;
+  border: 0px;
   border-bottom: 3px solid var(--color-base-blue);
-  padding: 5px 5px;
 }
 
 .standardInputTextArea:focus {

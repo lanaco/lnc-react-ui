@@ -46,6 +46,7 @@
   padding: 5px;
   min-height: 60%;
   border: 0px;
+  border-bottom: 3px solid var(--color-base-blue);
 }
 
 .standardInputButton span {
