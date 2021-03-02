@@ -117,7 +117,7 @@ input:checked + .slider:before {
   background-color: var(--color-base-backgroud);
   transition: all var(--transition-base-duration);
   font-size: var(--font-size-base);
-  border-bottom: 3px solid var(--color-base-blue);
+  border-bottom: 2px solid var(--color-base-blue);
   padding: 5px 10px;
 }
 
