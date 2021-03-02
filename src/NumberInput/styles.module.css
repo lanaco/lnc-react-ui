@@ -34,6 +34,7 @@
   border-bottom: 3px solid var(--color-base-blue);
   height: 100%;
   width: 100%;
+  padding: 0px;
 }
 
 .standardInputNumberInput:focus {

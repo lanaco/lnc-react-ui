@@ -40,6 +40,7 @@
   overflow: hidden;
   border: 0px;
   border-bottom: 3px solid var(--color-base-blue);
+  padding: 0px;
 }
 
 .standardInputTextArea:focus {
