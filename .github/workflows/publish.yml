@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - CloneFirstCommit
+      - GoAirComponents_branch
 
 jobs:
   release:
