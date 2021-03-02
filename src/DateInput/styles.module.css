@@ -57,9 +57,9 @@ input[type="date"]::-webkit-inner-spin-button {
   color: var(--color-base-gray-darker);
 }
 
-div.react-datepicker-wrapper {
+.react-datepicker-wrapper {
   height: 100%;
 }
-div.react-datepicker__input-container {
+.react-datepicker__input-container {
   height: 100%;
 }
