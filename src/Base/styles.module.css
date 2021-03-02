@@ -86,10 +86,6 @@
     min-height: 2em;
     width: 100%;
   }
-
-  .baseInputHolder > .react-datepicker-wrapper {
-    height: 100%;
-  }
   
   .baseErrorText {
     font-size: 0.8em;
