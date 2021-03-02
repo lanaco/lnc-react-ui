@@ -102,6 +102,7 @@
   border-bottom: 3px solid var(--color-base-blue);
   height: 100%;
   width: 100%;
+  padding: 0px;
 }
 
 .standardInputPasswordInput:focus {
@@ -125,6 +126,7 @@
   border-bottom: 3px solid var(--color-base-blue);
   background-color: var(--color-base-backgroud);
   transition: all var(--transition-base-duration);
+  padding: 0px;
 }
 
 .iconButtonFocusedPasswordInput {
@@ -138,6 +140,7 @@
   border-bottom: 3px solid var(--color-base-blue);
   background-color: var(--color-base-white);
   transition: all var(--transition-base-duration);
+  padding: 0px;
 }
 
 .iconButtonPasswordInput:disabled {
