@@ -43,10 +43,9 @@
   background-color: var(--color-base-blue);
   background: var(--color-base-blue);
   color: var(--color-base-dirty-white);
-  padding: 5px;
-  min-height: 60%;
+  height: 100%;
+  width: 100%;
   border: 0px;
-  border-bottom: 3px solid var(--color-base-blue);
 }
 
 .standardInputButton span {

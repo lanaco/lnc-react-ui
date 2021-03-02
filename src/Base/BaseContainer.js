@@ -33,7 +33,9 @@ const BaseContainer = (props) => {
         </div>
       ) : (
         <React.Fragment>
+          <div className={baseStyles.baseInputHolder}>
           {props.children}
+          </div>
           <div
             className={
               props.errorTextCssClass

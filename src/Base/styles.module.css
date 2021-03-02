@@ -76,7 +76,15 @@
     display: flex;
     justify-content: left;
     align-items: flex-end;
-    min-height: 1em;
+    height: 1.25em;
+    min-height: 1.25em;
+  }
+
+  .baseInputHolder {
+    border:0px;
+    height: 2.5em;
+    min-height: 2.5em;
+    width: 100%;
   }
   
   .baseErrorText {
@@ -87,7 +95,8 @@
     display: flex;
     justify-content: left;
     align-items: flex-start;
-    min-height: 1em;
+    height: 1.25em;
+    min-height: 1.25em;
   }
 
 

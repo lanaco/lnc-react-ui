@@ -43,7 +43,7 @@ input[type="date"]::-webkit-inner-spin-button {
   font-size: var(--font-size-base);
   border: 0px;
   border-bottom: 3px solid var(--color-base-blue);
-  min-height: 60%;
+  height: 100%;
   width: 100%;
 }
 
