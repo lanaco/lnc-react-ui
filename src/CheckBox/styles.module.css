@@ -32,6 +32,14 @@ input[type="checkbox"]:hover {
   box-shadow: 0px 0px 10px gray;
 }
 
+input[type="checkbox"]:disabled {
+  background-color: var(--color-base-gray-lighter);
+  color: var(--color-base-gray-darker);
+  cursor: inherit;
+  opacity: 0.7;
+}
+
+
 .checkBoxLabel {
   vertical-align: middle;
   padding-left: 5px;

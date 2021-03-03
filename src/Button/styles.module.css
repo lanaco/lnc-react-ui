@@ -63,4 +63,5 @@
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
   cursor: inherit;
+  opacity: 0.7;
 }
