@@ -23,7 +23,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Publish if version has been updated
-        uses: houtianze/npm-publish-action@master
+        uses: houtianze/npm-publish-action@GoAirComponents_branch
         with: # All of theses inputs are optional
           tag_name: "v%s"
           tag_message: "v%s"
