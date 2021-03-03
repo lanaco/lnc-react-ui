@@ -13,7 +13,7 @@ const PasswordInput = (props) => {
   };
 
   const [locked, setLocked] = useState(true);
-
+  
   const forgotPassword = () => {
     if (props.handleForgotPassword) props.handleForgotPassword();
   };
