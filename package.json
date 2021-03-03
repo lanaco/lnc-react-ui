@@ -1,6 +1,10 @@
 {
   "name": "@lanaco/lanaco-react-library",
+<<<<<<< HEAD
   "version": "1.0.146",
+=======
+  "version": "1.0.147",
+>>>>>>> 16775cd15af0562fdc5948daf30ec76aed659094
   "description": "Lanaco react library components",
   "author": "aleksandar.mitric33",
   "license": "MIT",
