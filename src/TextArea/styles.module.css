@@ -41,6 +41,7 @@
   border: 0px;
   border-bottom: 2px solid var(--color-base-blue);
   padding: 0px;
+  box-sizing: border-box;
 }
 
 .standardInputTextArea:focus {
@@ -50,4 +51,5 @@
 .standardInputTextArea:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
+  cursor: inherit;
 }

@@ -46,6 +46,7 @@
   height: 100%;
   width: 100%;
   border: 0px;
+  box-sizing: border-box;
 }
 
 .standardInputButton span {

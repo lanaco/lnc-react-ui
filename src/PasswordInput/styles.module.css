@@ -103,6 +103,7 @@
   height: 100%;
   width: 100%;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 .standardInputPasswordInput:focus {
@@ -112,6 +113,7 @@
 .standardInputPasswordInput:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
+  cursor: inherit;
 }
 
 .iconButtonPasswordInput {
@@ -130,6 +132,7 @@
   background-color: var(--color-base-backgroud);
   transition: all var(--transition-base-duration);
   padding: 0px;
+  box-sizing: border-box;
 }
 
 .iconButtonFocusedPasswordInput {
@@ -147,11 +150,13 @@
   background-color: var(--color-base-white);
   transition: all var(--transition-base-duration);
   padding: 0px;
+  box-sizing: border-box;
 }
 
 .iconButtonPasswordInput:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
+  cursor: inherit;
 }
 
 .inputWithIconButtonPasswordInput {

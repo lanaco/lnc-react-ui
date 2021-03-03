@@ -36,6 +36,7 @@
   height: 100%;
   width: 100%;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 .standardInputTextInput:focus {
@@ -45,4 +46,5 @@
 .standardInputTextInput:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
+  cursor: inherit;
 }
