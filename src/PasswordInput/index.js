@@ -57,7 +57,7 @@ const PasswordInput = (props) => {
           onClick={handleLockUnlock}
           disabled={props.disabled}
         >
-          <i className={locked ? [baseStyles.lnc, baseStyles["lnc_eye_no"]].join(" ") : [baseStyles.lnc, baseStyles["lnc_eye_no"]].join(" ")} />
+          <i className={locked ? [baseStyles.lnc, baseStyles["lnc_eye_no"]].join(" ") : [baseStyles.lnc, baseStyles["lnc_eye"]].join(" ")} />
         </span>
       </div>
       {props.dontShowPasswordForgottenOption ? (
