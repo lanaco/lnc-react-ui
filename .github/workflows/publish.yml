@@ -22,15 +22,14 @@ jobs:
       # clean install of your projects' deps. We use "npm ci" to avoid package lock changes
       - run: npm ci
       - run: npm run build
+      # - name: Archive production artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: dist-without-markdown
+      #     path: |
+      #       dist
+      #       !dist/**/*.md
       - run: npm publish
-        # - name: Publish if version has been updated
-        #   uses: houtianze/npm-publish-action@GoAirComponents_branch
-        #   with: # All of theses inputs are optional
-        #     tag_name: "v%s"
-        #     tag_message: "v%s"
-        #     commit_pattern: "^(?:Release|Version) (\\S+)"
-        # - name: 🚀 publish
-        #   run: npm publish --access public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # You need to set this in your repo settings
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
