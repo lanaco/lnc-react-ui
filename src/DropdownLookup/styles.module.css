@@ -93,6 +93,7 @@
   height: 100%;
   width: 100%;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 .standardInput:focus {
@@ -102,6 +103,8 @@
 .standardInput:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
+  cursor: inherit;
+  border-bottom: 2px solid var(--color-base-gray-darker);
 }
 
 .listItem {

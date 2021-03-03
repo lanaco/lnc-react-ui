@@ -14,7 +14,7 @@ const PasswordInput = (props) => {
   };
 
   const [locked, setLocked] = useState(true);
-  
+
   const forgotPassword = () => {
     if (props.handleForgotPassword) props.handleForgotPassword();
   };
@@ -50,9 +50,7 @@ const PasswordInput = (props) => {
         ></input>
         <span
           className={
-            inFocus
-              ? styles.iconButtonFocusedPasswordInput
-              : styles.iconButtonPasswordInput
+            props.disabled ? styles.iconButtonDisabledPasswordInput : (inFocus ? styles.iconButtonFocusedPasswordInput : styles.iconButtonPasswordInput)
           }
           onClick={handleLockUnlock}
           disabled={props.disabled}

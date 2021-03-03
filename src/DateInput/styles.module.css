@@ -46,6 +46,7 @@ input[type="date"]::-webkit-inner-spin-button {
   height: 100%;
   width: 100%;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 .standardInputDateInput:focus {
@@ -55,5 +56,7 @@ input[type="date"]::-webkit-inner-spin-button {
 .standardInputDateInput:disabled {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
+  cursor: inherit;
+  border-bottom: 2px solid var(--color-base-gray-darker);
 }
 
