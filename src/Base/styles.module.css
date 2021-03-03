@@ -86,6 +86,14 @@
     min-height: 2em;
     width: 100%;
   }
+
+  .baseInputHolder > div {
+    height: 100%;
+  }
+
+  .baseInputHolder > div > div {
+    height: 100%;
+  }
   
   .baseErrorText {
     font-size: 0.8em;

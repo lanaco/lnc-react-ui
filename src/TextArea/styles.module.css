@@ -39,7 +39,7 @@
   display: block;
   overflow: hidden;
   border: 0px;
-  border-bottom: 3px solid var(--color-base-blue);
+  border-bottom: 2px solid var(--color-base-blue);
   padding: 0px;
 }
 

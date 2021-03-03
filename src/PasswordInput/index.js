@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BaseContainer from "../Base/BaseContainer";
+import baseStyles from "../Base/styles.module.css";
 import styles from "./styles.module.css";
 
 const PasswordInput = (props) => {
@@ -13,7 +14,7 @@ const PasswordInput = (props) => {
   };
 
   const [locked, setLocked] = useState(true);
-
+  
   const forgotPassword = () => {
     if (props.handleForgotPassword) props.handleForgotPassword();
   };
@@ -33,8 +34,8 @@ const PasswordInput = (props) => {
           className={
             props.inputCssClass
               ? [styles.standardInputPasswordInput, props.inputCssClass].join(
-                  " "
-                )
+                " "
+              )
               : styles.standardInputPasswordInput
           }
           disabled={props.disabled}
@@ -56,22 +57,22 @@ const PasswordInput = (props) => {
           onClick={handleLockUnlock}
           disabled={props.disabled}
         >
-          <i className={locked ? "lnc lnc-eye-no" : "lnc lnc-eye"} />
+          <i className={locked ? [baseStyles.lnc, baseStyles["lnc_eye_no"]].join(" ") : [baseStyles.lnc, baseStyles["lnc_eye_no"]].join(" ")} />
         </span>
       </div>
       {props.dontShowPasswordForgottenOption ? (
         ""
       ) : (
-        <div
-          className={styles.forgottenPasswordDivPasswordInput}
-          onClick={forgotPassword}
-          disabled={props.disabled}
-        >
-          {props.passwordForgottenText
-            ? props.passwordForgottenText
-            : "Password forgotten"}
-        </div>
-      )}
+          <div
+            className={styles.forgottenPasswordDivPasswordInput}
+            onClick={forgotPassword}
+            disabled={props.disabled}
+          >
+            {props.passwordForgottenText
+              ? props.passwordForgottenText
+              : "Password forgotten"}
+          </div>
+        )}
     </BaseContainer>
   );
 };

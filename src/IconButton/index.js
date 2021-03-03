@@ -2,6 +2,13 @@ import React from "react";
 import styles from './styles.module.css';
 
 const IconButton = (props) => {
+
+  let iconClassName = "";
+
+  if (props.iconClassName && props.iconClassName !== "") {
+    iconClassName = props.iconClassName.replace("-", "_");
+  }
+
   const handleOnClick = (e) => {
     if (props.preventDefault) {
       e.preventDefault();
@@ -17,7 +24,7 @@ const IconButton = (props) => {
       title={props.tooltipText}
     >
       <span>
-        <i className={props.iconClassName}></i>
+      <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i>
       </span>
     </button>
   );

@@ -69,14 +69,14 @@
 .clearInputSpan {
   background-color: var(--color-base-backgroud);
   font-size: var(--font-size-base);
-  border-bottom: 3px solid var(--color-base-blue);
+  border-bottom: 2px solid var(--color-base-blue);
   padding-right: 5px;
 }
 
 .clearInputSpanInFocus {
   background-color: white;
   font-size: var(--font-size-base);
-  border-bottom: 3px solid var(--color-base-blue);
+  border-bottom: 2px solid var(--color-base-blue);
   padding-right: 5px;
 }
 
@@ -89,7 +89,7 @@
   transition: all var(--transition-base-duration);
   font-size: var(--font-size-base);
   border: 0px;
-  border-bottom: 3px solid var(--color-base-blue);
+  border-bottom: 2px solid var(--color-base-blue);
   height: 100%;
   width: 100%;
   padding: 0px;
