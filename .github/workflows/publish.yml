@@ -22,12 +22,13 @@ jobs:
       # clean install of your projects' deps. We use "npm ci" to avoid package lock changes
       - run: npm ci
       - run: npm run build
-      - name: Publish if version has been updated
-        uses: houtianze/npm-publish-action@GoAirComponents_branch
-        with: # All of theses inputs are optional
-          tag_name: "v%s"
-          tag_message: "v%s"
-          commit_pattern: "^(?:Release|Version) (\\S+)"
+      - run: npm publish
+        # - name: Publish if version has been updated
+        #   uses: houtianze/npm-publish-action@GoAirComponents_branch
+        #   with: # All of theses inputs are optional
+        #     tag_name: "v%s"
+        #     tag_message: "v%s"
+        #     commit_pattern: "^(?:Release|Version) (\\S+)"
         # - name: 🚀 publish
         #   run: npm publish --access public
         env:
