@@ -46,4 +46,5 @@
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
   cursor: inherit;
+  border-bottom: 2px solid var(--color-base-gray-darker);
 }

@@ -114,6 +114,7 @@
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
   cursor: inherit;
+  border-bottom: 2px solid var(--color-base-gray-darker);
 }
 
 .iconButtonPasswordInput {
@@ -153,10 +154,11 @@
   box-sizing: border-box;
 }
 
-.iconButtonPasswordInput:disabled {
+.iconButtonDisabledPasswordInput {
   background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
   cursor: inherit;
+  border-bottom: 2px solid var(--color-base-gray-darker);
 }
 
 .inputWithIconButtonPasswordInput {
@@ -167,18 +169,6 @@
   height: 100%;
 }
 
-.iconButtonPasswordInputInFocus {
-  cursor: pointer;
-  position: relative;
-  font-size: 1.5em;
-  text-align: right;
-  padding-right: 5px;
-  width: 15%;
-  height: 100%;
-  border-bottom: 2px solid var(--color-base-blue);
-  background-color: var(--color-base-white);
-  transition: all 400ms;
-}
 
 .forgotPasswordLabelPasswordInput {
   text-align: right;
