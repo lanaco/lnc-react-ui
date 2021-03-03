@@ -57,6 +57,9 @@
   background: inherit;
   color: inherit;
   margin: 1px;
+  border: 0px;
+  width: min-content;
+  height: min-content;
 }
 
 .buttonIconIconButton:hover,
