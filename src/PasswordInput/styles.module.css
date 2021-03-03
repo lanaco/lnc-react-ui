@@ -115,6 +115,9 @@
 }
 
 .iconButtonPasswordInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   position: relative;
   font-size: 1.5em;
@@ -130,6 +133,9 @@
 }
 
 .iconButtonFocusedPasswordInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   position: relative;
   font-size: 1.5em;
