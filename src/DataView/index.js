@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.css";
-import IconButton from "../IconButton/index.js";
-import ViewType from "./Constants/ViewType";
-import { mergeCSS, freeze } from "./Helper/Helper";
-import FormViewMovement from "./FormViewMovement";
-import DropdownMenu from "../DropdownMenu/index";
-import FormMode from "./Constants/FormMode";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
+import DropdownMenu from "../DropdownMenu/index";
+import IconButton from "../IconButton/index.js";
+import FormMode from "./Constants/FormMode";
+import ViewType from "./Constants/ViewType";
+import FormViewMovement from "./FormViewMovement";
+import { freeze, mergeCSS } from "./Helper/Helper";
+import styles from "./styles.module.css";
 import TableView from "./TableView";
 
 const DataView = (props) => {
@@ -147,7 +147,7 @@ const DataView = (props) => {
               if (ClearSelectedData) ClearSelectedData();
             }}
             disabled={freezeLoading([Table.SelectedData.length === 0])}
-            iconClassName={Icons.Checkbox}
+            iconClassName={"lnc-plus"}
           ></IconButton>
         </div>
       );
