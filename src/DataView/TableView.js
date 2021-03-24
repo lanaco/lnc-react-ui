@@ -32,7 +32,7 @@ const TableView = (props) => {
 
   const { Localization = {}, Export = () => { }, Icons = {} } = props;
 
-  const [headerHover, setHeaderHover] = useState(false);
+  const [headerHoverIndex, setHeaderHoverIndex] = useState(-1);
 
   //======== FUNCTIONS ========
 
@@ -66,9 +66,9 @@ const TableView = (props) => {
       return (
         <th
           className={mergeCSS([styles.header, styles.selectColumn])}
-          style={headerHover ? styleForHover : style}
-          onMouseEnter={() => setHeaderHover(true)}
-          onMouseLeave={() => setHeaderHover(false)}
+          style={headerHoverIndex === 0 ? styleForHover : style}
+          onMouseEnter={() => setHeaderHoverIndex(0)}
+          onMouseLeave={() => setHeaderHoverIndex(-1)}
         >
           {renderSelectAll()}
         </th>
@@ -241,7 +241,9 @@ const TableView = (props) => {
           key={i}
           className={styles.header}
           onClick={IsLoading || hideOrdering ? () => { } : headerClick}
-          style={headerHover ? styleForHover : style}
+          style={headerHoverIndex === i ? styleForHover : style}
+          onMouseEnter={() => setHeaderHoverIndex(i)}
+          onMouseLeave={() => setHeaderHoverIndex(-1)}
         >
           <div className={styles.headerInnerDiv}>
             {def.displayName}
