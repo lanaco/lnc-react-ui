@@ -154,17 +154,21 @@ const TableView = (props) => {
 
     if (props.accentColor) {
       const style = {
-        border: "0px"
+        border: "0px",
+        backgroundColor: key % 2 === 0 ? "white" : "whitesmoke",
+        borderLeft: "1px solid transparent",
+        borderRight: "1px solid transparent",
+        borderTop: "1px solid transparent",
       };
 
       const styleForHover = {
-        border: "1px solid " + getLighterColor(props.accentColor, 0.75)
+        border: "1px solid " + getLighterColor(props.accentColor, 0.75),
+        backgroundColor: key % 2 === 0 ? "white" : "whitesmoke",
       }
 
       return (
         <tr
           key={key}
-          className={evenOddClass + " " + selectionClass}
           style={rowHowerOrSelectedIndex === key ? styleForHover : style}
           onMouseEnter={() => {
             console.log("on maus enter:", key);
