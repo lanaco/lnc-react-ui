@@ -1,4 +1,4 @@
-export const getLighetrColor = (color, percent) => {
+export const getLighterColor = (color, percent) => {
 
     var R = parseInt(color.substring(1, 3), 16);
     var G = parseInt(color.substring(3, 5), 16);

@@ -1,6 +1,6 @@
 import { isUndefined } from "lodash";
 import React, { useState } from "react";
-import { getDarkerColor, getLighetrColor, isColorDark } from "../Base/ColorBlender";
+import { getDarkerColor, getLighterColor, isColorDark } from "../Base/ColorBlender";
 import TableSelectionType from "./Constants/TableSelectionType";
 import { mergeCSS } from "./Helper/Helper";
 import Pagination from "./Pagination";
@@ -158,7 +158,7 @@ const TableView = (props) => {
       };
 
       const styleForHover = {
-        border: "1px solid " + getLighetrColor(props.accentColor, 75)
+        border: "1px solid " + getLighterColor(props.accentColor, 40)
       }
 
       return (
@@ -180,7 +180,7 @@ const TableView = (props) => {
       <tr key={key} className={evenOddClass + " " + selectionClass}>
         {renderSelectionCheckbox(rowData)}
         {Columns.filter((x) => x.hide !== true).map((def, i) =>
-          renderCell(rowData, def, i, key)
+          renderCell(rowData, def, i)
         )}
       </tr>
     );
@@ -212,7 +212,11 @@ const TableView = (props) => {
         <td key={key}
           className={styles.cell}
           onClick={onClick}
-          onMouseEnter={() => setRowHoverOrSelectedIndex(rowKey)}
+          onMouseEnter={() => {
+            console.log("on maus enter:", rowKey);
+            setRowHoverOrSelectedIndex(rowKey);
+          }
+          }
           onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
           {isFunction(def.specialRender) ? def.specialRender(rowData) : cellData}
         </td>
