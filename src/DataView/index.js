@@ -11,7 +11,7 @@ import styles from "./styles.module.css";
 import TableView from "./TableView";
 
 const DataView = (props) => {
-  const emptyFunc = () => {};
+  const emptyFunc = () => { };
   const [deleteConfirmationBoxOpen, setDeleteConfirmationBoxOpen] = useState(
     false
   );
@@ -37,7 +37,7 @@ const DataView = (props) => {
     SetSelectedData = emptyFunc,
     ClearSelectedData = emptyFunc,
     Localization = {},
-    Export = () => {},
+    Export = () => { },
     Icons = {},
   } = props;
 
@@ -368,6 +368,7 @@ const DataView = (props) => {
           Localization={Localization.TableView}
           Export={Export}
           Icons={Icons}
+          accentColor={props.accentColor}
         />
       );
 

@@ -25,12 +25,12 @@ const Button = (props) => {
 
     const style = {
       backgroundColor: props.accentColor,
-      color: isColorDark(props.accentColor) ? "white" : "black"
+      color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
     };
 
     const styleForHover = {
       backgroundColor: getDarkerColor(props.accentColor, 0.2),
-      color: isColorDark(props.accentColor) ? "white" : "black"
+      color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
     }
 
     return (

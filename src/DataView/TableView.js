@@ -1,9 +1,9 @@
 import { isUndefined } from "lodash";
-import React from "react";
+import React, { useState } from "react";
 import TableSelectionType from "./Constants/TableSelectionType";
-import styles from "./styles.module.css";
 import { mergeCSS } from "./Helper/Helper";
 import Pagination from "./Pagination";
+import styles from "./styles.module.css";
 
 const TableView = (props) => {
   //======== RENDER ========
@@ -19,17 +19,19 @@ const TableView = (props) => {
     EnableSelection,
     EnableFormView,
     SelectionType,
-    OnSelection = () => {},
-    OnSelectAll = () => {},
+    OnSelection = () => { },
+    OnSelectAll = () => { },
     EnablePagination,
     EnableOrdering,
     Accessor,
     Ascending,
     Descending,
-    OnHeaderClick = () => {},
+    OnHeaderClick = () => { },
   } = props.Config;
 
-  const { Localization = {}, Export = () => {}, Icons = {} } = props;
+  const { Localization = {}, Export = () => { }, Icons = {} } = props;
+
+  const [headerHover, setHeaderHover] = useState(false);
 
   //======== FUNCTIONS ========
 
@@ -48,6 +50,29 @@ const TableView = (props) => {
 
   const renderSelectionHeader = () => {
     if (!EnableSelection) return null;
+
+    if (props.accentColor) {
+      const style = {
+        backgroundColor: props.accentColor,
+        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+      };
+
+      const styleForHover = {
+        backgroundColor: getDarkerColor(props.accentColor, 0.2),
+        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+      }
+
+      return (
+        <th
+          className={mergeCSS([styles.header, styles.selectColumn])}
+          style={headerHover ? styleForHover : style}
+          onMouseEnter={() => setHeaderHover(true)}
+          onMouseLeave={() => setHeaderHover(false)}
+        >
+          {renderSelectAll()}
+        </th>
+      );
+    }
 
     return (
       <th className={mergeCSS([styles.header, styles.selectColumn])}>
@@ -138,11 +163,11 @@ const TableView = (props) => {
   const renderCell = (rowData, def, key) => {
     let onClick = !isFunction(def.specialRender)
       ? () => {
-          ChangeToFormView(rowData);
-        }
-      : () => {};
+        ChangeToFormView(rowData);
+      }
+      : () => { };
 
-    if (!EnableFormView) onClick = () => {};
+    if (!EnableFormView) onClick = () => { };
 
     if (!EnableFormView && EnableSelection) {
       var checked = isItemInArray(rowData, SelectedData, SelectionIndicator);
@@ -164,7 +189,7 @@ const TableView = (props) => {
   };
 
   const renderHeaderCell = (def, i) => {
-    let headerClick = () => {};
+    let headerClick = () => { };
     let hideOrdering =
       !EnableOrdering ||
       (def.sortable === undefined ? false : def.sortable === false);
@@ -199,11 +224,42 @@ const TableView = (props) => {
 
     //-------------------------------------------------------------------
 
+    if (props.accentColor) {
+      const style = {
+        backgroundColor: props.accentColor,
+        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+      };
+
+      const styleForHover = {
+        backgroundColor: getDarkerColor(props.accentColor, 0.2),
+        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+      }
+
+      return (
+        <th
+          key={i}
+          className={styles.header}
+          onClick={IsLoading || hideOrdering ? () => { } : headerClick}
+          style={headerHover ? styleForHover : style}
+        >
+          <div className={styles.headerInnerDiv}>
+            {def.displayName}
+
+            {!hideOrdering ? (
+              <div className={styles.headerInnerIconDiv}>{orderingIcon}</div>
+            ) : (
+              <></>
+            )}
+          </div>
+        </th>
+      );
+    }
+
     return (
       <th
         key={i}
         className={styles.header}
-        onClick={IsLoading || hideOrdering ? () => {} : headerClick}
+        onClick={IsLoading || hideOrdering ? () => { } : headerClick}
       >
         <div className={styles.headerInnerDiv}>
           {def.displayName}
