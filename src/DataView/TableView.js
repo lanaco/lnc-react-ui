@@ -167,8 +167,8 @@ const TableView = (props) => {
           className={evenOddClass + " " + selectionClass}
           style={rowHowerOrSelectedIndex === key ? styleForHover : style}
           onMouseEnter={() => {
-            console.log("on maus enter:", rowKey);
-            setRowHoverOrSelectedIndex(rowKey);
+            console.log("on maus enter:", key);
+            setRowHoverOrSelectedIndex(key);
           }
           }
           onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
