@@ -33,6 +33,7 @@ const TableView = (props) => {
   const { Localization = {}, Export = () => { }, Icons = {} } = props;
 
   const [headerHoverIndex, setHeaderHoverIndex] = useState(-1);
+  const [rowHowerOrSelectedIndex, setRowHoverOrSelectedIndex] = useState(-1);
 
   //======== FUNCTIONS ========
 
@@ -151,6 +152,32 @@ const TableView = (props) => {
       ? styles.checkedRow
       : "";
 
+    if (props.accentColor) {
+      const style = {
+        backgroundColor: props.accentColor,
+        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+      };
+
+      const styleForHover = {
+        backgroundColor: getDarkerColor(props.accentColor, 0.2),
+        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+      }
+
+      return (
+        <tr
+          key={key}
+          className={evenOddClass + " " + selectionClass}
+          style={rowHowerOrSelectedIndex === key ? styleForHover : style}
+          onMouseEnter={() => setRowHoverOrSelectedIndex(key)}
+          onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
+          {renderSelectionCheckbox(rowData)}
+          {Columns.filter((x) => x.hide !== true).map((def, i) =>
+            renderCell(rowData, def, i)
+          )}
+        </tr>
+      );
+    }
+
     return (
       <tr key={key} className={evenOddClass + " " + selectionClass}>
         {renderSelectionCheckbox(rowData)}
@@ -241,8 +268,8 @@ const TableView = (props) => {
           key={i}
           className={styles.header}
           onClick={IsLoading || hideOrdering ? () => { } : headerClick}
-          style={headerHoverIndex === i ? styleForHover : style}
-          onMouseEnter={() => setHeaderHoverIndex(i)}
+          style={headerHoverIndex === i + 1 ? styleForHover : style}
+          onMouseEnter={() => setHeaderHoverIndex(i + 1)}
           onMouseLeave={() => setHeaderHoverIndex(-1)}
         >
           <div className={styles.headerInnerDiv}>
