@@ -1,6 +1,6 @@
 import { isUndefined } from "lodash";
 import React, { useState } from "react";
-import { getDarkerColor, isColorDark } from "../Base/ColorBlender";
+import { getDarkerColor, getLighetrColor, isColorDark } from "../Base/ColorBlender";
 import TableSelectionType from "./Constants/TableSelectionType";
 import { mergeCSS } from "./Helper/Helper";
 import Pagination from "./Pagination";
@@ -154,13 +154,11 @@ const TableView = (props) => {
 
     if (props.accentColor) {
       const style = {
-        backgroundColor: props.accentColor,
-        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+        border: "0px"
       };
 
       const styleForHover = {
-        backgroundColor: getDarkerColor(props.accentColor, 0.2),
-        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+        border: "1px solid " + getLighetrColor(props.accentColor, 75)
       }
 
       return (
