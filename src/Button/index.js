@@ -29,13 +29,14 @@ const Button = (props) => {
     };
 
     const styleForHover = {
-      backgroundColor: getDarkerColor(props.accentColor, 0.5)
+      backgroundColor: getDarkerColor(props.accentColor, 0.2)
     }
 
     return (
       <BaseContainer {...props} label=" ">
         <button
-          onMouseOver={() => setHover(true)}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
           onClick={handleOnClick}
           className={
             props.inputCssClass
