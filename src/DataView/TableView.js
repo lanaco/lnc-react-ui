@@ -158,7 +158,7 @@ const TableView = (props) => {
       };
 
       const styleForHover = {
-        border: "1px solid " + getLighterColor(props.accentColor, 40)
+        border: "1px solid " + getLighterColor(props.accentColor, 0.75)
       }
 
       return (
@@ -166,11 +166,15 @@ const TableView = (props) => {
           key={key}
           className={evenOddClass + " " + selectionClass}
           style={rowHowerOrSelectedIndex === key ? styleForHover : style}
-          onMouseEnter={() => setRowHoverOrSelectedIndex(key)}
+          onMouseEnter={() => {
+            console.log("on maus enter:", rowKey);
+            setRowHoverOrSelectedIndex(rowKey);
+          }
+          }
           onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
           {renderSelectionCheckbox(rowData)}
           {Columns.filter((x) => x.hide !== true).map((def, i) =>
-            renderCell(rowData, def, i, key)
+            renderCell(rowData, def, i)
           )}
         </tr>
       );
@@ -186,7 +190,7 @@ const TableView = (props) => {
     );
   };
 
-  const renderCell = (rowData, def, key, rowKey = -1) => {
+  const renderCell = (rowData, def, key) => {
     let onClick = !isFunction(def.specialRender)
       ? () => {
         ChangeToFormView(rowData);
@@ -206,22 +210,6 @@ const TableView = (props) => {
       def.isObject === true
         ? rowData[def.accessor][def.objectAccessor]
         : rowData[def.accessor];
-
-    if (props.accentColor) {
-      return (
-        <td key={key}
-          className={styles.cell}
-          onClick={onClick}
-          onMouseEnter={() => {
-            console.log("on maus enter:", rowKey);
-            setRowHoverOrSelectedIndex(rowKey);
-          }
-          }
-          onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
-          {isFunction(def.specialRender) ? def.specialRender(rowData) : cellData}
-        </td>
-      );
-    }
 
     return (
       <td key={key} className={styles.cell} onClick={onClick}>
