@@ -170,7 +170,7 @@ const TableView = (props) => {
           onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
           {renderSelectionCheckbox(rowData)}
           {Columns.filter((x) => x.hide !== true).map((def, i) =>
-            renderCell(rowData, def, i)
+            renderCell(rowData, def, i, key)
           )}
         </tr>
       );
@@ -180,13 +180,13 @@ const TableView = (props) => {
       <tr key={key} className={evenOddClass + " " + selectionClass}>
         {renderSelectionCheckbox(rowData)}
         {Columns.filter((x) => x.hide !== true).map((def, i) =>
-          renderCell(rowData, def, i)
+          renderCell(rowData, def, i, key)
         )}
       </tr>
     );
   };
 
-  const renderCell = (rowData, def, key) => {
+  const renderCell = (rowData, def, key, rowKey = -1) => {
     let onClick = !isFunction(def.specialRender)
       ? () => {
         ChangeToFormView(rowData);
@@ -206,6 +206,18 @@ const TableView = (props) => {
       def.isObject === true
         ? rowData[def.accessor][def.objectAccessor]
         : rowData[def.accessor];
+
+    if (props.accentColor) {
+      return (
+        <td key={key}
+          className={styles.cell}
+          onClick={onClick}
+          onMouseEnter={() => setRowHoverOrSelectedIndex(rowKey)}
+          onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
+          {isFunction(def.specialRender) ? def.specialRender(rowData) : cellData}
+        </td>
+      );
+    }
 
     return (
       <td key={key} className={styles.cell} onClick={onClick}>
