@@ -1,5 +1,6 @@
 import { isUndefined } from "lodash";
 import React, { useState } from "react";
+import { getDarkerColor, isColorDark } from "../Base/ColorBlender";
 import TableSelectionType from "./Constants/TableSelectionType";
 import { mergeCSS } from "./Helper/Helper";
 import Pagination from "./Pagination";
