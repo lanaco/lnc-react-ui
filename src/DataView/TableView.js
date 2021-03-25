@@ -156,6 +156,9 @@ const TableView = (props) => {
       const style = {
         border: "0px",
         backgroundColor: key % 2 === 0 ? "white" : "whitesmoke",
+        borderLeft: "1px solid transparent",
+        borderRight: "1px solid transparent",
+        borderTop: "1px solid transparent",
       };
 
       const styleForHover = {
@@ -167,8 +170,7 @@ const TableView = (props) => {
         <tr
           key={key}
           style={rowHowerOrSelectedIndex === key ? styleForHover : style}
-          onMouseEnter={() => setRowHoverOrSelectedIndex(key)
-          }
+          onMouseEnter={() => setRowHoverOrSelectedIndex(key)}
           onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
           {renderSelectionCheckbox(rowData)}
           {Columns.filter((x) => x.hide !== true).map((def, i) =>
