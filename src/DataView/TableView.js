@@ -167,10 +167,7 @@ const TableView = (props) => {
         <tr
           key={key}
           style={rowHowerOrSelectedIndex === key ? styleForHover : style}
-          onMouseEnter={() => {
-            console.log("on maus enter:", key);
-            setRowHoverOrSelectedIndex(key);
-          }
+          onMouseEnter={() => setRowHoverOrSelectedIndex(key)
           }
           onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
           {renderSelectionCheckbox(rowData)}

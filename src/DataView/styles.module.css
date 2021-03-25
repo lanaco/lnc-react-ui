@@ -163,6 +163,7 @@
 
 .table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 @media screen and (max-width: 1400px) {
