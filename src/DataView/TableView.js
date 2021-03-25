@@ -315,6 +315,7 @@ const TableView = (props) => {
         Localization={Localization.Pagination}
         Icons={Icons}
         Export={Export}
+        accentColor={props.accentColor}
       />
     );
   };

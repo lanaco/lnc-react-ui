@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./styles.module.css";
-import { freeze } from "./Helper/Helper";
 import DropDown from "../DropDown/index";
 import IconButton from "../IconButton/index.js";
+import { freeze } from "./Helper/Helper";
+import styles from "./styles.module.css";
 
 const TablePagination = (props) => {
   //============== PROPS ==============
@@ -135,6 +135,7 @@ const TablePagination = (props) => {
           disabled={freezeLoading()}
           onChange={handlePageSizeChanged}
           withoutEmpty={true}
+          accentColor={props.accentColor}
         />
       </div>
     );
