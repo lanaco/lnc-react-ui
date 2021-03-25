@@ -61,10 +61,10 @@
     "moment-timezone": "^0.5.33",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
-    "react": "^16.14.0",
+    "react": "^16.13.1",
     "react-datepicker": "^3.6.0",
     "react-day-picker": "^7.4.8",
-    "react-dom": "^17.0.1",
+    "react-dom": "^16.13.1",
     "react-scripts": "^4.0.3",
     "svg-url-loader": "^7.1.1"
   },
