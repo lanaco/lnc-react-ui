@@ -156,9 +156,6 @@ const TableView = (props) => {
       const style = {
         border: "0px",
         backgroundColor: key % 2 === 0 ? "white" : "whitesmoke",
-        borderLeft: "1px solid transparent",
-        borderRight: "1px solid transparent",
-        borderTop: "1px solid transparent",
       };
 
       const styleForHover = {
