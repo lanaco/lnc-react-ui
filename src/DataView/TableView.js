@@ -33,7 +33,8 @@ const TableView = (props) => {
   const { Localization = {}, Export = () => { }, Icons = {} } = props;
 
   const [headerHoverIndex, setHeaderHoverIndex] = useState(-1);
-  const [rowHowerOrSelectedIndex, setRowHoverOrSelectedIndex] = useState(-1);
+  const [rowHoverIndex, setRowHoverIndex] = useState(-1);
+  const [rowSelectedIndex, setRowSelectedIndex] = useState(-1);
 
   //======== FUNCTIONS ========
 
@@ -44,7 +45,13 @@ const TableView = (props) => {
     );
   }
 
-  const handleOnSelection = (rowData, e) => {
+  const handleOnSelection = (rowData, e, rowIndex = -1) => {
+    if (e.target.checked && rowIndex >= 0) {
+      setRowSelectedIndex(rowIndex);
+    }
+    else {
+      setRowSelectedIndex(-1);
+    }
     OnSelection(rowData, e.target.checked, SelectionType);
   };
 
@@ -110,8 +117,28 @@ const TableView = (props) => {
     return array.indexOf(item) > -1;
   };
 
-  const renderSelectionCheckbox = (rowData) => {
+  const renderSelectionCheckbox = (rowData, rowIndex = -1) => {
     if (EnableSelection) {
+
+      if (props.accentColor) {
+        const styleForSelect = {
+          backgroundColor: getLighterColor(props.accentColor, 0.75),
+        }
+
+        return (
+          <td
+            className={mergeCSS([styles.specialRenderCell, styles.selectColumn])}
+          >
+            <input
+              type="checkbox"
+              checked={isItemInArray(rowData, SelectedData, SelectionIndicator)}
+              onChange={(e) => handleOnSelection(rowData, e, rowIndex)}
+              className={styles.pointer}
+              style={rowSelectedIndex === rowIndex ? styleForSelect : {}}
+            ></input>
+          </td>
+        );
+      }
       return (
         <td
           className={mergeCSS([styles.specialRenderCell, styles.selectColumn])}
@@ -119,7 +146,7 @@ const TableView = (props) => {
           <input
             type="checkbox"
             checked={isItemInArray(rowData, SelectedData, SelectionIndicator)}
-            onChange={(e) => handleOnSelection(rowData, e)}
+            onChange={(e) => handleOnSelection(rowData, e, rowIndex)}
             className={styles.pointer}
           ></input>
         </td>
@@ -169,10 +196,10 @@ const TableView = (props) => {
       return (
         <tr
           key={key}
-          style={rowHowerOrSelectedIndex === key ? styleForHover : style}
-          onMouseEnter={() => setRowHoverOrSelectedIndex(key)}
-          onMouseLeave={() => setRowHoverOrSelectedIndex(-1)}>
-          {renderSelectionCheckbox(rowData)}
+          style={rowHoverIndex === key ? styleForHover : style}
+          onMouseEnter={() => setRowHoverIndex(key)}
+          onMouseLeave={() => setRowHoverIndex(-1)}>
+          {renderSelectionCheckbox(rowData, key)}
           {Columns.filter((x) => x.hide !== true).map((def, i) =>
             renderCell(rowData, def, i)
           )}
