@@ -53,7 +53,9 @@ const TableView = (props) => {
         setRowSelectedIndices(tmpArray);
       }
       else if (SelectionType === TableSelectionType.SINGLE) {
-        setRowHoverIndex([rowIndex]);
+        let tmpArray = [];
+        tmpArray.push(rowIndex)
+        setRowHoverIndex(tmpArray);
 
       }
     }
