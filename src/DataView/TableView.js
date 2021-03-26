@@ -34,7 +34,7 @@ const TableView = (props) => {
 
   const [headerHoverIndex, setHeaderHoverIndex] = useState(-1);
   const [rowHoverIndex, setRowHoverIndex] = useState(-1);
-  const [rowSelectedIndex, setRowSelectedIndex] = useState(-1);
+  const [rowSelectedIndices, setRowSelectedIndices] = useState([]);
 
   //======== FUNCTIONS ========
 
@@ -47,10 +47,23 @@ const TableView = (props) => {
 
   const handleOnSelection = (rowData, e, rowIndex = -1) => {
     if (e.target.checked && rowIndex >= 0) {
-      setRowSelectedIndex(rowIndex);
+      if (SelectionType === TableSelectionType.MULTIPLE) {
+        let tmpArray = [...rowSelectedIndices];
+        tmpArray.push(rowIndex);
+        setRowSelectedIndices(tmpArray);
+      }
+      else if (SelectionType === TableSelectionType.SINGLE) {
+        setRowHoverIndex([rowIndex]);
+      }
     }
-    else {
-      setRowSelectedIndex(-1);
+    else if (!e.target.checked && rowIndex >= 0) {
+      if (SelectionType === TableSelectionType.MULTIPLE) {
+        let tmpArray = rowSelectedIndices.map(x => x !== rowIndex);
+        setRowSelectedIndices(tmpArray);
+      }
+      else if (SelectionType === TableSelectionType.SINGLE) {
+        setRowHoverIndex([]);
+      }
     }
     OnSelection(rowData, e.target.checked, SelectionType);
   };
@@ -180,7 +193,7 @@ const TableView = (props) => {
       return (
         <tr
           key={key}
-          style={rowSelectedIndex === key ? styleForSelect : rowHoverIndex === key ? styleForHover : style}
+          style={rowSelectedIndices.includes(key) ? styleForSelect : rowHoverIndex === key ? styleForHover : style}
           onMouseEnter={() => setRowHoverIndex(key)}
           onMouseLeave={() => setRowHoverIndex(-1)}>
           {renderSelectionCheckbox(rowData, key)}
