@@ -119,26 +119,6 @@ const TableView = (props) => {
 
   const renderSelectionCheckbox = (rowData, rowIndex = -1) => {
     if (EnableSelection) {
-
-      if (props.accentColor) {
-        const styleForSelect = {
-          backgroundColor: getLighterColor(props.accentColor, 0.75),
-        }
-
-        return (
-          <td
-            className={mergeCSS([styles.specialRenderCell, styles.selectColumn])}
-          >
-            <input
-              type="checkbox"
-              checked={isItemInArray(rowData, SelectedData, SelectionIndicator)}
-              onChange={(e) => handleOnSelection(rowData, e, rowIndex)}
-              className={styles.pointer}
-              style={rowSelectedIndex === rowIndex ? styleForSelect : {}}
-            ></input>
-          </td>
-        );
-      }
       return (
         <td
           className={mergeCSS([styles.specialRenderCell, styles.selectColumn])}
@@ -193,10 +173,14 @@ const TableView = (props) => {
         backgroundColor: key % 2 === 0 ? "white" : "whitesmoke",
       }
 
+      const styleForSelect = {
+        backgroundColor: getLighterColor(props.accentColor, 0.75),
+      }
+
       return (
         <tr
           key={key}
-          style={rowHoverIndex === key ? styleForHover : style}
+          style={rowSelectedIndex === key ? styleForSelect : rowHoverIndex === key ? styleForHover : style}
           onMouseEnter={() => setRowHoverIndex(key)}
           onMouseLeave={() => setRowHoverIndex(-1)}>
           {renderSelectionCheckbox(rowData, key)}
