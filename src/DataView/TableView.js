@@ -51,22 +51,19 @@ const TableView = (props) => {
         let tmpArray = [...rowSelectedIndices];
         tmpArray.push(rowIndex);
         setRowSelectedIndices(tmpArray);
-        console.log("MULTIPLE", e.target.checked, rowIndex)
       }
       else if (SelectionType === TableSelectionType.SINGLE) {
         setRowHoverIndex([rowIndex]);
-        console.log("SINGLE", e.target.checked, rowIndex)
+
       }
     }
     else if (!e.target.checked && rowIndex >= 0) {
       if (SelectionType === TableSelectionType.MULTIPLE) {
         let tmpArray = rowSelectedIndices.map(x => x !== rowIndex);
         setRowSelectedIndices(tmpArray);
-        console.log("MULTIPLE", e.target.checked, rowIndex)
       }
       else if (SelectionType === TableSelectionType.SINGLE) {
         setRowHoverIndex([]);
-        console.log("SINGLE", e.target.checked, rowIndex)
       }
     }
     OnSelection(rowData, e.target.checked, SelectionType);
@@ -193,6 +190,8 @@ const TableView = (props) => {
       const styleForSelect = {
         backgroundColor: getLighterColor(props.accentColor, 0.75),
       }
+
+      console.log("rowSelectedIndices", rowSelectedIndices, "key", key)
 
       return (
         <tr
