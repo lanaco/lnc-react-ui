@@ -78,7 +78,7 @@ const CheckboxLookup = (props) => {
                 key={i}
                 checked={isChecked}
                 id={item[props.itemId]}
-                value={item[props.itemText]}
+                label={item[props.itemText]}
                 onChange={handleCheckboxChange}
               />
             );
