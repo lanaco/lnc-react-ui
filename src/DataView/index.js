@@ -38,7 +38,15 @@ const DataView = (props) => {
     ClearSelectedData = emptyFunc,
     Localization = {},
     Export = () => { },
-    Icons = {},
+    Icons = {
+      DownDouble: "lnc-down-double",
+      Refresh: "lnc-refresh",
+      Trash: "lnc-trash",
+      CloseX: "lnc-x",
+      Plus: "lnc-plus",
+      Repeat: "lnc-repeat",
+      Table: "lnc-table"
+    },
   } = props;
 
   const { Lookup = {} } = props;
