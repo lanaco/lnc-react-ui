@@ -44,12 +44,12 @@ const CheckboxLookup = (props) => {
   };
 
   return (
-    <BaseContainer {...props}>
+    <BaseContainer {...props, label = props.title}>
       <div className={styles.cardStyle}>
-        <div className={styles.title}>
-          {props.title}
-          <div className={styles.selectButton}>{renderSelectAll()}</div>
-        </div>
+        {/* <div className={styles.title}> */}
+        {/* {props.title} */}
+        <div className={styles.selectButton}>{renderSelectAll()}</div>
+        {/* </div> */}
         <div className={styles.cardContent}>
           {props.options.map((item, i) => {
             let isChecked = false;
