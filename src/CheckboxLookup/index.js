@@ -45,47 +45,49 @@ const CheckboxLookup = (props) => {
 
   return (
     <BaseContainer {...props}>
-    <div className={styles.cardStyle}>
-      <div className={styles.title}>
-        {props.title}
-        <div className={styles.selectButton}>{renderSelectAll()}</div>
-      </div>
-      <div className={styles.cardContent}>
-        {props.options.map((item, i) => {
-          let isChecked = false;
+      <div className={styles.cardStyle}>
+        <div className={styles.title}>
+          {props.title}
+          <div className={styles.selectButton}>{renderSelectAll()}</div>
+        </div>
+        <div className={styles.cardContent}>
+          {props.options.map((item, i) => {
+            let isChecked = false;
 
-          if (props.selectedOptions) {
-            props.selectedOptions.forEach((element) => {
-              if (element[props.itemId] === item[props.itemId]) {
-                isChecked = true;
-              }
-            });
-          }
+            if (props.selectedOptions) {
+              props.selectedOptions.forEach((element) => {
+                if (element[props.itemId] === item[props.itemId]) {
+                  isChecked = true;
+                }
+              });
+            }
 
-          if (props.isSwitchComponent) {
-            return (
-              <ToggleSwitch
-                key={i}
-                value={isChecked}
-                id={item[props.itemId]}
-                label={item[props.itemText]}
-                onChange={handleCheckboxChange}
-              />
-            );
-          } else {
-            return (
-              <CheckBox
-                key={i}
-                checked={isChecked}
-                id={item[props.itemId]}
-                label={item[props.itemText]}
-                onChange={handleCheckboxChange}
-              />
-            );
-          }
-        })}
+            if (props.isSwitchComponent) {
+              return (
+                <ToggleSwitch
+                  key={i}
+                  value={isChecked}
+                  id={item[props.itemId]}
+                  label={item[props.itemText]}
+                  onChange={handleCheckboxChange}
+                />
+              );
+            } else {
+              return (
+                <CheckBox
+                  key={i}
+                  checked={isChecked}
+                  id={item[props.itemId]}
+                  label={item[props.itemText]}
+                  onChange={handleCheckboxChange}
+                  labelCssClass={css.labelAndErrorCssClass}
+                  errorTextCssClass={css.labelAndErrorCssClass}
+                />
+              );
+            }
+          })}
+        </div>
       </div>
-    </div>
     </BaseContainer>
   );
 };
