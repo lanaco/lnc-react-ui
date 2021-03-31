@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 const NumberInput = (props) => {
   const [val, setVal] = useState(props.value);
+  const [focus, setFocus] = useState(false);
 
   useEffect(() => {
     setVal(props.value);
@@ -72,7 +73,7 @@ const NumberInput = (props) => {
   if (props.accentColor) {
 
     const style = {
-      backgroundColor: getLighterColor(props.accentColor, 0.75),
+      backgroundColor: focus ? "white" : getLighterColor(props.accentColor, 0.75),
       borderBottom: "2px solid " + props.accentColor
     };
 
@@ -88,6 +89,8 @@ const NumberInput = (props) => {
           className={(props.inputCssClass) ? [styles.standardInputNumberInput, props.inputCssClass].join(" ") : styles.standardInputNumberInput}
           disabled={props.disabled}
           title={props.tooltipText}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
           style={style}
         />
       </BaseContainer>

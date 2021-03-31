@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 const TextArea = (props) => {
   const [val, setVal] = useState(props.value);
+  const [focus, setFocus] = useState(false);
 
   useEffect(() => {
     setVal(props.value);
@@ -35,6 +36,34 @@ const TextArea = (props) => {
       el.style.cssText = "height: " + el.scrollHeight + "px;";
     }, 0);
   };
+
+  if (props.accentColor) {
+
+    const style = {
+      backgroundColor: focus ? "white" : getLighterColor(props.accentColor, 0.75),
+      borderBottom: "2px solid " + props.accentColor
+    };
+
+    return (
+      <BaseContainer {...props}>
+        <textarea
+          id={"textArea" + props.id}
+          value={val ? val : ""}
+          onChange={handleOnChange}
+          onBlur={handleOnBlur}
+          className={(props.inputCssClass) ? [styles.standardInputTextArea, props.inputCssClass].join(" ") : styles.standardInputTextArea}
+          disabled={props.disabled}
+          title={props.tooltipText}
+          onKeyDown={autosize}
+          rows={numberOfRows}
+          cols={numberOfColumns}
+          style={style}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        ></textarea>
+      </BaseContainer>
+    );
+  }
 
   return (
     <BaseContainer {...props}>

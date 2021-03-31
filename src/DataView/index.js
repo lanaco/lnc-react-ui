@@ -45,7 +45,13 @@ const DataView = (props) => {
       CloseX: "lnc-x",
       Plus: "lnc-plus",
       Repeat: "lnc-repeat",
-      Table: "lnc-table"
+      Table: "lnc-table",
+      RightDouble: "lnc-right-double",
+      Right: "lnc-right",
+      LeftDouble: "lnc-left-double",
+      Left: "lnc-left",
+      Save: "lnc-save",
+      FileExcel: "lnc-file-excel"
     },
   } = props;
 
@@ -235,9 +241,9 @@ const DataView = (props) => {
           refuseFunction={() => setDeleteConfirmationBoxOpen(false)}
           approveFunction={OnDelete}
           closeIconClassName={Icons.CloseX}
-          textYes={Localization.Yes}
-          textNo={Localization.No}
-          title={Localization.AreYouSure}
+          textYes={Localization ? Localization.Yes : "Yes"}
+          textNo={Localization ? Localization.No : "No"}
+          title={Localization ? Localization.AreYouSure : "Are you sure"}
         ></ConfirmationForm>
       </ComponentBox>
     );

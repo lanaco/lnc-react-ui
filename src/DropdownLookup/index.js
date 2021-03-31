@@ -124,7 +124,7 @@ const DropdownLookup = (props) => {
   if (props.accentColor) {
 
     const style = {
-      backgroundColor: getLighterColor(props.accentColor, 0.75),
+      backgroundColor: inFocus ? "white" : getLighterColor(props.accentColor, 0.75),
       borderBottom: "2px solid " + props.accentColor
     };
 
