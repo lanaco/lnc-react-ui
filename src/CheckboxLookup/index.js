@@ -80,8 +80,8 @@ const CheckboxLookup = (props) => {
                   id={item[props.itemId]}
                   label={item[props.itemText]}
                   onChange={handleCheckboxChange}
-                  labelCssClass={css.labelAndErrorCssClass}
-                  errorTextCssClass={css.labelAndErrorCssClass}
+                  labelCssClass={styles.labelAndErrorCssClass}
+                  errorTextCssClass={styles.labelAndErrorCssClass}
                 />
               );
             }
