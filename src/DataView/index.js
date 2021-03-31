@@ -244,6 +244,7 @@ const DataView = (props) => {
           textYes={Localization ? Localization.Yes : "Yes"}
           textNo={Localization ? Localization.No : "No"}
           title={Localization ? Localization.AreYouSure : "Are you sure"}
+          accentColor={props.accentColor}
         ></ConfirmationForm>
       </ComponentBox>
     );
