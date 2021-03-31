@@ -44,7 +44,7 @@ const CheckboxLookup = (props) => {
   };
 
   return (
-    <BaseContainer {...props, label = props.title}>
+    <BaseContainer {...props} label={props.title}>
       <div className={styles.cardStyle}>
         {/* <div className={styles.title}> */}
         {/* {props.title} */}
