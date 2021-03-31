@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BaseContainer from "../Base/BaseContainer";
+import { getLighterColor } from "../Base/ColorBlender";
 import styles from './styles.module.css';
 
 const TextArea = (props) => {

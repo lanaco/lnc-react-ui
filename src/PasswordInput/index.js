@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BaseContainer from "../Base/BaseContainer";
+import { getLighterColor } from "../Base/ColorBlender";
 import baseStyles from "../Base/styles.module.css";
 import styles from "./styles.module.css";
 

@@ -138,6 +138,7 @@ const DropdownLookup = (props) => {
             onChange={onTextChange}
             className={`${styles.standardInput} ${cssThemeClass}`}
             title={props.tooltipText}
+            style={style}
             onBlur={onBlur}
             onFocus={() => {
               setInFocus(true);
@@ -151,6 +152,7 @@ const DropdownLookup = (props) => {
             <IconButton
               iconClassName={props.closeIconClassName}
               onClick={onClearSelection}
+              style={style}
             ></IconButton>
           </span>
         </div>
