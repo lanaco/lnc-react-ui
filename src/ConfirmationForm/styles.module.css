@@ -14,14 +14,12 @@
   white-space: pre-wrap;
 }
 
-.button {
-  display: inline;
-  align-items: center;
-  width: 20%;
-}
-
 .yesAndNo {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.yesAndNoButton {
+  min-width: 100px;
 }
