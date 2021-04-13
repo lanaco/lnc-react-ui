@@ -20,7 +20,7 @@ jobs:
           node-version: 14.16.0
           registry-url: https://registry.npmjs.org
       - run: npm install
-      - run: npm version
+      - run: npm token list
       - run: npm profile get
       - run: npm publish
         env:
