@@ -10,7 +10,7 @@ on:
 jobs:
   release:
     name: 🚀 publish to NPM
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
@@ -20,8 +20,6 @@ jobs:
           node-version: 14.15.1
           registry-url: https://registry.npmjs.org
       # clean install of your projects' deps. We use "npm ci" to avoid package lock changes
-      - run: npm ci
-      - run: npm run build
       # - name: Archive production artifacts
       #   uses: actions/upload-artifact@v2
       #   with:
