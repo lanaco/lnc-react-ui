@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./styles.module.css";
 import Button from "../Button/index.js";
+import styles from "./styles.module.css";
 
 const ConfirmationForm = (props) => {
   const approveFunction = () => {
@@ -12,17 +12,20 @@ const ConfirmationForm = (props) => {
     <div>
       <section className={styles.confirmationBoxModalContent}>
         <div className={styles.processingContainer}>{props.title}</div>
-        <br />
-        <Button
-          className={styles.button}
-          onClick={approveFunction}
-          label={props.textYes}
-        />
-        <Button
-          className={styles.button}
-          onClick={props.refuseFunction}
-          label={props.textNo}
-        />
+        <div className={styles.yesAndNo}>
+          <Button
+            onClick={approveFunction}
+            label={props.textYes}
+            accentColor={props.accentColor}
+            inputCssClass={styles.yesAndNoButton}
+          />
+          <Button
+            onClick={props.refuseFunction}
+            label={props.textNo}
+            accentColor={props.accentColor}
+            inputCssClass={styles.yesAndNoButton}
+          />
+        </div>
       </section>
     </div>
   );

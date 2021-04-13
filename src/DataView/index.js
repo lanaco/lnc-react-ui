@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.css";
-import IconButton from "../IconButton/index.js";
-import ViewType from "./Constants/ViewType";
-import { mergeCSS, freeze } from "./Helper/Helper";
-import FormViewMovement from "./FormViewMovement";
-import DropdownMenu from "../DropdownMenu/index";
-import FormMode from "./Constants/FormMode";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
+import DropdownMenu from "../DropdownMenu/index";
+import IconButton from "../IconButton/index.js";
+import FormMode from "./Constants/FormMode";
+import ViewType from "./Constants/ViewType";
+import FormViewMovement from "./FormViewMovement";
+import { freeze, mergeCSS } from "./Helper/Helper";
+import styles from "./styles.module.css";
 import TableView from "./TableView";
 
 const DataView = (props) => {
-  const emptyFunc = () => {};
+  const emptyFunc = () => { };
   const [deleteConfirmationBoxOpen, setDeleteConfirmationBoxOpen] = useState(
     false
   );
@@ -37,8 +37,22 @@ const DataView = (props) => {
     SetSelectedData = emptyFunc,
     ClearSelectedData = emptyFunc,
     Localization = {},
-    Export = () => {},
-    Icons = {},
+    Export = () => { },
+    Icons = {
+      DownDouble: "lnc-down-double",
+      Refresh: "lnc-refresh",
+      Trash: "lnc-trash",
+      CloseX: "lnc-x",
+      Plus: "lnc-plus",
+      Repeat: "lnc-repeat",
+      Table: "lnc-table",
+      RightDouble: "lnc-right-double",
+      Right: "lnc-right",
+      LeftDouble: "lnc-left-double",
+      Left: "lnc-left",
+      Save: "lnc-save",
+      FileExcel: "lnc-file-excel"
+    },
   } = props;
 
   const { Lookup = {} } = props;
@@ -147,7 +161,7 @@ const DataView = (props) => {
               if (ClearSelectedData) ClearSelectedData();
             }}
             disabled={freezeLoading([Table.SelectedData.length === 0])}
-            iconClassName={Icons.Checkbox}
+            iconClassName={"lnc-plus"}
           ></IconButton>
         </div>
       );
@@ -227,9 +241,10 @@ const DataView = (props) => {
           refuseFunction={() => setDeleteConfirmationBoxOpen(false)}
           approveFunction={OnDelete}
           closeIconClassName={Icons.CloseX}
-          textYes={Localization.Yes}
-          textNo={Localization.No}
-          title={Localization.AreYouSure}
+          textYes={Localization ? Localization.Yes : "Yes"}
+          textNo={Localization ? Localization.No : "No"}
+          title={Localization ? Localization.AreYouSure : "Are you sure"}
+          accentColor={props.accentColor}
         ></ConfirmationForm>
       </ComponentBox>
     );
@@ -368,6 +383,7 @@ const DataView = (props) => {
           Localization={Localization.TableView}
           Export={Export}
           Icons={Icons}
+          accentColor={props.accentColor}
         />
       );
 

@@ -49,3 +49,8 @@
 .selectButton {
   padding: 0px 10px;
 }
+
+.labelAndErrorCssClass {
+  display: none;
+}
+

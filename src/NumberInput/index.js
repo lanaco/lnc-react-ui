@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import BaseContainer from "../Base/BaseContainer";
+import { getLighterColor } from "../Base/ColorBlender";
 import styles from './styles.module.css';
 
 const NumberInput = (props) => {
   const [val, setVal] = useState(props.value);
+  const [focus, setFocus] = useState(false);
 
   useEffect(() => {
     setVal(props.value);
@@ -67,6 +69,33 @@ const NumberInput = (props) => {
       }
     }
   };
+
+  if (props.accentColor) {
+
+    const style = {
+      backgroundColor: focus ? "white" : getLighterColor(props.accentColor, 0.75),
+      borderBottom: "2px solid " + props.accentColor
+    };
+
+    return (
+      <BaseContainer {...props}>
+        <input
+          type="text"
+          value={val ? val : ""}
+          onChange={handleOnChange}
+          onBlur={handleOnBlur}
+          onKeyPress={(props.isDecimal) ? isInputDecimal : isInputInteger}
+          onPaste={(props.isDecimal) ? isInputDecimal : isInputInteger}
+          className={(props.inputCssClass) ? [styles.standardInputNumberInput, props.inputCssClass].join(" ") : styles.standardInputNumberInput}
+          disabled={props.disabled}
+          title={props.tooltipText}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+          style={style}
+        />
+      </BaseContainer>
+    );
+  }
 
   return (
     <BaseContainer {...props}>

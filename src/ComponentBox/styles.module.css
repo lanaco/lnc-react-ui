@@ -40,12 +40,10 @@
 .titleLine {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 1em;
-  border-bottom: 1px solid #ccc;
   color: #878787;
   width: 100%;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 .closeButton {

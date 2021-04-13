@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import BaseContainer from "../Base/BaseContainer";
+import { getLighterColor } from "../Base/ColorBlender";
 import IconButton from "../IconButton/index.js";
 import styles from "./styles.module.css";
 
@@ -119,6 +120,46 @@ const DropdownLookup = (props) => {
       );
     }
   };
+
+  if (props.accentColor) {
+
+    const style = {
+      backgroundColor: inFocus ? "white" : getLighterColor(props.accentColor, 0.75),
+      borderBottom: "2px solid " + props.accentColor
+    };
+
+    return (
+      <BaseContainer {...props}>
+        <div className={styles.innerContainer}>
+          <input
+            id={props.id}
+            type={"text"}
+            value={value ?? ""}
+            onChange={onTextChange}
+            className={`${styles.standardInput} ${cssThemeClass}`}
+            title={props.tooltipText}
+            style={style}
+            onBlur={onBlur}
+            onFocus={() => {
+              setInFocus(true);
+            }}
+          />
+          <span
+            className={
+              inFocus ? styles.clearInputSpanInFocus : styles.clearInputSpan
+            }
+          >
+            <IconButton
+              iconClassName={props.closeIconClassName}
+              onClick={onClearSelection}
+              style={style}
+            ></IconButton>
+          </span>
+        </div>
+        {renderSuggestions()}
+      </BaseContainer>
+    );
+  }
 
   return (
     <BaseContainer {...props}>
