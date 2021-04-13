@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 14.15.1
           registry-url: https://registry.npmjs.org
-      - run: npm publish
+      - run: npm install
       # clean install of your projects' deps. We use "npm ci" to avoid package lock changes
       # - name: Archive production artifacts
       #   uses: actions/upload-artifact@v2
