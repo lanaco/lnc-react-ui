@@ -20,14 +20,7 @@ jobs:
           node-version: 14.15.1
           registry-url: https://registry.npmjs.org
       - run: npm install
-      # clean install of your projects' deps. We use "npm ci" to avoid package lock changes
-      # - name: Archive production artifacts
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: dist-without-markdown
-      #     path: |
-      #       dist
-      #       !dist/**/*.md
+      - run: npm whoami
       - run: npm publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
