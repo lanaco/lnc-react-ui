@@ -21,7 +21,7 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm install
       # - run: npm profile get
-      - run: npm config set '//registry.npmjs.org/:_authToken' ${NPM_AUTH_TOKEN} && npm publish
+      - run: npm publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # You need to set this in your repo settings
