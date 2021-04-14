@@ -24,5 +24,4 @@ yarn-error.log*
 es
 lib
 dist
-.npmrc
 .vs
