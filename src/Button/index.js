@@ -5,7 +5,6 @@ import baseStyles from "../Base/styles.module.css";
 import styles from "./styles.module.css";
 
 const Button = (props) => {
-
   const [hover, setHover] = useState(false);
 
   const handleOnClick = (e) => {
@@ -18,20 +17,27 @@ const Button = (props) => {
   let iconClassName = "";
 
   if (props.iconClassName && props.iconClassName !== "") {
-    iconClassName = props.iconClassName.replace("-", "_");
+    iconClassName = props.iconClassName.replaceAll("-", "_");
   }
 
   if (props.accentColor) {
-
     const style = {
       backgroundColor: props.accentColor,
-      color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+      color: props.color
+        ? props.color
+        : isColorDark(props.accentColor)
+        ? "white"
+        : "black",
     };
 
     const styleForHover = {
       backgroundColor: getDarkerColor(props.accentColor, 0.2),
-      color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
-    }
+      color: props.color
+        ? props.color
+        : isColorDark(props.accentColor)
+        ? "white"
+        : "black",
+    };
 
     return (
       <BaseContainer {...props} label=" ">
@@ -49,10 +55,17 @@ const Button = (props) => {
           style={hover ? styleForHover : style}
         >
           <span>
-            {props.label && props.label !== "" ? <span>{props.label}</span> : ""}&nbsp;
+            {props.label && props.label !== "" ? (
+              <span>{props.label}</span>
+            ) : (
+              ""
+            )}
+            &nbsp;
             {iconClassName !== "" ? (
               <i
-                className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}
+                className={[baseStyles.lnc, baseStyles[iconClassName]].join(
+                  " "
+                )}
               ></i>
             ) : (
               ""
@@ -77,7 +90,8 @@ const Button = (props) => {
         title={props.tooltipText}
       >
         <span>
-          {props.label && props.label !== "" ? <span>{props.label}</span> : ""}&nbsp;
+          {props.label && props.label !== "" ? <span>{props.label}</span> : ""}
+          &nbsp;
           {iconClassName !== "" ? (
             <i
               className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}

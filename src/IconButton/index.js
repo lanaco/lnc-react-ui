@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import baseStyles from "../Base/styles.module.css";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const IconButton = (props) => {
-
   let iconClassName = "";
 
   const [hover, setHover] = useState(false);
 
   if (props.iconClassName && props.iconClassName !== "") {
-    iconClassName = props.iconClassName.replace("-", "_");
+    iconClassName = props.iconClassName.replaceAll("-", "_");
   }
 
   const handleOnClick = (e) => {
@@ -20,16 +19,20 @@ const IconButton = (props) => {
   };
 
   if (props.accentColor) {
-
     const styleForHover = {
-      background: "radial-gradient(" + props.accentColor + ", transparent, transparent)",
-      outline: "none"
-    }
+      background:
+        "radial-gradient(" + props.accentColor + ", transparent, transparent)",
+      outline: "none",
+    };
 
     return (
       <button
         onClick={handleOnClick}
-        className={(props.inputCssClass) ? [styles.buttonIconIconButton, props.inputCssClass].join(" ") : styles.buttonIconIconButton}
+        className={
+          props.inputCssClass
+            ? [styles.buttonIconIconButton, props.inputCssClass].join(" ")
+            : styles.buttonIconIconButton
+        }
         disabled={props.disabled}
         title={props.tooltipText}
         style={hover ? styleForHover : {}}
@@ -37,23 +40,34 @@ const IconButton = (props) => {
         onMouseLeave={() => setHover(false)}
       >
         <span>
-          <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i>
+          <i
+            className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}
+          ></i>
         </span>
       </button>
     );
   }
 
   return (
-    <button
-      onClick={handleOnClick}
-      className={(props.inputCssClass) ? [styles.buttonIconIconButton, props.inputCssClass].join(" ") : styles.buttonIconIconButton}
-      disabled={props.disabled}
-      title={props.tooltipText}
-    >
-      <span>
-        <i className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}></i>
-      </span>
-    </button>
+    <div>
+      {console.log(baseStyles[iconClassName])}
+      <button
+        onClick={handleOnClick}
+        className={
+          props.inputCssClass
+            ? [styles.buttonIconIconButton, props.inputCssClass].join(" ")
+            : styles.buttonIconIconButton
+        }
+        disabled={props.disabled}
+        title={props.tooltipText}
+      >
+        <span>
+          <i
+            className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}
+          ></i>
+        </span>
+      </button>
+    </div>
   );
 };
 
