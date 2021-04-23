@@ -1,0 +1,91 @@
+/* Code copy from stamp app without useles css. NEED TESTING AND CHECKING */
+/* .buttonIconIconButton {
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  height: 100%;
+  transition: all var(--transition-duration);
+  font-size: var(--font-size);
+  background-color: transparent;
+  color: inherit !important;
+  border-radius: 3px;
+}
+
+.buttonIconIconButton:hover,
+.buttonIconIconButton:focus {
+  background: radial-gradient(
+    var(--button-icon-bg-color-secondary),
+    transparent,
+    transparent
+  );
+  outline: none;
+}
+
+.buttonIconIconButton:active {
+  background-color: transparent;
+  scale: 0.95;
+}
+
+.buttonIconIconButton:disabled {
+  color: var(--disabled-bg-color) !important;
+  cursor: default !important;
+}
+
+.buttonIconIconButton span {
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* This is extra code that exists in STAMP. */
+/* .icon {
+  color: inherit !important;
+  font-size: var(--font-size);
+  height: 100%;
+  width: 100%;
+} */ 
+
+/* Neno's code */
+.buttonIconIconButton {
+  font-size: 1.2em;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  transition: all var(--transition-base-duration);
+  background-color: inherit;
+  background: inherit;
+  color: inherit;
+  margin: 1px;
+  border: 0px;
+  width: min-content;
+  height: min-content;
+}
+
+.buttonIconIconButton:hover,
+.buttonIconIconButton:focus {
+  background: radial-gradient(
+    var(--color-base-gray-lighter),
+    transparent,
+    transparent
+  );
+  outline: none;
+}
+
+.buttonIconIconButton:active {
+  background-color: transparent;
+  scale: 0.95;
+}
+
+.buttonIconIconButton:disabled {
+  background-color: var(--color-base-gray-lighter);
+  color: var(--color-base-gray-darker);
+  cursor: inherit;
+  opacity: 0.7;
+}
+
+.buttonIconIconButton span {
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}

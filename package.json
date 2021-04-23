@@ -1,0 +1,58 @@
+{
+  "name": "@lanaco/lanaco-react-library",
+  "version": "1.0.199",
+  "description": "Lanaco react library components",
+  "author": "aleksandar.mitric33",
+  "license": "MIT",
+  "repository": "lanaco/lanaco-react-ui",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --copy-files",
+    "build:es": "babel src --out-dir es --copy-files",
+    "build:umd": "cross-env FILE_NAME=index webpack",
+    "build:umd:min": "cross-env NODE_ENV=production npm run build:umd",
+    "clean": "rimraf lib dist es",
+    "build": "npm run clean && npm run build:commonjs && npm run build:es  && npm run build:umd && npm run build:umd:min",
+    "lint": "eslint src --ext .js,.jsx",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "moment": "2.29.1",
+    "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-datepicker": "^3.6.0",
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.1",
+    "eslint": "^7.24.0",
+    "eslint-plugin-react": "^7.22.0",
+    "rimraf": "^3.0.2",
+    "style-loader": "^2.0.0",
+    "svg-url-loader": "^7.1.1",
+    "webpack": "^5.32.0",
+    "webpack-cli": "^4.6.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  }
+}

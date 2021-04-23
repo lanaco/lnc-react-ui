@@ -1,1 +1,2 @@
-# lnc-react-ui
+# Lanaco react components
+fix 1
