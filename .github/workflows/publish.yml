@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-      - CloneFirstCommit
-      - GoAirComponents_branch
 
 jobs:
   release:
@@ -23,7 +21,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
-      # - run: npm profile get
       - run: npm publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
