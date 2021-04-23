@@ -14,7 +14,7 @@
     "build:umd": "cross-env FILE_NAME=index webpack",
     "build:umd:min": "cross-env NODE_ENV=production npm run build:umd",
     "clean": "rimraf lib dist es",
-    "build": "npm run clean && npm run build:commonjs && npm run build:es  && npm run build:umd && npm run build:umd:min",
+    "build": "npm run clean && npm run build:commonjs",
     "lint": "eslint src --ext .js,.jsx",
     "prepublishOnly": "npm run lint && npm run build"
   },
