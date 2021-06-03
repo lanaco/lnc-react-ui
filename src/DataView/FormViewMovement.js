@@ -17,6 +17,7 @@ const FormViewMovement = (props) => {
     goToNextItem,
     goToPreviousItem,
     Dirty,
+    FormMode,
   } = props.Config;
 
   const { Localization = {} } = props;
@@ -93,7 +94,7 @@ const FormViewMovement = (props) => {
         {renderLast()}
       </div>
       <div className={styles.flexContainerRight}>
-        {Dirty ? (
+        {Dirty && FormMode === "EDIT" ? (
           <IconButton
             iconClassName={Icons.Save}
             onClick={() => {}}

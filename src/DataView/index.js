@@ -11,7 +11,7 @@ import styles from "./styles.module.css";
 import TableView from "./TableView";
 
 const DataView = (props) => {
-  const emptyFunc = () => { };
+  const emptyFunc = () => {};
   const [deleteConfirmationBoxOpen, setDeleteConfirmationBoxOpen] = useState(
     false
   );
@@ -23,6 +23,7 @@ const DataView = (props) => {
   const {
     ChangeToFormView = emptyFunc,
     ChangeToTableView = emptyFunc,
+    ChangeToEditMode = emptyFunc,
     OnPageSizeChanged = emptyFunc,
     OnFieldChange = emptyFunc,
     OnSelection = emptyFunc,
@@ -37,7 +38,7 @@ const DataView = (props) => {
     SetSelectedData = emptyFunc,
     ClearSelectedData = emptyFunc,
     Localization = {},
-    Export = () => { },
+    Export = () => {},
     Icons = {
       DownDouble: "lnc-down-double",
       Refresh: "lnc-refresh",
@@ -45,13 +46,16 @@ const DataView = (props) => {
       CloseX: "lnc-x",
       Plus: "lnc-plus",
       Repeat: "lnc-repeat",
+      Clone: "lnc-clone",
       Table: "lnc-table",
       RightDouble: "lnc-right-double",
       Right: "lnc-right",
       LeftDouble: "lnc-left-double",
       Left: "lnc-left",
       Save: "lnc-save",
-      FileExcel: "lnc-file-excel"
+      Edit: "lnc-edit",
+      Eye: "lnc-eye",
+      FileExcel: "lnc-file-excel",
     },
   } = props;
 
@@ -106,6 +110,7 @@ const DataView = (props) => {
     goToPreviousItem,
     goToFirstItem,
     goToLastItem,
+    FormMode: Form.Mode,
   };
 
   const tableViewConfig = {
@@ -116,6 +121,8 @@ const DataView = (props) => {
     EnablePagination: Options.EnablePagination || false,
     EnableSelection: Options.EnableSelection || false,
     EnableFormView: Options.EnableFormView || false,
+    EnableSwitchReadOnlyMode: Options.EnableSwitchReadOnlyMode || true,
+    ReadOnly: Options.ReadOnly || false,
     SelectionType: Table.SelectionType,
     OnSelection: OnSelection,
     OnSelectAll: OnSelectAll,
@@ -145,7 +152,7 @@ const DataView = (props) => {
   //======== METHODS ========
 
   const freezeLoading = (args = []) => {
-    return freeze([General.IsLoading, ...args]);
+    return freeze([General.IsLoading || FormMode === FormMode.READ, ...args]);
   };
 
   //======== RENDER ========
@@ -208,7 +215,11 @@ const DataView = (props) => {
   };
 
   const renderDeleteSelectedButton = () => {
-    if (!Options.EnableDelete || General.CurrentView === ViewType.FORM_VIEW)
+    if (
+      Options.ReadOnly ||
+      !Options.EnableDelete ||
+      General.CurrentView === ViewType.FORM_VIEW
+    )
       return <></>;
 
     return (
@@ -251,6 +262,7 @@ const DataView = (props) => {
   };
 
   const renderGoToAddButton = () => {
+    if (Options.ReadOnly) return <></>;
     if (Options.EnableAdd && General.CurrentView !== ViewType.FORM_VIEW)
       return (
         <div className={styles.flexItem}>
@@ -278,7 +290,7 @@ const DataView = (props) => {
             tooltipText={Localization.AddWithCopy}
             onClick={GoToAddWithCopy}
             disabled={freezeLoading()}
-            iconClassName={Icons.Repeat}
+            iconClassName={Icons.Clone}
           ></IconButton>
         </div>
       );
@@ -297,6 +309,31 @@ const DataView = (props) => {
           onClick={ChangeToTableView}
           disabled={freezeLoading()}
           iconClassName={Icons.Table}
+        ></IconButton>
+      </div>
+    );
+  };
+
+  const renderSwitchToEditModeButton = () => {
+    if (
+      Options.ReadOnly ||
+      !Options.EnableSwitchReadOnlyMode ||
+      !Options.EnableFormView ||
+      General.CurrentView !== ViewType.FORM_VIEW
+    )
+      return <></>;
+
+    return (
+      <div className={styles.flexItem}>
+        <IconButton
+          tooltipText={
+            Form.Mode === FormMode.READ
+              ? Localization.FormEditMode
+              : Localization.FormReadMode
+          }
+          onClick={ChangeToEditMode}
+          disabled={freezeLoading()}
+          iconClassName={Form.Mode === FormMode.READ ? Icons.Edit : Icons.Eye}
         ></IconButton>
       </div>
     );
@@ -322,13 +359,21 @@ const DataView = (props) => {
   };
 
   const getBorderClass = () => {
+    let className = " ";
+
+    if (Form.Mode === FormMode.READ) className = " " + styles.successBorder;
+
     if (Form.Dirty && Form.Mode !== FormMode.ADD && Options.EnableEdit)
-      return " " + styles.editedBorder;
+      className = " " + styles.editedBorder;
 
     if (!Form.Dirty && Form.Mode !== FormMode.ADD && Options.EnableEdit)
-      return " " + styles.successBorder;
+      className = " " + styles.successBorder;
 
-    return " ";
+    if (Form.Mode === FormMode.READ) {
+      className += " " + styles.disabledChildren;
+    }
+
+    return className;
   };
 
   const renderFormView = () => {
@@ -405,6 +450,7 @@ const DataView = (props) => {
         <div className={styles.flexContainer}>
           <div className={styles.flexInnerContainer}>
             {renderChangeToTableView()}
+            {renderSwitchToEditModeButton()}
             {renderGoToAddButton()}
             {renderDeleteSelectedButton()}
             {renderDeleteConfirmationBox()}
