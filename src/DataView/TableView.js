@@ -1,6 +1,10 @@
 import { isUndefined } from "lodash";
 import React, { useState } from "react";
-import { getDarkerColor, getLighterColor, isColorDark } from "../Base/ColorBlender";
+import {
+  getDarkerColor,
+  getLighterColor,
+  isColorDark,
+} from "../Base/ColorBlender";
 import TableSelectionType from "./Constants/TableSelectionType";
 import { mergeCSS } from "./Helper/Helper";
 import Pagination from "./Pagination";
@@ -20,17 +24,18 @@ const TableView = (props) => {
     EnableSelection,
     EnableFormView,
     SelectionType,
-    OnSelection = () => { },
-    OnSelectAll = () => { },
+    OnSelection = () => {},
+    OnSelectAll = () => {},
     EnablePagination,
     EnableOrdering,
     Accessor,
     Ascending,
     Descending,
-    OnHeaderClick = () => { },
+    OnHeaderClick = () => {},
+    ReadOnly,
   } = props.Config;
 
-  const { Localization = {}, Export = () => { }, Icons = {} } = props;
+  const { Localization = {}, Export = () => {}, Icons = {} } = props;
 
   const [headerHoverIndex, setHeaderHoverIndex] = useState(-1);
   const [rowHoverIndex, setRowHoverIndex] = useState(-1);
@@ -51,17 +56,14 @@ const TableView = (props) => {
         let tmpArray = [...rowSelectedIndices];
         tmpArray.push(rowIndex);
         setRowSelectedIndices(tmpArray);
-      }
-      else if (SelectionType === TableSelectionType.SINGLE) {
+      } else if (SelectionType === TableSelectionType.SINGLE) {
         setRowSelectedIndices([rowIndex]);
       }
-    }
-    else if (!e.target.checked && rowIndex >= 0) {
+    } else if (!e.target.checked && rowIndex >= 0) {
       if (SelectionType === TableSelectionType.MULTIPLE) {
-        let tmpArray = rowSelectedIndices.map(x => x !== rowIndex);
+        let tmpArray = rowSelectedIndices.map((x) => x !== rowIndex);
         setRowSelectedIndices(tmpArray);
-      }
-      else if (SelectionType === TableSelectionType.SINGLE) {
+      } else if (SelectionType === TableSelectionType.SINGLE) {
         setRowSelectedIndices([]);
       }
     }
@@ -71,18 +73,26 @@ const TableView = (props) => {
   //======== RENDER ========
 
   const renderSelectionHeader = () => {
-    if (!EnableSelection) return null;
+    if (!EnableSelection || ReadOnly) return null;
 
     if (props.accentColor) {
       const style = {
         backgroundColor: props.accentColor,
-        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+        color: props.color
+          ? props.color
+          : isColorDark(props.accentColor)
+          ? "white"
+          : "black",
       };
 
       const styleForHover = {
         backgroundColor: getDarkerColor(props.accentColor, 0.2),
-        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
-      }
+        color: props.color
+          ? props.color
+          : isColorDark(props.accentColor)
+          ? "white"
+          : "black",
+      };
 
       return (
         <th
@@ -131,7 +141,7 @@ const TableView = (props) => {
   };
 
   const renderSelectionCheckbox = (rowData, rowIndex = -1) => {
-    if (EnableSelection) {
+    if (EnableSelection && !ReadOnly) {
       return (
         <td
           className={mergeCSS([styles.specialRenderCell, styles.selectColumn])}
@@ -184,18 +194,25 @@ const TableView = (props) => {
       const styleForHover = {
         border: "1px solid " + getLighterColor(props.accentColor, 0.75),
         backgroundColor: key % 2 === 0 ? "white" : "whitesmoke",
-      }
+      };
 
       const styleForSelect = {
         backgroundColor: getLighterColor(props.accentColor, 0.75),
-      }
+      };
 
       return (
         <tr
           key={key}
-          style={rowSelectedIndices.includes(key) ? styleForSelect : rowHoverIndex === key ? styleForHover : style}
+          style={
+            rowSelectedIndices.includes(key)
+              ? styleForSelect
+              : rowHoverIndex === key
+              ? styleForHover
+              : style
+          }
           onMouseEnter={() => setRowHoverIndex(key)}
-          onMouseLeave={() => setRowHoverIndex(-1)}>
+          onMouseLeave={() => setRowHoverIndex(-1)}
+        >
           {renderSelectionCheckbox(rowData, key)}
           {Columns.filter((x) => x.hide !== true).map((def, i) =>
             renderCell(rowData, def, i)
@@ -217,11 +234,11 @@ const TableView = (props) => {
   const renderCell = (rowData, def, key) => {
     let onClick = !isFunction(def.specialRender)
       ? () => {
-        ChangeToFormView(rowData);
-      }
-      : () => { };
+          ChangeToFormView(rowData);
+        }
+      : () => {};
 
-    if (!EnableFormView) onClick = () => { };
+    if (!EnableFormView) onClick = () => {};
 
     if (!EnableFormView && EnableSelection) {
       var checked = isItemInArray(rowData, SelectedData, SelectionIndicator);
@@ -243,7 +260,7 @@ const TableView = (props) => {
   };
 
   const renderHeaderCell = (def, i) => {
-    let headerClick = () => { };
+    let headerClick = () => {};
     let hideOrdering =
       !EnableOrdering ||
       (def.sortable === undefined ? false : def.sortable === false);
@@ -281,19 +298,27 @@ const TableView = (props) => {
     if (props.accentColor) {
       const style = {
         backgroundColor: props.accentColor,
-        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
+        color: props.color
+          ? props.color
+          : isColorDark(props.accentColor)
+          ? "white"
+          : "black",
       };
 
       const styleForHover = {
         backgroundColor: getDarkerColor(props.accentColor, 0.2),
-        color: props.color ? props.color : isColorDark(props.accentColor) ? "white" : "black"
-      }
+        color: props.color
+          ? props.color
+          : isColorDark(props.accentColor)
+          ? "white"
+          : "black",
+      };
 
       return (
         <th
           key={i}
           className={styles.header}
-          onClick={IsLoading || hideOrdering ? () => { } : headerClick}
+          onClick={IsLoading || hideOrdering ? () => {} : headerClick}
           style={headerHoverIndex === i + 1 ? styleForHover : style}
           onMouseEnter={() => setHeaderHoverIndex(i + 1)}
           onMouseLeave={() => setHeaderHoverIndex(-1)}
@@ -315,7 +340,7 @@ const TableView = (props) => {
       <th
         key={i}
         className={styles.header}
-        onClick={IsLoading || hideOrdering ? () => { } : headerClick}
+        onClick={IsLoading || hideOrdering ? () => {} : headerClick}
       >
         <div className={styles.headerInnerDiv}>
           {def.displayName}

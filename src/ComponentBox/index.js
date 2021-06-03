@@ -79,6 +79,7 @@ function ComponentBox(props) {
                 ""
               ) : (
                 <IconButton
+                  disabled={props.disabled}
                   ignorePermission={true}
                   iconClassName={props.closeIconClassName}
                   onClick={handleDialogClose}

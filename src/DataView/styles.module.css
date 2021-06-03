@@ -56,6 +56,15 @@
   margin-left: 20px;
 }
 
+.disabledChildren:hover {
+  cursor: not-allowed;
+}
+
+.disabledChildren * {
+  pointer-events: none;
+  opacity: 1;
+}
+
 .movementFlexContainer {
   display: flex;
   flex-direction: row;

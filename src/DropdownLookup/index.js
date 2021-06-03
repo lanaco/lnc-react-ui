@@ -122,10 +122,11 @@ const DropdownLookup = (props) => {
   };
 
   if (props.accentColor) {
-
     const style = {
-      backgroundColor: inFocus ? "white" : getLighterColor(props.accentColor, 0.75),
-      borderBottom: "2px solid " + props.accentColor
+      backgroundColor: inFocus
+        ? "white"
+        : getLighterColor(props.accentColor, 0.75),
+      borderBottom: "2px solid " + props.accentColor,
     };
 
     return (
@@ -184,6 +185,7 @@ const DropdownLookup = (props) => {
           <IconButton
             iconClassName={props.closeIconClassName}
             onClick={onClearSelection}
+            disabled={props.disabled}
           ></IconButton>
         </span>
       </div>
