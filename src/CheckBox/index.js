@@ -9,6 +9,7 @@ const CheckBox = (props) => {
     }
     props.onChange(props.id, e.target.checked);
   };
+
   return (
     <BaseContainer {...props} label="">
       <div className={styles.checkBoxLine}>
@@ -17,6 +18,7 @@ const CheckBox = (props) => {
           checked={props.checked ? "checked" : ""}
           onChange={handleChange}
           disabled={props.disabled}
+          style={{ cursor: "pointer" }}
         />
         <label className={styles.checkBoxLabel}>{props.label}</label>
       </div>

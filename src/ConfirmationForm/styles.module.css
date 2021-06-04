@@ -7,6 +7,7 @@
   transform: scale(1);
   opacity: 1;
   visibility: visible;
+  padding: 10px;
   /* padding: 2%; */
 }
 
@@ -14,10 +15,10 @@
   white-space: pre-wrap;
 }
 
-.yesAndNo {
+.confirmationBoxButtons {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .yesAndNoButton {

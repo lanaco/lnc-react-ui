@@ -119,6 +119,28 @@ const DropdownLookup = (props) => {
         </div>
       );
     }
+
+    let empty =
+      props.State.Options === null ||
+      (props.State.Options !== null && props.State.Options.length === 0);
+
+    if (
+      props.State.Options !== null &&
+      props.State.Options.length === 0 &&
+      inFocus &&
+      empty &&
+      props.State.Loading === false
+    ) {
+      return (
+        <div className={styles.ulListDiv}>
+          <ul className={styles.list}>
+            <li key={0} onMouseDown={onBlur} className={styles.listItem}>
+              {props.NotItemsFoundLabel ? props.NotItemsFoundLabel : ""}
+            </li>
+          </ul>
+        </div>
+      );
+    }
   };
 
   if (props.accentColor) {
@@ -138,11 +160,13 @@ const DropdownLookup = (props) => {
             value={value ?? ""}
             onChange={onTextChange}
             className={`${styles.standardInput} ${cssThemeClass}`}
+            disabled={props.disabled}
             title={props.tooltipText}
             style={style}
             onBlur={onBlur}
             onFocus={() => {
               setInFocus(true);
+              props.LoadData(value);
             }}
           />
           <span
@@ -171,10 +195,12 @@ const DropdownLookup = (props) => {
           value={value ?? ""}
           onChange={onTextChange}
           className={`${styles.standardInput} ${cssThemeClass}`}
+          disabled={props.disabled}
           title={props.tooltipText}
           onBlur={onBlur}
           onFocus={() => {
             setInFocus(true);
+            props.LoadData(value);
           }}
         />
         <span
@@ -182,11 +208,19 @@ const DropdownLookup = (props) => {
             inFocus ? styles.clearInputSpanInFocus : styles.clearInputSpan
           }
         >
-          <IconButton
-            iconClassName={props.closeIconClassName}
-            onClick={onClearSelection}
-            disabled={props.disabled}
-          ></IconButton>
+          {props.State.Loading === false ? (
+            <IconButton
+              iconClassName={props.closeIconClassName}
+              onClick={onClearSelection}
+              disabled={props.disabled}
+            ></IconButton>
+          ) : (
+            <IconButton
+              iconClassName={props.reloadIconClassName}
+              onClick={onClearSelection}
+              disabled={props.disabled}
+            ></IconButton>
+          )}
         </span>
       </div>
       {renderSuggestions()}

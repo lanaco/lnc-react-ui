@@ -12,7 +12,7 @@ const ConfirmationForm = (props) => {
     <div>
       <section className={styles.confirmationBoxModalContent}>
         <div className={styles.processingContainer}>{props.title}</div>
-        <div className={styles.yesAndNo}>
+        <div className={styles.confirmationBoxButtons}>
           <Button
             onClick={approveFunction}
             label={props.textYes}
