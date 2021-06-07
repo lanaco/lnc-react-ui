@@ -6,7 +6,7 @@ import IconButton from "../IconButton/index.js";
 import FormMode from "./Constants/FormMode";
 import ViewType from "./Constants/ViewType";
 import FormViewMovement from "./FormViewMovement";
-import { freeze, mergeCSS } from "./Helper/helper";
+import { freeze, mergeCSS } from "./Helper/dataViewHelper";
 import styles from "./styles.module.css";
 import TableView from "./TableView";
 

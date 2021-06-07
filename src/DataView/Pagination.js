@@ -1,7 +1,7 @@
 import React from "react";
 import DropDown from "../DropDown/index";
 import IconButton from "../IconButton/index.js";
-import { freeze } from "./Helper/Helper";
+import { freeze } from "./Helper/dataViewHelper";
 import styles from "./styles.module.css";
 
 const TablePagination = (props) => {

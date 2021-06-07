@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import { freeze } from "./Helper/Helper";
+import { freeze } from "./Helper/dataViewHelper";
 import IconButton from "../IconButton/index.js";
 
 const FormViewMovement = (props) => {

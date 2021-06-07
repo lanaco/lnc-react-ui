@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import DropDown from "../DropDown/index";
 import IconButton from "../IconButton/index";
-import { freeze } from "../DataView/Helper/Helper";
+import { freeze } from "../DataView/Helper/dataViewHelper";
 import "./style.css";
 
 const Pagination = (props) => {
