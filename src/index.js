@@ -34,3 +34,5 @@ export * from "./ConfirmationForm";
 export { default as ConfirmationForm } from "./ConfirmationForm";
 export * from "./DropdownMenu";
 export { default as DropdownMenu } from "./DropdownMenu";
+export * from "./Grid";
+export { default as Grid } from "./Grid";

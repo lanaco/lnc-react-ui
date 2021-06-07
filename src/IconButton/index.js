@@ -50,7 +50,6 @@ const IconButton = (props) => {
 
   return (
     <div>
-      {console.log(baseStyles[iconClassName])}
       <button
         onClick={handleOnClick}
         className={

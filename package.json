@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lanaco-react-library",
-  "version": "1.0.202",
+  "version": "1.0.203",
   "description": "Lanaco react library components",
   "author": "aleksandar.mitric33",
   "license": "MIT",
@@ -25,7 +25,10 @@
     "react": "^17.0.1",
     "react-datepicker": "^3.6.0",
     "react-dom": "^17.0.1",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "immer": "^6.0.3",
+    "use-immer": "^0.5.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.14",
