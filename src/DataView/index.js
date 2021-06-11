@@ -56,6 +56,9 @@ const DataView = (props) => {
       Edit: "lnc-edit",
       Eye: "lnc-eye",
       FileExcel: "lnc-file-excel",
+      ArrowUp: "lnc-arrow-up",
+      ArrowDown: "lnc-arrow-down",
+      ArrowDownUp: "lnc-arrow-down-up",
     },
   } = props;
 
