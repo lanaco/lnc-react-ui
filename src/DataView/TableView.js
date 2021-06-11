@@ -9,6 +9,7 @@ import TableSelectionType from "./Constants/TableSelectionType";
 import { mergeCSS } from "./Helper/dataViewHelper";
 import Pagination from "./Pagination";
 import styles from "./styles.module.css";
+import Icon from "../Icon/index";
 
 const TableView = (props) => {
   //======== RENDER ========
@@ -270,15 +271,16 @@ const TableView = (props) => {
     //-------------------------------------------------------------------
 
     if (isAccessor && Ascending)
-      orderingIcon = <i iconClassName={Icons.ArrowUp}></i>;
+      orderingIcon = <Icon iconClassName={Icons.ArrowUp}></Icon>;
 
     if (isAccessor && Descending)
-      orderingIcon = <i iconClassName={Icons.ArrowDown}></i>;
+      orderingIcon = <Icon iconClassName={Icons.ArrowDown}></Icon>;
 
     if (isAccessor && !Ascending && !Descending)
-      orderingIcon = <i iconClassName={Icons.ArrowDownUp}></i>;
+      orderingIcon = <Icon iconClassName={Icons.ArrowDownUp}></Icon>;
 
-    if (!isAccessor) orderingIcon = <i iconClassName={Icons.ArrowDownUp}></i>;
+    if (!isAccessor)
+      orderingIcon = <Icon iconClassName={Icons.ArrowDownUp}></Icon>;
 
     //-------------------------------------------------------------------
 
