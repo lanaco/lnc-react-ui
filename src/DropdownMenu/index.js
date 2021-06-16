@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
+import Icon from "../Icon/index";
 
 const DropdownMenu = (props) => {
   return (
@@ -12,8 +13,9 @@ const DropdownMenu = (props) => {
       </span>
 
       <div className={styles.dropdownContent}>
-        {props.items.map((x) => (
+        {props.items.map((x, i) => (
           <a
+            key={i}
             href="#"
             onClick={(e) => {
               e.preventDefault();
@@ -22,7 +24,7 @@ const DropdownMenu = (props) => {
           >
             <span className={styles.linkInnerSpan}>
               <span className={styles.linkIconSpan}>
-                <i iconClassName={x.iconClassName}></i>
+                <Icon iconClassName={x.iconClassName}></Icon>
               </span>
               {x.name}
             </span>

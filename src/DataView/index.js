@@ -12,9 +12,8 @@ import TableView from "./TableView";
 
 const DataView = (props) => {
   const emptyFunc = () => {};
-  const [deleteConfirmationBoxOpen, setDeleteConfirmationBoxOpen] = useState(
-    false
-  );
+  const [deleteConfirmationBoxOpen, setDeleteConfirmationBoxOpen] =
+    useState(false);
   //======== PROPS ========
 
   const { General, Options, Ordering, Pagination, Table, Form } =
@@ -40,6 +39,7 @@ const DataView = (props) => {
     Localization = {},
     Export = () => {},
     Icons = {
+      Checkbox: "lnc-checkbox",
       DownDouble: "lnc-down-double",
       Refresh: "lnc-refresh",
       Trash: "lnc-trash",
@@ -64,8 +64,11 @@ const DataView = (props) => {
 
   const { Lookup = {} } = props;
 
-  const { OnAdd = emptyFunc, OnUpdate = emptyFunc, OnDelete = emptyFunc } =
-    props.CRUD || {};
+  const {
+    OnAdd = emptyFunc,
+    OnUpdate = emptyFunc,
+    OnDelete = emptyFunc,
+  } = props.CRUD || {};
 
   const {
     CanGoToNextItem = false,
