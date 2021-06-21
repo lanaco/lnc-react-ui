@@ -70,14 +70,14 @@
   background-color: var(--color-base-backgroud);
   font-size: var(--font-size-base);
   border-bottom: 2px solid var(--color-base-blue);
-  padding-right: 5px;
+  /* padding-right: 5px; */
 }
 
 .clearInputSpanInFocus {
   background-color: white;
   font-size: var(--font-size-base);
   border-bottom: 2px solid var(--color-base-blue);
-  padding-right: 5px;
+  /* padding-right: 5px; */
 }
 
 .standardInput {
@@ -90,7 +90,7 @@
   font-size: var(--font-size-base);
   border: 0px;
   border-bottom: 2px solid var(--color-base-blue);
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   padding: 0px;
   box-sizing: border-box;
@@ -111,6 +111,8 @@
   cursor: pointer;
   background-color: white;
   z-index: 10000;
+  outline: none;
+  list-style: none;
 }
 
 .listItem:hover {
@@ -124,6 +126,8 @@
   z-index: 10000;
   border: 1px solid gray;
   position: relative;
+  outline: none;
+  list-style: none;
 }
 
 .ulListDiv {
