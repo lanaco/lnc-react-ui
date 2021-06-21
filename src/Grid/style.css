@@ -41,7 +41,7 @@
 }
 
 .default-form-border {
-  border-top: 4.5px solid var(--lanaco-accent-color);
+  border-top: 4.5px solid var(--color-base-blue);
   padding-top: 10px;
 }
 
@@ -242,8 +242,8 @@
 
 .table-cell-header {
   cursor: pointer;
-  background-color: var(--lanaco-accent-color);
-  color: var(--lanaco-text-color);
+  background-color: var(--color-base-blue);
+  color: var(--color-base-white);
   border-right: 1px solid #003954 !important;
   text-align: left;
   padding-right: 5px;
@@ -430,4 +430,32 @@
   .hide-1200 {
     display: none;
   }
+}
+
+.lnc-edit:before {
+  content: "\e095";
+}
+
+.lnc-eye:before {
+  content: "\e0b8";
+}
+
+.lnc-plus:before {
+  content: "\e037";
+}
+
+.lnc-refresh:before {
+  content: "\e03d";
+}
+
+.lnc-checkbox:before {
+  content: "\56";
+}
+
+.lnc-trash:before {
+  content: "\e05b";
+}
+
+.lnc-table:before {
+  content: "\e076";
 }

@@ -43,7 +43,7 @@
 
 .listItem:hover {
   z-index: 10000;
-  color: var(--lanaco-accent-color);
+  color: var(--color-base-blue);
   background-color: whitesmoke;
   position: relative;
 }
