@@ -107,8 +107,8 @@
 
 .header {
   cursor: pointer;
-  background-color: var(--lanaco-accent-color);
-  color: var(--lanaco-text-color);
+  background-color: var(--color-base-blue);
+  color: var(--color-base-white);
   border-right: 1px solid #003954;
   text-align: left;
   padding-right: 5px;

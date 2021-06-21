@@ -85,11 +85,11 @@
 }
 
 input:checked + .slider {
-  background-color: var(--lanaco-accent-color);
+  background-color: var(--color-base-blue);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px var(--lanaco-accent-color);
+  box-shadow: 0 0 1px var(--color-base-blue);
 }
 
 input:checked + .slider:before {

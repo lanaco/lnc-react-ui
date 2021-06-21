@@ -9,7 +9,7 @@
   transition: all var(--transition-duration);
   font-size: var(--font-size);
   background-color: var(--add-button-bg-color-primary);
-  background: var(--lanaco-accent-color);
+  background: var(--color-base-blue);
   color: var(--add-button-text-color);
   padding: 5px 15px;
 }
@@ -33,7 +33,7 @@
   color: var(--disabled-text-color);
 } */
 
- /* Neno's code */
+/* Neno's code */
 .standardInputButton {
   font-size: var(--font-size-base);
   -webkit-appearance: none;

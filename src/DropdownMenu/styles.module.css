@@ -22,7 +22,7 @@
 
 .dropdownContent a {
   background-color: var(--lanaco-grids-and-forms-color);
-  color: var(--lanaco-accent-color) !important;
+  color: var(--color-base-blue) !important;
   padding: 6px 6px;
   text-decoration: none;
   display: block;
@@ -97,7 +97,7 @@
 
 .dropdownContent a {
   background-color: var(--lanaco-grids-and-forms-color);
-  color: var(--lanaco-accent-color) !important;
+  color: var(--color-base-blue) !important;
   padding: 6px 6px;
   text-decoration: none;
   display: block;
