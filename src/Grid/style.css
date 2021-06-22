@@ -64,10 +64,6 @@
   opacity: 1;
 }
 
-.table-container {
-  /* position: relative; */
-}
-
 .table {
   width: 100%;
   position: relative;
@@ -80,7 +76,6 @@
 }
 
 @media only screen and (max-width: 1081px) {
-  /* For desktop: */
   .dataview-container {
     display: flex;
     flex-direction: column;
@@ -127,7 +122,6 @@
 }
 
 .dataview-table-container {
-  /* margin-top: 15px; */
   box-shadow: 0 0 20px #bebebe;
   height: 100%;
   overflow-y: auto;
@@ -283,17 +277,12 @@
 .table-cell,
 .special-cell-render {
   border-right: 1px solid #ccc;
-  /* padding-left: 5px; */
 }
 
 .table-row {
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
   border-top: 1px solid transparent;
-}
-
-.table-row:last-child {
-  /* border-bottom: 1px solid #ccc; */
 }
 
 .table-row-even {
@@ -332,8 +321,6 @@
 
 .selected-row {
   background-color: #ccebf0 !important;
-  /* border-top: 1px solid gray;
-  border-bottom: 1px solid gray; */
 }
 
 .fullCellInput {
@@ -367,9 +354,6 @@
 
 .table-container {
   position: relative;
-}
-
-.table-loading {
 }
 
 @media screen and (max-width: 1400px) {
