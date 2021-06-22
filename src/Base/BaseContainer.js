@@ -2,12 +2,20 @@ import React from "react";
 import baseStyles from "../Base/styles.module.css";
 
 const BaseContainer = (props) => {
+  var baseContainerWithSideLabel = props.baseContainerClass
+    ? [baseStyles.baseContainerWithSideLabel, props.baseContainerClass].join(
+        " "
+      )
+    : baseStyles.baseContainerWithSideLabel;
+
+  var baseContainerClass = props.baseContainerClass
+    ? [baseStyles.baseContainer, props.baseContainerClass].join(" ")
+    : baseStyles.baseContainer;
+
   return (
     <div
       className={
-        props.useSideLabel
-          ? baseStyles.baseContainerWithSideLabel
-          : baseStyles.baseContainer
+        props.useSideLabel ? baseContainerWithSideLabel : baseContainerClass
       }
     >
       <label
