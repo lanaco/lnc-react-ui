@@ -5,7 +5,9 @@ const BaseContainer = (props) => {
   return (
     <div
       className={
-        props.useSideLabel ? baseStyles.baseContainer : baseStyles.baseContainer
+        props.useSideLabel
+          ? baseStyles.baseContainerWithSideLabel
+          : baseStyles.baseContainer
       }
     >
       <label
@@ -33,9 +35,7 @@ const BaseContainer = (props) => {
         </div>
       ) : (
         <React.Fragment>
-          <div className={baseStyles.baseInputHolder}>
-          {props.children}
-          </div>
+          <div>{props.children}</div>
           <div
             className={
               props.errorTextCssClass

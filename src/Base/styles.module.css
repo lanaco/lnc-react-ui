@@ -68,6 +68,10 @@
     font-family: var(--font-base-ubuntu);
   }
 
+  .baseContainerWithSideLabel .baseLabel {
+    width: auto;
+  }
+
   .baseLabel {
     font-size: 0.8em;
     font-weight: 400;

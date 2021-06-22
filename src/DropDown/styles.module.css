@@ -1,29 +1,5 @@
-/* Code copy from stamp app without useles css. CHECKED AND OK */
-/* .standardInputDropDown {
-  font-family: inherit;
-  outline: none;
-  width: 100%;
-  height: 100%;
-  background-color: var(--input-bg-color);
-  transition: all var(--transition-duration);
-  font-size: var(--font-size);
-  border-bottom: 2.7px solid var(--base-color);
-}
-
-.standardInputDropDown:focus {
-  background-color: var(--input-bg-focus-color);
-}
-
-.standardInputDropDown:disabled {
-  background-color: var(--disabled-bg-color);
-  color: var(--disabled-text-color);
-} */
-
-/* Neno's code */
 .standardInputDropDown {
   font-family: inherit;
-  -webkit-appearance: none;
-  appearance: none;
   outline: none;
   background-color: var(--color-base-backgroud);
   transition: all var(--transition-base-duration);
