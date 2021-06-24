@@ -1,10 +1,10 @@
 {
-  "name": "@lanaco/lanaco-react-library",
-  "version": "1.0.209",
+  "name": "@lanaco/lnc-react-ui",
+  "version": "1.0.0",
   "description": "Lanaco react library components",
   "author": "aleksandar.mitric33",
   "license": "MIT",
-  "repository": "lanaco/lanaco-react-ui",
+  "repository": "lanaco/lnc-react-ui",
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {

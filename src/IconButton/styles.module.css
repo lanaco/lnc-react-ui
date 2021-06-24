@@ -29,10 +29,9 @@
 }
 
 .buttonIconIconButton:disabled {
-  background-color: var(--color-base-gray-lighter);
   color: var(--color-base-gray-darker);
   cursor: inherit;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .buttonIconIconButton span {
