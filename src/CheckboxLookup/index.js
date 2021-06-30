@@ -3,15 +3,23 @@ import BaseContainer from "../Base/BaseContainer.js";
 import CheckBox from "../CheckBox/index.js";
 import IconButton from "../IconButton/index.js";
 import ToggleSwitch from "../ToggleSwitch/index.js";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const CheckboxLookup = (props) => {
+  const emptyFunc = () => {};
+  const {
+    onChange = emptyFunc,
+    selectedOptions = [],
+    onSelectDeselectAll = emptyFunc,
+    options = [],
+  } = props;
+
   const handleCheckboxChange = (id, value) => {
-    let selectedItems = [...props.selectedOptions];
+    let selectedItems = [...selectedOptions];
 
     if (value) {
       selectedItems.push(
-        props.options.filter((item) => {
+        options.filter((item) => {
           return item[props.itemId] === id;
         })[0]
       );
@@ -20,19 +28,18 @@ const CheckboxLookup = (props) => {
         return item[props.itemId] !== id;
       });
     }
-    props.onChange(props.id, selectedItems);
+    onChange(props.id, selectedItems);
   };
 
   const handleSelectAll = (selectDeselect) =>
-    props.onSelectDeselectAll(selectDeselect);
+    onSelectDeselectAll(selectDeselect);
 
   const renderSelectAll = () => {
-    if (props.onSelectDeselectAll === undefined) return <></>;
+    if (onSelectDeselectAll === undefined) return <></>;
 
     let selectDeselect;
 
-    if (props.options.length === props.selectedOptions.length)
-      selectDeselect = false;
+    if (options.length === selectedOptions.length) selectDeselect = false;
     else selectDeselect = true;
 
     return (
@@ -51,11 +58,11 @@ const CheckboxLookup = (props) => {
         <div className={styles.selectButton}>{renderSelectAll()}</div>
         {/* </div> */}
         <div className={styles.cardContent}>
-          {props.options.map((item, i) => {
+          {options.map((item, i) => {
             let isChecked = false;
 
-            if (props.selectedOptions) {
-              props.selectedOptions.forEach((element) => {
+            if (selectedOptions) {
+              selectedOptions.forEach((element) => {
                 if (element[props.itemId] === item[props.itemId]) {
                   isChecked = true;
                 }

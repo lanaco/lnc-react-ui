@@ -6,12 +6,13 @@ import styles from "./styles.module.css";
 
 const Button = (props) => {
   const [hover, setHover] = useState(false);
+  const { onClick = () => {} } = props;
 
   const handleOnClick = (e) => {
     if (props.preventDefault) {
       e.preventDefault();
     }
-    props.onClick(props.id, e.target.value);
+    onClick(props.id, e.target.value);
   };
 
   let iconClassName = "";

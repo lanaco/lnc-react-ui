@@ -3,11 +3,13 @@ import BaseContainer from "../Base/BaseContainer";
 import styles from "./styles.module.css";
 
 const CheckBox = (props) => {
+  const { onChange = () => {} } = props;
+
   const handleChange = (e) => {
     if (props.preventDefault) {
       e.preventDefault();
     }
-    props.onChange(props.id, e.target.checked);
+    onChange(props.id, e.target.checked);
   };
 
   return (

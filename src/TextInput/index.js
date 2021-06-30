@@ -4,6 +4,10 @@ import { getLighterColor } from "../Base/ColorBlender";
 import styles from "./styles.module.css";
 
 const TextInput = React.forwardRef((props, ref) => {
+  const emptyFunc = () => {};
+
+  const { onChange = emptyFunc } = props;
+
   const [text, setText] = useState("");
   const [isFirst, setIsFirst] = useState(true);
   const [focus, setFocus] = useState(false);
@@ -18,7 +22,7 @@ const TextInput = React.forwardRef((props, ref) => {
   }, [text]);
 
   const handleDelayedOnChange = () => {
-    if (!isFirst) props.onChange(props.id, text);
+    if (!isFirst) onChange(props.id, text);
 
     if (isFirst) setIsFirst(false);
   };
@@ -28,15 +32,16 @@ const TextInput = React.forwardRef((props, ref) => {
       e.preventDefault();
     }
 
-    props.onChange(props.id, e.target.value);
+    onChange(props.id, e.target.value);
     setText(e.target.value);
   };
 
   if (props.accentColor) {
-
     const style = {
-      backgroundColor: focus ? "white" : getLighterColor(props.accentColor, 0.75),
-      borderBottom: "2px solid " + props.accentColor
+      backgroundColor: focus
+        ? "white"
+        : getLighterColor(props.accentColor, 0.75),
+      borderBottom: "2px solid " + props.accentColor,
     };
 
     return (

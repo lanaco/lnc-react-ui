@@ -3,6 +3,10 @@ import baseStyles from "../Base/styles.module.css";
 import styles from "./styles.module.css";
 
 const IconButton = (props) => {
+  const emptyFunc = () => {};
+
+  const { onClick = emptyFunc } = props;
+
   let iconClassName = "";
 
   const [hover, setHover] = useState(false);
@@ -15,7 +19,7 @@ const IconButton = (props) => {
     if (props.preventDefault) {
       e.preventDefault();
     }
-    props.onClick(props.id, e.target.value);
+    onClick(props.id, e.target.value);
   };
 
   if (props.accentColor) {

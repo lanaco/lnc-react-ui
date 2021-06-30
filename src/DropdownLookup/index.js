@@ -11,8 +11,18 @@ const usePrevious = (value) => {
   });
   return ref.current;
 };
+const emptyFunc = () => {};
 
 const DropdownLookup = (props) => {
+  const {
+    InitializeNamespace,
+    initialValue,
+    State,
+    LoadData,
+    onChange,
+    ClearOptions,
+  } = props;
+
   const [inFocus, setInFocus] = React.useState(false);
   const [value, setValue] = React.useState("");
   const [selectedOption, setSelectedOption] = React.useState({});
@@ -29,26 +39,23 @@ const DropdownLookup = (props) => {
       isNaN(props.namespace)
     ) {
     } else {
-      props.InitializeNamespace(props.namespace);
+      InitializeNamespace(props.namespace);
     }
-    updateSelectedValue(props.initialValue);
+    updateSelectedValue(initialValue);
   }, []);
 
   useEffect(() => {
     if (previousInitialValue === undefined)
-      updateSelectedValue(props.initialValue, true);
+      updateSelectedValue(initialValue, true);
 
-    if (
-      previousInitialValue &&
-      previousInitialValue.key !== props.initialValue.key
-    )
-      updateSelectedValue(props.initialValue, true);
+    if (previousInitialValue && previousInitialValue.key !== initialValue.key)
+      updateSelectedValue(initialValue, true);
 
-    if (props.initialValue.key === "" && !inFocus) setValue("");
-  }, [props.initialValue]);
+    if (initialValue.key === "" && !inFocus) setValue("");
+  }, [initialValue]);
 
   useEffect(() => {
-    if (selectedOption && props.State.Options.lenght === 0) {
+    if (selectedOption && State.Options.lenght === 0) {
       setValue(selectedOption.value);
     }
   }, [selectedOption]);
@@ -65,13 +72,13 @@ const DropdownLookup = (props) => {
 
   const onTextChange = (e) => {
     setValue(e.target.value);
-    props.LoadData(e.target.value);
+    LoadData(e.target.value);
   };
 
   const suggestionSelected = (item) => {
     updateSelectedValue(item, true);
-    props.onChange(props.id, item);
-    props.ClearOptions();
+    onChange(props.id, item);
+    ClearOptions();
   };
 
   const onBlur = () => {
@@ -82,7 +89,7 @@ const DropdownLookup = (props) => {
       value !== selectedOption.value
     ) {
       setValue(selectedOption.value);
-      props.ClearOptions();
+      ClearOptions();
     }
     if (!selectedOption || !selectedOption.key) {
       onClearSelection();
@@ -92,20 +99,16 @@ const DropdownLookup = (props) => {
   const onClearSelection = () => {
     setValue("");
     setSelectedOption({ key: "", value: "" });
-    props.onChange(props.id, { key: "", value: "" });
-    props.ClearOptions();
+    onChange(props.id, { key: "", value: "" });
+    ClearOptions();
   };
 
   const renderSuggestions = () => {
-    if (
-      props.State.Options !== null &&
-      props.State.Options.length !== 0 &&
-      inFocus
-    ) {
+    if (State.Options !== null && State.Options.length !== 0 && inFocus) {
       return (
         <div className={styles.ulListDiv}>
           <ul className={styles.list}>
-            {props.State.Options.map((item, i) => (
+            {State.Options.map((item, i) => (
               <li
                 key={i}
                 onMouseDown={() => suggestionSelected(item)}
@@ -121,15 +124,15 @@ const DropdownLookup = (props) => {
     }
 
     let empty =
-      props.State.Options === null ||
-      (props.State.Options !== null && props.State.Options.length === 0);
+      State.Options === null ||
+      (State.Options !== null && State.Options.length === 0);
 
     if (
-      props.State.Options !== null &&
-      props.State.Options.length === 0 &&
+      State.Options !== null &&
+      State.Options.length === 0 &&
       inFocus &&
       empty &&
-      props.State.Loading === false
+      State.Loading === false
     ) {
       return (
         <div className={styles.ulListDiv}>
@@ -166,7 +169,7 @@ const DropdownLookup = (props) => {
             onBlur={onBlur}
             onFocus={() => {
               setInFocus(true);
-              props.LoadData(value);
+              LoadData(value);
             }}
           />
           <span
@@ -200,7 +203,7 @@ const DropdownLookup = (props) => {
           onBlur={onBlur}
           onFocus={() => {
             setInFocus(true);
-            props.LoadData(value);
+            LoadData(value);
           }}
         />
         <span
@@ -208,7 +211,7 @@ const DropdownLookup = (props) => {
             inFocus ? styles.clearInputSpanInFocus : styles.clearInputSpan
           }
         >
-          {props.State.Loading === false ? (
+          {State.Loading === false ? (
             <IconButton
               iconClassName={props.closeIconClassName}
               onClick={onClearSelection}
@@ -226,6 +229,15 @@ const DropdownLookup = (props) => {
       {renderSuggestions()}
     </BaseContainer>
   );
+};
+
+DropdownLookup.defaultProps = {
+  InitializeNamespace: emptyFunc,
+  initialValue: {},
+  State: { Options: [] },
+  LoadData: emptyFunc,
+  onChange: emptyFunc,
+  ClearOptions: emptyFunc,
 };
 
 export default DropdownLookup;
