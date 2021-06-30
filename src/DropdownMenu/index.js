@@ -3,6 +3,8 @@ import styles from "./styles.module.css";
 import Icon from "../Icon/index";
 
 const DropdownMenu = (props) => {
+  const { actionData = () => {}, items = [] } = props;
+
   return (
     <div className={props.disabled ? styles.disabled : styles.dropdown}>
       <span className={styles.dropbtn} disabled={props.disabled}>
@@ -13,13 +15,13 @@ const DropdownMenu = (props) => {
       </span>
 
       <div className={styles.dropdownContent}>
-        {props.items.map((x, i) => (
+        {items.map((x, i) => (
           <a
             key={i}
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              x.action(props.actionData);
+              x.action(actionData);
             }}
           >
             <span className={styles.linkInnerSpan}>

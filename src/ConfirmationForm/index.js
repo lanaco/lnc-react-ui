@@ -3,9 +3,17 @@ import Button from "../Button/index.js";
 import styles from "./styles.module.css";
 
 const ConfirmationForm = (props) => {
-  const approveFunction = () => {
-    props.approveFunction();
-    props.handleDialogClose();
+  const emptyFunc = () => {};
+
+  const {
+    approveFunction = emptyFunc,
+    handleDialogClose = emptyFunc,
+    refuseFunction = emptyFunc,
+  } = props;
+
+  const approveAndCloseFunction = () => {
+    approveFunction();
+    handleDialogClose();
   };
 
   return (
@@ -14,13 +22,13 @@ const ConfirmationForm = (props) => {
         <div className={styles.processingContainer}>{props.title}</div>
         <div className={styles.confirmationBoxButtons}>
           <Button
-            onClick={approveFunction}
+            onClick={approveAndCloseFunction}
             label={props.textYes}
             accentColor={props.accentColor}
             inputCssClass={styles.yesAndNoButton}
           />
           <Button
-            onClick={props.refuseFunction}
+            onClick={refuseFunction}
             label={props.textNo}
             accentColor={props.accentColor}
             inputCssClass={styles.yesAndNoButton}

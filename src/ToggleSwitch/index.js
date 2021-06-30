@@ -3,8 +3,12 @@ import BaseContainer from "../Base/BaseContainer";
 import styles from "./styles.module.css";
 
 const ToggleSwitch = (props) => {
+  const emptyFunc = () => {};
+
+  const { onChange = emptyFunc } = props;
+
   function handleChange(e) {
-    props.onChange(props.id, e.target.checked);
+    onChange(props.id, e.target.checked);
   }
 
   if (props.accentColor) {

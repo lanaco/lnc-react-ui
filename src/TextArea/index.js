@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import BaseContainer from "../Base/BaseContainer";
 import { getLighterColor } from "../Base/ColorBlender";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const TextArea = (props) => {
+  const emptyFunc = () => {};
+
+  const { onChange = emptyFunc } = props;
+
   const [val, setVal] = useState(props.value);
   const [focus, setFocus] = useState(false);
 
@@ -22,8 +26,8 @@ const TextArea = (props) => {
     if (props.preventDefault) {
       e.preventDefault();
     }
-    props.onChange(props.id, e.target.value);
-  }
+    onChange(props.id, e.target.value);
+  };
 
   const numberOfRows = props.rows ? props.rows : 1;
   const numberOfColumns = props.cols ? props.cols : 50;
@@ -39,10 +43,11 @@ const TextArea = (props) => {
   };
 
   if (props.accentColor) {
-
     const style = {
-      backgroundColor: focus ? "white" : getLighterColor(props.accentColor, 0.75),
-      borderBottom: "2px solid " + props.accentColor
+      backgroundColor: focus
+        ? "white"
+        : getLighterColor(props.accentColor, 0.75),
+      borderBottom: "2px solid " + props.accentColor,
     };
 
     return (
@@ -52,7 +57,11 @@ const TextArea = (props) => {
           value={val ? val : ""}
           onChange={handleOnChange}
           onBlur={handleOnBlur}
-          className={(props.inputCssClass) ? [styles.standardInputTextArea, props.inputCssClass].join(" ") : styles.standardInputTextArea}
+          className={
+            props.inputCssClass
+              ? [styles.standardInputTextArea, props.inputCssClass].join(" ")
+              : styles.standardInputTextArea
+          }
           disabled={props.disabled}
           title={props.tooltipText}
           onKeyDown={autosize}
@@ -73,7 +82,11 @@ const TextArea = (props) => {
         value={val ? val : ""}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
-        className={(props.inputCssClass) ? [styles.standardInputTextArea, props.inputCssClass].join(" ") : styles.standardInputTextArea}
+        className={
+          props.inputCssClass
+            ? [styles.standardInputTextArea, props.inputCssClass].join(" ")
+            : styles.standardInputTextArea
+        }
         disabled={props.disabled}
         title={props.tooltipText}
         onKeyDown={autosize}

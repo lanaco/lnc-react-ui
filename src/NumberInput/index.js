@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import BaseContainer from "../Base/BaseContainer";
 import { getLighterColor } from "../Base/ColorBlender";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const NumberInput = (props) => {
+  const emptyFunc = () => {};
+
+  const { onChange = emptyFunc } = props;
+
   const [val, setVal] = useState(props.value);
   const [focus, setFocus] = useState(false);
 
@@ -22,7 +26,7 @@ const NumberInput = (props) => {
     if (props.preventDefault) {
       e.preventDefault();
     }
-    props.onChange(props.id, e.target.value);
+    onChange(props.id, e.target.value);
   };
 
   const isInputInteger = (evt) => {
@@ -38,7 +42,6 @@ const NumberInput = (props) => {
       evt.preventDefault();
     }
   };
-
 
   let numberOfDecimalPlaces =
     props.numberOfDecimalPlaces !== undefined ? props.numberOfDecimalPlaces : 2;
@@ -71,10 +74,11 @@ const NumberInput = (props) => {
   };
 
   if (props.accentColor) {
-
     const style = {
-      backgroundColor: focus ? "white" : getLighterColor(props.accentColor, 0.75),
-      borderBottom: "2px solid " + props.accentColor
+      backgroundColor: focus
+        ? "white"
+        : getLighterColor(props.accentColor, 0.75),
+      borderBottom: "2px solid " + props.accentColor,
     };
 
     return (
@@ -84,9 +88,13 @@ const NumberInput = (props) => {
           value={val ? val : ""}
           onChange={handleOnChange}
           onBlur={handleOnBlur}
-          onKeyPress={(props.isDecimal) ? isInputDecimal : isInputInteger}
-          onPaste={(props.isDecimal) ? isInputDecimal : isInputInteger}
-          className={(props.inputCssClass) ? [styles.standardInputNumberInput, props.inputCssClass].join(" ") : styles.standardInputNumberInput}
+          onKeyPress={props.isDecimal ? isInputDecimal : isInputInteger}
+          onPaste={props.isDecimal ? isInputDecimal : isInputInteger}
+          className={
+            props.inputCssClass
+              ? [styles.standardInputNumberInput, props.inputCssClass].join(" ")
+              : styles.standardInputNumberInput
+          }
           disabled={props.disabled}
           title={props.tooltipText}
           onFocus={() => setFocus(true)}
@@ -104,9 +112,13 @@ const NumberInput = (props) => {
         value={val ? val : ""}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
-        onKeyPress={(props.isDecimal) ? isInputDecimal : isInputInteger}
-        onPaste={(props.isDecimal) ? isInputDecimal : isInputInteger}
-        className={(props.inputCssClass) ? [styles.standardInputNumberInput, props.inputCssClass].join(" ") : styles.standardInputNumberInput}
+        onKeyPress={props.isDecimal ? isInputDecimal : isInputInteger}
+        onPaste={props.isDecimal ? isInputDecimal : isInputInteger}
+        className={
+          props.inputCssClass
+            ? [styles.standardInputNumberInput, props.inputCssClass].join(" ")
+            : styles.standardInputNumberInput
+        }
         disabled={props.disabled}
         title={props.tooltipText}
       />

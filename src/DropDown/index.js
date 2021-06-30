@@ -4,13 +4,16 @@ import { getLighterColor } from "../Base/ColorBlender";
 import styles from "./styles.module.css";
 
 const DropDown = (props) => {
+  const emptyFunc = () => {};
+  const { onChange = emptyFunc, items = [] } = props;
+
   const [focus, setFocus] = useState(false);
 
   const handleOnChange = (e) => {
     if (props.preventDefault) {
       e.preventDefault();
     }
-    props.onChange(props.id, e.target.value);
+    onChange(props.id, e.target.value);
   };
 
   const getItems = () => {
@@ -21,7 +24,7 @@ const DropDown = (props) => {
 
     if (props.mapValueTo) value = props.mapValueTo;
 
-    return props.items.map((el, i) => {
+    return items.map((el, i) => {
       return (
         <option key={i} value={el[value]}>
           {el[name]}

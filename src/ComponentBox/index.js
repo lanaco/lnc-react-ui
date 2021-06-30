@@ -3,22 +3,31 @@ import styles from "./styles.module.css";
 import IconButton from "../IconButton/index.js";
 
 function ComponentBox(props) {
-  const { basic = false, open, zIndex = 10000 } = props;
+  const emptyFunc = () => {};
+
+  const {
+    basic = false,
+    open,
+    zIndex = 10000,
+    componentBoxList = [],
+    addComponentBox = emptyFunc,
+    closeComponentBox = emptyFunc,
+  } = props;
 
   let componentBox = !basic
-    ? props.componentBoxList.find((x) => {
+    ? componentBoxList.find((x) => {
         return x.ID === props.id;
       })
     : undefined;
 
   useEffect(() => {
-    if (!basic) props.addComponentBox(props.id);
+    if (!basic) addComponentBox(props.id);
   });
 
   const handleDialogClose = () => {
     props.handleDialogClose !== undefined
       ? props.handleDialogClose()
-      : props.closeComponentBox(props.id);
+      : closeComponentBox(props.id);
   };
 
   const handleClickOutsideModal = (e) => {
