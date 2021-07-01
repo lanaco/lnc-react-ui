@@ -11,7 +11,11 @@ const Icon = (props) => {
 
   return (
     <span
-      className={styles.iconSpanIcon}
+      className={
+        props.iconSpanCssClass
+          ? [styles.iconSpanIcon, props.iconSpanCssClass].join(" ")
+          : styles.iconSpanIcon
+      }
       title={props.tooltipText}
       disabled={props.disabled}
     >
