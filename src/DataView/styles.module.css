@@ -261,3 +261,8 @@
 .innerPaginationContainer {
   display: flex;
 }
+
+.dirtyInfoButton {
+  width: 100%;
+  height: 100%;
+}
