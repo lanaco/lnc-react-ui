@@ -139,8 +139,16 @@ const PasswordInput = (props) => {
           <i
             className={
               locked
-                ? [baseStyles.lnc, baseStyles["lnc_eye_no"]].join(" ")
-                : [baseStyles.lnc, baseStyles["lnc_eye"]].join(" ")
+                ? [
+                    baseStyles.lnc,
+                    baseStyles["lnc_eye_no"],
+                    styles.additionalIconStyle,
+                  ].join(" ")
+                : [
+                    baseStyles.lnc,
+                    baseStyles["lnc_eye"],
+                    styles.additionalIconStyle,
+                  ].join(" ")
             }
           />
         </span>
