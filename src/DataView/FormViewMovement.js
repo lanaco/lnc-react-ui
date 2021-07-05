@@ -100,6 +100,7 @@ const FormViewMovement = (props) => {
             onClick={() => {}}
             disabled={false}
             tooltipText={Localization.Dirty}
+            inputCssClass={styles.dirtyInfoButton}
           ></IconButton>
         ) : (
           ""
