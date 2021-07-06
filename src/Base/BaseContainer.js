@@ -43,8 +43,8 @@ const BaseContainer = (props) => {
         </div>
       ) : (
         <React.Fragment>
-          <div>{props.children}</div>
-          <div
+          {props.children}
+          <label
             className={
               props.errorTextCssClass
                 ? [baseStyles.baseErrorText, props.errorTextCssClass].join(" ")
@@ -52,7 +52,7 @@ const BaseContainer = (props) => {
             }
           >
             {props.errorText}
-          </div>
+          </label>
         </React.Fragment>
       )}
     </div>
