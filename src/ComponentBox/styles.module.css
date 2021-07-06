@@ -52,9 +52,14 @@
 
 .table {
   display: table;
+  padding-left: 10px;
 }
 
 .tableCell {
   display: table-cell;
   vertical-align: top;
+}
+
+.closeButtonPadding {
+  padding-right: 10px;
 }

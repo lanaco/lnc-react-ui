@@ -45,7 +45,11 @@ const IconButton = (props) => {
       >
         <span>
           <i
-            className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}
+            className={[
+              baseStyles.lnc,
+              baseStyles[iconClassName],
+              styles.iconCssClass,
+            ].join(" ")}
           ></i>
         </span>
       </button>
@@ -66,7 +70,11 @@ const IconButton = (props) => {
       >
         <span>
           <i
-            className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}
+            className={[
+              baseStyles.lnc,
+              baseStyles[iconClassName],
+              props.iconCssClass,
+            ].join(" ")}
           ></i>
         </span>
       </button>
