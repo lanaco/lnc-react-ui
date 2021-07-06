@@ -18,8 +18,14 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 .yesAndNoButton {
   min-width: 100px;
+}
+
+.maxWidth {
+  width: 100%;
 }
