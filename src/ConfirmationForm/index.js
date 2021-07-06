@@ -26,12 +26,14 @@ const ConfirmationForm = (props) => {
             label={props.textYes}
             accentColor={props.accentColor}
             inputCssClass={styles.yesAndNoButton}
+            baseContainerCssClass={styles.maxWidth}
           />
           <Button
             onClick={refuseFunction}
             label={props.textNo}
             accentColor={props.accentColor}
             inputCssClass={styles.yesAndNoButton}
+            baseContainerCssClass={styles.maxWidth}
           />
         </div>
       </section>

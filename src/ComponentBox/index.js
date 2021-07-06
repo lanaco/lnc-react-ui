@@ -92,6 +92,7 @@ function ComponentBox(props) {
                   ignorePermission={true}
                   iconClassName={props.closeIconClassName}
                   onClick={handleDialogClose}
+                  iconCssClass={styles.closeButtonPadding}
                 />
               )}
             </div>
