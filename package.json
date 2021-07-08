@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "component library",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -9,7 +9,8 @@
     "start": "start-storybook -p 6006",
     "clean": "rimraf lib", 
     "build-storybook": "build-storybook",
-    "build": "npm run clean && rollup -c"
+    "build": "npm run clean && rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "stroybook",
