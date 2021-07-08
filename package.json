@@ -2,7 +2,6 @@
   "name": "@lanaco/lnc-react-ui",
   "version": "1.0.9",
   "description": "component library",
-  "repository": "lanaco/lnc-react-ui",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "scripts": {
