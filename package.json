@@ -1,14 +1,16 @@
 {
-  "name": "lnc-react-ui",
+  "name": "@lanaco/lnc-react-ui",
   "version": "1.0.0",
   "description": "component library",
+  "repository": "lanaco/lnc-react-ui",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "start-storybook -p 6006",
+    "clean": "rimraf lib", 
     "build-storybook": "build-storybook",
-    "build": "rollup -c"
+    "build": "npm run clean && rollup -c"
   },
   "keywords": [
     "stroybook",
@@ -38,6 +40,7 @@
     "eslint-plugin-react": "^7.24.0",
     "path": "^0.12.7",
     "postcss": "^8.3.5",
+    "rimraf": "^3.0.2",
     "rollup": "^2.52.7",
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
