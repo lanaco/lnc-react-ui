@@ -17,5 +17,6 @@ yarn-error.log*
 
 src
 rollup.config.js
-.eslint.json
+.eslintrc.json
 .babelrc
+.github
