@@ -16,7 +16,7 @@
     "react",
     "ui"
   ],
-  "author": "Lanaco",
+  "author": "lanaco",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.14.6",
