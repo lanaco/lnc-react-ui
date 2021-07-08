@@ -9,7 +9,8 @@
     "start": "start-storybook -p 6006",
     "clean": "rimraf lib", 
     "build-storybook": "build-storybook",
-    "build": "npm run clean && rollup -c"
+    "build": "npm run clean && rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "stroybook",
