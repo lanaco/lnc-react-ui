@@ -1,13 +1,13 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "component library",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "start-storybook -p 6006",
-    "clean": "rimraf lib", 
+    "clean": "rimraf lib",
     "build-storybook": "build-storybook",
     "build": "npm run clean && rollup -c",
     "prepublishOnly": "npm run build"
