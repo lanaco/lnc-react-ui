@@ -73,6 +73,18 @@ const NumberInput = (props) => {
     }
   };
 
+  const handleContainerFocus = (e) => {
+    if (props.onFocus) {
+      props.onFocus(e);
+    }
+  };
+
+  const handleContainerBlur = (e) => {
+    if (props.onBlur) {
+      props.onBlur(e);
+    }
+  };
+
   if (props.accentColor) {
     const style = {
       backgroundColor: focus
@@ -82,7 +94,11 @@ const NumberInput = (props) => {
     };
 
     return (
-      <BaseContainer {...props}>
+      <BaseContainer
+        {...props}
+        handleContainerBlur={handleContainerBlur}
+        handleContainerFocus={handleContainerFocus}
+      >
         <input
           type="text"
           value={val ? val : ""}
@@ -106,7 +122,11 @@ const NumberInput = (props) => {
   }
 
   return (
-    <BaseContainer {...props}>
+    <BaseContainer
+      {...props}
+      handleContainerBlur={handleContainerBlur}
+      handleContainerFocus={handleContainerFocus}
+    >
       <input
         type="text"
         value={val ? val : ""}

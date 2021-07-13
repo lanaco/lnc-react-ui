@@ -61,7 +61,6 @@ const Button = (props) => {
             ) : (
               ""
             )}
-            &nbsp;
             {iconClassName !== "" ? (
               <i
                 className={[baseStyles.lnc, baseStyles[iconClassName]].join(
@@ -92,7 +91,6 @@ const Button = (props) => {
       >
         <span>
           {props.label && props.label !== "" ? <span>{props.label}</span> : ""}
-          &nbsp;
           {iconClassName !== "" ? (
             <i
               className={[baseStyles.lnc, baseStyles[iconClassName]].join(" ")}

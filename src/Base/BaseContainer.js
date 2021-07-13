@@ -17,6 +17,8 @@ const BaseContainer = (props) => {
       className={
         props.useSideLabel ? baseContainerWithSideLabel : baseContainerClass
       }
+      onFocus={props.handleContainerFocus}
+      onBlur={props.handleContainerBlur}
     >
       <label
         className={
