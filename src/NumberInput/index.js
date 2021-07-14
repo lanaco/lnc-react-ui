@@ -43,6 +43,11 @@ const NumberInput = (props) => {
     }
   };
 
+  let decimalSeparator =
+    props.decimalSeparator !== undefined && props.decimalSeparator.length === 1
+      ? props.decimalSeparator
+      : ".";
+
   let numberOfDecimalPlaces =
     props.numberOfDecimalPlaces !== undefined ? props.numberOfDecimalPlaces : 2;
 
@@ -55,16 +60,17 @@ const NumberInput = (props) => {
     ) {
       return;
     }
-    if (!/^\d*\.?\d*$/.test(ch)) {
+    var regex = new RegExp("^\\d*\\" + decimalSeparator + "?\\d*$");
+    if (!regex.test(ch)) {
       evt.preventDefault();
     } else {
-      if ("." === ch) {
-        if (oldValue.includes(".")) {
+      if (decimalSeparator === ch) {
+        if (oldValue.includes(decimalSeparator)) {
           evt.preventDefault();
         }
       } else {
-        if (oldValue.includes(".")) {
-          var numOfDecimalPlaces = oldValue.split(".")[1].length;
+        if (oldValue.includes(decimalSeparator)) {
+          var numOfDecimalPlaces = oldValue.split(decimalSeparator)[1].length;
           if (numOfDecimalPlaces >= numberOfDecimalPlaces) {
             evt.preventDefault();
           }
