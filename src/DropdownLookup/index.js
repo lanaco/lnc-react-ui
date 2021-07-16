@@ -29,8 +29,6 @@ const DropdownLookup = (props) => {
 
   const previousInitialValue = usePrevious(props.initialValue);
 
-  let cssThemeClass = {};
-
   useEffect(() => {
     if (
       props.namespace === "" ||
@@ -162,7 +160,7 @@ const DropdownLookup = (props) => {
             type={"text"}
             value={value ?? ""}
             onChange={onTextChange}
-            className={`${styles.standardInput} ${cssThemeClass}`}
+            className={styles.standardInput}
             disabled={props.disabled}
             title={props.tooltipText}
             style={style}
@@ -197,7 +195,7 @@ const DropdownLookup = (props) => {
           type={"text"}
           value={value ?? ""}
           onChange={onTextChange}
-          className={`${styles.standardInput} ${cssThemeClass}`}
+          className={styles.standardInput}
           disabled={props.disabled}
           title={props.tooltipText}
           onBlur={onBlur}
