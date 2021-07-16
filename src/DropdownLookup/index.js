@@ -175,11 +175,23 @@ const DropdownLookup = (props) => {
               inFocus ? styles.clearInputSpanInFocus : styles.clearInputSpan
             }
           >
-            <IconButton
-              iconClassName={props.closeIconClassName}
-              onClick={onClearSelection}
-              style={style}
-            ></IconButton>
+            {State.Loading === false ? (
+              <IconButton
+                iconClassName={props.closeIconClassName}
+                onClick={onClearSelection}
+                disabled={props.disabled}
+                iconCssClass={styles.closeButtonPadding}
+                inputCssClass={styles.closeAndReloadButtonPadding}
+              ></IconButton>
+            ) : (
+              <IconButton
+                iconClassName={props.closeAndReloadButtonPadding}
+                onClick={onClearSelection}
+                disabled={props.disabled}
+                iconCssClass={styles.closeAndReloadButtonPadding}
+                inputCssClass={styles.closeAndReloadButtonPadding}
+              ></IconButton>
+            )}
           </span>
         </div>
         {renderSuggestions()}
@@ -214,12 +226,16 @@ const DropdownLookup = (props) => {
               iconClassName={props.closeIconClassName}
               onClick={onClearSelection}
               disabled={props.disabled}
+              iconCssClass={styles.closeAndReloadButtonPadding}
+              inputCssClass={styles.closeAndReloadButtonPadding}
             ></IconButton>
           ) : (
             <IconButton
               iconClassName={props.reloadIconClassName}
               onClick={onClearSelection}
               disabled={props.disabled}
+              iconCssClass={styles.closeAndReloadButtonPadding}
+              inputCssClass={styles.closeAndReloadButtonPadding}
             ></IconButton>
           )}
         </span>

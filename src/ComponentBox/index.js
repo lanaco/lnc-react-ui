@@ -93,6 +93,7 @@ function ComponentBox(props) {
                   iconClassName={props.closeIconClassName}
                   onClick={handleDialogClose}
                   iconCssClass={styles.closeButtonPadding}
+                  inputCssClass={styles.closeButtonPadding}
                 />
               )}
             </div>
