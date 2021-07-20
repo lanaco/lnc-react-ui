@@ -48,7 +48,7 @@ const IconButton = (props) => {
             className={[
               baseStyles.lnc,
               baseStyles[iconClassName],
-              styles.iconCssClass,
+              props.iconCssClass,
             ].join(" ")}
           ></i>
         </span>

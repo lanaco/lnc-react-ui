@@ -29,8 +29,6 @@ const DropdownLookup = (props) => {
 
   const previousInitialValue = usePrevious(props.initialValue);
 
-  let cssThemeClass = {};
-
   useEffect(() => {
     if (
       props.namespace === "" ||
@@ -162,7 +160,7 @@ const DropdownLookup = (props) => {
             type={"text"}
             value={value ?? ""}
             onChange={onTextChange}
-            className={`${styles.standardInput} ${cssThemeClass}`}
+            className={styles.standardInput}
             disabled={props.disabled}
             title={props.tooltipText}
             style={style}
@@ -177,11 +175,23 @@ const DropdownLookup = (props) => {
               inFocus ? styles.clearInputSpanInFocus : styles.clearInputSpan
             }
           >
-            <IconButton
-              iconClassName={props.closeIconClassName}
-              onClick={onClearSelection}
-              style={style}
-            ></IconButton>
+            {State.Loading === false ? (
+              <IconButton
+                iconClassName={props.closeIconClassName}
+                onClick={onClearSelection}
+                disabled={props.disabled}
+                iconCssClass={styles.closeButtonPadding}
+                inputCssClass={styles.closeAndReloadButtonPadding}
+              ></IconButton>
+            ) : (
+              <IconButton
+                iconClassName={props.closeAndReloadButtonPadding}
+                onClick={onClearSelection}
+                disabled={props.disabled}
+                iconCssClass={styles.closeAndReloadButtonPadding}
+                inputCssClass={styles.closeAndReloadButtonPadding}
+              ></IconButton>
+            )}
           </span>
         </div>
         {renderSuggestions()}
@@ -197,7 +207,7 @@ const DropdownLookup = (props) => {
           type={"text"}
           value={value ?? ""}
           onChange={onTextChange}
-          className={`${styles.standardInput} ${cssThemeClass}`}
+          className={styles.standardInput}
           disabled={props.disabled}
           title={props.tooltipText}
           onBlur={onBlur}
@@ -216,12 +226,16 @@ const DropdownLookup = (props) => {
               iconClassName={props.closeIconClassName}
               onClick={onClearSelection}
               disabled={props.disabled}
+              iconCssClass={styles.closeAndReloadButtonPadding}
+              inputCssClass={styles.closeAndReloadButtonPadding}
             ></IconButton>
           ) : (
             <IconButton
               iconClassName={props.reloadIconClassName}
               onClick={onClearSelection}
               disabled={props.disabled}
+              iconCssClass={styles.closeAndReloadButtonPadding}
+              inputCssClass={styles.closeAndReloadButtonPadding}
             ></IconButton>
           )}
         </span>
