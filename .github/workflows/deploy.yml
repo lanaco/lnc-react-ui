@@ -16,7 +16,8 @@ jobs:
         run: |
           npm install
           npm run build-storybook
-
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
