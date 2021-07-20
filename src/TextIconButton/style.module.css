@@ -9,6 +9,7 @@
   background-color: white;
   cursor: pointer;
   padding: 6px 6px;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -19,16 +20,20 @@
   background-color: var(--color-base-blue);
 }
 
+/*----------------------*/
+
 .icon-button-btn-inverted:disabled {
   background-color: var(--color-base-gray);
   cursor: inherit;
   opacity: 0.5;
 }
 
-.icon-button-btn-inverted:hover {
+.icon-button-btn-inverted:hover:not([disabled]) {
   background-color: var(--color-base-blue-lighter);
   outline: none;
 }
+
+/*----------------------*/
 
 .icon-button-btn:disabled {
   color: var(--color-base-gray-darker);
@@ -36,22 +41,32 @@
   opacity: 0.5;
 }
 
-.icon-button-btn:hover {
+.icon-button-btn:hover:not([disabled]) {
   background-color: var(--color-base-gray-lightest);
   outline: none;
 }
 
+/*----------------------*/
+
+.icon-button-text {
+  padding-left: 5px;
+}
+
+/*----------------------*/
+
 .icon-button-btn-s {
-  padding: 6px 6px;
+  padding: 5.2px 6px;
 }
 
 .icon-button-btn-m {
-  padding: 8px 8px;
+  padding: 7.2px 8px;
 }
 
 .icon-button-btn-l {
-  padding: 10px 10px;
+  padding: 9.2px 10px;
 }
+
+/*----------------------*/
 
 .icon-button-icon-s {
   font-size: 12px;
@@ -62,5 +77,19 @@
 }
 
 .icon-button-icon-l {
+  font-size: 20px;
+}
+
+/*----------------------*/
+
+.icon-button-text-s {
+  font-size: 12px;
+}
+
+.icon-button-text-m {
+  font-size: 16px;
+}
+
+.icon-button-text-l {
   font-size: 20px;
 }

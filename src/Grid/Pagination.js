@@ -60,7 +60,11 @@ const Pagination = (props) => {
   //======================== RENDER ==========================================
 
   const renderRowInformation = () => {
-    return <div className="pagination-item">{getShowingNumberOfRows()}</div>;
+    return (
+      <div className="pagination-item ubuntuFont">
+        {getShowingNumberOfRows()}
+      </div>
+    );
   };
 
   const renderCurrentPage = () => {
@@ -150,16 +154,14 @@ const Pagination = (props) => {
 
   return (
     <div className="pagination-container">
-      <span className="pagination-container-inner">
-        {renderRowInformation()}
-        {renderFirst()}
-        {renderPrevious()}
-        {renderCurrentPage()}
-        {renderNext()}
-        {renderLast()}
-        {renderPageSize()}
-      </span>
-      {renderExportButtons()}
+      {renderRowInformation()}
+      {renderFirst()}
+      {renderPrevious()}
+      {renderCurrentPage()}
+      {renderNext()}
+      {renderLast()}
+      {renderPageSize()}
+      {/* {renderExportButtons()} */}
     </div>
   );
 };

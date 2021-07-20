@@ -11,6 +11,7 @@ import FormMode from "../DataView/Constants/FormMode";
 import { freeze } from "../DataView/Helper/dataViewHelper";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
+import TextIconButton from "../TextIconButton/TextIconButton";
 
 const getDefaultState = () => {
   return {
@@ -1260,14 +1261,80 @@ const Grid = React.forwardRef((props, ref) => {
       return <></>;
 
     return (
-      <div className="dataview-flex-item">
-        <IconButton
-          tooltipText={Localization.Refresh || "Refresh"}
-          onClick={onRefresh}
-          disabled={freezeLoading()}
-          iconClassName="lnc-refresh"
-        ></IconButton>
-      </div>
+      <>
+        <div className="dataview-flex-item">
+          <TextIconButton
+            inverted={true}
+            text={Localization.Refresh || "Refresh"}
+            tooltipText={Localization.Refresh || "Refresh"}
+            onClick={onRefresh}
+            disabled={freezeLoading()}
+            iconClassName="lnc-refresh"
+            iconLocation={"left"}
+            size="s"
+          />
+        </div>
+        <div className="dataview-flex-item">
+          <TextIconButton
+            inverted={true}
+            text={Localization.Refresh || "Refresh"}
+            tooltipText={Localization.Refresh || "Refresh"}
+            onClick={onRefresh}
+            disabled={freezeLoading()}
+            iconClassName="lnc-refresh"
+            iconLocation={"right"}
+            size="s"
+          />
+        </div>
+        <div className="dataview-flex-item">
+          <TextIconButton
+            inverted={true}
+            text={Localization.Refresh || "Refresh"}
+            tooltipText={Localization.Refresh || "Refresh"}
+            onClick={onRefresh}
+            disabled={freezeLoading()}
+            iconClassName="lnc-refresh"
+            iconLocation={"left"}
+            size="m"
+          />
+        </div>
+        <div className="dataview-flex-item">
+          <TextIconButton
+            inverted={true}
+            text={Localization.Refresh || "Refresh"}
+            tooltipText={Localization.Refresh || "Refresh"}
+            onClick={onRefresh}
+            disabled={freezeLoading()}
+            iconClassName="lnc-refresh"
+            iconLocation={"right"}
+            size="m"
+          />
+        </div>
+        <div className="dataview-flex-item">
+          <TextIconButton
+            inverted={true}
+            text={Localization.Refresh || "Refresh"}
+            tooltipText={Localization.Refresh || "Refresh"}
+            onClick={onRefresh}
+            disabled={freezeLoading()}
+            iconClassName="lnc-refresh"
+            iconLocation={"left"}
+            size="l"
+          />
+        </div>
+        <div className="dataview-flex-item">
+          <TextIconButton
+            inverted={true}
+            text={Localization.Refresh || "Refresh"}
+            tooltipText={Localization.Refresh || "Refresh"}
+            onClick={onRefresh}
+            disabled={freezeLoading()}
+            iconClassName="lnc-refresh"
+            iconLocation={"right"}
+            size="l"
+          />
+        </div>
+      </>
     );
   };
 

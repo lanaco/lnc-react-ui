@@ -1,3 +1,7 @@
+.grid-icon-button {
+  font-size: 0.8em;
+}
+
 /*================== FORM MOVE  =================*/
 
 .FlexContainer {
@@ -70,6 +74,7 @@
 }
 
 .dataview-container {
+  font-family: var(--font-base-ubuntu);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -105,6 +110,7 @@
   align-content: center;
   align-items: center;
   box-shadow: 0 0 20px #bebebe;
+  padding: 2px;
 }
 
 .dataview-form-container {
@@ -115,8 +121,8 @@
 }
 
 .dataview-flex-item {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 3px;
+  padding-right: 4px;
   font-size: 1.4em;
   max-height: 40px;
 }
@@ -191,16 +197,18 @@
 /*================== PAGINATION  =================*/
 
 .pagination-container {
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left; */
   display: flex;
   flex-direction: row;
-  font-size: 0.8em;
-  display: flex;
+  justify-content: left;
   align-items: center;
-  justify-content: space-between;
 }
 
 .pagination-item {
-  padding-left: 10px;
+  padding-left: 6px;
   display: flex;
   align-items: center;
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import baseStyles from "../Base/styles.module.css";
 import PropTypes from "prop-types";
-import styles from "./styles.module.css";
+import styles from "./style.module.css";
 
-const IconButton = (props) => {
+const TextIconButton = (props) => {
   const {
     id,
     onClick,
@@ -14,6 +14,8 @@ const IconButton = (props) => {
     iconClassName,
     size,
     inverted,
+    iconLocation,
+    text,
   } = props;
 
   let buttonProperties = {
@@ -47,6 +49,19 @@ const IconButton = (props) => {
       ].join(" ")}
       {...buttonProperties}
     >
+      {text && text !== "" && iconLocation === "right" ? (
+        <span
+          className={[
+            styles["icon-button-text"],
+            styles[`icon-button-text-${size}`],
+          ].join(" ")}
+        >
+          {text}
+        </span>
+      ) : (
+        <></>
+      )}
+
       <div
         className={[
           baseStyles["lnc"],
@@ -54,11 +69,24 @@ const IconButton = (props) => {
           styles[`icon-button-icon-${size}`],
         ].join(" ")}
       ></div>
+
+      {text && text !== "" && iconLocation === "left" ? (
+        <span
+          className={[
+            styles["icon-button-text"],
+            styles[`icon-button-text-${size}`],
+          ].join(" ")}
+        >
+          {text}
+        </span>
+      ) : (
+        <></>
+      )}
     </button>
   );
 };
 
-IconButton.defaultProps = {
+TextIconButton.defaultProps = {
   id: "",
   disabled: false,
   tooltipText: "",
@@ -68,9 +96,11 @@ IconButton.defaultProps = {
   preventDefault: true,
   size: "s",
   inverted: false,
+  iconLocation: "left",
+  text: "",
 };
 
-IconButton.propTypes = {
+TextIconButton.propTypes = {
   id: PropTypes.string,
   disabled: PropTypes.bool,
   tooltipText: PropTypes.string,
@@ -80,6 +110,8 @@ IconButton.propTypes = {
   preventDefault: PropTypes.bool,
   size: PropTypes.oneOf(["s", "m", "l"]),
   inverted: PropTypes.bool,
+  iconLocation: PropTypes.oneOf(["left", "right"]),
+  text: PropTypes.string,
 };
 
-export default IconButton;
+export default TextIconButton;
