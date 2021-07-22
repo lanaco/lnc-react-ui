@@ -27,9 +27,7 @@ const SearchBar = (props) => {
 
   //====== PROPS ======
 
-  const { onChange } = props;
-  const { filterProps } = props;
-  const { Localization, Icons } = props;
+  const { onChange, filterProps, Localization, Icons } = props;
 
   //====== LIFECYCLE ======
 
