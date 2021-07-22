@@ -1,0 +1,322 @@
+.Container {
+  /* display: flex;
+    justify-content: space-between; */
+}
+
+.inputAndCommandsContainer {
+  display: grid;
+  width: 100% !important;
+  background-color: white;
+  grid-template-columns: 0.05fr minmax(1px, max-content) auto;
+}
+
+.filterContainer {
+  display: flex;
+  overflow: auto;
+  overflow-y: hidden;
+}
+
+.filterContainerHidden {
+  display: hidden;
+}
+
+.Commands {
+  display: flex;
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  justify-content: space-around;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-left: 1px dashed gainsboro;
+  font-size: 1.3em;
+}
+
+.filtersAndCommandsHolder {
+  display: flex;
+  width: 100%;
+  font-size: 0.7em;
+  min-width: 20% !important;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1em;
+}
+
+.additionalFilterOptions {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px dashed gainsboro;
+}
+
+.iconHolder {
+  width: 20px;
+  color: gray;
+  text-align: center;
+}
+
+.iconHolderHidden {
+  display: none;
+}
+
+.Chips {
+  padding: 11px;
+  font-size: 1em;
+}
+
+.Chip {
+  height: 30px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.Search {
+  padding: 0;
+  border: none;
+  margin-left: 5px;
+  width: 100%;
+}
+
+.Input {
+  height: 30px;
+  border: none;
+}
+
+.Border {
+  border: 1px solid dimgray;
+  width: auto;
+}
+
+.QuickFilterInput {
+  width: 100%;
+  font-size: 1.3em;
+  line-height: 1.15;
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.dropdownContent {
+  display: none;
+  position: fixed;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 5px;
+  z-index: 99;
+}
+
+.showDropdown {
+  display: block;
+}
+
+.visibleX {
+  display: block;
+  font-size: 0.8em;
+  padding-right: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.iconSpan {
+  height: 100%;
+  width: 100%;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdownContent {
+  display: none;
+  position: fixed;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+  z-index: 99;
+  border: 0.8px transparent gray;
+  font-size: 1.2em;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.showDropdown {
+  display: inline-block;
+}
+
+.columnName {
+  background-color: var(--base-color);
+  color: white;
+  height: 100%;
+  width: 45%;
+  text-align: center;
+}
+
+.value {
+  height: 100%;
+  width: 45%;
+  text-align: center;
+  color: black;
+}
+
+.remove {
+  color: black;
+}
+
+.bubbleContent {
+  background-color: var(--input-bg-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7em;
+  height: 19px;
+  width: 100% !important;
+  border-radius: 15px;
+  width: 30ch;
+  min-width: 30ch;
+  /* padding-left: 5px; */
+  padding-right: 5px;
+  border: 1px solid var(--base-color);
+  overflow: hidden;
+  color: black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.bubbleContent:hover {
+  cursor: pointer;
+}
+
+.bgRemoveActive {
+  color: gray;
+}
+
+.bgActive {
+  color: gray;
+  /* border: 1px solid gray;; */
+}
+
+.bgNonActive {
+  background-color: #ebebeb;
+  color: gray;
+  border: 1px solid gray;
+}
+
+.bgColumnNameNonActive {
+  background-color: gray;
+  color: white;
+}
+
+.popoverContentContainer {
+  display: inline-block;
+  padding: 5px;
+}
+
+.filterItem {
+  display: flex;
+  flex-direction: row;
+}
+
+.p10 {
+  padding: 10px;
+}
+
+.itemsContainer {
+  display: inline-block;
+  position: relative;
+}
+
+.filterText {
+  display: inline-block;
+}
+
+.infoIcon {
+  font-size: 22px;
+  padding: 2.2px 0px 2.2px 0px;
+}
+
+.xIcon {
+  font-size: 18px;
+  padding: 4px 0px 3.3px 0px;
+}
+
+.container {
+  background-color: whitesmoke;
+  padding: 20px;
+}
+
+.flex {
+  display: flex;
+  padding: 10px;
+}
+
+.flexItem {
+  margin: 2px 5px 2px 0px;
+}
+
+.addAndSaveButton {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 11px 0;
+  padding-right: 10px;
+}
+
+.projectActivityScrollableGrid {
+  min-height: 10vh;
+  max-height: 25vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: inherit;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top: 1%;
+}
+
+.addButton {
+  padding: 5px 15px;
+}
+.containerItem {
+  display: grid;
+  grid-template-columns: 32% 32% 32% 4%;
+  width: 100%;
+}
+
+.item {
+  margin: 2px 5px 2px 0px;
+}
+
+.removeIcon {
+  display: flex;
+  flex-direction: row;
+}
+
+.deleteItemIcon {
+  font-weight: var(--button-icon-font-weight) !important;
+  color: var(--delete-button-icon-bg-color-primary);
+  height: 100%;
+  width: 100%;
+  font-size: 1.5em;
+}
+
+.link {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-size: 1.3em;
+  display: block;
+}
+
+.link:hover {
+  background-color: #ddd;
+}
+
+.linkActive {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-size: 1.3em;
+  display: block;
+  background-color: #ddd;
+}

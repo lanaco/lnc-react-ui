@@ -8,7 +8,7 @@ import { default as TablePagination } from "./Pagination";
 import { useImmer } from "use-immer";
 import { v4 as uuidv4 } from "uuid";
 import FormMode from "../DataView/Constants/FormMode";
-import { freeze } from "../DataView/Helper/dataViewHelper";
+import { freeze } from "../Helper/helper";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
 
