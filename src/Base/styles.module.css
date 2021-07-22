@@ -13,23 +13,6 @@
 }
 
 :root {
-  /* BASE */
-  --base-color: #00537a;
-  --base-hover-color: #0270a3;
-  --disabled-bg-color: #235d78;
-  --base-error-color: red;
-  --base-small-text-color: #545454;
-  --base-font-size: 1em;
-  --base-additional-text-font-size: 0.8em;
-  --base-label-size: 0.8em;
-  --base-error-text-size: 0.8em;
-  --icon-color: #3d3b36;
-
-  /* INPUTS */
-  --input-bg-color: #dceff5;
-  --input-bg-focus-color: #fefefe;
-  --transition-duration: 350ms;
-
   /* BASE COLORS */
   --color-base-blue: #00537a;
   --color-base-blue-darker: #003b57;
