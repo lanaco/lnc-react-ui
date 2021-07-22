@@ -1,0 +1,40 @@
+.buttonIconIconButton {
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  transition: all var(--transition-base-duration);
+  background-color: inherit;
+  background: inherit;
+  color: inherit;
+  margin: 1px;
+  border: 0px;
+  width: min-content;
+  height: min-content;
+}
+
+.buttonIconIconButton:hover,
+.buttonIconIconButton:focus {
+  background: radial-gradient(
+    var(--color-base-gray-lighter),
+    transparent,
+    transparent
+  );
+  outline: none;
+}
+
+.buttonIconIconButton:active {
+  background-color: transparent;
+  scale: 0.95;
+}
+
+.buttonIconIconButton:disabled {
+  color: var(--color-base-gray-darker);
+  cursor: inherit;
+  opacity: 0.5;
+}
+
+.buttonIconIconButton span {
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}

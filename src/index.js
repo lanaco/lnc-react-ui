@@ -36,3 +36,7 @@ export * from "./DropdownMenu";
 export { default as DropdownMenu } from "./DropdownMenu";
 export * from "./Grid";
 export { default as Grid } from "./Grid";
+export * from "./TagSelector";
+export { default as Grid } from "./TagSelector";
+export * from "./ItemCounter";
+export { default as Grid } from "./ItemCounter";
