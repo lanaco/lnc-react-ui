@@ -36,3 +36,5 @@ export * from "./DropdownMenu";
 export { default as DropdownMenu } from "./DropdownMenu";
 export * from "./Grid";
 export { default as Grid } from "./Grid";
+export * from "./SearchBar";
+export { default as SearchBar } from "./SearchBar";
