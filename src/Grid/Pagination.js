@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import DropDown from "../DropDown/index";
 import IconButton from "../IconButton/index";
 import { freeze } from "../DataView/Helper/dataViewHelper";
-import "./style.css";
+import style from "./style.module.css";
 
 const Pagination = (props) => {
   //======================== PROPS ============================================
@@ -61,19 +61,21 @@ const Pagination = (props) => {
 
   const renderRowInformation = () => {
     return (
-      <div className="pagination-item ubuntuFont">
+      <div
+        className={[style["pagination-item"], style["ubuntuFont"]].join(" ")}
+      >
         {getShowingNumberOfRows()}
       </div>
     );
   };
 
   const renderCurrentPage = () => {
-    return <div className="pagination-item">{CurrentPage}</div>;
+    return <div className={style["pagination-item"]}>{CurrentPage}</div>;
   };
 
   const renderFirst = () => {
     return (
-      <div className="pagination-item">
+      <div className={style["pagination-item"]}>
         <IconButton
           iconClassName="lnc-left-double"
           onClick={() => goToFirstPage(PageSize, CurrentPage)}
@@ -86,7 +88,7 @@ const Pagination = (props) => {
 
   const renderPrevious = () => {
     return (
-      <div className="pagination-item">
+      <div className={style["pagination-item"]}>
         <IconButton
           iconClassName="lnc-left"
           onClick={() => goToPreviousPage(PageSize, CurrentPage)}
@@ -99,7 +101,7 @@ const Pagination = (props) => {
 
   const renderNext = () => {
     return (
-      <div className="pagination-item">
+      <div className={style["pagination-item"]}>
         <IconButton
           iconClassName="lnc-right"
           onClick={() => goToNextPage(PageSize, CurrentPage)}
@@ -112,7 +114,7 @@ const Pagination = (props) => {
 
   const renderLast = () => {
     return (
-      <div className="pagination-item">
+      <div className={style["pagination-item"]}>
         <IconButton
           iconClassName="lnc-right-double"
           onClick={() => goToLastPage(PageSize, CurrentPage)}
@@ -125,7 +127,7 @@ const Pagination = (props) => {
 
   const renderPageSize = () => {
     return (
-      <div className="pagination-item">
+      <div className={style["pagination-item"]}>
         <DropDown
           items={getPageSizes()}
           value={PageSize}
@@ -141,7 +143,7 @@ const Pagination = (props) => {
     if (!EnableExports) return <></>;
 
     return (
-      <span className="export-buttons">
+      <span className={style["export-buttons"]}>
         <IconButton
           tooltipText={Localization.ExportToExcel}
           onClick={exportToExcel}
@@ -153,7 +155,7 @@ const Pagination = (props) => {
   };
 
   return (
-    <div className="pagination-container">
+    <div className={style["pagination-container"]}>
       {renderRowInformation()}
       {renderFirst()}
       {renderPrevious()}

@@ -1,13 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import TextInput from '.';
+import TextInput from ".";
 
 export default {
-  title: 'TextInput',
+  title: "Text Input",
   component: TextInput,
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
 };
 
 const Template = (args) => <TextInput {...args} />;

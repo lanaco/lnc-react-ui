@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "start-storybook -p 6006",
-    "clean": "rimraf lib", 
+    "clean": "rimraf lib",
     "build-storybook": "build-storybook",
     "build": "npm run clean && rollup -c",
     "prepublishOnly": "npm run build"
@@ -51,6 +51,7 @@
   "peerDependencies": {},
   "dependencies": {
     "immer": "^9.0.3",
+    "lodash.debounce": "^4.0.8",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-datepicker": "^4.1.1",

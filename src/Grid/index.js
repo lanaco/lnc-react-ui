@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
+import style from "./style.module.css";
 import FormMovement from "./FormMovement";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import Table from "./Table";
@@ -11,7 +11,7 @@ import FormMode from "../DataView/Constants/FormMode";
 import { freeze } from "../DataView/Helper/dataViewHelper";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
-import TextIconButton from "../TextIconButton/TextIconButton";
+import TextIconButton from "../TextIconButton";
 
 const getDefaultState = () => {
   return {
@@ -660,24 +660,24 @@ const Grid = React.forwardRef((props, ref) => {
       state.Form.Mode === FormMode.EDIT &&
       state.Options.EnableEdit
     )
-      className += " edit-form-border ";
+      className += style["edit-form-border"] + " ";
 
     if (
       !state.Form.Dirty &&
       state.Form.Mode === FormMode.EDIT &&
       state.Options.EnableEdit
     )
-      className += " success-form-border ";
+      className += style["success-form-border"] + " ";
 
     if (state.Form.Mode === FormMode.READ) {
-      className += " disabled-children ";
+      className += style["disabled-children"] + " ";
     }
 
     if (state.Form.Mode === FormMode.ADD) {
-      className += " default-form-border ";
+      className += style["default-form-border"] + " ";
     }
 
-    return "dataview-form-container " + className;
+    return style["dataview-form-container"] + " " + className;
   };
 
   const toggleDeleteConfirmationBox = () => {
@@ -1198,9 +1198,9 @@ const Grid = React.forwardRef((props, ref) => {
   const renderDeveloperMessages = () => {
     if (errors.length > 0 && props.Developer)
       return (
-        <div className="developer-messages-container">
+        <div className={style["developer-messages-container"]}>
           {errors.map((x, i) => (
-            <div key={i} className="developer-message">
+            <div key={i} className={style["developer-message"]}>
               {x}
             </div>
           ))}
@@ -1221,8 +1221,8 @@ const Grid = React.forwardRef((props, ref) => {
       return <></>;
 
     return (
-      <div className="dataview-flex-item">
-        <IconButton
+      <div className={style["dataview-flex-item"]}>
+        <TextIconButton
           tooltipText={
             state.Form.Mode === FormMode.READ
               ? Localization.FormEditMode || "Edit mode"
@@ -1233,7 +1233,7 @@ const Grid = React.forwardRef((props, ref) => {
           iconClassName={
             state.Form.Mode === FormMode.READ ? "lnc-edit" : "lnc-eye"
           }
-        ></IconButton>
+        />
       </div>
     );
   };
@@ -1243,7 +1243,7 @@ const Grid = React.forwardRef((props, ref) => {
       return <></>;
     if (state.Options.EnableAdd && state.General.CurrentView !== "FormView")
       return (
-        <div className="dataview-flex-item">
+        <div className={style["dataview-flex-item"]}>
           <IconButton
             tooltipText={Localization.Add || "Add"}
             onClick={goToAdd}
@@ -1261,80 +1261,15 @@ const Grid = React.forwardRef((props, ref) => {
       return <></>;
 
     return (
-      <>
-        <div className="dataview-flex-item">
-          <TextIconButton
-            inverted={true}
-            text={Localization.Refresh || "Refresh"}
-            tooltipText={Localization.Refresh || "Refresh"}
-            onClick={onRefresh}
-            disabled={freezeLoading()}
-            iconClassName="lnc-refresh"
-            iconLocation={"left"}
-            size="s"
-          />
-        </div>
-        <div className="dataview-flex-item">
-          <TextIconButton
-            inverted={true}
-            text={Localization.Refresh || "Refresh"}
-            tooltipText={Localization.Refresh || "Refresh"}
-            onClick={onRefresh}
-            disabled={freezeLoading()}
-            iconClassName="lnc-refresh"
-            iconLocation={"right"}
-            size="s"
-          />
-        </div>
-        <div className="dataview-flex-item">
-          <TextIconButton
-            inverted={true}
-            text={Localization.Refresh || "Refresh"}
-            tooltipText={Localization.Refresh || "Refresh"}
-            onClick={onRefresh}
-            disabled={freezeLoading()}
-            iconClassName="lnc-refresh"
-            iconLocation={"left"}
-            size="m"
-          />
-        </div>
-        <div className="dataview-flex-item">
-          <TextIconButton
-            inverted={true}
-            text={Localization.Refresh || "Refresh"}
-            tooltipText={Localization.Refresh || "Refresh"}
-            onClick={onRefresh}
-            disabled={freezeLoading()}
-            iconClassName="lnc-refresh"
-            iconLocation={"right"}
-            size="m"
-          />
-        </div>
-        <div className="dataview-flex-item">
-          <TextIconButton
-            inverted={true}
-            text={Localization.Refresh || "Refresh"}
-            tooltipText={Localization.Refresh || "Refresh"}
-            onClick={onRefresh}
-            disabled={freezeLoading()}
-            iconClassName="lnc-refresh"
-            iconLocation={"left"}
-            size="l"
-          />
-        </div>
-        <div className="dataview-flex-item">
-          <TextIconButton
-            inverted={true}
-            text={Localization.Refresh || "Refresh"}
-            tooltipText={Localization.Refresh || "Refresh"}
-            onClick={onRefresh}
-            disabled={freezeLoading()}
-            iconClassName="lnc-refresh"
-            iconLocation={"right"}
-            size="l"
-          />
-        </div>
-      </>
+      <div className={style["dataview-flex-item"]}>
+        <TextIconButton
+          tooltipText={Localization.Refresh || "Refresh"}
+          onClick={onRefresh}
+          disabled={freezeLoading()}
+          iconClassName="lnc-refresh"
+          size="s"
+        />
+      </div>
     );
   };
 
@@ -1344,8 +1279,8 @@ const Grid = React.forwardRef((props, ref) => {
       state.Table.SelectionType === TableSelectionType.MULTIPLE
     )
       return (
-        <div className="dataview-flex-item">
-          <IconButton
+        <div className={style["dataview-flex-item"]}>
+          <TextIconButton
             tooltipText={Localization.TakeValues || "Take values"}
             onClick={() => {
               if (OnChange) OnChange(state.Table.SelectedData);
@@ -1391,13 +1326,13 @@ const Grid = React.forwardRef((props, ref) => {
       return <></>;
 
     return (
-      <div className="dataview-flex-item">
-        <IconButton
+      <div className={style["dataview-flex-item"]}>
+        <TextIconButton
           onClick={toggleDeleteConfirmationBox}
           disabled={freezeLoading([state.Table.SelectedData.length === 0])}
           tooltipText={Localization.DeleteSelected || "Delete selected"}
           iconClassName="lnc-trash"
-        ></IconButton>
+        />
       </div>
     );
   };
@@ -1407,13 +1342,13 @@ const Grid = React.forwardRef((props, ref) => {
       return <></>;
 
     return (
-      <div className="dataview-flex-item">
-        <IconButton
+      <div className={style["dataview-flex-item"]}>
+        <TextIconButton
           tooltipText={Localization.ToTableView || "Table view"}
           onClick={onSwitchToTableView}
           disabled={freezeLoading()}
           iconClassName="lnc-table"
-        ></IconButton>
+        />
       </div>
     );
   };
@@ -1468,31 +1403,35 @@ const Grid = React.forwardRef((props, ref) => {
     var id = state.General.IsLookup ? SelectedData.Identificator : "Guid";
 
     return (
-      <div className="dataview-table-container">
-        <Table
-          IsLoading={state.General.IsLoading}
-          Columns={state.Table.Columns}
-          Data={state.Table.Data}
-          OnRowClick={onTableRowClick}
-          //---------------------------------
-          Ordering={getOrderingConfig()}
-          Selection={{
-            SelectedData: state.Table.SelectedData,
-            SelectedEntirePage: state.Table.SelectedEntirePage,
-            SelectionIndicator: id,
-            OnSelection: onSelect,
-            OnSelectAll: onSelectAll,
-          }}
-          Options={{
-            IsLookup: state.General.IsLookup,
-            ReadOnly: state.Options.ReadOnly,
-            EnableSelection: state.Options.EnableSelection,
-            EnableOrdering: state.Options.EnableOrdering,
-            SelectionType: state.Table.SelectionType,
-          }}
-          Localization={Localization.TableView || {}}
-        />
-        {renderPagination()}
+      <div className={style["dataview-table-pagination-container"]}>
+        <div className={style["dataview-table-container"]}>
+          <Table
+            IsLoading={state.General.IsLoading}
+            Columns={state.Table.Columns}
+            Data={state.Table.Data}
+            OnRowClick={onTableRowClick}
+            //---------------------------------
+            Ordering={getOrderingConfig()}
+            Selection={{
+              SelectedData: state.Table.SelectedData,
+              SelectedEntirePage: state.Table.SelectedEntirePage,
+              SelectionIndicator: id,
+              OnSelection: onSelect,
+              OnSelectAll: onSelectAll,
+            }}
+            Options={{
+              IsLookup: state.General.IsLookup,
+              ReadOnly: state.Options.ReadOnly,
+              EnableSelection: state.Options.EnableSelection,
+              EnableOrdering: state.Options.EnableOrdering,
+              SelectionType: state.Table.SelectionType,
+            }}
+            Localization={Localization.TableView || {}}
+          />
+        </div>
+        <div className={style["dataview-pagination-container"]}>
+          {renderPagination()}
+        </div>
       </div>
     );
   };
@@ -1545,9 +1484,9 @@ const Grid = React.forwardRef((props, ref) => {
 
   return (
     <>
-      <div className="dataview-container">
+      <div className={style["dataview-container"]}>
         {renderDeleteConfirmationBox()}
-        <div className="dataview-container-inner">
+        <div className={style["dataview-container-inner"]}>
           {renderChangeToTableView()}
           {renderDeleteSelectedButton()}
           {renderGoToAddButton()}
@@ -1555,7 +1494,7 @@ const Grid = React.forwardRef((props, ref) => {
           {renderSwitchToEditModeButton()}
           {renderRefreshButton()}
           {renderLookupTakeValues()}
-          <div className="dataview-filter-container"></div>
+          <div className={style["dataview-filter-container"]}></div>
         </div>
         {renderTable()}
         {renderForm()}

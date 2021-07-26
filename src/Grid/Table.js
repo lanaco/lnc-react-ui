@@ -2,7 +2,7 @@ import React from "react";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import PropTypes from "prop-types";
 import Icon from "../Icon/index";
-import "./style.css";
+import style from "./style.module.css";
 
 const Table = (props) => {
   //======================== PROPS ============================================
@@ -70,7 +70,15 @@ const Table = (props) => {
     )
       return <></>;
 
-    return <td className="table-cell special-cell-render select-checkbox"></td>;
+    return (
+      <td
+        className={[
+          style["table-cell"],
+          style["special-cell-render"],
+          style["select-checkbox"],
+        ].join(" ")}
+      ></td>
+    );
   };
 
   const renderGroupBodyRows = (col, dataItem) => {
@@ -81,7 +89,10 @@ const Table = (props) => {
         return (
           <tr
             key={i + 100}
-            className={"table-row-group-by-nested table-row-odd"}
+            className={[
+              style["table-row-group-by-nested"],
+              style["table-row-odd"],
+            ].join(" ")}
           >
             {renderEmptySelectionCell()}
             {Columns.map((col, j) => {
@@ -98,12 +109,17 @@ const Table = (props) => {
   const renderBodyRow = (dataItem, i) => {
     var nested = Columns.find((x) => x.nested);
 
-    let eveOddClass = i % 2 === 0 ? " table-row-even " : " table-row-odd ";
-    if (nested) eveOddClass = " table-row-even ";
+    let eveOddClass =
+      i % 2 === 0
+        ? style["table-row-even"] + " "
+        : style["table-row-odd"] + " ";
+    if (nested) eveOddClass = style["table-row-even"] + " ";
 
     let rowSelected = isRowSelected(dataItem);
-    let selectedRowClass = rowSelected ? " selected-row " : "";
-    let tableRowClass = nested ? " table-row-group-by " : " table-row ";
+    let selectedRowClass = rowSelected ? style["selected-row"] + " " : "";
+    let tableRowClass = nested
+      ? style["table-row-group-by"] + " "
+      : style["table-row"] + " ";
 
     return (
       <>
@@ -139,12 +155,12 @@ const Table = (props) => {
       orderingIconClass = "lnc-arrow-down-up";
 
     return (
-      <th key={i} className="table-cell-header" onClick={onClick}>
-        <div className="table-cell-header-inner">
+      <th key={i} className={style["table-cell-header"]} onClick={onClick}>
+        <div className={style["table-cell-header-inner"]}>
           {col.name}
 
           {!hideOrdering ? (
-            <div className="header-cell-icon">
+            <div className={style["header-cell-icon"]}>
               <Icon iconClassName={orderingIconClass}></Icon>
             </div>
           ) : (
@@ -165,7 +181,11 @@ const Table = (props) => {
 
     return (
       <td
-        className="table-cell special-cell-render select-checkbox"
+        className={[
+          style["table-cell"],
+          style["special-cell-render"],
+          style["select-checkbox"],
+        ].join(" ")}
         onClick={() => {
           OnSelection(dataItem);
         }}
@@ -174,7 +194,7 @@ const Table = (props) => {
           type="checkbox"
           checked={selected}
           onChange={() => {}}
-          className="pointer"
+          className={style["pointer"]}
         ></input>
       </td>
     );
@@ -182,7 +202,7 @@ const Table = (props) => {
 
   const renderBodyCell = (dataItem, col, rowIndex, cellIndex) => {
     var tabIndex = rowIndex * Columns.length + cellIndex + 50;
-    var className = "table-cell";
+    var className = style["table-cell"];
 
     return (
       <td
@@ -216,14 +236,18 @@ const Table = (props) => {
       title = Localization.DeselectAll;
 
     return (
-      <th className="table-cell-header select-checkbox">
+      <th
+        className={[style["table-cell-header"], style["select-checkbox"]].join(
+          " "
+        )}
+      >
         {SelectionType === TableSelectionType.MULTIPLE ? (
           <input
             title={title}
             type="checkbox"
             checked={SelectedEntirePage}
             onChange={handleSelectAll}
-            className="pointer"
+            className={style["pointer"]}
           ></input>
         ) : (
           <></>
@@ -233,8 +257,8 @@ const Table = (props) => {
   };
 
   return (
-    <div className="table-container">
-      <table className="table">
+    <div className={style["table-container"]}>
+      <table className={style["table"]} cellSpacing={0}>
         <thead>
           <tr key={"header"}>
             {renderSelectAllHeaderCell()}

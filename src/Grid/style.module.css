@@ -71,6 +71,7 @@
 .table {
   width: 100%;
   position: relative;
+  border-collapse: collapse;
 }
 
 .dataview-container {
@@ -105,16 +106,21 @@
   }
 }
 
+.dataview-container {
+  box-shadow: 0 0 20px #bebebe;
+}
+
 .dataview-container-inner {
   display: flex;
   align-content: center;
   align-items: center;
-  box-shadow: 0 0 20px #bebebe;
+  /* box-shadow: 0 0 20px #bebebe; */
   padding: 2px;
+  border-bottom: 1px solid #ccc;
 }
 
 .dataview-form-container {
-  box-shadow: 0 0 20px #bebebe;
+  /* box-shadow: 0 0 20px #bebebe; */
   height: 100%;
   overflow-y: auto;
   max-height: calc(100vh - 120px);
@@ -127,8 +133,11 @@
   max-height: 40px;
 }
 
+.dataview-pagination-container {
+  border-top: 1px solid #ccc;
+}
+
 .dataview-table-container {
-  box-shadow: 0 0 20px #bebebe;
   height: 100%;
   overflow-y: auto;
   max-height: calc(100vh - 120px);
@@ -205,6 +214,7 @@
   flex-direction: row;
   justify-content: left;
   align-items: center;
+  max-height: 34px;
 }
 
 .pagination-item {
@@ -289,6 +299,10 @@
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
   border-top: 1px solid transparent;
+}
+
+.table-row:last-child {
+  border-bottom: 1px solid transparent;
 }
 
 .table-row-even {
@@ -448,4 +462,14 @@
 
 .lnc-table:before {
   content: "\e076";
+}
+
+/* ===================================== */
+
+.rowrow {
+}
+
+.rowrow td:hover {
+  border-top: 1px solid #003954;
+  border-bottom: 1px solid #003954;
 }

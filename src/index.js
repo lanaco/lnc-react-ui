@@ -36,3 +36,7 @@ export * from "./DropdownMenu";
 export { default as DropdownMenu } from "./DropdownMenu";
 export * from "./Grid";
 export { default as Grid } from "./Grid";
+export * from "./TextIconButton";
+export { default as TextIconButton } from "./TextIconButton";
+export * from "./NewTextInput";
+export { default as NewTextInput } from "./NewTextInput";
