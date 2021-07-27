@@ -40,3 +40,5 @@ export * from "./TagSelector";
 export { default as TagSelector } from "./TagSelector";
 export * from "./ItemCounter";
 export { default as ItemCounter } from "./ItemCounter";
+export * from "./SearchBar";
+export { default as SearchBar } from "./SearchBar";
