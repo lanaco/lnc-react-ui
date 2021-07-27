@@ -1,85 +1,40 @@
-import React, { useState } from "react";
-import baseStyles from "../Base/styles.module.css";
+import React from "react";
 import styles from "./styles.module.css";
+import ItemCounterTypes from "./ItemCounterTypes";
 
-const IconButton = (props) => {
-  const emptyFunc = () => {};
+const ItemCounter = (props) => {
+  const { Items = [], ContainerWrapperClassName = "" } = props;
 
-  const { onClick = emptyFunc } = props;
-
-  let iconClassName = "";
-
-  const [hover, setHover] = useState(false);
-
-  if (props.iconClassName && props.iconClassName !== "") {
-    iconClassName = props.iconClassName.replaceAll("-", "_");
-  }
-
-  const handleOnClick = (e) => {
-    if (props.preventDefault) {
-      e.preventDefault();
-    }
-    onClick(props.id, e.target.value);
+  const getClassForType = (typeCode) => {
+    if (typeCode === ItemCounterTypes.Success.code) return styles.success;
+    else if (typeCode === ItemCounterTypes.Danger.code) return styles.danger;
+    else if (typeCode === ItemCounterTypes.Warning.code) return styles.warning;
   };
 
-  if (props.accentColor) {
-    const styleForHover = {
-      background:
-        "radial-gradient(" + props.accentColor + ", transparent, transparent)",
-      outline: "none",
-    };
-
+  if (Items) {
     return (
-      <button
-        onClick={handleOnClick}
+      <div
         className={
-          props.inputCssClass
-            ? [styles.buttonIconIconButton, props.inputCssClass].join(" ")
-            : styles.buttonIconIconButton
+          ContainerWrapperClassName
+            ? [styles.ContainerWrapper, ContainerWrapperClassName].join(" ")
+            : styles.ContainerWrapper
         }
-        disabled={props.disabled}
-        title={props.tooltipText}
-        style={hover ? styleForHover : {}}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
       >
-        <span>
-          <i
-            className={[
-              baseStyles.lnc,
-              baseStyles[iconClassName],
-              props.iconCssClass,
-            ].join(" ")}
-          ></i>
-        </span>
-      </button>
+        {Items.map((item, i) => (
+          <div className={styles.container} key={i}>
+            <div
+              className={styles.number + " " + getClassForType(item.Type.code)}
+            >
+              {item.Number}
+            </div>
+            <div className={styles.number}># of {item.Description}</div>
+          </div>
+        ))}
+      </div>
     );
+  } else {
+    return <div />;
   }
-
-  return (
-    <div>
-      <button
-        onClick={handleOnClick}
-        className={
-          props.inputCssClass
-            ? [styles.buttonIconIconButton, props.inputCssClass].join(" ")
-            : styles.buttonIconIconButton
-        }
-        disabled={props.disabled}
-        title={props.tooltipText}
-      >
-        <span>
-          <i
-            className={[
-              baseStyles.lnc,
-              baseStyles[iconClassName],
-              props.iconCssClass,
-            ].join(" ")}
-          ></i>
-        </span>
-      </button>
-    </div>
-  );
 };
 
-export default IconButton;
+export default ItemCounter;

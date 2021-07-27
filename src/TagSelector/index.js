@@ -1,85 +1,35 @@
-import React, { useState } from "react";
-import baseStyles from "../Base/styles.module.css";
+import React from "react";
 import styles from "./styles.module.css";
+import TagItem from "./TagItem";
 
-const IconButton = (props) => {
+const TagSelector = (props) => {
   const emptyFunc = () => {};
 
-  const { onClick = emptyFunc } = props;
+  const {
+    tagsData = [],
+    toggleTagSelection = emptyFunc,
+    selectedTags = [],
+    disabled = false,
+  } = props;
 
-  let iconClassName = "";
-
-  const [hover, setHover] = useState(false);
-
-  if (props.iconClassName && props.iconClassName !== "") {
-    iconClassName = props.iconClassName.replaceAll("-", "_");
-  }
-
-  const handleOnClick = (e) => {
-    if (props.preventDefault) {
-      e.preventDefault();
-    }
-    onClick(props.id, e.target.value);
+  const calculateSelectionForTag = (tagId) => {
+    return selectedTags.find((item) => item === tagId) ? true : false;
   };
 
-  if (props.accentColor) {
-    const styleForHover = {
-      background:
-        "radial-gradient(" + props.accentColor + ", transparent, transparent)",
-      outline: "none",
-    };
+  const calculateTagItems = () => {
+    return tagsData.map((tag, i) => (
+      <TagItem
+        key={i}
+        text={tag.code}
+        id={tag.id}
+        toggleTagSelection={toggleTagSelection}
+        selected={calculateSelectionForTag(tag.id)}
+        disabled={disabled}
+      />
+    ));
+  };
 
-    return (
-      <button
-        onClick={handleOnClick}
-        className={
-          props.inputCssClass
-            ? [styles.buttonIconIconButton, props.inputCssClass].join(" ")
-            : styles.buttonIconIconButton
-        }
-        disabled={props.disabled}
-        title={props.tooltipText}
-        style={hover ? styleForHover : {}}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-        <span>
-          <i
-            className={[
-              baseStyles.lnc,
-              baseStyles[iconClassName],
-              props.iconCssClass,
-            ].join(" ")}
-          ></i>
-        </span>
-      </button>
-    );
-  }
-
-  return (
-    <div>
-      <button
-        onClick={handleOnClick}
-        className={
-          props.inputCssClass
-            ? [styles.buttonIconIconButton, props.inputCssClass].join(" ")
-            : styles.buttonIconIconButton
-        }
-        disabled={props.disabled}
-        title={props.tooltipText}
-      >
-        <span>
-          <i
-            className={[
-              baseStyles.lnc,
-              baseStyles[iconClassName],
-              props.iconCssClass,
-            ].join(" ")}
-          ></i>
-        </span>
-      </button>
-    </div>
-  );
+  return <div className={styles.tagSelector}>{calculateTagItems()}</div>;
 };
 
-export default IconButton;
+export default TagSelector;

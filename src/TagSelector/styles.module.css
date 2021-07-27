@@ -1,40 +1,48 @@
-.buttonIconIconButton {
-  -webkit-appearance: none;
-  appearance: none;
-  outline: none;
-  transition: all var(--transition-base-duration);
-  background-color: inherit;
-  background: inherit;
-  color: inherit;
-  margin: 1px;
-  border: 0px;
-  width: min-content;
-  height: min-content;
-}
-
-.buttonIconIconButton:hover,
-.buttonIconIconButton:focus {
-  background: radial-gradient(
-    var(--color-base-gray-lighter),
-    transparent,
-    transparent
-  );
-  outline: none;
-}
-
-.buttonIconIconButton:active {
-  background-color: transparent;
-  scale: 0.95;
-}
-
-.buttonIconIconButton:disabled {
-  color: var(--color-base-gray-darker);
-  cursor: inherit;
-  opacity: 0.5;
-}
-
-.buttonIconIconButton span {
-  align-items: center;
-  text-align: center;
+.tagItemButton {
   width: 100%;
+  height: 100%;
+  display: inline-block;
+  font-style: italic;
+  color: black;
+  text-align: center;
+}
+
+.tagItemButton:hover {
+  background-color: #fff2ee;
+}
+
+.tagItemWrapper {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  font-style: italic;
+  border: black;
+}
+
+.selectedItem {
+  color: var(--base-color);
+  background-color: #fff2cc;
+  width: 100%;
+  height: 100%;
+  font-style: italic;
+}
+
+.selectedItem:active {
+  outline: none;
+}
+
+.selectedItem:focus {
+  outline: none;
+}
+
+.selectedItem:focus {
+  outline: none;
+}
+
+.tagSelector {
+  width: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
