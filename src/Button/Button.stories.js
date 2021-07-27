@@ -1,36 +1,66 @@
-import React from 'react';
+import React from "react";
+import Button from ".";
 
-import Button from '.';
 
 export default {
-  title: 'Buttonn',
+  title: "Button",
   component: Button,
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
+  argTypes: {
+    bgColor: { control: "color" },
+    textColor: { control: "color" },
+  },
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => (
+  <p>
+    <Button {...args} />
+  </p>
+);
 
-export const Primary = Template.bind({});
-Primary.args = {
-  label: 'Button',
-  onClick: undefined
+export const JustText = Template.bind({});
+JustText.args = {
+  text: "Button",
+  tooltipText: "Button",
+  onClick: () => {},
+  bgColor: "#00537a",
+  textColor: "#ffffff",
+  size: "m",
+  disabled: false,
 };
 
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   label: 'Button',
-// };
+export const JustIcon = Template.bind({});
+JustIcon.args = {
+  tooltipText: "Button",
+  onClick: () => {},
+  iconClassName: "lnc-refresh",
+  bgColor: "#2a963c",
+  textColor: "#ffffff",
+  size: "m",
+  disabled: false,
+};
 
-// export const Large = Template.bind({});
-// Large.args = {
-//   size: 'large',
-//   label: 'Button',
-// };
+export const TextAndIconToLeft = Template.bind({});
+TextAndIconToLeft.args = {
+  text: "Button",
+  tooltipText: "Button",
+  onClick: () => {},
+  iconClassName: "lnc-refresh",
+  iconLocation: "left",
+  bgColor: "#e0223e",
+  textColor: "#ffffff",
+  size: "m",
+  disabled: false,
+};
 
-// export const Small = Template.bind({});
-// Small.args = {
-//   size: 'small',
-//   label: 'Button',
-// };
+export const TextAndIconToRight = Template.bind({});
+TextAndIconToRight.args = {
+  text: "Button",
+  tooltipText: "Button",
+  onClick: () => {},
+  iconClassName: "lnc-refresh",
+  iconLocation: "right",
+  bgColor: "#00537a",
+  textColor: "#ffffff",
+  size: "m",
+  disabled: false,
+};

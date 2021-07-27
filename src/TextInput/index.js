@@ -1,90 +1,189 @@
-import React, { useEffect, useState } from "react";
-import BaseContainer from "../Base/BaseContainer";
-import { getLighterColor } from "../Base/ColorBlender";
-import styles from "./styles.module.css";
+import debounce from "lodash.debounce";
+import PropTypes from "prop-types";
+import React, { useMemo, useState } from "react";
+import style from "./styles.module.css";
 
 const TextInput = React.forwardRef((props, ref) => {
-  const emptyFunc = () => {};
+  //
+  const { onChange, onFocus, onBlur } = props;
 
-  const { onChange = emptyFunc } = props;
+  const {
+    id,
+    disabled,
+    className,
+    delay,
+    preventDefault,
+    tooltipText,
+    size,
+    accentColor,
+    textColor,
+    bgColor,
+  } = props;
 
-  const [text, setText] = useState("");
-  const [isFirst, setIsFirst] = useState(true);
-  const [focus, setFocus] = useState(false);
+  const [focused, setFocused] = useState(false);
 
-  useEffect(() => {
-    if (text !== props.value) setText(props.value === null ? "" : props.value);
-  }, [props.value]);
+  //================================================
 
-  useEffect(() => {
-    const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
-    return () => clearTimeout(timeOutId);
-  }, [text]);
+  const changeHandler = (event) => {
+    if (preventDefault) event.preventDefault();
 
-  const handleDelayedOnChange = () => {
-    if (!isFirst) onChange(props.id, text);
-
-    if (isFirst) setIsFirst(false);
+    onChange(id, event.target.value);
   };
 
-  const handleOnChange = (e) => {
-    if (props.preventDefault) {
-      e.preventDefault();
-    }
+  const debouncedChangeHandler = useMemo(
+    () => debounce(changeHandler, delay),
+    []
+  );
 
-    onChange(props.id, e.target.value);
-    setText(e.target.value);
+  let inputStyle = {
+    backgroundColor: bgColor,
+    borderBottom: `2px solid ${accentColor}`,
+    color: textColor,
   };
 
-  if (props.accentColor) {
-    const style = {
-      backgroundColor: focus
-        ? "white"
-        : getLighterColor(props.accentColor, 0.75),
-      borderBottom: "2px solid " + props.accentColor,
+  if (disabled) {
+    inputStyle = {
+      backgroundColor: "#dee1e6",
+      borderBottom: "2px solid #777a80",
+      color: "#777a80",
+      opacity: "0.7",
+      cursor: "inherit",
     };
+  }
 
-    return (
-      <BaseContainer {...props}>
-        <input
-          ref={ref}
-          type={"text"}
-          value={text}
-          onChange={handleOnChange}
-          disabled={props.disabled}
-          className={
-            props.inputCssClass
-              ? [styles.standardInputTextInput, props.inputCssClass].join(" ")
-              : styles.standardInputTextInput
-          }
-          title={props.tooltipText}
-          onKeyDown={props.onKeyDown}
-          style={style}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-        />
-      </BaseContainer>
-    );
+  if (focused) {
+    inputStyle.backgroundColor = "white";
   }
 
   return (
-    <BaseContainer {...props}>
-      <input
-        ref={ref}
-        type={"text"}
-        value={text}
-        onChange={handleOnChange}
-        disabled={props.disabled}
-        className={
-          props.inputCssClass
-            ? [styles.standardInputTextInput, props.inputCssClass].join(" ")
-            : styles.standardInputTextInput
-        }
-        title={props.tooltipText}
-        onKeyDown={props.onKeyDown}
-      />
-    </BaseContainer>
+    <input
+      ref={ref}
+      type={"text"}
+      onChange={debouncedChangeHandler}
+      disabled={disabled}
+      style={inputStyle}
+      className={[
+        style["text-input"],
+        style[`text-input-${size}`],
+        className,
+      ].join(" ")}
+      title={tooltipText}
+      onFocus={(e) => {
+        setFocused(true);
+        onFocus(e);
+      }}
+      onBlur={(e) => {
+        setFocused(false);
+        onBlur(e);
+      }}
+    />
   );
+
+  //================================================
+
+  // useEffect(() => {
+  //   if (text !== value) setText(value === null ? "" : value);
+  // }, [value]);
+
+  // useEffect(() => {
+  //   const timeOutId = setTimeout(() => handleDelayedOnChange(), delay);
+  //   return () => clearTimeout(timeOutId);
+  // }, [text]);
+
+  // const handleDelayedOnChange = () => {
+  //   if (!isFirst) onChange(id, text);
+  //   if (isFirst) setIsFirst(false);
+  // };
+
+  // const handleOnChange = (e) => {
+  //   if (props.preventDefault) {
+  //     e.preventDefault();
+  //   }
+
+  //   // onChange(props.id, e.target.value);
+  //   setText(e.target.value);
+  // };
+
+  // let inputStyle = {
+  //   backgroundColor: bgColor,
+  //   borderBottom: `2px solid ${accentColor}`,
+  //   color: textColor,
+  // };
+
+  // if (disabled) {
+  //   inputStyle = {
+  //     backgroundColor: "#dee1e6",
+  //     borderBottom: "2px solid #777a80",
+  //     color: "#777a80",
+  //     opacity: "0.7",
+  //     cursor: "inherit",
+  //   };
+  // }
+
+  // if (focused) {
+  //   inputStyle.backgroundColor = "white";
+  // }
+
+  // return (
+  //   <input
+  //     ref={ref}
+  //     type={"text"}
+  //     value={text}
+  //     onChange={handleOnChange}
+  //     disabled={disabled}
+  //     style={inputStyle}
+  //     className={[
+  //       style["text-input"],
+  //       style[`text-input-${size}`],
+  //       className,
+  //     ].join(" ")}
+  //     title={tooltipText}
+  //     onKeyDown={onKeyDown}
+  //     onFocus={(e) => {
+  //       setFocused(true);
+  //       onFocus(e);
+  //     }}
+  //     onBlur={(e) => {
+  //       setFocused(false);
+  //       onBlur(e);
+  //     }}
+  //   />
+  // );
 });
+
+TextInput.defaultProps = {
+  id: "",
+  disabled: false,
+  tooltipText: "",
+  onChange: () => {},
+  onKeyDown: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  className: "",
+  preventDefault: true,
+  size: "s",
+  text: "",
+  accentColor: "#00537a",
+  bgColor: "#dceff5",
+  textColor: "#000000",
+  delay: 300,
+};
+
+TextInput.propTypes = {
+  id: PropTypes.string,
+  disabled: PropTypes.bool,
+  tooltipText: PropTypes.string,
+  onChange: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  className: PropTypes.string,
+  preventDefault: PropTypes.bool,
+  size: PropTypes.oneOf(["s", "m", "l"]),
+  accentColor: PropTypes.string,
+  bgColor: PropTypes.string,
+  textColor: PropTypes.string,
+  delay: PropTypes.number,
+};
 
 export default TextInput;

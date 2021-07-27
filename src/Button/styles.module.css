@@ -1,31 +1,72 @@
-.standardInputButton {
-  font-size: var(--font-size-base);
+.icon-button-btn {
   -webkit-appearance: none;
   appearance: none;
   outline: none;
   transition: all var(--transition-base-duration);
-  background-color: var(--color-base-blue);
-  background: var(--color-base-blue);
-  color: var(--color-base-dirty-white);
-  height: 100%;
-  width: 100%;
-  border: 0px;
-  box-sizing: border-box;
+  border: none;
+  color: var(--color-base-blue-darker);
+  background-color: white;
+  padding: 6px 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 5px;
 }
 
-.standardInputButton span {
-  align-items: center;
-  text-align: center;
+/*----------------------*/
+
+.icon-button-text-left {
+  padding-left: 5px;
 }
 
-.standardInputButton:hover {
-  background-color: var(--color-base-blue-darker);
-  cursor: pointer;
+.icon-button-text-right {
+  padding-right: 5px;
 }
 
-.standardInputButton:disabled {
-  background-color: var(--color-base-gray-lighter);
-  color: var(--color-base-gray-darker);
-  cursor: inherit;
-  opacity: 0.7;
+/*----------------------*/
+
+.icon-button-btn-s {
+  padding: 6px 6px;
+  max-height: 24px;
+  min-height: 24px;
+}
+
+.icon-button-btn-m {
+  padding: 8px 8.5px;
+  max-height: 32px;
+  min-height: 32px;
+}
+
+.icon-button-btn-l {
+  padding: 10px 9.5px;
+  max-height: 38px;
+  min-height: 38px;
+}
+
+/*----------------------*/
+
+.icon-button-icon-s {
+  font-size: 12px;
+}
+
+.icon-button-icon-m {
+  font-size: 15px;
+}
+
+.icon-button-icon-l {
+  font-size: 19px;
+}
+
+/*----------------------*/
+
+.icon-button-text-s {
+  font-size: 12px;
+}
+
+.icon-button-text-m {
+  font-size: 15px;
+}
+
+.icon-button-text-l {
+  font-size: 19px;
 }
