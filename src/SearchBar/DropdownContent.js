@@ -24,7 +24,8 @@ const DropdownContent = (props) => {
             key={i}
             href="#"
             className={className}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               onSelect(el)(value);
             }}
           >
