@@ -6,7 +6,11 @@ import IconButton from "../IconButton/index";
 const Filter = (props) => {
   //====== PROPS ======
 
-  const { onToggleState, onRemove, id, Icons } = props;
+  const { onToggleState, onRemove } = props;
+  const { id } = props;
+  const { Icons } = props;
+
+  //====== LIFECYCLE ======
 
   //====== EVENTS ======
 
