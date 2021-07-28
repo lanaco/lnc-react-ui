@@ -18,7 +18,6 @@ const DropdownContent = (props) => {
     <div>
       {items.map((el, i) => {
         let className = cursor === i ? styles.linkActive : styles.link;
-
         return (
           <a
             key={i}
