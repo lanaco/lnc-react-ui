@@ -6,13 +6,12 @@ import styled from "@emotion/styled";
 //====================== STYLE ======================
 
 const paddingBySize = (size) => {
-  if (size === "small") return "6.2px 6.2px";
-  if (size === "medium") return "8px 8px";
-  if (size === "large") return "10px 10px";
+  if (size === "small") return "0.3875rem 0.3875rem";
+  if (size === "medium") return "0.45rem 0.45rem";
+  if (size === "large") return "0.4875rem 0.4875rem";
 };
 
 const Button = styled.button((props) => {
-  console.log("aaa", props);
   return {
     appearance: "none",
     outline: "none",
@@ -40,12 +39,12 @@ const Button = styled.button((props) => {
 });
 
 const TextLeft = styled.span((props) => ({
-  paddingRight: props.hasIcon ? "5px" : "0",
+  paddingRight: props.hasIcon ? "0.3125rem" : "0",
   fontSize: props.theme.typography[props.size].fontSize,
 }));
 
 const TextRight = styled.span((props) => ({
-  paddingLeft: props.hasIcon ? "5px" : "0",
+  paddingLeft: props.hasIcon ? "0.3125rem" : "0",
   fontSize: props.theme.typography[props.size].fontSize,
 }));
 
@@ -150,9 +149,11 @@ TextIconButton.defaultProps = {
   iconLocation: "left",
   text: "",
   color: "primary",
+  theme: {},
 };
 
 TextIconButton.propTypes = {
+  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
   tooltipText: PropTypes.string,
