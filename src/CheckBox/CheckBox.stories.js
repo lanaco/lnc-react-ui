@@ -1,6 +1,6 @@
 import React from "react";
 import CheckBox from ".";
-import TextIconButton from "../TextIconButton/index";
+// import TextIconButton from "../TextIconButton/index";
 import theme from "../_utils/theme";
 
 export default {
