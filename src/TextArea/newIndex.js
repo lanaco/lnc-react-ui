@@ -8,7 +8,7 @@ const paddingBySize = (size) => {
   if (size === "large") return "10px 10px";
 };
 
-const StyledNumberInput = styled.input((props) => {
+const StyledTextArea = styled.input((props) => {
   return {
     appearance: "none",
     outline: "none",
@@ -39,7 +39,7 @@ const StyledNumberInput = styled.input((props) => {
 
 //===================================================
 
-const NumberInput = (props) => {
+const TextInput = (props) => {
   const {
     theme,
     color,
@@ -48,12 +48,12 @@ const NumberInput = (props) => {
     preventDefault,
     className,
     size,
-    value,
+    value
   } = props;
 
   const { onChange = emptyFunc } = props;
 
-  const [val, setVal] = useState(value ? value : "");
+  const [val, setVal] = useState(value ? value : "");   
 
   const handleOnChange = (e) => {
     if (preventDefault) {
@@ -71,74 +71,24 @@ const NumberInput = (props) => {
     console.log("hendl blur: ", val);
   };
 
-  const isInputInteger = (evt) => {
-    var ch = String.fromCharCode(evt.which);
-    var oldValue = evt.target.value;
-    if (
-      (ch === "-" && oldValue === undefined) ||
-      (ch === "-" && oldValue.length === 0)
-    ) {
-      return;
-    }
-    if (!/[0-9]/.test(ch)) {
-      evt.preventDefault();
-    }
-  };
-
-  let decimalSeparator = props.decimalSeparator !== undefined && props.decimalSeparator.length === 1 ? props.decimalSeparator : ".";
-
-  let numberOfDecimalPlaces = props.numberOfDecimalPlaces !== undefined ? props.numberOfDecimalPlaces : 2;
-
-  const isInputDecimal = (evt) => {
-    var ch = String.fromCharCode(evt.which);
-    var oldValue = evt.target.value;
-    if (
-      (ch === "-" && oldValue === undefined) ||
-      (ch === "-" && oldValue.length === 0)
-    ) {
-      return;
-    }
-    var regex = new RegExp("^\\d*\\" + decimalSeparator + "?\\d*$");
-    if (!regex.test(ch)) {
-      evt.preventDefault();
-    } else {
-      if (decimalSeparator === ch) {
-        if (oldValue.includes(decimalSeparator)) {
-          evt.preventDefault();
-        }
-      } else {
-        if (oldValue.includes(decimalSeparator)) {
-          var numOfDecimalPlaces = oldValue.split(decimalSeparator)[1].length;
-          if (numOfDecimalPlaces >= numberOfDecimalPlaces) {
-            evt.preventDefault();
-          }
-        }
-      }
-    }
-  };
-
-
   return (
-    <StyledNumberInput
+    <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
       onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
       value={val}
-      type="text"
-      onKeyPress={props.isDecimal ? isInputDecimal : isInputInteger}
-      onPaste={props.isDecimal ? isInputDecimal : isInputInteger}
     >
-    </StyledNumberInput>
+    </StyledTextInput>
   );
 };
 
-StyledNumberInput.defaultProps = {
+StyledTextInput.defaultProps = {
   id: "",
   disabled: false,
   tooltipText: "",
-  onClick: () => { },
+  onClick: () => {},
   iconClassName: "",
   className: "",
   preventDefault: true,
@@ -149,7 +99,7 @@ StyledNumberInput.defaultProps = {
   value: ""
 };
 
-StyledNumberInput.propTypes = {
+StyledTextInput.propTypes = {
   id: PropTypes.string,
   disabled: PropTypes.bool,
   tooltipText: PropTypes.string,
@@ -171,4 +121,4 @@ StyledNumberInput.propTypes = {
   value: PropTypes.string
 };
 
-export default NumberInput;
+export default TextInput;

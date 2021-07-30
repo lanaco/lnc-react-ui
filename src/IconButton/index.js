@@ -33,9 +33,39 @@ const IconButton = (props) => {
     onClick(id);
   };
 
-  let buttonClassName = inverted
-    ? "icon-button-btn-inverted"
-    : "icon-button-btn";
+  if (props.accentColor) {
+    const styleForHover = {
+      background:
+        "radial-gradient(" + props.accentColor + ", transparent, transparent)",
+      outline: "none",
+    };
+
+    return (
+      <button
+        onClick={handleOnClick}
+        className={
+          props.inputCssClass
+            ? [styles.buttonIconIconButton, props.inputCssClass].join(" ")
+            : styles.buttonIconIconButton
+        }
+        disabled={props.disabled}
+        title={props.tooltipText}
+        style={hover ? styleForHover : {}}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <span>
+          <i
+            className={[
+              baseStyles.lnc,
+              baseStyles[iconClassName],
+              props.iconCssClass,
+            ].join(" ")}
+          ></i>
+        </span>
+      </button>
+    );
+  }
 
   return (
     <button

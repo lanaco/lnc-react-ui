@@ -69,3 +69,7 @@
   border: 1px solid gray;
   position: relative;
 }
+
+.closeAndReloadButtonPadding {
+  padding: 0px 5px;
+}

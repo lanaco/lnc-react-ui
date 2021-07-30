@@ -40,3 +40,5 @@ export * from "./TextIconButton";
 export { default as TextIconButton } from "./TextIconButton";
 export * from "./NewTextInput";
 export { default as NewTextInput } from "./NewTextInput";
+export * from "./SearchBar";
+export { default as SearchBar } from "./SearchBar";
