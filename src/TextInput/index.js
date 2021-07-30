@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "6.2px 6.2px";
-  if (size === "medium") return "8px 8px";
-  if (size === "large") return "10px 10px";
+  if (size === "small") return "0.2625rem 0.2625rem";
+  if (size === "medium") return "0.325rem 0.325rem";
+  if (size === "large") return "0.3625rem 0.3625rem";
 };
 
 const StyledTextInput = styled.input((props) => {
@@ -33,7 +33,7 @@ const StyledTextInput = styled.input((props) => {
     },
     "&:focus": {
       backgroundColor: props.theme.palette["background"].light,
-    }
+    },
   };
 });
 
@@ -48,27 +48,20 @@ const TextInput = (props) => {
     preventDefault,
     className,
     size,
-    value
+    value,
+    onChange,
   } = props;
 
-  const { onChange = emptyFunc } = props;
-
-  const [val, setVal] = useState(value ? value : "");   
+  const [val, setVal] = useState(value ? value : "");
 
   const handleOnChange = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
+    if (preventDefault) e.preventDefault();
     setVal(e.target.value);
-    console.log("hendl cejndz: ", val);
   };
 
   const handleOnBlur = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
+    if (preventDefault) e.preventDefault();
     onChange(id, val);
-    console.log("hendl blur: ", val);
   };
 
   return (
@@ -79,37 +72,31 @@ const TextInput = (props) => {
       className={className}
       disabled={disabled}
       value={val}
-    >
-    </StyledTextInput>
+    ></StyledTextInput>
   );
 };
 
-StyledTextInput.defaultProps = {
+TextInput.defaultProps = {
   id: "",
+  theme: {},
   disabled: false,
-  tooltipText: "",
-  onClick: () => {},
-  iconClassName: "",
+  onChange: () => {},
   className: "",
   preventDefault: true,
   size: "small",
-  iconLocation: "left",
-  text: "",
   color: "primary",
-  value: ""
+  value: "",
 };
 
-StyledTextInput.propTypes = {
+TextInput.propTypes = {
+  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
-  tooltipText: PropTypes.string,
-  onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
+  onChange: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
+  value: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  iconLocation: PropTypes.oneOf(["left", "right"]),
-  text: PropTypes.string,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
@@ -118,7 +105,6 @@ StyledTextInput.propTypes = {
     "warning",
     "gray",
   ]),
-  value: PropTypes.string
 };
 
 export default TextInput;

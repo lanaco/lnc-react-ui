@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import DropDown from "../DropDown/index";
 import IconButton from "../IconButton/index";
-import { freeze } from "../DataView/Helper/dataViewHelper";
 import style from "./style.module.css";
 
 const Pagination = (props) => {
@@ -45,6 +44,16 @@ const Pagination = (props) => {
     text += (Localization.Of || " of ") + DataCount;
 
     return text;
+  };
+
+  const freeze = (dependcies) => {
+    let freeze = false;
+
+    dependcies.forEach((el) => {
+      freeze = freeze || el;
+    });
+
+    return freeze;
   };
 
   const freezeLoading = (args = []) => freeze([IsLoading, ...args]);

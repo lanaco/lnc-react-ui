@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
-import { freeze } from "../DataView/Helper/dataViewHelper";
+
 import TextIconButton from "../TextIconButton/index";
 
 const FormMovement = (props) => {
@@ -20,6 +20,16 @@ const FormMovement = (props) => {
   const { Localization = {} } = props;
 
   //====== METHODS ======
+
+  const freeze = (dependcies) => {
+    let freeze = false;
+
+    dependcies.forEach((el) => {
+      freeze = freeze || el;
+    });
+
+    return freeze;
+  };
 
   const freezeLoading = (args = []) => freeze([IsLoading, ...args]);
 
