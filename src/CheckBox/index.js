@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Global, css } from "@emotion/react";
+import theme from "../_utils/theme";
 
 const getCheckboxCss = (props) => {
   var left,
@@ -176,7 +177,7 @@ const CheckBox = (props) => {
 };
 
 CheckBox.defaultProps = {
-  theme: {},
+  theme: theme,
   id: "",
   disabled: false,
   onChange: () => {},

@@ -11,7 +11,7 @@ import FormMode from "../DataView/Constants/FormMode";
 import { freeze } from "../Helper/helper";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
-import TextIconButton from "../TextIconButton";
+import Button from "../Button";
 
 const getDefaultState = () => {
   return {
@@ -1222,7 +1222,7 @@ const Grid = React.forwardRef((props, ref) => {
 
     return (
       <div className={style["dataview-flex-item"]}>
-        <TextIconButton
+        <Button
           tooltipText={
             state.Form.Mode === FormMode.READ
               ? Localization.FormEditMode || "Edit mode"
@@ -1262,12 +1262,12 @@ const Grid = React.forwardRef((props, ref) => {
 
     return (
       <div className={style["dataview-flex-item"]}>
-        <TextIconButton
+        <Button
           tooltipText={Localization.Refresh || "Refresh"}
           onClick={onRefresh}
           disabled={freezeLoading()}
           iconClassName="lnc-refresh"
-          size="s"
+          size="small"
         />
       </div>
     );
@@ -1280,7 +1280,7 @@ const Grid = React.forwardRef((props, ref) => {
     )
       return (
         <div className={style["dataview-flex-item"]}>
-          <TextIconButton
+          <Button
             tooltipText={Localization.TakeValues || "Take values"}
             onClick={() => {
               if (OnChange) OnChange(state.Table.SelectedData);
@@ -1327,7 +1327,7 @@ const Grid = React.forwardRef((props, ref) => {
 
     return (
       <div className={style["dataview-flex-item"]}>
-        <TextIconButton
+        <Button
           onClick={toggleDeleteConfirmationBox}
           disabled={freezeLoading([state.Table.SelectedData.length === 0])}
           tooltipText={Localization.DeleteSelected || "Delete selected"}
@@ -1343,7 +1343,7 @@ const Grid = React.forwardRef((props, ref) => {
 
     return (
       <div className={style["dataview-flex-item"]}>
-        <TextIconButton
+        <Button
           tooltipText={Localization.ToTableView || "Table view"}
           onClick={onSwitchToTableView}
           disabled={freezeLoading()}

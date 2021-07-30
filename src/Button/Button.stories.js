@@ -3,7 +3,7 @@ import Button from ".";
 import theme from "../_utils/theme";
 
 export default {
-  title: "New Button",
+  title: "Button",
   component: Button,
   argTypes: {},
 };

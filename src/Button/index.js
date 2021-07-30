@@ -1,18 +1,18 @@
-import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import React from "react";
 import baseStyles from "../Base/styles.module.css";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import theme from "../_utils/theme";
 
 //====================== STYLE ======================
 
 const paddingBySize = (size) => {
-  if (size === "small") return "6.2px 6.2px";
-  if (size === "medium") return "8px 8px";
-  if (size === "large") return "10px 10px";
+  if (size === "small") return "0.3875rem 0.3875rem";
+  if (size === "medium") return "0.45rem 0.45rem";
+  if (size === "large") return "0.4875rem 0.4875rem";
 };
 
 const StyledButton = styled.button((props) => {
-  console.log("aaa", props);
   return {
     appearance: "none",
     outline: "none",
@@ -40,12 +40,12 @@ const StyledButton = styled.button((props) => {
 });
 
 const TextLeft = styled.span((props) => ({
-  paddingRight: props.hasIcon ? "5px" : "0",
+  paddingRight: props.hasIcon ? "0.3125rem" : "0",
   fontSize: props.theme.typography[props.size].fontSize,
 }));
 
 const TextRight = styled.span((props) => ({
-  paddingLeft: props.hasIcon ? "5px" : "0",
+  paddingLeft: props.hasIcon ? "0.3125rem" : "0",
   fontSize: props.theme.typography[props.size].fontSize,
 }));
 
@@ -150,9 +150,11 @@ Button.defaultProps = {
   iconLocation: "left",
   text: "",
   color: "primary",
+  theme: theme,
 };
 
 Button.propTypes = {
+  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
   tooltipText: PropTypes.string,

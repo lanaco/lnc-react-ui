@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import baseStyles from "../Base/styles.module.css";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.325rem 0.325rem";
@@ -75,12 +76,9 @@ const Input = styled.input((props) => ({
   },
 }));
 
-const ForgotPassword = styled.div((props) => ({}));
-
 const PasswordInput = (props) => {
   const {
     onChange,
-    handleForgotPassword,
     preventDefault,
     id,
     disabled,
@@ -93,7 +91,6 @@ const PasswordInput = (props) => {
     className,
   } = props;
 
-  const [inFocus, setInFocus] = React.useState(false);
   const [locked, setLocked] = useState(true);
 
   const handleOnChange = (e) => {
@@ -101,10 +98,6 @@ const PasswordInput = (props) => {
       e.preventDefault();
     }
     onChange(id, e.target.value);
-  };
-
-  const forgotPassword = () => {
-    if (handleForgotPassword) handleForgotPassword();
   };
 
   const handleLockUnlock = () => setLocked(!locked);
@@ -134,25 +127,12 @@ const PasswordInput = (props) => {
           />
         </Span>
       </Container>
-      {/* {props.dontShowPasswordForgottenOption ? (
-        ""
-      ) : (
-        <ForgotPassword
-          className={styles.forgottenPasswordDivPasswordInput}
-          onClick={forgotPassword}
-          disabled={props.disabled}
-        >
-          {props.passwordForgottenText
-            ? props.passwordForgottenText
-            : "Password forgotten"}
-        </ForgotPassword>
-      )} */}
     </>
   );
 };
 
 PasswordInput.defaultProps = {
-  theme: {},
+  theme: theme,
   id: "",
   disabled: false,
   onChange: () => {},
@@ -161,6 +141,9 @@ PasswordInput.defaultProps = {
   preventDefault: true,
   size: "small",
   color: "primary",
+  autoComplete: false,
+  tooltipText: "",
+  value: "",
 };
 
 PasswordInput.propTypes = {
@@ -170,7 +153,10 @@ PasswordInput.propTypes = {
   onChange: PropTypes.func,
   handleForgotPassword: PropTypes.func,
   className: PropTypes.string,
+  tooltipText: PropTypes.string,
+  value: PropTypes.string,
   preventDefault: PropTypes.bool,
+  autoComplete: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",

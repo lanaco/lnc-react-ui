@@ -1,5 +1,19 @@
+.switch {
+  display: inline-block;
+  position: relative;
+  width: 37px;
+  height: 22px;
+  padding: 2px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
 .standardInputToggleSwitch {
-  font-family: inherit;
+  /* font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
   outline: none;
@@ -9,33 +23,21 @@
   transition: all var(--transition-base-duration);
   font-size: var(--font-size-base);
   border-bottom: 2px solid var(--color-base-blue);
-  padding: 5px 10px;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+  padding: 5px 10px; */
 }
 
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 25%;
-  left: 0;
+  top: 4.3px;
+  left: 2px;
   right: 0;
   bottom: 0;
   background-color: gray;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  height: 20px;
-  width: 45px;
+  height: 15px;
+  width: 34px;
   border: 1px solid var(--color-base-blue);
   border-radius: 2px;
 }
@@ -43,8 +45,8 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 22px;
-  width: 22px;
+  height: 17px;
+  width: 17px;
   left: 1px;
   top: -2px;
   background-color: white;
