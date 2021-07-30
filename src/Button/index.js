@@ -11,7 +11,7 @@ const paddingBySize = (size) => {
   if (size === "large") return "10px 10px";
 };
 
-const Button = styled.button((props) => {
+const StyledButton = styled.button((props) => {
   console.log("aaa", props);
   return {
     appearance: "none",
@@ -86,7 +86,7 @@ const Button = (props) => {
   }
 
   return (
-    <Button
+    <StyledButton
       {...{ theme, size, color }}
       onClick={handleOnClick}
       className={className}
@@ -134,7 +134,7 @@ const Button = (props) => {
       ) : (
         <></>
       )}
-    </Button>
+    </StyledButton>
   );
 };
 
