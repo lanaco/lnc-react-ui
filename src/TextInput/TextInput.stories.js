@@ -73,8 +73,6 @@ export const Input = Template.bind({});
 Input.args = {
   theme: theme,
   color: "primary",
-  text: "TextInput",
-  tooltipText: "TextInput",
   onChange: () => {},
   size: "medium",
   disabled: false,

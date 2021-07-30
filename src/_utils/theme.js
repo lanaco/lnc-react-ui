@@ -64,16 +64,16 @@ const theme = {
   },
   typography: {
     small: {
-      fontSize: "12px",
-      iconFontSize: "13.6px",
+      fontSize: "0.75rem",
+      iconFontSize: "0.85rem",
     },
     medium: {
-      fontSize: "15px",
-      iconFontSize: "18px",
+      fontSize: "0.9375rem",
+      iconFontSize: "1.125rem",
     },
     large: {
-      fontSize: "19px",
-      iconFontSize: "23px",
+      fontSize: "1.1875rem",
+      iconFontSize: "1.4375rem",
     },
   },
 };

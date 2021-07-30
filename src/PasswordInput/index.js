@@ -1,10 +1,36 @@
 import React, { useState } from "react";
-import BaseContainer from "../Base/BaseContainer";
-import { getLighterColor } from "../Base/ColorBlender";
 import baseStyles from "../Base/styles.module.css";
 import PropTypes from "prop-types";
-import styles from "./styles.module.css";
 import styled from "@emotion/styled";
+
+const paddingBySize = (size) => {
+  if (size === "small") return "0.325rem 0.325rem";
+  if (size === "medium") return "0.3875rem 0.3875rem";
+  if (size === "large") return "0.425rem 0.425rem";
+};
+
+const Span = styled.span((props) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  borderBottom: `2px solid ${props.theme.palette[props.color].main}`,
+  backgroundColor: props.theme.palette.background.main,
+  padding: paddingBySize(props.size),
+  borderRadius: "0 2px 2px 0",
+  cursor: "pointer",
+
+  "&:disabled": {
+    backgroundColor: props.theme.palette.gray[200],
+    borderBottom: "2px solid " + props.theme.palette.gray[900],
+    color: props.theme.palette.gray.textLight,
+    opacity: 0.7,
+    cursor: "default",
+  },
+}));
+
+const Icon = styled.i((props) => ({
+  fontSize: props.theme.typography[props.size].iconFontSize,
+}));
 
 const Container = styled.div((props) => ({
   display: "flex",
@@ -15,35 +41,39 @@ const Container = styled.div((props) => ({
 }));
 
 const Input = styled.input((props) => ({
-  fontFamily: "inherit",
   appearance: "none",
   outline: "none",
-  backgroundColor: "var(--color-base-backgroud)",
-  transition: "220ms",
-  fontSize: "var(--font-size-base)",
-  border: "0px",
-  borderBottom: "2px solid var(--color-base-blue)",
-  height: "100%",
-  width: "100%",
-  padding: "0px",
-  boxSizing: "border-box",
-
-  "&:focus": {
-    backgroundColor: "var(--color-base-white)",
-  },
-
+  border: "none",
+  borderBottom: `2px solid ${props.theme.palette[props.color].main}`,
+  transition: "all 250ms",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  cursor: "text",
+  padding: paddingBySize(props.size),
+  fontSize: props.theme.typography[props.size].fontSize,
+  backgroundColor: props.theme.palette.background.main,
+  color: props.theme.palette.background.text,
+  borderRadius: "2px 0 0 2px",
   "&:disabled": {
-    backgroundColor: "var(--color-base-gray-lighter)",
-    color: "var(--color-base-gray-darker)",
+    backgroundColor: props.theme.palette.gray[200],
+    borderBottom: "2px solid " + props.theme.palette.gray[900],
+    color: props.theme.palette.gray.textLight,
+    opacity: 0.7,
     cursor: "default",
-    borderBottom: "2px solid var(--color-base-gray-darker)",
-    opacity: "0.7",
+
+    "& ~ span": {
+      backgroundColor: props.theme.palette.gray[200],
+      borderBottom: "2px solid " + props.theme.palette.gray[900],
+      color: props.theme.palette.gray.textLight,
+      opacity: 0.7,
+      cursor: "default",
+    },
+  },
+  "&:focus": {
+    backgroundColor: props.theme.palette.background.light,
   },
 }));
-
-const Span = styled.span((props) => ({}));
-
-const Icon = styled.i((props) => ({}));
 
 const ForgotPassword = styled.div((props) => ({}));
 
@@ -60,7 +90,7 @@ const PasswordInput = (props) => {
     autoComplete,
     value,
     tooltipText,
-    onKeyDown,
+    className,
   } = props;
 
   const [inFocus, setInFocus] = React.useState(false);
@@ -83,64 +113,28 @@ const PasswordInput = (props) => {
 
   return (
     <>
-      <Container
-        {...themeProps}
-        className={styles.inputWithIconButtonPasswordInput}
-      >
+      <Container {...themeProps}>
         <Input
           {...themeProps}
           type={locked ? "password" : "text"}
           autoComplete={autoComplete}
           value={value}
           onChange={handleOnChange}
-          className={
-            props.inputCssClass
-              ? [styles.standardInputPasswordInput, props.inputCssClass].join(
-                  " "
-                )
-              : styles.standardInputPasswordInput
-          }
+          className={className}
           disabled={disabled}
           title={tooltipText}
-          onKeyDown={onKeyDown}
-          onBlur={() => {
-            setInFocus(false);
-          }}
-          onFocus={() => {
-            setInFocus(true);
-          }}
         />
-        <Span
-          {...themeProps}
-          className={
-            disabled
-              ? styles.iconButtonDisabledPasswordInput
-              : inFocus
-              ? styles.iconButtonFocusedPasswordInput
-              : styles.iconButtonPasswordInput
-          }
-          onClick={handleLockUnlock}
-          disabled={disabled}
-        >
+        <Span {...themeProps} onClick={disabled ? () => {} : handleLockUnlock}>
           <Icon
             {...themeProps}
-            className={
-              locked
-                ? [
-                    baseStyles.lnc,
-                    baseStyles["lnc_eye_no"],
-                    styles.additionalIconStyle,
-                  ].join(" ")
-                : [
-                    baseStyles.lnc,
-                    baseStyles["lnc_eye"],
-                    styles.additionalIconStyle,
-                  ].join(" ")
-            }
+            className={[
+              baseStyles.lnc,
+              baseStyles[locked ? "lnc_eye_no" : "lnc_eye"],
+            ].join(" ")}
           />
         </Span>
       </Container>
-      {props.dontShowPasswordForgottenOption ? (
+      {/* {props.dontShowPasswordForgottenOption ? (
         ""
       ) : (
         <ForgotPassword
@@ -152,7 +146,7 @@ const PasswordInput = (props) => {
             ? props.passwordForgottenText
             : "Password forgotten"}
         </ForgotPassword>
-      )}
+      )} */}
     </>
   );
 };
