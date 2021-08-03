@@ -10,9 +10,15 @@ export default {
 
 const Template = (args) => (
   <>
-    <p>
+    {/* <p>
       <Button {...args} />
-    </p>
+    </p> */}
+    <span style={{ padding: "10px" }}>
+      <Button {...args} />
+    </span>
+    <span style={{ padding: "10px" }}>
+      <Button {...args} text="Button" />
+    </span>
   </>
 );
 
@@ -21,7 +27,7 @@ JustText.args = {
   theme: theme,
   color: "primary",
   text: "Button",
-  tooltipText: "Button",
+  tooltip: "Button",
   onClick: () => {},
   size: "medium",
   disabled: false,
@@ -31,11 +37,12 @@ export const JustIcon = Template.bind({});
 JustIcon.args = {
   theme: theme,
   color: "primary",
-  tooltipText: "Button",
+  tooltip: "Button",
   onClick: () => {},
-  iconClassName: "lnc-refresh",
   size: "medium",
   disabled: false,
+  icon: "user",
+  iconStyle: "solid",
 };
 
 export const TextAndIconToLeft = Template.bind({});
@@ -43,12 +50,13 @@ TextAndIconToLeft.args = {
   theme: theme,
   color: "primary",
   text: "Button",
-  tooltipText: "Button",
+  tooltip: "Button",
   onClick: () => {},
-  iconClassName: "lnc-refresh",
-  iconLocation: "left",
   size: "medium",
   disabled: false,
+  icon: "user",
+  iconStyle: "solid",
+  iconLocation: "left",
 };
 
 export const TextAndIconToRight = Template.bind({});
@@ -56,10 +64,11 @@ TextAndIconToRight.args = {
   theme: theme,
   color: "primary",
   text: "Button",
-  tooltipText: "Button",
+  tooltip: "Button",
   onClick: () => {},
-  iconClassName: "lnc-refresh",
-  iconLocation: "right",
   size: "medium",
   disabled: false,
+  icon: "user",
+  iconStyle: "solid",
+  iconLocation: "right",
 };

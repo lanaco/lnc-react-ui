@@ -6,10 +6,10 @@ import theme from "../_utils/theme";
 
 //====================== STYLE ======================
 
-const paddingBySize = (size) => {
-  if (size === "small") return "0.3875rem 0.3875rem";
-  if (size === "medium") return "0.45rem 0.45rem";
-  if (size === "large") return "0.4875rem 0.4875rem";
+const paddingBySize = (size, hasText) => {
+  if (size === "small") return "0.3875rem 0.34375rem";
+  if (size === "medium") return "0.45rem 0.415625rem";
+  if (size === "large") return "0.4875rem 0.445rem";
 };
 
 const StyledButton = styled.button((props) => {
@@ -18,11 +18,11 @@ const StyledButton = styled.button((props) => {
     outline: "none",
     border: "none",
     transition: "all 220ms",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
+    display: "inline-block",
+    // flexDirection: "row",
+    // justifyContent: "center",
     cursor: "pointer",
-    padding: paddingBySize(props.size),
+    padding: paddingBySize(props.size, props.hasText),
     fontSize: props.theme.typography[props.size].fontSize,
     backgroundColor: props.theme.palette[props.color].main,
     color: props.theme.palette[props.color].text,
@@ -50,7 +50,7 @@ const TextRight = styled.span((props) => ({
 }));
 
 const Icon = styled.i((props) => ({
-  fontSize: props.theme.typography[props.size].iconFontSize,
+  fontSize: props.theme.typography[props.size].fontSize,
 }));
 
 //===================================================
@@ -62,10 +62,11 @@ const Button = (props) => {
     id,
     onClick,
     disabled,
-    tooltipText,
+    tooltip,
     preventDefault,
     className,
-    iconClassName,
+    icon,
+    iconStyle,
     size,
     iconLocation,
     text,
@@ -76,14 +77,13 @@ const Button = (props) => {
     onClick(id);
   };
 
-  let _iconClassName,
-    title = "";
+  var title = "";
+  if (tooltip && tooltip !== "") title = tooltip;
 
-  if (tooltipText && tooltipText !== "") title = tooltipText;
-
-  if (iconClassName && iconClassName !== "") {
-    _iconClassName = iconClassName.replaceAll("-", "_");
-  }
+  const getIconClass = () => {
+    var style = iconStyle === "solid" ? "fas" : "far";
+    return `${style} fa-${icon} fa-fw`;
+  };
 
   return (
     <StyledButton
@@ -92,6 +92,7 @@ const Button = (props) => {
       className={className}
       disabled={disabled}
       title={title}
+      hasText={icon && icon !== ""}
     >
       {/* Text when the icon is RIGTH */}
       {text && text !== "" && iconLocation === "right" ? (
@@ -100,7 +101,7 @@ const Button = (props) => {
             theme,
             size,
             color,
-            hasIcon: iconClassName && iconClassName !== "",
+            hasIcon: icon && icon !== "",
           }}
         >
           {text}
@@ -110,14 +111,18 @@ const Button = (props) => {
       )}
 
       {/* Icon */}
-      <Icon
-        {...{
-          theme,
-          size,
-          color,
-        }}
-        className={[baseStyles["lnc"], baseStyles[_iconClassName]].join(" ")}
-      />
+      {icon && icon !== "" ? (
+        <Icon
+          {...{
+            theme,
+            size,
+            color,
+          }}
+          className={getIconClass()}
+        />
+      ) : (
+        <></>
+      )}
 
       {/* Text when the icon is LEFT */}
       {text && text !== "" && iconLocation === "left" ? (
@@ -126,7 +131,7 @@ const Button = (props) => {
             theme,
             size,
             color,
-            hasIcon: iconClassName && iconClassName !== "",
+            hasIcon: icon && icon !== "",
           }}
         >
           {text}
@@ -141,12 +146,13 @@ const Button = (props) => {
 Button.defaultProps = {
   id: "",
   disabled: false,
-  tooltipText: "",
+  tooltip: "",
   onClick: () => {},
-  iconClassName: "",
   className: "",
   preventDefault: true,
   size: "small",
+  icon: "",
+  iconStyle: "solid",
   iconLocation: "left",
   text: "",
   color: "primary",
@@ -157,9 +163,10 @@ Button.propTypes = {
   theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
-  tooltipText: PropTypes.string,
+  tooltip: PropTypes.string,
   onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
+  icon: PropTypes.string,
+  iconStyle: PropTypes.oneOf(["solid", "regular"]),
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
