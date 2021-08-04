@@ -21,45 +21,57 @@ const theme = {
     },
     //---------------------
     primary: {
+      lighter: "#EBF9FF",
       light: "#00628F",
       main: "#00537A",
       dark: "#004666",
       text: "white",
+      textDark: "black",
     },
     //---------------------
     secondary: {
+      lighter: "#F9DCF1",
       light: "#991E74",
       main: "#7b185d",
       dark: "#66154D",
       text: "white",
+      textDark: "black",
     },
     //---------------------
     success: {
+      lighter: "#D4EDDA",
       light: "#71C189",
       main: "#55B472",
       dark: "#449C5F",
       text: "white",
+      textDark: "black",
     },
     //---------------------
     error: {
+      lighter: "#F8DEDE",
       light: "#DF686C",
       main: "#DB575B",
       dark: "#D8464B",
       text: "white",
+      textDark: "black",
     },
     //---------------------
     warning: {
+      lighter: "#FFEDD6",
       light: "#FFB65C",
       main: "#FFAC47",
       dark: "#FFA333",
       text: "white",
+      textDark: "black",
     },
     //---------------------
     background: {
-      light: "#FFFFFF",
-      main: "#DEF0FA",
-      dark: "#BCD5E3",
+      lighter: "#FFFFFF",
+      light: "#F1F6F9",
+      main: "#BCD5E3",
+      dark: "#619BBD",
       text: "#2e2e2e",
+      textDark: "black",
     },
   },
   typography: {

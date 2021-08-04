@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
-
-import TextIconButton from "../TextIconButton/index";
+import Button from "../Button/index";
 
 const FormMovement = (props) => {
   //====== PROPS ======
@@ -38,11 +37,11 @@ const FormMovement = (props) => {
   const renderFirst = () => {
     return (
       <div className={style["dataview-flex-item"]}>
-        <TextIconButton
-          iconClassName="lnc-left-double"
+        <Button
+          icon="angle-double-left"
           onClick={goToFirstItem}
           disabled={freezeLoading([!CanGoToFirstItem])}
-          tooltipText={Localization.First || "First"}
+          tooltip={Localization.First || "First"}
         />
       </div>
     );
@@ -51,11 +50,11 @@ const FormMovement = (props) => {
   const renderLast = () => {
     return (
       <div className={style["dataview-flex-item"]}>
-        <TextIconButton
-          iconClassName="lnc-right-double"
+        <Button
+          icon="angle-double-right"
           onClick={goToLastItem}
           disabled={freezeLoading([!CanGoToLastItem])}
-          tooltipText={Localization.Last || "Last"}
+          tooltip={Localization.Last || "Last"}
         />
       </div>
     );
@@ -64,8 +63,8 @@ const FormMovement = (props) => {
   const renderNext = () => {
     return (
       <div className={style["dataview-flex-item"]}>
-        <TextIconButton
-          iconClassName="lnc-right"
+        <Button
+          icon="angle-right"
           onClick={goToNextItem}
           disabled={freezeLoading([!CanGoToNextItem])}
           tooltipText={Localization.Next || "Next"}
@@ -77,11 +76,11 @@ const FormMovement = (props) => {
   const renderPrevious = () => {
     return (
       <div className={style["dataview-flex-item"]}>
-        <TextIconButton
-          iconClassName="lnc-left"
+        <Button
+          icon="angle-left"
           onClick={goToPreviousItem}
           disabled={freezeLoading([!CanGoToPreviousItem])}
-          tooltipText={Localization.Previous || "Previous"}
+          tooltip={Localization.Previous || "Previous"}
         />
       </div>
     );

@@ -10,15 +10,9 @@ export default {
 
 const Template = (args) => (
   <>
-    {/* <p>
+    <p>
       <Button {...args} />
-    </p> */}
-    <span style={{ padding: "10px" }}>
-      <Button {...args} />
-    </span>
-    <span style={{ padding: "10px" }}>
-      <Button {...args} text="Button" />
-    </span>
+    </p>
   </>
 );
 

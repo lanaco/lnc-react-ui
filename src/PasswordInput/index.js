@@ -5,9 +5,9 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.325rem 0.325rem";
-  if (size === "medium") return "0.3875rem 0.3875rem";
-  if (size === "large") return "0.425rem 0.425rem";
+  if (size === "small") return "0.325rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.425rem 0.375rem";
 };
 
 const Span = styled.span((props) => ({
@@ -15,7 +15,8 @@ const Span = styled.span((props) => ({
   flexDirection: "row",
   justifyContent: "center",
   borderBottom: `2px solid ${props.theme.palette[props.color].main}`,
-  backgroundColor: props.theme.palette.background.main,
+  backgroundColor: props.theme.palette[props.color].lighter,
+  color: props.theme.palette[props.color].textDark,
   padding: paddingBySize(props.size),
   borderRadius: "0 2px 2px 0",
   cursor: "pointer",
@@ -30,7 +31,7 @@ const Span = styled.span((props) => ({
 }));
 
 const Icon = styled.i((props) => ({
-  fontSize: props.theme.typography[props.size].iconFontSize,
+  fontSize: props.theme.typography[props.size].fontSize,
 }));
 
 const Container = styled.div((props) => ({
@@ -45,7 +46,7 @@ const Input = styled.input((props) => ({
   appearance: "none",
   outline: "none",
   border: "none",
-  borderBottom: `2px solid ${props.theme.palette[props.color].main}`,
+  borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
   transition: "all 250ms",
   display: "flex",
   flexDirection: "row",
@@ -53,26 +54,27 @@ const Input = styled.input((props) => ({
   cursor: "text",
   padding: paddingBySize(props.size),
   fontSize: props.theme.typography[props.size].fontSize,
-  backgroundColor: props.theme.palette.background.main,
-  color: props.theme.palette.background.text,
-  borderRadius: "2px 0 0 2px",
+  backgroundColor: props.theme.palette[props.color].lighter,
+  color: props.theme.palette[props.color].textDark,
+  borderRadius: "0.125rem 0 0 0.125rem",
   "&:disabled": {
     backgroundColor: props.theme.palette.gray[200],
-    borderBottom: "2px solid " + props.theme.palette.gray[900],
+    borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
     color: props.theme.palette.gray.textLight,
     opacity: 0.7,
     cursor: "default",
 
     "& ~ span": {
       backgroundColor: props.theme.palette.gray[200],
-      borderBottom: "2px solid " + props.theme.palette.gray[900],
+      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
       color: props.theme.palette.gray.textLight,
       opacity: 0.7,
       cursor: "default",
     },
   },
   "&:focus": {
-    backgroundColor: props.theme.palette.background.light,
+    backgroundColor: props.theme.palette.common.white,
+    color: props.theme.palette.common.black,
   },
 }));
 

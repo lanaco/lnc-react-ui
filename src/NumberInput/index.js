@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "6.2px 6.2px";
-  if (size === "medium") return "8px 8px";
-  if (size === "large") return "10px 10px";
+  if (size === "small") return "0.325rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.425rem 0.375rem";
 };
 
 const StyledNumberInput = styled.input((props) => {
@@ -13,27 +13,26 @@ const StyledNumberInput = styled.input((props) => {
     appearance: "none",
     outline: "none",
     border: "none",
-    borderBottom: "2px solid " + props.theme.palette[props.color].main,
+    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
     transition: "all 250ms",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
+    display: "inline-block",
     cursor: "text",
     padding: paddingBySize(props.size),
     fontSize: props.theme.typography[props.size].fontSize,
-    backgroundColor: props.theme.palette["background"].main,
-    color: props.theme.palette["background"].text,
-    borderRadius: "2px",
+    backgroundColor: props.theme.palette[props.color].lighter,
+    color: props.theme.palette[props.color].textDark,
+    borderRadius: "0.125rem",
     "&:disabled": {
       backgroundColor: props.theme.palette.gray[200],
-      borderBottom: "2px solid " + props.theme.palette.gray[900],
+      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
       color: props.theme.palette.gray.textLight,
       opacity: 0.7,
       cursor: "default",
     },
     "&:focus": {
-      backgroundColor: props.theme.palette["background"].light,
-    }
+      backgroundColor: props.theme.palette.common.white,
+      color: props.theme.palette.common.black,
+    },
   };
 });
 
@@ -49,55 +48,45 @@ const NumberInput = (props) => {
     className,
     size,
     value,
+    onChange,
+    isDecimal,
   } = props;
-
-  const { onChange = emptyFunc } = props;
 
   const [val, setVal] = useState(value ? value : "");
 
   const handleOnChange = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
+    if (preventDefault) e.preventDefault();
     setVal(e.target.value);
-    console.log("hendl cejndz: ", val);
   };
 
   const handleOnBlur = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
+    if (preventDefault) e.preventDefault();
     onChange(id, val);
-    console.log("hendl blur: ", val);
   };
 
   const isInputInteger = (evt) => {
     var ch = String.fromCharCode(evt.which);
     var oldValue = evt.target.value;
-    if (
-      (ch === "-" && oldValue === undefined) ||
-      (ch === "-" && oldValue.length === 0)
-    ) {
-      return;
-    }
-    if (!/[0-9]/.test(ch)) {
-      evt.preventDefault();
-    }
+
+    if (ch === "-" && (oldValue == undefined || oldValue.length === 0)) return;
+
+    if (!/[0-9]/.test(ch)) evt.preventDefault();
   };
 
-  let decimalSeparator = props.decimalSeparator !== undefined && props.decimalSeparator.length === 1 ? props.decimalSeparator : ".";
+  let decimalSeparator =
+    props.decimalSeparator !== undefined && props.decimalSeparator.length === 1
+      ? props.decimalSeparator
+      : ".";
 
-  let numberOfDecimalPlaces = props.numberOfDecimalPlaces !== undefined ? props.numberOfDecimalPlaces : 2;
+  let numberOfDecimalPlaces =
+    props.numberOfDecimalPlaces !== undefined ? props.numberOfDecimalPlaces : 2;
 
   const isInputDecimal = (evt) => {
     var ch = String.fromCharCode(evt.which);
     var oldValue = evt.target.value;
-    if (
-      (ch === "-" && oldValue === undefined) ||
-      (ch === "-" && oldValue.length === 0)
-    ) {
-      return;
-    }
+
+    if (ch === "-" && (oldValue == undefined || oldValue.length === 0)) return;
+
     var regex = new RegExp("^\\d*\\" + decimalSeparator + "?\\d*$");
     if (!regex.test(ch)) {
       evt.preventDefault();
@@ -117,7 +106,6 @@ const NumberInput = (props) => {
     }
   };
 
-
   return (
     <StyledNumberInput
       {...{ theme, size, color }}
@@ -127,39 +115,34 @@ const NumberInput = (props) => {
       disabled={disabled}
       value={val}
       type="text"
-      onKeyPress={props.isDecimal ? isInputDecimal : isInputInteger}
-      onPaste={props.isDecimal ? isInputDecimal : isInputInteger}
-    >
-    </StyledNumberInput>
+      onKeyPress={isDecimal ? isInputDecimal : isInputInteger}
+      onPaste={isDecimal ? isInputDecimal : isInputInteger}
+    />
   );
 };
 
 StyledNumberInput.defaultProps = {
   id: "",
   disabled: false,
-  tooltipText: "",
-  onClick: () => { },
+  onChange: () => {},
   iconClassName: "",
   className: "",
   preventDefault: true,
   size: "small",
-  iconLocation: "left",
-  text: "",
   color: "primary",
-  value: ""
+  value: "",
+  isDecimal: false,
 };
 
 StyledNumberInput.propTypes = {
   id: PropTypes.string,
   disabled: PropTypes.bool,
-  tooltipText: PropTypes.string,
-  onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
+  onChange: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
+  isDecimal: PropTypes.bool,
+  value: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  iconLocation: PropTypes.oneOf(["left", "right"]),
-  text: PropTypes.string,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
@@ -168,7 +151,6 @@ StyledNumberInput.propTypes = {
     "warning",
     "gray",
   ]),
-  value: PropTypes.string
 };
 
 export default NumberInput;

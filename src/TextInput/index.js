@@ -1,13 +1,11 @@
-/** @jsxImportSource @emotion/react */
-import { jsx } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.2625rem 0.2625rem";
-  if (size === "medium") return "0.325rem 0.325rem";
-  if (size === "large") return "0.3625rem 0.3625rem";
+  if (size === "small") return "0.2625rem 0.375rem";
+  if (size === "medium") return "0.325rem 0.375rem";
+  if (size === "large") return "0.3625rem 0.375rem";
 };
 
 const StyledTextInput = styled.input((props) => {
@@ -15,7 +13,7 @@ const StyledTextInput = styled.input((props) => {
     appearance: "none",
     outline: "none",
     border: "none",
-    borderBottom: "2px solid " + props.theme.palette[props.color].main,
+    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
     transition: "all 250ms",
     display: "flex",
     flexDirection: "row",
@@ -23,18 +21,19 @@ const StyledTextInput = styled.input((props) => {
     cursor: "text",
     padding: paddingBySize(props.size),
     fontSize: props.theme.typography[props.size].fontSize,
-    backgroundColor: props.theme.palette["background"].main,
-    color: props.theme.palette["background"].text,
-    borderRadius: "2px",
+    backgroundColor: props.theme.palette[props.color].lighter,
+    color: props.theme.palette[props.color].textDark,
+    borderRadius: "0.125rem",
     "&:disabled": {
       backgroundColor: props.theme.palette.gray[200],
-      borderBottom: "2px solid " + props.theme.palette.gray[900],
+      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
       color: props.theme.palette.gray.textLight,
       opacity: 0.7,
       cursor: "default",
     },
     "&:focus": {
-      backgroundColor: props.theme.palette["background"].light,
+      backgroundColor: props.theme.palette.common.white,
+      color: props.theme.palette.common.black,
     },
   };
 });

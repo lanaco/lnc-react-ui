@@ -1223,16 +1223,14 @@ const Grid = React.forwardRef((props, ref) => {
     return (
       <div className={style["dataview-flex-item"]}>
         <Button
-          tooltipText={
+          tooltip={
             state.Form.Mode === FormMode.READ
               ? Localization.FormEditMode || "Edit mode"
               : Localization.FormReadMode || "View mode"
           }
           onClick={changeToEditMode}
           disabled={freezeLoading()}
-          iconClassName={
-            state.Form.Mode === FormMode.READ ? "lnc-edit" : "lnc-eye"
-          }
+          icon={state.Form.Mode === FormMode.READ ? "edit" : "eye"}
         />
       </div>
     );
@@ -1263,10 +1261,10 @@ const Grid = React.forwardRef((props, ref) => {
     return (
       <div className={style["dataview-flex-item"]}>
         <Button
-          tooltipText={Localization.Refresh || "Refresh"}
+          tooltip={Localization.Refresh || "Refresh"}
           onClick={onRefresh}
           disabled={freezeLoading()}
-          iconClassName="lnc-refresh"
+          icon="sync-alt"
           size="small"
         />
       </div>
@@ -1281,12 +1279,12 @@ const Grid = React.forwardRef((props, ref) => {
       return (
         <div className={style["dataview-flex-item"]}>
           <Button
-            tooltipText={Localization.TakeValues || "Take values"}
+            tooltip={Localization.TakeValues || "Take values"}
             onClick={() => {
               if (OnChange) OnChange(state.Table.SelectedData);
             }}
             disabled={freezeLoading([state.Table.SelectedData.length === 0])}
-            iconClassName="lnc-checkbox"
+            icon="check-circle"
           />
         </div>
       );
@@ -1330,8 +1328,8 @@ const Grid = React.forwardRef((props, ref) => {
         <Button
           onClick={toggleDeleteConfirmationBox}
           disabled={freezeLoading([state.Table.SelectedData.length === 0])}
-          tooltipText={Localization.DeleteSelected || "Delete selected"}
-          iconClassName="lnc-trash"
+          tooltip={Localization.DeleteSelected || "Delete selected"}
+          icon="trash"
         />
       </div>
     );
@@ -1344,10 +1342,10 @@ const Grid = React.forwardRef((props, ref) => {
     return (
       <div className={style["dataview-flex-item"]}>
         <Button
-          tooltipText={Localization.ToTableView || "Table view"}
+          tooltip={Localization.ToTableView || "Table view"}
           onClick={onSwitchToTableView}
           disabled={freezeLoading()}
-          iconClassName="lnc-table"
+          icon="table"
         />
       </div>
     );
