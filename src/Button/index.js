@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
+import "../Base/fontawesome/css/fontawesome.css";
 
 //====================== STYLE ======================
 

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.2625rem 0.375rem";
@@ -15,7 +15,7 @@ const StyledTextInput = styled.input((props) => {
     border: "none",
     borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
     transition: "all 250ms",
-    display: "flex",
+    display: "inline-block",
     flexDirection: "row",
     justifyContent: "center",
     cursor: "text",
@@ -73,6 +73,7 @@ const TextInput = (props) => {
       className={className}
       disabled={disabled}
       value={val}
+      type="text"
     ></StyledTextInput>
   );
 };

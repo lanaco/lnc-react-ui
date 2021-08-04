@@ -1,16 +1,16 @@
 import React from "react";
-import TextInput from ".";
+import CheckboxLookup from "./_index";
 import theme from "../_utils/theme";
 
 export default {
-  title: "Text Input",
-  component: TextInput,
+  title: "Checkbox Lookup",
+  component: CheckboxLookup,
   argTypes: {},
 };
 
 const Template = (args) => (
   <div>
-    <TextInput {...args} />
+    <CheckboxLookup {...args} />
   </div>
 );
 
@@ -21,5 +21,12 @@ Default.args = {
   onChange: () => {},
   size: "medium",
   disabled: false,
-  value: "text",
+  itemId: "id",
+  itemText: "code",
+  selectedOptions: [],
+  options: [
+    { id: 1, code: "Option 1" },
+    { id: 2, code: "Option 2" },
+    { id: 3, code: "Option 3" },
+  ],
 };

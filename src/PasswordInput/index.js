@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import baseStyles from "../Base/styles.module.css";
+import "../Base/fontawesome/css/fontawesome.css";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
@@ -122,10 +122,7 @@ const PasswordInput = (props) => {
         <Span {...themeProps} onClick={disabled ? () => {} : handleLockUnlock}>
           <Icon
             {...themeProps}
-            className={[
-              baseStyles.lnc,
-              baseStyles[locked ? "lnc_eye_no" : "lnc_eye"],
-            ].join(" ")}
+            className={`fas ${locked ? "fa-eye" : "fa-eye-slash"} fa-fw`}
           />
         </Span>
       </Container>
