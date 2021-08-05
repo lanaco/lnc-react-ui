@@ -24,14 +24,10 @@ Default.args = {
   itemId: "id",
   itemText: "code",
   style: "toggle",
-  selectedOptions: [
-    { id: 1, code: "Option 1" },
-    { id: 2, code: "Option 2" },
-    { id: 3, code: "Option 3" },
-  ],
+  selectedOptions: [{ id: 2, code: "Option 22" }],
   options: [
     { id: 1, code: "Option 1" },
-    { id: 2, code: "Option 2" },
-    { id: 3, code: "Option 3" },
+    { id: 2, code: "Option 22" },
+    { id: 3, code: "Option 333" },
   ],
 };
