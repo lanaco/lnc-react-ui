@@ -19,11 +19,16 @@ Default.args = {
   theme: theme,
   color: "primary",
   onChange: () => {},
-  size: "medium",
+  size: "small",
   disabled: false,
   itemId: "id",
   itemText: "code",
-  selectedOptions: [],
+  style: "toggle",
+  selectedOptions: [
+    { id: 1, code: "Option 1" },
+    { id: 2, code: "Option 2" },
+    { id: 3, code: "Option 3" },
+  ],
   options: [
     { id: 1, code: "Option 1" },
     { id: 2, code: "Option 2" },

@@ -18,6 +18,7 @@ const StyledNumberInput = styled.input((props) => {
     display: "inline-block",
     cursor: "text",
     padding: paddingBySize(props.size),
+    fontFamily: props.theme.typography.fontFamily,
     fontSize: props.theme.typography[props.size].fontSize,
     backgroundColor: props.theme.palette[props.color].lighter,
     color: props.theme.palette[props.color].textDark,

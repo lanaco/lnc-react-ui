@@ -20,7 +20,8 @@ export const Default = Template.bind({});
 Default.args = {
   theme: theme,
   color: "secondary",
-  size: "small",
+  size: "large",
   value: false,
   disabled: false,
+  label: "Toggle",
 };

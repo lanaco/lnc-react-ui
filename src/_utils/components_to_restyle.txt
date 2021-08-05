@@ -10,5 +10,6 @@ DateInput ? (Aco nesto radi)
 
 
 TO ADD:
+    - Add frontend pagination to CheckboxLookup
     - some kind of form item containers for labels and alignement
     - form layouts (single/multiple columns), should work good with previous

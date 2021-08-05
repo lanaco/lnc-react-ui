@@ -20,7 +20,7 @@ const getCheckboxCss = (props) => {
     checkWidth = "0.13rem";
     checkHeight = "0.7rem";
     margin = "0.1375rem";
-    marginLeft = "3px";
+    marginLeft = "0";
     padingLeft = "1.875rem";
     width = "1.188rem";
     height = "1.188rem";
@@ -32,7 +32,7 @@ const getCheckboxCss = (props) => {
     checkWidth = "0.22rem";
     checkHeight = "0.9rem";
     margin = "0.2rem";
-    marginLeft = "3px";
+    marginLeft = "0";
     padingLeft = "2.1875rem";
     width = "1.4375rem";
     height = "1.4375rem";
@@ -44,7 +44,7 @@ const getCheckboxCss = (props) => {
     checkWidth = "0.28rem";
     checkHeight = "1.1rem";
     margin = "0.2625rem";
-    marginLeft = "3px";
+    marginLeft = "0";
     padingLeft = "2.5rem";
     width = "1.6875rem";
     height = "1.6875rem";

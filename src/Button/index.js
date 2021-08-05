@@ -24,6 +24,7 @@ const StyledButton = styled.button((props) => {
     cursor: "pointer",
     padding: paddingBySize(props.size, props.hasText),
     fontSize: props.theme.typography[props.size].fontSize,
+    fontFamily: props.theme.typography.fontFamily,
     backgroundColor: props.theme.palette[props.color].main,
     color: props.theme.palette[props.color].text,
     borderRadius: "2px",

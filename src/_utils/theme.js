@@ -75,6 +75,7 @@ const theme = {
     },
   },
   typography: {
+    fontFamily: "Ubuntu",
     small: {
       fontSize: "0.75rem",
       iconFontSize: "0.85rem",

@@ -3,22 +3,28 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
-const getLabelProps = () => {
+const getLabelAndTextProps = () => {
   return {
     small: {
       width: "2.46875rem",
-      height: "1.375rem",
+      height: "1.625rem",
       padding: "0.125rem 0.125rem",
+      paddingLeft: "2.8rem",
+      top: "0.17rem",
     },
     medium: {
       width: "2.96875rem",
-      height: "1.625rem",
+      height: "2rem",
       padding: "0.1875rem 0.125rem",
+      paddingLeft: "3.5rem",
+      top: "0.42rem",
     },
     large: {
       width: "3.4375rem",
-      height: "1.875rem",
+      height: "2.375rem",
       padding: "0.25rem 0.125rem",
+      paddingLeft: "4.3rem",
+      top: "0.47rem",
     },
   };
 };
@@ -28,8 +34,8 @@ const getSpanProps = () => {
     small: {
       width: "2.125rem",
       height: "0.9375rem",
-      top: "0.28125rem",
-      left: "0.15625rem",
+      top: "0.245rem",
+      left: "0rem",
       before_width: "1.0625rem",
       before_height: "1.0625rem",
     },
@@ -37,15 +43,15 @@ const getSpanProps = () => {
       width: "2.6875rem",
       height: "1.1875rem",
       top: "0.325rem",
-      left: "0.15625rem",
+      left: "0rem",
       before_width: "1.3125rem",
       before_height: "1.3125rem",
     },
     large: {
       width: "3.125rem",
       height: "1.4375rem",
-      top: "0.41875rem",
-      left: "0.15625rem",
+      top: "0.37rem",
+      left: "0rem",
       before_width: "1.5625rem",
       before_height: "1.5625rem",
     },
@@ -56,7 +62,9 @@ const Label = styled.label((props) => {
   return {
     display: "inline-block",
     position: "relative",
-    ...getLabelProps()[props.size],
+    height: getLabelAndTextProps()[props.size].height,
+    width: "auto",
+    paddingLeft: getLabelAndTextProps()[props.size].paddingLeft,
 
     "& input": {
       opacity: "0",
@@ -65,6 +73,13 @@ const Label = styled.label((props) => {
     },
   };
 });
+
+const Text = styled.label`
+  position: relative;
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  top: ${(props) => getLabelAndTextProps()[props.size].top};
+`;
 
 const Input = styled.input`
   &:checked + span {
@@ -173,6 +188,7 @@ const ToggleSwitch = (props) => {
     color,
     className,
     preventDefault,
+    label,
   } = props;
 
   function handleChange(e) {
@@ -184,6 +200,7 @@ const ToggleSwitch = (props) => {
 
   return (
     <Label {...themeProps} className={className}>
+      <Text {...themeProps}>{label}</Text>
       <Input
         {...themeProps}
         type="checkbox"
@@ -205,6 +222,7 @@ ToggleSwitch.defaultProps = {
   size: "small",
   color: "primary",
   theme: theme,
+  label: "",
 };
 
 ToggleSwitch.propTypes = {
@@ -213,6 +231,7 @@ ToggleSwitch.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,
+  label: PropTypes.string,
   preventDefault: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([

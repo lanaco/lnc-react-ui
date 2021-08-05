@@ -36,7 +36,7 @@ const Icon = styled.i((props) => ({
 
 const Container = styled.div((props) => ({
   display: "flex",
-  fontFamily: "inherit",
+  fontFamily: props.theme.typography.fontFamily,
   outline: "none",
   width: "100%",
   height: "100%",
@@ -46,6 +46,7 @@ const Input = styled.input((props) => ({
   appearance: "none",
   outline: "none",
   border: "none",
+  fontFamily: "inherit",
   borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
   transition: "all 250ms",
   display: "flex",
@@ -112,7 +113,7 @@ const PasswordInput = (props) => {
         <Input
           {...themeProps}
           type={locked ? "password" : "text"}
-          autoComplete={autoComplete}
+          autoComplete={autoComplete ? "true" : "false"}
           value={value}
           onChange={handleOnChange}
           className={className}
