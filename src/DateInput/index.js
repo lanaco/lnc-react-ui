@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "./react-datepicker.css";
 import BaseContainer from "../Base/BaseContainer";
 import { getLighterColor } from "../Base/ColorBlender";
 import styles from "./styles.module.css";
