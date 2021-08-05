@@ -1,5 +1,5 @@
 import React from "react";
-import CheckboxLookup from "./_index";
+import CheckboxLookup from "./index";
 import theme from "../_utils/theme";
 
 export default {
