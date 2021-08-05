@@ -2,7 +2,17 @@ import React from "react";
 import styles from "./styles.module.css";
 
 const DropdownContent = (props) => {
+  //====== PROPS ======
+
   const { onSelect, items, value, cursor } = props;
+
+  //====== LIFECYCLE ======
+
+  //====== EVENTS ======
+
+  //====== METHODS ======
+
+  //====== RENDER ======
 
   return (
     <div>
@@ -13,7 +23,8 @@ const DropdownContent = (props) => {
             key={i}
             href="#"
             className={className}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               onSelect(el)(value);
             }}
           >
