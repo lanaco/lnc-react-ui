@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
   border: 0.125rem solid ${(props) => props.theme.palette[props.color].main};
   border-radius: 0.125rem;
   padding: 0.4rem;
@@ -33,17 +32,6 @@ const ControlContainer = styled.div`
   padding: 0.125rem 0;
 `;
 
-const PagingContainer = styled.div`
-  padding: 0.125rem 0.125rem;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 0.25rem 0 0 0;
-  border-top: 0.1rem solid ${(props) => props.theme.palette.gray[300]};
-`;
-
 const CheckboxLookup = (props) => {
   const {
     onChange,
@@ -59,6 +47,7 @@ const CheckboxLookup = (props) => {
     itemId,
     itemText,
     className,
+    localization,
   } = props;
 
   let themeProps = { theme, size, color };
@@ -86,157 +75,76 @@ const CheckboxLookup = (props) => {
       : localization.SelectAll || "Select all";
 
   return (
-    <Container {...themeProps} className={className}>
-      <Header {...themeProps}>
-        <Button
-          theme={theme}
-          color={color}
-          tooltip={label}
-          text={label}
-          icon={"check-square"}
-          iconStyle={
-            options.length === selectedOptions.length ? "regular" : "solid"
-          }
-          iconLocation={"left"}
-          onClick={() =>
-            onSelectDeselectAll(
-              options.length === selectedOptions.length ? false : true
-            )
-          }
-          size={size}
-          disabled={false}
-        />
-      </Header>
-      <Content>
-        {options.map((x) => {
-          let isChecked = false;
+    <>
+      <Container {...themeProps} className={className}>
+        <Header {...themeProps}>
+          <Button
+            theme={theme}
+            color={color}
+            tooltip={label}
+            text={label}
+            icon={"check-square"}
+            iconStyle={
+              options.length === selectedOptions.length ? "regular" : "solid"
+            }
+            iconLocation={"left"}
+            onClick={() =>
+              onSelectDeselectAll(
+                options.length === selectedOptions.length ? false : true
+              )
+            }
+            size={size}
+            disabled={false}
+          />
+        </Header>
+        <Content>
+          {options.map((x) => {
+            let isChecked = false;
 
-          if (selectedOptions) {
-            selectedOptions.forEach((element) => {
-              if (element[itemId] === x[props.itemId]) {
-                isChecked = true;
-              }
-            });
-          }
+            if (selectedOptions) {
+              selectedOptions.forEach((element) => {
+                if (element[itemId] === x[props.itemId]) {
+                  isChecked = true;
+                }
+              });
+            }
 
-          return (
-            <ControlContainer {...themeProps}>
-              {style === "regular" ? (
-                <CheckBox
-                  {...{
-                    id: x[itemId],
-                    disabled: disabled,
-                    checked: isChecked,
-                    onChange: handleCheckboxChange,
-                    color: color,
-                    size: size,
-                    theme: theme,
-                    label: x[itemText],
-                  }}
-                />
-              ) : (
-                <ToggleSwitch
-                  {...{
-                    id: x[itemId],
-                    disabled: disabled,
-                    value: isChecked,
-                    onChange: handleCheckboxChange,
-                    color: color,
-                    size: size,
-                    theme: theme,
-                    label: x[itemText],
-                  }}
-                />
-              )}
-            </ControlContainer>
-          );
-        })}
-      </Content>
-    </Container>
+            return (
+              <ControlContainer {...themeProps}>
+                {style === "regular" ? (
+                  <CheckBox
+                    {...{
+                      id: x[itemId],
+                      disabled: disabled,
+                      checked: isChecked,
+                      onChange: handleCheckboxChange,
+                      color: color,
+                      size: size,
+                      theme: theme,
+                      label: x[itemText],
+                    }}
+                  />
+                ) : (
+                  <ToggleSwitch
+                    {...{
+                      id: x[itemId],
+                      disabled: disabled,
+                      value: isChecked,
+                      onChange: handleCheckboxChange,
+                      color: color,
+                      size: size,
+                      theme: theme,
+                      label: x[itemText],
+                    }}
+                  />
+                )}
+              </ControlContainer>
+            );
+          })}
+        </Content>
+      </Container>
+    </>
   );
-
-  // const handleCheckboxChange = (id, value) => {
-  //   let selectedItems = [...selectedOptions];
-
-  //   if (value) {
-  //     selectedItems.push(
-  //       options.filter((item) => {
-  //         return item[props.itemId] === id;
-  //       })[0]
-  //     );
-  //   } else {
-  //     selectedItems = selectedItems.filter((item) => {
-  //       return item[props.itemId] !== id;
-  //     });
-  //   }
-  //   onChange(props.id, selectedItems);
-  // };
-
-  // const handleSelectAll = (selectDeselect) =>
-  //   onSelectDeselectAll(selectDeselect);
-
-  // const renderSelectAll = () => {
-  //   if (onSelectDeselectAll === undefined) return <></>;
-
-  //   let selectDeselect;
-
-  //   if (options.length === selectedOptions.length) selectDeselect = false;
-  //   else selectDeselect = true;
-
-  //   return (
-  //     <Button
-  //       size="small"
-  //       onClick={() => handleSelectAll(selectDeselect)}
-  //       icon={"tasks"}
-  //     />
-  //   );
-  // };
-
-  // return (
-  //   <div className={styles.cardStyle}>
-  //     {/* <div className={styles.title}> */}
-  //     {/* {props.title} */}
-  //     <div className={styles.selectButton}>{renderSelectAll()}</div>
-  //     {/* </div> */}
-  //     <div className={styles.cardContent}>
-  //       {options.map((item, i) => {
-  //         let isChecked = false;
-
-  //         if (selectedOptions) {
-  //           selectedOptions.forEach((element) => {
-  //             if (element[props.itemId] === item[props.itemId]) {
-  //               isChecked = true;
-  //             }
-  //           });
-  //         }
-
-  //         if (props.isSwitchComponent) {
-  //           return (
-  //             <ToggleSwitch
-  //               key={i}
-  //               value={isChecked}
-  //               id={item[props.itemId]}
-  //               label={item[props.itemText]}
-  //               onChange={handleCheckboxChange}
-  //             />
-  //           );
-  //         } else {
-  //           return (
-  //             <CheckBox
-  //               key={i}
-  //               checked={isChecked}
-  //               id={item[props.itemId]}
-  //               label={item[props.itemText]}
-  //               onChange={handleCheckboxChange}
-  //               labelCssClass={styles.labelAndErrorCssClass}
-  //               errorTextCssClass={styles.labelAndErrorCssClass}
-  //             />
-  //           );
-  //         }
-  //       })}
-  //     </div>
-  //   </div>
-  // );
 };
 
 CheckboxLookup.defaultProps = {
