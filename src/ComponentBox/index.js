@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import styles from "./styles.module.css";
+import React from "react";
 import Button from "../Button/index.js";
 
 import PropTypes from "prop-types";
@@ -9,16 +8,16 @@ import theme from "../_utils/theme";
 const Container = styled.div((props) => ({
   position: "fixed",
   alignItems: "center",
-  background: "rgba(0, 0, 0, 0.5)",
+  background: props.theme.palette.gray[600] + "50",
   width: "100%",
   height: "100%",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  display: "flex",
+  display: props.open ? "flex" : "none",
   flexDirection: "row",
   justifyContent: "center",
-  zIndex: 10000,
+  zIndex: props.zIndex,
 }));
 
 const Modal = styled.div((props) => ({
@@ -27,15 +26,23 @@ const Modal = styled.div((props) => ({
   visibility: "visible",
   position: "relative",
   width: "70%",
+  borderRadius: "0.2rem",
+  visibility: "visible",
 }));
 
 const Header = styled.div((props) => ({
-  padding: "5px",
+  padding: "0.3125rem",
   display: "flex",
+  background: props.theme.palette[props.color].main,
+  borderRadius: "0.2rem 0.2rem 0 0",
 }));
 
 const Title = styled.div((props) => ({
-  fontSize: "12px",
+  fontSize: props.theme.typography[props.size].fontSize,
+  fontFamily: props.theme.typography.fontFamily,
+  fontWeight: "bold",
+  color: props.theme.palette[props.color].text,
+  paddingLeft: "0.3rem",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -46,8 +53,9 @@ const CloseButton = styled.div((props) => ({
 }));
 
 const Content = styled.div((props) => ({
-  borderTop: `0.125rem solid ${props.}`,
-  padding: "5px",
+  padding: "0.3125rem",
+  border: `0.065rem solid ${props.theme.palette.gray[600]}`,
+  borderRadius: "0 0 0.2rem 0.2rem",
 }));
 
 function ComponentBox(props) {
@@ -61,120 +69,40 @@ function ComponentBox(props) {
     theme,
     size,
     color,
+    children,
+    clickOutsideToClose,
+    showHeader,
   } = props;
 
-  let themeProps = { theme, size, color}
+  let themeProps = { theme, size, color, zIndex, open };
+
+  const onClickOutsideModal = (event) => {
+    if (event.target !== event.currentTarget) return;
+
+    if (clickOutsideToClose || !showHeader) onClose();
+  };
 
   return (
-    <Container {...themeProps}>
+    <Container
+      {...themeProps}
+      className={className}
+      onClick={onClickOutsideModal}
+    >
       <Modal {...themeProps}>
-        <Header {...themeProps}>
-          <Title {...themeProps}>Header</Title>
-          <CloseButton {...themeProps}>
-            <Button icon={"times"} iconStyle={"solid"} onClick={() => {}} />
-          </CloseButton>
-        </Header>
-        <Content {...themeProps}>Content</Content>
+        {showHeader ? (
+          <Header {...themeProps}>
+            <Title {...themeProps}>{header}</Title>
+            <CloseButton {...themeProps}>
+              <Button icon={"times"} iconStyle={"solid"} onClick={onClose} />
+            </CloseButton>
+          </Header>
+        ) : (
+          <></>
+        )}
+        <Content {...themeProps}>{children}</Content>
       </Modal>
     </Container>
   );
-
-  // let componentBox = !basic
-  //   ? componentBoxList.find((x) => {
-  //       return x.ID === props.id;
-  //     })
-  //   : undefined;
-
-  // useEffect(() => {
-  //   if (!basic) addComponentBox(props.id);
-  // });
-
-  // const handleDialogClose = () => {
-  //   props.handleDialogClose !== undefined
-  //     ? props.handleDialogClose()
-  //     : closeComponentBox(props.id);
-  // };
-
-  // const handleClickOutsideModal = (e) => {
-  //   if (props.closeModalOnOutsideClick && e.target.className === styles.modal) {
-  //     handleDialogClose();
-  //   }
-  // };
-
-  // const getModalContentClass = () => {
-  //   let modalContentClass =
-  //     props.size === "small"
-  //       ? [
-  //           styles.componentBoxModalContent,
-  //           styles.smallModal,
-  //           styles.padding,
-  //         ].join(" ")
-  //       : props.size === "large"
-  //       ? [
-  //           styles.componentBoxModalContent,
-  //           styles.largeModal,
-  //           styles.padding,
-  //         ].join(" ")
-  //       : [
-  //           styles.componentBoxModalContent,
-  //           styles.mediumModal,
-  //           styles.padding,
-  //         ].join(" ");
-
-  //   if (props.withoutPadding) {
-  //     modalContentClass =
-  //       props.size === "small"
-  //         ? [styles.componentBoxModalContent, styles.smallModal].join(" ")
-  //         : props.size === "large"
-  //         ? [styles.componentBoxModalContent, styles.largeModal].join(" ")
-  //         : [styles.componentBoxModalContent, styles.mediumModal].join(" ");
-  //   }
-  //   return modalContentClass;
-  // };
-
-  // const renderComponentBox = () => {
-  //   let index = basic ? zIndex : componentBox.zIndex;
-
-  //   return (
-  //     <div
-  //       className={styles.modal}
-  //       onClick={handleClickOutsideModal}
-  //       style={{ zIndex: index }}
-  //     >
-  //       <section className={getModalContentClass()}>
-  //         <div className={styles.titleLine}>
-  //           <div className={styles.table}>
-  //             <div className={styles.tableCell}>
-  //               {props.dontShowTitle ? "" : props.title}
-  //             </div>
-  //           </div>
-  //           <div className={styles.closeButton}>
-  //             {props.dontShowCloseButton ? (
-  //               ""
-  //             ) : (
-  //               <Button
-  //                 disabled={props.disabled}
-  //                 icon={"times"}
-  //                 iconStyle={"solid"}
-  //                 onClick={handleDialogClose}
-  //                 // iconCssClass={styles.closeButtonPadding}
-  //                 // inputCssClass={styles.closeButtonPadding}
-  //               />
-  //             )}
-  //           </div>
-  //         </div>
-  //         <div>{props.children}</div>
-  //       </section>
-  //     </div>
-  //   );
-  // };
-
-  // if (
-  //   (basic === true && open !== undefined && open === true) ||
-  //   (componentBox !== undefined && componentBox.Open)
-  // )
-  //   return renderComponentBox();
-  // else return <React.Fragment />;
 }
 
 ComponentBox.defaultProps = {
@@ -188,6 +116,7 @@ ComponentBox.defaultProps = {
   color: "primary",
   theme: theme,
   clickOutsideToClose: false,
+  showHeader: true,
 };
 
 ComponentBox.propTypes = {
@@ -198,6 +127,8 @@ ComponentBox.propTypes = {
   header: PropTypes.string,
   zIndex: PropTypes.number,
   open: PropTypes.bool,
+  showHeader: PropTypes.bool,
+  clickOutsideToClose: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",

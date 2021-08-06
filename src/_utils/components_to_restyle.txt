@@ -1,5 +1,3 @@
-ComponentBox 
-ConfirmationForm 
 DropdownLookup 
 TransparentTextInput 
 SearchBar

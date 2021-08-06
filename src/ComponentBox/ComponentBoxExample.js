@@ -3,7 +3,7 @@ import ComponentBox from ".";
 import Button from "../Button/index";
 
 const ComponentBoxExample = (props) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <div>
@@ -11,12 +11,14 @@ const ComponentBoxExample = (props) => {
         <Button text={"Open Component Box"} onClick={() => setOpen(true)} />
       </div>
 
-      <ComponentBox
-        {...props}
-        basic={true}
-        open={open}
-        closeComponentBox={() => setOpen(false)}
-      />
+      <ComponentBox {...props} open={open} onClose={() => setOpen(false)}>
+        <div>
+          <div>Content</div>
+          <div>Content</div>
+          <div>Content</div>
+          <div>Content</div>
+        </div>
+      </ComponentBox>
     </div>
   );
 };

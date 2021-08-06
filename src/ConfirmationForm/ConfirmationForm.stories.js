@@ -1,17 +1,17 @@
 import React from "react";
-import ComponentBox from ".";
-import ComponentBoxExample from "./ComponentBoxExample";
+import ConfirmationForm from "./index";
+import ConfirmationFormExample from "./ConfirmationFormExample";
 import theme from "../_utils/theme";
 
 export default {
-  title: "ComponentBox",
-  component: ComponentBox,
+  title: "ConfirmationForm",
+  component: ConfirmationForm,
   argTypes: {},
 };
 
 const Template = (args) => (
   <>
-    <ComponentBoxExample {...args} />
+    <ConfirmationFormExample {...args} />
   </>
 );
 
@@ -20,7 +20,7 @@ Default.args = {
   color: "primary",
   size: "small",
   theme: theme,
-  header: "Component box header",
+  header: "Are you sure ?",
   clickOutsideToClose: true,
   showHeader: true,
 };
