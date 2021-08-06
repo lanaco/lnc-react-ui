@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./styles.module.css";
-import IconButton from "../IconButton/index.js";
+import Button from "../Button/index.js";
 
 function ComponentBox(props) {
   const emptyFunc = () => {};
@@ -87,13 +87,13 @@ function ComponentBox(props) {
               {props.dontShowCloseButton ? (
                 ""
               ) : (
-                <IconButton
+                <Button
                   disabled={props.disabled}
-                  ignorePermission={true}
-                  iconClassName={props.closeIconClassName}
+                  icon={"times"}
+                  iconStyle={"solid"}
                   onClick={handleDialogClose}
-                  iconCssClass={styles.closeButtonPadding}
-                  inputCssClass={styles.closeButtonPadding}
+                  // iconCssClass={styles.closeButtonPadding}
+                  // inputCssClass={styles.closeButtonPadding}
                 />
               )}
             </div>

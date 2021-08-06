@@ -23,18 +23,9 @@ const ConfirmationForm = (props) => {
         <div className={styles.confirmationBoxButtons}>
           <Button
             onClick={approveAndCloseFunction}
-            label={props.textYes}
-            accentColor={props.accentColor}
-            inputCssClass={styles.yesAndNoButton}
-            baseContainerCssClass={styles.maxWidth}
+            text={props.textYes || "Yes"}
           />
-          <Button
-            onClick={refuseFunction}
-            label={props.textNo}
-            accentColor={props.accentColor}
-            inputCssClass={styles.yesAndNoButton}
-            baseContainerCssClass={styles.maxWidth}
-          />
+          <Button onClick={refuseFunction} text={props.textNo || "No"} />
         </div>
       </section>
     </div>
