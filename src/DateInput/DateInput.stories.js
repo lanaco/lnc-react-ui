@@ -12,4 +12,7 @@ export const Normal = Template.bind({});
 Normal.args = {
   value: "17.08.2021.",
   onChange: (_, value) => console.log(value),
+  size: "small",
+  color: "secondary",
+  disabled: false,
 };

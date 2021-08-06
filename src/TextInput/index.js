@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
+import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.2625rem 0.375rem";
@@ -80,7 +81,7 @@ const TextInput = (props) => {
 
 TextInput.defaultProps = {
   id: "",
-  theme: {},
+  theme: theme,
   disabled: false,
   onChange: () => {},
   className: "",

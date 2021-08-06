@@ -1,10 +1,7 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 import "./react-datepicker.css";
-import BaseContainer from "../Base/BaseContainer";
-import { getLighterColor } from "../Base/ColorBlender";
-import styles from "./styles.module.css";
 
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
@@ -16,31 +13,54 @@ import theme from "../_utils/theme";
 //   -webkit-appearance: none;
 // }
 
+const paddingBySize = (size) => {
+  if (size === "small") return "0.325rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.45rem 0.375rem";
+};
+
 const Container = styled.span((props) => ({
   "& input": {
-    fontFamily: "inherit",
     appearance: "none",
     outline: "none",
-    backgroundColor: "var(--color-base-backgroud)",
-    transition: "all var(--transition-base-duration)",
-    fontSize: "var(--font-size-base)",
-    border: "0px",
-    borderBottom: "2px solid var(--color-base-blue)",
-    height: "100%",
-    width: "100%",
-    padding: "0px",
+    border: "none",
+    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
+    transition: "all 250ms",
+    display: "inline-block",
+    flexDirection: "row",
+    justifyContent: "center",
+    cursor: "text",
+    padding: paddingBySize(props.size),
+    fontSize: props.theme.typography[props.size].fontSize,
+    backgroundColor: props.theme.palette[props.color].lighter,
+    color: props.theme.palette[props.color].textDark,
+    borderRadius: "0.125rem",
     boxSizing: "border-box",
+    fontFamily: props.theme.typography.fontFamily,
+
+    // appearance: "none",
+    // outline: "none",
+    // backgroundColor: "var(--color-base-backgroud)",
+    // transition: "all var(--transition-base-duration)",
+    // fontSize: "var(--font-size-base)",
+    // border: "0px",
+    // borderBottom: "2px solid var(--color-base-blue)",
+    // height: "100%",
+    // width: "100%",
+    // padding: "0px",
+    // boxSizing: "border-box",
 
     "&:focus": {
-      backgroundColor: "var(--color-base-white)",
+      backgroundColor: props.theme.palette.common.white,
+      color: props.theme.palette.common.black,
     },
 
     "&:disabled": {
-      backgroundColor: "var(--color-base-gray-lighter)",
-      color: "var(--color-base-gray-darker)",
-      cursor: "inherit",
-      borderBottom: "2px solid var(--color-base-gray-darker)",
+      backgroundColor: props.theme.palette.gray[200],
+      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+      color: props.theme.palette.gray.textLight,
       opacity: 0.7,
+      cursor: "default",
     },
   },
 }));
@@ -50,7 +70,7 @@ const DateInput = (props) => {
     value,
     id,
     onChange,
-    format,
+    dateFormat,
     disabled,
     size,
     color,
@@ -73,16 +93,49 @@ const DateInput = (props) => {
   };
 
   return (
-    <Container>
+    <Container {...{ theme, size, color }}>
       <DatePicker
         selected={getValue()}
         onChange={handleChange}
-        dateFormat={format ? format : "dd.MM.yyyy."}
+        dateFormat={dateFormat ? dateFormat : "dd.MM.yyyy."}
         disabled={disabled}
         className={className}
       />
     </Container>
   );
+};
+
+DateInput.defaultProps = {
+  id: "",
+  theme: theme,
+  disabled: false,
+  onChange: () => {},
+  className: "",
+  preventDefault: true,
+  size: "small",
+  color: "primary",
+  value: "",
+  dateFormat: "dd.MM.yyyy.",
+};
+
+DateInput.propTypes = {
+  theme: PropTypes.object.isRequired,
+  id: PropTypes.string,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  preventDefault: PropTypes.bool,
+  value: PropTypes.string,
+  dateFormat: PropTypes.string,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "gray",
+  ]),
 };
 
 export default DateInput;

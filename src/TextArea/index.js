@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.3rem 0.375rem";
@@ -84,7 +85,7 @@ const TextArea = (props) => {
 TextArea.defaultProps = {
   id: "",
   rows: 1,
-  theme: {},
+  theme: theme,
   disabled: false,
   onChange: () => {},
   className: "",
