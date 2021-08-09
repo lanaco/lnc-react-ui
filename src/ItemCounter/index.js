@@ -23,11 +23,11 @@ const ItemCounter = (props) => {
         {Items.map((item, i) => (
           <div className={styles.container} key={i}>
             <div
-              className={styles.number + " " + getClassForType(item.Type.code)}
+              className={styles.number + " " + getClassForType(item.type.code)}
             >
-              {item.Number}
+              {item.number}
             </div>
-            <div className={styles.number}># of {item.Description}</div>
+            <div className={styles.number}># of {item.description}</div>
           </div>
         ))}
       </div>
