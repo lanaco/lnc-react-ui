@@ -10,9 +10,12 @@ export default {
 
 const Template = (args) => (
   <>
-    <p>
+    <div style={{ padding: "10px" }} label="" id="check1">
       <CheckBox {...args} />
-    </p>
+    </div>
+    <div style={{ padding: "10px" }}>
+      <CheckBox {...args} label="Checkbox" id="check2" />
+    </div>
   </>
 );
 
@@ -25,5 +28,5 @@ Default.args = {
   color: "secondary",
   size: "small",
   theme: theme,
-  label: "Checkbox",
+  // label: "Checkbox",
 };

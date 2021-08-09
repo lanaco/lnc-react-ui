@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { mergeCSS } from "../Helper/helper";
-import IconButton from "../IconButton/index";
+import Button from "../Button/index";
 
 const Filter = (props) => {
   //====== PROPS ======
 
-  const { onToggleState, onRemove, id, Icons } = props;
+  const { onToggleState, onRemove, id } = props;
 
   //====== EVENTS ======
 
@@ -73,11 +73,7 @@ const Filter = (props) => {
         {columnValue}
       </span>
       <span className={styles.remove}>
-        <IconButton
-          iconClassName={Icons ? Icons.CloseX : "lnc-x"}
-          spanClassName={styles.xIcon}
-          onClick={remove}
-        />
+        <Button icon={"times"} spanClassName={styles.xIcon} onClick={remove} />
       </span>
     </div>
   );

@@ -193,18 +193,18 @@ const ToggleSwitch = (props) => {
 
   function handleChange(e) {
     if (preventDefault) e.preventDefault();
-    onChange(id, e.target.checked);
+    onChange(id, !value);
   }
 
   let themeProps = { theme, size, color };
 
   return (
-    <Label {...themeProps} className={className}>
+    <Label {...themeProps} className={className} onClick={handleChange}>
       <Text {...themeProps}>{label}</Text>
       <Input
         {...themeProps}
         type="checkbox"
-        onChange={handleChange}
+        onChange={() => {}}
         checked={value ? "checked" : ""}
         disabled={disabled}
       />
@@ -227,7 +227,7 @@ ToggleSwitch.defaultProps = {
 
 ToggleSwitch.propTypes = {
   theme: PropTypes.object.isRequired,
-  id: PropTypes.string,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,

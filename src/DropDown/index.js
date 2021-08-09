@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.275rem 0.375rem";
+  if (size === "small") return "0.3rem 0.375rem";
   if (size === "medium") return "0.3625rem 0.375rem";
   if (size === "large") return "0.4rem 0.375rem";
 };
@@ -33,7 +33,9 @@ const Select = styled.select((props) => ({
   },
 }));
 
-const Option = styled.option((props) => ({}));
+const Option = styled.option((props) => ({
+  fontFamily: props.theme.typography.fontFamily,
+}));
 
 const DropDown = (props) => {
   const {

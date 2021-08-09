@@ -107,16 +107,20 @@
 }
 
 .dataview-container {
-  box-shadow: 0 0 20px #bebebe;
+  /* box-shadow: 0 0 20px #bebebe; */
 }
 
 .dataview-container-inner {
   display: flex;
-  align-content: center;
+  flex-direction: row;
+  justify-content: left;
   align-items: center;
-  /* box-shadow: 0 0 20px #bebebe; */
-  padding: 2px;
-  border-bottom: 1px solid #ccc;
+
+  border: 1.5px solid rgba(165, 164, 164, 0.4);
+  border-radius: 3px;
+  padding: 4px;
+  font-size: 12px;
+  font-family: "Ubuntu";
 }
 
 .dataview-form-container {
@@ -206,15 +210,16 @@
 /*================== PAGINATION  =================*/
 
 .pagination-container {
-  /* display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: left; */
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  max-height: 34px;
+
+  border: 1.5px solid rgba(165, 164, 164, 0.4);
+  border-radius: 3px;
+  padding: 4px;
+  font-size: 12px;
+  font-family: "Ubuntu";
 }
 
 .pagination-item {

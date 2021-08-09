@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import FormMovement from "./FormMovement";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import Table from "./Table";
-import IconButton from "../IconButton/index";
+import Button from "../Button/index";
 import { default as TablePagination } from "./Pagination";
 import { useImmer } from "use-immer";
 import { v4 as uuidv4 } from "uuid";
@@ -11,7 +11,6 @@ import FormMode from "../DataView/Constants/FormMode";
 import { freeze } from "../Helper/helper";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
-import Button from "../Button";
 
 const getDefaultState = () => {
   return {
@@ -1242,12 +1241,12 @@ const Grid = React.forwardRef((props, ref) => {
     if (state.Options.EnableAdd && state.General.CurrentView !== "FormView")
       return (
         <div className={style["dataview-flex-item"]}>
-          <IconButton
-            tooltipText={Localization.Add || "Add"}
+          <Button
+            tooltip={Localization.Add || "Add"}
             onClick={goToAdd}
             disabled={freezeLoading()}
-            iconClassName="lnc-plus"
-          ></IconButton>
+            icon="plus"
+          ></Button>
         </div>
       );
 
@@ -1401,36 +1400,64 @@ const Grid = React.forwardRef((props, ref) => {
     var id = state.General.IsLookup ? SelectedData.Identificator : "Guid";
 
     return (
-      <div className={style["dataview-table-pagination-container"]}>
-        <div className={style["dataview-table-container"]}>
-          <Table
-            IsLoading={state.General.IsLoading}
-            Columns={state.Table.Columns}
-            Data={state.Table.Data}
-            OnRowClick={onTableRowClick}
-            //---------------------------------
-            Ordering={getOrderingConfig()}
-            Selection={{
-              SelectedData: state.Table.SelectedData,
-              SelectedEntirePage: state.Table.SelectedEntirePage,
-              SelectionIndicator: id,
-              OnSelection: onSelect,
-              OnSelectAll: onSelectAll,
-            }}
-            Options={{
-              IsLookup: state.General.IsLookup,
-              ReadOnly: state.Options.ReadOnly,
-              EnableSelection: state.Options.EnableSelection,
-              EnableOrdering: state.Options.EnableOrdering,
-              SelectionType: state.Table.SelectionType,
-            }}
-            Localization={Localization.TableView || {}}
-          />
-        </div>
-        <div className={style["dataview-pagination-container"]}>
+      <Table
+        IsLoading={state.General.IsLoading}
+        Columns={state.Table.Columns}
+        Data={state.Table.Data}
+        OnRowClick={onTableRowClick}
+        //---------------------------------
+        Ordering={getOrderingConfig()}
+        Selection={{
+          SelectedData: state.Table.SelectedData,
+          SelectedEntirePage: state.Table.SelectedEntirePage,
+          SelectionIndicator: id,
+          OnSelection: onSelect,
+          OnSelectAll: onSelectAll,
+        }}
+        Options={{
+          IsLookup: state.General.IsLookup,
+          ReadOnly: state.Options.ReadOnly,
+          EnableSelection: state.Options.EnableSelection,
+          EnableOrdering: state.Options.EnableOrdering,
+          SelectionType: state.Table.SelectionType,
+        }}
+        Localization={Localization.TableView || {}}
+      />
+    );
+
+    return (
+      <>
+        <div className={style["dataview-table-pagination-container"]}>
+          <div className={style["dataview-table-container"]}>
+            <Table
+              IsLoading={state.General.IsLoading}
+              Columns={state.Table.Columns}
+              Data={state.Table.Data}
+              OnRowClick={onTableRowClick}
+              //---------------------------------
+              Ordering={getOrderingConfig()}
+              Selection={{
+                SelectedData: state.Table.SelectedData,
+                SelectedEntirePage: state.Table.SelectedEntirePage,
+                SelectionIndicator: id,
+                OnSelection: onSelect,
+                OnSelectAll: onSelectAll,
+              }}
+              Options={{
+                IsLookup: state.General.IsLookup,
+                ReadOnly: state.Options.ReadOnly,
+                EnableSelection: state.Options.EnableSelection,
+                EnableOrdering: state.Options.EnableOrdering,
+                SelectionType: state.Table.SelectionType,
+              }}
+              Localization={Localization.TableView || {}}
+            />
+          </div>
+          {/* <div className={style["dataview-pagination-container"]}>
           {renderPagination()}
+        </div> */}
         </div>
-      </div>
+      </>
     );
   };
 
@@ -1482,21 +1509,32 @@ const Grid = React.forwardRef((props, ref) => {
 
   return (
     <>
-      <div className={style["dataview-container"]}>
-        {renderDeleteConfirmationBox()}
-        <div className={style["dataview-container-inner"]}>
-          {renderChangeToTableView()}
-          {renderDeleteSelectedButton()}
-          {renderGoToAddButton()}
-          {renderFormViewMovement()}
-          {renderSwitchToEditModeButton()}
-          {renderRefreshButton()}
-          {renderLookupTakeValues()}
-          <div className={style["dataview-filter-container"]}></div>
+      <div
+        style={{
+          boxShadow: "0 0 12px #bebebe",
+          borderRadius: "3px",
+          padding: "4px",
+        }}
+      >
+        <div style={{ marginBottom: "5px" }}>
+          <div className={style["dataview-container-inner"]}>
+            {renderChangeToTableView()}
+            {renderDeleteSelectedButton()}
+            {renderGoToAddButton()}
+            {renderFormViewMovement()}
+            {renderSwitchToEditModeButton()}
+            {renderRefreshButton()}
+            {renderLookupTakeValues()}
+            <div className={style["dataview-filter-container"]}></div>
+          </div>
         </div>
-        {renderTable()}
-        {renderForm()}
-        {renderDeveloperMessages()}
+        <div className={style["dataview-container"]}>
+          {renderDeleteConfirmationBox()}
+          {renderTable()}
+          {renderForm()}
+          {renderDeveloperMessages()}
+        </div>
+        <div style={{ marginTop: "6px" }}>{renderPagination()}</div>
       </div>
     </>
   );

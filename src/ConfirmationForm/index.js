@@ -25,7 +25,7 @@ const Modal = styled.div((props) => ({
   transition: "1.1s ease-out",
   visibility: "visible",
   position: "relative",
-  width: "70%",
+  width: "40%",
   borderRadius: "0.2rem",
   visibility: "visible",
 }));
@@ -72,7 +72,6 @@ const YesNoContainer = styled.div((props) => ({
 
 const ConfirmationForm = (props) => {
   const {
-    id,
     onClose,
     onConfirm,
     onDecline,
@@ -143,7 +142,6 @@ const ConfirmationForm = (props) => {
 };
 
 ConfirmationForm.defaultProps = {
-  id: "",
   open: false,
   onClose: () => {},
   onConfirm: () => {},
@@ -165,7 +163,6 @@ ConfirmationForm.defaultProps = {
 ConfirmationForm.propTypes = {
   localization: PropTypes.object,
   theme: PropTypes.object.isRequired,
-  id: PropTypes.string,
   onClose: PropTypes.func,
   onConfirm: PropTypes.func,
   onDecline: PropTypes.func,

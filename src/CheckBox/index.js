@@ -12,16 +12,20 @@ const getCheckboxCss = (props) => {
     checkHeight,
     margin,
     marginLeft,
-    padingLeft;
+    padingLeft,
+    paddingTop;
+
+  var hasLabel = props.label !== "";
 
   if (props.size === "small") {
     left = "0.4245rem";
     top = "0.08rem";
     checkWidth = "0.13rem";
     checkHeight = "0.7rem";
-    margin = "0.1375rem";
+    margin = "0.15625rem";
     marginLeft = "0";
-    padingLeft = "1.875rem";
+    padingLeft = hasLabel ? "1.875rem" : "1.0625rem";
+    paddingTop = hasLabel ? "" : "padding-top: 1.0625rem;";
     width = "1.188rem";
     height = "1.188rem";
   }
@@ -31,9 +35,10 @@ const getCheckboxCss = (props) => {
     top = "0.08rem";
     checkWidth = "0.22rem";
     checkHeight = "0.9rem";
-    margin = "0.2rem";
+    margin = "0.21875rem";
     marginLeft = "0";
-    padingLeft = "2.1875rem";
+    padingLeft = hasLabel ? "2.1875rem" : "1.375rem";
+    paddingTop = hasLabel ? "" : "padding-top: 1.3125rem;";
     width = "1.4375rem";
     height = "1.4375rem";
   }
@@ -43,9 +48,10 @@ const getCheckboxCss = (props) => {
     top = "0.08rem";
     checkWidth = "0.28rem";
     checkHeight = "1.1rem";
-    margin = "0.2625rem";
+    margin = "0.21875rem";
     marginLeft = "0";
-    padingLeft = "2.5rem";
+    padingLeft = hasLabel ? "2.5rem" : "1.625rem";
+    paddingTop = hasLabel ? "" : "padding-top: 1.6875rem;";
     width = "1.6875rem";
     height = "1.6875rem";
   }
@@ -57,6 +63,7 @@ const getCheckboxCss = (props) => {
       position: relative;
       padding: 0.25rem;
       padding-left: ${padingLeft};
+      ${paddingTop}
       cursor: pointer;
       font-size: ${props.theme.typography[props.size].fontSize};
       -webkit-user-select: none;
@@ -156,18 +163,22 @@ const CheckBox = (props) => {
 
   const handleChange = (e) => {
     if (preventDefault) e.preventDefault();
-    onChange(id, e.target.checked);
+
+    onChange(id, !checked);
   };
 
   return (
     <>
       <Global styles={getCheckboxCss(props)} />
-      <label className={`c-${id}-container ${className}`}>
+      <label
+        className={`c-${id}-container ${className}`}
+        onClick={handleChange}
+      >
         {label}
         <input
           type="checkbox"
-          checked={checked ? "checked" : ""}
-          onChange={handleChange}
+          checked={checked}
+          onChange={() => {}}
           disabled={disabled}
         />
         <span className={`c-${id}-checkmark`}></span>
@@ -190,7 +201,7 @@ CheckBox.defaultProps = {
 
 CheckBox.propTypes = {
   theme: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import BaseContainer from "../Base/BaseContainer";
 import { getLighterColor } from "../Base/ColorBlender";
-import IconButton from "../IconButton/index.js";
+import Button from "../Button/index.js";
 import styles from "./styles.module.css";
 
 const usePrevious = (value) => {
@@ -176,21 +176,21 @@ const DropdownLookup = (props) => {
             }
           >
             {State.Loading === false ? (
-              <IconButton
-                iconClassName={props.closeIconClassName}
+              <Button
+                icon={"times-circle"}
                 onClick={onClearSelection}
                 disabled={props.disabled}
                 iconCssClass={styles.closeButtonPadding}
                 inputCssClass={styles.closeAndReloadButtonPadding}
-              ></IconButton>
+              />
             ) : (
-              <IconButton
-                iconClassName={props.closeAndReloadButtonPadding}
+              <Button
+                icon={"sync-alt"}
                 onClick={onClearSelection}
                 disabled={props.disabled}
                 iconCssClass={styles.closeAndReloadButtonPadding}
                 inputCssClass={styles.closeAndReloadButtonPadding}
-              ></IconButton>
+              />
             )}
           </span>
         </div>
@@ -222,21 +222,21 @@ const DropdownLookup = (props) => {
           }
         >
           {State.Loading === false ? (
-            <IconButton
-              iconClassName={props.closeIconClassName}
+            <Button
+              icon={"times"}
               onClick={onClearSelection}
               disabled={props.disabled}
               iconCssClass={styles.closeAndReloadButtonPadding}
               inputCssClass={styles.closeAndReloadButtonPadding}
-            ></IconButton>
+            />
           ) : (
-            <IconButton
-              iconClassName={props.reloadIconClassName}
+            <Button
+              icon={"sync-alt"}
               onClick={onClearSelection}
               disabled={props.disabled}
               iconCssClass={styles.closeAndReloadButtonPadding}
               inputCssClass={styles.closeAndReloadButtonPadding}
-            ></IconButton>
+            />
           )}
         </span>
       </div>

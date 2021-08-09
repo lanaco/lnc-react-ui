@@ -25,7 +25,7 @@ const Modal = styled.div((props) => ({
   transition: "1.1s ease-out",
   visibility: "visible",
   position: "relative",
-  width: "70%",
+  width: props.width,
   borderRadius: "0.2rem",
   visibility: "visible",
 }));
@@ -60,7 +60,6 @@ const Content = styled.div((props) => ({
 
 function ComponentBox(props) {
   const {
-    id,
     onClose,
     open,
     zIndex,
@@ -72,9 +71,10 @@ function ComponentBox(props) {
     children,
     clickOutsideToClose,
     showHeader,
+    width,
   } = props;
 
-  let themeProps = { theme, size, color, zIndex, open };
+  let themeProps = { theme, size, color, zIndex, open, width };
 
   const onClickOutsideModal = (event) => {
     if (event.target !== event.currentTarget) return;
@@ -106,7 +106,6 @@ function ComponentBox(props) {
 }
 
 ComponentBox.defaultProps = {
-  id: "",
   open: false,
   onClose: () => {},
   className: "",
@@ -117,11 +116,11 @@ ComponentBox.defaultProps = {
   theme: theme,
   clickOutsideToClose: false,
   showHeader: true,
+  width: "70%",
 };
 
 ComponentBox.propTypes = {
   theme: PropTypes.object.isRequired,
-  id: PropTypes.string,
   onClose: PropTypes.func,
   className: PropTypes.string,
   header: PropTypes.string,
@@ -129,6 +128,7 @@ ComponentBox.propTypes = {
   open: PropTypes.bool,
   showHeader: PropTypes.bool,
   clickOutsideToClose: PropTypes.bool,
+  width: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DropDown from "../DropDown/index";
-import IconButton from "../IconButton/index";
+import Button from "../Button/index";
 import style from "./style.module.css";
 
 const Pagination = (props) => {
@@ -72,6 +72,7 @@ const Pagination = (props) => {
     return (
       <div
         className={[style["pagination-item"], style["ubuntuFont"]].join(" ")}
+        key={-1}
       >
         {getShowingNumberOfRows()}
       </div>
@@ -79,64 +80,68 @@ const Pagination = (props) => {
   };
 
   const renderCurrentPage = () => {
-    return <div className={style["pagination-item"]}>{CurrentPage}</div>;
+    return (
+      <div key={0} className={style["pagination-item"]}>
+        {CurrentPage}
+      </div>
+    );
   };
 
   const renderFirst = () => {
     return (
-      <div className={style["pagination-item"]}>
-        <IconButton
-          iconClassName="lnc-left-double"
+      <div className={style["pagination-item"]} key={1}>
+        <Button
+          icon="angle-double-left"
           onClick={() => goToFirstPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToFirstPage])}
-          tooltipText={Localization.First}
-        ></IconButton>
+          tooltip={Localization.First}
+        />
       </div>
     );
   };
 
   const renderPrevious = () => {
     return (
-      <div className={style["pagination-item"]}>
-        <IconButton
-          iconClassName="lnc-left"
+      <div className={style["pagination-item"]} key={2}>
+        <Button
+          icon="angle-left"
           onClick={() => goToPreviousPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToPreviousPage])}
-          tooltipText={Localization.Previous}
-        ></IconButton>
+          tooltip={Localization.Previous}
+        />
       </div>
     );
   };
 
   const renderNext = () => {
     return (
-      <div className={style["pagination-item"]}>
-        <IconButton
-          iconClassName="lnc-right"
+      <div className={style["pagination-item"]} key={3}>
+        <Button
+          icon="angle-right"
           onClick={() => goToNextPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToNextPage])}
-          tooltipText={Localization.Next}
-        ></IconButton>
+          tooltip={Localization.Next}
+        />
       </div>
     );
   };
 
   const renderLast = () => {
     return (
-      <div className={style["pagination-item"]}>
-        <IconButton
-          iconClassName="lnc-right-double"
+      <div className={style["pagination-item"]} key={4}>
+        <Button
+          icon="angle-double-right"
           onClick={() => goToLastPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToLastPage])}
-          tooltipText={Localization.Last}
-        ></IconButton>
+          tooltip={Localization.Last}
+        />
       </div>
     );
   };
 
   const renderPageSize = () => {
     return (
-      <div className={style["pagination-item"]}>
+      <div className={style["pagination-item"]} key={5}>
         <DropDown
           items={getPageSizes()}
           value={PageSize}
@@ -152,12 +157,12 @@ const Pagination = (props) => {
     if (!EnableExports) return <></>;
 
     return (
-      <span className={style["export-buttons"]}>
-        <IconButton
-          tooltipText={Localization.ExportToExcel}
+      <span className={style["export-buttons"]} key={6}>
+        <Button
+          tooltip={Localization.ExportToExcel}
           onClick={exportToExcel}
           disabled={freezeLoading()}
-          iconClassName="lnc-file-excel"
+          icon="lnc-file-excel"
         />
       </span>
     );
