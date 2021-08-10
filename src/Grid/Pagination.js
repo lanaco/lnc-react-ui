@@ -2,29 +2,68 @@ import React from "react";
 import PropTypes from "prop-types";
 import DropDown from "../DropDown/index";
 import Button from "../Button/index";
-import style from "./style.module.css";
+import styled from "@emotion/styled";
+import theme from "../_utils/theme";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+
+  border: 1.5px solid rgba(165, 164, 164, 0.4);
+  border-radius: 3px;
+  padding: 4px;
+  font-size: ${theme.typography.small.fontSize};
+  font-family: ${theme.typography.fontFamily};
+`;
+
+const Item = styled.div`
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+`;
+
+const ItemText = styled.div`
+  padding-left: 6px;
+  padding-right: 12px;
+  display: flex;
+  align-items: center;
+`;
+
+const ItemCurrentPage = styled.div`
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+`;
+
+const ItemDropdown = styled.div`
+  padding-left: 14px;
+  display: flex;
+  align-items: center;
+`;
 
 const Pagination = (props) => {
   //======================== PROPS ============================================
 
   const {
-    EnableExports = false,
-    CurrentPage = 1,
-    IsLoading = false,
-    DataCount = 0,
-    PageSizes = [10, 20, 30, 40, 50, 100],
-    PageSize = 10,
-    OnPageSizeChanged = () => {},
-    LoadedDataCount = 0,
-    CanGoToNextPage = false,
-    CanGoToPreviousPage = false,
-    CanGoToFirstPage = false,
-    CanGoToLastPage = false,
-    goToNextPage = () => {},
-    goToPreviousPage = () => {},
-    goToFirstPage = () => {},
-    goToLastPage = () => {},
-    Export = () => {},
+    EnableExports,
+    CurrentPage,
+    IsLoading,
+    DataCount,
+    PageSizes,
+    PageSize,
+    OnPageSizeChanged,
+    LoadedDataCount,
+    CanGoToNextPage,
+    CanGoToPreviousPage,
+    CanGoToFirstPage,
+    CanGoToLastPage,
+    goToNextPage,
+    goToPreviousPage,
+    goToFirstPage,
+    goToLastPage,
+    Export,
   } = props.Config || {};
 
   const { Localization = {} } = props;
@@ -69,79 +108,68 @@ const Pagination = (props) => {
   //======================== RENDER ==========================================
 
   const renderRowInformation = () => {
-    return (
-      <div
-        className={[style["pagination-item"], style["ubuntuFont"]].join(" ")}
-        key={-1}
-      >
-        {getShowingNumberOfRows()}
-      </div>
-    );
+    return <ItemText key={-1}>{getShowingNumberOfRows()}</ItemText>;
   };
 
   const renderCurrentPage = () => {
-    return (
-      <div key={0} className={style["pagination-item"]}>
-        {CurrentPage}
-      </div>
-    );
+    return <ItemCurrentPage key={0}>{CurrentPage}</ItemCurrentPage>;
   };
 
   const renderFirst = () => {
     return (
-      <div className={style["pagination-item"]} key={1}>
+      <Item key={1}>
         <Button
           icon="angle-double-left"
           onClick={() => goToFirstPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToFirstPage])}
           tooltip={Localization.First}
         />
-      </div>
+      </Item>
     );
   };
 
   const renderPrevious = () => {
     return (
-      <div className={style["pagination-item"]} key={2}>
+      <Item key={2}>
         <Button
           icon="angle-left"
           onClick={() => goToPreviousPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToPreviousPage])}
           tooltip={Localization.Previous}
         />
-      </div>
+      </Item>
     );
   };
 
   const renderNext = () => {
     return (
-      <div className={style["pagination-item"]} key={3}>
+      <Item key={3}>
         <Button
           icon="angle-right"
           onClick={() => goToNextPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToNextPage])}
           tooltip={Localization.Next}
         />
-      </div>
+      </Item>
     );
   };
 
   const renderLast = () => {
     return (
-      <div className={style["pagination-item"]} key={4}>
+      <Item key={4}>
         <Button
           icon="angle-double-right"
           onClick={() => goToLastPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToLastPage])}
           tooltip={Localization.Last}
         />
-      </div>
+      </Item>
     );
   };
 
   const renderPageSize = () => {
     return (
-      <div className={style["pagination-item"]} key={5}>
+      <ItemDropdown key={5}>
         <DropDown
           items={getPageSizes()}
           value={PageSize}
@@ -149,27 +177,27 @@ const Pagination = (props) => {
           onChange={handlePageSizeChanged}
           withoutEmpty={true}
         />
-      </div>
+      </ItemDropdown>
     );
   };
 
-  const renderExportButtons = () => {
-    if (!EnableExports) return <></>;
+  // const renderExportButtons = () => {
+  //   if (!EnableExports) return <></>;
 
-    return (
-      <span className={style["export-buttons"]} key={6}>
-        <Button
-          tooltip={Localization.ExportToExcel}
-          onClick={exportToExcel}
-          disabled={freezeLoading()}
-          icon="lnc-file-excel"
-        />
-      </span>
-    );
-  };
+  //   return (
+  //     <span className={style["export-buttons"]} key={6}>
+  //       <Button
+  //         tooltip={Localization.ExportToExcel}
+  //         onClick={exportToExcel}
+  //         disabled={freezeLoading()}
+  //         icon="lnc-file-excel"
+  //       />
+  //     </span>
+  //   );
+  // };
 
   return (
-    <div className={style["pagination-container"]}>
+    <Container>
       {renderRowInformation()}
       {renderFirst()}
       {renderPrevious()}
@@ -178,8 +206,31 @@ const Pagination = (props) => {
       {renderLast()}
       {renderPageSize()}
       {/* {renderExportButtons()} */}
-    </div>
+    </Container>
   );
+};
+
+Pagination.defaultProps = {
+  Config: {},
+  Localization: {},
+  //------------------------------
+  EnableExports: false,
+  CurrentPage: 1,
+  IsLoading: false,
+  DataCount: 0,
+  PageSizes: [10, 20, 30, 40, 50],
+  PageSize: 10,
+  OnPageSizeChanged: () => {},
+  LoadedDataCount: 0,
+  CanGoToNextPage: false,
+  CanGoToPreviousPage: false,
+  CanGoToFirstPage: false,
+  CanGoToLastPage: false,
+  goToNextPage: () => {},
+  goToPreviousPage: () => {},
+  goToFirstPage: () => {},
+  goToLastPage: () => {},
+  Export: () => {},
 };
 
 Pagination.propTypes = {

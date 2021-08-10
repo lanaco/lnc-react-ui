@@ -6,7 +6,6 @@ import Icon from "../Icon/index";
 import style from "./style.module.css";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
-
 import baseStyle from "../Base/styles.module.css";
 
 const Container = styled.div`
