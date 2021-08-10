@@ -11,6 +11,7 @@ import FormMode from "../DataView/Constants/FormMode";
 import { freeze } from "../Helper/helper";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
+import Spinner from "../Spinner/index";
 
 const getDefaultState = () => {
   return {
@@ -1398,6 +1399,21 @@ const Grid = React.forwardRef((props, ref) => {
     );
   };
 
+  const renderSpinner = () => {
+    if (!state.General.IsLoading) return <></>;
+
+    return (
+      <>
+        <div className={style["table-loader-container"]}></div>
+        <div className={style["table-loader-container-transparent"]}>
+          <div className={style["table-loader"]}>
+            {state.Table.Data.length > 2 ? <Spinner /> : <></>}
+          </div>
+        </div>
+      </>
+    );
+  };
+
   const renderTable = () => {
     if (
       state.General.CurrentView !== "TableView" &&
@@ -1408,29 +1424,32 @@ const Grid = React.forwardRef((props, ref) => {
     var id = state.General.IsLookup ? SelectedData.Identificator : "Guid";
 
     return (
-      <Table
-        IsLoading={state.General.IsLoading}
-        Columns={state.Table.Columns}
-        Data={state.Table.Data}
-        OnRowClick={onTableRowClick}
-        //---------------------------------
-        Ordering={getOrderingConfig()}
-        Selection={{
-          SelectedData: state.Table.SelectedData,
-          SelectedEntirePage: state.Table.SelectedEntirePage,
-          SelectionIndicator: id,
-          OnSelection: onSelect,
-          OnSelectAll: onSelectAll,
-        }}
-        Options={{
-          IsLookup: state.General.IsLookup,
-          ReadOnly: state.Options.ReadOnly,
-          EnableSelection: state.Options.EnableSelection,
-          EnableOrdering: state.Options.EnableOrdering,
-          SelectionType: state.Table.SelectionType,
-        }}
-        Localization={Localization.TableView || {}}
-      />
+      <div style={{ position: "relative" }}>
+        {renderSpinner()}
+        <Table
+          IsLoading={state.General.IsLoading}
+          Columns={state.Table.Columns}
+          Data={state.Table.Data}
+          OnRowClick={onTableRowClick}
+          //---------------------------------
+          Ordering={getOrderingConfig()}
+          Selection={{
+            SelectedData: state.Table.SelectedData,
+            SelectedEntirePage: state.Table.SelectedEntirePage,
+            SelectionIndicator: id,
+            OnSelection: onSelect,
+            OnSelectAll: onSelectAll,
+          }}
+          Options={{
+            IsLookup: state.General.IsLookup,
+            ReadOnly: state.Options.ReadOnly,
+            EnableSelection: state.Options.EnableSelection,
+            EnableOrdering: state.Options.EnableOrdering,
+            SelectionType: state.Table.SelectionType,
+          }}
+          Localization={Localization.TableView || {}}
+        />
+      </div>
     );
 
     return (
