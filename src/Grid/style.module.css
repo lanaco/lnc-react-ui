@@ -2,6 +2,45 @@
   font-size: 0.8em;
 }
 
+.table-loader-container {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #eceaea;
+  z-index: 10000000;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+
+.table-loader-container-transparent {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 10000000;
+}
+
+.table-loader {
+  position: absolute;
+  top: 48%;
+  left: 47%;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
 /*================== FORM MOVE  =================*/
 
 .FlexContainer {

@@ -54,3 +54,6 @@ export { default as Grid } from "./Grid";
 
 export * from "./SearchBar";
 export { default as SearchBar } from "./SearchBar";
+
+export * from "./Spinner";
+export { default as Spinner } from "./Spinner";
