@@ -20,6 +20,15 @@ const theme = {
       textDark: "white",
     },
     //---------------------
+    white: {
+      lighter: "white",
+      light: "white",
+      main: "white",
+      dark: "white",
+      text: "white",
+      textDark: "white",
+    },
+    //---------------------
     primary: {
       lighter: "#EBF9FF",
       light: "#00628F",

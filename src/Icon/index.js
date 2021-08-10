@@ -58,6 +58,7 @@ Icon.propTypes = {
     "error",
     "warning",
     "gray",
+    "white",
   ]),
 };
 

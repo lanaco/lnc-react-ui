@@ -255,13 +255,11 @@ const Table = (props) => {
         >
           {col.name}
 
-          {/* {!hideOrdering ? (
-            <div className={style["header-cell-icon"]}>
-              <Icon icon={orderingIconClass} />
-            </div>
+          {!hideOrdering ? (
+            <Icon color={"white"} icon={orderingIconClass} />
           ) : (
             <></>
-          )} */}
+          )}
         </div>
       </TableHeadCell>
     );

@@ -1217,7 +1217,7 @@ const Grid = React.forwardRef((props, ref) => {
       Form === undefined ||
       state.General.CurrentView !== "FormView"
     )
-      return <></>;
+      return false;
 
     return (
       <div className={style["dataview-flex-item"]}>
@@ -1236,9 +1236,10 @@ const Grid = React.forwardRef((props, ref) => {
   };
 
   const renderGoToAddButton = () => {
-    if (state.Options.ReadOnly || state.General.IsLookup || Form === null)
-      return <></>;
-    if (state.Options.EnableAdd && state.General.CurrentView !== "FormView")
+    if (state.Options.ReadOnly || state.General.IsLookup || Form === null) {
+      return false;
+    }
+    if (state.Options.EnableAdd && state.General.CurrentView !== "FormView") {
       return (
         <div className={style["dataview-flex-item"]}>
           <Button
@@ -1249,13 +1250,15 @@ const Grid = React.forwardRef((props, ref) => {
           ></Button>
         </div>
       );
+    }
 
     return null;
   };
 
   const renderRefreshButton = () => {
-    if (state.General.CurrentView !== "TableView" || Load === null)
-      return <></>;
+    if (state.General.CurrentView !== "TableView" || Load === null) {
+      return false;
+    }
 
     return (
       <div className={style["dataview-flex-item"]}>
@@ -1274,7 +1277,7 @@ const Grid = React.forwardRef((props, ref) => {
     if (
       state.General.IsLookup &&
       state.Table.SelectionType === TableSelectionType.MULTIPLE
-    )
+    ) {
       return (
         <div className={style["dataview-flex-item"]}>
           <Button
@@ -1287,8 +1290,9 @@ const Grid = React.forwardRef((props, ref) => {
           />
         </div>
       );
+    }
 
-    return <></>;
+    return false;
   };
 
   const renderDeleteConfirmationBox = () => {
@@ -1319,8 +1323,9 @@ const Grid = React.forwardRef((props, ref) => {
       state.General.CurrentView === "FormView" ||
       state.General.IsLookup ||
       OnDelete === null
-    )
-      return <></>;
+    ) {
+      return false;
+    }
 
     return (
       <div className={style["dataview-flex-item"]}>
@@ -1335,8 +1340,9 @@ const Grid = React.forwardRef((props, ref) => {
   };
 
   const renderChangeToTableView = () => {
-    if (Form === null || state.General.CurrentView === "TableView")
-      return <></>;
+    if (Form === null || state.General.CurrentView === "TableView") {
+      return false;
+    }
 
     return (
       <div className={style["dataview-flex-item"]}>
@@ -1363,13 +1369,13 @@ const Grid = React.forwardRef((props, ref) => {
           Localization={Localization.FormViewMovement || {}}
         />
       );
+    } else {
+      return false;
     }
-
-    return <></>;
   };
 
   const renderPagination = () => {
-    if (!state.Options.EnablePagination) return <></>;
+    if (!state.Options.EnablePagination) return false;
 
     var cfg = {
       IsLoading: state.General.IsLoading,
@@ -1383,10 +1389,12 @@ const Grid = React.forwardRef((props, ref) => {
     };
 
     return (
-      <TablePagination
-        Config={cfg}
-        Localization={Localization.Pagination || {}}
-      />
+      <div style={{ marginTop: "6px" }}>
+        <TablePagination
+          Config={cfg}
+          Localization={Localization.Pagination || {}}
+        />
+      </div>
     );
   };
 
@@ -1507,15 +1515,52 @@ const Grid = React.forwardRef((props, ref) => {
     }
   };
 
-  return (
-    <>
-      <div
-        style={{
-          boxShadow: "0 0 12px #bebebe",
-          borderRadius: "3px",
-          padding: "4px",
-        }}
-      >
+  const renderHeader = () => {
+    var x1 =
+      Form === null || state.General.CurrentView === "TableView" ? false : true;
+
+    var x2 =
+      state.Options.ReadOnly ||
+      !state.Options.EnableDelete ||
+      state.General.CurrentView === "FormView" ||
+      state.General.IsLookup ||
+      OnDelete === null
+        ? false
+        : true;
+
+    var x3 =
+      state.Options.ReadOnly || state.General.IsLookup || Form === null
+        ? false
+        : true;
+
+    var x4 =
+      state.Options.EnableFormViewMovement &&
+      Form !== null &&
+      state.General.CurrentView === "FormView" &&
+      state.Form.Mode !== "ADD"
+        ? true
+        : false;
+
+    var x5 =
+      state.Options.ReadOnly ||
+      !state.Options.EnableSwitchReadOnlyMode ||
+      Form === null ||
+      Form === undefined ||
+      state.General.CurrentView !== "FormView"
+        ? false
+        : true;
+
+    var x6 =
+      state.General.CurrentView !== "TableView" || Load === null ? false : true;
+
+    var x7 =
+      state.General.IsLookup &&
+      state.Table.SelectionType === TableSelectionType.MULTIPLE
+        ? true
+        : false;
+
+    if (x1 || x2 || x3 || x4 || x5 || x6 || x7)
+      return (
         <div style={{ marginBottom: "5px" }}>
           <div className={style["dataview-container-inner"]}>
             {renderChangeToTableView()}
@@ -1525,16 +1570,30 @@ const Grid = React.forwardRef((props, ref) => {
             {renderSwitchToEditModeButton()}
             {renderRefreshButton()}
             {renderLookupTakeValues()}
-            <div className={style["dataview-filter-container"]}></div>
           </div>
         </div>
+      );
+
+    return <></>;
+  };
+
+  return (
+    <>
+      <div
+        style={{
+          boxShadow: "0 0 12px #bebebe",
+          borderRadius: "3px",
+          padding: "4px",
+        }}
+      >
+        {renderHeader()}
         <div className={style["dataview-container"]}>
           {renderDeleteConfirmationBox()}
           {renderTable()}
           {renderForm()}
           {renderDeveloperMessages()}
         </div>
-        <div style={{ marginTop: "6px" }}>{renderPagination()}</div>
+        {renderPagination()}
       </div>
     </>
   );

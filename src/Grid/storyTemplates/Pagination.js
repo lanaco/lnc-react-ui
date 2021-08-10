@@ -26,6 +26,7 @@ const Pagination = (props) => {
     Options: {
       EnablePagination: true,
       EnableSelection: true,
+      EnableOrdering: true,
     },
     Ordering: {
       DefaultAccessor: "id",
