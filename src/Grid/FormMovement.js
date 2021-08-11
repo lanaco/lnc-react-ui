@@ -1,6 +1,13 @@
 import React from "react";
-import style from "./style.module.css";
 import Button from "../Button/index";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import theme from "../_utils/theme";
+
+const Item = styled.div`
+  padding-left: 0.1875rem;
+  padding-right: 0.25rem;
+`;
 
 const FormMovement = (props) => {
   //====== PROPS ======
@@ -16,7 +23,9 @@ const FormMovement = (props) => {
     goToPreviousItem = () => {},
   } = props.Config;
 
-  const { Localization = {} } = props;
+  const { Localization = {}, theme, size, color } = props;
+
+  const themeProps = { theme, size, color };
 
   //====== METHODS ======
 
@@ -36,53 +45,57 @@ const FormMovement = (props) => {
 
   const renderFirst = () => {
     return (
-      <div className={style["dataview-flex-item"]}>
+      <Item {...themeProps}>
         <Button
+          {...themeProps}
           icon="angle-double-left"
           onClick={goToFirstItem}
           disabled={freezeLoading([!CanGoToFirstItem])}
           tooltip={Localization.First || "First"}
         />
-      </div>
+      </Item>
     );
   };
 
   const renderLast = () => {
     return (
-      <div className={style["dataview-flex-item"]}>
+      <Item {...themeProps}>
         <Button
+          {...themeProps}
           icon="angle-double-right"
           onClick={goToLastItem}
           disabled={freezeLoading([!CanGoToLastItem])}
           tooltip={Localization.Last || "Last"}
         />
-      </div>
+      </Item>
     );
   };
 
   const renderNext = () => {
     return (
-      <div className={style["dataview-flex-item"]}>
+      <Item {...themeProps}>
         <Button
+          {...themeProps}
           icon="angle-right"
           onClick={goToNextItem}
           disabled={freezeLoading([!CanGoToNextItem])}
           tooltipText={Localization.Next || "Next"}
         />
-      </div>
+      </Item>
     );
   };
 
   const renderPrevious = () => {
     return (
-      <div className={style["dataview-flex-item"]}>
+      <Item {...themeProps}>
         <Button
+          {...themeProps}
           icon="angle-left"
           onClick={goToPreviousItem}
           disabled={freezeLoading([!CanGoToPreviousItem])}
           tooltip={Localization.Previous || "Previous"}
         />
-      </div>
+      </Item>
     );
   };
 
@@ -94,6 +107,18 @@ const FormMovement = (props) => {
       {renderLast()}
     </>
   );
+};
+
+FormMovement.defaultProps = {
+  theme: theme,
+  size: "small",
+  color: "primary",
+};
+
+FormMovement.propTypes = {
+  theme: PropTypes.object.isRequired,
+  size: PropTypes.string,
+  color: PropTypes.string,
 };
 
 export default FormMovement;
