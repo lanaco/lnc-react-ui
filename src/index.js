@@ -57,3 +57,6 @@ export { default as SearchBar } from "./SearchBar";
 
 export * from "./Spinner";
 export { default as Spinner } from "./Spinner";
+
+export * from "./Tabs";
+export { default as Spinner } from "./Tabs";

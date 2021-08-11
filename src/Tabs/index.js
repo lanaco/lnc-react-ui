@@ -3,10 +3,25 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
+const paddingBySize = (size) => {
+  if (size === "small") {
+    return "padding: 0.3875rem 0.75rem;";
+  }
+
+  if (size === "medium") {
+    return "padding: 0.45rem 0.75rem;";
+  }
+
+  if (size === "large") {
+    return "padding: 0.5125rem 0.75rem;";
+  }
+};
+
 const Container = styled.div`
   overflow: hidden;
-  border: 1px solid #ccc;
   background-color: #f1f1f1;
+  border-radius: 0.1875rem 0.1875rem 0 0;
+  background-color: ${(props) => props.theme.palette[props.color].main};
 `;
 
 const Tab = styled.button`
@@ -15,25 +30,46 @@ const Tab = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+  ${(props) => paddingBySize(props.size)}
+  transition: 0.25s;
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  color: ${(props) => props.theme.palette[props.color].text};
 
   &:hover {
-    background-color: #ddd;
+    background-color: ${(props) => props.theme.palette[props.color].light};
   }
 
-  ${(props) => (props.active ? "background-color: #ccc;" : "")}
+  background-color: ${(props) =>
+    props.active ? props.theme.palette[props.color].light : "inherit"};
 `;
 
 const ContentPanel = styled.div`
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
+  padding: 0.375rem;
+  border: 0.09375rem solid ${(props) => props.theme.palette[props.color].main};
   border-top: none;
+  border-radius: 0 0 0.1875rem 0.1875rem;
+`;
+
+const Content = styled.div`
+  ${(props) => (props.active ? "display: block;" : "display: none;")}
+`;
+
+const Footer = styled.div`
+  padding: 0.375rem 0 0 0;
+  border-top: 0.09375rem solid #dee1e680;
 `;
 
 const Tabs = (props) => {
-  const { className, size, color, theme, initialActiveTab, tabs } = props;
+  const {
+    className,
+    size,
+    color,
+    theme,
+    initialActiveTab,
+    tabs,
+    footer,
+  } = props;
 
   const [active, setActive] = useState(null);
 
@@ -41,32 +77,40 @@ const Tabs = (props) => {
 
   useEffect(() => {
     if (initialActiveTab && initialActiveTab.render)
-      setActive(initialActiveTab);
+      setActive(initialActiveTab.id);
   }, []);
 
   const selectTab = (id) => setActive(id);
 
   const renderContent = () => {
-    var activeTab = tabs.find((tab) => tab.id === active);
-
-    if (activeTab && activeTab.render) {
-      return activeTab.render();
-    }
-
-    return <></>;
+    return tabs.map((tab) => {
+      return (
+        <Content {...themeProps} active={tab.id === active}>
+          {tab.render()}
+        </Content>
+      );
+    });
   };
 
   return (
     <div>
       <Container {...themeProps} className={className}>
         {tabs.map((tab) => (
-          <Tab active={active === tab.id} onClick={() => selectTab(tab.id)}>
+          <Tab
+            {...themeProps}
+            active={active === tab.id}
+            onClick={() => selectTab(tab.id)}
+          >
             {tab.header}
           </Tab>
         ))}
       </Container>
 
-      <ContentPanel>{renderContent()}</ContentPanel>
+      <ContentPanel {...themeProps}>
+        {renderContent()}
+
+        {footer ? <Footer>{footer()}</Footer> : <></>}
+      </ContentPanel>
     </div>
   );
 };
@@ -76,11 +120,15 @@ Tabs.defaultProps = {
   size: "small",
   color: "primary",
   theme: theme,
+  initialActiveTab: null,
+  tabs: [],
+  footer: null,
 };
 
 Tabs.propTypes = {
   theme: PropTypes.object.isRequired,
   className: PropTypes.string,
+  footer: PropTypes.func,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
