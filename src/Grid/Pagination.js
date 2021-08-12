@@ -212,7 +212,12 @@ const Pagination = (props) => {
 
 Pagination.defaultProps = {
   Config: {},
-  Localization: {},
+  Localization: {
+    First: "First",
+    Last: "Last",
+    Next: "Next",
+    Previous: "Previous",
+  },
   //------------------------------
   EnableExports: false,
   CurrentPage: 1,

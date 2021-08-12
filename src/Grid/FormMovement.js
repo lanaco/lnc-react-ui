@@ -113,12 +113,21 @@ FormMovement.defaultProps = {
   theme: theme,
   size: "small",
   color: "primary",
+  Config: {},
+  Localization: {
+    First: "First",
+    Last: "Last",
+    Next: "Next",
+    Previous: "Previous",
+  },
 };
 
 FormMovement.propTypes = {
   theme: PropTypes.object.isRequired,
   size: PropTypes.string,
   color: PropTypes.string,
+  Config: PropTypes.object,
+  Localization: PropTypes.object,
 };
 
 export default FormMovement;

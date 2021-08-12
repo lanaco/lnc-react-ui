@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import style from "./style.module.css";
 import FormMovement from "./FormMovement";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import Table from "./Table";
@@ -93,17 +92,17 @@ const getDefaultState = () => {
   };
 };
 
-const getBorderSyle = (style, read, theme, color) => {
+const getBorderSyle = (borderStyle, read, theme, color) => {
   var css = "";
   var borderColor = "";
 
-  if (style === "edit") borderColor = theme.palette.warning.main;
+  if (borderStyle === "edit") borderColor = theme.palette.warning.main;
 
-  if (style === "success") {
+  if (borderStyle === "success") {
     borderColor = theme.palette.success.main;
   }
 
-  if (style === "add") {
+  if (borderStyle === "add") {
     borderColor = theme.palette[color].main;
   }
 
@@ -149,7 +148,8 @@ const FormContainer = styled.div`
   height: 100%;
   overflow-y: auto;
   max-height: calc(100vh - 120px);
-  ${(props) => getBorderSyle(props.style, props.read, props.theme, props.color)}
+  ${(props) =>
+    getBorderSyle(props.borderStyle, props.read, props.theme, props.color)}
 `;
 
 const HeaderContainer = styled.div`
@@ -171,6 +171,50 @@ const FlexItem = styled.div`
   padding-right: 4px;
   font-size: 1.4em;
   max-height: 40px;
+`;
+
+const DeveloperMessageContainer = styled.div`
+  margin-top: 5px;
+  padding: 8px;
+  border: 2px solid rgba(255, 0, 0, 0.725);
+  background-color: rgba(252, 79, 79, 0.104);
+  font-size: 11px;
+`;
+
+const DeveloperMessage = styled.div`
+  color: rgb(180, 3, 3);
+`;
+
+const LoaderContainer = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #eceaea;
+  z-index: 10000000;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+`;
+
+const LoaderContainerTransparent = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 10000000;
+`;
+
+const Loader = styled.div`
+  position: absolute;
+  top: 48%;
+  left: 47%;
+`;
+
+const DivRelative = styled.div`
+  position: relative;
 `;
 
 const Grid = React.forwardRef((props, ref) => {
@@ -1277,13 +1321,11 @@ const Grid = React.forwardRef((props, ref) => {
   const renderDeveloperMessages = () => {
     if (errors.length > 0 && props.Developer)
       return (
-        <div className={style["developer-messages-container"]}>
+        <DeveloperMessageContainer>
           {errors.map((x, i) => (
-            <div key={i} className={style["developer-message"]}>
-              {x}
-            </div>
+            <DeveloperMessage key={i}>{x}</DeveloperMessage>
           ))}
-        </div>
+        </DeveloperMessageContainer>
       );
 
     return <></>;
@@ -1483,12 +1525,10 @@ const Grid = React.forwardRef((props, ref) => {
 
     return (
       <>
-        <div className={style["table-loader-container"]}></div>
-        <div className={style["table-loader-container-transparent"]}>
-          <div className={style["table-loader"]}>
-            {state.Table.Data.length > 2 ? <Spinner /> : <></>}
-          </div>
-        </div>
+        <LoaderContainer></LoaderContainer>
+        <LoaderContainerTransparent>
+          <Loader>{state.Table.Data.length > 2 ? <Spinner /> : <></>}</Loader>
+        </LoaderContainerTransparent>
       </>
     );
   };
@@ -1503,7 +1543,7 @@ const Grid = React.forwardRef((props, ref) => {
     var id = state.General.IsLookup ? SelectedData.Identificator : "Guid";
 
     return (
-      <div style={{ position: "relative" }}>
+      <DivRelative>
         {renderSpinner()}
         <Table
           IsLoading={state.General.IsLoading}
@@ -1528,7 +1568,7 @@ const Grid = React.forwardRef((props, ref) => {
           }}
           Localization={Localization.TableView || {}}
         />
-      </div>
+      </DivRelative>
     );
   };
 
@@ -1542,7 +1582,7 @@ const Grid = React.forwardRef((props, ref) => {
 
     var component = (
       <FormContainer
-        style={getBorderStyleProp()}
+        borderStyle={getBorderStyleProp()}
         read={state.Form.Mode === FormMode.READ}
         {...themeProps}
       >
@@ -1659,6 +1699,32 @@ Grid.defaultProps = {
   theme: theme,
   size: "small",
   color: "primary",
+  Columns: [],
+  Data: [],
+  Config: {},
+  Form: null,
+  Pagination: {},
+  Load: null,
+  Localization: {},
+  SelectedData: {},
+  OnChange: null,
+  Developer: false,
+};
+
+Grid.propTypes = {
+  theme: PropTypes.object.isRequired,
+  size: PropTypes.string,
+  color: PropTypes.string,
+  Columns: PropTypes.array,
+  Data: PropTypes.array,
+  Config: PropTypes.object,
+  Form: PropTypes.func,
+  Pagination: PropTypes.object,
+  Load: PropTypes.func,
+  Localization: PropTypes.object,
+  SelectedData: PropTypes.object,
+  OnChange: PropTypes.func,
+  Developer: PropTypes.bool,
 };
 
 export default Grid;
