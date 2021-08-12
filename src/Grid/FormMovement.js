@@ -124,8 +124,15 @@ FormMovement.defaultProps = {
 
 FormMovement.propTypes = {
   theme: PropTypes.object.isRequired,
-  size: PropTypes.string,
-  color: PropTypes.string,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "gray",
+  ]),
   Config: PropTypes.object,
   Localization: PropTypes.object,
 };

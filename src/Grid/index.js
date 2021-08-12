@@ -3,7 +3,7 @@ import FormMovement from "./FormMovement";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import Table from "./Table";
 import Button from "../Button/index";
-import { default as TablePagination } from "./Pagination";
+import { default as TablePagination } from "../Pagination/index";
 import { useImmer } from "use-immer";
 import { v4 as uuidv4 } from "uuid";
 import FormMode from "../DataView/Constants/FormMode";
@@ -1513,7 +1513,7 @@ const Grid = React.forwardRef((props, ref) => {
     return (
       <PaginationContainer>
         <TablePagination
-          Config={cfg}
+          {...cfg}
           Localization={Localization.Pagination || {}}
         />
       </PaginationContainer>
