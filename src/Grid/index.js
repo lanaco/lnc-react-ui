@@ -13,6 +13,10 @@ import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
 import Spinner from "../Spinner/index";
 
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import theme from "../_utils/theme";
+
 const getDefaultState = () => {
   return {
     General: {
@@ -89,10 +93,93 @@ const getDefaultState = () => {
   };
 };
 
+const getBorderSyle = (style, read, theme, color) => {
+  var css = "";
+  var borderColor = "";
+
+  if (style === "edit") borderColor = theme.palette.warning.main;
+
+  if (style === "success") {
+    borderColor = theme.palette.success.main;
+  }
+
+  if (style === "add") {
+    borderColor = theme.palette[color].main;
+  }
+
+  if (read) {
+    css += `
+      &:hover {
+        cursor: not-allowed;
+      }
+
+      & * {
+        pointer-events: none;
+        opacity: 1;
+      }
+    `;
+  }
+
+  css += `
+      border-top: 4.5px solid ${borderColor};
+      padding-top: 10px;
+    `;
+
+  return css;
+};
+
+const Container = styled.div`
+  box-shadow: 0 0 12px #bebebe;
+  borderradius: 3px;
+  padding: 4px;
+`;
+
+const TableContainer = styled.div`
+  font-family: var(--font-base-ubuntu);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`;
+
+const PaginationContainer = styled.div`
+  margin-top: 6px;
+`;
+
+const FormContainer = styled.div`
+  height: 100%;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
+  ${(props) => getBorderSyle(props.style, props.read, props.theme, props.color)}
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 5px;
+
+  border: 1.5px solid rgba(165, 164, 164, 0.4);
+  border-radius: 3px;
+  padding: 4px;
+  font-size: 12px;
+  font-family: "Ubuntu";
+`;
+
+const FlexItem = styled.div`
+  padding-left: 3px;
+  padding-right: 4px;
+  font-size: 1.4em;
+  max-height: 40px;
+`;
+
 const Grid = React.forwardRef((props, ref) => {
   //====================== PROPS ======================================================
 
   const {
+    theme,
+    size,
+    color,
     Columns = [],
     Data = [],
     Config = {},
@@ -134,6 +221,8 @@ const Grid = React.forwardRef((props, ref) => {
     SwitchToTableViewAfterAdd = () => true,
     SwitchToTableViewAfterEdit = () => false,
   } = props.Hooks || {};
+
+  let themeProps = { theme, size, color };
 
   //====================== STATE ======================================================
 
@@ -652,32 +741,22 @@ const Grid = React.forwardRef((props, ref) => {
     return ordering;
   };
 
-  const getBorderClass = () => {
-    let className = "";
-
+  const getBorderStyleProp = () => {
     if (
       state.Form.Dirty &&
       state.Form.Mode === FormMode.EDIT &&
       state.Options.EnableEdit
     )
-      className += style["edit-form-border"] + " ";
+      return "edit";
 
     if (
       !state.Form.Dirty &&
       state.Form.Mode === FormMode.EDIT &&
       state.Options.EnableEdit
     )
-      className += style["success-form-border"] + " ";
+      return "success";
 
-    if (state.Form.Mode === FormMode.READ) {
-      className += style["disabled-children"] + " ";
-    }
-
-    if (state.Form.Mode === FormMode.ADD) {
-      className += style["default-form-border"] + " ";
-    }
-
-    return style["dataview-form-container"] + " " + className;
+    if (state.Form.Mode === FormMode.ADD) return "add";
   };
 
   const toggleDeleteConfirmationBox = () => {
@@ -1221,7 +1300,7 @@ const Grid = React.forwardRef((props, ref) => {
       return false;
 
     return (
-      <div className={style["dataview-flex-item"]}>
+      <FlexItem>
         <Button
           tooltip={
             state.Form.Mode === FormMode.READ
@@ -1232,7 +1311,7 @@ const Grid = React.forwardRef((props, ref) => {
           disabled={freezeLoading()}
           icon={state.Form.Mode === FormMode.READ ? "edit" : "eye"}
         />
-      </div>
+      </FlexItem>
     );
   };
 
@@ -1242,14 +1321,14 @@ const Grid = React.forwardRef((props, ref) => {
     }
     if (state.Options.EnableAdd && state.General.CurrentView !== "FormView") {
       return (
-        <div className={style["dataview-flex-item"]}>
+        <FlexItem>
           <Button
             tooltip={Localization.Add || "Add"}
             onClick={goToAdd}
             disabled={freezeLoading()}
             icon="plus"
           ></Button>
-        </div>
+        </FlexItem>
       );
     }
 
@@ -1262,7 +1341,7 @@ const Grid = React.forwardRef((props, ref) => {
     }
 
     return (
-      <div className={style["dataview-flex-item"]}>
+      <FlexItem>
         <Button
           tooltip={Localization.Refresh || "Refresh"}
           onClick={onRefresh}
@@ -1270,7 +1349,7 @@ const Grid = React.forwardRef((props, ref) => {
           icon="sync-alt"
           size="small"
         />
-      </div>
+      </FlexItem>
     );
   };
 
@@ -1280,7 +1359,7 @@ const Grid = React.forwardRef((props, ref) => {
       state.Table.SelectionType === TableSelectionType.MULTIPLE
     ) {
       return (
-        <div className={style["dataview-flex-item"]}>
+        <FlexItem>
           <Button
             tooltip={Localization.TakeValues || "Take values"}
             onClick={() => {
@@ -1289,7 +1368,7 @@ const Grid = React.forwardRef((props, ref) => {
             disabled={freezeLoading([state.Table.SelectedData.length === 0])}
             icon="check-circle"
           />
-        </div>
+        </FlexItem>
       );
     }
 
@@ -1329,14 +1408,14 @@ const Grid = React.forwardRef((props, ref) => {
     }
 
     return (
-      <div className={style["dataview-flex-item"]}>
+      <FlexItem>
         <Button
           onClick={toggleDeleteConfirmationBox}
           disabled={freezeLoading([state.Table.SelectedData.length === 0])}
           tooltip={Localization.DeleteSelected || "Delete selected"}
           icon="trash"
         />
-      </div>
+      </FlexItem>
     );
   };
 
@@ -1346,14 +1425,14 @@ const Grid = React.forwardRef((props, ref) => {
     }
 
     return (
-      <div className={style["dataview-flex-item"]}>
+      <FlexItem>
         <Button
           tooltip={Localization.ToTableView || "Table view"}
           onClick={onSwitchToTableView}
           disabled={freezeLoading()}
           icon="table"
         />
-      </div>
+      </FlexItem>
     );
   };
 
@@ -1390,12 +1469,12 @@ const Grid = React.forwardRef((props, ref) => {
     };
 
     return (
-      <div style={{ marginTop: "6px" }}>
+      <PaginationContainer>
         <TablePagination
           Config={cfg}
           Localization={Localization.Pagination || {}}
         />
-      </div>
+      </PaginationContainer>
     );
   };
 
@@ -1451,41 +1530,6 @@ const Grid = React.forwardRef((props, ref) => {
         />
       </div>
     );
-
-    return (
-      <>
-        <div className={style["dataview-table-pagination-container"]}>
-          <div className={style["dataview-table-container"]}>
-            <Table
-              IsLoading={state.General.IsLoading}
-              Columns={state.Table.Columns}
-              Data={state.Table.Data}
-              OnRowClick={onTableRowClick}
-              //---------------------------------
-              Ordering={getOrderingConfig()}
-              Selection={{
-                SelectedData: state.Table.SelectedData,
-                SelectedEntirePage: state.Table.SelectedEntirePage,
-                SelectionIndicator: id,
-                OnSelection: onSelect,
-                OnSelectAll: onSelectAll,
-              }}
-              Options={{
-                IsLookup: state.General.IsLookup,
-                ReadOnly: state.Options.ReadOnly,
-                EnableSelection: state.Options.EnableSelection,
-                EnableOrdering: state.Options.EnableOrdering,
-                SelectionType: state.Table.SelectionType,
-              }}
-              Localization={Localization.TableView || {}}
-            />
-          </div>
-          {/* <div className={style["dataview-pagination-container"]}>
-          {renderPagination()}
-        </div> */}
-        </div>
-      </>
-    );
   };
 
   const renderForm = () => {
@@ -1497,7 +1541,11 @@ const Grid = React.forwardRef((props, ref) => {
       return <></>;
 
     var component = (
-      <div className={getBorderClass()}>
+      <FormContainer
+        style={getBorderStyleProp()}
+        read={state.Form.Mode === FormMode.READ}
+        {...themeProps}
+      >
         {Form({
           Data: state.Form.Data,
           OnFieldChange: OnFieldChange,
@@ -1511,7 +1559,7 @@ const Grid = React.forwardRef((props, ref) => {
           OnEdit: onEdit,
           OnDiscard: onDiscard,
         })}
-      </div>
+      </FormContainer>
     );
 
     if (state.General.DataFromBackend) {
@@ -1521,7 +1569,6 @@ const Grid = React.forwardRef((props, ref) => {
     if (!state.General.DataFromBackend) {
       return (
         <ComponentBox
-          basic={true}
           id={"FormViewInModal"}
           open={true}
           size={"medium"}
@@ -1580,42 +1627,38 @@ const Grid = React.forwardRef((props, ref) => {
 
     if (x1 || x2 || x3 || x4 || x5 || x6 || x7)
       return (
-        <div style={{ marginBottom: "5px" }}>
-          <div className={style["dataview-container-inner"]}>
-            {renderChangeToTableView()}
-            {renderDeleteSelectedButton()}
-            {renderGoToAddButton()}
-            {renderFormViewMovement()}
-            {renderSwitchToEditModeButton()}
-            {renderRefreshButton()}
-            {renderLookupTakeValues()}
-          </div>
-        </div>
+        <HeaderContainer>
+          {renderChangeToTableView()}
+          {renderDeleteSelectedButton()}
+          {renderGoToAddButton()}
+          {renderFormViewMovement()}
+          {renderSwitchToEditModeButton()}
+          {renderRefreshButton()}
+          {renderLookupTakeValues()}
+        </HeaderContainer>
       );
 
     return <></>;
   };
 
   return (
-    <>
-      <div
-        style={{
-          boxShadow: "0 0 12px #bebebe",
-          borderRadius: "3px",
-          padding: "4px",
-        }}
-      >
-        {renderHeader()}
-        <div className={style["dataview-container"]}>
-          {renderDeleteConfirmationBox()}
-          {renderTable()}
-          {renderForm()}
-          {renderDeveloperMessages()}
-        </div>
-        {renderPagination()}
-      </div>
-    </>
+    <Container {...themeProps}>
+      {renderHeader()}
+      <TableContainer {...themeProps}>
+        {renderDeleteConfirmationBox()}
+        {renderTable()}
+        {renderForm()}
+        {renderDeveloperMessages()}
+      </TableContainer>
+      {renderPagination()}
+    </Container>
   );
 });
+
+Grid.defaultProps = {
+  theme: theme,
+  size: "small",
+  color: "primary",
+};
 
 export default Grid;
