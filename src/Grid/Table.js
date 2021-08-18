@@ -3,7 +3,6 @@ import CheckBox from "../CheckBox/index";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import PropTypes from "prop-types";
 import Icon from "../Icon/index";
-import style from "./style.module.css";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 import baseStyle from "../Base/styles.module.css";
@@ -157,202 +156,6 @@ const Table = (props) => {
     return <>{Data.map((dataItem, i) => renderBodyRow(dataItem, i))}</>;
   };
 
-  const renderEmptySelectionCell = () => {
-    if (
-      !EnableSelection ||
-      ReadOnly ||
-      (IsLookup && SelectionType === TableSelectionType.SINGLE)
-    )
-      return <></>;
-
-    return (
-      <td
-        className={[
-          style["table-cell"],
-          style["special-cell-render"],
-          style["select-checkbox"],
-        ].join(" ")}
-      ></td>
-    );
-  };
-
-  const renderGroupBodyRows = (col, dataItem) => {
-    if (col) var nestedArray = dataItem[col.accessor];
-
-    if (nestedArray) {
-      return dataItem[col.accessor].map((x, i) => {
-        return (
-          <tr
-            key={i + 100}
-            className={[
-              style["table-row-group-by-nested"],
-              style["table-row-odd"],
-            ].join(" ")}
-          >
-            {renderEmptySelectionCell()}
-            {Columns.map((col, j) => {
-              return renderBodyCell(x, col, i + 100, j + 100);
-            })}
-          </tr>
-        );
-      });
-    }
-
-    return <></>;
-  };
-
-  const renderBodyRow = (dataItem, i) => {
-    var nested = Columns.find((x) => x.nested);
-    let rowSelected = isRowSelected(dataItem);
-
-    // let eveOddClass =
-    //   i % 2 === 0
-    //     ? style["table-row-even"] + " "
-    //     : style["table-row-odd"] + " ";
-    // if (nested) eveOddClass = style["table-row-even"] + " ";
-
-    // let selectedRowClass = rowSelected ? style["selected-row"] + " " : "";
-    // let tableRowClass = nested
-    //   ? style["table-row-group-by"] + " "
-    //   : style["table-row"] + " ";
-
-    return (
-      <>
-        <TableBodyRow selectedRow={rowSelected} key={i}>
-          {renderSelectionCell(dataItem, rowSelected)}
-          {Columns.map((col, j) => {
-            return renderBodyCell(dataItem, col, i, j);
-          })}
-        </TableBodyRow>
-
-        {/* {renderGroupBodyRows(nested, dataItem)} */}
-      </>
-    );
-  };
-
-  const renderHeaderCell = (col, i) => {
-    var hideOrdering = !EnableOrdering || !col.sort;
-
-    var isOrderByColumn = col.accessor === Accessor;
-
-    let onClick =
-      IsLoading || hideOrdering ? () => {} : () => OnOrder(col.accessor);
-    var orderingIconClass = "sort";
-
-    if (isOrderByColumn && Ascending) orderingIconClass = "sort-up";
-
-    if (isOrderByColumn && Descending) orderingIconClass = "sort-down";
-
-    if (isOrderByColumn && !Ascending && !Descending)
-      orderingIconClass = "sort";
-
-    if (!isOrderByColumn || Accessor === "") orderingIconClass = "sort";
-
-    return (
-      <TableHeadCell key={i} onClick={onClick}>
-        <div
-        //  className={style["table-cell-header-inner"]}
-        >
-          {col.name}
-
-          {!hideOrdering ? (
-            <Icon color={"white"} icon={orderingIconClass} />
-          ) : (
-            <></>
-          )}
-        </div>
-      </TableHeadCell>
-    );
-  };
-
-  const renderSelectionCell = (dataItem, selected) => {
-    if (
-      !EnableSelection ||
-      ReadOnly ||
-      (IsLookup && SelectionType === TableSelectionType.SINGLE)
-    )
-      return <></>;
-
-    // console.log(dataItem, selected);
-
-    return (
-      <TableBodyCell selectionCell={true}>
-        <CheckBox
-          checked={selected}
-          onChange={() => {
-            OnSelection(dataItem);
-          }}
-          id={dataItem["id"]}
-        />
-      </TableBodyCell>
-    );
-  };
-
-  const renderBodyCell = (dataItem, col, rowIndex, cellIndex) => {
-    var tabIndex = rowIndex * Columns.length + cellIndex + 50;
-    var className = style["table-cell"];
-
-    return (
-      <TableBodyCell
-        key={tabIndex}
-        onClick={col.render ? () => {} : () => OnRowClick(dataItem, col)}
-      >
-        {col.render
-          ? col.render(dataItem, col)
-          : Array.isArray(dataItem[col.accessor])
-          ? ""
-          : dataItem[col.accessor]}
-      </TableBodyCell>
-    );
-  };
-
-  const renderSelectAllHeaderCell = () => {
-    if (
-      !EnableSelection ||
-      ReadOnly ||
-      (IsLookup && SelectionType === TableSelectionType.SINGLE)
-    )
-      return <></>;
-
-    var title = SelectedEntirePage ? "Deselect all" : "Select all";
-
-    if (SelectedEntirePage && Localization.DeselectAll)
-      title = Localization.DeselectAll;
-
-    if (!SelectedEntirePage && Localization.SelectAll)
-      title = Localization.DeselectAll;
-
-    return (
-      <TableHeadCell selectionCell={true}>
-        {SelectionType === TableSelectionType.MULTIPLE ? (
-          <CheckBox checked={SelectedEntirePage} onChange={handleSelectAll} />
-        ) : (
-          <></>
-        )}
-      </TableHeadCell>
-    );
-  };
-
-  return (
-    <Container>
-      <Wrapper>
-        <TableTable cellSpacing={0}>
-          <TableHead>
-            <TableHeadRow>
-              {renderSelectAllHeaderCell()}
-              {Columns.map((col, i) => renderHeaderCell(col, i))}
-            </TableHeadRow>
-          </TableHead>
-          <TableBody>{renderBody()}</TableBody>
-        </TableTable>
-      </Wrapper>
-    </Container>
-  );
-
-  // const renderBody = () => {
-  //   return <>{Data.map((dataItem, i) => renderBodyRow(dataItem, i))}</>;
-  // };
-
   // const renderEmptySelectionCell = () => {
   //   if (
   //     !EnableSelection ||
@@ -397,172 +200,177 @@ const Table = (props) => {
   //   return <></>;
   // };
 
-  // const renderBodyRow = (dataItem, i) => {
-  //   var nested = Columns.find((x) => x.nested);
+  const renderBodyRow = (dataItem, i) => {
+    var nested = Columns.find((x) => x.nested);
+    let rowSelected = isRowSelected(dataItem);
 
-  //   let eveOddClass =
-  //     i % 2 === 0
-  //       ? style["table-row-even"] + " "
-  //       : style["table-row-odd"] + " ";
-  //   if (nested) eveOddClass = style["table-row-even"] + " ";
+    return (
+      <>
+        <TableBodyRow selectedRow={rowSelected} key={i}>
+          {renderSelectionCell(dataItem, rowSelected)}
+          {Columns.map((col, j) => {
+            return renderBodyCell(dataItem, col, i, j);
+          })}
+        </TableBodyRow>
 
-  //   let rowSelected = isRowSelected(dataItem);
-  //   let selectedRowClass = rowSelected ? style["selected-row"] + " " : "";
-  //   let tableRowClass = nested
-  //     ? style["table-row-group-by"] + " "
-  //     : style["table-row"] + " ";
+        {/* {renderGroupBodyRows(nested, dataItem)} */}
+      </>
+    );
+  };
 
-  //   return (
-  //     <>
-  //       <tr key={i} className={selectedRowClass + eveOddClass + tableRowClass}>
-  //         {renderSelectionCell(dataItem, rowSelected)}
-  //         {Columns.map((col, j) => {
-  //           return renderBodyCell(dataItem, col, i, j);
-  //         })}
-  //       </tr>
+  const renderHeaderCell = (col, i) => {
+    var hideOrdering = !EnableOrdering || !col.sort;
 
-  //       {renderGroupBodyRows(nested, dataItem)}
-  //     </>
-  //   );
-  // };
+    var isOrderByColumn = col.accessor === Accessor;
 
-  // const renderHeaderCell = (col, i) => {
-  //   var hideOrdering = !EnableOrdering || !col.sort;
+    let onClick =
+      IsLoading || hideOrdering ? () => {} : () => OnOrder(col.accessor);
+    var orderingIconClass = "sort";
 
-  //   var isOrderByColumn = col.accessor === Accessor;
+    if (isOrderByColumn && Ascending) orderingIconClass = "sort-up";
 
-  //   let onClick =
-  //     IsLoading || hideOrdering ? () => {} : () => OnOrder(col.accessor);
-  //   var orderingIconClass = "lnc-arrow-down-up";
+    if (isOrderByColumn && Descending) orderingIconClass = "sort-down";
 
-  //   if (isOrderByColumn && Ascending) orderingIconClass = "lnc-arrow-up";
+    if (isOrderByColumn && !Ascending && !Descending)
+      orderingIconClass = "sort";
 
-  //   if (isOrderByColumn && Descending) orderingIconClass = "lnc-arrow-down";
+    if (!isOrderByColumn || Accessor === "") orderingIconClass = "sort";
 
-  //   if (isOrderByColumn && !Ascending && !Descending)
-  //     orderingIconClass = "lnc-arrow-down-up";
+    return (
+      <TableHeadCell key={i} onClick={onClick}>
+        <div>
+          {col.name}
 
-  //   if (!isOrderByColumn || Accessor === "")
-  //     orderingIconClass = "lnc-arrow-down-up";
+          {!hideOrdering ? (
+            <Icon color={"white"} icon={orderingIconClass} />
+          ) : (
+            <></>
+          )}
+        </div>
+      </TableHeadCell>
+    );
+  };
 
-  //   return (
-  //     <th key={i} className={style["table-cell-header"]} onClick={onClick}>
-  //       <div className={style["table-cell-header-inner"]}>
-  //         {col.name}
+  const renderSelectionCell = (dataItem, selected) => {
+    if (
+      !EnableSelection ||
+      ReadOnly ||
+      (IsLookup && SelectionType === TableSelectionType.SINGLE)
+    )
+      return <></>;
 
-  //         {!hideOrdering ? (
-  //           <div className={style["header-cell-icon"]}>
-  //             <Icon iconClassName={orderingIconClass}></Icon>
-  //           </div>
-  //         ) : (
-  //           <></>
-  //         )}
-  //       </div>
-  //     </th>
-  //   );
-  // };
+    // console.log(dataItem, selected);
 
-  // const renderSelectionCell = (dataItem, selected) => {
-  //   if (
-  //     !EnableSelection ||
-  //     ReadOnly ||
-  //     (IsLookup && SelectionType === TableSelectionType.SINGLE)
-  //   )
-  //     return <></>;
+    return (
+      <TableBodyCell selectionCell={true} key={-1}>
+        <CheckBox
+          checked={selected}
+          onChange={() => {
+            OnSelection(dataItem);
+          }}
+          id={dataItem["id"]}
+        />
+      </TableBodyCell>
+    );
+  };
 
-  //   return (
-  //     <td
-  //       className={[
-  //         style["table-cell"],
-  //         style["special-cell-render"],
-  //         style["select-checkbox"],
-  //       ].join(" ")}
-  //       onClick={() => {
-  //         OnSelection(dataItem);
-  //       }}
-  //     >
-  //       <input
-  //         type="checkbox"
-  //         checked={selected}
-  //         onChange={() => {}}
-  //         className={style["pointer"]}
-  //       ></input>
-  //     </td>
-  //   );
-  // };
+  const renderBodyCell = (dataItem, col, rowIndex, cellIndex) => {
+    var tabIndex = rowIndex * Columns.length + cellIndex + 50;
 
-  // const renderBodyCell = (dataItem, col, rowIndex, cellIndex) => {
-  //   var tabIndex = rowIndex * Columns.length + cellIndex + 50;
-  //   var className = style["table-cell"];
+    return (
+      <TableBodyCell
+        key={tabIndex}
+        onClick={col.render ? () => {} : () => OnRowClick(dataItem, col)}
+      >
+        {col.render
+          ? col.render(dataItem, col)
+          : Array.isArray(dataItem[col.accessor])
+          ? ""
+          : dataItem[col.accessor]}
+      </TableBodyCell>
+    );
+  };
 
-  //   return (
-  //     <td
-  //       key={tabIndex}
-  //       className={className}
-  //       onClick={col.render ? () => {} : () => OnRowClick(dataItem, col)}
-  //     >
-  //       {col.render
-  //         ? col.render(dataItem, col)
-  //         : Array.isArray(dataItem[col.accessor])
-  //         ? ""
-  //         : dataItem[col.accessor]}
-  //     </td>
-  //   );
-  // };
+  const renderSelectAllHeaderCell = () => {
+    if (
+      !EnableSelection ||
+      ReadOnly ||
+      (IsLookup && SelectionType === TableSelectionType.SINGLE)
+    )
+      return <></>;
 
-  // const renderSelectAllHeaderCell = () => {
-  //   if (
-  //     !EnableSelection ||
-  //     ReadOnly ||
-  //     (IsLookup && SelectionType === TableSelectionType.SINGLE)
-  //   )
-  //     return <></>;
+    var title = SelectedEntirePage ? "Deselect all" : "Select all";
 
-  //   var title = SelectedEntirePage ? "Deselect all" : "Select all";
+    if (SelectedEntirePage && Localization.DeselectAll)
+      title = Localization.DeselectAll;
 
-  //   if (SelectedEntirePage && Localization.DeselectAll)
-  //     title = Localization.DeselectAll;
+    if (!SelectedEntirePage && Localization.SelectAll)
+      title = Localization.DeselectAll;
 
-  //   if (!SelectedEntirePage && Localization.SelectAll)
-  //     title = Localization.DeselectAll;
+    return (
+      <TableHeadCell selectionCell={true} key={-1}>
+        {SelectionType === TableSelectionType.MULTIPLE ? (
+          <CheckBox checked={SelectedEntirePage} onChange={handleSelectAll} />
+        ) : (
+          <></>
+        )}
+      </TableHeadCell>
+    );
+  };
 
-  //   return (
-  //     <th
-  //       className={[style["table-cell-header"], style["select-checkbox"]].join(
-  //         " "
-  //       )}
-  //     >
-  //       {SelectionType === TableSelectionType.MULTIPLE ? (
-  //         <input
-  //           title={title}
-  //           type="checkbox"
-  //           checked={SelectedEntirePage}
-  //           onChange={handleSelectAll}
-  //           className={style["pointer"]}
-  //         ></input>
-  //       ) : (
-  //         <></>
-  //       )}
-  //     </th>
-  //   );
-  // };
+  return (
+    <Container>
+      <Wrapper>
+        <TableTable cellSpacing={0}>
+          <TableHead>
+            <TableHeadRow>
+              {renderSelectAllHeaderCell()}
+              {Columns.map((col, i) => renderHeaderCell(col, i))}
+            </TableHeadRow>
+          </TableHead>
+          <TableBody>{renderBody()}</TableBody>
+        </TableTable>
+      </Wrapper>
+    </Container>
+  );
+};
 
-  // return (
-  //   <div className={style["table-container"]}>
-  //     <table className={style["table"]} cellSpacing={0}>
-  //       <thead>
-  //         <tr key={"header"}>
-  //           {renderSelectAllHeaderCell()}
-  //           {Columns.map((col, i) => renderHeaderCell(col, i))}
-  //         </tr>
-  //       </thead>
-  //       <tbody>{renderBody()}</tbody>
-  //     </table>
-  //   </div>
-  // );
+Table.defaultProps = {
+  theme: theme,
+  size: "small",
+  color: "primary",
+  //----------------------
+  Options: {},
+  Selection: {},
+  Ordering: {},
+  //----------------------
+  Accessor: "",
+  Ascending: false,
+  Descending: false,
+  OnOrder: () => {},
+  //----------------------
+  SelectedData: [],
+  SelectedEntirePage: false,
+  SelectionIndicator: "id",
+  OnSelection: () => {},
+  OnSelectAll: () => {},
+  //----------------------
+  Columns: [],
+  Data: [],
+  IsLoading: false,
+  //----------------------
+  ReadOnly: false,
+  EnablePagination: false,
+  EnableSelection: false,
+  EnableOrdering: false,
+  SelectionType: "single",
 };
 
 Table.propTypes = {
+  theme: PropTypes.object.isRequired,
+  size: PropTypes.string,
+  color: PropTypes.string,
+  //----------------------
   Options: PropTypes.object,
   Selection: PropTypes.object,
   Ordering: PropTypes.object,

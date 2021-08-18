@@ -14,8 +14,8 @@ const Container = styled.div`
   border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
   padding: 4px;
-  font-size: ${theme.typography.small.fontSize};
-  font-family: ${theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography.small.fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
 `;
 
 const Item = styled.div`
@@ -64,9 +64,15 @@ const Pagination = (props) => {
     goToFirstPage,
     goToLastPage,
     Export,
-  } = props.Config || {};
+    Localization,
+    withPageInformation,
+    //------------------
+    theme,
+    size,
+    color,
+  } = props;
 
-  const { Localization = {} } = props;
+  const themeProps = { theme, size, color };
 
   //======================== METHODS ==========================================
 
@@ -108,17 +114,28 @@ const Pagination = (props) => {
   //======================== RENDER ==========================================
 
   const renderRowInformation = () => {
-    return <ItemText key={-1}>{getShowingNumberOfRows()}</ItemText>;
+    if (!withPageInformation) return <></>;
+
+    return (
+      <ItemText {...themeProps} key={-1}>
+        {getShowingNumberOfRows()}
+      </ItemText>
+    );
   };
 
   const renderCurrentPage = () => {
-    return <ItemCurrentPage key={0}>{CurrentPage}</ItemCurrentPage>;
+    return (
+      <ItemCurrentPage {...themeProps} key={0}>
+        {CurrentPage}
+      </ItemCurrentPage>
+    );
   };
 
   const renderFirst = () => {
     return (
-      <Item key={1}>
+      <Item {...themeProps} key={1}>
         <Button
+          {...themeProps}
           icon="angle-double-left"
           onClick={() => goToFirstPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToFirstPage])}
@@ -130,8 +147,9 @@ const Pagination = (props) => {
 
   const renderPrevious = () => {
     return (
-      <Item key={2}>
+      <Item key={2} {...themeProps}>
         <Button
+          {...themeProps}
           icon="angle-left"
           onClick={() => goToPreviousPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToPreviousPage])}
@@ -143,8 +161,9 @@ const Pagination = (props) => {
 
   const renderNext = () => {
     return (
-      <Item key={3}>
+      <Item key={3} {...themeProps}>
         <Button
+          {...themeProps}
           icon="angle-right"
           onClick={() => goToNextPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToNextPage])}
@@ -156,8 +175,9 @@ const Pagination = (props) => {
 
   const renderLast = () => {
     return (
-      <Item key={4}>
+      <Item key={4} {...themeProps}>
         <Button
+          {...themeProps}
           icon="angle-double-right"
           onClick={() => goToLastPage(PageSize, CurrentPage)}
           disabled={freezeLoading([!CanGoToLastPage])}
@@ -169,8 +189,9 @@ const Pagination = (props) => {
 
   const renderPageSize = () => {
     return (
-      <ItemDropdown key={5}>
+      <ItemDropdown key={5} {...themeProps}>
         <DropDown
+          {...themeProps}
           items={getPageSizes()}
           value={PageSize}
           disabled={freezeLoading()}
@@ -197,7 +218,7 @@ const Pagination = (props) => {
   // };
 
   return (
-    <Container>
+    <Container {...themeProps}>
       {renderRowInformation()}
       {renderFirst()}
       {renderPrevious()}
@@ -212,7 +233,13 @@ const Pagination = (props) => {
 
 Pagination.defaultProps = {
   Config: {},
-  Localization: {},
+  withPageInformation: true,
+  Localization: {
+    First: "First",
+    Last: "Last",
+    Next: "Next",
+    Previous: "Previous",
+  },
   //------------------------------
   EnableExports: false,
   CurrentPage: 1,
@@ -231,11 +258,16 @@ Pagination.defaultProps = {
   goToFirstPage: () => {},
   goToLastPage: () => {},
   Export: () => {},
+  //-------------------------------
+  theme: theme,
+  color: "primary",
+  size: "small",
 };
 
 Pagination.propTypes = {
   Config: PropTypes.object,
   Localization: PropTypes.object,
+  withPageInformation: PropTypes.bool,
   //------------------------------
   EnableExports: PropTypes.bool,
   CurrentPage: PropTypes.number,
@@ -254,6 +286,17 @@ Pagination.propTypes = {
   goToFirstPage: PropTypes.func,
   goToLastPage: PropTypes.func,
   Export: PropTypes.func,
+  //-------------------------------
+  theme: PropTypes.object.isRequired,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "gray",
+  ]),
 };
 
 export default Pagination;

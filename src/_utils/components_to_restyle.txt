@@ -1,6 +1,7 @@
 DropdownLookup 
 TransparentTextInput 
 SearchBar
+GridLookup
 
 DropdownMenu // should not be i this library
 
