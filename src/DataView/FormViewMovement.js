@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { freeze } from "../Helper/helper";
-import IconButton from "../IconButton/index.js";
+import Button from "../Button/index.js";
 
 const FormViewMovement = (props) => {
   //====== PROPS ======
@@ -21,7 +21,6 @@ const FormViewMovement = (props) => {
   } = props.Config;
 
   const { Localization = {} } = props;
-  const { Icons = {} } = props;
 
   //====== LIFECYCLE ======
 
@@ -36,12 +35,12 @@ const FormViewMovement = (props) => {
   const renderFirst = () => {
     return (
       <div className={styles.movementFlexItem}>
-        <IconButton
-          iconClassName={Icons.LeftDouble}
+        <Button
+          icon={"angle-double-left"}
           onClick={goToFirstItem}
           disabled={freezeLoading([!CanGoToFirstItem])}
-          tooltipText={Localization.First}
-        ></IconButton>
+          tooltip={Localization.First}
+        />
       </div>
     );
   };
@@ -49,12 +48,12 @@ const FormViewMovement = (props) => {
   const renderLast = () => {
     return (
       <div className={styles.movementFlexItem}>
-        <IconButton
-          iconClassName={Icons.RightDouble}
+        <Button
+          icon={"angle-double-right"}
           onClick={goToLastItem}
           disabled={freezeLoading([!CanGoToLastItem])}
-          tooltipText={Localization.Last}
-        ></IconButton>
+          tooltip={Localization.Last}
+        />
       </div>
     );
   };
@@ -62,12 +61,12 @@ const FormViewMovement = (props) => {
   const renderNext = () => {
     return (
       <div className={styles.movementFlexItem}>
-        <IconButton
-          iconClassName={Icons.Right}
+        <Button
+          icon={"angle-right"}
           onClick={goToNextItem}
           disabled={freezeLoading([!CanGoToNextItem])}
-          tooltipText={Localization.Next}
-        ></IconButton>
+          tooltip={Localization.Next}
+        />
       </div>
     );
   };
@@ -75,12 +74,12 @@ const FormViewMovement = (props) => {
   const renderPrevious = () => {
     return (
       <div className={styles.movementFlexItem}>
-        <IconButton
-          iconClassName={Icons.Left}
+        <Button
+          icon={"angle-left"}
           onClick={goToPreviousItem}
           disabled={freezeLoading([!CanGoToPreviousItem])}
-          tooltipText={Localization.Previous}
-        ></IconButton>
+          tooltip={Localization.Previous}
+        />
       </div>
     );
   };
@@ -95,13 +94,13 @@ const FormViewMovement = (props) => {
       </div>
       <div className={styles.flexContainerRight}>
         {Dirty && FormMode === "EDIT" ? (
-          <IconButton
-            iconClassName={Icons.Save}
+          <Button
+            icon={"save"}
             onClick={() => {}}
             disabled={false}
-            tooltipText={Localization.Dirty}
-            inputCssClass={styles.dirtyInfoButton}
-          ></IconButton>
+            tooltip={Localization.Dirty}
+            className={styles.dirtyInfoButton}
+          />
         ) : (
           ""
         )}

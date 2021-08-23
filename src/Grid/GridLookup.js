@@ -4,7 +4,7 @@ import * as css from "./style.module.css";
 //-----------------------------------------------------------------------------------
 // import Filtering from "./Filtering";
 import ComponentBox from "_ui/components/Modals/ComponentBox";
-import IconButton from "_ui/components/BasicComponents/Button/IconButton";
+import Button from "_ui/components/Button/Button";
 import Grid from "_ui/components/Grid/Grid";
 //-----------------------------------------------------------------------------------
 
@@ -106,10 +106,7 @@ const GridLookup = (props) => {
     if (EnableReset) {
       return (
         <span className={css.clearInputSpan}>
-          <IconButton
-            iconClassName="lnc-x"
-            onClick={() => Reset(props.id)}
-          ></IconButton>
+          <Button icon="times" onClick={() => Reset(props.id)}></Button>
         </span>
       );
     }
@@ -141,10 +138,7 @@ const GridLookup = (props) => {
           {renderValue()}
         </span>
         <div className={css.innerDivWithIcons}>
-          <IconButton
-            iconClassName="lnc-search"
-            onClick={handleDialogOpen}
-          ></IconButton>
+          <Button icon="search" onClick={handleDialogOpen} />
           &nbsp; &nbsp;
           {renderReset()}
         </div>

@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "component library",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -50,7 +50,9 @@
   },
   "peerDependencies": {},
   "dependencies": {
+    "@emotion/react": "^11.4.0",
     "immer": "^9.0.3",
+    "lodash.debounce": "^4.0.8",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-datepicker": "^4.1.1",

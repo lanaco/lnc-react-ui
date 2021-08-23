@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ComponentBox from "../ComponentBox/index";
 import ConfirmationForm from "../ConfirmationForm/index";
 import DropdownMenu from "../DropdownMenu/index";
-import IconButton from "../IconButton/index.js";
+import Button from "../Button/index.js";
 import FormMode from "./Constants/FormMode";
 import ViewType from "./Constants/ViewType";
 import FormViewMovement from "./FormViewMovement";
@@ -165,15 +165,15 @@ const DataView = (props) => {
     if (General.IsLookup) {
       return (
         <div className={styles.flexItem}>
-          <IconButton
-            tooltipText={Localization.TakeValues}
+          <Button
+            tooltip={Localization.TakeValues}
             onClick={() => {
               Lookup.TakeValues(Table.SelectedData);
               if (ClearSelectedData) ClearSelectedData();
             }}
             disabled={freezeLoading([Table.SelectedData.length === 0])}
-            iconClassName={"lnc-plus"}
-          ></IconButton>
+            icon={"plus"}
+          />
         </div>
       );
     }
@@ -208,12 +208,12 @@ const DataView = (props) => {
 
     return (
       <div className={styles.flexItem}>
-        <IconButton
-          tooltipText={Localization.Refresh}
+        <Button
+          tooltip={Localization.Refresh}
           onClick={OnRefresh}
           disabled={freezeLoading()}
-          iconClassName={Icons.Refresh}
-        ></IconButton>
+          icon={"sync-alt"}
+        />
       </div>
     );
   };
@@ -228,12 +228,12 @@ const DataView = (props) => {
 
     return (
       <div className={styles.flexItem}>
-        <IconButton
+        <Button
           onClick={() => setDeleteConfirmationBoxOpen(true)}
           disabled={freezeLoading([Table.SelectedData.length === 0])}
-          tooltipText={Localization.DeleteSelected}
-          iconClassName={Icons.Trash}
-        ></IconButton>
+          tooltip={Localization.DeleteSelected}
+          icon={"trash"}
+        />
       </div>
     );
   };
@@ -270,12 +270,12 @@ const DataView = (props) => {
     if (Options.EnableAdd && General.CurrentView !== ViewType.FORM_VIEW)
       return (
         <div className={styles.flexItem}>
-          <IconButton
-            tooltipText={Localization.Add}
+          <Button
+            tooltip={Localization.Add}
             onClick={GoToAdd}
             disabled={freezeLoading()}
-            iconClassName={Icons.Plus}
-          ></IconButton>
+            icon={"plus"}
+          />
         </div>
       );
 
@@ -290,12 +290,12 @@ const DataView = (props) => {
     ) {
       return (
         <div className={styles.flexItem}>
-          <IconButton
-            tooltipText={Localization.AddWithCopy}
+          <Button
+            tooltip={Localization.AddWithCopy}
             onClick={GoToAddWithCopy}
             disabled={freezeLoading()}
-            iconClassName={Icons.Clone}
-          ></IconButton>
+            icon={"clone"}
+          />
         </div>
       );
     }
@@ -308,12 +308,12 @@ const DataView = (props) => {
 
     return (
       <div className={styles.flexItem}>
-        <IconButton
-          tooltipText={Localization.ToTableView}
+        <Button
+          tooltip={Localization.ToTableView}
           onClick={ChangeToTableView}
           disabled={freezeLoading()}
-          iconClassName={Icons.Table}
-        ></IconButton>
+          icon={"table"}
+        />
       </div>
     );
   };
@@ -329,16 +329,16 @@ const DataView = (props) => {
 
     return (
       <div className={styles.flexItem}>
-        <IconButton
-          tooltipText={
+        <Button
+          tooltip={
             Form.Mode === FormMode.READ
               ? Localization.FormEditMode
               : Localization.FormReadMode
           }
           onClick={ChangeToEditMode}
           disabled={freezeLoading()}
-          iconClassName={Form.Mode === FormMode.READ ? Icons.Edit : Icons.Eye}
-        ></IconButton>
+          icon={Form.Mode === FormMode.READ ? "edit" : "eye"}
+        />
       </div>
     );
   };

@@ -1,72 +1,141 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 import "./react-datepicker.css";
-import BaseContainer from "../Base/BaseContainer";
-import { getLighterColor } from "../Base/ColorBlender";
-import styles from "./styles.module.css";
+
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import theme from "../_utils/theme";
+
+// Don't know what to do with this :/
+// input[type="date"]::-webkit-inner-spin-button {
+//   display: none;
+//   -webkit-appearance: none;
+// }
+
+const paddingBySize = (size) => {
+  if (size === "small") return "0.325rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.45rem 0.375rem";
+};
+
+const Container = styled.span((props) => ({
+  "& input": {
+    appearance: "none",
+    outline: "none",
+    border: "none",
+    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
+    transition: "all 250ms",
+    display: "inline-block",
+    flexDirection: "row",
+    justifyContent: "center",
+    cursor: "text",
+    padding: paddingBySize(props.size),
+    fontSize: props.theme.typography[props.size].fontSize,
+    backgroundColor: props.theme.palette[props.color].lighter,
+    color: props.theme.palette[props.color].textDark,
+    borderRadius: "0.125rem",
+    boxSizing: "border-box",
+    fontFamily: props.theme.typography.fontFamily,
+
+    // appearance: "none",
+    // outline: "none",
+    // backgroundColor: "var(--color-base-backgroud)",
+    // transition: "all var(--transition-base-duration)",
+    // fontSize: "var(--font-size-base)",
+    // border: "0px",
+    // borderBottom: "2px solid var(--color-base-blue)",
+    // height: "100%",
+    // width: "100%",
+    // padding: "0px",
+    // boxSizing: "border-box",
+
+    "&:focus": {
+      backgroundColor: props.theme.palette.common.white,
+      color: props.theme.palette.common.black,
+    },
+
+    "&:disabled": {
+      backgroundColor: props.theme.palette.gray[200],
+      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+      color: props.theme.palette.gray.textLight,
+      opacity: 0.7,
+      cursor: "default",
+    },
+  },
+}));
 
 const DateInput = (props) => {
-  const [focus, setFocus] = useState(false);
+  const {
+    value,
+    id,
+    onChange,
+    dateFormat,
+    disabled,
+    size,
+    color,
+    theme,
+    className,
+  } = props;
 
   const callOnChange = (id, value) => {
-    if (props.onChange) props.onChange(id, value);
+    if (onChange) onChange(id, value);
   };
 
   const handleChange = (jsDateObject) => {
-    if (jsDateObject === null) callOnChange(props.id, "");
-    else callOnChange(props.id, moment(jsDateObject).format("DD.MM.YYYY."));
+    if (jsDateObject === null) callOnChange(id, "");
+    else callOnChange(id, moment(jsDateObject).format("DD.MM.YYYY."));
   };
 
   const getValue = () => {
-    if (props.value === undefined || !props.value) return null;
-
-    return moment(props.value, "DD.MM.YYYY.").toDate();
+    if (value === undefined || !value) return null;
+    return moment(value, "DD.MM.YYYY.").toDate();
   };
 
-  if (props.accentColor) {
-    const style = {
-      backgroundColor: focus
-        ? "white"
-        : getLighterColor(props.accentColor, 0.75),
-      borderBottom: "2px solid " + props.accentColor,
-    };
-
-    return (
-      <BaseContainer {...props}>
-        <DatePicker
-          selected={getValue()}
-          onChange={handleChange}
-          dateFormat={props.dateFormat ? props.dateFormat : "dd.MM.yyyy."}
-          disabled={props.disabled}
-          className={
-            props.inputCssClass
-              ? [styles.standardInputDateInput, props.inputCssClass].join(" ")
-              : styles.standardInputDateInput
-          }
-          style={style}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-        />
-      </BaseContainer>
-    );
-  }
-
   return (
-    <BaseContainer {...props}>
+    <Container {...{ theme, size, color }}>
       <DatePicker
         selected={getValue()}
         onChange={handleChange}
-        dateFormat={props.dateFormat ? props.dateFormat : "dd.MM.yyyy."}
-        disabled={props.disabled}
-        className={
-          props.inputCssClass
-            ? [styles.standardInputDateInput, props.inputCssClass].join(" ")
-            : styles.standardInputDateInput
-        }
+        dateFormat={dateFormat ? dateFormat : "dd.MM.yyyy."}
+        disabled={disabled}
+        className={className}
       />
-    </BaseContainer>
+    </Container>
   );
+};
+
+DateInput.defaultProps = {
+  id: "",
+  theme: theme,
+  disabled: false,
+  onChange: () => {},
+  className: "",
+  preventDefault: true,
+  size: "small",
+  color: "primary",
+  value: "",
+  dateFormat: "dd.MM.yyyy.",
+};
+
+DateInput.propTypes = {
+  theme: PropTypes.object.isRequired,
+  id: PropTypes.string,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  preventDefault: PropTypes.bool,
+  value: PropTypes.string,
+  dateFormat: PropTypes.string,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "gray",
+  ]),
 };
 
 export default DateInput;

@@ -1,37 +1,25 @@
-import React from 'react';
-
-import TextInput from '.';
+import React from "react";
+import TextInput from ".";
+import theme from "../_utils/theme";
 
 export default {
-  title: 'TextInput',
+  title: "Text Input",
   component: TextInput,
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
+  argTypes: {},
 };
 
-const Template = (args) => <TextInput {...args} />;
+const Template = (args) => (
+  <div>
+    <TextInput {...args} />
+  </div>
+);
 
-export const Primary = Template.bind({});
-// Primary.args = {
-//   primary: true,
-//   label: 'Button',
-//   aa: 'a'
-// };
-
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   label: 'Button',
-// };
-
-// export const Large = Template.bind({});
-// Large.args = {
-//   size: 'large',
-//   label: 'Button',
-// };
-
-// export const Small = Template.bind({});
-// Small.args = {
-//   size: 'small',
-//   label: 'Button',
-// };
+export const Default = Template.bind({});
+Default.args = {
+  theme: theme,
+  color: "primary",
+  onChange: () => {},
+  size: "medium",
+  disabled: false,
+  value: "text",
+};

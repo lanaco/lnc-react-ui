@@ -7,7 +7,7 @@
   display: grid;
   width: 100% !important;
   background-color: white;
-  grid-template-columns: 0.05fr minmax(1px, max-content) auto;
+  grid-template-columns: 30px minmax(1px, max-content) auto;
 }
 
 .filterContainer {
@@ -22,12 +22,12 @@
 
 .Commands {
   display: flex;
-  width: 60px;
-  min-width: 60px;
-  max-width: 60px;
+  /* width: 60px; */
+  /* min-width: 60px;
+  max-width: 60px; */
   justify-content: space-around;
-  padding-right: 10px;
-  padding-left: 10px;
+  /* padding-right: 10px;
+  padding-left: 10px; */
   border-left: 1px dashed gainsboro;
   font-size: 1.3em;
 }
@@ -50,9 +50,11 @@
 }
 
 .iconHolder {
-  width: 20px;
+  width: 30px;
+  height: 100%;
   color: gray;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .iconHolderHidden {
@@ -100,8 +102,8 @@
 .dropdownContent {
   display: none;
   position: fixed;
-  background-color: #f1f1f1;
-  min-width: 160px;
+  /* background-color: #f1f1f1; */
+  /* min-width: 160px; */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   margin-top: 5px;
   z-index: 99;
@@ -130,11 +132,11 @@
 .dropdownContent {
   display: none;
   position: fixed;
-  background-color: white;
+  /* background-color: white; */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
   z-index: 99;
   border: 0.8px transparent gray;
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
@@ -304,7 +306,7 @@
   color: black;
   padding: 12px 16px;
   text-decoration: none;
-  font-size: 1.3em;
+  /* font-size: 1.3em; */
   display: block;
 }
 
@@ -313,10 +315,10 @@
 }
 
 .linkActive {
-  color: black;
   padding: 12px 16px;
   text-decoration: none;
-  font-size: 1.3em;
+  /* font-size: 1.3em; */
   display: block;
-  background-color: #ddd;
+  /* background-color: #ddd; */
+  color: black;
 }

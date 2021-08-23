@@ -1,100 +1,118 @@
-import React, { useEffect, useState } from "react";
-import BaseContainer from "../Base/BaseContainer";
-import { getLighterColor } from "../Base/ColorBlender";
-import styles from "./styles.module.css";
+import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import theme from "../_utils/theme";
+
+const paddingBySize = (size) => {
+  if (size === "small") return "0.3rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.426125rem 0.375rem";
+};
+
+const StyledTextInput = styled.textarea((props) => {
+  return {
+    fontFamily: props.theme.typography.fontFamily,
+    appearance: "none",
+    outline: "none",
+    border: "none",
+    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
+    transition: "all 250ms",
+    resize: "vertical",
+    display: "inline-block",
+    overflow: "hidden",
+    boxSizing: "border-box",
+    cursor: "text",
+    padding: paddingBySize(props.size),
+    fontSize: props.theme.typography[props.size].fontSize,
+    backgroundColor: props.theme.palette[props.color].lighter,
+    color: props.theme.palette[props.color].textDark,
+    borderRadius: "0.125rem",
+    "&:disabled": {
+      backgroundColor: props.theme.palette.gray[200],
+      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+      color: props.theme.palette.gray.textLight,
+      opacity: 0.7,
+      cursor: "default",
+    },
+    "&:focus": {
+      backgroundColor: props.theme.palette.common.white,
+      color: props.theme.palette.common.black,
+    },
+  };
+});
+
+//===================================================
 
 const TextArea = (props) => {
-  const emptyFunc = () => {};
+  const {
+    theme,
+    color,
+    id,
+    disabled,
+    preventDefault,
+    className,
+    size,
+    value,
+    onChange,
+    rows,
+  } = props;
 
-  const { onChange = emptyFunc } = props;
-
-  const [val, setVal] = useState(props.value);
-  const [focus, setFocus] = useState(false);
-
-  useEffect(() => {
-    setVal(props.value);
-  }, [props.value]);
+  const [val, setVal] = useState(value ? value : "");
 
   const handleOnChange = (e) => {
-    if (props.preventDefault) {
-      e.preventDefault();
-    }
+    if (preventDefault) e.preventDefault();
     setVal(e.target.value);
   };
 
   const handleOnBlur = (e) => {
-    if (props.preventDefault) {
-      e.preventDefault();
-    }
-    onChange(props.id, e.target.value);
+    if (preventDefault) e.preventDefault();
+    onChange(id, val);
   };
-
-  const numberOfRows = props.rows ? props.rows : 1;
-  const numberOfColumns = props.cols ? props.cols : 50;
-
-  const autosize = (e) => {
-    var el = e.currentTarget;
-    setTimeout(function () {
-      el.style.cssText = "height:auto; padding:0";
-      // for box-sizing other than "content-box" use:
-      // el.style.cssText = '-moz-box-sizing:content-box';
-      el.style.cssText = "height: " + el.scrollHeight + "px;";
-    }, 0);
-  };
-
-  if (props.accentColor) {
-    const style = {
-      backgroundColor: focus
-        ? "white"
-        : getLighterColor(props.accentColor, 0.75),
-      borderBottom: "2px solid " + props.accentColor,
-    };
-
-    return (
-      <BaseContainer {...props}>
-        <textarea
-          id={"textArea" + props.id}
-          value={val ? val : ""}
-          onChange={handleOnChange}
-          onBlur={handleOnBlur}
-          className={
-            props.inputCssClass
-              ? [styles.standardInputTextArea, props.inputCssClass].join(" ")
-              : styles.standardInputTextArea
-          }
-          disabled={props.disabled}
-          title={props.tooltipText}
-          onKeyDown={autosize}
-          rows={numberOfRows}
-          cols={numberOfColumns}
-          style={style}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-        ></textarea>
-      </BaseContainer>
-    );
-  }
 
   return (
-    <BaseContainer {...props}>
-      <textarea
-        id={"textArea" + props.id}
-        value={val ? val : ""}
-        onChange={handleOnChange}
-        onBlur={handleOnBlur}
-        className={
-          props.inputCssClass
-            ? [styles.standardInputTextArea, props.inputCssClass].join(" ")
-            : styles.standardInputTextArea
-        }
-        disabled={props.disabled}
-        title={props.tooltipText}
-        onKeyDown={autosize}
-        rows={numberOfRows}
-        cols={numberOfColumns}
-      ></textarea>
-    </BaseContainer>
+    <StyledTextInput
+      {...{ theme, size, color }}
+      onChange={handleOnChange}
+      onBlur={handleOnBlur}
+      className={className}
+      disabled={disabled}
+      value={val}
+      rows={rows}
+    ></StyledTextInput>
   );
+};
+
+TextArea.defaultProps = {
+  id: "",
+  rows: 1,
+  theme: theme,
+  disabled: false,
+  onChange: () => {},
+  className: "",
+  preventDefault: true,
+  size: "small",
+  color: "primary",
+  value: "",
+};
+
+TextArea.propTypes = {
+  theme: PropTypes.object.isRequired,
+  id: PropTypes.string,
+  rows: PropTypes.number,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  preventDefault: PropTypes.bool,
+  value: PropTypes.string,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "gray",
+  ]),
 };
 
 export default TextArea;

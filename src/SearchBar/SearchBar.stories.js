@@ -1,15 +1,12 @@
 import React from "react";
-
 import SearchBar from ".";
 import dataTypes from "./DataTypes";
 import operationTypes, { getStringOperationTypes } from "./OperationTypes";
 
+
 export default {
   title: "SearchBar",
   component: SearchBar,
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
 };
 
 const Template = (args) => <SearchBar {...args} />;
@@ -39,20 +36,3 @@ Primary.args = {
   ChangeQuickFilterText: () => {},
   onChange: () => {},
 };
-
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   label: 'Button',
-// };
-
-// export const Large = Template.bind({});
-// Large.args = {
-//   size: 'large',
-//   label: 'Button',
-// };
-
-// export const Small = Template.bind({});
-// Small.args = {
-//   size: 'small',
-//   label: 'Button',
-// };

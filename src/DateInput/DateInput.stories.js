@@ -2,14 +2,17 @@ import React from "react";
 import DateInput from "./index";
 
 export default {
-  title: "DateInput",
+  title: "Date Input",
   component: DateInput,
-  //   argTypes: {
-  //     backgroundColor: { control: "color" },
-  //   },
 };
 
 const Template = (args) => <DateInput {...args} />;
 
 export const Normal = Template.bind({});
-Normal.args = {};
+Normal.args = {
+  value: "17.08.2021.",
+  onChange: (_, value) => console.log(value),
+  size: "small",
+  color: "secondary",
+  disabled: false,
+};

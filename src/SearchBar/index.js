@@ -4,7 +4,7 @@ import Filter from "./Filter";
 import TransparentTextInput from "../TransparentTextInput/index";
 import { getGuid, mergeCSS } from "../Helper/helper";
 import DropdownContent from "./DropdownContent";
-import IconButton from "../IconButton/index";
+import Button from "../Button/index";
 import Icon from "../Icon/index";
 
 const useHasChanged = (val) => {
@@ -196,22 +196,22 @@ const SearchBar = (props) => {
   const renderClearFiltersButton = () => {
     return (
       <div className={hasFilters ? styles.visibleX : styles.hidden}>
-        <IconButton
-          iconClassName={Icons ? Icons.CloseX : "lnc-x"}
+        <Button
+          icon={"times"}
           onClick={onClearFilters}
-          tooltipText={Localization ? Localization.Clear : "Clear"}
-        ></IconButton>
+          tooltip={Localization ? Localization.Clear : "Clear"}
+        />
       </div>
     );
   };
 
   const renderResetFiltersButton = () => {
     return (
-      <IconButton
-        iconClassName={Icons ? Icons.Reload : "lnc-reload"}
+      <Button
+        icon={"sync-alt"}
         onClick={onResetFilters}
-        tooltipText={Localization ? Localization.Reset : "Reset"}
-      ></IconButton>
+        tooltip={Localization ? Localization.Reset : "Reset"}
+      />
     );
   };
 
@@ -265,10 +265,7 @@ const SearchBar = (props) => {
       <div className={mergeCSS([styles.Container, styles.Border])}>
         <div className={styles.inputAndCommandsContainer}>
           <span className={styles.iconHolder}>
-            <Icon
-              iconClassName={Icons ? Icons.Search : "lnc-search"}
-              iconSpanCssClass={styles.iconSpan}
-            ></Icon>
+            <Icon icon={"search"} iconSpanCssClass={styles.iconSpan}></Icon>
           </span>
           <span
             ref={filterContainer}
