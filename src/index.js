@@ -65,4 +65,4 @@ export * from "./Spinner";
 export { default as Spinner } from "./Spinner";
 
 export * from "./Tabs";
-export { default as Spinner } from "./Tabs";
+export { default as Tabs } from "./Tabs";
