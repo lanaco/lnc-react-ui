@@ -85,7 +85,7 @@ const Tabs = (props) => {
   const renderContent = () => {
     return tabs.map((tab) => {
       return (
-        <Content {...themeProps} active={tab.id === active}>
+        <Content key={tab.id} {...themeProps} active={tab.id === active}>
           {tab.render()}
         </Content>
       );
@@ -97,6 +97,7 @@ const Tabs = (props) => {
       <Container {...themeProps} className={className}>
         {tabs.map((tab) => (
           <Tab
+            key={tab.id}
             {...themeProps}
             active={active === tab.id}
             onClick={() => selectTab(tab.id)}
