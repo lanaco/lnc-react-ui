@@ -27,7 +27,9 @@ const SearchBar = (props) => {
 
   //====== PROPS ======
 
-  const { onChange, filterProps, Localization, Icons } = props;
+  const { onChange } = props;
+  const { filterProps } = props;
+  const { Localization, Icons } = props;
 
   //====== LIFECYCLE ======
 
@@ -35,6 +37,7 @@ const SearchBar = (props) => {
   const [mounted, setMounted] = useState(false);
   const [hasFilters, setHasFilters] = useState(Filters.length > 0);
   const transparentTextInput = React.createRef();
+  const filterContainer = React.createRef();
 
   const changed = useHasChanged(Filters);
 
@@ -42,6 +45,10 @@ const SearchBar = (props) => {
     transparentTextInput.current.focus();
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    filterContainer.current.scrollLeft += 1000;
+  }, [Filters]);
 
   useEffect(() => {
     if (changed && mounted) {
@@ -261,6 +268,7 @@ const SearchBar = (props) => {
             <Icon icon={"search"} iconSpanCssClass={styles.iconSpan}></Icon>
           </span>
           <span
+            ref={filterContainer}
             className={
               hasFilters ? styles.filterContainer : styles.filterContainerHidden
             }

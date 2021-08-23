@@ -6,7 +6,11 @@ import Button from "../Button/index";
 const Filter = (props) => {
   //====== PROPS ======
 
-  const { onToggleState, onRemove, id } = props;
+  const { onToggleState, onRemove } = props;
+  const { id } = props;
+  const { Icons } = props;
+
+  //====== LIFECYCLE ======
 
   //====== EVENTS ======
 
