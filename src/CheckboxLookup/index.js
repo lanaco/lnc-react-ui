@@ -98,7 +98,7 @@ const CheckboxLookup = (props) => {
           />
         </Header>
         <Content>
-          {options.map((x) => {
+          {options.map((x, i) => {
             let isChecked = false;
 
             if (selectedOptions) {
@@ -110,7 +110,7 @@ const CheckboxLookup = (props) => {
             }
 
             return (
-              <ControlContainer {...themeProps}>
+              <ControlContainer key={i} {...themeProps}>
                 {style === "regular" ? (
                   <CheckBox
                     {...{
