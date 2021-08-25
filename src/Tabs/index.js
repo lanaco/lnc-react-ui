@@ -17,6 +17,12 @@ const paddingBySize = (size) => {
   }
 };
 
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `max-height: 1.625rem; min-height: 1.625rem;`;
+  if (size === "medium") return `max-height: 2rem; min-height: 2rem;`;
+  if (size === "large") return `max-height: 2.375rem; min-height: 2.375rem;`;
+};
+
 const Container = styled.div`
   overflow: hidden;
   background-color: #f1f1f1;
@@ -25,6 +31,7 @@ const Container = styled.div`
 `;
 
 const Tab = styled.button`
+  ${(props) => heightBySize(props.size)}
   background-color: inherit;
   float: left;
   border: none;

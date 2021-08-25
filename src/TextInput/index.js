@@ -4,9 +4,15 @@ import React, { useState, useEffect } from "react";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.2625rem 0.375rem";
-  if (size === "medium") return "0.325rem 0.375rem";
-  if (size === "large") return "0.3625rem 0.375rem";
+  if (size === "small") return "0.325rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.422375rem 0.375rem";
+};
+
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
 };
 
 const StyledTextInput = styled.input((props) => {
@@ -25,6 +31,11 @@ const StyledTextInput = styled.input((props) => {
     backgroundColor: props.theme.palette[props.color].lighter,
     color: props.theme.palette[props.color].textDark,
     borderRadius: "0.125rem",
+    width: "100%",
+    boxSizing: "border-box",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
+    fontFamily: props.theme.typography.fontFamily,
     "&:disabled": {
       backgroundColor: props.theme.palette.gray[200],
       borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
@@ -38,6 +49,12 @@ const StyledTextInput = styled.input((props) => {
     },
   };
 });
+
+const Container = styled.div`
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+`;
 
 //===================================================
 
@@ -67,15 +84,17 @@ const TextInput = (props) => {
   };
 
   return (
-    <StyledTextInput
-      {...{ theme, size, color }}
-      onChange={handleOnChange}
-      onBlur={handleOnBlur}
-      className={className}
-      disabled={disabled}
-      value={val}
-      type="text"
-    ></StyledTextInput>
+    <Container>
+      <StyledTextInput
+        {...{ theme, size, color }}
+        onChange={handleOnChange}
+        onBlur={handleOnBlur}
+        className={className}
+        disabled={disabled}
+        value={val}
+        type="text"
+      />
+    </Container>
   );
 };
 

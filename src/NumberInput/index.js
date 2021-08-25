@@ -8,6 +8,12 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.425rem 0.375rem";
 };
 
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
+};
+
 const StyledNumberInput = styled.input((props) => {
   return {
     appearance: "none",
@@ -17,6 +23,10 @@ const StyledNumberInput = styled.input((props) => {
     transition: "all 250ms",
     display: "inline-block",
     cursor: "text",
+    width: "100%",
+    boxSizing: "border-box",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
     padding: paddingBySize(props.size),
     fontFamily: props.theme.typography.fontFamily,
     fontSize: props.theme.typography[props.size].fontSize,

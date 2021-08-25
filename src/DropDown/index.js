@@ -8,6 +8,13 @@ const paddingBySize = (size) => {
   if (size === "medium") return "0.3625rem 0.375rem";
   if (size === "large") return "0.4rem 0.375rem";
 };
+
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
+};
+
 const Select = styled.select((props) => ({
   fontFamily: props.theme.typography.fontFamily,
   outline: "none",
@@ -18,7 +25,10 @@ const Select = styled.select((props) => ({
   border: "0px",
   borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
   padding: paddingBySize(props.size),
+  width: "100%",
   boxSizing: "border-box",
+  minHeight: heightBySize(props.size),
+  maxHeight: heightBySize(props.size),
   cursor: "pointer",
   "&:focus": {
     backgroundColor: props.theme.palette.common.white,

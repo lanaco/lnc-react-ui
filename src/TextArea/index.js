@@ -9,6 +9,12 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.426125rem 0.375rem";
 };
 
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
+};
+
 const StyledTextInput = styled.textarea((props) => {
   return {
     fontFamily: props.theme.typography.fontFamily,
@@ -20,8 +26,11 @@ const StyledTextInput = styled.textarea((props) => {
     resize: "vertical",
     display: "inline-block",
     overflow: "hidden",
-    boxSizing: "border-box",
     cursor: "text",
+    width: "100%",
+    boxSizing: "border-box",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
     padding: paddingBySize(props.size),
     fontSize: props.theme.typography[props.size].fontSize,
     backgroundColor: props.theme.palette[props.color].lighter,

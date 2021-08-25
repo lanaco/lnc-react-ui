@@ -42,6 +42,7 @@
     "postcss": "^8.3.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.52.7",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",

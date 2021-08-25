@@ -84,17 +84,17 @@ const theme = {
     },
   },
   typography: {
-    fontFamily: "Ubuntu",
+    fontFamily: "'Roboto Mono', monospace",
     small: {
-      fontSize: "0.75rem",
+      fontSize: "12px",
       iconFontSize: "0.85rem",
     },
     medium: {
-      fontSize: "0.9375rem",
+      fontSize: "15px",
       iconFontSize: "1.125rem",
     },
     large: {
-      fontSize: "1.1875rem",
+      fontSize: "18px",
       iconFontSize: "1.4375rem",
     },
   },
