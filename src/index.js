@@ -1,3 +1,5 @@
+export { default as theme } from "./_utils/theme";
+
 export * from "./Button";
 export { default as Button } from "./Button";
 

@@ -50,12 +50,6 @@ const StyledTextInput = styled.input((props) => {
   };
 });
 
-const Container = styled.div`
-  padding: 0;
-  margin: 0;
-  display: inline-block;
-`;
-
 //===================================================
 
 const TextInput = (props) => {
@@ -84,17 +78,15 @@ const TextInput = (props) => {
   };
 
   return (
-    <Container>
-      <StyledTextInput
-        {...{ theme, size, color }}
-        onChange={handleOnChange}
-        onBlur={handleOnBlur}
-        className={className}
-        disabled={disabled}
-        value={val}
-        type="text"
-      />
-    </Container>
+    <StyledTextInput
+      {...{ theme, size, color }}
+      onChange={handleOnChange}
+      onBlur={handleOnBlur}
+      className={className}
+      disabled={disabled}
+      value={val}
+      type="text"
+    />
   );
 };
 

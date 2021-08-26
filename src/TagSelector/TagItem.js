@@ -26,10 +26,10 @@ const Button = styled.button`
   transition: all 220ms;
   display: inline-block;
   cursor: pointer;
-  margin: 2px;
-  border-radius: 2px;
-  border: 1.5px solid transparent;
-  ${(props) => (props.selected ? `border: 1.5px solid #bfbfbf80;` : "")}
+  margin: 0.125rem;
+  border-radius: 0.125rem;
+  border: 0.09375rem solid transparent;
+  ${(props) => (props.selected ? `border: 0.09375rem solid #bfbfbf80;` : "")}
   color: ${(props) =>
     props.selected
       ? props.theme.palette[props.color].textDark
@@ -40,7 +40,7 @@ const Button = styled.button`
       : props.theme.palette[props.color].main};
 
   &:hover {
-    ${(props) => (props.selected ? `` : `border: 1.5px solid #bfbfbf80;`)}
+    ${(props) => (props.selected ? `` : `border: 0.09375rem solid #bfbfbf80;`)}
     color: ${(props) =>
       props.selected
         ? props.theme.palette[props.color].text
@@ -49,6 +49,18 @@ const Button = styled.button`
       props.selected
         ? props.theme.palette[props.color].main
         : props.theme.palette[props.color].lighter};
+  }
+
+  &:disabled {
+    background-color: ${(props) =>
+      props.selected
+        ? props.theme.palette.gray[500]
+        : props.theme.palette.gray[200]};
+
+    color: ${(props) => props.theme.palette.gray.textLight};
+    opacity: 0.7;
+    cursor: default;
+    border: 0.09375rem solid #bfbfbf80;
   }
 `;
 
@@ -69,7 +81,7 @@ const TagItem = (props) => {
       {...{ size, color, theme }}
       selected={selected}
       id={id}
-      onClick={() => toggleTagSelection(id)}
+      onClick={disabled ? () => {} : () => toggleTagSelection(id)}
       disabled={disabled}
     >
       {text}

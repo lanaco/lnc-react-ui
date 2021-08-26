@@ -84,7 +84,7 @@ const theme = {
     },
   },
   typography: {
-    fontFamily: "'Roboto Mono', monospace",
+    fontFamily: "Ubuntu",
     small: {
       fontSize: "12px",
       iconFontSize: "0.85rem",
