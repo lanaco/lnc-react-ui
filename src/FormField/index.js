@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
-import ErrorMessage from "../ErrorMessage/index";
+import Message from "../Message/index";
 
 const fontSize = (props) => {
   var fontSize =
@@ -55,7 +55,7 @@ const FormField = (props) => {
       {children}
       {errorMessage && errorMessage !== "" && (
         <ErrorContainer {...themeProps}>
-          <ErrorMessage {...themeProps} message={errorMessage} />
+          <Message {...themeProps} message={errorMessage} />
         </ErrorContainer>
       )}
     </Container>
