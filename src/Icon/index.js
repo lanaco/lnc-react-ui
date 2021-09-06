@@ -17,6 +17,8 @@ const heightBySize = (size) => {
 };
 
 const Span = styled.span`
+  display: inline-block;
+  box-sizing: border-box;
   background-color: inherit;
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   padding: ${(props) => getPadding(props.size)};

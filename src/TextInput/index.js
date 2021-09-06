@@ -65,26 +65,52 @@ const TextInput = (props) => {
     onChange,
   } = props;
 
-  const [val, setVal] = useState(value ? value : "");
+  const [text, setText] = useState("");
+  const [isFirst, setIsFirst] = useState(true);
+
+  useEffect(() => {
+    if (text !== value) setText(value === null ? "" : value);
+  }, [value]);
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
+    return () => clearTimeout(timeOutId);
+  }, [text]);
+
+  const handleDelayedOnChange = () => {
+    if (!isFirst) onChange(id, text);
+
+    if (isFirst) setIsFirst(false);
+  };
 
   const handleOnChange = (e) => {
-    if (preventDefault) e.preventDefault();
-    setVal(e.target.value);
+    if (preventDefault) {
+      e.preventDefault();
+    }
+
+    onChange(id, e.target.value);
+    setText(e.target.value);
   };
 
-  const handleOnBlur = (e) => {
-    if (preventDefault) e.preventDefault();
-    onChange(id, val);
-  };
+  // const [val, setVal] = useState(value ? value : "");
+
+  // const handleOnChange = (e) => {
+  //   if (preventDefault) e.preventDefault();
+  //   setVal(e.target.value);
+  // };
+
+  // const handleOnBlur = (e) => {
+  //   if (preventDefault) e.preventDefault();
+  //   onChange(id, val);
+  // };
 
   return (
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
-      onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
-      value={val}
+      value={text}
       type="text"
     />
   );

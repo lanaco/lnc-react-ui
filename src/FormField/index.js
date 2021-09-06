@@ -55,7 +55,7 @@ const FormField = (props) => {
       {children}
       {errorMessage && errorMessage !== "" && (
         <ErrorContainer {...themeProps}>
-          <Message {...themeProps} message={errorMessage} />
+          <Message {...themeProps} color="error" message={errorMessage} />
         </ErrorContainer>
       )}
     </Container>

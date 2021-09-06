@@ -2,6 +2,7 @@ import React from "react";
 import FormContainer from "./index";
 import FormField from "../FormField/index";
 import TextInput from "../TextInput/index";
+import PasswordInput from "../PasswordInput/index";
 
 export default {
   title: "FormContainer",
@@ -39,7 +40,7 @@ const Template = (args) => (
         <TextInput value="racicvladan" />
       </FormField>
       <FormField {...fieldProps}>
-        <TextInput value="racicvladan" />
+        <PasswordInput value="racicvladan" />
       </FormField>
     </FormContainer>
   </div>

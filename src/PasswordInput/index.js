@@ -45,7 +45,6 @@ const Container = styled.div((props) => ({
   fontFamily: props.theme.typography.fontFamily,
   outline: "none",
   width: "100%",
-  height: "100%",
 }));
 
 const Input = styled.input((props) => ({

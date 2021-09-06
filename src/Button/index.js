@@ -191,6 +191,7 @@ Button.propTypes = {
     "warning",
     "gray",
     "background",
+    "transparent",
   ]),
 };
 
