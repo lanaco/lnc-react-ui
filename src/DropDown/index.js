@@ -4,9 +4,9 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.3rem 0.375rem";
-  if (size === "medium") return "0.3625rem 0.375rem";
-  if (size === "large") return "0.4rem 0.375rem";
+  if (size === "small") return "0.3rem 0.375rem 0.3rem 0.0625rem";
+  if (size === "medium") return "0.3625rem 0.375rem 0.3625rem 0.0625";
+  if (size === "large") return "0.4rem 0.375rem 0.4rem 0.0625";
 };
 
 const heightBySize = (size, hasText) => {
@@ -54,7 +54,7 @@ const DropDown = (props) => {
     id,
     preventDefault,
     onChange,
-    items = [],
+    items,
     disabled,
     size,
     color,

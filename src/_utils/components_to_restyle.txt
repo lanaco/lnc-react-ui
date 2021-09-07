@@ -1,9 +1,10 @@
 DropdownLookup 
-TransparentTextInput 
 SearchBar
 GridLookup
 
+TransparentTextInput // should not be i this library
 DropdownMenu // should not be i this library
 
 TO ADD:
     - Add frontend pagination to CheckboxLookup
+    - value and onChange od textArea, numberInput

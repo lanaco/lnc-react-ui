@@ -39,6 +39,7 @@ const FormField = (props) => {
     errorMessage,
     label,
     required,
+    container,
   } = props;
 
   const themeProps = { theme, size, color };
@@ -55,7 +56,12 @@ const FormField = (props) => {
       {children}
       {errorMessage && errorMessage !== "" && (
         <ErrorContainer {...themeProps}>
-          <Message {...themeProps} color="error" message={errorMessage} />
+          <Message
+            {...themeProps}
+            color="error"
+            message={errorMessage}
+            container={container}
+          />
         </ErrorContainer>
       )}
     </Container>
@@ -69,6 +75,7 @@ FormField.defaultProps = {
   errorMessage: "",
   label: "",
   required: false,
+  container: true,
 };
 
 FormField.propTypes = {
@@ -77,6 +84,7 @@ FormField.propTypes = {
   errorMessage: PropTypes.string,
   label: PropTypes.string,
   required: PropTypes.bool,
+  container: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
