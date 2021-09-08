@@ -47,7 +47,7 @@ const Option = styled.option((props) => ({
   fontFamily: props.theme.typography.fontFamily,
 }));
 
-const DropDown = (props) => {
+const DropDown = React.forwardRef((props, ref) => {
   const {
     mapNameTo,
     mapValueTo,
@@ -96,6 +96,7 @@ const DropDown = (props) => {
       title={tooltip}
       onChange={handleOnChange}
       value={value}
+      ref={ref}
     >
       {!withoutEmpty ? (
         <Option {...{ theme, size, color }} key={-1} value={-1}>
@@ -107,7 +108,7 @@ const DropDown = (props) => {
       {getItems()}
     </Select>
   );
-};
+});
 
 DropDown.defaultProps = {
   id: "",

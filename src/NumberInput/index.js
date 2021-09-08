@@ -49,7 +49,7 @@ const StyledNumberInput = styled.input((props) => {
 
 //===================================================
 
-const NumberInput = (props) => {
+const NumberInput = React.forwardRef((props, ref) => {
   const {
     theme,
     color,
@@ -128,9 +128,10 @@ const NumberInput = (props) => {
       type="text"
       onKeyPress={isDecimal ? isInputDecimal : isInputInteger}
       onPaste={isDecimal ? isInputDecimal : isInputInteger}
+      ref={ref}
     />
   );
-};
+});
 
 StyledNumberInput.defaultProps = {
   id: "",

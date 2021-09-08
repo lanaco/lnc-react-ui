@@ -52,7 +52,7 @@ const StyledTextInput = styled.input((props) => {
 
 //===================================================
 
-const TextInput = (props) => {
+const TextInput = React.forwardRef((props, ref) => {
   const {
     theme,
     color,
@@ -112,9 +112,10 @@ const TextInput = (props) => {
       disabled={disabled}
       value={text}
       type="text"
+      ref={ref}
     />
   );
-};
+});
 
 TextInput.defaultProps = {
   id: "",

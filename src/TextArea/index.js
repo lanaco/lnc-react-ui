@@ -52,7 +52,7 @@ const StyledTextInput = styled.textarea((props) => {
 
 //===================================================
 
-const TextArea = (props) => {
+const TextArea = React.forwardRef((props, ref) => {
   const {
     theme,
     color,
@@ -87,9 +87,10 @@ const TextArea = (props) => {
       disabled={disabled}
       value={val}
       rows={rows}
+      ref={ref}
     ></StyledTextInput>
   );
-};
+});
 
 TextArea.defaultProps = {
   id: "",
