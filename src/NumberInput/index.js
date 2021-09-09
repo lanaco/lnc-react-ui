@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.325rem 0.375rem";
@@ -99,22 +100,17 @@ const NumberInput = React.forwardRef((props, ref) => {
     if (ch === "-" && (oldValue == undefined || oldValue.length === 0)) return;
 
     var regex = new RegExp("^\\d*\\" + decimalSeparator + "?\\d*$");
-    if (!regex.test(ch)) {
+
+    if (!regex.test(ch)) evt.preventDefault();
+
+    if (decimalSeparator === ch && oldValue.includes(decimalSeparator))
       evt.preventDefault();
-    } else {
-      if (decimalSeparator === ch) {
-        if (oldValue.includes(decimalSeparator)) {
-          evt.preventDefault();
-        }
-      } else {
-        if (oldValue.includes(decimalSeparator)) {
-          var numOfDecimalPlaces = oldValue.split(decimalSeparator)[1].length;
-          if (numOfDecimalPlaces >= numberOfDecimalPlaces) {
-            evt.preventDefault();
-          }
-        }
-      }
-    }
+
+    if (
+      oldValue.includes(decimalSeparator) &&
+      oldValue.split(decimalSeparator)[1].length >= numberOfDecimalPlaces
+    )
+      evt.preventDefault();
   };
 
   return (
@@ -137,7 +133,6 @@ StyledNumberInput.defaultProps = {
   id: "",
   disabled: false,
   onChange: () => {},
-  iconClassName: "",
   className: "",
   preventDefault: true,
   size: "small",
@@ -147,6 +142,7 @@ StyledNumberInput.defaultProps = {
 };
 
 StyledNumberInput.propTypes = {
+  theme: theme,
   id: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,

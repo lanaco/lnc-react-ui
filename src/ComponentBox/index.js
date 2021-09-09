@@ -8,7 +8,7 @@ import theme from "../_utils/theme";
 const Container = styled.div((props) => ({
   position: "fixed",
   alignItems: "center",
-  background: props.theme.palette.gray[600] + "50",
+  background: props.theme.palette.gray[600] + "80",
   width: "100%",
   height: "100%",
   top: "50%",

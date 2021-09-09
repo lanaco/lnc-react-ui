@@ -73,6 +73,11 @@ const TextArea = React.forwardRef((props, ref) => {
     setVal(e.target.value);
   };
 
+  const handleOnChange = (e) => {
+    if (preventDefault) e.preventDefault();
+    setVal(e.target.value);
+  };
+
   const handleOnBlur = (e) => {
     if (preventDefault) e.preventDefault();
     onChange(id, val);
@@ -82,6 +87,7 @@ const TextArea = React.forwardRef((props, ref) => {
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
+      onPaste={handleOnPaste}
       onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
@@ -98,6 +104,7 @@ TextArea.defaultProps = {
   theme: theme,
   disabled: false,
   onChange: () => {},
+  onPaste: () => {},
   className: "",
   preventDefault: true,
   size: "small",
@@ -111,6 +118,7 @@ TextArea.propTypes = {
   rows: PropTypes.number,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onPaste: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   value: PropTypes.string,
