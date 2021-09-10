@@ -85,7 +85,6 @@ function ComponentBox(props) {
 
   const onClickOutsideModal = (event) => {
     if (event.target !== event.currentTarget) return;
-
     if (clickOutsideToClose || !showHeader) onClose();
   };
 
@@ -109,6 +108,8 @@ function ComponentBox(props) {
           animate={"isOpen"}
           exit={"exit"}
           variants={modalVariant}
+          onClick={onClickOutsideModal}
+          className={className}
         >
           <ModalContainer
             initial={"initial"}
