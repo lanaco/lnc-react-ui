@@ -73,11 +73,6 @@ const TextArea = React.forwardRef((props, ref) => {
     setVal(e.target.value);
   };
 
-  const handleOnChange = (e) => {
-    if (preventDefault) e.preventDefault();
-    setVal(e.target.value);
-  };
-
   const handleOnBlur = (e) => {
     if (preventDefault) e.preventDefault();
     onChange(id, val);
@@ -87,7 +82,7 @@ const TextArea = React.forwardRef((props, ref) => {
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
-      onPaste={handleOnPaste}
+      onPaste={handleOnChange}
       onBlur={handleOnBlur}
       className={className}
       disabled={disabled}

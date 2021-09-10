@@ -31,17 +31,25 @@ const Modal = styled.div((props) => ({
 }));
 
 const Header = styled.div((props) => ({
-  padding: "0.3125rem",
+  padding: "0.2rem",
   display: "flex",
-  background: props.theme.palette[props.color].main,
+  background: props.basic
+    ? "transparent"
+    : props.theme.palette[props.color].main,
   borderRadius: "0.2rem 0.2rem 0 0",
+
+  border: props.basic
+    ? `0.065rem solid ${props.theme.palette.gray[600]}`
+    : "none",
 }));
 
 const Title = styled.div((props) => ({
   fontSize: props.theme.typography[props.size].fontSize,
   fontFamily: props.theme.typography.fontFamily,
   fontWeight: "bold",
-  color: props.theme.palette[props.color].text,
+  color: props.basic
+    ? props.theme.palette.gray[800]
+    : props.theme.palette[props.color].text,
   paddingLeft: "0.3rem",
   display: "flex",
   alignItems: "center",
@@ -55,6 +63,9 @@ const CloseButton = styled.div((props) => ({
 const Content = styled.div((props) => ({
   padding: "0.3125rem",
   border: `0.065rem solid ${props.theme.palette.gray[600]}`,
+  borderTop: props.basic
+    ? "none"
+    : "`0.065rem solid ${props.theme.palette.gray[600]}`",
   borderRadius: "0 0 0.2rem 0.2rem",
 }));
 
@@ -72,9 +83,10 @@ function ComponentBox(props) {
     clickOutsideToClose,
     showHeader,
     width,
+    basic,
   } = props;
 
-  let themeProps = { theme, size, color, zIndex, open, width };
+  let themeProps = { theme, size, color, zIndex, open, width, basic };
 
   const onClickOutsideModal = (event) => {
     if (event.target !== event.currentTarget) return;
@@ -93,7 +105,13 @@ function ComponentBox(props) {
           <Header {...themeProps}>
             <Title {...themeProps}>{header}</Title>
             <CloseButton {...themeProps}>
-              <Button icon={"times"} iconStyle={"solid"} onClick={onClose} />
+              <Button
+                {...themeProps}
+                icon={"times"}
+                iconStyle={"solid"}
+                onClick={onClose}
+                color={basic ? "transparent" : themeProps.color}
+              />
             </CloseButton>
           </Header>
         ) : (
@@ -114,6 +132,7 @@ ComponentBox.defaultProps = {
   size: "small",
   color: "primary",
   theme: theme,
+  basic: false,
   clickOutsideToClose: false,
   showHeader: true,
   width: "70%",
@@ -127,6 +146,7 @@ ComponentBox.propTypes = {
   zIndex: PropTypes.number,
   open: PropTypes.bool,
   showHeader: PropTypes.bool,
+  basic: PropTypes.bool,
   clickOutsideToClose: PropTypes.bool,
   width: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
