@@ -12,6 +12,7 @@ const Overlay = styled(motion.div)`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
+  z-index: ${(props) => props.zIndex};
 `;
 const ModalContainer = styled(motion.div)`
   width: 50%;
@@ -23,6 +24,7 @@ const ModalContainer = styled(motion.div)`
   width: ${(props) => props.width};
   border-radius: 0.2rem;
   background: white;
+  z-index: ${(props) => props.zIndex};
 `;
 
 const Header = styled.div((props) => ({
@@ -104,6 +106,7 @@ function ComponentBox(props) {
     <AnimatePresence>
       {open && (
         <Overlay
+          {...themeProps}
           initial={"initial"}
           animate={"isOpen"}
           exit={"exit"}
@@ -112,6 +115,7 @@ function ComponentBox(props) {
           className={className}
         >
           <ModalContainer
+            {...themeProps}
             initial={"initial"}
             animate={"isOpen"}
             exit={"exit"}
