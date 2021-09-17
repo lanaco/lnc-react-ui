@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.325rem 0.375rem";
@@ -49,7 +50,7 @@ const StyledNumberInput = styled.input((props) => {
 
 //===================================================
 
-const NumberInput = (props) => {
+const NumberInput = React.forwardRef((props, ref) => {
   const {
     theme,
     color,
@@ -61,43 +62,51 @@ const NumberInput = (props) => {
     value,
     onChange,
     isDecimal,
+    decimalSeparator,
+    numberOfDecimalPlaces,
   } = props;
 
-  const [val, setVal] = useState(value ? value : "");
+  const [val, setVal] = useState(value);
+
+  React.useEffect(() => {
+    setVal(value);
+  }, [value]);
 
   const handleOnChange = (e) => {
     if (preventDefault) e.preventDefault();
+
     setVal(e.target.value);
   };
 
   const handleOnBlur = (e) => {
     if (preventDefault) e.preventDefault();
-    onChange(id, val);
+
+    onChange(id, e.target.value);
   };
 
   const isInputInteger = (evt) => {
     var ch = String.fromCharCode(evt.which);
     var oldValue = evt.target.value;
-
-    if (ch === "-" && (oldValue == undefined || oldValue.length === 0)) return;
-
-    if (!/[0-9]/.test(ch)) evt.preventDefault();
+    if (
+      (ch === "-" && oldValue === undefined) ||
+      (ch === "-" && oldValue.length === 0)
+    ) {
+      return;
+    }
+    if (!/[0-9]/.test(ch)) {
+      evt.preventDefault();
+    }
   };
-
-  let decimalSeparator =
-    props.decimalSeparator !== undefined && props.decimalSeparator.length === 1
-      ? props.decimalSeparator
-      : ".";
-
-  let numberOfDecimalPlaces =
-    props.numberOfDecimalPlaces !== undefined ? props.numberOfDecimalPlaces : 2;
 
   const isInputDecimal = (evt) => {
     var ch = String.fromCharCode(evt.which);
     var oldValue = evt.target.value;
-
-    if (ch === "-" && (oldValue == undefined || oldValue.length === 0)) return;
-
+    if (
+      (ch === "-" && oldValue === undefined) ||
+      (ch === "-" && oldValue.length === 0)
+    ) {
+      return;
+    }
     var regex = new RegExp("^\\d*\\" + decimalSeparator + "?\\d*$");
     if (!regex.test(ch)) {
       evt.preventDefault();
@@ -128,31 +137,37 @@ const NumberInput = (props) => {
       type="text"
       onKeyPress={isDecimal ? isInputDecimal : isInputInteger}
       onPaste={isDecimal ? isInputDecimal : isInputInteger}
+      ref={ref}
     />
   );
-};
+});
 
 StyledNumberInput.defaultProps = {
   id: "",
   disabled: false,
   onChange: () => {},
-  iconClassName: "",
   className: "",
   preventDefault: true,
   size: "small",
   color: "primary",
   value: "",
   isDecimal: false,
+  theme: theme,
+  decimalSeparator: ".",
+  numberOfDecimalPlaces: 2,
 };
 
 StyledNumberInput.propTypes = {
+  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   isDecimal: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.any,
+  decimalSeparator: PropTypes.string,
+  numberOfDecimalPlaces: PropTypes.number,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",

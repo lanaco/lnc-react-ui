@@ -52,6 +52,7 @@
   "peerDependencies": {},
   "dependencies": {
     "@emotion/react": "^11.4.0",
+    "framer-motion": "^4.1.17",
     "immer": "^9.0.3",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.29.1",

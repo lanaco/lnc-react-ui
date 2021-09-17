@@ -4,9 +4,9 @@ import React from "react";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.3rem 0.375rem";
-  if (size === "medium") return "0.3625rem 0.375rem";
-  if (size === "large") return "0.4rem 0.375rem";
+  if (size === "small") return "0.3rem 0.375rem 0.3rem 0.0625rem";
+  if (size === "medium") return "0.3625rem 0.375rem 0.3625rem 0.0625";
+  if (size === "large") return "0.4rem 0.375rem 0.4rem 0.0625";
 };
 
 const heightBySize = (size, hasText) => {
@@ -47,14 +47,14 @@ const Option = styled.option((props) => ({
   fontFamily: props.theme.typography.fontFamily,
 }));
 
-const DropDown = (props) => {
+const DropDown = React.forwardRef((props, ref) => {
   const {
     mapNameTo,
     mapValueTo,
     id,
     preventDefault,
     onChange,
-    items = [],
+    items,
     disabled,
     size,
     color,
@@ -96,6 +96,7 @@ const DropDown = (props) => {
       title={tooltip}
       onChange={handleOnChange}
       value={value}
+      ref={ref}
     >
       {!withoutEmpty ? (
         <Option {...{ theme, size, color }} key={-1} value={-1}>
@@ -107,7 +108,7 @@ const DropDown = (props) => {
       {getItems()}
     </Select>
   );
-};
+});
 
 DropDown.defaultProps = {
   id: "",

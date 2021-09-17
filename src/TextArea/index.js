@@ -52,7 +52,7 @@ const StyledTextInput = styled.textarea((props) => {
 
 //===================================================
 
-const TextArea = (props) => {
+const TextArea = React.forwardRef((props, ref) => {
   const {
     theme,
     color,
@@ -82,14 +82,16 @@ const TextArea = (props) => {
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
+      onPaste={handleOnChange}
       onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
       value={val}
       rows={rows}
+      ref={ref}
     ></StyledTextInput>
   );
-};
+});
 
 TextArea.defaultProps = {
   id: "",
@@ -97,6 +99,7 @@ TextArea.defaultProps = {
   theme: theme,
   disabled: false,
   onChange: () => {},
+  onPaste: () => {},
   className: "",
   preventDefault: true,
   size: "small",
@@ -110,6 +113,7 @@ TextArea.propTypes = {
   rows: PropTypes.number,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onPaste: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   value: PropTypes.string,

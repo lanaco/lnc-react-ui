@@ -88,7 +88,7 @@ const Input = styled.input((props) => ({
   },
 }));
 
-const PasswordInput = (props) => {
+const PasswordInput = React.forwardRef((props, ref) => {
   const {
     onChange,
     preventDefault,
@@ -128,6 +128,7 @@ const PasswordInput = (props) => {
           className={className}
           disabled={disabled}
           title={tooltip}
+          ref={ref}
         />
         <Span {...themeProps} onClick={disabled ? () => {} : handleLockUnlock}>
           <Icon
@@ -138,7 +139,7 @@ const PasswordInput = (props) => {
       </Container>
     </>
   );
-};
+});
 
 PasswordInput.defaultProps = {
   theme: theme,

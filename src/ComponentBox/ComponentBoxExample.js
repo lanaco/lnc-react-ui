@@ -3,7 +3,7 @@ import ComponentBox from ".";
 import Button from "../Button/index";
 
 const ComponentBoxExample = (props) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
