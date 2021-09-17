@@ -1,35 +1,131 @@
-import React, { useState, useEffect } from "react";
-import styles from "./styles.module.css";
-import Filter from "./Filter";
-import TransparentTextInput from "../TransparentTextInput/index";
-import { getGuid, mergeCSS } from "../Helper/helper";
-import DropdownContent from "./DropdownContent";
-import Button from "../Button/index";
-import Icon from "../Icon/index";
+import styled from "@emotion/styled";
+import React, { useEffect, useState } from "react";
+import Button from "../Button";
+import TextInput from "../TextInput";
 
-const useHasChanged = (val) => {
-  const prevVal = usePrevious(val);
-  return prevVal !== JSON.stringify(val);
+const paddingBySize = (size) => {
+  if (size === "small") return "0.3rem 0.375rem";
+  if (size === "medium") return "0.3625rem 0.375rem";
+  if (size === "large") return "0.4rem 0.375rem";
 };
 
-const usePrevious = (value) => {
-  const ref = React.useRef();
-  useEffect(() => {
-    ref.current = JSON.stringify(value);
-  });
-  return ref.current;
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
 };
+
+const Icon = styled.i((props) => ({
+  fontSize: props.theme.typography[props.size].fontSize,
+}));
+
+const Filter = (props) => {
+  //====== PROPS ======
+
+  const { onToggleState, onRemove } = props;
+  const { id } = props;
+  const { Icons } = props;
+
+  //====== LIFECYCLE ======
+
+  //====== EVENTS ======
+
+  const toggleState = () => {
+    onToggleState(id);
+  };
+
+  const remove = () => {
+    onRemove(id);
+  };
+
+  //====== METHODS ======
+
+  const getIsAppliedCss = () => {
+    return props.data.isApplied === true ? styles.bgActive : styles.bgNonActive;
+  };
+
+  const getIsAppliedColumnNameCss = () => {
+    return props.data.isApplied === true ? "" : styles.bgColumnNameNonActive;
+  };
+
+  //====== RENDER ======
+
+  const getPopoverContent = (item) => {
+    item = props.data;
+    let content = "";
+
+    item.statements.forEach((element) => {
+      content +=
+        element.name +
+        " " +
+        element.operationType.name.toLowerCase() +
+        ' "' +
+        element.value +
+        '"\n';
+    });
+
+    return content;
+  };
+
+  let columnName = props.data.statements[0].name;
+  let columnValue = props.data.statements[0].value;
+  if (columnName.length > 14) {
+    columnName = columnName.substring(0, 13) + ".";
+  }
+  if (columnValue.length > 14) {
+    columnValue = columnValue.substring(0, 13) + ".";
+  }
+
+  return (
+    <div className={mergeCSS([styles.bubbleContent, getIsAppliedCss()])}>
+      <span
+        className={mergeCSS([styles.columnName, getIsAppliedColumnNameCss()])}
+        title={getPopoverContent()}
+        onClick={toggleState}
+      >
+        <b>{columnName}</b>
+      </span>
+      <span
+        className={styles.value}
+        title={getPopoverContent()}
+        onClick={toggleState}
+      >
+        {columnValue}
+      </span>
+      <span className={styles.remove}>
+        <Button icon={"times"} spanClassName={styles.xIcon} onClick={remove} />
+      </span>
+    </div>
+  );
+};
+
 
 const SearchBar = (props) => {
+
+  const useHasChanged = (val) => {
+    const prevVal = usePrevious(val);
+    return prevVal !== JSON.stringify(val);
+  };
+
+  const usePrevious = (value) => {
+    const ref = React.useRef();
+    useEffect(() => {
+      ref.current = JSON.stringify(value);
+    });
+    return ref.current;
+  };
+
   const [Filters, setFilters] = useState([]);
   const [QuickFilterText, setQuickFilterText] = useState("");
   const [QuickFilterOpen, setQuickFilterOpen] = useState("");
 
   //====== PROPS ======
 
-  const { onChange } = props;
-  const { filterProps } = props;
-  const { Localization, Icons } = props;
+  const {
+    onChange,
+    filterProps,
+    Localization,
+    Icons } = props;
 
   //====== LIFECYCLE ======
 
@@ -42,7 +138,7 @@ const SearchBar = (props) => {
   const changed = useHasChanged(Filters);
 
   useEffect(() => {
-    transparentTextInput.current.focus();
+    //transparentTextInput.current.focus();
     setMounted(true);
   }, []);
 
@@ -56,12 +152,54 @@ const SearchBar = (props) => {
       setHasFilters(Filters.length > 0);
     }
 
-    transparentTextInput.current.focus();
+    //transparentTextInput.current.focus();
 
     onChange(getAppliedFilters());
   }, [Filters]);
 
-  //====== EVENTS ======
+  const renderFilters = () => {
+    if (hasFilters)
+      return Filters.map((x, i) => (
+        <Filter
+          key={i}
+          id={x.id}
+          data={x}
+          onRemove={onRemoveFilter}
+          onToggleState={onToggleState}
+          Icons={Icons}
+        />
+      ));
+    return;
+  };
+
+  const renderClearFiltersButton = () => {
+    if (hasFilters)
+      return (
+        <Button
+          theme={props.theme}
+          color={"transparent"}
+          size={props.size}
+          iconStyle="solid"
+          icon={"times"}
+          onClick={onClearFilters}
+          tooltip={Localization ? Localization.Clear : "Clear"}
+        />
+      );
+  };
+
+  const renderResetFiltersButton = () => {
+    return (
+      <Button
+        theme={props.theme}
+        color={"transparent"}
+        size={props.size}
+        iconStyle="solid"
+        icon={"sync-alt"}
+        onClick={onResetFilters}
+        tooltip={Localization ? Localization.Reset : "Reset"}
+      />
+    );
+  };
 
   const onClearFilters = () => {
     setFilters([]);
@@ -93,6 +231,7 @@ const SearchBar = (props) => {
   };
 
   const onKeyDown = (e) => {
+    console.log("on ki daun", e)
     let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
     if (e.keyCode === 38 && cursor > 0) {
       setCursor(cursor - 1);
@@ -162,7 +301,6 @@ const SearchBar = (props) => {
     }, 250);
   };
 
-  //====== METHODS ======
 
   const getAppliedFilters = () => {
     let dynamicFilters = [];
@@ -191,107 +329,98 @@ const SearchBar = (props) => {
     return dynamicFilters;
   };
 
-  //====== RENDER ======
 
-  const renderClearFiltersButton = () => {
-    return (
-      <div className={hasFilters ? styles.visibleX : styles.hidden}>
-        <Button
-          icon={"times"}
-          onClick={onClearFilters}
-          tooltip={Localization ? Localization.Clear : "Clear"}
-        />
-      </div>
-    );
-  };
 
-  const renderResetFiltersButton = () => {
-    return (
-      <Button
-        icon={"sync-alt"}
-        onClick={onResetFilters}
-        tooltip={Localization ? Localization.Reset : "Reset"}
-      />
-    );
-  };
+  return (
+    <div style={{
+      display: "flex",
+      fontFamily: props.theme.typography.fontFamily,
+      outline: "none",
+      backgroundColor: props.theme.palette[props.color].lighter,
+      color: props.theme.palette[props.color].textDark,
+      transition: "all 250ms",
+      fontSize: props.theme.typography[props.size].fontSize,
+      border: "0px",
+      borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
+      //padding: paddingBySize(props.size),
+      width: "100%",
+      boxSizing: "border-box",
+      minHeight: heightBySize(props.size),
+      maxHeight: heightBySize(props.size),
+      cursor: "pointer",
+      "&:focus": {
+        backgroundColor: props.theme.palette.common.white,
+        color: props.theme.palette.common.black,
+      },
+      "&:disabled": {
+        backgroundColor: props.theme.palette.gray[200],
+        borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+        color: props.theme.palette.gray.textLight,
+        cursor: "default",
+        opacity: 0.7,
+      },
+    }}
+    >
+      <Icon {...props} className={`fas fa-search fa-fw`} style={{
+        color: props.theme.palette[props.color].main,
+        margin: "7px"
+      }} />
+      <span
+        ref={filterContainer}
+      >
+        {renderFilters()}
+      </span>
+      <TextInput
+        // ref={transparentTextInput}
+        {...props}
+        value={QuickFilterText}
+        onKeyDown={onKeyDown}
+        onInput={onQuickFilterInput}
+        onBlur={onQuickFilterBlur}>
+      </TextInput>
+      {renderClearFiltersButton()}
+      {renderResetFiltersButton()}
 
-  const renderFilters = () => {
-    return Filters.map((x, i) => (
-      <Filter
-        key={i}
-        id={x.id}
-        data={x}
-        onRemove={onRemoveFilter}
-        onToggleState={onToggleState}
-        Icons={Icons}
-      />
-    ));
-  };
-
-  const renderSearchInput = () => {
-    let dropdownContentCss =
-      QuickFilterOpen === true
-        ? mergeCSS([styles.dropdownContent, styles.showDropdown])
-        : styles.dropdownContent;
-
-    let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
-
-    return (
-      <div className={styles.dropdown}>
-        <div className={styles.Search}>
-          <TransparentTextInput
-            value={QuickFilterText}
-            onKeyDown={onKeyDown}
-            onInput={onQuickFilterInput}
-            onBlur={onQuickFilterBlur}
-            inputClassName={styles.QuickFilterInput}
-            ref={transparentTextInput}
-          />
-        </div>
-        <div className={dropdownContentCss}>
-          <DropdownContent
-            items={quickFilters}
-            onSelect={onQuickFilterSelect}
-            value={QuickFilterText}
-            cursor={cursor}
-          />
-        </div>
-      </div>
-    );
-  };
-
-  const renderComponent = () => {
-    return (
-      <div className={mergeCSS([styles.Container, styles.Border])}>
-        <div className={styles.inputAndCommandsContainer}>
-          <span className={styles.iconHolder}>
-            <Icon icon={"search"} iconSpanCssClass={styles.iconSpan}></Icon>
-          </span>
-          <span
-            ref={filterContainer}
-            className={
-              hasFilters ? styles.filterContainer : styles.filterContainerHidden
-            }
-          >
-            {renderFilters()}
-          </span>
-          <div className={styles.filtersAndCommandsHolder}>
-            {renderSearchInput()}
-            {renderClearFiltersButton()}
-            <span className={styles.Commands}>
-              {renderResetFiltersButton()}
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderElement = () => {
-    return renderComponent();
-  };
-
-  return renderElement();
+    </div>
+  );
 };
+
+// SearchBar.defaultProps = {
+//   id: "",
+//   disabled: false,
+//   tooltip: "",
+//   onChange: () => {},
+//   className: "",
+//   preventDefault: true,
+//   size: "small",
+//   color: "primary",
+//   theme: theme,
+//   items: [],
+//   withoutEmpty: false,
+//   mapValueTo: "value",
+//   mapNameTo: "name",
+// };
+
+// SearchBar.propTypes = {
+//   theme: PropTypes.object.isRequired,
+//   id: PropTypes.string,
+//   disabled: PropTypes.bool,
+//   tooltip: PropTypes.string,
+//   onChange: PropTypes.func,
+//   className: PropTypes.string,
+//   preventDefault: PropTypes.bool,
+//   withoutEmpty: PropTypes.bool,
+//   mapValueTo: PropTypes.string,
+//   mapNameTo: PropTypes.string,
+//   size: PropTypes.oneOf(["small", "medium", "large"]),
+//   color: PropTypes.oneOf([
+//     "primary",
+//     "secondary",
+//     "success",
+//     "error",
+//     "warning",
+//     "gray",
+//   ]),
+// };
 
 export default SearchBar;

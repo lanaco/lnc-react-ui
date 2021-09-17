@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
@@ -63,6 +63,9 @@ const TextInput = (props) => {
     size,
     value,
     onChange,
+    onKeyDown,
+    onInput,
+    onBlur,
   } = props;
 
   const [text, setText] = useState("");
@@ -87,9 +90,35 @@ const TextInput = (props) => {
     if (preventDefault) {
       e.preventDefault();
     }
-
     onChange(id, e.target.value);
     setText(e.target.value);
+  };
+
+  const handleOnKeyDown = (e) => {
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    if (onKeyDown)
+    onKeyDown(e);
+    //setText(e.target.value);
+  };
+
+  const handleOnInput = (e) => {
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    if (onInput)
+    onInput(e);
+    //setText(e.target.value);
+  };
+
+  const handleOnBlur = (e) => {
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    if (onBlur)
+    onBlur(e);
+    //setText(e.target.value);
   };
 
   // const [val, setVal] = useState(value ? value : "");
@@ -108,6 +137,9 @@ const TextInput = (props) => {
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
+      onKeyDown={handleOnKeyDown}
+      onInput={handleOnInput}
+      onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
       value={text}

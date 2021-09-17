@@ -21,6 +21,7 @@ const StyledDropdownLookup = styled.input((props) => {
     flexDirection: "row",
     justifyContent: "center",
     cursor: "text",
+    width: "100%",
     padding: paddingBySize(props.size),
     fontSize: props.theme.typography[props.size].fontSize,
     backgroundColor: props.theme.palette[props.color].lighter,
@@ -43,12 +44,12 @@ const StyledDropdownLookup = styled.input((props) => {
 const StyledList = styled.ul((props) => {
   return {
     zIndex: "10000",
-    border: "1px solid gray",
+    // border: "1px solid gray",
     position: "relative",
     outline: "none",
     listStyle: "none",
     width: "auto",
-    padding: "0px",
+    paddingLeft: "5px",
   };
 });
 
@@ -126,6 +127,7 @@ const DropdownLookup = (props) => {
   }, [selectedOption]);
 
   const updateSelectedValue = (data, updateText = false) => {
+    console.log("update selected value:", data, updateText)
     if (data && data.key) {
       setSelectedOption(data);
       if (updateText) setValue(data.value);
@@ -230,7 +232,10 @@ const DropdownLookup = (props) => {
 
   return (
     <div>
-      <div>
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between"
+      }} >
         <StyledDropdownLookup
           id={id}
           type={"text"}
@@ -248,18 +253,22 @@ const DropdownLookup = (props) => {
           color="primary"
           size={size}
         />
-        <span>
+        <span style={{borderBottom: "2px solid " + theme.palette.primary.main, backgroundColor: props.theme.palette[props.color].lighter}}>
           {State.Loading === false ? (
             <Button
               icon={"times-circle"}
               onClick={onClearSelection}
               disabled={props.disabled}
+              theme={theme}
+              color="transparent"
             />
           ) : (
             <Button
               icon={"sync-alt"}
               onClick={onClearSelection}
               disabled={props.disabled}
+              theme={theme}
+              color="transparent"
             />
           )}
         </span>
@@ -273,16 +282,16 @@ DropdownLookup.defaultProps = {
   id: "",
   theme: theme,
   disabled: false,
-  onChange: () => {},
+  onChange: () => { },
   className: "",
   preventDefault: true,
   size: "small",
   color: "primary",
-  InitializeNamespace: () => {},
+  InitializeNamespace: () => { },
   initialValue: "",
   State: {},
-  LoadData: () => {},
-  ClearOptions: () => {},
+  LoadData: () => { },
+  ClearOptions: () => { },
   NotItemsFoundLabel: "",
 };
 
