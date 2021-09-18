@@ -25,8 +25,7 @@ const Item = styled.div`
 `;
 
 const ItemText = styled.div`
-  padding-left: 6px;
-  padding-right: 12px;
+  padding-left: 12px;
   display: flex;
   align-items: center;
 `;
@@ -219,13 +218,13 @@ const Pagination = (props) => {
 
   return (
     <Container {...themeProps}>
-      {renderRowInformation()}
       {renderFirst()}
       {renderPrevious()}
       {renderCurrentPage()}
       {renderNext()}
       {renderLast()}
       {renderPageSize()}
+      {renderRowInformation()}
       {/* {renderExportButtons()} */}
     </Container>
   );

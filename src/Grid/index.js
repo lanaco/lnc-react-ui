@@ -1361,6 +1361,7 @@ const Grid = React.forwardRef((props, ref) => {
     if (state.Options.ReadOnly || state.General.IsLookup || Form === null) {
       return false;
     }
+
     if (state.Options.EnableAdd && state.General.CurrentView !== "FormView") {
       return (
         <FlexItem>

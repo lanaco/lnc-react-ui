@@ -8,3 +8,5 @@ DropdownMenu // should not be i this library
 TO ADD:
     - Add frontend pagination to CheckboxLookup
     - value and onChange od textArea, numberInput
+    - TextArea resizing anc colors
+    - Tooltips on all components, check STAMP wrapper also

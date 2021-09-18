@@ -9,6 +9,136 @@ import FormViewMovement from "./FormViewMovement";
 import { freeze, mergeCSS } from "../Helper/helper";
 import styles from "./styles.module.css";
 import TableView from "./TableView";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import { default as LncPagination } from "../Pagination/index";
+import Spinner from "../Spinner/index";
+import theme from "../_utils/theme";
+
+const getBorderSyle = (borderStyle, read, theme, color) => {
+  var css = "";
+  var borderColor = "";
+
+  if (borderStyle === "edit") borderColor = theme.palette.warning.main;
+
+  if (borderStyle === "success") {
+    borderColor = theme.palette.success.main;
+  }
+
+  if (borderStyle === "add") {
+    borderColor = theme.palette[color].main;
+  }
+
+  if (read) {
+    css += `
+      &:hover {
+        cursor: not-allowed;
+      }
+
+      & * {
+        pointer-events: none;
+        opacity: 1;
+      }
+    `;
+  }
+
+  css += `
+      border-top: 4.5px solid ${borderColor};
+      padding-top: 10px;
+    `;
+
+  return css;
+};
+
+const Container = styled.div`
+  box-shadow: 0 0 12px #bebebe;
+  borderradius: 3px;
+  padding: 4px;
+`;
+
+const TableContainer = styled.div`
+  font-family: var(--font-base-ubuntu);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`;
+
+const PaginationContainer = styled.div`
+  margin-top: 6px;
+`;
+
+const FormContainer = styled.div`
+  height: 100%;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
+  ${(props) =>
+    getBorderSyle(props.borderStyle, props.read, props.theme, props.color)}
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 5px;
+
+  border: 1.5px solid rgba(165, 164, 164, 0.4);
+  border-radius: 3px;
+  padding: 4px;
+  font-size: 12px;
+  font-family: "Ubuntu";
+`;
+
+const FlexItem = styled.div`
+  padding-left: 3px;
+  padding-right: 4px;
+  font-size: 1.4em;
+  max-height: 40px;
+`;
+
+const DeveloperMessageContainer = styled.div`
+  margin-top: 5px;
+  padding: 8px;
+  border: 2px solid rgba(255, 0, 0, 0.725);
+  background-color: rgba(252, 79, 79, 0.104);
+  font-size: 11px;
+`;
+
+const DeveloperMessage = styled.div`
+  color: rgb(180, 3, 3);
+`;
+
+const LoaderContainer = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #eceaea;
+  z-index: 10000000;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+`;
+
+const LoaderContainerTransparent = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 10000000;
+`;
+
+const Loader = styled.div`
+  position: absolute;
+  top: 48%;
+  left: 47%;
+`;
+
+const DivRelative = styled.div`
+  position: relative;
+`;
 
 const DataView = (props) => {
   const emptyFunc = () => {};
@@ -63,7 +193,7 @@ const DataView = (props) => {
     },
   } = props;
 
-  const { Lookup = {} } = props;
+  const { Lookup = {}, theme, size, color } = props;
 
   const { OnAdd = emptyFunc, OnUpdate = emptyFunc, OnDelete = emptyFunc } =
     props.CRUD || {};
@@ -88,6 +218,8 @@ const DataView = (props) => {
     goToFirstPage = emptyFunc,
     goToLastPage = emptyFunc,
   } = props.TableViewMovementActions || {};
+
+  let themeProps = { theme, size, color };
 
   //======== LOOKUP ========
 
@@ -164,7 +296,7 @@ const DataView = (props) => {
   const renderLookupTakeValues = () => {
     if (General.IsLookup) {
       return (
-        <div className={styles.flexItem}>
+        <FlexItem>
           <Button
             tooltip={Localization.TakeValues}
             onClick={() => {
@@ -174,11 +306,11 @@ const DataView = (props) => {
             disabled={freezeLoading([Table.SelectedData.length === 0])}
             icon={"plus"}
           />
-        </div>
+        </FlexItem>
       );
     }
 
-    return <></>;
+    return false;
   };
 
   const renderContextMenu = () => {
@@ -204,17 +336,17 @@ const DataView = (props) => {
 
   const renderRefreshButton = () => {
     if (General.CurrentView !== ViewType.TABLE_VIEW || !General.DataFromBackend)
-      return <></>;
+      return false;
 
     return (
-      <div className={styles.flexItem}>
+      <FlexItem>
         <Button
           tooltip={Localization.Refresh}
           onClick={OnRefresh}
           disabled={freezeLoading()}
           icon={"sync-alt"}
         />
-      </div>
+      </FlexItem>
     );
   };
 
@@ -224,17 +356,17 @@ const DataView = (props) => {
       !Options.EnableDelete ||
       General.CurrentView === ViewType.FORM_VIEW
     )
-      return <></>;
+      return false;
 
     return (
-      <div className={styles.flexItem}>
+      <FlexItem>
         <Button
           onClick={() => setDeleteConfirmationBoxOpen(true)}
           disabled={freezeLoading([Table.SelectedData.length === 0])}
           tooltip={Localization.DeleteSelected}
           icon={"trash"}
         />
-      </div>
+      </FlexItem>
     );
   };
 
@@ -267,16 +399,17 @@ const DataView = (props) => {
 
   const renderGoToAddButton = () => {
     if (Options.ReadOnly) return <></>;
+
     if (Options.EnableAdd && General.CurrentView !== ViewType.FORM_VIEW)
       return (
-        <div className={styles.flexItem}>
+        <FlexItem>
           <Button
             tooltip={Localization.Add}
             onClick={GoToAdd}
             disabled={freezeLoading()}
             icon={"plus"}
           />
-        </div>
+        </FlexItem>
       );
 
     return null;
@@ -304,17 +437,17 @@ const DataView = (props) => {
 
   const renderChangeToTableView = () => {
     if (!Options.EnableFormView || General.CurrentView !== ViewType.FORM_VIEW)
-      return <></>;
+      return false;
 
     return (
-      <div className={styles.flexItem}>
+      <FlexItem>
         <Button
           tooltip={Localization.ToTableView}
           onClick={ChangeToTableView}
           disabled={freezeLoading()}
           icon={"table"}
         />
-      </div>
+      </FlexItem>
     );
   };
 
@@ -325,10 +458,10 @@ const DataView = (props) => {
       !Options.EnableFormView ||
       General.CurrentView !== ViewType.FORM_VIEW
     )
-      return <></>;
+      return false;
 
     return (
-      <div className={styles.flexItem}>
+      <FlexItem>
         <Button
           tooltip={
             Form.Mode === FormMode.READ
@@ -339,12 +472,35 @@ const DataView = (props) => {
           disabled={freezeLoading()}
           icon={Form.Mode === FormMode.READ ? "edit" : "eye"}
         />
-      </div>
+      </FlexItem>
+    );
+  };
+
+  const renderPagination = () => {
+    if (!Options.EnablePagination) return false;
+
+    return (
+      <PaginationContainer>
+        <LncPagination {...tableViewConfig.PaginationConfig} Export={Export} />
+      </PaginationContainer>
+    );
+  };
+
+  const renderSpinner = () => {
+    if (!General.IsLoading) return <></>;
+
+    return (
+      <>
+        <LoaderContainer></LoaderContainer>
+        <LoaderContainerTransparent>
+          <Loader>{Table.Data.length > 2 ? <Spinner /> : <></>}</Loader>
+        </LoaderContainerTransparent>
+      </>
     );
   };
 
   const renderFromViewMovement = () => {
-    if (!Options.EnableFormViewMovement || Form.Mode === "ADD") return <></>;
+    if (!Options.EnableFormViewMovement || Form.Mode === "ADD") return false;
 
     return (
       <FormViewMovement
@@ -448,31 +604,187 @@ const DataView = (props) => {
       );
   };
 
+  const renderFormViewMovement = () => {
+    if (!Options.EnableFormViewMovement || Form.Mode === "ADD") return false;
+
+    return (
+      <FormViewMovement
+        Config={formViewMovementConfig}
+        Localization={Localization.FormViewMovement}
+        Icons={Icons}
+      />
+    );
+  };
+
+  const renderHeader = () => {
+    var x1 =
+      Form === null || General.CurrentView === "TableView" ? false : true;
+
+    var x2 =
+      Options.ReadOnly ||
+      !Options.EnableDelete ||
+      General.CurrentView === "FormView" ||
+      General.IsLookup ||
+      OnDelete === null
+        ? false
+        : true;
+
+    var x3 =
+      Options.ReadOnly || General.IsLookup || Form === null ? false : true;
+
+    var x4 =
+      Options.EnableFormViewMovement &&
+      Form !== null &&
+      General.CurrentView === "FormView" &&
+      Form.Mode !== "ADD"
+        ? true
+        : false;
+
+    var x5 =
+      Options.ReadOnly ||
+      !Options.EnableSwitchReadOnlyMode ||
+      Form === null ||
+      Form === undefined ||
+      General.CurrentView !== "FormView"
+        ? false
+        : true;
+
+    var x6 = General.CurrentView !== "TableView" ? false : true;
+
+    var x7 =
+      General.IsLookup && Table.SelectionType === TableSelectionType.MULTIPLE
+        ? true
+        : false;
+
+    if (x1 || x2 || x3 || x4 || x5 || x6 || x7)
+      return (
+        <HeaderContainer>
+          {renderChangeToTableView()}
+          {renderDeleteSelectedButton()}
+          {renderGoToAddButton()}
+          {renderFormViewMovement()}
+          {renderSwitchToEditModeButton()}
+          {renderRefreshButton()}
+          {renderLookupTakeValues()}
+        </HeaderContainer>
+      );
+
+    return <></>;
+  };
+
+  const renderTable = () => {
+    if (General.CurrentView !== "TableView" && General.DataFromBackend)
+      return <></>;
+
+    return (
+      <DivRelative>
+        {renderSpinner()}
+        <TableView
+          Config={tableViewConfig}
+          Localization={Localization.TableView}
+          Export={Export}
+          Icons={Icons}
+          accentColor={props.accentColor}
+        />
+      </DivRelative>
+    );
+  };
+
+  const renderForm = () => {
+    if (
+      General.CurrentView !== "FormView" ||
+      Form === null ||
+      Form === undefined
+    )
+      return <></>;
+
+    var component = (
+      <FormContainer
+        borderStyle={getBorderStyleProp()}
+        read={state.Form.Mode === FormMode.READ}
+        {...themeProps}
+      >
+        {FormView({
+          IsLoading: General.IsLoading,
+          Data: Form.Data,
+          OnFieldChange: OnFieldChange,
+          EnableEdit: Options.EnableEdit,
+          EnableAdd: Options.EnableAdd,
+          FormMode: Form.Mode,
+          OnAdd: Options.EnableAdd ? OnAdd : emptyFunc,
+          OnUpdate: Options.EnableEdit ? OnUpdate : emptyFunc,
+          Dirty: Form.Dirty,
+          DiscardEdited: Options.EnableEdit ? DiscardEdited : emptyFunc,
+        })}
+      </FormContainer>
+    );
+
+    if (General.DataFromBackend) {
+      return component;
+    }
+
+    if (!General.DataFromBackend) {
+      return (
+        <ComponentBox
+          id={"FormViewInModal"}
+          open={true}
+          size={"medium"}
+          title={""}
+          handleDialogClose={() => {}}
+        >
+          {component}
+        </ComponentBox>
+      );
+    }
+  };
+
   const renderComponent = () => {
     return (
-      <div>
-        <div className={styles.flexContainer}>
-          <div className={styles.flexInnerContainer}>
-            {renderChangeToTableView()}
-            {renderSwitchToEditModeButton()}
-            {renderGoToAddButton()}
-            {renderDeleteSelectedButton()}
-            {renderDeleteConfirmationBox()}
-            {renderAddWithCopyButton()}
-            {renderLookupTakeValues()}
-            {renderRefreshButton()}
-            {renderContextMenu()}
-          </div>
-          <div className={styles.filterContainerHolder}>
-            {renderFiltering()}
-          </div>
-        </div>
-        <div className={mergeCSS([styles.view])}>{renderView()}</div>
-      </div>
+      <Container {...themeProps}>
+        {renderHeader()}
+        <TableContainer {...themeProps}>
+          {/* {renderDeleteConfirmationBox()} */}
+          {renderTable()}
+          {renderForm()}
+          {/* {renderDeveloperMessages()} */}
+        </TableContainer>
+        {renderPagination()}
+      </Container>
+      // <div>
+      //   <div className={styles.flexContainer}>
+      //     <div className={styles.flexInnerContainer}>
+      //       {renderChangeToTableView()}
+      //       {renderSwitchToEditModeButton()}
+      //       {renderGoToAddButton()}
+      //       {renderDeleteSelectedButton()}
+      //       {renderDeleteConfirmationBox()}
+      //       {renderAddWithCopyButton()}
+      //       {renderLookupTakeValues()}
+      //       {renderRefreshButton()}
+      //       {renderContextMenu()}
+      //     </div>
+      //     <div className={styles.filterContainerHolder}>
+      //       {renderFiltering()}
+      //     </div>
+      //   </div>
+      //   <div className={mergeCSS([styles.view])}>{renderView()}</div>
+      // </div>
     );
   };
 
   return renderComponent();
+};
+
+DataView.defaultProps = {
+  theme: theme,
+  size: "small",
+  color: "primary",
+};
+
+DataView.propTypes = {
+  theme: PropTypes.object.isRequired,
+  size: PropTypes.string,
+  color: PropTypes.string,
 };
 
 export default DataView;

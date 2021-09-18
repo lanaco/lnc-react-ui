@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import CheckBox from "../CheckBox/index.js";
 import Button from "../Button/index.js";
 import ToggleSwitch from "../ToggleSwitch/index.js";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Global, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 import PropTypes from "prop-types";
@@ -9,31 +11,127 @@ import PropTypes from "prop-types";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  border: 0.125rem solid ${(props) => props.theme.palette[props.color].main};
-  border-radius: 0.125rem;
-  padding: 0.4rem;
-  width: fit-content;
+  // border: 0.06rem solid #80808080;
+  box-shadow: 0 0 6px #bebebe;
+  border-radius: 0.175rem;
+  padding: 8px;
+  width: ${(props) =>
+    props.width && props.width !== "" ? props.width : "fit-content"};
+
+  font-family: ${theme.typography.fontFamily};
 `;
 
-const Header = styled.div`
-  padding: 0.125rem 0 0.4rem 0;
-  border-bottom: 0.1rem solid ${(props) => props.theme.palette.gray[300]};
-`;
-
-const Content = styled.div`
+const Table = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.2rem 0 0 0;
+  border: 1.7px solid #80808060;
+  background-color: whitesmoke;
+  border-radius: 0.175rem;
 `;
 
-const ControlContainer = styled.div`
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  &::-webkit-scrollbar {
+    background: white;
+    height: 0;
+    width: 0;
+  }
+  overflow: auto;
+  height: ${(props) =>
+    props.height && props.height !== "" ? props.height : "auto"};
+`;
+
+const Row = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 0.125rem 0;
+  cursor: pointer;
+  transition: all 250ms ease;
+  background-color: white;
+
+  &:hover {
+    background-color: whitesmoke;
+  }
 `;
+
+const HeaderRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #80808050;
+  background-color: whitesmoke;
+  border-radius: 3px 3px 0 0;
+  position: sticky;
+`;
+
+const HeaderColumnCheck = styled.div`
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: ${(props) => (props.check ? "8px" : "0")};
+  padding-left: 8px;
+  border-right: 1px solid #80808050;
+`;
+
+const ColumnCheck = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px ${(props) => (props.check ? "8px" : "0")} 5px 8px;
+  border-right: 1px solid #80808050;
+`;
+
+const ColumnTitle = styled.div`
+  padding: 5px 8px 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+`;
+
+const HeaderColumnTitle = styled.div`
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: calc(
+    ${(props) => props.theme.typography[props.size].fontSize} + 3px
+  );
+`;
+
+const FooterRow = styled.div`
+  display: flex;
+  // flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  border: 1.7px solid #80808060;
+  background-color: whitesmoke;
+  border-radius: 0.175rem;
+  padding: 3px;
+
+  margin-top: 8px;
+`;
+
+const ButtonContainer = styled.div`
+  margin: 3px;
+`;
+
+const PageNumber = styled.div`
+  font-size: calc(
+    ${(props) => props.theme.typography[props.size].fontSize} + 3px
+  );
+  margin: 3px 5px;
+`;
+
+//=======================================================================
 
 const CheckboxLookup = (props) => {
   const {
+    id,
     onChange,
     selectedOptions,
     onSelectDeselectAll,
@@ -43,14 +141,19 @@ const CheckboxLookup = (props) => {
     color,
     style,
     disabled,
-    value,
     itemId,
     itemText,
     className,
+    title,
     localization,
+    pagination,
+    height,
+    width,
   } = props;
 
-  let themeProps = { theme, size, color };
+  let themeProps = { theme, size, color, height, width };
+
+  const [page, setPage] = useState(1);
 
   const handleCheckboxChange = (_id, _value) => {
     let selectedItems = [...selectedOptions];
@@ -66,90 +169,186 @@ const CheckboxLookup = (props) => {
         return item[itemId] !== _id;
       });
     }
+
     onChange(id, selectedItems);
   };
+
+  const pageCount = Math.round((options.length - 1) / 5 + 1);
 
   var label =
     options.length === selectedOptions.length
       ? localization.DeselectAll || "Deselect all"
       : localization.SelectAll || "Select all";
 
+  let _options = pagination ? options.slice((page - 1) * 5, page * 5) : options;
+
   return (
-    <>
-      <Container {...themeProps} className={className}>
-        <Header {...themeProps}>
-          <Button
-            theme={theme}
-            color={color}
-            tooltip={label}
-            text={label}
-            icon={"check-square"}
-            iconStyle={
-              options.length === selectedOptions.length ? "regular" : "solid"
-            }
-            iconLocation={"left"}
-            onClick={() =>
-              onSelectDeselectAll(
-                options.length === selectedOptions.length ? false : true
-              )
-            }
-            size={size}
-            disabled={false}
-          />
-        </Header>
-        <Content>
-          {options.map((x, i) => {
-            let isChecked = false;
+    <Container {...themeProps} className={className}>
+      <Global
+        styles={css`
+          .item-enter {
+            opacity: 0;
+          }
 
-            if (selectedOptions) {
-              selectedOptions.forEach((element) => {
-                if (element[itemId] === x[props.itemId]) {
-                  isChecked = true;
-                }
-              });
-            }
+          .item-enter-active {
+            transition: all 0.4s ease-in;
+            opacity: 1;
+          }
 
-            return (
-              <ControlContainer key={i} {...themeProps}>
-                {style === "regular" ? (
-                  <CheckBox
-                    {...{
-                      id: x[itemId],
-                      disabled: disabled,
-                      checked: isChecked,
-                      onChange: handleCheckboxChange,
-                      color: color,
-                      size: size,
-                      theme: theme,
-                      label: x[itemText],
-                    }}
-                  />
-                ) : (
-                  <ToggleSwitch
-                    {...{
-                      id: x[itemId],
-                      disabled: disabled,
-                      value: isChecked,
-                      onChange: handleCheckboxChange,
-                      color: color,
-                      size: size,
-                      theme: theme,
-                      label: x[itemText],
-                    }}
-                  />
-                )}
-              </ControlContainer>
-            );
-          })}
-        </Content>
-      </Container>
-    </>
+          .item-exit {
+          }
+
+          .item-exit-active {
+            opacity: 0;
+            transition: opacity 400ms ease-out;
+          }
+        `}
+      />
+
+      <Table>
+        <HeaderRow>
+          <HeaderColumnCheck check={style === "regular"}>
+            {style === "regular" ? (
+              <CheckBox
+                {...{
+                  id: id,
+                  disabled: false,
+                  checked: options.length === selectedOptions.length,
+                  onChange: () =>
+                    onSelectDeselectAll(
+                      options.length === selectedOptions.length ? false : true
+                    ),
+                  color: color,
+                  size: size,
+                  theme: theme,
+                  tooltip: label,
+                }}
+              />
+            ) : (
+              <ToggleSwitch
+                {...{
+                  id: id,
+                  disabled: false,
+                  checked: options.length === selectedOptions.length,
+                  onChange: () =>
+                    onSelectDeselectAll(
+                      options.length === selectedOptions.length ? false : true
+                    ),
+                  color: color,
+                  size: size,
+                  theme: theme,
+                  tooltip: label,
+                }}
+              />
+            )}
+          </HeaderColumnCheck>
+          <HeaderColumnTitle {...themeProps}>{title}</HeaderColumnTitle>
+        </HeaderRow>
+
+        <Body {...themeProps}>
+          <TransitionGroup component="div">
+            {_options.map((x, i) => {
+              let isChecked = false;
+
+              if (selectedOptions) {
+                selectedOptions.forEach((element) => {
+                  if (element[itemId] === x[props.itemId]) {
+                    isChecked = true;
+                  }
+                });
+              }
+
+              return (
+                <CSSTransition key={i} timeout={350} classNames="item">
+                  <Row
+                    onClick={() => handleCheckboxChange(x[itemId], !isChecked)}
+                  >
+                    <ColumnCheck check={style === "regular"}>
+                      {style === "regular" ? (
+                        <CheckBox
+                          {...{
+                            id: x[itemId],
+                            disabled: disabled,
+                            checked: isChecked,
+                            onChange: () => {},
+                            color: color,
+                            size: size,
+                            theme: theme,
+                          }}
+                        />
+                      ) : (
+                        <ToggleSwitch
+                          {...{
+                            id: x[itemId],
+                            disabled: disabled,
+                            value: isChecked,
+                            onChange: () => {},
+                            color: color,
+                            size: size,
+                            theme: theme,
+                          }}
+                        />
+                      )}
+                    </ColumnCheck>
+                    <ColumnTitle {...themeProps}>{x[itemText]}</ColumnTitle>
+                  </Row>
+                </CSSTransition>
+              );
+            })}
+          </TransitionGroup>
+        </Body>
+      </Table>
+
+      {pagination && (
+        <FooterRow>
+          <ButtonContainer>
+            <Button
+              {...themeProps}
+              icon="angle-double-left"
+              onClick={() => setPage(1)}
+              disabled={page === 1}
+            />
+          </ButtonContainer>
+
+          <ButtonContainer>
+            <Button
+              {...themeProps}
+              icon="angle-left"
+              onClick={() => setPage(page - 1)}
+              disabled={page === 1}
+            />
+          </ButtonContainer>
+
+          <PageNumber {...themeProps}>{`${page}/${pageCount}`}</PageNumber>
+
+          <ButtonContainer>
+            <Button
+              {...themeProps}
+              icon="angle-right"
+              onClick={() => setPage(page + 1)}
+              disabled={page === pageCount}
+            />
+          </ButtonContainer>
+
+          <ButtonContainer>
+            <Button
+              {...themeProps}
+              icon="angle-double-right"
+              onClick={() => setPage(pageCount)}
+              disabled={page === pageCount}
+            />
+          </ButtonContainer>
+        </FooterRow>
+      )}
+    </Container>
   );
 };
 
 CheckboxLookup.defaultProps = {
   theme: theme,
   id: "",
+  title: "Title",
+  pagination: true,
   disabled: false,
   onChange: () => {},
   onSelectDeselectAll: () => {},
@@ -159,6 +358,8 @@ CheckboxLookup.defaultProps = {
   preventDefault: true,
   size: "small",
   label: "",
+  height: "",
+  width: "",
   color: "primary",
   style: "regular",
   itemId: "id",
@@ -172,16 +373,20 @@ CheckboxLookup.defaultProps = {
 CheckboxLookup.propTypes = {
   localization: PropTypes.object,
   theme: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf({}),
-  selectedOptions: PropTypes.arrayOf({}),
+  options: PropTypes.arrayOf(PropTypes.object),
+  selectedOptions: PropTypes.arrayOf(PropTypes.object),
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onSelectDeselectAll: PropTypes.func,
   className: PropTypes.string,
   itemId: PropTypes.string,
   itemText: PropTypes.string,
+  height: PropTypes.string,
+  width: PropTypes.string,
   preventDefault: PropTypes.bool,
+  pagination: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   style: PropTypes.oneOf(["regular", "toggle"]),
   label: PropTypes.string,
