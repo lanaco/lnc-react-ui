@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import styles from "./styles.module.css";
-import Filter from "./Filter";
-import TransparentTextInput from "../TransparentTextInput/index";
-import { getGuid, mergeCSS } from "../Helper/helper";
-import DropdownContent from "./DropdownContent";
+import React, { useEffect, useState } from "react";
 import Button from "../Button/index";
+import { getGuid, mergeCSS } from "../Helper/helper";
 import Icon from "../Icon/index";
+import TransparentTextInput from "../TransparentTextInput/index";
+import DropdownContent from "./DropdownContent";
+import Filter from "./Filter";
+import styles from "./styles.module.css";
 
 const useHasChanged = (val) => {
   const prevVal = usePrevious(val);
