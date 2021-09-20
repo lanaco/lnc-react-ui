@@ -137,9 +137,9 @@ const TextInput = React.forwardRef((props, ref) => {
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
-      onKeyDown={handleOnKeyDown}
-      onInput={handleOnInput}
-      onBlur={handleOnBlur}
+      // onKeyDown={handleOnKeyDown}
+      // onInput={handleOnInput}
+      // onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
       value={text}

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
-import TextInput from "../TextInput";
+import { getGuid } from "../Helper/helper";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.3rem 0.375rem";
@@ -19,16 +19,46 @@ const Icon = styled.i((props) => ({
   fontSize: props.theme.typography[props.size].fontSize,
 }));
 
-const Filter = (props) => {
-  //====== PROPS ======
 
+const FilterTextInput = styled.input((props) => {
+  return {
+    appearance: "none",
+    outline: "none",
+    border: "none",
+    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
+    transition: "all 250ms",
+    display: "inline-block",
+    flexDirection: "row",
+    justifyContent: "center",
+    cursor: "text",
+    padding: paddingBySize(props.size),
+    fontSize: props.theme.typography[props.size].fontSize,
+    backgroundColor: props.theme.palette[props.color].lighter,
+    color: props.theme.palette[props.color].textDark,
+    borderRadius: "0.125rem",
+    width: "100%",
+    boxSizing: "border-box",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
+    fontFamily: props.theme.typography.fontFamily,
+    "&:disabled": {
+      backgroundColor: props.theme.palette.gray[200],
+      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+      color: props.theme.palette.gray.textLight,
+      opacity: 0.7,
+      cursor: "default",
+    },
+    "&:focus": {
+      backgroundColor: props.theme.palette.common.white,
+      color: props.theme.palette.common.black,
+    },
+  };
+});
+
+const Filter = (props) => {
   const { onToggleState, onRemove } = props;
   const { id } = props;
   const { Icons } = props;
-
-  //====== LIFECYCLE ======
-
-  //====== EVENTS ======
 
   const toggleState = () => {
     onToggleState(id);
@@ -38,8 +68,6 @@ const Filter = (props) => {
     onRemove(id);
   };
 
-  //====== METHODS ======
-
   const getIsAppliedCss = () => {
     return props.data.isApplied === true ? styles.bgActive : styles.bgNonActive;
   };
@@ -47,8 +75,6 @@ const Filter = (props) => {
   const getIsAppliedColumnNameCss = () => {
     return props.data.isApplied === true ? "" : styles.bgColumnNameNonActive;
   };
-
-  //====== RENDER ======
 
   const getPopoverContent = (item) => {
     item = props.data;
@@ -77,24 +103,92 @@ const Filter = (props) => {
   }
 
   return (
-    <div className={mergeCSS([styles.bubbleContent, getIsAppliedCss()])}>
-      <span
-        className={mergeCSS([styles.columnName, getIsAppliedColumnNameCss()])}
+    <div
+      style={
+        props.data.isApplied ?
+          {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            alignSelf: "center",
+            borderRadius: "15px",
+            fontSize: props.theme.typography.fontSize,
+            minWidth: "150px",
+            width: "auto",
+            backgroundColor: props.theme.palette[props.color].main,
+            color: props.theme.palette["white"].textDark,
+            paddingLeft: "5px",
+            paddingRight: "10px",
+            marginRight: "5px"
+          } : {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            alignSelf: "center",
+            borderRadius: "15px",
+            fontSize: props.theme.typography.fontSize,
+            minWidth: "150px",
+            width: "500px",
+            backgroundColor: props.theme.palette["gray"]["700"],
+            color: props.theme.palette["white"].textDark,
+            paddingLeft: "5px",
+            paddingRight: "10px",
+            marginRight: "5px"
+          }
+      }>
+      <div style={{
+        width: "90%",
+        whiteSpace: "nowrap",
+        display: "flex",
+        justifyContent: "space-around"
+      }}
         title={getPopoverContent()}
         onClick={toggleState}
       >
-        <b>{columnName}</b>
-      </span>
-      <span
-        className={styles.value}
-        title={getPopoverContent()}
-        onClick={toggleState}
-      >
-        {columnValue}
-      </span>
-      <span className={styles.remove}>
-        <Button icon={"times"} spanClassName={styles.xIcon} onClick={remove} />
-      </span>
+        {columnName} &nbsp;
+        <b>{columnValue}</b>
+      </div>
+      <Button icon={"times"} onClick={remove} size="small" color="transparent" />
+    </div>
+  );
+};
+
+const DropdownContent = (props) => {
+  //====== PROPS ======
+
+  const { onSelect, items, value, cursor } = props;
+
+  //====== LIFECYCLE ======
+
+  //====== EVENTS ======
+
+  //====== METHODS ======
+
+  //====== RENDER ======
+
+  return (
+    <div style={{
+      padding: "5px"
+    }}>
+      {items.map((el, i) => {
+        return (
+          <a style={{
+            textDecoration: "none",
+            "&:hover": {
+              backgroundColor: props.theme.palette[props.color].light,
+            },
+          }}
+            key={i}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onSelect(el)(value);
+            }}
+          >
+            {`${el.name} : "${value}"`}
+          </a>
+        );
+      })}
     </div>
   );
 };
@@ -142,9 +236,9 @@ const SearchBar = (props) => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    filterContainer.current.scrollLeft += 1000;
-  }, [Filters]);
+  // useEffect(() => {
+  //   filterContainer.current.scrollLeft += 1000;
+  // }, [Filters]);
 
   useEffect(() => {
     if (changed && mounted) {
@@ -161,14 +255,16 @@ const SearchBar = (props) => {
     if (hasFilters)
       return Filters.map((x, i) => (
         <Filter
+          {...props}
           key={i}
           id={x.id}
           data={x}
           onRemove={onRemoveFilter}
           onToggleState={onToggleState}
           Icons={Icons}
+          theme={props.theme}
         />
-      ));
+      ))
     return;
   };
 
@@ -230,8 +326,13 @@ const SearchBar = (props) => {
     setQuickFilterText(text);
   };
 
+  const onChangeHandler = (id, value) => {
+    console.log("cejndz:", value)
+    setQuickFilterText(value);
+    onChange(id, value);
+  }
+
   const onKeyDown = (e) => {
-    console.log("on ki daun", e)
     let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
     if (e.keyCode === 38 && cursor > 0) {
       setCursor(cursor - 1);
@@ -253,7 +354,7 @@ const SearchBar = (props) => {
   };
 
   const onQuickFilterSelect = (element) => {
-    transparentTextInput.current.classList.add("lnc");
+    // transparentTextInput.current.classList.add("lnc");
     return (value) => {
       let data = {
         id: getGuid(),
@@ -279,6 +380,7 @@ const SearchBar = (props) => {
         isApplied: true,
       });
       setFilters(newFilters);
+      setHasFilters(newFilters.length > 0)
 
       changeQuickFilterText("");
     };
@@ -329,59 +431,92 @@ const SearchBar = (props) => {
     return dynamicFilters;
   };
 
-
+  let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
 
   return (
-    <div style={{
-      display: "flex",
-      fontFamily: props.theme.typography.fontFamily,
-      outline: "none",
-      backgroundColor: props.theme.palette[props.color].lighter,
-      color: props.theme.palette[props.color].textDark,
-      transition: "all 250ms",
-      fontSize: props.theme.typography[props.size].fontSize,
-      border: "0px",
-      borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-      //padding: paddingBySize(props.size),
-      width: "100%",
-      boxSizing: "border-box",
-      minHeight: heightBySize(props.size),
-      maxHeight: heightBySize(props.size),
-      cursor: "pointer",
-      "&:focus": {
-        backgroundColor: props.theme.palette.common.white,
-        color: props.theme.palette.common.black,
-      },
-      "&:disabled": {
-        backgroundColor: props.theme.palette.gray[200],
-        borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-        color: props.theme.palette.gray.textLight,
-        cursor: "default",
-        opacity: 0.7,
-      },
-    }}
-    >
-      <Icon {...props} className={`fas fa-search fa-fw`} style={{
-        color: props.theme.palette[props.color].main,
-        margin: "7px"
-      }} />
-      <span
-        ref={filterContainer}
+    <>
+      <div style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        fontFamily: props.theme.typography.fontFamily,
+        outline: "none",
+        backgroundColor: props.theme.palette[props.color].lighter,
+        color: props.theme.palette[props.color].textDark,
+        transition: "all 250ms",
+        fontSize: props.theme.typography[props.size].fontSize,
+        border: "0px",
+        borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
+        //padding: paddingBySize(props.size),
+        //width: "100%",
+        boxSizing: "border-box",
+        minHeight: heightBySize(props.size),
+        maxHeight: heightBySize(props.size),
+        cursor: "pointer",
+        "&:focus": {
+          backgroundColor: props.theme.palette.common.white,
+          color: props.theme.palette.common.black,
+        },
+        "&:disabled": {
+          backgroundColor: props.theme.palette.gray[200],
+          borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+          color: props.theme.palette.gray.textLight,
+          cursor: "default",
+          opacity: 0.7,
+        },
+      }}
       >
-        {renderFilters()}
-      </span>
-      <TextInput
-        // ref={transparentTextInput}
-        {...props}
-        value={QuickFilterText}
-        onKeyDown={onKeyDown}
-        onInput={onQuickFilterInput}
-        onBlur={onQuickFilterBlur}>
-      </TextInput>
-      {renderClearFiltersButton()}
-      {renderResetFiltersButton()}
+        <Icon {...props} className={`fas fa-search fa-fw`} style={{
+          color: props.theme.palette[props.color].main,
+          margin: "7px"
+        }} />
+        <div
+          ref={filterContainer}
+          style={{
+            display: "flex",
+            overflowX: "auto",
+            justifyContent: "flex-start",
+            // overflowY: "hidden",
+            overflowY: "hidden",
+          }}
+        >
+          {renderFilters()}
+        </div>
+        <div style={{
+          display: "flex",
+          width: "100%",
+          minWidth: "20% !important",
+        }}>
+          <FilterTextInput
+            // ref={transparentTextInput}
+            {...props}
+            value={QuickFilterText}
+            onKeyDown={onKeyDown}
+            onInput={onQuickFilterInput}
+            onBlur={onQuickFilterBlur}
+          //onChange={onChangeHandler}
+          >
 
-    </div>
+          </FilterTextInput>
+          {renderClearFiltersButton()}
+          {renderResetFiltersButton()}
+        </div>
+      </div>
+      <div style={QuickFilterOpen ? {
+        display: "block",
+        position: "fixed",
+        boxShadow: "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
+        marginTop: "5px",
+        zIndex: "99"
+      } : { display: "none" }}>
+        <DropdownContent
+        {...props}
+          items={quickFilters}
+          onSelect={onQuickFilterSelect}
+          value={QuickFilterText}
+          cursor={cursor}></DropdownContent>
+      </div>
+    </>
   );
 };
 
