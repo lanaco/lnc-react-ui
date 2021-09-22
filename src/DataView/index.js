@@ -14,6 +14,8 @@ import styled from "@emotion/styled";
 import { default as LncPagination } from "../Pagination/index";
 import Spinner from "../Spinner/index";
 import theme from "../_utils/theme";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
+import "./animation.css";
 
 const getBorderSyle = (borderStyle, read, theme, color) => {
   var css = "";
@@ -52,7 +54,7 @@ const getBorderSyle = (borderStyle, read, theme, color) => {
 
 const Container = styled.div`
   box-shadow: 0 0 12px #bebebe;
-  borderradius: 3px;
+  border-radius: 3px;
   padding: 4px;
 `;
 
@@ -71,6 +73,10 @@ const FormContainer = styled.div`
   height: 100%;
   overflow-y: auto;
   max-height: calc(100vh - 120px);
+  border: 1.5px solid rgba(165, 164, 164, 0.4);
+  border-radius: 3px;
+  padding: 4px;
+
   ${(props) =>
     getBorderSyle(props.borderStyle, props.read, props.theme, props.color)}
 `;
@@ -291,19 +297,33 @@ const DataView = (props) => {
     return freeze([General.IsLoading || FormMode === FormMode.READ, ...args]);
   };
 
+  const getBorderStyleProp = () => {
+    if (Form.Dirty && Form.Mode === FormMode.EDIT && Options.EnableEdit)
+      return "edit";
+
+    if (!Form.Dirty && Form.Mode === FormMode.EDIT && Options.EnableEdit)
+      return "success";
+
+    if (Form.Mode === FormMode.ADD) return "add";
+  };
+
   //======== RENDER ========
 
   const renderLookupTakeValues = () => {
     if (General.IsLookup) {
+      let loading = freezeLoading([Table.SelectedData.length === 0]);
+
       return (
         <FlexItem>
           <Button
             tooltip={Localization.TakeValues}
             onClick={() => {
-              Lookup.TakeValues(Table.SelectedData);
-              if (ClearSelectedData) ClearSelectedData();
+              if (!loading) {
+                Lookup.TakeValues(Table.SelectedData);
+                if (ClearSelectedData) ClearSelectedData();
+              }
             }}
-            disabled={freezeLoading([Table.SelectedData.length === 0])}
+            disabled={Table.SelectedData.length === 0}
             icon={"plus"}
           />
         </FlexItem>
@@ -342,8 +362,8 @@ const DataView = (props) => {
       <FlexItem>
         <Button
           tooltip={Localization.Refresh}
-          onClick={OnRefresh}
-          disabled={freezeLoading()}
+          onClick={freezeLoading() ? () => {} : OnRefresh}
+          // disabled={freezeLoading()}
           icon={"sync-alt"}
         />
       </FlexItem>
@@ -358,11 +378,15 @@ const DataView = (props) => {
     )
       return false;
 
+    let loading = freezeLoading([Table.SelectedData.length === 0]);
+
     return (
       <FlexItem>
         <Button
-          onClick={() => setDeleteConfirmationBoxOpen(true)}
-          disabled={freezeLoading([Table.SelectedData.length === 0])}
+          onClick={
+            loading ? () => {} : () => setDeleteConfirmationBoxOpen(true)
+          }
+          disabled={Table.SelectedData.length === 0}
           tooltip={Localization.DeleteSelected}
           icon={"trash"}
         />
@@ -405,8 +429,8 @@ const DataView = (props) => {
         <FlexItem>
           <Button
             tooltip={Localization.Add}
-            onClick={GoToAdd}
-            disabled={freezeLoading()}
+            onClick={freezeLoading() ? () => {} : GoToAdd}
+            // disabled={freezeLoading()}
             icon={"plus"}
           />
         </FlexItem>
@@ -425,8 +449,8 @@ const DataView = (props) => {
         <div className={styles.flexItem}>
           <Button
             tooltip={Localization.AddWithCopy}
-            onClick={GoToAddWithCopy}
-            disabled={freezeLoading()}
+            onClick={freezeLoading() ? () => {} : GoToAddWithCopy}
+            // disabled={freezeLoading()}
             icon={"clone"}
           />
         </div>
@@ -443,8 +467,8 @@ const DataView = (props) => {
       <FlexItem>
         <Button
           tooltip={Localization.ToTableView}
-          onClick={ChangeToTableView}
-          disabled={freezeLoading()}
+          onClick={freezeLoading() ? () => {} : ChangeToTableView}
+          // disabled={freezeLoading()}
           icon={"table"}
         />
       </FlexItem>
@@ -468,8 +492,8 @@ const DataView = (props) => {
               ? Localization.FormEditMode
               : Localization.FormReadMode
           }
-          onClick={ChangeToEditMode}
-          disabled={freezeLoading()}
+          onClick={freezeLoading() ? () => {} : ChangeToEditMode}
+          // disabled={freezeLoading()}
           icon={Form.Mode === FormMode.READ ? "edit" : "eye"}
         />
       </FlexItem>
@@ -477,7 +501,8 @@ const DataView = (props) => {
   };
 
   const renderPagination = () => {
-    if (!Options.EnablePagination) return false;
+    if (!Options.EnablePagination || General.CurrentView !== "TableView")
+      return <span></span>;
 
     return (
       <PaginationContainer>
@@ -605,7 +630,12 @@ const DataView = (props) => {
   };
 
   const renderFormViewMovement = () => {
-    if (!Options.EnableFormViewMovement || Form.Mode === "ADD") return false;
+    if (
+      !Options.EnableFormViewMovement ||
+      Form.Mode === "ADD" ||
+      General.CurrentView === "TableView"
+    )
+      return false;
 
     return (
       <FormViewMovement
@@ -673,35 +703,38 @@ const DataView = (props) => {
   };
 
   const renderTable = () => {
-    if (General.CurrentView !== "TableView" && General.DataFromBackend)
-      return <></>;
-
     return (
-      <DivRelative>
-        {renderSpinner()}
-        <TableView
-          Config={tableViewConfig}
-          Localization={Localization.TableView}
-          Export={Export}
-          Icons={Icons}
-          accentColor={props.accentColor}
-        />
-      </DivRelative>
+      !(General.CurrentView !== "TableView" && General.DataFromBackend) && (
+        <DivRelative>
+          {renderSpinner()}
+          <TableView
+            Config={tableViewConfig}
+            Localization={Localization.TableView}
+            Export={Export}
+            Icons={Icons}
+            accentColor={props.accentColor}
+          />
+        </DivRelative>
+      )
     );
   };
 
   const renderForm = () => {
-    if (
+    // if (
+    //   General.CurrentView !== "FormView" ||
+    //   Form === null ||
+    //   Form === undefined
+    // )
+    //   return <></>;
+
+    var component = !(
       General.CurrentView !== "FormView" ||
       Form === null ||
       Form === undefined
-    )
-      return <></>;
-
-    var component = (
+    ) && (
       <FormContainer
         borderStyle={getBorderStyleProp()}
-        read={state.Form.Mode === FormMode.READ}
+        read={Form.Mode === FormMode.READ}
         {...themeProps}
       >
         {FormView({
@@ -739,16 +772,43 @@ const DataView = (props) => {
   };
 
   const renderComponent = () => {
+    let key = General.CurrentView !== "TableView" && General.DataFromBackend;
+
     return (
       <Container {...themeProps}>
         {renderHeader()}
-        <TableContainer {...themeProps}>
-          {/* {renderDeleteConfirmationBox()} */}
-          {renderTable()}
-          {renderForm()}
-          {/* {renderDeveloperMessages()} */}
-        </TableContainer>
-        {renderPagination()}
+
+        <SwitchTransition mode="out-in">
+          <CSSTransition
+            key={key}
+            addEndListener={(node, done) => {
+              node.addEventListener("transitionend", done, false);
+            }}
+            classNames="fade1"
+          >
+            <TableContainer {...themeProps}>
+              {renderTable()}
+              {renderForm()}
+
+              {/* {renderDeleteConfirmationBox()}
+              {renderDeveloperMessages()} */}
+            </TableContainer>
+          </CSSTransition>
+        </SwitchTransition>
+
+        <SwitchTransition mode="out-in">
+          <CSSTransition
+            key={
+              Options.EnablePagination && General.CurrentView !== "TableView"
+            }
+            addEndListener={(node, done) => {
+              node.addEventListener("transitionend", done, false);
+            }}
+            classNames="fade2"
+          >
+            {renderPagination()}
+          </CSSTransition>
+        </SwitchTransition>
       </Container>
       // <div>
       //   <div className={styles.flexContainer}>

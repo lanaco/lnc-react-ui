@@ -19,9 +19,16 @@ const Container = styled.div`
 `;
 
 const Item = styled.div`
+  padding-left: ${(props) => (props.first ? "0" : "6px")};
+  display: flex;
+  align-items: center;
+`;
+
+const ExportItem = styled.div`
   padding-left: 6px;
   display: flex;
   align-items: center;
+  margin-left: auto;
 `;
 
 const ItemText = styled.div`
@@ -132,12 +139,16 @@ const Pagination = (props) => {
 
   const renderFirst = () => {
     return (
-      <Item {...themeProps} key={1}>
+      <Item first={true} {...themeProps} key={1}>
         <Button
           {...themeProps}
           icon="angle-double-left"
-          onClick={() => goToFirstPage(PageSize, CurrentPage)}
-          disabled={freezeLoading([!CanGoToFirstPage])}
+          onClick={
+            freezeLoading()
+              ? () => {}
+              : () => goToFirstPage(PageSize, CurrentPage)
+          }
+          disabled={!CanGoToFirstPage}
           tooltip={Localization.First}
         />
       </Item>
@@ -150,8 +161,12 @@ const Pagination = (props) => {
         <Button
           {...themeProps}
           icon="angle-left"
-          onClick={() => goToPreviousPage(PageSize, CurrentPage)}
-          disabled={freezeLoading([!CanGoToPreviousPage])}
+          onClick={
+            freezeLoading()
+              ? () => {}
+              : () => goToPreviousPage(PageSize, CurrentPage)
+          }
+          disabled={!CanGoToPreviousPage}
           tooltip={Localization.Previous}
         />
       </Item>
@@ -164,8 +179,12 @@ const Pagination = (props) => {
         <Button
           {...themeProps}
           icon="angle-right"
-          onClick={() => goToNextPage(PageSize, CurrentPage)}
-          disabled={freezeLoading([!CanGoToNextPage])}
+          onClick={
+            freezeLoading()
+              ? () => {}
+              : () => goToNextPage(PageSize, CurrentPage)
+          }
+          disabled={!CanGoToNextPage}
           tooltip={Localization.Next}
         />
       </Item>
@@ -178,8 +197,12 @@ const Pagination = (props) => {
         <Button
           {...themeProps}
           icon="angle-double-right"
-          onClick={() => goToLastPage(PageSize, CurrentPage)}
-          disabled={freezeLoading([!CanGoToLastPage])}
+          onClick={
+            freezeLoading()
+              ? () => {}
+              : () => goToLastPage(PageSize, CurrentPage)
+          }
+          disabled={!CanGoToLastPage}
           tooltip={Localization.Last}
         />
       </Item>
@@ -193,28 +216,28 @@ const Pagination = (props) => {
           {...themeProps}
           items={getPageSizes()}
           value={PageSize}
-          disabled={freezeLoading()}
-          onChange={handlePageSizeChanged}
+          // disabled={freezeLoading()}
+          onChange={freezeLoading() ? () => {} : handlePageSizeChanged}
           withoutEmpty={true}
         />
       </ItemDropdown>
     );
   };
 
-  // const renderExportButtons = () => {
-  //   if (!EnableExports) return <></>;
+  const renderExportButtons = () => {
+    if (!EnableExports) return <></>;
 
-  //   return (
-  //     <span className={style["export-buttons"]} key={6}>
-  //       <Button
-  //         tooltip={Localization.ExportToExcel}
-  //         onClick={exportToExcel}
-  //         disabled={freezeLoading()}
-  //         icon="lnc-file-excel"
-  //       />
-  //     </span>
-  //   );
-  // };
+    return (
+      <ExportItem key={6} {...themeProps}>
+        <Button
+          {...themeProps}
+          icon="file-excel"
+          onClick={freezeLoading() ? () => {} : () => exportToExcel()}
+          tooltip={Localization.ExportToExcel}
+        />
+      </ExportItem>
+    );
+  };
 
   return (
     <Container {...themeProps}>
@@ -225,7 +248,7 @@ const Pagination = (props) => {
       {renderLast()}
       {renderPageSize()}
       {renderRowInformation()}
-      {/* {renderExportButtons()} */}
+      {renderExportButtons()}
     </Container>
   );
 };

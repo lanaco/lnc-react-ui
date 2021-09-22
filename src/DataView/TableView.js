@@ -99,10 +99,8 @@ const TableBodyRow = styled.tr`
 `;
 
 const TableBodyCell = styled.td`
-  ${(props) =>
-    props.selectionCell === true
-      ? "padding: 1px 1px 1px 6px;"
-      : "padding: 5px 5px 5px 10px;"}
+  padding: ${(props) =>
+    props.selectionCell === true ? "1px 1px 1px 6px" : "5px 5px 5px 10px"};
 `;
 
 const TableView = (props) => {
@@ -135,7 +133,7 @@ const TableView = (props) => {
 
   // const [headerHoverIndex, setHeaderHoverIndex] = useState(-1);
   // const [rowHoverIndex, setRowHoverIndex] = useState(-1);
-  const [rowSelectedIndices, setRowSelectedIndices] = useState([]);
+  // const [rowSelectedIndices, setRowSelectedIndices] = useState([]);
 
   //======== FUNCTIONS ========
 
@@ -146,28 +144,29 @@ const TableView = (props) => {
     );
   }
 
-  const handleOnSelection = (rowData, e, rowIndex = -1) => {
-    if (e.target.checked && rowIndex >= 0) {
-      if (SelectionType === TableSelectionType.MULTIPLE) {
-        let tmpArray = [...rowSelectedIndices];
-        tmpArray.push(rowIndex);
-        setRowSelectedIndices(tmpArray);
-      } else if (SelectionType === TableSelectionType.SINGLE) {
-        setRowSelectedIndices([rowIndex]);
-      }
-    } else if (!e.target.checked && rowIndex >= 0) {
-      if (SelectionType === TableSelectionType.MULTIPLE) {
-        let tmpArray = rowSelectedIndices.map((x) => x !== rowIndex);
-        setRowSelectedIndices(tmpArray);
-      } else if (SelectionType === TableSelectionType.SINGLE) {
-        setRowSelectedIndices([]);
-      }
-    }
-    OnSelection(rowData, e.target.checked, SelectionType);
+  const handleOnSelection = (rowData, val, rowIndex = -1) => {
+    // if (e.target.checked && rowIndex >= 0) {
+    //   if (SelectionType === TableSelectionType.MULTIPLE) {
+    //     let tmpArray = [...rowSelectedIndices];
+    //     tmpArray.push(rowIndex);
+    //     // setRowSelectedIndices(tmpArray);
+    //   } else if (SelectionType === TableSelectionType.SINGLE) {
+    //     // setRowSelectedIndices([rowIndex]);
+    //   }
+    // } else if (!e.target.checked && rowIndex >= 0) {
+    //   if (SelectionType === TableSelectionType.MULTIPLE) {
+    //     let tmpArray = rowSelectedIndices.map((x) => x !== rowIndex);
+    //     // setRowSelectedIndices(tmpArray);
+    //   } else if (SelectionType === TableSelectionType.SINGLE) {
+    //     // setRowSelectedIndices([]);
+    //   }
+    // }
+
+    OnSelection(rowData, val, SelectionType);
   };
 
-  const handleSelectAll = () => {
-    OnSelectAll();
+  const handleSelectAll = (val) => {
+    OnSelectAll(val);
   };
 
   //======== RENDER ========
@@ -279,7 +278,7 @@ const TableView = (props) => {
     return (
       <>
         <TableBodyRow selectedRow={rowSelected} key={i}>
-          {(renderSelectionCell(dataItem, rowSelected), i)}
+          {renderSelectionCell(dataItem, rowSelected, i)}
           {Columns.map((col, j) => {
             return renderBodyCell(dataItem, col, i, j);
           })}
@@ -359,9 +358,9 @@ const TableView = (props) => {
     return (
       <TableBodyCell selectionCell={true} key={-1}>
         <CheckBox
-          checked={isItemInArray(dataItem, SelectedData, SelectionIndicator)}
-          onChange={(e) => handleOnSelection(dataItem, e, rowIndex)}
-          id={dataItem["id"]}
+          checked={selected}
+          onChange={(e, val) => handleOnSelection(dataItem, val, rowIndex)}
+          id={rowIndex}
         />
       </TableBodyCell>
     );
@@ -493,7 +492,11 @@ const TableView = (props) => {
     return (
       <TableHeadCell selectionCell={true} key={-1}>
         {SelectionType === TableSelectionType.MULTIPLE && (
-          <CheckBox checked={SelectedEntirePage} onChange={handleSelectAll} />
+          <CheckBox
+            checked={SelectedEntirePage}
+            onChange={() => handleSelectAll(!SelectedEntirePage)}
+            id="SelectedEntirePage"
+          />
         )}
       </TableHeadCell>
     );
