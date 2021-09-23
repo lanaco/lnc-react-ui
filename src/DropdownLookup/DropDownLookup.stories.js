@@ -1,18 +1,17 @@
 import React from "react";
-import DropDownLookup from ".";
+import DropdownLookup from "./index";
+import Example from "./Example";
 import theme from "../_utils/theme";
 
 export default {
-  title: "DropDownLookup",
-  component: DropDownLookup,
+  title: "DropdownLookup",
+  component: DropdownLookup,
   argTypes: {},
 };
 
 const Template = (args) => (
   <>
-    <p>
-      <DropDownLookup {...args} />
-    </p>
+    <Example args={args} />
   </>
 );
 
@@ -20,21 +19,9 @@ export const Default = Template.bind({});
 Default.args = {
   theme: theme,
   color: "primary",
-  tooltip: "Dropdown",
-  onChange: () => {},
-  size: "medium",
-  disabled: false,
-  items: [
-    { name: "Name 11", value: 1 },
-    { name: "Name 222", value: 2 },
-    { name: "Name 333333333", value: 3 },
+  size: "small",
+  options: [
+    { id: 1, value: "prva opcija", key: "prva opcija" },
+    { id: 2, value: "druga opcija", key: "druga opcija opcija" },
   ],
-  InitializeNamespace: () => {},
-  initialValue: "",
-  State: {
-    Options:[{id: 1, value: "prva opcija", key: "prva opcija"}, {id: 2, value: "druga opcija",key: "druga opcija opcija"}],
-    Loading: false
-  },
-  LoadData: (value) => { console.log("load data:", value)},
-  ClearOptions: () => {}
 };
