@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import React from "react";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
@@ -24,7 +24,7 @@ const Select = styled.select((props) => ({
   fontSize: props.theme.typography[props.size].fontSize,
   border: "0px",
   borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-  padding: paddingBySize(props.size),
+  //padding: paddingBySize(props.size),
   width: "100%",
   boxSizing: "border-box",
   minHeight: heightBySize(props.size),

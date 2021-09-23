@@ -32,9 +32,9 @@ Default.args = {
   InitializeNamespace: () => {},
   initialValue: "",
   State: {
-    Options:[{id: 1, value: "prva opcija"}, {id: 2, value: "druga opcija"}],
+    Options:[{id: 1, value: "prva opcija", key: "prva opcija"}, {id: 2, value: "druga opcija",key: "druga opcija opcija"}],
     Loading: false
   },
-  LoadData: () => {},
+  LoadData: (value) => { console.log("load data:", value)},
   ClearOptions: () => {}
 };

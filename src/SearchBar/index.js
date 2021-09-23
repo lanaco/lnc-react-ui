@@ -1,35 +1,225 @@
-import React, { useState, useEffect } from "react";
-import styles from "./styles.module.css";
-import Filter from "./Filter";
-import TransparentTextInput from "../TransparentTextInput/index";
-import { getGuid, mergeCSS } from "../Helper/helper";
-import DropdownContent from "./DropdownContent";
-import Button from "../Button/index";
-import Icon from "../Icon/index";
+import styled from "@emotion/styled";
+import React, { useEffect, useState } from "react";
+import Button from "../Button";
+import { getGuid } from "../Helper/helper";
 
-const useHasChanged = (val) => {
-  const prevVal = usePrevious(val);
-  return prevVal !== JSON.stringify(val);
+const paddingBySize = (size) => {
+  if (size === "small") return "0.3rem 0.375rem";
+  if (size === "medium") return "0.3625rem 0.375rem";
+  if (size === "large") return "0.4rem 0.375rem";
 };
 
-const usePrevious = (value) => {
-  const ref = React.useRef();
-  useEffect(() => {
-    ref.current = JSON.stringify(value);
-  });
-  return ref.current;
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
 };
+
+const Icon = styled.i((props) => ({
+  fontSize: props.theme.typography[props.size].fontSize,
+}));
+
+
+const FilterTextInput = styled.input((props) => {
+  return {
+    appearance: "none",
+    outline: "none",
+    border: "none",
+    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
+    transition: "all 250ms",
+    display: "inline-block",
+    flexDirection: "row",
+    justifyContent: "center",
+    cursor: "text",
+    padding: paddingBySize(props.size),
+    fontSize: props.theme.typography[props.size].fontSize,
+    backgroundColor: props.theme.palette[props.color].lighter,
+    color: props.theme.palette[props.color].textDark,
+    borderRadius: "0.125rem",
+    width: "100%",
+    boxSizing: "border-box",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
+    fontFamily: props.theme.typography.fontFamily,
+    "&:disabled": {
+      backgroundColor: props.theme.palette.gray[200],
+      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+      color: props.theme.palette.gray.textLight,
+      opacity: 0.7,
+      cursor: "default",
+    },
+    "&:focus": {
+      backgroundColor: props.theme.palette.common.white,
+      color: props.theme.palette.common.black,
+    },
+  };
+});
+
+const Filter = (props) => {
+  const { onToggleState, onRemove } = props;
+  const { id } = props;
+  const { Icons } = props;
+
+  const toggleState = () => {
+    onToggleState(id);
+  };
+
+  const remove = () => {
+    onRemove(id);
+  };
+
+  const getIsAppliedCss = () => {
+    return props.data.isApplied === true ? styles.bgActive : styles.bgNonActive;
+  };
+
+  const getIsAppliedColumnNameCss = () => {
+    return props.data.isApplied === true ? "" : styles.bgColumnNameNonActive;
+  };
+
+  const getPopoverContent = (item) => {
+    item = props.data;
+    let content = "";
+
+    item.statements.forEach((element) => {
+      content +=
+        element.name +
+        " " +
+        element.operationType.name.toLowerCase() +
+        ' "' +
+        element.value +
+        '"\n';
+    });
+
+    return content;
+  };
+
+  let columnName = props.data.statements[0].name;
+  let columnValue = props.data.statements[0].value;
+  if (columnName.length > 14) {
+    columnName = columnName.substring(0, 13) + ".";
+  }
+  if (columnValue.length > 14) {
+    columnValue = columnValue.substring(0, 13) + ".";
+  }
+
+  return (
+    <div
+      style={
+        props.data.isApplied ?
+          {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            alignSelf: "center",
+            borderRadius: "15px",
+            fontSize: props.theme.typography.fontSize,
+            minWidth: "150px",
+            width: "auto",
+            backgroundColor: props.theme.palette[props.color].main,
+            color: props.theme.palette["white"].textDark,
+            paddingLeft: "5px",
+            paddingRight: "10px",
+            marginRight: "5px"
+          } : {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            alignSelf: "center",
+            borderRadius: "15px",
+            fontSize: props.theme.typography.fontSize,
+            minWidth: "150px",
+            width: "500px",
+            backgroundColor: props.theme.palette["gray"]["700"],
+            color: props.theme.palette["white"].textDark,
+            paddingLeft: "5px",
+            paddingRight: "10px",
+            marginRight: "5px"
+          }
+      }>
+      <div style={{
+        width: "90%",
+        whiteSpace: "nowrap",
+        display: "flex",
+        justifyContent: "space-around"
+      }}
+        title={getPopoverContent()}
+        onClick={toggleState}
+      >
+        {columnName} &nbsp;
+        <b>{columnValue}</b>
+      </div>
+      <Button icon={"times"} onClick={remove} size="small" color="transparent" />
+    </div>
+  );
+};
+
+const DropdownContent = (props) => {
+  //====== PROPS ======
+
+  const { onSelect, items, value, cursor } = props;
+
+  //====== LIFECYCLE ======
+
+  //====== EVENTS ======
+
+  //====== METHODS ======
+
+  //====== RENDER ======
+
+  return (
+    <div style={{
+      padding: "5px"
+    }}>
+      {items.map((el, i) => {
+        return (
+          <a style={{
+            textDecoration: "none",
+            "&:hover": {
+              backgroundColor: props.theme.palette[props.color].light,
+            },
+          }}
+            key={i}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onSelect(el)(value);
+            }}
+          >
+            {`${el.name} : "${value}"`}
+          </a>
+        );
+      })}
+    </div>
+  );
+};
+
 
 const SearchBar = (props) => {
+
+  const useHasChanged = (val) => {
+    const prevVal = usePrevious(val);
+    return prevVal !== JSON.stringify(val);
+  };
+
+  const usePrevious = (value) => {
+    const ref = React.useRef();
+    useEffect(() => {
+      ref.current = JSON.stringify(value);
+    });
+    return ref.current;
+  };
+
   const [Filters, setFilters] = useState([]);
   const [QuickFilterText, setQuickFilterText] = useState("");
   const [QuickFilterOpen, setQuickFilterOpen] = useState("");
 
   //====== PROPS ======
 
-  const { onChange } = props;
-  const { filterProps } = props;
-  const { Localization, Icons } = props;
+  const {
+    onChange,
+    filterProps,
+    Localization,
+    Icons } = props;
 
   //====== LIFECYCLE ======
 
@@ -42,13 +232,13 @@ const SearchBar = (props) => {
   const changed = useHasChanged(Filters);
 
   useEffect(() => {
-    transparentTextInput.current.focus();
+    //transparentTextInput.current.focus();
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    filterContainer.current.scrollLeft += 1000;
-  }, [Filters]);
+  // useEffect(() => {
+  //   filterContainer.current.scrollLeft += 1000;
+  // }, [Filters]);
 
   useEffect(() => {
     if (changed && mounted) {
@@ -56,12 +246,56 @@ const SearchBar = (props) => {
       setHasFilters(Filters.length > 0);
     }
 
-    transparentTextInput.current.focus();
+    //transparentTextInput.current.focus();
 
     onChange(getAppliedFilters());
   }, [Filters]);
 
-  //====== EVENTS ======
+  const renderFilters = () => {
+    if (hasFilters)
+      return Filters.map((x, i) => (
+        <Filter
+          {...props}
+          key={i}
+          id={x.id}
+          data={x}
+          onRemove={onRemoveFilter}
+          onToggleState={onToggleState}
+          Icons={Icons}
+          theme={props.theme}
+        />
+      ))
+    return;
+  };
+
+  const renderClearFiltersButton = () => {
+    if (hasFilters)
+      return (
+        <Button
+          theme={props.theme}
+          color={"transparent"}
+          size={props.size}
+          iconStyle="solid"
+          icon={"times"}
+          onClick={onClearFilters}
+          tooltip={Localization ? Localization.Clear : "Clear"}
+        />
+      );
+  };
+
+  const renderResetFiltersButton = () => {
+    return (
+      <Button
+        theme={props.theme}
+        color={"transparent"}
+        size={props.size}
+        iconStyle="solid"
+        icon={"sync-alt"}
+        onClick={onResetFilters}
+        tooltip={Localization ? Localization.Reset : "Reset"}
+      />
+    );
+  };
 
   const onClearFilters = () => {
     setFilters([]);
@@ -92,6 +326,12 @@ const SearchBar = (props) => {
     setQuickFilterText(text);
   };
 
+  const onChangeHandler = (id, value) => {
+    console.log("cejndz:", value)
+    setQuickFilterText(value);
+    onChange(id, value);
+  }
+
   const onKeyDown = (e) => {
     let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
     if (e.keyCode === 38 && cursor > 0) {
@@ -114,7 +354,7 @@ const SearchBar = (props) => {
   };
 
   const onQuickFilterSelect = (element) => {
-    transparentTextInput.current.classList.add("lnc");
+    // transparentTextInput.current.classList.add("lnc");
     return (value) => {
       let data = {
         id: getGuid(),
@@ -140,6 +380,7 @@ const SearchBar = (props) => {
         isApplied: true,
       });
       setFilters(newFilters);
+      setHasFilters(newFilters.length > 0)
 
       changeQuickFilterText("");
     };
@@ -162,7 +403,6 @@ const SearchBar = (props) => {
     }, 250);
   };
 
-  //====== METHODS ======
 
   const getAppliedFilters = () => {
     let dynamicFilters = [];
@@ -191,107 +431,131 @@ const SearchBar = (props) => {
     return dynamicFilters;
   };
 
-  //====== RENDER ======
+  let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
 
-  const renderClearFiltersButton = () => {
-    return (
-      <div className={hasFilters ? styles.visibleX : styles.hidden}>
-        <Button
-          icon={"times"}
-          onClick={onClearFilters}
-          tooltip={Localization ? Localization.Clear : "Clear"}
-        />
-      </div>
-    );
-  };
-
-  const renderResetFiltersButton = () => {
-    return (
-      <Button
-        icon={"sync-alt"}
-        onClick={onResetFilters}
-        tooltip={Localization ? Localization.Reset : "Reset"}
-      />
-    );
-  };
-
-  const renderFilters = () => {
-    return Filters.map((x, i) => (
-      <Filter
-        key={i}
-        id={x.id}
-        data={x}
-        onRemove={onRemoveFilter}
-        onToggleState={onToggleState}
-        Icons={Icons}
-      />
-    ));
-  };
-
-  const renderSearchInput = () => {
-    let dropdownContentCss =
-      QuickFilterOpen === true
-        ? mergeCSS([styles.dropdownContent, styles.showDropdown])
-        : styles.dropdownContent;
-
-    let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
-
-    return (
-      <div className={styles.dropdown}>
-        <div className={styles.Search}>
-          <TransparentTextInput
+  return (
+    <>
+      <div style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        fontFamily: props.theme.typography.fontFamily,
+        outline: "none",
+        backgroundColor: props.theme.palette[props.color].lighter,
+        color: props.theme.palette[props.color].textDark,
+        transition: "all 250ms",
+        fontSize: props.theme.typography[props.size].fontSize,
+        border: "0px",
+        borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
+        //padding: paddingBySize(props.size),
+        //width: "100%",
+        boxSizing: "border-box",
+        minHeight: heightBySize(props.size),
+        maxHeight: heightBySize(props.size),
+        cursor: "pointer",
+        "&:focus": {
+          backgroundColor: props.theme.palette.common.white,
+          color: props.theme.palette.common.black,
+        },
+        "&:disabled": {
+          backgroundColor: props.theme.palette.gray[200],
+          borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+          color: props.theme.palette.gray.textLight,
+          cursor: "default",
+          opacity: 0.7,
+        },
+      }}
+      >
+        <Icon {...props} className={`fas fa-search fa-fw`} style={{
+          color: props.theme.palette[props.color].main,
+          margin: "7px"
+        }} />
+        <div
+          ref={filterContainer}
+          style={{
+            display: "flex",
+            overflowX: "auto",
+            justifyContent: "flex-start",
+            // overflowY: "hidden",
+            overflowY: "hidden",
+          }}
+        >
+          {renderFilters()}
+        </div>
+        <div style={{
+          display: "flex",
+          width: "100%",
+          minWidth: "20% !important",
+        }}>
+          <FilterTextInput
+            // ref={transparentTextInput}
+            {...props}
             value={QuickFilterText}
             onKeyDown={onKeyDown}
             onInput={onQuickFilterInput}
             onBlur={onQuickFilterBlur}
-            inputClassName={styles.QuickFilterInput}
-            ref={transparentTextInput}
-          />
-        </div>
-        <div className={dropdownContentCss}>
-          <DropdownContent
-            items={quickFilters}
-            onSelect={onQuickFilterSelect}
-            value={QuickFilterText}
-            cursor={cursor}
-          />
-        </div>
-      </div>
-    );
-  };
-
-  const renderComponent = () => {
-    return (
-      <div className={mergeCSS([styles.Container, styles.Border])}>
-        <div className={styles.inputAndCommandsContainer}>
-          <span className={styles.iconHolder}>
-            <Icon icon={"search"} iconSpanCssClass={styles.iconSpan}></Icon>
-          </span>
-          <span
-            ref={filterContainer}
-            className={
-              hasFilters ? styles.filterContainer : styles.filterContainerHidden
-            }
+          //onChange={onChangeHandler}
           >
-            {renderFilters()}
-          </span>
-          <div className={styles.filtersAndCommandsHolder}>
-            {renderSearchInput()}
-            {renderClearFiltersButton()}
-            <span className={styles.Commands}>
-              {renderResetFiltersButton()}
-            </span>
-          </div>
+
+          </FilterTextInput>
+          {renderClearFiltersButton()}
+          {renderResetFiltersButton()}
         </div>
       </div>
-    );
-  };
-
-  const renderElement = () => {
-    return renderComponent();
-  };
-
-  return renderElement();
+      <div style={QuickFilterOpen ? {
+        display: "block",
+        position: "fixed",
+        boxShadow: "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
+        marginTop: "5px",
+        zIndex: "99"
+      } : { display: "none" }}>
+        <DropdownContent
+        {...props}
+          items={quickFilters}
+          onSelect={onQuickFilterSelect}
+          value={QuickFilterText}
+          cursor={cursor}></DropdownContent>
+      </div>
+    </>
+  );
 };
+
+// SearchBar.defaultProps = {
+//   id: "",
+//   disabled: false,
+//   tooltip: "",
+//   onChange: () => {},
+//   className: "",
+//   preventDefault: true,
+//   size: "small",
+//   color: "primary",
+//   theme: theme,
+//   items: [],
+//   withoutEmpty: false,
+//   mapValueTo: "value",
+//   mapNameTo: "name",
+// };
+
+// SearchBar.propTypes = {
+//   theme: PropTypes.object.isRequired,
+//   id: PropTypes.string,
+//   disabled: PropTypes.bool,
+//   tooltip: PropTypes.string,
+//   onChange: PropTypes.func,
+//   className: PropTypes.string,
+//   preventDefault: PropTypes.bool,
+//   withoutEmpty: PropTypes.bool,
+//   mapValueTo: PropTypes.string,
+//   mapNameTo: PropTypes.string,
+//   size: PropTypes.oneOf(["small", "medium", "large"]),
+//   color: PropTypes.oneOf([
+//     "primary",
+//     "secondary",
+//     "success",
+//     "error",
+//     "warning",
+//     "gray",
+//   ]),
+// };
 
 export default SearchBar;
