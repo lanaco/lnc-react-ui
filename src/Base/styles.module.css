@@ -20,6 +20,7 @@
   --color-base-gray: #a2a5ab;
   --color-base-gray-darker: #777a80;
   --color-base-gray-lighter: #dee1e6;
+  --color-base-gray-lightest: #f0f2f7;
   --color-base-green: #2a963c;
   --color-base-green-darker: #21732f;
   --color-base-green-ligher: #3eb051;
@@ -32,14 +33,14 @@
 
   /* BASE FONTS */
   --font-base-ubuntu: "Ubuntu", sans-serif;
-  --font-size-base: 1em;
+  --font-size-base: 14px;
 
   /* DISABLED */
   --disabled-bg-color: #dedede;
   --disabled-text-color: #666666;
 
   /* TRANSITIONS */
-  --transition-base-duration: 400ms;
+  --transition-base-duration: 220ms;
 }
 
 .baseContainer {
@@ -111,9 +112,10 @@
 }
 
 /*----------------- ICONS AND FONTS ------------------------*/
+
 .lnc {
   font-family: "lnclines";
-  font-size: 0.7em;
+  font-size: 12px;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

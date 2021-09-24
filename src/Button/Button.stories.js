@@ -1,36 +1,68 @@
-import React from 'react';
-
-import Button from '.';
+import React from "react";
+import Button from ".";
+import theme from "../_utils/theme";
 
 export default {
-  title: 'Buttonn',
+  title: "Button",
   component: Button,
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
+  argTypes: {},
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => (
+  <>
+    <p>
+      <Button {...args} />
+    </p>
+  </>
+);
 
-export const Primary = Template.bind({});
-Primary.args = {
-  label: 'Button',
-  onClick: undefined
+export const JustText = Template.bind({});
+JustText.args = {
+  theme: theme,
+  color: "primary",
+  text: "Button",
+  tooltip: "Button",
+  onClick: () => {},
+  size: "medium",
+  disabled: false,
 };
 
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   label: 'Button',
-// };
+export const JustIcon = Template.bind({});
+JustIcon.args = {
+  theme: theme,
+  color: "primary",
+  tooltip: "Button",
+  onClick: () => {},
+  size: "medium",
+  disabled: false,
+  icon: "user",
+  iconStyle: "solid",
+};
 
-// export const Large = Template.bind({});
-// Large.args = {
-//   size: 'large',
-//   label: 'Button',
-// };
+export const TextAndIconToLeft = Template.bind({});
+TextAndIconToLeft.args = {
+  theme: theme,
+  color: "primary",
+  text: "Button",
+  tooltip: "Button",
+  onClick: () => {},
+  size: "medium",
+  disabled: false,
+  icon: "user",
+  iconStyle: "solid",
+  iconLocation: "left",
+};
 
-// export const Small = Template.bind({});
-// Small.args = {
-//   size: 'small',
-//   label: 'Button',
-// };
+export const TextAndIconToRight = Template.bind({});
+TextAndIconToRight.args = {
+  theme: theme,
+  color: "primary",
+  text: "Button",
+  tooltip: "Button",
+  onClick: () => {},
+  size: "medium",
+  disabled: false,
+  icon: "user",
+  iconStyle: "solid",
+  iconLocation: "right",
+};

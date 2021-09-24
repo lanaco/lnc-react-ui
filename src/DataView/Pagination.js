@@ -1,7 +1,7 @@
 import React from "react";
 import DropDown from "../DropDown/index";
-import IconButton from "../IconButton/index.js";
-import { freeze } from "./Helper/dataViewHelper";
+import Button from "../Button/index.js";
+import { freeze } from "../Helper/helper";
 import styles from "./styles.module.css";
 
 const TablePagination = (props) => {
@@ -26,7 +26,7 @@ const TablePagination = (props) => {
     goToLastPage,
   } = props.Config;
 
-  const { Localization = {}, Export, Icons = {} } = props;
+  const { Localization = {}, Export } = props;
 
   //============== METHODS ==============
 
@@ -77,12 +77,12 @@ const TablePagination = (props) => {
   const renderFirst = () => {
     return (
       <div className={styles.tablePaginationItem}>
-        <IconButton
-          iconClassName={Icons.LeftDouble}
+        <Button
+          icon={"angle-double-left"}
           onClick={goToFirstPage}
           disabled={freezeLoading([!CanGoToFirstPage])}
-          tooltipText={Localization.First}
-        ></IconButton>
+          tooltip={Localization.First}
+        />
       </div>
     );
   };
@@ -90,12 +90,12 @@ const TablePagination = (props) => {
   const renderPrevious = () => {
     return (
       <div className={styles.tablePaginationItem}>
-        <IconButton
-          iconClassName={Icons.Left}
+        <Button
+          icon={"angle-left"}
           onClick={goToPreviousPage}
           disabled={freezeLoading([!CanGoToPreviousPage])}
-          tooltipText={Localization.Previous}
-        ></IconButton>
+          tooltip={Localization.Previous}
+        />
       </div>
     );
   };
@@ -103,12 +103,12 @@ const TablePagination = (props) => {
   const renderNext = () => {
     return (
       <div className={styles.tablePaginationItem}>
-        <IconButton
-          iconClassName={Icons.Right}
+        <Button
+          icon={"angle-right"}
           onClick={goToNextPage}
           disabled={freezeLoading([!CanGoToNextPage])}
-          tooltipText={Localization.Next}
-        ></IconButton>
+          tooltip={Localization.Next}
+        />
       </div>
     );
   };
@@ -116,12 +116,12 @@ const TablePagination = (props) => {
   const renderLast = () => {
     return (
       <div className={styles.tablePaginationItem}>
-        <IconButton
-          iconClassName={Icons.RightDouble}
+        <Button
+          icon={"angle-double-right"}
           onClick={goToLastPage}
           disabled={freezeLoading([!CanGoToLastPage])}
-          tooltipText={Localization.Last}
-        ></IconButton>
+          tooltip={Localization.Last}
+        />
       </div>
     );
   };
@@ -146,11 +146,11 @@ const TablePagination = (props) => {
 
     return (
       <span className={styles.exportButtons}>
-        <IconButton
-          tooltipText={Localization.ExportToExcel}
+        <Button
+          tooltip={Localization.ExportToExcel}
           onClick={exportToExcel}
           disabled={freezeLoading()}
-          iconClassName={Icons.FileExcel}
+          icon={"file-excel"}
         />
       </span>
     );

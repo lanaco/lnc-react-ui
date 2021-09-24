@@ -7,40 +7,25 @@ module.exports = {
       (f) => f.test.toString() !== "/\\.css$/"
     );
 
-    config.module.rules.push(
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     "style-loader",
-      //     {
-      //       loader: "css-loader",
-      //       options: {
-      //         modules: false, // Enable modules to help you using className
-      //       },
-      //     },
-      //   ],
-      //   include: path.resolve(__dirname, "../src"),
-      // },
-      {
-        test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: true,
-            },
-          },
-        ],
-        include: /\.module\.css$/,
-      }
-    );
-
     config.module.rules.push({
       test: /\.css$/,
       use: ["style-loader", "css-loader"],
       exclude: /\.module\.css$/,
+    });
+
+    config.module.rules.push({
+      test: /\.css$/,
+      use: [
+        "style-loader",
+        {
+          loader: "css-loader",
+          options: {
+            importLoaders: 1,
+            modules: true,
+          },
+        },
+      ],
+      include: /\.module\.css$/,
     });
 
     return config;

@@ -1,7 +1,13 @@
 import React from "react";
-import "./style.css";
-import { freeze } from "../DataView/Helper/dataViewHelper";
-import IconButton from "../IconButton/index";
+import Button from "../Button/index";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import theme from "../_utils/theme";
+
+const Item = styled.div`
+  padding-left: 0.1875rem;
+  padding-right: 0.25rem;
+`;
 
 const FormMovement = (props) => {
   //====== PROPS ======
@@ -17,13 +23,21 @@ const FormMovement = (props) => {
     goToPreviousItem = () => {},
   } = props.Config;
 
-  const { Localization = {} } = props;
+  const { Localization = {}, theme, size, color } = props;
 
-  //====== LIFECYCLE ======
-
-  //====== EVENTS ======
+  const themeProps = { theme, size, color };
 
   //====== METHODS ======
+
+  const freeze = (dependcies) => {
+    let freeze = false;
+
+    dependcies.forEach((el) => {
+      freeze = freeze || el;
+    });
+
+    return freeze;
+  };
 
   const freezeLoading = (args = []) => freeze([IsLoading, ...args]);
 
@@ -31,53 +45,57 @@ const FormMovement = (props) => {
 
   const renderFirst = () => {
     return (
-      <div className="dataview-flex-item">
-        <IconButton
-          iconClassName="lnc-left-double"
+      <Item {...themeProps}>
+        <Button
+          {...themeProps}
+          icon="angle-double-left"
           onClick={goToFirstItem}
           disabled={freezeLoading([!CanGoToFirstItem])}
-          tooltipText={Localization.First || "First"}
-        ></IconButton>
-      </div>
+          tooltip={Localization.First || "First"}
+        />
+      </Item>
     );
   };
 
   const renderLast = () => {
     return (
-      <div className="dataview-flex-item">
-        <IconButton
-          iconClassName="lnc-right-double"
+      <Item {...themeProps}>
+        <Button
+          {...themeProps}
+          icon="angle-double-right"
           onClick={goToLastItem}
           disabled={freezeLoading([!CanGoToLastItem])}
-          tooltipText={Localization.Last || "Last"}
-        ></IconButton>
-      </div>
+          tooltip={Localization.Last || "Last"}
+        />
+      </Item>
     );
   };
 
   const renderNext = () => {
     return (
-      <div className="dataview-flex-item">
-        <IconButton
-          iconClassName="lnc-right"
+      <Item {...themeProps}>
+        <Button
+          {...themeProps}
+          icon="angle-right"
           onClick={goToNextItem}
           disabled={freezeLoading([!CanGoToNextItem])}
           tooltipText={Localization.Next || "Next"}
-        ></IconButton>
-      </div>
+        />
+      </Item>
     );
   };
 
   const renderPrevious = () => {
     return (
-      <div className="dataview-flex-item">
-        <IconButton
-          iconClassName="lnc-left"
+      <Item {...themeProps}>
+        <Button
+          {...themeProps}
+          icon="angle-left"
           onClick={goToPreviousItem}
           disabled={freezeLoading([!CanGoToPreviousItem])}
-          tooltipText={Localization.Previous || "Previous"}
-        ></IconButton>
-      </div>
+          tooltip={Localization.Previous || "Previous"}
+        />
+      </Item>
     );
   };
 
@@ -89,6 +107,34 @@ const FormMovement = (props) => {
       {renderLast()}
     </>
   );
+};
+
+FormMovement.defaultProps = {
+  theme: theme,
+  size: "small",
+  color: "primary",
+  Config: {},
+  Localization: {
+    First: "First",
+    Last: "Last",
+    Next: "Next",
+    Previous: "Previous",
+  },
+};
+
+FormMovement.propTypes = {
+  theme: PropTypes.object.isRequired,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "gray",
+  ]),
+  Config: PropTypes.object,
+  Localization: PropTypes.object,
 };
 
 export default FormMovement;

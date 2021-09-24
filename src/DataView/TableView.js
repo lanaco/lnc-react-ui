@@ -6,7 +6,7 @@ import {
   isColorDark,
 } from "../Base/ColorBlender";
 import TableSelectionType from "./Constants/TableSelectionType";
-import { mergeCSS } from "./Helper/dataViewHelper";
+import { mergeCSS } from "../Helper/helper";
 import Pagination from "./Pagination";
 import styles from "./styles.module.css";
 import Icon from "../Icon/index";
