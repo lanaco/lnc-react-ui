@@ -183,77 +183,6 @@ const CheckboxLookup = (props) => {
   let _options = pagination ? options.slice((page - 1) * 5, page * 5) : options;
 
   return (
-<<<<<<< HEAD
-    <>
-      <Container {...themeProps} className={className}>
-        <Header {...themeProps}>
-          <Button
-            theme={theme}
-            color={color}
-            tooltip={label}
-            text={label}
-            icon={"check-square"}
-            iconStyle={
-              options.length === selectedOptions.length ? "regular" : "solid"
-            }
-            iconLocation={"left"}
-            onClick={() =>
-              onSelectDeselectAll(
-                options.length === selectedOptions.length ? false : true
-              )
-            }
-            size={size}
-            disabled={false}
-          />
-        </Header>
-        <Content>
-          {options.map((x, i) => {
-            let isChecked = false;
-
-            if (selectedOptions) {
-              selectedOptions.forEach((element) => {
-                if (element[itemId] === x[props.itemId]) {
-                  isChecked = true;
-                }
-              });
-            }
-
-            return (
-              <ControlContainer key={i} {...themeProps}>
-                {style === "regular" ? (
-                  <CheckBox
-                    {...{
-                      id: x[itemId],
-                      disabled: disabled,
-                      checked: isChecked,
-                      onChange: handleCheckboxChange,
-                      color: color,
-                      size: size,
-                      theme: theme,
-                      label: x[itemText],
-                    }}
-                  />
-                ) : (
-                  <ToggleSwitch
-                    {...{
-                      id: x[itemId],
-                      disabled: disabled,
-                      value: isChecked,
-                      onChange: handleCheckboxChange,
-                      color: color,
-                      size: size,
-                      theme: theme,
-                      label: x[itemText],
-                    }}
-                  />
-                )}
-              </ControlContainer>
-            );
-          })}
-        </Content>
-      </Container>
-    </>
-=======
     <Container {...themeProps} className={className}>
       <Global
         styles={css`
@@ -412,7 +341,6 @@ const CheckboxLookup = (props) => {
         </FooterRow>
       )}
     </Container>
->>>>>>> c1fe4cb336552c6f7b7f878566b5f5d0934d474b
   );
 };
 
