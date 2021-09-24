@@ -19,7 +19,22 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.45rem 0.375rem";
 };
 
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
+};
+
 const Container = styled.span((props) => ({
+  "& .react-datepicker__triangle": {
+    display: "none",
+  },
+
+  "& .react-datepicker-wrapper": {
+    width: "100%",
+    boxSizing: "border-box",
+  },
+
   "& input": {
     appearance: "none",
     outline: "none",
@@ -30,25 +45,16 @@ const Container = styled.span((props) => ({
     flexDirection: "row",
     justifyContent: "center",
     cursor: "text",
+    width: "100%",
+    boxSizing: "border-box",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
     padding: paddingBySize(props.size),
     fontSize: props.theme.typography[props.size].fontSize,
     backgroundColor: props.theme.palette[props.color].lighter,
     color: props.theme.palette[props.color].textDark,
     borderRadius: "0.125rem",
-    boxSizing: "border-box",
     fontFamily: props.theme.typography.fontFamily,
-
-    // appearance: "none",
-    // outline: "none",
-    // backgroundColor: "var(--color-base-backgroud)",
-    // transition: "all var(--transition-base-duration)",
-    // fontSize: "var(--font-size-base)",
-    // border: "0px",
-    // borderBottom: "2px solid var(--color-base-blue)",
-    // height: "100%",
-    // width: "100%",
-    // padding: "0px",
-    // boxSizing: "border-box",
 
     "&:focus": {
       backgroundColor: props.theme.palette.common.white,

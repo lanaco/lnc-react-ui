@@ -72,7 +72,7 @@ const getCheckboxCss = (props) => {
       user-select: none;
       margin: ${margin};
       margin-left: ${marginLeft};
-      cursor: default;
+      cursor: pointer;
     }
 
     /* Hide the browser's default checkbox */
@@ -99,7 +99,6 @@ const getCheckboxCss = (props) => {
 
     /* On mouse-over, add a grey background color */
     .c-${props.id}-container:hover input ~ .c-${props.id}-checkmark {
-      background-color: #ccc;
       cursor: pointer;
     }
 

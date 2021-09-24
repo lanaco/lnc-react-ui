@@ -79,7 +79,7 @@ const FormMovement = (props) => {
           icon="angle-right"
           onClick={goToNextItem}
           disabled={freezeLoading([!CanGoToNextItem])}
-          tooltipText={Localization.Next || "Next"}
+          tooltip={Localization.Next || "Next"}
         />
       </Item>
     );

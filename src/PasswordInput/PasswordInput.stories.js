@@ -19,7 +19,7 @@ Password.args = {
   theme: theme,
   color: "primary",
   text: "Button",
-  tooltipText: "Button",
+  tooltip: "Button",
   onClick: () => {},
   size: "small",
   disabled: false,

@@ -1,11 +1,12 @@
 DropdownLookup 
-TransparentTextInput 
 SearchBar
 GridLookup
 
+TransparentTextInput // should not be i this library
 DropdownMenu // should not be i this library
 
 TO ADD:
     - Add frontend pagination to CheckboxLookup
-    - some kind of form item containers for labels and alignement
-    - form layouts (single/multiple columns), should work good with previous
+    - value and onChange od textArea, numberInput
+    - TextArea resizing anc colors
+    - Tooltips on all components, check STAMP wrapper also

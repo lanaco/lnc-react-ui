@@ -1,5 +1,6 @@
 import React from "react";
 import SearchBar from ".";
+import theme from "../_utils/theme";
 import dataTypes from "./DataTypes";
 import operationTypes, { getStringOperationTypes } from "./OperationTypes";
 
@@ -13,6 +14,9 @@ const Template = (args) => <SearchBar {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
+  theme: theme,
+  color: "primary",
+  size: "medium",
   label: "SearchBar",
   onClick: undefined,
   State: {

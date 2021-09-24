@@ -10,6 +10,12 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.425rem 0.375rem";
 };
 
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
+};
+
 const Span = styled.span((props) => ({
   display: "flex",
   flexDirection: "row",
@@ -39,7 +45,6 @@ const Container = styled.div((props) => ({
   fontFamily: props.theme.typography.fontFamily,
   outline: "none",
   width: "100%",
-  height: "100%",
 }));
 
 const Input = styled.input((props) => ({
@@ -58,6 +63,10 @@ const Input = styled.input((props) => ({
   backgroundColor: props.theme.palette[props.color].lighter,
   color: props.theme.palette[props.color].textDark,
   borderRadius: "0.125rem 0 0 0.125rem",
+  width: "100%",
+  boxSizing: "border-box",
+  minHeight: heightBySize(props.size),
+  maxHeight: heightBySize(props.size),
   "&:disabled": {
     backgroundColor: props.theme.palette.gray[200],
     borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
@@ -79,7 +88,7 @@ const Input = styled.input((props) => ({
   },
 }));
 
-const PasswordInput = (props) => {
+const PasswordInput = React.forwardRef((props, ref) => {
   const {
     onChange,
     preventDefault,
@@ -90,7 +99,7 @@ const PasswordInput = (props) => {
     color,
     autoComplete,
     value,
-    tooltipText,
+    tooltip,
     className,
   } = props;
 
@@ -118,7 +127,8 @@ const PasswordInput = (props) => {
           onChange={handleOnChange}
           className={className}
           disabled={disabled}
-          title={tooltipText}
+          title={tooltip}
+          ref={ref}
         />
         <Span {...themeProps} onClick={disabled ? () => {} : handleLockUnlock}>
           <Icon
@@ -129,7 +139,7 @@ const PasswordInput = (props) => {
       </Container>
     </>
   );
-};
+});
 
 PasswordInput.defaultProps = {
   theme: theme,
@@ -142,7 +152,7 @@ PasswordInput.defaultProps = {
   size: "small",
   color: "primary",
   autoComplete: false,
-  tooltipText: "",
+  tooltip: "",
   value: "",
 };
 
@@ -153,7 +163,7 @@ PasswordInput.propTypes = {
   onChange: PropTypes.func,
   handleForgotPassword: PropTypes.func,
   className: PropTypes.string,
-  tooltipText: PropTypes.string,
+  tooltip: PropTypes.string,
   value: PropTypes.string,
   preventDefault: PropTypes.bool,
   autoComplete: PropTypes.bool,

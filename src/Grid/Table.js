@@ -51,8 +51,6 @@ const TableHeadCell = styled.th`
   }
 `;
 
-const TableHeadCellSelection = styled.th``;
-
 const TableBody = styled.tbody``;
 
 const TableBodyRow = styled.tr`
@@ -241,11 +239,7 @@ const Table = (props) => {
         <div>
           {col.name}
 
-          {!hideOrdering ? (
-            <Icon color={"white"} icon={orderingIconClass} />
-          ) : (
-            <></>
-          )}
+          {!hideOrdering && <Icon color={"white"} icon={orderingIconClass} />}
         </div>
       </TableHeadCell>
     );
@@ -309,10 +303,8 @@ const Table = (props) => {
 
     return (
       <TableHeadCell selectionCell={true} key={-1}>
-        {SelectionType === TableSelectionType.MULTIPLE ? (
+        {SelectionType === TableSelectionType.MULTIPLE && (
           <CheckBox checked={SelectedEntirePage} onChange={handleSelectAll} />
-        ) : (
-          <></>
         )}
       </TableHeadCell>
     );

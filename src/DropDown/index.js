@@ -1,13 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import React from "react";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.3rem 0.375rem";
-  if (size === "medium") return "0.3625rem 0.375rem";
-  if (size === "large") return "0.4rem 0.375rem";
+  if (size === "small") return "0.3rem 0.375rem 0.3rem 0.0625rem";
+  if (size === "medium") return "0.3625rem 0.375rem 0.3625rem 0.0625";
+  if (size === "large") return "0.4rem 0.375rem 0.4rem 0.0625";
 };
+
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
+};
+
 const Select = styled.select((props) => ({
   fontFamily: props.theme.typography.fontFamily,
   outline: "none",
@@ -17,8 +24,11 @@ const Select = styled.select((props) => ({
   fontSize: props.theme.typography[props.size].fontSize,
   border: "0px",
   borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-  padding: paddingBySize(props.size),
+  //padding: paddingBySize(props.size),
+  width: "100%",
   boxSizing: "border-box",
+  minHeight: heightBySize(props.size),
+  maxHeight: heightBySize(props.size),
   cursor: "pointer",
   "&:focus": {
     backgroundColor: props.theme.palette.common.white,
@@ -37,14 +47,14 @@ const Option = styled.option((props) => ({
   fontFamily: props.theme.typography.fontFamily,
 }));
 
-const DropDown = (props) => {
+const DropDown = React.forwardRef((props, ref) => {
   const {
     mapNameTo,
     mapValueTo,
     id,
     preventDefault,
     onChange,
-    items = [],
+    items,
     disabled,
     size,
     color,
@@ -86,6 +96,7 @@ const DropDown = (props) => {
       title={tooltip}
       onChange={handleOnChange}
       value={value}
+      ref={ref}
     >
       {!withoutEmpty ? (
         <Option {...{ theme, size, color }} key={-1} value={-1}>
@@ -97,7 +108,7 @@ const DropDown = (props) => {
       {getItems()}
     </Select>
   );
-};
+});
 
 DropDown.defaultProps = {
   id: "",

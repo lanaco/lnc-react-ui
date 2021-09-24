@@ -23,4 +23,5 @@ Default.args = {
   header: "Component box header",
   clickOutsideToClose: true,
   showHeader: true,
+  basic: true,
 };

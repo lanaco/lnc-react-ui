@@ -82,19 +82,28 @@ const theme = {
       text: "#2e2e2e",
       textDark: "black",
     },
+    //---------------------
+    transparent: {
+      lighter: "#e6e6e6",
+      light: "#d9d9d9",
+      main: "transparent",
+      dark: "#619BBD",
+      text: "#575757",
+      textDark: "#575757",
+    },
   },
   typography: {
     fontFamily: "Ubuntu",
     small: {
-      fontSize: "0.75rem",
+      fontSize: "12px",
       iconFontSize: "0.85rem",
     },
     medium: {
-      fontSize: "0.9375rem",
+      fontSize: "15px",
       iconFontSize: "1.125rem",
     },
     large: {
-      fontSize: "1.1875rem",
+      fontSize: "18px",
       iconFontSize: "1.4375rem",
     },
   },
