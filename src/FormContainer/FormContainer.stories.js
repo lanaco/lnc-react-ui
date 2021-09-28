@@ -28,20 +28,29 @@ const Template = (args) => (
   >
     <FormContainer {...args}>
       <FormField {...fieldProps}>
-        <TextInput value="racicvladan" />
+        <TextInput value="racicvladan1" />
       </FormField>
       <FormField {...fieldProps}>
-        <TextInput value="racicvladan" />
+        <TextInput value="racicvladan2" />
       </FormField>
       <FormField {...fieldProps} errorMessage="The user must not be an idiot!">
-        <TextInput value="racicvladan" />
+        <TextInput value="racicvladan3" />
       </FormField>
       <FormField {...fieldProps}>
-        <TextInput value="racicvladan" />
+        <TextInput value="racicvladan4" />
       </FormField>
       <FormField {...fieldProps}>
-        <PasswordInput value="racicvladan" />
+        <PasswordInput value="racicvladan5" />
       </FormField>
+
+      <FormContainer {...args}>
+        <FormField {...fieldProps}>
+          <TextInput value="racicvladan1" />
+        </FormField>
+        <FormField {...fieldProps}>
+          <TextInput value="racicvladan2" />
+        </FormField>
+      </FormContainer>
     </FormContainer>
   </div>
 );

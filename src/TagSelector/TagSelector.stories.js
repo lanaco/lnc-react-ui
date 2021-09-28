@@ -7,7 +7,7 @@ export default {
 };
 
 const Template = (args) => (
-  <div style={{ width: "300px" }}>
+  <div style={{ width: "500px" }}>
     <TagSelector {...args} />
   </div>
 );

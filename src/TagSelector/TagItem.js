@@ -44,11 +44,11 @@ const Button = styled.button`
     color: ${(props) =>
       props.selected
         ? props.theme.palette[props.color].text
-        : props.theme.palette[props.color].textDark};
+        : props.theme.palette[props.color].text};
     background-color: ${(props) =>
       props.selected
         ? props.theme.palette[props.color].main
-        : props.theme.palette[props.color].lighter};
+        : props.theme.palette[props.color].light};
   }
 
   &:disabled {

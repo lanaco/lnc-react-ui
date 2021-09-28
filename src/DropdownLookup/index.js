@@ -22,7 +22,7 @@ const spin = keyframes`
       transform: rotate(360deg);
     }
 
-     0% {
+    0% {
       transform: rotate(0deg);
     }
 `;
@@ -259,6 +259,7 @@ const DropdownLookup = (props) => {
         setCursor(cursor - 1);
       }
 
+      //TODO: comment
       if (e.keyCode === 40 && cursor < options.length - 1) {
         setCursor(cursor + 1);
       }

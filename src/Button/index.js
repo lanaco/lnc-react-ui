@@ -107,7 +107,7 @@ const Button = React.forwardRef((props, ref) => {
       ref={ref}
     >
       {/* Text when the icon is RIGTH */}
-      {text && text !== "" && iconLocation === "right" ? (
+      {text && text !== "" && iconLocation === "right" && (
         <TextLeft
           {...{
             theme,
@@ -118,12 +118,10 @@ const Button = React.forwardRef((props, ref) => {
         >
           {text}
         </TextLeft>
-      ) : (
-        <></>
       )}
 
       {/* Icon */}
-      {icon && icon !== "" ? (
+      {icon && icon !== "" && (
         <Icon
           {...{
             theme,
@@ -132,12 +130,10 @@ const Button = React.forwardRef((props, ref) => {
           }}
           className={getIconClass()}
         />
-      ) : (
-        <></>
       )}
 
       {/* Text when the icon is LEFT */}
-      {text && text !== "" && iconLocation === "left" ? (
+      {text && text !== "" && iconLocation === "left" && (
         <TextRight
           {...{
             theme,
@@ -148,8 +144,6 @@ const Button = React.forwardRef((props, ref) => {
         >
           {text}
         </TextRight>
-      ) : (
-        <></>
       )}
     </StyledButton>
   );

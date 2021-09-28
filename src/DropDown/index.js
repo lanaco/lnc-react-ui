@@ -24,7 +24,6 @@ const Select = styled.select((props) => ({
   fontSize: props.theme.typography[props.size].fontSize,
   border: "0px",
   borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-  //padding: paddingBySize(props.size),
   width: "100%",
   boxSizing: "border-box",
   minHeight: heightBySize(props.size),
@@ -98,12 +97,10 @@ const DropDown = React.forwardRef((props, ref) => {
       value={value}
       ref={ref}
     >
-      {!withoutEmpty ? (
+      {!withoutEmpty && (
         <Option {...{ theme, size, color }} key={-1} value={-1}>
           ???
         </Option>
-      ) : (
-        <></>
       )}
       {getItems()}
     </Select>

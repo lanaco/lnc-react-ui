@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Button from "../Button";
+import Bubble from "../Bubble";
 import { getGuid } from "../Helper/helper";
 
 const paddingBySize = (size) => {
@@ -18,7 +19,6 @@ const heightBySize = (size, hasText) => {
 const Icon = styled.i((props) => ({
   fontSize: props.theme.typography[props.size].fontSize,
 }));
-
 
 const FilterTextInput = styled.input((props) => {
   return {
@@ -105,50 +105,58 @@ const Filter = (props) => {
   return (
     <div
       style={
-        props.data.isApplied ?
-          {
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            alignSelf: "center",
-            borderRadius: "15px",
-            fontSize: props.theme.typography.fontSize,
-            minWidth: "150px",
-            width: "auto",
-            backgroundColor: props.theme.palette[props.color].main,
-            color: props.theme.palette["white"].textDark,
-            paddingLeft: "5px",
-            paddingRight: "10px",
-            marginRight: "5px"
-          } : {
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            alignSelf: "center",
-            borderRadius: "15px",
-            fontSize: props.theme.typography.fontSize,
-            minWidth: "150px",
-            width: "500px",
-            backgroundColor: props.theme.palette["gray"]["700"],
-            color: props.theme.palette["white"].textDark,
-            paddingLeft: "5px",
-            paddingRight: "10px",
-            marginRight: "5px"
-          }
-      }>
-      <div style={{
-        width: "90%",
-        whiteSpace: "nowrap",
-        display: "flex",
-        justifyContent: "space-around"
-      }}
+        props.data.isApplied
+          ? {
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              alignSelf: "center",
+              borderRadius: "15px",
+              fontSize: props.theme.typography.fontSize,
+              minWidth: "150px",
+              width: "auto",
+              backgroundColor: props.theme.palette[props.color].main,
+              color: props.theme.palette["white"].textDark,
+              paddingLeft: "5px",
+              paddingRight: "10px",
+              marginRight: "5px",
+            }
+          : {
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              alignSelf: "center",
+              borderRadius: "15px",
+              fontSize: props.theme.typography.fontSize,
+              minWidth: "150px",
+              width: "500px",
+              backgroundColor: props.theme.palette["gray"]["700"],
+              color: props.theme.palette["white"].textDark,
+              paddingLeft: "5px",
+              paddingRight: "10px",
+              marginRight: "5px",
+            }
+      }
+    >
+      <div
+        style={{
+          width: "90%",
+          whiteSpace: "nowrap",
+          display: "flex",
+          justifyContent: "space-around",
+        }}
         title={getPopoverContent()}
         onClick={toggleState}
       >
         {columnName} &nbsp;
         <b>{columnValue}</b>
       </div>
-      <Button icon={"times"} onClick={remove} size="small" color="transparent" />
+      <Button
+        icon={"times"}
+        onClick={remove}
+        size="small"
+        color="transparent"
+      />
     </div>
   );
 };
@@ -167,17 +175,20 @@ const DropdownContent = (props) => {
   //====== RENDER ======
 
   return (
-    <div style={{
-      padding: "5px"
-    }}>
+    <div
+      style={{
+        padding: "5px",
+      }}
+    >
       {items.map((el, i) => {
         return (
-          <a style={{
-            textDecoration: "none",
-            "&:hover": {
-              backgroundColor: props.theme.palette[props.color].light,
-            },
-          }}
+          <a
+            style={{
+              textDecoration: "none",
+              "&:hover": {
+                backgroundColor: props.theme.palette[props.color].light,
+              },
+            }}
             key={i}
             href="#"
             onClick={(e) => {
@@ -193,8 +204,43 @@ const DropdownContent = (props) => {
   );
 };
 
+const ScrollContainer = styled.div`
+  width: 200px;
+  padding: 4px;
+  border: 2px solid gray;
+  display: flex;
+  overflow: auto;
+  scrollbarwidth: none;
+
+  &::-webkit-scrollbar {
+    background: white;
+    height: 0;
+    width: 0;
+  }
+`;
+
+function useHorizontalScroll() {
+  const elRef = useRef();
+  useEffect(() => {
+    const el = elRef.current;
+    if (el) {
+      const onWheel = (e) => {
+        if (e.deltaY == 0) return;
+        e.preventDefault();
+        el.scrollTo({
+          left: el.scrollLeft + e.deltaY,
+          behavior: "smooth",
+        });
+      };
+      el.addEventListener("wheel", onWheel);
+      return () => el.removeEventListener("wheel", onWheel);
+    }
+  }, []);
+  return elRef;
+}
 
 const SearchBar = (props) => {
+  const scrollRef = useHorizontalScroll();
 
   const useHasChanged = (val) => {
     const prevVal = usePrevious(val);
@@ -215,11 +261,7 @@ const SearchBar = (props) => {
 
   //====== PROPS ======
 
-  const {
-    onChange,
-    filterProps,
-    Localization,
-    Icons } = props;
+  const { onChange, filterProps, Localization, Icons } = props;
 
   //====== LIFECYCLE ======
 
@@ -264,7 +306,7 @@ const SearchBar = (props) => {
           Icons={Icons}
           theme={props.theme}
         />
-      ))
+      ));
     return;
   };
 
@@ -327,10 +369,10 @@ const SearchBar = (props) => {
   };
 
   const onChangeHandler = (id, value) => {
-    console.log("cejndz:", value)
+    console.log("cejndz:", value);
     setQuickFilterText(value);
     onChange(id, value);
-  }
+  };
 
   const onKeyDown = (e) => {
     let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
@@ -380,7 +422,7 @@ const SearchBar = (props) => {
         isApplied: true,
       });
       setFilters(newFilters);
-      setHasFilters(newFilters.length > 0)
+      setHasFilters(newFilters.length > 0);
 
       changeQuickFilterText("");
     };
@@ -402,7 +444,6 @@ const SearchBar = (props) => {
       if (QuickFilterOpen === true) setQuickFilterOpen(false);
     }, 250);
   };
-
 
   const getAppliedFilters = () => {
     let dynamicFilters = [];
@@ -434,42 +475,66 @@ const SearchBar = (props) => {
   let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
 
   return (
+    <ScrollContainer ref={scrollRef}>
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+      <Bubble text="text" />
+    </ScrollContainer>
+  );
+
+  return (
     <>
-      <div style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        fontFamily: props.theme.typography.fontFamily,
-        outline: "none",
-        backgroundColor: props.theme.palette[props.color].lighter,
-        color: props.theme.palette[props.color].textDark,
-        transition: "all 250ms",
-        fontSize: props.theme.typography[props.size].fontSize,
-        border: "0px",
-        borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-        //padding: paddingBySize(props.size),
-        //width: "100%",
-        boxSizing: "border-box",
-        minHeight: heightBySize(props.size),
-        maxHeight: heightBySize(props.size),
-        cursor: "pointer",
-        "&:focus": {
-          backgroundColor: props.theme.palette.common.white,
-          color: props.theme.palette.common.black,
-        },
-        "&:disabled": {
-          backgroundColor: props.theme.palette.gray[200],
-          borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-          color: props.theme.palette.gray.textLight,
-          cursor: "default",
-          opacity: 0.7,
-        },
-      }}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          fontFamily: props.theme.typography.fontFamily,
+          outline: "none",
+          backgroundColor: props.theme.palette[props.color].lighter,
+          color: props.theme.palette[props.color].textDark,
+          transition: "all 250ms",
+          fontSize: props.theme.typography[props.size].fontSize,
+          border: "0px",
+          borderBottom: `0.125rem solid ${
+            props.theme.palette[props.color].main
+          }`,
+          //padding: paddingBySize(props.size),
+          //width: "100%",
+          boxSizing: "border-box",
+          minHeight: heightBySize(props.size),
+          maxHeight: heightBySize(props.size),
+          cursor: "pointer",
+          "&:focus": {
+            backgroundColor: props.theme.palette.common.white,
+            color: props.theme.palette.common.black,
+          },
+          "&:disabled": {
+            backgroundColor: props.theme.palette.gray[200],
+            borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
+            color: props.theme.palette.gray.textLight,
+            cursor: "default",
+            opacity: 0.7,
+          },
+        }}
       >
-        <Icon {...props} className={`fas fa-search fa-fw`} style={{
-          color: props.theme.palette[props.color].main,
-          margin: "7px"
-        }} />
+        <Icon
+          {...props}
+          className={`fas fa-search fa-fw`}
+          style={{
+            color: props.theme.palette[props.color].main,
+            margin: "7px",
+          }}
+        />
         <div
           ref={filterContainer}
           style={{
@@ -482,11 +547,13 @@ const SearchBar = (props) => {
         >
           {renderFilters()}
         </div>
-        <div style={{
-          display: "flex",
-          width: "100%",
-          minWidth: "20% !important",
-        }}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            minWidth: "20% !important",
+          }}
+        >
           <FilterTextInput
             // ref={transparentTextInput}
             {...props}
@@ -494,27 +561,32 @@ const SearchBar = (props) => {
             onKeyDown={onKeyDown}
             onInput={onQuickFilterInput}
             onBlur={onQuickFilterBlur}
-          //onChange={onChangeHandler}
-          >
-
-          </FilterTextInput>
+            //onChange={onChangeHandler}
+          ></FilterTextInput>
           {renderClearFiltersButton()}
           {renderResetFiltersButton()}
         </div>
       </div>
-      <div style={QuickFilterOpen ? {
-        display: "block",
-        position: "fixed",
-        boxShadow: "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
-        marginTop: "5px",
-        zIndex: "99"
-      } : { display: "none" }}>
+      <div
+        style={
+          QuickFilterOpen
+            ? {
+                display: "block",
+                position: "fixed",
+                boxShadow: "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
+                marginTop: "5px",
+                zIndex: "99",
+              }
+            : { display: "none" }
+        }
+      >
         <DropdownContent
-        {...props}
+          {...props}
           items={quickFilters}
           onSelect={onQuickFilterSelect}
           value={QuickFilterText}
-          cursor={cursor}></DropdownContent>
+          cursor={cursor}
+        ></DropdownContent>
       </div>
     </>
   );

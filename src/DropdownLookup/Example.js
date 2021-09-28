@@ -7,7 +7,7 @@ const Example = (props) => {
   const [options, setOptions] = useState([]);
   const [value, setValue] = useState({ key: 0, value: "" });
 
-  const load = () => {
+  const load = (text) => {
     setLoading(true);
 
     setTimeout(() => {
@@ -29,6 +29,7 @@ const Example = (props) => {
         initialValue={value}
         load={load}
         clear={clear}
+        //TODO: onSelectionChange maybe ?
         onChange={onChange}
       />
     </div>
