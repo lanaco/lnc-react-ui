@@ -34,12 +34,12 @@ const Container = styled.div`
   padding: 0;
   width: 100%;
   border-bottom: 0.125rem solid
-    ${(props) => props.theme.palette["primary"].main};
+    ${(props) => props.theme.palette[props.color].main};
   min-height: ${(props) => heightBySize(props.size)};
   max-height: ${(props) => heightBySize(props.size)};
   transition: all 250ms ease;
   border-radius: 0.125rem;
-  background-color: ${(props) => props.theme.palette["primary"].lighter};
+  background-color: ${(props) => props.theme.palette[props.color].lighter};
 `;
 
 const Inner = styled.div`

@@ -24,9 +24,10 @@ const Inner = styled.div`
 `;
 
 const Text = styled.div`
-  padding: 6px 4px 6px 6px;
+  padding: 6.2px 4px 6.2px 8px;
   transition: all 250ms ease;
   border-radius: 8px 0 0 8px;
+  white-space: pre;
 
   &:hover {
     background-color: ${theme.palette.primary.light};
@@ -35,7 +36,7 @@ const Text = styled.div`
 
 const ButtonContainer = styled.div`
   cursor: pointer;
-  padding: 6px 4px 6px 6px;
+  padding: 6.2px 8px 6.2px 6px;
   transition: all 250ms ease;
   border-radius: 0 8px 8px 0;
 
@@ -64,7 +65,7 @@ const Bubble = (props) => {
     text,
   } = props;
 
-  const themeProps = { ...theme, size, color, disabled, inactive };
+  const themeProps = { theme, size, color, disabled, inactive };
 
   return (
     <Container {...themeProps} className={className}>
