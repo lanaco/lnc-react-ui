@@ -7,17 +7,28 @@ import "../Base/fontawesome/css/fontawesome.css";
 const Container = styled.div`
   display: inline-block;
   box-sizing: border-box;
+  // width: 100%;
 `;
 
 const Inner = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
 
-  background-color: ${theme.palette.primary.main};
-  color: ${theme.palette.primary.text};
-  font-family: ${theme.typography.fontFamily};
-  font-size: ${theme.typography.small.fontSize};
+  border: ${(props) =>
+    props.inactive ? "1.5px solid #bfbfbf80" : "1.5px solid transparent"};
+
+  background-color: ${(props) =>
+    props.inactive
+      ? props.theme.palette.primary.lighter
+      : props.theme.palette.primary.main};
+
+  color: ${(props) =>
+    props.inactive
+      ? props.theme.palette.primary.textDark
+      : props.theme.palette.primary.text};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography.small.fontSize};
 
   border-radius: 8px;
   cursor: pointer;
@@ -28,10 +39,7 @@ const Text = styled.div`
   transition: all 250ms ease;
   border-radius: 8px 0 0 8px;
   white-space: pre;
-
-  &:hover {
-    background-color: ${theme.palette.primary.light};
-  }
+  flex-grow: 10;
 `;
 
 const ButtonContainer = styled.div`
@@ -39,13 +47,12 @@ const ButtonContainer = styled.div`
   padding: 6.2px 8px 6.2px 6px;
   transition: all 250ms ease;
   border-radius: 0 8px 8px 0;
+  flex-grow: 0;
+  align-self: flex-end;
+  margin-left: auto;
 
   & i {
-    font-size: ${theme.typography.small.fontSize};
-  }
-
-  &:hover {
-    background-color: ${theme.palette.primary.light};
+    font-size: ${(props) => props.theme.typography.small.fontSize};
   }
 `;
 
@@ -55,7 +62,7 @@ const Bubble = (props) => {
     color,
     id,
     onClick,
-    onDelete,
+    onRemove,
     disabled,
     inactive,
     tooltip,
@@ -73,7 +80,7 @@ const Bubble = (props) => {
         <Text {...themeProps} onClick={() => onClick(id)} title={tooltip}>
           {text}
         </Text>
-        <ButtonContainer {...themeProps} onClick={() => onDelete(id)}>
+        <ButtonContainer {...themeProps} onClick={() => onRemove(id)}>
           <i className="far fa-times-circle" />
         </ButtonContainer>
       </Inner>
@@ -87,7 +94,7 @@ Bubble.defaultProps = {
   inactive: false,
   tooltip: "",
   onClick: () => {},
-  onDelete: () => {},
+  onRemove: () => {},
   className: "",
   preventDefault: true,
   size: "small",
@@ -98,12 +105,12 @@ Bubble.defaultProps = {
 
 Bubble.propTypes = {
   theme: PropTypes.object.isRequired,
-  id: PropTypes.string,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   inactive: PropTypes.bool,
   tooltip: PropTypes.string,
   onClick: PropTypes.func,
-  onDelete: PropTypes.func,
+  onRemove: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),

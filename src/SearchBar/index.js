@@ -3,43 +3,22 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 import PropTypes from "prop-types";
 import Bubble from "../Bubble";
-
-function useHorizontalScroll() {
-  const elRef = useRef();
-  useEffect(() => {
-    const el = elRef.current;
-    if (el) {
-      const onWheel = (e) => {
-        if (e.deltaY == 0) return;
-        e.preventDefault();
-        el.scrollTo({
-          left: el.scrollLeft + e.deltaY,
-          behavior: "smooth",
-        });
-      };
-      el.addEventListener("wheel", onWheel);
-      return () => el.removeEventListener("wheel", onWheel);
-    }
-  }, []);
-  return elRef;
-}
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import "./animation.css";
 
 const Container = styled.div`
   display: inline-block;
   box-sizing: border-box;
-  border-bottom: 0.125rem solid ${(props) => theme.palette["primary"].main};
-  background-color: ${(props) => theme.palette["primary"].lighter};
-  border-radius: 2.5px;
+  border: 1.5px solid #bfbfbf80;
+  background-color: white;
+  border-radius: 3px;
 `;
 
 const ItemContainer = styled.div`
-  width: 330px;
   padding: 4px;
   display: flex;
-  align-items: center;
   flex-direction: row;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  flex-wrap: wrap;
 
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -49,38 +28,39 @@ const ItemContainer = styled.div`
   }
 `;
 
-const InputContainer = styled.div`
-  display: inline-block;
-  margin-left: 4px;
-`;
-
 const ItemWrapper = styled.div`
   display: inline-block;
-  margin: 0 0 0 4px;
+  margin: 2px;
+  flex-grow: 1;
+
+  & > div {
+    width: 100%;
+  }
+`;
+
+const InputContainer = styled.div`
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 2px;
+  margin-left: 4px;
+  flex-grow: 1;
 `;
 
 const Input = styled.input`
-  min-width: 120px;
-  max-width: 120px;
+  width: 100%;
   text-decoration: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  box-sizing: border-box;
   outline: none;
   border: none;
-  padding: 5px;
+  padding: 6.5px;
   background-color: transparent;
   font-family: ${(props) => theme.typography.fontFamily};
   font-size: ${(props) => theme.typography["small"].fontSize};
   color: ${(props) => theme.palette["primary"].textDark};
+  border-radius: 3px;
 `;
-
-const SearchIcon = styled.div`
-  padding: 0 2px 0 8px;
-  font-size: ${(props) => theme.typography["medium"].fontSize};
-  color: ${(props) => theme.palette["primary"].main};
-`;
-
-const ClearIcon = styled.div``;
 
 const Inner = styled.div`
   display: flex;
@@ -88,35 +68,71 @@ const Inner = styled.div`
 `;
 
 const SearchBar = (props) => {
-  const scrollRef = useHorizontalScroll();
-
   const {
-    items = [
-      { id: 1, text: "text 1" },
-      { id: 2, text: "text 2" },
-      { id: 3, text: "text 3" },
-      { id: 4, text: "text 4" },
-      { id: 5, text: "text 5" },
-      { id: 6, text: "text 6" },
-    ],
+    items,
+    suggestions = [{}],
+    onRemoveItem,
+    onAddItem,
+    onActivateItem,
+    onDeactivateItem,
   } = props;
+
+  const [value, setValue] = useState("");
+
+  const onKeyDown = (e) => {
+    // let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
+    // if (e.keyCode === 38 && cursor > 0) {
+    //   setCursor(cursor - 1);
+    // }
+
+    // if (e.keyCode === 40 && cursor < quickFilters.length - 1) {
+    //   setCursor(cursor + 1);
+    // }
+
+    if (
+      e.key === "Enter" &&
+      suggestions.length === 0 &&
+      value &&
+      value.length > 0
+    ) {
+      onAddItem({ id: 0, text: value, active: true });
+      setValue("");
+    }
+
+    if (e.key === "Backspace" && items.length > 0 && value === "") {
+      onRemoveItem(items[items.length - 1]);
+    }
+  };
 
   return (
     <Container>
       <Inner>
-        <SearchIcon>
-          <i className="fas fa-search"></i>
-        </SearchIcon>
-
-        <ItemContainer ref={scrollRef}>
-          {items.map((x, key) => (
-            <ItemWrapper key={key}>
-              <Bubble id={x.id} text={x.text} />
-            </ItemWrapper>
-          ))}
+        <ItemContainer>
+          <TransitionGroup component={null}>
+            {items.map((x, key) => (
+              <CSSTransition key={key} timeout={200} classNames="item">
+                <ItemWrapper key={key} first={key === 0}>
+                  <Bubble
+                    id={x.id}
+                    text={x.text}
+                    inactive={!x.active}
+                    onClick={() => {
+                      if (x.active) onDeactivateItem(x);
+                      if (!x.active) onActivateItem(x);
+                    }}
+                    onRemove={() => onRemoveItem(x)}
+                  />
+                </ItemWrapper>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
 
           <InputContainer>
-            <Input />
+            <Input
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={onKeyDown}
+            />
           </InputContainer>
         </ItemContainer>
       </Inner>
