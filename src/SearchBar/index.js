@@ -105,12 +105,12 @@ const SearchBar = (props) => {
     <Container>
       <Inner>
         <SearchIcon>
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </SearchIcon>
 
         <ItemContainer ref={scrollRef}>
-          {items.map((x) => (
-            <ItemWrapper>
+          {items.map((x, key) => (
+            <ItemWrapper key={key}>
               <Bubble id={x.id} text={x.text} />
             </ItemWrapper>
           ))}

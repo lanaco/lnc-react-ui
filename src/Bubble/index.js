@@ -74,7 +74,7 @@ const Bubble = (props) => {
           {text}
         </Text>
         <ButtonContainer {...themeProps} onClick={() => onDelete(id)}>
-          <i class="far fa-times-circle" />
+          <i className="far fa-times-circle" />
         </ButtonContainer>
       </Inner>
     </Container>
