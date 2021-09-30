@@ -21,3 +21,13 @@ Default.args = {
   inactive: false,
   disabled: false,
 };
+
+export const AdditionalInfo = Template.bind({});
+AdditionalInfo.args = {
+  color: "secondary",
+  size: "small",
+  text: "Bubble",
+  additionalInfo: "123",
+  inactive: false,
+  disabled: false,
+};

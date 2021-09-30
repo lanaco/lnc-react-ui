@@ -3,15 +3,19 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 import PropTypes from "prop-types";
 import Bubble from "../Bubble";
+import FadeIn from "../FadeIn/FadeIn";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./animation.css";
 
 const Container = styled.div`
   display: inline-block;
+  position: relative;
   box-sizing: border-box;
-  border: 1.5px solid #bfbfbf80;
+  border: 1.5px solid #bfbfbf;
   background-color: white;
   border-radius: 3px;
+  width: 100%;
+  transition: all 250ms ease;
 `;
 
 const ItemContainer = styled.div`
@@ -19,6 +23,8 @@ const ItemContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  flex-grow: 10;
+  transition: all 250ms ease;
 
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -32,6 +38,7 @@ const ItemWrapper = styled.div`
   display: inline-block;
   margin: 2px;
   flex-grow: 1;
+  transition: all 250ms ease;
 
   & > div {
     width: 100%;
@@ -44,10 +51,12 @@ const InputContainer = styled.div`
   margin: 2px;
   margin-left: 4px;
   flex-grow: 1;
+  transition: all 250ms ease;
 `;
 
 const Input = styled.input`
   width: 100%;
+  transition: all 250ms ease;
   text-decoration: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -64,13 +73,61 @@ const Input = styled.input`
 
 const Inner = styled.div`
   display: flex;
-  align-items: center;
+  // align-items: center;
+`;
+
+const SearchIcon = styled.div`
+  padding: 12px 8px 6px 8px;
+  color: ${(props) => theme.palette["primary"].main};
+  font-size: ${(props) => theme.typography["medium"].fontSize};
+  background-color: whitesmoke;
+  transition: all 250ms ease;
+`;
+
+const ClearIcon = styled.div`
+  padding: 12px 8px 6px 8px;
+  color: ${(props) => theme.palette["primary"].main};
+  font-size: ${(props) => theme.typography["medium"].fontSize};
+  background-color: whitesmoke;
+  transition: all 250ms ease;
+  cursor: pointer;
+`;
+
+const Content = styled.div`
+  display: flex;
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  margin-top: 0.25rem;
+  padding: 0.1875rem;
+  width: 98.1%;
+  border-radius: 0.15625rem;
+  box-shadow: 0 0 0.375rem #bebebe;
+  border: 0.125rem solid ${(props) => theme.palette["primary"].main};
+  display: flex;
+  flex-direction: column;
+  transition: all 250ms ease;
+`;
+
+const ContentItem = styled.div`
+  font-family: ${(props) => theme.typography.fontFamily};
+  font-size: ${(props) => theme.typography["small"].fontSize};
+  padding: 0.375rem;
+  cursor: pointer;
+  background-color: ${(props) => (props.hover ? "whitesmoke" : "inherit")};
+  color: ${(props) =>
+    props.hover ? theme.palette["primary"].main : "inherit"};
+
+  &:hover {
+    background-color: whitesmoke;
+    color: ${(props) => theme.palette["primary"].main};
+  }
 `;
 
 const SearchBar = (props) => {
   const {
     items,
-    suggestions = [{}],
+    suggestions,
     onRemoveItem,
     onAddItem,
     onActivateItem,
@@ -78,6 +135,8 @@ const SearchBar = (props) => {
   } = props;
 
   const [value, setValue] = useState("");
+  const [openSuggestions, setOpenSuggestions] = useState(true);
+  let InputRef = React.createRef();
 
   const onKeyDown = (e) => {
     // let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
@@ -95,7 +154,13 @@ const SearchBar = (props) => {
       value &&
       value.length > 0
     ) {
-      onAddItem({ id: 0, text: value, active: true });
+      onAddItem({
+        id: 0,
+        field: "mame",
+        description: "Name",
+        value: value,
+        active: true,
+      });
       setValue("");
     }
 
@@ -104,9 +169,34 @@ const SearchBar = (props) => {
     }
   };
 
+  const renderSuggestions = () => {
+    if (openSuggestions) {
+      return (
+        <FadeIn>
+          <Content>
+            {suggestions.map((item, i) => {
+              return (
+                <ContentItem
+                  key={i}
+                  onMouseDown={() => console.log(item)}
+                  hover={false}
+                >
+                  {item.description}
+                </ContentItem>
+              );
+            })}
+          </Content>
+        </FadeIn>
+      );
+    }
+  };
+
   return (
     <Container>
       <Inner>
+        <SearchIcon>
+          <i className="fas fa-search fa-fw"></i>
+        </SearchIcon>
         <ItemContainer>
           <TransitionGroup component={null}>
             {items.map((x, key) => (
@@ -114,13 +204,14 @@ const SearchBar = (props) => {
                 <ItemWrapper key={key} first={key === 0}>
                   <Bubble
                     id={x.id}
-                    text={x.text}
+                    text={x.description}
+                    additionalInfo={x.value}
                     inactive={!x.active}
+                    onRemove={() => onRemoveItem(x)}
                     onClick={() => {
                       if (x.active) onDeactivateItem(x);
                       if (!x.active) onActivateItem(x);
                     }}
-                    onRemove={() => onRemoveItem(x)}
                   />
                 </ItemWrapper>
               </CSSTransition>
@@ -135,7 +226,13 @@ const SearchBar = (props) => {
             />
           </InputContainer>
         </ItemContainer>
+
+        <ClearIcon>
+          <i className="fas fa-times fa-fw"></i>
+        </ClearIcon>
       </Inner>
+
+      {renderSuggestions()}
     </Container>
   );
 };

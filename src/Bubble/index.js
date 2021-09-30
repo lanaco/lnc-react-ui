@@ -4,10 +4,34 @@ import theme from "../_utils/theme";
 import PropTypes from "prop-types";
 import "../Base/fontawesome/css/fontawesome.css";
 
+const getBtnContainerColor = (props) => {
+  if (props.additional && props.inactive) return props.theme.palette.gray[100];
+
+  if (props.additional && !props.inactive)
+    return props.theme.palette.primary.lighter;
+
+  if (!props.additional && !props.inactive)
+    return props.theme.palette.primary.main;
+
+  if (!props.additional && props.inactive) return props.theme.palette.gray[900];
+};
+
+const getBtnColor = (props) => {
+  if (props.additional && props.inactive) return props.theme.palette.gray[900];
+
+  if (props.additional && !props.inactive)
+    return props.theme.palette.primary.main;
+
+  if (!props.additional && !props.inactive)
+    return props.theme.palette.primary.lighter;
+
+  if (!props.additional && props.inactive)
+    return props.theme.palette.primary.lighter;
+};
+
 const Container = styled.div`
   display: inline-block;
   box-sizing: border-box;
-  // width: 100%;
 `;
 
 const Inner = styled.div`
@@ -15,18 +39,8 @@ const Inner = styled.div`
   align-items: flex-start;
   flex-direction: row;
 
-  border: ${(props) =>
-    props.inactive ? "1.5px solid #bfbfbf80" : "1.5px solid transparent"};
+  border: 1px solid #bfbfbf80;
 
-  background-color: ${(props) =>
-    props.inactive
-      ? props.theme.palette.primary.lighter
-      : props.theme.palette.primary.main};
-
-  color: ${(props) =>
-    props.inactive
-      ? props.theme.palette.primary.textDark
-      : props.theme.palette.primary.text};
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.small.fontSize};
 
@@ -35,11 +49,32 @@ const Inner = styled.div`
 `;
 
 const Text = styled.div`
-  padding: 6.2px 4px 6.2px 8px;
+  padding: 6.2px 5px 6.2px 8px;
   transition: all 250ms ease;
   border-radius: 8px 0 0 8px;
   white-space: pre;
   flex-grow: 10;
+
+  background-color: ${(props) =>
+    props.inactive
+      ? props.theme.palette.gray[900]
+      : props.theme.palette.primary.main};
+
+  color: ${(props) => props.theme.palette.primary.text};
+`;
+
+const AdditionalInfo = styled.div`
+  padding: 6.2px 5px 6.2px 8px;
+  transition: all 250ms ease;
+  white-space: pre;
+  flex-grow: 10;
+
+  background-color: ${(props) =>
+    props.inactive
+      ? props.theme.palette.gray[100]
+      : props.theme.palette.primary.lighter};
+
+  color: ${(props) => props.theme.palette.primary.textDark};
 `;
 
 const ButtonContainer = styled.div`
@@ -50,6 +85,10 @@ const ButtonContainer = styled.div`
   flex-grow: 0;
   align-self: flex-end;
   margin-left: auto;
+
+  background-color: ${(props) => getBtnContainerColor(props)};
+
+  color: ${(props) => getBtnColor(props)};
 
   & i {
     font-size: ${(props) => props.theme.typography.small.fontSize};
@@ -70,6 +109,7 @@ const Bubble = (props) => {
     className,
     size,
     text,
+    additionalInfo,
   } = props;
 
   const themeProps = { theme, size, color, disabled, inactive };
@@ -80,8 +120,19 @@ const Bubble = (props) => {
         <Text {...themeProps} onClick={() => onClick(id)} title={tooltip}>
           {text}
         </Text>
-        <ButtonContainer {...themeProps} onClick={() => onRemove(id)}>
-          <i className="far fa-times-circle" />
+
+        {additionalInfo && additionalInfo !== "" && (
+          <AdditionalInfo onClick={() => onClick(id)} {...themeProps}>
+            {additionalInfo}
+          </AdditionalInfo>
+        )}
+
+        <ButtonContainer
+          {...themeProps}
+          additional={additionalInfo && additionalInfo !== ""}
+          onClick={() => onRemove(id)}
+        >
+          <i className="fas fa-times" />
         </ButtonContainer>
       </Inner>
     </Container>
@@ -99,6 +150,7 @@ Bubble.defaultProps = {
   preventDefault: true,
   size: "small",
   text: "",
+  additionalInfo: "",
   color: "primary",
   theme: theme,
 };
@@ -115,6 +167,7 @@ Bubble.propTypes = {
   preventDefault: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   text: PropTypes.string,
+  additionalInfo: PropTypes.string,
   color: PropTypes.oneOf([
     "primary",
     "secondary",

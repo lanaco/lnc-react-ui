@@ -3,13 +3,24 @@ import SearchBar from "./index";
 
 const Example = (props) => {
   const [items, setItems] = useState([
-    { id: 1, text: "text 1", active: false },
-    { id: 2, text: "text 222", active: true },
-    { id: 3, text: "text 33", active: false },
-    { id: 4, text: "text 444444", active: false },
-    { id: 5, text: "text 55555", active: true },
-    { id: 6, text: "text 6", active: false },
-    { id: 7, text: "text 77", active: false },
+    {
+      id: 1,
+      field: "age",
+      description: "Age",
+      dataType: "integer",
+      operation: "Equals",
+      value: "12",
+      active: false,
+    },
+    {
+      id: 2,
+      field: "firstName",
+      description: "First name",
+      dataType: "string",
+      operation: "Contains",
+      value: "Vladan",
+      active: true,
+    },
   ]);
 
   const onRemoveItem = (item) => {
@@ -38,11 +49,33 @@ const Example = (props) => {
   };
 
   return (
-    <div style={{ width: "400px" }}>
+    <div style={{ minWidth: "500px", maxWidth: "500px" }}>
       <SearchBar
         {...props.args}
         items={items}
-        suggestions={[]}
+        suggestions={[
+          {
+            id: 1,
+            field: "firstName",
+            description: "First name",
+            dataType: "string",
+            operation: "Contains",
+          },
+          {
+            id: 2,
+            field: "lastName",
+            description: "Last name",
+            dataType: "string",
+            operation: "Contains",
+          },
+          {
+            id: 3,
+            field: "age",
+            description: "Age",
+            dataType: "integer",
+            operation: "Equals",
+          },
+        ]}
         onRemoveItem={onRemoveItem}
         onAddItem={onAddItem}
         onActivateItem={onActivateItem}
