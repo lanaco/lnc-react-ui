@@ -23,35 +23,15 @@ const Example = (props) => {
     },
   ]);
 
-  const onRemoveItem = (item) => {
-    setItems([...items].filter((x) => x.id !== item.id));
-  };
-
-  const onAddItem = (item) => {
-    item.id = items.map((x) => x.id).reduce((a, b) => Math.max(a, b), 0) + 1;
-    setItems([...items, item]);
-  };
-
-  const onActivateItem = (item) => {
-    let copy = [...items];
-    let index = copy.findIndex((x) => x.id === item.id);
-    copy[index] = { ...copy[index], active: true };
-
-    setItems(copy);
-  };
-
-  const onDeactivateItem = (item) => {
-    let copy = [...items];
-    let index = copy.findIndex((x) => x.id === item.id);
-    copy[index] = { ...copy[index], active: false };
-
-    setItems(copy);
+  const onChange = (id, items, changedItem) => {
+    setItems(items);
   };
 
   return (
-    <div style={{ minWidth: "500px", maxWidth: "500px" }}>
+    <div style={{ minWidth: "800px", maxWidth: "800px" }}>
       <SearchBar
         {...props.args}
+        onChange={onChange}
         items={items}
         suggestions={[
           {
@@ -76,10 +56,6 @@ const Example = (props) => {
             operation: "Equals",
           },
         ]}
-        onRemoveItem={onRemoveItem}
-        onAddItem={onAddItem}
-        onActivateItem={onActivateItem}
-        onDeactivateItem={onDeactivateItem}
       />
     </div>
   );

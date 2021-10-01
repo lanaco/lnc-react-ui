@@ -10,33 +10,11 @@ export default {
   component: SearchBar,
 };
 
-const Template = (args) => <Example {...args} />;
+const Template = (args) => <Example args={args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
   theme: theme,
   color: "primary",
-  size: "medium",
-  label: "SearchBar",
-  onClick: undefined,
-  State: {
-    Filters: [],
-  },
-  filterProps: [
-    {
-      value: 1,
-      name: "Project name",
-      propName: "ProjectName",
-      firstLevel: "ProjectName",
-      dataType: dataTypes.String,
-      isAdvanced: false,
-      operationTypes: getStringOperationTypes(),
-      showInQuickFilters: true,
-      quickFiltersOperationType: operationTypes.Contains,
-    },
-  ],
-  SetProperties: () => {},
-  SetQuickFilterOpen: () => {},
-  ChangeQuickFilterText: () => {},
-  onChange: () => {},
+  size: "small",
 };

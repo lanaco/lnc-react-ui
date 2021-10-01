@@ -113,7 +113,7 @@ const Content = styled.div`
   z-index: 1;
   margin-top: 0.0625rem;
   padding: 0.1875rem;
-  width: 99%;
+  width: calc(100% - 0.625rem);
   border-radius: 0.15625rem;
   box-shadow: 0 0 0.375rem #bebebe;
   border: 0.125rem solid ${(props) => props.theme.palette[props.color].main};
@@ -250,6 +250,8 @@ const DropdownLookup = (props) => {
   };
 
   const onKeyDown = (e) => {
+    if (e.keyCode === 38 || e.keyCode === 40) e.preventDefault();
+
     if (e.keyCode === 27) {
       InputRef.current.blur();
     }
@@ -280,7 +282,7 @@ const DropdownLookup = (props) => {
   };
 
   const renderSuggestions = () => {
-    if (options !== null && options.length !== 0 && inFocus) {
+    if (true || (options !== null && options.length !== 0 && inFocus)) {
       return (
         <FadeIn>
           <Content {...themeProps}>

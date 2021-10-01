@@ -29,6 +29,18 @@ const getBtnColor = (props) => {
     return props.theme.palette.primary.lighter;
 };
 
+const paddingBySize = (size) => {
+  if (size === "small") return `0.34375rem 0.5rem 0.34375rem 0.5rem`;
+  if (size === "medium") return `0.40625rem 0.6rem 0.40625rem 0.6rem`;
+  if (size === "large") return `0.46875rem 0.7rem 0.46875rem 0.7rem`;
+};
+
+const heightBySize = (size) => {
+  if (size === "small") return `1.5rem`;
+  if (size === "medium") return `1.875rem`;
+  if (size === "large") return `2.25rem`;
+};
+
 const Container = styled.div`
   display: inline-block;
   box-sizing: border-box;
@@ -38,23 +50,29 @@ const Inner = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: row;
-
-  border: 1px solid #bfbfbf80;
-
+  border: 0.0625rem solid #bfbfbf80;
   font-family: ${(props) => props.theme.typography.fontFamily};
-  font-size: ${(props) => props.theme.typography.small.fontSize};
-
-  border-radius: 8px;
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  padding: 0;
+  margin: 0;
+  border-radius: 0.5rem;
   cursor: pointer;
+
+  min-height: ${(props) => heightBySize(props.size)};
+  max-height: ${(props) => heightBySize(props.size)};
 `;
 
+const TextSpan = styled.span``;
+
 const Text = styled.div`
-  padding: 6.2px 5px 6.2px 8px;
+  flex: 1;
+
+  padding: ${(props) => paddingBySize(props.size)};
   transition: all 250ms ease;
-  border-radius: 8px 0 0 8px;
+  border-radius: 0.5rem 0 0 0.5rem;
   white-space: pre;
   flex-grow: 10;
-
+  height: 100%;
   background-color: ${(props) =>
     props.inactive
       ? props.theme.palette.gray[900]
@@ -64,11 +82,11 @@ const Text = styled.div`
 `;
 
 const AdditionalInfo = styled.div`
-  padding: 6.2px 5px 6.2px 8px;
+  padding: ${(props) => paddingBySize(props.size)};
   transition: all 250ms ease;
   white-space: pre;
   flex-grow: 10;
-
+  height: 100%;
   background-color: ${(props) =>
     props.inactive
       ? props.theme.palette.gray[100]
@@ -78,24 +96,26 @@ const AdditionalInfo = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  display: inline;
   cursor: pointer;
-  padding: 6.2px 8px 6.2px 6px;
+  padding: ${(props) => paddingBySize(props.size)};
   transition: all 250ms ease;
-  border-radius: 0 8px 8px 0;
-  flex-grow: 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  // flex-grow: 0;
   align-self: flex-end;
   margin-left: auto;
+  height: 100%;
 
   background-color: ${(props) => getBtnContainerColor(props)};
 
   color: ${(props) => getBtnColor(props)};
 
   & i {
-    font-size: ${(props) => props.theme.typography.small.fontSize};
+    font-size: ${(props) => props.theme.typography[props.size].fontSize};
   }
 `;
 
-const Bubble = (props) => {
+const Chip = (props) => {
   const {
     theme,
     color,
@@ -118,7 +138,7 @@ const Bubble = (props) => {
     <Container {...themeProps} className={className}>
       <Inner {...themeProps}>
         <Text {...themeProps} onClick={() => onClick(id)} title={tooltip}>
-          {text}
+          <TextSpan>{text}</TextSpan>
         </Text>
 
         {additionalInfo && additionalInfo !== "" && (
@@ -139,7 +159,7 @@ const Bubble = (props) => {
   );
 };
 
-Bubble.defaultProps = {
+Chip.defaultProps = {
   id: "",
   disabled: false,
   inactive: false,
@@ -155,7 +175,7 @@ Bubble.defaultProps = {
   theme: theme,
 };
 
-Bubble.propTypes = {
+Chip.propTypes = {
   theme: PropTypes.object.isRequired,
   id: PropTypes.any,
   disabled: PropTypes.bool,
@@ -180,4 +200,4 @@ Bubble.propTypes = {
   ]),
 };
 
-export default Bubble;
+export default Chip;
