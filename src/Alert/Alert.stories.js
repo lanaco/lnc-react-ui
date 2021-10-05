@@ -1,15 +1,15 @@
 import React from "react";
 
-import Message from "./index";
+import Alet from "./index";
 
 export default {
-  title: "Message",
-  component: Message,
+  title: "Alet",
+  component: Alet,
 };
 
 const Template = (args) => (
   <div>
-    <Message {...args} />
+    <Alet {...args} />
   </div>
 );
 
@@ -18,5 +18,5 @@ Default.args = {
   message: "Error message",
   size: "small",
   color: "error",
-  container: true,
+  hasContainer: true,
 };

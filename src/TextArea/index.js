@@ -89,7 +89,7 @@ const TextArea = React.forwardRef((props, ref) => {
       value={val}
       rows={rows}
       ref={ref}
-    ></StyledTextInput>
+    />
   );
 });
 

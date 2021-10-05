@@ -9,6 +9,7 @@ const Example = (props) => {
       description: "Age",
       dataType: "integer",
       operation: "Equals",
+      operationDescription: "Equals",
       value: "12",
       active: false,
     },
@@ -18,6 +19,7 @@ const Example = (props) => {
       description: "First name",
       dataType: "string",
       operation: "Contains",
+      operationDescription: "Contains",
       value: "Vladan",
       active: true,
     },
@@ -40,6 +42,7 @@ const Example = (props) => {
             description: "First name",
             dataType: "string",
             operation: "Contains",
+            operationDescription: "Contains",
           },
           {
             id: 2,
@@ -47,6 +50,7 @@ const Example = (props) => {
             description: "Last name",
             dataType: "string",
             operation: "Contains",
+            operationDescription: "Contains",
           },
           {
             id: 3,
@@ -54,6 +58,7 @@ const Example = (props) => {
             description: "Age",
             dataType: "integer",
             operation: "Equals",
+            operationDescription: "Equals",
           },
         ]}
       />

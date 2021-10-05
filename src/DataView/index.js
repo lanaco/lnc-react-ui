@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ComponentBox from "../ComponentBox/index";
+import Modal from "../Modal/index";
 import ConfirmationForm from "../ConfirmationForm/index";
 import DropdownMenu from "../DropdownMenu/index";
 import Button from "../Button/index.js";
@@ -399,7 +399,7 @@ const DataView = (props) => {
       return <></>;
 
     return (
-      <ComponentBox
+      <Modal
         basic={true}
         id={"AreYouSure?"}
         open={deleteConfirmationBoxOpen}
@@ -417,7 +417,7 @@ const DataView = (props) => {
           title={Localization ? Localization.AreYouSure : "Are you sure"}
           accentColor={props.accentColor}
         ></ConfirmationForm>
-      </ComponentBox>
+      </Modal>
     );
   };
 
@@ -591,7 +591,7 @@ const DataView = (props) => {
 
     if (!General.DataFromBackend)
       return (
-        <ComponentBox
+        <Modal
           basic={true}
           id={"FormViewInModal"}
           open={true}
@@ -601,7 +601,7 @@ const DataView = (props) => {
           closeIconClassName={Icons.CloseX}
         >
           {component}
-        </ComponentBox>
+        </Modal>
       );
   };
 
@@ -758,7 +758,7 @@ const DataView = (props) => {
 
     if (!General.DataFromBackend) {
       return (
-        <ComponentBox
+        <Modal
           id={"FormViewInModal"}
           open={true}
           size={"medium"}
@@ -766,7 +766,7 @@ const DataView = (props) => {
           handleDialogClose={() => {}}
         >
           {component}
-        </ComponentBox>
+        </Modal>
       );
     }
   };

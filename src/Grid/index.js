@@ -8,7 +8,7 @@ import { useImmer } from "use-immer";
 import { v4 as uuidv4 } from "uuid";
 import FormMode from "../DataView/Constants/FormMode";
 import { freeze } from "../Helper/helper";
-import ComponentBox from "../ComponentBox/index";
+import Modal from "../Modal/index";
 import ConfirmationForm from "../ConfirmationForm/index";
 import Spinner from "../Spinner/index";
 
@@ -1423,7 +1423,7 @@ const Grid = React.forwardRef((props, ref) => {
       return <></>;
 
     return (
-      <ComponentBox
+      <Modal
         basic={true}
         id={"AreYouSure?"}
         open={state.General.DeleteConfirmationBox}
@@ -1435,7 +1435,7 @@ const Grid = React.forwardRef((props, ref) => {
           refuseFunction={toggleDeleteConfirmationBox}
           approveFunction={onDelete}
         ></ConfirmationForm>
-      </ComponentBox>
+      </Modal>
     );
   };
 
@@ -1609,7 +1609,7 @@ const Grid = React.forwardRef((props, ref) => {
 
     if (!state.General.DataFromBackend) {
       return (
-        <ComponentBox
+        <Modal
           id={"FormViewInModal"}
           open={true}
           size={"medium"}
@@ -1617,7 +1617,7 @@ const Grid = React.forwardRef((props, ref) => {
           handleDialogClose={onSwitchToTableView}
         >
           {component}
-        </ComponentBox>
+        </Modal>
       );
     }
   };

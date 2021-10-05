@@ -27,23 +27,9 @@ const Template = (args) => (
       padding: "8px",
     }}
   >
-    <FormContainer>
-      <FormField {...args}>
-        <TextInput value="racicvladan" size={args.size} />
-      </FormField>
-      <FormField {...args}>
-        <TextInput value="racicvladan" size={args.size} />
-      </FormField>
-      <FormField {...args} errorMessage="The user must not be an idiot!">
-        <TextInput value="racicvladan" size={args.size} />
-      </FormField>
-      <FormField {...args}>
-        <TextInput value="racicvladan" size={args.size} />
-      </FormField>
-      <FormField {...args}>
-        <TextInput value="racicvladan" size={args.size} />
-      </FormField>
-    </FormContainer>
+    <FormField {...args} errorMessage="The user must not be an idiot!" required>
+      <TextInput value="racicvladan" size={args.size} color={args.color} />
+    </FormField>
   </div>
 );
 
@@ -53,4 +39,5 @@ Default.args = {
   label: "Username",
   required: true,
   size: "small",
+  hasContainer: false,
 };

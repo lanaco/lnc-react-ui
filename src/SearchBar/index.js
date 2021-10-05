@@ -13,10 +13,16 @@ const getIconFontSize = (props) => {
   if (props.size === "large") return "1.3125rem";
 };
 
-const paddingBySize = (size) => {
-  if (size === "small") return `6.5px 0.375rem`;
-  if (size === "medium") return `0.40625rem 0.6rem 0.40625rem 0.6rem`;
-  if (size === "large") return `0.46875rem 0.7rem 0.46875rem 0.7rem`;
+const inputPaddingBySize = (size) => {
+  if (size === "small") return `0.40625rem 0.375rem`;
+  if (size === "medium") return `0.46875rem 0.375rem`;
+  if (size === "large") return `0.53125rem 0.375rem`;
+};
+
+const iconPaddingBySize = (size) => {
+  if (size === "small") return "0.625rem 0.5rem 0.375rem 0.5rem";
+  if (size === "medium") return "0.71875rem 0.5625rem 0.375rem 0.5625rem";
+  if (size === "large") return "0.78125rem 0.625rem 0.375rem 0.625rem";
 };
 
 const Container = styled.div`
@@ -31,19 +37,12 @@ const Container = styled.div`
 `;
 
 const ItemContainer = styled.div`
-  padding: 0.25rem;
+  padding: 0.15rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   flex-grow: 10;
   transition: all 250ms ease;
-
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    background: white;
-    height: 0;
-    width: 0;
-  }
 `;
 
 const ItemWrapper = styled.div`
@@ -75,12 +74,12 @@ const Input = styled.input`
   box-sizing: border-box;
   outline: none;
   border: none;
-  padding: ${(props) => paddingBySize(props.size)};
+  padding: ${(props) => inputPaddingBySize(props.size)};
   background-color: transparent;
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   color: ${(props) => props.theme.palette[props.color].textDark};
-  border-radius: 3px;
+  border-radius: 0.1875rem;
 `;
 
 const Inner = styled.div`
@@ -89,7 +88,7 @@ const Inner = styled.div`
 `;
 
 const SearchIcon = styled.div`
-  padding: 12px 8px 6px 8px;
+  padding: ${(props) => iconPaddingBySize(props.size)};
   color: ${(props) => props.theme.palette[props.color].main};
   font-size: ${(props) => getIconFontSize(props)};
   background-color: whitesmoke;
@@ -97,7 +96,7 @@ const SearchIcon = styled.div`
 `;
 
 const ClearIcon = styled.div`
-  padding: 12px 8px 6px 8px;
+  padding: ${(props) => iconPaddingBySize(props.size)};
   color: ${(props) => props.theme.palette[props.color].main};
   font-size: ${(props) => getIconFontSize(props)};
   background-color: whitesmoke;
@@ -185,6 +184,9 @@ const SearchBar = (props) => {
       description: suggestion.description,
       value: value,
       active: true,
+      dataType: suggestion.dataType,
+      operation: suggestion.operation,
+      operationDescription: suggestion.operationDescription,
     });
 
     setValue("");
@@ -236,7 +238,7 @@ const SearchBar = (props) => {
                   onMouseDown={() => suggestionSelected(item)}
                   hover={cursor === i}
                 >
-                  {item.description}
+                  {`${item.description} - ${item.operationDescription}`}
                 </ContentItem>
               );
             })}
@@ -256,7 +258,12 @@ const SearchBar = (props) => {
           <TransitionGroup component={null}>
             {items.map((x, key) => (
               <CSSTransition key={key} timeout={200} classNames="item">
-                <ItemWrapper {...themeProps} key={key} first={key === 0}>
+                <ItemWrapper
+                  {...themeProps}
+                  key={key}
+                  first={key === 0}
+                  title={`${x.description} - ${x.operationDescription}:  ${x.value}`}
+                >
                   <Chip
                     {...themeProps}
                     id={x.id}

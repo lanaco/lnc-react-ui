@@ -2,17 +2,32 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
-import Message from "../Message/index";
+import Alet from "../Alert/index";
 
 const fontSize = (props) => {
-  var fontSize =
-    parseFloat(props.theme.typography[props.size].fontSize.replace("px", "")) -
-    1.5 +
-    "px";
+  let fontSize = props.theme.typography[props.size].fontSize;
+  let newFontSize = "";
 
-  return fontSize;
+  if (fontSize.includes("px")) {
+    newFontSize =
+      parseFloat(
+        props.theme.typography[props.size].fontSize.replace("px", "")
+      ) -
+      1.5 +
+      "px";
+  }
+
+  if (fontSize.includes("rem")) {
+    newFontSize =
+      parseFloat(
+        props.theme.typography[props.size].fontSize.replace("rem", "")
+      ) -
+      0.09375 +
+      "rem";
+  }
+
+  return newFontSize;
 };
-
 const Container = styled.div`
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   font-family: ${(props) => props.theme.typography.fontFamily};
@@ -26,7 +41,7 @@ const LabelContainer = styled.div`
 `;
 
 const ErrorContainer = styled.div`
-  margin-top: 0.25rem;
+  margin-top: ${(props) => (props.hasContainer ? "0.2rem" : "0.05rem")};
 `;
 
 const FormField = (props) => {
@@ -39,7 +54,7 @@ const FormField = (props) => {
     errorMessage,
     label,
     required,
-    container,
+    hasContainer,
   } = props;
 
   const themeProps = { theme, size, color };
@@ -55,12 +70,12 @@ const FormField = (props) => {
 
       {children}
       {errorMessage && errorMessage !== "" && (
-        <ErrorContainer {...themeProps}>
-          <Message
+        <ErrorContainer {...themeProps} hasContainer={hasContainer}>
+          <Alet
             {...themeProps}
             color="error"
             message={errorMessage}
-            container={container}
+            hasContainer={hasContainer}
           />
         </ErrorContainer>
       )}
@@ -75,7 +90,7 @@ FormField.defaultProps = {
   errorMessage: "",
   label: "",
   required: false,
-  container: true,
+  hasContainer: true,
 };
 
 FormField.propTypes = {
@@ -84,7 +99,7 @@ FormField.propTypes = {
   errorMessage: PropTypes.string,
   label: PropTypes.string,
   required: PropTypes.bool,
-  container: PropTypes.bool,
+  hasContainer: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
