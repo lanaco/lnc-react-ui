@@ -282,7 +282,7 @@ const DropdownLookup = (props) => {
   };
 
   const renderSuggestions = () => {
-    if (true || (options !== null && options.length !== 0 && inFocus)) {
+    if (options !== null && options.length !== 0 && inFocus) {
       return (
         <FadeIn>
           <Content {...themeProps}>

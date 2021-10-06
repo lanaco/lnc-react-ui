@@ -7,15 +7,11 @@ TO ADD:
     - value and onChange od textArea, numberInput
     - Tooltips on all components, check STAMP wrapper also
 
-
-why preventDefault in props
 dateInput format to iso
-
 actions on components
 responsive form container
+
 NumberInput - Aco
-TextArea - onFocus show all, on blur show reduced content, onHover show all in tooltip (resizing anc colors)
 
 Many to many dropdown lookup (new)
-
 Table as separate component
