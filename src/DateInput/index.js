@@ -1,5 +1,5 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "./react-datepicker.css";
 
@@ -82,7 +82,11 @@ const DateInput = (props) => {
     color,
     theme,
     className,
+    preventDefault,
   } = props;
+
+  const [dateText, setDateText] = useState("");
+  const [isFirst, setIsFirst] = useState(true);
 
   const callOnChange = (id, value) => {
     if (onChange) onChange(id, value);
@@ -90,7 +94,7 @@ const DateInput = (props) => {
 
   const handleChange = (jsDateObject) => {
     if (jsDateObject === null) callOnChange(id, "");
-    else callOnChange(id, moment(jsDateObject).format("DD.MM.YYYY."));
+    else callOnChange(id, jsDateObject);
   };
 
   const getValue = () => {
@@ -98,11 +102,26 @@ const DateInput = (props) => {
     return moment(value, "DD.MM.YYYY.").toDate();
   };
 
+  useEffect(() => {
+    const timeOutId = setTimeout(() => handleDelayedOnChange(), 1500);
+    return () => clearTimeout(timeOutId);
+  }, [dateText]);
+
+  const handleDelayedOnChange = () => {
+    if (!isFirst) handleChange(dateText);
+
+    if (isFirst) setIsFirst(false);
+  };
+
+  const handleOnChange = (jsDateObject) => {
+    setDateText(moment(jsDateObject).format("DD.MM.YYYY."));
+  };
+
   return (
     <Container {...{ theme, size, color }}>
       <DatePicker
         selected={getValue()}
-        onChange={handleChange}
+        onChange={handleOnChange}
         dateFormat={dateFormat ? dateFormat : "dd.MM.yyyy."}
         disabled={disabled}
         className={className}
