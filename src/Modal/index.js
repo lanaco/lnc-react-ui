@@ -66,7 +66,7 @@ const Content = styled.div((props) => ({
   borderRadius: "0 0 0.2rem 0.2rem",
 }));
 
-function ComponentBox(props) {
+function Modal(props) {
   const {
     onClose,
     open,
@@ -143,7 +143,7 @@ function ComponentBox(props) {
   );
 }
 
-ComponentBox.defaultProps = {
+Modal.defaultProps = {
   open: false,
   onClose: () => {},
   className: "",
@@ -158,7 +158,7 @@ ComponentBox.defaultProps = {
   width: "70%",
 };
 
-ComponentBox.propTypes = {
+Modal.propTypes = {
   theme: PropTypes.object.isRequired,
   onClose: PropTypes.func,
   className: PropTypes.string,
@@ -181,4 +181,4 @@ ComponentBox.propTypes = {
   ]),
 };
 
-export default ComponentBox;
+export default Modal;

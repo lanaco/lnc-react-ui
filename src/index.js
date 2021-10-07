@@ -42,8 +42,8 @@ export { default as TransparentTextInput } from "./TransparentTextInput";
 export * from "./DataView";
 export { default as DataView } from "./DataView";
 
-export * from "./ComponentBox";
-export { default as ComponentBox } from "./ComponentBox";
+export * from "./Modal";
+export { default as Modal } from "./Modal";
 
 export * from "./ConfirmationForm";
 export { default as ConfirmationForm } from "./ConfirmationForm";
@@ -78,5 +78,5 @@ export { default as FormField } from "./FormField";
 export * from "./FormContainer";
 export { default as FormContainer } from "./FormContainer";
 
-export * from "./Message";
-export { default as Message } from "./Message";
+export * from "./Alert";
+export { default as Alert } from "./Alert";

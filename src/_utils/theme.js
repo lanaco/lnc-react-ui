@@ -95,15 +95,15 @@ const theme = {
   typography: {
     fontFamily: "Ubuntu",
     small: {
-      fontSize: "12px",
+      fontSize: "0.75rem",
       iconFontSize: "0.85rem",
     },
     medium: {
-      fontSize: "15px",
+      fontSize: "0.9375rem",
       iconFontSize: "1.125rem",
     },
     large: {
-      fontSize: "18px",
+      fontSize: "1.125rem",
       iconFontSize: "1.4375rem",
     },
   },

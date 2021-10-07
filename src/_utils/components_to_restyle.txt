@@ -1,31 +1,17 @@
-DropdownLookup 
-SearchBar
 GridLookup
 
 TransparentTextInput // should not be i this library
 DropdownMenu // should not be i this library
 
 TO ADD:
-    - Add frontend pagination to CheckboxLookup
     - value and onChange od textArea, numberInput
-    - TextArea resizing anc colors
     - Tooltips on all components, check STAMP wrapper also
 
-
-rename ComponentBox to Modal
-why preventDefault in props
 dateInput format to iso
-
 actions on components
 responsive form container
-magrin on error container (formField)
-    - container prop name ?
-message component rename
-    - add submenu with colors
+
 NumberInput - Aco
-TextArea - onFocus show all, on blur show reduced content, onHover show all in tooltip
-tag selector - switch colors
 
 Many to many dropdown lookup (new)
-
 Table as separate component

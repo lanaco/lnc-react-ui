@@ -21,7 +21,11 @@ const Example = (props) => {
   const onChange = (_, value) => setValue(value);
 
   return (
-    <div>
+    <div
+      style={{
+        width: "500px",
+      }}
+    >
       <DropdownLookup
         {...props.args}
         loading={loading}

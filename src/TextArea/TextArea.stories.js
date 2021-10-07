@@ -9,7 +9,7 @@ export default {
 };
 
 const Template = (args) => (
-  <div>
+  <div style={{ width: "200px" }}>
     <TextArea {...args} />
   </div>
 );
@@ -21,4 +21,6 @@ Default.args = {
   onChange: () => {},
   size: "medium",
   disabled: false,
+  rows: 4,
+  value: "Text",
 };

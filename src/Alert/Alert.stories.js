@@ -1,23 +1,22 @@
 import React from "react";
 
-import Bubble from "./index";
+import Alet from "./index";
 
 export default {
-  title: "Bubble",
-  component: Bubble,
+  title: "Alet",
+  component: Alet,
 };
 
 const Template = (args) => (
   <div>
-    <Bubble {...args} />
+    <Alet {...args} />
   </div>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  color: "secondary",
+  message: "Error message",
   size: "small",
-  text: "Bubble",
-  inactive: false,
-  disabled: false,
+  color: "error",
+  hasContainer: true,
 };
