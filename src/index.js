@@ -78,5 +78,5 @@ export { default as FormField } from "./FormField";
 export * from "./FormContainer";
 export { default as FormContainer } from "./FormContainer";
 
-export * from "./Alet";
-export { default as Alet } from "./Alet";
+export * from "./Alert";
+export { default as Alert } from "./Alert";

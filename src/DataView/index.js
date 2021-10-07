@@ -404,8 +404,7 @@ const DataView = (props) => {
         id={"AreYouSure?"}
         open={deleteConfirmationBoxOpen}
         size={"small"}
-        handleDialogClose={() => setDeleteConfirmationBoxOpen(false)}
-        closeIconClassName={Icons.CloseX}
+        onClose={() => setDeleteConfirmationBoxOpen(false)}
       >
         <ConfirmationForm
           handleDialogClose={() => setDeleteConfirmationBoxOpen(false)}
@@ -790,8 +789,8 @@ const DataView = (props) => {
               {renderTable()}
               {renderForm()}
 
-              {/* {renderDeleteConfirmationBox()}
-              {renderDeveloperMessages()} */}
+              {renderDeleteConfirmationBox()}
+              {/*{renderDeveloperMessages()} */}
             </TableContainer>
           </CSSTransition>
         </SwitchTransition>
