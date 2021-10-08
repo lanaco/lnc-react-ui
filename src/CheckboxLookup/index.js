@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  // border: 0.06rem solid #80808080;
+  box-sizing: border-box;
   box-shadow: 0 0 6px #bebebe;
   border-radius: 0.175rem;
   padding: 8px;

@@ -1,11 +1,11 @@
 .editedBorder {
   border-top: 4.5px solid orange;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .successBorder {
   border-top: 4.5px solid green;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .flexContainer {

@@ -117,7 +117,6 @@ const Content = styled.div`
   border-radius: 0.15625rem;
   box-shadow: 0 0 0.375rem #bebebe;
   border: 0.125rem solid ${(props) => props.theme.palette[props.color].main};
-  display: flex;
   flex-direction: column;
   transition: all 250ms ease;
 `;
@@ -254,24 +253,27 @@ const DropdownLookup = (props) => {
 
     if (e.keyCode === 27) {
       InputRef.current.blur();
+      return;
     }
 
     if (options !== null && options.length !== 0 && inFocus) {
-      if (e.keyCode === 38 && cursor > 0) {
-        setCursor(cursor - 1);
-      }
+      if (e.keyCode === 38 && cursor > 0) setCursor(cursor - 1);
 
-      //TODO: comment
-      if (e.keyCode === 40 && cursor < options.length - 1) {
+      if (e.keyCode === 40 && cursor < options.length - 1)
         setCursor(cursor + 1);
-      }
 
-      if (e.keyCode === 13) {
-        suggestionSelected(options[cursor]);
-      }
-    } else if (e.keyCode === 40) {
+      if (e.keyCode === 13) suggestionSelected(options[cursor]);
+
+      return;
+    }
+
+    if (e.keyCode === 40) {
       setInFocus(true);
       load(value);
+    }
+
+    if (e.keyCode === 13) {
+      onBlur();
     }
   };
 
@@ -282,7 +284,7 @@ const DropdownLookup = (props) => {
   };
 
   const renderSuggestions = () => {
-    if (options !== null && options.length !== 0 && inFocus) {
+    if (options !== null && options.length > 0 && inFocus) {
       return (
         <FadeIn>
           <Content {...themeProps}>
@@ -308,10 +310,15 @@ const DropdownLookup = (props) => {
     if (inFocus && empty && loading === false && value !== "") {
       return (
         <FadeIn>
-          <Content {...themeProps}>
-            <Content {...themeProps} key={0} hover={true} onMouseDown={onBlur}>
+          <Content {...themeProps} key={0}>
+            <ContentItem
+              {...themeProps}
+              key={0}
+              hover={true}
+              onMouseDown={onBlur}
+            >
               {notItemsFoundText}
-            </Content>
+            </ContentItem>
           </Content>
         </FadeIn>
       );

@@ -23,4 +23,5 @@ Default.args = {
   header: "Are you sure ?",
   clickOutsideToClose: true,
   showHeader: true,
+  basic: false,
 };

@@ -62,7 +62,7 @@ const Content = styled.div((props) => ({
   border: `0.065rem solid ${props.theme.palette.gray[600]}`,
   borderTop: props.basic
     ? "none"
-    : "`0.065rem solid ${props.theme.palette.gray[600]}`",
+    : `0.065rem solid ${props.theme.palette.gray[600]}`,
   borderRadius: "0 0 0.2rem 0.2rem",
 }));
 

@@ -15,3 +15,10 @@ NumberInput - Aco
 
 Many to many dropdown lookup (new)
 Table as separate component
+
+
+
+
+//===================================//
+
+- Adjust Dropdown lookup to stamp

@@ -399,24 +399,16 @@ const DataView = (props) => {
       return <></>;
 
     return (
-      <Modal
+      <ConfirmationForm
         basic={true}
-        id={"AreYouSure?"}
         open={deleteConfirmationBoxOpen}
-        size={"small"}
         onClose={() => setDeleteConfirmationBoxOpen(false)}
-      >
-        <ConfirmationForm
-          handleDialogClose={() => setDeleteConfirmationBoxOpen(false)}
-          refuseFunction={() => setDeleteConfirmationBoxOpen(false)}
-          approveFunction={OnDelete}
-          closeIconClassName={Icons.CloseX}
-          textYes={Localization ? Localization.Yes : "Yes"}
-          textNo={Localization ? Localization.No : "No"}
-          title={Localization ? Localization.AreYouSure : "Are you sure"}
-          accentColor={props.accentColor}
-        ></ConfirmationForm>
-      </Modal>
+        onDecline={() => setDeleteConfirmationBoxOpen(false)}
+        onConfirm={OnDelete}
+        localization={Localization}
+        header={Localization ? Localization.AreYouSure : "Are you sure"}
+        clickOutsideToClose={false}
+      />
     );
   };
 
