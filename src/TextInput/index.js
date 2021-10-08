@@ -90,7 +90,7 @@ const TextInput = React.forwardRef((props, ref) => {
     if (preventDefault) {
       e.preventDefault();
     }
-    onChange(id, e.target.value);
+    // onChange(id, e.target.value);
     setText(e.target.value);
   };
 
@@ -98,8 +98,7 @@ const TextInput = React.forwardRef((props, ref) => {
     if (preventDefault) {
       e.preventDefault();
     }
-    if (onKeyDown)
-    onKeyDown(e);
+    if (onKeyDown) onKeyDown(e);
     //setText(e.target.value);
   };
 
@@ -107,8 +106,7 @@ const TextInput = React.forwardRef((props, ref) => {
     if (preventDefault) {
       e.preventDefault();
     }
-    if (onInput)
-    onInput(e);
+    if (onInput) onInput(e);
     //setText(e.target.value);
   };
 
@@ -116,8 +114,7 @@ const TextInput = React.forwardRef((props, ref) => {
     if (preventDefault) {
       e.preventDefault();
     }
-    if (onBlur)
-    onBlur(e);
+    if (onBlur) onBlur(e);
     //setText(e.target.value);
   };
 
