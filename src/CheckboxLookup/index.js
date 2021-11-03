@@ -213,10 +213,15 @@ const CheckboxLookup = (props) => {
                 {...{
                   id: id,
                   disabled: false,
-                  checked: options.length === selectedOptions.length,
+                  checked:
+                    options.length > 0 &&
+                    options.length === selectedOptions.length,
                   onChange: () =>
                     onSelectDeselectAll(
-                      options.length === selectedOptions.length ? false : true
+                      options.length > 0 &&
+                        options.length === selectedOptions.length
+                        ? false
+                        : true
                     ),
                   color: color,
                   size: size,
@@ -306,7 +311,7 @@ const CheckboxLookup = (props) => {
               {...themeProps}
               icon="angle-double-left"
               onClick={() => setPage(1)}
-              disabled={page === 1}
+              disabled={page === 1 || disabled}
             />
           </ButtonContainer>
 
@@ -315,7 +320,7 @@ const CheckboxLookup = (props) => {
               {...themeProps}
               icon="angle-left"
               onClick={() => setPage(page - 1)}
-              disabled={page === 1}
+              disabled={page === 1 || disabled}
             />
           </ButtonContainer>
 
@@ -326,7 +331,7 @@ const CheckboxLookup = (props) => {
               {...themeProps}
               icon="angle-right"
               onClick={() => setPage(page + 1)}
-              disabled={page === pageCount}
+              disabled={page === pageCount || disabled}
             />
           </ButtonContainer>
 
@@ -335,7 +340,7 @@ const CheckboxLookup = (props) => {
               {...themeProps}
               icon="angle-double-right"
               onClick={() => setPage(pageCount)}
-              disabled={page === pageCount}
+              disabled={page === pageCount || disabled}
             />
           </ButtonContainer>
         </FooterRow>

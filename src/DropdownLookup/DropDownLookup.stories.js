@@ -17,6 +17,7 @@ const Template = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
+  disabled: false,
   theme: theme,
   color: "primary",
   size: "small",

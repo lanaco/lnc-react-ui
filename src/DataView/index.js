@@ -589,7 +589,6 @@ const DataView = (props) => {
           size={"medium"}
           title={props.modalLabel || ""}
           handleDialogClose={ChangeToTableView}
-          closeIconClassName={Icons.CloseX}
         >
           {component}
         </Modal>
@@ -718,11 +717,10 @@ const DataView = (props) => {
     // )
     //   return <></>;
 
-    var component = !(
-      General.CurrentView !== "FormView" ||
-      Form === null ||
-      Form === undefined
-    ) && (
+    var renderForm =
+      General.CurrentView === "FormView" && Form !== null && Form !== undefined;
+
+    var component = renderForm && (
       <FormContainer
         borderStyle={getBorderStyleProp()}
         read={Form.Mode === FormMode.READ}
@@ -747,19 +745,22 @@ const DataView = (props) => {
       return component;
     }
 
-    if (!General.DataFromBackend) {
+    if (renderForm && !General.DataFromBackend) {
       return (
         <Modal
           id={"FormViewInModal"}
+          basic={true}
           open={true}
           size={"medium"}
-          title={""}
-          handleDialogClose={() => {}}
+          header={props.modalLabel || ""}
+          onClose={ChangeToTableView}
         >
           {component}
         </Modal>
       );
     }
+
+    return <></>;
   };
 
   const renderComponent = () => {

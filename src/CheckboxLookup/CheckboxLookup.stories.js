@@ -12,7 +12,6 @@ const Template = (args) => {
   const [selectedOptions, setSelectedOptions] = React.useState([]);
 
   const onChange = (_, selectedItems) => {
-    console.log(selectedItems);
     setSelectedOptions(selectedItems);
   };
 

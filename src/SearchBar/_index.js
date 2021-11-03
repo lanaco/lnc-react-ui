@@ -369,7 +369,6 @@ const SearchBar = (props) => {
   };
 
   const onChangeHandler = (id, value) => {
-    console.log("cejndz:", value);
     setQuickFilterText(value);
     onChange(id, value);
   };

@@ -337,7 +337,9 @@ const TableView = (props) => {
 
     return (
       <TableBodyCell key={tabIndex} onClick={onClick}>
-        {isFunction(def.specialRender) ? def.specialRender(dataItem) : cellData}
+        {isFunction(def.specialRender)
+          ? def.specialRender(dataItem, onClick)
+          : cellData}
       </TableBodyCell>
     );
   };

@@ -34,12 +34,18 @@ const Container = styled.div`
   padding: 0;
   width: 100%;
   border-bottom: 0.125rem solid
-    ${(props) => props.theme.palette[props.color].main};
+    ${(props) =>
+      props.disabled
+        ? props.theme.palette.gray[900]
+        : props.theme.palette[props.color].main};
   min-height: ${(props) => heightBySize(props.size)};
   max-height: ${(props) => heightBySize(props.size)};
   transition: all 250ms ease;
   border-radius: 0.125rem;
-  background-color: ${(props) => props.theme.palette[props.color].lighter};
+  background-color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray[200]
+      : props.theme.palette[props.color].lighter};
 `;
 
 const Inner = styled.div`
@@ -60,8 +66,12 @@ const ButtonContainer = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 250ms ease;
-  color: ${(props) => props.theme.palette[props.color].main};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray.textLight
+      : props.theme.palette[props.color].main};
   padding: 0 0.1875rem;
+  cursor: ${(props) => (props.clickable ? "pointer" : "inherit")};
 `;
 
 const TimesButtonContainer = styled.div`
@@ -70,7 +80,10 @@ const TimesButtonContainer = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 250ms ease;
-  color: ${(props) => props.theme.palette[props.color].main};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray.textLight
+      : props.theme.palette[props.color].main};
   padding: 0 0.1875rem;
   cursor: pointer;
 `;
@@ -81,7 +94,10 @@ const LoadingButtonContainer = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 250ms ease;
-  color: ${(props) => props.theme.palette[props.color].main};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray.textLight
+      : props.theme.palette[props.color].main};
   padding: 0 0.1875rem;
 
   animation: ${spin} 0.7s ease-in-out infinite;
@@ -97,8 +113,16 @@ const Input = styled.input`
   transition: all 250ms ease;
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  background-color: ${(props) => props.theme.palette[props.color].lighter};
-  color: ${(props) => props.theme.palette[props.color].textDark};
+
+  background-color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray[200]
+      : props.theme.palette[props.color].lighter};
+
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray.textLight
+      : props.theme.palette[props.color].textDark};
   padding: ${(props) => paddingBySize(props.size)};
 
   &:focus {
@@ -357,7 +381,17 @@ const DropdownLookup = (props) => {
         )}
 
         {!loading && (
-          <ButtonContainer {...themeProps}>
+          <ButtonContainer
+            {...themeProps}
+            clickable={options == null || options.length === 0}
+            onClick={() => {
+              if (options == null || options.length === 0) {
+                InputRef.current.focus();
+                setInFocus(true);
+                load(value);
+              }
+            }}
+          >
             <i className={`fas fa-${getIcon()} fa-fw`} />
           </ButtonContainer>
         )}
