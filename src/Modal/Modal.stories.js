@@ -1,17 +1,17 @@
 import React from "react";
-import ComponentBox from ".";
-import ComponentBoxExample from "./ComponentBoxExample";
+import Modal from ".";
+import ModalExample from "./ModalExample";
 import theme from "../_utils/theme";
 
 export default {
-  title: "ComponentBox",
-  component: ComponentBox,
+  title: "Modal",
+  component: Modal,
   argTypes: {},
 };
 
 const Template = (args) => (
   <>
-    <ComponentBoxExample {...args} />
+    <ModalExample {...args} />
   </>
 );
 
@@ -23,4 +23,5 @@ Default.args = {
   header: "Component box header",
   clickOutsideToClose: true,
   showHeader: true,
+  basic: true,
 };

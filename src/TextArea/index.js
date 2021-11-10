@@ -1,12 +1,18 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.3rem 0.375rem";
   if (size === "medium") return "0.3875rem 0.375rem";
   if (size === "large") return "0.426125rem 0.375rem";
+};
+
+const heightBySize = (size) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
 };
 
 const StyledTextInput = styled.textarea((props) => {
@@ -16,12 +22,18 @@ const StyledTextInput = styled.textarea((props) => {
     outline: "none",
     border: "none",
     borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-    transition: "all 250ms",
+    transition: "all 250ms ease",
     resize: "vertical",
     display: "inline-block",
     overflow: "hidden",
-    boxSizing: "border-box",
     cursor: "text",
+    width: "100%",
+    boxSizing: "border-box",
+    height: heightBySize(props.size),
+    minHeight: heightBySize(props.size),
+    resize: "none",
+    whiteSpace: "nowrap",
+    // maxHeight: heightBySize(props.size),
     padding: paddingBySize(props.size),
     fontSize: props.theme.typography[props.size].fontSize,
     backgroundColor: props.theme.palette[props.color].lighter,
@@ -43,7 +55,7 @@ const StyledTextInput = styled.textarea((props) => {
 
 //===================================================
 
-const TextArea = (props) => {
+const TextArea = React.forwardRef((props, ref) => {
   const {
     theme,
     color,
@@ -54,7 +66,6 @@ const TextArea = (props) => {
     size,
     value,
     onChange,
-    rows,
   } = props;
 
   const [val, setVal] = useState(value ? value : "");
@@ -73,21 +84,34 @@ const TextArea = (props) => {
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
+      onPaste={handleOnChange}
       onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
       value={val}
-      rows={rows}
-    ></StyledTextInput>
+      ref={ref}
+      onFocus={(e) => {
+        e.target.style.whiteSpace = "inherit";
+        e.target.style.height = `${e.target.scrollHeight}px`;
+      }}
+      onInput={(e) => {
+        e.target.style.whiteSpace = "inherit";
+        e.target.style.height = `${e.target.scrollHeight}px`;
+      }}
+      onBlur={(e) => {
+        e.target.style.height = heightBySize(size);
+        e.target.style.whiteSpace = "nowrap";
+      }}
+    />
   );
-};
+});
 
 TextArea.defaultProps = {
   id: "",
-  rows: 1,
   theme: theme,
   disabled: false,
   onChange: () => {},
+  onPaste: () => {},
   className: "",
   preventDefault: true,
   size: "small",
@@ -98,9 +122,9 @@ TextArea.defaultProps = {
 TextArea.propTypes = {
   theme: PropTypes.object.isRequired,
   id: PropTypes.string,
-  rows: PropTypes.number,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onPaste: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   value: PropTypes.string,

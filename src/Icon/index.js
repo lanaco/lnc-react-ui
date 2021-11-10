@@ -10,11 +10,20 @@ const getPadding = (size) => {
   if (size === "large") return "0.5375rem 0.44375rem";
 };
 
+const heightBySize = (size) => {
+  if (size === "small") return `max-height: 1.625rem; min-height: 1.625rem;`;
+  if (size === "medium") return `max-height: 2rem; min-height: 2rem;`;
+  if (size === "large") return `max-height: 2.375rem; min-height: 2.375rem;`;
+};
+
 const Span = styled.span`
+  display: inline-block;
+  box-sizing: border-box;
   background-color: inherit;
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   padding: ${(props) => getPadding(props.size)};
   color: ${(props) => props.theme.palette[props.color].main};
+  ${(props) => heightBySize(props.size)}
 `;
 
 const Icon = (props) => {

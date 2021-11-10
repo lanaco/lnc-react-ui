@@ -1,5 +1,5 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "./react-datepicker.css";
 
@@ -19,7 +19,22 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.45rem 0.375rem";
 };
 
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
+};
+
 const Container = styled.span((props) => ({
+  "& .react-datepicker__triangle": {
+    display: "none",
+  },
+
+  "& .react-datepicker-wrapper": {
+    width: "100%",
+    boxSizing: "border-box",
+  },
+
   "& input": {
     appearance: "none",
     outline: "none",
@@ -30,25 +45,16 @@ const Container = styled.span((props) => ({
     flexDirection: "row",
     justifyContent: "center",
     cursor: "text",
+    width: "100%",
+    boxSizing: "border-box",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
     padding: paddingBySize(props.size),
     fontSize: props.theme.typography[props.size].fontSize,
     backgroundColor: props.theme.palette[props.color].lighter,
     color: props.theme.palette[props.color].textDark,
     borderRadius: "0.125rem",
-    boxSizing: "border-box",
     fontFamily: props.theme.typography.fontFamily,
-
-    // appearance: "none",
-    // outline: "none",
-    // backgroundColor: "var(--color-base-backgroud)",
-    // transition: "all var(--transition-base-duration)",
-    // fontSize: "var(--font-size-base)",
-    // border: "0px",
-    // borderBottom: "2px solid var(--color-base-blue)",
-    // height: "100%",
-    // width: "100%",
-    // padding: "0px",
-    // boxSizing: "border-box",
 
     "&:focus": {
       backgroundColor: props.theme.palette.common.white,
@@ -76,7 +82,11 @@ const DateInput = (props) => {
     color,
     theme,
     className,
+    preventDefault,
   } = props;
+
+  const [dateText, setDateText] = useState("");
+  const [isFirst, setIsFirst] = useState(true);
 
   const callOnChange = (id, value) => {
     if (onChange) onChange(id, value);
@@ -84,7 +94,7 @@ const DateInput = (props) => {
 
   const handleChange = (jsDateObject) => {
     if (jsDateObject === null) callOnChange(id, "");
-    else callOnChange(id, moment(jsDateObject).format("DD.MM.YYYY."));
+    else callOnChange(id, jsDateObject);
   };
 
   const getValue = () => {
@@ -92,11 +102,26 @@ const DateInput = (props) => {
     return moment(value, "DD.MM.YYYY.").toDate();
   };
 
+  useEffect(() => {
+    const timeOutId = setTimeout(() => handleDelayedOnChange(), 1500);
+    return () => clearTimeout(timeOutId);
+  }, [dateText]);
+
+  const handleDelayedOnChange = () => {
+    if (!isFirst) handleChange(dateText);
+
+    if (isFirst) setIsFirst(false);
+  };
+
+  const handleOnChange = (jsDateObject) => {
+    setDateText(moment(jsDateObject).format("DD.MM.YYYY."));
+  };
+
   return (
     <Container {...{ theme, size, color }}>
       <DatePicker
         selected={getValue()}
-        onChange={handleChange}
+        onChange={handleOnChange}
         dateFormat={dateFormat ? dateFormat : "dd.MM.yyyy."}
         disabled={disabled}
         className={className}

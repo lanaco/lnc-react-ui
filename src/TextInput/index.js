@@ -1,12 +1,18 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.2625rem 0.375rem";
-  if (size === "medium") return "0.325rem 0.375rem";
-  if (size === "large") return "0.3625rem 0.375rem";
+  if (size === "small") return "0.325rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.422375rem 0.375rem";
+};
+
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
 };
 
 const StyledTextInput = styled.input((props) => {
@@ -25,6 +31,11 @@ const StyledTextInput = styled.input((props) => {
     backgroundColor: props.theme.palette[props.color].lighter,
     color: props.theme.palette[props.color].textDark,
     borderRadius: "0.125rem",
+    width: "100%",
+    boxSizing: "border-box",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
+    fontFamily: props.theme.typography.fontFamily,
     "&:disabled": {
       backgroundColor: props.theme.palette.gray[200],
       borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
@@ -41,7 +52,7 @@ const StyledTextInput = styled.input((props) => {
 
 //===================================================
 
-const TextInput = (props) => {
+const TextInput = React.forwardRef((props, ref) => {
   const {
     theme,
     color,
@@ -52,32 +63,88 @@ const TextInput = (props) => {
     size,
     value,
     onChange,
+    onKeyDown,
+    onInput,
+    onBlur,
   } = props;
 
-  const [val, setVal] = useState(value ? value : "");
+  const [text, setText] = useState("");
+  const [isFirst, setIsFirst] = useState(true);
+
+  useEffect(() => {
+    if (text !== value) setText(value === null ? "" : value);
+  }, [value]);
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
+    return () => clearTimeout(timeOutId);
+  }, [text]);
+
+  const handleDelayedOnChange = () => {
+    if (!isFirst) onChange(id, text);
+
+    if (isFirst) setIsFirst(false);
+  };
 
   const handleOnChange = (e) => {
-    if (preventDefault) e.preventDefault();
-    setVal(e.target.value);
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    // onChange(id, e.target.value);
+    setText(e.target.value);
+  };
+
+  const handleOnKeyDown = (e) => {
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    if (onKeyDown) onKeyDown(e);
+    //setText(e.target.value);
+  };
+
+  const handleOnInput = (e) => {
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    if (onInput) onInput(e);
+    //setText(e.target.value);
   };
 
   const handleOnBlur = (e) => {
-    if (preventDefault) e.preventDefault();
-    onChange(id, val);
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    if (onBlur) onBlur(e);
+    //setText(e.target.value);
   };
+
+  // const [val, setVal] = useState(value ? value : "");
+
+  // const handleOnChange = (e) => {
+  //   if (preventDefault) e.preventDefault();
+  //   setVal(e.target.value);
+  // };
+
+  // const handleOnBlur = (e) => {
+  //   if (preventDefault) e.preventDefault();
+  //   onChange(id, val);
+  // };
 
   return (
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
-      onBlur={handleOnBlur}
+      // onKeyDown={handleOnKeyDown}
+      // onInput={handleOnInput}
+      // onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
-      value={val}
+      value={text}
       type="text"
-    ></StyledTextInput>
+      ref={ref}
+    />
   );
-};
+});
 
 TextInput.defaultProps = {
   id: "",

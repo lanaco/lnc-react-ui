@@ -1,297 +1,334 @@
-import React, { useState, useEffect } from "react";
-import styles from "./styles.module.css";
-import Filter from "./Filter";
-import TransparentTextInput from "../TransparentTextInput/index";
-import { getGuid, mergeCSS } from "../Helper/helper";
-import DropdownContent from "./DropdownContent";
-import Button from "../Button/index";
-import Icon from "../Icon/index";
+import React, { useState, useRef, useEffect } from "react";
+import styled from "@emotion/styled";
+import theme from "../_utils/theme";
+import PropTypes from "prop-types";
+import Chip from "../Chip";
+import FadeIn from "../FadeIn/FadeIn";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import "./animation.css";
 
-const useHasChanged = (val) => {
-  const prevVal = usePrevious(val);
-  return prevVal !== JSON.stringify(val);
+const getIconFontSize = (props) => {
+  if (props.size === "small") return props.theme.typography.medium.fontSize;
+  if (props.size === "medium") return props.theme.typography.large.fontSize;
+  if (props.size === "large") return "1.3125rem";
 };
 
-const usePrevious = (value) => {
-  const ref = React.useRef();
-  useEffect(() => {
-    ref.current = JSON.stringify(value);
-  });
-  return ref.current;
+const inputPaddingBySize = (size) => {
+  if (size === "small") return `0.40625rem 0.375rem`;
+  if (size === "medium") return `0.46875rem 0.375rem`;
+  if (size === "large") return `0.53125rem 0.375rem`;
 };
+
+const iconPaddingBySize = (size) => {
+  if (size === "small") return "0.625rem 0.5rem 0.375rem 0.5rem";
+  if (size === "medium") return "0.71875rem 0.5625rem 0.375rem 0.5625rem";
+  if (size === "large") return "0.78125rem 0.625rem 0.375rem 0.625rem";
+};
+
+const Container = styled.div`
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  border: 0.09375rem solid #bfbfbf;
+  background-color: white;
+  border-radius: 0.1875rem;
+  width: 100%;
+  transition: all 250ms ease;
+`;
+
+const ItemContainer = styled.div`
+  padding: 0.15rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 10;
+  transition: all 250ms ease;
+`;
+
+const ItemWrapper = styled.div`
+  display: inline-block;
+  margin: 0.125rem;
+  flex-grow: 1;
+  transition: all 250ms ease;
+
+  & > div {
+    width: 100%;
+  }
+`;
+
+const InputContainer = styled.div`
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0.125rem;
+  margin-left: 0.25rem;
+  flex-grow: 1;
+  transition: all 250ms ease;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  transition: all 250ms ease;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  padding: ${(props) => inputPaddingBySize(props.size)};
+  background-color: transparent;
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  color: ${(props) => props.theme.palette[props.color].textDark};
+  border-radius: 0.1875rem;
+`;
+
+const Inner = styled.div`
+  display: flex;
+  // align-items: center;
+`;
+
+const SearchIcon = styled.div`
+  padding: ${(props) => iconPaddingBySize(props.size)};
+  color: ${(props) => props.theme.palette[props.color].main};
+  font-size: ${(props) => getIconFontSize(props)};
+  background-color: whitesmoke;
+  transition: all 250ms ease;
+`;
+
+const ClearIcon = styled.div`
+  padding: ${(props) => iconPaddingBySize(props.size)};
+  color: ${(props) => props.theme.palette[props.color].main};
+  font-size: ${(props) => getIconFontSize(props)};
+  background-color: whitesmoke;
+  transition: all 250ms ease;
+  cursor: pointer;
+`;
+
+const Content = styled.div`
+  display: flex;
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  margin-top: 0.25rem;
+  padding: 0.1875rem;
+  width: calc(100% - 0.625rem);
+  border-radius: 0.15625rem;
+  box-shadow: 0 0 0.375rem #bebebe;
+  border: 0.125rem solid ${(props) => props.theme.palette[props.color].main};
+  display: flex;
+  flex-direction: column;
+  transition: all 250ms ease;
+`;
+
+const ContentItem = styled.div`
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  padding: 0.375rem;
+  cursor: pointer;
+  background-color: ${(props) => (props.hover ? "whitesmoke" : "inherit")};
+  color: ${(props) =>
+    props.hover ? props.theme.palette[props.color].main : "inherit"};
+
+  &:hover {
+    background-color: whitesmoke;
+    color: ${(props) => props.theme.palette[props.color].main};
+  }
+`;
 
 const SearchBar = (props) => {
-  const [Filters, setFilters] = useState([]);
-  const [QuickFilterText, setQuickFilterText] = useState("");
-  const [QuickFilterOpen, setQuickFilterOpen] = useState("");
+  const {
+    items,
+    suggestions,
+    onChange,
+    id,
+    className,
+    size,
+    color,
+    theme,
+  } = props;
 
-  //====== PROPS ======
-
-  const { onChange } = props;
-  const { filterProps } = props;
-  const { Localization, Icons } = props;
-
-  //====== LIFECYCLE ======
-
+  const [value, setValue] = useState("");
+  const [openSuggestions, setOpenSuggestions] = useState(false);
   const [cursor, setCursor] = useState(0);
-  const [mounted, setMounted] = useState(false);
-  const [hasFilters, setHasFilters] = useState(Filters.length > 0);
-  const transparentTextInput = React.createRef();
-  const filterContainer = React.createRef();
+  let InputRef = React.createRef();
 
-  const changed = useHasChanged(Filters);
-
-  useEffect(() => {
-    transparentTextInput.current.focus();
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    filterContainer.current.scrollLeft += 1000;
-  }, [Filters]);
-
-  useEffect(() => {
-    if (changed && mounted) {
-      if (onChange) onChange(getAppliedFilters());
-      setHasFilters(Filters.length > 0);
-    }
-
-    transparentTextInput.current.focus();
-
-    onChange(getAppliedFilters());
-  }, [Filters]);
-
-  //====== EVENTS ======
-
-  const onClearFilters = () => {
-    setFilters([]);
-  };
-
-  const onResetFilters = () => {
-    var newFilters = Filters.map((x) => {
-      x.isApplied = false;
-      return x;
-    });
-    setFilters(newFilters);
-  };
-
-  const onRemoveFilter = (id) => {
-    var newFilters = Filters.filter((x) => x.id !== id);
-
-    setFilters(newFilters);
-  };
-
-  const onToggleState = (id) => {
-    var newFilters = [...Filters];
-    let item = newFilters.filter((x) => x.id === id)[0];
-    item.isApplied = !item.isApplied;
-    setFilters(newFilters);
-  };
-
-  const changeQuickFilterText = (text) => {
-    setQuickFilterText(text);
-  };
+  let themeProps = { size, color, theme };
 
   const onKeyDown = (e) => {
-    let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
-    if (e.keyCode === 38 && cursor > 0) {
-      setCursor(cursor - 1);
-    }
+    if (e.keyCode === 27) InputRef.current.blur();
+    if (e.keyCode === 38 || e.keyCode === 40) e.preventDefault();
 
-    if (e.keyCode === 40 && cursor < quickFilters.length - 1) {
+    if (e.keyCode === 38 && cursor > 0) setCursor(cursor - 1);
+
+    if (e.keyCode === 40 && cursor < suggestions.length - 1)
       setCursor(cursor + 1);
+
+    if (
+      e.key === "Enter" &&
+      suggestions.length > 0 &&
+      value &&
+      value.length > 0
+    ) {
+      suggestionSelected(suggestions[cursor]);
     }
 
-    if (e.key === "Enter") {
-      onQuickFilterSelect(quickFilters[cursor])(QuickFilterText);
-      setQuickFilterOpen(false);
-    }
-
-    if (e.key === "Backspace" && Filters.length > 0 && QuickFilterText === "") {
-      onRemoveFilter(Filters[Filters.length - 1].id);
-      setQuickFilterOpen(false);
+    if (e.key === "Backspace" && items.length > 0 && value === "") {
+      onRemoveItem(items[items.length - 1]);
     }
   };
 
-  const onQuickFilterSelect = (element) => {
-    transparentTextInput.current.classList.add("lnc");
-    return (value) => {
-      let data = {
-        id: getGuid(),
-        propID: element.value,
-        propertyName: element.propName,
-        name: element.name,
-        firstLevel: element.firstLevel ? element.firstLevel : "",
-        secondLevel: element.secondLevel ? element.secondLevel : "",
-        operationType: element.quickFiltersOperationType,
-        operationTypes: element.operationTypes,
-        dataType: element.dataType,
-        value: value,
-        localizedOperationType: element.quickFiltersOperationType.name,
-      };
-
-      setCursor(0);
-
-      var newFilters = [...Filters];
-      newFilters.push({
-        statements: [data],
-        name: QuickFilterText,
-        id: getGuid(),
-        isApplied: true,
-      });
-      setFilters(newFilters);
-
-      changeQuickFilterText("");
-    };
-  };
-
-  const onQuickFilterInput = (e) => {
-    if (e.target.value.length > 0) {
-      e.target.classList.remove("lnc");
-    } else {
-      e.target.classList.add("lnc");
-    }
-    setQuickFilterOpen(true);
-    changeQuickFilterText(e.target.value);
-  };
-
-  const onQuickFilterBlur = (e) => {
-    setTimeout(() => {
-      setCursor(0);
-      if (QuickFilterOpen === true) setQuickFilterOpen(false);
-    }, 250);
-  };
-
-  //====== METHODS ======
-
-  const getAppliedFilters = () => {
-    let dynamicFilters = [];
-
-    let appliedFilters = Filters.map((f) => {
-      if (f.isApplied === true) {
-        return f.statements.map((s) => {
-          return {
-            PropertyName: s.propertyName,
-            FirstLevel: s.firstLevel,
-            SecondLevel: s.secondLevel,
-            OperationType: s.operationType.value,
-            DataType: s.dataType.name,
-            Value: s.value,
-          };
-        });
-      } else {
-        return null;
-      }
+  const suggestionSelected = (suggestion) => {
+    handleAddItem({
+      id: 0,
+      field: suggestion.field,
+      description: suggestion.description,
+      value: value,
+      active: true,
+      dataType: suggestion.dataType,
+      operation: suggestion.operation,
+      operationDescription: suggestion.operationDescription,
     });
 
-    appliedFilters.forEach((el) => {
-      if (el !== null) dynamicFilters.push(el);
-    });
-
-    return dynamicFilters;
+    setValue("");
+    setOpenSuggestions(false);
+    setCursor(0);
   };
 
-  //====== RENDER ======
+  const onInputBlur = () => {
+    setOpenSuggestions(false);
+  };
 
-  const renderClearFiltersButton = () => {
-    return (
-      <div className={hasFilters ? styles.visibleX : styles.hidden}>
-        <Button
-          icon={"times"}
-          onClick={onClearFilters}
-          tooltip={Localization ? Localization.Clear : "Clear"}
-        />
-      </div>
+  const onInputChange = (e) => {
+    setOpenSuggestions(true);
+    setCursor(0);
+    setValue(e.target.value);
+  };
+
+  const handleRemoveItem = (index) => {
+    let removedItem = [...items].find((_, i) => i !== index);
+
+    onChange(
+      id,
+      [...items].filter((_, i) => i !== index),
+      removedItem
     );
   };
 
-  const renderResetFiltersButton = () => {
-    return (
-      <Button
-        icon={"sync-alt"}
-        onClick={onResetFilters}
-        tooltip={Localization ? Localization.Reset : "Reset"}
-      />
-    );
+  const handleAddItem = (item) => {
+    onChange(id, [...items, item], item);
   };
 
-  const renderFilters = () => {
-    return Filters.map((x, i) => (
-      <Filter
-        key={i}
-        id={x.id}
-        data={x}
-        onRemove={onRemoveFilter}
-        onToggleState={onToggleState}
-        Icons={Icons}
-      />
-    ));
+  const handleActiveInactive = (index) => {
+    let copy = [...items];
+    copy[index] = { ...copy[index], active: !copy[index].active };
+
+    onChange(id, copy, copy[index]);
   };
 
-  const renderSearchInput = () => {
-    let dropdownContentCss =
-      QuickFilterOpen === true
-        ? mergeCSS([styles.dropdownContent, styles.showDropdown])
-        : styles.dropdownContent;
-
-    let quickFilters = filterProps.filter((x) => x.showInQuickFilters === true);
-
-    return (
-      <div className={styles.dropdown}>
-        <div className={styles.Search}>
-          <TransparentTextInput
-            value={QuickFilterText}
-            onKeyDown={onKeyDown}
-            onInput={onQuickFilterInput}
-            onBlur={onQuickFilterBlur}
-            inputClassName={styles.QuickFilterInput}
-            ref={transparentTextInput}
-          />
-        </div>
-        <div className={dropdownContentCss}>
-          <DropdownContent
-            items={quickFilters}
-            onSelect={onQuickFilterSelect}
-            value={QuickFilterText}
-            cursor={cursor}
-          />
-        </div>
-      </div>
-    );
+  const renderSuggestions = () => {
+    if (openSuggestions) {
+      return (
+        <FadeIn>
+          <Content {...themeProps}>
+            {suggestions.map((item, i) => {
+              return (
+                <ContentItem
+                  {...themeProps}
+                  key={i}
+                  onMouseDown={() => suggestionSelected(item)}
+                  hover={cursor === i}
+                >
+                  {`${item.description} - ${item.operationDescription}`}
+                </ContentItem>
+              );
+            })}
+          </Content>
+        </FadeIn>
+      );
+    }
   };
 
-  const renderComponent = () => {
-    return (
-      <div className={mergeCSS([styles.Container, styles.Border])}>
-        <div className={styles.inputAndCommandsContainer}>
-          <span className={styles.iconHolder}>
-            <Icon icon={"search"} iconSpanCssClass={styles.iconSpan}></Icon>
-          </span>
-          <span
-            ref={filterContainer}
-            className={
-              hasFilters ? styles.filterContainer : styles.filterContainerHidden
-            }
-          >
-            {renderFilters()}
-          </span>
-          <div className={styles.filtersAndCommandsHolder}>
-            {renderSearchInput()}
-            {renderClearFiltersButton()}
-            <span className={styles.Commands}>
-              {renderResetFiltersButton()}
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  return (
+    <Container className={className} {...themeProps}>
+      <Inner {...themeProps}>
+        <SearchIcon {...themeProps}>
+          <i className="fas fa-search fa-fw"></i>
+        </SearchIcon>
+        <ItemContainer {...themeProps}>
+          <TransitionGroup component={null}>
+            {items.map((x, key) => (
+              <CSSTransition key={key} timeout={200} classNames="item">
+                <ItemWrapper
+                  {...themeProps}
+                  key={key}
+                  first={key === 0}
+                  title={`${x.description} - ${x.operationDescription}:  ${x.value}`}
+                >
+                  <Chip
+                    {...themeProps}
+                    id={x.id}
+                    text={x.description}
+                    additionalInfo={x.value}
+                    inactive={!x.active}
+                    onRemove={() => handleRemoveItem(key)}
+                    onClick={() => handleActiveInactive(key)}
+                  />
+                </ItemWrapper>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
 
-  const renderElement = () => {
-    return renderComponent();
-  };
+          <InputContainer {...themeProps}>
+            <Input
+              {...themeProps}
+              ref={InputRef}
+              value={value}
+              onBlur={onInputBlur}
+              onChange={onInputChange}
+              onKeyDown={onKeyDown}
+            />
+          </InputContainer>
+        </ItemContainer>
 
-  return renderElement();
+        <ClearIcon {...themeProps}>
+          <i className="fas fa-times fa-fw" onClick={() => onChange(id, [])} />
+        </ClearIcon>
+      </Inner>
+
+      {renderSuggestions()}
+    </Container>
+  );
+};
+
+SearchBar.defaultProps = {
+  id: "",
+  onChange: () => {},
+  items: [],
+  suggestions: [],
+  className: "",
+  size: "small",
+  color: "primary",
+  theme: theme,
+};
+
+SearchBar.propTypes = {
+  theme: PropTypes.object.isRequired,
+  id: PropTypes.any,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  items: PropTypes.array,
+  suggestions: PropTypes.array,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "gray",
+    "background",
+    "transparent",
+  ]),
 };
 
 export default SearchBar;

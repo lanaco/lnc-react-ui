@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import ComponentBox from ".";
+import Modal from ".";
 import Button from "../Button/index";
 
 const ComponentBoxExample = (props) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
       <div>
-        <Button text={"Open Component Box"} onClick={() => setOpen(true)} />
+        <Button text={"Open Modal"} onClick={() => setOpen(true)} />
       </div>
 
-      <ComponentBox {...props} open={open} onClose={() => setOpen(false)}>
+      <Modal {...props} open={open} onClose={() => setOpen(false)}>
         <div>
           <div>Content</div>
           <div>Content</div>
           <div>Content</div>
           <div>Content</div>
         </div>
-      </ComponentBox>
+      </Modal>
     </div>
   );
 };

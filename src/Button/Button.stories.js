@@ -30,7 +30,7 @@ JustText.args = {
 export const JustIcon = Template.bind({});
 JustIcon.args = {
   theme: theme,
-  color: "primary",
+  color: "transparent",
   tooltip: "Button",
   onClick: () => {},
   size: "medium",

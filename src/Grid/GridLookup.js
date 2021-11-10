@@ -3,7 +3,7 @@ import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import * as css from "./style.module.css";
 //-----------------------------------------------------------------------------------
 // import Filtering from "./Filtering";
-import ComponentBox from "_ui/components/Modals/ComponentBox";
+import Modal from "_ui/components/Modals/Modal";
 import Button from "_ui/components/Button/Button";
 import Grid from "_ui/components/Grid/Grid";
 //-----------------------------------------------------------------------------------

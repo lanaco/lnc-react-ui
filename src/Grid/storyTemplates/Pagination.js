@@ -84,6 +84,7 @@ const Pagination = (props) => {
           //-----------------------------------
           BeforePageSizeChange: () => true,
           AfterPageSizeChanged: () => {},
+          //-----------------------------------
         }}
       />
     </div>

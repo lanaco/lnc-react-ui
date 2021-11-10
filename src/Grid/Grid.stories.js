@@ -10,8 +10,10 @@ export default {
 
 const _Basic = (args) => <BasicGrid />;
 export const Basic = _Basic.bind({});
-Basic.args = {};
+Basic.args = {
+  color: "primary",
+};
 
 const _Pagination = (args) => <PaginationGrid />;
 export const Pagination = _Pagination.bind({});
-Pagination.args = {};
+Pagination.args = { color: "primary" };

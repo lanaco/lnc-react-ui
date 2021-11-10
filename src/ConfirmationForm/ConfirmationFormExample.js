@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ConfirmationBox from "./index";
+import ConfirmationForm from "./index";
 import Button from "../Button/index";
 
 const ComponentBoxExample = (props) => {
@@ -11,7 +11,7 @@ const ComponentBoxExample = (props) => {
         <Button text={"Open Confirmation Form"} onClick={() => setOpen(true)} />
       </div>
 
-      <ConfirmationBox {...props} open={open} onClose={() => setOpen(false)} />
+      <ConfirmationForm {...props} open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };

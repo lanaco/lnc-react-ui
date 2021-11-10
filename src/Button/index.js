@@ -12,6 +12,12 @@ const paddingBySize = (size, hasText) => {
   if (size === "large") return "0.4875rem 0.445rem";
 };
 
+const heightBySize = (size, hasText) => {
+  if (size === "small") return `1.625rem`;
+  if (size === "medium") return `2rem`;
+  if (size === "large") return `2.375rem`;
+};
+
 const StyledButton = styled.button((props) => {
   return {
     appearance: "none",
@@ -19,8 +25,6 @@ const StyledButton = styled.button((props) => {
     border: "none",
     transition: "all 220ms",
     display: "inline-block",
-    // flexDirection: "row",
-    // justifyContent: "center",
     cursor: "pointer",
     padding: paddingBySize(props.size, props.hasText),
     fontSize: props.theme.typography[props.size].fontSize,
@@ -28,6 +32,8 @@ const StyledButton = styled.button((props) => {
     backgroundColor: props.theme.palette[props.color].main,
     color: props.theme.palette[props.color].text,
     borderRadius: "2px",
+    minHeight: heightBySize(props.size),
+    maxHeight: heightBySize(props.size),
     "&:hover": {
       backgroundColor: props.theme.palette[props.color].light,
     },
@@ -41,11 +47,15 @@ const StyledButton = styled.button((props) => {
 });
 
 const TextLeft = styled.span((props) => ({
+  padding: "0",
+  margin: "0",
   paddingRight: props.hasIcon ? "0.3125rem" : "0",
   fontSize: props.theme.typography[props.size].fontSize,
 }));
 
 const TextRight = styled.span((props) => ({
+  padding: "0",
+  margin: "0",
   paddingLeft: props.hasIcon ? "0.3125rem" : "0",
   fontSize: props.theme.typography[props.size].fontSize,
 }));
@@ -56,7 +66,7 @@ const Icon = styled.i((props) => ({
 
 //===================================================
 
-const Button = (props) => {
+const Button = React.forwardRef((props, ref) => {
   const {
     theme,
     color,
@@ -94,9 +104,10 @@ const Button = (props) => {
       disabled={disabled}
       title={title}
       hasText={icon && icon !== ""}
+      ref={ref}
     >
       {/* Text when the icon is RIGTH */}
-      {text && text !== "" && iconLocation === "right" ? (
+      {text && text !== "" && iconLocation === "right" && (
         <TextLeft
           {...{
             theme,
@@ -107,12 +118,10 @@ const Button = (props) => {
         >
           {text}
         </TextLeft>
-      ) : (
-        <></>
       )}
 
       {/* Icon */}
-      {icon && icon !== "" ? (
+      {icon && icon !== "" && (
         <Icon
           {...{
             theme,
@@ -121,12 +130,10 @@ const Button = (props) => {
           }}
           className={getIconClass()}
         />
-      ) : (
-        <></>
       )}
 
       {/* Text when the icon is LEFT */}
-      {text && text !== "" && iconLocation === "left" ? (
+      {text && text !== "" && iconLocation === "left" && (
         <TextRight
           {...{
             theme,
@@ -137,12 +144,10 @@ const Button = (props) => {
         >
           {text}
         </TextRight>
-      ) : (
-        <></>
       )}
     </StyledButton>
   );
-};
+});
 
 Button.defaultProps = {
   id: "",
@@ -181,6 +186,7 @@ Button.propTypes = {
     "warning",
     "gray",
     "background",
+    "transparent",
   ]),
 };
 

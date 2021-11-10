@@ -25,7 +25,7 @@ const Modal = styled.div((props) => ({
   transition: "1.1s ease-out",
   visibility: "visible",
   position: "relative",
-  width: "40%",
+  width: "30%",
   borderRadius: "0.2rem",
   visibility: "visible",
 }));
@@ -33,15 +33,22 @@ const Modal = styled.div((props) => ({
 const Header = styled.div((props) => ({
   padding: "0.3125rem",
   display: "flex",
-  background: props.theme.palette[props.color].main,
+  background: props.basic
+    ? "transparent"
+    : props.theme.palette[props.color].main,
   borderRadius: "0.2rem 0.2rem 0 0",
+  border: props.basic
+    ? `0.065rem solid ${props.theme.palette.gray[600]}`
+    : "none",
 }));
 
 const Title = styled.div((props) => ({
   fontSize: props.theme.typography[props.size].fontSize,
   fontFamily: props.theme.typography.fontFamily,
   fontWeight: "bold",
-  color: props.theme.palette[props.color].text,
+  color: props.basic
+    ? props.theme.palette.gray[800]
+    : props.theme.palette[props.color].text,
   paddingLeft: "0.3rem",
   display: "flex",
   alignItems: "center",
@@ -53,12 +60,15 @@ const CloseButton = styled.div((props) => ({
 }));
 
 const Content = styled.div((props) => ({
-  padding: "0.7125rem",
+  padding: "1.1rem 0.9rem",
   border: `0.065rem solid ${props.theme.palette.gray[600]}`,
   borderRadius: "0 0 0.2rem 0.2rem",
   display: "flex",
   flexDirection: "row",
   alignItems: "stretch",
+  borderTop: props.basic
+    ? "none"
+    : `0.065rem solid ${props.theme.palette.gray[600]}`,
 }));
 
 const YesNoContainer = styled.div((props) => ({
@@ -85,9 +95,10 @@ const ConfirmationForm = (props) => {
     clickOutsideToClose,
     showHeader,
     localization,
+    basic,
   } = props;
 
-  let themeProps = { theme, size, color, zIndex, open };
+  let themeProps = { theme, size, color, zIndex, open, basic };
 
   const onClickOutsideModal = (event) => {
     if (event.target !== event.currentTarget) return;
@@ -106,7 +117,12 @@ const ConfirmationForm = (props) => {
           <Header {...themeProps}>
             <Title {...themeProps}>{header}</Title>
             <CloseButton {...themeProps}>
-              <Button icon={"times"} iconStyle={"solid"} onClick={onClose} />
+              <Button
+                icon={"times"}
+                iconStyle={"solid"}
+                onClick={onClose}
+                color={basic ? "transparent" : themeProps.color}
+              />
             </CloseButton>
           </Header>
         ) : (
@@ -154,6 +170,7 @@ ConfirmationForm.defaultProps = {
   theme: theme,
   clickOutsideToClose: false,
   showHeader: true,
+  basic: false,
   localization: {
     Yes: "Yes",
     No: "No",
@@ -172,6 +189,7 @@ ConfirmationForm.propTypes = {
   open: PropTypes.bool,
   showHeader: PropTypes.bool,
   clickOutsideToClose: PropTypes.bool,
+  basic: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
