@@ -173,7 +173,7 @@ const CheckboxLookup = (props) => {
     onChange(id, selectedItems);
   };
 
-  const pageCount = Math.round((options.length - 1) / 5 + 1);
+  const pageCount = Math.round((options.length - 1) / 5);
 
   var label =
     options.length === selectedOptions.length

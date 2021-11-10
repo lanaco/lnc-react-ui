@@ -34,20 +34,18 @@ const getBorderSyle = (borderStyle, read, theme, color) => {
   if (read) {
     css += `
       &:hover {
-        cursor: not-allowed;
+        cursor: default;
       }
 
       & * {
         pointer-events: none;
-        opacity: 1;
       }
     `;
   }
 
-  css += `
-      border-top: 4.5px solid ${borderColor};
-      padding-top: 10px;
-    `;
+  if (borderColor !== "") {
+    css += `border-top: 4.5px solid ${borderColor};`;
+  }
 
   return css;
 };
@@ -75,7 +73,6 @@ const FormContainer = styled.div`
   max-height: calc(100vh - 120px);
   border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
-  padding: 4px;
 
   ${(props) =>
     getBorderSyle(props.borderStyle, props.read, props.theme, props.color)}
@@ -710,13 +707,6 @@ const DataView = (props) => {
   };
 
   const renderForm = () => {
-    // if (
-    //   General.CurrentView !== "FormView" ||
-    //   Form === null ||
-    //   Form === undefined
-    // )
-    //   return <></>;
-
     var renderForm =
       General.CurrentView === "FormView" && Form !== null && Form !== undefined;
 
