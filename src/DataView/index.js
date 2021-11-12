@@ -53,7 +53,7 @@ const getBorderSyle = (borderStyle, read, theme, color) => {
 const Container = styled.div`
   box-shadow: 0 0 12px #bebebe;
   border-radius: 3px;
-  padding: 4px;
+  padding: 0 4px;
 `;
 
 const TableContainer = styled.div`
@@ -65,13 +65,13 @@ const TableContainer = styled.div`
 
 const PaginationContainer = styled.div`
   margin-top: 6px;
+  border-top: 1px solid #80808025;
 `;
 
 const FormContainer = styled.div`
   height: 100%;
   overflow-y: auto;
   max-height: calc(100vh - 120px);
-  border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
 
   ${(props) =>
@@ -83,18 +83,14 @@ const HeaderContainer = styled.div`
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  margin-bottom: 5px;
-
-  border: 1.5px solid rgba(165, 164, 164, 0.4);
+  padding: 4px 0;
   border-radius: 3px;
-  padding: 4px;
   font-size: 12px;
   font-family: "Ubuntu";
 `;
 
 const FlexItem = styled.div`
-  padding-left: 3px;
-  padding-right: 4px;
+  padding-right: 6px;
   font-size: 1.4em;
   max-height: 40px;
 `;
@@ -362,6 +358,7 @@ const DataView = (props) => {
           onClick={freezeLoading() ? () => {} : OnRefresh}
           // disabled={freezeLoading()}
           icon={"sync-alt"}
+          inverted={true}
         />
       </FlexItem>
     );
@@ -386,6 +383,7 @@ const DataView = (props) => {
           disabled={Table.SelectedData.length === 0}
           tooltip={Localization.DeleteSelected}
           icon={"trash"}
+          inverted={true}
         />
       </FlexItem>
     );
@@ -420,6 +418,7 @@ const DataView = (props) => {
             onClick={freezeLoading() ? () => {} : GoToAdd}
             // disabled={freezeLoading()}
             icon={"plus"}
+            inverted={true}
           />
         </FlexItem>
       );
@@ -440,6 +439,7 @@ const DataView = (props) => {
             onClick={freezeLoading() ? () => {} : GoToAddWithCopy}
             // disabled={freezeLoading()}
             icon={"clone"}
+            inverted={true}
           />
         </div>
       );
@@ -458,6 +458,7 @@ const DataView = (props) => {
           onClick={freezeLoading() ? () => {} : ChangeToTableView}
           // disabled={freezeLoading()}
           icon={"table"}
+          inverted={true}
         />
       </FlexItem>
     );
@@ -483,6 +484,7 @@ const DataView = (props) => {
           onClick={freezeLoading() ? () => {} : ChangeToEditMode}
           // disabled={freezeLoading()}
           icon={Form.Mode === FormMode.READ ? "edit" : "eye"}
+          inverted={true}
         />
       </FlexItem>
     );
@@ -494,7 +496,11 @@ const DataView = (props) => {
 
     return (
       <PaginationContainer>
-        <LncPagination {...tableViewConfig.PaginationConfig} Export={Export} />
+        <LncPagination
+          {...tableViewConfig.PaginationConfig}
+          inverted={true}
+          Export={Export}
+        />
       </PaginationContainer>
     );
   };

@@ -11,7 +11,6 @@ const Container = styled.div`
   justify-content: left;
   align-items: center;
 
-  border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
   padding: 4px;
   font-size: ${(props) => props.theme.typography.small.fontSize};
@@ -72,13 +71,14 @@ const Pagination = (props) => {
     Export,
     Localization,
     withPageInformation,
+    inverted,
     //------------------
     theme,
     size,
     color,
   } = props;
 
-  const themeProps = { theme, size, color };
+  const themeProps = { theme, size, color, inverted };
 
   //======================== METHODS ==========================================
 
@@ -281,6 +281,7 @@ Pagination.defaultProps = {
   goToLastPage: () => {},
   Export: () => {},
   //-------------------------------
+  inverted: false,
   theme: theme,
   color: "primary",
   size: "small",
@@ -309,6 +310,7 @@ Pagination.propTypes = {
   goToLastPage: PropTypes.func,
   Export: PropTypes.func,
   //-------------------------------
+  inverted: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([

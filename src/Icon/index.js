@@ -68,6 +68,7 @@ Icon.propTypes = {
     "warning",
     "gray",
     "white",
+    "black",
   ]),
 };
 
