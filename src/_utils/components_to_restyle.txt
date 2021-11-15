@@ -24,3 +24,9 @@ Table as separate component
 - Adjust Dropdown lookup to stamp
 
 - Grid ordering icons
+
+
+
+//===================================//
+
+- Adjust Dropdown lookup to stamp

@@ -34,26 +34,19 @@ const TagSelector = (props) => {
   };
 
   const renderTags = () => {
-    return tags.map((tag, i) => {
-      console.log("tag[mapId]", tag[mapId], mapId);
-
-      return (
-        <TagItem
-          key={i}
-          text={tag[mapName]}
-          id={tag[mapId]}
-          toggleTagSelection={(id) => {
-            console.log("id", id);
-            toggleTagSelection(id);
-          }}
-          selected={calculateSelectionForTag(tag[mapId])}
-          disabled={disabled}
-          size={size}
-          color={color}
-          theme={theme}
-        />
-      );
-    });
+    return tags.map((tag, i) => (
+      <TagItem
+        key={i}
+        text={tag[mapName]}
+        id={tag[mapId]}
+        toggleTagSelection={toggleTagSelection}
+        selected={calculateSelectionForTag(tag[mapId])}
+        disabled={disabled}
+        size={size}
+        color={color}
+        theme={theme}
+      />
+    ));
   };
 
   return (
