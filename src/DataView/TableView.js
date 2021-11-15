@@ -12,7 +12,7 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
 const Container = styled.div`
-  border: 1.5px solid rgba(165, 164, 164, 0.4);
+  // border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
   font-size: ${theme.typography.small.fontSize};
   font-family: ${theme.typography.fontFamily};
@@ -26,15 +26,20 @@ const TableTable = styled.table`
 `;
 
 const TableHead = styled.thead`
-  background-color: ${theme.palette.primary.main};
-  color: ${theme.palette.primary.text};
+  // background-color: ${theme.palette.primary.main};
+  color: ${theme.palette.primary.textDark};
+
+  border-top: 1px solid #80808025;
 `;
 
-const TableHeadRow = styled.tr``;
+const TableHeadRow = styled.tr`
+  border-bottom: 1px solid #80808025;
+`;
 
 const TableHeadCell = styled.th`
   text-align: left;
   transition: all 250ms ease;
+  font-weight: 900;
 
   ${(props) =>
     props.selectionCell === true
@@ -50,8 +55,33 @@ const TableHeadCell = styled.th`
   }
 
   &:hover {
-    background-color: ${theme.palette.primary.light};
+    // background-color: ${theme.palette.primary.light};
+    background-color: whitesmoke;
     cursor: pointer;
+  }
+`;
+
+const HeaderInnerCell = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  & i {
+    color: black;
+  }
+`;
+
+const HeaderCellText = styled.span`
+  color: black;
+`;
+
+const HeaderCellIcon = styled.span`
+  color: black;
+  margin-left: auto;
+
+  & i {
+    color: ${(props) => (props.sort ? "transparent" : "black")};
   }
 `;
 
@@ -64,14 +94,11 @@ const TableBodyRow = styled.tr`
   ${(props) => {
     if (props.selectedRow !== true)
       return `
-        &:nth-of-type(even) {
-          background-color: #f5f5f5;
-        }
-
         &:hover {
           & > td {
-            border-bottom: 1px solid ${theme.palette.primary.light};
-            border-top: 1px solid ${theme.palette.primary.light};
+            // border-bottom: 1px solid ${theme.palette.primary.light};
+            // border-top: 1px solid ${theme.palette.primary.light};
+            background-color: whitesmoke;
           }
     
         cursor: pointer;
@@ -83,10 +110,11 @@ const TableBodyRow = styled.tr`
     if (props.selectedRow === true)
       return `
         background-color: ${theme.palette.primary.lighter};
+        cursor: pointer;
         
         & > td {
-          border-bottom: 1px solid ${theme.palette.primary.light};
-          border-top: 1px solid ${theme.palette.primary.light};
+          // border-bottom: 1px solid ${theme.palette.primary.light};
+          // border-top: 1px solid ${theme.palette.primary.light};
         }
       `;
     else return "";
@@ -433,9 +461,9 @@ const TableView = (props) => {
 
     //-------------------------------------------------------------------
 
-    if (isAccessor && Ascending) orderingIconClass = "sort-up";
+    if (isAccessor && Ascending) orderingIconClass = "long-arrow-alt-up";
 
-    if (isAccessor && Descending) orderingIconClass = "sort-down";
+    if (isAccessor && Descending) orderingIconClass = "long-arrow-alt-down";
 
     if (isAccessor && !Ascending && !Descending) orderingIconClass = "sort";
 
@@ -461,11 +489,15 @@ const TableView = (props) => {
         key={i}
         onClick={IsLoading || hideOrdering ? () => {} : headerClick}
       >
-        <div>
-          {def.displayName}
+        <HeaderInnerCell>
+          <HeaderCellText>{def.displayName}</HeaderCellText>
 
-          {!hideOrdering && <Icon color={"white"} icon={orderingIconClass} />}
-        </div>
+          {!hideOrdering && (
+            <HeaderCellIcon sort={orderingIconClass === "sort"}>
+              <Icon color={"white"} icon={orderingIconClass} />
+            </HeaderCellIcon>
+          )}
+        </HeaderInnerCell>
       </TableHeadCell>
     );
   };

@@ -25,6 +25,7 @@ JustText.args = {
   onClick: () => {},
   size: "medium",
   disabled: false,
+  inverted: false,
 };
 
 export const JustIcon = Template.bind({});
@@ -37,6 +38,7 @@ JustIcon.args = {
   disabled: false,
   icon: "user",
   iconStyle: "solid",
+  inverted: false,
 };
 
 export const TextAndIconToLeft = Template.bind({});
@@ -51,6 +53,7 @@ TextAndIconToLeft.args = {
   icon: "user",
   iconStyle: "solid",
   iconLocation: "left",
+  inverted: false,
 };
 
 export const TextAndIconToRight = Template.bind({});
@@ -65,4 +68,5 @@ TextAndIconToRight.args = {
   icon: "user",
   iconStyle: "solid",
   iconLocation: "right",
+  inverted: false,
 };

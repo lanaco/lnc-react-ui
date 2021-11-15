@@ -82,6 +82,7 @@ const TablePagination = (props) => {
           onClick={goToFirstPage}
           disabled={freezeLoading([!CanGoToFirstPage])}
           tooltip={Localization.First}
+          inverted={true}
         />
       </div>
     );
@@ -95,6 +96,7 @@ const TablePagination = (props) => {
           onClick={goToPreviousPage}
           disabled={freezeLoading([!CanGoToPreviousPage])}
           tooltip={Localization.Previous}
+          inverted={true}
         />
       </div>
     );
@@ -108,6 +110,7 @@ const TablePagination = (props) => {
           onClick={goToNextPage}
           disabled={freezeLoading([!CanGoToNextPage])}
           tooltip={Localization.Next}
+          inverted={true}
         />
       </div>
     );
@@ -121,6 +124,7 @@ const TablePagination = (props) => {
           onClick={goToLastPage}
           disabled={freezeLoading([!CanGoToLastPage])}
           tooltip={Localization.Last}
+          inverted={true}
         />
       </div>
     );
@@ -151,6 +155,7 @@ const TablePagination = (props) => {
           onClick={exportToExcel}
           disabled={freezeLoading()}
           icon={"file-excel"}
+          inverted={true}
         />
       </span>
     );

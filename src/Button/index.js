@@ -6,7 +6,7 @@ import "../Base/fontawesome/css/fontawesome.css";
 
 //====================== STYLE ======================
 
-const paddingBySize = (size, hasText) => {
+const paddingBySize = (size) => {
   if (size === "small") return "0.3875rem 0.34375rem";
   if (size === "medium") return "0.45rem 0.415625rem";
   if (size === "large") return "0.4875rem 0.445rem";
@@ -29,40 +29,98 @@ const StyledButton = styled.button((props) => {
     padding: paddingBySize(props.size, props.hasText),
     fontSize: props.theme.typography[props.size].fontSize,
     fontFamily: props.theme.typography.fontFamily,
-    backgroundColor: props.theme.palette[props.color].main,
-    color: props.theme.palette[props.color].text,
+
+    backgroundColor: props.inverted
+      ? "transparent"
+      : props.theme.palette[props.color].main,
+
     borderRadius: "2px",
     minHeight: heightBySize(props.size),
     maxHeight: heightBySize(props.size),
     "&:hover": {
-      backgroundColor: props.theme.palette[props.color].light,
+      backgroundColor: props.inverted
+        ? "whitesmoke"
+        : props.theme.palette[props.color].light,
     },
     "&:disabled": {
-      backgroundColor: props.theme.palette.gray[200],
-      color: props.theme.palette.gray.textLight,
+      backgroundColor: props.inverted
+        ? "transparent"
+        : props.theme.palette.gray[200],
+      color: props.theme.palette.gray.textDark,
       opacity: 0.7,
       cursor: "default",
     },
   };
 });
 
-const TextLeft = styled.span((props) => ({
-  padding: "0",
-  margin: "0",
-  paddingRight: props.hasIcon ? "0.3125rem" : "0",
-  fontSize: props.theme.typography[props.size].fontSize,
-}));
+const TextLeft = styled.span((props) => {
+  let opacity = 1;
+  let color = props.inverted
+    ? props.theme.palette[props.color].textDark
+    : props.theme.palette[props.color].text;
 
-const TextRight = styled.span((props) => ({
-  padding: "0",
-  margin: "0",
-  paddingLeft: props.hasIcon ? "0.3125rem" : "0",
-  fontSize: props.theme.typography[props.size].fontSize,
-}));
+  if (props.disabled) {
+    color = props.inverted
+      ? props.theme.palette[props.color].textDark
+      : props.theme.palette[props.color].textDark;
 
-const Icon = styled.i((props) => ({
-  fontSize: props.theme.typography[props.size].fontSize,
-}));
+    opacity = 0.6;
+  }
+
+  return {
+    padding: "0",
+    margin: "0",
+    paddingRight: props.hasIcon ? "0.3125rem" : "0",
+    fontSize: props.theme.typography[props.size].fontSize,
+    color: color,
+    opacity: opacity,
+  };
+});
+
+const TextRight = styled.span((props) => {
+  let opacity = 1;
+  let color = props.inverted
+    ? props.theme.palette[props.color].textDark
+    : props.theme.palette[props.color].text;
+
+  if (props.disabled) {
+    color = props.inverted
+      ? props.theme.palette[props.color].textDark
+      : props.theme.palette[props.color].textDark;
+
+    opacity = 0.6;
+  }
+
+  return {
+    padding: "0",
+    margin: "0",
+    paddingLeft: props.hasIcon ? "0.3125rem" : "0",
+    fontSize: props.theme.typography[props.size].fontSize,
+    color: color,
+    opacity: opacity,
+  };
+});
+
+const Icon = styled.i((props) => {
+  let opacity = 1;
+  let color = props.inverted
+    ? props.theme.palette[props.color].main
+    : props.theme.palette[props.color].text;
+
+  if (props.disabled) {
+    color = props.inverted
+      ? props.theme.palette[props.color].textDark
+      : props.theme.palette[props.color].textDark;
+
+    opacity = 0.6;
+  }
+
+  return {
+    fontSize: props.theme.typography[props.size].fontSize,
+    color: color,
+    opacity: opacity,
+  };
+});
 
 //===================================================
 
@@ -81,6 +139,7 @@ const Button = React.forwardRef((props, ref) => {
     size,
     iconLocation,
     text,
+    inverted,
   } = props;
 
   const handleOnClick = (e) => {
@@ -98,7 +157,7 @@ const Button = React.forwardRef((props, ref) => {
 
   return (
     <StyledButton
-      {...{ theme, size, color }}
+      {...{ theme, size, color, inverted, disabled }}
       onClick={handleOnClick}
       className={className}
       disabled={disabled}
@@ -113,6 +172,8 @@ const Button = React.forwardRef((props, ref) => {
             theme,
             size,
             color,
+            inverted,
+            disabled,
             hasIcon: icon && icon !== "",
           }}
         >
@@ -127,6 +188,8 @@ const Button = React.forwardRef((props, ref) => {
             theme,
             size,
             color,
+            inverted,
+            disabled,
           }}
           className={getIconClass()}
         />
@@ -139,6 +202,8 @@ const Button = React.forwardRef((props, ref) => {
             theme,
             size,
             color,
+            inverted,
+            disabled,
             hasIcon: icon && icon !== "",
           }}
         >
@@ -163,6 +228,7 @@ Button.defaultProps = {
   text: "",
   color: "primary",
   theme: theme,
+  inverted: false,
 };
 
 Button.propTypes = {
@@ -175,6 +241,7 @@ Button.propTypes = {
   iconStyle: PropTypes.oneOf(["solid", "regular"]),
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
+  inverted: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   iconLocation: PropTypes.oneOf(["left", "right"]),
   text: PropTypes.string,

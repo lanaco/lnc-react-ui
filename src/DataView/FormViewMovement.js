@@ -60,6 +60,7 @@ const FormViewMovement = (props) => {
           onClick={freezeLoading() ? () => {} : goToFirstItem}
           disabled={!CanGoToFirstItem}
           tooltip={Localization.First}
+          inverted={true}
         />
       </Item>
     );
@@ -74,6 +75,7 @@ const FormViewMovement = (props) => {
           onClick={freezeLoading() ? () => {} : goToLastItem}
           disabled={!CanGoToLastItem}
           tooltip={Localization.Last}
+          inverted={true}
         />
       </Item>
     );
@@ -88,6 +90,7 @@ const FormViewMovement = (props) => {
           onClick={freezeLoading() ? () => {} : goToNextItem}
           disabled={!CanGoToNextItem}
           tooltip={Localization.Next}
+          inverted={true}
         />
       </Item>
     );
@@ -102,6 +105,7 @@ const FormViewMovement = (props) => {
           onClick={freezeLoading() ? () => {} : goToPreviousItem}
           disabled={!CanGoToPreviousItem}
           tooltip={Localization.Previous}
+          inverted={true}
         />
       </Item>
     );
