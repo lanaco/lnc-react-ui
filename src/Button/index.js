@@ -12,7 +12,7 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.4875rem 0.445rem";
 };
 
-const heightBySize = (size, hasText) => {
+const heightBySize = (size) => {
   if (size === "small") return `1.625rem`;
   if (size === "medium") return `2rem`;
   if (size === "large") return `2.375rem`;

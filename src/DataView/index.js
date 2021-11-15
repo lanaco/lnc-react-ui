@@ -64,7 +64,6 @@ const TableContainer = styled.div`
 `;
 
 const PaginationContainer = styled.div`
-  margin-top: 6px;
   border-top: 1px solid #80808025;
 `;
 
