@@ -1,15 +1,15 @@
 import React from "react";
 
-import Alet from "./index";
+import Alert from "./index";
 
 export default {
-  title: "Alet",
-  component: Alet,
+  title: "Alert",
+  component: Alert,
 };
 
 const Template = (args) => (
   <div>
-    <Alet {...args} />
+    <Alert {...args} />
   </div>
 );
 
