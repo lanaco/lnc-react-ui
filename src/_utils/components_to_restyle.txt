@@ -25,7 +25,7 @@ Table as separate component
 
 - Grid ordering icons
 
-
+- fix chip component vertical alignement
 
 //===================================//
 
