@@ -1,0 +1,50 @@
+.month {
+  color: orange;
+}
+
+.workingDaysContainer {
+  width: fit-content;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.workingDaysText {
+  text-align: right;
+}
+
+.workingDaysNumber {
+  text-align: center;
+  font-weight: bold;
+  color: var(--base-color);
+}
+
+.employeeRoleContainer {
+  width: fit-content;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.employeeRoleText {
+  text-align: right;
+}
+
+.employeeName {
+  text-align: center;
+  font-weight: bold;
+  color: var(--base-color);
+}
+
+.ContainerWrapper {
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.ComponentWrapper {
+  width: fit-content;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
