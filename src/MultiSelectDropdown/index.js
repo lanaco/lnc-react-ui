@@ -211,6 +211,8 @@ const MultiSelectDropdown = (props) => {
     disabled,
     id,
     className,
+    mapIdTo,
+    mapValueTo,
     size,
     color,
     theme,
@@ -306,7 +308,7 @@ const MultiSelectDropdown = (props) => {
                   onMouseDown={() => optionSelected([...items, item])}
                   hover={cursor === i}
                 >
-                  {item.value}
+                  {item[mapValueTo]}
                 </ContentItem>
               );
             })}
@@ -348,12 +350,12 @@ const MultiSelectDropdown = (props) => {
                       {...themeProps}
                       key={key}
                       first={key === 0}
-                      title={x.value}
+                      title={x[mapValueTo]}
                     >
                       <Item
                         {...themeProps}
-                        id={x.id}
-                        text={x.value}
+                        id={x[mapIdTo]}
+                        text={x[mapValueTo]}
                         onRemove={() => handleRemoveItem(key)}
                       />
                     </ItemWrapper>
@@ -432,6 +434,8 @@ MultiSelectDropdown.defaultProps = {
   color: "primary",
   notItemsFoundText: "No items found...",
   theme: theme,
+  mapIdTo: "id",
+  mapValueTo: "value",
 };
 
 MultiSelectDropdown.propTypes = {
@@ -444,6 +448,8 @@ MultiSelectDropdown.propTypes = {
   className: PropTypes.string,
   items: PropTypes.array,
   options: PropTypes.array,
+  mapIdTo: PropTypes.string,
+  mapValueTo: PropTypes.string,
   notItemsFoundText: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
