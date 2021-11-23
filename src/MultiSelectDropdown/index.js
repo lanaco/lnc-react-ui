@@ -37,7 +37,7 @@ const iconPaddingBySize = (size) => {
 };
 
 const containerColor = (props) => {
-  if (props.disable) return props.theme.palette.gray[200];
+  if (props.disabled) return props.theme.palette.gray[200];
 
   if (props.focus) return "white";
 
