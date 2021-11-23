@@ -175,7 +175,7 @@ const SearchBar = (props) => {
     }
 
     if (e.key === "Backspace" && items.length > 0 && value === "") {
-      onRemoveItem(items[items.length - 1]);
+      handleRemoveItem(items.length - 1);
     }
   };
 

@@ -411,7 +411,6 @@ DropdownLookup.defaultProps = {
   disabled: false,
   load: () => {},
   onChange: () => {},
-  load: () => {},
   clear: () => {},
   className: "",
   size: "small",
