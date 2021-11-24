@@ -37,7 +37,7 @@ const iconPaddingBySize = (size) => {
 };
 
 const containerColor = (props) => {
-  if (props.disable) return props.theme.palette.gray[200];
+  if (props.disabled) return props.theme.palette.gray[200];
 
   if (props.focus) return "white";
 
@@ -231,25 +231,37 @@ const MultiSelectDropdown = (props) => {
   };
 
   const onKeyDown = (e) => {
-    if (e.keyCode === 27) InputRef.current.blur();
+    //ArrowUp & ArrowDown
     if (e.keyCode === 38 || e.keyCode === 40) e.preventDefault();
 
-    if (e.keyCode === 38 && cursor > 0) setCursor(cursor - 1);
+    //Esc
+    if (e.keyCode === 27) InputRef.current.blur();
 
-    if (e.keyCode === 40 && cursor < options.length - 1) setCursor(cursor + 1);
+    //ArrowUp & ArrowDown
+    if (options !== null && options.length !== 0 && inFocus) {
+      if (e.keyCode === 38 && cursor > 0) setCursor(cursor - 1);
 
-    if (e.key === "Enter" && options.length > 0 && value && value.length > 0) {
-      optionSelected([...items, options[cursor]]);
+      if (e.keyCode === 40 && cursor < options.length - 1)
+        setCursor(cursor + 1);
+
+      if (e.keyCode === 13) optionSelected([...items, options[cursor]]);
+
+      if (e.key === "Backspace" && items.length > 0 && value === "") {
+        handleRemoveItem(items.length - 1);
+      }
+
+      console.log("ARR DOWN");
+      return;
+    }
+
+    if (e.keyCode === 40) {
+      setInFocus(true);
+      setCursor(0);
+      load(e.target.value);
     }
 
     let empty = options === null || (options !== null && options.length === 0);
-    if (
-      e.key === "Enter" &&
-      inFocus &&
-      empty &&
-      loading === false &&
-      value !== ""
-    ) {
+    if (e.key === "Enter" && inFocus && empty && loading === false) {
       onInputBlur();
     }
 
@@ -319,7 +331,7 @@ const MultiSelectDropdown = (props) => {
 
     let empty = options === null || (options !== null && options.length === 0);
 
-    if (inFocus && empty && loading === false && value !== "") {
+    if (inFocus && empty && loading === false) {
       return (
         <FadeIn>
           <Content {...themeProps} key={0}>
