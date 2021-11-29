@@ -12,7 +12,6 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
 const Container = styled.div`
-  // border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
   font-size: ${theme.typography.small.fontSize};
   font-family: ${theme.typography.fontFamily};
@@ -26,9 +25,7 @@ const TableTable = styled.table`
 `;
 
 const TableHead = styled.thead`
-  // background-color: ${theme.palette.primary.main};
   color: ${theme.palette.primary.textDark};
-
   border-top: 1px solid #80808025;
 `;
 
