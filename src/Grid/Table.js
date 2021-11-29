@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CheckBox from "../CheckBox/index";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import PropTypes from "prop-types";
@@ -8,7 +8,6 @@ import theme from "../_utils/theme";
 import baseStyle from "../Base/styles.module.css";
 
 const Container = styled.div`
-  border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
   font-size: ${theme.typography.small.fontSize};
   font-family: ${theme.typography.fontFamily};
@@ -22,15 +21,18 @@ const TableTable = styled.table`
 `;
 
 const TableHead = styled.thead`
-  background-color: ${theme.palette.primary.main};
-  color: ${theme.palette.primary.text};
+  color: ${theme.palette.primary.textDark};
+  border-top: 1px solid #80808025;
 `;
 
-const TableHeadRow = styled.tr``;
+const TableHeadRow = styled.tr`
+  border-bottom: 1px solid #80808025;
+`;
 
 const TableHeadCell = styled.th`
   text-align: left;
   transition: all 250ms ease;
+  font-weight: 900;
 
   ${(props) =>
     props.selectionCell === true
@@ -46,54 +48,75 @@ const TableHeadCell = styled.th`
   }
 
   &:hover {
-    background-color: ${theme.palette.primary.light};
+    // background-color: ${theme.palette.primary.light};
+    background-color: #f0f0f0;
     cursor: pointer;
+  }
+`;
+
+const HeaderInnerCell = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // justify-content: center;
+
+  & i {
+    color: black;
+  }
+`;
+
+const HeaderCellText = styled.span`
+  color: black;
+`;
+
+const HeaderCellIcon = styled.span`
+  color: black;
+  margin-left: auto;
+
+  & i {
+    color: ${(props) => (props.sort ? "transparent" : "black")};
   }
 `;
 
 const TableBody = styled.tbody``;
 
+const TableBodyRowNested = styled.tr`
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  background-color: #f7f7f7;
+  cursor: normal;
+`;
+
 const TableBodyRow = styled.tr`
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
+  background-color: ${(props) => (props.nested ? "#f7f7f7" : "inherit")};
 
   ${(props) => {
     if (props.selectedRow !== true)
       return `
-        &:nth-of-type(even) {
-          background-color: #f5f5f5;
+      &:hover {
+        & > td {
+          background-color: #f0f0f0;
         }
-
-        &:hover {
-          & > td {
-            border-bottom: 1px solid ${theme.palette.primary.light};
-            border-top: 1px solid ${theme.palette.primary.light};
-          }
-    
-        cursor: pointer;
-      }`;
+  
+      cursor: pointer;
+    }`;
     else return "";
   }}
-
   ${(props) => {
     if (props.selectedRow === true)
       return `
-        background-color: ${theme.palette.primary.lighter};
-        
-        & > td {
-          border-bottom: 1px solid ${theme.palette.primary.light};
-          border-top: 1px solid ${theme.palette.primary.light};
-        }
-      `;
+      background-color: ${theme.palette.primary.lighter};
+      cursor: pointer;
+    `;
     else return "";
-  }}
+  }};
 `;
 
 const TableBodyCell = styled.td`
-  ${(props) =>
-    props.selectionCell === true
-      ? "padding: 1px 1px 1px 6px;"
-      : "padding: 5px 5px 5px 10px;"}
+  padding: ${(props) =>
+    props.selectionCell === true ? "1px 1px 1px 6px" : "5px 5px 5px 10px"};
 `;
 
 const Table = (props) => {
@@ -132,6 +155,8 @@ const Table = (props) => {
 
   //======================== STATE ============================================
 
+  const [expandedColumns, setExpandedColumns] = useState([]);
+
   //======================== METHODS ==========================================
 
   const handleSelectAll = () => {
@@ -154,64 +179,86 @@ const Table = (props) => {
     return <>{Data.map((dataItem, i) => renderBodyRow(dataItem, i))}</>;
   };
 
-  // const renderEmptySelectionCell = () => {
-  //   if (
-  //     !EnableSelection ||
-  //     ReadOnly ||
-  //     (IsLookup && SelectionType === TableSelectionType.SINGLE)
-  //   )
-  //     return <></>;
+  const renderEmptySelectionCell = () => {
+    if (
+      !EnableSelection ||
+      ReadOnly ||
+      (IsLookup && SelectionType === TableSelectionType.SINGLE)
+    )
+      return <></>;
 
-  //   return (
-  //     <td
-  //       className={[
-  //         style["table-cell"],
-  //         style["special-cell-render"],
-  //         style["select-checkbox"],
-  //       ].join(" ")}
-  //     ></td>
-  //   );
-  // };
+    return <td></td>;
+  };
 
-  // const renderGroupBodyRows = (col, dataItem) => {
-  //   if (col) var nestedArray = dataItem[col.accessor];
+  const renderGroupBodyRows = (col, dataItem) => {
+    var nestedArray;
+    if (col) nestedArray = dataItem[col.accessor];
 
-  //   if (nestedArray) {
-  //     return dataItem[col.accessor].map((x, i) => {
-  //       return (
-  //         <tr
-  //           key={i + 100}
-  //           className={[
-  //             style["table-row-group-by-nested"],
-  //             style["table-row-odd"],
-  //           ].join(" ")}
-  //         >
-  //           {renderEmptySelectionCell()}
-  //           {Columns.map((col, j) => {
-  //             return renderBodyCell(x, col, i + 100, j + 100);
-  //           })}
-  //         </tr>
-  //       );
-  //     });
-  //   }
+    if (nestedArray) {
+      return dataItem[col.accessor].map((x, i) => {
+        return (
+          <TableBodyRowNested key={i + 100}>
+            {renderEmptySelectionCell()}
+            <td></td>
+            {Columns.map((col, j) => {
+              return renderBodyCell(x, col, i + 100, j + 100);
+            })}
+          </TableBodyRowNested>
+        );
+      });
+    }
 
-  //   return <></>;
-  // };
+    return <></>;
+  };
 
   const renderBodyRow = (dataItem, i) => {
-    var nested = Columns.find((x) => x.nested);
+    var nested = Columns.find((x) => x.nested === true);
     let rowSelected = isRowSelected(dataItem);
+    var nestedArray;
+
+    if (nested) nestedArray = dataItem[nested.accessor];
 
     return (
       <>
-        <TableBodyRow selectedRow={rowSelected} key={i}>
+        <TableBodyRow
+          selectedRow={rowSelected}
+          key={i}
+          onClick={() => {
+            if (expandedColumns.includes(dataItem[SelectionIndicator])) {
+              setExpandedColumns(
+                expandedColumns.filter((x) => x != dataItem[SelectionIndicator])
+              );
+            } else {
+              setExpandedColumns([
+                ...expandedColumns,
+                dataItem[SelectionIndicator],
+              ]);
+            }
+          }}
+        >
           {renderSelectionCell(dataItem, rowSelected)}
+          {nested && nestedArray && nestedArray.length > 0 ? (
+            <td>
+              <Icon
+                color={"primary"}
+                icon={
+                  expandedColumns.includes(dataItem[SelectionIndicator])
+                    ? "caret-square-down"
+                    : "caret-square-right"
+                }
+              />
+            </td>
+          ) : (
+            <td></td>
+          )}
+
           {Columns.map((col, j) => {
             return renderBodyCell(dataItem, col, i, j);
           })}
         </TableBodyRow>
 
-        {/* {renderGroupBodyRows(nested, dataItem)} */}
+        {expandedColumns.includes(dataItem[SelectionIndicator]) &&
+          renderGroupBodyRows(nested, dataItem)}
       </>
     );
   };
@@ -225,9 +272,10 @@ const Table = (props) => {
       IsLoading || hideOrdering ? () => {} : () => OnOrder(col.accessor);
     var orderingIconClass = "sort";
 
-    if (isOrderByColumn && Ascending) orderingIconClass = "sort-up";
+    if (isOrderByColumn && Ascending) orderingIconClass = "long-arrow-alt-up";
 
-    if (isOrderByColumn && Descending) orderingIconClass = "sort-down";
+    if (isOrderByColumn && Descending)
+      orderingIconClass = "long-arrow-alt-down";
 
     if (isOrderByColumn && !Ascending && !Descending)
       orderingIconClass = "sort";
@@ -236,11 +284,15 @@ const Table = (props) => {
 
     return (
       <TableHeadCell key={i} onClick={onClick}>
-        <div>
-          {col.name}
+        <HeaderInnerCell>
+          <HeaderCellText> {col.name}</HeaderCellText>
 
-          {!hideOrdering && <Icon color={"white"} icon={orderingIconClass} />}
-        </div>
+          {!hideOrdering && (
+            <HeaderCellIcon sort={orderingIconClass === "sort"}>
+              <Icon color={"white"} icon={orderingIconClass} />
+            </HeaderCellIcon>
+          )}
+        </HeaderInnerCell>
       </TableHeadCell>
     );
   };
@@ -317,6 +369,11 @@ const Table = (props) => {
           <TableHead>
             <TableHeadRow>
               {renderSelectAllHeaderCell()}
+              <th
+                style={{
+                  width: "13px",
+                }}
+              ></th>
               {Columns.map((col, i) => renderHeaderCell(col, i))}
             </TableHeadRow>
           </TableHead>

@@ -142,6 +142,7 @@ const TableContainer = styled.div`
 
 const PaginationContainer = styled.div`
   margin-top: 6px;
+  border-top: 1px solid #80808025;
 `;
 
 const FormContainer = styled.div`
@@ -159,9 +160,8 @@ const HeaderContainer = styled.div`
   align-items: center;
   margin-bottom: 5px;
 
-  border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
-  padding: 4px;
+  padding: 0px;
   font-size: 12px;
   font-family: "Ubuntu";
 `;
@@ -1352,6 +1352,7 @@ const Grid = React.forwardRef((props, ref) => {
           onClick={changeToEditMode}
           disabled={freezeLoading()}
           icon={state.Form.Mode === FormMode.READ ? "edit" : "eye"}
+          inverted={true}
         />
       </FlexItem>
     );
@@ -1370,6 +1371,7 @@ const Grid = React.forwardRef((props, ref) => {
             onClick={goToAdd}
             disabled={freezeLoading()}
             icon="plus"
+            inverted={true}
           ></Button>
         </FlexItem>
       );
@@ -1391,6 +1393,7 @@ const Grid = React.forwardRef((props, ref) => {
           disabled={freezeLoading()}
           icon="sync-alt"
           size="small"
+          inverted={true}
         />
       </FlexItem>
     );
@@ -1410,6 +1413,7 @@ const Grid = React.forwardRef((props, ref) => {
             }}
             disabled={freezeLoading([state.Table.SelectedData.length === 0])}
             icon="check-circle"
+            inverted={true}
           />
         </FlexItem>
       );
@@ -1457,6 +1461,7 @@ const Grid = React.forwardRef((props, ref) => {
           disabled={freezeLoading([state.Table.SelectedData.length === 0])}
           tooltip={Localization.DeleteSelected || "Delete selected"}
           icon="trash"
+          inverted={true}
         />
       </FlexItem>
     );
@@ -1474,6 +1479,7 @@ const Grid = React.forwardRef((props, ref) => {
           onClick={onSwitchToTableView}
           disabled={freezeLoading()}
           icon="table"
+          inverted={true}
         />
       </FlexItem>
     );
@@ -1515,6 +1521,7 @@ const Grid = React.forwardRef((props, ref) => {
       <PaginationContainer>
         <TablePagination
           {...cfg}
+          inverted={true}
           Localization={Localization.Pagination || {}}
         />
       </PaginationContainer>
