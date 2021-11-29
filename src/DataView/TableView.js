@@ -299,7 +299,7 @@ const TableView = (props) => {
       <>
         <TableBodyRow selectedRow={rowSelected} key={i}>
           {renderSelectionCell(dataItem, rowSelected, i)}
-          {Columns.map((col, j) => {
+          {Columns.filter((x) => x.hide !== true).map((col, j) => {
             return renderBodyCell(dataItem, col, i, j);
           })}
         </TableBodyRow>
@@ -535,7 +535,9 @@ const TableView = (props) => {
           <TableHead>
             <TableHeadRow>
               {renderSelectAllHeaderCell()}
-              {Columns.map((col, i) => renderHeaderCell(col, i))}
+              {Columns.filter((x) => x.hide !== true).map((col, i) =>
+                renderHeaderCell(col, i)
+              )}
             </TableHeadRow>
           </TableHead>
           <TableBody>{renderBody()}</TableBody>
