@@ -33,6 +33,7 @@ const Container = styled.div`
   background-color: white;
   border-radius: 0.1875rem;
   width: 100%;
+
   transition: all 250ms ease;
 `;
 
@@ -136,16 +137,8 @@ const ContentItem = styled.div`
 `;
 
 const SearchBar = (props) => {
-  const {
-    items,
-    suggestions,
-    onChange,
-    id,
-    className,
-    size,
-    color,
-    theme,
-  } = props;
+  const { items, suggestions, onChange, id, className, size, color, theme } =
+    props;
 
   const [value, setValue] = useState("");
   const [openSuggestions, setOpenSuggestions] = useState(false);
@@ -182,7 +175,7 @@ const SearchBar = (props) => {
     }
 
     if (e.key === "Backspace" && items.length > 0 && value === "") {
-      onRemoveItem(items[items.length - 1]);
+      handleRemoveItem(items.length - 1);
     }
   };
 

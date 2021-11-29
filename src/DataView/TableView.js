@@ -12,7 +12,6 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
 const Container = styled.div`
-  // border: 1.5px solid rgba(165, 164, 164, 0.4);
   border-radius: 3px;
   font-size: ${theme.typography.small.fontSize};
   font-family: ${theme.typography.fontFamily};
@@ -26,9 +25,7 @@ const TableTable = styled.table`
 `;
 
 const TableHead = styled.thead`
-  // background-color: ${theme.palette.primary.main};
   color: ${theme.palette.primary.textDark};
-
   border-top: 1px solid #80808025;
 `;
 
@@ -65,7 +62,7 @@ const HeaderInnerCell = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
 
   & i {
     color: black;
@@ -302,7 +299,7 @@ const TableView = (props) => {
       <>
         <TableBodyRow selectedRow={rowSelected} key={i}>
           {renderSelectionCell(dataItem, rowSelected, i)}
-          {Columns.map((col, j) => {
+          {Columns.filter((x) => x.hide !== true).map((col, j) => {
             return renderBodyCell(dataItem, col, i, j);
           })}
         </TableBodyRow>
@@ -538,7 +535,9 @@ const TableView = (props) => {
           <TableHead>
             <TableHeadRow>
               {renderSelectAllHeaderCell()}
-              {Columns.map((col, i) => renderHeaderCell(col, i))}
+              {Columns.filter((x) => x.hide !== true).map((col, i) =>
+                renderHeaderCell(col, i)
+              )}
             </TableHeadRow>
           </TableHead>
           <TableBody>{renderBody()}</TableBody>

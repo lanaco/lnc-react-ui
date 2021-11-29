@@ -20,12 +20,18 @@ const Pagination = (props) => {
       name: "Age",
       sort: true,
     },
+    {
+      accessor: "subordinates",
+      name: "Subordinates",
+      sort: false,
+      nested: true,
+    },
   ];
 
   const Config = {
     Options: {
       EnablePagination: true,
-      EnableSelection: true,
+      EnableSelection: false,
       EnableOrdering: true,
     },
     Ordering: {
