@@ -138,6 +138,10 @@ const DivRelative = styled.div`
   position: relative;
 `;
 
+const FilteringContainer = styled.div`
+  width: 100%;
+`;
+
 const DataView = (props) => {
   const emptyFunc = () => {};
   const [deleteConfirmationBoxOpen, setDeleteConfirmationBoxOpen] = useState(
@@ -533,7 +537,7 @@ const DataView = (props) => {
     if (!Options.EnableFilters || General.CurrentView === ViewType.FORM_VIEW)
       return <></>;
 
-    return FilteringView();
+    return <FilteringContainer>{FilteringView()}</FilteringContainer>;
   };
 
   const getBorderClass = () => {
@@ -763,6 +767,8 @@ const DataView = (props) => {
 
     return (
       <Container {...themeProps}>
+        {renderFiltering()}
+
         {renderHeader()}
 
         <SwitchTransition mode="out-in">
