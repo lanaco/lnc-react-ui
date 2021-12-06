@@ -85,7 +85,6 @@ const TextArea = React.forwardRef((props, ref) => {
       {...{ theme, size, color }}
       onChange={handleOnChange}
       onPaste={handleOnChange}
-      onBlur={handleOnBlur}
       className={className}
       disabled={disabled}
       value={val}
@@ -101,6 +100,7 @@ const TextArea = React.forwardRef((props, ref) => {
       onBlur={(e) => {
         e.target.style.height = heightBySize(size);
         e.target.style.whiteSpace = "nowrap";
+        handleOnBlur(e);
       }}
     />
   );
