@@ -103,7 +103,7 @@ const DateInput = (props) => {
   };
 
   useEffect(() => {
-    const timeOutId = setTimeout(() => handleDelayedOnChange(), 1500);
+    const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
     return () => clearTimeout(timeOutId);
   }, [dateText]);
 
