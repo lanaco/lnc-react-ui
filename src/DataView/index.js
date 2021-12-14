@@ -51,7 +51,7 @@ const getBorderSyle = (borderStyle, read, theme, color) => {
 };
 
 const Container = styled.div`
-  box-shadow: 0 0 12px #bebebe;
+  box-shadow: ${(props) => (props.shadow === false ? "0" : "0 0 12px #bebebe")};
   border-radius: 3px;
   padding: 0 4px;
 `;
@@ -153,6 +153,7 @@ const DataView = (props) => {
     props.Config || {};
 
   const {
+    Shadow = true,
     ChangeToFormView = emptyFunc,
     ChangeToTableView = emptyFunc,
     ChangeToEditMode = emptyFunc,
@@ -320,7 +321,8 @@ const DataView = (props) => {
               }
             }}
             disabled={Table.SelectedData.length === 0}
-            icon={"plus"}
+            icon={"arrow-circle-down"}
+            inverted={true}
           />
         </FlexItem>
       );
@@ -337,7 +339,7 @@ const DataView = (props) => {
       Table.Actions.length > 0
     ) {
       return (
-        <div className={[styles.flexItem, styles.contextMenu].join(" ")}>
+        <FlexItem>
           <DropdownMenu
             disabled={freezeLoading([Table.SelectedData.length === 0])}
             items={Table.Actions || []}
@@ -345,7 +347,7 @@ const DataView = (props) => {
             actionData={Table.SelectedData}
             downDoubleIconClassName={Icons.DownDouble}
           />
-        </div>
+        </FlexItem>
       );
     } else return <></>;
   };
@@ -540,29 +542,11 @@ const DataView = (props) => {
     return <FilteringContainer>{FilteringView()}</FilteringContainer>;
   };
 
-  const getBorderClass = () => {
-    let className = " ";
-
-    if (Form.Mode === FormMode.READ) className = " " + styles.successBorder;
-
-    if (Form.Dirty && Form.Mode !== FormMode.ADD && Options.EnableEdit)
-      className = " " + styles.editedBorder;
-
-    if (!Form.Dirty && Form.Mode !== FormMode.ADD && Options.EnableEdit)
-      className = " " + styles.successBorder;
-
-    if (Form.Mode === FormMode.READ) {
-      className += " " + styles.disabledChildren;
-    }
-
-    return className;
-  };
-
   const renderFormView = () => {
     if (!Options.EnableFormView) return <></>;
 
     let component = (
-      <div className={getBorderClass()}>
+      <div>
         {FormView({
           IsLoading: General.IsLoading,
           Data: Form.Data,
@@ -678,11 +662,15 @@ const DataView = (props) => {
     var x6 = General.CurrentView !== "TableView" ? false : true;
 
     var x7 =
-      General.IsLookup && Table.SelectionType === TableSelectionType.MULTIPLE
-        ? true
-        : false;
+      General.IsLookup && Table.SelectionType === "multiple" ? true : false;
 
-    if (x1 || x2 || x3 || x4 || x5 || x6 || x7)
+    var x8 =
+      Options.EnableActions &&
+      General.CurrentView === ViewType.TABLE_VIEW &&
+      Table.Actions &&
+      Table.Actions.length > 0;
+
+    if (x1 || x2 || x3 || x4 || x5 || x6 || x7 || x8)
       return (
         <HeaderContainer>
           {renderChangeToTableView()}
@@ -692,6 +680,7 @@ const DataView = (props) => {
           {renderSwitchToEditModeButton()}
           {renderRefreshButton()}
           {renderLookupTakeValues()}
+          {renderContextMenu()}
         </HeaderContainer>
       );
 
@@ -766,7 +755,7 @@ const DataView = (props) => {
     let key = General.CurrentView !== "TableView" && General.DataFromBackend;
 
     return (
-      <Container {...themeProps}>
+      <Container {...themeProps} shadow={Shadow}>
         {renderFiltering()}
 
         {renderHeader()}
@@ -803,25 +792,6 @@ const DataView = (props) => {
           </CSSTransition>
         </SwitchTransition>
       </Container>
-      // <div>
-      //   <div className={styles.flexContainer}>
-      //     <div className={styles.flexInnerContainer}>
-      //       {renderChangeToTableView()}
-      //       {renderSwitchToEditModeButton()}
-      //       {renderGoToAddButton()}
-      //       {renderDeleteSelectedButton()}
-      //       {renderDeleteConfirmationBox()}
-      //       {renderAddWithCopyButton()}
-      //       {renderLookupTakeValues()}
-      //       {renderRefreshButton()}
-      //       {renderContextMenu()}
-      //     </div>
-      //     <div className={styles.filterContainerHolder}>
-      //       {renderFiltering()}
-      //     </div>
-      //   </div>
-      //   <div className={mergeCSS([styles.view])}>{renderView()}</div>
-      // </div>
     );
   };
 

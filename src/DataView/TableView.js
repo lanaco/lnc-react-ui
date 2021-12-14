@@ -17,7 +17,11 @@ const Container = styled.div`
   font-family: ${theme.typography.fontFamily};
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+`;
 
 const TableTable = styled.table`
   border-collapse: collapse;
@@ -37,6 +41,7 @@ const TableHeadCell = styled.th`
   text-align: left;
   transition: all 250ms ease;
   font-weight: 900;
+  font-size: 13px;
 
   ${(props) =>
     props.selectionCell === true
@@ -348,12 +353,19 @@ const TableView = (props) => {
 
     if (!EnableFormView) onClick = () => {};
 
-    if (!EnableFormView && EnableSelection) {
-      var checked = isItemInArray(dataItem, SelectedData, SelectionIndicator);
+    // if (!EnableFormView && EnableSelection) {
+    //   var checked = isItemInArray(dataItem, SelectedData, SelectionIndicator);
 
-      onClick = () =>
-        handleOnSelection(dataItem, { target: { checked: !checked } });
-    }
+    //   onClick = () =>
+    //     handleOnSelection(dataItem, { target: { checked: !checked } });
+    // }
+
+    if (
+      !EnableSelection ||
+      ReadOnly ||
+      (IsLookup && SelectionType === TableSelectionType.SINGLE)
+    )
+      onClick = () => {};
 
     let cellData =
       def.isObject === true
