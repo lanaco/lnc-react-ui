@@ -284,6 +284,7 @@ const DataView = (props) => {
       goToFirstPage,
       goToLastPage,
       EnableExports: Options.EnableExports,
+      Localization: Localization.Pagination,
     },
   };
 
