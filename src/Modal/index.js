@@ -87,7 +87,7 @@ function Modal(props) {
 
   const onClickOutsideModal = (event) => {
     if (event.target !== event.currentTarget) return;
-    if (clickOutsideToClose || !showHeader) onClose();
+    if (clickOutsideToClose || !showHeader) onClose(event);
   };
 
   const modalVariant = {
@@ -103,43 +103,41 @@ function Modal(props) {
   };
 
   return (
-    <AnimatePresence>
+    <>
       {open && (
         <Overlay
           {...themeProps}
-          initial={"initial"}
-          animate={"isOpen"}
-          exit={"exit"}
-          variants={modalVariant}
           onClick={onClickOutsideModal}
           className={className}
         >
-          <ModalContainer
-            {...themeProps}
-            initial={"initial"}
-            animate={"isOpen"}
-            exit={"exit"}
-            variants={containerVariant}
-          >
-            {showHeader && (
-              <Header {...themeProps}>
-                <Title {...themeProps}>{header}</Title>
-                <CloseButton {...themeProps}>
-                  <Button
-                    {...themeProps}
-                    icon={"times"}
-                    iconStyle={"solid"}
-                    onClick={onClose}
-                    color={basic ? "transparent" : themeProps.color}
-                  />
-                </CloseButton>
-              </Header>
-            )}
-            <Content {...themeProps}>{children}</Content>
-          </ModalContainer>
+          <AnimatePresence>
+            <ModalContainer
+              {...themeProps}
+              initial={"initial"}
+              animate={"isOpen"}
+              exit={"exit"}
+              variants={containerVariant}
+            >
+              {showHeader && (
+                <Header {...themeProps}>
+                  <Title {...themeProps}>{header}</Title>
+                  <CloseButton {...themeProps}>
+                    <Button
+                      {...themeProps}
+                      icon={"times"}
+                      iconStyle={"solid"}
+                      onClick={(e) => onClose(e)}
+                      color={basic ? "transparent" : themeProps.color}
+                    />
+                  </CloseButton>
+                </Header>
+              )}
+              <Content {...themeProps}>{children}</Content>
+            </ModalContainer>
+          </AnimatePresence>
         </Overlay>
       )}
-    </AnimatePresence>
+    </>
   );
 }
 
