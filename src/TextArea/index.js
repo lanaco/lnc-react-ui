@@ -111,7 +111,7 @@ TextArea.defaultProps = {
   theme: theme,
   disabled: false,
   onChange: () => {},
-  onPaste: () => {},
+  // onPaste: () => {},
   className: "",
   preventDefault: true,
   size: "small",
