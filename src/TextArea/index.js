@@ -84,7 +84,7 @@ const TextArea = React.forwardRef((props, ref) => {
     <StyledTextInput
       {...{ theme, size, color }}
       onChange={handleOnChange}
-      onPaste={handleOnChange}
+      // onPaste={handleOnChange}
       className={className}
       disabled={disabled}
       value={val}
@@ -124,7 +124,7 @@ TextArea.propTypes = {
   id: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  onPaste: PropTypes.func,
+  //onPaste: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   value: PropTypes.string,
