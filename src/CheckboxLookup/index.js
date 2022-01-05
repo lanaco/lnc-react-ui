@@ -149,6 +149,7 @@ const CheckboxLookup = (props) => {
     pagination,
     height,
     width,
+    displayedItemsCount,
   } = props;
 
   let themeProps = { theme, size, color, height, width };
@@ -173,14 +174,19 @@ const CheckboxLookup = (props) => {
     onChange(id, selectedItems);
   };
 
-  const pageCount = Math.round((options.length - 1) / 5);
+  const pageCount = Math.floor(options.length / displayedItemsCount) + 1;
 
   var label =
     options.length === selectedOptions.length
       ? localization.DeselectAll || "Deselect all"
       : localization.SelectAll || "Select all";
 
-  let _options = pagination ? options.slice((page - 1) * 5, page * 5) : options;
+  let _options = pagination
+    ? options.slice(
+        (page - 1) * displayedItemsCount,
+        page * displayedItemsCount
+      )
+    : options;
 
   return (
     <Container {...themeProps} className={className}>
@@ -369,6 +375,7 @@ CheckboxLookup.defaultProps = {
   style: "regular",
   itemId: "id",
   itemText: "code",
+  displayedItemsCount: 5,
   localization: {
     SelectAll: "Select all",
     DeselectAll: "Deselect all",
@@ -403,6 +410,7 @@ CheckboxLookup.propTypes = {
     "warning",
     "gray",
   ]),
+  displayedItemsCount: PropTypes.number,
 };
 
 export default CheckboxLookup;
