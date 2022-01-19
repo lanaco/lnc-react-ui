@@ -36,9 +36,6 @@ export { default as TextInput } from "./TextInput";
 export * from "./ToggleSwitch";
 export { default as ToggleSwitch } from "./ToggleSwitch";
 
-export * from "./TransparentTextInput";
-export { default as TransparentTextInput } from "./TransparentTextInput";
-
 export * from "./DataView";
 export { default as DataView } from "./DataView";
 
