@@ -205,6 +205,7 @@ const MultiSelectDropdown = (props) => {
     options,
     load,
     onChange,
+    onAdd,
     clearOptions,
     loading,
     notItemsFoundText,
@@ -216,6 +217,8 @@ const MultiSelectDropdown = (props) => {
     size,
     color,
     theme,
+    addingOptionEnabled,
+    addOptionText,
   } = props;
 
   const [inFocus, setInFocus] = useState(false);
@@ -241,18 +244,32 @@ const MultiSelectDropdown = (props) => {
     if (options !== null && options.length !== 0 && inFocus) {
       if (e.keyCode === 38 && cursor > 0) setCursor(cursor - 1);
 
-      if (e.keyCode === 40 && cursor < options.length - 1)
+      if (
+        e.keyCode === 40 &&
+        ((cursor <= options.length + 1 && addingOptionEnabled) ||
+          cursor < options.length - 1)
+      ) {
         setCursor(cursor + 1);
+      }
 
-      if (e.keyCode === 13) optionSelected([...items, options[cursor]]);
+      if (e.keyCode === 13 && cursor != options.length)
+        optionSelected([...items, options[cursor]]);
+
+      if (e.keyCode === 13 && cursor === 0 && addingOptionEnabled) addNew();
 
       if (e.key === "Backspace" && items.length > 0 && value === "") {
         handleRemoveItem(items.length - 1);
       }
 
-      console.log("ARR DOWN");
       return;
     }
+
+    if (
+      e.keyCode === 13 &&
+      addingOptionEnabled &&
+      (options === null || (options !== null && options.length === 0))
+    )
+      addNew();
 
     if (e.keyCode === 40) {
       setInFocus(true);
@@ -272,6 +289,14 @@ const MultiSelectDropdown = (props) => {
 
   const optionSelected = (items) => {
     onChange(id, items);
+    setValue("");
+    clearOptions(id);
+    setInFocus(false);
+    setCursor(0);
+  };
+
+  const addNew = () => {
+    onAdd(value);
     setValue("");
     clearOptions(id);
     setInFocus(false);
@@ -324,6 +349,18 @@ const MultiSelectDropdown = (props) => {
                 </ContentItem>
               );
             })}
+            {addingOptionEnabled ? (
+              <ContentItem
+                {...themeProps}
+                key={options.length}
+                onMouseDown={() => addNew()}
+                hover={cursor === options.length}
+              >
+                {addOptionText + " " + value}
+              </ContentItem>
+            ) : (
+              ""
+            )}
           </Content>
         </FadeIn>
       );
@@ -335,14 +372,25 @@ const MultiSelectDropdown = (props) => {
       return (
         <FadeIn>
           <Content {...themeProps} key={0}>
-            <ContentItem
-              {...themeProps}
-              key={0}
-              hover={true}
-              onMouseDown={onInputBlur}
-            >
-              {notItemsFoundText}
-            </ContentItem>
+            {addingOptionEnabled ? (
+              <ContentItem
+                {...themeProps}
+                key={0}
+                onMouseDown={() => addNew()}
+                hover={true}
+              >
+                {notItemsFoundText + " " + addOptionText + " " + value}
+              </ContentItem>
+            ) : (
+              <ContentItem
+                {...themeProps}
+                key={0}
+                hover={false}
+                onMouseDown={onInputBlur}
+              >
+                {notItemsFoundText}
+              </ContentItem>
+            )}
           </Content>
         </FadeIn>
       );

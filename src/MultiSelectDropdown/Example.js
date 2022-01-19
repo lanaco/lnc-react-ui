@@ -24,6 +24,10 @@ const Example = (props) => {
     setItems(items);
   };
 
+  const onAdd = (item) => {
+    setItems([...items, { id: 7, value: item }]);
+  };
+
   const load = (text) => {
     setLoading(true);
 
@@ -45,8 +49,11 @@ const Example = (props) => {
         load={load}
         clearOptions={clearOptions}
         onChange={onChange}
+        onAdd={onAdd}
         items={items}
         options={options}
+        addingOptionEnabled={true}
+        addOptionText={"Add new tag"}
       />
     </div>
   );
