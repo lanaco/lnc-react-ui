@@ -131,6 +131,7 @@ const Content = styled.div`
 const ContentItem = styled.div`
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
+
   padding: 0.375rem;
   cursor: pointer;
   background-color: ${(props) => (props.hover ? "whitesmoke" : "inherit")};
@@ -199,12 +200,17 @@ const Controls = styled.div`
   display: flex;
 `;
 
+const AddOptionText = styled.div`
+  font-weight: bold;
+`;
+
 const MultiSelectDropdown = (props) => {
   const {
     items,
     options,
     load,
     onChange,
+    onAdd,
     clearOptions,
     loading,
     notItemsFoundText,
@@ -216,6 +222,8 @@ const MultiSelectDropdown = (props) => {
     size,
     color,
     theme,
+    enableAdd,
+    addOptionText,
   } = props;
 
   const [inFocus, setInFocus] = useState(false);
@@ -241,18 +249,32 @@ const MultiSelectDropdown = (props) => {
     if (options !== null && options.length !== 0 && inFocus) {
       if (e.keyCode === 38 && cursor > 0) setCursor(cursor - 1);
 
-      if (e.keyCode === 40 && cursor < options.length - 1)
+      if (
+        e.keyCode === 40 &&
+        ((cursor === options.length - 1 && enableAdd) ||
+          cursor < options.length - 1)
+      ) {
         setCursor(cursor + 1);
+      }
 
-      if (e.keyCode === 13) optionSelected([...items, options[cursor]]);
+      if (e.keyCode === 13 && cursor != options.length)
+        optionSelected([...items, options[cursor]]);
+
+      if (e.keyCode === 13 && cursor === options.length && enableAdd) addNew();
 
       if (e.key === "Backspace" && items.length > 0 && value === "") {
         handleRemoveItem(items.length - 1);
       }
 
-      console.log("ARR DOWN");
       return;
     }
+
+    if (
+      e.keyCode === 13 &&
+      enableAdd &&
+      (options === null || (options !== null && options.length === 0))
+    )
+      addNew();
 
     if (e.keyCode === 40) {
       setInFocus(true);
@@ -272,6 +294,14 @@ const MultiSelectDropdown = (props) => {
 
   const optionSelected = (items) => {
     onChange(id, items);
+    setValue("");
+    clearOptions(id);
+    setInFocus(false);
+    setCursor(0);
+  };
+
+  const addNew = () => {
+    onAdd(value);
     setValue("");
     clearOptions(id);
     setInFocus(false);
@@ -324,6 +354,19 @@ const MultiSelectDropdown = (props) => {
                 </ContentItem>
               );
             })}
+            {enableAdd && !options.map((y) => y.value).includes(value) ? (
+              <ContentItem
+                {...themeProps}
+                key={options.length}
+                onMouseDown={() => addNew()}
+                hover={cursor === options.length}
+              >
+                <AddOptionText>{addOptionText}</AddOptionText>
+                {value}
+              </ContentItem>
+            ) : (
+              ""
+            )}
           </Content>
         </FadeIn>
       );
@@ -335,14 +378,29 @@ const MultiSelectDropdown = (props) => {
       return (
         <FadeIn>
           <Content {...themeProps} key={0}>
-            <ContentItem
-              {...themeProps}
-              key={0}
-              hover={true}
-              onMouseDown={onInputBlur}
-            >
-              {notItemsFoundText}
-            </ContentItem>
+            {enableAdd ? (
+              <ContentItem
+                {...themeProps}
+                key={0}
+                onMouseDown={() => addNew()}
+                hover={true}
+              >
+                <>
+                  {notItemsFoundText}
+                  <AddOptionText>{addOptionText}</AddOptionText>
+                  {value}
+                </>
+              </ContentItem>
+            ) : (
+              <ContentItem
+                {...themeProps}
+                key={0}
+                hover={false}
+                onMouseDown={onInputBlur}
+              >
+                {notItemsFoundText}
+              </ContentItem>
+            )}
           </Content>
         </FadeIn>
       );
@@ -438,6 +496,7 @@ MultiSelectDropdown.defaultProps = {
   disabled: false,
   load: () => {},
   onChange: () => {},
+  onAdd: () => {},
   clearOptions: () => {},
   items: [],
   options: [],
@@ -448,6 +507,8 @@ MultiSelectDropdown.defaultProps = {
   theme: theme,
   mapIdTo: "id",
   mapValueTo: "value",
+  enableAdd: false,
+  addOptionText: "Add new item",
 };
 
 MultiSelectDropdown.propTypes = {
@@ -456,6 +517,7 @@ MultiSelectDropdown.propTypes = {
   disabled: PropTypes.bool,
   load: PropTypes.func,
   onChange: PropTypes.func,
+  onAdd: PropTypes.func,
   clearOptions: PropTypes.func,
   className: PropTypes.string,
   items: PropTypes.array,
@@ -474,6 +536,8 @@ MultiSelectDropdown.propTypes = {
     "background",
     "transparent",
   ]),
+  enableAdd: PropTypes.bool,
+  addOptionText: PropTypes.string,
 };
 
 export default MultiSelectDropdown;
