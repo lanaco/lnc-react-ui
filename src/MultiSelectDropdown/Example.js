@@ -52,8 +52,8 @@ const Example = (props) => {
         onAdd={onAdd}
         items={items}
         options={options}
-        addingOptionEnabled={true}
-        addOptionText={"Add new tag"}
+        enableAdd={false}
+        addOptionText={"Add new item"}
       />
     </div>
   );
