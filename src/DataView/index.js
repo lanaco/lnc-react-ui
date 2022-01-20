@@ -586,30 +586,6 @@ const DataView = (props) => {
       );
   };
 
-  // const renderView = () => {
-  //   if (General.CurrentView === "TableView")
-  //     return (
-  //       <TableView
-  //         Config={tableViewConfig}
-  //         Localization={Localization.TableView}
-  //         Export={Export}
-  //         Icons={Icons}
-  //         accentColor={props.accentColor}
-  //       />
-  //     );
-
-  //   if (General.DataFromBackend && General.CurrentView === "FormView")
-  //     return <div>{renderFormView()}</div>;
-
-  //   if (!General.DataFromBackend && General.CurrentView === "FormView")
-  //     return (
-  //       <>
-  //         <TableView Config={tableViewConfig} Icons={Icons} />
-  //         {renderFormView()}
-  //       </>
-  //     );
-  // };
-
   const renderFormViewMovement = () => {
     if (
       !Options.EnableFormViewMovement ||
