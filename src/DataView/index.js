@@ -69,8 +69,8 @@ const PaginationContainer = styled.div`
 
 const FormContainer = styled.div`
   height: 100%;
-  overflow-y: auto;
-  max-height: calc(100vh - 120px);
+  // overflow-y: auto;
+  // max-height: calc(100vh - 120px);
   border-radius: 3px;
 
   ${(props) =>
@@ -586,29 +586,29 @@ const DataView = (props) => {
       );
   };
 
-  const renderView = () => {
-    if (General.CurrentView === "TableView")
-      return (
-        <TableView
-          Config={tableViewConfig}
-          Localization={Localization.TableView}
-          Export={Export}
-          Icons={Icons}
-          accentColor={props.accentColor}
-        />
-      );
+  // const renderView = () => {
+  //   if (General.CurrentView === "TableView")
+  //     return (
+  //       <TableView
+  //         Config={tableViewConfig}
+  //         Localization={Localization.TableView}
+  //         Export={Export}
+  //         Icons={Icons}
+  //         accentColor={props.accentColor}
+  //       />
+  //     );
 
-    if (General.DataFromBackend && General.CurrentView === "FormView")
-      return <div>{renderFormView()}</div>;
+  //   if (General.DataFromBackend && General.CurrentView === "FormView")
+  //     return <div>{renderFormView()}</div>;
 
-    if (!General.DataFromBackend && General.CurrentView === "FormView")
-      return (
-        <>
-          <TableView Config={tableViewConfig} Icons={Icons} />
-          {renderFormView()}
-        </>
-      );
-  };
+  //   if (!General.DataFromBackend && General.CurrentView === "FormView")
+  //     return (
+  //       <>
+  //         <TableView Config={tableViewConfig} Icons={Icons} />
+  //         {renderFormView()}
+  //       </>
+  //     );
+  // };
 
   const renderFormViewMovement = () => {
     if (
