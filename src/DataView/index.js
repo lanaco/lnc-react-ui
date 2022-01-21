@@ -518,7 +518,9 @@ const DataView = (props) => {
       <>
         <LoaderContainer></LoaderContainer>
         <LoaderContainerTransparent>
-          <Loader>{Table.Data.length > 2 ? <Spinner /> : <></>}</Loader>
+          <Loader>
+            {Table.Data !== null && Table.Data.length > 2 ? <Spinner /> : <></>}
+          </Loader>
         </LoaderContainerTransparent>
       </>
     );
