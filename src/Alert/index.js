@@ -88,9 +88,11 @@ Alet.defaultProps = {
   theme: theme,
   color: "primary",
   hasContainer: true,
+  message: "",
 };
 
 Alet.propTypes = {
+  message: PropTypes.string,
   theme: PropTypes.object.isRequired,
   className: PropTypes.string,
   hasContainer: PropTypes.bool,

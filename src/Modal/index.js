@@ -64,6 +64,8 @@ const Content = styled.div((props) => ({
     ? "none"
     : `0.065rem solid ${props.theme.palette.gray[600]}`,
   borderRadius: "0 0 0.2rem 0.2rem",
+  maxHeight: "calc(100vh - 220px)",
+  overflowY: "auto",
 }));
 
 function Modal(props) {
