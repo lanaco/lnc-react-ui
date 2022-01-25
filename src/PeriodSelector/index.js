@@ -24,7 +24,7 @@ const Container = styled.span((props) => ({
   },
 
   "& .react-datepicker-wrapper": {
-    width: "100%",
+    width: "25%",
     boxSizing: "border-box",
   },
 
@@ -151,8 +151,7 @@ const PeriodSelector = (props) => {
         disabled={disabled}
         className={className}
       />
-      <br />
-      <br />
+      {" "}
       <DatePicker
         selected={getEndDate()}
         onChange={handleOnEndDateChange}
