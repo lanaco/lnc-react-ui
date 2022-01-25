@@ -226,15 +226,15 @@ const DataView = (props) => {
 
   //======== LOOKUP ========
 
-  useEffect(() => {
-    if (General.IsLookup) SetSelectedData(Lookup.SelectedData);
-  }, [Lookup.SelectedData]);
+  // useEffect(() => {
+  //   if (General.IsLookup) SetSelectedData(Lookup.SelectedData);
+  // }, [Lookup.SelectedData]);
 
-  useEffect(() => {
-    return function cleanup() {
-      if (General.IsLookup) ClearSelectedData();
-    };
-  }, []);
+  // useEffect(() => {
+  //   return function cleanup() {
+  //     if (General.IsLookup) ClearSelectedData();
+  //   };
+  // }, []);
 
   //======== CONFIGS ========
 
@@ -268,6 +268,9 @@ const DataView = (props) => {
     SelectionIndicator: Table.SelectionIndicator || "id",
     SelectedData: Table.SelectedData,
     ChangeToFormView: ChangeToFormView,
+    //---------------------------
+    IsLookup: General.IsLookup,
+    LookupTakeItem: Lookup.LookupTakeItem ? Lookup.LookupTakeItem : () => {},
     //---------------------------
     EnableOrdering: Options.EnableOrdering,
     Column: Ordering.Column,
@@ -658,7 +661,7 @@ const DataView = (props) => {
           {renderFormViewMovement()}
           {renderSwitchToEditModeButton()}
           {renderRefreshButton()}
-          {renderLookupTakeValues()}
+          {/* {renderLookupTakeValues()} */}
           {renderContextMenu()}
         </HeaderContainer>
       );
