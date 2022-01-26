@@ -83,3 +83,6 @@ export { default as PeriodSelector } from "./PeriodSelector";
 
 export * from "./MultiSelectDropdown";
 export { default as MultiSelectDropdown } from "./MultiSelectDropdown";
+
+export * from "./TimeInput";
+export { default as TimeInput } from "./TimeInput";
