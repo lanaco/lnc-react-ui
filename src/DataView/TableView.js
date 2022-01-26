@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import Icon from "../Icon/index";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
+import Button from "../Button";
 
 const Container = styled.div`
   border-radius: 3px;
@@ -152,6 +153,7 @@ const TableView = (props) => {
     OnHeaderClick = () => {},
     ReadOnly,
     IsLookup = false,
+    LookupTakeItem = () => {},
   } = props.Config;
 
   const { Localization = {}, Export = () => {}, Icons = {} } = props;
@@ -215,12 +217,15 @@ const TableView = (props) => {
 
     if (!EnableFormView) onClick = () => {};
 
-    if (
-      !EnableSelection ||
-      ReadOnly ||
-      (IsLookup && SelectionType === TableSelectionType.SINGLE)
-    )
-      onClick = () => {};
+    if (!EnableSelection || ReadOnly) onClick = () => {};
+
+    if (IsLookup) {
+      onClick = () => {
+        if (!IsLoading) {
+          LookupTakeItem(dataItem);
+        }
+      };
+    }
 
     let cellData =
       def.isObject === true
@@ -237,12 +242,23 @@ const TableView = (props) => {
   };
 
   const renderSelectionCell = (dataItem, selected, rowIndex) => {
-    if (
-      !EnableSelection ||
-      ReadOnly ||
-      (IsLookup && SelectionType === TableSelectionType.SINGLE)
-    )
-      return <></>;
+    if (IsLookup) {
+      return (
+        <TableBodyCell selectionCell={true} key={-1}>
+          <Button
+            inverted={true}
+            onClick={() => {
+              if (!IsLoading) {
+                LookupTakeItem(dataItem);
+              }
+            }}
+            icon={"arrow-right"}
+          />
+        </TableBodyCell>
+      );
+    }
+
+    if (!EnableSelection || ReadOnly || IsLookup) return <></>;
 
     return (
       <TableBodyCell selectionCell={true} key={-1}>
@@ -308,6 +324,9 @@ const TableView = (props) => {
   };
 
   const renderSelectAllHeaderCell = () => {
+    if (IsLookup)
+      return <TableHeadCell selectionCell={true} key={-1}></TableHeadCell>;
+
     if (
       !EnableSelection ||
       ReadOnly ||
