@@ -30,7 +30,7 @@ const getBtnColor = (props) => {
 };
 
 const paddingBySize = (size) => {
-  if (size === "small") return `0.2rem 0.4rem 0.2rem 0.4rem`;
+  if (size === "small") return `0.25rem 0.4rem 0.2rem 0.4rem`;
   if (size === "medium") return `0.2625rem 0.5rem 0.2625rem 0.5rem`;
   if (size === "large") return `0.35rem 0.7rem 0.35rem 0.7rem`;
 };
