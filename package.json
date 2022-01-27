@@ -53,13 +53,15 @@
   "dependencies": {
     "@emotion/react": "^11.4.0",
     "framer-motion": "^4.1.17",
-    "immer": "^9.0.3",
+    "immer": "^9.0.12",
+    "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-datepicker": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-transition-group": "^4.4.2",
+    "react-use": "^17.3.2",
     "use-immer": "^0.6.0"
   }
 }
