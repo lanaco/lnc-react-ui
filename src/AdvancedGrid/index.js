@@ -211,21 +211,21 @@ const AdvancedGrid = forwardRef((props, ref) => {
     switch (state.General.ViewType) {
       case viewType.TABLE:
         if (renderTable && isFunction(renderTable))
-          return <Panel>{renderTable({})}</Panel>;
+          return <Panel>{renderTable({ dispatch })}</Panel>;
         else
           return (
             <Panel>
-              <Table controls={{}} />
+              <Table dispatch={dispatch} />
             </Panel>
           );
 
       case viewType.GROUPED_TABLE:
         if (renderGroupedTable && isFunction(renderGroupedTable))
-          return <Panel>{renderGroupedTable({})}</Panel>;
+          return <Panel>{renderGroupedTable({ dispatch })}</Panel>;
         else
           return (
             <Panel>
-              <GroupedTable controls={{}} />
+              <GroupedTable dispatch={dispatch} />
             </Panel>
           );
 
