@@ -11,7 +11,7 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 import { mode, selectionType, viewType } from "./constants/constants";
 import { useEffectOnce, useUpdateEffect } from "react-use";
-import { cloneDeep, isFunction } from "lodash";
+import { cloneDeep, isArray } from "lodash";
 import GridContext from "./context";
 import Table from "./components/Table";
 import GroupedTable from "./components/GroupedTable";
@@ -57,14 +57,14 @@ const ControlsContainer = styled.div`
 
 //=========================== ACTIONS ====================================================
 
-const init = (data) => {
+export const init = (data) => {
   return {
     type: "INIT",
     payload: data,
   };
 };
 
-const setLoading = (loading) => {
+export const setLoading = (loading) => {
   return {
     type: "SET_LOADING",
     payload: {
@@ -73,7 +73,16 @@ const setLoading = (loading) => {
   };
 };
 
-//=========================== INITIAL STATE================================================
+export const setData = (data) => {
+  return {
+    type: "SET_DATA",
+    payload: {
+      data,
+    },
+  };
+};
+
+//=========================== INITIAL STATE ==============================================
 
 const initialState = {
   General: {
@@ -108,7 +117,8 @@ const initialState = {
     CanGoToLastPage: false,
   },
   Selection: {
-    Selector: "id",
+    Identifier: "id",
+    IdentifierDataType: "string",
     SelectedData: [],
     SelectedEntirePage: false,
     SelectionType: selectionType.MULTIPLE,
@@ -129,6 +139,7 @@ const initialState = {
     Create: false,
     Update: false,
     Delete: false,
+    FormView: true,
     // ShowHeader: true,
     // ShowFooter: true,
     // ShowCommands: true,
@@ -152,6 +163,11 @@ function reducer(state, action) {
     case "SET_LOADING":
       return produce(state, (draftState) => {
         draftState.General.Loading = payload.loading;
+      });
+
+    case "SET_DATA":
+      return produce(state, (draftState) => {
+        draftState.Data.Data = payload.data;
       });
 
     default:
@@ -188,16 +204,19 @@ const AdvancedGrid = forwardRef((props, ref) => {
   });
 
   // Update (you can include deps array if necessary)
-  useUpdateEffect(() => {});
+  useUpdateEffect(() => {
+    dispatch(setData(Data));
+  }, [Data]);
 
   // Functions exposed to parent via ref
   useImperativeHandle(
     ref,
     () => ({
       setLoading: (loading) => dispatch(setLoading(loading)),
+      log: () => console.log(state),
     }),
     [
-      // Update functions when certain state changes
+      state, // Update functions when certain state changes
     ]
   );
 
@@ -205,37 +224,80 @@ const AdvancedGrid = forwardRef((props, ref) => {
 
   //--------------- METHODS --------------
 
-  //--------------- RENDER ---------------
+  const findChildComponentByType = (type) => {
+    if (props.children && type) {
+      var component = React.Children.toArray(props.children).find(
+        (child) => child.props.__TYPE__ === type
+      );
 
-  const renderPanel = () => {
-    switch (state.General.ViewType) {
-      case viewType.TABLE:
-        if (renderTable && isFunction(renderTable))
-          return <Panel>{renderTable({ dispatch })}</Panel>;
-        else
-          return (
-            <Panel>
-              <Table dispatch={dispatch} />
-            </Panel>
-          );
+      if (React.isValidElement(component)) {
+        let compChildren = component.props.children;
 
-      case viewType.GROUPED_TABLE:
-        if (renderGroupedTable && isFunction(renderGroupedTable))
-          return <Panel>{renderGroupedTable({ dispatch })}</Panel>;
-        else
-          return (
-            <Panel>
-              <GroupedTable dispatch={dispatch} />
-            </Panel>
-          );
-
-      case viewType.FORM:
-        if (renderForm && isFunction(renderForm))
-          return <Panel>{renderForm({})}</Panel>;
-        break;
+        return React.cloneElement(component, {
+          children: compChildren,
+          dispatch,
+        });
+      }
     }
 
-    return <Panel>{"The panel is empty."}</Panel>;
+    return null;
+  };
+
+  //--------------- RENDER ---------------
+
+  const renderTableComponent = () => {
+    var childTable = findChildComponentByType(viewType.TABLE);
+
+    if (childTable !== null) return <Panel>{childTable}</Panel>;
+
+    return (
+      <Panel>
+        <Table dispatch={dispatch} />
+      </Panel>
+    );
+  };
+
+  const renderGroupedTableComponent = () => {
+    var childTable = findChildComponentByType(viewType.GROUPED_TABLE);
+
+    if (childTable !== null) return <Panel>{childTable}</Panel>;
+
+    return (
+      <Panel>
+        <GroupedTable dispatch={dispatch} />
+      </Panel>
+    );
+  };
+
+  const renderFormComponent = () => {
+    var childTable = findChildComponentByType(viewType.FORM);
+
+    if (childTable !== null) return <Panel>{childTable}</Panel>;
+
+    console.error("'Panel' is empty. Child of type 'FORM' is missing.");
+    return <Panel></Panel>;
+  };
+
+  const renderPanel = () => {
+    // Render components in the content panel based on ViewType
+    // If there is a child of ceratain type, use it..
+    // if not, use the default component
+
+    if (state.General.ViewType === viewType.TABLE)
+      return renderTableComponent();
+
+    if (state.General.ViewType === viewType.GROUPED_TABLE)
+      return renderGroupedTableComponent();
+
+    if (
+      state.General.ViewType === viewType.GROUPED_TABLE &&
+      state.Options.FormView
+    ) {
+      return renderFormComponent();
+    }
+
+    console.error("'Panel' is empty");
+    return <Panel></Panel>;
   };
 
   const renderHeaderContainer = () => {
