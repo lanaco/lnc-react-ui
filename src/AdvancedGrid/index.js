@@ -42,7 +42,7 @@ const FooterContainer = styled.div`
 `;
 
 const Panel = styled.div`
-  border: 1px solid green;
+  // border: 1px solid green;
   padding: 10px;
   margin: 5px 0;
   border-radius: 3px;
@@ -93,8 +93,21 @@ const initialState = {
   Data: {
     Mode: mode.READ,
     Dirty: false,
-    Columns: [],
-    Data: [
+
+    Visibility: {
+      XS: {
+        columns: [
+          {
+            id: "asasdasd",
+            width: 30,
+            index: 0,
+          },
+        ],
+      },
+    },
+    // TODO:
+    // Rename size to visibleAtSize
+    Columns: [
       // {
       //     accessor: "",
       //     order: false,
@@ -105,6 +118,7 @@ const initialState = {
       //     size: XS/S/M/L/XL
       // }
     ],
+    Data: [],
     DataTemplate: {},
   },
   Pagination: {
