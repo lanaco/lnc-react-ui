@@ -60,7 +60,7 @@ const TableHeadCell = styled.th`
   &:hover {
     // background-color: ${theme.palette.primary.light};
     background-color: whitesmoke;
-    cursor: pointer;
+    cursor: ${(props) => (props.hideOrdering ? "inherit" : "pointer")};
   }
 `;
 
@@ -307,6 +307,7 @@ const TableView = (props) => {
 
     return (
       <TableHeadCell
+        hideOrdering={hideOrdering}
         key={i}
         onClick={IsLoading || hideOrdering ? () => {} : headerClick}
       >
