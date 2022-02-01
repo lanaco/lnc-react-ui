@@ -93,7 +93,8 @@ const DateInput = (props) => {
   };
 
   const handleChange = (jsDateObject) => {
-    if (jsDateObject === null) callOnChange(id, "");
+    if (jsDateObject === null || jsDateObject === "Invalid date")
+      callOnChange(id, "");
     else callOnChange(id, jsDateObject);
   };
 
@@ -101,6 +102,10 @@ const DateInput = (props) => {
     if (value === undefined || !value) return null;
     return moment(value, "DD.MM.YYYY.").toDate();
   };
+
+  useEffect(() => {
+    setDateText(value);
+  }, [value]);
 
   useEffect(() => {
     const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
@@ -114,12 +119,15 @@ const DateInput = (props) => {
   };
 
   const handleOnChange = (jsDateObject) => {
-    setDateText(moment(jsDateObject).format("DD.MM.YYYY."));
+    if (jsDateObject === null || jsDateObject === "Invalid date")
+      setDateText("");
+    else setDateText(moment(jsDateObject).format("DD.MM.YYYY."));
   };
 
   return (
     <Container {...{ theme, size, color }}>
       <DatePicker
+        value={dateText}
         selected={getValue()}
         onChange={handleOnChange}
         dateFormat={dateFormat ? dateFormat : "dd.MM.yyyy."}
