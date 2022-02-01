@@ -28,7 +28,6 @@ const Basic = () => {
           accessor: "name",
           order: false,
           render: null,
-          index: [1, 1, 1, 0, 0],
           width: 23,
           size: "S",
         },
@@ -36,7 +35,6 @@ const Basic = () => {
           accessor: "company",
           order: false,
           render: null,
-          index: [2, 2, 2, 1, 1],
           width: 17,
           size: "S",
         },
@@ -44,7 +42,6 @@ const Basic = () => {
           accessor: "address",
           order: false,
           render: null,
-          index: [3, 3, 3, 2, 2],
           width: 30,
           size: "M",
         },
@@ -52,7 +49,6 @@ const Basic = () => {
           accessor: "email",
           order: false,
           render: null,
-          index: [4, 4, 4, 3, 3],
           width: 23,
           size: "L",
         },
@@ -60,15 +56,11 @@ const Basic = () => {
           accessor: "status",
           order: false,
           render: null,
-          index: [0, 0, 0, 4, 4],
           width: 7,
           size: "XL",
         },
       ],
       Data: state.data,
-    },
-    Render: {
-      renderTable: (args) => <AlternateTable {...args} />,
     },
   };
 
@@ -80,7 +72,11 @@ const Basic = () => {
       <AdvancedGrid {...config} ref={ref}>
         {/* <AlternateTable /> */}
 
-        <Table>{/* <TableRow /> */}</Table>
+        <Table>
+          <TableHead />
+          <TableRow />
+          <TableCell />
+        </Table>
       </AdvancedGrid>
     </div>
   );
