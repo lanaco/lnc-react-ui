@@ -23,7 +23,48 @@ const Basic = () => {
 
   var config = {
     Data: {
-      Columns: [],
+      Columns: [
+        {
+          accessor: "name",
+          order: false,
+          render: null,
+          index: [1, 1, 1, 0, 0],
+          width: 23,
+          size: "S",
+        },
+        {
+          accessor: "company",
+          order: false,
+          render: null,
+          index: [2, 2, 2, 1, 1],
+          width: 17,
+          size: "S",
+        },
+        {
+          accessor: "address",
+          order: false,
+          render: null,
+          index: [3, 3, 3, 2, 2],
+          width: 30,
+          size: "M",
+        },
+        {
+          accessor: "email",
+          order: false,
+          render: null,
+          index: [4, 4, 4, 3, 3],
+          width: 23,
+          size: "L",
+        },
+        {
+          accessor: "status",
+          order: false,
+          render: null,
+          index: [0, 0, 0, 4, 4],
+          width: 7,
+          size: "XL",
+        },
+      ],
       Data: state.data,
     },
     Render: {
@@ -37,11 +78,9 @@ const Basic = () => {
         <button onClick={() => ref.current.log()}>LOG</button>
       </div>
       <AdvancedGrid {...config} ref={ref}>
-        <AlternateTable />
+        {/* <AlternateTable /> */}
 
-        <Table>
-          <TableRow />
-        </Table>
+        <Table>{/* <TableRow /> */}</Table>
       </AdvancedGrid>
     </div>
   );

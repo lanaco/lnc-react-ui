@@ -100,7 +100,9 @@ const initialState = {
       //     order: false,
       //     render: null,
       //     hide: false,
-      //     index: 0
+      //     index: [0, 0, 0, 0, 0]
+      //     width: auto / 100px / 10%
+      //     size: XS/S/M/L/XL
       // }
     ],
     DataTemplate: {},
@@ -180,8 +182,6 @@ function reducer(state, action) {
 const AdvancedGrid = forwardRef((props, ref) => {
   // Props
   const { Columns, Data } = props.Data;
-  const {} = props.Hooks;
-  const { renderTable, renderGroupedTable, renderForm } = props.Render;
 
   // Component state
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -315,10 +315,10 @@ const AdvancedGrid = forwardRef((props, ref) => {
   return (
     <GridContext.Provider value={state}>
       <Container>
-        {renderControlsContainer()}
-        {renderHeaderContainer()}
+        {/* {renderControlsContainer()} */}
+        {/* {renderHeaderContainer()} */}
         {renderPanel()}
-        {renderFooterContainer()}
+        {/* {renderFooterContainer()} */}
       </Container>
     </GridContext.Provider>
   );
@@ -331,8 +331,6 @@ AdvancedGrid.defaultProps = {
   Pagination: {},
   Ordering: {},
   Options: {},
-  Hooks: {},
-  Render: {},
 };
 
 export default AdvancedGrid;
