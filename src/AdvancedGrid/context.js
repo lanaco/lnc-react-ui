@@ -1,5 +1,5 @@
 import React from "react";
 
-const GridContext = React.createContext();
+const TableContext = React.createContext();
 
-export default GridContext;
+export default TableContext;

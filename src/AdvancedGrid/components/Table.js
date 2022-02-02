@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import GridContext from "../context";
+import TableContext from "../context";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useMedia } from "react-use";
@@ -42,7 +42,7 @@ const Table = (props) => {
   //
   const sizes = Object.keys(screenSizes).map((size) => screenSizes[size].type);
 
-  const GridState = useContext(GridContext);
+  const TableState = useContext(TableContext);
   const screenSize = useScreenSize();
 
   const { dispatch } = props;
@@ -67,7 +67,7 @@ const Table = (props) => {
 
   const renderRow = (rowData, i) => {
     // Filter columns based on 'hide' property and current screen size
-    var columnsToRender = GridState.Data.Columns.filter((x) => {
+    var columnsToRender = TableState.Data.Columns.filter((x) => {
       var columnSizeIndex = sizes.indexOf(x.size);
       var screenSizeIndex = sizes.indexOf(screenSize);
 
@@ -105,21 +105,7 @@ const Table = (props) => {
     );
   };
 
-  return (
-    <>
-      <div
-        style={{
-          fontWeight: "bold",
-          padding: "15px",
-          border: "1px solid black",
-          marginBottom: "10px",
-        }}
-      >
-        {"Screen size:" + screenSize}
-      </div>
-      <div>{GridState.Data.Data.map((x, i) => renderRow(x, i))}</div>
-    </>
-  );
+  return <div>{TableState.Data.Data.map((x, i) => renderRow(x, i))}</div>;
 };
 
 Table.defaultProps = {

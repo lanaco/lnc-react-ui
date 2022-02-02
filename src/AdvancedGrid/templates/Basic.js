@@ -1,9 +1,8 @@
 import React, { useState, useEffect, createRef } from "react";
-import AdvancedGrid from "../index";
+import Table from "../index";
 import service from "../services/service";
 import styled from "@emotion/styled";
-import AlternateTable from "../components/AlternateTable";
-import Table from "../components/Table";
+import { default as TableTable } from "../components/Table";
 import TableRow from "../components/TableRow";
 
 const Basic = () => {
@@ -69,15 +68,9 @@ const Basic = () => {
       <div>
         <button onClick={() => ref.current.log()}>LOG</button>
       </div>
-      <AdvancedGrid {...config} ref={ref}>
-        {/* <AlternateTable /> */}
-
-        <Table>
-          <TableHead />
-          <TableRow />
-          <TableCell />
-        </Table>
-      </AdvancedGrid>
+      <Table {...config} ref={ref}>
+        <TableTable>{/* <TableRow /> */}</TableTable>
+      </Table>
     </div>
   );
 };

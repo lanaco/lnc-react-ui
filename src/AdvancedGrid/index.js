@@ -12,8 +12,9 @@ import theme from "../_utils/theme";
 import { mode, selectionType, viewType } from "./constants/constants";
 import { useEffectOnce, useUpdateEffect } from "react-use";
 import { cloneDeep, isArray } from "lodash";
-import GridContext from "./context";
-import Table from "./components/Table";
+import TableContext from "./context";
+
+import { default as TableTable } from "./components/Table";
 import GroupedTable from "./components/GroupedTable";
 
 //=========================== CSS ========================================================
@@ -193,7 +194,7 @@ function reducer(state, action) {
 
 //=========================== COMPONENT =================================================
 
-const AdvancedGrid = forwardRef((props, ref) => {
+const Table = forwardRef((props, ref) => {
   // Props
   const { Columns, Data } = props.Data;
 
@@ -266,7 +267,7 @@ const AdvancedGrid = forwardRef((props, ref) => {
 
     return (
       <Panel>
-        <Table dispatch={dispatch} />
+        <TableTable dispatch={dispatch} />
       </Panel>
     );
   };
@@ -327,18 +328,18 @@ const AdvancedGrid = forwardRef((props, ref) => {
   };
 
   return (
-    <GridContext.Provider value={state}>
+    <TableContext.Provider value={state}>
       <Container>
         {/* {renderControlsContainer()} */}
         {/* {renderHeaderContainer()} */}
         {renderPanel()}
         {/* {renderFooterContainer()} */}
       </Container>
-    </GridContext.Provider>
+    </TableContext.Provider>
   );
 });
 
-AdvancedGrid.defaultProps = {
+Table.defaultProps = {
   General: {},
   Data: {},
   Selection: {},
@@ -347,4 +348,4 @@ AdvancedGrid.defaultProps = {
   Options: {},
 };
 
-export default AdvancedGrid;
+export default Table;

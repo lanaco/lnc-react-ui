@@ -1,10 +1,10 @@
 import React from "react";
-import AdvancedGrid from ".";
+import Table from ".";
 import { default as BasicTemplate } from "./templates/Basic";
 
 export default {
-  title: "Advanced Grid",
-  component: AdvancedGrid,
+  title: "Table",
+  component: Table,
 };
 
 const _Basic = (args) => <BasicTemplate />;

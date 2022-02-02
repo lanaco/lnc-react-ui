@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import GridContext from "../context";
+import TableContext from "../context";
 
 const Pagination = () => {
-  const GridState = useContext(GridContext);
+  const TableState = useContext(TableContext);
 
   return <div></div>;
 };
