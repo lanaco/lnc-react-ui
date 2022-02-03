@@ -145,13 +145,13 @@ const TableContainer = styled.div`
 const PaginationContainer = styled.div`
   margin-top: 6px;
   border-top: 1px solid #80808025;
+  display: flex;
 `;
 
 const ItemFooterText = styled.div`
-  padding-left: 6px;
-  padding-right: 7px;
+  padding: 10px;
   display: flex;
-  align-items: center;
+  align-items: right;
   margin-left: auto;
   font-size: ${(props) => props.theme.typography.small.fontSize};
   font-family: ${(props) => props.theme.typography.fontFamily};

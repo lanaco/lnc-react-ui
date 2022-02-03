@@ -1,6 +1,7 @@
 .container {
   width: 100%;
-  background-color: #eff1f3;
+  border: 1.5px solid #bfbfbf80;
+  border-radius: 2px;
 }
 
 .number {
