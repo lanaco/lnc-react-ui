@@ -81,6 +81,8 @@ const Pagination = (props) => {
       <Grid
         Config={Config}
         Columns={Columns}
+        FooterText={"Report footer text"}
+        HeaderText={"Report header text"}
         Data={GridState.Data}
         Pagination={GridState}
         Load={load}
