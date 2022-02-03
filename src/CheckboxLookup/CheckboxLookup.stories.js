@@ -45,7 +45,7 @@ Default.args = {
   style: "toggle",
   title: "Title",
   pagination: true,
-  // height: "150px",
+  height: "150px",
   options: [
     {
       id: 0,

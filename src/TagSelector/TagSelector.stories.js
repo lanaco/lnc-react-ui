@@ -1,5 +1,6 @@
 import React from "react";
 import TagSelector from "./index";
+import theme from "../_utils/theme";
 
 export default {
   title: "TagSelector",
@@ -15,6 +16,8 @@ const Template = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   disabled: false,
+  pagination: true,
+  displayedItemsCount: 5,
   tags: [
     { code: "Tag 1", id: 1 },
     { code: "Tag 222", id: 2 },
@@ -26,10 +29,12 @@ Default.args = {
     { code: "Tag 88", id: 8 },
     { code: "Tag 9999999", id: 9 },
     { code: "Tag 10", id: 10 },
+    { code: "Tag 11", id: 11 },
   ],
   toggleTagSelection: () => {},
   selectedTags: [1, 3, 7],
   color: "primary",
   size: "small",
   mapName: "code",
+  theme: theme,
 };
