@@ -10,10 +10,12 @@ export const getChildComponentByType = (type = "", children, props = {}) => {
       (child) => child.props.__TYPE__ === type
     );
 
-    props.children = component.props.children;
+    if (component) return component;
 
-    if (React.isValidElement(component))
-      return React.cloneElement(component, props);
+    // if (component && component.props) props.children = component.props.children;
+
+    // if (React.isValidElement(component))
+    //   return React.cloneElement(component, props);
   }
 
   return null;

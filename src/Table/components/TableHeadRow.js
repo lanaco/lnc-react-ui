@@ -29,50 +29,40 @@ const HtmlRow = styled.tr`
   }}
 `;
 
-const TableRow = (props) => {
+const TableHeadRow = (props) => {
   //--------------------------
   const {
     onRowClick,
     onSelectRow,
-    // RowData,
-    // SelectedData,
-    // Columns,
-    // ColumnsToRender,
+    RowData,
+    SelectedData,
+    Columns,
+    ColumnsToRender,
     Index,
     IsSelected,
   } = props;
 
   return (
-    <HtmlRow IsSelected={IsSelected} key={Index} onClick={onRowClick}>
+    <HtmlRow IsSelected={IsSelected} key={Index}>
       {props.children}
     </HtmlRow>
   );
 };
 
-TableRow.defaultProps = {
-  __TYPE__: "TABLE_ROW",
+TableHeadRow.defaultProps = {
+  __TYPE__: "TABLE_HEAD_ROW",
   //--------------------
-  onRowClick: () => {},
-  onSelectRow: () => {},
-  // RowData: {},
-  // SelectedData: [],
-  // Columns: [],
-  // ColumnsToRender: [],
+
   //--------------------
   size: "small",
   color: "primary",
   theme: theme,
 };
 
-TableRow.propTypes = {
+TableHeadRow.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  onRowClick: PropTypes.func,
-  onSelectRow: PropTypes.func,
-  // RowData: PropTypes.object,
-  // SelectedData: PropTypes.array,
-  // Columns: PropTypes.arrayOf(PropTypes.object),
-  // ColumnsToRender: PropTypes.arrayOf(PropTypes.object),
+
   //----------------------------------------
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
@@ -88,4 +78,4 @@ TableRow.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default TableRow;
+export default TableHeadRow;

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Table from ".";
 import service from "../AdvancedGrid/services/service";
+import CustomTableCell from "./components/CustomTableCell";
+import CustomTableRow from "./components/CustomTableRow";
 
-const visibilityPattern = {
+var visibilityPattern = {
   XS: [
     {
       id: 1,
@@ -29,21 +31,21 @@ const visibilityPattern = {
   ],
   M: [
     {
-      id: 1,
-      accessor: "name",
-      width: 40,
+      id: 3,
+      accessor: "address",
+      width: 10,
     },
 
     {
-      id: 3,
-      accessor: "address",
-      width: 60,
+      id: 1,
+      accessor: "name",
+      width: 90,
     },
   ],
   L: [
     {
-      id: 1,
-      accessor: "name",
+      id: 3,
+      accessor: "address",
       width: 25,
     },
     {
@@ -52,15 +54,15 @@ const visibilityPattern = {
       width: 15,
     },
     {
-      id: 3,
-      accessor: "address",
+      id: 1,
+      accessor: "name",
       width: 60,
     },
   ],
   XL: [
     {
-      id: 1,
-      accessor: "name",
+      id: 3,
+      accessor: "address",
       width: 20,
     },
     {
@@ -69,8 +71,8 @@ const visibilityPattern = {
       width: 15,
     },
     {
-      id: 3,
-      accessor: "address",
+      id: 1,
+      accessor: "name",
       width: 65,
     },
   ],
@@ -99,20 +101,26 @@ const StoryTemplate = (props) => {
             id: 1,
             accessor: "name",
             width: 25,
+            show: true,
           },
           {
             id: 2,
             accessor: "company",
             width: 15,
+            show: true,
           },
           {
             id: 3,
             accessor: "address",
             width: 60,
+            show: true,
           },
         ]}
         VisibilityPattern={visibilityPattern}
-      />
+      >
+        <CustomTableCell />
+        {/* <CustomTableRow /> */}
+      </Table>
     </div>
   );
 };
