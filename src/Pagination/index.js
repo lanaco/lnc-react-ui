@@ -10,7 +10,6 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: left;
   align-items: center;
-
   border-radius: 3px;
   padding: 4px;
   font-size: ${(props) => props.theme.typography.small.fontSize};

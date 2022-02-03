@@ -74,6 +74,8 @@ const getDefaultState = () => {
       SelectionType: TableSelectionType.MULTIPLE,
       Columns: [],
       Actions: [],
+      FooterText: "",
+      HeaderText: "",
     },
     Form: {
       Mode: "READ",
@@ -145,6 +147,27 @@ const PaginationContainer = styled.div`
   border-top: 1px solid #80808025;
 `;
 
+const ItemFooterText = styled.div`
+  padding-left: 6px;
+  padding-right: 7px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-size: ${(props) => props.theme.typography.small.fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+`;
+
+const ItemHeaderText = styled.div`
+  max-height: 40px;
+  padding-left: 3px;
+  padding-right: 4px;
+  display: flex;
+  align-items: left;
+  font-size: ${(props) => props.theme.typography.small.fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-weight: bold;
+`;
+
 const FormContainer = styled.div`
   height: 100%;
   overflow-y: auto;
@@ -159,7 +182,6 @@ const HeaderContainer = styled.div`
   justify-content: left;
   align-items: center;
   margin-bottom: 5px;
-
   border-radius: 3px;
   padding: 0px;
   font-size: 12px;
@@ -333,6 +355,8 @@ const Grid = React.forwardRef((props, ref) => {
       SelectionType: TableSelectionType.MULTIPLE,
       Columns: [],
       Actions: [],
+      FooterText: "",
+      HeaderText: "",
     },
     Form: {
       Mode: "READ",
@@ -1399,6 +1423,13 @@ const Grid = React.forwardRef((props, ref) => {
     );
   };
 
+  const renderHeaderText = () => {
+    if (state.General.CurrentView !== "TableView" || Load === null) {
+      return false;
+    }
+    return <ItemHeaderText {...themeProps}>{props.HeaderText}</ItemHeaderText>;
+  };
+
   const renderLookupTakeValues = () => {
     if (
       state.General.IsLookup &&
@@ -1524,6 +1555,7 @@ const Grid = React.forwardRef((props, ref) => {
           inverted={true}
           Localization={Localization.Pagination || {}}
         />
+        <ItemFooterText {...themeProps}>{props.FooterText}</ItemFooterText>
       </PaginationContainer>
     );
   };
@@ -1682,6 +1714,7 @@ const Grid = React.forwardRef((props, ref) => {
           {renderFormViewMovement()}
           {renderSwitchToEditModeButton()}
           {renderRefreshButton()}
+          {renderHeaderText()}
           {renderLookupTakeValues()}
         </HeaderContainer>
       );
