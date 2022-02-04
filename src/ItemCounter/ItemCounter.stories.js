@@ -1,6 +1,5 @@
 import React from "react";
 import ItemCounter from "./index";
-import theme from "../_utils/theme";
 
 export default {
   title: "Item counter",
@@ -15,24 +14,22 @@ Normal.args = {
     {
       key: "Item1",
       number: 2,
-      type: { id: 1, code: "Success" },
+      color: "success",
       description: "Project",
     },
     {
       key: "Item2",
       number: 34,
-      type: { id: 2, code: "Danger" },
+      color: "error",
       description: "Resources",
     },
     {
       key: "Item3",
       number: 314,
-      type: { id: 3, code: "Warning" },
+      color: "warning",
       description: "Days",
     },
   ],
-  size: "small",
+  size: "medium",
   color: "primary",
-  disabled: false,
-  theme: theme,
 };

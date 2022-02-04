@@ -149,26 +149,6 @@ const PaginationContainer = styled.div`
 `;
 
 const ItemFooterText = styled.div`
-  padding: 10px;
-  display: flex;
-  align-items: right;
-  margin-left: auto;
-  font-size: ${(props) => props.theme.typography.small.fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-`;
-
-const ItemHeaderText = styled.div`
-  max-height: 40px;
-  padding-left: 3px;
-  padding-right: 4px;
-  display: flex;
-  align-items: left;
-  font-size: ${(props) => props.theme.typography.small.fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  font-weight: bold;
-`;
-
-const ItemFooterText = styled.div`
   padding-left: 6px;
   padding-right: 7px;
   display: flex;
