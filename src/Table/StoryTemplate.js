@@ -118,8 +118,8 @@ const StoryTemplate = (props) => {
         ]}
         VisibilityPattern={visibilityPattern}
       >
-        <CustomTableCell />
-        {/* <CustomTableRow /> */}
+        {/* <CustomTableCell />
+        <CustomTableRow /> */}
       </Table>
     </div>
   );

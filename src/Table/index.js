@@ -82,15 +82,37 @@ const Table = (props) => {
 
   const tableRowRender = useRef(null);
   const tableCellRender = useRef(null);
+
+  const tableHeadRowRender = useRef(null);
   const tableHeadCellRender = useRef(null);
+
+  const tableHeaderRender = useRef(null);
+  const tableFooterRender = useRef(null);
 
   //================== LIFECYCLE =======================================
 
   useEffect(() => {
     var customTableRow = getChildComponentByType("TABLE_ROW", props.children);
+
     var customTableCell = getChildComponentByType("TABLE_CELL", props.children);
+
     var customTableHeadCell = getChildComponentByType(
       "TABLE_HEAD_CELL",
+      props.children
+    );
+
+    var customTableRowCell = getChildComponentByType(
+      "TABLE_ROW_CELL",
+      props.children
+    );
+
+    var customTableHeader = getChildComponentByType(
+      "TABLE_HEADER",
+      props.children
+    );
+
+    var customTableFooter = getChildComponentByType(
+      "TABLE_FOOTER",
       props.children
     );
 
@@ -102,6 +124,15 @@ const Table = (props) => {
 
     if (customTableHeadCell && React.isValidElement(customTableHeadCell))
       tableHeadCellRender.current = customTableCell;
+
+    if (customTableRowCell && React.isValidElement(customTableRowCell))
+      tableHeadRowRender.current = customTableRowCell;
+
+    if (customTableHeader && React.isValidElement(customTableHeader))
+      tableHeaderRender.current = customTableHeader;
+
+    if (customTableFooter && React.isValidElement(customTableFooter))
+      tableFooterRender.current = customTableFooter;
   }, []);
 
   var screenSize = useScreenSize();
@@ -249,21 +280,44 @@ const Table = (props) => {
   };
 
   const renderHeadCell = () => {
-    // Try finding a custom header cell renderer
-    var childHeadCell = getChildComponentByType(
-      "TABLE_HEAD_CELL",
-      props.children,
-      {}
-    );
-
-    if (childHeadCell !== null) {
-      return childHeadCell;
+    if (tableHeadCellRender.current !== null) {
+      return React.cloneElement(tableHeadCellRender.current, {
+        Columns,
+      });
     }
 
     return <></>;
   };
 
-  const renderSelectionCell = () => {
+  const renderHeadRow = () => {
+    if (tableHeadRowRender.current !== null) {
+      return React.cloneElement(tableHeadRowRender.current, {
+        Columns,
+      });
+    }
+
+    return <></>;
+  };
+
+  const renderHeader = () => {
+    if (tableHeaderRender.current !== null) {
+      return React.cloneElement(tableHeaderRender.current, {
+        Data,
+        Columns,
+      });
+    }
+
+    return <></>;
+  };
+
+  const renderFooter = () => {
+    if (tableFooterRender.current !== null) {
+      return React.cloneElement(tableFooterRender.current, {
+        Data,
+        Columns,
+      });
+    }
+
     return <></>;
   };
 
@@ -272,15 +326,19 @@ const Table = (props) => {
   };
 
   const renderHead = () => {
-    return <></>;
+    return <HtmlHead>{renderHeadRow()}</HtmlHead>;
   };
 
   return (
     <Container className={className}>
+      {renderHeader()}
+
       <HtmlTable>
         <HtmlHead>{renderHead()}</HtmlHead>
         <HtmlBody>{renderBody()}</HtmlBody>
       </HtmlTable>
+
+      {renderFooter()}
     </Container>
   );
 };
@@ -307,8 +365,8 @@ Table.defaultProps = {
 Table.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Columns: PropTypes.arrayOf(PropTypes.object),
-  Data: PropTypes.arrayOf(PropTypes.object),
+  Columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  Data: PropTypes.arrayOf(PropTypes.object).isRequired,
   EnableSelection: PropTypes.bool,
   SelectedData: PropTypes.arrayOf(PropTypes.string),
   RowIdentifier: PropTypes.string,
