@@ -1,29 +1,16 @@
-.container {
-  width: 100%;
-  border: 1.5px solid #bfbfbf80;
-  border-radius: 2px;
-}
-
 .number {
   text-align: center;
   font-weight: bold;
 }
 
 .success {
-  color: rgb(31, 128, 231);
+  color: #71c189;
 }
 
 .danger {
-  color: red;
+  color: #df686c;
 }
 
 .warning {
-  color: rgb(165, 117, 15);
-}
-
-.ContainerWrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  border: 1px solid var(--base-color);
+  color: #ffb65c;
 }
