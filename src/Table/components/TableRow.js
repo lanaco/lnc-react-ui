@@ -40,10 +40,27 @@ const TableRow = (props) => {
     // ColumnsToRender,
     Index,
     IsSelected,
+    //----------------
+    className,
+    size,
+    color,
+    theme,
   } = props;
 
+  const themeProps = {
+    className,
+    size,
+    color,
+    theme,
+  };
+
   return (
-    <HtmlRow IsSelected={IsSelected} key={Index} onClick={onRowClick}>
+    <HtmlRow
+      {...themeProps}
+      IsSelected={IsSelected}
+      key={Index}
+      onClick={onRowClick}
+    >
       {props.children}
     </HtmlRow>
   );
@@ -59,6 +76,9 @@ TableRow.defaultProps = {
   // Columns: [],
   // ColumnsToRender: [],
   //--------------------
+  IsSelected: null,
+  //--------------------
+  className: "",
   size: "small",
   color: "primary",
   theme: theme,
@@ -74,6 +94,9 @@ TableRow.propTypes = {
   // Columns: PropTypes.arrayOf(PropTypes.object),
   // ColumnsToRender: PropTypes.arrayOf(PropTypes.object),
   //----------------------------------------
+  IsSelected: PropTypes.bool,
+  //----------------------------------------
+  className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",

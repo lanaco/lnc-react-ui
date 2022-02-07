@@ -3,6 +3,8 @@ import Table from ".";
 import service from "../AdvancedGrid/services/service";
 import CustomTableCell from "./components/CustomTableCell";
 import CustomTableRow from "./components/CustomTableRow";
+import CustomTableHeader from "./components/CustomTableHeader";
+import CustomTableFooter from "./components/CustomTableFooter";
 
 var visibilityPattern = {
   XS: [
@@ -99,27 +101,34 @@ const StoryTemplate = (props) => {
         Columns={[
           {
             id: 1,
+            displayName: "Name",
             accessor: "name",
             width: 25,
             show: true,
           },
           {
             id: 2,
+            displayName: "Company",
             accessor: "company",
             width: 15,
             show: true,
           },
           {
             id: 3,
+            displayName: "Address",
             accessor: "address",
             width: 60,
             show: true,
           },
         ]}
         VisibilityPattern={visibilityPattern}
+        EnableSelection={true}
       >
         {/* <CustomTableCell />
         <CustomTableRow /> */}
+
+        <CustomTableHeader />
+        <CustomTableFooter />
       </Table>
     </div>
   );

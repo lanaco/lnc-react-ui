@@ -31,3 +31,18 @@ export const useScreenSize = () => {
 
   return screenSizes.M.type;
 };
+
+export const renderCustomElement = (
+  customRender,
+  properties,
+  children = null
+) => {
+  if (customRender.current !== null) {
+    properties.children =
+      children !== null ? children : customRender.current.props.children;
+
+    return React.cloneElement(customRender.current, properties);
+  }
+
+  return null;
+};

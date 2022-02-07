@@ -2,16 +2,25 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
+import Checkbox from "../../CheckBox/index";
 
-const HtmlRow = styled.tr`
-  border-bottom: 1px solid transparent;
+const HtmlCell = styled.td`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 2px 4px 6px;
+  width: ${(props) => props.width}%;
 `;
 
-const TableHeadRow = (props) => {
+const TableSelectionCell = (props) => {
   //--------------------------
   const {
+    Column,
+    RowData,
+    SelectedData,
+    IsSelected,
     Index,
-    //-------------
+    //----------------
     className,
     size,
     color,
@@ -26,16 +35,20 @@ const TableHeadRow = (props) => {
   };
 
   return (
-    <HtmlRow {...themeProps} key={Index}>
-      {props.children}
-    </HtmlRow>
+    <HtmlCell {...themeProps} key={Index} width={props.width}>
+      <Checkbox id={Index} checked={IsSelected} onChange={() => {}} />
+    </HtmlCell>
   );
 };
 
-TableHeadRow.defaultProps = {
-  __TYPE__: "TABLE_HEAD_ROW",
+TableSelectionCell.defaultProps = {
+  __TYPE__: "TABLE_SELECTION_CELL",
   //--------------------
+  Column: {},
+  RowData: {},
   Index: 0,
+  SelectedData: [],
+  IsSelected: null,
   //--------------------
   className: "",
   size: "small",
@@ -43,10 +56,14 @@ TableHeadRow.defaultProps = {
   theme: theme,
 };
 
-TableHeadRow.propTypes = {
+TableSelectionCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Index: PropTypes.any,
+  Column: PropTypes.object.isRequired,
+  RowData: PropTypes.object.isRequired,
+  Index: PropTypes.number.isRequired,
+  SelectedData: PropTypes.array,
+  IsSelected: PropTypes.bool,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
@@ -63,4 +80,4 @@ TableHeadRow.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default TableHeadRow;
+export default TableSelectionCell;

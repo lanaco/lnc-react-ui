@@ -2,20 +2,25 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
+import Checkbox from "../../CheckBox/index";
 
-const HtmlCell = styled.td`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const HtmlCell = styled.th`
+  text-align: left;
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  border-bottom: 1px solid ${(props) => props.theme.palette.transparent.light};
+  border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
   width: ${(props) => props.width};
-  padding: 4px 2px 4px 6px;
+  padding: 2px 2px 2px 6px;
+  width: ${(props) => props.width}%;
 `;
 
-const TableCell = (props) => {
+const TableHeadSelectionCell = (props) => {
   //--------------------------
   const {
     Column,
     RowData,
+    SelectedData,
+    IsSelected,
     Index,
     //----------------
     className,
@@ -31,27 +36,21 @@ const TableCell = (props) => {
     theme,
   };
 
-  const getWidth = () => {
-    if (Column && Column.width) {
-      return Column.width + "%";
-    }
-
-    return "auto";
-  };
-
   return (
-    <HtmlCell {...themeProps} width={getWidth()} key={Index}>
-      {RowData[Column.accessor]}
+    <HtmlCell {...themeProps} key={Index} width={props.width}>
+      <Checkbox id={Index} checked={IsSelected} onChange={() => {}} />
     </HtmlCell>
   );
 };
 
-TableCell.defaultProps = {
-  __TYPE__: "TABLE_CELL",
+TableHeadSelectionCell.defaultProps = {
+  __TYPE__: "TABLE_HEAD_SELECTION_CELL",
   //--------------------
   Column: {},
   RowData: {},
   Index: 0,
+  SelectedData: [],
+  IsSelected: null,
   //--------------------
   className: "",
   size: "small",
@@ -59,12 +58,14 @@ TableCell.defaultProps = {
   theme: theme,
 };
 
-TableCell.propTypes = {
+TableHeadSelectionCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
   Column: PropTypes.object.isRequired,
   RowData: PropTypes.object.isRequired,
   Index: PropTypes.number.isRequired,
+  SelectedData: PropTypes.array,
+  IsSelected: PropTypes.bool,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
@@ -81,4 +82,4 @@ TableCell.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default TableCell;
+export default TableHeadSelectionCell;

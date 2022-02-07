@@ -162,8 +162,8 @@ const CheckBox = (props) => {
 
   const handleChange = (e) => {
     if (preventDefault) e.preventDefault();
-
     onChange(id, !checked);
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
   };
 
   return (
@@ -192,6 +192,7 @@ CheckBox.defaultProps = {
   disabled: false,
   onChange: () => {},
   className: "",
+  checked: false,
   preventDefault: true,
   size: "small",
   label: "",
@@ -204,6 +205,7 @@ CheckBox.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,
+  checked: PropTypes.bool,
   preventDefault: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   label: PropTypes.string,
