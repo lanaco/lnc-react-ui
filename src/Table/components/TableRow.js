@@ -10,10 +10,11 @@ const HtmlRow = styled.tr`
   ${(props) => {
     if (props.IsSelected !== true)
       return `
-        &:hover {
+       &:hover {
           & > td {
-            background-color: whitesmoke;
+            background-color: whitesmoke ;
           }
+
           cursor: pointer;
       }`;
     else return "";
@@ -34,7 +35,7 @@ const TableRow = (props) => {
   const {
     onRowClick,
     onSelectRow,
-    // RowData,
+    RowData,
     // SelectedData,
     // Columns,
     // ColumnsToRender,
@@ -54,12 +55,18 @@ const TableRow = (props) => {
     theme,
   };
 
+  const onClick = (e) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+    onRowClick(e, RowData);
+  };
+
   return (
     <HtmlRow
       {...themeProps}
       IsSelected={IsSelected}
       key={Index}
-      onClick={onRowClick}
+      onClick={onClick}
     >
       {props.children}
     </HtmlRow>
@@ -71,7 +78,7 @@ TableRow.defaultProps = {
   //--------------------
   onRowClick: () => {},
   onSelectRow: () => {},
-  // RowData: {},
+  RowData: {},
   // SelectedData: [],
   // Columns: [],
   // ColumnsToRender: [],
@@ -89,7 +96,7 @@ TableRow.propTypes = {
   //----------------------------------------
   onRowClick: PropTypes.func,
   onSelectRow: PropTypes.func,
-  // RowData: PropTypes.object,
+  RowData: PropTypes.object,
   // SelectedData: PropTypes.array,
   // Columns: PropTypes.arrayOf(PropTypes.object),
   // ColumnsToRender: PropTypes.arrayOf(PropTypes.object),

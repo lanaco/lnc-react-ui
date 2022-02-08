@@ -13,6 +13,7 @@ import TableHeadRow from "./components/TableHeadRow";
 import TableHeadCell from "./components/TableHeadCell";
 import TableHeadSelectionCell from "./components/TableHeadSelectionCell";
 import { useMeasure } from "react-use";
+import Spinner from "../Spinner/index";
 
 const Container = styled.div`
   padding: 10px;
@@ -23,6 +24,35 @@ const Container = styled.div`
   white-space: nowrap;
   font-size: ${theme.typography.small.fontSize};
   font-family: ${theme.typography.fontFamily};
+  position: relative;
+`;
+
+const LoaderContainer = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #eceaea;
+  z-index: 10000000;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+`;
+
+const LoaderContainerTransparent = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 10000000;
+`;
+
+const Loader = styled.div`
+  position: absolute;
+  top: 48%;
+  left: 47%;
 `;
 
 const HtmlTable = styled.table`
@@ -36,6 +66,18 @@ const HtmlHead = styled.thead``;
 
 const HtmlBody = styled.tbody``;
 
+const NoDataRow = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${theme.typography.small.fontSize};
+  font-family: ${theme.typography.fontFamily};
+  padding: 8px 8px 8px 8px;
+  background-color: whitesmoke;
+  border-radius: 3px;
+  margin-top: 4px;
+`;
+
 const Table = (props) => {
   //================== PROPS ===========================================
 
@@ -43,7 +85,9 @@ const Table = (props) => {
     EnableSelection,
     EnableOrdering,
     EnableSelectAll,
+    EnableLoader,
     //--------------------
+    Loading,
     Columns,
     Data,
     SelectedData,
@@ -68,6 +112,9 @@ const Table = (props) => {
     size,
   };
 
+  const tableContainerRender = useRef(null);
+  const tableLoaderRender = useRef(null);
+
   const tableRowRender = useRef(null);
   const tableCellRender = useRef(null);
   const tableSelectionCellRender = useRef(null);
@@ -82,6 +129,16 @@ const Table = (props) => {
   //================== LIFECYCLE =======================================
 
   useEffect(() => {
+    var customTableContainer = getChildComponentByType(
+      "TABLE_CONTAINER",
+      props.children
+    );
+
+    var customTableLoader = getChildComponentByType(
+      "TABLE_LOADER",
+      props.children
+    );
+
     var customTableRow = getChildComponentByType("TABLE_ROW", props.children);
     var customTableCell = getChildComponentByType("TABLE_CELL", props.children);
     var customTableSelectionCell = getChildComponentByType(
@@ -109,6 +166,12 @@ const Table = (props) => {
       props.children
     );
 
+    if (customTableContainer && React.isValidElement(customTableContainer))
+      tableContainerRender.current = customTableContainer;
+
+    if (customTableLoader && React.isValidElement(customTableLoader))
+      tableLoaderRender.current = customTableLoader;
+
     if (customTableRow && React.isValidElement(customTableRow))
       tableRowRender.current = customTableRow;
 
@@ -134,10 +197,7 @@ const Table = (props) => {
       tableFooterRender.current = customTableFooter;
   }, []);
 
-  const [
-    tBodyRef,
-    { x, y, width, height, top, right, bottom, left },
-  ] = useMeasure();
+  const [tBodyRef, { width }] = useMeasure();
 
   var screenSize = useScreenSize();
 
@@ -150,10 +210,6 @@ const Table = (props) => {
         "Error: Selection is enabled but the 'RowIdentifier' is empty"
       );
   }, []);
-
-  useEffect(() => {
-    console.log(width);
-  }, [width]);
 
   useEffect(() => {
     if (Columns === null || Columns === undefined || Columns.length === 0)
@@ -201,7 +257,9 @@ const Table = (props) => {
       });
 
       if (EnableSelection === true) {
-        var reduceWidthByAmount = ((32 / width) * 100) / columnsToRender.length;
+        var reduceWidthByAmount =
+          ((getSelectionCellWidthBySize() / width) * 100) /
+          columnsToRender.length;
 
         columnsToRender = columnsToRender.map((col) => ({
           ...col,
@@ -241,6 +299,14 @@ const Table = (props) => {
     return rowSelection;
   };
 
+  const getSelectionCellWidthBySize = () => {
+    if (size === "small") return 30;
+    if (size === "medium") return 36;
+    if (size === "large") return 42;
+
+    return 30;
+  };
+
   //================== RENDER ==========================================
 
   const renderRow = (rowData = {}, index) => {
@@ -250,7 +316,7 @@ const Table = (props) => {
     checkColumnsWidthSum(columnsToRender, index);
 
     // Check if row is selected
-    if (EnableSelection) calculateRowSelection(rowData);
+    if (EnableSelection === true) rowSelection = calculateRowSelection(rowData);
 
     var rowProps = {
       onRowClick,
@@ -290,6 +356,7 @@ const Table = (props) => {
       RowData: rowData,
       Column: column,
       Index: index,
+      EnableSelection,
       ...themeProps,
     };
 
@@ -304,6 +371,7 @@ const Table = (props) => {
     var selectionCellProps = {
       SelectedData,
       RowData: rowData,
+      onSelectRow,
       IsSelected: isSelected,
       ...themeProps,
     };
@@ -313,7 +381,7 @@ const Table = (props) => {
         <TableSelectionCell
           {...selectionCellProps}
           key={index}
-          width={(32 / width) * 100}
+          width={(getSelectionCellWidthBySize() / width) * 100}
         />
       )
     );
@@ -347,6 +415,7 @@ const Table = (props) => {
       Column: column,
       Ordering,
       EnableOrdering,
+      EnableSelectAll,
       onColumnClick,
       ...themeProps,
     };
@@ -362,6 +431,7 @@ const Table = (props) => {
     var cellProps = {
       Index: -1,
       IsSelected: SelectedEntirePage,
+      EnableSelectAll,
       ...themeProps,
     };
 
@@ -370,7 +440,7 @@ const Table = (props) => {
         <TableHeadSelectionCell
           {...cellProps}
           key={-1}
-          width={(32 / width) * 100}
+          width={(getSelectionCellWidthBySize() / width) * 100}
         />
       )
     );
@@ -396,30 +466,84 @@ const Table = (props) => {
     );
   };
 
-  return (
-    <Container className={className}>
-      {renderHeader()}
+  const renderNoDataRow = () => {
+    if (Data === null || Data === undefined || (Data && Data.length === 0)) {
+      var colspan = filterColumns().length;
 
-      <HtmlTable>
-        <HtmlHead>{renderHeadRow()}</HtmlHead>
-        <HtmlBody ref={tBodyRef}>
-          {Data.map((rowData, index) => renderRow(rowData, index))}
-        </HtmlBody>
-      </HtmlTable>
+      if (EnableSelection) colspan++;
 
-      {renderFooter()}
-    </Container>
-  );
+      return (
+        <tr>
+          <td colSpan={colspan}>
+            <NoDataRow>{"No data to show"}</NoDataRow>
+          </td>
+        </tr>
+      );
+    }
+
+    return <></>;
+  };
+
+  const renderSpinner = () => {
+    if (EnableLoader === true && Loading === true)
+      return (
+        renderCustomElement(tableLoaderRender, {}) || (
+          <>
+            <LoaderContainer></LoaderContainer>
+            <LoaderContainerTransparent>
+              <Loader>
+                <Spinner />
+              </Loader>
+            </LoaderContainerTransparent>
+          </>
+        )
+      );
+
+    return <></>;
+  };
+
+  const renderTable = () => {
+    var containerProps = {
+      className,
+      ...themeProps,
+    };
+
+    var children = (
+      <>
+        {renderSpinner()}
+        {renderHeader()}
+        <HtmlTable>
+          <HtmlHead>{renderHeadRow()}</HtmlHead>
+          <HtmlBody ref={tBodyRef}>
+            {Data.map((rowData, index) => renderRow(rowData, index))}
+            {renderNoDataRow()}
+          </HtmlBody>
+        </HtmlTable>
+        {renderFooter()}
+      </>
+    );
+
+    return (
+      renderCustomElement(tableContainerRender, containerProps, children) || (
+        <Container className={className}>{children}</Container>
+      )
+    );
+  };
+
+  return renderTable();
 };
 
 Table.defaultProps = {
   __TYPE__: "TABLE",
+  //--------------------
+  Loading: false,
   Columns: [],
   Data: [],
   EnableSelection: false,
   EnableOrdering: false,
-  SelectedData: [],
+  EnableLoader: false,
   EnableSelectAll: false,
+  SelectedData: [],
   SelectedEntirePage: false,
   RowIdentifier: "id",
   VisibilityPattern: {},
@@ -440,11 +564,13 @@ Table.propTypes = {
   //----------------------------------------
   EnableSelection: PropTypes.bool,
   EnableOrdering: PropTypes.bool,
+  EnableLoader: PropTypes.bool,
+  EnableSelectAll: PropTypes.bool,
   //----------------------------------------
+  Loading: PropTypes.bool,
   Columns: PropTypes.arrayOf(PropTypes.object).isRequired,
   Data: PropTypes.arrayOf(PropTypes.object).isRequired,
   SelectedData: PropTypes.arrayOf(PropTypes.string),
-  EnableSelectAll: PropTypes.bool,
   SelectedEntirePage: PropTypes.bool,
   RowIdentifier: PropTypes.string,
   VisibilityPattern: PropTypes.object,

@@ -5,10 +5,8 @@ import theme from "../../_utils/theme";
 import Checkbox from "../../CheckBox/index";
 
 const HtmlCell = styled.td`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding: 4px 2px 4px 6px;
+  background-color: transparent;
   width: ${(props) => props.width}%;
 `;
 
@@ -18,6 +16,7 @@ const TableSelectionCell = (props) => {
     Column,
     RowData,
     SelectedData,
+    onSelectRow,
     IsSelected,
     Index,
     //----------------
@@ -34,9 +33,24 @@ const TableSelectionCell = (props) => {
     theme,
   };
 
+  const onChange = (_, value) => {
+    onSelectRow(RowData, IsSelected);
+  };
+
+  const onCellClick = (e) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+    onSelectRow(RowData, IsSelected);
+  };
+
   return (
-    <HtmlCell {...themeProps} key={Index} width={props.width}>
-      <Checkbox id={Index} checked={IsSelected} onChange={() => {}} />
+    <HtmlCell
+      {...themeProps}
+      key={Index}
+      width={props.width}
+      onClick={onCellClick}
+    >
+      <Checkbox id={Index} checked={IsSelected} onChange={onChange} />
     </HtmlCell>
   );
 };
@@ -46,6 +60,7 @@ TableSelectionCell.defaultProps = {
   //--------------------
   Column: {},
   RowData: {},
+  onSelectRow: () => {},
   Index: 0,
   SelectedData: [],
   IsSelected: null,
@@ -61,6 +76,7 @@ TableSelectionCell.propTypes = {
   //----------------------------------------
   Column: PropTypes.object.isRequired,
   RowData: PropTypes.object.isRequired,
+  onSelectRow: PropTypes.func,
   Index: PropTypes.number.isRequired,
   SelectedData: PropTypes.array,
   IsSelected: PropTypes.bool,

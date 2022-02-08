@@ -5,6 +5,8 @@ import CustomTableCell from "./components/CustomTableCell";
 import CustomTableRow from "./components/CustomTableRow";
 import CustomTableHeader from "./components/CustomTableHeader";
 import CustomTableFooter from "./components/CustomTableFooter";
+import CustomTableContainer from "./components/CustomTableContainer";
+import CellRender from "./components/CellRender";
 
 var visibilityPattern = {
   XS: [
@@ -81,22 +83,35 @@ var visibilityPattern = {
 };
 
 const StoryTemplate = (props) => {
-  const [state, setState] = useState({ data: [] });
+  const [state, setState] = useState({ data: [], loading: false });
 
-  useEffect(() => {
+  useEffect(() => load(), []);
+
+  const load = () => {
+    setState({ ...state, loading: true });
+    var result = service.loadData();
+
     setTimeout(() => {
-      var result = service.loadData();
-
       setState({
         ...state,
         data: result.data,
+        loading: false,
       });
-    }, 300);
-  }, []);
+    }, 1200);
+  };
 
   return (
     <div>
+      <div
+        style={{
+          padding: "10px",
+        }}
+      >
+        <button onClick={load}>LOAD</button>
+      </div>
       <Table
+        Loading={state.loading}
+        EnableLoader={true}
         Data={state.data}
         Columns={[
           {
@@ -105,6 +120,8 @@ const StoryTemplate = (props) => {
             accessor: "name",
             width: 25,
             show: true,
+            render: (props) => <CellRender {...props} />,
+            // render: (props) => false,
           },
           {
             id: 2,
@@ -122,13 +139,20 @@ const StoryTemplate = (props) => {
           },
         ]}
         VisibilityPattern={visibilityPattern}
+        onRowClick={(e, props) => {
+          console.log("onRowClick");
+        }}
         EnableSelection={true}
+        onSelectRow={(data, selected) => {
+          console.log(selected, data);
+        }}
       >
         {/* <CustomTableCell />
         <CustomTableRow /> */}
 
-        <CustomTableHeader />
-        <CustomTableFooter />
+        {/* <CustomTableContainer /> */}
+        {/* <CustomTableHeader /> */}
+        {/* <CustomTableFooter /> */}
       </Table>
     </div>
   );

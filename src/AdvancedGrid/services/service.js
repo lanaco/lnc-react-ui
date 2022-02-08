@@ -472,7 +472,7 @@ const loadData = (data = {}) => {
   return {
     isSuccessfull: true,
     errors: [],
-    data: db,
+    data: db.slice(0, Math.floor(Math.random() * 34)),
     // CurrentPage: CurrentPage,
     // PageCount: pageCount,
     // PageSize: PageSize,

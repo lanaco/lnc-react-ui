@@ -162,8 +162,9 @@ const CheckBox = (props) => {
 
   const handleChange = (e) => {
     if (preventDefault) e.preventDefault();
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     onChange(id, !checked);
-    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
   };
 
   return (

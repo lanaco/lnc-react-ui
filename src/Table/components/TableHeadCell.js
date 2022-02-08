@@ -11,10 +11,8 @@ const HtmlHeadCell = styled.th`
   border-bottom: 1px solid ${(props) => props.theme.palette.transparent.light};
   border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
 
-  ${(props) =>
-    props.selectionCell === true
-      ? "width: 27px; padding: 1px 1px 1px 6px;"
-      : "padding: 2px 2px 2px 6px;"}
+  padding: ${(props) =>
+    props.selection ? "2px 2px 2px 6px" : "8px 2px 8px 6px"};
 
   &:first-of-type {
     border-radius: 3px 0 0 0;
@@ -60,6 +58,7 @@ const TableHeadCell = (props) => {
     Ordering,
     Index,
     onColumnClick,
+    EnableSelectAll,
     //-----------
     className,
     size,
@@ -78,6 +77,7 @@ const TableHeadCell = (props) => {
     <HtmlHeadCell
       onClick={(e) => onColumnClick(e, Column, Ordering)}
       {...themeProps}
+      selection={EnableSelectAll}
       key={Index}
     >
       {Column.displayName}
@@ -91,6 +91,7 @@ TableHeadCell.defaultProps = {
   Column: {},
   Ordering: {},
   Index: 0,
+  EnableSelectAll: false,
   onColumnClick: () => {},
   //--------------------
   className: "",
@@ -105,6 +106,7 @@ TableHeadCell.propTypes = {
   Columns: PropTypes.object,
   Ordering: PropTypes.array,
   Index: PropTypes.any,
+  EnableSelectAll: PropTypes.bool,
   onColumnClick: PropTypes.func,
   //----------------------------------------
   className: PropTypes.string,

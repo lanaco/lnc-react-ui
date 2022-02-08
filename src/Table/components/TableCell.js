@@ -2,13 +2,15 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
+import { isFunction, isEmpty } from "lodash";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: ${(props) => props.width};
-  padding: 4px 2px 4px 6px;
+  padding: ${(props) =>
+    props.selection === false ? "11.4px 6px 11.4px 6px" : "4px 6px 4px 6px"};
 `;
 
 const TableCell = (props) => {
@@ -17,6 +19,7 @@ const TableCell = (props) => {
     Column,
     RowData,
     Index,
+    EnableSelection,
     //----------------
     className,
     size,
@@ -39,9 +42,33 @@ const TableCell = (props) => {
     return "auto";
   };
 
+  const renderCellContent = () => {
+    if (Column.render && isFunction(Column.render)) {
+      var element = Column.render(RowData);
+
+      if (React.isValidElement(element)) return element;
+      else
+        console.error(
+          `${Column.id}/${Column.accessor}: invalid render function.`
+        );
+    }
+
+    if (isEmpty(Column.accessor))
+      console.error(
+        `${Column.index}: accessor property is required when the render function is not suplied`
+      );
+
+    return RowData[Column.accessor];
+  };
+
   return (
-    <HtmlCell {...themeProps} width={getWidth()} key={Index}>
-      {RowData[Column.accessor]}
+    <HtmlCell
+      {...themeProps}
+      selection={EnableSelection}
+      width={getWidth()}
+      key={Index}
+    >
+      {renderCellContent()}
     </HtmlCell>
   );
 };
@@ -52,6 +79,7 @@ TableCell.defaultProps = {
   Column: {},
   RowData: {},
   Index: 0,
+  EnableSelection: false,
   //--------------------
   className: "",
   size: "small",
@@ -65,6 +93,7 @@ TableCell.propTypes = {
   Column: PropTypes.object.isRequired,
   RowData: PropTypes.object.isRequired,
   Index: PropTypes.number.isRequired,
+  EnableSelection: PropTypes.bool,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),

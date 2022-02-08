@@ -10,7 +10,8 @@ const HtmlCell = styled.th`
   border-bottom: 1px solid ${(props) => props.theme.palette.transparent.light};
   border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
   width: ${(props) => props.width};
-  padding: 2px 2px 2px 6px;
+  padding: ${(props) =>
+    props.selection ? "2px 2px 2px 6px" : "8px 2px 8px 6px"};
   width: ${(props) => props.width}%;
 `;
 
@@ -20,6 +21,7 @@ const TableHeadSelectionCell = (props) => {
     Column,
     RowData,
     SelectedData,
+    EnableSelectAll,
     IsSelected,
     Index,
     //----------------
@@ -37,8 +39,15 @@ const TableHeadSelectionCell = (props) => {
   };
 
   return (
-    <HtmlCell {...themeProps} key={Index} width={props.width}>
-      <Checkbox id={Index} checked={IsSelected} onChange={() => {}} />
+    <HtmlCell
+      {...themeProps}
+      selection={EnableSelectAll}
+      key={Index}
+      width={props.width}
+    >
+      {/* {EnableSelectAll && (
+        <Checkbox id={Index} checked={IsSelected} onChange={() => {}} />
+      )} */}
     </HtmlCell>
   );
 };
@@ -51,6 +60,7 @@ TableHeadSelectionCell.defaultProps = {
   Index: 0,
   SelectedData: [],
   IsSelected: null,
+  EnableSelectAll: false,
   //--------------------
   className: "",
   size: "small",
@@ -66,6 +76,7 @@ TableHeadSelectionCell.propTypes = {
   Index: PropTypes.number.isRequired,
   SelectedData: PropTypes.array,
   IsSelected: PropTypes.bool,
+  EnableSelectAll: PropTypes.bool,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
