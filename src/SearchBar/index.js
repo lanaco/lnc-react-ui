@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import Chip from "../Chip";
 import FadeIn from "../FadeIn/FadeIn";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import "./animation.css";
 
 const getIconFontSize = (props) => {
   if (props.size === "small") return props.theme.typography.medium.fontSize;
@@ -34,6 +33,7 @@ const Container = styled.div`
   border-radius: 0.1875rem;
   width: 100%;
   transition: all 250ms ease;
+  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
 `;
 
 const ItemContainer = styled.div`
@@ -90,6 +90,7 @@ const SearchIcon = styled.div`
   font-size: ${(props) => getIconFontSize(props)};
   background-color: whitesmoke;
   transition: all 250ms ease;
+  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
 `;
 
 const ClearIcon = styled.div`
@@ -98,7 +99,8 @@ const ClearIcon = styled.div`
   font-size: ${(props) => getIconFontSize(props)};
   background-color: whitesmoke;
   transition: all 250ms ease;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
   margin-right: 0;
   margin-left: auto;
 `;
@@ -139,6 +141,7 @@ const SearchBar = (props) => {
     suggestions,
     onChange,
     id,
+    disabled,
     className,
     size,
     color,
@@ -258,7 +261,7 @@ const SearchBar = (props) => {
   return (
     <Container className={className} {...themeProps}>
       <Inner {...themeProps}>
-        <SearchIcon {...themeProps}>
+        <SearchIcon {...themeProps} disabled={disabled}>
           <i className="fas fa-search fa-fw"></i>
         </SearchIcon>
         <ItemContainer {...themeProps}>
@@ -277,8 +280,9 @@ const SearchBar = (props) => {
                     text={x.description}
                     additionalInfo={x.value}
                     inactive={!x.active}
-                    onRemove={() => handleRemoveItem(key)}
-                    onClick={() => handleActiveInactive(key)}
+                    onRemove={() => (disabled ? {} : handleRemoveItem(key))}
+                    onClick={() => (disabled ? {} : handleActiveInactive(key))}
+                    disabled={disabled}
                   />
                 </ItemWrapper>
               </CSSTransition>
@@ -293,11 +297,15 @@ const SearchBar = (props) => {
               onBlur={onInputBlur}
               onChange={onInputChange}
               onKeyDown={onKeyDown}
+              disabled={disabled}
             />
           </InputContainer>
         </ItemContainer>
-        <ClearIcon {...themeProps}>
-          <i className="fas fa-times fa-fw" onClick={() => onChange(id, [])} />
+        <ClearIcon {...themeProps} disabled={disabled}>
+          <i
+            className="fas fa-times fa-fw"
+            onClick={() => (disabled ? {} : onChange(id, []))}
+          />
         </ClearIcon>
       </Inner>
 
@@ -308,6 +316,7 @@ const SearchBar = (props) => {
 
 SearchBar.defaultProps = {
   id: "",
+  disabled: false,
   onChange: () => {},
   items: [],
   suggestions: [],
@@ -320,6 +329,7 @@ SearchBar.defaultProps = {
 SearchBar.propTypes = {
   theme: PropTypes.object.isRequired,
   id: PropTypes.any,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,
   items: PropTypes.array,

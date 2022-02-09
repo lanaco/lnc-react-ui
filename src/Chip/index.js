@@ -56,7 +56,7 @@ const Inner = styled.div`
   padding: 0;
   margin: 0;
   border-radius: 0.5rem;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
 
   min-height: ${(props) => heightBySize(props.size)};
   max-height: ${(props) => heightBySize(props.size)};
@@ -73,6 +73,7 @@ const Text = styled.div`
   white-space: pre;
   flex-grow: 10;
   height: 100%;
+  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
   background-color: ${(props) =>
     props.inactive
       ? props.theme.palette.gray[900]
@@ -87,6 +88,7 @@ const AdditionalInfo = styled.div`
   white-space: pre;
   flex-grow: 10;
   height: 100%;
+  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
   background-color: ${(props) =>
     props.inactive
       ? props.theme.palette.gray[100]
@@ -97,7 +99,7 @@ const AdditionalInfo = styled.div`
 
 const ButtonContainer = styled.div`
   display: inline;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   padding: ${(props) => paddingBySize(props.size)};
   transition: all 250ms ease;
   border-radius: 0 0.5rem 0.5rem 0;
@@ -105,7 +107,7 @@ const ButtonContainer = styled.div`
   align-self: flex-end;
   margin-left: auto;
   height: 100%;
-
+  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
   background-color: ${(props) => getBtnContainerColor(props)};
 
   color: ${(props) => getBtnColor(props)};
@@ -151,6 +153,7 @@ const Chip = (props) => {
           {...themeProps}
           additional={additionalInfo && additionalInfo !== ""}
           onClick={() => onRemove(id)}
+          disabled={disabled}
         >
           <i className="fas fa-times" />
         </ButtonContainer>
