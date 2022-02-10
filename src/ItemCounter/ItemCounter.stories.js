@@ -11,11 +11,25 @@ const Template = (args) => <ItemCounter {...args} />;
 export const Normal = Template.bind({});
 Normal.args = {
   Items: [
-    { key: "Item1", number: 2, type: { id: 1, code: "Success" } },
-    { key: "Item2", number: 34, type: { id: 2, code: "Danger" } },
-    { key: "Item3", number: 314, type: { id: 3, code: "Warning" } },
+    {
+      key: "Item1",
+      number: 2,
+      color: "success",
+      description: "Project",
+    },
+    {
+      key: "Item2",
+      number: 34,
+      color: "error",
+      description: "Resources",
+    },
+    {
+      key: "Item3",
+      number: 314,
+      color: "warning",
+      description: "Days",
+    },
   ],
-  size: "small",
+  size: "medium",
   color: "primary",
-  disabled: false,
 };

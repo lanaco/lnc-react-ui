@@ -33,17 +33,13 @@ const Container = styled.div`
   background-color: white;
   border-radius: 0.1875rem;
   width: 100%;
-
   transition: all 250ms ease;
 `;
 
 const ItemContainer = styled.div`
   padding: 0.15rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  flex-grow: 10;
   transition: all 250ms ease;
+  display: inline-block;
 `;
 
 const ItemWrapper = styled.div`
@@ -51,7 +47,7 @@ const ItemWrapper = styled.div`
   margin: 0.125rem;
   flex-grow: 1;
   transition: all 250ms ease;
-
+  width: fit-content;
   & > div {
     width: 100%;
   }
@@ -85,7 +81,7 @@ const Input = styled.input`
 
 const Inner = styled.div`
   display: flex;
-  // align-items: center;
+  width: 100%;
 `;
 
 const SearchIcon = styled.div`
@@ -103,10 +99,11 @@ const ClearIcon = styled.div`
   background-color: whitesmoke;
   transition: all 250ms ease;
   cursor: pointer;
+  margin-right: 0;
+  margin-left: auto;
 `;
 
 const Content = styled.div`
-  display: flex;
   position: absolute;
   background-color: white;
   z-index: 1;
@@ -137,8 +134,16 @@ const ContentItem = styled.div`
 `;
 
 const SearchBar = (props) => {
-  const { items, suggestions, onChange, id, className, size, color, theme } =
-    props;
+  const {
+    items,
+    suggestions,
+    onChange,
+    id,
+    className,
+    size,
+    color,
+    theme,
+  } = props;
 
   const [value, setValue] = useState("");
   const [openSuggestions, setOpenSuggestions] = useState(false);
@@ -291,7 +296,6 @@ const SearchBar = (props) => {
             />
           </InputContainer>
         </ItemContainer>
-
         <ClearIcon {...themeProps}>
           <i className="fas fa-times fa-fw" onClick={() => onChange(id, [])} />
         </ClearIcon>
