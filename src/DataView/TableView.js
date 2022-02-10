@@ -240,6 +240,7 @@ const TableView = (props) => {
       </TableBodyCell>
     );
   };
+  
 
   const renderSelectionCell = (dataItem, selected, rowIndex) => {
     if (IsLookup) {
