@@ -192,6 +192,7 @@ const TableView = (props) => {
     var nested = Columns.find((x) => x.nested);
     let rowSelected = isItemInArray(dataItem, SelectedData, SelectionIndicator);
 
+
     return (
       <>
         <TableBodyRow selectedRow={rowSelected} key={i}>
@@ -232,14 +233,16 @@ const TableView = (props) => {
         ? dataItem[def.accessor][def.objectAccessor]
         : dataItem[def.accessor];
 
-    return (
-      <TableBodyCell key={tabIndex} onClick={onClick}>
-        {isFunction(def.specialRender)
-          ? def.specialRender(dataItem, onClick)
-          : cellData}
-      </TableBodyCell>
-    );
-  };
+        return (
+          <TableBodyCell key={tabIndex} onClick={onClick}>
+            {isFunction(def.specialRender)
+              ? def.specialRender(dataItem, () => {
+                ChangeToFormView(dataItem);
+              })
+              : cellData}
+          </TableBodyCell>
+        );
+      };
 
   const renderSelectionCell = (dataItem, selected, rowIndex) => {
     if (IsLookup) {
@@ -251,6 +254,7 @@ const TableView = (props) => {
               if (!IsLoading) {
                 LookupTakeItem(dataItem);
               }
+            
             }}
             icon={"arrow-right"}
           />
