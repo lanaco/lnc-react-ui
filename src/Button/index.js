@@ -145,6 +145,7 @@ const Button = React.forwardRef((props, ref) => {
   const handleOnClick = (e) => {
     if (preventDefault) e.preventDefault();
     onClick(id);
+    if(e.stopImmediatePropagation) e.stopImmediatePropagation();
   };
 
   var title = "";
