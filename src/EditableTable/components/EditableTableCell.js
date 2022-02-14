@@ -33,6 +33,9 @@ const EditableTableCell = (props) => {
     Index,
     EnableSelection,
     //----------------
+    onCellFocus,
+    onCellBlur,
+    //----------------
     className,
     size,
     color,
