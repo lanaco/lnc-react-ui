@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Chip from "../Chip";
 import FadeIn from "../FadeIn/FadeIn";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import "./animation.css";
 
 const getIconFontSize = (props) => {
   if (props.size === "small") return props.theme.typography.medium.fontSize;
