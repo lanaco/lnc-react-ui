@@ -2,6 +2,10 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
+import {
+  getChildComponentByType,
+  renderCustomElement,
+} from "../../_utils/utils";
 
 const HtmlRow = styled.tr`
   border-bottom: 1px solid transparent;

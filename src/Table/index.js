@@ -356,8 +356,8 @@ const Table = (props) => {
         {EnableSelection === true &&
           renderSelectionCell(rowSelection.IsSelected, rowData)}
 
-        {columnsToRender.map((column, index) => {
-          return renderCell(rowData, column, index);
+        {columnsToRender.map((column, cellIndex) => {
+          return renderCell(rowData, column, cellIndex, index);
         })}
       </>
     );
@@ -371,13 +371,16 @@ const Table = (props) => {
     );
   };
 
-  const renderCell = (rowData, column, index) => {
+  const renderCell = (rowData, column, index, rowIndex) => {
     var cellProps = {
       RowData: rowData,
       Column: column,
       Index: index,
+      RowIndex: rowIndex,
       key: index,
       EnableSelection,
+      onCellFocus,
+      onCellBlur,
       ...themeProps,
     };
 

@@ -8,7 +8,6 @@ import EditableTableCell from "./components/EditableTableCell";
 import EditableTableRow from "./components/EditableTableRow";
 
 const EditableTable = (props) => {
-  //
   //================ STATE =================================================================
 
   const [state, setState] = useState({});
@@ -20,6 +19,12 @@ const EditableTable = (props) => {
   useEffect(() => {
     loadCustomRenderers();
   }, []);
+
+  //================ EVENTS ================================================================
+
+  const onCellFocus = (e, rowIndex, cellIndex) => {};
+
+  const onCellBlur = (e, rowIndex, cellIndex) => {};
 
   //================ METHODS ===============================================================
 
@@ -33,7 +38,12 @@ const EditableTable = (props) => {
   //================ RENDER ================================================================
 
   return (
-    <Table {...props} VisibilityPattern={null}>
+    <Table
+      {...props}
+      VisibilityPattern={null}
+      onCellFocus={onCellFocus}
+      onCellBlur={onCellBlur}
+    >
       {/* {props.children} */}
       <EditableTableRow />
       <EditableTableCell />
