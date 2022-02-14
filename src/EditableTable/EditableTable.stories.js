@@ -1,22 +1,22 @@
 import React from "react";
-import Table from "./";
-import StoryTemplate from "./StoryTemplate";
+import EditableTable from "./";
+// import Story from "./Story";
 
 export default {
-  title: "Standard Table",
-  component: Table,
+  title: "Editable Table",
+  component: EditableTable,
 };
 
-const Template = (args) => <Table {...args} />;
+const Template = (args) => <EditableTable {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   color: "primary",
   size: "small",
   //------------------------------------
-  EnableSelection: true,
+  EnableSelection: false,
   EnableOrdering: false,
-  EnableSelectAll: true,
+  EnableSelectAll: false,
   EnableLoader: true,
   //-------------------------------------
   Loading: false,
@@ -112,91 +112,21 @@ Default.args = {
       displayName: "Name",
       accessor: "name",
       width: 25,
+      dataType: "STRING",
     },
     {
       id: 2,
       displayName: "Company",
       accessor: "company",
       width: 15,
+      dataType: "STRING",
     },
     {
       id: 3,
       displayName: "Address",
       accessor: "address",
       width: 60,
+      dataType: "STRING",
     },
   ],
-  VisibilityPattern: {
-    XS: [
-      {
-        id: 1,
-        accessor: "name",
-        width: 70,
-      },
-      {
-        id: 2,
-        accessor: "company",
-        width: 30,
-      },
-    ],
-    S: [
-      {
-        id: 2,
-        accessor: "company",
-        width: 40,
-      },
-      {
-        id: 1,
-        accessor: "name",
-        width: 60,
-      },
-    ],
-    M: [
-      {
-        id: 3,
-        accessor: "address",
-        width: 10,
-      },
-
-      {
-        id: 1,
-        accessor: "name",
-        width: 90,
-      },
-    ],
-    L: [
-      {
-        id: 3,
-        accessor: "address",
-        width: 25,
-      },
-      {
-        id: 2,
-        accessor: "company",
-        width: 15,
-      },
-      {
-        id: 1,
-        accessor: "name",
-        width: 60,
-      },
-    ],
-    XL: [
-      {
-        id: 3,
-        accessor: "address",
-        width: 20,
-      },
-      {
-        id: 2,
-        accessor: "company",
-        width: 15,
-      },
-      {
-        id: 1,
-        accessor: "name",
-        width: 65,
-      },
-    ],
-  },
 };

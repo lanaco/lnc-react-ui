@@ -104,7 +104,7 @@ TableHeadCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
   Columns: PropTypes.object,
-  Ordering: PropTypes.array,
+  Ordering: PropTypes.object,
   Index: PropTypes.any,
   EnableSelectAll: PropTypes.bool,
   onColumnClick: PropTypes.func,

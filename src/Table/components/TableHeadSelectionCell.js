@@ -24,6 +24,7 @@ const TableHeadSelectionCell = (props) => {
     EnableSelectAll,
     IsSelected,
     Index,
+    onSelectAll,
     //----------------
     className,
     size,
@@ -45,9 +46,13 @@ const TableHeadSelectionCell = (props) => {
       key={Index}
       width={props.width}
     >
-      {/* {EnableSelectAll && (
-        <Checkbox id={Index} checked={IsSelected} onChange={() => {}} />
-      )} */}
+      {EnableSelectAll && (
+        <Checkbox
+          id={Index}
+          checked={IsSelected}
+          onChange={(e) => onSelectAll(e, IsSelected)}
+        />
+      )}
     </HtmlCell>
   );
 };

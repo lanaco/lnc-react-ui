@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Table from ".";
+import EditableTable from ".";
 import styled from "@emotion/styled";
 import service from "../AdvancedGrid/services/service";
-import CustomTableCell from "./components/CustomTableCell";
-import CustomTableRow from "./components/CustomTableRow";
-import CustomTableHeader from "./components/CustomTableHeader";
-import CustomTableFooter from "./components/CustomTableFooter";
-import CustomTableContainer from "./components/CustomTableContainer";
-import CellRender from "./components/CellRender";
 
 var visibilityPattern = {
   XS: [
@@ -85,10 +79,6 @@ var visibilityPattern = {
 
 const Container = styled.div``;
 
-const Header = styled.div`
-  margin-bottom: 10px;
-`;
-
 const StoryTemplate = (props) => {
   const [tableData, setTableData] = useState({ data: [], loading: false });
 
@@ -99,8 +89,6 @@ const StoryTemplate = (props) => {
         displayName: "Name",
         accessor: "name",
         width: 25,
-        render: (props) => <CellRender {...props} />,
-        // render: (props) => false,
       },
       {
         id: 2,
@@ -140,8 +128,7 @@ const StoryTemplate = (props) => {
 
   return (
     <Container>
-      <Header></Header>
-      <Table
+      <EditableTable
         Loading={tableData.loading}
         EnableLoader={true}
         {...state}
@@ -160,7 +147,7 @@ const StoryTemplate = (props) => {
         {/* <CustomTableContainer /> */}
         {/* <CustomTableHeader /> */}
         {/* <CustomTableFooter /> */}
-      </Table>
+      </EditableTable>
     </Container>
   );
 };
