@@ -34,7 +34,6 @@ const Container = styled.div`
   border-radius: 0.1875rem;
   width: 100%;
   transition: all 250ms ease;
-  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
 `;
 
 const ItemContainer = styled.div`
@@ -91,7 +90,6 @@ const SearchIcon = styled.div`
   font-size: ${(props) => getIconFontSize(props)};
   background-color: whitesmoke;
   transition: all 250ms ease;
-  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
 `;
 
 const ClearIcon = styled.div`
@@ -101,7 +99,6 @@ const ClearIcon = styled.div`
   background-color: whitesmoke;
   transition: all 250ms ease;
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
   margin-right: 0;
   margin-left: auto;
 `;
