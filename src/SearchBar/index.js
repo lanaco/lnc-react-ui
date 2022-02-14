@@ -86,7 +86,10 @@ const Inner = styled.div`
 
 const SearchIcon = styled.div`
   padding: ${(props) => iconPaddingBySize(props.size)};
-  color: ${(props) => props.theme.palette[props.color].main};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray[800]
+      : props.theme.palette[props.color].main};
   font-size: ${(props) => getIconFontSize(props)};
   background-color: whitesmoke;
   transition: all 250ms ease;
@@ -94,7 +97,10 @@ const SearchIcon = styled.div`
 
 const ClearIcon = styled.div`
   padding: ${(props) => iconPaddingBySize(props.size)};
-  color: ${(props) => props.theme.palette[props.color].main};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray[800]
+      : props.theme.palette[props.color].main};
   font-size: ${(props) => getIconFontSize(props)};
   background-color: whitesmoke;
   transition: all 250ms ease;
