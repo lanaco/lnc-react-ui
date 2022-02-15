@@ -1,13 +1,13 @@
 import React from "react";
 import EditableTable from "./";
-// import Story from "./Story";
+import Story from "./Story";
 
 export default {
   title: "Editable Table",
   component: EditableTable,
 };
 
-const Template = (args) => <EditableTable {...args} />;
+const Template = (args) => <Story args={args} />;
 
 export const Default = Template.bind({});
 Default.args = {

@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { getChildComponentByType, renderCustomElement } from "../_utils/utils";
@@ -7,20 +13,95 @@ import Table from "../Table/index";
 import EditableTableCell from "./components/EditableTableCell";
 import EditableTableRow from "./components/EditableTableRow";
 
-const EditableTable = (props) => {
+const EditableTable = forwardRef((props, ref) => {
+  //
+  var {
+    EnableSelection,
+    EnableOrdering,
+    EnableSelectAll,
+    EnableLoader,
+    //--------------------
+    Loading,
+    Columns,
+    Data,
+    SelectedData,
+    SelectedEntirePage,
+    RowIdentifier,
+    Ordering,
+  } = props;
+
   //================ STATE =================================================================
 
-  const [state, setState] = useState({});
+  const [state, setState] = useState({
+    PreviousFocusedCell: null,
+    FocusedCell: null,
+    FocusedRowData: null,
+  });
 
-  const tableCellRender = useRef(null);
+  // const stateRef = useRef({
+  //   PreviousFocusedCell: null,
+  //   FocusedCell: null,
+  // });
+
+  const tableRef = React.createRef();
 
   //================ LIFECYCLE =============================================================
+
+  // Functions exposed to parent via ref
+  useImperativeHandle(ref, () => ({}), [
+    state, // Update functions when certain state changes
+  ]);
 
   useEffect(() => {
     loadCustomRenderers();
   }, []);
 
   //================ EVENTS ================================================================
+
+  const onSave = () => console.log("SAVE");
+
+  const onFocusChanged = (e, focused, rowIndex, cellIndex) => {
+    // if (focused) {
+    //   console.log("focus", {
+    //     ...state,
+    //     FocusedCell: {
+    //       row: rowIndex,
+    //       cell: cellIndex,
+    //     },
+    //   });
+    //   if (
+    //     state.PreviousFocusedCell &&
+    //     state.PreviousFocusedCell.row !== rowIndex
+    //   ) {
+    //     onSave();
+    //   }
+    //   setState({
+    //     ...state,
+    //     FocusedCell: {
+    //       row: rowIndex,
+    //       cell: cellIndex,
+    //     },
+    //   });
+    // }
+    // if (!focused) {
+    //   console.log("blur", {
+    //     PreviousFocusedCell: { ...state.FocusedCell },
+    //     FocusedCell: null,
+    //     FocusedRowData: null,
+    //   });
+    //   setState({
+    //     PreviousFocusedCell: { ...state.FocusedCell },
+    //     FocusedCell: null,
+    //     FocusedRowData: null,
+    //   });
+    //   if (
+    //     e.relatedTarget === null ||
+    //     (e.relatedTarget && !e.relatedTarget.hasAttribute("focusable"))
+    //   ) {
+    //     onSave();
+    //   }
+    // }
+  };
 
   const onCellFocus = (e, rowIndex, cellIndex) => {};
 
@@ -38,18 +119,21 @@ const EditableTable = (props) => {
   //================ RENDER ================================================================
 
   return (
-    <Table
-      {...props}
-      VisibilityPattern={null}
-      onCellFocus={onCellFocus}
-      onCellBlur={onCellBlur}
-    >
-      {/* {props.children} */}
-      <EditableTableRow />
-      <EditableTableCell />
-    </Table>
+    <>
+      <Table
+        ref={tableRef}
+        {...props}
+        VisibilityPattern={null}
+        // onCellFocus={onCellFocus}
+        // onCellBlur={onCellBlur}
+      >
+        {/* {props.children} */}
+        {/* <EditableTableRow /> */}
+        <EditableTableCell onFocusChanged={onFocusChanged} />
+      </Table>
+    </>
   );
-};
+});
 
 EditableTable.defaultProps = {
   __TYPE__: "EDITABLE_TABLE",

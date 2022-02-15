@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, forwardRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { getChildComponentByType, renderCustomElement } from "../_utils/utils";
@@ -78,7 +78,7 @@ const NoDataRow = styled.span`
   margin-top: 4px;
 `;
 
-const Table = (props) => {
+const Table = forwardRef((props, ref) => {
   //================== PROPS ===========================================
 
   var {
@@ -559,7 +559,7 @@ const Table = (props) => {
   };
 
   return renderTable();
-};
+});
 
 Table.defaultProps = {
   __TYPE__: "TABLE",

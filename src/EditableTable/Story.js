@@ -3,80 +3,6 @@ import EditableTable from ".";
 import styled from "@emotion/styled";
 import service from "../AdvancedGrid/services/service";
 
-var visibilityPattern = {
-  XS: [
-    {
-      id: 1,
-      accessor: "name",
-      width: 70,
-    },
-    {
-      id: 2,
-      accessor: "company",
-      width: 30,
-    },
-  ],
-  S: [
-    {
-      id: 2,
-      accessor: "company",
-      width: 40,
-    },
-    {
-      id: 1,
-      accessor: "name",
-      width: 60,
-    },
-  ],
-  M: [
-    {
-      id: 3,
-      accessor: "address",
-      width: 10,
-    },
-
-    {
-      id: 1,
-      accessor: "name",
-      width: 90,
-    },
-  ],
-  L: [
-    {
-      id: 3,
-      accessor: "address",
-      width: 25,
-    },
-    {
-      id: 2,
-      accessor: "company",
-      width: 15,
-    },
-    {
-      id: 1,
-      accessor: "name",
-      width: 60,
-    },
-  ],
-  XL: [
-    {
-      id: 3,
-      accessor: "address",
-      width: 20,
-    },
-    {
-      id: 2,
-      accessor: "company",
-      width: 15,
-    },
-    {
-      id: 1,
-      accessor: "name",
-      width: 65,
-    },
-  ],
-};
-
 const Container = styled.div``;
 
 const StoryTemplate = (props) => {
@@ -103,12 +29,11 @@ const StoryTemplate = (props) => {
         width: 60,
       },
     ],
-    VisibilityPattern: visibilityPattern,
     //--------------------
     EnableSelection: false,
     EnableOrdering: false,
     EnableSelectAll: false,
-    EnableLoader: false,
+    EnableLoader: true,
   });
 
   useEffect(() => load(), []);
@@ -128,26 +53,15 @@ const StoryTemplate = (props) => {
 
   return (
     <Container>
+      <div style={{ padding: "6px" }}>
+        <button onClick={load}>reload</button>
+      </div>
       <EditableTable
-        Loading={tableData.loading}
-        EnableLoader={true}
-        {...state}
-        onRowClick={(e, props) => {
-          console.log("onRowClick");
-        }}
-        onSelectRow={(data, selected) => {
-          console.log(selected, data);
-        }}
         {...props.args}
+        {...state}
         Data={tableData.data}
-      >
-        {/* <CustomTableCell />
-        <CustomTableRow /> */}
-
-        {/* <CustomTableContainer /> */}
-        {/* <CustomTableHeader /> */}
-        {/* <CustomTableFooter /> */}
-      </EditableTable>
+        Loading={tableData.loading}
+      ></EditableTable>
     </Container>
   );
 };
