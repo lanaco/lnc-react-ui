@@ -1,7 +1,16 @@
-import React, { useEffect, useRef, forwardRef } from "react";
+import React, {
+  useEffect,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import { getChildComponentByType, renderCustomElement } from "../_utils/utils";
+import {
+  getCustomRender,
+  getChildComponentByType,
+  renderCustomElement,
+} from "../_utils/utils";
 import { isObject, isFinite } from "lodash";
 import { useScreenSize } from "../_utils/utils";
 import theme from "../_utils/theme";
@@ -35,7 +44,8 @@ const LoaderContainer = styled.div`
   height: 100%;
   background-color: #eceaea;
   z-index: 10000000;
-  opacity: 0.2;
+  opacity: 0.9;
+  background-color: white;
   filter: alpha(opacity=20);
 `;
 
@@ -87,6 +97,8 @@ const Table = forwardRef((props, ref) => {
     EnableSelectAll,
     EnableLoader,
     //--------------------
+    NoDataText,
+    //--------------------
     Loading,
     Columns,
     Data,
@@ -117,90 +129,18 @@ const Table = forwardRef((props, ref) => {
     size,
   };
 
-  const tableContainerRender = useRef(null);
-  const tableLoaderRender = useRef(null);
-
-  const tableRowRender = useRef(null);
-  const tableCellRender = useRef(null);
-  const tableSelectionCellRender = useRef(null);
-
-  const tableHeadRowRender = useRef(null);
-  const tableHeadCellRender = useRef(null);
-  const tableHeadSelectionCellRender = useRef(null);
-
-  const tableHeaderRender = useRef(null);
-  const tableFooterRender = useRef(null);
-
   //================== LIFECYCLE =======================================
 
-  useEffect(() => {
-    var customTableContainer = getChildComponentByType(
-      "TABLE_CONTAINER",
-      props.children
-    );
-
-    var customTableLoader = getChildComponentByType(
-      "TABLE_LOADER",
-      props.children
-    );
-
-    var customTableRow = getChildComponentByType("TABLE_ROW", props.children);
-    var customTableCell = getChildComponentByType("TABLE_CELL", props.children);
-    var customTableSelectionCell = getChildComponentByType(
-      "TABLE_SELECTION_CELL",
-      props.children
-    );
-
-    var customTableHeadCell = getChildComponentByType(
-      "TABLE_HEAD_CELL",
-      props.children
-    );
-
-    var customTableRowCell = getChildComponentByType(
-      "TABLE_ROW_CELL",
-      props.children
-    );
-
-    var customTableHeader = getChildComponentByType(
-      "TABLE_HEADER",
-      props.children
-    );
-
-    var customTableFooter = getChildComponentByType(
-      "TABLE_FOOTER",
-      props.children
-    );
-
-    if (customTableContainer && React.isValidElement(customTableContainer))
-      tableContainerRender.current = customTableContainer;
-
-    if (customTableLoader && React.isValidElement(customTableLoader))
-      tableLoaderRender.current = customTableLoader;
-
-    if (customTableRow && React.isValidElement(customTableRow))
-      tableRowRender.current = customTableRow;
-
-    if (customTableCell && React.isValidElement(customTableCell))
-      tableCellRender.current = customTableCell;
-
-    if (
-      customTableSelectionCell &&
-      React.isValidElement(customTableSelectionCell)
-    )
-      tableSelectionCellRender.current = customTableSelectionCell;
-
-    if (customTableHeadCell && React.isValidElement(customTableHeadCell))
-      tableHeadCellRender.current = customTableCell;
-
-    if (customTableRowCell && React.isValidElement(customTableRowCell))
-      tableHeadRowRender.current = customTableRowCell;
-
-    if (customTableHeader && React.isValidElement(customTableHeader))
-      tableHeaderRender.current = customTableHeader;
-
-    if (customTableFooter && React.isValidElement(customTableFooter))
-      tableFooterRender.current = customTableFooter;
-  }, []);
+  // Functions exposed to parent via ref
+  useImperativeHandle(
+    ref,
+    () => ({
+      getTableData: () => Data,
+    }),
+    [
+      Data, // Update functions when certain state changes
+    ]
+  );
 
   const [tBodyRef, { width }] = useMeasure();
 
@@ -357,13 +297,17 @@ const Table = forwardRef((props, ref) => {
           renderSelectionCell(rowSelection.IsSelected, rowData)}
 
         {columnsToRender.map((column, cellIndex) => {
-          return renderCell(rowData, column, cellIndex, index);
+          return renderCell(rowData, column, cellIndex, index, columnsToRender);
         })}
       </>
     );
 
     return (
-      renderCustomElement(tableRowRender, rowProps, children) || (
+      renderCustomElement(
+        getCustomRender("TABLE_ROW", props.children),
+        rowProps,
+        children
+      ) || (
         <TableRow {...rowProps} key={index}>
           {children}
         </TableRow>
@@ -371,10 +315,11 @@ const Table = forwardRef((props, ref) => {
     );
   };
 
-  const renderCell = (rowData, column, index, rowIndex) => {
+  const renderCell = (rowData, column, index, rowIndex, columnsToRender) => {
     var cellProps = {
       RowData: rowData,
       Column: column,
+      ColumnsToRender: columnsToRender,
       Index: index,
       RowIndex: rowIndex,
       key: index,
@@ -385,9 +330,10 @@ const Table = forwardRef((props, ref) => {
     };
 
     return (
-      renderCustomElement(tableCellRender, cellProps) || (
-        <TableCell {...cellProps} key={index} />
-      )
+      renderCustomElement(
+        getCustomRender("TABLE_CELL", props.children),
+        cellProps
+      ) || <TableCell {...cellProps} key={index} />
     );
   };
 
@@ -403,7 +349,10 @@ const Table = forwardRef((props, ref) => {
     };
 
     return (
-      renderCustomElement(tableSelectionCellRender, selectionCellProps) || (
+      renderCustomElement(
+        getCustomRender("TABLE_SELLECTION_CELL", props.children),
+        selectionCellProps
+      ) || (
         <TableSelectionCell
           {...selectionCellProps}
           key={index}
@@ -427,7 +376,11 @@ const Table = forwardRef((props, ref) => {
     );
 
     return (
-      renderCustomElement(tableHeadRowRender, headRowProps, children) || (
+      renderCustomElement(
+        getCustomRender("TABLE_HEAD_ROW", props.children),
+        headRowProps,
+        children
+      ) || (
         <TableHeadRow {...headRowProps} key={0}>
           {children}
         </TableHeadRow>
@@ -447,9 +400,10 @@ const Table = forwardRef((props, ref) => {
     };
 
     return (
-      renderCustomElement(tableHeadCellRender, cellProps) || (
-        <TableHeadCell {...cellProps} key={index} />
-      )
+      renderCustomElement(
+        getCustomRender("TABLE_HEAD_CELL", props.children),
+        cellProps
+      ) || <TableHeadCell {...cellProps} key={index} />
     );
   };
 
@@ -463,7 +417,10 @@ const Table = forwardRef((props, ref) => {
     };
 
     return (
-      renderCustomElement(tableHeadSelectionCellRender, cellProps) || (
+      renderCustomElement(
+        getCustomRender("TABLE_HEAD_SELECTION_CELL", props.children),
+        cellProps
+      ) || (
         <TableHeadSelectionCell
           {...cellProps}
           key={-1}
@@ -475,7 +432,7 @@ const Table = forwardRef((props, ref) => {
 
   const renderHeader = () => {
     return (
-      renderCustomElement(tableHeaderRender, {
+      renderCustomElement(getCustomRender("TABLE_HEADER", props.children), {
         Data,
         Columns,
         ...themeProps,
@@ -485,7 +442,7 @@ const Table = forwardRef((props, ref) => {
 
   const renderFooter = () => {
     return (
-      renderCustomElement(tableFooterRender, {
+      renderCustomElement(getCustomRender("TABLE_FOOTER", props.children), {
         Data,
         Columns,
         ...themeProps,
@@ -502,7 +459,7 @@ const Table = forwardRef((props, ref) => {
       return (
         <tr>
           <td colSpan={colspan}>
-            <NoDataRow {...themeProps}>{"No data to show"}</NoDataRow>
+            <NoDataRow {...themeProps}>{NoDataText}</NoDataRow>
           </td>
         </tr>
       );
@@ -518,10 +475,13 @@ const Table = forwardRef((props, ref) => {
           <LoaderContainer></LoaderContainer>
           <LoaderContainerTransparent>
             <Loader>
-              {renderCustomElement(tableLoaderRender, {
-                ...themeProps,
-                Loading,
-              }) || <Spinner />}
+              {renderCustomElement(
+                getCustomRender("TABLE_LOADER", props.children),
+                {
+                  ...themeProps,
+                  Loading,
+                }
+              ) || <Spinner />}
             </Loader>
           </LoaderContainerTransparent>
         </>
@@ -540,21 +500,33 @@ const Table = forwardRef((props, ref) => {
       <>
         {renderSpinner()}
         {renderHeader()}
+
         <HtmlTable {...themeProps}>
           <HtmlHead {...themeProps}>{renderHeadRow()}</HtmlHead>
-          <HtmlBody ref={tBodyRef} {...themeProps}>
+          <HtmlBody data-tbody={true} ref={tBodyRef} {...themeProps}>
             {Data.map((rowData, index) => renderRow(rowData, index))}
             {renderNoDataRow()}
           </HtmlBody>
         </HtmlTable>
+
         {renderFooter()}
       </>
     );
 
+    // return (
+    //   renderCustomElement(
+    //     getCustomRender("TABLE_CONTAINER", props.children),
+    //     containerProps,
+    //     children
+    //   ) || <Container {...containerProps}>{children}</Container>
+    // );
+
     return (
-      renderCustomElement(tableContainerRender, containerProps, children) || (
-        <Container {...containerProps}>{children}</Container>
-      )
+      renderCustomElement(
+        getCustomRender("TABLE_CONTAINER", props.children),
+        containerProps,
+        children
+      ) || <Container {...containerProps}>{children}</Container>
     );
   };
 
@@ -567,10 +539,13 @@ Table.defaultProps = {
   Loading: false,
   Columns: [],
   Data: [],
+  //--------------------
   EnableSelection: false,
   EnableOrdering: false,
   EnableLoader: false,
   EnableSelectAll: false,
+  //--------------------
+  NoDataText: "No data to show",
   SelectedData: [],
   SelectedEntirePage: false,
   RowIdentifier: "id",
@@ -600,6 +575,7 @@ Table.propTypes = {
   EnableLoader: PropTypes.bool,
   EnableSelectAll: PropTypes.bool,
   //----------------------------------------
+  NoDataText: PropTypes.string,
   Loading: PropTypes.bool,
   Columns: PropTypes.arrayOf(PropTypes.object).isRequired,
   Data: PropTypes.arrayOf(PropTypes.object).isRequired,

@@ -40,14 +40,14 @@ const EditableTableRow = (props) => {
     theme,
   };
 
-  const onClick = (e) => {
-    // e.stopPropagation();
-    // e.nativeEvent.stopImmediatePropagation();
-    // onRowClick(e, RowData);
-  };
+  // const onClick = (e) => {
+  //   e.stopPropagation();
+  //   e.nativeEvent.stopImmediatePropagation();
+  //   onRowClick(e, RowData);
+  // };
 
   return (
-    <HtmlRow {...themeProps} key={Index} onClick={onClick}>
+    <HtmlRow {...themeProps} key={Index}>
       {props.children}
     </HtmlRow>
   );

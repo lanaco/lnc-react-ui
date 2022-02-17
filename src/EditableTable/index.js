@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import { cloneDeep, isEmpty } from "lodash";
 import { getChildComponentByType, renderCustomElement } from "../_utils/utils";
 import theme from "../_utils/theme";
 import Table from "../Table/index";
@@ -15,33 +16,18 @@ import EditableTableRow from "./components/EditableTableRow";
 
 const EditableTable = forwardRef((props, ref) => {
   //
-  var {
-    EnableSelection,
-    EnableOrdering,
-    EnableSelectAll,
-    EnableLoader,
-    //--------------------
-    Loading,
-    Columns,
-    Data,
-    SelectedData,
-    SelectedEntirePage,
-    RowIdentifier,
-    Ordering,
-  } = props;
+  var { onSave, cellDataChanged, Data, Columns, RowIdentifier } = props;
 
   //================ STATE =================================================================
 
-  const [state, setState] = useState({
-    PreviousFocusedCell: null,
-    FocusedCell: null,
-    FocusedRowData: null,
-  });
+  const [data, setData] = useState([]);
 
-  // const stateRef = useRef({
-  //   PreviousFocusedCell: null,
-  //   FocusedCell: null,
-  // });
+  const editedDataRef = useRef([]);
+
+  const focusedCell = useRef({
+    FocusedCell: null,
+    PreviousFocusedCell: null,
+  });
 
   const tableRef = React.createRef();
 
@@ -49,63 +35,118 @@ const EditableTable = forwardRef((props, ref) => {
 
   // Functions exposed to parent via ref
   useImperativeHandle(ref, () => ({}), [
-    state, // Update functions when certain state changes
+    props, // Update functions when certain state changes
   ]);
 
   useEffect(() => {
     loadCustomRenderers();
   }, []);
 
+  useEffect(() => {
+    setData(Data);
+  }, [Data]);
+
   //================ EVENTS ================================================================
 
-  const onSave = () => console.log("SAVE");
+  const updateDataArray = (editedRow) => {
+    var dataCopy = [...data];
 
-  const onFocusChanged = (e, focused, rowIndex, cellIndex) => {
-    // if (focused) {
-    //   console.log("focus", {
-    //     ...state,
-    //     FocusedCell: {
-    //       row: rowIndex,
-    //       cell: cellIndex,
-    //     },
-    //   });
-    //   if (
-    //     state.PreviousFocusedCell &&
-    //     state.PreviousFocusedCell.row !== rowIndex
-    //   ) {
-    //     onSave();
-    //   }
-    //   setState({
-    //     ...state,
-    //     FocusedCell: {
-    //       row: rowIndex,
-    //       cell: cellIndex,
-    //     },
-    //   });
-    // }
-    // if (!focused) {
-    //   console.log("blur", {
-    //     PreviousFocusedCell: { ...state.FocusedCell },
-    //     FocusedCell: null,
-    //     FocusedRowData: null,
-    //   });
-    //   setState({
-    //     PreviousFocusedCell: { ...state.FocusedCell },
-    //     FocusedCell: null,
-    //     FocusedRowData: null,
-    //   });
-    //   if (
-    //     e.relatedTarget === null ||
-    //     (e.relatedTarget && !e.relatedTarget.hasAttribute("focusable"))
-    //   ) {
-    //     onSave();
-    //   }
-    // }
+    var row = dataCopy.find(
+      (x) => String(x[RowIdentifier]) === String(editedRow[RowIdentifier])
+    );
+
+    dataCopy[dataCopy.indexOf(row)] = editedRow;
+
+    setData(dataCopy);
   };
 
-  const onCellFocus = (e, rowIndex, cellIndex) => {};
+  const handleDataChange = (value, column, rowData) => {
+    var originalRowData = cloneDeep(rowData);
+    var editedDataCopy = cloneDeep(editedDataRef.current);
+    var editedRow = {};
 
-  const onCellBlur = (e, rowIndex, cellIndex) => {};
+    var imutableEditedRow = editedDataCopy.find(
+      (x) => String(x[RowIdentifier]) === String(originalRowData[RowIdentifier])
+    );
+
+    if (imutableEditedRow) {
+      //-----
+      editedRow = cloneDeep(imutableEditedRow);
+      editedRow[column.accessor] = value;
+
+      editedRow = cellDataChanged(editedRow, imutableEditedRow);
+      updateDataArray(editedRow);
+
+      editedDataCopy[editedDataCopy.indexOf(imutableEditedRow)] = editedRow;
+      editedDataRef.current = editedDataCopy;
+      //-----
+    } else {
+      //-----
+      editedRow = cloneDeep(originalRowData);
+      editedRow[column.accessor] = value;
+
+      editedRow = cellDataChanged(editedRow, originalRowData);
+      updateDataArray(editedRow);
+
+      editedDataCopy.push(editedRow);
+      editedDataRef.current = editedDataCopy;
+      //-----
+    }
+  };
+
+  const handleOnSave = (e, rowIndex) => {
+    // If focus is outside of the table
+    if (
+      e.relatedTarget === null ||
+      e.relatedTarget.closest("tbody") === null ||
+      (!e.relatedTarget.closest("tbody").hasAttribute("data-tbody") &&
+        editedDataRef.current.lenght > 0)
+    ) {
+      var objectToSave = cloneDeep(editedDataRef.current[0]) || {};
+      editedDataRef.current = [];
+      onSave(objectToSave);
+    }
+
+    //===============================
+
+    // If focus is on a cell in another row
+    if (
+      e.relatedTarget &&
+      e.relatedTarget.closest("tbody") &&
+      e.relatedTarget.closest("tbody").hasAttribute("data-tbody") &&
+      parseInt(e.relatedTarget.closest("td").getAttribute("data-rowindex")) !==
+        rowIndex &&
+      editedDataRef.current.length > 0
+    ) {
+      var objectToSave = cloneDeep(editedDataRef.current[0]) || {};
+      editedDataRef.current = [];
+      onSave(objectToSave);
+    }
+  };
+
+  const onFocusChanged = (e, focused, rowIndex, cellIndex, inputRef) => {
+    // On FOCUS
+    if (focused) {
+      focusedCell.current = {
+        ...focusedCell.current,
+        FocusedCell: {
+          row: rowIndex,
+          cell: cellIndex,
+          ref: inputRef,
+        },
+      };
+    }
+
+    // On BLUR
+    if (!focused) {
+      focusedCell.current = {
+        PreviousFocusedCell: focusedCell.current.FocusedCell,
+        FocusedCell: null,
+      };
+
+      handleOnSave(e, rowIndex);
+    }
+  };
 
   //================ METHODS ===============================================================
 
@@ -120,16 +161,14 @@ const EditableTable = forwardRef((props, ref) => {
 
   return (
     <>
-      <Table
-        ref={tableRef}
-        {...props}
-        VisibilityPattern={null}
-        // onCellFocus={onCellFocus}
-        // onCellBlur={onCellBlur}
-      >
-        {/* {props.children} */}
-        {/* <EditableTableRow /> */}
-        <EditableTableCell onFocusChanged={onFocusChanged} />
+      <Table ref={tableRef} {...props} Data={data} VisibilityPattern={null}>
+        {props.children}
+        <EditableTableRow />
+        <EditableTableCell
+          TabIndexOffset={50}
+          onFocusChanged={onFocusChanged}
+          onChange={handleDataChange}
+        />
       </Table>
     </>
   );
@@ -137,6 +176,9 @@ const EditableTable = forwardRef((props, ref) => {
 
 EditableTable.defaultProps = {
   __TYPE__: "EDITABLE_TABLE",
+  //--------------------
+  onSave: () => {},
+  cellDataChanged: (obj) => obj,
   //--------------------
   Loading: false,
   Columns: [],
@@ -164,6 +206,9 @@ EditableTable.defaultProps = {
 
 EditableTable.propTypes = {
   __TYPE__: PropTypes.string,
+  //--------------------
+  onSave: PropTypes.func,
+  cellDataChanged: PropTypes.func,
   //----------------------------------------
   EnableSelection: PropTypes.bool,
   EnableOrdering: PropTypes.bool,

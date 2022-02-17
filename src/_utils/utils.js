@@ -2,6 +2,15 @@ import React from "react";
 import { useMedia } from "react-use";
 import { screenSizes } from "../AdvancedGrid/constants/constants";
 
+export const getCustomRender = (type, children) => {
+  var customElement = getChildComponentByType(type, children);
+
+  if (customElement && React.isValidElement(customElement))
+    return { current: customElement };
+
+  return { current: null };
+};
+
 export const getChildComponentByType = (type = "", children, props = {}) => {
   //TODO: validate properties
 

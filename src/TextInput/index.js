@@ -66,6 +66,8 @@ const TextInput = React.forwardRef((props, ref) => {
     onKeyDown,
     onInput,
     onBlur,
+    onFocus,
+    tabIndex,
   } = props;
 
   const [text, setText] = useState("");
@@ -90,53 +92,33 @@ const TextInput = React.forwardRef((props, ref) => {
     if (preventDefault) {
       e.preventDefault();
     }
-    // onChange(id, e.target.value);
     setText(e.target.value);
   };
 
-  const handleOnKeyDown = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
-    if (onKeyDown) onKeyDown(e);
-    //setText(e.target.value);
-  };
-
   const handleOnInput = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
+    if (preventDefault) e.preventDefault();
     if (onInput) onInput(e);
-    //setText(e.target.value);
   };
 
   const handleOnBlur = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
+    console.log("inpur blur");
+    if (preventDefault) e.preventDefault();
     if (onBlur) onBlur(e);
-    //setText(e.target.value);
   };
 
-  // const [val, setVal] = useState(value ? value : "");
-
-  // const handleOnChange = (e) => {
-  //   if (preventDefault) e.preventDefault();
-  //   setVal(e.target.value);
-  // };
-
-  // const handleOnBlur = (e) => {
-  //   if (preventDefault) e.preventDefault();
-  //   onChange(id, val);
-  // };
+  const handleOnFocus = (e) => {
+    if (preventDefault) e.preventDefault();
+    if (onBlur) onFocus(e);
+  };
 
   return (
     <StyledTextInput
+      tabIndex={tabIndex}
       {...{ theme, size, color }}
       onChange={handleOnChange}
-      // onKeyDown={handleOnKeyDown}
-      // onInput={handleOnInput}
-      // onBlur={handleOnBlur}
+      onInput={handleOnInput}
+      onBlur={handleOnBlur}
+      onFocus={handleOnFocus}
       className={className}
       disabled={disabled}
       value={text}
@@ -151,8 +133,13 @@ TextInput.defaultProps = {
   theme: theme,
   disabled: false,
   onChange: () => {},
+  onKeyDown: () => {},
+  onInput: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  tabIndex: -1,
   className: "",
-  preventDefault: true,
+  preventDefault: false,
   size: "small",
   color: "primary",
   value: "",
@@ -163,6 +150,11 @@ TextInput.propTypes = {
   id: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onInput: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  tabIndex: PropTypes.number,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   value: PropTypes.string,
