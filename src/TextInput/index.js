@@ -101,12 +101,13 @@ const TextInput = React.forwardRef((props, ref) => {
   };
 
   const handleOnBlur = (e) => {
-    console.log("inpur blur");
+    console.log("STAMP BLUR");
     if (preventDefault) e.preventDefault();
     if (onBlur) onBlur(e);
   };
 
   const handleOnFocus = (e) => {
+    console.log("STAMP FOCUS");
     if (preventDefault) e.preventDefault();
     if (onBlur) onFocus(e);
   };

@@ -8,11 +8,13 @@ export default {
   argTypes: {},
 };
 
-const Template = (args) => (
-  <div>
-    <TextInput {...args} />
-  </div>
-);
+const Template = (args) => {
+  return (
+    <div>
+      <TextInput {...args} />
+    </div>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {

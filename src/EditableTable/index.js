@@ -13,6 +13,7 @@ import theme from "../_utils/theme";
 import Table from "../Table/index";
 import EditableTableCell from "./components/EditableTableCell";
 import EditableTableRow from "./components/EditableTableRow";
+import EditableTableRowsRenderer from "./components/EditableTableRowsRenderer";
 
 const EditableTable = forwardRef((props, ref) => {
   //
@@ -43,7 +44,7 @@ const EditableTable = forwardRef((props, ref) => {
   }, []);
 
   useEffect(() => {
-    setData(Data);
+    setData([...Data, { ...props.EmptyDataItem }]);
   }, [Data]);
 
   //================ EVENTS ================================================================

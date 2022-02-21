@@ -497,7 +497,7 @@ const Table = forwardRef((props, ref) => {
     };
 
     var children = (
-      <>
+      <div>
         {renderSpinner()}
         {renderHeader()}
 
@@ -510,16 +510,8 @@ const Table = forwardRef((props, ref) => {
         </HtmlTable>
 
         {renderFooter()}
-      </>
+      </div>
     );
-
-    // return (
-    //   renderCustomElement(
-    //     getCustomRender("TABLE_CONTAINER", props.children),
-    //     containerProps,
-    //     children
-    //   ) || <Container {...containerProps}>{children}</Container>
-    // );
 
     return (
       renderCustomElement(

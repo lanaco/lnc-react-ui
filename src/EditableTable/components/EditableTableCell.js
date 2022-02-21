@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
 import { isFunction, isEmpty } from "lodash";
 import EditableTableRow from "../components/EditableTableRow";
+import { inputType } from "../constants/constants";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
@@ -84,7 +85,6 @@ const EditableTableCell = (props) => {
 
   useEffect(() => {
     if (focused && inputRef && inputRef.current) {
-      if (RowIndex === 1 && Index === 0) console.log("FOCUS");
       inputRef.current.focus();
     }
   }, [focused]);
@@ -116,52 +116,58 @@ const EditableTableCell = (props) => {
     }
   };
 
+  const getDefaultInputComponent = () => {
+    //
+    var inputComponent = null;
+
+    var inputProps = {
+      ...themeProps,
+      value: data,
+      onChange: (e) => {
+        setCellData(e.target.value);
+      },
+      focused: focused,
+      onBlur: (e) => onSetFocus(e, false),
+      onFocus: (e) => onSetFocus(e, true),
+      tabIndex: calculateTabIndex(),
+    };
+
+    switch (Column.inputType) {
+      case inputType.STRING:
+        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        break;
+
+      case inputType.INTEGER:
+        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        break;
+
+      case inputType.DECIMAL:
+        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        break;
+
+      case inputType.DATE:
+        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        break;
+
+      case inputType.BOOLEAN:
+        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        break;
+
+      case inputType.SELECT:
+        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        break;
+    }
+
+    return inputComponent;
+  };
+
   const renderCellContent = () => {
     //
     // Default input component
-    var inputComponent = (
-      <Input
-        ref={inputRef}
-        {...themeProps}
-        value={data}
-        onChange={(e) => {
-          setCellData(e.target.value);
-        }}
-        //-----------------------------
-        focused={focused}
-        onBlur={(e) => onSetFocus(e, false)}
-        onFocus={(e) => onSetFocus(e, true)}
-        tabIndex={calculateTabIndex()}
-      />
-    );
-
-    //Input component as a render prop function
-    // if (
-    //   Column.editable === true &&
-    //   Column.component &&
-    //   isFunction(Column.component)
-    // )
-    //   inputComponent = (
-    //     <>
-    //       {Column.component(
-    //         {
-    //           tabIndex: calculateTabIndex(),
-    //           value: data,
-    //           onChange: (e) => {
-    //             setCellData(e.target.value);
-    //           },
-    //           focused: focused,
-    //           onBlur: (e) => onSetFocus(e, false),
-    //           onFocus: (e) => onSetFocus(e, true),
-    //           ...themeProps,
-    //         },
-    //         inputRef
-    //       )}
-    //     </>
-    //   );
+    var inputComponent = getDefaultInputComponent();
 
     // Input component as a react element
-    if (Column.editable === true && Column.component) {
+    if (Column.editable === true && Column.component)
       inputComponent = (
         <Column.component
           ref={inputRef}
@@ -175,13 +181,10 @@ const EditableTableCell = (props) => {
           onFocus={(e) => onSetFocus(e, true)}
         />
       );
-    }
 
-    if (Column.editable === true && focused) {
-      return inputComponent;
-    }
+    if (Column.editable === true && focused) return inputComponent;
 
-    if (!focused || Column.editable !== true) {
+    if (!focused || Column.editable !== true)
       return (
         <DefaultCellContent
           tabIndex={calculateTabIndex()}
@@ -191,7 +194,6 @@ const EditableTableCell = (props) => {
           {data}
         </DefaultCellContent>
       );
-    }
 
     // if (Column.render && isFunction(Column.render)) {
     //   var element = Column.render(RowData);

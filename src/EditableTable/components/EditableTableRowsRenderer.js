@@ -6,24 +6,14 @@ import {
   getChildComponentByType,
   renderCustomElement,
 } from "../../_utils/utils";
-import { isEmpty } from "lodash";
 
-const HtmlRow = styled.tr`
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-`;
-
-const EditableTableRow = (props) => {
+const EditableTableRowsRenderer = (props) => {
   //--------------------------
   const {
     onRowClick,
     onSelectRow,
     RowData,
-    // SelectedData,
-    // Columns,
-    // ColumnsToRender,
+
     Index,
     IsSelected,
     //----------------
@@ -40,21 +30,25 @@ const EditableTableRow = (props) => {
     theme,
   };
 
-  // const onClick = (e) => {
-  //   e.stopPropagation();
-  //   e.nativeEvent.stopImmediatePropagation();
-  //   onRowClick(e, RowData);
-  // };
-
   return (
-    <HtmlRow {...themeProps} key={Index}>
+    <>
       {props.children}
-    </HtmlRow>
+
+      <div
+        style={{
+          padding: "8px",
+          border: "2px solid green",
+          width: "100%",
+        }}
+      >
+        aaaaaaa
+      </div>
+    </>
   );
 };
 
-EditableTableRow.defaultProps = {
-  __TYPE__: "TABLE_ROW",
+EditableTableRowsRenderer.defaultProps = {
+  __TYPE__: "TABLE_ROWS_RENDERER",
   //--------------------
   onRowClick: () => {},
   onSelectRow: () => {},
@@ -71,7 +65,7 @@ EditableTableRow.defaultProps = {
   theme: theme,
 };
 
-EditableTableRow.propTypes = {
+EditableTableRowsRenderer.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
   onRowClick: PropTypes.func,
@@ -98,4 +92,4 @@ EditableTableRow.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default EditableTableRow;
+export default EditableTableRowsRenderer;

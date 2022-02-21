@@ -9,6 +9,14 @@ import { isEmpty } from "lodash";
 
 const Container = styled.div``;
 
+//============================================
+
+const customRender = React.forwardRef((props, ref) => {
+  return <CustomInput {...props} ref={ref} />;
+});
+
+//============================================
+
 const StoryTemplate = (props) => {
   const [loading, setLoading] = useState(false);
   const [tableData, setTableData] = useState([]);
@@ -22,22 +30,8 @@ const StoryTemplate = (props) => {
         width: 25,
         editable: true,
         inputType: inputType.STRING,
-        component: React.forwardRef((props, ref) => {
-          return (
-            <TextInput
-              {...props}
-              onChange={(_, value) =>
-                props.onChange({
-                  target: {
-                    value: value,
-                  },
-                })
-              }
-              ref={ref}
-            />
-          );
-        }),
-        component: CustomInput,
+        // component: CustomInput,
+        component: customRender,
       },
       {
         id: 2,
@@ -53,7 +47,8 @@ const StoryTemplate = (props) => {
         editable: true,
         width: 40,
         inputType: inputType.STRING,
-        component: CustomInput,
+        // component: CustomInput,
+        component: customRender,
       },
       {
         id: 4,
@@ -63,6 +58,14 @@ const StoryTemplate = (props) => {
         editable: false,
       },
     ],
+    //--------------------
+    EmptyDataItem: {
+      id: "",
+      name: "",
+      company: "",
+      address: "",
+      balance: "$0.00",
+    },
     //--------------------
     EnableSelection: false,
     EnableOrdering: false,
@@ -113,6 +116,7 @@ const StoryTemplate = (props) => {
         <button onClick={() => console.log(tableData)}>log</button>
         <button onClick={onSave}>save</button>
       </div>
+
       <EditableTable
         {...props.args}
         {...config}
