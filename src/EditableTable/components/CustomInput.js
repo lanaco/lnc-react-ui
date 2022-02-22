@@ -112,6 +112,11 @@ const CustomInput = React.forwardRef((props, ref) => {
   //   if (onInput) onInput(e);
   // };
 
+  const handleOnKeyDown = (e) => {
+    // if (preventDefault) e.preventDefault();
+    if (onKeyDown) onKeyDown(e);
+  };
+
   const handleOnBlur = (e) => {
     // if (preventDefault) e.preventDefault();
     if (onBlur) onBlur(e);
@@ -126,7 +131,7 @@ const CustomInput = React.forwardRef((props, ref) => {
     onChange(e);
   };
 
-  const delayedQuery = useRef(debounce((q) => __onChange(q), 800)).current;
+  const delayedQuery = useRef(debounce((q) => __onChange(q), 200)).current;
   const _onChange = (e) => {
     setText(e.target.value);
     delayedQuery(e);
@@ -138,6 +143,7 @@ const CustomInput = React.forwardRef((props, ref) => {
       {...{ theme, size, color }}
       onChange={_onChange}
       // onInput={handleOnInput}
+      onKeyDown={handleOnKeyDown}
       onBlur={handleOnBlur}
       onFocus={handleOnFocus}
       className={className}

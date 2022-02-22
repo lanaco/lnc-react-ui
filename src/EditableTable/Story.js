@@ -79,16 +79,12 @@ const StoryTemplate = (props) => {
     setLoading(true);
     var result = service.loadData();
 
+    result.data.push(config.EmptyDataItem);
+
     setTimeout(() => {
       setTableData(result.data);
       setLoading(false);
     }, 1200);
-  };
-
-  const onCellDataChanged = (newRowData, previousRowData) => {
-    newRowData.balance = "$69,420.00";
-
-    return newRowData;
   };
 
   const onSave = (obj) => {
@@ -113,8 +109,14 @@ const StoryTemplate = (props) => {
     <Container>
       <div style={{ padding: "6px" }}>
         <button onClick={load}>reload</button>
-        <button onClick={() => console.log(tableData)}>log</button>
-        <button onClick={onSave}>save</button>
+      </div>
+
+      <div style={{ padding: "6px" }}>
+        <button
+          onClick={() => setTableData([...tableData, config.EmptyDataItem])}
+        >
+          add
+        </button>
       </div>
 
       <EditableTable
@@ -122,8 +124,27 @@ const StoryTemplate = (props) => {
         {...config}
         Data={tableData}
         Loading={loading}
-        onSave={onSave}
-        cellDataChanged={onCellDataChanged}
+        // onSave={onSave}
+        //--------------------------
+        onCellFocusChange={() => {}}
+        //--------------------------
+        onRowFocusChange={(e, rowIndex, nextRow) => {
+          if (rowIndex !== nextRow) {
+            console.log("%c Save handler ", "background: green; color: white");
+          }
+        }}
+        //--------------------------
+        onDiscard={(e, rowIndex, cellIndex, inputRef) => {
+          console.log("%c Discard handler ", "background: black; color: white");
+        }}
+        //--------------------------
+        onInputChange={(e, value, rowIndex, cellIndex, column, rowData) => {
+          console.log(
+            "%c Input changed handler ",
+            "background: gray; color: white"
+          );
+        }}
+        //--------------------------
       ></EditableTable>
     </Container>
   );

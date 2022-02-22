@@ -501,7 +501,7 @@ const Table = forwardRef((props, ref) => {
         {renderSpinner()}
         {renderHeader()}
 
-        <HtmlTable {...themeProps}>
+        <HtmlTable {...themeProps} data-table={true}>
           <HtmlHead {...themeProps}>{renderHeadRow()}</HtmlHead>
           <HtmlBody data-tbody={true} ref={tBodyRef} {...themeProps}>
             {Data.map((rowData, index) => renderRow(rowData, index))}

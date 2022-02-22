@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
@@ -48,9 +48,9 @@ const DefaultCellContent = styled.div`
 const EditableTableCell = (props) => {
   //
   const [focused, setFocus] = useState(false);
-  const [data, setData] = useState("");
 
   var inputRef = React.createRef();
+  var triggerBlur = useRef(true);
 
   //--------------------------
   const {
@@ -61,6 +61,8 @@ const EditableTableCell = (props) => {
     RowIndex,
     EnableSelection,
     TabIndexOffset,
+    onFocusChanged,
+    onDiscard,
     //----------------
     onChange,
     onCellFocus,
@@ -80,10 +82,6 @@ const EditableTableCell = (props) => {
   };
 
   useEffect(() => {
-    setData(RowData[Column.accessor]);
-  }, [props]);
-
-  useEffect(() => {
     if (focused && inputRef && inputRef.current) {
       inputRef.current.focus();
     }
@@ -97,22 +95,24 @@ const EditableTableCell = (props) => {
     return "auto";
   };
 
-  const onSetFocus = (e, focused) => {
-    props.onFocusChanged(e, focused, RowIndex, Index, inputRef);
-
-    if (!focused) setFocus(focused);
-  };
-
   const calculateTabIndex = () => {
     if (Column.editable !== true) return -1;
 
     return TabIndexOffset + RowIndex * ColumnsToRender.length + Index;
   };
 
-  const setCellData = (value) => {
-    if (data !== value) {
-      onChange(value, Column, RowData);
-      setData(value);
+  const onSetFocus = (e, focused) => {
+    onFocusChanged(e, focused, RowIndex, Index, inputRef);
+
+    if (!focused) setFocus(focused);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === "Escape") {
+      triggerBlur.current = false;
+      inputRef.current.blur();
+      triggerBlur.current = true;
+      onDiscard(e, RowIndex, Index, inputRef);
     }
   };
 
@@ -122,13 +122,14 @@ const EditableTableCell = (props) => {
 
     var inputProps = {
       ...themeProps,
-      value: data,
-      onChange: (e) => {
-        setCellData(e.target.value);
-      },
+      value: RowData[Column.accessor],
+
+      onChange: (e) =>
+        onChange(e, e.target.value, RowIndex, Index, Column, RowData),
       focused: focused,
       onBlur: (e) => onSetFocus(e, false),
       onFocus: (e) => onSetFocus(e, true),
+      onKeyDown: (e) => onKeyDown(e),
       tabIndex: calculateTabIndex(),
     };
 
@@ -161,6 +162,11 @@ const EditableTableCell = (props) => {
     return inputComponent;
   };
 
+  const handleBlur = (e) => {
+    if (triggerBlur.current === true) onSetFocus(e, false);
+    else setFocus(false);
+  };
+
   const renderCellContent = () => {
     //
     // Default input component
@@ -172,13 +178,14 @@ const EditableTableCell = (props) => {
         <Column.component
           ref={inputRef}
           tabIndex={calculateTabIndex()}
-          value={data}
-          onChange={(e) => {
-            setCellData(e.target.value);
-          }}
+          value={RowData[Column.accessor]}
+          onChange={(e) =>
+            onChange(e, e.target.value, RowIndex, Index, Column, RowData)
+          }
           focused={focused}
-          onBlur={(e) => onSetFocus(e, false)}
+          onBlur={handleBlur}
           onFocus={(e) => onSetFocus(e, true)}
+          onKeyDown={(e) => onKeyDown(e)}
         />
       );
 
@@ -191,26 +198,9 @@ const EditableTableCell = (props) => {
           onFocus={() => setFocus(true)}
           {...themeProps}
         >
-          {data}
+          {RowData[Column.accessor]}
         </DefaultCellContent>
       );
-
-    // if (Column.render && isFunction(Column.render)) {
-    //   var element = Column.render(RowData);
-
-    //   if (React.isValidElement(element)) return element;
-    //   else
-    //     console.error(
-    //       `${Column.id}/${Column.accessor}: invalid render function.`
-    //     );
-    // }
-
-    // if (isEmpty(Column.accessor))
-    //   console.error(
-    //     `${Column.index}: accessor property is required when the render function is not suplied`
-    //   );
-
-    // return RowData[Column.accessor];
   };
 
   return (
