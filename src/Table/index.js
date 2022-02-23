@@ -11,7 +11,7 @@ import {
   getChildComponentByType,
   renderCustomElement,
 } from "../_utils/utils";
-import { isObject, isFinite } from "lodash";
+import { isObject, isFinite, filter } from "lodash";
 import { useScreenSize } from "../_utils/utils";
 import theme from "../_utils/theme";
 import { screenSizes } from "../AdvancedGrid/constants/constants";
@@ -450,6 +450,20 @@ const Table = forwardRef((props, ref) => {
     );
   };
 
+  const renderSpecialLastRow = () => {
+    return (
+      renderCustomElement(
+        getCustomRender("TABLE_SPECIAL_LAST_ROW", props.children),
+        {
+          Data,
+          Columns,
+          ColumnsToRender: filterColumns(),
+          ...themeProps,
+        }
+      ) || <></>
+    );
+  };
+
   const renderNoDataRow = () => {
     if (Data === null || Data === undefined || (Data && Data.length === 0)) {
       var colspan = filterColumns().length;
@@ -509,6 +523,7 @@ const Table = forwardRef((props, ref) => {
           </HtmlBody>
         </HtmlTable>
 
+        {renderSpecialLastRow()}
         {renderFooter()}
       </div>
     );

@@ -50,6 +50,7 @@ const EditableTableCell = (props) => {
   const [focused, setFocus] = useState(false);
 
   var inputRef = React.createRef();
+  var divRef = React.createRef();
   var triggerBlur = useRef(true);
 
   //--------------------------
@@ -63,6 +64,7 @@ const EditableTableCell = (props) => {
     TabIndexOffset,
     onFocusChanged,
     onDiscard,
+    onMount,
     //----------------
     onChange,
     onCellFocus,
@@ -82,6 +84,14 @@ const EditableTableCell = (props) => {
   };
 
   useEffect(() => {
+    onMount(RowIndex, Index, divRef);
+  }, []);
+
+  useEffect(() => {
+    if (!focused) onMount(RowIndex, Index, divRef);
+  }, [focused]);
+
+  useEffect(() => {
     if (focused && inputRef && inputRef.current) {
       inputRef.current.focus();
     }
@@ -98,11 +108,18 @@ const EditableTableCell = (props) => {
   const calculateTabIndex = () => {
     if (Column.editable !== true) return -1;
 
-    return TabIndexOffset + RowIndex * ColumnsToRender.length + Index;
+    var editableCells = ColumnsToRender.filter((x) => x.editable);
+    var thisCell = editableCells.find((x) => x.id === Column.id);
+
+    return (
+      TabIndexOffset +
+      RowIndex * editableCells.length +
+      editableCells.indexOf(thisCell)
+    );
   };
 
   const onSetFocus = (e, focused) => {
-    onFocusChanged(e, focused, RowIndex, Index, inputRef);
+    onFocusChanged(e, focused, RowIndex, Index);
 
     if (!focused) setFocus(focused);
   };
@@ -194,6 +211,7 @@ const EditableTableCell = (props) => {
     if (!focused || Column.editable !== true)
       return (
         <DefaultCellContent
+          ref={divRef}
           tabIndex={calculateTabIndex()}
           onFocus={() => setFocus(true)}
           {...themeProps}

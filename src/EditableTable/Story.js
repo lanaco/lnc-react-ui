@@ -21,6 +21,8 @@ const StoryTemplate = (props) => {
   const [loading, setLoading] = useState(false);
   const [tableData, setTableData] = useState([]);
 
+  var tableRef = React.createRef();
+
   const config = {
     Columns: [
       {
@@ -61,9 +63,9 @@ const StoryTemplate = (props) => {
     //--------------------
     EmptyDataItem: {
       id: "",
-      name: "",
-      company: "",
-      address: "",
+      name: "...",
+      company: "...",
+      address: "...",
       balance: "$0.00",
     },
     //--------------------
@@ -79,30 +81,10 @@ const StoryTemplate = (props) => {
     setLoading(true);
     var result = service.loadData();
 
-    result.data.push(config.EmptyDataItem);
-
     setTimeout(() => {
       setTableData(result.data);
       setLoading(false);
     }, 1200);
-  };
-
-  const onSave = (obj) => {
-    if (!isEmpty(obj)) {
-      setLoading(true);
-
-      // Save data...
-      var result = service.loadData();
-
-      var row = result.data.find((x) => x.id === obj.id);
-      result.data[result.data.indexOf(row)] = obj;
-
-      setTableData(result.data);
-
-      setTimeout(() => {
-        setLoading(false);
-      }, 800);
-    }
   };
 
   return (
@@ -113,13 +95,16 @@ const StoryTemplate = (props) => {
 
       <div style={{ padding: "6px" }}>
         <button
-          onClick={() => setTableData([...tableData, config.EmptyDataItem])}
+          onClick={() => {
+            tableRef.current.focusLastActiveCell();
+          }}
         >
-          add
+          focus
         </button>
       </div>
 
       <EditableTable
+        ref={tableRef}
         {...props.args}
         {...config}
         Data={tableData}
@@ -127,6 +112,16 @@ const StoryTemplate = (props) => {
         // onSave={onSave}
         //--------------------------
         onCellFocusChange={() => {}}
+        //--------------------------
+        onCreateNewItem={(timeout) => {
+          setLoading(true);
+
+          setTableData([...tableData, config.EmptyDataItem]);
+
+          setTimeout(() => {
+            setLoading(false);
+          }, timeout);
+        }}
         //--------------------------
         onRowFocusChange={(e, rowIndex, nextRow) => {
           if (rowIndex !== nextRow) {

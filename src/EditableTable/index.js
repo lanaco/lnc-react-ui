@@ -13,13 +13,19 @@ import theme from "../_utils/theme";
 import Table from "../Table/index";
 import EditableTableCell from "./components/EditableTableCell";
 import EditableTableRow from "./components/EditableTableRow";
-import EditableTableRowsRenderer from "./components/EditableTableRowsRenderer";
+import TableSpecialLastRow from "./components/TableSpecialLastRow";
 
 const EditableTable = forwardRef((props, ref) => {
   //
   var { onSave, cellDataChanged, Data, Columns, RowIdentifier } = props;
 
-  var { onCellFocusChange, onRowFocusChange, onDiscard, onInputChange } = props;
+  var {
+    onCreateNewItem,
+    onCellFocusChange,
+    onRowFocusChange,
+    onDiscard,
+    onInputChange,
+  } = props;
 
   //================ STATE =================================================================
 
@@ -32,14 +38,31 @@ const EditableTable = forwardRef((props, ref) => {
     PreviousFocusedCell: null,
   });
 
+  const mountedCells = useRef([]);
+  const firstCellInLastRow = useRef(null);
+
   const tableRef = React.createRef();
 
   //================ LIFECYCLE =============================================================
 
   // Functions exposed to parent via ref
-  useImperativeHandle(ref, () => ({}), [
-    props, // Update functions when certain state changes
-  ]);
+  useImperativeHandle(
+    ref,
+    () => ({
+      focusLastActiveCell: () => {
+        var cell = mountedCells.current.find(
+          (x) =>
+            x.row === focusedCell.current.PreviousFocusedCell.row &&
+            x.cell === focusedCell.current.PreviousFocusedCell.cell
+        );
+
+        if (cell.ref) cell.ref.focus();
+      },
+    }),
+    [
+      props, // Update functions when certain state changes
+    ]
+  );
 
   //================ EVENTS ================================================================
 
@@ -81,12 +104,7 @@ const EditableTable = forwardRef((props, ref) => {
       e.relatedTarget.closest("tbody") === null ||
       !e.relatedTarget.closest("tbody").hasAttribute("data-tbody")
     ) {
-      onRowFocusChange(
-        e,
-        rowIndex,
-        -1,
-        focusedCell.current.PreviousFocusedCell
-      );
+      onRowFocusChange(e, rowIndex, -1);
     }
 
     //===============================
@@ -102,13 +120,12 @@ const EditableTable = forwardRef((props, ref) => {
       onRowFocusChange(
         e,
         rowIndex,
-        parseInt(e.relatedTarget.closest("td").getAttribute("data-rowindex")),
-        focusedCell.current.PreviousFocusedCell
+        parseInt(e.relatedTarget.closest("td").getAttribute("data-rowindex"))
       );
     }
   };
 
-  const onFocusChanged = (e, focused, rowIndex, cellIndex, inputRef) => {
+  const onFocusChanged = (e, focused, rowIndex, cellIndex, divRef) => {
     // On FOCUS
     if (focused) {
       focusedCell.current = {
@@ -116,7 +133,7 @@ const EditableTable = forwardRef((props, ref) => {
         FocusedCell: {
           row: rowIndex,
           cell: cellIndex,
-          ref: inputRef,
+          ref: divRef,
         },
       };
     }
@@ -132,6 +149,53 @@ const EditableTable = forwardRef((props, ref) => {
     }
   };
 
+  const handleCellMount = (rowIndex, cellIndex, cellRef) => {
+    // Save the the first cell of the last row to a separate ref
+    if (rowIndex === Data.length - 1 && cellIndex === 0) {
+      firstCellInLastRow.current = cellRef.current;
+    }
+
+    // Add first mounted cell
+    if (mountedCells.current.length === 0) {
+      mountedCells.current = [
+        { row: rowIndex, cell: cellIndex, ref: cellRef.current },
+      ];
+    }
+
+    // Update cell ref if the cell is already added
+    if (
+      mountedCells.current.length > 0 &&
+      mountedCells.current.find(
+        (x) => x.row === rowIndex && x.cell === cellIndex
+      )
+    ) {
+      //---
+
+      var cell = mountedCells.current.find(
+        (x) => x.row === rowIndex && x.cell === cellIndex
+      );
+
+      cell.ref = cellRef.current;
+
+      //---
+    }
+    // Add next mounted cell
+    else if (mountedCells.current.length > 0) {
+      mountedCells.current = [
+        ...mountedCells.current,
+        { row: rowIndex, cell: cellIndex, ref: cellRef.current },
+      ];
+    }
+  };
+
+  const onSpecialRowClick = () => {
+    onCreateNewItem(300);
+
+    setTimeout(() => {
+      if (firstCellInLastRow.current) firstCellInLastRow.current.focus();
+    }, 300);
+  };
+
   //================ METHODS ===============================================================
 
   //================ RENDER ================================================================
@@ -140,12 +204,14 @@ const EditableTable = forwardRef((props, ref) => {
     <>
       <Table ref={tableRef} {...props} Data={Data} VisibilityPattern={null}>
         {props.children}
+        <TableSpecialLastRow TabIndexOffset={50} onClick={onSpecialRowClick} />
         <EditableTableRow />
         <EditableTableCell
           TabIndexOffset={50}
           onFocusChanged={onFocusChanged}
           onChange={handleDataChange}
           onDiscard={onDiscard}
+          onMount={handleCellMount}
         />
       </Table>
     </>
