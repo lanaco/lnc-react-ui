@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import EditableTable from ".";
 import styled from "@emotion/styled";
 import service from "../AdvancedGrid/services/service";
 import CustomInput from "./components/CustomInput";
 import CustomSelectList from "./components/CustomSelectList";
+import CustomCheckbox from "./components/CustomCheckbox";
 import { inputType } from "./constants/constants";
 import TextInput from "../TextInput/index";
 import Button from "../Button/index";
 import { cloneDeep, isEmpty, isEqual } from "lodash";
+import { useStateWithCallbackLazy } from "use-state-with-callback";
 
 const uuidv4 = () => {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -37,6 +39,10 @@ const customSelectList = React.forwardRef((props, ref) => {
   return <CustomSelectList {...props} ref={ref} />;
 });
 
+const customCheckbox = React.forwardRef((props, ref) => {
+  return <CustomCheckbox {...props} ref={ref} />;
+});
+
 var statusList = [
   {
     name: "active",
@@ -51,7 +57,7 @@ var statusList = [
 var db = [
   {
     id: "61f7b8ea2fe061cacbcdbfea",
-    // isBlocked: true,
+    isBlocked: true,
     balance: "$1,476.66",
     // age: 21,
     name: "Katie Wilson",
@@ -65,7 +71,7 @@ var db = [
   },
   {
     id: "61f7b8ea63d0fc830f326350",
-    // isBlocked: false,
+    isBlocked: false,
     balance: "$3,239.46",
     // age: 32,
     name: "Delgado Lott",
@@ -79,7 +85,7 @@ var db = [
   },
   {
     id: "61f7b8eaf418ca604fcdffba",
-    // isBlocked: false,
+    isBlocked: false,
     balance: "$3,804.94",
     // age: 21,
     name: "Frankie Jacobson",
@@ -93,7 +99,7 @@ var db = [
   },
   {
     id: "61f7b8ea066dfb5760224b71",
-    // isBlocked: true,
+    isBlocked: true,
     balance: "$3,731.79",
     // age: 29,
     name: "Lynch Sims",
@@ -107,7 +113,7 @@ var db = [
   },
   {
     id: "61f7b8eadd6586c40491b91e",
-    // isBlocked: true,
+    isBlocked: true,
     balance: "$2,116.41",
     // age: 30,
     name: "Black William",
@@ -126,10 +132,10 @@ var db = [
 const StoryTemplate = (props) => {
   //========== STATE =====================================
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useStateWithCallbackLazy(false);
   const [data, setData] = useState([]);
 
-  var tableRef = React.createRef();
+  var tableRef = useRef();
 
   const config = {
     Columns: [
@@ -154,7 +160,7 @@ const StoryTemplate = (props) => {
         displayName: "Address",
         accessor: "address",
         editable: true,
-        width: 30,
+        width: 25,
         inputType: inputType.STRING,
         component: customTextInput,
       },
@@ -162,7 +168,7 @@ const StoryTemplate = (props) => {
         id: 4,
         displayName: "Balance",
         accessor: "balance",
-        width: 20,
+        width: 15,
         editable: false,
       },
       {
@@ -179,11 +185,21 @@ const StoryTemplate = (props) => {
           mapValueTo: "value",
         },
       },
+      {
+        id: 6,
+        displayName: "Blocked",
+        accessor: "isBlocked",
+        width: 10,
+        editable: true,
+        inputType: inputType.BOOLEAN,
+        component: customCheckbox,
+      },
     ],
     //--------------------
     EmptyDataItem: {
       id: "",
       name: "",
+      isBlocked: false,
       company: "",
       address: "",
       balance: "$0.00",
@@ -216,7 +232,9 @@ const StoryTemplate = (props) => {
     var dataCopy = cloneDeep(data);
 
     dataCopy.forEach((item) => {
-      if (isEmpty(item.id)) item.id = uuidv4();
+      if (isEmpty(item.id)) {
+        item.id = uuidv4();
+      }
     });
 
     db = dataCopy;
@@ -228,23 +246,44 @@ const StoryTemplate = (props) => {
 
   const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
     var dataCopy = cloneDeep(data);
-    var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
+    var itemToUpdate = isEmpty(rowData.id)
+      ? dataCopy[rowIndex]
+      : dataCopy.find((x) => x.id === rowData.id);
 
     itemToUpdate[column.accessor] = value;
+    console.log(itemToUpdate);
 
     setData(dataCopy);
   };
 
   const onSave = (rowIndex) => {
-    var original = db[rowIndex];
+    var original = db[rowIndex] || config.EmptyDataItem;
     var edited = data[rowIndex];
 
     if (!isEqual(original, edited)) {
       setLoading(true);
-      commitData();
 
       setTimeout(() => {
-        setLoading(false);
+        if (isEmpty(data[rowIndex].name)) {
+          if (
+            confirm(
+              "There are validation errors. Do you want to discard the edited data ?"
+            )
+          ) {
+            //--
+            var dataCopy = cloneDeep(data);
+            dataCopy[rowIndex] = original;
+            setData(dataCopy);
+            //--
+          } else if (tableRef.current) {
+            setLoading(false, () => {
+              tableRef.current.focusLastActiveCell();
+            });
+          }
+        } else {
+          commitData();
+          setLoading(false);
+        }
       }, 800);
     }
   };
@@ -255,7 +294,9 @@ const StoryTemplate = (props) => {
     var originalItem = db.find((x) => x.id === rowData.id);
     var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
 
-    dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem;
+    dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
+      ? originalItem
+      : config.EmptyDataItem;
 
     setData(dataCopy);
   };
@@ -275,6 +316,10 @@ const StoryTemplate = (props) => {
     <Container>
       <Commands>
         <Button onClick={loadData} text={"Reload"} />
+        <Button
+          onClick={() => tableRef.current.focusLastActiveCell()}
+          text={"Focus last active cell"}
+        />
       </Commands>
       <EditableTable
         ref={tableRef}
@@ -291,6 +336,7 @@ const StoryTemplate = (props) => {
         //--------------------------
         onRowFocusChange={(e, rowIndex, nextRow) => {
           if (rowIndex !== nextRow) {
+            console.log(rowIndex, nextRow);
             onSave(rowIndex);
             console.log("%c Save handler ", "background: green; color: white");
           }

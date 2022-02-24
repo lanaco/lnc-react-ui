@@ -49,8 +49,8 @@ const EditableTableCell = (props) => {
   //
   const [focused, setFocus] = useState(false);
 
-  var inputRef = React.createRef();
-  var divRef = React.createRef();
+  var inputRef = useRef();
+  var divRef = useRef();
   var triggerBlur = useRef(true);
 
   //--------------------------
@@ -63,6 +63,7 @@ const EditableTableCell = (props) => {
     EnableSelection,
     TabIndexOffset,
     onFocusChanged,
+    RowIdentifier,
     onDiscard,
     onMount,
     //----------------
@@ -200,6 +201,14 @@ const EditableTableCell = (props) => {
           mapValueTo: Column.selectProps.mapValueTo,
         };
 
+      if (Column.inputType === "BOOLEAN")
+        additionalProps = {
+          checked: RowData[Column.accessor],
+          id: calculateTabIndex(),
+          onChange: (id, value) =>
+            onChange(null, value, RowIndex, Index, Column, RowData),
+        };
+
       inputComponent = (
         <Column.component
           ref={inputRef}
@@ -227,7 +236,11 @@ const EditableTableCell = (props) => {
           onFocus={() => setFocus(true)}
           {...themeProps}
         >
-          {RowData[Column.accessor]}
+          {Column.inputType === "BOOLEAN"
+            ? RowData[Column.accessor]
+              ? "Yes"
+              : "No"
+            : RowData[Column.accessor]}
         </DefaultCellContent>
       );
   };

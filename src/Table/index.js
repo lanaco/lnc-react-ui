@@ -324,6 +324,7 @@ const Table = forwardRef((props, ref) => {
       RowIndex: rowIndex,
       key: index,
       EnableSelection,
+      RowIdentifier,
       onCellFocus,
       onCellBlur,
       ...themeProps,

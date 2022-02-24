@@ -41,7 +41,7 @@ const EditableTable = forwardRef((props, ref) => {
   const mountedCells = useRef([]);
   const firstCellInLastRow = useRef(null);
 
-  const tableRef = React.createRef();
+  const tableRef = useRef();
 
   //================ LIFECYCLE =============================================================
 
@@ -50,13 +50,16 @@ const EditableTable = forwardRef((props, ref) => {
     ref,
     () => ({
       focusLastActiveCell: () => {
-        var cell = mountedCells.current.find(
-          (x) =>
-            x.row === focusedCell.current.PreviousFocusedCell.row &&
-            x.cell === focusedCell.current.PreviousFocusedCell.cell
-        );
+        try {
+          var cell = mountedCells.current.find(
+            (x) =>
+              x.row === focusedCell.current.PreviousFocusedCell.row &&
+              x.cell === focusedCell.current.PreviousFocusedCell.cell
+          );
 
-        if (cell.ref) cell.ref.focus();
+          console.log(cell);
+          if (cell.ref) cell.ref.focus();
+        } catch (error) {}
       },
     }),
     [
@@ -69,32 +72,6 @@ const EditableTable = forwardRef((props, ref) => {
   const handleDataChange = (e, value, rowIndex, cellIndex, column, rowData) => {
     if (onInputChange)
       onInputChange(e, value, rowIndex, cellIndex, column, rowData);
-
-    // var originalRowData = cloneDeep(rowData);
-    // var editedDataCopy = cloneDeep(editedDataRef.current);
-    // var editedRow = {};
-    // var imutableEditedRow = editedDataCopy.find(
-    //   (x) => String(x[RowIdentifier]) === String(originalRowData[RowIdentifier])
-    // );
-    // if (imutableEditedRow) {
-    //   //-----
-    //   editedRow = cloneDeep(imutableEditedRow);
-    //   editedRow[column.accessor] = value;
-    //   editedRow = cellDataChanged(editedRow, imutableEditedRow);
-    //   updateDataArray(editedRow);
-    //   editedDataCopy[editedDataCopy.indexOf(imutableEditedRow)] = editedRow;
-    //   editedDataRef.current = editedDataCopy;
-    //   //-----
-    // } else {
-    //   //-----
-    //   editedRow = cloneDeep(originalRowData);
-    //   editedRow[column.accessor] = value;
-    //   editedRow = cellDataChanged(editedRow, originalRowData);
-    //   updateDataArray(editedRow);
-    //   editedDataCopy.push(editedRow);
-    //   editedDataRef.current = editedDataCopy;
-    //   //-----
-    // }
   };
 
   const handleOnSave = (e, rowIndex) => {
