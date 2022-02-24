@@ -129,7 +129,7 @@ const EditableTableCell = (props) => {
       triggerBlur.current = false;
       inputRef.current.blur();
       triggerBlur.current = true;
-      onDiscard(e, RowIndex, Index, inputRef);
+      onDiscard(e, RowIndex, Index, RowData);
     }
   };
 
@@ -190,7 +190,16 @@ const EditableTableCell = (props) => {
     var inputComponent = getDefaultInputComponent();
 
     // Input component as a react element
-    if (Column.editable === true && Column.component)
+    if (Column.editable === true && Column.component) {
+      var additionalProps = {};
+
+      if (Column.inputType === "SELECT")
+        additionalProps = {
+          items: RowData[Column.selectProps.itemsFieldAccessor],
+          mapNameTo: Column.selectProps.mapNameTo,
+          mapValueTo: Column.selectProps.mapValueTo,
+        };
+
       inputComponent = (
         <Column.component
           ref={inputRef}
@@ -203,8 +212,10 @@ const EditableTableCell = (props) => {
           onBlur={handleBlur}
           onFocus={(e) => onSetFocus(e, true)}
           onKeyDown={(e) => onKeyDown(e)}
+          {...additionalProps}
         />
       );
+    }
 
     if (Column.editable === true && focused) return inputComponent;
 

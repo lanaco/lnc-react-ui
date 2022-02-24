@@ -56,9 +56,9 @@ const TableSpecialLastRow = (props) => {
   return (
     <SpecialFooter
       onKeyDown={(e) => {
-        if (e.key === "Enter") onClick();
+        if (e.key === "Enter") onClick(true);
       }}
-      onClick={onClick}
+      onClick={() => onClick(false)}
       tabIndex={
         TabIndexOffset +
         ColumnsToRender.filter((x) => x.editable).length * Data.length

@@ -188,11 +188,12 @@ const EditableTable = forwardRef((props, ref) => {
     }
   };
 
-  const onSpecialRowClick = () => {
-    onCreateNewItem(300);
+  const onSpecialRowClick = (isEnter) => {
+    onCreateNewItem(isEnter ? 300 : 0);
 
     setTimeout(() => {
-      if (firstCellInLastRow.current) firstCellInLastRow.current.focus();
+      if (firstCellInLastRow.current && isEnter)
+        firstCellInLastRow.current.focus();
     }, 300);
   };
 

@@ -3,23 +3,131 @@ import EditableTable from ".";
 import styled from "@emotion/styled";
 import service from "../AdvancedGrid/services/service";
 import CustomInput from "./components/CustomInput";
+import CustomSelectList from "./components/CustomSelectList";
 import { inputType } from "./constants/constants";
 import TextInput from "../TextInput/index";
-import { isEmpty } from "lodash";
+import Button from "../Button/index";
+import { cloneDeep, isEmpty, isEqual } from "lodash";
+
+const uuidv4 = () => {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
+};
 
 const Container = styled.div``;
 
+const Commands = styled.div`
+  margin: 2px;
+  padding: 8px 0;
+  display: flex;
+  gap: 8px;
+`;
+
 //============================================
 
-const customRender = React.forwardRef((props, ref) => {
+const customTextInput = React.forwardRef((props, ref) => {
   return <CustomInput {...props} ref={ref} />;
 });
+
+const customSelectList = React.forwardRef((props, ref) => {
+  return <CustomSelectList {...props} ref={ref} />;
+});
+
+var statusList = [
+  {
+    name: "active",
+    value: "active",
+  },
+  {
+    name: "inactive",
+    value: "inactive",
+  },
+];
+
+var db = [
+  {
+    id: "61f7b8ea2fe061cacbcdbfea",
+    // isBlocked: true,
+    balance: "$1,476.66",
+    // age: 21,
+    name: "Katie Wilson",
+    // gender: "female",
+    company: "QUAREX",
+    // email: "katiewilson@quarex.com",
+    // phone: "(807) 443-2274",
+    address: "125 Oceanview Avenue, Moquino, Mississippi, 418",
+    status: "active",
+    statusList: statusList,
+  },
+  {
+    id: "61f7b8ea63d0fc830f326350",
+    // isBlocked: false,
+    balance: "$3,239.46",
+    // age: 32,
+    name: "Delgado Lott",
+    // gender: "male",
+    company: "XYMONK",
+    // email: "delgadolott@xymonk.com",
+    // phone: "(973) 427-2565",
+    address: "402 Vernon Avenue, Draper, Florida, 6921",
+    status: "inactive",
+    statusList: statusList,
+  },
+  {
+    id: "61f7b8eaf418ca604fcdffba",
+    // isBlocked: false,
+    balance: "$3,804.94",
+    // age: 21,
+    name: "Frankie Jacobson",
+    // gender: "female",
+    company: "QUALITEX",
+    // email: "frankiejacobson@qualitex.com",
+    // phone: "(825) 404-3871",
+    address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
+    status: "inactive",
+    statusList: statusList,
+  },
+  {
+    id: "61f7b8ea066dfb5760224b71",
+    // isBlocked: true,
+    balance: "$3,731.79",
+    // age: 29,
+    name: "Lynch Sims",
+    // gender: "male",
+    company: "EARTHPURE",
+    // email: "lynchsims@earthpure.com",
+    // phone: "(979) 489-3188",
+    address: "620 Riverdale Avenue, Greenbush, New Mexico, 9605",
+    status: "active",
+    statusList: statusList,
+  },
+  {
+    id: "61f7b8eadd6586c40491b91e",
+    // isBlocked: true,
+    balance: "$2,116.41",
+    // age: 30,
+    name: "Black William",
+    // gender: "male",
+    company: "RODEOMAD",
+    // email: "blackwilliam@rodeomad.com",
+    // phone: "(818) 583-2805",
+    address: "125 Kathleen Court, Bergoo, Michigan, 1206",
+    status: "active",
+    statusList: statusList,
+  },
+];
 
 //============================================
 
 const StoryTemplate = (props) => {
+  //========== STATE =====================================
+
   const [loading, setLoading] = useState(false);
-  const [tableData, setTableData] = useState([]);
+  const [data, setData] = useState([]);
 
   var tableRef = React.createRef();
 
@@ -29,11 +137,10 @@ const StoryTemplate = (props) => {
         id: 1,
         displayName: "Name",
         accessor: "name",
-        width: 25,
+        width: 20,
         editable: true,
         inputType: inputType.STRING,
-        // component: CustomInput,
-        component: customRender,
+        component: customTextInput,
       },
       {
         id: 2,
@@ -47,10 +154,9 @@ const StoryTemplate = (props) => {
         displayName: "Address",
         accessor: "address",
         editable: true,
-        width: 40,
+        width: 30,
         inputType: inputType.STRING,
-        // component: CustomInput,
-        component: customRender,
+        component: customTextInput,
       },
       {
         id: 4,
@@ -59,14 +165,30 @@ const StoryTemplate = (props) => {
         width: 20,
         editable: false,
       },
+      {
+        id: 5,
+        displayName: "Status",
+        accessor: "status",
+        width: 15,
+        editable: true,
+        inputType: inputType.SELECT,
+        component: customSelectList,
+        selectProps: {
+          itemsFieldAccessor: "statusList",
+          mapNameTo: "name",
+          mapValueTo: "value",
+        },
+      },
     ],
     //--------------------
     EmptyDataItem: {
       id: "",
-      name: "...",
-      company: "...",
-      address: "...",
+      name: "",
+      company: "",
+      address: "",
       balance: "$0.00",
+      status: "active",
+      statusList: statusList,
     },
     //--------------------
     EnableSelection: false,
@@ -75,65 +197,112 @@ const StoryTemplate = (props) => {
     EnableLoader: true,
   };
 
-  useEffect(() => load(), []);
+  //========== LIFECYCLE =================================
 
-  const load = () => {
+  useEffect(() => loadData(), []);
+
+  //========== METHODS ===================================
+
+  const loadData = () => {
     setLoading(true);
-    var result = service.loadData();
 
     setTimeout(() => {
-      setTableData(result.data);
+      setData(db);
       setLoading(false);
     }, 1200);
   };
 
+  const commitData = () => {
+    var dataCopy = cloneDeep(data);
+
+    dataCopy.forEach((item) => {
+      if (isEmpty(item.id)) item.id = uuidv4();
+    });
+
+    db = dataCopy;
+
+    loadData();
+  };
+
+  //========== EVENTS ====================================
+
+  const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
+    var dataCopy = cloneDeep(data);
+    var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
+
+    itemToUpdate[column.accessor] = value;
+
+    setData(dataCopy);
+  };
+
+  const onSave = (rowIndex) => {
+    var original = db[rowIndex];
+    var edited = data[rowIndex];
+
+    if (!isEqual(original, edited)) {
+      setLoading(true);
+      commitData();
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 800);
+    }
+  };
+
+  const onDiscard = (e, rowIndex, cellIndex, rowData) => {
+    var dataCopy = cloneDeep(data);
+
+    var originalItem = db.find((x) => x.id === rowData.id);
+    var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
+
+    dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem;
+
+    setData(dataCopy);
+  };
+
+  const onCreateNewItem = (timeout) => {
+    setLoading(true);
+    setData([...data, config.EmptyDataItem]);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, timeout);
+  };
+
+  //========== RENDER ====================================
+
   return (
     <Container>
-      <div style={{ padding: "6px" }}>
-        <button onClick={load}>reload</button>
-      </div>
-
-      <div style={{ padding: "6px" }}>
-        <button
-          onClick={() => {
-            tableRef.current.focusLastActiveCell();
-          }}
-        >
-          focus
-        </button>
-      </div>
-
+      <Commands>
+        <Button onClick={loadData} text={"Reload"} />
+      </Commands>
       <EditableTable
         ref={tableRef}
         {...props.args}
         {...config}
-        Data={tableData}
+        Data={data}
         Loading={loading}
-        // onSave={onSave}
         //--------------------------
         onCellFocusChange={() => {}}
         //--------------------------
         onCreateNewItem={(timeout) => {
-          setLoading(true);
-
-          setTableData([...tableData, config.EmptyDataItem]);
-
-          setTimeout(() => {
-            setLoading(false);
-          }, timeout);
+          onCreateNewItem(timeout);
         }}
         //--------------------------
         onRowFocusChange={(e, rowIndex, nextRow) => {
           if (rowIndex !== nextRow) {
+            onSave(rowIndex);
             console.log("%c Save handler ", "background: green; color: white");
           }
         }}
         //--------------------------
-        onDiscard={(e, rowIndex, cellIndex, inputRef) => {
+        onDiscard={(e, rowIndex, cellIndex, rowData) => {
+          onDiscard(e, rowIndex, cellIndex, rowData);
           console.log("%c Discard handler ", "background: black; color: white");
         }}
         //--------------------------
         onInputChange={(e, value, rowIndex, cellIndex, column, rowData) => {
+          onFieldChanged(e, value, rowIndex, cellIndex, column, rowData);
           console.log(
             "%c Input changed handler ",
             "background: gray; color: white"
