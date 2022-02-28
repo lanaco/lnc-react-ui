@@ -37,7 +37,7 @@ const DefaultCellContent = styled.div`
   font-family: ${(props) => props.theme.typography.fontFamily};
   padding: ${(props) => (props.hasRender ? "0" : "9.5px 6px 9.5px 6px")};
   border: 1px solid transparent;
-  cursor: ${(props) => (props.tabIndex !== -1 ? "cell" : "auto")};
+  cursor: ${(props) => (props.tabIndex !== -1 ? "pointer" : "auto")};
 
   &:focus {
     outline: none;
@@ -191,7 +191,7 @@ const EditableTableCell = (props) => {
     var inputComponent = getDefaultInputComponent();
 
     // Input component as a react element
-    if (Column.editable === true && Column.component) {
+    if (Column.editable === true && Column.editComponent) {
       var additionalProps = {};
 
       if (Column.inputType === "SELECT")
@@ -202,7 +202,7 @@ const EditableTableCell = (props) => {
         };
 
       inputComponent = (
-        <Column.component
+        <Column.editComponent
           ref={inputRef}
           tabIndex={calculateTabIndex()}
           value={RowData[Column.accessor]}
@@ -226,11 +226,14 @@ const EditableTableCell = (props) => {
           ref={divRef}
           tabIndex={calculateTabIndex()}
           onFocus={() => setFocus(true)}
-          hasRender={Column.render ? true : false}
+          hasRender={Column.readonlyComponent ? true : false}
           {...themeProps}
         >
-          {Column.render ? (
-            <Column.render value={RowData[Column.accessor]} disabled={true} />
+          {Column.readonlyComponent ? (
+            <Column.readonlyComponent
+              value={RowData[Column.accessor]}
+              disabled={true}
+            />
           ) : (
             RowData[Column.accessor]
           )}

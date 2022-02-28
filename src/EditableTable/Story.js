@@ -67,6 +67,9 @@ const customCheckbox = React.forwardRef((props, ref) => {
     <CustomCheckbox
       {...props}
       onChange={(e, value, id) => props.onChange(e, value, id)}
+      onKeyDown={(e, value, id) => {
+        // if (e.key === "Enter") props.onChange(e, value, id);
+      }}
       checked={props.value}
       ref={ref}
     />
@@ -188,7 +191,7 @@ const StoryTemplate = (props) => {
         width: 20,
         editable: true,
         inputType: inputType.STRING,
-        component: customTextInput,
+        editComponent: customTextInput,
       },
       {
         id: 2,
@@ -204,7 +207,7 @@ const StoryTemplate = (props) => {
         editable: true,
         width: 30,
         inputType: inputType.STRING,
-        component: customTextInput,
+        editComponent: customTextInput,
       },
       {
         id: 4,
@@ -220,8 +223,10 @@ const StoryTemplate = (props) => {
         width: 15,
         editable: true,
         inputType: inputType.SELECT,
-        component: customSelectList,
-        render: customRenderSelectedValue,
+        // editTableComponent: customSelectList,
+        // readOnlyComponent: customRenderSelectedValue,
+        editComponent: customSelectList,
+        readonlyComponent: customRenderSelectedValue,
         selectProps: {
           itemsFieldAccessor: "statusList",
           mapNameTo: "name",
@@ -235,8 +240,8 @@ const StoryTemplate = (props) => {
         width: 10,
         editable: true,
         inputType: inputType.BOOLEAN,
-        component: customCheckbox,
-        render: customRenderCheckbox,
+        editComponent: customCheckbox,
+        readonlyComponent: customRenderCheckbox,
       },
     ],
     //--------------------
@@ -305,7 +310,7 @@ const StoryTemplate = (props) => {
     var original = db[rowIndex] || config.EmptyDataItem;
     var edited = data[rowIndex];
 
-    if (!isEqual(original, edited)) {
+    if (!isEqual(original, edited) || isEmpty(edited.id)) {
       setLoading(true);
 
       setTimeout(() => {
@@ -348,15 +353,23 @@ const StoryTemplate = (props) => {
   };
 
   const onCreateNewItem = (timeout) => {
+    var create = props.onCreateNew();
+
+    if (crate) {
+    }
+
     if (timeout > 0) setLoading(true);
     setData([...data, config.EmptyDataItem]);
 
     setTimeout(() => {
       if (timeout > 0) setLoading(false);
+      onCreateFinished();
     }, timeout);
   };
 
   //========== RENDER ====================================
+
+  var [check, set] = useState(false);
 
   return (
     <Container>
@@ -367,6 +380,13 @@ const StoryTemplate = (props) => {
           text={"Focus last active cell"}
         />
       </Commands>
+      <div
+        style={{
+          padding: "10px",
+        }}
+      >
+        <CustomCheckbox checked={check} onChange={() => set(!check)} />
+      </div>
       <EditableTable
         ref={tableRef}
         {...props.args}
@@ -384,21 +404,21 @@ const StoryTemplate = (props) => {
           if (rowIndex !== nextRow) {
             console.log(rowIndex, nextRow);
             onSave(rowIndex);
-            console.log("%c Save handler ", "background: green; color: white");
+            // console.log("%c Save handler ", "background: green; color: white");
           }
         }}
         //--------------------------
         onDiscard={(e, rowIndex, cellIndex, rowData) => {
           onDiscard(e, rowIndex, cellIndex, rowData);
-          console.log("%c Discard handler ", "background: black; color: white");
+          // console.log("%c Discard handler ", "background: black; color: white");
         }}
         //--------------------------
         onInputChange={(e, value, rowIndex, cellIndex, column, rowData) => {
           onFieldChanged(e, value, rowIndex, cellIndex, column, rowData);
-          console.log(
-            "%c Input changed handler ",
-            "background: gray; color: white"
-          );
+          // console.log(
+          //   "%c Input changed handler ",
+          //   "background: gray; color: white"
+          // );
         }}
         //--------------------------
       ></EditableTable>
