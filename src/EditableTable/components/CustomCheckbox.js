@@ -5,8 +5,14 @@ import theme from "../../_utils/theme";
 import styled from "@emotion/styled";
 
 const CheckBox = styled.input`
-  height: 23px;
-  width: 23px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  margin: 9.5px 6px 9.5px 6px;
+
+  &:disabled {
+    cursor: default;
+  }
 `;
 
 const CustomCheckbox = React.forwardRef((props, ref) => {
@@ -24,25 +30,25 @@ const CustomCheckbox = React.forwardRef((props, ref) => {
   } = props;
 
   const handleChange = (e) => {
-    +e.stopPropagation();
+    e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    onChange(id, !checked);
+    onChange(e, !checked, id);
   };
 
   const onKeyDown = (e) => {
     if (e.key === "Enter") {
       e.stopPropagation();
       e.nativeEvent.stopImmediatePropagation();
-      onChange(id, !checked);
+      onChange(e, !checked, id);
     }
   };
 
   const handleOnBlur = (e) => {
-    if (onBlur) onBlur(e);
+    if (onBlur) onBlur(e, id);
   };
 
   const handleOnFocus = (e) => {
-    if (onFocus) onFocus(e);
+    if (onFocus) onFocus(e, id);
   };
 
   return (
@@ -56,6 +62,7 @@ const CustomCheckbox = React.forwardRef((props, ref) => {
       tabIndex={tabIndex}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}
+      disabled={disabled}
     />
   );
 });

@@ -39,8 +39,50 @@ const customSelectList = React.forwardRef((props, ref) => {
   return <CustomSelectList {...props} ref={ref} />;
 });
 
+const customRenderSelectedValue = React.forwardRef((props, ref) => {
+  var style = {};
+
+  if (props.value === "active") {
+    style = {
+      padding: "3px",
+      borderRadius: "3px",
+      backgroundColor: "#8bf7a9",
+      fontWeight: "bold",
+    };
+  }
+
+  if (props.value === "inactive") {
+    style = {
+      padding: "3px",
+      borderRadius: "3px",
+      backgroundColor: "#e6e6e6",
+    };
+  }
+
+  return <span style={style}>{props.value}</span>;
+});
+
 const customCheckbox = React.forwardRef((props, ref) => {
-  return <CustomCheckbox {...props} ref={ref} />;
+  return (
+    <CustomCheckbox
+      {...props}
+      onChange={(e, value, id) => props.onChange(e, value, id)}
+      checked={props.value}
+      ref={ref}
+    />
+  );
+});
+
+const customRenderCheckbox = React.forwardRef((props, ref) => {
+  return (
+    <CustomCheckbox
+      {...props}
+      onChange={() => {}}
+      tabIndex={-1}
+      checked={props.value}
+      ref={ref}
+    />
+  );
 });
 
 var statusList = [
@@ -58,7 +100,7 @@ var db = [
   {
     id: "61f7b8ea2fe061cacbcdbfea",
     isBlocked: true,
-    balance: "$1,476.66",
+    balance: 1476.66,
     // age: 21,
     name: "Katie Wilson",
     // gender: "female",
@@ -72,7 +114,7 @@ var db = [
   {
     id: "61f7b8ea63d0fc830f326350",
     isBlocked: false,
-    balance: "$3,239.46",
+    balance: 3239.46,
     // age: 32,
     name: "Delgado Lott",
     // gender: "male",
@@ -86,7 +128,7 @@ var db = [
   {
     id: "61f7b8eaf418ca604fcdffba",
     isBlocked: false,
-    balance: "$3,804.94",
+    balance: 3804.94,
     // age: 21,
     name: "Frankie Jacobson",
     // gender: "female",
@@ -100,7 +142,7 @@ var db = [
   {
     id: "61f7b8ea066dfb5760224b71",
     isBlocked: true,
-    balance: "$3,731.79",
+    balance: 3731.79,
     // age: 29,
     name: "Lynch Sims",
     // gender: "male",
@@ -114,7 +156,7 @@ var db = [
   {
     id: "61f7b8eadd6586c40491b91e",
     isBlocked: true,
-    balance: "$2,116.41",
+    balance: 2116.41,
     // age: 30,
     name: "Black William",
     // gender: "male",
@@ -160,15 +202,15 @@ const StoryTemplate = (props) => {
         displayName: "Address",
         accessor: "address",
         editable: true,
-        width: 25,
+        width: 30,
         inputType: inputType.STRING,
         component: customTextInput,
       },
       {
         id: 4,
-        displayName: "Balance",
+        displayName: "Balance ($)",
         accessor: "balance",
-        width: 15,
+        width: 10,
         editable: false,
       },
       {
@@ -179,6 +221,7 @@ const StoryTemplate = (props) => {
         editable: true,
         inputType: inputType.SELECT,
         component: customSelectList,
+        render: customRenderSelectedValue,
         selectProps: {
           itemsFieldAccessor: "statusList",
           mapNameTo: "name",
@@ -193,6 +236,7 @@ const StoryTemplate = (props) => {
         editable: true,
         inputType: inputType.BOOLEAN,
         component: customCheckbox,
+        render: customRenderCheckbox,
       },
     ],
     //--------------------
@@ -251,7 +295,8 @@ const StoryTemplate = (props) => {
       : dataCopy.find((x) => x.id === rowData.id);
 
     itemToUpdate[column.accessor] = value;
-    console.log(itemToUpdate);
+
+    if (itemToUpdate.isBlocked) itemToUpdate.balance = 0.0;
 
     setData(dataCopy);
   };
@@ -274,6 +319,7 @@ const StoryTemplate = (props) => {
             var dataCopy = cloneDeep(data);
             dataCopy[rowIndex] = original;
             setData(dataCopy);
+            setLoading(false);
             //--
           } else if (tableRef.current) {
             setLoading(false, () => {
@@ -302,11 +348,11 @@ const StoryTemplate = (props) => {
   };
 
   const onCreateNewItem = (timeout) => {
-    setLoading(true);
+    if (timeout > 0) setLoading(true);
     setData([...data, config.EmptyDataItem]);
 
     setTimeout(() => {
-      setLoading(false);
+      if (timeout > 0) setLoading(false);
     }, timeout);
   };
 

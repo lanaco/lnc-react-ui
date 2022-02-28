@@ -35,8 +35,9 @@ const Input = styled.input`
 const DefaultCellContent = styled.div`
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   font-family: ${(props) => props.theme.typography.fontFamily};
-  padding: 9.5px 6px 9.5px 6px;
+  padding: ${(props) => (props.hasRender ? "0" : "9.5px 6px 9.5px 6px")};
   border: 1px solid transparent;
+  cursor: ${(props) => (props.tabIndex !== -1 ? "cell" : "auto")};
 
   &:focus {
     outline: none;
@@ -186,7 +187,6 @@ const EditableTableCell = (props) => {
   };
 
   const renderCellContent = () => {
-    //
     // Default input component
     var inputComponent = getDefaultInputComponent();
 
@@ -201,21 +201,13 @@ const EditableTableCell = (props) => {
           mapValueTo: Column.selectProps.mapValueTo,
         };
 
-      if (Column.inputType === "BOOLEAN")
-        additionalProps = {
-          checked: RowData[Column.accessor],
-          id: calculateTabIndex(),
-          onChange: (id, value) =>
-            onChange(null, value, RowIndex, Index, Column, RowData),
-        };
-
       inputComponent = (
         <Column.component
           ref={inputRef}
           tabIndex={calculateTabIndex()}
           value={RowData[Column.accessor]}
-          onChange={(e) =>
-            onChange(e, e.target.value, RowIndex, Index, Column, RowData)
+          onChange={(event, value, id) =>
+            onChange(event, value, RowIndex, Index, Column, RowData, id)
           }
           focused={focused}
           onBlur={handleBlur}
@@ -234,13 +226,14 @@ const EditableTableCell = (props) => {
           ref={divRef}
           tabIndex={calculateTabIndex()}
           onFocus={() => setFocus(true)}
+          hasRender={Column.render ? true : false}
           {...themeProps}
         >
-          {Column.inputType === "BOOLEAN"
-            ? RowData[Column.accessor]
-              ? "Yes"
-              : "No"
-            : RowData[Column.accessor]}
+          {Column.render ? (
+            <Column.render value={RowData[Column.accessor]} disabled={true} />
+          ) : (
+            RowData[Column.accessor]
+          )}
         </DefaultCellContent>
       );
   };

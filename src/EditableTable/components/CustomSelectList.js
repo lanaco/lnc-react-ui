@@ -69,7 +69,7 @@ const CustomSelectList = React.forwardRef((props, ref) => {
   } = props;
 
   const handleOnChange = (e) => {
-    onChange(e);
+    onChange(e, e.target.value, id);
   };
 
   const getItems = () => {
@@ -90,11 +90,11 @@ const CustomSelectList = React.forwardRef((props, ref) => {
   };
 
   const handleOnBlur = (e) => {
-    if (onBlur) onBlur(e);
+    if (onBlur) onBlur(e, id);
   };
 
   const handleOnFocus = (e) => {
-    if (onFocus) onFocus(e);
+    if (onFocus) onFocus(e, id);
   };
 
   return (

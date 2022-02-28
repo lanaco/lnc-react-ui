@@ -128,7 +128,7 @@ const CustomInput = React.forwardRef((props, ref) => {
   };
 
   const __onChange = (e) => {
-    onChange(e);
+    onChange(e, e.target.value, id);
   };
 
   const delayedQuery = useRef(debounce((q) => __onChange(q), 200)).current;
