@@ -59,7 +59,6 @@ const Inner = styled.div`
   border-radius: 0.5rem;
 
   min-height: ${(props) => heightBySize(props.size)};
-  max-height: ${(props) => heightBySize(props.size)};
 `;
 
 const TextSpan = styled.span``;
