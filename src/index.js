@@ -1,88 +1,88 @@
 export { default as theme } from "./_utils/theme";
 
-export * from "./Button";
-export { default as Button } from "./Button";
+export * from "./General/Button";
+export { default as Button } from "./General/Button";
 
-export * from "./CheckBox";
-export { default as CheckBox } from "./CheckBox";
+export * from "./Inputs/CheckBox";
+export { default as CheckBox } from "./Inputs/CheckBox";
 
-export * from "./CheckboxLookup";
-export { default as CheckboxLookup } from "./CheckboxLookup";
+export * from "./Inputs/CheckboxLookup";
+export { default as CheckboxLookup } from "./Inputs/CheckboxLookup";
 
-export * from "./DateInput";
-export { default as DateInput } from "./DateInput";
+export * from "./Inputs/DateInput";
+export { default as DateInput } from "./Inputs/DateInput";
 
-export * from "./DropDown";
-export { default as DropDown } from "./DropDown";
+export * from "./Inputs/DropDown";
+export { default as DropDown } from "./Inputs/DropDown";
 
-export * from "./DropdownLookup";
-export { default as DropdownLookup } from "./DropdownLookup";
+export * from "./Inputs/DropdownLookup";
+export { default as DropdownLookup } from "./Inputs/DropdownLookup";
 
-export * from "./Icon";
-export { default as Icon } from "./Icon";
+export * from "./General/Icon";
+export { default as Icon } from "./General/Icon";
 
-export * from "./NumberInput";
-export { default as NumberInput } from "./NumberInput";
+export * from "./Inputs/NumberInput";
+export { default as NumberInput } from "./Inputs/NumberInput";
 
-export * from "./PasswordInput";
-export { default as PasswordInput } from "./PasswordInput";
+export * from "./Inputs/PasswordInput";
+export { default as PasswordInput } from "./Inputs/PasswordInput";
 
-export * from "./TextArea";
-export { default as TextArea } from "./TextArea";
+export * from "./Inputs/TextArea";
+export { default as TextArea } from "./Inputs/TextArea";
 
-export * from "./TextInput";
-export { default as TextInput } from "./TextInput";
+export * from "./Inputs/TextInput";
+export { default as TextInput } from "./Inputs/TextInput";
 
-export * from "./ToggleSwitch";
-export { default as ToggleSwitch } from "./ToggleSwitch";
+export * from "./Inputs/ToggleSwitch";
+export { default as ToggleSwitch } from "./Inputs/ToggleSwitch";
 
-export * from "./DataView";
-export { default as DataView } from "./DataView";
+export * from "./Data display/DataView";
+export { default as DataView } from "./Data display/DataView";
 
-export * from "./Modal";
-export { default as Modal } from "./Modal";
+export * from "./Utility/Modal";
+export { default as Modal } from "./Utility/Modal";
 
-export * from "./ConfirmationForm";
-export { default as ConfirmationForm } from "./ConfirmationForm";
+export * from "./Utility/ConfirmationForm";
+export { default as ConfirmationForm } from "./Utility/ConfirmationForm";
 
-export * from "./DropdownMenu";
-export { default as DropdownMenu } from "./DropdownMenu";
+export * from "./Inputs/DropdownMenu";
+export { default as DropdownMenu } from "./Inputs/DropdownMenu";
 
-export * from "./Grid";
-export { default as Grid } from "./Grid";
+export * from "./Data dipslay/Grid";
+export { default as Grid } from "./Data display/Grid";
 
-export * from "./TagSelector";
-export { default as TagSelector } from "./TagSelector";
+export * from "./Inputs/TagSelector";
+export { default as TagSelector } from "./Inputs/TagSelector";
 
-export * from "./ItemCounter";
-export { default as ItemCounter } from "./ItemCounter";
+export * from "./Data display/ItemCounter";
+export { default as ItemCounter } from "./Data display/ItemCounter";
 
-export * from "./SearchBar";
-export { default as SearchBar } from "./SearchBar";
+export * from "./Inputs/SearchBar";
+export { default as SearchBar } from "./Inputs/SearchBar";
 
-export * from "./Spinner";
-export { default as Spinner } from "./Spinner";
+export * from "./Feedback/Spinner";
+export { default as Spinner } from "./Feedback/Spinner";
 
-export * from "./Tabs";
-export { default as Tabs } from "./Tabs";
+export * from "./Layout/Tabs";
+export { default as Tabs } from "./Layout/Tabs";
 
-export * from "./Pagination";
-export { default as Pagination } from "./Pagination";
+export * from "./Utility/Pagination";
+export { default as Pagination } from "./Utility/Pagination";
 
-export * from "./FormField";
-export { default as FormField } from "./FormField";
+export * from "./Layout/FormField";
+export { default as FormField } from "./Layout/FormField";
 
-export * from "./FormContainer";
-export { default as FormContainer } from "./FormContainer";
+export * from "./Layout/FormContainer";
+export { default as FormContainer } from "./Layout/FormContainer";
 
-export * from "./Alert";
-export { default as Alert } from "./Alert";
+export * from "./Feedback/Alert";
+export { default as Alert } from "./Feedback/Alert";
 
-export * from "./PeriodSelector";
-export { default as PeriodSelector } from "./PeriodSelector";
+export * from "./Inputs/PeriodSelector";
+export { default as PeriodSelector } from "./Inputs/PeriodSelector";
 
-export * from "./MultiSelectDropdown";
-export { default as MultiSelectDropdown } from "./MultiSelectDropdown";
+export * from "./Inputs/MultiSelectDropdown";
+export { default as MultiSelectDropdown } from "./Inputs/MultiSelectDropdown";
 
-export * from "./TimeInput";
-export { default as TimeInput } from "./TimeInput";
+export * from "./Inputs/TimeInput";
+export { default as TimeInput } from "./Inputs/TimeInput";
