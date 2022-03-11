@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
+import Icon from "../../Icon/index";
 
 const HtmlHeadCell = styled.th`
   text-align: left;
@@ -28,21 +29,22 @@ const HtmlHeadCell = styled.th`
   }
 `;
 
-const HeadInnerCell = styled.div`
+const HeaderInnerCell = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  // justify-content: center;
 
   & i {
     color: black;
   }
 `;
 
-const HeadCellText = styled.span`
+const HeaderCellText = styled.span`
   color: black;
 `;
 
-const HeadCellIcon = styled.span`
+const HeaderCellIcon = styled.span`
   color: black;
   margin-left: auto;
 
@@ -59,6 +61,7 @@ const TableHeadCell = (props) => {
     Index,
     onColumnClick,
     EnableSelectAll,
+    EnableOrdering,
     //-----------
     className,
     size,
@@ -73,14 +76,85 @@ const TableHeadCell = (props) => {
     theme,
   };
 
+  const renderOrdering = () => {
+    if (Column.sortable === true && EnableOrdering === true) {
+      let orderingIconClass;
+
+      if (Ordering && Ordering.columnId === Column.id) {
+        if (Ordering.ascending === true)
+          orderingIconClass = "long-arrow-alt-up";
+
+        if (Ordering.descending === true)
+          orderingIconClass = "long-arrow-alt-down";
+
+        if (!Ordering.ascending === false && !Ordering.descending === false)
+          orderingIconClass = "sort";
+      } else orderingIconClass = "sort";
+
+      // console.log(Column.accessor, orderingIconClass);
+
+      return (
+        <HeaderCellIcon sort={orderingIconClass === "sort"}>
+          <Icon color={"white"} icon={orderingIconClass} />
+        </HeaderCellIcon>
+      );
+    }
+
+    return <></>;
+  };
+
+  const handleColumnClick = (e) => {
+    var ordering = { columnId: Column.id, ascending: false, descending: true };
+
+    if (
+      EnableOrdering === true &&
+      Column.sortable === true &&
+      Ordering &&
+      Ordering.columnId === Column.id
+    ) {
+      if (Ordering.ascending === true) {
+        ordering.ascending = false;
+        ordering.descending = false;
+      }
+
+      if (Ordering.descending === true) {
+        ordering.ascending = true;
+        ordering.descending = false;
+      }
+
+      if (Ordering.descending === false && Ordering.ascending === false) {
+        ordering.ascending = false;
+        ordering.descending = true;
+      }
+
+      onColumnClick(e, Column, ordering);
+    }
+
+    if (
+      EnableOrdering === true &&
+      Column.sortable === true &&
+      Ordering &&
+      Ordering.columnId !== Column.id
+    ) {
+      onColumnClick(e, Column, ordering);
+    }
+
+    if (Column.sortable !== true || EnableOrdering !== true)
+      onColumnClick(e, Column, Ordering);
+  };
+
   return (
     <HtmlHeadCell
-      onClick={(e) => onColumnClick(e, Column, Ordering)}
+      onClick={handleColumnClick}
       {...themeProps}
       selection={EnableSelectAll}
       key={Index}
     >
-      {Column.displayName}
+      <HeaderInnerCell>
+        <HeaderCellText>{Column.displayName}</HeaderCellText>
+
+        {renderOrdering()}
+      </HeaderInnerCell>
     </HtmlHeadCell>
   );
 };

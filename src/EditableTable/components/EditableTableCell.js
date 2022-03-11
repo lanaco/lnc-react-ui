@@ -11,8 +11,6 @@ const HtmlCell = styled.td`
   overflow: hidden;
   text-overflow: ellipsis;
   width: ${(props) => props.width};
-  // color: red;
-  // border: 1px solid gray;
 `;
 
 const Input = styled.input`
@@ -196,7 +194,7 @@ const EditableTableCell = (props) => {
 
       if (Column.inputType === "SELECT")
         additionalProps = {
-          items: RowData[Column.selectProps.itemsFieldAccessor],
+          items: Column.selectItems,
           mapNameTo: Column.selectProps.mapNameTo,
           mapValueTo: Column.selectProps.mapValueTo,
         };
@@ -231,6 +229,7 @@ const EditableTableCell = (props) => {
         >
           {Column.readonlyComponent ? (
             <Column.readonlyComponent
+              rowData={RowData}
               value={RowData[Column.accessor]}
               disabled={true}
             />

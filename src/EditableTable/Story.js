@@ -5,6 +5,7 @@ import service from "../AdvancedGrid/services/service";
 import CustomInput from "./components/CustomInput";
 import CustomSelectList from "./components/CustomSelectList";
 import CustomCheckbox from "./components/CustomCheckbox";
+import CustomDatePicker from "./components/CustomDatePicker";
 import { inputType } from "./constants/constants";
 import TextInput from "../TextInput/index";
 import Button from "../Button/index";
@@ -42,24 +43,25 @@ const customSelectList = React.forwardRef((props, ref) => {
 const customRenderSelectedValue = React.forwardRef((props, ref) => {
   var style = {};
 
-  if (props.value === "active") {
+  if (props.rowData.status_id === 1) {
     style = {
-      padding: "3px",
+      padding: "3px 5px",
       borderRadius: "3px",
       backgroundColor: "#8bf7a9",
       fontWeight: "bold",
     };
   }
 
-  if (props.value === "inactive") {
+  if (props.rowData.status_id === 2) {
     style = {
-      padding: "3px",
+      padding: "3px 5px",
       borderRadius: "3px",
-      backgroundColor: "#e6e6e6",
+      backgroundColor: "salmon",
+      fontWeight: "bold",
     };
   }
 
-  return <span style={style}>{props.value}</span>;
+  return <span style={style}>{props.rowData.status}</span>;
 });
 
 const customCheckbox = React.forwardRef((props, ref) => {
@@ -67,9 +69,6 @@ const customCheckbox = React.forwardRef((props, ref) => {
     <CustomCheckbox
       {...props}
       onChange={(e, value, id) => props.onChange(e, value, id)}
-      onKeyDown={(e, value, id) => {
-        // if (e.key === "Enter") props.onChange(e, value, id);
-      }}
       checked={props.value}
       ref={ref}
     />
@@ -88,87 +87,56 @@ const customRenderCheckbox = React.forwardRef((props, ref) => {
   );
 });
 
-var statusList = [
+var db_invoices = [
   {
-    name: "active",
-    value: "active",
+    id: "db235f2c-2023-47fa-9932-99e25832d90f",
+    company_iban: "HR75 3509 8698 7394 1416 4",
+    company_name: "Feedfire",
+    amount: 8187.46,
+    date: "22.01.2022",
+    status: "Approved",
+    status_id: 1,
+    processed: true,
   },
   {
-    name: "inactive",
-    value: "inactive",
-  },
-];
-
-var db = [
-  {
-    id: "61f7b8ea2fe061cacbcdbfea",
-    isBlocked: true,
-    balance: 1476.66,
-    // age: 21,
-    name: "Katie Wilson",
-    // gender: "female",
-    company: "QUAREX",
-    // email: "katiewilson@quarex.com",
-    // phone: "(807) 443-2274",
-    address: "125 Oceanview Avenue, Moquino, Mississippi, 418",
-    status: "active",
-    statusList: statusList,
+    id: "67792659-ae00-46a2-9742-49f41d61997b",
+    company_iban: "SM97 K032 2583 391A UIAY MGMS QTM",
+    company_name: "Yodoo",
+    amount: 2617.95,
+    date: "10.05.2021",
+    status: "Rejected",
+    status_id: 2,
+    processed: false,
   },
   {
-    id: "61f7b8ea63d0fc830f326350",
-    isBlocked: false,
-    balance: 3239.46,
-    // age: 32,
-    name: "Delgado Lott",
-    // gender: "male",
-    company: "XYMONK",
-    // email: "delgadolott@xymonk.com",
-    // phone: "(973) 427-2565",
-    address: "402 Vernon Avenue, Draper, Florida, 6921",
-    status: "inactive",
-    statusList: statusList,
+    id: "7a4ce6b3-36a4-470f-8e93-7a5a1791968f",
+    company_iban: "VG18 UGXB 1371 0224 8507 7471",
+    company_name: "Twimbo",
+    amount: 8962.72,
+    date: "31.07.2021",
+    status: "Approved",
+    status_id: 1,
+    processed: false,
   },
   {
-    id: "61f7b8eaf418ca604fcdffba",
-    isBlocked: false,
-    balance: 3804.94,
-    // age: 21,
-    name: "Frankie Jacobson",
-    // gender: "female",
-    company: "QUALITEX",
-    // email: "frankiejacobson@qualitex.com",
-    // phone: "(825) 404-3871",
-    address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
-    status: "inactive",
-    statusList: statusList,
+    id: "c804cd2d-d92d-4324-8c37-a6664b4838cc",
+    company_iban: "NO09 5446 4416 582",
+    company_name: "Lago",
+    amount: 5219.39,
+    date: "25.12.2021",
+    status: "Rejected",
+    status_id: 2,
+    processed: true,
   },
   {
-    id: "61f7b8ea066dfb5760224b71",
-    isBlocked: true,
-    balance: 3731.79,
-    // age: 29,
-    name: "Lynch Sims",
-    // gender: "male",
-    company: "EARTHPURE",
-    // email: "lynchsims@earthpure.com",
-    // phone: "(979) 489-3188",
-    address: "620 Riverdale Avenue, Greenbush, New Mexico, 9605",
-    status: "active",
-    statusList: statusList,
-  },
-  {
-    id: "61f7b8eadd6586c40491b91e",
-    isBlocked: true,
-    balance: 2116.41,
-    // age: 30,
-    name: "Black William",
-    // gender: "male",
-    company: "RODEOMAD",
-    // email: "blackwilliam@rodeomad.com",
-    // phone: "(818) 583-2805",
-    address: "125 Kathleen Court, Bergoo, Michigan, 1206",
-    status: "active",
-    statusList: statusList,
+    id: "8069a146-384c-41b2-b016-6b9a2f5c92db",
+    company_iban: "ME06 7363 2360 5431 5228 85",
+    company_name: "Lazzy",
+    amount: 3856.21,
+    date: "31.07.2022",
+    status: "Approved",
+    status_id: 1,
+    processed: true,
   },
 ];
 
@@ -186,74 +154,79 @@ const StoryTemplate = (props) => {
     Columns: [
       {
         id: 1,
-        displayName: "Name",
-        accessor: "name",
-        width: 20,
+        displayName: "Iban",
+        accessor: "company_iban",
+        width: 30,
         editable: true,
         inputType: inputType.STRING,
         editComponent: customTextInput,
       },
       {
         id: 2,
-        displayName: "Company",
-        accessor: "company",
-        width: 15,
-        editable: false,
+        displayName: "Name",
+        accessor: "company_name",
+        width: 20,
+        editable: true,
+        inputType: inputType.STRING,
+        editComponent: customTextInput,
       },
       {
         id: 3,
-        displayName: "Address",
-        accessor: "address",
+        displayName: "Amount ($)",
+        accessor: "amount",
         editable: true,
-        width: 30,
+        width: 17,
         inputType: inputType.STRING,
         editComponent: customTextInput,
       },
       {
         id: 4,
-        displayName: "Balance ($)",
-        accessor: "balance",
-        width: 10,
-        editable: false,
+        displayName: "Date",
+        accessor: "date",
+        width: 13,
+        editable: true,
+        inputType: inputType.STRING,
+        editComponent: customTextInput,
       },
       {
         id: 5,
-        displayName: "Status",
-        accessor: "status",
-        width: 15,
-        editable: true,
-        inputType: inputType.SELECT,
-        // editTableComponent: customSelectList,
-        // readOnlyComponent: customRenderSelectedValue,
-        editComponent: customSelectList,
-        readonlyComponent: customRenderSelectedValue,
-        selectProps: {
-          itemsFieldAccessor: "statusList",
-          mapNameTo: "name",
-          mapValueTo: "value",
-        },
-      },
-      {
-        id: 6,
-        displayName: "Blocked",
-        accessor: "isBlocked",
+        displayName: "Processed",
+        accessor: "processed",
         width: 10,
         editable: true,
         inputType: inputType.BOOLEAN,
         editComponent: customCheckbox,
         readonlyComponent: customRenderCheckbox,
       },
+      {
+        id: 6,
+        displayName: "Status",
+        accessor: "status_id",
+        width: 10,
+        editable: true,
+        inputType: inputType.SELECT,
+        editComponent: customSelectList,
+        readonlyComponent: customRenderSelectedValue,
+        selectItems: [
+          { id: 1, name: "Approved" },
+          { id: 2, name: "Rejected" },
+        ],
+        selectProps: {
+          mapNameTo: "name",
+          mapValueTo: "id",
+        },
+      },
     ],
     //--------------------
     EmptyDataItem: {
       id: "",
-      name: "",
-      isBlocked: false,
-      company: "",
-      address: "",
-      balance: "$0.00",
-      status: "active",
-      statusList: statusList,
+      company_iban: "",
+      company_name: "",
+      amount: 0.0,
+      date: "09.03.2022",
+      status: "Approved",
+      status_id: 1,
+      processed: false,
     },
     //--------------------
     EnableSelection: false,
@@ -272,7 +245,7 @@ const StoryTemplate = (props) => {
     setLoading(true);
 
     setTimeout(() => {
-      setData(db);
+      setData(db_invoices);
       setLoading(false);
     }, 1200);
   };
@@ -286,7 +259,7 @@ const StoryTemplate = (props) => {
       }
     });
 
-    db = dataCopy;
+    db_invoices = dataCopy;
 
     loadData();
   };
@@ -299,42 +272,64 @@ const StoryTemplate = (props) => {
       ? dataCopy[rowIndex]
       : dataCopy.find((x) => x.id === rowData.id);
 
-    itemToUpdate[column.accessor] = value;
-
-    if (itemToUpdate.isBlocked) itemToUpdate.balance = 0.0;
+    if (column.accessor === "status_id") {
+      //
+      itemToUpdate[column.accessor] = parseInt(value);
+      console.log(itemToUpdate, column);
+      itemToUpdate["status"] = column.selectItems.find(
+        (x) => x.id === parseInt(value)
+      ).name;
+      //
+    } else itemToUpdate[column.accessor] = value;
 
     setData(dataCopy);
   };
 
+  const validateEdit = (rowData) => {
+    return false;
+  };
+
+  const validateAdd = (rowData) => {
+    return false;
+  };
+
+  const showDialog = (rowIndex, edited) => {
+    if (
+      confirm(
+        "There are validation errors. Do you want to discard the edited data ?"
+      )
+    ) {
+      //--
+      onDiscard(null, rowIndex, -1, edited);
+      setLoading(false);
+      //--
+    } else if (tableRef.current) {
+      setLoading(false, () => {
+        tableRef.current.focusLastActiveCell();
+      });
+    }
+  };
+
   const onSave = (rowIndex) => {
-    var original = db[rowIndex] || config.EmptyDataItem;
+    var original = db_invoices[rowIndex] || config.EmptyDataItem;
     var edited = data[rowIndex];
 
     if (!isEqual(original, edited) || isEmpty(edited.id)) {
       setLoading(true);
 
       setTimeout(() => {
-        if (isEmpty(data[rowIndex].name)) {
-          if (
-            confirm(
-              "There are validation errors. Do you want to discard the edited data ?"
-            )
-          ) {
-            //--
-            var dataCopy = cloneDeep(data);
-            dataCopy[rowIndex] = original;
-            setData(dataCopy);
-            setLoading(false);
-            //--
-          } else if (tableRef.current) {
-            setLoading(false, () => {
-              tableRef.current.focusLastActiveCell();
-            });
-          }
-        } else {
-          commitData();
-          setLoading(false);
+        if (isEmpty(data[rowIndex].id) && !validateAdd(edited)) {
+          showDialog(rowIndex, edited);
+          return;
         }
+
+        if (!isEmpty(data[rowIndex].id) && !validateEdit(edited)) {
+          showDialog(rowIndex, edited);
+          return;
+        }
+
+        commitData();
+        setLoading(false);
       }, 800);
     }
   };
@@ -342,34 +337,32 @@ const StoryTemplate = (props) => {
   const onDiscard = (e, rowIndex, cellIndex, rowData) => {
     var dataCopy = cloneDeep(data);
 
-    var originalItem = db.find((x) => x.id === rowData.id);
+    var originalItem = db_invoices.find((x) => x.id === rowData.id);
     var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
 
-    dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
-      ? originalItem
-      : config.EmptyDataItem;
+    if (isEmpty(rowData.id)) {
+      dataCopy.splice(rowIndex, 1);
+    } else {
+      dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
+        ? originalItem
+        : config.EmptyDataItem;
+    }
 
     setData(dataCopy);
   };
 
   const onCreateNewItem = (timeout) => {
-    var create = props.onCreateNew();
-
-    if (crate) {
-    }
-
     if (timeout > 0) setLoading(true);
     setData([...data, config.EmptyDataItem]);
 
     setTimeout(() => {
       if (timeout > 0) setLoading(false);
-      onCreateFinished();
     }, timeout);
   };
 
   //========== RENDER ====================================
 
-  var [check, set] = useState(false);
+  var [check, set] = useState(true);
 
   return (
     <Container>
@@ -385,7 +378,7 @@ const StoryTemplate = (props) => {
           padding: "10px",
         }}
       >
-        <CustomCheckbox checked={check} onChange={() => set(!check)} />
+        <CustomDatePicker />
       </div>
       <EditableTable
         ref={tableRef}
@@ -404,21 +397,15 @@ const StoryTemplate = (props) => {
           if (rowIndex !== nextRow) {
             console.log(rowIndex, nextRow);
             onSave(rowIndex);
-            // console.log("%c Save handler ", "background: green; color: white");
           }
         }}
         //--------------------------
         onDiscard={(e, rowIndex, cellIndex, rowData) => {
           onDiscard(e, rowIndex, cellIndex, rowData);
-          // console.log("%c Discard handler ", "background: black; color: white");
         }}
         //--------------------------
         onInputChange={(e, value, rowIndex, cellIndex, column, rowData) => {
           onFieldChanged(e, value, rowIndex, cellIndex, column, rowData);
-          // console.log(
-          //   "%c Input changed handler ",
-          //   "background: gray; color: white"
-          // );
         }}
         //--------------------------
       ></EditableTable>

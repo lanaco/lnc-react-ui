@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Global, css } from "@emotion/react";
 import theme from "../../_utils/theme";
@@ -8,7 +8,6 @@ const CheckBox = styled.input`
   height: 16px;
   width: 16px;
   cursor: pointer;
-  // margin: 9.5px 6px 9.5px 6px;
 
   &:disabled {
     cursor: default;
@@ -19,7 +18,6 @@ const Label = styled.label`
   display: inline-flex;
   cursor: pointer;
   position: relative;
-  // width: 100%;
 
   & > input {
     height: 22px;
@@ -32,13 +30,10 @@ const Label = styled.label`
     border-radius: 3px;
     outline: none;
     transition-duration: 0.3s;
-    background-color: white;
+    background-color: transparent;
     cursor: pointer;
+    z-index: ${(props) => (props.focused ? "2" : "auto")};
   }
-
-  // & > input:checked {
-  //   background-color: white;
-  // }
 
   & > input:checked + span::before {
     content: ${'"\\2713"'};
@@ -55,7 +50,7 @@ const Label = styled.label`
   }
 
   & > input:focus {
-    background-color: ${theme.palette.primary.lighter};
+    background-color: transparent;
   }
 
   & > input:disabled {
@@ -86,6 +81,8 @@ const CustomCheckbox = React.forwardRef((props, ref) => {
     tabIndex,
   } = props;
 
+  var [focused, setFocused] = useState(false);
+
   const handleChange = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
@@ -101,15 +98,18 @@ const CustomCheckbox = React.forwardRef((props, ref) => {
   };
 
   const handleOnBlur = (e) => {
+    setFocused(false);
     if (onBlur) onBlur(e, id);
   };
 
   const handleOnFocus = (e) => {
+    setFocused(true);
+
     if (onFocus) onFocus(e, id);
   };
 
   return (
-    <Label>
+    <Label checked={checked} focused={focused}>
       <Checkbox
         type="checkbox"
         ref={ref}

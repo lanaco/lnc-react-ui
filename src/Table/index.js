@@ -194,7 +194,6 @@ const Table = forwardRef((props, ref) => {
 
       columnsToRender = VisibilityPattern[screenSize].map((colForSize) => {
         let col = Columns.find((x) => String(x.id) === String(colForSize.id));
-
         return {
           ...col,
           ...colForSize,
@@ -240,7 +239,7 @@ const Table = forwardRef((props, ref) => {
 
     var sum = widthSum + reduceWidthByAmount;
 
-    if (isFinite(sum) && (sum > 100 || sum < 99))
+    if (isFinite(sum) && (sum > 101 || sum < 99))
       console.error(`Error: Row ${index} - sum of column widths is ${sum}.`);
   };
 

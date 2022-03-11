@@ -15,12 +15,19 @@ Default.args = {
   size: "small",
   //------------------------------------
   EnableSelection: true,
-  EnableOrdering: false,
+  EnableOrdering: true,
   EnableSelectAll: true,
   EnableLoader: true,
   //-------------------------------------
   Loading: false,
   RowIdentifier: "id",
+  //-------------------------------------
+
+  Ordering: {
+    columnId: 1,
+    ascending: false,
+    descending: true,
+  },
   //-------------------------------------
   SelectedEntirePage: false,
   SelectedData: [
@@ -112,18 +119,21 @@ Default.args = {
       displayName: "Name",
       accessor: "name",
       width: 25,
+      sortable: true,
     },
     {
       id: 2,
       displayName: "Company",
       accessor: "company",
       width: 15,
+      sortable: false,
     },
     {
       id: 3,
       displayName: "Address",
       accessor: "address",
       width: 60,
+      sortable: true,
     },
   ],
   VisibilityPattern: {
