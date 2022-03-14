@@ -3,7 +3,7 @@ import TextInput from ".";
 import theme from "../../_utils/theme";
 
 export default {
-  title: "Inputs/Text Input",
+  title: "Basic Inputs/Text Input",
   component: TextInput,
   argTypes: {},
 };

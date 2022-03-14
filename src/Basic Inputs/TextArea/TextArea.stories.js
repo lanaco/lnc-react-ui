@@ -3,7 +3,7 @@ import TextArea from "./";
 import theme from "../../_utils/theme";
 
 export default {
-  title: "Inputs/Text Area",
+  title: "Basic Inputs/Text Area",
   component: TextArea,
   argTypes: {},
 };

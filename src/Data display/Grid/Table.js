@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CheckBox from "../../Inputs/CheckBox/index";
+import CheckBox from "../../Basic Inputs/CheckBox/index";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import PropTypes from "prop-types";
 import Icon from "../../General/Icon/index";

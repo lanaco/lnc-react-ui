@@ -3,8 +3,8 @@ export { default as theme } from "./_utils/theme";
 export * from "./General/Button";
 export { default as Button } from "./General/Button";
 
-export * from "./Inputs/CheckBox";
-export { default as CheckBox } from "./Inputs/CheckBox";
+export * from "./Basic Inputs/CheckBox";
+export { default as CheckBox } from "./Basic Inputs/CheckBox";
 
 export * from "./Inputs/CheckboxLookup";
 export { default as CheckboxLookup } from "./Inputs/CheckboxLookup";
@@ -24,14 +24,14 @@ export { default as Icon } from "./General/Icon";
 export * from "./Inputs/NumberInput";
 export { default as NumberInput } from "./Inputs/NumberInput";
 
-export * from "./Inputs/PasswordInput";
-export { default as PasswordInput } from "./Inputs/PasswordInput";
+export * from "./Basic Inputs/PasswordInput";
+export { default as PasswordInput } from "./Basic Inputs/PasswordInput";
 
-export * from "./Inputs/TextArea";
-export { default as TextArea } from "./Inputs/TextArea";
+export * from "./Basic Inputs/TextArea";
+export { default as TextArea } from "./Basic Inputs/TextArea";
 
-export * from "./Inputs/TextInput";
-export { default as TextInput } from "./Inputs/TextInput";
+export * from "./Basic Inputs/TextInput";
+export { default as TextInput } from "./Basic Inputs/TextInput";
 
 export * from "./Inputs/ToggleSwitch";
 export { default as ToggleSwitch } from "./Inputs/ToggleSwitch";
@@ -50,9 +50,6 @@ export { default as DropdownMenu } from "./Inputs/DropdownMenu";
 
 export * from "./Data dipslay/Grid";
 export { default as Grid } from "./Data display/Grid";
-
-export * from "./Inputs/TagSelector";
-export { default as TagSelector } from "./Inputs/TagSelector";
 
 export * from "./Data display/ItemCounter";
 export { default as ItemCounter } from "./Data display/ItemCounter";
@@ -86,3 +83,45 @@ export { default as MultiSelectDropdown } from "./Inputs/MultiSelectDropdown";
 
 export * from "./Inputs/TimeInput";
 export { default as TimeInput } from "./Inputs/TimeInput";
+
+export * from "./Basic Inputs/ColorInput";
+export { default as ColorInput } from "./Basic Inputs/ColorInput";
+
+export * from "./Basic Inputs/DateInput";
+export { default as DateInputBasic } from "./Basic Inputs/DateInput";
+
+export * from "./Basic Inputs/DecimalInput";
+export { default as DecimalInput } from "./Basic Inputs/DecimalInput";
+
+export * from "./Basic Inputs/EmailInput";
+export { default as EmailInput } from "./Basic Inputs/EmailInput";
+
+export * from "./Basic Inputs/FileInput";
+export { default as FileInput } from "./Basic Inputs/FileInput";
+
+export * from "./Basic Inputs/NumberInput";
+export { default as NumberInput } from "./Basic Inputs/NumberInput";
+
+export * from "./Basic Inputs/RadioInput";
+export { default as RadioInput } from "./Basic Inputs/RadioInput";
+
+export * from ".Basic Inputs/TimeInput";
+export { default as TimeInput } from "./Basic Inputs/TimeInput";
+
+export * from "./Layout/Layout";
+export { default as Layout } from "./Layout/Layout";
+
+export * from "./Layout/Sidebar";
+export { default as Sidebar } from "./Layout/Sidebar";
+
+export * from "./Layout/Header";
+export { default as Header } from "./Layout/Header";
+
+export * from "./Layout/Footer";
+export { default as Footer } from "./Layout/Footer";
+
+export * from "./Layout/Content";
+export { default as Content } from "./Layout/Content";
+
+export * from "./Layout/Button Group";
+export { default as ButtonGroup } from "./Layout/Button Group";

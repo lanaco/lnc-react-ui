@@ -3,7 +3,7 @@ import PasswordInput from ".";
 import theme from "../../_utils/theme";
 
 export default {
-  title: "Inputs/Password input",
+  title: "Basic Inputs/Password input",
   component: PasswordInput,
   argTypes: {},
 };

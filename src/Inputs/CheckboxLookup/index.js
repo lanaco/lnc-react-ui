@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CheckBox from "../../Inputs/CheckBox/index.js";
+import CheckBox from "../../Basic Inputs/CheckBox/index.js";
 import Button from "../../General/Button/index.js";
 import ToggleSwitch from "../../Inputs/ToggleSwitch/index.js";
 import { TransitionGroup, CSSTransition } from "react-transition-group";

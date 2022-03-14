@@ -3,7 +3,7 @@ import CheckBox from ".";
 import theme from "../../_utils/theme";
 
 export default {
-  title: "Inputs/CheckBox",
+  title: "Basic Inputs/CheckBox",
   component: CheckBox,
   argTypes: {},
 };

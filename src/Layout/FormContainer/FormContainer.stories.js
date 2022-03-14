@@ -1,8 +1,8 @@
 import React from "react";
 import FormContainer from "./index";
 import FormField from "../FormField/index";
-import TextInput from "../../Inputs/TextInput/index";
-import PasswordInput from "../../Inputs/PasswordInput/index";
+import TextInput from "../../Basic Inputs/TextInput/index";
+import PasswordInput from "../../Basic Inputs/PasswordInput/index";
 
 export default {
   title: "Layout/FormContainer",

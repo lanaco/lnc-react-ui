@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import FormField from "./index";
-import TextInput from "../../Inputs/TextInput/index";
+import TextInput from "../../Basic Inputs/TextInput/index";
 
 export default {
   title: "Layout/FormField",
