@@ -8,6 +8,7 @@ import CustomCheckbox from "./components/CustomCheckbox";
 import CustomDatePicker from "./components/CustomDatePicker";
 import { inputType } from "./constants/constants";
 import TextInput from "../TextInput/index";
+import TableSpecialLastRow from "./components/TableSpecialLastRow";
 import Button from "../Button/index";
 import { cloneDeep, isEmpty, isEqual } from "lodash";
 import { useStateWithCallbackLazy } from "use-state-with-callback";
@@ -157,6 +158,7 @@ const StoryTemplate = (props) => {
         displayName: "Iban",
         accessor: "company_iban",
         width: 30,
+        sortable: true,
         editable: true,
         inputType: inputType.STRING,
         editComponent: customTextInput,
@@ -229,9 +231,16 @@ const StoryTemplate = (props) => {
       processed: false,
     },
     //--------------------
-    EnableSelection: false,
-    EnableOrdering: false,
-    EnableSelectAll: false,
+    SelectedData: [{ id: "7a4ce6b3-36a4-470f-8e93-7a5a1791968f" }],
+    Ordering: {
+      columnId: 1,
+      ascending: false,
+      descending: true,
+    },
+    //--------------------
+    EnableSelection: true,
+    EnableOrdering: true,
+    EnableSelectAll: true,
     EnableLoader: true,
   };
 
@@ -286,11 +295,11 @@ const StoryTemplate = (props) => {
   };
 
   const validateEdit = (rowData) => {
-    return false;
+    return true;
   };
 
   const validateAdd = (rowData) => {
-    return false;
+    return true;
   };
 
   const showDialog = (rowIndex, edited) => {
@@ -360,26 +369,21 @@ const StoryTemplate = (props) => {
     }, timeout);
   };
 
-  //========== RENDER ====================================
+  const onSpecialRowClick = (isEnter) => {
+    onCreateNewItem(isEnter ? 300 : 0);
 
-  var [check, set] = useState(true);
+    setTimeout(() => {
+      tableRef.current.focusFirstCellOfLastRow();
+    }, 300);
+  };
+
+  //========== RENDER ====================================
 
   return (
     <Container>
       <Commands>
-        <Button onClick={loadData} text={"Reload"} />
-        <Button
-          onClick={() => tableRef.current.focusLastActiveCell()}
-          text={"Focus last active cell"}
-        />
+        <Button text={"Reload"} onClick={loadData} />
       </Commands>
-      <div
-        style={{
-          padding: "10px",
-        }}
-      >
-        <CustomDatePicker />
-      </div>
       <EditableTable
         ref={tableRef}
         {...props.args}
@@ -408,7 +412,9 @@ const StoryTemplate = (props) => {
           onFieldChanged(e, value, rowIndex, cellIndex, column, rowData);
         }}
         //--------------------------
-      ></EditableTable>
+      >
+        <TableSpecialLastRow onClick={onSpecialRowClick} />
+      </EditableTable>
     </Container>
   );
 };

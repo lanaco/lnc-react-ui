@@ -15,9 +15,9 @@ export const getChildComponentByType = (type = "", children, props = {}) => {
   //TODO: validate properties
 
   if (children && type) {
-    var component = React.Children.toArray(children).find(
-      (child) => child.props.__TYPE__ === type
-    );
+    var component = React.Children.toArray(children)
+      .reverse()
+      .find((child) => child.props.__TYPE__ === type);
 
     if (component) return component;
   }

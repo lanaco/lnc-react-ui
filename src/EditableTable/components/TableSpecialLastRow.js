@@ -65,7 +65,7 @@ const TableSpecialLastRow = (props) => {
       }
       {...themeProps}
     >
-      Add new item
+      Add new invoice
     </SpecialFooter>
   );
 };

@@ -1,37 +1,16 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useImperativeHandle,
-  forwardRef,
-} from "react";
-import styled from "@emotion/styled";
+import React, { useRef, useImperativeHandle, forwardRef } from "react";
 import PropTypes from "prop-types";
-import { cloneDeep, isEmpty } from "lodash";
-import { getChildComponentByType, renderCustomElement } from "../_utils/utils";
+import { getCustomRender, renderCustomElement } from "../_utils/utils";
 import theme from "../_utils/theme";
 import Table from "../Table/index";
 import EditableTableCell from "./components/EditableTableCell";
 import EditableTableRow from "./components/EditableTableRow";
-import TableSpecialLastRow from "./components/TableSpecialLastRow";
 
 const EditableTable = forwardRef((props, ref) => {
   //
-  var { onSave, cellDataChanged, Data, Columns, RowIdentifier } = props;
-
-  var {
-    onCreateNewItem,
-    onCellFocusChange,
-    onRowFocusChange,
-    onDiscard,
-    onInputChange,
-  } = props;
+  var { Data, onRowFocusChange, onDiscard, onInputChange } = props;
 
   //================ STATE =================================================================
-
-  // const [data, setData] = useState([]);
-
-  // const editedDataRef = useRef([]);
 
   const focusedCell = useRef({
     FocusedCell: null,
@@ -49,6 +28,9 @@ const EditableTable = forwardRef((props, ref) => {
   useImperativeHandle(
     ref,
     () => ({
+      focusFirstCellOfLastRow: () => {
+        if (firstCellInLastRow.current) firstCellInLastRow.current.focus();
+      },
       focusLastActiveCell: () => {
         try {
           var cell = mountedCells.current.find(
@@ -57,7 +39,6 @@ const EditableTable = forwardRef((props, ref) => {
               x.cell === focusedCell.current.PreviousFocusedCell.cell
           );
 
-          console.log(cell);
           if (cell.ref) cell.ref.focus();
         } catch (error) {}
       },
@@ -73,6 +54,32 @@ const EditableTable = forwardRef((props, ref) => {
     if (onInputChange)
       onInputChange(e, value, rowIndex, cellIndex, column, rowData);
   };
+
+  const onFocusChanged = (e, focused, rowIndex, cellIndex, divRef) => {
+    // On FOCUS
+    if (focused) {
+      focusedCell.current = {
+        ...focusedCell.current,
+        FocusedCell: {
+          row: rowIndex,
+          cell: cellIndex,
+          ref: divRef,
+        },
+      };
+    }
+
+    // On BLUR
+    if (!focused) {
+      focusedCell.current = {
+        PreviousFocusedCell: focusedCell.current.FocusedCell,
+        FocusedCell: null,
+      };
+
+      handleOnSave(e, rowIndex, -1);
+    }
+  };
+
+  //================ METHODS ===============================================================
 
   const handleOnSave = (e, rowIndex) => {
     // If focus is outside of the table
@@ -99,30 +106,6 @@ const EditableTable = forwardRef((props, ref) => {
         rowIndex,
         parseInt(e.relatedTarget.closest("td").getAttribute("data-rowindex"))
       );
-    }
-  };
-
-  const onFocusChanged = (e, focused, rowIndex, cellIndex, divRef) => {
-    // On FOCUS
-    if (focused) {
-      focusedCell.current = {
-        ...focusedCell.current,
-        FocusedCell: {
-          row: rowIndex,
-          cell: cellIndex,
-          ref: divRef,
-        },
-      };
-    }
-
-    // On BLUR
-    if (!focused) {
-      focusedCell.current = {
-        PreviousFocusedCell: focusedCell.current.FocusedCell,
-        FocusedCell: null,
-      };
-
-      handleOnSave(e, rowIndex, -1);
     }
   };
 
@@ -165,32 +148,43 @@ const EditableTable = forwardRef((props, ref) => {
     }
   };
 
-  const onSpecialRowClick = (isEnter) => {
-    onCreateNewItem(isEnter ? 300 : 0);
+  //================ RENDER ================================================================
 
-    setTimeout(() => {
-      if (firstCellInLastRow.current && isEnter)
-        firstCellInLastRow.current.focus();
-    }, 300);
+  const renderSpecialLastRow = () => {
+    return (
+      renderCustomElement(
+        getCustomRender("TABLE_SPECIAL_LAST_ROW", props.children),
+        {
+          TabIndexOffset: 50,
+        }
+      ) || <></>
+    );
   };
 
-  //================ METHODS ===============================================================
+  const renderEditableTableCell = () => {
+    var cellProps = {
+      TabIndexOffset: 50,
+      onFocusChanged: onFocusChanged,
+      onChange: handleDataChange,
+      onDiscard: onDiscard,
+      onMount: handleCellMount,
+    };
 
-  //================ RENDER ================================================================
+    return (
+      renderCustomElement(
+        getCustomRender("TABLE_CELL", props.children),
+        cellProps
+      ) || <EditableTableCell {...cellProps} />
+    );
+  };
 
   return (
     <>
       <Table ref={tableRef} {...props} Data={Data} VisibilityPattern={null}>
-        {props.children}
-        <TableSpecialLastRow TabIndexOffset={50} onClick={onSpecialRowClick} />
         <EditableTableRow />
-        <EditableTableCell
-          TabIndexOffset={50}
-          onFocusChanged={onFocusChanged}
-          onChange={handleDataChange}
-          onDiscard={onDiscard}
-          onMount={handleCellMount}
-        />
+        {props.children}
+        {renderEditableTableCell()}
+        {renderSpecialLastRow()}
       </Table>
     </>
   );
