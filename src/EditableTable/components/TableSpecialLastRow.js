@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
 
-const SpecialFooter = styled.div`
+const SpecialRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,6 +18,12 @@ const SpecialFooter = styled.div`
   font-family: ${(props) => props.theme.typography.fontFamily};
   transition: all 0.2s ease;
 
+  &:disabled {
+    color: ${(props) => props.theme.palette.gray[600]};
+    border: 1px solid ${(props) => props.theme.palette.gray[400]};
+    background-color: gray;
+  }
+
   &:focus {
     outline: none;
     border: 1px solid ${(props) => props.theme.palette[props.color].main};
@@ -29,12 +35,22 @@ const SpecialFooter = styled.div`
     border: 1px solid ${(props) => props.theme.palette[props.color].main};
     background-color: whitesmoke;
   }
+
+  ${(props) =>
+    !props.disabled
+      ? ""
+      : `
+          cursor: default;
+          color: ${props.theme.palette.gray[600]};
+          border: 1px solid ${props.theme.palette.gray[400]};
+        `}
 `;
 
 const TableSpecialLastRow = (props) => {
   //--------------------------
   const {
     Columns,
+    Disabled,
     Data,
     ColumnsToRender,
     onClick,
@@ -54,11 +70,14 @@ const TableSpecialLastRow = (props) => {
   };
 
   return (
-    <SpecialFooter
+    <SpecialRow
+      disabled={Disabled}
       onKeyDown={(e) => {
-        if (e.key === "Enter") onClick(true);
+        if (e.key === "Enter" && !Loading) onClick(true);
       }}
-      onClick={() => onClick(false)}
+      onClick={() => {
+        if (!Loading) onClick(false);
+      }}
       tabIndex={
         TabIndexOffset +
         ColumnsToRender.filter((x) => x.editable).length * Data.length
@@ -66,7 +85,7 @@ const TableSpecialLastRow = (props) => {
       {...themeProps}
     >
       Add new invoice
-    </SpecialFooter>
+    </SpecialRow>
   );
 };
 

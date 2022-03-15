@@ -458,6 +458,7 @@ const Table = forwardRef((props, ref) => {
           Data,
           Columns,
           ColumnsToRender: filterColumns(),
+          Disabled: Loading,
           ...themeProps,
         }
       ) || <></>

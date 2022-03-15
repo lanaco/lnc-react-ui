@@ -1,6 +1,71 @@
 import React from "react";
 import EditableTable from "./";
 import Story from "./Story";
+import { inputType } from "./constants/constants";
+import styled from "@emotion/styled";
+import CustomInput from "./components/CustomInput";
+import CustomSelectList from "./components/CustomSelectList";
+import CustomCheckbox from "./components/CustomCheckbox";
+import CustomDatePicker from "./components/CustomDatePicker";
+
+//-------------------------------------------------------------------
+
+const customTextInput = React.forwardRef((props, ref) => {
+  return <CustomInput {...props} ref={ref} />;
+});
+
+const customSelectList = React.forwardRef((props, ref) => {
+  return <CustomSelectList {...props} ref={ref} />;
+});
+
+const customRenderSelectedValue = React.forwardRef((props, ref) => {
+  var style = {};
+
+  if (props.rowData.status_id === 1) {
+    style = {
+      padding: "3px 5px",
+      borderRadius: "3px",
+      backgroundColor: "#8bf7a9",
+      fontWeight: "bold",
+    };
+  }
+
+  if (props.rowData.status_id === 2) {
+    style = {
+      padding: "3px 5px",
+      borderRadius: "3px",
+      backgroundColor: "salmon",
+      fontWeight: "bold",
+    };
+  }
+
+  return <span style={style}>{props.rowData.status}</span>;
+});
+
+const customCheckbox = React.forwardRef((props, ref) => {
+  return (
+    <CustomCheckbox
+      {...props}
+      onChange={(e, value, id) => props.onChange(e, value, id)}
+      checked={props.value}
+      ref={ref}
+    />
+  );
+});
+
+const customRenderCheckbox = React.forwardRef((props, ref) => {
+  return (
+    <CustomCheckbox
+      {...props}
+      onChange={() => {}}
+      tabIndex={-1}
+      checked={props.value}
+      ref={ref}
+    />
+  );
+});
+
+//-------------------------------------------------------------------
 
 export default {
   title: "Editable Table",
@@ -14,119 +79,96 @@ Default.args = {
   color: "primary",
   size: "small",
   //------------------------------------
-  EnableSelection: false,
-  EnableOrdering: false,
-  EnableSelectAll: false,
-  EnableLoader: true,
-  //-------------------------------------
-  Loading: false,
-  RowIdentifier: "id",
-  //-------------------------------------
   SelectedEntirePage: false,
-  SelectedData: [
-    {
-      id: "61f7b8eaf418ca604fcdffba",
-      isActive: false,
-      balance: "$3,804.94",
-      age: 21,
-      name: "Frankie Jacobson",
-      gender: "female",
-      company: "QUALITEX",
-      email: "frankiejacobson@qualitex.com",
-      phone: "(825) 404-3871",
-      address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
-      status: "inactive",
-    },
-  ],
   //-------------------------------------
-  Data: [
-    {
-      id: "61f7b8ea2fe061cacbcdbfea",
-      isActive: true,
-      balance: "$1,476.66",
-      age: 21,
-      name: "Katie Wilson",
-      gender: "female",
-      company: "QUAREX",
-      email: "katiewilson@quarex.com",
-      phone: "(807) 443-2274",
-      address: "125 Oceanview Avenue, Moquino, Mississippi, 418",
-      status: "banned",
-    },
-    {
-      id: "61f7b8ea63d0fc830f326350",
-      isActive: false,
-      balance: "$3,239.46",
-      age: 32,
-      name: "Delgado Lott",
-      gender: "male",
-      company: "XYMONK",
-      email: "delgadolott@xymonk.com",
-      phone: "(973) 427-2565",
-      address: "402 Vernon Avenue, Draper, Florida, 6921",
-      status: "banned",
-    },
-    {
-      id: "61f7b8eaf418ca604fcdffba",
-      isActive: false,
-      balance: "$3,804.94",
-      age: 21,
-      name: "Frankie Jacobson",
-      gender: "female",
-      company: "QUALITEX",
-      email: "frankiejacobson@qualitex.com",
-      phone: "(825) 404-3871",
-      address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
-      status: "inactive",
-    },
-    {
-      id: "61f7b8ea066dfb5760224b71",
-      isActive: true,
-      balance: "$3,731.79",
-      age: 29,
-      name: "Lynch Sims",
-      gender: "male",
-      company: "EARTHPURE",
-      email: "lynchsims@earthpure.com",
-      phone: "(979) 489-3188",
-      address: "620 Riverdale Avenue, Greenbush, New Mexico, 9605",
-      status: "active",
-    },
-    {
-      id: "61f7b8eadd6586c40491b91e",
-      isActive: true,
-      balance: "$2,116.41",
-      age: 30,
-      name: "Black William",
-      gender: "male",
-      company: "RODEOMAD",
-      email: "blackwilliam@rodeomad.com",
-      phone: "(818) 583-2805",
-      address: "125 Kathleen Court, Bergoo, Michigan, 1206",
-      status: "banned",
-    },
-  ],
   Columns: [
     {
       id: 1,
-      displayName: "Name",
-      accessor: "name",
-      width: 25,
-      dataType: "STRING",
+      displayName: "Iban",
+      accessor: "company_iban",
+      width: 30,
+      sortable: true,
+      editable: true,
+      inputType: inputType.STRING,
+      editComponent: customTextInput,
     },
     {
       id: 2,
-      displayName: "Company",
-      accessor: "company",
-      width: 15,
-      dataType: "STRING",
+      displayName: "Name",
+      accessor: "company_name",
+      width: 20,
+      editable: true,
+      inputType: inputType.STRING,
+      editComponent: customTextInput,
     },
     {
       id: 3,
-      displayName: "Address",
-      accessor: "address",
-      width: 60,
-      dataType: "STRING",
+      displayName: "Amount ($)",
+      accessor: "amount",
+      editable: true,
+      width: 17,
+      inputType: inputType.STRING,
+      editComponent: customTextInput,
+    },
+    {
+      id: 4,
+      displayName: "Date",
+      accessor: "date",
+      width: 13,
+      editable: true,
+      inputType: inputType.STRING,
+      editComponent: customTextInput,
+    },
+    {
+      id: 5,
+      displayName: "Processed",
+      accessor: "processed",
+      width: 10,
+      editable: true,
+      inputType: inputType.BOOLEAN,
+      editComponent: customCheckbox,
+      readonlyComponent: customRenderCheckbox,
+    },
+    {
+      id: 6,
+      displayName: "Status",
+      accessor: "status_id",
+      width: 10,
+      editable: true,
+      inputType: inputType.SELECT,
+      editComponent: customSelectList,
+      readonlyComponent: customRenderSelectedValue,
+      selectItems: [
+        { id: 1, name: "Approved" },
+        { id: 2, name: "Rejected" },
+      ],
+      selectProps: {
+        mapNameTo: "name",
+        mapValueTo: "id",
+      },
     },
   ],
+  //--------------------
+  EmptyDataItem: {
+    id: "",
+    company_iban: "",
+    company_name: "",
+    amount: 0.0,
+    date: "09.03.2022",
+    status: "Approved",
+    status_id: 1,
+    processed: false,
+  },
+  //--------------------
+  SelectedData: [{ id: "7a4ce6b3-36a4-470f-8e93-7a5a1791968f" }],
+  Ordering: {
+    columnId: 1,
+    ascending: false,
+    descending: true,
+  },
+  //--------------------
+  EnableSelection: true,
+  EnableOrdering: true,
+  EnableSelectAll: true,
+  EnableLoader: true,
 };
