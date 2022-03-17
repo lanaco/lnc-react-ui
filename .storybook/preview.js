@@ -1,3 +1,7 @@
+
+import theme, { themes } from "../src/_utils/theme";
+import { ThemeProvider } from "@emotion/react";
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -7,3 +11,12 @@ export const parameters = {
     },
   },
 }
+
+
+export const decorators = [
+  (Story) => (
+    <ThemeProvider theme={themes[1]}>
+      <Story />
+    </ThemeProvider>
+  ),
+]

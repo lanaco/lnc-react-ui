@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 import "../Base/fontawesome/css/fontawesome.css";
+import { useTheme } from "@emotion/react";
 
 //====================== STYLE ======================
 
@@ -23,12 +24,13 @@ const StyledButton = styled.button((props) => {
     appearance: "none",
     outline: "none",
     border: "none",
-    transition: "all 220ms",
     display: "inline-block",
     cursor: "pointer",
     padding: paddingBySize(props.size, props.hasText),
     fontSize: props.theme.typography[props.size].fontSize,
     fontFamily: props.theme.typography.fontFamily,
+    // transition: "all 220ms",
+    transition: `${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, box-shadow ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, border-color ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, color ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms`,
 
     backgroundColor: props.inverted
       ? "transparent"
@@ -38,6 +40,7 @@ const StyledButton = styled.button((props) => {
     minHeight: heightBySize(props.size),
     maxHeight: heightBySize(props.size),
     "&:hover": {
+      textDecoration: 'none',
       backgroundColor: props.inverted
         ? "whitesmoke"
         : props.theme.palette[props.color].light,
@@ -50,6 +53,9 @@ const StyledButton = styled.button((props) => {
       opacity: 0.7,
       cursor: "default",
     },
+    "&:active": {
+      boxShadow: props.theme.shadows[1]
+    }
   };
 });
 
@@ -125,8 +131,9 @@ const Icon = styled.i((props) => {
 //===================================================
 
 const Button = React.forwardRef((props, ref) => {
+  const theme = useTheme();
   const {
-    theme,
+    // theme,
     color,
     id,
     onClick,
@@ -145,7 +152,7 @@ const Button = React.forwardRef((props, ref) => {
   const handleOnClick = (e) => {
     if (preventDefault) e.preventDefault();
     onClick(id);
-    if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
   };
 
   var title = "";
@@ -181,7 +188,6 @@ const Button = React.forwardRef((props, ref) => {
           {text}
         </TextLeft>
       )}
-
       {/* Icon */}
       {icon && icon !== "" && (
         <Icon
@@ -219,7 +225,7 @@ Button.defaultProps = {
   id: "",
   disabled: false,
   tooltip: "",
-  onClick: () => {},
+  onClick: () => { },
   className: "",
   preventDefault: true,
   size: "small",
@@ -228,7 +234,6 @@ Button.defaultProps = {
   iconLocation: "left",
   text: "",
   color: "primary",
-  theme: theme,
   inverted: false,
 };
 

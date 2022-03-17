@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
+import { useTheme } from "@emotion/react";
+
 
 const fontSize = (props) => {
+
   let fontSize = props.theme.typography[props.size].fontSize;
   let newFontSize = "";
 
@@ -40,6 +43,7 @@ const paddingBySizeContainerBox = (size) => {
   if (size === "large") return `0.3125rem 0.5rem`;
 };
 
+
 const ContainerBox = styled.div`
   border: 0.0625rem solid ${(props) => props.theme.palette[props.color].dark};
   border-radius: 0.15625rem;
@@ -63,16 +67,16 @@ const Container = styled.div`
 `;
 
 const Alet = (props) => {
-  const { className, size, color, theme, message, hasContainer } = props;
-
+  const { className, size, color, message, hasContainer } = props;
+  const theme = useTheme();
   const themeProps = { theme, size, color };
-
+  
   if (hasContainer)
-    return (
+  return (
       <ContainerBox {...themeProps} className={className}>
         {message}
       </ContainerBox>
-    );
+  );
 
   if (!hasContainer)
     return (
@@ -85,7 +89,6 @@ const Alet = (props) => {
 Alet.defaultProps = {
   className: "",
   size: "small",
-  theme: theme,
   color: "primary",
   hasContainer: true,
   message: "",
@@ -93,7 +96,6 @@ Alet.defaultProps = {
 
 Alet.propTypes = {
   message: PropTypes.string,
-  theme: PropTypes.object.isRequired,
   className: PropTypes.string,
   hasContainer: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
