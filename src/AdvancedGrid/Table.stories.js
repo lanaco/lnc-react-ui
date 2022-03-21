@@ -3,7 +3,7 @@ import Table from ".";
 import { default as BasicTemplate } from "./templates/Basic";
 
 export default {
-  title: "Table",
+  title: "DataView",
   component: Table,
 };
 

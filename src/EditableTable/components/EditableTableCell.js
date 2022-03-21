@@ -67,8 +67,6 @@ const EditableTableCell = (props) => {
     onMount,
     //----------------
     onChange,
-    onCellFocus,
-    onCellBlur,
     //----------------
     className,
     size,

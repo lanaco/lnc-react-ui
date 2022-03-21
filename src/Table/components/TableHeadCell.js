@@ -13,7 +13,7 @@ const HtmlHeadCell = styled.th`
   border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
 
   padding: ${(props) =>
-    props.selection ? "2px 2px 2px 6px" : "8px 2px 8px 6px"};
+    props.selection ? "2px 2px 2px 6px" : "4px 2px 4px 6px"};
 
   &:first-of-type {
     border-radius: 3px 0 0 0;
@@ -49,7 +49,8 @@ const HeaderCellIcon = styled.span`
   margin-left: auto;
 
   & i {
-    color: ${(props) => (props.sort ? "transparent" : "black")};
+    color: ${(props) =>
+      props.sort ? "transparent" : theme.palette[props.color].main};
   }
 `;
 
@@ -94,8 +95,8 @@ const TableHeadCell = (props) => {
       // console.log(Column.accessor, orderingIconClass);
 
       return (
-        <HeaderCellIcon sort={orderingIconClass === "sort"}>
-          <Icon color={"white"} icon={orderingIconClass} />
+        <HeaderCellIcon color={"primary"} sort={orderingIconClass === "sort"}>
+          <Icon color={"primary"} icon={orderingIconClass} />
         </HeaderCellIcon>
       );
     }
@@ -140,7 +141,7 @@ const TableHeadCell = (props) => {
     }
 
     if (Column.sortable !== true || EnableOrdering !== true)
-      onColumnClick(e, Column, Ordering);
+      onColumnClick(e, Column);
   };
 
   return (

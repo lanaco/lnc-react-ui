@@ -88,6 +88,9 @@ const NoDataRow = styled.span`
   margin-top: 4px;
 `;
 
+/**
+ * A table component.
+ */
 const Table = forwardRef((props, ref) => {
   //================== PROPS ===========================================
 
@@ -100,6 +103,7 @@ const Table = forwardRef((props, ref) => {
     NoDataText,
     //--------------------
     Loading,
+    // TODO: add alignText prop to Column object
     Columns,
     Data,
     SelectedData,
@@ -112,10 +116,6 @@ const Table = forwardRef((props, ref) => {
     onRowClick,
     onSelectRow,
     onSelectAll,
-    //--------------------
-    onCellClick,
-    onCellFocus,
-    onCellBlur,
     //--------------------
     theme,
     color,
@@ -324,8 +324,7 @@ const Table = forwardRef((props, ref) => {
       key: index,
       EnableSelection,
       RowIdentifier,
-      onCellFocus,
-      onCellBlur,
+
       ...themeProps,
     };
 
@@ -576,35 +575,119 @@ Table.defaultProps = {
 };
 
 Table.propTypes = {
+  /**
+   * This property determines where the component is rendered.
+   * Should not be overridden!
+   */
   __TYPE__: PropTypes.string,
   //----------------------------------------
+  /**
+   * Show a selection checkbox in the first cell of every row.
+   * Value of the checkbox is determined by the `SelectedData` property.
+   */
   EnableSelection: PropTypes.bool,
+  /**
+   * Show ordering arrows in header cells.
+   */
   EnableOrdering: PropTypes.bool,
+  /**
+   * Show a spinner with backdrop on top of the table when `Loading` is set to `true`.
+   */
   EnableLoader: PropTypes.bool,
+  /**
+   * Show a selection checkbox in the first cell of the table header.
+   * Value of the checkbox is determined by the `SelectedEntirePage` property.
+   */
   EnableSelectAll: PropTypes.bool,
   //----------------------------------------
+  /**
+   * Specify the text that is shown when there are 0 rows in the `Data`.
+   */
   NoDataText: PropTypes.string,
+  /**
+   *  Disables some events and actions when set to `true`. Also triggers the spinner if `EnableLoader` is set to `true`.
+   */
   Loading: PropTypes.bool,
+  /**
+   * Defines the table columns.
+   * @param id - Column identifier
+   * @param displayName - Text displayed in the header
+   * @param accessor - Access the property in `Data`
+   * @param width - Default column width (overridden by the VisibilityPattern)
+   * @param sortable - Can be sorted
+   *
+   */
   Columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  /**
+   * Defines the data displayed in each row.
+   */
   Data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  /**
+   * Define the selected data.
+   * @param id - Column identifier (mandatory field)
+   */
   SelectedData: PropTypes.arrayOf(PropTypes.object),
+  /**
+   *  Value of the `SelectAll` checkbox.
+   */
   SelectedEntirePage: PropTypes.bool,
+  /**
+   *  Defines which field in a data object is the row identifier.
+   */
   RowIdentifier: PropTypes.string,
+  /**
+   * An object that defines the width and order of columns for different screen sizes.
+   * (`XS`,`S`,`M`,`L`,`XL`)
+   */
   VisibilityPattern: PropTypes.object,
+  /**
+   * Describe how the data is ordered.
+   * @param columnId - Column identifier, maps to the id on the Column object
+   */
   Ordering: PropTypes.object,
   //----------------------------------------
+  /**
+   * Triggered on header cell click.
+   * @param event - event object
+   * @param column - column definition
+   * @param ordering - updated ordering object, or undefined if ordering is not enabled or the column is not sortable
+   */
   onColumnClick: PropTypes.func,
+  /**
+   * Triggered on table row click.
+   * @param event - event object
+   * @param rowData - row data
+   */
   onRowClick: PropTypes.func,
+  /**
+   * Triggered on selection checkbox click.
+   * @param event - event object
+   * @param rowData - row data
+   * @param isSelected - the value of selection checkbox
+   */
   onSelectRow: PropTypes.func,
+  /**
+   * Triggered on select all checkbox click.
+   * @param event - event object
+   * @param isSelected - the value of select all checkbox
+   */
   onSelectAll: PropTypes.func,
   //----------------------------------------
-  onCellClick: PropTypes.func,
-  onCellFocus: PropTypes.func,
-  onCellBlur: PropTypes.func,
-  //----------------------------------------
+  /**
+   * Theme object.
+   */
   theme: PropTypes.object.isRequired,
+  /**
+   * `className` applied to the component container.
+   */
   className: PropTypes.string,
+  /**
+   * Defines size of the component (padding, margin, font etc.).
+   */
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  /**
+   *  Defines the palette color for the component.
+   */
   color: PropTypes.oneOf([
     "primary",
     "secondary",

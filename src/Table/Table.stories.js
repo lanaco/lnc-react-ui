@@ -1,9 +1,8 @@
 import React from "react";
 import Table from "./";
-import StoryTemplate from "./StoryTemplate";
 
 export default {
-  title: "Standard Table",
+  title: "Table",
   component: Table,
 };
 
@@ -11,8 +10,6 @@ const Template = (args) => <Table {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  color: "primary",
-  size: "small",
   //------------------------------------
   EnableSelection: true,
   EnableOrdering: true,
@@ -21,8 +18,8 @@ Default.args = {
   //-------------------------------------
   Loading: false,
   RowIdentifier: "id",
+  // onRowClick: (e, d) => console.log(d),
   //-------------------------------------
-
   Ordering: {
     columnId: 1,
     ascending: false,
@@ -113,6 +110,7 @@ Default.args = {
       status: "banned",
     },
   ],
+  //-------------------------------------
   Columns: [
     {
       id: 1,
@@ -136,6 +134,7 @@ Default.args = {
       sortable: true,
     },
   ],
+  //-------------------------------------
   VisibilityPattern: {
     XS: [
       {
@@ -209,4 +208,7 @@ Default.args = {
       },
     ],
   },
+  //-------------------------------------
+  color: "primary",
+  size: "small",
 };

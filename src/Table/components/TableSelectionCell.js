@@ -34,13 +34,16 @@ const TableSelectionCell = (props) => {
   };
 
   const onChange = (_, value) => {
-    onSelectRow(RowData, IsSelected);
+    //TODO: when the new checkbox is implemented, the first param should be the event object
+    onSelectRow(null, RowData, IsSelected);
   };
 
   const onCellClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    onSelectRow(RowData, IsSelected);
+
+    //TODO: when the new checkbox is implemented, the first param should be the event object
+    onSelectRow(null, RowData, IsSelected);
   };
 
   return (
