@@ -564,10 +564,6 @@ Table.defaultProps = {
   onSelectRow: () => {},
   onSelectAll: () => {},
   //--------------------
-  onCellClick: () => {},
-  onCellFocus: () => {},
-  onCellBlur: () => {},
-  //--------------------
   size: "small",
   color: "primary",
   theme: theme,

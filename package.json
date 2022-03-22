@@ -50,11 +50,14 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-uglify": "^6.0.4",
+    "storybook-react-context": "^0.6.0",
     "style-loader": "^2.0.0"
   },
   "peerDependencies": {},
   "dependencies": {
     "@emotion/react": "^11.4.0",
+    "@storybook/api": "^6.4.19",
+    "@storybook/client-api": "^6.4.19",
     "framer-motion": "^4.1.17",
     "immer": "^9.0.12",
     "lodash": "^4.17.21",

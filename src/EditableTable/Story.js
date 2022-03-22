@@ -239,9 +239,6 @@ const StoryTemplate = (props) => {
         //--------------------------
         onCellFocusChange={() => {}}
         //--------------------------
-        onCreateNewItem={(timeout) => {
-          onCreateNewItem(timeout);
-        }}
         //--------------------------
         onRowFocusChange={(e, rowIndex, nextRow) => {
           if (rowIndex !== nextRow) {
