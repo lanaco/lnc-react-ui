@@ -68,15 +68,8 @@ const Footer = styled.div`
 `;
 
 const Tabs = (props) => {
-  const {
-    className,
-    size,
-    color,
-    theme,
-    initialActiveTab,
-    tabs,
-    footer,
-  } = props;
+  const { className, size, color, theme, initialActiveTab, tabs, footer } =
+    props;
 
   const [active, setActive] = useState(null);
 

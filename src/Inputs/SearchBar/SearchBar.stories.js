@@ -7,7 +7,7 @@ import theme from "../../_utils/theme";
 export default {
   title: "Inputs/SearchBar",
   component: SearchBar,
-  subcomponents: { Chip }
+  subcomponents: { Chip },
 };
 
 const Template = (args) => <Example args={args} />;

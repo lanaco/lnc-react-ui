@@ -150,8 +150,7 @@ const PeriodSelector = (props) => {
         dateFormat={dateFormat ? dateFormat : "dd.MM.yyyy."}
         disabled={disabled}
         className={className}
-      />
-      {" "}
+      />{" "}
       <DatePicker
         selected={getEndDate()}
         onChange={handleOnEndDateChange}
