@@ -150,15 +150,8 @@ const getCheckboxCss = (props) => {
 };
 
 const CheckBox = (props) => {
-  const {
-    onChange,
-    preventDefault,
-    id,
-    disabled,
-    className,
-    checked,
-    label,
-  } = props;
+  const { onChange, preventDefault, id, disabled, className, checked, label } =
+    props;
 
   const handleChange = (e) => {
     if (preventDefault) e.preventDefault();
