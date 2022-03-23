@@ -2,7 +2,7 @@ import React from "react";
 import Table from "./";
 
 export default {
-  title: "Table",
+  title: "Data Display/Table",
   component: Table,
 };
 
