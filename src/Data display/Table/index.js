@@ -12,6 +12,8 @@ import TableSelectionCell from "./components/TableSelectionCell";
 import TableHeadRow from "./components/TableHeadRow";
 import TableHeadCell from "./components/TableHeadCell";
 import TableHeadSelectionCell from "./components/TableHeadSelectionCell";
+import TableRowStatusIndicatorCell from "./components/TableRowStatusIndicatorCell";
+import TableHeadRowStatusIndicatorCell from "./components/TableHeadRowStatusIndicatorCell";
 import { useMeasure } from "react-use";
 import Spinner from "../../Feedback/Spinner/index";
 
@@ -90,6 +92,7 @@ const Table = forwardRef((props, ref) => {
     EnableOrdering,
     EnableSelectAll,
     EnableLoader,
+    EnableRowStatusIndicator,
     //--------------------
     NoDataText,
     //--------------------
@@ -283,6 +286,8 @@ const Table = forwardRef((props, ref) => {
 
     var children = (
       <>
+        {EnableRowStatusIndicator === true && renderRowStatusIndicatorCell()}
+
         {EnableSelection === true &&
           renderSelectionCell(rowSelection.IsSelected, rowData)}
 
@@ -315,7 +320,6 @@ const Table = forwardRef((props, ref) => {
       key: index,
       EnableSelection,
       RowIdentifier,
-
       ...themeProps,
     };
 
@@ -360,6 +364,8 @@ const Table = forwardRef((props, ref) => {
 
     var children = (
       <>
+        {EnableRowStatusIndicator === true &&
+          renderHeadRowStatusIndicatorCell()}
         {EnableSelection === true && renderHeadSelectionCell()}
         {filterColumns().map((col, index) => renderHeadCell(col, index))}
       </>
@@ -473,6 +479,47 @@ const Table = forwardRef((props, ref) => {
     return <></>;
   };
 
+  const renderRowStatusIndicatorCell = () => {
+    var cellProps = {
+      ...themeProps,
+      key: -1,
+    };
+
+    if (EnableRowStatusIndicator === true)
+      return (
+        <>
+          {renderCustomElement(
+            getCustomRender("TABLE_ROW_STATUS_INDICATOR_CELL", props.children),
+            cellProps
+          ) || <TableRowStatusIndicatorCell {...cellProps} />}
+        </>
+      );
+
+    return <></>;
+  };
+
+  const renderHeadRowStatusIndicatorCell = () => {
+    var cellProps = {
+      ...themeProps,
+      key: -1,
+    };
+
+    if (EnableRowStatusIndicator === true)
+      return (
+        <>
+          {renderCustomElement(
+            getCustomRender(
+              "TABLE_HEAD_ROW_STATUS_INDICATOR_CELL",
+              props.children
+            ),
+            cellProps
+          ) || <TableHeadRowStatusIndicatorCell {...cellProps} />}
+        </>
+      );
+
+    return <></>;
+  };
+
   const renderSpinner = () => {
     if (EnableLoader === true && Loading === true)
       return (
@@ -542,6 +589,7 @@ Table.defaultProps = {
   EnableOrdering: false,
   EnableLoader: false,
   EnableSelectAll: false,
+  EnableRowStatusIndicator: false,
   //--------------------
   NoDataText: "No data to show",
   SelectedData: [],
@@ -586,6 +634,10 @@ Table.propTypes = {
    * Value of the checkbox is determined by the `SelectedEntirePage` property.
    */
   EnableSelectAll: PropTypes.bool,
+  /**
+   * Show a special status indicator cell on the left edge of the row
+   */
+  EnableRowStatusIndicator: PropTypes.bool,
   //----------------------------------------
   /**
    * Specify the text that is shown when there are 0 rows in the `Data`.
