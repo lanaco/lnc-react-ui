@@ -15,6 +15,7 @@ Default.args = {
   EnableOrdering: true,
   EnableSelectAll: true,
   EnableLoader: true,
+  EnableRowStatusIndicator: true,
   //-------------------------------------
   Loading: false,
   RowIdentifier: "id",

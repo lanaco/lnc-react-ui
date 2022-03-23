@@ -46,7 +46,6 @@ const HeaderCellText = styled.span`
 
 const HeaderCellIcon = styled.span`
   color: black;
-  margin-left: auto;
 
   & i {
     color: ${(props) =>
