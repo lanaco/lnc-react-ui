@@ -2,14 +2,14 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
-import { isFunction, isEmpty } from "lodash";
+import { statusColor } from "../constants/constants";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: red !important;
-  z-index: 10;
+  background-color: ${(props) => props.bgColor} !important;
+  padding-right: 2px;
   border-radius: 2px;
   width: ${(props) => props.width};
 `;
@@ -19,6 +19,7 @@ const TableRowStatusIndicatorCell = (props) => {
   const {
     RowData,
     Index,
+    GetRowStatusIndicatorColor,
     //----------------
     className,
     size,
@@ -37,7 +38,26 @@ const TableRowStatusIndicatorCell = (props) => {
     return "2px";
   };
 
-  return <HtmlCell {...themeProps} width={getWidth()} key={Index}></HtmlCell>;
+  const isColor = (strColor) => {
+    const s = new Option().style;
+    s.color = strColor;
+    return s.color !== "";
+  };
+
+  return (
+    <HtmlCell
+      {...themeProps}
+      width={getWidth()}
+      key={Index}
+      bgColor={() => {
+        var color = GetRowStatusIndicatorColor(RowData);
+
+        if (isColor(color)) return color;
+
+        return statusColor.NONE;
+      }}
+    ></HtmlCell>
+  );
 };
 
 TableRowStatusIndicatorCell.defaultProps = {

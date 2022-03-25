@@ -1,13 +1,13 @@
 import React from "react";
-import Table from "./";
-import { statusColor } from "./constants/constants";
+import AnalyticalTable from "./";
+import Story from "./Story";
 
 export default {
-  title: "Data Display/Table",
-  component: Table,
+  title: "Data Display/AnalyticalTable",
+  component: AnalyticalTable,
 };
 
-const Template = (args) => <Table {...args} />;
+const Template = (args) => <Story {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -18,20 +18,8 @@ Default.args = {
   EnableSelectAll: true,
   EnableLoader: true,
   //-------------------------------------
-  EnableRowStatusIndicator: true,
-  EnableRowTextHighlight: true,
-  GetRowStatusIndicatorColor: (rowData) => {
-    if (rowData.company === "QUAREX") return statusColor.DISABLED;
-    if (rowData.company !== "QUAREX") return statusColor.SUCCESS;
-
-    return statusColor.NONE;
-  },
-  GetRowTextHighlightColor: (rowData) => {
-    if (rowData.company === "QUAREX") return statusColor.DISABLED;
-    if (rowData.company !== "QUAREX") return statusColor.SUCCESS;
-
-    return "black";
-  },
+  EnableRowStatusIndicator: false,
+  EnableRowTextHighlight: false,
   //-------------------------------------
   Loading: false,
   RowIdentifier: "id",
@@ -58,6 +46,9 @@ Default.args = {
       status: "inactive",
     },
   ],
+  //-------------------------------------
+  // array of columnId-s
+  GroupBy: [1],
   //-------------------------------------
   Data: [
     {
@@ -150,80 +141,6 @@ Default.args = {
       sortable: true,
     },
   ],
-  //-------------------------------------
-  VisibilityPattern: {
-    XS: [
-      {
-        id: 1,
-        accessor: "name",
-        width: 70,
-      },
-      {
-        id: 2,
-        accessor: "company",
-        width: 30,
-      },
-    ],
-    S: [
-      {
-        id: 2,
-        accessor: "company",
-        width: 40,
-      },
-      {
-        id: 1,
-        accessor: "name",
-        width: 60,
-      },
-    ],
-    M: [
-      {
-        id: 3,
-        accessor: "address",
-        width: 10,
-      },
-
-      {
-        id: 1,
-        accessor: "name",
-        width: 90,
-      },
-    ],
-    L: [
-      {
-        id: 3,
-        accessor: "address",
-        width: 25,
-      },
-      {
-        id: 2,
-        accessor: "company",
-        width: 15,
-      },
-      {
-        id: 1,
-        accessor: "name",
-        width: 60,
-      },
-    ],
-    XL: [
-      {
-        id: 3,
-        accessor: "address",
-        width: 20,
-      },
-      {
-        id: 2,
-        accessor: "company",
-        width: 15,
-      },
-      {
-        id: 1,
-        accessor: "name",
-        width: 65,
-      },
-    ],
-  },
   //-------------------------------------
   color: "primary",
   size: "small",

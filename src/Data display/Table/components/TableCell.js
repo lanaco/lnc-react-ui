@@ -13,6 +13,10 @@ const HtmlCell = styled.td`
     props.selection === false ? "11.4px 6px 11.4px 6px" : "4px 6px 4px 6px"};
 `;
 
+const CellText = styled.span`
+  ${(props) => props.textColor}
+`;
+
 const TableCell = (props) => {
   //--------------------------
   const {
@@ -20,6 +24,8 @@ const TableCell = (props) => {
     RowData,
     Index,
     EnableSelection,
+    EnableRowTextHighlight,
+    GetRowTextHighlightColor,
     //----------------
     className,
     size,
@@ -34,12 +40,30 @@ const TableCell = (props) => {
     theme,
   };
 
+  // TODO: move to service
+  const isColor = (strColor) => {
+    const s = new Option().style;
+    s.color = strColor;
+    return s.color !== "";
+  };
+
   const getWidth = () => {
     if (Column && Column.width) {
       return Column.width + "%";
     }
 
     return "auto";
+  };
+
+  const getTextColor = () => {
+    var color = GetRowTextHighlightColor(RowData);
+
+    if (EnableRowTextHighlight === true && isColor(color))
+      return `
+        color: ${color}
+      `;
+
+    return "";
   };
 
   const renderCellContent = () => {
@@ -58,7 +82,9 @@ const TableCell = (props) => {
         `${Column.index}: accessor property is required when the render function is not suplied`
       );
 
-    return RowData[Column.accessor];
+    return (
+      <CellText textColor={getTextColor()}>{RowData[Column.accessor]}</CellText>
+    );
   };
 
   return (

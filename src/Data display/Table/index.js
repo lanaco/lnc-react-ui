@@ -92,7 +92,11 @@ const Table = forwardRef((props, ref) => {
     EnableOrdering,
     EnableSelectAll,
     EnableLoader,
+    //--------------------
     EnableRowStatusIndicator,
+    EnableRowTextHighlight,
+    GetRowStatusIndicatorColor,
+    GetRowTextHighlightColor,
     //--------------------
     NoDataText,
     //--------------------
@@ -199,6 +203,10 @@ const Table = forwardRef((props, ref) => {
           ((getSelectionCellWidthBySize() / width) * 100) /
           columnsToRender.length;
 
+        if (EnableRowStatusIndicator === true) {
+          reduceWidthByAmount += (3 / width) * 100;
+        }
+
         columnsToRender = columnsToRender.map((col) => ({
           ...col,
           width: col.width - reduceWidthByAmount,
@@ -211,6 +219,10 @@ const Table = forwardRef((props, ref) => {
         var reduceWidthByAmount =
           ((getSelectionCellWidthBySize() / width) * 100) /
           columnsToRender.length;
+
+        if (EnableRowStatusIndicator === true) {
+          reduceWidthByAmount += (3 / width) * 100;
+        }
 
         columnsToRender = columnsToRender.map((col) => ({
           ...col,
@@ -286,7 +298,8 @@ const Table = forwardRef((props, ref) => {
 
     var children = (
       <>
-        {EnableRowStatusIndicator === true && renderRowStatusIndicatorCell()}
+        {EnableRowStatusIndicator === true &&
+          renderRowStatusIndicatorCell(rowData)}
 
         {EnableSelection === true &&
           renderSelectionCell(rowSelection.IsSelected, rowData)}
@@ -320,6 +333,8 @@ const Table = forwardRef((props, ref) => {
       key: index,
       EnableSelection,
       RowIdentifier,
+      EnableRowTextHighlight,
+      GetRowTextHighlightColor,
       ...themeProps,
     };
 
@@ -479,10 +494,12 @@ const Table = forwardRef((props, ref) => {
     return <></>;
   };
 
-  const renderRowStatusIndicatorCell = () => {
+  const renderRowStatusIndicatorCell = (rowData) => {
     var cellProps = {
       ...themeProps,
       key: -1,
+      RowData: rowData,
+      GetRowStatusIndicatorColor,
     };
 
     if (EnableRowStatusIndicator === true)
@@ -580,6 +597,7 @@ const Table = forwardRef((props, ref) => {
 
 Table.defaultProps = {
   __TYPE__: "TABLE",
+  ID: "",
   //--------------------
   Loading: false,
   Columns: [],
@@ -590,6 +608,9 @@ Table.defaultProps = {
   EnableLoader: false,
   EnableSelectAll: false,
   EnableRowStatusIndicator: false,
+  EnableRowTextHighlight: false,
+  GetRowStatusIndicatorColor: () => {},
+  GetRowTextHighlightColor: () => {},
   //--------------------
   NoDataText: "No data to show",
   SelectedData: [],
@@ -615,6 +636,10 @@ Table.propTypes = {
    * Should not be overridden!
    */
   __TYPE__: PropTypes.string,
+  /**
+   *
+   */
+  ID: PropTypes.string.isRequired,
   //----------------------------------------
   /**
    * Show a selection checkbox in the first cell of every row.
@@ -638,6 +663,18 @@ Table.propTypes = {
    * Show a special status indicator cell on the left edge of the row
    */
   EnableRowStatusIndicator: PropTypes.bool,
+  /**
+   *
+   */
+  EnableRowTextHighlight: PropTypes.bool,
+  /**
+   *
+   */
+  GetRowStatusIndicatorColor: PropTypes.func,
+  /**
+   *
+   */
+  GetRowTextHighlightColor: PropTypes.func,
   //----------------------------------------
   /**
    * Specify the text that is shown when there are 0 rows in the `Data`.
