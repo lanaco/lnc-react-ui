@@ -18,11 +18,6 @@ const HtmlHeadCell = styled.th`
   &:last-of-type {
     border-radius: 0 3px 0 0;
   }
-
-  &:hover {
-    background-color: whitesmoke;
-    cursor: pointer;
-  }
 `;
 
 const TableHeadRowStatusIndicatorCell = (props) => {

@@ -16,6 +16,16 @@ export const selectionType = {
   MULTIPLE: "MULTIPLE",
 };
 
+export const statusColor = {
+  SUCCESS: "#55B472",
+  ERROR: "#DB575B",
+  WARNING: "#FFAC47",
+  PRIMARY: "#00537A",
+  SECONDARY: "#7b185d",
+  DISABLED: "#B8B8B8",
+  NONE: "inherit",
+};
+
 export const screenSizes = {
   XS: {
     type: "XS",
