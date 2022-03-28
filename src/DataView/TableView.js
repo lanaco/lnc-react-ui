@@ -1,16 +1,11 @@
-import { isUndefined } from "lodash";
-import React, { useState } from "react";
-import TableSelectionType from "./Constants/TableSelectionType";
-import { mergeCSS } from "../Helper/helper";
-import Pagination from "./Pagination";
-import { default as LncPagination } from "../Pagination/index";
-import styles from "./styles.module.css";
-import CheckBox from "../CheckBox/index";
-import PropTypes from "prop-types";
-import Icon from "../Icon/index";
 import styled from "@emotion/styled";
-import theme from "../_utils/theme";
+import { isUndefined } from "lodash";
+import React from "react";
 import Button from "../Button";
+import CheckBox from "../CheckBox/index";
+import Icon from "../Icon/index";
+import theme from "../_utils/theme";
+import TableSelectionType from "./Constants/TableSelectionType";
 
 const Container = styled.div`
   border-radius: 3px;
@@ -143,20 +138,20 @@ const TableView = (props) => {
     EnableSelection,
     EnableFormView,
     SelectionType,
-    OnSelection = () => {},
-    OnSelectAll = () => {},
+    OnSelection = () => { },
+    OnSelectAll = () => { },
     EnablePagination,
     EnableOrdering,
     Accessor,
     Ascending,
     Descending,
-    OnHeaderClick = () => {},
+    OnHeaderClick = () => { },
     ReadOnly,
     IsLookup = false,
-    LookupTakeItem = () => {},
+    LookupTakeItem = () => { },
   } = props.Config;
 
-  const { Localization = {}, Export = () => {}, Icons = {} } = props;
+  const { Localization = {}, Export = () => { }, Icons = {} } = props;
 
   //======== FUNCTIONS ========
 
@@ -193,16 +188,12 @@ const TableView = (props) => {
     let rowSelected = isItemInArray(dataItem, SelectedData, SelectionIndicator);
 
     return (
-      <>
-        <TableBodyRow selectedRow={rowSelected} key={i}>
-          {renderSelectionCell(dataItem, rowSelected, i)}
-          {Columns.filter((x) => x.hide !== true).map((col, j) => {
-            return renderBodyCell(dataItem, col, i, j);
-          })}
-        </TableBodyRow>
-
-        {/* {renderGroupBodyRows(nested, dataItem)} */}
-      </>
+      <TableBodyRow selectedRow={rowSelected} key={i}>
+        {renderSelectionCell(dataItem, rowSelected, i)}
+        {Columns.filter((x) => x.hide !== true).map((col, j) => {
+          return renderBodyCell(dataItem, col, i, j);
+        })}
+      </TableBodyRow>
     );
   };
 
@@ -210,12 +201,12 @@ const TableView = (props) => {
     var tabIndex = rowIndex * Columns.length + cellIndex + 50;
 
     let onClick = () => {
-      ChangeToFormView(dataItem);
+      ChangeToFormView(dataItem, rowIndex);
     };
 
-    if (!EnableFormView) onClick = () => {};
+    if (!EnableFormView) onClick = () => { };
 
-    if (!EnableSelection || ReadOnly) onClick = () => {};
+    if (!EnableSelection || ReadOnly) onClick = () => { };
 
     if (IsLookup) {
       onClick = () => {
@@ -234,13 +225,13 @@ const TableView = (props) => {
       <TableBodyCell key={tabIndex} onClick={onClick}>
         {isFunction(def.specialRender)
           ? def.specialRender(dataItem, () => {
-              ChangeToFormView(dataItem);
-            })
+            ChangeToFormView(dataItem, rowIndex);
+          })
           : cellData}
       </TableBodyCell>
     );
   };
-  
+
 
   const renderSelectionCell = (dataItem, selected, rowIndex) => {
     if (IsLookup) {
@@ -273,7 +264,7 @@ const TableView = (props) => {
   };
 
   const renderHeaderCell = (def, i) => {
-    let headerClick = () => {};
+    let headerClick = () => { };
     let hideOrdering =
       !EnableOrdering ||
       (def.sortable === undefined ? false : def.sortable === false);
@@ -310,7 +301,7 @@ const TableView = (props) => {
       <TableHeadCell
         hideOrdering={hideOrdering}
         key={i}
-        onClick={IsLoading || hideOrdering ? () => {} : headerClick}
+        onClick={IsLoading || hideOrdering ? () => { } : headerClick}
       >
         <HeaderInnerCell>
           <HeaderCellText>{def.displayName}</HeaderCellText>
