@@ -188,16 +188,12 @@ const TableView = (props) => {
     let rowSelected = isItemInArray(dataItem, SelectedData, SelectionIndicator);
 
     return (
-      <>
-        <TableBodyRow selectedRow={rowSelected} key={i}>
-          {renderSelectionCell(dataItem, rowSelected, i)}
-          {Columns.filter((x) => x.hide !== true).map((col, j) => {
-            return renderBodyCell(dataItem, col, i, j);
-          })}
-        </TableBodyRow>
-
-        {/* {renderGroupBodyRows(nested, dataItem)} */}
-      </>
+      <TableBodyRow selectedRow={rowSelected} key={i}>
+        {renderSelectionCell(dataItem, rowSelected, i)}
+        {Columns.filter((x) => x.hide !== true).map((col, j) => {
+          return renderBodyCell(dataItem, col, i, j);
+        })}
+      </TableBodyRow>
     );
   };
 
