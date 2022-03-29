@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
-import "../../Base/fontawesome/css/fontawesome.css";
+import "../../Base/fontawesome/css/fontawesome.css"; //this fails on test
 
 //====================== STYLE ======================
 
@@ -28,7 +28,7 @@ const StyledButton = styled.button((props) => {
     padding: paddingBySize(props.size, props.hasText),
     fontSize: props.theme.typography[props.size].fontSize,
     fontFamily: props.theme.typography.fontFamily,
-    // transition: "all 220ms",
+    transition: "all 220ms",
     transition: `${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, box-shadow ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, border-color ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, color ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms`,
 
     backgroundColor: props.inverted
@@ -164,6 +164,7 @@ const Button = React.forwardRef((props, ref) => {
 
   return (
     <StyledButton
+      data-testid="button"
       {...{ theme, size, color, inverted, disabled }}
       onClick={handleOnClick}
       className={className}
@@ -237,7 +238,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  theme: PropTypes.object.isRequired,
+  // theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
   tooltip: PropTypes.string,
