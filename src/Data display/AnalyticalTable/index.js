@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 import theme from "../../_utils/theme";
 import Table from "../Table/index";
+import AnalyticalTableRow from "./components/AnalyticalTableRow";
+import AnalyticalTableCell from "./components/AnalyticalTableCell";
 
 const AnalyticalTable = forwardRef((props, ref) => {
   //
-  var { Data, GroupBy = [] } = props;
+  var { Data, GroupBy = {} } = props;
 
   //================ STATE =================================================================
 
@@ -23,10 +25,34 @@ const AnalyticalTable = forwardRef((props, ref) => {
 
   //================ RENDER ================================================================
 
+  const renderAnalyticalTableRow = () => {
+    var rowProps = { GroupBy: props.GroupBy };
+
+    return (
+      renderCustomElement(
+        getCustomRender("TABLE_ROW", props.children),
+        rowProps
+      ) || <AnalyticalTableRow {...rowProps} />
+    );
+  };
+
+  const renderAnalyticalTableCell = () => {
+    var cellProps = {};
+
+    return (
+      renderCustomElement(
+        getCustomRender("TABLE_CELL", props.children),
+        cellProps
+      ) || <AnalyticalTableCell {...cellProps} />
+    );
+  };
+
   return (
     <>
       <Table {...props} Data={Data} VisibilityPattern={null}>
         {props.children}
+        {renderAnalyticalTableCell()}
+        {renderAnalyticalTableRow()}
       </Table>
     </>
   );
