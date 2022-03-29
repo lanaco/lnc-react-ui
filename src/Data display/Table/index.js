@@ -92,6 +92,7 @@ const Table = forwardRef((props, ref) => {
     EnableOrdering,
     EnableSelectAll,
     EnableLoader,
+    PreRenderedTableBody = false,
     //--------------------
     EnableRowStatusIndicator,
     EnableRowTextHighlight,
@@ -557,6 +558,29 @@ const Table = forwardRef((props, ref) => {
       );
 
     return <></>;
+  };
+
+  const renderTableBody = () => {
+    var bodyProps = {};
+
+    var children = (
+      <>
+        {Data.map((rowData, index) => renderRow(rowData, index))}
+        {renderNoDataRow()}
+      </>
+    );
+
+    return (
+      renderCustomElement(
+        getCustomRender("TABLE_BODY", props.children),
+        bodyProps,
+        PreRenderedTableBody ? children : undefined
+      ) || (
+        <HtmlBody data-tbody={true} ref={tBodyRef} {...themeProps}>
+          {children}
+        </HtmlBody>
+      )
+    );
   };
 
   const renderTable = () => {
