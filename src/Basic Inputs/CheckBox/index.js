@@ -175,6 +175,7 @@ const CheckBox = (props) => {
       >
         {label}
         <input
+          data-testid="checkbox"
           type="checkbox"
           checked={checked}
           onChange={() => {}}
