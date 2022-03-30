@@ -32,67 +32,6 @@ const HtmlRow = styled.tr`
 
 //================================================================================
 
-function createDataTree(list) {
-  var map = {},
-    node,
-    roots = [],
-    i;
-
-  for (i = 0; i < list.length; i += 1) {
-    map[list[i].value] = i; // initialize the map
-    list[i].children = []; // initialize the children
-  }
-
-  for (i = 0; i < list.length; i += 1) {
-    node = list[i];
-    if (node.parent !== null) {
-      // if you have dangling branches check that map[node.parentId] exists
-      list[map[node.parent]].children.push(node);
-    } else {
-      roots.push(node);
-    }
-  }
-  return roots;
-}
-
-const GetDataTreeFromGroupDefinition = (groupDef) => {
-  var TREE = [];
-
-  var groupingDataIds = [...new Set(groupDef.data.map((x) => x.id))];
-  var filteredGroupingData = [];
-
-  groupingDataIds.forEach((gId) => {
-    filteredGroupingData.push(groupDef.data.filter((item) => item.id === gId));
-  });
-
-  filteredGroupingData.forEach((fgd) => {
-    var groupTree = [];
-
-    fgd.forEach((d) => {
-      groupDef.fields.forEach((f, i) => {
-        var parent = null;
-        var parentInfo = null;
-        if (i !== 0) {
-          parent = d[groupDef.fields[i - 1]].title;
-          parentInfo = d;
-        }
-
-        var item = groupTree.find(
-          (x) => x.column === f && x.value === d[f].title && x.parent === parent
-        );
-
-        if (item === null || item === undefined) {
-          groupTree.push({ column: f, value: d[f].title, parent, parentInfo });
-        }
-      });
-    });
-
-    TREE = [...TREE, ...createDataTree(groupTree)];
-  });
-
-  return TREE;
-};
-
 //================================================================================
 
 const AnalyticalTableRow = (props) => {
@@ -128,8 +67,6 @@ const AnalyticalTableRow = (props) => {
     onRowClick(e, RowData);
   };
 
-  var tree = GetDataTreeFromGroupDefinition(GroupBy);
-
   return (
     <HtmlRow
       {...themeProps}
@@ -137,12 +74,7 @@ const AnalyticalTableRow = (props) => {
       key={Index}
       onClick={onClick}
     >
-      {/* {props.children} */}
-
-      <td style={{ padding: "8px" }} colspan={4}>
-        {`${tree.find((x) => x.value === String(RowData.year)).value}`}
-        {/* {RowData.id} */}
-      </td>
+      {props.children}
     </HtmlRow>
   );
 };
