@@ -1,14 +1,29 @@
-import React, { useRef, useImperativeHandle, forwardRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
+import { cloneDeep } from "lodash";
 import PropTypes from "prop-types";
+import {
+  createDataTree,
+  getDataTreeFromGroupDefinition,
+  iterativeTreeTraversal,
+} from "./service/service";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 import theme from "../../_utils/theme";
 import Table from "../Table/index";
 import AnalyticalTableRow from "./components/AnalyticalTableRow";
 import AnalyticalTableCell from "./components/AnalyticalTableCell";
+import AnalyticalTableBody from "./components/AnalyticalTableBody";
 
 const AnalyticalTable = forwardRef((props, ref) => {
   //
-  var { Data, GroupBy = {} } = props;
+  var { Data, GroupBy = {}, GetDataForGroup = () => {} } = props;
+
+  const [groups, setGroups] = useState([]);
 
   //================ STATE =================================================================
 
@@ -19,9 +34,77 @@ const AnalyticalTable = forwardRef((props, ref) => {
     props, // Update functions when certain state changes
   ]);
 
+  useEffect(() => {
+    var groupsTree = getDataTreeFromGroupDefinition(GroupBy);
+    var groups = iterativeTreeTraversal(groupsTree, GroupBy.fields);
+
+    setGroups(
+      groups.map((g) => {
+        return {
+          depth: g.depth,
+          show: g.depth === 0 ? true : true,
+          node: g.node,
+        };
+      })
+    );
+  }, [GroupBy]);
+
   //================ EVENTS ================================================================
 
   //================ METHODS ===============================================================
+
+  const ExpandCollapseGroup = (depth, node) => {
+    var groupsCopy = cloneDeep(groups);
+    var expandOrCollapse = true;
+    var clickedNode = groupsCopy.find((x) => x.node._id_ === node._id_);
+    var childNodes = groupsCopy.slice(groupsCopy.indexOf(clickedNode) + 1);
+    var filteredChildNodes = [];
+
+    for (let i = 0; i < childNodes.length; i++) {
+      const childNode = childNodes[i];
+      if (childNode.depth === 0) break;
+
+      filteredChildNodes.push(childNode);
+    }
+
+    var expArray = filteredChildNodes.filter(
+      (x) => x.depth === depth + 1 && x.show === false
+    );
+
+    if (expArray === null || expArray === undefined || expArray.length === 0) {
+      expandOrCollapse = false;
+    }
+
+    // EXPAND
+    if (expandOrCollapse) {
+      var toExpand = filteredChildNodes.filter((x) => x.depth === depth + 1);
+      var toExpandIds = toExpand.map((x) => x.node._id_);
+
+      groupsCopy.forEach((g) => {
+        if (toExpandIds.includes(g.node._id_)) {
+          g.show = true;
+        }
+      });
+
+      setGroups(groupsCopy);
+    }
+
+    // COLLAPSE
+    if (!expandOrCollapse) {
+      var toCollapse = filteredChildNodes.filter(
+        (x) => x.depth > 0 && x.depth !== depth
+      );
+      var toCollapseIds = toCollapse.map((x) => x.node._id_);
+
+      groupsCopy.forEach((g) => {
+        if (toCollapseIds.includes(g.node._id_)) {
+          g.show = false;
+        }
+      });
+
+      setGroups(groupsCopy);
+    }
+  };
 
   //================ RENDER ================================================================
 
@@ -47,12 +130,32 @@ const AnalyticalTable = forwardRef((props, ref) => {
     );
   };
 
+  const renderAnalyticalTableBody = () => {
+    if (GroupBy && GroupBy.fields && GroupBy.fields.length > 0) {
+      var bodyProps = {
+        Groups: groups,
+        GetData: GetDataForGroup,
+        ExpandCollapseGroup,
+      };
+
+      return (
+        renderCustomElement(
+          getCustomRender("TABLE_BODY", props.children),
+          bodyProps
+        ) || <AnalyticalTableBody {...bodyProps} />
+      );
+    }
+
+    return <></>;
+  };
+
   return (
     <>
       <Table {...props} Data={Data} VisibilityPattern={null}>
         {props.children}
-        {renderAnalyticalTableCell()}
-        {renderAnalyticalTableRow()}
+        {renderAnalyticalTableBody()}
+        {/* {renderAnalyticalTableCell()} */}
+        {/* {renderAnalyticalTableRow()} */}
       </Table>
     </>
   );

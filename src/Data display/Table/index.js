@@ -2,7 +2,7 @@ import React, { useEffect, forwardRef, useImperativeHandle } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
-import { isObject, isFinite } from "lodash";
+import { isObject, isFinite, cloneDeep } from "lodash";
 import { useScreenSize } from "../../_utils/utils";
 import theme from "../../_utils/theme";
 import { screenSizes } from "./constants/constants";
@@ -16,6 +16,7 @@ import TableRowStatusIndicatorCell from "./components/TableRowStatusIndicatorCel
 import TableHeadRowStatusIndicatorCell from "./components/TableHeadRowStatusIndicatorCell";
 import { useMeasure } from "react-use";
 import Spinner from "../../Feedback/Spinner/index";
+import Fade from "react-reveal/Fade";
 
 const Container = styled.div`
   padding: 10px;
@@ -37,9 +38,9 @@ const LoaderContainer = styled.div`
   height: 100%;
   background-color: #eceaea;
   z-index: 10000000;
-  opacity: 0.9;
+  opacity: 0.7;
   background-color: white;
-  filter: alpha(opacity=20);
+  filter: alpha(opacity=10);
 `;
 
 const LoaderContainerTransparent = styled.div`
@@ -141,7 +142,7 @@ const Table = forwardRef((props, ref) => {
     ]
   );
 
-  const [tBodyRef, { width }] = useMeasure();
+  const [tableRef, { width }] = useMeasure();
 
   var screenSize = useScreenSize();
 
@@ -246,7 +247,7 @@ const Table = forwardRef((props, ref) => {
 
     var sum = widthSum + reduceWidthByAmount;
 
-    if (isFinite(sum) && (sum > 101 || sum < 99))
+    if (isFinite(sum) && (sum > 101 || sum < 98))
       console.error(`Error: Row ${index} - sum of column widths is ${sum}.`);
   };
 
@@ -561,7 +562,8 @@ const Table = forwardRef((props, ref) => {
   };
 
   const renderTableBody = () => {
-    var bodyProps = {};
+    var bodyProps = cloneDeep(props);
+    delete bodyProps.__TYPE__;
 
     var children = (
       <>
@@ -576,7 +578,7 @@ const Table = forwardRef((props, ref) => {
         bodyProps,
         PreRenderedTableBody ? children : undefined
       ) || (
-        <HtmlBody data-tbody={true} ref={tBodyRef} {...themeProps}>
+        <HtmlBody data-tbody={true} {...themeProps}>
           {children}
         </HtmlBody>
       )
@@ -592,14 +594,17 @@ const Table = forwardRef((props, ref) => {
     var children = (
       <div>
         {renderSpinner()}
+
         {renderHeader()}
 
-        <HtmlTable {...themeProps} data-table={true}>
+        <HtmlTable {...themeProps} data-table={true} ref={tableRef}>
           <HtmlHead {...themeProps}>{renderHeadRow()}</HtmlHead>
-          <HtmlBody data-tbody={true} ref={tBodyRef} {...themeProps}>
+
+          {renderTableBody()}
+          {/* <HtmlBody data-tbody={true} {...themeProps}>
             {Data.map((rowData, index) => renderRow(rowData, index))}
             {renderNoDataRow()}
-          </HtmlBody>
+          </HtmlBody> */}
         </HtmlTable>
 
         {renderSpecialLastRow()}

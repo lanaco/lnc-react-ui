@@ -1,7 +1,7 @@
 import React from "react";
 import AnalyticalTable from "./";
 import Story from "./Story";
-
+import IterativeTreeTraversal from "./IterativeTreeTraversal";
 export default {
   title: "Data Display/AnalyticalTable",
   component: AnalyticalTable,
@@ -56,40 +56,43 @@ Default.args = {
         //-----
         year: {
           title: "2020",
-        },
-        type: {
-          title: "type1",
-        },
-        status: {
-          title: "status1",
-        },
-      },
-      //-------------------------
-      {
-        id: "g1",
-        //-----
-        year: {
-          title: "2020",
-        },
-        type: {
-          title: "type1",
-        },
-        status: {
-          title: "status2",
-        },
-      },
-      //-------------------------
-      {
-        id: "g1",
-        //-----
-        year: {
-          title: "2020",
+          obj: {
+            id: 1,
+          },
         },
         type: {
           title: "type2",
+          obj: {
+            id: 2,
+          },
+        },
+        status: {
+          title: "status2",
+          obj: {
+            id: 2,
+          },
+        },
+      },
+      {
+        id: "g1",
+        //-----
+        year: {
+          title: "2020",
+          obj: {
+            id: 1,
+          },
+        },
+        type: {
+          title: "type1",
+          obj: {
+            id: 1,
+          },
         },
         status: {
           title: "status1",
+          obj: {
+            id: 1,
+          },
         },
       },
       //-------------------------
@@ -98,26 +101,69 @@ Default.args = {
         //-----
         year: {
           title: "2020",
+          obj: {
+            id: 1,
+          },
         },
         type: {
-          title: "type2",
+          title: "type1",
+          obj: {
+            id: 1,
+          },
         },
         status: {
           title: "status2",
+          obj: {
+            id: 2,
+          },
         },
       },
+      //-------------------------
+      {
+        id: "g1",
+        //-----
+        year: {
+          title: "2020",
+          obj: {
+            id: 1,
+          },
+        },
+        type: {
+          title: "type2",
+          obj: {
+            id: 2,
+          },
+        },
+        status: {
+          title: "status1",
+          obj: {
+            id: 1,
+          },
+        },
+      },
+      //-------------------------
+
       //========================================
       {
         id: "g2",
         //-----
         year: {
           title: "2021",
+          obj: {
+            id: 2,
+          },
         },
         type: {
           title: "type1",
+          obj: {
+            id: 1,
+          },
         },
         status: {
           title: "status1",
+          obj: {
+            id: 1,
+          },
         },
       },
       //-------------------------
@@ -126,12 +172,21 @@ Default.args = {
         //-----
         year: {
           title: "2021",
+          obj: {
+            id: 2,
+          },
         },
         type: {
           title: "type1",
+          obj: {
+            id: 1,
+          },
         },
         status: {
           title: "status2",
+          obj: {
+            id: 2,
+          },
         },
       },
       //-------------------------
@@ -140,100 +195,25 @@ Default.args = {
         //-----
         year: {
           title: "2021",
+          obj: {
+            id: 2,
+          },
         },
         type: {
           title: "type2",
+          obj: {
+            id: 2,
+          },
         },
         status: {
           title: "status1",
+          obj: {
+            id: 1,
+          },
         },
       },
     ],
   },
-  //-------------------------------------
-  Data: [
-    {
-      id: "61f7b8ea2fe061cacbcdbfea",
-      year: "2020",
-      type: "type1",
-      typeId: 1,
-      status: "status1",
-      statusId: 1,
-      amount: 2000,
-    },
-    {
-      id: "11f7b8ea2fo061cacbfdbfea",
-      year: "2020",
-      type: "type1",
-      typeId: 1,
-      status: "status1",
-      statusId: 1,
-      amount: 2200,
-    },
-    {
-      id: "21f7b8ea1fo061cacbfdcfeg",
-      year: "2020",
-      type: "type1",
-      typeId: 1,
-      status: "status1",
-      statusId: 1,
-      amount: 1800,
-    },
-    {
-      id: "61f7b8ea63d0fc830f326350",
-      year: "2020",
-      type: "type1",
-      typeId: 1,
-      status: "status2",
-      statusId: 2,
-      amount: 3000,
-    },
-    {
-      id: "61f7b8eaf418ca604fcdffba",
-      year: "2020",
-      type: "type2",
-      typeId: 2,
-      status: "status1",
-      statusId: 1,
-      amount: 4000,
-    },
-    {
-      id: "61f7b8ea066dfb5760224b71",
-      year: "2020",
-      type: "type2",
-      typeId: 2,
-      status: "status2",
-      statusId: 2,
-      amount: 5000,
-    },
-    {
-      id: "61f7b8eadd6586c40491b91e",
-      year: "2021",
-      type: "type1",
-      typeId: 1,
-      status: "status1",
-      statusId: 1,
-      amount: 2000,
-    },
-    {
-      id: "61f7b8eadd6586c40491b91e",
-      year: "2021",
-      type: "type1",
-      typeId: 1,
-      status: "status2",
-      statusId: 2,
-      amount: 3000,
-    },
-    {
-      id: "61f7b8eadd6586c40491b91e",
-      year: "2021",
-      type: "type2",
-      typeId: 2,
-      status: "status1",
-      statusId: 1,
-      amount: 4000,
-    },
-  ],
   //-------------------------------------
   Columns: [
     {
