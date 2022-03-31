@@ -3,9 +3,9 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
 
-const HtmlBody = styled.tbody``;
+const HtmlHead = styled.thead``;
 
-const TableBody = (props) => {
+const TableHead = (props) => {
   //--------------------------
   const { className, size, color, theme } = props;
 
@@ -16,15 +16,11 @@ const TableBody = (props) => {
     theme,
   };
 
-  return (
-    <HtmlBody data-tbody={true} {...themeProps}>
-      {props.children}
-    </HtmlBody>
-  );
+  return <HtmlHead {...themeProps}>{props.children}</HtmlHead>;
 };
 
-TableBody.defaultProps = {
-  __TYPE__: "TABLE_BODY",
+TableHead.defaultProps = {
+  __TYPE__: "TABLE_HEAD",
   //--------------------
   className: "",
   size: "small",
@@ -32,7 +28,7 @@ TableBody.defaultProps = {
   theme: theme,
 };
 
-TableBody.propTypes = {
+TableHead.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
   className: PropTypes.string,
@@ -50,4 +46,4 @@ TableBody.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default TableBody;
+export default TableHead;

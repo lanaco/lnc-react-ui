@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
+import { usePrevious } from "react-use";
+import { isEqual } from "lodash";
 
 const Row = styled.tr`
   opacity: ${(props) => props.opacity};
@@ -25,7 +27,7 @@ const Cell = styled.td`
 const LeafCell = styled.td`
   padding: 6px;
   font-weight: bold;
-  text-align: right;
+  text-align: ${(props) => (props.isNumber ? "right" : "left")};
   border: 1px solid black;
 `;
 
@@ -36,13 +38,20 @@ const AnalyticalTableGroupRow = ({
   getData,
   ExpandCollapseGroup,
   show = true,
+  Columns,
+  GroupByFields,
 }) => {
   //
   const [leafs, setLeafs] = useState([]);
+  const prevGroupBy = usePrevious(GroupByFields);
 
   useEffect(() => {
     if (!show) setLeafs([]);
   }, [show]);
+
+  useEffect(() => {
+    if (!isEqual(prevGroupBy, GroupByFields)) setLeafs([]);
+  }, [GroupByFields]);
 
   //============================================================================
 
@@ -70,6 +79,18 @@ const AnalyticalTableGroupRow = ({
     return cells.map((c) => c);
   };
 
+  const renderDataLeafCells = (data) => {
+    return Columns.filter((c) => !GroupByFields.includes(c.accessor)).map(
+      (c) => {
+        return (
+          <LeafCell isNumber={c.inputType === "NUMBER"}>
+            {data[c.accessor]}
+          </LeafCell>
+        );
+      }
+    );
+  };
+
   //============================================================================
 
   const handleClick = async () => {
@@ -90,7 +111,7 @@ const AnalyticalTableGroupRow = ({
     return leafs.map((l) => (
       <tr>
         {renderEmptyLeafCells()}
-        <LeafCell>{l.amount}</LeafCell>
+        {renderDataLeafCells(l)}
       </tr>
     ));
   };

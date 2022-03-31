@@ -35,18 +35,22 @@ const AnalyticalTable = forwardRef((props, ref) => {
   ]);
 
   useEffect(() => {
-    var groupsTree = getDataTreeFromGroupDefinition(GroupBy);
-    var groups = iterativeTreeTraversal(groupsTree, GroupBy.fields);
+    if (GroupBy && GroupBy.fields && GroupBy.fields.length > 0) {
+      var groupsTree = getDataTreeFromGroupDefinition(GroupBy);
+      var groups = iterativeTreeTraversal(groupsTree, GroupBy.fields);
 
-    setGroups(
-      groups.map((g) => {
-        return {
-          depth: g.depth,
-          show: g.depth === 0 ? true : true,
-          node: g.node,
-        };
-      })
-    );
+      setGroups(
+        groups.map((g) => {
+          return {
+            depth: g.depth,
+            show: g.depth === 0 ? true : true,
+            node: g.node,
+          };
+        })
+      );
+    } else {
+      setGroups([]);
+    }
   }, [GroupBy]);
 
   //================ EVENTS ================================================================
@@ -56,32 +60,18 @@ const AnalyticalTable = forwardRef((props, ref) => {
   const ExpandCollapseGroup = (depth, node) => {
     var groupsCopy = cloneDeep(groups);
     var expandOrCollapse = true;
-    var clickedNode = groupsCopy.find((x) => x.node._id_ === node._id_);
-    var childNodes = groupsCopy.slice(groupsCopy.indexOf(clickedNode) + 1);
-    var filteredChildNodes = [];
 
-    for (let i = 0; i < childNodes.length; i++) {
-      const childNode = childNodes[i];
-      if (childNode.depth === 0) break;
-
-      filteredChildNodes.push(childNode);
-    }
-
-    var expArray = filteredChildNodes.filter(
-      (x) => x.depth === depth + 1 && x.show === false
+    var childrenIds = node.children.map((c) => c._id_);
+    var groupsChildrenIntersect = groupsCopy.filter((g) =>
+      childrenIds.includes(g.node._id_)
     );
 
-    if (expArray === null || expArray === undefined || expArray.length === 0) {
-      expandOrCollapse = false;
-    }
+    if (groupsChildrenIntersect[0].show === true) expandOrCollapse = false;
 
     // EXPAND
     if (expandOrCollapse) {
-      var toExpand = filteredChildNodes.filter((x) => x.depth === depth + 1);
-      var toExpandIds = toExpand.map((x) => x.node._id_);
-
       groupsCopy.forEach((g) => {
-        if (toExpandIds.includes(g.node._id_)) {
+        if (childrenIds.includes(g.node._id_)) {
           g.show = true;
         }
       });
@@ -91,10 +81,11 @@ const AnalyticalTable = forwardRef((props, ref) => {
 
     // COLLAPSE
     if (!expandOrCollapse) {
-      var toCollapse = filteredChildNodes.filter(
-        (x) => x.depth > 0 && x.depth !== depth
-      );
-      var toCollapseIds = toCollapse.map((x) => x.node._id_);
+      var toCollapse = iterativeTreeTraversal([node], GroupBy.fields);
+
+      var toCollapseIds = toCollapse
+        .filter((x) => x.depth > depth)
+        .map((x) => x.node._id_);
 
       groupsCopy.forEach((g) => {
         if (toCollapseIds.includes(g.node._id_)) {
@@ -154,8 +145,6 @@ const AnalyticalTable = forwardRef((props, ref) => {
       <Table {...props} Data={Data} VisibilityPattern={null}>
         {props.children}
         {renderAnalyticalTableBody()}
-        {/* {renderAnalyticalTableCell()} */}
-        {/* {renderAnalyticalTableRow()} */}
       </Table>
     </>
   );

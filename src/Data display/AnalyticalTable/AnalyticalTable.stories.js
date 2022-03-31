@@ -243,6 +243,7 @@ Default.args = {
       accessor: "amount",
       width: 25,
       sortable: false,
+      inputType: "NUMBER",
     },
   ],
   //-------------------------------------

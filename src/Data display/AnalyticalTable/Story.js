@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import AnalyticalTable from "./index";
+import Button from "../../General/Button/index";
+import {
+  GroupBy_YearTypeStatus,
+  GroupBy_YearType,
+  GroupBy_Year,
+} from "./service/service";
 
 // const renderTree = ({ node, level, index, show, findParents }) => {
 //   const [expanded, setExpanded] = useState(false);
@@ -107,6 +113,15 @@ import AnalyticalTable from "./index";
 //   );
 // };
 
+const Container = styled.div``;
+
+const Commands = styled.div`
+  margin: 2px;
+  padding: 8px 0;
+  display: flex;
+  gap: 8px;
+`;
+
 const data = [
   {
     id: "61f7b8ea2fe061cacbcdbfea",
@@ -189,10 +204,20 @@ const data = [
     statusId: 1,
     amount: 4000,
   },
+  {
+    id: "11f7b8eada6686c40411b81c",
+    year: "2021",
+    type: "type2",
+    typeId: 2,
+    status: "status2",
+    statusId: 2,
+    amount: 1000,
+  },
 ];
 
 const Story = (props) => {
   const [Loading, SetLoading] = useState(false);
+  const [GroupBy, SetGroupBy] = useState(GroupBy_YearTypeStatus);
 
   const GetDataForGroup = async (parentInfo) => {
     SetLoading(true);
@@ -202,11 +227,24 @@ const Story = (props) => {
         SetLoading(false);
 
         var response = data.filter((d) => {
-          return (
-            d.year === parentInfo.year.title &&
-            d.type === parentInfo.type.title &&
-            d.status === parentInfo.status.title
-          );
+          if (GroupBy.fields.length === 1) {
+            return d.year === parentInfo.year.title;
+          }
+
+          if (GroupBy.fields.length === 2) {
+            return (
+              d.year === parentInfo.year.title &&
+              d.type === parentInfo.type.title
+            );
+          }
+
+          if (GroupBy.fields.length === 3) {
+            return (
+              d.year === parentInfo.year.title &&
+              d.type === parentInfo.type.title &&
+              d.status === parentInfo.status.title
+            );
+          }
         });
 
         resolve(response);
@@ -214,12 +252,36 @@ const Story = (props) => {
     });
   };
 
+  //========= Commands ===========================
+
+  const notGrouped = () => SetGroupBy(null);
+
+  const groupByYear = () => SetGroupBy(GroupBy_Year);
+
+  const groupByYearType = () => SetGroupBy(GroupBy_YearType);
+
+  const groupByYearTypeStatus = () => SetGroupBy(GroupBy_YearTypeStatus);
+
   return (
-    <AnalyticalTable
-      {...props}
-      GetDataForGroup={GetDataForGroup}
-      Loading={Loading}
-    />
+    <div>
+      <Commands>
+        <Button onClick={notGrouped} text={"Not grouped"} />
+        <Button onClick={groupByYear} text={"Group by Year"} />
+        <Button onClick={groupByYearType} text={"Group by Year / Type"} />
+        <Button
+          onClick={groupByYearTypeStatus}
+          text={"Group by Year / Type / Status"}
+        />
+      </Commands>
+
+      <AnalyticalTable
+        {...props}
+        Data={data}
+        GroupBy={GroupBy}
+        GetDataForGroup={GetDataForGroup}
+        Loading={Loading}
+      />
+    </div>
   );
 };
 

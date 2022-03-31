@@ -5,25 +5,13 @@ import theme from "../../../_utils/theme";
 import AnalyticalTableGroupRow from "./AnalyticalTableGroupRow";
 import { getCustomRender, renderCustomElement } from "../../../_utils/utils";
 
-const HtmlTableBody = styled.tbody``;
+const HtmlTableHead = styled.thead``;
 
 //================================================================================
 
-const AnalyticalTableBody = (props) => {
+const AnalyticalTableHead = (props) => {
   //--------------------------
-  const {
-    Columns,
-    GetData,
-    ExpandCollapseGroup,
-    //================
-    className,
-    size,
-    color,
-    theme,
-    //================
-    GroupBy,
-    Groups,
-  } = props;
+  const { className, size, color, theme } = props;
 
   const themeProps = {
     className,
@@ -34,52 +22,35 @@ const AnalyticalTableBody = (props) => {
 
   //=========================================================================================
 
-  //=========================================================================================
-
-  const renderAnalyticalTableRow = (key, depth, node, isLeaf, show) => {
-    var rowProps = {
-      key,
-      depth,
-      node,
-      isLeaf,
-      show,
-      getData: GetData,
-      ExpandCollapseGroup,
-      Columns,
-      GroupByFields: GroupBy.fields,
-    };
+  const renderAnalyticalTableHeadRow = () => {
+    var rowProps = {};
 
     return (
       renderCustomElement(
-        getCustomRender("ANALYTICAL_TABLE_GROUP_ROW", props.children),
+        getCustomRender("TABLE_HEAD_ROW", props.children),
         rowProps
-      ) || <AnalyticalTableGroupRow {...rowProps} />
+      ) || <></>
     );
   };
 
-  const renderGroups = () => {
+  const renderAnalyticalTableHeadCell = () => {
+    var cellProps = {};
+
     return (
-      <>
-        {Groups.map((n, i) =>
-          renderAnalyticalTableRow(
-            i,
-            n.depth,
-            n.node,
-            n.depth === GroupBy.fields.length - 1,
-            n.show
-          )
-        )}
-      </>
+      renderCustomElement(
+        getCustomRender("TABLE_HEAD_CELL", props.children),
+        cellProps
+      ) || <></>
     );
   };
 
   //=========================================================================================
 
-  return <HtmlTableBody {...themeProps}>{renderGroups()}</HtmlTableBody>;
+  return <HtmlTableHead {...themeProps}></HtmlTableHead>;
 };
 
-AnalyticalTableBody.defaultProps = {
-  __TYPE__: "TABLE_BODY",
+AnalyticalTableHead.defaultProps = {
+  __TYPE__: "TABLE_HEAD",
   //--------------------
   className: "",
   size: "small",
@@ -87,7 +58,7 @@ AnalyticalTableBody.defaultProps = {
   theme: theme,
 };
 
-AnalyticalTableBody.propTypes = {
+AnalyticalTableHead.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
   className: PropTypes.string,
@@ -105,4 +76,4 @@ AnalyticalTableBody.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default AnalyticalTableBody;
+export default AnalyticalTableHead;
