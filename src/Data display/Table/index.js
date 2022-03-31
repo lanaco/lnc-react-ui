@@ -6,6 +6,8 @@ import { isObject, isFinite, cloneDeep } from "lodash";
 import { useScreenSize } from "../../_utils/utils";
 import theme from "../../_utils/theme";
 import { screenSizes } from "./constants/constants";
+import TableBody from "./components/TableBody";
+import TableHead from "./components/TableHead";
 import TableRow from "./components/TableRow";
 import TableCell from "./components/TableCell";
 import TableSelectionCell from "./components/TableSelectionCell";
@@ -16,7 +18,6 @@ import TableRowStatusIndicatorCell from "./components/TableRowStatusIndicatorCel
 import TableHeadRowStatusIndicatorCell from "./components/TableHeadRowStatusIndicatorCell";
 import { useMeasure } from "react-use";
 import Spinner from "../../Feedback/Spinner/index";
-import Fade from "react-reveal/Fade";
 
 const Container = styled.div`
   padding: 10px;
@@ -94,6 +95,7 @@ const Table = forwardRef((props, ref) => {
     EnableSelectAll,
     EnableLoader,
     PreRenderedTableBody = false,
+    PreRenderedTableHead = false,
     //--------------------
     EnableRowStatusIndicator,
     EnableRowTextHighlight,
@@ -577,11 +579,22 @@ const Table = forwardRef((props, ref) => {
         getCustomRender("TABLE_BODY", props.children),
         bodyProps,
         PreRenderedTableBody ? children : undefined
-      ) || (
-        <HtmlBody data-tbody={true} {...themeProps}>
-          {children}
-        </HtmlBody>
-      )
+      ) || <TableBody {...themeProps}>{children}</TableBody>
+    );
+  };
+
+  const renderTableHead = () => {
+    var headProps = cloneDeep(props);
+    delete headProps.__TYPE__;
+
+    var children = <>{renderHeadRow()}</>;
+
+    return (
+      renderCustomElement(
+        getCustomRender("TABLE_HEAD", props.children),
+        headProps,
+        PreRenderedTableHead ? children : undefined
+      ) || <TableHead {...themeProps}>{children}</TableHead>
     );
   };
 
@@ -594,17 +607,11 @@ const Table = forwardRef((props, ref) => {
     var children = (
       <div>
         {renderSpinner()}
-
         {renderHeader()}
 
         <HtmlTable {...themeProps} data-table={true} ref={tableRef}>
-          <HtmlHead {...themeProps}>{renderHeadRow()}</HtmlHead>
-
+          {renderTableHead()}
           {renderTableBody()}
-          {/* <HtmlBody data-tbody={true} {...themeProps}>
-            {Data.map((rowData, index) => renderRow(rowData, index))}
-            {renderNoDataRow()}
-          </HtmlBody> */}
         </HtmlTable>
 
         {renderSpecialLastRow()}

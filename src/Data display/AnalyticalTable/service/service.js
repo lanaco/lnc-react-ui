@@ -47,15 +47,17 @@ export const getDataTreeFromGroupDefinition = (groupDef) => {
     fgd.forEach((d) => {
       groupDef.fields.forEach((f, i) => {
         var parent = null;
-        var parentInfo = null;
+        var parentInfo = d;
 
         if (i !== 0) {
           parent = d[groupDef.fields[i - 1]].title;
-          parentInfo = d;
         }
 
         var item = groupTree.find(
-          (x) => x.column === f && x.value === d[f].title && x.parent === parent
+          (x) =>
+            x.column === f &&
+            x.value === d[f].title &&
+            (x.parent === parent || x.parent === null)
         );
 
         if (item === null || item === undefined) {
@@ -99,4 +101,275 @@ export const iterativeTreeTraversal = (tree, fields) => {
   });
 
   return flat;
+};
+
+//=============== GROUP BY ================================
+
+export const GroupBy_YearTypeStatus = {
+  fields: ["year", "type", "status"],
+  //-------------------------------------
+  data: [
+    {
+      id: "g1",
+      //-----
+      year: {
+        title: "2020",
+        obj: {
+          id: 1,
+        },
+      },
+      type: {
+        title: "type2",
+        obj: {
+          id: 2,
+        },
+      },
+      status: {
+        title: "status2",
+        obj: {
+          id: 2,
+        },
+      },
+    },
+    {
+      id: "g1",
+      //-----
+      year: {
+        title: "2020",
+        obj: {
+          id: 1,
+        },
+      },
+      type: {
+        title: "type1",
+        obj: {
+          id: 1,
+        },
+      },
+      status: {
+        title: "status1",
+        obj: {
+          id: 1,
+        },
+      },
+    },
+    //-------------------------
+    {
+      id: "g1",
+      //-----
+      year: {
+        title: "2020",
+        obj: {
+          id: 1,
+        },
+      },
+      type: {
+        title: "type1",
+        obj: {
+          id: 1,
+        },
+      },
+      status: {
+        title: "status2",
+        obj: {
+          id: 2,
+        },
+      },
+    },
+    //-------------------------
+    {
+      id: "g1",
+      //-----
+      year: {
+        title: "2020",
+        obj: {
+          id: 1,
+        },
+      },
+      type: {
+        title: "type2",
+        obj: {
+          id: 2,
+        },
+      },
+      status: {
+        title: "status1",
+        obj: {
+          id: 1,
+        },
+      },
+    },
+    //-------------------------
+
+    //========================================
+    {
+      id: "g2",
+      //-----
+      year: {
+        title: "2021",
+        obj: {
+          id: 2,
+        },
+      },
+      type: {
+        title: "type1",
+        obj: {
+          id: 1,
+        },
+      },
+      status: {
+        title: "status1",
+        obj: {
+          id: 1,
+        },
+      },
+    },
+    //-------------------------
+    {
+      id: "g2",
+      //-----
+      year: {
+        title: "2021",
+        obj: {
+          id: 2,
+        },
+      },
+      type: {
+        title: "type1",
+        obj: {
+          id: 1,
+        },
+      },
+      status: {
+        title: "status2",
+        obj: {
+          id: 2,
+        },
+      },
+    },
+    //-------------------------
+    {
+      id: "g2",
+      //-----
+      year: {
+        title: "2021",
+        obj: {
+          id: 2,
+        },
+      },
+      type: {
+        title: "type2",
+        obj: {
+          id: 2,
+        },
+      },
+      status: {
+        title: "status1",
+        obj: {
+          id: 1,
+        },
+      },
+    },
+  ],
+};
+
+export const GroupBy_YearType = {
+  fields: ["year", "type"],
+  //-------------------------------------
+  data: [
+    {
+      id: "g1",
+      //-----
+      year: {
+        title: "2020",
+        obj: {
+          id: 1,
+        },
+      },
+      type: {
+        title: "type2",
+        obj: {
+          id: 2,
+        },
+      },
+    },
+    {
+      id: "g1",
+      //-----
+      year: {
+        title: "2020",
+        obj: {
+          id: 1,
+        },
+      },
+      type: {
+        title: "type1",
+        obj: {
+          id: 1,
+        },
+      },
+    },
+    //========================================
+    {
+      id: "g2",
+      //-----
+      year: {
+        title: "2021",
+        obj: {
+          id: 2,
+        },
+      },
+      type: {
+        title: "type1",
+        obj: {
+          id: 1,
+        },
+      },
+    },
+    //-------------------------
+    {
+      id: "g2",
+      //-----
+      year: {
+        title: "2021",
+        obj: {
+          id: 2,
+        },
+      },
+      type: {
+        title: "type2",
+        obj: {
+          id: 2,
+        },
+      },
+    },
+  ],
+};
+
+export const GroupBy_Year = {
+  fields: ["year"],
+  //-------------------------------------
+  data: [
+    {
+      id: "g1",
+      //-----
+      year: {
+        title: "2020",
+        obj: {
+          id: 1,
+        },
+      },
+    },
+    //========================================
+    {
+      id: "g2",
+      //-----
+      year: {
+        title: "2021",
+        obj: {
+          id: 2,
+        },
+      },
+    },
+  ],
 };
