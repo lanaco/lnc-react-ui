@@ -36,14 +36,14 @@ const AnalyticalTableBody = (props) => {
 
   //=========================================================================================
 
-  const renderAnalyticalTableRow = (key, depth, node, isLeaf, show) => {
+  const renderAnalyticalTableRow = ({ Key, Depth, Node, IsLeaf, Show }) => {
     var rowProps = {
-      key,
-      depth,
-      node,
-      isLeaf,
-      show,
-      getData: GetData,
+      Key,
+      Depth,
+      Node,
+      IsLeaf,
+      Show,
+      GetData,
       ExpandCollapseGroup,
       Columns,
       GroupByFields: GroupBy.fields,
@@ -61,13 +61,13 @@ const AnalyticalTableBody = (props) => {
     return (
       <>
         {Groups.map((n, i) =>
-          renderAnalyticalTableRow(
-            i,
-            n.depth,
-            n.node,
-            n.depth === GroupBy.fields.length - 1,
-            n.show
-          )
+          renderAnalyticalTableRow({
+            Key: i,
+            Depth: n.depth,
+            Node: n.node,
+            IsLeaf: n.depth === GroupBy.fields.length - 1,
+            Show: n.show,
+          })
         )}
       </>
     );

@@ -22,7 +22,6 @@ import Spinner from "../../Feedback/Spinner/index";
 const Container = styled.div`
   padding: 10px;
   margin: 2px;
-  border: 1px solid #80808080;
   border-radius: 2px;
   overflow-x: auto;
   white-space: nowrap;
@@ -593,7 +592,7 @@ const Table = forwardRef((props, ref) => {
       renderCustomElement(
         getCustomRender("TABLE_HEAD", props.children),
         headProps,
-        PreRenderedTableHead ? children : undefined
+        PreRenderedTableHead ? children : null
       ) || <TableHead {...themeProps}>{children}</TableHead>
     );
   };
