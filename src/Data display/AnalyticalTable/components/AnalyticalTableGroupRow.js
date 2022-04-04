@@ -15,6 +15,7 @@ const Row = styled.tr`
 const Cell = styled.td`
   margin: 3px;
   padding: 6px;
+  padding-left: ${(props) => props.padding + "px"};
   font-family: Arial;
   font-size: 12px;
   border: 1px solid white;
@@ -52,15 +53,15 @@ const AnalyticalTableGroupRow = (props) => {
   //============================================================================
 
   const getBgColorByLevel = () => {
-    if (Depth === 0) return theme.palette.gray[600];
-    if (Depth === 1) return theme.palette.gray[400];
-    if (Depth === 2) return theme.palette.gray[200];
-
-    return "white";
+    return theme.palette.gray[200];
   };
 
   const getOpacityByLevel = () => {
     return 1 - Depth * 0.25;
+  };
+
+  const getPaddingByLevel = () => {
+    return 10 + Depth * 20;
   };
 
   const renderEmptyGroupedCells = () => {
@@ -76,7 +77,7 @@ const AnalyticalTableGroupRow = (props) => {
   const renderEmptyLeafCells = () => {
     var cells = [];
 
-    for (let i = 0; i < Depth + 1; i++) {
+    for (let i = 0; i < 1; i++) {
       cells.push(<td />);
     }
 
@@ -128,9 +129,11 @@ const AnalyticalTableGroupRow = (props) => {
         opacity={getOpacityByLevel()}
         onClick={handleClick}
       >
-        {renderEmptyGroupedCells()}
+        {/* {renderEmptyGroupedCells()} */}
 
-        <Cell colSpan={4}>{Node.value}</Cell>
+        <Cell colSpan={4} padding={getPaddingByLevel()}>
+          {Node.value}
+        </Cell>
       </Row>
 
       {renderLeafs()}
