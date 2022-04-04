@@ -18,6 +18,7 @@ import Table from "../Table/index";
 import AnalyticalTableRow from "./components/AnalyticalTableRow";
 import AnalyticalTableCell from "./components/AnalyticalTableCell";
 import AnalyticalTableBody from "./components/AnalyticalTableBody";
+import AnalyticalTableHead from "./components/AnalyticalTableHead";
 
 const AnalyticalTable = forwardRef((props, ref) => {
   //
@@ -140,11 +141,32 @@ const AnalyticalTable = forwardRef((props, ref) => {
     return <></>;
   };
 
+  const renderAnalyticalTableHead = () => {
+    if (GroupBy && GroupBy.fields && GroupBy.fields.length > 0) {
+      var headProps = {
+        GroupBy,
+        Groups: groups,
+        GetData: GetDataForGroup,
+        ExpandCollapseGroup,
+      };
+
+      return (
+        renderCustomElement(
+          getCustomRender("TABLE_HEAD", props.children),
+          headProps
+        ) || <AnalyticalTableHead {...headProps} />
+      );
+    }
+
+    return <></>;
+  };
+
   return (
     <>
       <Table {...props} Data={Data} VisibilityPattern={null}>
         {props.children}
         {renderAnalyticalTableBody()}
+        {renderAnalyticalTableHead()}
       </Table>
     </>
   );

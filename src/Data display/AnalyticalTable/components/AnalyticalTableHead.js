@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
-import AnalyticalTableGroupRow from "./AnalyticalTableGroupRow";
+import AnalyticalTableHeadRow from "./AnalyticalTableHeadRow";
+import AnalyticalTableHeadCell from "./AnalyticalTableHeadCell";
 import { getCustomRender, renderCustomElement } from "../../../_utils/utils";
 
 const HtmlTableHead = styled.thead``;
@@ -11,7 +12,7 @@ const HtmlTableHead = styled.thead``;
 
 const AnalyticalTableHead = (props) => {
   //--------------------------
-  const { className, size, color, theme } = props;
+  const { GroupBy, Groups, Columns, className, size, color, theme } = props;
 
   const themeProps = {
     className,
@@ -22,31 +23,69 @@ const AnalyticalTableHead = (props) => {
 
   //=========================================================================================
 
+  const renderHeadCells = () => {
+    var groupedFields = GroupBy.fields.map((field) =>
+      Columns.find((c) => c.accessor === field)
+    );
+    var remainingFields = Columns.filter(
+      (c) => !GroupBy.fields.includes(c.accessor)
+    );
+
+    var groupedColumn = {
+      columnId: 1,
+      displayName: "",
+    };
+
+    groupedFields.forEach((x) => {
+      groupedColumn.displayName += x.displayName + " / ";
+    });
+
+    var groupedCell = renderAnalyticalTableHeadCell(groupedColumn);
+
+    return (
+      <>
+        {groupedCell}
+        {remainingFields.map((c) => renderAnalyticalTableHeadCell(c))}
+      </>
+    );
+  };
+
   const renderAnalyticalTableHeadRow = () => {
     var rowProps = {};
+
+    var children = <>{renderHeadCells()}</>;
 
     return (
       renderCustomElement(
         getCustomRender("TABLE_HEAD_ROW", props.children),
-        rowProps
-      ) || <></>
+        rowProps,
+        children
+      ) || (
+        <AnalyticalTableHeadRow {...rowProps}>
+          {children}
+        </AnalyticalTableHeadRow>
+      )
     );
   };
 
-  const renderAnalyticalTableHeadCell = () => {
-    var cellProps = {};
+  const renderAnalyticalTableHeadCell = (Column) => {
+    var cellProps = { Column };
 
     return (
       renderCustomElement(
         getCustomRender("TABLE_HEAD_CELL", props.children),
         cellProps
-      ) || <></>
+      ) || <AnalyticalTableHeadCell {...cellProps} />
     );
   };
 
   //=========================================================================================
 
-  return <HtmlTableHead {...themeProps}></HtmlTableHead>;
+  return (
+    <HtmlTableHead {...themeProps}>
+      {renderAnalyticalTableHeadRow()}
+    </HtmlTableHead>
+  );
 };
 
 AnalyticalTableHead.defaultProps = {
