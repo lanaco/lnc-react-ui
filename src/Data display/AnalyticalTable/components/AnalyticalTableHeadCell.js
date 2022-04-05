@@ -12,8 +12,7 @@ const HtmlHeadCell = styled.th`
   border-bottom: 1px solid ${(props) => props.theme.palette.transparent.light};
   border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
 
-  padding: ${(props) =>
-    props.selection ? "2px 2px 2px 6px" : "4px 2px 4px 6px"};
+  padding: 8px 2px 8px 6px;
 
   &:first-of-type {
     border-radius: 3px 0 0 0;

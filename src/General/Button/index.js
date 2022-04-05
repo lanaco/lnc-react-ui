@@ -39,7 +39,7 @@ const StyledButton = styled.button((props) => {
     minHeight: heightBySize(props.size),
     maxHeight: heightBySize(props.size),
     "&:hover": {
-      textDecoration: 'none',
+      textDecoration: "none",
       backgroundColor: props.inverted
         ? "whitesmoke"
         : props.theme.palette[props.color].light,
@@ -53,8 +53,8 @@ const StyledButton = styled.button((props) => {
       cursor: "default",
     },
     "&:active": {
-      boxShadow: props.theme.shadows[1]
-    }
+      boxShadow: props.theme.shadows[1],
+    },
   };
 });
 
@@ -225,7 +225,7 @@ Button.defaultProps = {
   id: "",
   disabled: false,
   tooltip: "",
-  onClick: () => { },
+  onClick: () => {},
   className: "",
   preventDefault: true,
   size: "small",

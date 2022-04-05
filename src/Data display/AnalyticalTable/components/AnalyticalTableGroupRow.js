@@ -6,23 +6,24 @@ import { usePrevious } from "react-use";
 import { isEqual } from "lodash";
 
 const Row = styled.tr`
-  border-radius: 2px;
+  border-radius: 3px;
   background-color: ${(props) => props.bgColor};
   cursor: pointer;
   display: ${(props) => (props.show === false ? "none" : "default")};
 `;
 
 const Cell = styled.td`
-  margin: 3px;
-  padding: 6px;
+  padding: 8px;
   padding-left: ${(props) => props.padding + "px"};
   font-family: Arial;
   font-size: 12px;
   border: 1px solid white;
+  border-radius: 5px;
 `;
 
 const LeafCell = styled.td`
-  padding: 6px;
+  padding: 8px;
+  padding-right: 16px;
   text-align: ${(props) => (props.isNumber ? "right" : "left")};
 `;
 
@@ -53,7 +54,7 @@ const AnalyticalTableGroupRow = (props) => {
   //============================================================================
 
   const getBgColorByLevel = () => {
-    return theme.palette.gray[200];
+    return theme.palette.gray[100];
   };
 
   const getOpacityByLevel = () => {
@@ -61,7 +62,7 @@ const AnalyticalTableGroupRow = (props) => {
   };
 
   const getPaddingByLevel = () => {
-    return 10 + Depth * 20;
+    return 10 + Depth * 60;
   };
 
   const renderEmptyGroupedCells = () => {
@@ -131,7 +132,7 @@ const AnalyticalTableGroupRow = (props) => {
       >
         {/* {renderEmptyGroupedCells()} */}
 
-        <Cell colSpan={4} padding={getPaddingByLevel()}>
+        <Cell colSpan={Columns.length} padding={getPaddingByLevel()}>
           {Node.value}
         </Cell>
       </Row>
