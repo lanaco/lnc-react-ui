@@ -7,16 +7,18 @@ import { isEqual } from "lodash";
 
 const Row = styled.tr`
   border-radius: 3px;
-  background-color: ${(props) => props.bgColor};
+  // background-color: ${(props) => props.bgColor};
   cursor: pointer;
   display: ${(props) => (props.show === false ? "none" : "default")};
 `;
 
 const Cell = styled.td`
-  padding: 8px;
-  padding-left: ${(props) => props.padding + "px"};
+  // padding: 8px;
+  padding-left: ${(props) =>
+    props.padding + "__________________________________________" + "px"};
   font-family: Arial;
   font-size: 12px;
+  background-color: white;
   border: 1px solid white;
   border-radius: 5px;
 `;
@@ -25,6 +27,19 @@ const LeafCell = styled.td`
   padding: 8px;
   padding-right: 16px;
   text-align: ${(props) => (props.isNumber ? "right" : "left")};
+`;
+
+const CellContent = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const CellPad = styled.div``;
+
+const CellInfo = styled.div`
+  width: 100%;
+  padding: 8px;
+  background-color: ${theme.palette.gray[400]};
 `;
 
 const AnalyticalTableGroupRow = (props) => {
@@ -62,7 +77,7 @@ const AnalyticalTableGroupRow = (props) => {
   };
 
   const getPaddingByLevel = () => {
-    return 10 + Depth * 60;
+    return Depth * 60;
   };
 
   const renderEmptyGroupedCells = () => {
@@ -122,6 +137,20 @@ const AnalyticalTableGroupRow = (props) => {
     ));
   };
 
+  const renderPaddingDiv = () => {
+    var pad = [];
+
+    for (let i = 0; i < Depth; i++) {
+      pad.push(<>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>);
+    }
+
+    return <CellPad>{pad}</CellPad>;
+  };
+
+  const renderGroupCell = () => {
+    return <CellInfo>{Node.value}</CellInfo>;
+  };
+
   return (
     <>
       <Row
@@ -133,7 +162,10 @@ const AnalyticalTableGroupRow = (props) => {
         {/* {renderEmptyGroupedCells()} */}
 
         <Cell colSpan={Columns.length} padding={getPaddingByLevel()}>
-          {Node.value}
+          <CellContent>
+            {renderPaddingDiv()}
+            {renderGroupCell()}
+          </CellContent>
         </Cell>
       </Row>
 
