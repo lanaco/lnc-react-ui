@@ -11,9 +11,7 @@ const HtmlCell = styled.td`
 
   // width: ${(props) => props.width};
   padding: ${(props) =>
-    props.selection === false
-      ? "11.4px 6px 11.4px 6px"
-      : "11.4px 6px 11.4px 6px"};
+    props.selection === false ? "8px 6px 8px 6px" : "8px 6px 8px 6px"};
 `;
 
 const CellText = styled.span`

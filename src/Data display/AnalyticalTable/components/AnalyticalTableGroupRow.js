@@ -8,6 +8,7 @@ import Icon from "../../../General/Icon/index";
 import { getCustomRender, renderCustomElement } from "../../../_utils/utils";
 import AnalyticalTableCell from "./AnalyticalTableCell";
 import AnalyticalTableRow from "./AnalyticalTableRow";
+import CheckBox from "../../../Basic Inputs/CheckBox/index";
 
 const Row = styled.tr`
   border-radius: 3px;
@@ -33,7 +34,9 @@ const CellPad = styled.div``;
 
 const CellIcon = styled.div``;
 
-const CellTitle = styled.div``;
+const CellTitle = styled.div`
+  padding-left: 8px;
+`;
 
 const CellContent = styled.div`
   box-sizing: border-box;
@@ -60,8 +63,11 @@ const AnalyticalTableGroupRow = (props) => {
     GroupByFields,
   } = props;
 
-  const [leafs, setLeafs] = useState([]);
   const prevGroupBy = usePrevious(GroupByFields);
+
+  useEffect(() => {
+    console.log(props);
+  }, [props]);
 
   useEffect(() => {
     if (!Show) ClearData(Node);
@@ -109,7 +115,7 @@ const AnalyticalTableGroupRow = (props) => {
             flexDirection: "row-reverse",
           }}
         >
-          <input type="checkbox" />
+          <CheckBox size="small" />
         </div>
       </td>
     );
@@ -143,10 +149,10 @@ const AnalyticalTableGroupRow = (props) => {
     return (
       <CellContent>
         <CellIcon onClick={handleClick}>
-          <Icon icon={getIcon()} />
+          <Icon icon={getIcon()} onClick={handleClick} />
         </CellIcon>
         <div>
-          <input type="checkbox" />
+          <CheckBox />
         </div>
         <CellTitle onClick={handleClick}>{Node.value}</CellTitle>
       </CellContent>

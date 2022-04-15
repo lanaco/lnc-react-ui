@@ -18,6 +18,9 @@ const AnalyticalTableBody = (props) => {
     ExpandCollapseGroup,
     GroupBy,
     Groups,
+    EnableSelection,
+    SelectedData,
+    onSelectRow,
     //------------------
     className,
     size,
@@ -84,6 +87,9 @@ const AnalyticalTableBody = (props) => {
         Show: n.show,
         Expanded: n.expanded,
         Data: n.data,
+        EnableSelection,
+        SelectedData,
+        onSelectRow,
       })
     );
   };

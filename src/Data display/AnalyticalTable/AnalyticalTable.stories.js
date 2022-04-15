@@ -13,7 +13,7 @@ export const Default = Template.bind({});
 Default.args = {
   ID: "UsersTable",
   //------------------------------------
-  EnableSelection: false,
+  EnableSelection: true,
   EnableOrdering: false,
   EnableSelectAll: false,
   EnableLoader: true,
@@ -33,17 +33,15 @@ Default.args = {
   SelectedEntirePage: false,
   SelectedData: [
     {
-      id: "61f7b8eaf418ca604fcdffba",
-      isActive: false,
-      balance: "$3,804.94",
-      age: 21,
-      name: "Frankie Jacobson",
-      gender: "female",
-      company: "QUALITEX",
-      email: "frankiejacobson@qualitex.com",
-      phone: "(825) 404-3871",
-      address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
-      status: "inactive",
+      id: "61f7b8ea2fe061cacbcdbfea",
+      year: "2020",
+      type: "type1",
+      typeId: 1,
+      status: "status1",
+      statusId: 1,
+      amountRequested: 4000,
+      amountApproved: 2000,
+      amountRejected: 2000,
     },
   ],
   //-------------------------------------

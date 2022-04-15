@@ -12,7 +12,7 @@ const HtmlRow = styled.tr`
       return `
        &:hover {
           & > td {
-            background-color: whitesmoke ;
+            // background-color: whitesmoke ;
           }
 
           cursor: pointer;
