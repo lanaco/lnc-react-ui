@@ -8,16 +8,19 @@ const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: ${(props) => props.width};
+
+  // width: ${(props) => props.width};
   padding: ${(props) =>
-    props.selection === false ? "11.4px 6px 11.4px 6px" : "4px 6px 4px 6px"};
+    props.selection === false
+      ? "11.4px 6px 11.4px 6px"
+      : "11.4px 6px 11.4px 6px"};
 `;
 
 const CellText = styled.span`
   ${(props) => props.textColor}
 `;
 
-const TableCell = (props) => {
+const AnalyticalTableCell = (props) => {
   //--------------------------
   const {
     Column,
@@ -40,7 +43,7 @@ const TableCell = (props) => {
     theme,
   };
 
-  // TODO: move to service
+  //TODO: move to service
   const isColor = (strColor) => {
     const s = new Option().style;
     s.color = strColor;
@@ -83,7 +86,12 @@ const TableCell = (props) => {
       );
 
     return (
-      <CellText textColor={getTextColor()}>{RowData[Column.accessor]}</CellText>
+      <CellText textColor={getTextColor()}>
+        {RowData[Column.accessor]}
+        {/* {RowData[Column.accessor]
+          ? RowData[Column.accessor] + " / " + Column.width + "%"
+          : Column.width + "%"} */}
+      </CellText>
     );
   };
 
@@ -99,8 +107,8 @@ const TableCell = (props) => {
   );
 };
 
-TableCell.defaultProps = {
-  __TYPE__: "TABLE_CELL",
+AnalyticalTableCell.defaultProps = {
+  __TYPE__: "ANALYTICAL_TABLE_CELL",
   //--------------------
   Column: {},
   RowData: {},
@@ -115,7 +123,7 @@ TableCell.defaultProps = {
   theme: theme,
 };
 
-TableCell.propTypes = {
+AnalyticalTableCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
   Column: PropTypes.object.isRequired,
@@ -140,4 +148,4 @@ TableCell.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default TableCell;
+export default AnalyticalTableCell;
