@@ -5,7 +5,11 @@ import theme from "../../_utils/theme";
 export default {
   title: "Basic Inputs/Text Area",
   component: TextArea,
-  argTypes: {},
+  argTypes: {
+    onInput: { action: "onInput"},
+    onChange: { action: "onChange"},
+    onBlur: { action: "onBlur"}
+  },
 };
 
 const Template = (args) => (
@@ -16,11 +20,11 @@ const Template = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  theme: theme,
   color: "primary",
-  onChange: () => {},
+  onInput: () => {},
   size: "medium",
   disabled: false,
+  readOnly: false,
   rows: 4,
   value: "Text",
 };

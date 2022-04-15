@@ -7,7 +7,7 @@ export default {
 };
 
 const Template = (args) => (
-  <ColorInput />
+  <ColorInput {...args}/>
 );
 
 export const Default = Template.bind({});

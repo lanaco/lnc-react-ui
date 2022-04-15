@@ -22,11 +22,15 @@ const Template = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   id: "check",
-  disabled: false,
   checked: true,
-  onChange: () => alert("aa"),
+  disabled: false,
+  readOnly: false,
+  indeterminate: false,
+  onChange: () => {},
   color: "secondary",
   size: "small",
   theme: theme,
-  // label: "Checkbox",
+  label: "Checkbox",
+  labelPosition: "right",
+  style: {},
 };

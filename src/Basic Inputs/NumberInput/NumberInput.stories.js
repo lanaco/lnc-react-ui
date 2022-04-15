@@ -7,7 +7,9 @@ export default {
 };
 
 const Template = (args) => (
-  <NumberInput />
+  <div style={{ width: "150px" }}>
+    <NumberInput {...args}/>
+  </div>
 );
 
 export const Default = Template.bind({});

@@ -7,7 +7,21 @@ export default {
 };
 
 const Template = (args) => (
-  <DateInput />
+  <DateInput {...args}/>
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  id: "",
+  disabled: false,
+  onChange: () => { },
+  className: "",
+  preventDefault: true,
+  size: "small",
+  color: "primary",
+  value: "",
+  style: {},
+  min: "",
+  max: "",
+  readOnly: false,
+};

@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
 import TextInput from ".";
 import theme from "../../_utils/theme";
 
 export default {
   title: "Basic Inputs/Text Input",
   component: TextInput,
-  argTypes: {},
+  argTypes: {
+    onInput: { action: "onInput"},
+    onChange: { action: "onChange"},
+    onBlur: { action: "onBlur"},
+  },
 };
 
-const Template = (args) => (
-  <div>
-    <TextInput {...args} />
-  </div>
+const Template = (args) => 
+(<div>
+  <TextInput {...args} />
+</div>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  theme: theme,
   color: "primary",
-  onChange: () => {},
   size: "medium",
   disabled: false,
-  value: "text",
+  readOnly: false,
+  // value: "text",
+  autoFocus: true,
+  onInput: () => {}
 };

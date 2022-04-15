@@ -7,7 +7,19 @@ export default {
 };
 
 const Template = (args) => (
-  <EmailInput />
+  <div style={{ width: "250px" }}>
+    <EmailInput {...args}/>
+  </div>
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  color: "primary",
+  size: "medium",
+  disabled: false,
+  readOnly: false,
+  // value: "text",
+  autoFocus: true,
+  onInput: () => { },
+  icon: "envelope",
+};
