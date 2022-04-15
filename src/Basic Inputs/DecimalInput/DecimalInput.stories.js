@@ -7,7 +7,9 @@ export default {
 };
 
 const Template = (args) => (
-  <DecimalInput />
+  <div style={{ width: "150px" }}>
+    <DecimalInput {...args}/>
+  </div>
 );
 
 export const Default = Template.bind({});

@@ -21,13 +21,12 @@ const Span = styled.span`
   box-sizing: border-box;
   background-color: inherit;
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  padding: ${(props) => getPadding(props.size)};
   color: ${(props) => props.theme.palette[props.color].main};
   ${(props) => heightBySize(props.size)}
 `;
 
 const Icon = (props) => {
-  const { tooltip, icon, iconStyle, className, size, color, theme } = props;
+  const { tooltip, icon, iconStyle, className, size, color, theme, ...rest } = props;
 
   const themeProps = { theme, size, color };
 
@@ -37,7 +36,7 @@ const Icon = (props) => {
   };
 
   return (
-    <Span {...themeProps} className={className} tooltip={tooltip}>
+    <Span {...themeProps} className={className} tooltip={tooltip} {...rest}>
       <i className={getIconClass()} />
     </Span>
   );

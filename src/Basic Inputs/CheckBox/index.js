@@ -1,195 +1,251 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Global, css } from "@emotion/react";
+import { Global, css, useTheme } from "@emotion/react";
 import theme from "../../_utils/theme";
+import styled from "@emotion/styled";
+import Icon from "../../General/Icon";
 
-const getCheckboxCss = (props) => {
-  var left,
-    top,
-    width,
-    height,
-    checkWidth,
-    checkHeight,
-    margin,
-    marginLeft,
-    padingLeft,
-    paddingTop;
-
-  var hasLabel = props.label !== "";
-
-  if (props.size === "small") {
-    left = "0.4245rem";
-    top = "0.08rem";
-    checkWidth = "0.13rem";
-    checkHeight = "0.7rem";
-    margin = "0.15625rem";
-    marginLeft = "0";
-    padingLeft = hasLabel ? "1.875rem" : "1.0625rem";
-    paddingTop = hasLabel ? "" : "padding-top: 1.0625rem;";
-    width = "1.188rem";
-    height = "1.188rem";
+const getCheckboxSize = (size) => {
+  if (size === "small") {
+    return "1.375rem";
+  } else if (size === "medium") {
+    return "1.563rem";
+  } else if (size === "large") {
+    return "1.75rem";
   }
+}
 
-  if (props.size === "medium") {
-    left = "0.4845rem";
-    top = "0.08rem";
-    checkWidth = "0.22rem";
-    checkHeight = "0.9rem";
-    margin = "0.21875rem";
-    marginLeft = "0";
-    padingLeft = hasLabel ? "2.1875rem" : "1.375rem";
-    paddingTop = hasLabel ? "" : "padding-top: 1.3125rem;";
-    width = "1.4375rem";
-    height = "1.4375rem";
+const getIndeterminateSquareSize = (size) => {
+  if (size === "small") {
+    return "0.85rem";
+  } else if (size === "medium") {
+    return "0.913rem";
+  } else if (size === "large") {
+    return "1rem";
   }
+}
 
-  if (props.size === "large") {
-    left = "0.59rem";
-    top = "0.08rem";
-    checkWidth = "0.28rem";
-    checkHeight = "1.1rem";
-    margin = "0.21875rem";
-    marginLeft = "0";
-    padingLeft = hasLabel ? "2.5rem" : "1.625rem";
-    paddingTop = hasLabel ? "" : "padding-top: 1.6875rem;";
-    width = "1.6875rem";
-    height = "1.6875rem";
+const getCheckSize = (size) => {
+  if (size === "small") {
+    return "0.85rem";
+  } else if (size === "medium") {
+    return "1.125rem";
+  } else if (size === "large") {
+    return "1.225rem";
   }
+}
 
-  return css`
-    .c-${props.id}-container {
-      font-family: ${props.theme.typography.fontFamily};
-      display: inline-block;
-      position: relative;
-      padding: 0.25rem;
-      padding-left: ${padingLeft};
-      ${paddingTop}
-      cursor: pointer;
-      font-size: ${props.theme.typography[props.size].fontSize};
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      margin: ${margin};
-      margin-left: ${marginLeft};
-      cursor: pointer;
-    }
+const getLabelDirection = (direction) => {
+  console.log("Direction", direction);
+  if (direction == "up") return "column-reverse";
+  else if (direction == "down") return "column";
+  else if (direction == "left") return "row-reverse";
+  return "row";
+}
 
-    /* Hide the browser's default checkbox */
-    .c-${props.id}-container input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-    }
+const Label = styled.label`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  position: relative;
+  flex-direction: ${(props) => (getLabelDirection(props.labelPosition))};
+  & > .lnc-checkboxInput {
+    position: relative;
+    height: ${(props) => (props.theme.typography[props.size].iconFontSize)};
+    width: ${(props) => (props.theme.typography[props.size].iconFontSize)};
+  }
+  & > .lnc-checkboxInput > input {
+    height: ${(props) => (props.theme.typography[props.size].iconFontSize)};
+    width: ${(props) => (props.theme.typography[props.size].iconFontSize)};
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: ${(props) => (props.icon ? 'none' : '2px solid ' + props.theme.palette[props.color].main)};
+    border-radius: 3px;
+    outline: none;
+    transition-duration: 0.3s;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: ${(props) => (props.focused ? "2" : "auto")};
+  }
+  & > .lnc-checkboxInput > input:checked + .lnc-checkMark {
+    position: absolute;
+    height: ${(props) => (props.indeterminate ? getIndeterminateSquareSize(props.size) : "0")};
+    width: ${(props) => (props.indeterminate ? getIndeterminateSquareSize(props.size) : "0")};
+    transform: ${(props) => (props.indeterminate ? "translate(-50%, -50%)" : "none")};
+    top: ${(props) => (props.indeterminate ? "50%" : "0")};
+    left: ${(props) => (props.indeterminate ? "50%" : "0")};
+    background-color: ${(props) => (props.indeterminate ? (props.disabled ? props.theme.palette.gray[900] : props.theme.palette[props.color].main) : "none")};
+  }
+  & > .lnc-checkboxInput > input:checked + .lnc-checkMark::before {
+    content:  ${(props) => (props.indeterminate ? '""' : '"\\2713"')} ;
+    display: block;
+    text-align: center;
+    color: ${(props) => (props.disabled ? props.theme.palette.gray[900] : props.theme.palette[props.color].main)};
+    position: absolute;
+    
+    left: 5px;
+    top: 0.031px;
 
-    /* Create a custom checkbox */
-    .c-${props.id}-checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: ${height};
-      width: ${width};
-      background-color: #eee;
-      border: 0.0625rem solid ${props.theme.palette[props.color].main};
-      border-radius: 2px;
-      transition: all 200ms ease;
-    }
+    font-weight: bold;
+    font-size: ${(props) => (getCheckSize(props.size))}; 
+    height: 0px;
+    width: 0px;
 
-    /* On mouse-over, add a grey background color */
-    .c-${props.id}-container:hover input ~ .c-${props.id}-checkmark {
-      cursor: pointer;
-    }
+    transition: ${props => props.theme.transition.duration.short + "ms transform "+props.theme.transition.easing.easeInOut};
+  }
+  & > .lnc-checkboxInput > input:focus {
+    background-color: transparent;
+  }
+  & > .lnc-checkboxInput > input:disabled {
+    border:  ${(props) => (props.icon ? 'none' : '2px solid ' + props.theme.palette.gray[900])};
+    color: ${(props) => (props.theme.palette.gray[900])};
+  }
+  & > .lnc-checkboxInput > input:disabled + div > .lnc-checkMark::before {
+    color: ${(props) => (props.theme.palette.gray[900])};
+  }
+  & > .lnc-checkboxInput > .lnc-checkbox-icon-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  & > .lnc-checkboxInput > .lnc-checkbox-icon-wrapper > .lnc-checkbox-icon {
+    min-height: unset;
+    max-height: unset;
+    max-width: unset;
+    min-width: unset;
+    height: ${(props) => (getCheckboxSize(props.size))};
+    width: ${(props) => (getCheckboxSize(props.size))};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
-    .c-${props.id}-container:hover input:disabled ~ .c-${props.id}-checkmark {
-      background-color: ${props.theme.palette.gray[900]};
-      cursor: default;
-    }
+const CheckboxInput = styled.input`
+  margin: 0;
+`;
 
-    .c-${props.id}-container input:disabled ~ .c-${props.id}-checkmark {
-      background-color: ${props.theme.palette.gray[900]};
-    }
+const CheckBox = React.forwardRef((props, ref) => {
+  const {
+    onChange,
+    preventDefault,
+    id,
+    disabled,
+    readOnly,
+    indeterminate,
+    checked,
+    onFocus,
+    onBlur,
+    tabIndex,
+    color,
+    size,
+    label,
+    labelPosition,
+    icon,
+    className,
+    style,
+    inputRef,
+    ...rest
+  } = props;
 
-    /* When the checkbox is checked, add a blue background */
-    .c-${props.id}-container input:checked ~ .c-${props.id}-checkmark {
-      background-color: ${props.theme.palette[props.color].main};
-    }
+  const theme = useTheme();
+  const [checkBoxChecked, setCheckBoxChecked] = useState(checked);
+  const [indeterminateState, setIndeterminateState] = useState(indeterminate);
+  var [focused, setFocused] = useState(false);
 
-    .c-${props.id}-container input:checked:disabled ~ .c-${props.id}-checkmark {
-      background-color: ${props.theme.palette.gray[900]};
-      border: 0.0625rem solid ${props.theme.palette.gray.textLight};
-      cursor: default;
-    }
 
-    /* Create the checkmark/indicator (hidden when not checked) */
-    .c-${props.id}-checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
+  useEffect(() => {
+    setCheckBoxChecked(checked);
+  }, [checked])
 
-    /* Show the checkmark when checked */
-    .c-${props.id}-container input:checked ~ .c-${props.id}-checkmark:after {
-      display: block;
-    }
-
-    /* Style the checkmark/indicator */
-    .c-${props.id}-container .c-${props.id}-checkmark:after {
-      left: ${left};
-      top: ${top};
-      width: ${checkWidth};
-      height: ${checkHeight};
-      border: solid white;
-      border-width: 0 0.21875rem 0.21875rem 0;
-      -webkit-transform: rotate(35deg);
-      -ms-transform: rotate(35deg);
-      transform: rotate(35deg);
-    }
-  `;
-};
-
-const CheckBox = (props) => {
-  const { onChange, preventDefault, id, disabled, className, checked, label } =
-    props;
+  useEffect(() => {
+    setIndeterminateState(indeterminate);
+  }, [indeterminate])
 
   const handleChange = (e) => {
-    if (preventDefault) e.preventDefault();
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
 
-    onChange(id, !checked);
+    if(readOnly) return;
+    if (indeterminateState) setIndeterminateState(false);
+
+    setCheckBoxChecked(!checkBoxChecked)
+    onChange(e, !checkBoxChecked, id);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.stopPropagation();
+      e.nativeEvent.stopImmediatePropagation();
+
+      if(readOnly) return;
+
+      onChange(e, !checked, id);
+    }
+  };
+
+  const handleOnBlur = (e) => {
+    setFocused(false);
+    if (onBlur) onBlur(e, id);
+  };
+
+  const handleOnFocus = (e) => {
+    setFocused(true);
+
+    if (onFocus) onFocus(e, id);
   };
 
   return (
-    <>
-      <Global styles={getCheckboxCss(props)} />
-      <label
-        className={`c-${id}-container ${className}`}
-        onClick={handleChange}
-      >
-        {label}
-        <input
-          data-testid="checkbox"
+    <Label checked={checked} focused={true} theme={theme} color={color} indeterminate={indeterminateState}
+      size={size} className={className} style={style} labelPosition={labelPosition} icon={icon} disabled={disabled} ref={ref}>
+      <div className="lnc-checkboxInput">
+        <CheckboxInput
           type="checkbox"
-          checked={checked}
-          onChange={() => {}}
+          ref={inputRef}
+          checked={checkBoxChecked}
+          onClick={handleChange}
+          onChange={() => { }}
+          onKeyDown={onKeyDown}
+          tabIndex={tabIndex}
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
           disabled={disabled}
+          readOnly={readOnly}
+          {...rest}
         />
-        <span className={`c-${id}-checkmark`}></span>
-      </label>
-    </>
-  );
-};
+        {icon ?
+          <div className="lnc-checkbox-icon-wrapper">
+            <Icon icon={icon} color={checkBoxChecked && !disabled ? color : 'gray'} size={size} className="lnc-checkbox-icon" />
+          </div>
+          :
+          <span className="lnc-checkMark"></span>
+        }
+      </div>
+      {label && <div>
+        {label}
+      </div>}
+    </Label>)
+});
 
 CheckBox.defaultProps = {
   theme: theme,
   id: "",
   disabled: false,
-  onChange: () => {},
-  className: "",
+  onChange: () => { },
+  checked: false,
   preventDefault: true,
   size: "small",
   label: "",
+  labelPosition: "right",
   color: "primary",
+  indeterminate: false,
+  className: "",
+  style: {},
+  icon: null,
 };
 
 CheckBox.propTypes = {
@@ -197,10 +253,18 @@ CheckBox.propTypes = {
   id: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  className: PropTypes.string,
+  checked: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  indeterminate: PropTypes.bool,
   preventDefault: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   label: PropTypes.string,
+  labelPosition: PropTypes.oneOf([
+    "up",
+    "down",
+    "right",
+    "left"
+  ]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
@@ -209,6 +273,10 @@ CheckBox.propTypes = {
     "warning",
     "gray",
   ]),
+  className: PropTypes.string,
+  style: PropTypes.object,
+  icon: PropTypes.string,
+  inputRef: PropTypes.func,
 };
 
 export default CheckBox;

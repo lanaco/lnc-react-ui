@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../Base/fontawesome/css/fontawesome.css";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import theme from "../../_utils/theme";
+import { useTheme } from "@emotion/react";
+import Icon from "../../General/Icon";
 
-const paddingBySize = (size) => {
-  if (size === "small") return "0.325rem 0.375rem";
-  if (size === "medium") return "0.3875rem 0.375rem";
-  if (size === "large") return "0.425rem 0.375rem";
+const paddingBySize = (size, iconPosition) => {
+  if (size === "small") {
+    if (iconPosition == "right")
+      return "0.325rem 2rem 0.325rem 0.375rem";
+
+    return "0.325rem 0.375rem 0.325rem 2rem";
+  }
+  if (size === "medium") {
+    if (iconPosition == "right")
+      return "0.375rem 2.375rem 0.375rem 0.3875rem";
+
+    return "0.375rem 0.3875rem 0.375rem 2.475rem";
+  }
+  if (size === "large") {
+    if (iconPosition == "right")
+      return "0.375rem 2.75rem 0.375rem 0.422375rem";
+
+    return "0.375rem 0.422375rem 0.375rem 2.85rem";
+  }
 };
 
 const heightBySize = (size, hasText) => {
@@ -16,157 +32,188 @@ const heightBySize = (size, hasText) => {
   if (size === "large") return `2.375rem`;
 };
 
-const Span = styled.span((props) => ({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  borderBottom: `2px solid ${props.theme.palette[props.color].main}`,
-  backgroundColor: props.theme.palette[props.color].lighter,
-  color: props.theme.palette[props.color].textDark,
-  padding: paddingBySize(props.size),
-  borderRadius: "0 2px 2px 0",
-  cursor: "pointer",
+const StyledTextInput = styled.input`
+    appearance: none;
+    outline: none;
+    border: none;
+    border-bottom: ${props => "0.125rem solid " + props.theme.palette[props.color].main};
+    transition: all 250ms;
+    display: inline-block;
+    justify-content: center;
+    cursor: text;
+    padding: ${props => paddingBySize(props.size, props.iconPosition)};
+    font-size: ${props => props.theme.typography[props.size].fontSize};
+    background-color: ${props => props.theme.palette[props.color].lighter};
+    color: ${props => props.theme.palette[props.color].textDark};
+    border-radius: 0.125rem;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: ${props => heightBySize(props.size)};
+    max-height: ${props => heightBySize(props.size)};
+    font-family: ${props => props.theme.typography.fontFamily};
+    &:disabled {
+      background-color: ${props => props.theme.palette.gray[200]};
+      border-bottom: ${props => "0.125rem solid " + props.theme.palette.gray[900]};
+      color: ${props => props.theme.palette.gray.textLight};
+      opacity: 0.7;
+      cursor: default,
+    };
+    &:focus {
+      background-color: ${props => props.theme.palette.common.white};
+      color: ${props => props.theme.palette.common.black};
+    };
+`
+const StyledInputWrapper = styled.div`
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    & > .side-input-icon-lnc {
+      position: absolute;
+      background: transparent;
+      right:  ${props => (props.iconPosition == "right" ? "0.2rem" : "unset")};
+      left:  ${props => (props.iconPosition == "left" ? "0.2rem" : "unset")};
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  `;
 
-  "&:disabled": {
-    backgroundColor: props.theme.palette.gray[200],
-    borderBottom: "2px solid " + props.theme.palette.gray[900],
-    color: props.theme.palette.gray.textLight,
-    opacity: 0.7,
-    cursor: "default",
-  },
-}));
-
-const Icon = styled.i((props) => ({
-  fontSize: props.theme.typography[props.size].fontSize,
-}));
-
-const Container = styled.div((props) => ({
-  display: "flex",
-  fontFamily: props.theme.typography.fontFamily,
-  outline: "none",
-  width: "100%",
-}));
-
-const Input = styled.input((props) => ({
-  appearance: "none",
-  outline: "none",
-  border: "none",
-  fontFamily: "inherit",
-  borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-  transition: "all 250ms",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  cursor: "text",
-  padding: paddingBySize(props.size),
-  fontSize: props.theme.typography[props.size].fontSize,
-  backgroundColor: props.theme.palette[props.color].lighter,
-  color: props.theme.palette[props.color].textDark,
-  borderRadius: "0.125rem 0 0 0.125rem",
-  width: "100%",
-  boxSizing: "border-box",
-  minHeight: heightBySize(props.size),
-  maxHeight: heightBySize(props.size),
-  "&:disabled": {
-    backgroundColor: props.theme.palette.gray[200],
-    borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-    color: props.theme.palette.gray.textLight,
-    opacity: 0.7,
-    cursor: "default",
-
-    "& ~ span": {
-      backgroundColor: props.theme.palette.gray[200],
-      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-      color: props.theme.palette.gray.textLight,
-      opacity: 0.7,
-      cursor: "default",
-    },
-  },
-  "&:focus": {
-    backgroundColor: props.theme.palette.common.white,
-    color: props.theme.palette.common.black,
-  },
-}));
-
+//===================================================
 const PasswordInput = React.forwardRef((props, ref) => {
   const {
     onChange,
+    onInput,
+    onBlur,
     preventDefault,
     id,
     disabled,
-    theme,
+    readOnly,
+    autoFocus,
     size,
     color,
     autoComplete,
     value,
     tooltip,
     className,
+    style,
+    iconPosition,
+    placeholder,
+    ...rest
   } = props;
-
+  const theme = useTheme();
   const [locked, setLocked] = useState(true);
+  const [text, setText] = useState(value);
+  const inputRef = useRef();
+
+  const handleLockUnlock = () => {
+    setLocked(!locked);
+
+    inputRef.current.focus();
+   
+  }
+
+  useEffect(() => {
+    inputRef.current.selectionStart = text.length;
+    inputRef.current.selectionEnd = text.length;
+  }, [locked])
+
+  useEffect(() => {
+    if (value) {
+      if (text !== value) setText(value === null ? "" : value);
+    }
+  }, [value]);
 
   const handleOnChange = (e) => {
     if (preventDefault) {
       e.preventDefault();
     }
+
     onChange(id, e.target.value);
   };
 
-  const handleLockUnlock = () => setLocked(!locked);
+  const handleOnInput = (e) => {
+    if (preventDefault) {
+      e.preventDefault();
+    }
 
-  let themeProps = { theme, size, color };
+    if (onInput) onInput(e);
+    if (text != e.target.value)
+      setText(e.target.value);
+  };
+
+  const handleOnBlur = (e) => {
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    if (onChange) handleOnChange(e);
+    if (onBlur) onBlur(e);
+  };
 
   return (
     <>
-      <Container {...themeProps}>
-        <Input
-          {...themeProps}
-          type={locked ? "password" : "text"}
-          autoComplete={autoComplete ? "true" : "false"}
-          value={value}
-          onChange={handleOnChange}
-          className={className}
+      <StyledInputWrapper iconPosition={iconPosition} theme={theme} color={color} size={size} className={className} style={style} ref={ref}>
+        <StyledTextInput
+          {...{ theme, size, color }}
+          onInput={handleOnInput}
+          onBlur={handleOnBlur}
           disabled={disabled}
-          title={tooltip}
-          ref={ref}
+          readOnly={readOnly}
+          value={text}
+          type={locked ? "password" : "text"}
+          placeholder={placeholder}
+          ref={inputRef}
+          iconPosition={iconPosition}
+          autoFocus={autoFocus}
+          autoComplete={autoComplete ? "true" : "false"}
+          {...rest}
         />
-        <Span {...themeProps} onClick={disabled ? () => {} : handleLockUnlock}>
-          <Icon
-            {...themeProps}
-            className={`fas ${locked ? "fa-eye" : "fa-eye-slash"} fa-fw`}
-          />
-        </Span>
-      </Container>
+        <Icon icon={locked ? "eye" : "eye-slash"} className="side-input-icon-lnc" size={size} onClick={disabled ? () => { } : handleLockUnlock} color={disabled ? 'gray' : color} />
+      </StyledInputWrapper>
+
+
     </>
   );
 });
 
 PasswordInput.defaultProps = {
-  theme: theme,
   id: "",
   disabled: false,
-  onChange: () => {},
-  handleForgotPassword: () => {},
+  readOnly: false,
+  autoFocus: false,
+  onChange: () => { },
+  handleForgotPassword: () => { },
   className: "",
+  style: {},
   preventDefault: true,
   size: "small",
   color: "primary",
   autoComplete: false,
   tooltip: "",
   value: "",
+  iconPosition: "right",
 };
 
 PasswordInput.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   onChange: PropTypes.func,
+  onInput: PropTypes.func,
+  onBlur: PropTypes.func,
   handleForgotPassword: PropTypes.func,
   className: PropTypes.string,
+  style: PropTypes.object,
+  placeholder: PropTypes.string,
   tooltip: PropTypes.string,
   value: PropTypes.string,
   preventDefault: PropTypes.bool,
   autoComplete: PropTypes.bool,
+  iconPosition: PropTypes.oneOf([
+    "right",
+    "left",
+  ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",

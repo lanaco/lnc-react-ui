@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import TimeInput from ".";
 
 export default {
@@ -7,7 +7,7 @@ export default {
 };
 
 const Template = (args) => (
-  <TimeInput />
+  <TimeInput {...args} />
 );
 
 export const Default = Template.bind({});

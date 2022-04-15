@@ -1,7 +1,7 @@
+import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState, useRef } from "react";
-import theme from "../../_utils/theme";
+import React, { useState, useRef, useEffect } from "react";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.3rem 0.375rem";
@@ -15,116 +15,156 @@ const heightBySize = (size) => {
   if (size === "large") return `2.375rem`;
 };
 
-const StyledTextInput = styled.textarea((props) => {
-  return {
-    fontFamily: props.theme.typography.fontFamily,
-    appearance: "none",
-    outline: "none",
-    border: "none",
-    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-    transition: "all 250ms ease",
-    resize: "vertical",
-    display: "inline-block",
-    overflow: "hidden",
-    cursor: "text",
-    width: "100%",
-    boxSizing: "border-box",
-    height: heightBySize(props.size),
-    minHeight: heightBySize(props.size),
-    resize: "none",
-    whiteSpace: "nowrap",
-    // maxHeight: heightBySize(props.size),
-    padding: paddingBySize(props.size),
-    fontSize: props.theme.typography[props.size].fontSize,
-    backgroundColor: props.theme.palette[props.color].lighter,
-    color: props.theme.palette[props.color].textDark,
-    borderRadius: "0.125rem",
-    "&:disabled": {
-      backgroundColor: props.theme.palette.gray[200],
-      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-      color: props.theme.palette.gray.textLight,
-      opacity: 0.7,
-      cursor: "default",
-    },
-    "&:focus": {
-      backgroundColor: props.theme.palette.common.white,
-      color: props.theme.palette.common.black,
-    },
-  };
-});
+const StyledTextInput = styled.textarea`
+    font-family: ${props => props.theme.typography.fontFamily};
+    appearance: none;
+    outline: none;
+    border: none;
+    border-bottom: ${props => "0.125rem solid " + props.theme.palette[props.color].main};
+    transition: all 250ms ease;
+    resize: vertical;
+    display: inline-block;
+    overflow: hidden;
+    cursor: text;
+    width: 100%;
+    box-sizing: border-box;
+    height: ${props => heightBySize(props.size)};
+    min-height: ${props => heightBySize(props.size)};
+    resize: none;
+    white-space: nowrap;
+    padding: paddingBySize(props.size);
+    font-size: ${props => props.theme.typography[props.size].fontSize};
+    background-color: ${props => props.theme.palette[props.color].lighter};
+    color: ${props => props.theme.palette[props.color].textDark};
+    border-radius: 0.125rem;
+    &:disabled {
+      background-color: props.theme.palette.gray[200];
+      border-bottom: ${props => "0.125rem solid " + props.theme.palette.gray[900]};
+      color: ${props => props.theme.palette.gray.textLight};
+      opacity: 0.7;
+      cursor: default;
+    };
+    &:focus {
+      background-color: ${props => props.theme.palette.common.white};
+      color: ${props => props.theme.palette.common.black};
+    };
+`;
 
 //===================================================
 
 const TextArea = React.forwardRef((props, ref) => {
   const {
-    theme,
     color,
     id,
     disabled,
-    preventDefault,
+    readOnly,
+    placeholder,
     className,
+    style,
+
+    preventDefault,
     size,
     value,
+    defaultValue,
+    autoFocus,
     onChange,
+    onInput,
+    onBlur,
+    ...rest
   } = props;
+  const theme = useTheme();
+  const [text, setText] = useState(value ? "" : (defaultValue ? defaultValue : ""));
 
-  const [val, setVal] = useState(value ? value : "");
+
+  useEffect(() => {
+    if (value) {
+      if (text !== value) setText(value === null ? "" : value);
+    }
+  }, [value]);
+
+  // useEffect(() => {
+  //   const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
+  //   return () => clearTimeout(timeOutId);
+  // }, [text]);
+
 
   const handleOnChange = (e) => {
     if (preventDefault) e.preventDefault();
-    setVal(e.target.value);
+
+    onChange(id, e.target.value);
   };
 
-  const handleOnBlur = (e) => {
+  const handleOnInput = (e) => {
     if (preventDefault) e.preventDefault();
-    onChange(id, val);
+    
+    if(onInput) onInput(id, e);
+    if (text != e.target.value)
+      setText(e.target.value);
+  }
+
+  const handleOnBlur = (e) => {
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    if (onChange) handleOnChange(e);
+    if (onBlur) onBlur(e);
   };
+
 
   return (
     <StyledTextInput
       {...{ theme, size, color }}
-      onChange={handleOnChange}
       className={className}
+      style={style}
+      placeholder={placeholder}
       disabled={disabled}
-      value={val}
+      value={text}
       ref={ref}
-      onFocus={(e) => {
-        e.target.style.whiteSpace = "inherit";
-        e.target.style.height = `${e.target.scrollHeight}px`;
-      }}
+      readOnly={readOnly}
+      // onFocus={(e) => {
+      //   e.target.style.whiteSpace = "inherit";
+      //   e.target.style.height = `${e.target.scrollHeight}px`;
+      // }}
       onInput={(e) => {
         e.target.style.whiteSpace = "inherit";
         e.target.style.height = `${e.target.scrollHeight}px`;
+        handleOnInput(e);
       }}
       onBlur={(e) => {
         e.target.style.height = heightBySize(size);
         e.target.style.whiteSpace = "nowrap";
         handleOnBlur(e);
       }}
+      autoFocus={autoFocus}
+      {...rest}
     />
   );
 });
 
 TextArea.defaultProps = {
   id: "",
-  theme: theme,
   disabled: false,
-  onChange: () => {},
+  readOnly: false,
   className: "",
   preventDefault: true,
   size: "small",
   color: "primary",
   value: "",
+  defaultValue: "",
+  autoFocus: false, 
+  //onChange: () => {},
 };
 
 TextArea.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  preventDefault: PropTypes.bool,
+  readOnly: PropTypes.bool,
   value: PropTypes.string,
+  defaultValue: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  preventDefault: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
@@ -134,6 +174,10 @@ TextArea.propTypes = {
     "warning",
     "gray",
   ]),
+  onChange: PropTypes.func,
+  onInput: PropTypes.func,
+  onBlur: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
 
 export default TextArea;
