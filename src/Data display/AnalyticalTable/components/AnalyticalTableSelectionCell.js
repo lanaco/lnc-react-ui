@@ -10,6 +10,12 @@ const HtmlCell = styled.td`
   width: ${(props) => props.width}%;
 `;
 
+const Inner = styled.div`
+  wdith: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
 const TableSelectionCell = (props) => {
   //--------------------------
   const {
@@ -18,6 +24,7 @@ const TableSelectionCell = (props) => {
     SelectedData,
     onSelectRow,
     IsSelected,
+    RowIdentifier,
     Index,
     //----------------
     className,
@@ -33,17 +40,28 @@ const TableSelectionCell = (props) => {
     theme,
   };
 
-  const onChange = (_, value) => {
-    //TODO: when the new checkbox is implemented, the first param should be the event object
-    onSelectRow(null, RowData, IsSelected);
+  const calculateRowSelection = (rowData) => {
+    // Check if row is selected
+    let row = SelectedData.find(
+      (x) => String(x[RowIdentifier]) === String(rowData[RowIdentifier])
+    );
+
+    if (row !== null && row !== undefined) return true;
+    else return false;
+
+    return false;
+  };
+
+  const onChange = (e) => {
+    console.log(RowData.id);
+    onSelectRow(e, RowData, calculateRowSelection(RowData));
   };
 
   const onCellClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
 
-    //TODO: when the new checkbox is implemented, the first param should be the event object
-    onSelectRow(e, RowData, IsSelected);
+    onSelectRow(e, RowData, calculateRowSelection(RowData));
   };
 
   return (
@@ -53,13 +71,19 @@ const TableSelectionCell = (props) => {
       width={props.width}
       onClick={onCellClick}
     >
-      <Checkbox id={Index} checked={IsSelected} onChange={onChange} />
+      <Inner>
+        <Checkbox
+          id={Index}
+          checked={calculateRowSelection(RowData)}
+          onChange={onChange}
+        />
+      </Inner>
     </HtmlCell>
   );
 };
 
 TableSelectionCell.defaultProps = {
-  __TYPE__: "TABLE_SELECTION_CELL",
+  __TYPE__: "ANALYTICAL_TABLE_SELECTION_CELL",
   //--------------------
   Column: {},
   RowData: {},

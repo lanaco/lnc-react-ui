@@ -17,12 +17,21 @@ import theme from "../../_utils/theme";
 import Table from "../Table/index";
 import AnalyticalTableRow from "./components/AnalyticalTableRow";
 import AnalyticalTableCell from "./components/AnalyticalTableCell";
+import AnalyticalTableSelectionCell from "./components/AnalyticalTableSelectionCell";
 import AnalyticalTableBody from "./components/AnalyticalTableBody";
 import AnalyticalTableHead from "./components/AnalyticalTableHead";
+import AnalyticalTableGroupRow from "./components/AnalyticalTableGroupRow";
 
 const AnalyticalTable = forwardRef((props, ref) => {
   //
-  var { Data, GroupBy = {}, GetDataForGroup = () => {} } = props;
+  var {
+    SelectedData,
+    RowIdentifier,
+    onSelectRow,
+    Data,
+    GroupBy = {},
+    GetDataForGroup = () => {},
+  } = props;
 
   const [groups, setGroups] = useState([]);
 
@@ -146,6 +155,31 @@ const AnalyticalTable = forwardRef((props, ref) => {
     );
   };
 
+  const renderAnalyticalTableSelectionCell = () => {
+    var cellProps = {
+      SelectedData,
+      RowIdentifier,
+    };
+
+    return (
+      renderCustomElement(
+        getCustomRender("ANALYTICAL_TABLE_SELECTION_CELL", props.children),
+        cellProps
+      ) || <AnalyticalTableSelectionCell {...cellProps} />
+    );
+  };
+
+  const renderAnalyticalTableGroupRow = () => {
+    var rowProps = {};
+
+    return (
+      renderCustomElement(
+        getCustomRender("ANALYTICAL_TABLE_GROUP_ROW", props.children),
+        rowProps
+      ) || <AnalyticalTableGroupRow {...rowProps} />
+    );
+  };
+
   const renderAnalyticalTableBody = () => {
     if (GroupBy && GroupBy.fields && GroupBy.fields.length > 0) {
       var bodyProps = {
@@ -158,6 +192,8 @@ const AnalyticalTable = forwardRef((props, ref) => {
       var children = [];
       children.push(renderAnalyticalTableRow());
       children.push(renderAnalyticalTableCell());
+      children.push(renderAnalyticalTableSelectionCell());
+      children.push(renderAnalyticalTableGroupRow());
 
       return (
         renderCustomElement(
@@ -343,7 +379,7 @@ AnalyticalTable.propTypes = {
   /**
    * Triggered on selection checkbox click.
    * @param event - event object
-   * @param rowData - row data
+   * @param rowData - row data object
    * @param isSelected - the value of selection checkbox
    */
   onSelectRow: PropTypes.func,

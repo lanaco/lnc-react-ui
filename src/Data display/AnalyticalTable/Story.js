@@ -2,116 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import AnalyticalTable from "./index";
 import Button from "../../General/Button/index";
+import CustomAnalyticalTableGroupRow from "./components/CustomAnalyticalTableGroupRow";
 import {
   GroupBy_YearTypeStatus,
   GroupBy_YearType,
   GroupBy_Year,
 } from "./service/service";
-
-// const renderTree = ({ node, level, index, show, findParents }) => {
-//   const [expanded, setExpanded] = useState(false);
-//   const [leafs, setLeafs] = useState([]);
-
-//   useEffect(() => {
-//     if (show === false) setExpanded(false);
-//   }, [show]);
-
-//   const getOpacityByLevel = () => {
-//     return 1 - level * 0.25;
-//   };
-
-//   const getPaddingByLevel = () => {
-//     var pad = 12 + level * 50;
-//     return pad + "px";
-//   };
-
-//   const renderEmptyCellsByLevel = () => {
-//     var arr = Array.from({ length: level }, (_, idx) => ++idx);
-
-//     return arr.map((x) => <GroupCell key={x} />);
-//   };
-
-//   const onClick = () => {
-//     setExpanded(!expanded);
-//     if (level === 2) {
-//       setLeafs(findParents(node));
-//     }
-//   };
-
-//   const renderNode = () => {
-//     return (
-//       <Group
-//         key={node.value}
-//         show={show}
-//         index={index}
-//         opacity={getOpacityByLevel()}
-//         onClick={onClick}
-//       >
-//         {renderEmptyCellsByLevel()}
-
-//         <GroupCell colSpan={4} padding={getPaddingByLevel()}>
-//           <span>{level + ": "}</span>
-//           <span>{node.value}</span>
-//         </GroupCell>
-//       </Group>
-//     );
-//   };
-
-//   const renderChildren = () => {
-//     if (node.children.length > 0)
-//       return node.children.map((n, i) =>
-//         renderTree({
-//           node: n,
-//           level: level + 1,
-//           index: i,
-//           findParents,
-//           show: expanded,
-//         })
-//       );
-
-//     return <></>;
-//   };
-
-//   const renderLeafs = () => {
-//     return leafs.map((l) => {
-//       return (
-//         <Leaf show={expanded}>
-//           <td></td>
-//           <td></td>
-//           <td></td>
-//           <td>
-//             <div
-//               style={{
-//                 textAlign: "right",
-//                 padding: "12px",
-//                 border: "1px solid black",
-//               }}
-//             >
-//               {l.amount}
-//             </div>
-//           </td>
-//         </Leaf>
-//       );
-//     });
-//   };
-
-//   if (level === 0) {
-//     return (
-//       <tbody key={node.value}>
-//         {renderNode()}
-//         {renderChildren()}
-//       </tbody>
-//     );
-//   }
-
-//   return (
-//     <>
-//       {renderNode()}
-//       {renderChildren()}
-//       {renderLeafs()}
-//     </>
-//   );
-// };
+import { isArray, cloneDeep } from "lodash";
 
 const Container = styled.div``;
 
@@ -238,6 +135,30 @@ const data = [
 const Story = (props) => {
   const [Loading, SetLoading] = useState(false);
   const [GroupBy, SetGroupBy] = useState(GroupBy_Year);
+  const [SelectedData, SetSelectedData] = useState([
+    {
+      id: "61f7b8ea2fe061cacbcdbfea",
+      year: "2020",
+      type: "type1",
+      typeId: 1,
+      status: "status1",
+      statusId: 1,
+      amountRequested: 4000,
+      amountApproved: 2000,
+      amountRejected: 2000,
+    },
+    {
+      id: "11f7b8eada6686c40411b81c",
+      year: "2021",
+      type: "type2",
+      typeId: 2,
+      status: "status2",
+      statusId: 2,
+      amountRequested: 900,
+      amountApproved: 400,
+      amountRejected: 500,
+    },
+  ]);
 
   const GetDataForGroup = async (parentInfo) => {
     SetLoading(true);
@@ -272,6 +193,25 @@ const Story = (props) => {
     });
   };
 
+  const onSelectRow = (e, rowDataOrRowDataArray, selected) => {
+    var selectedDataCopy = cloneDeep(SelectedData);
+
+    if (isArray(rowDataOrRowDataArray)) {
+    } else {
+      if (!selected) {
+        selectedDataCopy.push(rowDataOrRowDataArray);
+      }
+
+      if (selected) {
+        selectedDataCopy = selectedDataCopy.filter(
+          (x) => x.id !== rowDataOrRowDataArray.id
+        );
+      }
+    }
+
+    SetSelectedData(selectedDataCopy);
+  };
+
   //========= Commands ===========================
 
   const notGrouped = () => SetGroupBy(null);
@@ -297,10 +237,14 @@ const Story = (props) => {
       <AnalyticalTable
         {...props}
         Data={data}
+        SelectedData={SelectedData}
+        onSelectRow={onSelectRow}
         GroupBy={GroupBy}
         GetDataForGroup={GetDataForGroup}
         Loading={Loading}
-      />
+      >
+        {/* <CustomAnalyticalTableGroupRow /> */}
+      </AnalyticalTable>
     </div>
   );
 };

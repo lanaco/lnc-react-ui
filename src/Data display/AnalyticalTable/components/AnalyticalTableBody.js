@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
@@ -21,6 +21,7 @@ const AnalyticalTableBody = (props) => {
     EnableSelection,
     SelectedData,
     onSelectRow,
+    RowIdentifier,
     //------------------
     className,
     size,
@@ -36,6 +37,13 @@ const AnalyticalTableBody = (props) => {
   };
 
   //====================================================================================================
+
+  // useEffect(() => {
+  //   console.log(
+  //     "ATB",
+  //     props.children.map((x) => x.props.__TYPE__)
+  //   );
+  // }, [props]);
 
   const [tableBodyRef, { width }] = useMeasure();
 
@@ -62,6 +70,9 @@ const AnalyticalTableBody = (props) => {
       ExpandCollapseGroup,
       Columns,
       GroupByFields: GroupBy.fields,
+      onSelectRow,
+      SelectedData,
+      RowIdentifier,
     };
 
     return (

@@ -109,15 +109,18 @@ const theme = {
     fontWeightBold: 700,
     small: {
       fontSize: "0.75rem",
-      iconFontSize: "0.85rem",
+      iconFontSize: "1.25rem",
+      gap: "0.3rem",
     },
     medium: {
       fontSize: "0.9375rem",
-      iconFontSize: "1.125rem",
+      iconFontSize: "1.425rem",
+      gap: "0.45rem",
     },
     large: {
-      fontSize: "1.125rem",
-      iconFontSize: "1.4375rem",
+      fontSize: "1.463rem",
+      iconFontSize: "1.6375rem",
+      gap: "0.6rem",
     },
     h1: {
       fontWeight: 300,
@@ -174,9 +177,9 @@ const theme = {
       sharp: "cubic-bezier(0.4, 0, 0.6, 1)",
     },
     duration: {
-      short: 250,
-      standard: 300,
-      long: 400,
+      short: "120ms",
+      standard: "220ms",
+      long: "320ms",
     },
   },
   zIndex: {

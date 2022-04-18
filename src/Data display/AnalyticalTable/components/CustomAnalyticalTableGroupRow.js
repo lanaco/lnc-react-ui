@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
 import { usePrevious } from "react-use";
-import { isEqual, cloneDeep } from "lodash";
+import { isEqual } from "lodash";
 import Icon from "../../../General/Icon/index";
 import { getCustomRender, renderCustomElement } from "../../../_utils/utils";
 import AnalyticalTableCell from "./AnalyticalTableCell";
@@ -45,7 +45,7 @@ const CellContent = styled.div`
   align-items: center;
   width: 100%;
   padding: 3px 0 3px 0;
-  background-color: ${theme.palette.gray[100]};
+  background-color: ${theme.palette.gray[500]};
 `;
 
 const AnalyticalTableGroupRow = (props) => {
@@ -61,7 +61,6 @@ const AnalyticalTableGroupRow = (props) => {
     Expanded,
     Data = [],
     Columns,
-    onSelectRow,
     GroupByFields,
   } = props;
 
@@ -103,8 +102,8 @@ const AnalyticalTableGroupRow = (props) => {
 
   //============================================================================
 
-  const renderEmptyLeafCells = (data) => {
-    return renderAnalyticalTableSelectionCell(data);
+  const renderEmptyLeafCells = () => {
+    return renderAnalyticalTableSelectionCell({});
   };
 
   const renderDataLeafCells = (data) => {
@@ -148,7 +147,7 @@ const AnalyticalTableGroupRow = (props) => {
 
     var children = (
       <>
-        {renderEmptyLeafCells(leafData)}
+        {renderEmptyLeafCells()}
         {renderDataLeafCells(leafData)}
       </>
     );
@@ -174,10 +173,7 @@ const AnalyticalTableGroupRow = (props) => {
   };
 
   const renderAnalyticalTableSelectionCell = (data) => {
-    var cellProps = {
-      RowData: data,
-      onSelectRow,
-    };
+    var cellProps = { ...data };
 
     return (
       renderCustomElement(
