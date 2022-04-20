@@ -49,17 +49,7 @@ const AnalyticalTable = forwardRef((props, ref) => {
       var groupsTree = getDataTreeFromGroupDefinition(GroupBy);
       var groups = iterativeTreeTraversal(groupsTree, GroupBy.fields);
 
-      setGroups(
-        groups.map((g) => {
-          return {
-            depth: g.depth,
-            show: g.depth === 0,
-            node: g.node,
-            expanded: false,
-            data: [],
-          };
-        })
-      );
+      setGroups(mapGroups(groups));
     } else {
       setGroups([]);
     }
@@ -68,6 +58,19 @@ const AnalyticalTable = forwardRef((props, ref) => {
   //================ EVENTS ================================================================
 
   //================ METHODS ===============================================================
+
+  const mapGroups = (groupData) => {
+    return groupData.map((g) => {
+      return {
+        depth: g.depth,
+        show: g.depth === 0,
+        node: g.node,
+        expanded: false,
+        selected: false,
+        data: [],
+      };
+    });
+  };
 
   const ExpandCollapseGroup = (depth, node) => {
     var groupsCopy = cloneDeep(groups);
@@ -84,10 +87,7 @@ const AnalyticalTable = forwardRef((props, ref) => {
     if (expandOrCollapse) {
       groupsCopy.forEach((g) => {
         if (g.node._id_ === node._id_) g.expanded = true;
-
-        if (childrenIds.includes(g.node._id_)) {
-          g.show = true;
-        }
+        if (childrenIds.includes(g.node._id_)) g.show = true;
       });
 
       setGroups(groupsCopy);
@@ -120,6 +120,8 @@ const AnalyticalTable = forwardRef((props, ref) => {
     var data = await GetDataForGroup(node.parentInfo);
     selectedNode.data = data;
 
+    console.log(node, selectedNode);
+
     setGroups(groupsCopy);
   };
 
@@ -128,6 +130,8 @@ const AnalyticalTable = forwardRef((props, ref) => {
     var selectedNode = groupsCopy.find((x) => x.node._id_ === node._id_);
 
     selectedNode.data = [];
+    selectedNode.expanded = false;
+
     setGroups(groupsCopy);
   };
 
@@ -156,10 +160,7 @@ const AnalyticalTable = forwardRef((props, ref) => {
   };
 
   const renderAnalyticalTableSelectionCell = () => {
-    var cellProps = {
-      SelectedData,
-      RowIdentifier,
-    };
+    var cellProps = {};
 
     return (
       renderCustomElement(

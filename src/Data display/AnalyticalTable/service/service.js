@@ -270,6 +270,28 @@ export const GroupBy_YearTypeStatus = {
         },
       },
     },
+    {
+      id: "g2",
+      //-----
+      year: {
+        title: "2021",
+        obj: {
+          id: 2,
+        },
+      },
+      type: {
+        title: "type2",
+        obj: {
+          id: 2,
+        },
+      },
+      status: {
+        title: "status2",
+        obj: {
+          id: 1,
+        },
+      },
+    },
   ],
 };
 

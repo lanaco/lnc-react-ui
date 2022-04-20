@@ -62,14 +62,13 @@ const AnalyticalTableGroupRow = (props) => {
     Data = [],
     Columns,
     onSelectRow,
+    SelectedData,
+    RowIdentifier,
     GroupByFields,
+    Selected,
   } = props;
 
   const prevGroupBy = usePrevious(GroupByFields);
-
-  // useEffect(() => {
-  //   console.log(props);
-  // }, [props]);
 
   useEffect(() => {
     if (!Show) ClearData(Node);
@@ -101,6 +100,8 @@ const AnalyticalTableGroupRow = (props) => {
     } else if (IsLeaf && Data.length !== 0) ClearData(Node);
   };
 
+  const handleSelection = (e) => {};
+
   //============================================================================
 
   const renderEmptyLeafCells = (data) => {
@@ -109,8 +110,12 @@ const AnalyticalTableGroupRow = (props) => {
 
   const renderDataLeafCells = (data) => {
     return Columns.filter((c) => !GroupByFields.includes(c.accessor)).map(
-      (c) => {
-        return renderAnalyticalTableCell({ RowData: data, Column: c });
+      (c, index) => {
+        return renderAnalyticalTableCell({
+          RowData: data,
+          Column: c,
+          Index: index,
+        });
       }
     );
   };
@@ -135,9 +140,9 @@ const AnalyticalTableGroupRow = (props) => {
         <CellIcon onClick={handleClick}>
           <Icon icon={getIcon()} onClick={handleClick} />
         </CellIcon>
-        {/* <div>
-          <CheckBox />
-        </div> */}
+        <div>
+          <CheckBox checked={Selected} onChange={handleSelection} />
+        </div>
         <CellTitle onClick={handleClick}>{Node.value}</CellTitle>
       </CellContent>
     );
@@ -163,13 +168,13 @@ const AnalyticalTableGroupRow = (props) => {
   };
 
   const renderAnalyticalTableCell = (data) => {
-    var cellProps = { ...data };
+    var cellProps = { ...data, SelectedData, RowIdentifier };
 
     return (
       renderCustomElement(
         getCustomRender("ANALYTICAL_TABLE_CELL", props.children),
         cellProps
-      ) || <AnalyticalTableCell {...cellProps} />
+      ) || <AnalyticalTableCell {...cellProps} key={data.Index} />
     );
   };
 
@@ -177,6 +182,8 @@ const AnalyticalTableGroupRow = (props) => {
     var cellProps = {
       RowData: data,
       onSelectRow,
+      SelectedData,
+      RowIdentifier,
     };
 
     return (
@@ -189,7 +196,7 @@ const AnalyticalTableGroupRow = (props) => {
 
   return (
     <>
-      <Row show={Show}>
+      <Row show={Show} key={props.key}>
         <Cell colSpan={Columns.length}>
           <CellContainer>
             {renderPaddingDiv()}

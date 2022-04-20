@@ -10,6 +10,10 @@ const HtmlCell = styled.td`
   text-overflow: ellipsis;
 
   // width: ${(props) => props.width};
+
+  background-color: ${(props) =>
+    props.selected ? theme.palette.primary.lighter : "inherit"};
+
   padding: ${(props) =>
     props.selection === false ? "8px 6px 8px 6px" : "8px 6px 8px 6px"};
 `;
@@ -24,6 +28,8 @@ const AnalyticalTableCell = (props) => {
     Column,
     RowData,
     Index,
+    SelectedData,
+    RowIdentifier,
     EnableSelection,
     EnableRowTextHighlight,
     GetRowTextHighlightColor,
@@ -93,10 +99,21 @@ const AnalyticalTableCell = (props) => {
     );
   };
 
+  const calculateRowSelection = (rowData) => {
+    // Check if row is selected
+    let row = SelectedData.find(
+      (x) => String(x[RowIdentifier]) === String(rowData[RowIdentifier])
+    );
+
+    if (row !== null && row !== undefined) return true;
+    else return false;
+  };
+
   return (
     <HtmlCell
       {...themeProps}
       selection={EnableSelection}
+      selected={calculateRowSelection(RowData)}
       width={getWidth()}
       key={Index}
     >

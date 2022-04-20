@@ -5,7 +5,7 @@ import theme from "../../../_utils/theme";
 import Checkbox from "../../../Basic Inputs/CheckBox/index";
 
 const HtmlCell = styled.td`
-  padding: 4px 2px 4px 6px;
+  padding: 4px 6px 4px 6px;
   background-color: transparent;
   width: ${(props) => props.width}%;
 `;
@@ -16,14 +16,13 @@ const Inner = styled.div`
   flex-direction: row-reverse;
 `;
 
-const TableSelectionCell = (props) => {
+const AnalyticalTableSelectionCell = (props) => {
   //--------------------------
   const {
     Column,
     RowData,
     SelectedData,
     onSelectRow,
-    IsSelected,
     RowIdentifier,
     Index,
     //----------------
@@ -48,8 +47,6 @@ const TableSelectionCell = (props) => {
 
     if (row !== null && row !== undefined) return true;
     else return false;
-
-    return false;
   };
 
   const onChange = (e) => {
@@ -69,7 +66,7 @@ const TableSelectionCell = (props) => {
       {...themeProps}
       key={Index}
       width={props.width}
-      onClick={onCellClick}
+      // onClick={onCellClick}
     >
       <Inner>
         <Checkbox
@@ -82,7 +79,7 @@ const TableSelectionCell = (props) => {
   );
 };
 
-TableSelectionCell.defaultProps = {
+AnalyticalTableSelectionCell.defaultProps = {
   __TYPE__: "ANALYTICAL_TABLE_SELECTION_CELL",
   //--------------------
   Column: {},
@@ -98,7 +95,7 @@ TableSelectionCell.defaultProps = {
   theme: theme,
 };
 
-TableSelectionCell.propTypes = {
+AnalyticalTableSelectionCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
   Column: PropTypes.object.isRequired,
@@ -123,4 +120,4 @@ TableSelectionCell.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default TableSelectionCell;
+export default AnalyticalTableSelectionCell;

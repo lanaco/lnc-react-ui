@@ -87,7 +87,7 @@ const data = [
     amountRejected: 1000,
   },
   {
-    id: "61f7b8eadd6586c40491b91e",
+    id: "61f7b8eedd6486c40491b91a",
     year: "2021",
     type: "type1",
     typeId: 1,
@@ -98,7 +98,7 @@ const data = [
     amountRejected: 3800,
   },
   {
-    id: "61f7b8eadd6586c40491b91e",
+    id: "91f7b8eadc6186c40191b91b",
     year: "2021",
     type: "type1",
     typeId: 1,
@@ -109,7 +109,7 @@ const data = [
     amountRejected: 1300,
   },
   {
-    id: "61f7b8eadd6586c40491b91e",
+    id: "11f7b8eadd6886c40291b91e",
     year: "2021",
     type: "type2",
     typeId: 2,
@@ -134,7 +134,7 @@ const data = [
 
 const Story = (props) => {
   const [Loading, SetLoading] = useState(false);
-  const [GroupBy, SetGroupBy] = useState(GroupBy_Year);
+  const [GroupBy, SetGroupBy] = useState(GroupBy_YearType);
   const [SelectedData, SetSelectedData] = useState([
     {
       id: "61f7b8ea2fe061cacbcdbfea",

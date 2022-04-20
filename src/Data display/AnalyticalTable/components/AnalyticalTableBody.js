@@ -16,6 +16,7 @@ const AnalyticalTableBody = (props) => {
     Columns,
     GetData,
     ExpandCollapseGroup,
+    ClearData,
     GroupBy,
     Groups,
     EnableSelection,
@@ -37,13 +38,6 @@ const AnalyticalTableBody = (props) => {
   };
 
   //====================================================================================================
-
-  // useEffect(() => {
-  //   console.log(
-  //     "ATB",
-  //     props.children.map((x) => x.props.__TYPE__)
-  //   );
-  // }, [props]);
 
   const [tableBodyRef, { width }] = useMeasure();
 
@@ -68,6 +62,7 @@ const AnalyticalTableBody = (props) => {
       Data,
       GetData,
       ExpandCollapseGroup,
+      ClearData,
       Columns,
       GroupByFields: GroupBy.fields,
       onSelectRow,
@@ -81,7 +76,7 @@ const AnalyticalTableBody = (props) => {
         rowProps,
         props.children
       ) || (
-        <AnalyticalTableGroupRow {...rowProps}>
+        <AnalyticalTableGroupRow key={Key} {...rowProps}>
           {props.children}
         </AnalyticalTableGroupRow>
       )
@@ -98,6 +93,7 @@ const AnalyticalTableBody = (props) => {
         Show: n.show,
         Expanded: n.expanded,
         Data: n.data,
+        Selected: n.selected,
         EnableSelection,
         SelectedData,
         onSelectRow,
