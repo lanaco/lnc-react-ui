@@ -68,6 +68,9 @@ const AnalyticalTable = forwardRef((props, ref) => {
         expanded: false,
         selected: false,
         data: [],
+        currentPage: 1,
+        pageCount: 1,
+        pageSize: 2,
       };
     });
   };
@@ -113,14 +116,20 @@ const AnalyticalTable = forwardRef((props, ref) => {
     }
   };
 
-  const handleGetDataForGroup = async (node) => {
+  const handleGetDataForGroup = async (node, currentPage, pageSize) => {
     var groupsCopy = cloneDeep(groups);
     var selectedNode = groupsCopy.find((x) => x.node._id_ === node._id_);
 
-    var data = await GetDataForGroup(node.parentInfo);
-    selectedNode.data = data;
+    var response = await GetDataForGroup(
+      node.parentInfo,
+      currentPage,
+      pageSize
+    );
 
-    console.log(node, selectedNode);
+    selectedNode.data = response.data;
+    selectedNode.currentPage = currentPage;
+    selectedNode.pageCount = response.pageCount;
+    selectedNode.pageSize = pageSize;
 
     setGroups(groupsCopy);
   };
@@ -131,6 +140,9 @@ const AnalyticalTable = forwardRef((props, ref) => {
 
     selectedNode.data = [];
     selectedNode.expanded = false;
+    selectedNode.currentPage = 1;
+    selectedNode.pageCount = 1;
+    selectedNode.pageSize = 2;
 
     setGroups(groupsCopy);
   };
@@ -138,35 +150,35 @@ const AnalyticalTable = forwardRef((props, ref) => {
   //================ RENDER ================================================================
 
   const renderAnalyticalTableRow = () => {
-    var rowProps = { GroupBy: props.GroupBy };
+    var rowProps = { GroupBy: props.GroupBy, Index: 0 };
 
     return (
       renderCustomElement(
         getCustomRender("ANALYTICAL_TABLE_ROW", props.children),
         rowProps
-      ) || <AnalyticalTableRow {...rowProps} />
+      ) || <AnalyticalTableRow key={0} {...rowProps} />
     );
   };
 
   const renderAnalyticalTableCell = () => {
-    var cellProps = {};
+    var cellProps = { Index: 1 };
 
     return (
       renderCustomElement(
         getCustomRender("ANALYTICAL_TABLE_CELL", props.children),
         cellProps
-      ) || <AnalyticalTableCell {...cellProps} />
+      ) || <AnalyticalTableCell key={1} {...cellProps} />
     );
   };
 
   const renderAnalyticalTableSelectionCell = () => {
-    var cellProps = {};
+    var cellProps = { Index: 2 };
 
     return (
       renderCustomElement(
         getCustomRender("ANALYTICAL_TABLE_SELECTION_CELL", props.children),
         cellProps
-      ) || <AnalyticalTableSelectionCell {...cellProps} />
+      ) || <AnalyticalTableSelectionCell key={2} {...cellProps} />
     );
   };
 
@@ -190,19 +202,15 @@ const AnalyticalTable = forwardRef((props, ref) => {
         ExpandCollapseGroup,
       };
 
-      var children = [];
-      children.push(renderAnalyticalTableRow());
-      children.push(renderAnalyticalTableCell());
-      children.push(renderAnalyticalTableSelectionCell());
-      children.push(renderAnalyticalTableGroupRow());
-
       return (
         renderCustomElement(
           getCustomRender("TABLE_BODY", props.children),
           bodyProps,
-          children
+          props.children
         ) || (
-          <AnalyticalTableBody {...bodyProps}>{children}</AnalyticalTableBody>
+          <AnalyticalTableBody {...bodyProps}>
+            {props.children}
+          </AnalyticalTableBody>
         )
       );
     }

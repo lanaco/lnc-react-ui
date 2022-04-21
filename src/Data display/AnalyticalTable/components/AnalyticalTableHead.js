@@ -42,12 +42,12 @@ const AnalyticalTableHead = (props) => {
       if (i !== groupedFields.length - 1) groupedColumn.displayName += " / ";
     });
 
-    var groupedCell = renderAnalyticalTableHeadCell(groupedColumn);
+    var groupedCell = renderAnalyticalTableHeadCell(groupedColumn, -1);
 
     return (
       <>
         {groupedCell}
-        {remainingFields.map((c) => renderAnalyticalTableHeadCell(c))}
+        {remainingFields.map((c, i) => renderAnalyticalTableHeadCell(c, i))}
       </>
     );
   };
@@ -63,21 +63,21 @@ const AnalyticalTableHead = (props) => {
         rowProps,
         children
       ) || (
-        <AnalyticalTableHeadRow {...rowProps}>
+        <AnalyticalTableHeadRow key={-1} {...rowProps}>
           {children}
         </AnalyticalTableHeadRow>
       )
     );
   };
 
-  const renderAnalyticalTableHeadCell = (Column) => {
-    var cellProps = { Column };
+  const renderAnalyticalTableHeadCell = (Column, Index) => {
+    var cellProps = { Column, Index };
 
     return (
       renderCustomElement(
         getCustomRender("TABLE_HEAD_CELL", props.children),
         cellProps
-      ) || <AnalyticalTableHeadCell {...cellProps} />
+      ) || <AnalyticalTableHeadCell key={Index} {...cellProps} />
     );
   };
 

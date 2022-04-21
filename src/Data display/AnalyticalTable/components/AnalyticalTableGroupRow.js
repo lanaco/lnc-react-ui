@@ -10,6 +10,7 @@ import AnalyticalTableCell from "./AnalyticalTableCell";
 import AnalyticalTableRow from "./AnalyticalTableRow";
 import AnalyticalTableSelectionCell from "./AnalyticalTableSelectionCell";
 import CheckBox from "../../../Basic Inputs/CheckBox/index";
+import Button from "../../../General/Button/index";
 
 const Row = styled.tr`
   border-radius: 3px;
@@ -48,9 +49,15 @@ const CellContent = styled.div`
   background-color: ${theme.palette.gray[100]};
 `;
 
+const PaginationContainer = styled.div`
+  margin-left: auto;
+  padding-right: 10px;
+`;
+
 const AnalyticalTableGroupRow = (props) => {
   //
   const {
+    Key,
     Node = {},
     Depth,
     IsLeaf,
@@ -60,6 +67,9 @@ const AnalyticalTableGroupRow = (props) => {
     Show,
     Expanded,
     Data = [],
+    CurrentPage = 1,
+    PageCount = 1,
+    PageSize = 2,
     Columns,
     onSelectRow,
     SelectedData,
@@ -96,13 +106,43 @@ const AnalyticalTableGroupRow = (props) => {
     if (!IsLeaf) ExpandCollapseGroup(Depth, Node);
 
     if (IsLeaf && Data.length === 0 && GetData) {
-      GetData(Node);
+      GetData(Node, 1, PageSize);
     } else if (IsLeaf && Data.length !== 0) ClearData(Node);
   };
 
   const handleSelection = (e) => {};
 
+  const handleNextPage = (e) => {
+    if (CurrentPage < PageCount) {
+      GetData(Node, CurrentPage + 1, PageSize);
+    }
+  };
+
+  const handlePreviousPage = (e) => {
+    if (CurrentPage > 1) {
+      GetData(Node, CurrentPage - 1, PageSize);
+    }
+  };
+
   //============================================================================
+
+  const renderLeafPagination = () => {
+    if (IsLeaf && Data.length > 0) {
+      return (
+        <PaginationContainer>
+          <Button
+            inverted={true}
+            icon="angle-left"
+            onClick={handlePreviousPage}
+          />
+          <span>{CurrentPage + "/" + PageCount}</span>
+          <Button inverted={true} icon="angle-right" onClick={handleNextPage} />
+        </PaginationContainer>
+      );
+    }
+
+    return <></>;
+  };
 
   const renderEmptyLeafCells = (data) => {
     return renderAnalyticalTableSelectionCell(data);
@@ -128,7 +168,9 @@ const AnalyticalTableGroupRow = (props) => {
     var pad = [];
 
     for (let i = 0; i < Depth; i++) {
-      pad.push(<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>);
+      pad.push(
+        <span key={i}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      );
     }
 
     return <CellPad>{pad}</CellPad>;
@@ -140,16 +182,17 @@ const AnalyticalTableGroupRow = (props) => {
         <CellIcon onClick={handleClick}>
           <Icon icon={getIcon()} onClick={handleClick} />
         </CellIcon>
-        <div>
+        {/* <div>
           <CheckBox checked={Selected} onChange={handleSelection} />
-        </div>
+        </div> */}
         <CellTitle onClick={handleClick}>{Node.value}</CellTitle>
+        {renderLeafPagination()}
       </CellContent>
     );
   };
 
   const renderAnalyticalTableRow = (leafData) => {
-    var rowProps = {};
+    var rowProps = { Index: leafData[RowIdentifier] };
 
     var children = (
       <>
@@ -163,7 +206,11 @@ const AnalyticalTableGroupRow = (props) => {
         getCustomRender("ANALYTICAL_TABLE_ROW", props.children),
         rowProps,
         children
-      ) || <AnalyticalTableRow {...rowProps}>{children}</AnalyticalTableRow>
+      ) || (
+        <AnalyticalTableRow key={leafData[RowIdentifier]} {...rowProps}>
+          {children}
+        </AnalyticalTableRow>
+      )
     );
   };
 
@@ -174,12 +221,13 @@ const AnalyticalTableGroupRow = (props) => {
       renderCustomElement(
         getCustomRender("ANALYTICAL_TABLE_CELL", props.children),
         cellProps
-      ) || <AnalyticalTableCell {...cellProps} key={data.Index} />
+      ) || <AnalyticalTableCell key={data.Index} {...cellProps} />
     );
   };
 
   const renderAnalyticalTableSelectionCell = (data) => {
     var cellProps = {
+      Index: -1,
       RowData: data,
       onSelectRow,
       SelectedData,
@@ -190,13 +238,13 @@ const AnalyticalTableGroupRow = (props) => {
       renderCustomElement(
         getCustomRender("ANALYTICAL_TABLE_SELECTION_CELL", props.children),
         cellProps
-      ) || <AnalyticalTableSelectionCell {...cellProps} />
+      ) || <AnalyticalTableSelectionCell key={-1} {...cellProps} />
     );
   };
 
   return (
     <>
-      <Row show={Show} key={props.key}>
+      <Row show={Show} key={Key}>
         <Cell colSpan={Columns.length}>
           <CellContainer>
             {renderPaddingDiv()}

@@ -51,6 +51,9 @@ const AnalyticalTableBody = (props) => {
     Show,
     Expanded,
     Data,
+    CurrentPage,
+    PageCount,
+    PageSize,
   }) => {
     var rowProps = {
       Key,
@@ -68,6 +71,9 @@ const AnalyticalTableBody = (props) => {
       onSelectRow,
       SelectedData,
       RowIdentifier,
+      CurrentPage,
+      PageCount,
+      PageSize,
     };
 
     return (
@@ -93,6 +99,9 @@ const AnalyticalTableBody = (props) => {
         Show: n.show,
         Expanded: n.expanded,
         Data: n.data,
+        CurrentPage: n.currentPage,
+        PageCount: n.pageCount,
+        PageSize: n.pageSize,
         Selected: n.selected,
         EnableSelection,
         SelectedData,

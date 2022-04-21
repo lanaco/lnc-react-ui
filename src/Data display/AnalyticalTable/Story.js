@@ -160,14 +160,14 @@ const Story = (props) => {
     },
   ]);
 
-  const GetDataForGroup = async (parentInfo) => {
+  const GetDataForGroup = async (parentInfo, currentPage, pageSize) => {
     SetLoading(true);
 
     return new Promise((resolve, _) => {
       setTimeout(() => {
         SetLoading(false);
 
-        var response = data.filter((d) => {
+        var _data = data.filter((d) => {
           if (GroupBy.fields.length === 1) {
             return d.year === parentInfo.year.title;
           }
@@ -188,8 +188,16 @@ const Story = (props) => {
           }
         });
 
-        resolve(response);
-      }, 800);
+        var offset = (currentPage - 1) * pageSize;
+        var reducedData = _data.slice(offset, offset + pageSize);
+
+        resolve({
+          data: reducedData,
+          currentPage,
+          pageSize,
+          pageCount: Math.ceil(_data.length / pageSize),
+        });
+      }, 300);
     });
   };
 

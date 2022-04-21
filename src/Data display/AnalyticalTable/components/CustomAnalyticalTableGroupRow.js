@@ -122,15 +122,17 @@ const AnalyticalTableGroupRow = (props) => {
     var pad = [];
 
     for (let i = 0; i < Depth; i++) {
-      pad.push(<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>);
+      pad.push(
+        <span key={i}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      );
     }
 
-    return <CellPad>{pad}</CellPad>;
+    return <CellPad key={0}>{pad}</CellPad>;
   };
 
   const renderGroupCell = () => {
     return (
-      <CellContent>
+      <CellContent key={1}>
         <CellIcon onClick={handleClick}>
           <Icon icon={getIcon()} onClick={handleClick} />
         </CellIcon>
