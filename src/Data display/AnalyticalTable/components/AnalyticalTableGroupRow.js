@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
 import { usePrevious } from "react-use";
-import { isEqual, cloneDeep } from "lodash";
+import { isEqual } from "lodash";
 import Icon from "../../../General/Icon/index";
 import { getCustomRender, renderCustomElement } from "../../../_utils/utils";
 import AnalyticalTableCell from "./AnalyticalTableCell";
 import AnalyticalTableRow from "./AnalyticalTableRow";
 import AnalyticalTableSelectionCell from "./AnalyticalTableSelectionCell";
-import CheckBox from "../../../Basic Inputs/CheckBox/index";
 import Button from "../../../General/Button/index";
 
 const Row = styled.tr`
@@ -58,24 +57,23 @@ const AnalyticalTableGroupRow = (props) => {
   //
   const {
     Key,
-    Node = {},
+    Node,
     Depth,
     IsLeaf,
     GetData,
-    ClearData = () => {},
+    ClearData,
     ExpandCollapseGroup,
     Show,
     Expanded,
-    Data = [],
-    CurrentPage = 1,
-    PageCount = 1,
-    PageSize = 2,
+    Data,
+    CurrentPage,
+    PageCount,
+    PageSize,
     Columns,
     onSelectRow,
     SelectedData,
     RowIdentifier,
     GroupByFields,
-    Selected,
   } = props;
 
   const prevGroupBy = usePrevious(GroupByFields);
@@ -109,8 +107,6 @@ const AnalyticalTableGroupRow = (props) => {
       GetData(Node, 1, PageSize);
     } else if (IsLeaf && Data.length !== 0) ClearData(Node);
   };
-
-  const handleSelection = (e) => {};
 
   const handleNextPage = (e) => {
     if (CurrentPage < PageCount) {
@@ -182,9 +178,6 @@ const AnalyticalTableGroupRow = (props) => {
         <CellIcon onClick={handleClick}>
           <Icon icon={getIcon()} onClick={handleClick} />
         </CellIcon>
-        {/* <div>
-          <CheckBox checked={Selected} onChange={handleSelection} />
-        </div> */}
         <CellTitle onClick={handleClick}>{Node.value}</CellTitle>
         {renderLeafPagination()}
       </CellContent>
@@ -192,7 +185,7 @@ const AnalyticalTableGroupRow = (props) => {
   };
 
   const renderAnalyticalTableRow = (leafData) => {
-    var rowProps = { Index: leafData[RowIdentifier] };
+    var rowProps = { Index: leafData[RowIdentifier], RowData: leafData };
 
     var children = (
       <>
@@ -261,14 +254,23 @@ const AnalyticalTableGroupRow = (props) => {
 AnalyticalTableGroupRow.defaultProps = {
   __TYPE__: "ANALYTICAL_TABLE_GROUP_ROW",
   //--------------------
+  Key: "",
   Node: {},
   Depth: 0,
   IsLeaf: false,
   GetData: () => {},
+  ClearData: () => {},
   ExpandCollapseGroup: () => {},
   Show: false,
   Expanded: false,
+  Data: [],
+  CurrentPage: 1,
+  PageCount: 1,
+  PageSize: 2,
   Columns: [],
+  onSelectRow: () => {},
+  SelectedData: [],
+  RowIdentifier: "id",
   GroupByFields: [],
   //--------------------
   className: "",
@@ -280,14 +282,23 @@ AnalyticalTableGroupRow.defaultProps = {
 AnalyticalTableGroupRow.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
+  Key: PropTypes.any,
   Node: PropTypes.object,
   Depth: PropTypes.number,
   IsLeaf: PropTypes.bool,
   GetData: PropTypes.func,
+  ClearData: PropTypes.func,
   ExpandCollapseGroup: PropTypes.func,
   Show: PropTypes.bool,
   Expanded: PropTypes.bool,
+  Data: PropTypes.arrayOf(PropTypes.object),
+  CurrentPage: PropTypes.number,
+  PageCount: PropTypes.number,
+  PageSize: PropTypes.number,
   Columns: PropTypes.arrayOf(PropTypes.object),
+  onSelectRow: PropTypes.func,
+  SelectedData: PropTypes.arrayOf(PropTypes.object),
+  RowIdentifier: PropTypes.string,
   GroupByFields: PropTypes.arrayOf(PropTypes.string),
   //----------------------------------------
   className: PropTypes.string,

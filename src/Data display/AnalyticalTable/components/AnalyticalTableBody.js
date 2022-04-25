@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
@@ -125,8 +125,13 @@ AnalyticalTableBody.defaultProps = {
   Columns: [],
   GetData: () => {},
   ExpandCollapseGroup: () => {},
+  ClearData: () => {},
   GroupBy: {},
   Groups: [],
+  EnableSelection: false,
+  SelectedData: [],
+  onSelectRow: () => {},
+  RowIdentifier: "",
   //--------------------
   className: "",
   size: "small",
@@ -140,8 +145,13 @@ AnalyticalTableBody.propTypes = {
   Columns: PropTypes.arrayOf(PropTypes.object),
   GetData: PropTypes.func,
   ExpandCollapseGroup: PropTypes.func,
+  ClearData: PropTypes.func,
   GroupBy: PropTypes.object,
   Groups: PropTypes.arrayOf(PropTypes.object),
+  EnableSelection: PropTypes.bool,
+  SelectedData: PropTypes.arrayOf(PropTypes.object),
+  onSelectRow: PropTypes.func,
+  RowIdentifier: PropTypes.string,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),

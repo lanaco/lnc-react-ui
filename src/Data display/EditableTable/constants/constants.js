@@ -4,5 +4,7 @@ export const inputType = {
   INTEGER: "INTEGER",
   DECIMAL: "DECIMAL",
   DATE: "DATE",
+  DROPDOWN: "DROPDOWN",
   SELECT: "SELECT",
+  MULTISELECT: "MULTISELECT",
 };

@@ -125,8 +125,9 @@ const AnalyticalTableCell = (props) => {
 AnalyticalTableCell.defaultProps = {
   __TYPE__: "ANALYTICAL_TABLE_CELL",
   //--------------------
-  Column: {},
   RowData: {},
+  SelectedData: [],
+  RowIdentifier: "id",
   Index: 0,
   EnableSelection: false,
   EnableRowTextHighlight: false,
@@ -141,7 +142,8 @@ AnalyticalTableCell.defaultProps = {
 AnalyticalTableCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Column: PropTypes.object.isRequired,
+  SelectedData: PropTypes.arrayOf(PropTypes.object),
+  RowIdentifier: PropTypes.string,
   RowData: PropTypes.object.isRequired,
   Index: PropTypes.number.isRequired,
   EnableSelection: PropTypes.bool,

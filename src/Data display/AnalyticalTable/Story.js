@@ -135,30 +135,7 @@ const data = [
 const Story = (props) => {
   const [Loading, SetLoading] = useState(false);
   const [GroupBy, SetGroupBy] = useState(GroupBy_YearType);
-  const [SelectedData, SetSelectedData] = useState([
-    {
-      id: "61f7b8ea2fe061cacbcdbfea",
-      year: "2020",
-      type: "type1",
-      typeId: 1,
-      status: "status1",
-      statusId: 1,
-      amountRequested: 4000,
-      amountApproved: 2000,
-      amountRejected: 2000,
-    },
-    {
-      id: "11f7b8eada6686c40411b81c",
-      year: "2021",
-      type: "type2",
-      typeId: 2,
-      status: "status2",
-      statusId: 2,
-      amountRequested: 900,
-      amountApproved: 400,
-      amountRejected: 500,
-    },
-  ]);
+  const [SelectedData, SetSelectedData] = useState([]);
 
   const GetDataForGroup = async (parentInfo, currentPage, pageSize) => {
     SetLoading(true);

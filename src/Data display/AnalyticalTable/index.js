@@ -149,49 +149,49 @@ const AnalyticalTable = forwardRef((props, ref) => {
 
   //================ RENDER ================================================================
 
-  const renderAnalyticalTableRow = () => {
-    var rowProps = { GroupBy: props.GroupBy, Index: 0 };
+  // const renderAnalyticalTableRow = () => {
+  //   var rowProps = { GroupBy: props.GroupBy, Index: 0 };
 
-    return (
-      renderCustomElement(
-        getCustomRender("ANALYTICAL_TABLE_ROW", props.children),
-        rowProps
-      ) || <AnalyticalTableRow key={0} {...rowProps} />
-    );
-  };
+  //   return (
+  //     renderCustomElement(
+  //       getCustomRender("ANALYTICAL_TABLE_ROW", props.children),
+  //       rowProps
+  //     ) || <AnalyticalTableRow key={0} {...rowProps} />
+  //   );
+  // };
 
-  const renderAnalyticalTableCell = () => {
-    var cellProps = { Index: 1 };
+  // const renderAnalyticalTableCell = () => {
+  //   var cellProps = { Index: 1 };
 
-    return (
-      renderCustomElement(
-        getCustomRender("ANALYTICAL_TABLE_CELL", props.children),
-        cellProps
-      ) || <AnalyticalTableCell key={1} {...cellProps} />
-    );
-  };
+  //   return (
+  //     renderCustomElement(
+  //       getCustomRender("ANALYTICAL_TABLE_CELL", props.children),
+  //       cellProps
+  //     ) || <AnalyticalTableCell key={1} {...cellProps} />
+  //   );
+  // };
 
-  const renderAnalyticalTableSelectionCell = () => {
-    var cellProps = { Index: 2 };
+  // const renderAnalyticalTableSelectionCell = () => {
+  //   var cellProps = { Index: 2 };
 
-    return (
-      renderCustomElement(
-        getCustomRender("ANALYTICAL_TABLE_SELECTION_CELL", props.children),
-        cellProps
-      ) || <AnalyticalTableSelectionCell key={2} {...cellProps} />
-    );
-  };
+  //   return (
+  //     renderCustomElement(
+  //       getCustomRender("ANALYTICAL_TABLE_SELECTION_CELL", props.children),
+  //       cellProps
+  //     ) || <AnalyticalTableSelectionCell key={2} {...cellProps} />
+  //   );
+  // };
 
-  const renderAnalyticalTableGroupRow = () => {
-    var rowProps = {};
+  // const renderAnalyticalTableGroupRow = () => {
+  //   var rowProps = {};
 
-    return (
-      renderCustomElement(
-        getCustomRender("ANALYTICAL_TABLE_GROUP_ROW", props.children),
-        rowProps
-      ) || <AnalyticalTableGroupRow {...rowProps} />
-    );
-  };
+  //   return (
+  //     renderCustomElement(
+  //       getCustomRender("ANALYTICAL_TABLE_GROUP_ROW", props.children),
+  //       rowProps
+  //     ) || <AnalyticalTableGroupRow {...rowProps} />
+  //   );
+  // };
 
   const renderAnalyticalTableBody = () => {
     if (GroupBy && GroupBy.fields && GroupBy.fields.length > 0) {

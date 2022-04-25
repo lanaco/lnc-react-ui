@@ -1,7 +1,6 @@
 import React from "react";
 import AnalyticalTable from "./";
 import Story from "./Story";
-import IterativeTreeTraversal from "./IterativeTreeTraversal";
 export default {
   title: "Data Display/AnalyticalTable",
   component: AnalyticalTable,
@@ -31,19 +30,7 @@ Default.args = {
   },
   //-------------------------------------
   SelectedEntirePage: false,
-  SelectedData: [
-    {
-      id: "61f7b8ea2fe061cacbcdbfea",
-      year: "2020",
-      type: "type1",
-      typeId: 1,
-      status: "status1",
-      statusId: 1,
-      amountRequested: 4000,
-      amountApproved: 2000,
-      amountRejected: 2000,
-    },
-  ],
+  SelectedData: [],
   //-------------------------------------
   GroupBy: {
     fields: ["year", "type", "status"],

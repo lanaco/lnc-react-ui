@@ -59,7 +59,6 @@ const AnalyticalTableHeadCell = (props) => {
     Ordering,
     Index,
     onColumnClick,
-    EnableSelectAll,
     EnableOrdering,
     //-----------
     className,
@@ -141,12 +140,7 @@ const AnalyticalTableHeadCell = (props) => {
   };
 
   return (
-    <HtmlHeadCell
-      onClick={handleColumnClick}
-      {...themeProps}
-      selection={EnableSelectAll}
-      key={Index}
-    >
+    <HtmlHeadCell onClick={handleColumnClick} {...themeProps} key={Index}>
       <HeaderInnerCell>
         <HeaderCellText>{Column.displayName}</HeaderCellText>
 
@@ -162,7 +156,7 @@ AnalyticalTableHeadCell.defaultProps = {
   Column: {},
   Ordering: {},
   Index: 0,
-  EnableSelectAll: false,
+  EnableOrdering: false,
   onColumnClick: () => {},
   //--------------------
   className: "",
@@ -177,7 +171,7 @@ AnalyticalTableHeadCell.propTypes = {
   Columns: PropTypes.object,
   Ordering: PropTypes.object,
   Index: PropTypes.any,
-  EnableSelectAll: PropTypes.bool,
+  EnableOrdering: PropTypes.bool,
   onColumnClick: PropTypes.func,
   //----------------------------------------
   className: PropTypes.string,

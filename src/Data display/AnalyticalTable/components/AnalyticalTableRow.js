@@ -60,6 +60,7 @@ const AnalyticalTableRow = (props) => {
   const onClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
+
     onRowClick(e, RowData);
   };
 

@@ -12,7 +12,7 @@ const HtmlTableHead = styled.thead``;
 
 const AnalyticalTableHead = (props) => {
   //--------------------------
-  const { GroupBy, Groups, Columns, className, size, color, theme } = props;
+  const { GroupBy, Columns, className, size, color, theme } = props;
 
   const themeProps = {
     className,
@@ -93,6 +93,9 @@ const AnalyticalTableHead = (props) => {
 AnalyticalTableHead.defaultProps = {
   __TYPE__: "TABLE_HEAD",
   //--------------------
+  GroupBy: {},
+  Columns: [],
+  //--------------------
   className: "",
   size: "small",
   color: "primary",
@@ -101,6 +104,9 @@ AnalyticalTableHead.defaultProps = {
 
 AnalyticalTableHead.propTypes = {
   __TYPE__: PropTypes.string,
+  //----------------------------------------
+  GroupBy: PropTypes.object,
+  Columns: PropTypes.arrayOf(PropTypes.object),
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),

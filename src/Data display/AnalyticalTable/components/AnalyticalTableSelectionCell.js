@@ -19,7 +19,6 @@ const Inner = styled.div`
 const AnalyticalTableSelectionCell = (props) => {
   //--------------------------
   const {
-    Column,
     RowData,
     SelectedData,
     onSelectRow,
@@ -82,12 +81,11 @@ const AnalyticalTableSelectionCell = (props) => {
 AnalyticalTableSelectionCell.defaultProps = {
   __TYPE__: "ANALYTICAL_TABLE_SELECTION_CELL",
   //--------------------
-  Column: {},
   RowData: {},
-  onSelectRow: () => {},
-  Index: 0,
   SelectedData: [],
-  IsSelected: null,
+  onSelectRow: () => {},
+  RowIdentifier: "id",
+  Index: 0,
   //--------------------
   className: "",
   size: "small",
@@ -98,12 +96,11 @@ AnalyticalTableSelectionCell.defaultProps = {
 AnalyticalTableSelectionCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Column: PropTypes.object.isRequired,
-  RowData: PropTypes.object.isRequired,
+  RowData: PropTypes.object,
+  SelectedData: PropTypes.arrayOf(PropTypes.object),
   onSelectRow: PropTypes.func,
+  RowIdentifier: PropTypes.string,
   Index: PropTypes.number.isRequired,
-  SelectedData: PropTypes.array,
-  IsSelected: PropTypes.bool,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
