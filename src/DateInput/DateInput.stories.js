@@ -1,12 +1,13 @@
 import React from "react";
 import DateInput from "./index";
+import Story from "./Story";
 
 export default {
   title: "Date Input",
   component: DateInput,
 };
 
-const Template = (args) => <DateInput {...args} />;
+const Template = (args) => <Story {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {

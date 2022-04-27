@@ -1,11 +1,11 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import "./react-datepicker.css";
 
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
+import DatePicker from "react-date-picker";
+import "./style.css";
 
 // Don't know what to do with this :/
 // input[type="date"]::-webkit-inner-spin-button {
@@ -71,6 +71,33 @@ const Container = styled.span((props) => ({
   },
 }));
 
+const AltContainer = styled.div`
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+
+  & .react-date-picker {
+    // border: 1px solid lightgray;
+  }
+
+  & .react-date-picker__inputGroup {
+    // background-color: #a9d4ff;
+  }
+
+  & .react-date-picker__wrapper {
+    // max-height: 24px;
+    padding: 5px 0px 3px 2px;
+
+    & button {
+      padding: 0 2px;
+    }
+  }
+`;
+
+const Icon = styled.i`
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  color: ${(props) => props.theme.palette[props.color].main};
+`;
+
 const DateInput = (props) => {
   const {
     value,
@@ -78,6 +105,7 @@ const DateInput = (props) => {
     onChange,
     dateFormat,
     disabled,
+    openCalendarOnFocus = false,
     size,
     color,
     theme,
@@ -85,56 +113,42 @@ const DateInput = (props) => {
     preventDefault,
   } = props;
 
-  const [dateText, setDateText] = useState("");
-  const [isFirst, setIsFirst] = useState(true);
-
-  const callOnChange = (id, value) => {
-    if (onChange) onChange(id, value);
-  };
-
-  const handleChange = (jsDateObject) => {
-    if (jsDateObject === null || jsDateObject === "Invalid date")
-      callOnChange(id, "");
-    else callOnChange(id, jsDateObject);
-  };
-
   const getValue = () => {
     if (value === undefined || !value) return null;
-    return moment(value, "DD.MM.YYYY.").toDate();
+
+    console.log("bbbb: ", new Date(moment(value, dateFormat)));
+
+    return new Date(moment(value, dateFormat));
   };
 
-  useEffect(() => {
-    setDateText(value);
-  }, [value]);
+  const handleOnChange = (dateString) => {
+    if (dateString === null) return "";
 
-  useEffect(() => {
-    const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
-    return () => clearTimeout(timeOutId);
-  }, [dateText]);
+    console.log(dateString);
 
-  const handleDelayedOnChange = () => {
-    if (!isFirst) handleChange(dateText);
-
-    if (isFirst) setIsFirst(false);
+    onChange(id, moment(dateString).format(dateFormat));
   };
 
-  const handleOnChange = (jsDateObject) => {
-    if (jsDateObject === null || jsDateObject === "Invalid date")
-      setDateText("");
-    else setDateText(moment(jsDateObject).format("DD.MM.YYYY."));
+  const displayDateFormat = () => {
+    console.log(dateFormat.replaceAll("D", "d").replaceAll("Y", "y"));
+
+    return dateFormat.replaceAll("D", "d").replaceAll("Y", "y");
   };
 
   return (
-    <Container {...{ theme, size, color }}>
+    <AltContainer {...{ theme, size, color }} className={className}>
       <DatePicker
-        value={dateText}
-        selected={getValue()}
-        onChange={handleOnChange}
-        dateFormat={dateFormat ? dateFormat : "dd.MM.yyyy."}
         disabled={disabled}
-        className={className}
+        format={displayDateFormat()}
+        openCalendarOnFocus={openCalendarOnFocus}
+        onChange={handleOnChange}
+        value={getValue()}
+        clearIcon={null}
+        calendarIcon={
+          <Icon {...{ theme, size, color }} className="fas fa-calendar fa-fw" />
+        }
       />
-    </Container>
+    </AltContainer>
   );
 };
 
@@ -148,7 +162,7 @@ DateInput.defaultProps = {
   size: "small",
   color: "primary",
   value: "",
-  dateFormat: "dd.MM.yyyy.",
+  dateFormat: "DD.MM.YYYY.",
 };
 
 DateInput.propTypes = {
