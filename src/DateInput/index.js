@@ -7,16 +7,10 @@ import theme from "../_utils/theme";
 import DatePicker from "react-date-picker";
 import "./style.css";
 
-// Don't know what to do with this :/
-// input[type="date"]::-webkit-inner-spin-button {
-//   display: none;
-//   -webkit-appearance: none;
-// }
-
 const paddingBySize = (size) => {
-  if (size === "small") return "0.325rem 0.375rem";
-  if (size === "medium") return "0.3875rem 0.375rem";
-  if (size === "large") return "0.45rem 0.375rem";
+  if (size === "small") return "0.3125rem 0 0.1875rem 0.125rem";
+  if (size === "medium") return "0.48125rem 0.0625rem 0.29375rem 0.21875rem";
+  if (size === "large") return "0.59375rem 0.125rem 0.35625rem 0.28125rem";
 };
 
 const heightBySize = (size, hasText) => {
@@ -74,28 +68,35 @@ const Container = styled.span((props) => ({
 const AltContainer = styled.div`
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   font-family: ${(props) => props.theme.typography.fontFamily};
-
-  & .react-date-picker {
-    // border: 1px solid lightgray;
-  }
-
-  & .react-date-picker__inputGroup {
-    // background-color: #a9d4ff;
-  }
+  min-height: ${(props) => heightBySize(props.size)};
+  max-height: ${(props) => heightBySize(props.size)};
 
   & .react-date-picker__wrapper {
-    // max-height: 24px;
-    padding: 5px 0px 3px 2px;
+    padding: ${(props) => paddingBySize(props.size)};
+
+    background-color: ${(props) => props.theme.palette[props.color].lighter};
+    border-radius: 0.125rem;
+    border-bottom: 0.125rem solid
+      ${(props) => props.theme.palette[props.color].main};
 
     & button {
-      padding: 0 2px;
+      padding: 0 0.125rem;
     }
+  }
+
+  & .react-calendar {
+    border-radius: 0.125rem;
+    border: 0.0625rem solid ${(props) => props.theme.palette[props.color].main};
+  }
+
+  & .react-calendar__month-view__weekdays__weekday {
+    color: ${(props) => props.theme.palette[props.color].main};
   }
 `;
 
 const Icon = styled.i`
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  color: ${(props) => props.theme.palette[props.color].main};
+  color: ${(props) => props.theme.palette[props.color].dark};
 `;
 
 const DateInput = (props) => {
@@ -130,8 +131,6 @@ const DateInput = (props) => {
   };
 
   const displayDateFormat = () => {
-    console.log(dateFormat.replaceAll("D", "d").replaceAll("Y", "y"));
-
     return dateFormat.replaceAll("D", "d").replaceAll("Y", "y");
   };
 

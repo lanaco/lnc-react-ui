@@ -4,7 +4,6 @@
   width: 350px;
   max-width: 100%;
   background: white;
-  border: 1px solid #a0a096;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
 }
@@ -141,7 +140,6 @@
   flex-grow: 1;
   flex-shrink: 0;
   border: none;
-  border-bottom: 2px solid #2a639c;
 }
 .react-date-picker__inputGroup {
   min-width: calc((4px * 3) + 0.54em * 8 + 0.217em * 2);
