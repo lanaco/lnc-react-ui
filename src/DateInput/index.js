@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
@@ -8,64 +8,18 @@ import DatePicker from "react-date-picker";
 import "./style.css";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.3125rem 0 0.1875rem 0.125rem";
-  if (size === "medium") return "0.48125rem 0.0625rem 0.29375rem 0.21875rem";
-  if (size === "large") return "0.59375rem 0.125rem 0.35625rem 0.28125rem";
+  return {
+    small: "0.3125rem 0 0.1875rem 0.125rem",
+    medium: "0.48125rem 0.0625rem 0.29375rem 0.21875rem",
+    large: "0.59375rem 0.125rem 0.35625rem 0.28125rem",
+  }[size];
 };
 
-const heightBySize = (size, hasText) => {
-  if (size === "small") return `1.625rem`;
-  if (size === "medium") return `2rem`;
-  if (size === "large") return `2.375rem`;
+const heightBySize = (size) => {
+  return { small: `1.625rem`, medium: `2rem`, large: `2.375rem` }[size];
 };
 
-const Container = styled.span((props) => ({
-  "& .react-datepicker__triangle": {
-    display: "none",
-  },
-
-  "& .react-datepicker-wrapper": {
-    width: "100%",
-    boxSizing: "border-box",
-  },
-
-  "& input": {
-    appearance: "none",
-    outline: "none",
-    border: "none",
-    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-    transition: "all 250ms",
-    display: "inline-block",
-    flexDirection: "row",
-    justifyContent: "center",
-    cursor: "text",
-    width: "100%",
-    boxSizing: "border-box",
-    minHeight: heightBySize(props.size),
-    maxHeight: heightBySize(props.size),
-    padding: paddingBySize(props.size),
-    fontSize: props.theme.typography[props.size].fontSize,
-    backgroundColor: props.theme.palette[props.color].lighter,
-    color: props.theme.palette[props.color].textDark,
-    borderRadius: "0.125rem",
-    fontFamily: props.theme.typography.fontFamily,
-
-    "&:focus": {
-      backgroundColor: props.theme.palette.common.white,
-      color: props.theme.palette.common.black,
-    },
-
-    "&:disabled": {
-      backgroundColor: props.theme.palette.gray[200],
-      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-      color: props.theme.palette.gray.textLight,
-      opacity: 0.7,
-      cursor: "default",
-    },
-  },
-}));
-
-const AltContainer = styled.div`
+const Container = styled.div`
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   font-family: ${(props) => props.theme.typography.fontFamily};
   min-height: ${(props) => heightBySize(props.size)};
@@ -99,7 +53,7 @@ const Icon = styled.i`
   color: ${(props) => props.theme.palette[props.color].dark};
 `;
 
-const DateInput = (props) => {
+const DateInput = React.forwardRef((props, ref) => {
   const {
     value,
     id,
@@ -111,22 +65,25 @@ const DateInput = (props) => {
     color,
     theme,
     className,
-    preventDefault,
+    min,
+    max,
+    onFocus,
+    onBlur,
   } = props;
 
-  const getValue = () => {
-    if (value === undefined || !value) return null;
+  const getDateValue = (val) => {
+    if (val === undefined || !val) return null;
 
-    console.log("bbbb: ", new Date(moment(value, dateFormat)));
-
-    return new Date(moment(value, dateFormat));
+    return new Date(moment(val, dateFormat));
   };
 
   const handleOnChange = (dateString) => {
-    if (dateString === null) return "";
+    if (dateString === null) {
+      console.log("CHANGE: ");
+      return "";
+    }
 
-    console.log(dateString);
-
+    console.log("CHANGE: ", moment(dateString).format(dateFormat));
     onChange(id, moment(dateString).format(dateFormat));
   };
 
@@ -135,33 +92,41 @@ const DateInput = (props) => {
   };
 
   return (
-    <AltContainer {...{ theme, size, color }} className={className}>
+    <Container {...{ theme, size, color }} className={className}>
       <DatePicker
+        onFocus={onFocus}
+        onBlur={onBlur}
         disabled={disabled}
         format={displayDateFormat()}
         openCalendarOnFocus={openCalendarOnFocus}
         onChange={handleOnChange}
-        value={getValue()}
+        value={getDateValue(value)}
         clearIcon={null}
+        maxDate={getDateValue(max)}
+        minDate={getDateValue(min)}
         calendarIcon={
           <Icon {...{ theme, size, color }} className="fas fa-calendar fa-fw" />
         }
       />
-    </AltContainer>
+    </Container>
   );
-};
+});
 
 DateInput.defaultProps = {
   id: "",
   theme: theme,
   disabled: false,
   onChange: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
   className: "",
   preventDefault: true,
   size: "small",
   color: "primary",
   value: "",
   dateFormat: "DD.MM.YYYY.",
+  max: new Date(2099, 1, 1),
+  min: null,
 };
 
 DateInput.propTypes = {
@@ -169,10 +134,14 @@ DateInput.propTypes = {
   id: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
   value: PropTypes.string,
   dateFormat: PropTypes.string,
+  max: PropTypes.object,
+  min: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
