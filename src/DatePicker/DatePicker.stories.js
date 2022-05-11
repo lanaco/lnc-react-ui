@@ -11,7 +11,7 @@ const Template = (args) => <Story {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
-  format: "yyyy.MM.dd",
+  format: "dd.MM.yyyy",
   size: "small",
   color: "primary",
   disabled: false,

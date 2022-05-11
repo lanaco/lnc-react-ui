@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 import moment from "moment";
 import Calendar from "react-calendar";
+import { isEmpty, isNumber } from "lodash";
 
 const validFormats = [
   "dd.mm.yyyy",
@@ -63,18 +64,48 @@ const heightBySize = (size) => {
   return { small: `1.625rem`, medium: `2rem`, large: `2.375rem` }[size];
 };
 
+const paddingBySize = (size) => {
+  if (size === "small") return "0.325rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.422375rem 0.375rem";
+};
+
 const Container = styled.div`
+  width: fit-content;
   position: relative;
   display: flex;
 
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   font-family: ${(props) => props.theme.typography.fontFamily};
+  color: ${(props) => props.theme.palette[props.color].dark};
+
+  background-color: ${(props) => props.theme.palette[props.color].lighter};
+  border-bottom: 0.125rem solid
+    ${(props) => props.theme.palette[props.color].main};
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  color: ${(props) => props.theme.palette[props.color].textDark};
+  appearance: none;
+  outline: none;
+  border: none;
+  background-color: ${(props) => props.theme.palette[props.color].lighter};
+  padding: ${(props) => paddingBySize(props.size)};
+`;
+
+const HiddenInput = styled.input`
+  position: absolute;
+  margin-left: -1000000px;
+`;
 
 const CalendarButton = styled.div`
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
 `;
 
 const CalendarContainer = styled.div`
@@ -100,26 +131,35 @@ const DatePicker = React.forwardRef((props, ref) => {
     value,
     format,
     onChange,
+    useCalendar,
   } = props;
 
-  const [dateValue, setDateValue] = useState(null);
+  const [date, setDate] = useState(null);
+  const [text, setText] = useState("");
 
   const [openCalendar, setOpenCalendar] = useState(false);
+
+  var inpRef = useRef();
 
   //===============================================================================
 
   useEffect(() => {
-    // fromDateStringToJsDate("10.11.2002");
-
-    fromJsDateToDateString(new Date());
+    if (!validateDateFormat())
+      console.error(`Format: ${format} is not supported!`);
   }, []);
 
-  //===============================================================================
+  useEffect(() => {
+    setDate(fromDateStringToJsDate(value));
+    setText(value);
+  }, [value]);
 
-  const toggleCalendar = () => setOpenCalendar(!openCalendar);
+  //=============== METHODS ============================================================
 
   const validateDateFormat = () => {
     var _format = format.toLowerCase();
+    var isValid = validFormats.filter((x) => x === _format);
+
+    return isValid;
   };
 
   const getFormatSeparator = (format) => {
@@ -134,6 +174,9 @@ const DatePicker = React.forwardRef((props, ref) => {
   };
 
   const fromJsDateToDateString = (jsDate) => {
+    if (jsDate === null || jsDate == "Invalid Date") return null;
+    if (!validateDateFormat()) return jsDate;
+
     var _format = format.toLowerCase(_format);
     var dateString = "";
 
@@ -180,6 +223,11 @@ const DatePicker = React.forwardRef((props, ref) => {
   };
 
   const fromDateStringToJsDate = (dateString) => {
+    if (isEmpty(dateString) || dateString === undefined || dateString === null)
+      return null;
+
+    if (!validateDateFormat()) return dateString;
+
     var _format = format.toLowerCase(_format);
 
     var year = 0;
@@ -192,54 +240,113 @@ const DatePicker = React.forwardRef((props, ref) => {
     var dateStringInChunks = dateString.split(separator);
 
     formatInChunks.forEach((chunk, index) => {
-      if (chunk.includes("y")) year = parseInt(dateStringInChunks[index]);
+      if (chunk.includes("y")) {
+        year = parseInt(dateStringInChunks[index]);
+
+        if (!isNumber(year)) year = 0;
+      }
 
       if (chunk.includes("m")) {
         month = parseInt(dateStringInChunks[index]);
 
+        if (!isNumber(month)) month = 0;
+
         if (month > 0) month -= 1;
       }
 
-      if (chunk.includes("d")) day = parseInt(dateStringInChunks[index]);
+      if (chunk.includes("d")) {
+        day = parseInt(dateStringInChunks[index]);
+
+        if (!isNumber(day)) day = 0;
+      }
     });
+
+    if (((year === month) === day) === 0) return null;
 
     var momentDate = moment().year(year).month(month).date(day);
 
     return new Date(momentDate._d);
   };
 
-  const dateToPresentationFormat = () => {
-    return value;
+  //=============== EVENTS ============================================================
+
+  const toggleCalendar = () => {
+    setOpenCalendar(!openCalendar);
   };
 
-  const handleInputOnChange = (e) => {};
+  useEffect(() => {
+    if (openCalendar) {
+      inpRef.current.focus();
+    }
+  }, [openCalendar]);
+
+  const handleInputOnChange = (e) => {
+    setText(e.target.value);
+  };
+
+  const handleInputOnBlur = (e) => {
+    var jsDate = null;
+    var dateString = "";
+
+    if (text !== "") {
+      jsDate = fromDateStringToJsDate(text);
+      dateString = fromJsDateToDateString(jsDate);
+
+      if ((jsDate === null || jsDate == "Invalid Date") && date !== null) {
+        jsDate = date;
+        dateString = fromJsDateToDateString(date);
+      }
+    }
+
+    setDate(jsDate);
+    setText(dateString);
+    onChange(e, dateString);
+
+    if (onBlur) onBlur(e);
+  };
 
   const handleCalendarOnChange = (date) => {
-    var newDateValue = new Date();
+    var dateString = fromJsDateToDateString(date);
 
-    onChange(null, newDateValue);
+    setText(dateString);
+    setDate(date);
+
+    onChange(null, dateString);
     toggleCalendar();
   };
 
-  //===============================================================================
+  //=============== RENDER ============================================================
 
   return (
     <Container {...{ theme, size, color }} className={className}>
       <Input
+        {...{ theme, size, color }}
         type={"text"}
         onChange={handleInputOnChange}
-        value={dateToPresentationFormat()}
+        value={text || ""}
+        onBlur={handleInputOnBlur}
       />
 
-      <CalendarButton {...{ theme, size, color }} onClick={toggleCalendar}>
-        <Icon {...{ theme, size, color }} className="fas fa-calendar fa-fw" />
-      </CalendarButton>
+      {useCalendar && (
+        <CalendarButton {...{ theme, size, color }} onClick={toggleCalendar}>
+          <Icon {...{ theme, size, color }} className="fas fa-calendar fa-fw" />
+        </CalendarButton>
+      )}
 
-      {openCalendar && (
+      {useCalendar && openCalendar && (
         <CalendarContainer {...{ theme, size, color }}>
+          <HiddenInput
+            ref={inpRef}
+            onBlur={() => {
+              setTimeout(() => {
+                toggleCalendar();
+              }, 80);
+            }}
+          />
           <Calendar
             onChange={handleCalendarOnChange}
-            value={fromDateStringToJsDate(value)}
+            value={date}
+            onFocus={() => console.log("aa")}
           />
         </CalendarContainer>
       )}
@@ -255,6 +362,7 @@ DatePicker.defaultProps = {
   onChange: () => {},
   onFocus: () => {},
   onBlur: () => {},
+  useCalendar: true,
   //------------------------------
   theme: theme,
   className: "",
