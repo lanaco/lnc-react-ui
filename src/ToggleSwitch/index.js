@@ -193,7 +193,7 @@ const ToggleSwitch = (props) => {
 
   function handleChange(e) {
     if (preventDefault) e.preventDefault();
-    disabled ? '' : onChange(id, !value);
+    if (!disabled) onChange(id, !value);
   }
 
   let themeProps = { theme, size, color };
