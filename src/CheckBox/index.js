@@ -162,7 +162,7 @@ const CheckBox = (props) => {
   const handleChange = (e) => {
     if (preventDefault) e.preventDefault();
 
-    disabled ? '' : onChange(id, !checked);
+    if (!disabled) onChange(id, !checked);
   };
 
   return (

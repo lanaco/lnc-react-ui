@@ -171,7 +171,7 @@ const CheckboxLookup = (props) => {
       });
     }
 
-    disabled ? '' : onChange(id, selectedItems);
+    if (!disabled) onChange(id, selectedItems);
   };
 
   const pageDecimalCount = options.length / displayedItemsCount;
@@ -226,13 +226,13 @@ const CheckboxLookup = (props) => {
                   checked:
                     options.length > 0 &&
                     options.length === selectedOptions.length,
-                  onChange: () =>
-                    disabled ? '' : onSelectDeselectAll(
+                  onChange: () =>{
+                    if(!disabled) onSelectDeselectAll(
                       options.length > 0 &&
                         options.length === selectedOptions.length
                         ? false
                         : true
-                    ),
+                    )},
                   color: color,
                   size: size,
                   theme: theme,
@@ -243,12 +243,12 @@ const CheckboxLookup = (props) => {
               <ToggleSwitch
                 {...{
                   id: id,
-                  disabled: disabled ? true : false,
+                  disabled: disabled,
                   checked: options.length === selectedOptions.length,
-                  onChange: () =>
-                    disabled ? '' : onSelectDeselectAll(
+                  onChange: () =>{
+                    if(!disabled) onSelectDeselectAll(
                       options.length === selectedOptions.length ? false : true
-                    ),
+                    )},
                   color: color,
                   size: size,
                   theme: theme,
@@ -295,7 +295,7 @@ const CheckboxLookup = (props) => {
                         <ToggleSwitch
                           {...{
                             id: x[itemId],
-                            disabled: disabled ? true : false,
+                            disabled,
                             value: isChecked,
                             onChange: () => {},
                             color: color,
