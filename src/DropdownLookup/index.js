@@ -380,7 +380,7 @@ const DropdownLookup = (props) => {
           </LoadingButtonContainer>
         )}
 
-        {!loading && (
+        {!loading && disabled ? '' : (
           <ButtonContainer
             {...themeProps}
             clickable={options == null || options.length === 0}

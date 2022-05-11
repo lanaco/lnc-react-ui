@@ -104,7 +104,7 @@ const Input = styled.input`
 
   &:disabled + span {
     position: absolute;
-    cursor: pointer;
+    cursor: auto;
     top: ${(props) => getSpanProps()[props.size].top};
     left: ${(props) => getSpanProps()[props.size].left};
     right: 0;
@@ -193,7 +193,7 @@ const ToggleSwitch = (props) => {
 
   function handleChange(e) {
     if (preventDefault) e.preventDefault();
-    onChange(id, !value);
+    disabled ? '' : onChange(id, !value);
   }
 
   let themeProps = { theme, size, color };
