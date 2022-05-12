@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import DateInput from "./index";
 
 const Story = (props) => {
-  const [value, setValue] = useState("03.03.2013.");
+  const [value, setValue] = useState("");
 
-  const onChange = (id, val) => {
-    // console.log("VALUE: ", val);
-    setValue(val);
+  const onChange = (event, dateValue) => {
+    setValue(dateValue);
   };
 
-  return <DateInput {...props} value={value} onChange={onChange} />;
+  return (
+    <div style={{ width: "140px" }}>
+      <DateInput {...props} value={value} onChange={onChange} />
+    </div>
+  );
 };
 
 export default Story;
