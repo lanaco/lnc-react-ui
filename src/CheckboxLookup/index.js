@@ -45,7 +45,7 @@ const Body = styled.div`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  cursor: pointer;
+  cursor: default;
   transition: all 250ms ease;
   background-color: white;
 
@@ -171,7 +171,7 @@ const CheckboxLookup = (props) => {
       });
     }
 
-    onChange(id, selectedItems);
+    if (!disabled) onChange(id, selectedItems);
   };
 
   const pageDecimalCount = options.length / displayedItemsCount;
@@ -193,7 +193,7 @@ const CheckboxLookup = (props) => {
     : options;
 
   return (
-    <Container {...themeProps} className={className}>
+    <Container {...themeProps} className={className}> 
       <Global
         styles={css`
           .item-enter {
@@ -226,13 +226,13 @@ const CheckboxLookup = (props) => {
                   checked:
                     options.length > 0 &&
                     options.length === selectedOptions.length,
-                  onChange: () =>
-                    onSelectDeselectAll(
+                  onChange: () =>{
+                    if(!disabled) onSelectDeselectAll(
                       options.length > 0 &&
                         options.length === selectedOptions.length
                         ? false
                         : true
-                    ),
+                    )},
                   color: color,
                   size: size,
                   theme: theme,
@@ -243,12 +243,12 @@ const CheckboxLookup = (props) => {
               <ToggleSwitch
                 {...{
                   id: id,
-                  disabled: false,
+                  disabled: disabled,
                   checked: options.length === selectedOptions.length,
-                  onChange: () =>
-                    onSelectDeselectAll(
+                  onChange: () =>{
+                    if(!disabled) onSelectDeselectAll(
                       options.length === selectedOptions.length ? false : true
-                    ),
+                    )},
                   color: color,
                   size: size,
                   theme: theme,
@@ -295,7 +295,7 @@ const CheckboxLookup = (props) => {
                         <ToggleSwitch
                           {...{
                             id: x[itemId],
-                            disabled: disabled,
+                            disabled,
                             value: isChecked,
                             onChange: () => {},
                             color: color,

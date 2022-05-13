@@ -64,7 +64,7 @@ const getCheckboxCss = (props) => {
       padding: 0.25rem;
       padding-left: ${padingLeft};
       ${paddingTop}
-      cursor: pointer;
+      cursor: auto;
       font-size: ${props.theme.typography[props.size].fontSize};
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -72,7 +72,6 @@ const getCheckboxCss = (props) => {
       user-select: none;
       margin: ${margin};
       margin-left: ${marginLeft};
-      cursor: pointer;
     }
 
     /* Hide the browser's default checkbox */
@@ -163,7 +162,7 @@ const CheckBox = (props) => {
   const handleChange = (e) => {
     if (preventDefault) e.preventDefault();
 
-    onChange(id, !checked);
+    if (!disabled) onChange(id, !checked);
   };
 
   return (
