@@ -79,7 +79,7 @@ const Container = styled.div`
   width: 100%;
   position: relative;
   display: flex;
-
+  border-radius: 0.125rem;
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   font-family: ${(props) => props.theme.typography.fontFamily};
   color: ${(props) => props.theme.palette[props.color].dark};
@@ -547,7 +547,7 @@ DateInput.propTypes = {
   value: PropTypes.string,
   minDate: PropTypes.string,
   maxDate: PropTypes.string,
-  format: PropTypes.oneOf(validFormats),
+  format: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
