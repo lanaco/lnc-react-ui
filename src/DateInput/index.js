@@ -298,7 +298,11 @@ const DateInput = React.forwardRef((props, ref) => {
       //
       if (chunk.includes("y")) {
         year = new Date(jsDate).getFullYear();
-        dateString += year + separator;
+
+        if (year < 10) dateString += "000" + year + separator;
+        else if (year < 100) dateString += "00" + year + separator;
+        else if (year < 1000) dateString += "0" + year + separator;
+        else dateString += year + separator;
       }
 
       if (chunk === "m") {
@@ -367,6 +371,11 @@ const DateInput = React.forwardRef((props, ref) => {
         if (!isNumber(day)) day = 0;
       }
     });
+
+    if (month > 11) month = 11;
+
+    var daysInMonth = moment(`${year}-${month + 1}`, "YYYY-MM").daysInMonth();
+    if (day > daysInMonth) day = daysInMonth;
 
     if (((year === month) === day) === 0) return null;
 
