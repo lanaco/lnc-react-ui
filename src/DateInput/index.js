@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 import moment from "moment";
 import Calendar from "react-calendar";
-import { isEmpty, isNumber } from "lodash";
+import { isEmpty, isNumber, isArray } from "lodash";
 import "./style.css";
 
 const validFormats = [
@@ -216,6 +216,7 @@ const Icon = styled.i`
 `;
 
 const NavigationIcon = styled.i`
+  pointer-events: none;
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   color: ${(props) =>
     props.disabled
@@ -456,6 +457,22 @@ const DateInput = React.forwardRef((props, ref) => {
     toggleCalendar();
   };
 
+  const onHiddenInputBlur = (e) => {
+    console.log(e);
+    // console.log(e.relatedTarget.classList);
+    if (
+      e.relatedTarget &&
+      e.relatedTarget.classList &&
+      e.relatedTarget.classList.value.includes("react-calendar")
+    ) {
+      if (inpRef && inpRef.current) inpRef.current.focus();
+    } else {
+      setTimeout(() => {
+        toggleCalendar();
+      }, 80);
+    }
+  };
+
   //=============== RENDER ============================================================
 
   var themeProps = { theme, size, color, disabled };
@@ -490,14 +507,7 @@ const DateInput = React.forwardRef((props, ref) => {
 
       {useCalendar && openCalendar && (
         <CalendarContainer {...themeProps}>
-          {/* <HiddenInput
-            ref={inpRef}
-            onBlur={() => {
-              setTimeout(() => {
-                toggleCalendar();
-              }, 80);
-            }}
-          /> */}
+          <HiddenInput ref={inpRef} onBlur={onHiddenInputBlur} />
           <Calendar
             onChange={handleCalendarOnChange}
             value={date}
