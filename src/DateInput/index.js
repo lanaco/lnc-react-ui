@@ -107,7 +107,7 @@ const Container = styled.div`
   & .react-calendar__navigation__arrow,
   .react-calendar__navigation__label {
     transition: all 220ms ease;
-    border-radius: 3px;
+    border-radius: 0.1875rem;
   }
 
   & .react-calendar__navigation__label {
@@ -198,7 +198,7 @@ const CalendarButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 3px;
+  padding: 0 0.3125rem;
 `;
 
 const CalendarContainer = styled.div`
@@ -265,7 +265,7 @@ const DateInput = React.forwardRef((props, ref) => {
   //=============== METHODS ============================================================
 
   const validateDateFormat = () => {
-    var _format = format.toLowerCase();
+    var _format = validateDateFormat() ? format.toLowerCase() : "yyyy-mm-dd";
     var isValid = validFormats.filter((x) => x === _format);
 
     return isValid;
@@ -283,9 +283,8 @@ const DateInput = React.forwardRef((props, ref) => {
 
   const fromJsDateToDateString = (jsDate) => {
     if (jsDate === null || jsDate == "Invalid Date") return null;
-    if (!validateDateFormat()) return jsDate;
 
-    var _format = format.toLowerCase(_format);
+    var _format = validateDateFormat() ? format.toLowerCase() : "yyyy-mm-dd";
     var dateString = "";
 
     var year = 0;
@@ -338,9 +337,7 @@ const DateInput = React.forwardRef((props, ref) => {
     if (isEmpty(dateString) || dateString === undefined || dateString === null)
       return null;
 
-    if (!validateDateFormat()) return dateString;
-
-    var _format = format.toLowerCase(_format);
+    var _format = validateDateFormat() ? format.toLowerCase() : "yyyy-mm-dd";
 
     var year = 0;
     var month = 0;
@@ -458,8 +455,6 @@ const DateInput = React.forwardRef((props, ref) => {
   };
 
   const onHiddenInputBlur = (e) => {
-    console.log(e);
-    // console.log(e.relatedTarget.classList);
     if (
       e.relatedTarget &&
       e.relatedTarget.classList &&
@@ -496,7 +491,7 @@ const DateInput = React.forwardRef((props, ref) => {
         value={text || ""}
         onBlur={handleInputOnBlur}
         onFocus={onFocus}
-        placeholder={format}
+        placeholder={validateDateFormat() ? format : "yyyy-mm-dd"}
       />
 
       {useCalendar && (
