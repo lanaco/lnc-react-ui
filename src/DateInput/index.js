@@ -265,7 +265,7 @@ const DateInput = React.forwardRef((props, ref) => {
   //=============== METHODS ============================================================
 
   const validateDateFormat = () => {
-    var _format = validateDateFormat() ? format.toLowerCase() : "yyyy-mm-dd";
+    var _format = format.toLowerCase();
     var isValid = validFormats.filter((x) => x === _format);
 
     return isValid;
@@ -415,6 +415,7 @@ const DateInput = React.forwardRef((props, ref) => {
         minDate &&
         minDate !== null &&
         minDate !== undefined &&
+        jsDate !== null &&
         jsDate.getTime() < currentJsDate.getTime()
       ) {
         jsDate = null;
@@ -425,6 +426,7 @@ const DateInput = React.forwardRef((props, ref) => {
         maxDate &&
         maxDate !== null &&
         maxDate !== undefined &&
+        jsDate !== null &&
         jsDate.getTime() > currentJsDate.getTime()
       ) {
         jsDate = null;
@@ -439,7 +441,8 @@ const DateInput = React.forwardRef((props, ref) => {
 
     setDate(jsDate);
     setText(dateString);
-    onChange(e, dateString, jsDate);
+
+    if (text !== dateString) onChange(e, dateString, jsDate);
 
     if (onBlur) onBlur(e);
   };
@@ -450,7 +453,8 @@ const DateInput = React.forwardRef((props, ref) => {
     setText(dateString);
     setDate(date);
 
-    onChange(null, dateString, date);
+    if (text !== dateString) onChange(null, dateString, date);
+
     toggleCalendar();
   };
 
