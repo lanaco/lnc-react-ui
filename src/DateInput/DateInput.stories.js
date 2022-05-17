@@ -1,18 +1,20 @@
 import React from "react";
 import DateInput from "./index";
+import Story from "./Story";
 
 export default {
   title: "Date Input",
   component: DateInput,
 };
 
-const Template = (args) => <DateInput {...args} />;
+const Template = (args) => <Story {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
-  value: "17.08.2021.",
-  onChange: (_, value) => console.log(value),
+  format: "dd.MM.yyyy",
   size: "small",
   color: "primary",
   disabled: false,
+  minDate: "01.01.2020",
+  maxDate: "31.12.2022",
 };

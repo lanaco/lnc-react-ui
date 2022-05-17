@@ -62,7 +62,7 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Alet = (props) => {
+const Alert = (props) => {
   const { className, size, color, theme, message, hasContainer } = props;
 
   const themeProps = { theme, size, color };
@@ -82,7 +82,7 @@ const Alet = (props) => {
     );
 };
 
-Alet.defaultProps = {
+Alert.defaultProps = {
   className: "",
   size: "small",
   theme: theme,
@@ -91,7 +91,7 @@ Alet.defaultProps = {
   message: "",
 };
 
-Alet.propTypes = {
+Alert.propTypes = {
   message: PropTypes.string,
   theme: PropTypes.object.isRequired,
   className: PropTypes.string,
@@ -108,4 +108,4 @@ Alet.propTypes = {
   ]),
 };
 
-export default Alet;
+export default Alert;
