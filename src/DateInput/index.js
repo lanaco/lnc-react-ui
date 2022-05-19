@@ -243,6 +243,7 @@ const DateInput = React.forwardRef((props, ref) => {
 
   const [date, setDate] = useState(null);
   const [text, setText] = useState("");
+  const InputChanged = useRef(false);
 
   const [openCalendar, setOpenCalendar] = useState(false);
 
@@ -257,7 +258,6 @@ const DateInput = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     var jsDate = fromDateStringToJsDate(value);
-
     setDate(jsDate);
     setText(fromJsDateToDateString(jsDate));
   }, [value]);
@@ -397,6 +397,7 @@ const DateInput = React.forwardRef((props, ref) => {
   }, [openCalendar]);
 
   const handleInputOnChange = (e) => {
+    InputChanged.current = true;
     setText(e.target.value);
   };
 
@@ -405,32 +406,25 @@ const DateInput = React.forwardRef((props, ref) => {
     var dateString = "";
 
     if (text !== "") {
-      var currentJsDate = new Date();
-      currentJsDate.setTime(0, 0, 0, 0);
-
       jsDate = fromDateStringToJsDate(text);
       dateString = fromJsDateToDateString(jsDate);
 
-      if (
-        minDate &&
-        minDate !== null &&
-        minDate !== undefined &&
-        jsDate !== null &&
-        jsDate.getTime() < currentJsDate.getTime()
-      ) {
-        jsDate = null;
-        dateString = "";
+      if (minDate && minDate !== null && minDate !== undefined) {
+        var minJsDate = fromDateStringToJsDate(minDate);
+
+        if (jsDate !== null && jsDate.getTime() < minJsDate.getTime()) {
+          jsDate = null;
+          dateString = "";
+        }
       }
 
-      if (
-        maxDate &&
-        maxDate !== null &&
-        maxDate !== undefined &&
-        jsDate !== null &&
-        jsDate.getTime() > currentJsDate.getTime()
-      ) {
-        jsDate = null;
-        dateString = "";
+      if (maxDate && maxDate !== null && maxDate !== undefined) {
+        var maxJsDate = fromDateStringToJsDate(maxDate);
+
+        if (jsDate !== null && jsDate.getTime() > maxJsDate.getTime()) {
+          jsDate = null;
+          dateString = "";
+        }
       }
 
       if ((jsDate === null || jsDate == "Invalid Date") && date !== null) {
@@ -442,7 +436,8 @@ const DateInput = React.forwardRef((props, ref) => {
     setDate(jsDate);
     setText(dateString);
 
-    if (text !== dateString) onChange(e, dateString, jsDate);
+    if (InputChanged.current && onChange) onChange(e, dateString, jsDate);
+    InputChanged.current = false;
 
     if (onBlur) onBlur(e);
   };
@@ -453,7 +448,8 @@ const DateInput = React.forwardRef((props, ref) => {
     setText(dateString);
     setDate(date);
 
-    if (text !== dateString) onChange(null, dateString, date);
+    if (InputChanged.current && onChange) onChange(null, dateString, date);
+    InputChanged.current = false;
 
     toggleCalendar();
   };
