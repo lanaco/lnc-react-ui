@@ -1,100 +1,415 @@
-import React, { useEffect, useRef } from 'react';
-import styled from "@emotion/styled";
-import Icon from '../../General/Icon';
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import TextInput from '../TextInput';
-import { useTheme } from '@emotion/react';
+import styled from "@emotion/styled";
+import theme from "../../_utils/theme";
+import moment from "moment";
+import Calendar from "react-calendar";
+import { isEmpty, isNumber, isArray } from "lodash";
+import "./style.css";
 
-const DateInputToggle = styled.label`
-  display: inline-block;
+const heightBySize = (size) => {
+  return { small: `1.5rem`, medium: `1.875rem`, large: `2.25rem` }[size];
+};
+
+const calendarOffsetBySize = (size) => {
+  return { small: `1.675rem`, medium: `2.05rem`, large: `2.425rem` }[size];
+};
+
+const paddingBySize = (size) => {
+  if (size === "small") return "0.325rem 0.375rem";
+  if (size === "medium") return "0.3875rem 0.375rem";
+  if (size === "large") return "0.422375rem 0.375rem";
+};
+
+const Container = styled.div`
+  width: 100%;
   position: relative;
   display: flex;
-  gap: 12px;
+  border-radius: 0.125rem;
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  color: ${(props) => props.theme.palette[props.color].dark};
 
-  & > .datePicker-toggle-button-lnc {
-    // position: absolute;
-    // left: 0;
-    // top: 0;
-    // width: 100%;
-    // height: 100%;
-    display: flex;
-    align-items: center;
+  background-color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray[200]
+      : props.theme.palette[props.color].lighter};
+  border-bottom: 0.125rem solid
+    ${(props) =>
+      props.disabled
+        ? props.theme.palette.gray[900]
+        : props.theme.palette[props.color].main};
+
+  min-height: ${(props) => heightBySize(props.size)};
+  max-height: ${(props) => heightBySize(props.size)};
+
+  & .react-calendar {
+    border-radius: 0.2rem;
+    font-size: ${(props) => props.theme.typography[props.size].fontSize};
+    font-family: ${(props) => props.theme.typography.fontFamily};
+    border: 0.0625rem solid ${(props) => props.theme.palette[props.color].main};
   }
 
-  // & > .datepicker-input {
-  //   position: absolute;
-  //   left: 0;
-  //   top: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   cursor: pointer;
-  //   box-sizing: border-box;
-  // }
-  // & > .datepicker-input::-webkit-calendar-picker-indicator {
-  //   position: absolute;
-  //   left: 0;
-  //   top: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   margin: 0;
-  //   padding: 0;
-  //   cursor: pointer;
-  // }
+  & .react-calendar__navigation__arrow,
+  .react-calendar__navigation__label {
+    transition: all 220ms ease;
+    border-radius: 0.1875rem;
+  }
 
+  & .react-calendar__navigation__label {
+    font-size: ${(props) => props.theme.typography[props.size].fontSize};
+    font-family: ${(props) => props.theme.typography.fontFamily};
+  }
+
+  & .react-calendar__month-view__weekdays__weekday {
+    color: ${(props) => props.theme.palette[props.color].main};
+    font-size: ${(props) => props.theme.typography[props.size].fontSize};
+    font-family: ${(props) => props.theme.typography.fontFamily};
+
+    & abbr {
+      text-decoration: none;
+    }
+  }
+
+  & .react-calendar__tile {
+    font-size: ${(props) => props.theme.typography[props.size].fontSize};
+    font-family: ${(props) => props.theme.typography.fontFamily};
+  }
+
+  & .react-calendar__tile--now {
+    background: ${(props) => props.theme.palette.secondary.lighter};
+  }
+
+  & .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus {
+    background: ${(props) => props.theme.palette.secondary.lighter};
+  }
+
+  & .react-calendar__tile--active {
+    background: ${(props) => props.theme.palette[props.color].main};
+    color: white;
+  }
+
+  & .react-calendar__tile--active:enabled:hover,
+  .react-calendar__tile--active:enabled:focus {
+    background: ${(props) => props.theme.palette[props.color].light};
+  }
+
+  & .react-calendar__tile--hasActive {
+    background: ${(props) => props.theme.palette[props.color].main};
+    color: ${(props) => props.theme.palette[props.color].text};
+  }
+
+  & .react-calendar__tile--hasActive:enabled:hover,
+  .react-calendar__tile--hasActive:enabled:focus {
+    background: ${(props) => props.theme.palette[props.color].light};
+  }
 `;
 
+const Input = styled.input`
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  color: ${(props) => props.theme.palette[props.color].textDark};
+  appearance: none;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: ${(props) => props.theme.palette[props.color].lighter};
+  padding: ${(props) => paddingBySize(props.size)};
+  transition: all 250ms ease;
 
-const DateInput = ({
-  id,
-  disabled,
-  readOnly,
-  onChange,
-  preventDefault,
-  size,
-  color,
-  className,
-  value,
-  style,
-  min,
-  max,
-  autoFocus,
-  ...rest
-}) => {
+  &:disabled {
+    background-color: ${(props) => props.theme.palette.gray[200]};
+    color: ${(props) => props.theme.palette.gray.textLight};
+    opacity: 0.7;
+    cursor: auto;
+  }
+
+  &:focus {
+    background-color: ${(props) =>
+      props.disabled ? "inherit" : props.theme.palette.common.white};
+    color: ${(props) => props.theme.palette.common.black};
+  }
+`;
+
+const HiddenInput = styled.input`
+  position: absolute;
+  margin-left: -1000000px;
+`;
+
+const CalendarButton = styled.div`
+  margin-left: auto;
+  cursor: ${(props) => (props.disabled ? "auto" : "pointer")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.3125rem;
+`;
+
+const CalendarContainer = styled.div`
+  position: absolute;
+  top: ${(props) => calendarOffsetBySize(props.size)};
+  z-index: 2;
+`;
+
+const Icon = styled.i`
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray[900]
+      : props.theme.palette[props.color].dark};
+`;
+
+const NavigationIcon = styled.i`
+  pointer-events: none;
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.palette.gray[900]
+      : props.theme.palette[props.color].dark};
+`;
+
+const DateInput = React.forwardRef((props, ref) => {
+  const {
+    size,
+    color,
+    theme,
+    className,
+    disabled,
+    onFocus,
+    onBlur,
+    value,
+    format,
+    onChange,
+    useCalendar,
+    minDate,
+    maxDate,
+  } = props;
+
+  const [date, setDate] = useState(null);
+  const [text, setText] = useState("");
+  const InputChanged = useRef(false);
+
+  const [openCalendar, setOpenCalendar] = useState(false);
+
+  var inpRef = useRef();
+
+  //===============================================================================
+
+  useEffect(() => {
+    if (value !== "" && !isIsoDate(value))
+      console.error("Date value is not in ISO8601 format!");
+
+    var formatedDate = isoToUserFormat(value);
+
+    setText(formatedDate);
+    setDate(formatedDate !== "" ? new Date(value) : null);
+  }, [value]);
+
+  //=============== METHODS ============================================================
+
+  const jsDateToIso = (jsDate) => {
+    return jsDate.toISOString().substr(0, 10);
+  };
+
+  const isoToUserFormat = (isoDate) => {
+    if (isoDate === "") return "";
+
+    var formatedDate = moment(isoDate, moment.ISO_8601, true).format(format);
+
+    if (formatedDate === "Invalid date") return "";
+    return formatedDate;
+  };
+
+  const userFormatToIso = (userFormat) => {
+    var isoDate = "";
+
+    try {
+      console.log(
+        "BLUR: ",
+        userFormat,
+        format,
+        moment(userFormat, format, true).format("YYYY-MM-DD")
+      );
+
+      isoDate = moment(userFormat, format, true).format("YYYY-MM-DD");
+
+      if (!isIsoDate(isoDate)) isDate = "";
+    } catch (e) {
+      return "";
+    }
+
+    if (isoDate === "Invalid date") return "";
+    return isoDate;
+  };
+
+  const isIsoDate = (str) => {
+    return moment(str, moment.ISO_8601, true).isValid();
+  };
+
+  //=============== EVENTS ============================================================
+
+  const toggleCalendar = () => {
+    if (!disabled) setOpenCalendar(!openCalendar);
+  };
+
+  useEffect(() => {
+    if (openCalendar && inpRef && inpRef.current) {
+      inpRef.current.focus();
+    }
+  }, [openCalendar]);
+
+  const handleInputOnChange = (e) => {
+    InputChanged.current = true;
+    setText(e.target.value);
+  };
+
+  const handleInputOnBlur = (e) => {
+    var jsDate = null;
+    var isoDate = userFormatToIso(text);
+
+    if (text === "" && InputChanged.current && onChange) {
+      onChange(null, isoDate, jsDate);
+    }
+
+    if (isoDate !== "") {
+      //
+      jsDate = new Date(isoDate);
+      if (InputChanged.current && onChange) onChange(null, isoDate, jsDate);
+      //
+    } else if (date !== null) {
+      //
+      isoDate = jsDateToIso(date);
+      setText(isoToUserFormat(isoDate));
+      //
+    } else {
+      setText("");
+      setDate(null);
+    }
+
+    InputChanged.current = false;
+    if (onBlur) onBlur(e);
+  };
+
+  const handleCalendarOnChange = (date) => {
+    var isoDate = jsDateToIso(date);
+
+    setText(isoToUserFormat(isoDate));
+    setDate(date);
+
+    if (onChange) onChange(null, isoDate, date);
+    InputChanged.current = false;
+
+    toggleCalendar();
+  };
+
+  const onHiddenInputBlur = (e) => {
+    if (
+      e.relatedTarget &&
+      e.relatedTarget.classList &&
+      e.relatedTarget.classList.value.includes("react-calendar")
+    ) {
+      if (inpRef && inpRef.current) inpRef.current.focus();
+    } else {
+      setTimeout(() => {
+        toggleCalendar();
+      }, 80);
+    }
+  };
+
+  //=============== RENDER ============================================================
+
+  var themeProps = { theme, size, color, disabled };
+
   return (
-    <DateInputToggle style={style} className={className} id={id} >
-      <Icon icon="calendar" className="datePicker-toggle-button-lnc" size={size} color={disabled ? 'gray' : color} />
-      <TextInput type="date" min={min} max={max} readOnly={readOnly} autoFocus={autoFocus}
-        className="datepicker-input-lnc" disabled={disabled} preventDefault={preventDefault} size={size} color={color} value={value} {...rest}  />
-    </DateInputToggle>
-  )
-};
+    <Container {...themeProps} className={className}>
+      <Input
+        ref={ref}
+        {...themeProps}
+        type={"text"}
+        onChange={handleInputOnChange}
+        value={text || ""}
+        onBlur={handleInputOnBlur}
+        onFocus={onFocus}
+        placeholder={format}
+      />
+
+      {useCalendar && (
+        <CalendarButton {...themeProps} onClick={toggleCalendar}>
+          <Icon {...themeProps} className="fas fa-calendar fa-fw" />
+        </CalendarButton>
+      )}
+
+      {useCalendar && openCalendar && (
+        <CalendarContainer {...themeProps}>
+          <HiddenInput ref={inpRef} onBlur={onHiddenInputBlur} />
+          <Calendar
+            onChange={handleCalendarOnChange}
+            value={date}
+            // {...minMaxDate}
+            prevLabel={
+              <NavigationIcon
+                {...themeProps}
+                className="fas fa-angle-left fa-fw"
+              />
+            }
+            prev2Label={
+              <NavigationIcon
+                {...themeProps}
+                className="fas fa-angle-double-left fa-fw"
+              />
+            }
+            nextLabel={
+              <NavigationIcon
+                {...themeProps}
+                className="fas fa-angle-right fa-fw"
+              />
+            }
+            next2Label={
+              <NavigationIcon
+                {...themeProps}
+                className="fas fa-angle-double-right fa-fw"
+              />
+            }
+          />
+        </CalendarContainer>
+      )}
+    </Container>
+  );
+});
 
 DateInput.defaultProps = {
   id: "",
+  value: "",
+  format: "yyyy-mm-dd",
   disabled: false,
-  onChange: () => { },
+  onChange: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  useCalendar: true,
+  minDate: "",
+  maxDate: "",
+  //------------------------------
+  theme: theme,
   className: "",
-  preventDefault: true,
   size: "small",
   color: "primary",
-  value: "",
-  style: {},
-  readOnly: false,
-  autoFocus: false,
 };
 
 DateInput.propTypes = {
   id: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  preventDefault: PropTypes.bool,
   value: PropTypes.string,
-  min: PropTypes.string,
-  max: PropTypes.string,
-  autoFocus: PropTypes.bool,
+  minDate: PropTypes.string,
+  maxDate: PropTypes.string,
+  format: PropTypes.string,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  useCalendar: PropTypes.bool,
+  //-----------------------------------------------------------
+  theme: PropTypes.object.isRequired,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
@@ -106,4 +421,4 @@ DateInput.propTypes = {
   ]),
 };
 
-export default DateInput
+export default DateInput;
