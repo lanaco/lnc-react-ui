@@ -8,16 +8,7 @@ export default {
   argTypes: {},
 };
 
-const Template = (args) => (
-  <>
-    <div style={{ padding: "10px" }} label="" id="check1">
-      <CheckBox {...args} />
-    </div>
-    <div style={{ padding: "10px" }}>
-      <CheckBox {...args} label="Checkbox" id="check2" />
-    </div>
-  </>
-);
+const Template = (args) => <CheckBox {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -25,12 +16,17 @@ Default.args = {
   checked: true,
   disabled: false,
   readOnly: false,
-  indeterminate: false,
-  onChange: () => {},
-  color: "secondary",
-  size: "small",
-  theme: theme,
   label: "Checkbox",
+  indeterminate: false,
   labelPosition: "right",
+  icon: null,
+  preventDefault: true,
+  onChange: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  className: "",
   style: {},
+  theme: theme,
+  size: "small",
+  color: "primary",
 };
