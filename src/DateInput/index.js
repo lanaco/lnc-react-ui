@@ -448,7 +448,7 @@ const DateInput = React.forwardRef((props, ref) => {
     setText(dateString);
     setDate(date);
 
-    if (InputChanged.current && onChange) onChange(null, dateString, date);
+    onChange(null, dateString, date);
     InputChanged.current = false;
 
     toggleCalendar();

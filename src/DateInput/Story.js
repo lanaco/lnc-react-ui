@@ -5,7 +5,6 @@ const Story = (props) => {
   const [value, setValue] = useState("");
 
   const onChange = (event, dateValue) => {
-    console.log("change", dateValue);
     setValue(dateValue);
   };
 
