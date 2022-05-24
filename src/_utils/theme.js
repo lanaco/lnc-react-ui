@@ -120,7 +120,7 @@ const theme = {
     large: {
       fontSize: "1.463rem",
       iconFontSize: "1.6375rem",
-      gap: "0.6rem"
+      gap: "0.6rem",
     },
     h1: {
       fontWeight: 300,
