@@ -1,27 +1,20 @@
 import React from "react";
-import DateInput from ".";
+import DateInput from "./index";
+import Story from "./Story";
 
 export default {
   title: "Basic Inputs/Date Input",
-  component: DateInput
+  component: DateInput,
 };
 
-const Template = (args) => (
-  <DateInput {...args}/>
-);
+const Template = (args) => <Story {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  id: "",
-  disabled: false,
-  onChange: () => { },
-  className: "",
-  preventDefault: true,
+  format: "DD/MM/YYYY",
   size: "small",
   color: "primary",
-  value: "",
-  style: {},
-  min: "",
-  max: "",
-  readOnly: false,
+  disabled: false,
+  minDate: "2000-01-01",
+  maxDate: "2030-01-01",
 };
