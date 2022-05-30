@@ -140,7 +140,7 @@ const HiddenInput = styled.input`
 
 const CalendarButton = styled.div`
   margin-left: auto;
-  cursor: ${(props) => (props.disabled ? "auto" : "pointer")};
+  cursor: ${(props) => (props.disabled || props.readOnly ? "auto" : "pointer")};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,6 +177,7 @@ const DateInput = React.forwardRef((props, ref) => {
     theme,
     className,
     disabled,
+    readOnly,
     onFocus,
     onBlur,
     value,
@@ -195,7 +196,7 @@ const DateInput = React.forwardRef((props, ref) => {
 
   var inpRef = useRef();
 
-  //===============================================================================
+  //===================================================================================
 
   useEffect(() => {
     if (value !== "" && !isIsoDate(value))
@@ -207,7 +208,7 @@ const DateInput = React.forwardRef((props, ref) => {
     setDate(formatedDate !== "" ? new Date(value) : null);
   }, [value]);
 
-  //=============== METHODS ============================================================
+  //=============== METHODS ===========================================================
 
   const jsDateToIso = (jsDate) => {
     return jsDate.toISOString().substr(0, 10);
@@ -226,13 +227,6 @@ const DateInput = React.forwardRef((props, ref) => {
     var isoDate = "";
 
     try {
-      console.log(
-        "BLUR: ",
-        userFormat,
-        format,
-        moment(userFormat, format, true).format("YYYY-MM-DD")
-      );
-
       isoDate = moment(userFormat, format, true).format("YYYY-MM-DD");
 
       if (!isIsoDate(isoDate)) isDate = "";
@@ -248,9 +242,35 @@ const DateInput = React.forwardRef((props, ref) => {
     return moment(str, moment.ISO_8601, true).isValid();
   };
 
+  const checkMinMaxDate = (value) => {
+    var isInMinRange = true;
+    var isInMaxRange = true;
+
+    var jsDate = new Date(value);
+    jsDate.setHours(0, 0, 0, 0);
+
+    if (minDate && isIsoDate(minDate)) {
+      var minJsDate = new Date(minDate);
+      minJsDate.setHours(0, 0, 0, 0);
+
+      isInMinRange = jsDate.getTime() < minJsDate.getTime();
+    }
+
+    if (maxDate && isIsoDate(maxDate)) {
+      var maxJsDate = new Date(maxDate);
+      maxJsDate.setHours(0, 0, 0, 0);
+
+      isInMaxRange = jsDate.getTime() > maxJsDate.getTime();
+    }
+
+    return isInMinRange && isInMaxRange;
+  };
+
   //=============== EVENTS ============================================================
 
   const toggleCalendar = () => {
+    if (disabled || readOnly) return;
+
     if (!disabled) setOpenCalendar(!openCalendar);
   };
 
@@ -261,11 +281,15 @@ const DateInput = React.forwardRef((props, ref) => {
   }, [openCalendar]);
 
   const handleInputOnChange = (e) => {
+    if (disabled || readOnly) return;
+
     InputChanged.current = true;
     setText(e.target.value);
   };
 
   const handleInputOnBlur = (e) => {
+    if (disabled || readOnly) return;
+
     var jsDate = null;
     var isoDate = userFormatToIso(text);
 
@@ -273,7 +297,9 @@ const DateInput = React.forwardRef((props, ref) => {
       onChange(null, isoDate, jsDate);
     }
 
-    if (isoDate !== "") {
+    var isDateInMinMaxRange = checkMinMaxDate(isoDate);
+
+    if (isoDate !== "" && isDateInMinMaxRange) {
       //
       jsDate = new Date(isoDate);
       if (InputChanged.current && onChange) onChange(null, isoDate, jsDate);
@@ -293,12 +319,26 @@ const DateInput = React.forwardRef((props, ref) => {
   };
 
   const handleCalendarOnChange = (date) => {
+    if (disabled || readOnly) return;
+
     var isoDate = jsDateToIso(date);
+    var isDateInMinMaxRange = checkMinMaxDate(isoDate);
 
-    setText(isoToUserFormat(isoDate));
-    setDate(date);
+    if (isoDate !== "" && isDateInMinMaxRange) {
+      //
+      if (onChange) onChange(null, isoDate, jsDate);
+      //
+    } else if (date !== null) {
+      //
+      isoDate = jsDateToIso(date);
+      setText(isoToUserFormat(isoDate));
+      //
+    } else {
+      setText("");
+      setDate(null);
+    }
 
-    if (onChange) onChange(null, isoDate, date);
+    // if (onChange) onChange(null, isoDate, date);
     InputChanged.current = false;
 
     toggleCalendar();
@@ -320,7 +360,17 @@ const DateInput = React.forwardRef((props, ref) => {
 
   //=============== RENDER ============================================================
 
-  var themeProps = { theme, size, color, disabled };
+  var themeProps = { theme, size, color, disabled, readOnly };
+
+  var minMaxDate = {};
+
+  if (minDate && isIsoDate(minDate)) {
+    minMaxDate.minDate = new Date(minDate);
+  }
+
+  if (maxDate && isIsoDate(maxDate)) {
+    minMaxDate.maxDate = new Date(maxDate);
+  }
 
   return (
     <Container {...themeProps} className={className}>
@@ -347,7 +397,7 @@ const DateInput = React.forwardRef((props, ref) => {
           <Calendar
             onChange={handleCalendarOnChange}
             value={date}
-            // {...minMaxDate}
+            {...minMaxDate}
             prevLabel={
               <NavigationIcon
                 {...themeProps}
@@ -382,17 +432,20 @@ const DateInput = React.forwardRef((props, ref) => {
 DateInput.defaultProps = {
   id: "",
   value: "",
-  format: "yyyy-mm-dd",
   disabled: false,
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
+  readOnly: false,
   useCalendar: true,
+  format: "yyyy-mm-dd",
   minDate: "",
   maxDate: "",
   //------------------------------
-  theme: theme,
+  onChange: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  //------------------------------
   className: "",
+  style: {},
+  theme: theme,
   size: "small",
   color: "primary",
 };
@@ -400,15 +453,19 @@ DateInput.defaultProps = {
 DateInput.propTypes = {
   id: PropTypes.string,
   value: PropTypes.string,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  useCalendar: PropTypes.bool,
+  format: PropTypes.string,
   minDate: PropTypes.string,
   maxDate: PropTypes.string,
-  format: PropTypes.string,
-  disabled: PropTypes.bool,
+  //-----------------------------------------------------------
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  useCalendar: PropTypes.bool,
   //-----------------------------------------------------------
+  className: PropTypes.string,
+  style: PropTypes.object,
   theme: PropTypes.object.isRequired,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
