@@ -85,6 +85,7 @@ const ColorInput = React.forwardRef((props, ref) => {
 
 ColorInput.defaultProps = {
   id: "",
+  value: "",
   disabled: false,
   readOnly: false,
   preventDefault: true,
@@ -102,6 +103,7 @@ ColorInput.defaultProps = {
 
 ColorInput.propTypes = {
   id: PropTypes.any.isRequired,
+  value: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   preventDefault: PropTypes.bool,
