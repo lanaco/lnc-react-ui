@@ -15,6 +15,7 @@ Default.args = {
   size: "small",
   color: "primary",
   disabled: false,
+  readOnly: false,
   minDate: "2000-01-01",
   maxDate: "2030-01-01",
 };

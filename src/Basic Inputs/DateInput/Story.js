@@ -5,7 +5,6 @@ const Story = (props) => {
   const [value, setValue] = useState("2022-05-24");
 
   const onChange = (event, isoDateValue) => {
-    console.error("ONCHANGE: ", isoDateValue);
     setValue(isoDateValue);
   };
 
