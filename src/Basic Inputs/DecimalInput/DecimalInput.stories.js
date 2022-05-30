@@ -1,15 +1,27 @@
 import React from "react";
 import DecimalInput from ".";
+import Story from "./Story";
 
 export default {
   title: "Basic Inputs/Decimal Input",
-  component: DecimalInput
+  component: DecimalInput,
 };
 
 const Template = (args) => (
   <div style={{ width: "150px" }}>
-    <DecimalInput {...args}/>
+    <Story {...args} />
   </div>
 );
 
-export const Default = Template.bind({});
+export const Default = Template.bind({
+  disabled: false,
+  readOnly: false,
+  defaultValue: 0,
+  debounceTime: 180,
+  prefix: "",
+  thousandSeparator: ".",
+  decimalSeparator: ",",
+  decimalScale: 2,
+  fixedDecimalScale: true,
+  allowNegative: true,
+});

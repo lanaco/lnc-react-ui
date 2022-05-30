@@ -170,7 +170,6 @@ const CheckBox = React.forwardRef((props, ref) => {
   const theme = useTheme();
   const [checkBoxChecked, setCheckBoxChecked] = useState(checked);
   const [indeterminateState, setIndeterminateState] = useState(indeterminate);
-  var [focused, setFocused] = useState(false);
 
   useEffect(() => {
     setCheckBoxChecked(checked);
@@ -203,13 +202,10 @@ const CheckBox = React.forwardRef((props, ref) => {
   };
 
   const handleOnBlur = (e) => {
-    setFocused(false);
     if (onBlur) onBlur(e, id);
   };
 
   const handleOnFocus = (e) => {
-    setFocused(true);
-
     if (onFocus) onFocus(e, id);
   };
 

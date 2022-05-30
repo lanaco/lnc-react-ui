@@ -176,6 +176,7 @@ const DateInput = React.forwardRef((props, ref) => {
     color,
     theme,
     className,
+    style,
     disabled,
     readOnly,
     onFocus,
@@ -373,7 +374,7 @@ const DateInput = React.forwardRef((props, ref) => {
   }
 
   return (
-    <Container {...themeProps} className={className}>
+    <Container {...themeProps} className={className} style={style}>
       <Input
         ref={ref}
         {...themeProps}
