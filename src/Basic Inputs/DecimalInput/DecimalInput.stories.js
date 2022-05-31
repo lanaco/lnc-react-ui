@@ -22,7 +22,7 @@ Default.args = {
   prefix: "",
   thousandSeparator: ".",
   decimalSeparator: ",",
-  decimalScale: -1,
+  decimalScale: 2,
   fixedDecimalScale: true,
   allowNegative: true,
 };

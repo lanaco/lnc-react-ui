@@ -3,11 +3,9 @@ import FileInput from ".";
 
 export default {
   title: "Basic Inputs/File Input",
-  component: FileInput
+  component: FileInput,
 };
 
-const Template = (args) => (
-  <FileInput />
-);
+const Template = (args) => <FileInput id="file" />;
 
 export const Default = Template.bind({});
