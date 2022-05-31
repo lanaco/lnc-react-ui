@@ -13,7 +13,8 @@ const Template = (args) => (
   </div>
 );
 
-export const Default = Template.bind({
+export const Default = Template.bind({});
+Default.args = {
   disabled: false,
   readOnly: false,
   defaultValue: 0,
@@ -21,7 +22,7 @@ export const Default = Template.bind({
   prefix: "",
   thousandSeparator: ".",
   decimalSeparator: ",",
-  decimalScale: 2,
+  decimalScale: -1,
   fixedDecimalScale: true,
   allowNegative: true,
-});
+};

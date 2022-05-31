@@ -41,6 +41,8 @@ const heightBySize = (size) => {
 };
 
 const Container = styled.div`
+  width: 100%;
+
   & input {
     appearance: none;
     outline: none;
@@ -97,6 +99,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
     decimalScale,
     fixedDecimalScale,
     allowNegative,
+    //----------------
     onChange,
     onKeyDown,
     onBlur,
@@ -111,6 +114,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
   const [inputValue, setInputValue] = useState(0);
+  const [refresh, setRefresh] = useState(true);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), 180),
@@ -121,10 +125,43 @@ const DecimalInput = React.forwardRef((props, ref) => {
     if (onChange) onChange(e, value);
   };
 
-  // const onBlurEvent = (e) => {
-  //   handleChange(e, inputValue);
-  //   console.log("blur", e);
-  // };
+  const forceRefresh = () => setRefresh(!refresh);
+
+  const onValueChange = (valueObject, eventObject) => {
+    var triggerRefresh = false;
+    var _value = valueObject.floatValue || 0;
+
+    if (_value === -0) {
+      triggerRefresh = true;
+      _value = 0;
+    }
+
+    if (_value === undefined) {
+      triggerRefresh = true;
+      _value = 0;
+    }
+
+    if (_value > Number.MAX_SAFE_INTEGER) {
+      _value = Number.MAX_SAFE_INTEGER;
+      triggerRefresh = true;
+    }
+
+    if (_value < Number.MIN_SAFE_INTEGER) {
+      _value = Number.MIN_SAFE_INTEGER;
+      triggerRefresh = true;
+    }
+
+    setInputValue(_value);
+
+    if (_value !== inputValue) debouncedOnChange(eventObject.event, _value);
+
+    if (triggerRefresh) forceRefresh();
+  };
+
+  const getDecimalScale = () => {
+    if (decimalScale < 0) return 0;
+    if (decimalScale > 17) return 17;
+  };
 
   return (
     <Container {...{ theme, size, color, disabled, readOnly }}>
@@ -133,29 +170,19 @@ const DecimalInput = React.forwardRef((props, ref) => {
         readOnly={readOnly}
         ref={ref}
         prefix={prefix}
-        thousandSeparator={"."}
-        decimalSeparator={","}
-        decimalScale={2}
-        fixedDecimalScale={true}
-        allowNegative={true}
+        thousandSeparator={thousandSeparator}
+        decimalSeparator={decimalSeparator}
+        decimalScale={getDecimalScale()}
+        fixedDecimalScale={fixedDecimalScale}
+        allowNegative={allowNegative}
         value={inputValue}
         defaultValue={defaultValue}
-        onKeyDown={(e) => {
-          if (e.key === "Backspace") {
-            console.log(e.target.value);
-          }
+        onFocus={onFocus}
+        onBlur={(e) => {
+          if (inputValue === 0 && e.target.value.includes("-")) forceRefresh();
+          if (onBlur) onBlur(e);
         }}
-        // onFocus={onFocus}
-        // onBlur={(e) => onBlurEvent(e)}
-        onValueChange={(valueObject, eventObject) => {
-          var _value = valueObject.floatValue || 0.0;
-
-          if (_value === -0) _value = 0;
-          if (_value === undefined) _value = 0;
-
-          setInputValue(_value);
-          debouncedOnChange(eventObject.event, _value);
-        }}
+        onValueChange={onValueChange}
       />
     </Container>
   );
