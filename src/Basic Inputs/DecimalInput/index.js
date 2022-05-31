@@ -161,6 +161,8 @@ const DecimalInput = React.forwardRef((props, ref) => {
   const getDecimalScale = () => {
     if (decimalScale < 0) return 0;
     if (decimalScale > 17) return 17;
+
+    return decimalScale;
   };
 
   return (
