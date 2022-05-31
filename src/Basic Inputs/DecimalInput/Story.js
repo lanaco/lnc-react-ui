@@ -6,6 +6,7 @@ const Story = (props) => {
 
   return (
     <>
+      <button>VALUE: {value}</button>
       <DecimalInput
         {...props}
         value={value}
