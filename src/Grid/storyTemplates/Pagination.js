@@ -33,6 +33,7 @@ const Pagination = (props) => {
       EnablePagination: true,
       EnableSelection: false,
       EnableOrdering: true,
+      EnableExports: true,
     },
     Ordering: {
       DefaultAccessor: "id",
@@ -72,6 +73,10 @@ const Pagination = (props) => {
     }, 350);
   };
 
+  const exportData = (eq) => {
+    console.log("Export started");
+  };
+
   useEffect(() => {
     setGridState({ ...GridState, ...loadData() });
   }, []);
@@ -85,6 +90,7 @@ const Pagination = (props) => {
         HeaderText={"Report header text"}
         Data={GridState.Data}
         Pagination={GridState}
+        Export={exportData}
         Load={load}
         Hooks={{
           BeforePageChange: () => true,

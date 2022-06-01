@@ -36,7 +36,7 @@ const getDefaultState = () => {
       EnableDelete: false,
       EnableEdit: false,
       EnableAdd: false,
-      EnableExports: false, // Later...
+      EnableExports: false,
       EnableFilters: false, // Stamp specific
       EnableOrdering: false,
       EnableSwitchReadOnlyMode: true,
@@ -253,6 +253,7 @@ const Grid = React.forwardRef((props, ref) => {
     Form = null,
     Pagination = {},
     Load = null,
+    Export = () => {},
     Localization = {},
     SelectedData = {},
     OnChange = null,
@@ -318,7 +319,7 @@ const Grid = React.forwardRef((props, ref) => {
       EnableDelete: false,
       EnableEdit: false,
       EnableAdd: false,
-      EnableExports: false, // Later...
+      EnableExports: false,
       EnableFilters: false, // Stamp specific
       EnableOrdering: false,
       EnableSwitchReadOnlyMode: true,
@@ -1547,6 +1548,7 @@ const Grid = React.forwardRef((props, ref) => {
       goToLastPage: onGoToLastPage,
       goToFirstPage: onGoToFirstPage,
       OnPageSizeChanged: onPageSizeChanged,
+      EnableExports: state.Options.EnableExports,
     };
 
     return (
@@ -1555,6 +1557,7 @@ const Grid = React.forwardRef((props, ref) => {
           {...cfg}
           inverted={true}
           Localization={Localization.Pagination || {}}
+          Export={Export}
         />
         <ItemFooterText {...themeProps}>{props.FooterText}</ItemFooterText>
       </PaginationContainer>
