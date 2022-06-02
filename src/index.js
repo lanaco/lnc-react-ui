@@ -93,9 +93,6 @@ export { default as DateInputBasic } from "./Basic Inputs/DateInput";
 export * from "./Basic Inputs/DecimalInput";
 export { default as DecimalInput } from "./Basic Inputs/DecimalInput";
 
-export * from "./Basic Inputs/EmailInput";
-export { default as EmailInput } from "./Basic Inputs/EmailInput";
-
 export * from "./Basic Inputs/FileInput";
 export { default as FileInput } from "./Basic Inputs/FileInput";
 

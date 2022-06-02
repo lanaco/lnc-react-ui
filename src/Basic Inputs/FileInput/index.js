@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import theme from "../../_utils/theme";
 
 const Container = styled.div``;
 
@@ -14,20 +15,24 @@ const Input = styled.input`
 `;
 
 const Label = styled.label`
-  font-size: 1.25em;
-  font-weight: 700;
-  color: white;
-  background-color: black;
+  font-family: arial;
+  font-size: 12px;
   display: inline-block;
   cursor: pointer;
+  background-color: ${theme.palette.primary.main};
+  color: white;
+  padding: 6px;
+  border-radius: 3px 0 0 3px;
 `;
 
-const FileName = styled.span`
-  position: absolute;
-  bottom: -35px;
-  left: 10px;
-  font-size: 0.85rem;
-  color: #555;
+const FileName = styled.input`
+  font-family: arial;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 0 3px 3px 0;
+  appearance: none;
+  outline: none;
+  border: 1px solid ${theme.palette.primary.main};
 `;
 
 const FileInput = React.forwardRef((props, ref) => {
@@ -41,38 +46,45 @@ const FileInput = React.forwardRef((props, ref) => {
     preventDefault,
     accept,
     multiple,
+    chooseFileText = "Choose file",
+    showFileSize = false,
     ...rest
   } = props;
 
-  const handleOnChange = (e) => {
-    if (preventDefault) e.preventDefault();
+  const [file, setFile] = useState(null);
 
-    if (onChange) onChange(id, e);
+  const getFileName = () => {
+    if (file && showFileSize)
+      return `${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
+
+    if (file) return file.name;
+    return "";
+  };
+
+  const handleOnChange = (e) => {
+    var file = null;
+
+    if (e.target.files && e.target.files.length === 1) file = e.target.files[0];
+    else file = null;
+
+    setFile(file);
+    if (onChange) onChange(e, file);
   };
 
   return (
-    <Container>
-      <Input type="file" id={id} />
-      <Label htmlFor={id}>Select file</Label>
-      <FileName></FileName>
+    <Container className={className} style={style}>
+      <Input
+        accept={accept}
+        multiple={false}
+        ref={ref}
+        onChange={handleOnChange}
+        type="file"
+        id={id}
+        {...rest}
+      />
+      <Label htmlFor={id}>{chooseFileText}</Label>
+      <FileName onChange={() => {}} value={getFileName()} />
     </Container>
-  );
-
-  return (
-    // <input type="file" />
-    <input
-      type="file"
-      id={id}
-      className={className}
-      style={style}
-      accept={accept}
-      disabled={disabled}
-      name={name}
-      ref={ref}
-      multiple={multiple}
-      onChange={handleOnChange}
-      {...rest}
-    />
   );
 });
 

@@ -1,6 +1,5 @@
 import React from "react";
 import DecimalInput from ".";
-import Story from "./Story";
 
 export default {
   title: "Basic Inputs/Decimal Input",
@@ -9,7 +8,7 @@ export default {
 
 const Template = (args) => (
   <div style={{ width: "150px" }}>
-    <Story {...args} />
+    <DecimalInput {...args} />
   </div>
 );
 
@@ -25,4 +24,6 @@ Default.args = {
   decimalScale: 2,
   fixedDecimalScale: true,
   allowNegative: true,
+  color: "primary",
+  size: "medium",
 };

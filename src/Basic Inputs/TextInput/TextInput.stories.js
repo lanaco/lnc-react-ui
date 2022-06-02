@@ -6,16 +6,16 @@ export default {
   title: "Basic Inputs/Text Input",
   component: TextInput,
   argTypes: {
-    onInput: { action: "onInput"},
-    onChange: { action: "onChange"},
-    onBlur: { action: "onBlur"},
+    onInput: { action: "onInput" },
+    onChange: { action: "onChange" },
+    onBlur: { action: "onBlur" },
   },
 };
 
-const Template = (args) => 
-(<div>
-  <TextInput {...args} />
-</div>
+const Template = (args) => (
+  <div style={{ width: "150px" }}>
+    <TextInput {...args} />
+  </div>
 );
 
 export const Default = Template.bind({});
@@ -24,7 +24,6 @@ Default.args = {
   size: "medium",
   disabled: false,
   readOnly: false,
-  // value: "text",
-  autoFocus: true,
-  onInput: () => {}
+  value: "",
+  type: "text",
 };
