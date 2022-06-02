@@ -1,6 +1,64 @@
 const theme = {
   name: "Main",
   backgroundColor: "#fff",
+  test_palette: {
+    primary: {
+      100: "#007DB8",
+      200: "#0070a3",
+      300: "#00628f",
+      400: "#00537a",
+      500: "#004666",
+    },
+    secondary: {
+      100: "#00dcf5",
+      200: "#00cae0",
+      300: "#00b8cc",
+      400: "#00a1b4",
+      500: "#0093a3",
+    },
+    dark: {
+      100: "#858585",
+      200: "#707070",
+      300: "#666666",
+      400: "#575757",
+      500: "#474747",
+    },
+    light: {
+      100: "#FFFFFF",
+      200: "#F5F5F5",
+      300: "#EBEBEB",
+      400: "#E0E0E0",
+      500: "#CCCCCC",
+    },
+    success: {
+      100: "#2EEFC2",
+      200: "#1BEEBD",
+      300: "#11E4B3",
+      400: "#10D1A3",
+      500: "#0EBE95",
+    },
+    danger: {
+      100: "#FF99A7",
+      200: "#FF8595",
+      300: "#FF7083",
+      400: "#FF556C",
+      500: "#FF4760",
+    },
+    warning: {
+      100: "#FFD5AD",
+      200: "#FFCA99",
+      300: "#FFC085",
+      400: "#FFB26B",
+      500: "#FFAB5C",
+    },
+    info: {
+      100: "#A1C5F7",
+      200: "#8EB9F5",
+      300: "#7CAEF4",
+      400: "#69A1F2",
+      500: "#5696F0",
+    },
+  },
   palette: {
     common: {
       black: "black",
@@ -118,7 +176,7 @@ const theme = {
       gap: "0.45rem",
     },
     large: {
-      fontSize: "1.463rem",
+      fontSize: "1.125",
       iconFontSize: "1.6375rem",
       gap: "0.6rem",
     },

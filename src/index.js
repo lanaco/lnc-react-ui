@@ -93,9 +93,6 @@ export { default as DateInputBasic } from "./Basic Inputs/DateInput";
 export * from "./Basic Inputs/DecimalInput";
 export { default as DecimalInput } from "./Basic Inputs/DecimalInput";
 
-export * from "./Basic Inputs/EmailInput";
-export { default as EmailInput } from "./Basic Inputs/EmailInput";
-
 export * from "./Basic Inputs/FileInput";
 export { default as FileInput } from "./Basic Inputs/FileInput";
 
@@ -125,21 +122,3 @@ export { default as Content } from "./Layout/Content";
 
 export * from "./Layout/Button Group";
 export { default as ButtonGroup } from "./Layout/Button Group";
-
-export * from "./Layout/Wizard";
-export { default as Wizard } from "./Layout/Wizard";
-
-export * from "./Layout/FlexBox";
-export { default as FlexBox } from "./Layout/FlexBox";
-
-export * from "./Layout/Grid";
-export { default as Grid } from "./Layout/Grid";
-
-export * from "./Feedback/ProgressBar";
-export { default as ProgressBar } from "./Layout/ProgressBar";
-
-export * from "./Utility/Popover";
-export { default as Popover } from "./Utility/Popover";
-
-export * from "./Feedback/Notification";
-export { default as Notification } from "./Layout/Notification";

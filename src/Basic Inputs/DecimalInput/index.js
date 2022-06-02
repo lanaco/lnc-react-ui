@@ -5,78 +5,68 @@ import React, { useCallback, useRef, useState } from "react";
 import NumberFormat from "react-number-format";
 import { debounce } from "lodash";
 
-const paddingBySize = (size, hasIcon, iconPosition) => {
-  if (size === "small") {
-    if (hasIcon) {
-      if (iconPosition == "right") return "0.325rem 2rem 0.325rem 0.375rem";
-
-      return "0.325rem 0.375rem 0.325rem 2rem";
-    }
-    return "0.325rem 0.375rem";
-  }
-  if (size === "medium") {
-    if (hasIcon) {
-      if (iconPosition == "right")
-        return "0.375rem 2.375rem 0.375rem 0.3875rem";
-
-      return "0.375rem 0.3875rem 0.375rem 2.475rem";
-    }
-    return "0.3875rem 0.375rem";
-  }
-  if (size === "large") {
-    if (hasIcon) {
-      if (iconPosition == "right")
-        return "0.375rem 2.75rem 0.375rem 0.422375rem";
-
-      return "0.375rem 0.422375rem 0.375rem 2.85rem";
-    }
-    return "0.422375rem 0.375rem";
-  }
+const paddingBySize = (size) => {
+  return {
+    small: "0.41875rem 0.5rem",
+    medium: "0.48125rem 0.6rem",
+    large: "0.65625rem 0.7rem",
+  }[size];
 };
 
-const heightBySize = (size) => {
-  if (size === "small") return `1.625rem`;
-  if (size === "medium") return `2rem`;
-  if (size === "large") return `2.375rem`;
+const standardCssFields = ({ theme, color, size }) => {
+  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+    size
+  ];
+
+  return `
+    font-family: ${theme.typography.fontFamily};
+    font-size: ${theme.typography[size].fontSize};
+    min-height: ${height};
+    max-height: ${height};
+  `;
 };
 
 const Container = styled.div`
   width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  ${(props) => standardCssFields(props)}
 
   & input {
+    padding: ${(props) => paddingBySize(props.size)};
+    background-color: ${(props) => props.theme.test_palette.light[100]};
+    color: ${(props) => props.theme.test_palette.dark[500]};
+    border: 1.5px solid ${(props) => props.theme.test_palette.light[500]};
+
+    min-height: inherit;
+    max-height: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
     appearance: none;
     outline: none;
-    border: none;
-    border-bottom: ${(props) =>
-      "0.125rem solid " + props.theme.palette[props.color].main};
-    transition: all 250ms;
     display: inline-block;
-    justify-content: center;
-    cursor: text;
-    padding: ${(props) =>
-      paddingBySize(props.size, props.icon ? true : false, props.iconPosition)};
-    font-size: ${(props) => props.theme.typography[props.size].fontSize};
-    background-color: ${(props) => props.theme.palette[props.color].lighter};
-    color: ${(props) => props.theme.palette[props.color].textDark};
-    border-radius: 0.125rem;
+    border-radius: 0.25rem;
     width: 100%;
     box-sizing: border-box;
-    min-height: ${(props) => heightBySize(props.size)};
-    max-height: ${(props) => heightBySize(props.size)};
-    font-family: ${(props) => props.theme.typography.fontFamily};
 
     &:disabled {
-      background-color: ${(props) => props.theme.palette.gray[200]};
-      border-bottom: ${(props) =>
-        "0.125rem solid " + props.theme.palette.gray[900]};
-      color: ${(props) => props.theme.palette.gray.textLight};
-      opacity: 0.7;
+      border: 1.5px solid ${(props) => props.theme.test_palette.light[400]};
+      color: ${(props) => props.theme.test_palette.light[500]};
       cursor: default;
     }
 
-    &:focus {
-      background-color: ${(props) => props.theme.palette.common.white};
-      color: ${(props) => props.theme.palette.common.black};
+    &:hover:enabled {
+      border: 1.5px solid
+        ${(props) => props.theme.test_palette[props.color][400]};
+    }
+
+    &:focus:enabled {
+      border: 1.5px solid
+        ${(props) => props.theme.test_palette[props.color][400]};
+      box-shadow: 0px 0px 6px -2px ${(props) => props.theme.test_palette[props.color][400]};
     }
   }
 `;
@@ -117,7 +107,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
   const [refresh, setRefresh] = useState(true);
 
   const debouncedOnChange = useCallback(
-    debounce((e, val) => handleChange(e, val), 180),
+    debounce((e, val) => handleChange(e, val), debounceTime),
     []
   );
 
