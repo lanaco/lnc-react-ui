@@ -12,7 +12,7 @@ const paddingBySize = (size) => {
   }[size];
 };
 
-const standardCssFields = ({ theme, color, size }) => {
+const standardCssFields = ({ theme, size }) => {
   var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
     size
   ];
@@ -84,6 +84,8 @@ const TextInput = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
   const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => setInputValue(value ? value : ""), [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),

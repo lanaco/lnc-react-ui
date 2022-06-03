@@ -34,7 +34,7 @@ const Container = styled.div`
 
   color: ${(props) => props.theme.test_palette.dark[500]};
 
-  border: 1.5px solid
+  border: 0.09375rem solid
     ${(props) =>
       props.disabled
         ? props.theme.test_palette.light[400]
@@ -48,7 +48,7 @@ const Container = styled.div`
       : "none"};
 
   &:hover {
-    border: 1.5px solid
+    border: 0.09375rem solid
       ${(props) =>
         props.disabled
           ? props.theme.test_palette.light[400]
@@ -66,7 +66,8 @@ const Container = styled.div`
     border-radius: 0.2rem;
     font-size: ${(props) => props.theme.typography[props.size].fontSize};
     font-family: ${(props) => props.theme.typography.fontFamily};
-    border: 0.0625rem solid ${(props) => props.theme.palette[props.color].main};
+    border: 0.0625rem solid
+      ${(props) => props.theme.test_palette[props.color][400]};
   }
 
   & .react-calendar__navigation__arrow,
@@ -81,7 +82,7 @@ const Container = styled.div`
   }
 
   & .react-calendar__month-view__weekdays__weekday {
-    color: ${(props) => props.theme.palette[props.color].main};
+    color: ${(props) => props.theme.test_palette[props.color][400]};
     font-size: ${(props) => props.theme.typography[props.size].fontSize};
     font-family: ${(props) => props.theme.typography.fontFamily};
 
@@ -96,32 +97,32 @@ const Container = styled.div`
   }
 
   & .react-calendar__tile--now {
-    background: ${(props) => props.theme.palette.secondary.lighter};
+    background: ${(props) => props.theme.test_palette.secondary[200]};
   }
 
   & .react-calendar__tile--now:enabled:hover,
   .react-calendar__tile--now:enabled:focus {
-    background: ${(props) => props.theme.palette.secondary.lighter};
+    background: ${(props) => props.theme.test_palette.secondary[200]};
   }
 
   & .react-calendar__tile--active {
-    background: ${(props) => props.theme.palette[props.color].main};
+    background: ${(props) => props.theme.test_palette[props.color][400]};
     color: white;
   }
 
   & .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
-    background: ${(props) => props.theme.palette[props.color].light};
+    background: ${(props) => props.theme.test_palette[props.color][300]};
   }
 
   & .react-calendar__tile--hasActive {
-    background: ${(props) => props.theme.palette[props.color].main};
+    background: ${(props) => props.theme.test_palette[props.color][400]};
     color: ${(props) => props.theme.palette[props.color].text};
   }
 
   & .react-calendar__tile--hasActive:enabled:hover,
   .react-calendar__tile--hasActive:enabled:focus {
-    background: ${(props) => props.theme.palette[props.color].light};
+    background: ${(props) => props.theme.test_palette[props.color][300]};
   }
 `;
 
@@ -156,7 +157,9 @@ const CalendarButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.4rem;
+  padding: 0
+    ${(props) =>
+      ({ small: "0.4rem", medium: "0.5rem", large: "0.6rem" }[props.size])};
 `;
 
 const CalendarContainer = styled.div`

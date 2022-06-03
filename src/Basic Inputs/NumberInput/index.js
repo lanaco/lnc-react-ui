@@ -87,6 +87,8 @@ const NumberInput = React.forwardRef((props, ref) => {
   const theme = useTheme();
   const [inputValue, setInputValue] = useState(0);
 
+  useEffect(() => setInputValue(value), [value]);
+
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
     []

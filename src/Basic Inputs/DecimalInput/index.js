@@ -106,6 +106,8 @@ const DecimalInput = React.forwardRef((props, ref) => {
   const [inputValue, setInputValue] = useState(0);
   const [refresh, setRefresh] = useState(true);
 
+  useEffect(() => setInputValue(value), [value]);
+
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
     []
