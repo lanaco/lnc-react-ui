@@ -6,6 +6,11 @@ export default {
   component: FileInput,
 };
 
-const Template = (args) => <FileInput id="file" />;
+const Template = (args) => <FileInput {...args} id="file" />;
 
 export const Default = Template.bind({});
+Default.args = {
+  disabled: false,
+  size: "small",
+  color: "primary",
+};

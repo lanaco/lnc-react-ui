@@ -9,7 +9,7 @@ const Story = (props) => {
   };
 
   return (
-    <div style={{ width: "140px" }}>
+    <div style={{ width: "180px" }}>
       <DateInput {...props} value={value} onChange={onChange} />
     </div>
   );

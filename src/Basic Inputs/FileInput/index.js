@@ -2,8 +2,49 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
+import { useTheme } from "@emotion/react";
 
-const Container = styled.div``;
+var heightBySize = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" };
+
+var paddingBySize = { small: "8px", medium: "9.5px", large: "11.75px" };
+var fileNamePaddingBySize = {
+  small: "6.5px",
+  medium: "8px",
+  large: "11.75px",
+};
+
+const standardCssFields = ({ theme, color, size }) => {
+  return `
+    font-family: ${theme.typography.fontFamily};
+    font-size: ${theme.typography[size].fontSize};
+  `;
+};
+
+const Container = styled.div`
+  display: flex;
+  max-height: ${(props) => heightBySize[props.size]};
+  min-height: ${(props) => heightBySize[props.size]};
+  box-sizing: border-box;
+  width: 100%;
+
+  &:hover label {
+    background-color: ${(props) =>
+      props.disabled
+        ? ""
+        : props.focused
+        ? props.theme.test_palette[props.color][200]
+        : props.theme.test_palette[props.color][300]};
+  }
+
+  &:hover input {
+    border: 0.09375rem solid
+      ${(props) =>
+        props.disabled
+          ? props.theme.test_palette.light[400]
+          : props.theme.test_palette.light[500]};
+    border-left: transparent;
+  }
+`;
 
 const Input = styled.input`
   width: 0.1px;
@@ -15,24 +56,33 @@ const Input = styled.input`
 `;
 
 const Label = styled.label`
-  font-family: arial;
-  font-size: 12px;
+  ${(props) => standardCssFields(props)}
+
   display: inline-block;
-  cursor: pointer;
-  background-color: ${theme.palette.primary.main};
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+  background-color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[400]
+      : props.theme.test_palette[props.color][props.focused ? 200 : 400]};
   color: white;
-  padding: 6px;
-  border-radius: 3px 0 0 3px;
+  padding: ${(props) => paddingBySize[props.size]};
+  border-radius: 0.1875rem 0 0 0.1875rem;
 `;
 
 const FileName = styled.input`
-  font-family: arial;
-  font-size: 12px;
-  padding: 5px;
-  border-radius: 0 3px 3px 0;
+  ${(props) => standardCssFields(props)}
+  flex-grow: 1;
+  padding: ${(props) => fileNamePaddingBySize[props.size]};
+  border-radius: 0 0.1875rem 0.1875rem 0;
   appearance: none;
   outline: none;
-  border: 1px solid ${theme.palette.primary.main};
+  box-sizing: border-box;
+  border: 0.09375rem solid
+    ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[400]
+        : props.theme.test_palette.light[500]};
+  border-left: transparent;
 `;
 
 const FileInput = React.forwardRef((props, ref) => {
@@ -41,17 +91,25 @@ const FileInput = React.forwardRef((props, ref) => {
     className,
     style,
     onChange,
+    onFocus,
+    onBlur,
     disabled,
-    name,
     preventDefault,
     accept,
     multiple,
-    chooseFileText = "Choose file",
-    showFileSize = false,
+    chooseFileText,
+    showFileSize,
+    color,
+    size,
     ...rest
   } = props;
 
+  const theme = useTheme();
+
   const [file, setFile] = useState(null);
+  const [focused, setFocused] = useState(false);
+
+  var themeProps = { theme, size, color, disabled, focused };
 
   const getFileName = () => {
     if (file && showFileSize)
@@ -72,18 +130,29 @@ const FileInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Container className={className} style={style}>
+    <Container {...themeProps} className={className} style={style}>
       <Input
+        {...themeProps}
         accept={accept}
         multiple={false}
         ref={ref}
-        onChange={handleOnChange}
+        onChange={disabled ? () => {} : handleOnChange}
         type="file"
         id={id}
+        onFocus={(e) => {
+          if (!disabled) setFocused(true);
+          if (onFocus && !disabled) onFocus(e);
+        }}
+        onBlur={(e) => {
+          if (!disabled) setFocused(false);
+          if (onBlur && !disabled) onBlur(e);
+        }}
         {...rest}
       />
-      <Label htmlFor={id}>{chooseFileText}</Label>
-      <FileName onChange={() => {}} value={getFileName()} />
+      <Label {...themeProps} htmlFor={id}>
+        {chooseFileText}
+      </Label>
+      <FileName {...themeProps} onChange={() => {}} value={getFileName()} />
     </Container>
   );
 });
@@ -91,20 +160,41 @@ const FileInput = React.forwardRef((props, ref) => {
 FileInput.defaultProps = {
   id: "",
   disabled: false,
+  accept: "",
+  chooseFileText: "Choose file",
+  showFileSize: false,
+  //------------------
   onChange: () => {},
-  preventDefault: true,
+  onFocus: () => {},
+  onBlur: () => {},
+  //------------------
   className: "",
   style: {},
+  size: "small",
+  color: "primary",
 };
 FileInput.propTypes = {
   id: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
+  accept: PropTypes.string,
+  chooseFileText: PropTypes.string,
+  showFileSize: PropTypes.bool,
+  //-------------------------
   onChange: PropTypes.func,
-  preventDefault: PropTypes.bool,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  //-------------------------
   className: PropTypes.string,
   style: PropTypes.object,
-  multiple: PropTypes.bool,
-  accept: PropTypes.string,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "gray",
+  ]),
 };
 
 export default FileInput;

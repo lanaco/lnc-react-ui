@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import theme from "../../_utils/theme";
 
 const getSize = (size) => {
-  return { small: "1.625rem", medium: "2rem", large: "2.375rem" }[size];
+  return { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[size];
 };
 
 const StyledColorInput = styled.input`
@@ -15,7 +15,7 @@ const StyledColorInput = styled.input`
   padding: 0;
   margin: 0;
   border-radius: 0.1875rem;
-  border: 1px solid ${(props) => props.theme.palette[props.color].main};
+  border: 2px solid ${(props) => props.theme.palette[props.color].main};
   padding: 0 0.1875rem;
   background-color: transparent;
   max-height: ${(props) => getSize(props.size)};
@@ -23,9 +23,19 @@ const StyledColorInput = styled.input`
   width: 100%;
   cursor: pointer;
 
+  &:hover:enabled {
+    box-shadow: 0px 0px 6px -2px ${(props) =>
+      props.theme.test_palette[props.color][400]};
+  }
+
+  &:focus:enabled {
+    box-shadow: 0px 0px 8px -1px ${(props) =>
+      props.theme.test_palette[props.color][400]};
+  }
+
   &:disabled {
     cursor: default;
-    border: 1px solid ${(props) => props.theme.palette.gray[900]}};
+    border: 2px solid ${(props) => props.theme.palette.gray[900]}};
   }
 `;
 

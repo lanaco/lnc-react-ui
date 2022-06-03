@@ -1,53 +1,164 @@
-import { useTheme } from '@emotion/react';
-import React, { useEffect, useState } from 'react';
+import { useTheme } from "@emotion/react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 
-const getLabelDirection = (direction) => {
-  if (direction == "up") return "column-reverse";
-  else if (direction == "down") return "column";
-  else if (direction == "left") return "row-reverse";
-  return "row";
-}
+const standardCssFields = ({ theme, color, size }) => {
+  var height = { small: "1.375rem", medium: "1.75rem", large: "2.125rem" }[
+    size
+  ];
 
-const StyledRadio = styled.label`
-  display: flex;
-  align-items: center;
-  gap: ${(props) => props.theme.typography[props.size].gap};
-  flex-direction: ${props => (getLabelDirection(props.labelPosition))};
+  return `
+    font-family: ${theme.typography.fontFamily};
+    font-size: ${theme.typography[size].fontSize};
+    min-height: ${height};
+    max-height: ${height};
+  `;
+};
+
+const lineHeight = {
+  small: "1.375rem",
+  medium: "1.75rem",
+  large: "2.125rem",
+};
+
+const paddingLeft = {
+  small: "2.125rem",
+  medium: "2.625rem",
+  large: "3rem",
+};
+
+const outerCircleDimensions = {
+  small: "1rem",
+  medium: "1.375rem",
+  large: "1.75rem",
+};
+
+const innerCircleDimensions = {
+  small: "0.625rem",
+  medium: "0.875rem",
+  large: "1.125rem",
+};
+
+const outerCircleTop = {
+  small: "0.0625rem",
+  medium: "0.0625rem",
+  large: "0.0625rem",
+};
+
+const outerCircleLeft = {
+  small: "0.1875rem",
+  medium: "0.1875rem",
+  large: "0.1875rem",
+};
+
+const innerCircleTop = {
+  small: "0.375rem",
+  medium: "0.4375rem",
+  large: "0.5rem",
+};
+
+const innerCircleLeft = {
+  small: "0.5rem",
+  medium: "0.5625rem",
+  large: "0.625rem",
+};
+
+const Input = styled.input`
+  &:checked,
+  &:not(:checked) {
+    position: absolute;
+    left: -9999px;
+  }
+
+  &:checked + label,
+  &:not(:checked) + label {
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    padding-left: ${(props) => paddingLeft[props.size]};
+    cursor: pointer;
+    line-height: ${(props) => lineHeight[props.size]};
+    display: inline-block;
+    color: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[500]
+        : props.theme.test_palette.dark[500]};
+    font-family: ${(props) => props.theme.typography.fontFamily};
+    font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  }
+
+  &:checked + label:hover::before,
+  &:not(:checked) + label:hover::before {
+    box-shadow: ${(props) =>
+      props.disabled
+        ? ""
+        : props.focused
+        ? `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`
+        : `0px 0px 6px -2px ${props.theme.test_palette[props.color][400]}`};
+  }
+
+  &:checked + label::before,
+  &:not(:checked) + label::before {
+    content: "";
+    position: absolute;
+    left: ${(props) => outerCircleLeft[props.size]};
+    top: ${(props) => outerCircleTop[props.size]};
+    width: ${(props) => outerCircleDimensions[props.size]};
+    height: ${(props) => outerCircleDimensions[props.size]};
+    border: 2px solid
+      ${(props) =>
+        props.disabled
+          ? props.theme.test_palette.light[500]
+          : props.theme.test_palette[props.color][400]};
+    border-radius: 100%;
+    background: #fff;
+
+    box-shadow: ${(props) =>
+      props.disabled
+        ? ""
+        : props.focused
+        ? `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`
+        : ""};
+  }
+
+  &:checked + label::after,
+  &:not(:checked) + label::after {
+    content: "";
+    width: ${(props) => innerCircleDimensions[props.size]};
+    height: ${(props) => innerCircleDimensions[props.size]};
+    background: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[500]
+        : props.theme.test_palette[props.color][400]};
+    position: absolute;
+    top: ${(props) => innerCircleTop[props.size]};
+    left: ${(props) => innerCircleLeft[props.size]};
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+
+  &:not(:checked) + label::after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  &:checked + label::after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 `;
 
-const StyledRadioInput = styled.input`
-  margin: 0;
-  padding: 0;
-  appearance: none;
-  background-color: #fff;
-  font: inherit;
+const Container = styled.div`
+  padding: 4px;
+  width: fit-content;
+`;
 
-  width: ${props => (props.theme.typography[props.size].iconFontSize)};
-  height: ${props => (props.theme.typography[props.size].iconFontSize)};
-  border: ${props => ("0.15rem solid " + props.theme.palette[props.color].main)}; 
-  border-radius: 50%;
-  
-
-  transform: translateY(-0.075em);
-  display: grid;
-  place-content: center;
- 
-  background-color: ${props => (props.theme.palette[props.color].main)}; 
-  &:disabled {
-    background-color: ${props => (props.theme.palette.gray[900])}; 
-    border: ${props => ("0.15rem solid " + props.theme.palette.gray[900])}; 
-  };
-  ::before {
-    content: "";
-    width: ${props => ("calc( " + props.theme.typography[props.size].iconFontSize + " - 0.65rem)")};
-    height: ${props => ("calc( " + props.theme.typography[props.size].iconFontSize + " - 0.65rem)")};
-    border-radius: 50%;
-    transform: ${props => (props.checked ? "scale(1)" : "scale(0)")};
-    transition: ${props => props.theme.transition.duration.short + " transform " + props.theme.transition.easing.easeInOut};
-    box-shadow: ${props => ("inset 1em 1em " + props.theme.palette["white"].main)}; 
-  };
+const Label = styled.label`
+  ${(props) => standardCssFields(props)}
 `;
 
 const RadioInput = React.forwardRef((props, ref) => {
@@ -61,77 +172,83 @@ const RadioInput = React.forwardRef((props, ref) => {
     onChange,
     value,
     label,
-    labelPosition,
     disabled,
     readOnly,
-    name,
-    inputRef,
     preventDefault,
     ...rest
   } = props;
 
   const theme = useTheme();
   const [isChecked, setIsChecked] = useState(checked);
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
     setIsChecked(checked);
-  }, [checked])
+  }, [checked]);
+
+  var themeProps = { theme, size, color, disabled, focused };
 
   const handleChange = (e) => {
-    console.log("handle change");
     if (preventDefault) e.preventDefault();
 
-    setIsChecked(true)
-    if (onChange) onChange();
-  }
+    setIsChecked(true);
+    if (onChange) onChange(e);
+  };
 
   return (
-    <StyledRadio className={className} style={style} size={size} color={color} ref={ref} theme={theme} labelPosition={labelPosition}>
-      <StyledRadioInput type="radio" value={value}
-        readOnly={readOnly} disabled={disabled}
-        inputRef={inputRef} checked={isChecked}
+    <Container tabIndex={1}>
+      <Input
+        ref={ref}
         onChange={handleChange}
-        theme={theme} color={color} size={size}
+        onFocus={(e) => {
+          setFocused(true);
+          if (onFocus) onFocus(e);
+        }}
+        onBlur={(e) => {
+          setFocused(false);
+          if (onBlur) onBlur(e);
+        }}
+        tabIndex={2}
+        {...themeProps}
+        type="radio"
+        id={id}
+        checked={isChecked}
         {...rest}
       />
-      {label}
-    </StyledRadio>
-  )
+      <Label {...themeProps} htmlFor={id}>
+        {label}
+      </Label>
+    </Container>
+  );
 });
 
 RadioInput.defaultProps = {
   id: "",
+  checked: false,
   disabled: false,
   readOnly: false,
-  onChange: () => { },
-  checked: false,
-  value: "",
-  preventDefault: true,
-  size: "small",
   label: "",
-  labelPosition: "right",
-  color: "primary",
+  //------------------
+  onChange: () => {},
+  //------------------
   className: "",
   style: {},
-  icon: null,
+  size: "small",
+  color: "primary",
 };
 
 RadioInput.propTypes = {
   id: PropTypes.any.isRequired,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
   checked: PropTypes.bool,
-  value: PropTypes.string,
+  disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
-  preventDefault: PropTypes.bool,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
   label: PropTypes.string,
-  labelPosition: PropTypes.oneOf([
-    "up",
-    "down",
-    "right",
-    "left"
-  ]),
+  //-------------------------
+  onChange: PropTypes.func,
+  //-------------------------
+  className: PropTypes.string,
+  style: PropTypes.object,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
@@ -140,10 +257,6 @@ RadioInput.propTypes = {
     "warning",
     "gray",
   ]),
-  className: PropTypes.string,
-  style: PropTypes.object,
-  icon: PropTypes.string,
-  inputRef: PropTypes.func
 };
 
-export default RadioInput
+export default RadioInput;
