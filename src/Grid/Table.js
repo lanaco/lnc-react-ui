@@ -345,14 +345,6 @@ const Table = (props) => {
     )
       return <></>;
 
-    var title = SelectedEntirePage ? "Deselect all" : "Select all";
-
-    if (SelectedEntirePage && Localization.DeselectAll)
-      title = Localization.DeselectAll;
-
-    if (!SelectedEntirePage && Localization.SelectAll)
-      title = Localization.DeselectAll;
-
     return (
       <TableHeadCell selectionCell={true} key={-1}>
         {SelectionType === TableSelectionType.MULTIPLE && (
