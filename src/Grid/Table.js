@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CheckBox from "../CheckBox/index";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
 import PropTypes from "prop-types";
 import Icon from "../Icon/index";
 import styled from "@emotion/styled";
 import theme from "../_utils/theme";
-import baseStyle from "../Base/styles.module.css";
 
 const Container = styled.div`
   border-radius: 3px;
@@ -345,8 +344,16 @@ const Table = (props) => {
     )
       return <></>;
 
+    var title = SelectedEntirePage ? "Deselect all" : "Select all";
+
+    if (SelectedEntirePage && Localization.DeselectAll)
+      title = Localization.DeselectAll;
+
+    if (!SelectedEntirePage && Localization.SelectAll)
+      title = Localization.SelectAll;
+
     return (
-      <TableHeadCell selectionCell={true} key={-1}>
+      <TableHeadCell selectionCell={true} key={-1} title={title}>
         {SelectionType === TableSelectionType.MULTIPLE && (
           <CheckBox checked={SelectedEntirePage} onChange={handleSelectAll} />
         )}

@@ -150,6 +150,8 @@ const TableView = (props) => {
     LookupTakeItem = () => {},
   } = props.Config;
 
+  const { Localization = {} } = props;
+
   //======== FUNCTIONS ========
 
   function isFunction(functionToCheck) {
@@ -312,8 +314,22 @@ const TableView = (props) => {
   };
 
   const renderSelectAllHeaderCell = () => {
+    var title = SelectedEntirePage ? "Deselect all" : "Select all";
+
+    if (SelectedEntirePage && Localization.DeselectAll)
+      title = Localization.DeselectAll;
+
+    if (!SelectedEntirePage && Localization.SelectAll)
+      title = Localization.SelectAll;
+
     if (IsLookup)
-      return <TableHeadCell selectionCell={true} key={-1}></TableHeadCell>;
+      return (
+        <TableHeadCell
+          selectionCell={true}
+          key={-1}
+          title={title}
+        ></TableHeadCell>
+      );
 
     if (
       !EnableSelection ||
@@ -323,7 +339,7 @@ const TableView = (props) => {
       return <></>;
 
     return (
-      <TableHeadCell selectionCell={true} key={-1}>
+      <TableHeadCell selectionCell={true} key={-1} title={title}>
         {SelectionType === TableSelectionType.MULTIPLE && (
           <CheckBox
             checked={SelectedEntirePage}
