@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "../Modal/index";
 import ConfirmationForm from "../ConfirmationForm/index";
 import DropdownMenu from "../DropdownMenu/index";
@@ -6,7 +6,7 @@ import Button from "../Button/index.js";
 import FormMode from "./Constants/FormMode";
 import ViewType from "./Constants/ViewType";
 import FormViewMovement from "./FormViewMovement";
-import { freeze, mergeCSS } from "../Helper/helper";
+import { freeze } from "../Helper/helper";
 import styles from "./styles.module.css";
 import TableView from "./TableView";
 import PropTypes from "prop-types";
@@ -94,18 +94,6 @@ const FlexItem = styled.div`
   max-height: 40px;
 `;
 
-const DeveloperMessageContainer = styled.div`
-  margin-top: 5px;
-  padding: 8px;
-  border: 2px solid rgba(255, 0, 0, 0.725);
-  background-color: rgba(252, 79, 79, 0.104);
-  font-size: 11px;
-`;
-
-const DeveloperMessage = styled.div`
-  color: rgb(180, 3, 3);
-`;
-
 const LoaderContainer = styled.div`
   position: absolute;
   top: 0px;
@@ -168,8 +156,6 @@ const DataView = (props) => {
     GoToAdd = emptyFunc,
     GoToAddWithCopy = emptyFunc,
     DiscardEdited = emptyFunc,
-    SetSelectedData = emptyFunc,
-    ClearSelectedData = emptyFunc,
     Localization = {},
     Export = () => {},
     Icons = {
@@ -223,18 +209,6 @@ const DataView = (props) => {
   } = props.TableViewMovementActions || {};
 
   let themeProps = { theme, size, color };
-
-  //======== LOOKUP ========
-
-  // useEffect(() => {
-  //   if (General.IsLookup) SetSelectedData(Lookup.SelectedData);
-  // }, [Lookup.SelectedData]);
-
-  // useEffect(() => {
-  //   return function cleanup() {
-  //     if (General.IsLookup) ClearSelectedData();
-  //   };
-  // }, []);
 
   //======== CONFIGS ========
 
@@ -310,31 +284,6 @@ const DataView = (props) => {
 
   //======== RENDER ========
 
-  const renderLookupTakeValues = () => {
-    if (General.IsLookup) {
-      let loading = freezeLoading([Table.SelectedData.length === 0]);
-
-      return (
-        <FlexItem>
-          <Button
-            tooltip={Localization.TakeValues}
-            onClick={() => {
-              if (!loading) {
-                Lookup.TakeValues(Table.SelectedData);
-                if (ClearSelectedData) ClearSelectedData();
-              }
-            }}
-            disabled={Table.SelectedData.length === 0}
-            icon={"arrow-circle-down"}
-            inverted={true}
-          />
-        </FlexItem>
-      );
-    }
-
-    return false;
-  };
-
   const renderContextMenu = () => {
     if (
       Options.EnableActions &&
@@ -365,7 +314,6 @@ const DataView = (props) => {
         <Button
           tooltip={Localization.Refresh}
           onClick={freezeLoading() ? () => {} : OnRefresh}
-          // disabled={freezeLoading()}
           icon={"sync-alt"}
           inverted={true}
         />
@@ -425,7 +373,6 @@ const DataView = (props) => {
           <Button
             tooltip={Localization.Add}
             onClick={freezeLoading() ? () => {} : GoToAdd}
-            // disabled={freezeLoading()}
             icon={"plus"}
             inverted={true}
           />
@@ -446,7 +393,6 @@ const DataView = (props) => {
           <Button
             tooltip={Localization.AddWithCopy}
             onClick={freezeLoading() ? () => {} : GoToAddWithCopy}
-            // disabled={freezeLoading()}
             icon={"clone"}
             inverted={true}
           />
@@ -465,7 +411,6 @@ const DataView = (props) => {
         <Button
           tooltip={Localization.ToTableView}
           onClick={freezeLoading() ? () => {} : ChangeToTableView}
-          // disabled={freezeLoading()}
           icon={"table"}
           inverted={true}
         />
@@ -491,7 +436,6 @@ const DataView = (props) => {
               : Localization.FormReadMode
           }
           onClick={freezeLoading() ? () => {} : ChangeToEditMode}
-          // disabled={freezeLoading()}
           icon={Form.Mode === FormMode.READ ? "edit" : "eye"}
           inverted={true}
         />
@@ -529,66 +473,11 @@ const DataView = (props) => {
     );
   };
 
-  const renderFromViewMovement = () => {
-    if (!Options.EnableFormViewMovement || Form.Mode === "ADD") return false;
-
-    return (
-      <FormViewMovement
-        Config={formViewMovementConfig}
-        Localization={Localization.FormViewMovement}
-        Icons={Icons}
-      />
-    );
-  };
-
   const renderFiltering = () => {
     if (!Options.EnableFilters || General.CurrentView === ViewType.FORM_VIEW)
       return <></>;
 
     return <FilteringContainer>{FilteringView()}</FilteringContainer>;
-  };
-
-  const renderFormView = () => {
-    if (!Options.EnableFormView) return <></>;
-
-    let component = (
-      <div>
-        {FormView({
-          IsLoading: General.IsLoading,
-          Data: Form.Data,
-          OnFieldChange: OnFieldChange,
-          EnableEdit: Options.EnableEdit,
-          EnableAdd: Options.EnableAdd,
-          FormMode: Form.Mode,
-          OnAdd: Options.EnableAdd ? OnAdd : emptyFunc,
-          OnUpdate: Options.EnableEdit ? OnUpdate : emptyFunc,
-          Dirty: Form.Dirty,
-          DiscardEdited: Options.EnableEdit ? DiscardEdited : emptyFunc,
-        })}
-      </div>
-    );
-
-    if (General.DataFromBackend)
-      return (
-        <div>
-          {renderFromViewMovement()}
-          {component}
-        </div>
-      );
-
-    if (!General.DataFromBackend)
-      return (
-        <Modal
-          basic={true}
-          id={"FormViewInModal"}
-          open={true}
-          size={"medium"}
-          title={props.modalLabel || ""}
-          handleDialogClose={ChangeToTableView}
-        >
-          {component}
-        </Modal>
-      );
   };
 
   const renderFormViewMovement = () => {
@@ -661,8 +550,8 @@ const DataView = (props) => {
           {renderFormViewMovement()}
           {renderSwitchToEditModeButton()}
           {renderRefreshButton()}
-          {/* {renderLookupTakeValues()} */}
           {renderContextMenu()}
+          {/* {renderAddWithCopyButton()} */}
         </HeaderContainer>
       );
 
@@ -739,7 +628,6 @@ const DataView = (props) => {
     return (
       <Container {...themeProps} shadow={Shadow}>
         {renderFiltering()}
-
         {renderHeader()}
 
         <SwitchTransition mode="out-in">
@@ -753,9 +641,7 @@ const DataView = (props) => {
             <TableContainer {...themeProps}>
               {renderTable()}
               {renderForm()}
-
               {renderDeleteConfirmationBox()}
-              {/*{renderDeveloperMessages()} */}
             </TableContainer>
           </CSSTransition>
         </SwitchTransition>

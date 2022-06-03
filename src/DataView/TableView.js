@@ -138,20 +138,19 @@ const TableView = (props) => {
     EnableSelection,
     EnableFormView,
     SelectionType,
-    OnSelection = () => { },
-    OnSelectAll = () => { },
-    EnablePagination,
+    OnSelection = () => {},
+    OnSelectAll = () => {},
     EnableOrdering,
     Accessor,
     Ascending,
     Descending,
-    OnHeaderClick = () => { },
+    OnHeaderClick = () => {},
     ReadOnly,
     IsLookup = false,
-    LookupTakeItem = () => { },
+    LookupTakeItem = () => {},
   } = props.Config;
 
-  const { Localization = {}, Export = () => { }, Icons = {} } = props;
+  const { Localization = {} } = props;
 
   //======== FUNCTIONS ========
 
@@ -162,7 +161,7 @@ const TableView = (props) => {
     );
   }
 
-  const handleOnSelection = (rowData, val, rowIndex = -1) => {
+  const handleOnSelection = (rowData, val) => {
     OnSelection(rowData, val, SelectionType);
   };
 
@@ -184,7 +183,6 @@ const TableView = (props) => {
   };
 
   const renderBodyRow = (dataItem, i) => {
-    var nested = Columns.find((x) => x.nested);
     let rowSelected = isItemInArray(dataItem, SelectedData, SelectionIndicator);
 
     return (
@@ -204,9 +202,9 @@ const TableView = (props) => {
       ChangeToFormView(dataItem, rowIndex);
     };
 
-    if (!EnableFormView) onClick = () => { };
+    if (!EnableFormView) onClick = () => {};
 
-    if (!EnableSelection || ReadOnly) onClick = () => { };
+    if (!EnableSelection || ReadOnly) onClick = () => {};
 
     if (IsLookup) {
       onClick = () => {
@@ -225,13 +223,12 @@ const TableView = (props) => {
       <TableBodyCell key={tabIndex} onClick={onClick}>
         {isFunction(def.specialRender)
           ? def.specialRender(dataItem, () => {
-            ChangeToFormView(dataItem, rowIndex);
-          })
+              ChangeToFormView(dataItem, rowIndex);
+            })
           : cellData}
       </TableBodyCell>
     );
   };
-
 
   const renderSelectionCell = (dataItem, selected, rowIndex) => {
     if (IsLookup) {
@@ -256,7 +253,7 @@ const TableView = (props) => {
       <TableBodyCell selectionCell={true} key={-1}>
         <CheckBox
           checked={selected}
-          onChange={(e, val) => handleOnSelection(dataItem, val, rowIndex)}
+          onChange={(e, val) => handleOnSelection(dataItem, val)}
           id={rowIndex}
         />
       </TableBodyCell>
@@ -264,7 +261,7 @@ const TableView = (props) => {
   };
 
   const renderHeaderCell = (def, i) => {
-    let headerClick = () => { };
+    let headerClick = () => {};
     let hideOrdering =
       !EnableOrdering ||
       (def.sortable === undefined ? false : def.sortable === false);
@@ -301,7 +298,7 @@ const TableView = (props) => {
       <TableHeadCell
         hideOrdering={hideOrdering}
         key={i}
-        onClick={IsLoading || hideOrdering ? () => { } : headerClick}
+        onClick={IsLoading || hideOrdering ? () => {} : headerClick}
       >
         <HeaderInnerCell>
           <HeaderCellText>{def.displayName}</HeaderCellText>
@@ -317,8 +314,22 @@ const TableView = (props) => {
   };
 
   const renderSelectAllHeaderCell = () => {
+    var title = SelectedEntirePage ? "Deselect all" : "Select all";
+
+    if (SelectedEntirePage && Localization.DeselectAll)
+      title = Localization.DeselectAll;
+
+    if (!SelectedEntirePage && Localization.SelectAll)
+      title = Localization.SelectAll;
+
     if (IsLookup)
-      return <TableHeadCell selectionCell={true} key={-1}></TableHeadCell>;
+      return (
+        <TableHeadCell
+          selectionCell={true}
+          key={-1}
+          title={title}
+        ></TableHeadCell>
+      );
 
     if (
       !EnableSelection ||
@@ -327,16 +338,8 @@ const TableView = (props) => {
     )
       return <></>;
 
-    var title = SelectedEntirePage ? "Deselect all" : "Select all";
-
-    if (SelectedEntirePage && Localization.DeselectAll)
-      title = Localization.DeselectAll;
-
-    if (!SelectedEntirePage && Localization.SelectAll)
-      title = Localization.DeselectAll;
-
     return (
-      <TableHeadCell selectionCell={true} key={-1}>
+      <TableHeadCell selectionCell={true} key={-1} title={title}>
         {SelectionType === TableSelectionType.MULTIPLE && (
           <CheckBox
             checked={SelectedEntirePage}
