@@ -4,11 +4,11 @@ import CheckBox from "../CheckBox";
 
 export default {
   title: "Basic Inputs/Radio Input",
-  component: RadioInput
+  component: RadioInput,
 };
 
 const Template = (args) => (
-  <div style={{width: '150px'}}>
+  <div style={{ width: "150px" }}>
     <RadioInput {...args} />
   </div>
 );
@@ -19,9 +19,9 @@ Default.args = {
   checked: false,
   disabled: false,
   readOnly: false,
-  onChange: () => { },
-  color: "secondary",
-  size: "small",
+  onChange: () => {},
+  color: "primary",
+  size: "medium",
   label: "Radio button",
   labelPosition: "right",
   style: {},

@@ -176,7 +176,7 @@ const theme = {
       gap: "0.45rem",
     },
     large: {
-      fontSize: "1.125",
+      fontSize: "1.125rem",
       iconFontSize: "1.6375rem",
       gap: "0.6rem",
     },

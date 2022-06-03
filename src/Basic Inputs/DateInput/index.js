@@ -8,40 +8,59 @@ import { isEmpty, isNumber, isArray } from "lodash";
 import "./style.css";
 
 const heightBySize = (size) => {
-  return { small: `1.5rem`, medium: `1.875rem`, large: `2.25rem` }[size];
+  return { small: `1.875rem`, medium: `2.25rem`, large: `2.625rem` }[size];
 };
 
 const calendarOffsetBySize = (size) => {
-  return { small: `1.675rem`, medium: `2.05rem`, large: `2.425rem` }[size];
+  return { small: `2rem`, medium: `2.4rem`, large: `2.8rem` }[size];
 };
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.325rem 0.375rem";
-  if (size === "medium") return "0.3875rem 0.375rem";
-  if (size === "large") return "0.422375rem 0.375rem";
+  if (size === "small") return "0.41875rem 0.375rem";
+  if (size === "medium") return "0.475rem 0.4rem";
+  if (size === "large") return "0.5625rem 0.425rem";
 };
 
 const Container = styled.div`
   width: 100%;
   position: relative;
   display: flex;
-  border-radius: 0.125rem;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  color: ${(props) => props.theme.palette[props.color].dark};
-
-  background-color: ${(props) =>
-    props.disabled
-      ? props.theme.palette.gray[200]
-      : props.theme.palette[props.color].lighter};
-  border-bottom: 0.125rem solid
-    ${(props) =>
-      props.disabled
-        ? props.theme.palette.gray[900]
-        : props.theme.palette[props.color].main};
-
+  border-radius: 0.25rem;
+  box-sizing: border-box;
   min-height: ${(props) => heightBySize(props.size)};
   max-height: ${(props) => heightBySize(props.size)};
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+
+  color: ${(props) => props.theme.test_palette.dark[500]};
+
+  border: 1.5px solid
+    ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[400]
+        : props.focused
+        ? props.theme.test_palette[props.color][400]
+        : props.theme.test_palette.light[500]};
+
+  box-shadow: ${(props) =>
+    props.focused
+      ? "0px 0px 6px -2px " + props.theme.test_palette[props.color][400]
+      : "none"};
+
+  &:hover {
+    border: 1.5px solid
+      ${(props) =>
+        props.disabled
+          ? props.theme.test_palette.light[400]
+          : props.theme.test_palette[props.color][400]};
+  }
+
+  &:hover i {
+    color: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[400]
+        : props.theme.test_palette[props.color][400]};
+  }
 
   & .react-calendar {
     border-radius: 0.2rem;
@@ -109,27 +128,20 @@ const Container = styled.div`
 const Input = styled.input`
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
   font-family: ${(props) => props.theme.typography.fontFamily};
-  color: ${(props) => props.theme.palette[props.color].textDark};
+  color: ${(props) => props.theme.test_palette.dark[500]};
   appearance: none;
   outline: none;
   border: none;
   box-sizing: border-box;
   width: 100%;
-  background-color: ${(props) => props.theme.palette[props.color].lighter};
+
   padding: ${(props) => paddingBySize(props.size)};
   transition: all 250ms ease;
 
   &:disabled {
-    background-color: ${(props) => props.theme.palette.gray[200]};
-    color: ${(props) => props.theme.palette.gray.textLight};
-    opacity: 0.7;
+    color: ${(props) => props.theme.test_palette.light[500]};
+    background-color: white;
     cursor: auto;
-  }
-
-  &:focus {
-    background-color: ${(props) =>
-      props.disabled ? "inherit" : props.theme.palette.common.white};
-    color: ${(props) => props.theme.palette.common.black};
   }
 `;
 
@@ -144,7 +156,7 @@ const CalendarButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.3125rem;
+  padding: 0 0.4rem;
 `;
 
 const CalendarContainer = styled.div`
@@ -155,10 +167,13 @@ const CalendarContainer = styled.div`
 
 const Icon = styled.i`
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
+
   color: ${(props) =>
     props.disabled
-      ? props.theme.palette.gray[900]
-      : props.theme.palette[props.color].dark};
+      ? props.theme.test_palette.light[400]
+      : props.focused
+      ? props.theme.test_palette[props.color][400]
+      : props.theme.test_palette.light[500]};
 `;
 
 const NavigationIcon = styled.i`
@@ -191,6 +206,7 @@ const DateInput = React.forwardRef((props, ref) => {
 
   const [date, setDate] = useState(null);
   const [text, setText] = useState("");
+  const [focused, setFocused] = useState(false);
   const InputChanged = useRef(false);
 
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -289,7 +305,10 @@ const DateInput = React.forwardRef((props, ref) => {
   };
 
   const handleInputOnBlur = (e) => {
-    if (disabled || readOnly) return;
+    if (disabled || readOnly) {
+      setFocused(false);
+      return;
+    }
 
     var jsDate = null;
     var isoDate = userFormatToIso(text);
@@ -316,6 +335,7 @@ const DateInput = React.forwardRef((props, ref) => {
     }
 
     InputChanged.current = false;
+    setFocused(false);
     if (onBlur) onBlur(e);
   };
 
@@ -339,7 +359,6 @@ const DateInput = React.forwardRef((props, ref) => {
       setDate(null);
     }
 
-    // if (onChange) onChange(null, isoDate, date);
     InputChanged.current = false;
 
     toggleCalendar();
@@ -361,7 +380,7 @@ const DateInput = React.forwardRef((props, ref) => {
 
   //=============== RENDER ============================================================
 
-  var themeProps = { theme, size, color, disabled, readOnly };
+  var themeProps = { theme, size, color, disabled, readOnly, focused };
 
   var minMaxDate = {};
 
@@ -382,7 +401,10 @@ const DateInput = React.forwardRef((props, ref) => {
         onChange={handleInputOnChange}
         value={text || ""}
         onBlur={handleInputOnBlur}
-        onFocus={onFocus}
+        onFocus={(e) => {
+          setFocused(true);
+          if (onFocus) onFocus(e);
+        }}
         placeholder={format}
       />
 
