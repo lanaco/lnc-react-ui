@@ -140,24 +140,40 @@ const TextArea = React.forwardRef((props, ref) => {
 
 TextArea.defaultProps = {
   id: "",
-  theme: theme,
+  value: 0,
+  defaultValue: 0,
   disabled: false,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  type: "text",
+  //----------------
   onChange: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  //----------------
   className: "",
-  preventDefault: true,
+  style: {},
   size: "small",
   color: "primary",
-  value: "",
 };
 
 TextArea.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
+  value: PropTypes.number,
+  defaultValue: PropTypes.number,
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  debounceTime: PropTypes.number,
+  placeholder: PropTypes.string,
+  type: PropTypes.oneOf(["text", "email"]),
+  //----------------
   onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  //----------------
   className: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  value: PropTypes.string,
+  style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
