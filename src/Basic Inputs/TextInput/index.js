@@ -71,7 +71,6 @@ const TextInput = React.forwardRef((props, ref) => {
     placeholder,
     //----------------
     onChange,
-    onKeyDown,
     onBlur,
     onFocus,
     //----------------
@@ -131,7 +130,6 @@ TextInput.defaultProps = {
   type: "text",
   //----------------
   onChange: () => {},
-  onKeyDown: () => {},
   onBlur: () => {},
   onFocus: () => {},
   //----------------
@@ -152,7 +150,6 @@ TextInput.propTypes = {
   type: PropTypes.oneOf(["text", "email"]),
   //----------------
   onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
   //----------------
