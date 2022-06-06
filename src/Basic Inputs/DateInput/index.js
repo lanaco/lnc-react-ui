@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 import theme from "../../_utils/theme";
 import moment from "moment";
 import Calendar from "react-calendar";
-import { isEmpty, isNumber, isArray } from "lodash";
 import "./style.css";
 
 const heightBySize = (size) => {

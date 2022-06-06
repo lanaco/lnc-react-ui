@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { debounce } from "lodash";
 
@@ -177,6 +177,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
           if (onBlur) onBlur(e);
         }}
         onValueChange={onValueChange}
+        {...rest}
       />
     </Container>
   );

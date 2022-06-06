@@ -57,7 +57,7 @@ const Input = styled.input`
 
 const Label = styled.label`
   ${(props) => standardCssFields(props)}
-
+  white-space: nowrap;
   display: inline-block;
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   background-color: ${(props) =>
@@ -71,7 +71,8 @@ const Label = styled.label`
 
 const FileName = styled.input`
   ${(props) => standardCssFields(props)}
-  flex-grow: 1;
+  // flex-grow: 1;
+  width: 100%;
   padding: ${(props) => fileNamePaddingBySize[props.size]};
   border-radius: 0 0.1875rem 0.1875rem 0;
   appearance: none;

@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { debounce } from "lodash";
 
 const paddingBySize = (size) => {
@@ -109,6 +109,9 @@ const NumberInput = React.forwardRef((props, ref) => {
 
     if (_value < Number.MIN_SAFE_INTEGER) _value = Number.MIN_SAFE_INTEGER;
 
+    if (min && _value < min) _value = min;
+    if (max && _value > max) _value = max;
+
     setInputValue(_value);
     debouncedOnChange(e, _value);
   };
@@ -129,6 +132,7 @@ const NumberInput = React.forwardRef((props, ref) => {
       onFocus={onFocus}
       onBlur={onBlur}
       onChange={onValueChange}
+      {...rest}
     />
   );
 });
