@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import TimeInput from ".";
 
 export default {
@@ -6,9 +6,17 @@ export default {
   component: TimeInput,
 };
 
-const Template = (args) => <TimeInput {...args} />;
+const Template = (args) => (
+  <div style={{ width: "150px" }}>
+    <TimeInput {...args} />
+  </div>
+);
 
 export const Default = Template.bind({});
 Default.args = {
-  value: "21:00",
+  color: "primary",
+  size: "small",
+  disabled: false,
+  readOnly: false,
+  value: "",
 };
