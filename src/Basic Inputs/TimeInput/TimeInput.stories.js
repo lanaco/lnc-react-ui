@@ -3,11 +3,12 @@ import TimeInput from ".";
 
 export default {
   title: "Basic Inputs/Time Input",
-  component: TimeInput
+  component: TimeInput,
 };
 
-const Template = (args) => (
-  <TimeInput {...args} />
-);
+const Template = (args) => <TimeInput {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+  value: "21:00",
+};
