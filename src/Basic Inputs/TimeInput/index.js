@@ -115,7 +115,7 @@ const TimeInput = React.forwardRef((props, ref) => {
 
 TimeInput.defaultProps = {
   id: "",
-  value: 0,
+  value: "",
   disabled: false,
   readOnly: false,
   debounceTime: 180,
@@ -130,7 +130,7 @@ TimeInput.defaultProps = {
 
 TimeInput.propTypes = {
   id: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,
