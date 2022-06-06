@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { debounce } from "lodash";
 
 const paddingBySize = (size) => {

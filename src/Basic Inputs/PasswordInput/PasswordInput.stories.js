@@ -8,13 +8,13 @@ export default {
 };
 
 const Template = (args) => (
-  <>
+  <div style={{ width: "150px" }}>
     <PasswordInput {...args} />
-  </>
+  </div>
 );
 
-export const Password = Template.bind({});
-Password.args = {
+export const Default = Template.bind({});
+Default.args = {
   color: "primary",
   text: "Button",
   tooltip: "Button",
