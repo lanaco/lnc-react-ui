@@ -152,6 +152,7 @@ TextArea.defaultProps = {
   onBlur: () => {},
   onFocus: () => {},
   //----------------
+  theme: theme,
   className: "",
   style: {},
   size: "small",
