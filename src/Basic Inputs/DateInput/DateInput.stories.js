@@ -7,6 +7,8 @@ export default {
   component: DateInput,
 };
 
+// remove theme from propTypes (all)
+// {...rest} all
 const Template = (args) => <Story {...args} />;
 
 export const Default = Template.bind({});

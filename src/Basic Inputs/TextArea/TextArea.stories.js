@@ -6,13 +6,14 @@ export default {
   title: "Basic Inputs/Text Area",
   component: TextArea,
   argTypes: {
-    onInput: { action: "onInput"},
-    onChange: { action: "onChange"},
-    onBlur: { action: "onBlur"}
+    onInput: { action: "onInput" },
+    onChange: { action: "onChange" },
+    onBlur: { action: "onBlur" },
   },
 };
 
 const Template = (args) => (
+  //dont resiz eoption
   <div style={{ width: "200px" }}>
     <TextArea {...args} />
   </div>
