@@ -3,154 +3,120 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
+import { isEmpty } from "lodash";
 
 //====================== STYLE ======================
 
-const paddingBySize = (size) => {
-  if (size === "small") return "0.3875rem 0.34375rem";
-  if (size === "medium") return "0.45rem 0.415625rem";
-  if (size === "large") return "0.4875rem 0.445rem";
+const paddingBySize = (size, hasText) => {
+  return {
+    small: `0.41875rem ${hasText ? "0.8rem" : "0.6rem"}`,
+    medium: `0.48125rem ${hasText ? "0.9rem" : "0.7rem"}`,
+    large: `0.65625rem ${hasText ? "1rem" : "0.8rem"}`,
+  }[size];
 };
 
-const heightBySize = (size) => {
-  if (size === "small") return `1.625rem`;
-  if (size === "medium") return `2rem`;
-  if (size === "large") return `2.375rem`;
+const standardCssFields = ({ theme, size }) => {
+  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+    size
+  ];
+
+  return `
+    font-family: ${theme.typography.fontFamily};
+    font-size: ${theme.typography[size].fontSize};
+    min-height: ${height};
+    max-height: ${height};
+    appearance: none;
+    outline: none;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: ${(props) => paddingBySize(props.size)};
+  `;
 };
 
-const StyledButton = styled.button((props) => {
-  return {
-    appearance: "none",
-    outline: "none",
-    border: "none",
-    display: "inline-block",
-    cursor: "pointer",
-    padding: paddingBySize(props.size, props.hasText),
-    fontSize: props.theme.typography[props.size].fontSize,
-    fontFamily: props.theme.typography.fontFamily,
-    transition: "all 220ms",
-    transition: `${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, box-shadow ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, border-color ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, color ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms`,
+const StyledBtn = styled.button`
+  ${(props) => standardCssFields(props)}
 
-    backgroundColor: props.inverted
-      ? "transparent"
-      : props.theme.palette[props.color].main,
+  background-color: ${(props) =>
+    props.outline
+      ? props.theme.test_palette.light[100]
+      : props.theme.test_palette[props.color][400]};
+  color: ${(props) =>
+    props.outline
+      ? props.theme.test_palette[props.color][400]
+      : props.theme.test_palette.light[100]};
+  border-radius: 0.625rem;
 
-    borderRadius: "2px",
-    minHeight: heightBySize(props.size),
-    maxHeight: heightBySize(props.size),
-    "&:hover": {
-      textDecoration: "none",
-      backgroundColor: props.inverted
-        ? "whitesmoke"
-        : props.theme.palette[props.color].light,
-    },
-    "&:disabled": {
-      backgroundColor: props.inverted
-        ? "transparent"
-        : props.theme.palette.gray[200],
-      color: props.theme.palette.gray.textDark,
-      opacity: 0.7,
-      cursor: "default",
-    },
-    "&:active": {
-      boxShadow: props.theme.shadows[1],
-    },
-  };
-});
+  ${(props) =>
+    props.outline
+      ? `border: 2px solid ${props.theme.test_palette[props.color][300]};`
+      : ""}
 
-const TextLeft = styled.span((props) => {
-  let opacity = 1;
-  let color = props.inverted
-    ? props.theme.palette[props.color].textDark
-    : props.theme.palette[props.color].text;
+  &:hover:enabled {
+    ${(props) =>
+      !props.outline
+        ? `background-color: ${props.theme.test_palette[props.color][300]};`
+        : ""}
 
-  if (props.disabled) {
-    color = props.inverted
-      ? props.theme.palette[props.color].textDark
-      : props.theme.palette[props.color].textDark;
-
-    opacity = 0.6;
+    ${(props) =>
+      props.outline
+        ? `color: ${props.theme.test_palette[props.color][400]};`
+        : ""}
   }
 
-  return {
-    padding: "0",
-    margin: "0",
-    paddingRight: props.hasIcon ? "0.3125rem" : "0",
-    fontSize: props.theme.typography[props.size].fontSize,
-    color: color,
-    opacity: opacity,
-  };
-});
-
-const TextRight = styled.span((props) => {
-  let opacity = 1;
-  let color = props.inverted
-    ? props.theme.palette[props.color].textDark
-    : props.theme.palette[props.color].text;
-
-  if (props.disabled) {
-    color = props.inverted
-      ? props.theme.palette[props.color].textDark
-      : props.theme.palette[props.color].textDark;
-
-    opacity = 0.6;
+  &:focus:enabled {
+    ${(props) =>
+      !props.outline
+        ? `background-color: ${props.theme.test_palette[props.color][200]};`
+        : ""}
   }
 
-  return {
-    padding: "0",
-    margin: "0",
-    paddingLeft: props.hasIcon ? "0.3125rem" : "0",
-    fontSize: props.theme.typography[props.size].fontSize,
-    color: color,
-    opacity: opacity,
-  };
-});
-
-const Icon = styled.i((props) => {
-  let opacity = 1;
-  let color = props.inverted
-    ? props.theme.palette[props.color].main
-    : props.theme.palette[props.color].text;
-
-  if (props.disabled) {
-    color = props.inverted
-      ? props.theme.palette[props.color].textDark
-      : props.theme.palette[props.color].textDark;
-
-    opacity = 0.6;
+  &:disabled {
+    ${(props) =>
+      !props.outline
+        ? `background-color: ${props.theme.test_palette.light[400]};`
+        : ""}
   }
+`;
 
-  return {
-    fontSize: props.theme.typography[props.size].fontSize,
-    color: color,
-    opacity: opacity,
-  };
-});
+const Text = styled.span``;
+
+const Icon = styled.i`
+  ${(props) =>
+    props.location === "left" && props.hasText
+      ? "padding-right: 0.3125rem;"
+      : ""}
+  ${(props) =>
+    props.location === "right" && props.hasText
+      ? "padding-left: 0.3125rem;"
+      : ""}
+    ${(props) => (!props.hasText ? "padding: 0px" : "")}
+`;
 
 //===================================================
 
 const Button = React.forwardRef((props, ref) => {
-  const theme = useTheme();
+  //
   const {
-    // theme,
     color,
     id,
     onClick,
     disabled,
     tooltip,
-    preventDefault,
     className,
     icon,
     iconStyle,
     size,
     iconLocation,
     text,
-    inverted,
+    outline,
+    ...rest
   } = props;
 
+  const theme = useTheme();
+
   const handleOnClick = (e) => {
-    if (preventDefault) e.preventDefault();
-    onClick(id);
+    onClick(e, id);
     if (e.stopImmediatePropagation) e.stopImmediatePropagation();
   };
 
@@ -162,62 +128,40 @@ const Button = React.forwardRef((props, ref) => {
     return `${style} fa-${icon} fa-fw`;
   };
 
+  var themeProps = { theme, size, color, outline, disabled };
+
   return (
-    <StyledButton
+    <StyledBtn
+      {...themeProps}
       data-testid="button"
-      {...{ theme, size, color, inverted, disabled }}
       onClick={handleOnClick}
       className={className}
       disabled={disabled}
       title={title}
-      hasText={icon && icon !== ""}
+      hasText={!isEmpty(text)}
       ref={ref}
+      {...rest}
     >
-      {/* Text when the icon is RIGTH */}
-      {text && text !== "" && iconLocation === "right" && (
-        <TextLeft
-          {...{
-            theme,
-            size,
-            color,
-            inverted,
-            disabled,
-            hasIcon: icon && icon !== "",
-          }}
-        >
-          {text}
-        </TextLeft>
-      )}
-      {/* Icon */}
-      {icon && icon !== "" && (
+      {!isEmpty(iconLocation) && !isEmpty(icon) && iconLocation === "left" && (
         <Icon
-          {...{
-            theme,
-            size,
-            color,
-            inverted,
-            disabled,
-          }}
+          {...themeProps}
           className={getIconClass()}
+          hasText={!isEmpty(text)}
+          location={"left"}
         />
       )}
 
-      {/* Text when the icon is LEFT */}
-      {text && text !== "" && iconLocation === "left" && (
-        <TextRight
-          {...{
-            theme,
-            size,
-            color,
-            inverted,
-            disabled,
-            hasIcon: icon && icon !== "",
-          }}
-        >
-          {text}
-        </TextRight>
+      {!isEmpty(text) && <Text {...themeProps}>{text}</Text>}
+
+      {!isEmpty(iconLocation) && !isEmpty(icon) && iconLocation === "right" && (
+        <Icon
+          {...themeProps}
+          className={getIconClass()}
+          hasText={!isEmpty(text)}
+          location={"right"}
+        />
       )}
-    </StyledButton>
+    </StyledBtn>
   );
 });
 
@@ -234,7 +178,7 @@ Button.defaultProps = {
   iconLocation: "left",
   text: "",
   color: "primary",
-  inverted: false,
+  outline: false,
 };
 
 Button.propTypes = {
@@ -244,11 +188,11 @@ Button.propTypes = {
   tooltip: PropTypes.string,
   onClick: PropTypes.func,
   icon: PropTypes.string,
-  iconStyle: PropTypes.oneOf(["solid", "regular"]),
   className: PropTypes.string,
   preventDefault: PropTypes.bool,
-  inverted: PropTypes.bool,
+  outline: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  iconStyle: PropTypes.oneOf(["solid", "regular"]),
   iconLocation: PropTypes.oneOf(["left", "right"]),
   text: PropTypes.string,
   color: PropTypes.oneOf([

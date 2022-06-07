@@ -25,19 +25,19 @@ JustText.args = {
   onClick: () => {},
   size: "medium",
   disabled: false,
-  inverted: false,
+  outline: false,
 };
 
 export const JustIcon = Template.bind({});
 JustIcon.args = {
-  color: "transparent",
+  color: "primary",
   tooltip: "Button",
   onClick: () => {},
   size: "medium",
   disabled: false,
   icon: "user",
   iconStyle: "solid",
-  inverted: false,
+  outline: false,
 };
 
 export const TextAndIconToLeft = Template.bind({});
@@ -52,7 +52,7 @@ TextAndIconToLeft.args = {
   icon: "user",
   iconStyle: "solid",
   iconLocation: "left",
-  inverted: false,
+  outline: false,
 };
 
 export const TextAndIconToRight = Template.bind({});
@@ -67,5 +67,5 @@ TextAndIconToRight.args = {
   icon: "user",
   iconStyle: "solid",
   iconLocation: "right",
-  inverted: false,
+  outline: false,
 };

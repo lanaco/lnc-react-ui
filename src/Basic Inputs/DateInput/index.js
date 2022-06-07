@@ -204,6 +204,7 @@ const DateInput = React.forwardRef((props, ref) => {
     useCalendar,
     minDate,
     maxDate,
+    ...rest
   } = props;
 
   const [date, setDate] = useState(null);
@@ -408,6 +409,7 @@ const DateInput = React.forwardRef((props, ref) => {
           if (onFocus) onFocus(e);
         }}
         placeholder={format}
+        {...rest}
       />
 
       {useCalendar && (
