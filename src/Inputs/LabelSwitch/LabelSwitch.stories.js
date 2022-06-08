@@ -1,6 +1,6 @@
 import React from "react";
 import LabelSwitch from ".";
-import theme from "../../_utils/theme";
+import Story from "./Story";
 
 export default {
   title: "Inputs/Label Switch",
@@ -8,13 +8,16 @@ export default {
   argTypes: {},
 };
 
-const Template = (args) => (
-  <>
-    <p>
-      <LabelSwitch {...args} />
-    </p>
-  </>
-);
+const Template = (args) => <Story {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  color: "primary",
+  colorAlt: "secondary",
+  size: "small",
+  value: false,
+  disabled: true,
+  readOnly: false,
+  labelWhenFalse: "Option 1",
+  labelWhenTrue: "Option 2",
+};
