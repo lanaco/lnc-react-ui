@@ -210,35 +210,41 @@ const LabelSwitch = (props) => {
 
 LabelSwitch.defaultProps = {
   id: "",
-  disabled: false,
-  onChange: () => {},
-  className: "",
-  size: "small",
-  color: "primary",
-  theme: theme,
-  //-------------
   value: false,
+  disabled: false,
+  onBlur: false,
   labelWhenFalse: "",
   labelWhenTrue: "",
   itemWhenTrue: {},
   itemWhenFalse: {},
+  //-------------
+  onChange: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  //-------------
+  style: {},
+  className: "",
+  size: "small",
+  color: "primary",
+  colorAlt: "primary",
 };
 
 LabelSwitch.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.any,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  label: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  //-------------
+  readOnly: PropTypes.bool,
   value: PropTypes.bool,
   labelWhenFalse: PropTypes.string.isRequired,
   labelWhenTrue: PropTypes.string.isRequired,
   itemWhenTrue: PropTypes.object,
   itemWhenFalse: PropTypes.object,
   //-------------
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  //-------------
+  style: PropTypes.object,
+  className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
@@ -246,7 +252,15 @@ LabelSwitch.propTypes = {
     "success",
     "error",
     "warning",
-    "gray",
+    "info",
+  ]),
+  colorAlt: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "error",
+    "warning",
+    "info",
   ]),
 };
 
