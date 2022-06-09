@@ -199,39 +199,43 @@ const IconButton = React.forwardRef((props, ref) => {
 IconButton.defaultProps = {
   id: "",
   disabled: false,
+  readOnly: false,
+  outline: false,
   tooltip: "",
-  onClick: () => {},
-  className: "",
-  preventDefault: true,
-  size: "small",
   icon: "",
   iconStyle: "solid",
-  iconLocation: "left",
-  text: "",
+  iconLocation: "right",
+  //-------------
+  onClick: () => {},
+  //-------------
+  style: {},
+  className: "",
+  size: "small",
   color: "primary",
-  outline: false,
 };
 
 IconButton.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
-  tooltip: PropTypes.string,
-  onClick: PropTypes.func,
-  icon: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  preventDefault: PropTypes.bool,
+  readOnly: PropTypes.bool,
   outline: PropTypes.bool,
+  tooltip: PropTypes.string,
+  icon: PropTypes.string.isRequired,
+  iconStyle: PropTypes.oneOf(["regular", "solid"]),
+  iconLocation: PropTypes.oneOf(["right", "left"]),
+  //-------------
+  onClick: PropTypes.func,
+  //-------------
+  style: PropTypes.object,
+  className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  iconStyle: PropTypes.oneOf(["solid", "regular"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
     "error",
     "warning",
-    "gray",
-    "background",
-    "transparent",
+    "info",
   ]),
 };
 
