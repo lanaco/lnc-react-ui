@@ -18,14 +18,14 @@ const Template = (args) => (
     <div style={{ padding: "10px" }}>
       <Icon {...args} size="large" />
     </div> */}
-    <Icon {...args} />
+    <Icon {...args} id="icon" />
   </div>
 );
 
 export const Default = Template.bind({});
 Default.args = {
+  id: "icon",
   icon: "user",
   iconStyle: "solid",
-  color: "secondary",
   size: "small",
 };
