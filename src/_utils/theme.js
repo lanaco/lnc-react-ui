@@ -78,6 +78,9 @@ const theme = {
       1000: "#333333",
       textLight: "#474747",
       textDark: "white",
+      disabled: "#CCCCCC",
+      disabledDark: "#C4C4C4",
+      main: "#CCCCCC",
     },
     //---------------------
     white: {
@@ -169,16 +172,19 @@ const theme = {
       fontSize: "0.75rem",
       iconFontSize: "1.25rem",
       gap: "0.3rem",
+      subTextSize: "0.625rem"
     },
     medium: {
       fontSize: "0.9375rem",
       iconFontSize: "1.425rem",
       gap: "0.45rem",
+      subTextSize: "0.725rem"
     },
     large: {
       fontSize: "1.125rem",
       iconFontSize: "1.6375rem",
       gap: "0.6rem",
+      subTextSize: "0.825rem"
     },
     h1: {
       fontWeight: 300,
