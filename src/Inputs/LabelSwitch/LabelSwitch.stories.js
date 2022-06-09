@@ -1,10 +1,10 @@
 import React from "react";
-import ToggleSwitch from ".";
+import LabelSwitch from ".";
 import Story from "./Story";
 
 export default {
-  title: "Inputs/Switch",
-  component: ToggleSwitch,
+  title: "Inputs/Label Switch",
+  component: LabelSwitch,
   argTypes: {},
 };
 
@@ -13,9 +13,11 @@ const Template = (args) => <Story {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   color: "primary",
-  size: "medium",
-  value: null,
-  disabled: false,
+  colorAlt: "secondary",
+  size: "small",
+  value: false,
+  disabled: true,
   readOnly: false,
-  label: "Switch",
+  labelWhenFalse: "Option 1",
+  labelWhenTrue: "Option 2",
 };

@@ -7,19 +7,19 @@ import { isEmpty } from "lodash";
 
 const padding = {
   default: {
-    small: "0.5rem 0.875rem",
-    medium: "0.59375rem 0.96875rem",
-    large: "0.671875rem 1.15625rem",
+    small: "0.5rem",
+    medium: "0.59375rem",
+    large: "0.671875rem",
   },
   outline: {
-    small: "0.40625rem 0.78125rem",
-    medium: "0.5rem 0.875rem",
-    large: "0.578125rem 1.0625rem",
+    small: "0.40625rem",
+    medium: "0.5rem",
+    large: "0.578125rem",
   },
   outlineHover: {
-    small: "0.34375rem 0.71875rem",
-    medium: "0.4375rem 0.8125rem",
-    large: "0.515625rem 1rem",
+    small: "0.34375rem",
+    medium: "0.4375rem",
+    large: "0.515625rem",
   },
 };
 
@@ -33,7 +33,9 @@ const standardCssFields = ({ theme, size }) => {
     font-size: ${theme.typography[size].fontSize};
     min-height: ${height};
     max-height: ${height};
-    width: 100%;
+    min-width: ${height};
+    max-width: ${height};
+    width: fit-content;
     box-sizing: border-box;
     appearance: none;
     outline: none;
@@ -59,7 +61,7 @@ const StyledBtn = styled.button`
     props.outline
       ? props.theme.test_palette[props.color][400]
       : props.theme.test_palette.light[100]};
-  border-radius: 0.5625rem;
+  border-radius: 50%;
 
   border: ${(props) =>
     props.outline
@@ -124,7 +126,7 @@ const Icon = styled.i`
 
 //===================================================
 
-const Button = React.forwardRef((props, ref) => {
+const IconButton = React.forwardRef((props, ref) => {
   //
   const {
     color,
@@ -194,12 +196,11 @@ const Button = React.forwardRef((props, ref) => {
   );
 });
 
-Button.defaultProps = {
+IconButton.defaultProps = {
   id: "",
   disabled: false,
   readOnly: false,
   outline: false,
-  text: "",
   tooltip: "",
   icon: "",
   iconStyle: "solid",
@@ -213,13 +214,12 @@ Button.defaultProps = {
   color: "primary",
 };
 
-Button.propTypes = {
+IconButton.propTypes = {
   id: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   outline: PropTypes.bool,
   tooltip: PropTypes.string,
-  text: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   iconStyle: PropTypes.oneOf(["regular", "solid"]),
   iconLocation: PropTypes.oneOf(["right", "left"]),
@@ -239,4 +239,4 @@ Button.propTypes = {
   ]),
 };
 
-export default Button;
+export default IconButton;

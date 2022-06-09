@@ -7,6 +7,7 @@ export default {
 };
 
 const Template = (args) => (
+  // fix separators
   <div style={{ width: "150px" }}>
     <DecimalInput {...args} />
   </div>
