@@ -55,10 +55,6 @@ export { default as Progress } from "./General/Progress";
 //=============================================================================================
 
 
-
-export * from "./Inputs/FileDnDInput";
-export { default as FileDnDInput } from "./Inputs/FileDnDInput";
-
 export * from "./Inputs/CheckboxLookup";
 export { default as CheckboxLookup } from "./Inputs/CheckboxLookup";
 

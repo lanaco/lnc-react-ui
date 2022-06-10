@@ -74,7 +74,7 @@ const File = React.forwardRef((props, ref) => {
                     >{fileName}</div>
                     {progressPercentage && <div>{progressPercentage}%</div>}
                 </ProgressText>
-                {progressPercentage && <Progress progressPercentage={progressPercentage} {...themeProps} />}
+                {(progressPercentage || progressPercentage == 0) && <Progress progressPercentage={progressPercentage} {...themeProps} />}
             </ProgressContent>
             <CancelWrapper onCancel={onCancel} onClick={onCancel ? onCancel : null}>
                 <Icon {...themeProps} color={"gray"} icon={"times"} {...rest} />
@@ -86,7 +86,7 @@ const File = React.forwardRef((props, ref) => {
 File.defaultProps = {
     id: "",
     fileName: "file-name.png",
-    // progressPercentage: 20,
+    progressPercentage: 20,
     //------------------
     className: "",
     style: {},
