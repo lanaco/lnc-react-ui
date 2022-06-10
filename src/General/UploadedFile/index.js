@@ -44,7 +44,7 @@ const CancelWrapper = styled.div`
     cursor: ${props => props.onCancel ? 'pointer' : 'default'}
 `
 
-const File = React.forwardRef((props, ref) => {
+const UploadedFile = React.forwardRef((props, ref) => {
     const {
         id,
         fileName,
@@ -55,6 +55,8 @@ const File = React.forwardRef((props, ref) => {
         onCancel,
         size,
         color,
+        fileIcon,
+        cancelIcon,
         ...rest
     } = props;
     const theme = useTheme();
@@ -63,7 +65,7 @@ const File = React.forwardRef((props, ref) => {
     return (
         <Container>
             <Icon {...themeProps}
-                icon={"file"}
+                icon={fileIcon}
                 sizeInUnits={getIconSize(themeProps.size)}
                 style={{ cursor: (onFileClick ? 'pointer' : 'default') }}
                 onClick={onFileClick ? onFileClick : null}
@@ -77,13 +79,13 @@ const File = React.forwardRef((props, ref) => {
                 {(progressPercentage || progressPercentage == 0) && <Progress progressPercentage={progressPercentage} {...themeProps} />}
             </ProgressContent>
             <CancelWrapper onCancel={onCancel} onClick={onCancel ? onCancel : null}>
-                <Icon {...themeProps} color={"gray"} icon={"times"} {...rest} />
+                <Icon {...themeProps} color={"gray"} icon={cancelIcon} {...rest} />
             </CancelWrapper>
         </Container >
     )
 });
 
-File.defaultProps = {
+UploadedFile.defaultProps = {
     id: "",
     fileName: "file-name.png",
     progressPercentage: 20,
@@ -95,10 +97,12 @@ File.defaultProps = {
     onCancel: () => { },
     //------------------
     size: "small",
-    color: "primary"
+    color: "primary",
+    fileIcon: "file",
+    cancelIcon: "times",
 };
 
-File.propTypes = {
+UploadedFile.propTypes = {
     id: PropTypes.any.isRequired,
     fileName: PropTypes.string,
     progressPercentage: PropTypes.number,
@@ -115,7 +119,9 @@ File.propTypes = {
         "warning",
         "gray",
     ]),
+    fileIcon: PropTypes.string,
+    cancelIcon: PropTypes.string,
 };
 
 
-export default File;
+export default UploadedFile;

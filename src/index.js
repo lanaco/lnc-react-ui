@@ -43,8 +43,8 @@ export { default as TimeInput } from "./Basic Inputs/TimeInput";
 export * from "./General/Button";
 export { default as Button } from "./General/Button";
 
-export * from "./General/File";
-export { default as File } from "./General/File";
+export * from "./General/UploadedFile";
+export { default as UploadedFile } from "./General/UploadedFile";
 
 export * from "./General/Icon";
 export { default as Icon } from "./General/Icon";

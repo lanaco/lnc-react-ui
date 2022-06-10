@@ -1,14 +1,14 @@
 import React from "react";
-import File from "./index";
+import UploadedFile from "./index";
 
 export default {
-    title: "General/File",
-    component: File,
+    title: "General/UploadedFile",
+    component: UploadedFile,
 };
 
 const Template = (args) => (
     <div style={{ width: "350px" }}>
-        <File {...args} />
+        <UploadedFile {...args} />
     </div>
 );
 
