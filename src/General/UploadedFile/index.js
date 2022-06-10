@@ -30,7 +30,7 @@ const Container = styled.div`
   `
 const ProgressContent = styled.div`
     ${(props) => standardCssFields(props)}
-    color: ${(props) => props.theme.palette[props.color].main};
+    color: ${(props) => props.theme.test_palette[props.color][400]};
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -79,7 +79,7 @@ const UploadedFile = React.forwardRef((props, ref) => {
                 {(progressPercentage || progressPercentage == 0) && <Progress progressPercentage={progressPercentage} {...themeProps} />}
             </ProgressContent>
             <CancelWrapper onCancel={onCancel} onClick={onCancel ? onCancel : null}>
-                <Icon {...themeProps} color={"gray"} icon={cancelIcon} {...rest} />
+                <Icon {...themeProps} color={"disabled"} icon={cancelIcon} {...rest} />
             </CancelWrapper>
         </Container >
     )
@@ -115,9 +115,9 @@ UploadedFile.propTypes = {
         "primary",
         "secondary",
         "success",
-        "error",
+        "danger",
         "warning",
-        "gray",
+        "disabled",
     ]),
     fileIcon: PropTypes.string,
     cancelIcon: PropTypes.string,

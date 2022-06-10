@@ -15,7 +15,7 @@ const StyledColorInput = styled.input`
   padding: 0;
   margin: 0;
   border-radius: 0.1875rem;
-  border: 2px solid ${(props) => props.theme.palette[props.color].main};
+  border: 2px solid ${(props) => props.theme.test_palette[props.color][400]};
   padding: 0 0.1875rem;
   background-color: transparent;
   max-height: ${(props) => getSize(props.size)};
@@ -128,9 +128,9 @@ ColorInput.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "disabled",
   ]),
 };
 

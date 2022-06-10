@@ -41,7 +41,7 @@ const Container = styled.div`
 const TextContent = styled.div`
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography[props.size].subTextSize};
-  color: ${(props) => props.theme.palette.transparent.text};
+  color: ${(props) => props.theme.test_palette.dark[400]};
 `;
 
 const Label = styled.label`
@@ -138,7 +138,7 @@ const DragDropFileInput = React.forwardRef((props, ref) => {
         {...rest}
       />
 
-      <Icon icon={"upload"} size={size} color={"gray"} />
+      <Icon icon={"upload"} size={size} color={"disabled"} />
       <TextContent {...themeProps}>{dndFileText}</TextContent>
       <Label {...themeProps} htmlFor={id}>
         {selectFileText}
@@ -202,9 +202,9 @@ DragDropFileInput.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "disabled",
   ]),
 };
 
