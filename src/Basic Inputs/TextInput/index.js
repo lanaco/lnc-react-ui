@@ -115,6 +115,7 @@ const TextInput = React.forwardRef((props, ref) => {
       onFocus={onFocus}
       onBlur={onBlur}
       onChange={onValueChange}
+      {...rest}
     />
   );
 });

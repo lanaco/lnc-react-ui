@@ -139,7 +139,7 @@ const ItemRight = styled.span`
 
 //================================================================================================
 
-const LabelSwitch = (props) => {
+const LabelSwitch = React.forwardRef((props, ref) => {
   const {
     id,
     disabled,
@@ -183,7 +183,7 @@ const LabelSwitch = (props) => {
 
   return (
     <SwitchContainer
-      tabIndex={1}
+      ref={ref}
       {...themeProps}
       className={className}
       style={style}
@@ -206,12 +206,13 @@ const LabelSwitch = (props) => {
       </ItemRight>
     </SwitchContainer>
   );
-};
+});
 
 LabelSwitch.defaultProps = {
   id: "",
   value: false,
   disabled: false,
+  readOnly: false,
   onBlur: false,
   labelWhenFalse: "",
   labelWhenTrue: "",

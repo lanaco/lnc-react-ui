@@ -253,24 +253,27 @@ const ToggleSwitch = (props) => {
 ToggleSwitch.defaultProps = {
   id: "",
   disabled: false,
+  readOnly: false,
+  label: "",
+  //-------------------------------
   onChange: () => {},
+  //-------------------------------
+  style: {},
   className: "",
-  preventDefault: true,
   size: "small",
   color: "primary",
-  theme: theme,
-  label: "",
-  style: {},
 };
 
 ToggleSwitch.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.any,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
+  readOnly: PropTypes.bool,
   label: PropTypes.string,
-  preventDefault: PropTypes.bool,
+  //-------------------------------
+  onChange: PropTypes.func,
+  //-------------------------------
+  style: PropTypes.object,
+  className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
@@ -278,7 +281,7 @@ ToggleSwitch.propTypes = {
     "success",
     "error",
     "warning",
-    "gray",
+    "info",
   ]),
 };
 
