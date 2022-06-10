@@ -1,6 +1,5 @@
 import React from "react";
 import DragDropFileInput from ".";
-import theme from "../../_utils/theme";
 
 export default {
   title: "Inputs/Drag & Drop File Input",
