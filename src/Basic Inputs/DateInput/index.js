@@ -503,9 +503,9 @@ DateInput.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "disabled",
   ]),
 };
 

@@ -8,7 +8,7 @@ const Span = styled.span`
   box-sizing: border-box;
   background-color: inherit;
   font-size: ${(props) => (props.sizeInUnits && props.sizeInUnits != "") ? props.sizeInUnits : props.theme.typography[props.size].iconFontSize};
-  color: ${(props) => props.theme.palette[props.color].main};
+  color: ${(props) => props.theme.test_palette[props.color][400]};
 
 `;
 
@@ -68,9 +68,9 @@ Icon.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "disabled",
     "white",
   ]),
 };
