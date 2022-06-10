@@ -58,6 +58,18 @@ const theme = {
       400: "#69A1F2",
       500: "#5696F0",
     },
+    disabled: {
+      100: "#F5F5F5",
+      200: "#EBEBEB",
+      300: "#E0E0E0",
+      400: "#CCCCCC",
+      500: "#C2C2C2",
+      600: "#C4C4C4",
+      textLight: "#474747",
+      textDark: "white",
+      disabled: "#CCCCCC",
+      disabledDark: "#C4C4C4",
+    },
   },
   palette: {
     common: {
