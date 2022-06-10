@@ -260,6 +260,7 @@ ToggleSwitch.defaultProps = {
   color: "primary",
   theme: theme,
   label: "",
+  style: {},
 };
 
 ToggleSwitch.propTypes = {
