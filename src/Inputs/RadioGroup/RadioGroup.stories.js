@@ -1,10 +1,10 @@
 import React from "react";
-import LabelSwitch from ".";
+import RadioGroup from ".";
 import Story from "./Story";
 
 export default {
-  title: "Inputs/Label Switch",
-  component: LabelSwitch,
+  title: "Inputs/Radio Group",
+  component: RadioGroup,
   argTypes: {},
 };
 

@@ -15,7 +15,8 @@ const StyledColorInput = styled.input`
   padding: 0;
   margin: 0;
   border-radius: 0.1875rem;
-  border: 2px solid ${(props) => props.theme.test_palette[props.color][400]};
+  border: 0.125rem solid ${(props) =>
+    props.theme.test_palette[props.color][400]};
   padding: 0 0.1875rem;
   background-color: transparent;
   max-height: ${(props) => getSize(props.size)};
@@ -24,18 +25,18 @@ const StyledColorInput = styled.input`
   cursor: pointer;
 
   &:hover:enabled {
-    box-shadow: 0px 0px 6px -2px ${(props) =>
+    box-shadow: 0px 0px 0.375rem -0.125rem ${(props) =>
       props.theme.test_palette[props.color][400]};
   }
 
   &:focus:enabled {
-    box-shadow: 0px 0px 8px -1px ${(props) =>
+    box-shadow: 0px 0px 0.5rem -0.0625rem ${(props) =>
       props.theme.test_palette[props.color][400]};
   }
 
   &:disabled {
     cursor: default;
-    border: 2px solid ${(props) => props.theme.palette.gray[900]}};
+    border: 0.125rem solid ${(props) => props.theme.test_palette.light[500]}};
   }
 `;
 

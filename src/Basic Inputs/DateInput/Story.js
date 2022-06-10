@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DateInput from "./index";
 
 const Story = (props) => {
-  const [value, setValue] = useState("2022-05-24");
+  const [value, setValue] = useState("");
 
   const onChange = (event, isoDateValue) => {
     setValue(isoDateValue);
