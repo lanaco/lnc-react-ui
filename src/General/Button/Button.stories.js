@@ -49,6 +49,6 @@ TextAndIconToRight.args = {
   disabled: false,
   icon: "user",
   iconStyle: "solid",
-  iconLocation: "left",
+  iconLocation: "right",
   outline: true,
 };

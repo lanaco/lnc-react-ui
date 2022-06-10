@@ -164,6 +164,7 @@ const Label = styled.label`
 const RadioInput = React.forwardRef((props, ref) => {
   const {
     id,
+    tabIndex,
     checked,
     className,
     style,
@@ -195,9 +196,13 @@ const RadioInput = React.forwardRef((props, ref) => {
     if (onChange) onChange(e);
   };
 
+  var tabIndexMap = {};
+  if (tabIndex || tabIndex === 0) tabIndexMap = { tabIndex };
+
   return (
-    <Container tabIndex={1}>
+    <Container>
       <Input
+        {...tabIndexMap}
         ref={ref}
         onChange={handleChange}
         onFocus={(e) => {
@@ -208,11 +213,10 @@ const RadioInput = React.forwardRef((props, ref) => {
           setFocused(false);
           if (onBlur) onBlur(e);
         }}
-        tabIndex={2}
-        {...themeProps}
         type="radio"
         id={id}
         checked={isChecked}
+        {...themeProps}
         {...rest}
       />
       <Label {...themeProps} htmlFor={id}>
@@ -224,6 +228,7 @@ const RadioInput = React.forwardRef((props, ref) => {
 
 RadioInput.defaultProps = {
   id: "",
+  tabIndex: undefined,
   checked: false,
   disabled: false,
   readOnly: false,
@@ -239,6 +244,7 @@ RadioInput.defaultProps = {
 
 RadioInput.propTypes = {
   id: PropTypes.any.isRequired,
+  tabIndex: PropTypes.number,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
