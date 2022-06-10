@@ -126,7 +126,7 @@ const Icon = styled.i`
 
 //===================================================
 
-const IconButton = (props) => {
+const IconButton = React.forwardRef((props, ref) => {
   //
   const {
     color,
@@ -170,7 +170,7 @@ const IconButton = (props) => {
       disabled={disabled}
       title={title}
       hasText={!isEmpty(text)}
-      // ref={ref}
+      ref={ref}
       {...rest}
     >
       {!isEmpty(iconLocation) && !isEmpty(icon) && iconLocation === "left" && (
@@ -194,7 +194,7 @@ const IconButton = (props) => {
       )}
     </StyledBtn>
   );
-};
+});
 
 IconButton.defaultProps = {
   id: "",

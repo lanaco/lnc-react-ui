@@ -24,7 +24,6 @@ Default.args = {
   onFocus: () => {},
   className: "",
   style: {},
-  theme: theme,
   size: "small",
   color: "primary",
 };

@@ -271,7 +271,6 @@ CheckBox.defaultProps = {
   //-------------------------
   className: "",
   style: {},
-  theme: theme,
   size: "small",
   color: "primary",
 };
@@ -293,7 +292,6 @@ CheckBox.propTypes = {
   //---------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,
-  theme: PropTypes.object.isRequired,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
