@@ -59,12 +59,10 @@ const Progress = React.forwardRef((props, ref) => {
     return (
         <Bar theme={theme} indicator={indicator} {...rest}>
             <Progressed progressPercentage={progressPercentage} theme={theme} color={color} />
-            {/* {indicator && */}
             {indicator && 
             (<Indicator theme={theme}>
                 {progressPercentage}%
             </Indicator>)}
-            {/* } */}
         </Bar>
     );
 });
@@ -83,7 +81,7 @@ Progress.defaultProps = {
 };
 
 Progress.propTypes = {
-    id: PropTypes.any.isRequired,
+    id: PropTypes.string.isRequired,
     indicator: PropTypes.bool,
     progressPercentage: PropTypes.number,
     //-------------------------
