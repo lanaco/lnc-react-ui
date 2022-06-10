@@ -81,7 +81,7 @@ Progress.defaultProps = {
 };
 
 Progress.propTypes = {
-    id: PropTypes.any.isRequired,
+    id: PropTypes.string.isRequired,
     indicator: PropTypes.bool,
     progressPercentage: PropTypes.number,
     //-------------------------
