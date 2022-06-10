@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import theme from "../../_utils/theme";
 import moment from "moment";
 import Calendar from "react-calendar";
+import { useTheme } from "@emotion/react";
 import "./style.css";
 
 const heightBySize = (size) => {
@@ -191,7 +191,6 @@ const DateInput = React.forwardRef((props, ref) => {
   const {
     size,
     color,
-    theme,
     className,
     style,
     disabled,
@@ -206,6 +205,8 @@ const DateInput = React.forwardRef((props, ref) => {
     maxDate,
     ...rest
   } = props;
+
+  const theme = useTheme();
 
   const [date, setDate] = useState(null);
   const [text, setText] = useState("");
@@ -472,7 +473,6 @@ DateInput.defaultProps = {
   //------------------------------
   className: "",
   style: {},
-  theme: theme,
   size: "small",
   color: "primary",
 };
@@ -493,7 +493,6 @@ DateInput.propTypes = {
   //-----------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,
-  theme: PropTypes.object.isRequired,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",

@@ -95,6 +95,7 @@ const FileInput = React.forwardRef((props, ref) => {
     onFocus,
     onBlur,
     disabled,
+    readOnly,
     preventDefault,
     accept,
     multiple,
@@ -137,7 +138,7 @@ const FileInput = React.forwardRef((props, ref) => {
         accept={accept}
         multiple={false}
         ref={ref}
-        onChange={disabled ? () => {} : handleOnChange}
+        onChange={disabled || readOnly ? () => {} : handleOnChange}
         type="file"
         id={id}
         onFocus={(e) => {
@@ -161,6 +162,7 @@ const FileInput = React.forwardRef((props, ref) => {
 FileInput.defaultProps = {
   id: "",
   disabled: false,
+  readOnly: false,
   accept: "",
   chooseFileText: "Choose file",
   showFileSize: false,
@@ -177,6 +179,7 @@ FileInput.defaultProps = {
 FileInput.propTypes = {
   id: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
   accept: PropTypes.string,
   chooseFileText: PropTypes.string,
   showFileSize: PropTypes.bool,

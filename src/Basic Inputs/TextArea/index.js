@@ -134,6 +134,7 @@ const TextArea = React.forwardRef((props, ref) => {
 
         if (onBlur) onBlur(e);
       }}
+      {...rest}
     />
   );
 });
@@ -152,7 +153,6 @@ TextArea.defaultProps = {
   onBlur: () => {},
   onFocus: () => {},
   //----------------
-  theme: theme,
   className: "",
   style: {},
   size: "small",
