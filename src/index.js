@@ -37,8 +37,27 @@ export { default as TimeInput } from "./Basic Inputs/TimeInput";
 
 //=============================================================================================
 
+
+//============ GENERAL==================================================================
+
 export * from "./General/Button";
 export { default as Button } from "./General/Button";
+
+export * from "./General/File";
+export { default as File } from "./General/File";
+
+export * from "./General/Icon";
+export { default as Icon } from "./General/Icon";
+
+export * from "./General/Progress";
+export { default as Progress } from "./General/Progress";
+
+//=============================================================================================
+
+
+
+export * from "./Inputs/FileDnDInput";
+export { default as FileDnDInput } from "./Inputs/FileDnDInput";
 
 export * from "./Inputs/CheckboxLookup";
 export { default as CheckboxLookup } from "./Inputs/CheckboxLookup";
@@ -48,9 +67,6 @@ export { default as DropDown } from "./Inputs/DropDown";
 
 export * from "./Inputs/DropdownLookup";
 export { default as DropdownLookup } from "./Inputs/DropdownLookup";
-
-export * from "./General/Icon";
-export { default as Icon } from "./General/Icon";
 
 export * from "./Inputs/ToggleSwitch";
 export { default as ToggleSwitch } from "./Inputs/ToggleSwitch";
