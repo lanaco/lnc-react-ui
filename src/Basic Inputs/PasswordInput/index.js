@@ -37,7 +37,8 @@ const Container = styled.div`
 
   box-shadow: ${(props) =>
     props.focused
-      ? "0px 0px 6px -2px " + props.theme.test_palette[props.color][400]
+      ? "0px 0px 0.375rem -0.125rem " +
+        props.theme.test_palette[props.color][400]
       : "none"};
 
   &:hover {
@@ -214,7 +215,7 @@ PasswordInput.defaultProps = {
 
 PasswordInput.propTypes = {
   id: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,
@@ -232,7 +233,7 @@ PasswordInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "info",
   ]),
 };
 

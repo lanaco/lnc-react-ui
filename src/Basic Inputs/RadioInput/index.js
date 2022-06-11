@@ -261,7 +261,7 @@ RadioInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "info",
   ]),
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import NumberInput from ".";
+import StoryContainer from "../../_utils/StoryContainer";
 
 export default {
   title: "Basic Inputs/Number Input",
@@ -7,21 +8,63 @@ export default {
 };
 
 const Template = (args) => (
-  <div style={{ width: "150px" }}>
-    <NumberInput {...args} />
-  </div>
+  <StoryContainer>
+    <NumberInput {...args} size={"small"} />
+    <NumberInput {...args} size={"medium"} />
+    <NumberInput {...args} size={"large"} />
+  </StoryContainer>
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Primary = Template.bind({});
+Primary.args = {
+  id: "",
+  value: 1,
+  defaultValue: 0,
   disabled: false,
   readOnly: false,
-  defaultValue: 0,
   debounceTime: 180,
   step: 1,
   min: -10,
   max: 10,
   placeholder: "",
+  className: "",
+  style: {},
+  size: "small",
   color: "primary",
-  size: "medium",
+};
+
+export const SecondaryStep = Template.bind({});
+SecondaryStep.args = {
+  id: "",
+  value: 2,
+  defaultValue: 0,
+  disabled: false,
+  readOnly: false,
+  debounceTime: 180,
+  step: 2,
+  min: -20,
+  max: 20,
+  placeholder: "",
+  className: "",
+  style: {},
+  size: "small",
+  color: "secondary",
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  id: "",
+  value: 0,
+  defaultValue: 0,
+  disabled: true,
+  readOnly: false,
+  debounceTime: 180,
+  step: 1,
+  min: -10,
+  max: 10,
+  placeholder: "",
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
 };
