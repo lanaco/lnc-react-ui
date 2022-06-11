@@ -297,9 +297,9 @@ CheckBox.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "info",
   ]),
 };
 

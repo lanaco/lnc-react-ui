@@ -13,7 +13,7 @@ const paddingBySize = (size) => {
   }[size];
 };
 
-const standardCssFields = ({ theme, color, size }) => {
+const standardCssFields = ({ theme, size }) => {
   var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
     size
   ];
@@ -38,7 +38,7 @@ const Container = styled.div`
     padding: ${(props) => paddingBySize(props.size)};
     background-color: ${(props) => props.theme.test_palette.light[100]};
     color: ${(props) => props.theme.test_palette.dark[500]};
-    border: 1.5px solid ${(props) => props.theme.test_palette.light[500]};
+    border: 0.09375rem solid ${(props) => props.theme.test_palette.light[500]};
 
     min-height: inherit;
     max-height: inherit;
@@ -53,20 +53,20 @@ const Container = styled.div`
     box-sizing: border-box;
 
     &:disabled {
-      border: 1.5px solid ${(props) => props.theme.test_palette.light[400]};
+      border: 0.09375rem solid ${(props) => props.theme.test_palette.light[400]};
       color: ${(props) => props.theme.test_palette.light[500]};
       cursor: default;
     }
 
     &:hover:enabled {
-      border: 1.5px solid
+      border: 0.09375rem solid
         ${(props) => props.theme.test_palette[props.color][400]};
     }
 
     &:focus:enabled {
-      border: 1.5px solid
+      border: 0.09375rem solid
         ${(props) => props.theme.test_palette[props.color][400]};
-      box-shadow: 0px 0px 6px -2px ${(props) => props.theme.test_palette[props.color][400]};
+      box-shadow: 0px 0px 0.375rem -0.125rem ${(props) => props.theme.test_palette[props.color][400]};
     }
   }
 `;
@@ -236,7 +236,7 @@ DecimalInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "info",
   ]),
 };
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../_utils/theme";
 
 const getSize = (size) => {
   return { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[size];
@@ -131,7 +130,7 @@ ColorInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "info",
   ]),
 };
 
