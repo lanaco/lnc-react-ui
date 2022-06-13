@@ -73,7 +73,6 @@ const TextArea = React.forwardRef((props, ref) => {
     id,
     disabled,
     readOnly,
-    preventDefault,
     value,
     defaultValue,
     debounceTime,
@@ -115,6 +114,7 @@ const TextArea = React.forwardRef((props, ref) => {
     <StyledTextArea
       ref={ref}
       {...{ theme, size, color, className, style, disabled, readOnly }}
+      placeholder={placeholder}
       onChange={onValueChange}
       disabled={disabled}
       value={inputValue}
@@ -141,13 +141,11 @@ const TextArea = React.forwardRef((props, ref) => {
 
 TextArea.defaultProps = {
   id: "",
-  value: 0,
-  defaultValue: 0,
+  value: "",
   disabled: false,
   readOnly: false,
   debounceTime: 180,
   placeholder: "",
-  type: "text",
   //----------------
   onChange: () => {},
   onBlur: () => {},
@@ -161,13 +159,11 @@ TextArea.defaultProps = {
 
 TextArea.propTypes = {
   id: PropTypes.string,
-  value: PropTypes.number,
-  defaultValue: PropTypes.number,
+  value: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,
   placeholder: PropTypes.string,
-  type: PropTypes.oneOf(["text", "email"]),
   //----------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
@@ -182,7 +178,7 @@ TextArea.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "info",
   ]),
 };
 

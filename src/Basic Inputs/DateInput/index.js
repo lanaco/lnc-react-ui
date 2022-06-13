@@ -164,7 +164,7 @@ const CalendarButton = styled.div`
 const CalendarContainer = styled.div`
   position: absolute;
   top: ${(props) => calendarOffsetBySize(props.size)};
-  z-index: 2;
+  z-index: 5;
 `;
 
 const Icon = styled.i`
@@ -274,14 +274,14 @@ const DateInput = React.forwardRef((props, ref) => {
       var minJsDate = new Date(minDate);
       minJsDate.setHours(0, 0, 0, 0);
 
-      isInMinRange = jsDate.getTime() < minJsDate.getTime();
+      isInMinRange = jsDate.getTime() >= minJsDate.getTime();
     }
 
     if (maxDate && isIsoDate(maxDate)) {
       var maxJsDate = new Date(maxDate);
       maxJsDate.setHours(0, 0, 0, 0);
 
-      isInMaxRange = jsDate.getTime() > maxJsDate.getTime();
+      isInMaxRange = jsDate.getTime() <= maxJsDate.getTime();
     }
 
     return isInMinRange && isInMaxRange;
@@ -314,19 +314,21 @@ const DateInput = React.forwardRef((props, ref) => {
       return;
     }
 
-    var jsDate = null;
     var isoDate = userFormatToIso(text);
 
     if (text === "" && InputChanged.current && onChange) {
-      onChange(null, isoDate, jsDate);
+      onChange(null, isoDate, new Date(isoDate));
     }
 
     var isDateInMinMaxRange = checkMinMaxDate(isoDate);
 
     if (isoDate !== "" && isDateInMinMaxRange) {
       //
-      jsDate = new Date(isoDate);
-      if (InputChanged.current && onChange) onChange(null, isoDate, jsDate);
+      if (InputChanged.current && onChange) {
+        setText(isoToUserFormat(isoDate));
+        setDate(new Date(isoDate));
+        onChange(null, isoDate, new Date(isoDate));
+      }
       //
     } else if (date !== null) {
       //
@@ -351,7 +353,11 @@ const DateInput = React.forwardRef((props, ref) => {
 
     if (isoDate !== "" && isDateInMinMaxRange) {
       //
-      if (onChange) onChange(null, isoDate, jsDate);
+      if (onChange) {
+        setText(isoToUserFormat(isoDate));
+        setDate(new Date(isoDate));
+        onChange(null, isoDate, new Date(isoDate));
+      }
       //
     } else if (date !== null) {
       //
@@ -364,7 +370,6 @@ const DateInput = React.forwardRef((props, ref) => {
     }
 
     InputChanged.current = false;
-
     toggleCalendar();
   };
 
@@ -500,7 +505,7 @@ DateInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "info",
   ]),
 };
 

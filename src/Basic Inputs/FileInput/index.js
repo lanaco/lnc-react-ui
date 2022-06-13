@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../_utils/theme";
 import { useTheme } from "@emotion/react";
 
 var heightBySize = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" };
@@ -13,7 +12,7 @@ var fileNamePaddingBySize = {
   large: "11.75px",
 };
 
-const standardCssFields = ({ theme, color, size }) => {
+const standardCssFields = ({ theme, size }) => {
   return `
     font-family: ${theme.typography.fontFamily};
     font-size: ${theme.typography[size].fontSize};
@@ -32,7 +31,7 @@ const Container = styled.div`
       props.disabled
         ? ""
         : props.focused
-        ? props.theme.test_palette[props.color][200]
+        ? props.theme.test_palette[props.color][500]
         : props.theme.test_palette[props.color][300]};
   }
 
@@ -63,7 +62,7 @@ const Label = styled.label`
   background-color: ${(props) =>
     props.disabled
       ? props.theme.test_palette.light[400]
-      : props.theme.test_palette[props.color][props.focused ? 200 : 400]};
+      : props.theme.test_palette[props.color][props.focused ? 500 : 400]};
   color: white;
   padding: ${(props) => paddingBySize[props.size]};
   border-radius: 0.1875rem 0 0 0.1875rem;
@@ -96,11 +95,8 @@ const FileInput = React.forwardRef((props, ref) => {
     onBlur,
     disabled,
     readOnly,
-    preventDefault,
     accept,
-    multiple,
     chooseFileText,
-    showFileSize,
     color,
     size,
     ...rest
@@ -114,9 +110,6 @@ const FileInput = React.forwardRef((props, ref) => {
   var themeProps = { theme, size, color, disabled, focused };
 
   const getFileName = () => {
-    if (file && showFileSize)
-      return `${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
-
     if (file) return file.name;
     return "";
   };
@@ -154,7 +147,12 @@ const FileInput = React.forwardRef((props, ref) => {
       <Label {...themeProps} htmlFor={id}>
         {chooseFileText}
       </Label>
-      <FileName {...themeProps} onChange={() => {}} value={getFileName()} />
+      <FileName
+        tabIndex={-1}
+        {...themeProps}
+        onChange={() => {}}
+        value={getFileName()}
+      />
     </Container>
   );
 });
@@ -165,7 +163,6 @@ FileInput.defaultProps = {
   readOnly: false,
   accept: "",
   chooseFileText: "Choose file",
-  showFileSize: false,
   //------------------
   onChange: () => {},
   onFocus: () => {},
@@ -182,7 +179,6 @@ FileInput.propTypes = {
   readOnly: PropTypes.bool,
   accept: PropTypes.string,
   chooseFileText: PropTypes.string,
-  showFileSize: PropTypes.bool,
   //-------------------------
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
@@ -197,7 +193,7 @@ FileInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "info",
   ]),
 };
 
