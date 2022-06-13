@@ -3,6 +3,15 @@ const theme = {
   backgroundColor: "#fff",
   test_palette: {
     primary: {
+      10: "#F5FCFF",
+      20: "#D6F2FF",
+      30: "#C2ECFF",
+      40: "#ADE5FF",
+      50: "#85D8FF",
+      60: "#5CCBFF",
+      70: "#33BEFF",
+      80: "#0AB1FF",
+      90: "#0099E0",
       100: "#007DB8",
       200: "#0070a3",
       300: "#00628f",
@@ -184,19 +193,19 @@ const theme = {
       fontSize: "0.75rem",
       iconFontSize: "1.25rem",
       gap: "0.3rem",
-      subTextSize: "0.625rem"
+      subTextSize: "0.625rem",
     },
     medium: {
       fontSize: "0.9375rem",
       iconFontSize: "1.425rem",
       gap: "0.45rem",
-      subTextSize: "0.725rem"
+      subTextSize: "0.725rem",
     },
     large: {
       fontSize: "1.125rem",
       iconFontSize: "1.6375rem",
       gap: "0.6rem",
-      subTextSize: "0.825rem"
+      subTextSize: "0.825rem",
     },
     h1: {
       fontWeight: 300,
