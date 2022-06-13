@@ -8,13 +8,7 @@ export default {
   argTypes: {},
 };
 
-const Template = (args) => (
-  <>
-    <p>
-      <DropDown {...args} />
-    </p>
-  </>
-);
+const Template = (args) => <DropDown {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
