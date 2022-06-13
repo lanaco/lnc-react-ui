@@ -48,6 +48,8 @@ const UploadedFile = React.forwardRef((props, ref) => {
     const {
         id,
         fileName,
+        fileSize,
+        showFileSize,
         progressPercentage,
         className,
         style,
@@ -62,6 +64,14 @@ const UploadedFile = React.forwardRef((props, ref) => {
     const theme = useTheme();
     var themeProps = { theme, size, color };
 
+    const getFileName = () => {
+        if (fileName && fileSize && showFileSize)
+          return `${fileName} (${(fileSize / (1024 * 1024)).toFixed(2)} MB)`;
+    
+        if (fileName) return fileName;
+        return "";
+      };
+
     return (
         <Container>
             <Icon {...themeProps}
@@ -73,7 +83,7 @@ const UploadedFile = React.forwardRef((props, ref) => {
             <ProgressContent {...themeProps}>
                 <ProgressText>
                     <div style={{ cursor: (onFileClick ? 'pointer' : 'default') }} onClick={onFileClick ? onFileClick : null}
-                    >{fileName}</div>
+                    >{getFileName()}</div>
                     {progressPercentage && <div>{progressPercentage}%</div>}
                 </ProgressText>
                 {(progressPercentage || progressPercentage == 0) && <Progress progressPercentage={progressPercentage} {...themeProps} />}
@@ -88,7 +98,9 @@ const UploadedFile = React.forwardRef((props, ref) => {
 UploadedFile.defaultProps = {
     id: "",
     fileName: "file-name.png",
-    progressPercentage: 20,
+    fileSize: null,
+    showFileSize : false,
+    // progressPercentage: 20,
     //------------------
     className: "",
     style: {},
@@ -105,6 +117,8 @@ UploadedFile.defaultProps = {
 UploadedFile.propTypes = {
     id: PropTypes.any.isRequired,
     fileName: PropTypes.string,
+    fileSize: PropTypes.string,
+    showFileSize: PropTypes.bool,
     progressPercentage: PropTypes.number,
     className: PropTypes.string,
     style: PropTypes.object,
