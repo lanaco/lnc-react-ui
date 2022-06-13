@@ -1,6 +1,8 @@
 import React from "react";
 import DropDown from ".";
+import TextInput from "../../Basic Inputs/TextInput/index";
 import theme from "../../_utils/theme";
+import StoryContainer from "../../_utils/StoryContainer";
 
 export default {
   title: "Inputs/Dropdown",
@@ -8,7 +10,12 @@ export default {
   argTypes: {},
 };
 
-const Template = (args) => <DropDown {...args} />;
+const Template = (args) => (
+  <StoryContainer>
+    <DropDown {...args} />
+    <TextInput placeholder={"Type..."} />
+  </StoryContainer>
+);
 
 export const Default = Template.bind({});
 Default.args = {

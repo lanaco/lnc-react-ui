@@ -7,17 +7,24 @@ import { useTheme } from "@emotion/react";
 const Wrapper = styled.div`
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  width: fit-content;
+  width: 100%;
 `;
 
 const Container = styled.div`
-  width: fit-content;
+  width: 100%;
+  position: relative;
 `;
 
-const Input = styled.input`
+const Input = styled.span`
   appearance: none;
   outline: none;
   color: ${(props) => props.theme.test_palette.dark[100]};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
 
   border-top: 1.5px solid
     ${(props) => props.theme.test_palette[props.color][400]};
@@ -37,6 +44,9 @@ const Input = styled.input`
 `;
 
 const List = styled.ul`
+  z-index: 200;
+  width: 100%;
+  position: absolute;
   margin: 0;
   appearance: none;
   outline: none;
@@ -44,6 +54,7 @@ const List = styled.ul`
   padding: 2px;
   padding-top: 0;
   box-sizing: border-box;
+  background-color: white;
 
   border-bottom: 1.5px solid
     ${(props) => props.theme.test_palette[props.color][400]};
@@ -83,7 +94,9 @@ const Item = styled.li`
   margin: 1.5px 1px;
   cursor: pointer;
   color: ${(props) => props.theme.test_palette[props.color][400]};
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: all 130ms ease;
   background-color: ${(props) => props.theme.test_palette[props.color][10]};
 
@@ -113,16 +126,36 @@ const DropDown = React.forwardRef((props, ref) => {
     setIsOptionsOpen(!isOptionsOpen);
   };
 
+  const handleInputKeyDown = (e) => {
+    if (e.keyCode === 32) {
+      e.preventDefault();
+      setIsOptionsOpen(!isOptionsOpen);
+    }
+
+    if (e.keyCode === 40) {
+      e.preventDefault();
+    }
+  };
+
   // Event handler for keydowns
-  const handleKeyDown = (index) => (e) => {
-    switch (e.key) {
-      case " ":
-      case "SpaceBar":
-      case "Enter":
+  const handleKeyDown = (e, index) => {
+    switch (e.keyCode) {
+      case 13:
         e.preventDefault();
         setSelectedOption(index);
         setIsOptionsOpen(false);
         break;
+
+      //down
+      case 40:
+        e.preventDefault();
+        break;
+
+      //up
+      case 38:
+        e.preventDefault();
+        break;
+
       default:
         break;
     }
@@ -136,13 +169,14 @@ const DropDown = React.forwardRef((props, ref) => {
         <Input
           {...themeProps}
           type="text"
+          tabIndex={0}
           aria-haspopup="listbox"
           aria-expanded={isOptionsOpen}
           open={isOptionsOpen}
           onClick={toggleOptions}
           onChange={() => {}}
-          readOnly
-          value={optionsList[selectedOption]}
+          onKeyDown={(e) => handleInputKeyDown(e)}
+          // value={optionsList[selectedOption]}
           onBlur={(e) => {
             if (
               e.relatedTarget === null ||
@@ -150,7 +184,9 @@ const DropDown = React.forwardRef((props, ref) => {
             )
               setIsOptionsOpen(true);
           }}
-        />
+        >
+          {optionsList[selectedOption]}
+        </Input>
 
         <List
           {...themeProps}
@@ -166,8 +202,8 @@ const DropDown = React.forwardRef((props, ref) => {
               key={index}
               tabIndex={0}
               role="option"
-              aria-selected={selectedOption == index}
-              onKeyDown={handleKeyDown(index)}
+              aria-selected={selectedOption === index}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               onClick={() => {
                 setSelectedOption(index);
                 setIsOptionsOpen(false);
