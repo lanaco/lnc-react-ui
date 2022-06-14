@@ -35,7 +35,6 @@ Default.args = {
   //----------------
   onChange: () => {},
   onBlur: () => {},
-  onFocus: () => {},
   //----------------
   className: "",
   style: {},
