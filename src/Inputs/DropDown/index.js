@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "@emotion/react";
 
 const Wrapper = styled.div`
@@ -33,7 +33,7 @@ const getSelectHover = (props) => {
       ${props.theme.test_palette[props.color][400]};
     border-bottom: ${
       props.open
-        ? "none"
+        ? "0.09375rem solid transparent"
         : `0.09375rem solid ${props.theme.test_palette[props.color][400]}`
     };
   `;
@@ -41,14 +41,25 @@ const getSelectHover = (props) => {
 
 const selectPadding = {
   small: "0.41875rem 0.5rem",
-  medium: "0.54375rem 0.625rem",
+  medium: "0.48125rem 0.625rem",
   large: "0.56875rem 0.75rem",
 };
 
 const listItemPadding = {
   small: "0.3125rem 0.5rem",
-  medium: "6px 9px",
-  large: "7px 10px",
+  medium: "0.375rem 0.5625rem",
+  large: "0.4375rem 0.625rem",
+};
+
+const heights = ({ theme, size }) => {
+  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+    size
+  ];
+
+  return `
+    min-height: ${height};
+    max-height: ${height};
+  `;
 };
 
 const Select = styled.span`
@@ -65,12 +76,15 @@ const Select = styled.span`
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  ${(props) => heights(props)}
 
   border-top: 0.09375rem solid ${(props) => getBorderColor(props)};
   border-right: 0.09375rem solid ${(props) => getBorderColor(props)};
   border-left: 0.09375rem solid ${(props) => getBorderColor(props)};
   border-bottom: ${(props) =>
-    props.open ? "none" : `0.09375rem solid ${getBorderColor(props)}`};
+    props.open
+      ? "0.09375rem solid transparent"
+      : `0.09375rem solid ${getBorderColor(props)}`};
 
   border-radius: ${(props) =>
     props.open ? "0.375rem 0.375rem 0 0" : "0.375rem"};
@@ -116,7 +130,7 @@ const List = styled.ul`
     ${(props) => props.theme.test_palette[props.color][400]};
   border-top: ${(props) =>
     props.show
-      ? "none"
+      ? ""
       : `0.09375rem solid ${props.theme.test_palette[props.color][400]}`};
 
   border-radius: ${(props) =>
@@ -174,7 +188,6 @@ const DropDown = React.forwardRef((props, ref) => {
     //----------------
     onChange,
     onBlur,
-    onFocus,
     //----------------
     className,
     style,
@@ -183,19 +196,21 @@ const DropDown = React.forwardRef((props, ref) => {
   } = props;
 
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(-1);
 
-  const optionsList = [
-    "Option 1",
-    "Option 2",
-    "Option 3",
-    "Option 4",
-    "Option 5",
-  ];
+  useEffect(() => {
+    if (value !== selectedOption) setSelectedOption(value);
+  }, [value]);
 
   const toggleOptions = () => {
     if (disabled || readOnly) return;
     setIsOptionsOpen(!isOptionsOpen);
+  };
+
+  const select = (e, itemId) => {
+    setSelectedOption(itemId);
+    setIsOptionsOpen(false);
+    if (onChange) onChange(e, itemId);
   };
 
   const handleInputKeyDown = (e) => {
@@ -210,12 +225,11 @@ const DropDown = React.forwardRef((props, ref) => {
   };
 
   // Event handler for keydowns
-  const handleKeyDown = (e, index) => {
+  const handleKeyDown = (e, itemId) => {
     switch (e.keyCode) {
       case 13:
         e.preventDefault();
-        setSelectedOption(index);
-        setIsOptionsOpen(false);
+        select(e, itemId);
         break;
 
       //down
@@ -233,10 +247,24 @@ const DropDown = React.forwardRef((props, ref) => {
     }
   };
 
+  const getSelectedOptionText = () => {
+    var selected = items.find((x) => x[mapId] === selectedOption);
+
+    if (selected) return selected[mapValue];
+
+    return emptySelectText;
+  };
+
   const themeProps = { color, size, theme, readOnly, disabled, isOptionsOpen };
 
   return (
-    <Wrapper {...themeProps} className={className} style={style} ref={ref}>
+    <Wrapper
+      id={id}
+      {...themeProps}
+      className={className}
+      style={style}
+      ref={ref}
+    >
       <Container {...themeProps}>
         <Select
           {...themeProps}
@@ -253,11 +281,13 @@ const DropDown = React.forwardRef((props, ref) => {
               e.relatedTarget === null ||
               (e.relatedTarget && e.relatedTarget.nodeName !== "LI")
             )
-              setIsOptionsOpen(false);
+              setIsOptionsOpen(true);
+
+            if (onBlur) onBlur(e);
           }}
         >
           <SelectedOption {...themeProps}>
-            {optionsList[selectedOption]}
+            {getSelectedOptionText()}
           </SelectedOption>
           <Icon {...themeProps} className="fas fa-chevron-down" />
         </Select>
@@ -267,23 +297,22 @@ const DropDown = React.forwardRef((props, ref) => {
           show={isOptionsOpen}
           tabIndex={-1}
           role="listbox"
-          aria-activedescendant={optionsList[selectedOption]}
-          optionsCount={optionsList.length}
+          aria-activedescendant={items.find((x) => x[mapId] === selectedOption)}
+          optionsCount={items.length}
         >
-          {optionsList.map((option, index) => (
+          {items.map((item, index) => (
             <Item
               {...themeProps}
               key={index}
               tabIndex={0}
               role="option"
-              aria-selected={selectedOption === index}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-              onClick={() => {
-                setSelectedOption(index);
-                setIsOptionsOpen(false);
+              aria-selected={selectedOption === item[mapId]}
+              onKeyDown={(e) => handleKeyDown(e, item[mapId])}
+              onClick={(e) => {
+                select(e, item[mapId]);
               }}
             >
-              {option}
+              {item[mapValue]}
             </Item>
           ))}
         </List>
@@ -304,7 +333,6 @@ DropDown.defaultProps = {
   //----------------
   onChange: () => {},
   onBlur: () => {},
-  onFocus: () => {},
   //----------------
   className: "",
   style: {},
@@ -324,7 +352,6 @@ DropDown.propTypes = {
   //----------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
   //----------------
   className: PropTypes.string,
   style: PropTypes.object,
