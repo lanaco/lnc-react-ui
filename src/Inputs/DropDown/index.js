@@ -167,10 +167,13 @@ const Item = styled.li`
   transition: all 130ms ease;
   background-color: ${(props) => props.theme.test_palette.light[100]};
 
-  &:hover {
-    color: white;
-    background-color: ${(props) => props.theme.test_palette[props.color][300]};
-  }
+  ${(props) =>
+    props.active
+      ? `
+          color: white;
+          background-color: ${props.theme.test_palette[props.color][300]};
+        `
+      : ""};
 `;
 
 const DropDown = React.forwardRef((props, ref) => {
@@ -198,6 +201,7 @@ const DropDown = React.forwardRef((props, ref) => {
 
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(-1);
+  const [activeOption, setActiveOption] = useState(-1);
 
   useEffect(() => {
     if (value !== selectedOption) setSelectedOption(value);
@@ -210,6 +214,7 @@ const DropDown = React.forwardRef((props, ref) => {
 
   const select = (e, itemId) => {
     setSelectedOption(itemId);
+    setActiveOption(-1);
     setIsOptionsOpen(false);
     if (onChange) onChange(e, itemId);
   };
@@ -220,8 +225,39 @@ const DropDown = React.forwardRef((props, ref) => {
       setIsOptionsOpen(!isOptionsOpen);
     }
 
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      select(e, activeOption);
+    }
+
     if (e.keyCode === 40) {
       e.preventDefault();
+
+      if (activeOption === -1) {
+        setActiveOption(items[0][mapId]);
+      } else {
+        var currentActiveIndex = items
+          .map((x) => x[mapId])
+          .indexOf(activeOption);
+
+        if (currentActiveIndex < items.length - 1) {
+          setActiveOption(items[currentActiveIndex + 1][mapId]);
+        }
+      }
+    }
+
+    if (e.keyCode === 38) {
+      e.preventDefault();
+
+      if (activeOption !== -1) {
+        var currentActiveIndex = items
+          .map((x) => x[mapId])
+          .indexOf(activeOption);
+
+        if (currentActiveIndex > 0) {
+          setActiveOption(items[currentActiveIndex - 1][mapId]);
+        }
+      }
     }
   };
 
@@ -236,6 +272,7 @@ const DropDown = React.forwardRef((props, ref) => {
       //down
       case 40:
         e.preventDefault();
+
         break;
 
       //up
@@ -254,6 +291,14 @@ const DropDown = React.forwardRef((props, ref) => {
     if (selected) return selected[mapValue];
 
     return emptySelectText;
+  };
+
+  const handleItemEnter = (e, itemId) => {
+    setActiveOption(itemId);
+  };
+
+  const handleItemLeave = (e, itemId) => {
+    if (activeOption === itemId) setActiveOption(-1);
   };
 
   const themeProps = { color, size, theme, readOnly, disabled, isOptionsOpen };
@@ -283,7 +328,7 @@ const DropDown = React.forwardRef((props, ref) => {
               e.relatedTarget === null ||
               (e.relatedTarget && e.relatedTarget.nodeName !== "LI")
             )
-              setIsOptionsOpen(true);
+              setIsOptionsOpen(false);
 
             if (onBlur) onBlur(e);
           }}
@@ -306,10 +351,13 @@ const DropDown = React.forwardRef((props, ref) => {
             <Item
               {...themeProps}
               key={index}
-              tabIndex={0}
+              tabIndex={-1}
               role="option"
+              active={activeOption === item[mapId]}
               aria-selected={selectedOption === item[mapId]}
-              onKeyDown={(e) => handleKeyDown(e, item[mapId])}
+              // onKeyDown={(e) => handleKeyDown(e, item[mapId])}
+              onMouseEnter={(e) => handleItemEnter(e, item[mapId])}
+              onMouseLeave={(e) => handleItemLeave(e, item[mapId])}
               onClick={(e) => {
                 select(e, item[mapId]);
               }}
