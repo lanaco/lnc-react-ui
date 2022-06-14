@@ -193,6 +193,7 @@ const DropDown = React.forwardRef((props, ref) => {
     style,
     size,
     color,
+    ...rest
   } = props;
 
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
@@ -264,6 +265,7 @@ const DropDown = React.forwardRef((props, ref) => {
       className={className}
       style={style}
       ref={ref}
+      {...rest}
     >
       <Container {...themeProps}>
         <Select
