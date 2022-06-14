@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import theme from "../../_utils/theme";
 import { useTheme } from "@emotion/react";
 
 const Wrapper = styled.div`
@@ -15,32 +14,85 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Input = styled.span`
+const getBorderColor = (props) => {
+  if (props.disabled) return props.theme.test_palette.light[400];
+  if (props.isOptionsOpen) return props.theme.test_palette[props.color][400];
+
+  return props.theme.test_palette.light[500];
+};
+
+const getSelectHover = (props) => {
+  if (props.disabled) return "";
+
+  return `
+  border-top: 0.09375rem solid
+      ${props.theme.test_palette[props.color][400]};
+    border-right: 0.09375rem solid
+      ${props.theme.test_palette[props.color][400]};
+    border-left: 0.09375rem solid
+      ${props.theme.test_palette[props.color][400]};
+    border-bottom: ${
+      props.open
+        ? "none"
+        : `0.09375rem solid ${props.theme.test_palette[props.color][400]}`
+    };
+  `;
+};
+
+const selectPadding = {
+  small: "0.41875rem 0.5rem",
+  medium: "0.54375rem 0.625rem",
+  large: "0.56875rem 0.75rem",
+};
+
+const listItemPadding = {
+  small: "0.3125rem 0.5rem",
+  medium: "6px 9px",
+  large: "7px 10px",
+};
+
+const Select = styled.span`
   appearance: none;
   outline: none;
-  color: ${(props) => props.theme.test_palette.dark[100]};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[400]
+      : props.theme.test_palette.dark[100]};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
 
-  border-top: 1.5px solid
-    ${(props) => props.theme.test_palette[props.color][400]};
-  border-right: 1.5px solid
-    ${(props) => props.theme.test_palette[props.color][400]};
-  border-left: 1.5px solid
-    ${(props) => props.theme.test_palette[props.color][400]};
+  border-top: 0.09375rem solid ${(props) => getBorderColor(props)};
+  border-right: 0.09375rem solid ${(props) => getBorderColor(props)};
+  border-left: 0.09375rem solid ${(props) => getBorderColor(props)};
   border-bottom: ${(props) =>
-    props.open
-      ? "none"
-      : `1.5px solid ${props.theme.test_palette[props.color][400]}`};
+    props.open ? "none" : `0.09375rem solid ${getBorderColor(props)}`};
 
-  border-radius: ${(props) => (props.open ? "6px 6px 0 0" : "6px")};
-  padding: 4.7px;
+  border-radius: ${(props) =>
+    props.open ? "0.375rem 0.375rem 0 0" : "0.375rem"};
+  padding: ${(props) => selectPadding[props.size]};
   font-family: inherit;
   font-size: inherit;
+
+  &:hover {
+    ${(props) => getSelectHover(props)}
+  }
+`;
+
+const SelectedOption = styled.span``;
+
+const Icon = styled.i`
+  margin-left: auto;
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[500]
+      : props.theme.test_palette.dark[100]};
 `;
 
 const List = styled.ul`
@@ -51,54 +103,55 @@ const List = styled.ul`
   appearance: none;
   outline: none;
   list-style-type: none;
-  padding: 2px;
+  padding: 0.125rem;
   padding-top: 0;
   box-sizing: border-box;
   background-color: white;
 
-  border-bottom: 1.5px solid
+  border-bottom: 0.09375rem solid
     ${(props) => props.theme.test_palette[props.color][400]};
-  border-right: 1.5px solid
+  border-right: 0.09375rem solid
     ${(props) => props.theme.test_palette[props.color][400]};
-  border-left: 1.5px solid
+  border-left: 0.09375rem solid
     ${(props) => props.theme.test_palette[props.color][400]};
   border-top: ${(props) =>
     props.show
       ? "none"
-      : `1.5px solid ${props.theme.test_palette[props.color][400]}`};
+      : `0.09375rem solid ${props.theme.test_palette[props.color][400]}`};
 
-  border-radius: ${(props) => (props.show ? "0 0 6px 6px " : "6px")};
+  border-radius: ${(props) =>
+    props.show ? "0 0 0.375rem 0.375rem " : "0.375rem"};
 
   display: ${(props) => (props.show ? "block" : "none")};
   font-family: inherit;
   font-size: inherit;
 
   & > li {
-    margin: 1.5px 1px;
+    margin: 0.09375rem 0.0625rem;
   }
 
   & > li:first-of-type {
-    margin: 0 1px 1.5px 1px;
+    margin: 0 0.0625rem 0.09375rem 0.0625rem;
     border-radius: ${(props) =>
-      props.optionsCount === 1 ? "3px" : "3px 3px 0 0"};
+      props.optionsCount === 1 ? "0.1875rem" : "0.1875rem 0.1875rem 0 0"};
   }
 
   & > li:last-of-type {
     border-radius: ${(props) =>
-      props.optionsCount === 1 ? "3px" : "0 0 3px 3px"};
+      props.optionsCount === 1 ? "0.1875rem" : "0 0 0.1875rem 0.1875rem"};
   }
 `;
 
 const Item = styled.li`
-  padding: 5px 8px;
-  margin: 1.5px 1px;
+  padding: ${(props) => listItemPadding[props.size]};
+  margin: 0.09375rem 0.0625rem;
   cursor: pointer;
   color: ${(props) => props.theme.test_palette[props.color][400]};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: all 130ms ease;
-  background-color: ${(props) => props.theme.test_palette[props.color][10]};
+  background-color: ${(props) => props.theme.test_palette.light[100]};
 
   &:hover {
     color: white;
@@ -109,7 +162,25 @@ const Item = styled.li`
 const DropDown = React.forwardRef((props, ref) => {
   //
   const theme = useTheme();
-  const { color, size } = props;
+  const {
+    id,
+    value,
+    disabled,
+    readOnly,
+    items,
+    mapId,
+    mapValue,
+    emptySelectText,
+    //----------------
+    onChange,
+    onBlur,
+    onFocus,
+    //----------------
+    className,
+    style,
+    size,
+    color,
+  } = props;
 
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(0);
@@ -123,6 +194,7 @@ const DropDown = React.forwardRef((props, ref) => {
   ];
 
   const toggleOptions = () => {
+    if (disabled || readOnly) return;
     setIsOptionsOpen(!isOptionsOpen);
   };
 
@@ -161,12 +233,12 @@ const DropDown = React.forwardRef((props, ref) => {
     }
   };
 
-  const themeProps = { color, size, theme };
+  const themeProps = { color, size, theme, readOnly, disabled, isOptionsOpen };
 
   return (
-    <Wrapper {...themeProps} className="wrapper">
-      <Container {...themeProps} className="container">
-        <Input
+    <Wrapper {...themeProps} className={className} style={style} ref={ref}>
+      <Container {...themeProps}>
+        <Select
           {...themeProps}
           type="text"
           tabIndex={0}
@@ -176,17 +248,19 @@ const DropDown = React.forwardRef((props, ref) => {
           onClick={toggleOptions}
           onChange={() => {}}
           onKeyDown={(e) => handleInputKeyDown(e)}
-          // value={optionsList[selectedOption]}
           onBlur={(e) => {
             if (
               e.relatedTarget === null ||
               (e.relatedTarget && e.relatedTarget.nodeName !== "LI")
             )
-              setIsOptionsOpen(true);
+              setIsOptionsOpen(false);
           }}
         >
-          {optionsList[selectedOption]}
-        </Input>
+          <SelectedOption {...themeProps}>
+            {optionsList[selectedOption]}
+          </SelectedOption>
+          <Icon {...themeProps} className="fas fa-chevron-down" />
+        </Select>
 
         <List
           {...themeProps}
@@ -220,39 +294,48 @@ const DropDown = React.forwardRef((props, ref) => {
 
 DropDown.defaultProps = {
   id: "",
+  value: 0,
   disabled: false,
-  tooltip: "",
+  readOnly: false,
+  items: [],
+  mapId: "id",
+  mapValue: "value",
+  emptySelectText: "Select...",
+  //----------------
   onChange: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  //----------------
   className: "",
-  preventDefault: true,
+  style: {},
   size: "small",
   color: "primary",
-  theme: theme,
-  items: [],
-  withoutEmpty: false,
-  mapValueTo: "value",
-  mapNameTo: "name",
 };
 
 DropDown.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
+  value: PropTypes.number,
   disabled: PropTypes.bool,
-  tooltip: PropTypes.string,
+  readOnly: PropTypes.bool,
+  items: PropTypes.arrayOf(PropTypes.object),
+  mapId: PropTypes.string,
+  mapValue: PropTypes.string,
+  emptySelectText: PropTypes.string,
+  //----------------
   onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  //----------------
   className: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  withoutEmpty: PropTypes.bool,
-  mapValueTo: PropTypes.string,
-  mapNameTo: PropTypes.string,
+  style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "info",
   ]),
 };
 
