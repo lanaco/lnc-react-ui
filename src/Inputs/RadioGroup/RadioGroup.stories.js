@@ -1,6 +1,6 @@
 import React from "react";
 import RadioGroup from ".";
-import Story from "./Story";
+import StoryContainer from "../../_utils/StoryContainer";
 
 export default {
   title: "Inputs/Radio Group",
@@ -8,17 +8,34 @@ export default {
   argTypes: {},
 };
 
-// add hidden input
-const Template = (args) => <Story {...args} />;
+const Template = (args) => (
+  <StoryContainer>
+    <RadioGroup {...args} size={"small"} id={"rg1"} />
+    <RadioGroup {...args} size={"medium"} id={"rg2"} />
+    <RadioGroup {...args} size={"large"} id={"rg3"} />
+  </StoryContainer>
+);
 
 export const Default = Template.bind({});
 Default.args = {
-  color: "primary",
-  colorAlt: "secondary",
-  size: "small",
-  value: false,
+  id: "",
+  value: null,
   disabled: false,
   readOnly: false,
-  labelWhenFalse: "Option 1",
-  labelWhenTrue: "Option 2",
+  items: [
+    { id: "1", value: "Option 1" },
+    { id: "2", value: "Option 2" },
+    { id: "3", value: "Option 3" },
+  ],
+  mapId: "id",
+  mapValue: "value",
+  emptySelectText: "Select...",
+  //----------------
+  onChange: () => {},
+  onBlur: () => {},
+  //----------------
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
 };

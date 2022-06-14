@@ -171,6 +171,8 @@ const RadioInput = React.forwardRef((props, ref) => {
     color,
     size,
     onChange,
+    onFocus,
+    onBlur,
     value,
     label,
     disabled,
@@ -193,7 +195,7 @@ const RadioInput = React.forwardRef((props, ref) => {
     if (preventDefault) e.preventDefault();
 
     setIsChecked(true);
-    if (onChange) onChange(e);
+    if (onChange) onChange(e, id);
   };
 
   var tabIndexMap = {};
@@ -235,6 +237,8 @@ RadioInput.defaultProps = {
   label: "",
   //------------------
   onChange: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
   //------------------
   className: "",
   style: {},
@@ -243,7 +247,7 @@ RadioInput.defaultProps = {
 };
 
 RadioInput.propTypes = {
-  id: PropTypes.any.isRequired,
+  id: PropTypes.string.isRequired,
   tabIndex: PropTypes.number,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -251,6 +255,8 @@ RadioInput.propTypes = {
   label: PropTypes.string,
   //-------------------------
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   //-------------------------
   className: PropTypes.string,
   style: PropTypes.object,
