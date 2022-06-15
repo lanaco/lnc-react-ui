@@ -47,11 +47,13 @@
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
-    "rollup-plugin-uglify": "^6.0.4",
     "style-loader": "^2.0.0"
   },
   "dependencies": {
     "@emotion/react": "^11.4.0",
+    "@mdx-js/loader": "^2.1.1",
+    "@mdx-js/react": "^2.1.1",
+    "@storybook/addon-docs": "^6.5.8",
     "@testing-library/react": "^12.1.4",
     "framer-motion": "^4.1.17",
     "immer": "^9.0.3",

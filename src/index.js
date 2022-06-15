@@ -32,6 +32,9 @@ export { default as NumberInput } from "./Basic Inputs/NumberInput";
 export * from "./Basic Inputs/RadioInput";
 export { default as RadioInput } from "./Basic Inputs/RadioInput";
 
+export * from "./Basic Inputs/RangeSlider";
+export { default as RangeSlider } from "./Basic Inputs/RangeSlider";
+
 export * from "./Basic Inputs/TimeInput";
 export { default as TimeInput } from "./Basic Inputs/TimeInput";
 
@@ -78,6 +81,9 @@ export { default as ConfirmationForm } from "./Utility/ConfirmationForm";
 
 export * from "./Inputs/DropdownMenu";
 export { default as DropdownMenu } from "./Inputs/DropdownMenu";
+
+export * from "./Inputs/DoubleRangeSlider";
+export { default as DoubleRangeSlider } from "./Inputs/DoubleRangeSlider";
 
 export * from "./Data dipslay/Grid";
 export { default as Grid } from "./Data display/Grid";
