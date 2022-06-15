@@ -17,10 +17,10 @@ const standardCssFields = ({ theme, size }) => {
 };
 
 const StyledRangeSlider = styled.div`
-position:relative;
-${(props) => standardCssFields(props)};
-display: flex;
-align-items: center;
+  position: relative;
+  ${(props) => standardCssFields(props)};
+  display: flex;
+  align-items: center;
 `;
 
 const InputSlider = styled.input`
@@ -39,19 +39,31 @@ const InputSlider = styled.input`
   &::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: ${props =>  props.theme.typography[props.size].thumb}; /* Set a specific slider handle width */
-    height: ${props =>  props.theme.typography[props.size].thumb}; /* Slider handle height */
+    width: ${(props) =>
+      props.theme.typography[props.size]
+        .thumb}; /* Set a specific slider handle width */
+    height: ${(props) =>
+      props.theme.typography[props.size].thumb}; /* Slider handle height */
     border-radius: 50%;
-    background: ${(props) => props.disabled ? props.theme.test_palette["disabled"][500] : props.theme.test_palette[props.color][400]};
+    background: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette["disabled"][500]
+        : props.theme.test_palette[props.color][400]};
     cursor: pointer; /* Cursor on hover */
     border: none;
   }
 
   &::-moz-range-thumb {
-    width: ${props =>  props.theme.typography[props.size].thumb}; /* Set a specific slider handle width */
-    height: ${props =>  props.theme.typography[props.size].thumb}; /* Slider handle height */
+    width: ${(props) =>
+      props.theme.typography[props.size]
+        .thumb}; /* Set a specific slider handle width */
+    height: ${(props) =>
+      props.theme.typography[props.size].thumb}; /* Slider handle height */
     border-radius: 50%;
-    background: ${(props) => props.disabled ? props.theme.test_palette["disabled"][500] : props.theme.test_palette[props.color][400]};
+    background: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette["disabled"][500]
+        : props.theme.test_palette[props.color][400]};
     cursor: pointer; /* Cursor on hover */
     border: none;
   }
@@ -61,9 +73,10 @@ const Popover = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position:absolute;
-  left: ${props => `calc(${props.inputValue+'%'} + (${8 -  props.inputValue * 0.15}px))`} ;
-  top: ${props =>  "-"+props.theme.typography[props.size].thumb};
+  position: absolute;
+  left: ${(props) =>
+    `calc(${props.inputValue + "%"} + (${8 - props.inputValue * 0.15}px))`};
+  top: ${(props) => "-" + props.theme.typography[props.size].thumb};
   transform: translateX(-50%);
   & > .text-content {
     color: white;
@@ -71,7 +84,6 @@ const Popover = styled.div`
     border-radius: 3px;
     z-index: 2;
     padding: 2px 6px;
-
   }
   & > .arrow {
     & > .outer {
@@ -93,17 +105,8 @@ const Popover = styled.div`
 `;
 
 const RangeSlider = React.forwardRef((props, ref) => {
-  const {
-    value,
-    min,
-    max,
-    disabled,
-    onChange,
-    onInput,
-    color,
-    size,
-    ...rest
-  } = props;
+  const { value, min, max, disabled, onChange, onInput, color, size, ...rest } =
+    props;
   const theme = useTheme();
   const themeProps = { theme, size, color };
 
@@ -112,8 +115,8 @@ const RangeSlider = React.forwardRef((props, ref) => {
 
   const [showPopover, setShowPopover] = useState();
 
-   // Convert to percentage
-   const getPercent = useCallback(
+  // Convert to percentage
+  const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
@@ -135,24 +138,28 @@ const RangeSlider = React.forwardRef((props, ref) => {
   const handleOnInput = (e) => {
     changeSliderColor(e.target.value);
 
-    if(onInput) onInput(e);
+    if (onInput) onInput(e);
   };
 
   const changeSliderColor = (sliderValue) => {
-    let valueColor = disabled ? theme.test_palette["disabled"][500] : theme.test_palette[color][400];
+    let valueColor = disabled
+      ? theme.test_palette["disabled"][500]
+      : theme.test_palette[color][400];
     setRangeBackground(
-      `linear-gradient(to right, ${valueColor} 0%, ${valueColor} ${getPercent(sliderValue)}%, ${sliderColor} ${getPercent(sliderValue)}%, ${sliderColor} 100%)`
+      `linear-gradient(to right, ${valueColor} 0%, ${valueColor} ${getPercent(
+        sliderValue
+      )}%, ${sliderColor} ${getPercent(sliderValue)}%, ${sliderColor} 100%)`
     );
-  }
+  };
 
   const handleOnChange = (e) => {
-    setInputValue(e.target.value)
+    setInputValue(e.target.value);
 
-    if(onChange) onChange(e.target.value);
-  }
+    if (onChange) onChange(e.target.value);
+  };
   return (
     <StyledRangeSlider {...themeProps}>
-      {(showPopover && inputValue) && (
+      {showPopover && inputValue && (
         <>
           <Popover {...themeProps} inputValue={getPercent(inputValue)}>
             <div className="text-content">{inputValue}</div>
@@ -183,9 +190,7 @@ const RangeSlider = React.forwardRef((props, ref) => {
         {...themeProps}
         {...rest}
       ></InputSlider>
-
     </StyledRangeSlider>
-
   );
 });
 
