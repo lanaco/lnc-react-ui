@@ -1,22 +1,8 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import { useTheme } from "@emotion/react";
 import DragAndDropFile from "../DragAndDropFile";
 import UploadedFile from "../../General/UploadedFile";
-
-var paddingBySize = {
-  small: "8px 13px",
-  medium: "9.5px 14.5px",
-  large: "11.75px 16.75px",
-};
-
-const standardCssFields = ({ theme, color, size }) => {
-  return `
-      font-family: ${theme.typography.fontFamily};
-      font-size: ${theme.typography[size].fontSize};
-    `;
-};
 
 const StyledDragDropFileInput = styled.div`
   display: flex;
@@ -51,7 +37,7 @@ const DragDropFileInput = React.forwardRef((props, ref) => {
     size,
     ...rest
   } = props;
-  const [inputFiles, setInputFiles] =useState();
+  const [inputFiles, setInputFiles] =useState([]);
   useEffect(() => {
     setInputFiles(files)
   }, [files])
@@ -68,7 +54,7 @@ const DragDropFileInput = React.forwardRef((props, ref) => {
     if (e.target?.files) {
       setInputFiles([...inputFiles, ...e.target.files]);
     } else if (e) {
-      setInputFiles([...inputFiles, ...e]);
+       setInputFiles([...inputFiles, ...e]);
     }
     if (onChange) onChange(e);
   };
@@ -84,6 +70,7 @@ const DragDropFileInput = React.forwardRef((props, ref) => {
         selectFileText={selectFileText}
         dndFileText={dndFileText}
         showFileSize={showFileSize}
+        showDnD={!(inputFiles?.length > 0)}
         onChange={handleOnChange}
         onFocus={onFocus}
         onBlur={onBlur}
