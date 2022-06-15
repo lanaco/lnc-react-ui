@@ -132,7 +132,7 @@ const RangeSlider = React.forwardRef((props, ref) => {
   }, [inputValue, getPercent, disabled]);
 
   useEffect(() => {
-    changeSliderColor(0);
+    changeSliderColor(inputValue);
   }, [color]);
 
   const handleOnInput = (e) => {
@@ -232,3 +232,4 @@ RangeSlider.propTypes = {
 };
 
 export default RangeSlider;
+
