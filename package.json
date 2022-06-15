@@ -65,6 +65,7 @@
     "react-dropzone": "^14.2.1",
     "react-number-format": "^4.9.3",
     "react-transition-group": "^4.4.2",
-    "use-immer": "^0.6.0"
+    "use-immer": "^0.6.0",
+    "use-state-with-callback": "^3.0.2"
   }
 }

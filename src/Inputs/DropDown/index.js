@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useTheme } from "@emotion/react";
+import { useStateWithCallbackLazy } from "use-state-with-callback";
 
 const Wrapper = styled.div`
   font-family: ${(props) => props.theme.typography.fontFamily};
@@ -14,7 +15,9 @@ const Container = styled.div`
   position: relative;
 `;
 
-const getBorderColor = (props) => {
+const getBorderColor = (props, focus = false) => {
+  if (focus) return props.theme.test_palette[props.color][400];
+
   if (props.disabled) return props.theme.test_palette.light[400];
   if (props.isOptionsOpen) return props.theme.test_palette[props.color][400];
 
@@ -92,6 +95,23 @@ const Select = styled.span`
   font-family: inherit;
   font-size: inherit;
 
+  &:focus {
+    ${(props) => {
+      if (!props.disabled) {
+        return `
+          border-top: 0.09375rem solid ${getBorderColor(props, true)};
+          border-right: 0.09375rem solid ${getBorderColor(props, true)};
+          border-left: 0.09375rem solid ${getBorderColor(props, true)};
+          border-bottom: ${
+            props.open
+              ? "0.09375rem solid transparent"
+              : `0.09375rem solid ${getBorderColor(props, true)}`
+          };
+        `;
+      }
+    }}
+  }
+
   &:hover {
     ${(props) => getSelectHover(props)}
   }
@@ -110,7 +130,7 @@ const Icon = styled.i`
 `;
 
 const List = styled.ul`
-  z-index: 200;
+  z-index: 15;
   width: 100%;
   position: absolute;
   margin: 0;
@@ -121,6 +141,8 @@ const List = styled.ul`
   padding-top: 0;
   box-sizing: border-box;
   background-color: white;
+  max-height: 60vh;
+  overflow: auto;
 
   border-bottom: 0.09375rem solid
     ${(props) => props.theme.test_palette[props.color][400]};
@@ -157,6 +179,7 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
+  position: relative;
   padding: ${(props) => listItemPadding[props.size]};
   margin: 0.09375rem 0.0625rem;
   cursor: pointer;
@@ -178,12 +201,14 @@ const Item = styled.li`
 
 const DropDown = React.forwardRef((props, ref) => {
   //
+
   const theme = useTheme();
   const {
     id,
     value,
     disabled,
     readOnly,
+    tabIndex,
     items,
     mapId,
     mapValue,
@@ -199,22 +224,30 @@ const DropDown = React.forwardRef((props, ref) => {
     ...rest
   } = props;
 
-  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [isOptionsOpen, setIsOptionsOpen] = useStateWithCallbackLazy(false);
   const [selectedOption, setSelectedOption] = useState(-1);
   const [activeOption, setActiveOption] = useState(-1);
 
   useEffect(() => {
-    if (value !== selectedOption) setSelectedOption(value);
+    if (value !== selectedOption) {
+      setSelectedOption(value);
+      setActiveOption(value);
+    }
   }, [value]);
 
   const toggleOptions = () => {
     if (disabled || readOnly) return;
     setIsOptionsOpen(!isOptionsOpen);
+
+    if (selectedOption !== -1) setActiveOption(selectedOption);
+    else if (items && items.length > 0) {
+      setActiveOption(items[0][mapId]);
+    } else setActiveOption(-1);
   };
 
   const select = (e, itemId) => {
     setSelectedOption(itemId);
-    setActiveOption(-1);
+    setActiveOption(itemId);
     setIsOptionsOpen(false);
     if (onChange) onChange(e, itemId);
   };
@@ -222,7 +255,7 @@ const DropDown = React.forwardRef((props, ref) => {
   const handleInputKeyDown = (e) => {
     if (e.keyCode === 32) {
       e.preventDefault();
-      setIsOptionsOpen(!isOptionsOpen);
+      toggleOptions();
     }
 
     if (e.keyCode === 13) {
@@ -235,13 +268,26 @@ const DropDown = React.forwardRef((props, ref) => {
 
       if (activeOption === -1) {
         setActiveOption(items[0][mapId]);
+
+        if (!isOptionsOpen) setSelectedOption(items[0][mapId]);
       } else {
         var currentActiveIndex = items
           .map((x) => x[mapId])
           .indexOf(activeOption);
 
         if (currentActiveIndex < items.length - 1) {
-          setActiveOption(items[currentActiveIndex + 1][mapId]);
+          var itemId = items[currentActiveIndex + 1][mapId];
+          setActiveOption(itemId);
+
+          var listRect = document
+            .querySelector(`[data-id="${id}"]`)
+            .getBoundingClientRect();
+          var itemRect = document.querySelector(`[data-id="${itemId}"]`);
+
+          // console.log(listRect);
+          console.log(listRect.height / 35);
+
+          if (!isOptionsOpen) setSelectedOption(itemId);
         }
       }
     }
@@ -256,40 +302,17 @@ const DropDown = React.forwardRef((props, ref) => {
 
         if (currentActiveIndex > 0) {
           setActiveOption(items[currentActiveIndex - 1][mapId]);
+
+          if (!isOptionsOpen)
+            setSelectedOption(items[currentActiveIndex - 1][mapId]);
         }
       }
     }
   };
 
-  // Event handler for keydowns
-  const handleKeyDown = (e, itemId) => {
-    switch (e.keyCode) {
-      case 13:
-        e.preventDefault();
-        select(e, itemId);
-        break;
-
-      //down
-      case 40:
-        e.preventDefault();
-
-        break;
-
-      //up
-      case 38:
-        e.preventDefault();
-        break;
-
-      default:
-        break;
-    }
-  };
-
   const getSelectedOptionText = () => {
     var selected = items.find((x) => x[mapId] === selectedOption);
-
     if (selected) return selected[mapValue];
-
     return emptySelectText;
   };
 
@@ -297,11 +320,32 @@ const DropDown = React.forwardRef((props, ref) => {
     setActiveOption(itemId);
   };
 
-  const handleItemLeave = (e, itemId) => {
-    if (activeOption === itemId) setActiveOption(-1);
+  const handleSelectBlur = (e) => {
+    if (onBlur) onBlur(e);
   };
 
   const themeProps = { color, size, theme, readOnly, disabled, isOptionsOpen };
+  var selectRef = useRef();
+
+  const WrapperRef = useRef();
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (
+        isOptionsOpen &&
+        WrapperRef.current &&
+        !WrapperRef.current.contains(e.target)
+      ) {
+        setIsOptionsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [isOptionsOpen]);
 
   return (
     <Wrapper
@@ -309,29 +353,22 @@ const DropDown = React.forwardRef((props, ref) => {
       {...themeProps}
       className={className}
       style={style}
-      ref={ref}
+      ref={WrapperRef}
       {...rest}
     >
       <Container {...themeProps}>
         <Select
           {...themeProps}
+          ref={selectRef}
           type="text"
-          tabIndex={0}
+          tabIndex={tabIndex}
           aria-haspopup="listbox"
           aria-expanded={isOptionsOpen}
           open={isOptionsOpen}
           onClick={toggleOptions}
           onChange={() => {}}
           onKeyDown={(e) => handleInputKeyDown(e)}
-          onBlur={(e) => {
-            if (
-              e.relatedTarget === null ||
-              (e.relatedTarget && e.relatedTarget.nodeName !== "LI")
-            )
-              setIsOptionsOpen(false);
-
-            if (onBlur) onBlur(e);
-          }}
+          onBlur={handleSelectBlur}
         >
           <SelectedOption {...themeProps}>
             {getSelectedOptionText()}
@@ -344,23 +381,24 @@ const DropDown = React.forwardRef((props, ref) => {
           show={isOptionsOpen}
           tabIndex={-1}
           role="listbox"
+          data-id={id}
           aria-activedescendant={items.find((x) => x[mapId] === selectedOption)}
           optionsCount={items.length}
+          onScroll={(e) => {
+            selectRef.current.focus();
+          }}
         >
           {items.map((item, index) => (
             <Item
               {...themeProps}
               key={index}
+              data-id={item[mapId]}
               tabIndex={-1}
               role="option"
               active={activeOption === item[mapId]}
               aria-selected={selectedOption === item[mapId]}
-              // onKeyDown={(e) => handleKeyDown(e, item[mapId])}
               onMouseEnter={(e) => handleItemEnter(e, item[mapId])}
-              onMouseLeave={(e) => handleItemLeave(e, item[mapId])}
-              onClick={(e) => {
-                select(e, item[mapId]);
-              }}
+              onClick={(e) => select(e, item[mapId])}
             >
               {item[mapValue]}
             </Item>
@@ -376,6 +414,7 @@ DropDown.defaultProps = {
   value: 0,
   disabled: false,
   readOnly: false,
+  tabIndex: 0,
   items: [],
   mapId: "id",
   mapValue: "value",
@@ -395,6 +434,7 @@ DropDown.propTypes = {
   value: PropTypes.number,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
+  tabIndex: PropTypes.number,
   items: PropTypes.arrayOf(PropTypes.object),
   mapId: PropTypes.string,
   mapValue: PropTypes.string,
