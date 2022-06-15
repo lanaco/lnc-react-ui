@@ -1,6 +1,8 @@
 import React from "react";
 import DropDown from ".";
+import TextInput from "../../Basic Inputs/TextInput/index";
 import theme from "../../_utils/theme";
+import StoryContainer from "../../_utils/StoryContainer";
 
 export default {
   title: "Inputs/Dropdown",
@@ -9,24 +11,33 @@ export default {
 };
 
 const Template = (args) => (
-  <>
-    <p>
-      <DropDown {...args} />
-    </p>
-  </>
+  <StoryContainer>
+    <DropDown {...args} size={"small"} />
+    <DropDown {...args} size={"medium"} />
+    <DropDown {...args} size={"large"} />
+  </StoryContainer>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  theme: theme,
-  color: "primary",
-  tooltip: "Dropdown",
-  onChange: () => {},
-  size: "medium",
+  id: "",
+  value: -1,
   disabled: false,
+  readOnly: false,
   items: [
-    { name: "Name 11", value: 1 },
-    { name: "Name 222", value: 2 },
-    { name: "Name 333333333", value: 3 },
+    { id: 1, value: "Option 1" },
+    { id: 2, value: "Option 2" },
+    { id: 3, value: "Option 3" },
   ],
+  mapId: "id",
+  mapValue: "value",
+  emptySelectText: "Select...",
+  //----------------
+  onChange: () => {},
+  onBlur: () => {},
+  //----------------
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
 };

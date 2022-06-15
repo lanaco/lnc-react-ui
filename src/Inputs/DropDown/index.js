@@ -1,147 +1,418 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React from "react";
-import theme from "../../_utils/theme";
+import React, { useState, useEffect } from "react";
+import { useTheme } from "@emotion/react";
 
-const paddingBySize = (size) => {
-  if (size === "small") return "0.3rem 0.375rem 0.3rem 0.0625rem";
-  if (size === "medium") return "0.3625rem 0.375rem 0.3625rem 0.0625";
-  if (size === "large") return "0.4rem 0.375rem 0.4rem 0.0625";
+const Wrapper = styled.div`
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  width: 100%;
+`;
+
+const Container = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
+const getBorderColor = (props) => {
+  if (props.disabled) return props.theme.test_palette.light[400];
+  if (props.isOptionsOpen) return props.theme.test_palette[props.color][400];
+
+  return props.theme.test_palette.light[500];
 };
 
-const heightBySize = (size, hasText) => {
-  if (size === "small") return `1.625rem`;
-  if (size === "medium") return `2rem`;
-  if (size === "large") return `2.375rem`;
+const getSelectHover = (props) => {
+  if (props.disabled) return "";
+
+  return `
+  border-top: 0.09375rem solid
+      ${props.theme.test_palette[props.color][400]};
+    border-right: 0.09375rem solid
+      ${props.theme.test_palette[props.color][400]};
+    border-left: 0.09375rem solid
+      ${props.theme.test_palette[props.color][400]};
+    border-bottom: ${
+      props.open
+        ? "0.09375rem solid transparent"
+        : `0.09375rem solid ${props.theme.test_palette[props.color][400]}`
+    };
+  `;
 };
 
-const Select = styled.select((props) => ({
-  fontFamily: props.theme.typography.fontFamily,
-  outline: "none",
-  backgroundColor: props.theme.palette[props.color].lighter,
-  color: props.theme.palette[props.color].textDark,
-  transition: "all 250ms",
-  fontSize: props.theme.typography[props.size].fontSize,
-  border: "0px",
-  borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-  width: "100%",
-  boxSizing: "border-box",
-  minHeight: heightBySize(props.size),
-  maxHeight: heightBySize(props.size),
-  cursor: "pointer",
-  "&:focus": {
-    backgroundColor: props.theme.palette.common.white,
-    color: props.theme.palette.common.black,
-  },
-  "&:disabled": {
-    backgroundColor: props.theme.palette.gray[200],
-    borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-    color: props.theme.palette.gray.textLight,
-    cursor: "default",
-    opacity: 0.7,
-  },
-}));
+const selectPadding = {
+  small: "0.41875rem 0.5rem",
+  medium: "0.48125rem 0.625rem",
+  large: "0.56875rem 0.75rem",
+};
 
-const Option = styled.option((props) => ({
-  fontFamily: props.theme.typography.fontFamily,
-}));
+const listItemPadding = {
+  small: "0.3125rem 0.5rem",
+  medium: "0.375rem 0.5625rem",
+  large: "0.4375rem 0.625rem",
+};
+
+const heights = ({ theme, size }) => {
+  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+    size
+  ];
+
+  return `
+    min-height: ${height};
+    max-height: ${height};
+  `;
+};
+
+const Select = styled.span`
+  appearance: none;
+  outline: none;
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[400]
+      : props.theme.test_palette.dark[100]};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  ${(props) => heights(props)}
+
+  border-top: 0.09375rem solid ${(props) => getBorderColor(props)};
+  border-right: 0.09375rem solid ${(props) => getBorderColor(props)};
+  border-left: 0.09375rem solid ${(props) => getBorderColor(props)};
+  border-bottom: ${(props) =>
+    props.open
+      ? "0.09375rem solid transparent"
+      : `0.09375rem solid ${getBorderColor(props)}`};
+
+  border-radius: ${(props) =>
+    props.open ? "0.375rem 0.375rem 0 0" : "0.375rem"};
+  padding: ${(props) => selectPadding[props.size]};
+  font-family: inherit;
+  font-size: inherit;
+
+  &:hover {
+    ${(props) => getSelectHover(props)}
+  }
+`;
+
+const SelectedOption = styled.span``;
+
+const Icon = styled.i`
+  margin-left: auto;
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[500]
+      : props.theme.test_palette.dark[100]};
+`;
+
+const List = styled.ul`
+  z-index: 200;
+  width: 100%;
+  position: absolute;
+  margin: 0;
+  appearance: none;
+  outline: none;
+  list-style-type: none;
+  padding: 0.125rem;
+  padding-top: 0;
+  box-sizing: border-box;
+  background-color: white;
+
+  border-bottom: 0.09375rem solid
+    ${(props) => props.theme.test_palette[props.color][400]};
+  border-right: 0.09375rem solid
+    ${(props) => props.theme.test_palette[props.color][400]};
+  border-left: 0.09375rem solid
+    ${(props) => props.theme.test_palette[props.color][400]};
+  border-top: ${(props) =>
+    props.show
+      ? ""
+      : `0.09375rem solid ${props.theme.test_palette[props.color][400]}`};
+
+  border-radius: ${(props) =>
+    props.show ? "0 0 0.375rem 0.375rem " : "0.375rem"};
+
+  display: ${(props) => (props.show ? "block" : "none")};
+  font-family: inherit;
+  font-size: inherit;
+
+  & > li {
+    margin: 0.09375rem 0.0625rem;
+  }
+
+  & > li:first-of-type {
+    margin: 0 0.0625rem 0.09375rem 0.0625rem;
+    border-radius: ${(props) =>
+      props.optionsCount === 1 ? "0.1875rem" : "0.1875rem 0.1875rem 0 0"};
+  }
+
+  & > li:last-of-type {
+    border-radius: ${(props) =>
+      props.optionsCount === 1 ? "0.1875rem" : "0 0 0.1875rem 0.1875rem"};
+  }
+`;
+
+const Item = styled.li`
+  padding: ${(props) => listItemPadding[props.size]};
+  margin: 0.09375rem 0.0625rem;
+  cursor: pointer;
+  color: ${(props) => props.theme.test_palette[props.color][400]};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 130ms ease;
+  background-color: ${(props) => props.theme.test_palette.light[100]};
+
+  ${(props) =>
+    props.active
+      ? `
+          color: white;
+          background-color: ${props.theme.test_palette[props.color][300]};
+        `
+      : ""};
+`;
 
 const DropDown = React.forwardRef((props, ref) => {
+  //
+  const theme = useTheme();
   const {
-    mapNameTo,
-    mapValueTo,
     id,
-    preventDefault,
-    onChange,
-    items,
+    value,
     disabled,
+    readOnly,
+    items,
+    mapId,
+    mapValue,
+    emptySelectText,
+    //----------------
+    onChange,
+    onBlur,
+    //----------------
+    className,
+    style,
     size,
     color,
-    theme,
-    value,
-    tooltip,
-    withoutEmpty,
-    className,
+    ...rest
   } = props;
 
-  const handleOnChange = (e) => {
-    if (preventDefault) e.preventDefault();
-    onChange(id, e.target.value);
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(-1);
+  const [activeOption, setActiveOption] = useState(-1);
+
+  useEffect(() => {
+    if (value !== selectedOption) setSelectedOption(value);
+  }, [value]);
+
+  const toggleOptions = () => {
+    if (disabled || readOnly) return;
+    setIsOptionsOpen(!isOptionsOpen);
   };
 
-  const getItems = () => {
-    let name = "name";
-    let value = "value";
-
-    if (mapNameTo && mapNameTo !== "") name = mapNameTo;
-
-    if (mapValueTo && mapValueTo !== "") value = mapValueTo;
-
-    return items.map((el, i) => {
-      return (
-        <Option {...{ theme, size, color }} key={i} value={el[value]}>
-          {el[name]}
-        </Option>
-      );
-    });
+  const select = (e, itemId) => {
+    setSelectedOption(itemId);
+    setActiveOption(-1);
+    setIsOptionsOpen(false);
+    if (onChange) onChange(e, itemId);
   };
+
+  const handleInputKeyDown = (e) => {
+    if (e.keyCode === 32) {
+      e.preventDefault();
+      setIsOptionsOpen(!isOptionsOpen);
+    }
+
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      select(e, activeOption);
+    }
+
+    if (e.keyCode === 40) {
+      e.preventDefault();
+
+      if (activeOption === -1) {
+        setActiveOption(items[0][mapId]);
+      } else {
+        var currentActiveIndex = items
+          .map((x) => x[mapId])
+          .indexOf(activeOption);
+
+        if (currentActiveIndex < items.length - 1) {
+          setActiveOption(items[currentActiveIndex + 1][mapId]);
+        }
+      }
+    }
+
+    if (e.keyCode === 38) {
+      e.preventDefault();
+
+      if (activeOption !== -1) {
+        var currentActiveIndex = items
+          .map((x) => x[mapId])
+          .indexOf(activeOption);
+
+        if (currentActiveIndex > 0) {
+          setActiveOption(items[currentActiveIndex - 1][mapId]);
+        }
+      }
+    }
+  };
+
+  // Event handler for keydowns
+  const handleKeyDown = (e, itemId) => {
+    switch (e.keyCode) {
+      case 13:
+        e.preventDefault();
+        select(e, itemId);
+        break;
+
+      //down
+      case 40:
+        e.preventDefault();
+
+        break;
+
+      //up
+      case 38:
+        e.preventDefault();
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const getSelectedOptionText = () => {
+    var selected = items.find((x) => x[mapId] === selectedOption);
+
+    if (selected) return selected[mapValue];
+
+    return emptySelectText;
+  };
+
+  const handleItemEnter = (e, itemId) => {
+    setActiveOption(itemId);
+  };
+
+  const handleItemLeave = (e, itemId) => {
+    if (activeOption === itemId) setActiveOption(-1);
+  };
+
+  const themeProps = { color, size, theme, readOnly, disabled, isOptionsOpen };
 
   return (
-    <Select
-      {...{ theme, size, color }}
+    <Wrapper
+      id={id}
+      {...themeProps}
       className={className}
-      disabled={disabled}
-      default={value}
-      title={tooltip}
-      onChange={handleOnChange}
-      value={value}
+      style={style}
       ref={ref}
+      {...rest}
     >
-      {!withoutEmpty && (
-        <Option {...{ theme, size, color }} key={-1} value={-1}>
-          ???
-        </Option>
-      )}
-      {getItems()}
-    </Select>
+      <Container {...themeProps}>
+        <Select
+          {...themeProps}
+          type="text"
+          tabIndex={0}
+          aria-haspopup="listbox"
+          aria-expanded={isOptionsOpen}
+          open={isOptionsOpen}
+          onClick={toggleOptions}
+          onChange={() => {}}
+          onKeyDown={(e) => handleInputKeyDown(e)}
+          onBlur={(e) => {
+            if (
+              e.relatedTarget === null ||
+              (e.relatedTarget && e.relatedTarget.nodeName !== "LI")
+            )
+              setIsOptionsOpen(false);
+
+            if (onBlur) onBlur(e);
+          }}
+        >
+          <SelectedOption {...themeProps}>
+            {getSelectedOptionText()}
+          </SelectedOption>
+          <Icon {...themeProps} className="fas fa-chevron-down" />
+        </Select>
+
+        <List
+          {...themeProps}
+          show={isOptionsOpen}
+          tabIndex={-1}
+          role="listbox"
+          aria-activedescendant={items.find((x) => x[mapId] === selectedOption)}
+          optionsCount={items.length}
+        >
+          {items.map((item, index) => (
+            <Item
+              {...themeProps}
+              key={index}
+              tabIndex={-1}
+              role="option"
+              active={activeOption === item[mapId]}
+              aria-selected={selectedOption === item[mapId]}
+              // onKeyDown={(e) => handleKeyDown(e, item[mapId])}
+              onMouseEnter={(e) => handleItemEnter(e, item[mapId])}
+              onMouseLeave={(e) => handleItemLeave(e, item[mapId])}
+              onClick={(e) => {
+                select(e, item[mapId]);
+              }}
+            >
+              {item[mapValue]}
+            </Item>
+          ))}
+        </List>
+      </Container>
+    </Wrapper>
   );
 });
 
 DropDown.defaultProps = {
   id: "",
+  value: 0,
   disabled: false,
-  tooltip: "",
+  readOnly: false,
+  items: [],
+  mapId: "id",
+  mapValue: "value",
+  emptySelectText: "Select...",
+  //----------------
   onChange: () => {},
+  onBlur: () => {},
+  //----------------
   className: "",
-  preventDefault: true,
+  style: {},
   size: "small",
   color: "primary",
-  theme: theme,
-  items: [],
-  withoutEmpty: false,
-  mapValueTo: "value",
-  mapNameTo: "name",
 };
 
 DropDown.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
+  value: PropTypes.number,
   disabled: PropTypes.bool,
-  tooltip: PropTypes.string,
+  readOnly: PropTypes.bool,
+  items: PropTypes.arrayOf(PropTypes.object),
+  mapId: PropTypes.string,
+  mapValue: PropTypes.string,
+  emptySelectText: PropTypes.string,
+  //----------------
   onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  //----------------
   className: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  withoutEmpty: PropTypes.bool,
-  mapValueTo: PropTypes.string,
-  mapNameTo: PropTypes.string,
+  style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "info",
   ]),
 };
 
