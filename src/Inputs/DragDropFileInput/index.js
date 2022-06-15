@@ -70,6 +70,7 @@ const DragDropFileInput = React.forwardRef((props, ref) => {
         selectFileText={selectFileText}
         dndFileText={dndFileText}
         showFileSize={showFileSize}
+        showDnD={!(inputFiles?.length > 0)}
         onChange={handleOnChange}
         onFocus={onFocus}
         onBlur={onBlur}
