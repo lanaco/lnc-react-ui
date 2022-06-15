@@ -77,13 +77,6 @@ const PlusLabel = styled.span`
 const DragAndDropFile = React.forwardRef((props, ref) => {
     const {
         id,
-        className,
-        style,
-        onChange,
-        onFocus,
-        onBlur,
-        onDropAccepted,
-        onDrop,
         disabled,
         preventDefault,
         accept,
@@ -91,13 +84,26 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
         selectFileText,
         dndFileText,
         showFileSize,
+        showDnD,
+        className,
+        style,
+        onChange,
+        onFocus,
+        onBlur,
+        onDropAccepted,
+        onDrop,
         color,
         size,
         ...rest
     } = props;
     const theme = useTheme();
     const [focused, setFocused] = useState(false);
-    const [displayDnD, setDisplayDnD] = useState(true);
+    const [displayDnD, setDisplayDnD] = useState(showDnD);
+
+    useEffect(() => {
+      setDisplayDnD(showDnD);
+    }, [showDnD])
+    
 
     var themeProps = { theme, size, color, disabled, focused };
 
@@ -174,6 +180,7 @@ DragAndDropFile.defaultProps = {
     selectFileText: "Select file",
     dndFileText: "Drag and drop file here or",
     showFileSize: false,
+    showDnD: true,
     //------------------
     onChange: () => { },
     onFocus: () => { },
@@ -206,6 +213,12 @@ DragAndDropFile.propTypes = {
     selectFileText: PropTypes.string,
     dndFileText: PropTypes.string,
     showFileSize: PropTypes.bool,
+    /**
+     * Determines whether Drag and Drop area or Add button will be shown
+     * 
+     * }
+    */
+    showDnD: PropTypes.bool,
     //-------------------------
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
