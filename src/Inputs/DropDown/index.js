@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useTheme } from "@emotion/react";
-import { useStateWithCallbackLazy } from "use-state-with-callback";
+import useStateWithCallback, {
+  useStateWithCallbackLazy,
+} from "use-state-with-callback";
 
 const Wrapper = styled.div`
   font-family: ${(props) => props.theme.typography.fontFamily};
@@ -179,7 +181,7 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
-  position: relative;
+  // position: relative;
   padding: ${(props) => listItemPadding[props.size]};
   margin: 0.09375rem 0.0625rem;
   cursor: pointer;
@@ -224,110 +226,21 @@ const DropDown = React.forwardRef((props, ref) => {
     ...rest
   } = props;
 
-  const [isOptionsOpen, setIsOptionsOpen] = useStateWithCallbackLazy(false);
-  const [selectedOption, setSelectedOption] = useState(-1);
-  const [activeOption, setActiveOption] = useState(-1);
+  //========================== STATE AND REFS =========================================
 
-  useEffect(() => {
-    if (value !== selectedOption) {
-      setSelectedOption(value);
-      setActiveOption(value);
+  const [isOptionsOpen, setIsOptionsOpen] = useStateWithCallback(
+    false,
+    (value) => {
+      if (value) adjustScroll(activeOption);
     }
-  }, [value]);
-
-  const toggleOptions = () => {
-    if (disabled || readOnly) return;
-    setIsOptionsOpen(!isOptionsOpen);
-
-    if (selectedOption !== -1) setActiveOption(selectedOption);
-    else if (items && items.length > 0) {
-      setActiveOption(items[0][mapId]);
-    } else setActiveOption(-1);
-  };
-
-  const select = (e, itemId) => {
-    setSelectedOption(itemId);
-    setActiveOption(itemId);
-    setIsOptionsOpen(false);
-    if (onChange) onChange(e, itemId);
-  };
-
-  const handleInputKeyDown = (e) => {
-    if (e.keyCode === 32) {
-      e.preventDefault();
-      toggleOptions();
-    }
-
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      select(e, activeOption);
-    }
-
-    if (e.keyCode === 40) {
-      e.preventDefault();
-
-      if (activeOption === -1) {
-        setActiveOption(items[0][mapId]);
-
-        if (!isOptionsOpen) setSelectedOption(items[0][mapId]);
-      } else {
-        var currentActiveIndex = items
-          .map((x) => x[mapId])
-          .indexOf(activeOption);
-
-        if (currentActiveIndex < items.length - 1) {
-          var itemId = items[currentActiveIndex + 1][mapId];
-          setActiveOption(itemId);
-
-          var listRect = document
-            .querySelector(`[data-id="${id}"]`)
-            .getBoundingClientRect();
-          var itemRect = document.querySelector(`[data-id="${itemId}"]`);
-
-          // console.log(listRect);
-          console.log(listRect.height / 35);
-
-          if (!isOptionsOpen) setSelectedOption(itemId);
-        }
-      }
-    }
-
-    if (e.keyCode === 38) {
-      e.preventDefault();
-
-      if (activeOption !== -1) {
-        var currentActiveIndex = items
-          .map((x) => x[mapId])
-          .indexOf(activeOption);
-
-        if (currentActiveIndex > 0) {
-          setActiveOption(items[currentActiveIndex - 1][mapId]);
-
-          if (!isOptionsOpen)
-            setSelectedOption(items[currentActiveIndex - 1][mapId]);
-        }
-      }
-    }
-  };
-
-  const getSelectedOptionText = () => {
-    var selected = items.find((x) => x[mapId] === selectedOption);
-    if (selected) return selected[mapValue];
-    return emptySelectText;
-  };
-
-  const handleItemEnter = (e, itemId) => {
-    setActiveOption(itemId);
-  };
-
-  const handleSelectBlur = (e) => {
-    if (onBlur) onBlur(e);
-  };
-
-  const themeProps = { color, size, theme, readOnly, disabled, isOptionsOpen };
+  );
+  const [selectedOption, setSelectedOption] = useStateWithCallbackLazy(-1);
+  const [activeOption, setActiveOption] = useStateWithCallbackLazy(-1);
+  var moveMouse = useRef(true);
   var selectRef = useRef();
-
   const WrapperRef = useRef();
+
+  //========================== USE-EFFECT =============================================
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -347,65 +260,229 @@ const DropDown = React.forwardRef((props, ref) => {
     };
   }, [isOptionsOpen]);
 
-  return (
-    <Wrapper
-      id={id}
-      {...themeProps}
-      className={className}
-      style={style}
-      ref={WrapperRef}
-      {...rest}
-    >
-      <Container {...themeProps}>
-        <Select
-          {...themeProps}
-          ref={selectRef}
-          type="text"
-          tabIndex={tabIndex}
-          aria-haspopup="listbox"
-          aria-expanded={isOptionsOpen}
-          open={isOptionsOpen}
-          onClick={toggleOptions}
-          onChange={() => {}}
-          onKeyDown={(e) => handleInputKeyDown(e)}
-          onBlur={handleSelectBlur}
-        >
-          <SelectedOption {...themeProps}>
-            {getSelectedOptionText()}
-          </SelectedOption>
-          <Icon {...themeProps} className="fas fa-chevron-down" />
-        </Select>
+  useEffect(() => {
+    if (value !== selectedOption) {
+      setSelectedOption(value);
+      setActiveOption(value);
+    }
+  }, [value]);
 
-        <List
-          {...themeProps}
-          show={isOptionsOpen}
-          tabIndex={-1}
-          role="listbox"
-          data-id={id}
-          aria-activedescendant={items.find((x) => x[mapId] === selectedOption)}
-          optionsCount={items.length}
-          onScroll={(e) => {
-            selectRef.current.focus();
-          }}
-        >
-          {items.map((item, index) => (
-            <Item
-              {...themeProps}
-              key={index}
-              data-id={item[mapId]}
-              tabIndex={-1}
-              role="option"
-              active={activeOption === item[mapId]}
-              aria-selected={selectedOption === item[mapId]}
-              onMouseEnter={(e) => handleItemEnter(e, item[mapId])}
-              onClick={(e) => select(e, item[mapId])}
-            >
-              {item[mapValue]}
-            </Item>
-          ))}
-        </List>
-      </Container>
-    </Wrapper>
+  //========================== FUNCTIONS =============================================
+
+  const toggleOptions = () => {
+    if (disabled || readOnly) return;
+    setIsOptionsOpen(!isOptionsOpen);
+    var activeOption = -1;
+
+    if (selectedOption !== -1) activeOption = selectedOption;
+    else if (items && items.length > 0) {
+      activeOption = items[0][mapId];
+    }
+
+    setActiveOption(activeOption);
+  };
+
+  const select = (e, itemId) => {
+    setSelectedOption(itemId);
+    setActiveOption(itemId);
+    setIsOptionsOpen(false);
+    if (onChange) onChange(e, itemId);
+  };
+
+  const getSelectedOptionText = () => {
+    var selected = items.find((x) => x[mapId] === selectedOption);
+    if (selected) return selected[mapValue];
+    return emptySelectText;
+  };
+
+  const adjustScroll = (itemId) => {
+    if (itemId === -1) return;
+
+    var itemElement = document.querySelector(`[data-id="${id}-${itemId}"]`);
+    console.error("scrollIntoView");
+
+    moveMouse.current = false;
+    itemElement.scrollIntoView();
+  };
+
+  const scrollUp = (itemId) => {
+    var listElement = document.querySelector(`[data-id="${id}"]`);
+    var itemElement = document.querySelector(`[data-id="${id}-${itemId}"]`);
+
+    var itemPosition =
+      itemElement.offsetTop -
+      listElement.scrollTop +
+      itemElement.getBoundingClientRect().height;
+
+    if (itemPosition < itemElement.getBoundingClientRect().height) {
+      moveMouse.current = false;
+      listElement.scroll({
+        top:
+          listElement.scrollTop -
+          (itemElement.getBoundingClientRect().height - itemPosition),
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollDown = (itemId) => {
+    var listElement = document.querySelector(`[data-id="${id}"]`);
+    var listRect = listElement.getBoundingClientRect();
+    var itemElement = document.querySelector(`[data-id="${id}-${itemId}"]`);
+
+    var itemPosition =
+      itemElement.offsetTop -
+      listElement.scrollTop +
+      itemElement.getBoundingClientRect().height;
+
+    if (itemPosition > listRect.height) {
+      moveMouse.current = false;
+
+      listElement.scroll({
+        top: listElement.scrollTop + (itemPosition - listRect.height),
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  //========================== EVENTS =============================================
+
+  const handleItemEnter = (e, itemId) => {
+    if (moveMouse.current) setActiveOption(itemId);
+    else {
+      moveMouse.current = true;
+    }
+  };
+
+  const handleSelectBlur = (e) => {
+    if (onBlur) onBlur(e);
+  };
+
+  const handleInputKeyDown = (e) => {
+    if (e.keyCode === 32) {
+      e.preventDefault();
+      toggleOptions();
+    }
+
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      select(e, activeOption);
+    }
+
+    if (e.keyCode === 40) {
+      e.preventDefault();
+
+      if (activeOption === -1) {
+        // setActiveOption(items[0][mapId]);
+        setActiveOption(items[0][mapId]);
+
+        if (!isOptionsOpen) setSelectedOption(items[0][mapId]);
+      } else {
+        var currentActiveIndex = items
+          .map((x) => x[mapId])
+          .indexOf(activeOption);
+
+        if (currentActiveIndex < items.length - 1) {
+          var itemId = items[currentActiveIndex + 1][mapId];
+
+          // setActiveOption(itemId)
+          setActiveOption(itemId);
+          scrollDown(itemId);
+
+          if (!isOptionsOpen) setSelectedOption(itemId);
+        }
+      }
+    }
+
+    if (e.keyCode === 38) {
+      e.preventDefault();
+
+      if (activeOption !== -1) {
+        var currentActiveIndex = items
+          .map((x) => x[mapId])
+          .indexOf(activeOption);
+
+        if (currentActiveIndex > 0) {
+          var itemId = items[currentActiveIndex - 1][mapId];
+          // setActiveOption(itemId);
+          setActiveOption(itemId);
+          scrollUp(itemId);
+
+          if (!isOptionsOpen) setSelectedOption(itemId);
+        }
+      }
+    }
+  };
+
+  //========================== RENDER =============================================
+
+  const themeProps = { color, size, theme, readOnly, disabled, isOptionsOpen };
+
+  return (
+    <>
+      <Wrapper
+        id={id}
+        {...themeProps}
+        className={className}
+        style={style}
+        ref={WrapperRef}
+        {...rest}
+      >
+        <Container {...themeProps}>
+          <Select
+            {...themeProps}
+            ref={selectRef}
+            type="text"
+            tabIndex={tabIndex}
+            aria-haspopup="listbox"
+            aria-expanded={isOptionsOpen}
+            open={isOptionsOpen}
+            onClick={toggleOptions}
+            onChange={() => {}}
+            onKeyDown={(e) => handleInputKeyDown(e)}
+            onBlur={handleSelectBlur}
+          >
+            <SelectedOption {...themeProps}>
+              {getSelectedOptionText()}
+            </SelectedOption>
+            <Icon {...themeProps} className="fas fa-chevron-down" />
+          </Select>
+
+          <List
+            {...themeProps}
+            show={isOptionsOpen}
+            tabIndex={-1}
+            role="listbox"
+            data-id={id}
+            aria-activedescendant={items.find(
+              (x) => x[mapId] === selectedOption
+            )}
+            optionsCount={items.length}
+            onScroll={(e) => {
+              selectRef.current.focus();
+            }}
+          >
+            {items.map((item, index) => (
+              <Item
+                {...themeProps}
+                key={index}
+                data-id={`${id}-${item[mapId]}`}
+                tabIndex={-1}
+                role="option"
+                active={activeOption === item[mapId]}
+                aria-selected={selectedOption === item[mapId]}
+                onMouseEnter={(e) => handleItemEnter(e, item[mapId])}
+                onClick={(e) => select(e, item[mapId])}
+              >
+                {item[mapValue]}
+              </Item>
+            ))}
+          </List>
+        </Container>
+      </Wrapper>
+    </>
   );
 });
 
