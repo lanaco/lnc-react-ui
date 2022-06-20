@@ -14,7 +14,7 @@ const Template = (args) => (
   <StoryContainer>
     <DropDown {...args} size={"small"} tabIndex={1} id={"dd1"} />
     <DropDown {...args} size={"medium"} tabIndex={2} id={"dd2"} />
-    <DropDown {...args} size={"large"} tabIndex={3} id={"dd3"} />
+    <DropDown {...args} size={"large"} tabIndex={3} id={"dd3"} value={10} />
     <select>
       <option value={1}>1</option>
       <option value={2}>1</option>
