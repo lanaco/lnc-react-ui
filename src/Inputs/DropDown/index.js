@@ -228,12 +228,7 @@ const DropDown = React.forwardRef((props, ref) => {
 
   //========================== STATE AND REFS =========================================
 
-  const [isOptionsOpen, setIsOptionsOpen] = useStateWithCallback(
-    false,
-    (value) => {
-      if (value) adjustScroll(activeOption);
-    }
-  );
+  const [isOptionsOpen, setIsOptionsOpen] = useStateWithCallbackLazy(false);
   const [selectedOption, setSelectedOption] = useStateWithCallbackLazy(-1);
   const [activeOption, setActiveOption] = useStateWithCallbackLazy(-1);
   var moveMouse = useRef(true);
@@ -271,7 +266,10 @@ const DropDown = React.forwardRef((props, ref) => {
 
   const toggleOptions = () => {
     if (disabled || readOnly) return;
-    setIsOptionsOpen(!isOptionsOpen);
+    setIsOptionsOpen(!isOptionsOpen, () => {
+      if (!isOptionsOpen) adjustScroll(activeOption);
+    });
+
     var activeOption = -1;
 
     if (selectedOption !== -1) activeOption = selectedOption;
@@ -299,10 +297,9 @@ const DropDown = React.forwardRef((props, ref) => {
     if (itemId === -1) return;
 
     var itemElement = document.querySelector(`[data-id="${id}-${itemId}"]`);
-    console.error("scrollIntoView");
 
     moveMouse.current = false;
-    itemElement.scrollIntoView();
+    itemElement.scrollIntoView(false);
   };
 
   const scrollUp = (itemId) => {
@@ -316,6 +313,8 @@ const DropDown = React.forwardRef((props, ref) => {
 
     if (itemPosition < itemElement.getBoundingClientRect().height) {
       moveMouse.current = false;
+
+      console.log("SCROLL-UP");
       listElement.scroll({
         top:
           listElement.scrollTop -
@@ -339,6 +338,7 @@ const DropDown = React.forwardRef((props, ref) => {
     if (itemPosition > listRect.height) {
       moveMouse.current = false;
 
+      console.log("SCROLL-DOWN");
       listElement.scroll({
         top: listElement.scrollTop + (itemPosition - listRect.height),
         left: 0,
