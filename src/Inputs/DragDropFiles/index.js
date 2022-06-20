@@ -3,17 +3,26 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import DragAndDropFile from "../DragAndDropFile";
 import UploadedFile from "../../General/UploadedFile";
+import { useTheme } from "@emotion/react";
 
-const StyledDragDropFileInput = styled.div`
+const StyledDragDropFiles = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+
+  border: 1px dashed ${(props) => props.theme.test_palette.light[500]};
+  border-radius: 5px;
+
+  padding: 1.25rem 2.5rem;
 `;
 
 const FilesList = styled.div`
-  padding: 1.25rem 3.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 `;
 
-const DragDropFileInput = React.forwardRef((props, ref) => {
+const DragDropFiles = React.forwardRef((props, ref) => {
   const {
     id,
     disabled,
@@ -37,6 +46,10 @@ const DragDropFileInput = React.forwardRef((props, ref) => {
     size,
     ...rest
   } = props;
+  const theme = useTheme();
+  var themeProps = { theme, size, color };
+
+
   const [inputFiles, setInputFiles] =useState([]);
   useEffect(() => {
     setInputFiles(files)
@@ -60,7 +73,7 @@ const DragDropFileInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <StyledDragDropFileInput>
+    <StyledDragDropFiles {...themeProps}>
       <DragAndDropFile
         id={id}
         disabled={disabled}
@@ -92,11 +105,11 @@ const DragDropFileInput = React.forwardRef((props, ref) => {
           onCancel={onCancel}/>
         ))}
       </FilesList>
-    </StyledDragDropFileInput>
+    </StyledDragDropFiles>
   );
 });
 
-DragDropFileInput.defaultProps = {
+DragDropFiles.defaultProps = {
   id: "",
   disabled: false,
   preventDefault: false,
@@ -121,7 +134,7 @@ DragDropFileInput.defaultProps = {
   color: "primary",
 };
 
-DragDropFileInput.propTypes = {
+DragDropFiles.propTypes = {
   id: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
   preventDefault: PropTypes.bool,
@@ -164,4 +177,4 @@ DragDropFileInput.propTypes = {
   ]),
 };
 
-export default DragDropFileInput;
+export default DragDropFiles;

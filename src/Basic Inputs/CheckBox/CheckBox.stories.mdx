@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import CheckBox from "./index";
+
+<Meta title="Basic Inputs/CheckBox" component={CheckBox} />
+
+export const TemplateSizes = (args) => (
+  <div style ={{display: 'flex', gap: '12px'}}>
+    <CheckBox {...args} size="small" />
+    <CheckBox {...args} size="medium" />
+    <CheckBox {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style ={{display: 'flex', gap: '12px'}}>
+    <CheckBox {...args} color="primary" />
+    <CheckBox {...args} color="secondary" />
+    <CheckBox {...args} color="success" />
+    <CheckBox {...args} color="warning" />
+    <CheckBox {...args} color="danger" />
+    <CheckBox {...args} color="info" />
+  </div>
+);
+
+# CheckBox
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas >
+  <Story
+    name="Sizes"
+    args={{
+      checked: true,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+Defining `color` 
+
+<Canvas >
+  <Story
+    name="Colors"
+    args={{
+      size: "small",
+      checked: true,
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

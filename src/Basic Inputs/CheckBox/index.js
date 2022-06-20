@@ -20,6 +20,7 @@ const standardCssFields = ({ theme, color, size }) => {
 };
 
 const CheckBoxContainer = styled.div`
+  box-sizing: border-box;
   cursor: pointer;
   display: flex;
   flex-direction: ${(props) => getLabelDirection(props.direction)};
@@ -28,6 +29,8 @@ const CheckBoxContainer = styled.div`
   ${(props) => standardCssFields(props)}
   align-items: center;
   & > label {
+    box-sizing: border-box;
+
     color: ${(props) =>
       props.disabled ? props.theme.test_palette["disabled"][400] : "unset"};
     cursor: pointer;
@@ -35,21 +38,22 @@ const CheckBoxContainer = styled.div`
   }
 
   & > input {
+    box-sizing: border-box;
+
     display: none;
   }
 `;
 
 const StyledCheckBox = styled.div`
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: ${(props) =>
-    `calc(${props.theme.typography[props.size].iconFontSize} - 0.5rem)`};
-  width: ${(props) =>
-    `calc(${props.theme.typography[props.size].iconFontSize} - 0.5rem)`};
+  height: ${(props) => props.theme.typography[props.size].inputSize};
+  width: ${(props) => props.theme.typography[props.size].inputSize};
   border-radius: 0.1875rem;
   cursor: pointer;
-  padding: 0.125rem;
+  padding: 0.25rem;
   border: ${(props) =>
     props.icon
       ? "none"
@@ -58,6 +62,7 @@ const StyledCheckBox = styled.div`
           ? props.theme.test_palette["disabled"][400]
           : props.theme.test_palette[props.color][400])};
   & > .checkmark {
+    border-radius: 0.1875rem;
     height: ${(props) =>
       props.indeterminate ? "2px" : (props.checked ? "100%" : "0")};
     width: ${(props) =>
@@ -177,6 +182,7 @@ const CheckBox = React.forwardRef((props, ref) => {
           onKeyDown={handleOnKeyDown}
           onBlur={handleOnBlur}
           onFocus={handleOnFocus}
+          sizeInUnits={theme.typography[size].inputSize}
           {...rest}
         />
       ) : (

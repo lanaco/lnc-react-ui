@@ -24,9 +24,6 @@ const Container = styled.label`
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding: 1.25rem 3.875rem;
-  border: 1px dashed ${(props) => props.theme.test_palette.light[500]};
-  border-radius: 5px;
   cursor: pointer;
 `;
 

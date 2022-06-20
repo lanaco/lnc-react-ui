@@ -1,18 +1,18 @@
 import React from "react";
-import DragDropFileInput from ".";
+import DragDropFiles from ".";
 import DragAndDropFile from "../DragAndDropFile";
 import UploadedFile from "../../General/UploadedFile";
 
 export default {
-  title: "Inputs/Drag & Drop File Input",
-  component: DragDropFileInput,
+  title: "Inputs/Drag & Drop Files",
+  component: DragDropFiles,
   argTypes: {},
   subcomponents: { DragAndDropFile, UploadedFile }
 };
 
 const Template = (args) => (
   <>
-      <DragDropFileInput {...args} />
+      <DragDropFiles {...args} />
   </>
 );
 
