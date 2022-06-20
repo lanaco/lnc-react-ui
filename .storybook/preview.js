@@ -1,4 +1,4 @@
-
+import React from 'react'
 import theme, { themes } from "../src/_utils/theme";
 import { ThemeProvider } from "@emotion/react";
 
@@ -11,7 +11,6 @@ export const parameters = {
     },
   },
 }
-
 
 export const decorators = [
   (Story) => (

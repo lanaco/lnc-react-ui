@@ -1,6 +1,6 @@
 import React from "react";
 import PasswordInput from ".";
-import theme from "../../_utils/theme";
+import StoryContainer from "../../_utils/StoryContainer";
 
 export default {
   title: "Basic Inputs/Password input",
@@ -9,18 +9,51 @@ export default {
 };
 
 const Template = (args) => (
-  <>
-    <PasswordInput {...args} />
-  </>
+  <StoryContainer>
+    <PasswordInput {...args} size={"small"} />
+    <PasswordInput {...args} size={"medium"} />
+    <PasswordInput {...args} size={"large"} />
+  </StoryContainer>
 );
 
-export const Password = Template.bind({});
-Password.args = {
-  theme: theme,
-  color: "primary",
-  text: "Button",
-  tooltip: "Button",
-  onClick: () => {},
-  size: "small",
+export const Primary = Template.bind({});
+Primary.args = {
+  id: "",
+  value: "Password",
   disabled: false,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
+};
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+  id: "",
+  value: "Password",
+  disabled: false,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  className: "",
+  style: {},
+  size: "small",
+  color: "secondary",
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  id: "",
+  value: "Password",
+  disabled: true,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
 };

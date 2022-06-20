@@ -3,154 +3,149 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
+import { isEmpty } from "lodash";
 
-//====================== STYLE ======================
-
-const paddingBySize = (size) => {
-  if (size === "small") return "0.3875rem 0.34375rem";
-  if (size === "medium") return "0.45rem 0.415625rem";
-  if (size === "large") return "0.4875rem 0.445rem";
+const padding = {
+  default: {
+    small: "0.5rem 0.875rem",
+    medium: "0.59375rem 0.96875rem",
+    large: "0.671875rem 1.15625rem",
+  },
+  outline: {
+    small: "0.40625rem 0.78125rem",
+    medium: "0.5rem 0.875rem",
+    large: "0.578125rem 1.0625rem",
+  },
+  outlineHover: {
+    small: "0.34375rem 0.71875rem",
+    medium: "0.4375rem 0.8125rem",
+    large: "0.515625rem 1rem",
+  },
 };
 
-const heightBySize = (size) => {
-  if (size === "small") return `1.625rem`;
-  if (size === "medium") return `2rem`;
-  if (size === "large") return `2.375rem`;
+const standardCssFields = ({ theme, size }) => {
+  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+    size
+  ];
+
+  return `
+    font-family: ${theme.typography.fontFamily};
+    font-size: ${theme.typography[size].fontSize};
+    min-height: ${height};
+    max-height: ${height};
+    width: 100%;
+    box-sizing: border-box;
+    appearance: none;
+    outline: none;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  `;
 };
 
-const StyledButton = styled.button((props) => {
-  return {
-    appearance: "none",
-    outline: "none",
-    border: "none",
-    display: "inline-block",
-    cursor: "pointer",
-    padding: paddingBySize(props.size, props.hasText),
-    fontSize: props.theme.typography[props.size].fontSize,
-    fontFamily: props.theme.typography.fontFamily,
-    transition: "all 220ms",
-    transition: `${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, box-shadow ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, border-color ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms, color ${props.theme.transition.duration.short}ms ${props.theme.transition.easing.easeInOut} 0ms`,
+const StyledBtn = styled.button`
+  ${(props) => standardCssFields(props)}
 
-    backgroundColor: props.inverted
-      ? "transparent"
-      : props.theme.palette[props.color].main,
+  padding: ${(props) =>
+    props.outline ? padding.outline[props.size] : padding.default[props.size]};
 
-    borderRadius: "2px",
-    minHeight: heightBySize(props.size),
-    maxHeight: heightBySize(props.size),
-    "&:hover": {
-      textDecoration: "none",
-      backgroundColor: props.inverted
-        ? "whitesmoke"
-        : props.theme.palette[props.color].light,
-    },
-    "&:disabled": {
-      backgroundColor: props.inverted
-        ? "transparent"
-        : props.theme.palette.gray[200],
-      color: props.theme.palette.gray.textDark,
-      opacity: 0.7,
-      cursor: "default",
-    },
-    "&:active": {
-      boxShadow: props.theme.shadows[1],
-    },
-  };
-});
+  background-color: ${(props) =>
+    props.outline
+      ? props.theme.test_palette.light[100]
+      : props.theme.test_palette[props.color][400]};
+  color: ${(props) =>
+    props.outline
+      ? props.theme.test_palette[props.color][400]
+      : props.theme.test_palette.light[100]};
+  border-radius: 0.5625rem;
 
-const TextLeft = styled.span((props) => {
-  let opacity = 1;
-  let color = props.inverted
-    ? props.theme.palette[props.color].textDark
-    : props.theme.palette[props.color].text;
+  border: ${(props) =>
+    props.outline
+      ? `0.09375rem solid ${props.theme.test_palette[props.color][300]};`
+      : "none;"}
 
-  if (props.disabled) {
-    color = props.inverted
-      ? props.theme.palette[props.color].textDark
-      : props.theme.palette[props.color].textDark;
+  &:hover:enabled {
+    background-color: ${(props) => {
+      if (props.outline) return props.theme.test_palette.light[100];
+      return props.theme.test_palette[props.color][200];
+    }};
 
-    opacity = 0.6;
+    color: ${(props) => {
+      if (props.outline) return props.theme.test_palette[props.color][400];
+      return props.theme.test_palette.light[100];
+    }};
+
+    border: ${(props) => {
+      if (props.outline)
+        return `0.15625rem solid ${props.theme.test_palette[props.color][400]}`;
+      return "none";
+    }};
+
+    padding: ${(props) => {
+      if (props.outline) return padding.outlineHover[props.size];
+
+      return padding.default[props.size];
+    }}
   }
 
-  return {
-    padding: "0",
-    margin: "0",
-    paddingRight: props.hasIcon ? "0.3125rem" : "0",
-    fontSize: props.theme.typography[props.size].fontSize,
-    color: color,
-    opacity: opacity,
-  };
-});
-
-const TextRight = styled.span((props) => {
-  let opacity = 1;
-  let color = props.inverted
-    ? props.theme.palette[props.color].textDark
-    : props.theme.palette[props.color].text;
-
-  if (props.disabled) {
-    color = props.inverted
-      ? props.theme.palette[props.color].textDark
-      : props.theme.palette[props.color].textDark;
-
-    opacity = 0.6;
+  &:focus:enabled {
+    color: ${(props) => props.theme.test_palette.light[100]};
+    background-color: ${(props) =>
+      props.outline
+        ? props.theme.test_palette[props.color][400]
+        : props.theme.test_palette[props.color][500]};
   }
 
-  return {
-    padding: "0",
-    margin: "0",
-    paddingLeft: props.hasIcon ? "0.3125rem" : "0",
-    fontSize: props.theme.typography[props.size].fontSize,
-    color: color,
-    opacity: opacity,
-  };
-});
-
-const Icon = styled.i((props) => {
-  let opacity = 1;
-  let color = props.inverted
-    ? props.theme.palette[props.color].main
-    : props.theme.palette[props.color].text;
-
-  if (props.disabled) {
-    color = props.inverted
-      ? props.theme.palette[props.color].textDark
-      : props.theme.palette[props.color].textDark;
-
-    opacity = 0.6;
+  &:disabled {
+    cursor: default;
+    background-color: ${(props) => props.theme.test_palette.light[500]};
+    color: ${(props) => props.theme.test_palette.light[100]};
+    border: ${(props) =>
+      props.outline
+        ? `0.125rem solid ${props.theme.test_palette.light[500]}`
+        : "none"};
   }
+`;
 
-  return {
-    fontSize: props.theme.typography[props.size].fontSize,
-    color: color,
-    opacity: opacity,
-  };
-});
+const Text = styled.span``;
+
+const Icon = styled.i`
+  ${(props) =>
+    props.location === "left" && props.hasText
+      ? "padding-right: 0.3125rem;"
+      : ""}
+  ${(props) =>
+    props.location === "right" && props.hasText
+      ? "padding-left: 0.3125rem;"
+      : ""}
+`;
 
 //===================================================
 
 const Button = React.forwardRef((props, ref) => {
-  const theme = useTheme();
+  //
   const {
-    // theme,
     color,
     id,
     onClick,
     disabled,
     tooltip,
-    preventDefault,
     className,
     icon,
     iconStyle,
     size,
     iconLocation,
     text,
-    inverted,
+    outline,
+    ...rest
   } = props;
 
+  const theme = useTheme();
+
   const handleOnClick = (e) => {
-    if (preventDefault) e.preventDefault();
-    onClick(id);
+    onClick(e, id);
     if (e.stopImmediatePropagation) e.stopImmediatePropagation();
   };
 
@@ -162,104 +157,85 @@ const Button = React.forwardRef((props, ref) => {
     return `${style} fa-${icon} fa-fw`;
   };
 
+  var themeProps = { theme, size, color, outline, disabled };
+
   return (
-    <StyledButton
+    <StyledBtn
+      {...themeProps}
       data-testid="button"
-      {...{ theme, size, color, inverted, disabled }}
       onClick={handleOnClick}
       className={className}
       disabled={disabled}
       title={title}
-      hasText={icon && icon !== ""}
+      hasText={!isEmpty(text)}
       ref={ref}
+      {...rest}
     >
-      {/* Text when the icon is RIGTH */}
-      {text && text !== "" && iconLocation === "right" && (
-        <TextLeft
-          {...{
-            theme,
-            size,
-            color,
-            inverted,
-            disabled,
-            hasIcon: icon && icon !== "",
-          }}
-        >
-          {text}
-        </TextLeft>
-      )}
-      {/* Icon */}
-      {icon && icon !== "" && (
+      {!isEmpty(iconLocation) && !isEmpty(icon) && iconLocation === "left" && (
         <Icon
-          {...{
-            theme,
-            size,
-            color,
-            inverted,
-            disabled,
-          }}
+          {...themeProps}
           className={getIconClass()}
+          hasText={!isEmpty(text)}
+          location={"left"}
         />
       )}
 
-      {/* Text when the icon is LEFT */}
-      {text && text !== "" && iconLocation === "left" && (
-        <TextRight
-          {...{
-            theme,
-            size,
-            color,
-            inverted,
-            disabled,
-            hasIcon: icon && icon !== "",
-          }}
-        >
-          {text}
-        </TextRight>
+      {!isEmpty(text) && <Text {...themeProps}>{text}</Text>}
+
+      {!isEmpty(iconLocation) && !isEmpty(icon) && iconLocation === "right" && (
+        <Icon
+          {...themeProps}
+          className={getIconClass()}
+          hasText={!isEmpty(text)}
+          location={"right"}
+        />
       )}
-    </StyledButton>
+    </StyledBtn>
   );
 });
 
 Button.defaultProps = {
   id: "",
   disabled: false,
+  readOnly: false,
+  outline: false,
+  text: "",
   tooltip: "",
-  onClick: () => {},
-  className: "",
-  preventDefault: true,
-  size: "small",
   icon: "",
   iconStyle: "solid",
-  iconLocation: "left",
-  text: "",
+  iconLocation: "right",
+  //-------------
+  onClick: () => {},
+  //-------------
+  style: {},
+  className: "",
+  size: "small",
   color: "primary",
-  inverted: false,
 };
 
 Button.propTypes = {
-  // theme: PropTypes.object.isRequired,
-  id: PropTypes.string,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  outline: PropTypes.bool,
   tooltip: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  iconStyle: PropTypes.oneOf(["regular", "solid"]),
+  iconLocation: PropTypes.oneOf(["right", "left"]),
+  //-------------
   onClick: PropTypes.func,
-  icon: PropTypes.string,
-  iconStyle: PropTypes.oneOf(["solid", "regular"]),
+  //-------------
+  style: PropTypes.object,
   className: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  inverted: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  iconLocation: PropTypes.oneOf(["left", "right"]),
-  text: PropTypes.string,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
     "error",
     "warning",
-    "gray",
-    "background",
-    "transparent",
+    "info",
   ]),
 };
 

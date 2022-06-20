@@ -1,138 +1,184 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState, useRef } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import theme from "../../_utils/theme";
+import { useTheme } from "@emotion/react";
+import { debounce } from "lodash";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.3rem 0.375rem";
-  if (size === "medium") return "0.3875rem 0.375rem";
-  if (size === "large") return "0.426125rem 0.375rem";
-};
-
-const heightBySize = (size) => {
-  if (size === "small") return `1.625rem`;
-  if (size === "medium") return `2rem`;
-  if (size === "large") return `2.375rem`;
-};
-
-const StyledTextInput = styled.textarea((props) => {
   return {
-    fontFamily: props.theme.typography.fontFamily,
-    appearance: "none",
-    outline: "none",
-    border: "none",
-    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-    transition: "all 250ms ease",
-    resize: "vertical",
-    display: "inline-block",
-    overflow: "hidden",
-    cursor: "text",
-    width: "100%",
-    boxSizing: "border-box",
-    height: heightBySize(props.size),
-    minHeight: heightBySize(props.size),
-    resize: "none",
-    whiteSpace: "nowrap",
-    // maxHeight: heightBySize(props.size),
-    padding: paddingBySize(props.size),
-    fontSize: props.theme.typography[props.size].fontSize,
-    backgroundColor: props.theme.palette[props.color].lighter,
-    color: props.theme.palette[props.color].textDark,
-    borderRadius: "0.125rem",
-    "&:disabled": {
-      backgroundColor: props.theme.palette.gray[200],
-      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-      color: props.theme.palette.gray.textLight,
-      opacity: 0.7,
-      cursor: "default",
-    },
-    "&:focus": {
-      backgroundColor: props.theme.palette.common.white,
-      color: props.theme.palette.common.black,
-    },
-  };
-});
+    small: "0.41875rem 0.5rem",
+    medium: "0.48125rem 0.6rem",
+    large: "0.65625rem 0.7rem",
+  }[size];
+};
+
+const heightBySize = {
+  small: "1.875rem",
+  medium: "2.25rem",
+  large: "2.625rem",
+};
+
+const standardCssFields = ({ theme, size }) => {
+  var height = heightBySize[size];
+
+  return `
+    font-family: ${theme.typography.fontFamily};
+    font-size: ${theme.typography[size].fontSize};
+    min-height: ${height};
+  `;
+};
+
+const StyledTextArea = styled.textarea`
+  ${(props) => standardCssFields(props)}
+  appearance: none;
+  outline: none;
+  border: none;
+  transition: all 250ms ease;
+  resize: vertical;
+  display: inline-block;
+  overflow: hidden;
+  cursor: text;
+  width: 100%;
+  box-sizing: border-box;
+  height: ${(props) => heightBySize[props.size]};
+  resize: none;
+  white-space: nowrap;
+  padding: ${(props) => paddingBySize(props.size)};
+  background-color: ${(props) => props.theme.test_palette.light[100]};
+  color: ${(props) => props.theme.test_palette.dark[500]};
+  border: 1.5px solid ${(props) => props.theme.test_palette.light[500]};
+  border-radius: 0.25rem;
+
+  &:disabled {
+    border: 1.5px solid ${(props) => props.theme.test_palette.light[400]};
+    color: ${(props) => props.theme.test_palette.light[500]};
+    cursor: default;
+  }
+
+  &:hover:enabled {
+    border: 1.5px solid ${(props) => props.theme.test_palette[props.color][400]};
+  }
+
+  &:focus:enabled {
+    border: 1.5px solid ${(props) => props.theme.test_palette[props.color][400]};
+    box-shadow: 0px 0px 6px -2px ${(props) => props.theme.test_palette[props.color][400]};
+  }
+`;
 
 //===================================================
 
 const TextArea = React.forwardRef((props, ref) => {
   const {
-    theme,
-    color,
     id,
     disabled,
-    preventDefault,
-    className,
-    size,
+    readOnly,
     value,
+    defaultValue,
+    debounceTime,
+    type,
+    placeholder,
+    //----------------
     onChange,
+    onKeyDown,
+    onBlur,
+    onFocus,
+    //----------------
+    className,
+    style,
+    size,
+    color,
+    ...rest
   } = props;
 
-  const [val, setVal] = useState(value ? value : "");
+  const theme = useTheme();
+  const [inputValue, setInputValue] = useState("");
 
-  const handleOnChange = (e) => {
-    if (preventDefault) e.preventDefault();
-    setVal(e.target.value);
+  useEffect(() => setInputValue(value ? value : ""), [value]);
+
+  const debouncedOnChange = useCallback(
+    debounce((e, val) => handleChange(e, val), debounceTime),
+    []
+  );
+
+  const handleChange = (e, value) => {
+    if (onChange) onChange(e, value);
   };
 
-  const handleOnBlur = (e) => {
-    if (preventDefault) e.preventDefault();
-    onChange(id, val);
+  const onValueChange = (e) => {
+    setInputValue(e.target.value);
+    debouncedOnChange(e, e.target.value);
   };
 
   return (
-    <StyledTextInput
-      {...{ theme, size, color }}
-      onChange={handleOnChange}
-      className={className}
-      disabled={disabled}
-      value={val}
+    <StyledTextArea
       ref={ref}
+      {...{ theme, size, color, className, style, disabled, readOnly }}
+      placeholder={placeholder}
+      onChange={onValueChange}
+      disabled={disabled}
+      value={inputValue}
       onFocus={(e) => {
         e.target.style.whiteSpace = "inherit";
         e.target.style.height = `${e.target.scrollHeight}px`;
+
+        if (onFocus) onFocus(e);
       }}
       onInput={(e) => {
         e.target.style.whiteSpace = "inherit";
         e.target.style.height = `${e.target.scrollHeight}px`;
       }}
       onBlur={(e) => {
-        e.target.style.height = heightBySize(size);
+        e.target.style.height = heightBySize[size];
         e.target.style.whiteSpace = "nowrap";
-        handleOnBlur(e);
+
+        if (onBlur) onBlur(e);
       }}
+      {...rest}
     />
   );
 });
 
 TextArea.defaultProps = {
   id: "",
-  theme: theme,
+  value: "",
   disabled: false,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  //----------------
   onChange: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  //----------------
   className: "",
-  preventDefault: true,
+  style: {},
   size: "small",
   color: "primary",
-  value: "",
 };
 
 TextArea.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  preventDefault: PropTypes.bool,
   value: PropTypes.string,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  debounceTime: PropTypes.number,
+  placeholder: PropTypes.string,
+  //----------------
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  //----------------
+  className: PropTypes.string,
+  style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "info",
   ]),
 };
 

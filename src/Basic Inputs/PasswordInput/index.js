@@ -1,180 +1,239 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "../../Base/fontawesome/css/fontawesome.css";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import theme from "../../_utils/theme";
+import { useTheme } from "@emotion/react";
+import { debounce } from "lodash";
+
+const heightBySize = (size) => {
+  return { small: `1.875rem`, medium: `2.25rem`, large: `2.625rem` }[size];
+};
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.325rem 0.375rem";
-  if (size === "medium") return "0.3875rem 0.375rem";
-  if (size === "large") return "0.425rem 0.375rem";
+  if (size === "small") return "0.41875rem 0.375rem";
+  if (size === "medium") return "0.475rem 0.4rem";
+  if (size === "large") return "0.5625rem 0.425rem";
 };
 
-const heightBySize = (size, hasText) => {
-  if (size === "small") return `1.625rem`;
-  if (size === "medium") return `2rem`;
-  if (size === "large") return `2.375rem`;
-};
+const Container = styled.div`
+  width: 100%;
+  position: relative;
+  display: flex;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  min-height: ${(props) => heightBySize(props.size)};
+  max-height: ${(props) => heightBySize(props.size)};
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  color: ${(props) => props.theme.test_palette.dark[500]};
 
-const Span = styled.span((props) => ({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  borderBottom: `2px solid ${props.theme.palette[props.color].main}`,
-  backgroundColor: props.theme.palette[props.color].lighter,
-  color: props.theme.palette[props.color].textDark,
-  padding: paddingBySize(props.size),
-  borderRadius: "0 2px 2px 0",
-  cursor: "pointer",
+  border: 0.09375rem solid
+    ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[400]
+        : props.focused
+        ? props.theme.test_palette[props.color][400]
+        : props.theme.test_palette.light[500]};
 
-  "&:disabled": {
-    backgroundColor: props.theme.palette.gray[200],
-    borderBottom: "2px solid " + props.theme.palette.gray[900],
-    color: props.theme.palette.gray.textLight,
-    opacity: 0.7,
-    cursor: "default",
-  },
-}));
+  box-shadow: ${(props) =>
+    props.focused
+      ? "0px 0px 0.375rem -0.125rem " +
+        props.theme.test_palette[props.color][400]
+      : "none"};
 
-const Icon = styled.i((props) => ({
-  fontSize: props.theme.typography[props.size].fontSize,
-}));
+  &:hover {
+    border: 0.09375rem solid
+      ${(props) =>
+        props.disabled
+          ? props.theme.test_palette.light[400]
+          : props.theme.test_palette[props.color][400]};
+  }
 
-const Container = styled.div((props) => ({
-  display: "flex",
-  fontFamily: props.theme.typography.fontFamily,
-  outline: "none",
-  width: "100%",
-}));
+  &:hover i {
+    color: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[400]
+        : props.theme.test_palette[props.color][400]};
+  }
+`;
 
-const Input = styled.input((props) => ({
-  appearance: "none",
-  outline: "none",
-  border: "none",
-  fontFamily: "inherit",
-  borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-  transition: "all 250ms",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  cursor: "text",
-  padding: paddingBySize(props.size),
-  fontSize: props.theme.typography[props.size].fontSize,
-  backgroundColor: props.theme.palette[props.color].lighter,
-  color: props.theme.palette[props.color].textDark,
-  borderRadius: "0.125rem 0 0 0.125rem",
-  width: "100%",
-  boxSizing: "border-box",
-  minHeight: heightBySize(props.size),
-  maxHeight: heightBySize(props.size),
-  "&:disabled": {
-    backgroundColor: props.theme.palette.gray[200],
-    borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-    color: props.theme.palette.gray.textLight,
-    opacity: 0.7,
-    cursor: "default",
+const IconButton = styled.div`
+  margin-left: auto;
+  cursor: ${(props) => (props.disabled || props.readOnly ? "auto" : "pointer")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0
+    ${(props) =>
+      ({ small: "0.4rem", medium: "0.5rem", large: "0.6rem" }[props.size])};
+`;
 
-    "& ~ span": {
-      backgroundColor: props.theme.palette.gray[200],
-      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-      color: props.theme.palette.gray.textLight,
-      opacity: 0.7,
-      cursor: "default",
-    },
-  },
-  "&:focus": {
-    backgroundColor: props.theme.palette.common.white,
-    color: props.theme.palette.common.black,
-  },
-}));
+const Icon = styled.i`
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[400]
+      : props.focused
+      ? props.theme.test_palette[props.color][400]
+      : props.theme.test_palette.light[500]};
+`;
+
+const Input = styled.input`
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  color: ${(props) => props.theme.test_palette.dark[500]};
+  appearance: none;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+
+  padding: ${(props) => paddingBySize(props.size)};
+  transition: all 250ms ease;
+
+  &:disabled {
+    color: ${(props) => props.theme.test_palette.light[500]};
+    background-color: white;
+    cursor: auto;
+  }
+`;
+
+//===================================================
 
 const PasswordInput = React.forwardRef((props, ref) => {
   const {
-    onChange,
-    preventDefault,
     id,
     disabled,
-    theme,
+    readOnly,
+    value,
+    debounceTime,
+    //----------------
+    onChange,
+    onBlur,
+    onFocus,
+    //----------------
+    className,
+    style,
     size,
     color,
-    autoComplete,
-    value,
-    tooltip,
-    className,
+    ...rest
   } = props;
+  //
+  const theme = useTheme();
 
   const [locked, setLocked] = useState(true);
+  const [focused, setFocused] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
-  const handleOnChange = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
+  const inputRef = useRef();
+
+  var themeProps = { theme, size, color, disabled, readOnly, focused };
+
+  useEffect(() => {
+    if (ref !== null && ref !== undefined) ref.current = inputRef.current;
+  }, [ref, inputRef]);
+
+  useEffect(() => {
+    inputRef.current.selectionStart = inputValue.length;
+    inputRef.current.selectionEnd = inputValue.length;
+  }, [locked]);
+
+  useEffect(() => {
+    if (value) {
+      if (inputValue !== value) setInputValue(value === null ? "" : value);
     }
-    onChange(id, e.target.value);
+  }, [value]);
+
+  useEffect(() => setInputValue(value ? value : ""), [value]);
+
+  const debouncedOnChange = useCallback(
+    debounce((e, val) => handleChange(e, val), debounceTime),
+    []
+  );
+
+  const handleChange = (e, value) => {
+    if (onChange) onChange(e, value);
   };
 
-  const handleLockUnlock = () => setLocked(!locked);
+  const onValueChange = (e) => {
+    setInputValue(e.target.value);
+    debouncedOnChange(e, e.target.value);
+  };
 
-  let themeProps = { theme, size, color };
+  const toggleLocked = () => {
+    setLocked(!locked);
+    inputRef.current.focus();
+  };
 
   return (
-    <>
-      <Container {...themeProps}>
-        <Input
+    <Container {...themeProps} className={className} style={style}>
+      <Input
+        ref={inputRef}
+        {...themeProps}
+        type={locked ? "password" : "text"}
+        onChange={onValueChange}
+        value={inputValue || ""}
+        onFocus={(e) => {
+          setFocused(true);
+          if (onFocus) onFocus(e);
+        }}
+        onBlur={(e) => {
+          setFocused(false);
+          if (onBlur) onBlur(e);
+        }}
+        {...rest}
+      />
+
+      <IconButton {...themeProps} onClick={toggleLocked}>
+        <Icon
           {...themeProps}
-          type={locked ? "password" : "text"}
-          autoComplete={autoComplete ? "true" : "false"}
-          value={value}
-          onChange={handleOnChange}
-          className={className}
-          disabled={disabled}
-          title={tooltip}
-          ref={ref}
+          className={`fas fa-${locked ? "eye-slash" : "eye"} fa-fw`}
         />
-        <Span {...themeProps} onClick={disabled ? () => {} : handleLockUnlock}>
-          <Icon
-            {...themeProps}
-            className={`fas ${locked ? "fa-eye" : "fa-eye-slash"} fa-fw`}
-          />
-        </Span>
-      </Container>
-    </>
+      </IconButton>
+    </Container>
   );
 });
 
 PasswordInput.defaultProps = {
-  theme: theme,
   id: "",
+  value: 0,
   disabled: false,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  //----------------
   onChange: () => {},
-  handleForgotPassword: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  //----------------
   className: "",
-  preventDefault: true,
+  style: {},
   size: "small",
   color: "primary",
-  autoComplete: false,
-  tooltip: "",
-  value: "",
 };
 
 PasswordInput.propTypes = {
-  theme: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  handleForgotPassword: PropTypes.func,
-  className: PropTypes.string,
-  tooltip: PropTypes.string,
+  id: PropTypes.string,
   value: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  autoComplete: PropTypes.bool,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  debounceTime: PropTypes.number,
+  //----------------
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  //----------------
+  className: PropTypes.string,
+  style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "info",
   ]),
 };
 

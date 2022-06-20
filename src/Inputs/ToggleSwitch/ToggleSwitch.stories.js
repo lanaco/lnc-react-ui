@@ -1,6 +1,6 @@
 import React from "react";
 import ToggleSwitch from ".";
-import theme from "../../_utils/theme";
+import Story from "./Story";
 
 export default {
   title: "Inputs/Switch",
@@ -8,20 +8,14 @@ export default {
   argTypes: {},
 };
 
-const Template = (args) => (
-  <>
-    <p>
-      <ToggleSwitch {...args} />
-    </p>
-  </>
-);
+const Template = (args) => <Story {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  theme: theme,
-  color: "secondary",
-  size: "large",
-  value: false,
+  color: "primary",
+  size: "medium",
+  value: null,
   disabled: false,
-  label: "Toggle",
+  readOnly: false,
+  label: "Switch",
 };

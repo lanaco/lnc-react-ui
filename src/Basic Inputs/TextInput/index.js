@@ -1,179 +1,168 @@
+import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import theme from "../../_utils/theme";
+import React, { useCallback, useState, useEffect } from "react";
+import { debounce } from "lodash";
 
 const paddingBySize = (size) => {
-  if (size === "small") return "0.325rem 0.375rem";
-  if (size === "medium") return "0.3875rem 0.375rem";
-  if (size === "large") return "0.422375rem 0.375rem";
-};
-
-const heightBySize = (size, hasText) => {
-  if (size === "small") return `1.625rem`;
-  if (size === "medium") return `2rem`;
-  if (size === "large") return `2.375rem`;
-};
-
-const StyledTextInput = styled.input((props) => {
   return {
-    appearance: "none",
-    outline: "none",
-    border: "none",
-    borderBottom: `0.125rem solid ${props.theme.palette[props.color].main}`,
-    transition: "all 250ms",
-    display: "inline-block",
-    flexDirection: "row",
-    justifyContent: "center",
-    cursor: "text",
-    padding: paddingBySize(props.size),
-    fontSize: props.theme.typography[props.size].fontSize,
-    backgroundColor: props.theme.palette[props.color].lighter,
-    color: props.theme.palette[props.color].textDark,
-    borderRadius: "0.125rem",
-    width: "100%",
-    boxSizing: "border-box",
-    minHeight: heightBySize(props.size),
-    maxHeight: heightBySize(props.size),
-    fontFamily: props.theme.typography.fontFamily,
-    "&:disabled": {
-      backgroundColor: props.theme.palette.gray[200],
-      borderBottom: `0.125rem solid ${props.theme.palette.gray[900]}`,
-      color: props.theme.palette.gray.textLight,
-      opacity: 0.7,
-      cursor: "default",
-    },
-    "&:focus": {
-      backgroundColor: props.theme.palette.common.white,
-      color: props.theme.palette.common.black,
-    },
-  };
-});
+    small: "0.41875rem 0.5rem",
+    medium: "0.48125rem 0.6rem",
+    large: "0.65625rem 0.7rem",
+  }[size];
+};
+
+const standardCssFields = ({ theme, size }) => {
+  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+    size
+  ];
+
+  return `
+    font-family: ${theme.typography.fontFamily};
+    font-size: ${theme.typography[size].fontSize};
+    min-height: ${height};
+    max-height: ${height};
+  `;
+};
+
+const Input = styled.input`
+  ${(props) => standardCssFields(props)}
+  padding: ${(props) => paddingBySize(props.size)};
+  background-color: ${(props) => props.theme.test_palette.light[100]};
+  color: ${(props) => props.theme.test_palette.dark[500]};
+  border: 0.09375rem solid ${(props) => props.theme.test_palette.light[500]};
+  line-height: inherit;
+  appearance: none;
+  outline: none;
+  display: inline-block;
+  border-radius: 0.25rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:disabled {
+    border: 0.09375rem solid ${(props) => props.theme.test_palette.light[400]};
+    color: ${(props) => props.theme.test_palette.light[500]};
+    cursor: default;
+  }
+
+  &:hover:enabled {
+    border: 0.09375rem solid
+      ${(props) => props.theme.test_palette[props.color][400]};
+  }
+
+  &:focus:enabled {
+    border: 0.09375rem solid
+      ${(props) => props.theme.test_palette[props.color][400]};
+    box-shadow: 0px 0px 0.375rem -0.125rem ${(props) => props.theme.test_palette[props.color][400]};
+  }
+`;
 
 //===================================================
 
 const TextInput = React.forwardRef((props, ref) => {
+  //
   const {
-    theme,
-    color,
     id,
     disabled,
-    preventDefault,
-    className,
-    size,
+    readOnly,
     value,
+    debounceTime,
+    type,
+    placeholder,
+    //----------------
     onChange,
-    onKeyDown,
-    onInput,
     onBlur,
+    onFocus,
+    //----------------
+    className,
+    style,
+    size,
+    color,
+    ...rest
   } = props;
 
-  const [text, setText] = useState("");
-  const [isFirst, setIsFirst] = useState(true);
+  const theme = useTheme();
+  const [inputValue, setInputValue] = useState("");
 
-  useEffect(() => {
-    if (text !== value) setText(value === null ? "" : value);
-  }, [value]);
+  useEffect(() => setInputValue(value ? value : ""), [value]);
 
-  useEffect(() => {
-    const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
-    return () => clearTimeout(timeOutId);
-  }, [text]);
+  const debouncedOnChange = useCallback(
+    debounce((e, val) => handleChange(e, val), debounceTime),
+    []
+  );
 
-  const handleDelayedOnChange = () => {
-    if (!isFirst) onChange(id, text);
-
-    if (isFirst) setIsFirst(false);
+  const handleChange = (e, value) => {
+    if (onChange) onChange(e, value);
   };
 
-  const handleOnChange = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
-    // onChange(id, e.target.value);
-    setText(e.target.value);
+  const onValueChange = (e) => {
+    setInputValue(e.target.value);
+    debouncedOnChange(e, e.target.value);
   };
-
-  const handleOnKeyDown = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
-    if (onKeyDown) onKeyDown(e);
-    //setText(e.target.value);
-  };
-
-  const handleOnInput = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
-    if (onInput) onInput(e);
-    //setText(e.target.value);
-  };
-
-  const handleOnBlur = (e) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
-    if (onBlur) onBlur(e);
-    //setText(e.target.value);
-  };
-
-  // const [val, setVal] = useState(value ? value : "");
-
-  // const handleOnChange = (e) => {
-  //   if (preventDefault) e.preventDefault();
-  //   setVal(e.target.value);
-  // };
-
-  // const handleOnBlur = (e) => {
-  //   if (preventDefault) e.preventDefault();
-  //   onChange(id, val);
-  // };
 
   return (
-    <StyledTextInput
-      {...{ theme, size, color }}
-      onChange={handleOnChange}
-      // onKeyDown={handleOnKeyDown}
-      // onInput={handleOnInput}
-      // onBlur={handleOnBlur}
-      className={className}
-      disabled={disabled}
-      value={text}
-      type="text"
+    <Input
       ref={ref}
+      type={type}
+      theme={theme}
+      color={color}
+      size={size}
+      className={className}
+      placeholder={placeholder}
+      style={style}
+      disabled={disabled}
+      readOnly={readOnly}
+      value={inputValue}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onChange={onValueChange}
+      {...rest}
     />
   );
 });
 
 TextInput.defaultProps = {
   id: "",
-  theme: theme,
+  value: "",
   disabled: false,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  type: "text",
+  //----------------
   onChange: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  //----------------
   className: "",
-  preventDefault: true,
+  style: {},
   size: "small",
   color: "primary",
-  value: "",
 };
 
 TextInput.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  preventDefault: PropTypes.bool,
   value: PropTypes.string,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  debounceTime: PropTypes.number,
+  placeholder: PropTypes.string,
+  type: PropTypes.oneOf(["text", "email"]),
+  //----------------
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  //----------------
+  className: PropTypes.string,
+  style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "info",
   ]),
 };
 

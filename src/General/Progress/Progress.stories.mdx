@@ -1,0 +1,15 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import Progress from "./index";
+
+<Meta title="General/Progress" component={Progress} />
+
+export const Template = (args) => <Progress {...args} />;
+
+# Progress
+
+With `MDX`, we can define a story for `Checkbox` right in the middle of our
+Markdown documentation.
+
+<Canvas>
+  <Story name="Default">{Template.bind({})}</Story>
+</Canvas>

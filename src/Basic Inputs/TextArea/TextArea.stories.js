@@ -1,6 +1,6 @@
 import React from "react";
-import TextArea from "./";
-import theme from "../../_utils/theme";
+import TextArea from ".";
+import StoryContainer from "../../_utils/StoryContainer";
 
 export default {
   title: "Basic Inputs/Text Area",
@@ -9,18 +9,54 @@ export default {
 };
 
 const Template = (args) => (
-  <div style={{ width: "200px" }}>
-    <TextArea {...args} />
-  </div>
+  <StoryContainer>
+    <TextArea {...args} size={"small"} />
+    <TextArea {...args} size={"medium"} />
+    <TextArea {...args} size={"large"} />
+  </StoryContainer>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  theme: theme,
-  color: "primary",
-  onChange: () => {},
-  size: "medium",
+export const Primary = Template.bind({});
+Primary.args = {
+  id: "",
+  value: "",
   disabled: false,
-  rows: 4,
-  value: "Text",
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  type: "text",
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
+};
+
+export const SecondaryPlaceholder = Template.bind({});
+SecondaryPlaceholder.args = {
+  id: "",
+  value: "",
+  disabled: false,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "Type something...",
+  type: "text",
+  className: "",
+  style: {},
+  size: "small",
+  color: "secondary",
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  id: "",
+  value: "Disabled",
+  disabled: true,
+  readOnly: false,
+  debounceTime: 180,
+  placeholder: "",
+  type: "text",
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
 };

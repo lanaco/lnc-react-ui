@@ -4,32 +4,28 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../../_utils/theme";
 
-const getPadding = (size) => {
-  if (size === "small") return "0.4125rem 0.34375rem";
-  if (size === "medium") return "0.475rem 0.415625rem";
-  if (size === "large") return "0.5375rem 0.44375rem";
-};
-
-const heightBySize = (size) => {
-  if (size === "small") return `max-height: 1.625rem; min-height: 1.625rem;`;
-  if (size === "medium") return `max-height: 2rem; min-height: 2rem;`;
-  if (size === "large") return `max-height: 2.375rem; min-height: 2.375rem;`;
-};
-
 const Span = styled.span`
-  display: inline-block;
   box-sizing: border-box;
   background-color: inherit;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  padding: ${(props) => getPadding(props.size)};
-  color: ${(props) => props.theme.palette[props.color].main};
-  ${(props) => heightBySize(props.size)}
+  font-size: ${(props) => (props.sizeInUnits && props.sizeInUnits != "") ? props.sizeInUnits : props.theme.typography[props.size].iconFontSize};
+  color: ${(props) => props.theme.test_palette[props.color][400]};
+
 `;
 
 const Icon = (props) => {
-  const { tooltip, icon, iconStyle, className, size, color, theme } = props;
+  const {
+    id,
+    icon,
+    iconStyle,
+    tooltip,
+    className,
+    style,
+    size,
+    sizeInUnits,
+    color,
+    ...rest } = props;
 
-  const themeProps = { theme, size, color };
+  const themeProps = { theme, size, color, sizeInUnits };
 
   const getIconClass = () => {
     var style = iconStyle === "solid" ? "fas" : "far";
@@ -37,38 +33,45 @@ const Icon = (props) => {
   };
 
   return (
-    <Span {...themeProps} className={className} tooltip={tooltip}>
+    <Span {...themeProps} tooltip={tooltip} className={className} style={style} {...rest}>
       <i className={getIconClass()} />
     </Span>
   );
 };
 
 Icon.defaultProps = {
-  tooltip: "",
+  id: "",
   icon: "",
   iconStyle: "solid",
+  tooltip: "",
   className: "",
+  stlye: {},
   size: "small",
+  sizeInUnits: "",
   color: "primary",
-  theme: theme,
 };
 
 Icon.propTypes = {
-  tooltip: PropTypes.string,
-  theme: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
   icon: PropTypes.string,
   iconStyle: PropTypes.oneOf(["solid", "regular"]),
+  tooltip: PropTypes.string,
+  //----------------
   className: PropTypes.string,
+  style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  /**
+    Size in one of the css units (px, rem, em, ... ), sizeInUnits overrides size property
+   */
+  sizeInUnits: PropTypes.string,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
+    "disabled",
     "white",
-    "black",
   ]),
 };
 

@@ -1,238 +1,279 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import theme from "../../_utils/theme";
+import { useTheme } from "@emotion/react";
 
-const getLabelAndTextProps = () => {
-  return {
-    small: {
-      width: "2.46875rem",
-      height: "1.625rem",
-      padding: "0.125rem 0.125rem",
-      paddingLeft: "2.8rem",
-      top: "0.17rem",
-    },
-    medium: {
-      width: "2.96875rem",
-      height: "2rem",
-      padding: "0.1875rem 0.125rem",
-      paddingLeft: "3.5rem",
-      top: "0.42rem",
-    },
-    large: {
-      width: "3.4375rem",
-      height: "2.375rem",
-      padding: "0.25rem 0.125rem",
-      paddingLeft: "4.3rem",
-      top: "0.47rem",
-    },
-  };
+const sizes = {
+  containerWidth: {
+    small: "4.375rem",
+    medium: "5.25rem",
+    large: "6.125rem",
+  },
+  containerHeight: {
+    small: "1.875rem",
+    medium: "2.25rem",
+    large: "2.625rem",
+  },
+  paddingLeft: {
+    small: "4.5625rem",
+    medium: "5.4375rem",
+    large: "6.3125rem",
+  },
+  paddingLeftInter: {
+    small: "5rem",
+    medium: "5.875rem",
+    large: "6.75rem",
+  },
+  dashHeight: {
+    small: "0.21875rem",
+    medium: "0.3125rem",
+    large: "0.40625rem",
+  },
+  dashWidth: {
+    small: "2.625rem",
+    medium: "3rem",
+    large: "3.375rem",
+  },
+  dashLeft: {
+    small: "0.875rem",
+    medium: "1.125rem",
+    large: "1.375rem",
+  },
+  dashBottom: {
+    small: "0.75rem",
+    medium: "0.9375rem",
+    large: "1.0625rem",
+  },
+  sliderX: {
+    small: "2.5rem",
+    medium: "3rem",
+    large: "3.5rem",
+  },
 };
 
-const getSpanProps = () => {
-  return {
-    small: {
-      width: "2.125rem",
-      height: "0.9375rem",
-      top: "0.245rem",
-      left: "0rem",
-      before_width: "1.0625rem",
-      before_height: "1.0625rem",
-    },
-    medium: {
-      width: "2.6875rem",
-      height: "1.1875rem",
-      top: "0.325rem",
-      left: "0rem",
-      before_width: "1.3125rem",
-      before_height: "1.3125rem",
-    },
-    large: {
-      width: "3.125rem",
-      height: "1.4375rem",
-      top: "0.37rem",
-      left: "0rem",
-      before_width: "1.5625rem",
-      before_height: "1.5625rem",
-    },
-  };
-};
+//================================================================================================
 
-const Label = styled.label((props) => {
-  return {
-    display: "inline-block",
-    position: "relative",
-    height: getLabelAndTextProps()[props.size].height,
-    width: "auto",
-    paddingLeft: getLabelAndTextProps()[props.size].paddingLeft,
-
-    "& input": {
-      opacity: "0",
-      width: "0",
-      height: "0",
-    },
-  };
-});
-
-const Text = styled.label`
+const IntermediateSwitchContainer = styled.label`
   position: relative;
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  top: ${(props) => getLabelAndTextProps()[props.size].top};
+  display: inline-block;
+  width: ${(props) => sizes.containerWidth[props.size]};
+  height: ${(props) => sizes.containerHeight[props.size]};
+  cursor: ${(props) =>
+    props.disabled || props.readOnly ? "default" : "pointer"};
 `;
 
-const Input = styled.input`
-  &:checked + span {
-    background-color: ${(props) => props.theme.palette[props.color].main};
-  }
-
-  &:focus + span {
-    box-shadow: 0 0 0.0625rem
-      ${(props) => props.theme.palette[props.color].main};
-  }
-
-  &:checked + span:before {
-    transform: translateX(90%);
-  }
-
-  &:checked:disabled + span {
-  }
-
-  &:checked:disabled + span:before {
-    backround-color: red;
-  }
-
-  &:disabled + span {
-    position: absolute;
-    cursor: pointer;
-    top: ${(props) => getSpanProps()[props.size].top};
-    left: ${(props) => getSpanProps()[props.size].left};
-    right: 0;
-    bottom: 0;
-    background-color: ${(props) => props.theme.palette.gray[900]};
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-    height: ${(props) => getSpanProps()[props.size].height};
-    width: ${(props) => getSpanProps()[props.size].width};
-    border: 0.0625rem solid ${(props) => props.theme.palette.gray[1000]};
-    border-radius: 0.125rem;
-  }
-
-  &:disabled + span:before {
-    position: absolute;
-    content: "";
-    height: ${(props) => getSpanProps()[props.size].before_height};
-    width: ${(props) => getSpanProps()[props.size].before_width};
-    left: 0.0625rem;
-    top: -0.125rem;
-    background-color: ${(props) => props.theme.palette.gray[400]};
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-    border: 0.0625rem solid ${(props) => props.theme.palette.gray[1000]};
-    border-radius: 0.125rem;
-  }
-
-  &:checked:disabled + span:before {
-    position: absolute;
-    content: "";
-    height: ${(props) => getSpanProps()[props.size].before_height};
-    width: ${(props) => getSpanProps()[props.size].before_width};
-    left: 0.0625rem;
-    top: -0.125rem;
-    background-color: ${(props) => props.theme.palette.gray[400]};
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-    border: 0.0625rem solid ${(props) => props.theme.palette.gray[1000]};
-    border-radius: 0.125rem;
-  }
-`;
-
-const Span = styled.span`
+const IntermediateSwitchDash = styled.span`
   position: absolute;
-  cursor: pointer;
-  top: ${(props) => getSpanProps()[props.size].top};
-  left: ${(props) => getSpanProps()[props.size].left};
+  cursor: ${(props) =>
+    props.disabled || props.readOnly ? "default" : "pointer"};
+  top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${(props) => props.theme.palette.gray[700]};
+  background-color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[400]
+      : props.theme.test_palette.light[100]};
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  height: ${(props) => getSpanProps()[props.size].height};
-  width: ${(props) => getSpanProps()[props.size].width};
-  border: 0.0625rem solid ${(props) => props.theme.palette[props.color].main};
-  border-radius: 0.125rem;
+  border-radius: ${(props) => sizes.containerHeight[props.size]};
+  ${(props) =>
+    !props.disabled
+      ? `box-shadow: 0px 0px 0.625rem -0.3125rem ${
+          props.theme.test_palette[props.color][400]
+        };`
+      : ""}
 
-  &:before {
+  &::before {
     position: absolute;
     content: "";
-    height: ${(props) => getSpanProps()[props.size].before_height};
-    width: ${(props) => getSpanProps()[props.size].before_width};
-    left: 0.0625rem;
-    top: -0.125rem;
-    background-color: white;
+    border-radius: 0.5rem;
+    height: ${(props) => sizes.dashHeight[props.size]};
+    width: ${(props) => sizes.dashWidth[props.size]};
+    left: ${(props) => sizes.dashLeft[props.size]};
+    bottom: ${(props) => sizes.dashBottom[props.size]};
+    background-color: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[100]
+        : props.theme.test_palette[props.color][300]};
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    border: 0.0625rem solid ${(props) => props.theme.palette[props.color].main};
-    border-radius: 0.125rem;
   }
 `;
+
+const LabelText = styled.span`
+  display: inline-block;
+  position: absolute;
+  font-family: inherit;
+  font-size: inherit;
+  padding-left: ${(props) =>
+    props.inter
+      ? sizes.paddingLeftInter[props.size]
+      : sizes.paddingLeft[props.size]};
+  line-height: ${(props) => sizes.containerHeight[props.size]};
+  min-height: ${(props) => sizes.containerHeight[props.size]};
+  max-height: ${(props) => sizes.containerHeight[props.size]};
+  vertical-align: middle;
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[500]
+      : props.theme.test_palette.dark[400]};
+  width: fit-content;
+`;
+
+const SwitchContainer = styled.label`
+  position: relative;
+  display: inline-block;
+  width: ${(props) => sizes.containerWidth[props.size]};
+  height: ${(props) => sizes.containerHeight[props.size]};
+  cursor: ${(props) =>
+    props.disabled || props.readOnly ? "default" : "pointer"};
+`;
+
+const SwitchInput = styled.input`
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  &:checked + span {
+    background-color: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette.light[400]
+        : props.theme.test_palette[props.color][400]};
+  }
+
+  &:checked + span::before {
+    -webkit-transform: translateX(${(props) => sizes.sliderX[props.size]});
+    -ms-transform: translateX(${(props) => sizes.sliderX[props.size]});
+    transform: translateX(${(props) => sizes.sliderX[props.size]});
+  }
+`;
+
+const SwitchSlider = styled.span`
+  position: absolute;
+  cursor: ${(props) =>
+    props.disabled || props.readOnly ? "default" : "pointer"};
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${(props) =>
+    props.disabled
+      ? props.theme.test_palette.light[400]
+      : props.theme.test_palette.light[500]};
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: ${(props) => sizes.containerHeight[props.size]};
+
+  &::before {
+    position: absolute;
+    content: "";
+    height: ${(props) => sizes.containerHeight[props.size]};
+    width: ${(props) => sizes.containerHeight[props.size]};
+    left: 0px;
+    bottom: 0px;
+    background-color: ${(props) => props.theme.test_palette.light[100]};
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0.625rem -0.25rem ${(props) => (props.disabled ? props.theme.test_palette.dark[100] : props.theme.test_palette[props.color][400])};
+  }
+`;
+
+//================================================================================================
 
 const ToggleSwitch = (props) => {
   const {
     id,
-    value,
     disabled,
+    readOnly,
+    value,
+    label,
+    //----------------
     onChange,
-    theme,
+    //----------------
+    className,
+    style,
     size,
     color,
-    className,
-    preventDefault,
-    label,
+    ...rest
   } = props;
 
   function handleChange(e) {
-    if (preventDefault) e.preventDefault();
-    onChange(id, !value);
+    if (disabled || readOnly) return;
+    if (value === null) onChange(e, false);
+    else onChange(e, !value);
   }
 
-  let themeProps = { theme, size, color };
+  const theme = useTheme();
+
+  let themeProps = { theme, size, color, disabled, readOnly };
+
+  if (value === null) {
+    return (
+      <IntermediateSwitchContainer
+        {...themeProps}
+        onClick={handleChange}
+        className={className}
+        style={style}
+        {...rest}
+      >
+        <IntermediateSwitchDash {...themeProps} />
+
+        {label && (
+          <LabelText inter={true} {...themeProps}>
+            {label}
+          </LabelText>
+        )}
+      </IntermediateSwitchContainer>
+    );
+  }
 
   return (
-    <Label {...themeProps} className={className} onClick={handleChange}>
-      <Text {...themeProps}>{label}</Text>
-      <Input
+    <SwitchContainer {...themeProps} className={className} style={style}>
+      <SwitchInput
         {...themeProps}
         type="checkbox"
-        onChange={() => {}}
         checked={value ? "checked" : ""}
         disabled={disabled}
+        readOnly={readOnly}
+        onChange={handleChange}
+        {...rest}
       />
-      <Span {...themeProps}></Span>
-    </Label>
+      <SwitchSlider {...themeProps}></SwitchSlider>
+
+      {label && <LabelText {...themeProps}>{label}</LabelText>}
+    </SwitchContainer>
   );
 };
 
 ToggleSwitch.defaultProps = {
   id: "",
   disabled: false,
+  readOnly: false,
+  label: "",
+  //-------------------------------
   onChange: () => {},
+  //-------------------------------
+  style: {},
   className: "",
-  preventDefault: true,
   size: "small",
   color: "primary",
-  theme: theme,
-  label: "",
 };
 
 ToggleSwitch.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.any,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
+  readOnly: PropTypes.bool,
   label: PropTypes.string,
-  preventDefault: PropTypes.bool,
+  //-------------------------------
+  onChange: PropTypes.func,
+  //-------------------------------
+  style: PropTypes.object,
+  className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
@@ -240,7 +281,7 @@ ToggleSwitch.propTypes = {
     "success",
     "error",
     "warning",
-    "gray",
+    "info",
   ]),
 };
 

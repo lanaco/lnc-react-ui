@@ -9,24 +9,86 @@ export default {
 };
 
 const Template = (args) => (
-  <>
-    <div style={{ padding: "10px" }} label="" id="check1">
-      <CheckBox {...args} />
-    </div>
-    <div style={{ padding: "10px" }}>
-      <CheckBox {...args} label="Checkbox" id="check2" />
-    </div>
-  </>
+  <CheckBox {...args} />
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  id: "check",
-  disabled: false,
-  checked: true,
-  onChange: () => alert("aa"),
-  color: "secondary",
-  size: "small",
-  theme: theme,
-  // label: "Checkbox",
 };
+
+export const Indeterminate = Template.bind({});
+Indeterminate.args = {
+  id: "",
+  checked: false,
+  disabled: false,
+  readOnly: false,
+  label: "indeterminate checkbox",
+  indeterminate: true,
+  labelPosition: "right",
+  icon: null,
+  tabIndex: 0,
+  preventDefault: true,
+  //-------------------------
+  onChange: (e, value) => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  onKeyDown: () => {},
+  //-------------------------
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
+  inputProps: { name: "name", id: "krkr", className: "klasa" },
+};
+
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  id: "",
+  checked: true,
+  disabled: true,
+  readOnly: false,
+  label: "disabled checkbox",
+  indeterminate: false,
+  labelPosition: "right",
+  icon: null,
+  tabIndex: 0,
+  preventDefault: true,
+  //-------------------------
+  onChange: (e, value) => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  onKeyDown: () => {},
+  //-------------------------
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
+  inputProps: {  },
+};
+
+export const Icon = Template.bind({});
+Icon.args = {
+  id: "",
+  checked: true,
+  disabled: false,
+  readOnly: false,
+  label: "icon checkbox",
+  indeterminate: false,
+  labelPosition: "right",
+  icon: "heart",
+  tabIndex: 0,
+  preventDefault: true,
+  //-------------------------
+  onChange: (e, value) => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  onKeyDown: () => {},
+  //-------------------------
+  className: "",
+  style: {},
+  size: "small",
+  color: "primary",
+  inputProps: {  },
+};
+

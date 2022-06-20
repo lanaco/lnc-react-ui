@@ -9,40 +9,24 @@ export default {
 };
 
 const Template = (args) => (
-  <>
-    <p>
-      <Button {...args} />
-    </p>
-  </>
+  <div style={{ width: "150px" }}>
+    <Button {...args} />
+  </div>
 );
 
 export const JustText = Template.bind({});
 JustText.args = {
-  theme: theme,
   color: "primary",
   text: "Button",
   tooltip: "Button",
   onClick: () => {},
-  size: "medium",
+  size: "small",
   disabled: false,
-  inverted: false,
-};
-
-export const JustIcon = Template.bind({});
-JustIcon.args = {
-  color: "transparent",
-  tooltip: "Button",
-  onClick: () => {},
-  size: "medium",
-  disabled: false,
-  icon: "user",
-  iconStyle: "solid",
-  inverted: false,
+  outline: false,
 };
 
 export const TextAndIconToLeft = Template.bind({});
 TextAndIconToLeft.args = {
-  theme: theme,
   color: "primary",
   text: "Button",
   tooltip: "Button",
@@ -52,12 +36,11 @@ TextAndIconToLeft.args = {
   icon: "user",
   iconStyle: "solid",
   iconLocation: "left",
-  inverted: false,
+  outline: false,
 };
 
 export const TextAndIconToRight = Template.bind({});
 TextAndIconToRight.args = {
-  theme: theme,
   color: "primary",
   text: "Button",
   tooltip: "Button",
@@ -67,5 +50,5 @@ TextAndIconToRight.args = {
   icon: "user",
   iconStyle: "solid",
   iconLocation: "right",
-  inverted: false,
+  outline: true,
 };
