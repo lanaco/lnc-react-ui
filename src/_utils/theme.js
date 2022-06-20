@@ -197,6 +197,7 @@ const theme = {
       gap: "0.3rem",
       subTextSize: "0.625rem",
       thumb: "1rem",
+      inputSize: "1.85rem",
     },
     medium: {
       fontSize: "0.9375rem",
@@ -204,13 +205,15 @@ const theme = {
       gap: "0.45rem",
       subTextSize: "0.725rem",
       thumb: "1.2rem",
+      inputSize: "2.25rem",
     },
     large: {
       fontSize: "1.125rem",
       iconFontSize: "1.6375rem",
       gap: "0.6rem",
       subTextSize: "0.825rem",
-      thumb: "1.4rem"
+      thumb: "1.4rem",
+      inputSize: "2.625rem",
     },
     h1: {
       fontWeight: 300,
