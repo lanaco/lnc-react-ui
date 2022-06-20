@@ -1,4 +1,4 @@
-
+import React from 'react'
 import theme, { themes } from "../src/_utils/theme";
 import { ThemeProvider } from "@emotion/react";
 

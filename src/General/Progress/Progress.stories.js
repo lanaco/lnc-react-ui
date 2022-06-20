@@ -16,3 +16,17 @@ export const Default = Template.bind({});
 Default.args = {
 };
 
+
+export const Indicator = Template.bind({});
+Indicator.args = {
+    id: "",
+    indicator: true,
+    progressPercentage: 20,
+    //------------------
+    onChange: () => { },
+    //------------------
+    className: "",
+    style: {},
+    color: "primary",
+    //-------------------
+};

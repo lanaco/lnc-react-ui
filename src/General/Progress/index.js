@@ -97,7 +97,6 @@ Progress.propTypes = {
         "warning",
         "disabled",
     ]),
-
 };
 
 export default Progress
