@@ -1,11 +1,22 @@
 import React from 'react'
+import PropTypes from "prop-types";
 
-const Footer = () => {
+const Footer = (props) => {
+  const { children, __TYPE__, ...rest } = props;
+
   return (
-    <div>
-      I'm a Footer component!
-    </div>
+    <footer {...rest}>
+      {children}
+    </footer>
   )
 }
+
+Footer.defaultProps = {
+  __TYPE__: "Footer"
+};
+
+Footer.propTypes = {
+  __TYPE__: PropTypes.string
+};
 
 export default Footer
