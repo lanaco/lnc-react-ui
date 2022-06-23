@@ -10,6 +10,11 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  docs:{
+    source: {
+      type: "code"
+    }
+  }
 }
 
 export const decorators = [

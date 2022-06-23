@@ -1,22 +1,22 @@
-import React from 'react'
+import React from "react";
 import PropTypes from "prop-types";
 
 const Header = (props) => {
   const { children, __TYPE__, ...rest } = props;
 
-  return (
-    <header {...rest}>
-      {children}
-    </header>
-  )
-}
+  return <header {...rest}>{children}</header>;
+};
 
 Header.defaultProps = {
-  __TYPE__: "Header"
+  __TYPE__: "Header",
 };
 
 Header.propTypes = {
-  __TYPE__: PropTypes.string
+  /**
+   * Do not override this property. 
+   * Should only be used as indicator for type if you are passing custom component.
+   */
+  __TYPE__: PropTypes.string,
 };
 
-export default Header
+export default Header;
