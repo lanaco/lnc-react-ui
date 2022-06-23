@@ -93,17 +93,8 @@ export { default as SearchBar } from "./Inputs/SearchBar";
 export * from "./Feedback/Spinner";
 export { default as Spinner } from "./Feedback/Spinner";
 
-export * from "./Layout/Tabs";
-export { default as Tabs } from "./Layout/Tabs";
-
 export * from "./Utility/Pagination";
 export { default as Pagination } from "./Utility/Pagination";
-
-export * from "./Layout/FormField";
-export { default as FormField } from "./Layout/FormField";
-
-export * from "./Layout/FormContainer";
-export { default as FormContainer } from "./Layout/FormContainer";
 
 export * from "./Feedback/Alert";
 export { default as Alert } from "./Feedback/Alert";
@@ -114,8 +105,13 @@ export { default as PeriodSelector } from "./Inputs/PeriodSelector";
 export * from "./Inputs/MultiSelectDropdown";
 export { default as MultiSelectDropdown } from "./Inputs/MultiSelectDropdown";
 
-export * from "./Layout/Layout";
-export { default as Layout } from "./Layout/Layout";
+export * from "./Layout/Button Group";
+export { default as ButtonGroup } from "./Layout/Button Group";
+
+//==================================== LAYOUT =====================================
+
+export * from "./Layout/PageLayout";
+export { default as PageLayout } from "./Layout/PageLayout";
 
 export * from "./Layout/Sidebar";
 export { default as Sidebar } from "./Layout/Sidebar";
@@ -129,5 +125,13 @@ export { default as Footer } from "./Layout/Footer";
 export * from "./Layout/Content";
 export { default as Content } from "./Layout/Content";
 
-export * from "./Layout/Button Group";
-export { default as ButtonGroup } from "./Layout/Button Group";
+export * from "./Layout/FormField";
+export { default as FormField } from "./Layout/FormField";
+
+export * from "./Layout/FormContainer";
+export { default as FormContainer } from "./Layout/FormContainer";
+
+export * from "./Layout/Tabs";
+export { default as Tabs } from "./Layout/Tabs";
+
+//=================================================================================

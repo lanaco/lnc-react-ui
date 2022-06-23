@@ -46,9 +46,9 @@ const Layout = React.forwardRef((props, ref) => {
         if (sidebarIndex)
           throw "Found multiple ocurrences of Sidebar component on the same level in the component tree.";
         sidebarIndex = index + 1;
-      } else if (component.props.__TYPE__ == "Layout") {
+      } else if (component.props.__TYPE__ == "PageLayout") {
         if (layoutIndex)
-          throw "Found multiple ocurrences of Layout component on the same level in the component tree.";
+          throw "Found multiple ocurrences of PageLayout component on the same level in the component tree.";
         layoutIndex = index + 1;
       } else if (component.props.__TYPE__ == "Content") {
         if (contentIndex)
@@ -69,7 +69,7 @@ const Layout = React.forwardRef((props, ref) => {
         return React.cloneElement(child, {
           placement: getSidebarPlacement(children),
         });
-      else if (child.props.__TYPE__ == "Layout")
+      else if (child.props.__TYPE__ == "PageLayout")
         return React.cloneElement(child, { isChild: true });
     }
 
@@ -89,11 +89,11 @@ const Layout = React.forwardRef((props, ref) => {
   );
 });
 
-Layout.defaultProps = {
-  __TYPE__: "Layout",
+PageLayout.defaultProps = {
+  __TYPE__: "PageLayout",
 };
 
-Layout.propTypes = {
+PageLayout.propTypes = {
   /**
    * Do not override this property.
    * Should only be used as indicator for type if you are passing custom component.
@@ -101,4 +101,4 @@ Layout.propTypes = {
   __TYPE__: PropTypes.string,
 };
 
-export default Layout;
+export default PageLayout;
