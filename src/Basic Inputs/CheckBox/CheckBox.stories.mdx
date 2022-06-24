@@ -1,7 +1,23 @@
-import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from '@storybook/addon-docs';
 import CheckBox from "./index";
+import Icon from "../../General/Icon";
+
 
 <Meta title="Basic Inputs/CheckBox" component={CheckBox} />
+
+export const TemplateDefault = (args) => (
+    <CheckBox {...args} />
+);
+
+export const TemplateIcon = (args) => (
+  <div style ={{display: 'flex', gap: '12px'}}>
+    <CheckBox icon="heart" iconUncheckedStyle="regular" />
+    <CheckBox checked icon="heart" iconUncheckedStyle="regular" />
+    <CheckBox icon="shopping-cart" iconUncheckedStyle="solid" />
+    <CheckBox checked icon="shopping-cart" iconUncheckedStyle="solid" />
+  </div>
+);
 
 export const TemplateSizes = (args) => (
   <div style ={{display: 'flex', gap: '12px'}}>
@@ -24,9 +40,61 @@ export const TemplateColors = (args) => (
 
 # CheckBox
 
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    args={{
+      checked: true,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Disabled state
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      checked: true,
+      disabled: true,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Indeterminate state
+
+<Canvas>
+  <Story
+    name="Indeterminate"
+    args={{
+      indeterminate: true,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Icon checkmark
+
+When `check={false}` icon style can be set to be `solid` or `regular` using `iconUncheckedStyle` property.
+
+<Canvas withSource="open">
+  <Story name="Icon">
+    {TemplateIcon.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
 Defining `size` with `small`, `medium` and `large` values.
 
-<Canvas >
+<Canvas>
   <Story
     name="Sizes"
     args={{

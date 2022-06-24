@@ -176,7 +176,7 @@ const RangeSlider = React.forwardRef((props, ref) => {
         type="range"
         min={min}
         max={max}
-        value={inputValue}
+        value={inputValue | ''}
         disabled={disabled}
         onMouseEnter={() => {
           setShowPopover(true);
@@ -228,6 +228,7 @@ RangeSlider.propTypes = {
     "danger",
     "warning",
     "disabled",
+    "info"
   ]),
 };
 

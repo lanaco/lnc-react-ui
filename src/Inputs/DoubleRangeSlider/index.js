@@ -106,7 +106,7 @@ const Popover = styled.div`
   transform: translateX(-50%);
   & > .text-content {
     color: white;
-    background-color: ${(props) => props.theme.test_palette[props.color][400]};
+    background-color: ${(props) => props.disabled ? props.theme.test_palette["disabled"][500] : props.theme.test_palette[props.color][400]};
     border-radius: 3px;
     z-index: 2;
     padding: 2px 6px;
@@ -118,7 +118,7 @@ const Popover = styled.div`
       & > .inner {
         width: 8px;
         height: 8px;
-        background: ${(props) => props.theme.test_palette[props.color][400]};
+        background: ${(props) => props.disabled ? props.theme.test_palette["disabled"][500] : props.theme.test_palette[props.color][400]};
         transform: rotate(45deg);
         position: absolute;
         top: -6px;
@@ -181,7 +181,7 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
     <StyledDoubleRangeSlider disabled={disabled} {...themeProps} {...rest}>
       {showPopover && minVal && (
         <>
-          <Popover {...themeProps} inputValue={getPercent(minVal)}>
+          <Popover {...themeProps} inputValue={getPercent(minVal)} disabled={disabled}>
             <div className="text-content">{minVal}</div>
             <div className="arrow">
               <div className="outer">
@@ -193,7 +193,7 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
       )}
       {showPopover && maxVal && (
         <>
-          <Popover {...themeProps} inputValue={getPercent(maxVal)}>
+          <Popover {...themeProps} inputValue={getPercent(maxVal)} disabled={disabled}>
             <div className="text-content">{maxVal}</div>
             <div className="arrow">
               <div className="outer">
@@ -208,7 +208,7 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
         type="range"
         min={min}
         max={max}
-        value={minVal}
+        value={minVal | ''}
         onChange={(event) => {
           const value = Math.min(Number(event.target.value), maxVal - 1);
           setMinVal(value);
@@ -226,7 +226,7 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
         type="range"
         min={min}
         max={max}
-        value={maxVal}
+        value={maxVal | ''}
         onChange={(event) => {
           const value = Math.max(Number(event.target.value), minVal + 1);
           setMaxVal(value);
@@ -249,8 +249,8 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
 });
 
 DoubleRangeSlider.defaultProps = {
-  minValue: 10,
-  maxValue: 20,
+  minValue: null,
+  maxValue: null,
   min: 0,
   max: 100,
   disabled: false,
@@ -282,6 +282,7 @@ DoubleRangeSlider.propTypes = {
     "danger",
     "warning",
     "disabled",
+    "info"
   ]),
 };
 

@@ -1,0 +1,115 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import DoubleRangeSlider from "./index";
+
+<Meta title="Inputs/Double Range Slider" component={DoubleRangeSlider} />
+
+export const TemplateDefault = (args) => <DoubleRangeSlider {...args} />;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <DoubleRangeSlider {...args} size="small" />
+    <DoubleRangeSlider {...args} size="medium" />
+    <DoubleRangeSlider {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <DoubleRangeSlider {...args} color="primary" />
+    <DoubleRangeSlider {...args} color="secondary" />
+    <DoubleRangeSlider {...args} color="success" />
+    <DoubleRangeSlider {...args} color="warning" />
+    <DoubleRangeSlider {...args} color="danger" />
+    <DoubleRangeSlider {...args} color="info" />
+  </div>
+);
+
+# Double Range Slider
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Slider Range
+
+Default value for slider range is `1-100`, with props `min` and `max` it can be alternated.
+
+### Wide range
+
+<Canvas withSource="open">
+  <Story
+    name="Wide Range"
+    args={{
+      minValue: -300,
+      maxValue: 200,
+      min: -500,
+      max: 500,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+### Narrow Range
+
+<Canvas withSource="open">
+  <Story
+    name="Narrow Range"
+    args={{
+      minValue: 2,
+      maxValue: 5,
+      min: 1,
+      max: 10,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      minValue: 20,
+      maxValue: 40,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      minValue: 20,
+      maxValue: 80,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      minValue: 20,
+      maxValue: 80,
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import Icon from "../Icon";
-import Progress from "../Progress";
+import ProgressBar from "../../Feedback/ProgressBar";
 
 
 const standardCssFields = ({ theme, color, size }) => {
@@ -66,11 +66,23 @@ const UploadedFile = React.forwardRef((props, ref) => {
 
     const getFileName = () => {
         if (fileName && fileSize && showFileSize)
-          return `${fileName} (${(fileSize / (1024 * 1024)).toFixed(2)} MB)`;
-    
+            return `${fileName} (${formatBytes(fileSize, 2)})`
+
         if (fileName) return fileName;
         return "";
-      };
+    };
+
+    function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
 
     return (
         <Container>
@@ -86,7 +98,7 @@ const UploadedFile = React.forwardRef((props, ref) => {
                     >{getFileName()}</div>
                     {progressPercentage && <div>{progressPercentage}%</div>}
                 </ProgressText>
-                {(progressPercentage || progressPercentage == 0) && <Progress progressPercentage={progressPercentage} {...themeProps} />}
+                {(progressPercentage || progressPercentage == 0) && <ProgressBar progressPercentage={progressPercentage} {...themeProps} />}
             </ProgressContent>
             <CancelWrapper onCancel={onCancel} onClick={onCancel ? onCancel : null}>
                 <Icon {...themeProps} color={"disabled"} icon={cancelIcon} {...rest} />
@@ -99,7 +111,7 @@ UploadedFile.defaultProps = {
     id: "",
     fileName: "file-name.png",
     fileSize: null,
-    showFileSize : false,
+    showFileSize: false,
     // progressPercentage: 20,
     //------------------
     className: "",

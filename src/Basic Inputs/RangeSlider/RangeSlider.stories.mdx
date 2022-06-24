@@ -1,0 +1,110 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import RangeSlider from "./index";
+
+<Meta title="Basic Inputs/Range Slider" component={RangeSlider} />
+
+export const TemplateDefault = (args) => <RangeSlider {...args} />;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <RangeSlider {...args} size="small" />
+    <RangeSlider {...args} size="medium" />
+    <RangeSlider {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <RangeSlider {...args} color="primary" />
+    <RangeSlider {...args} color="secondary" />
+    <RangeSlider {...args} color="success" />
+    <RangeSlider {...args} color="warning" />
+    <RangeSlider {...args} color="danger" />
+    <RangeSlider {...args} color="info" />
+  </div>
+);
+
+# Double Range Slider
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Slider Range
+
+Default value for slider range is `1-100`, with props `min` and `max` it can be alternated.
+
+### Wide range
+
+<Canvas withSource="open">
+  <Story
+    name="Wide Range"
+    args={{
+      value: -300,
+      min: -500,
+      max: 500,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+### Narrow Range
+
+<Canvas withSource="open">
+  <Story
+    name="Narrow Range"
+    args={{
+      value: 2,
+      min: 1,
+      max: 10,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      value: 50,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      value: 50,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      value: 50,
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

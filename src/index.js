@@ -52,9 +52,6 @@ export { default as UploadedFile } from "./General/UploadedFile";
 export * from "./General/Icon";
 export { default as Icon } from "./General/Icon";
 
-export * from "./General/Progress";
-export { default as Progress } from "./General/Progress";
-
 //=============================================================================================
 
 
