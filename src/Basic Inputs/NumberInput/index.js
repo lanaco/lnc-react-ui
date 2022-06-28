@@ -73,6 +73,7 @@ const NumberInput = React.forwardRef((props, ref) => {
     min,
     max,
     placeholder,
+    tabIndex,
     //----------------
     onChange,
     onKeyDown,
@@ -134,6 +135,7 @@ const NumberInput = React.forwardRef((props, ref) => {
       onFocus={onFocus}
       onBlur={onBlur}
       onChange={onValueChange}
+      tabIndex={tabIndex}
       {...rest}
     />
   );
@@ -150,6 +152,7 @@ NumberInput.defaultProps = {
   min: Number.MIN_SAFE_INTEGER,
   max: Number.MAX_SAFE_INTEGER,
   placeholder: "",
+  tabIndex: 0,
   //----------------
   onChange: () => {},
   onKeyDown: () => {},
@@ -173,6 +176,7 @@ NumberInput.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   placeholder: PropTypes.string,
+  tabIndex: PropTypes.number,
   //----------------
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,

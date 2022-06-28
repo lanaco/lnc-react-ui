@@ -69,6 +69,7 @@ const TextInput = React.forwardRef((props, ref) => {
     debounceTime,
     type,
     placeholder,
+    tabIndex,
     //----------------
     onChange,
     onBlur,
@@ -116,6 +117,7 @@ const TextInput = React.forwardRef((props, ref) => {
       onFocus={onFocus}
       onBlur={onBlur}
       onChange={onValueChange}
+      tabIndex={tabIndex}
       {...rest}
     />
   );
@@ -129,6 +131,7 @@ TextInput.defaultProps = {
   debounceTime: 180,
   placeholder: "",
   type: "text",
+  tabIndex: 0,
   //----------------
   onChange: () => {},
   onBlur: () => {},
@@ -148,6 +151,7 @@ TextInput.propTypes = {
   debounceTime: PropTypes.number,
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(["text", "email"]),
+  tabIndex: PropTypes.number,
   //----------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,

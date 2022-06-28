@@ -1,0 +1,125 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Button from "./index";
+
+<Meta title="General/Button" component={Button} />
+
+export const TemplateDefault = (args) => <Button {...args} />;
+
+export const TemplateIcons = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <Button {...args} iconLocation="left" />
+    <Button {...args} iconLocation="right" />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <Button {...args} size="small" />
+    <Button {...args} size="medium" />
+    <Button {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <Button {...args} color="primary" />
+    <Button {...args} color="secondary" />
+    <Button {...args} color="success" />
+    <Button {...args} color="warning" />
+    <Button {...args} color="danger" />
+    <Button {...args} color="info" />
+  </div>
+);
+
+# Button
+
+```jsx
+import Button from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    args={{
+      text: "Button",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Outline
+
+<Canvas withSource="open">
+  <Story
+    name="Outline"
+    args={{
+      text: "Button",
+      outline: true,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled state
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      text: "Button",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## With Icon
+Icon is set with `icon` prop, `iconLocation` can have `left` or `right` value.
+
+<Canvas withSource="open">
+  <Story
+    name="With Icon"
+    args={{
+      text: "Button",
+      icon: "pause",
+    }}
+  >
+    {TemplateIcons.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      text: "Button",
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      text: "Button",
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

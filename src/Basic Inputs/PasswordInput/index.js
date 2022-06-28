@@ -108,6 +108,7 @@ const PasswordInput = React.forwardRef((props, ref) => {
     readOnly,
     value,
     debounceTime,
+    tabIndex,
     //----------------
     onChange,
     onBlur,
@@ -182,6 +183,7 @@ const PasswordInput = React.forwardRef((props, ref) => {
           setFocused(false);
           if (onBlur) onBlur(e);
         }}
+        tabIndex={tabIndex}
         {...rest}
       />
 
@@ -202,6 +204,7 @@ PasswordInput.defaultProps = {
   readOnly: false,
   debounceTime: 180,
   placeholder: "",
+  tabIndex: 0,
   //----------------
   onChange: () => {},
   onBlur: () => {},
@@ -219,6 +222,7 @@ PasswordInput.propTypes = {
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,
+  tabIndex: PropTypes.number,
   //----------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,

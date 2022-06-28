@@ -1,0 +1,123 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import CheckBoxInput from "./index";
+import Icon from "../../General/Icon";
+
+<Meta title="Basic Inputs/Check Box Input" component={CheckBoxInput} />
+
+export const TemplateDefault = (args) => <CheckBoxInput {...args} />
+
+export const TemplateIcon = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <CheckBoxInput icon="heart" iconUncheckedStyle="regular" />
+    <CheckBoxInput checked icon="heart" iconUncheckedStyle="regular" />
+    <CheckBoxInput icon="shopping-cart" iconUncheckedStyle="solid" />
+    <CheckBoxInput checked icon="shopping-cart" iconUncheckedStyle="solid" />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <CheckBoxInput {...args} size="small" />
+    <CheckBoxInput {...args} size="medium" />
+    <CheckBoxInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <CheckBoxInput {...args} color="primary" />
+    <CheckBoxInput {...args} color="secondary" />
+    <CheckBoxInput {...args} color="success" />
+    <CheckBoxInput {...args} color="warning" />
+    <CheckBoxInput {...args} color="danger" />
+    <CheckBoxInput {...args} color="info" />
+  </div>
+);
+
+# Check Box Input
+
+```jsx
+import CheckBoxInput from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    args={{
+      checked: true,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Disabled state
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      checked: true,
+      disabled: true,
+      label: "disabled",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Indeterminate state
+
+<Canvas>
+  <Story
+    name="Indeterminate"
+    args={{
+      label: "indeterminate",
+      indeterminate: true,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Icon checkmark
+
+When `checked={false}` icon style can be set to be `solid` or `regular` using `iconUncheckedStyle` property.
+
+<Canvas withSource="open">
+  <Story name="Icon">{TemplateIcon.bind({})}</Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      checked: true,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      size: "small",
+      checked: true,
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

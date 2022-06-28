@@ -158,7 +158,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Container {...{ theme, size, color, disabled, readOnly }}>
+    <Container {...{ theme, size, color, disabled, readOnly }} className={className} style={style}>
       <NumberFormat
         disabled={disabled}
         readOnly={readOnly}

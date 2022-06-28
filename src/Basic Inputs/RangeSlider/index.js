@@ -76,7 +76,8 @@ const Popover = styled.div`
   position: absolute;
   left: ${(props) =>
     `calc(${props.inputValue + "%"} + (${8 - props.inputValue * 0.15}px))`};
-  top: ${(props) => "-" + props.theme.typography[props.size].thumb};
+  top: ${(props) =>
+    "calc(-" + props.theme.typography[props.size].thumb + " - 0.25rem)"};
   transform: translateX(-50%);
   & > .text-content {
     color: white;
@@ -104,9 +105,20 @@ const Popover = styled.div`
   }
 `;
 
-const RangeSlider = React.forwardRef((props, ref) => {
-  const { value, min, max, disabled, onChange, onInput, color, size, ...rest } =
-    props;
+const RangeSliderInput = React.forwardRef((props, ref) => {
+  const {
+    value,
+    min,
+    max,
+    disabled,
+    tabIndex,
+    onChange,
+    onInput,
+    color,
+    size,
+    ...rest
+  } = props;
+
   const theme = useTheme();
   const themeProps = { theme, size, color };
 
@@ -176,8 +188,9 @@ const RangeSlider = React.forwardRef((props, ref) => {
         type="range"
         min={min}
         max={max}
-        value={inputValue}
+        value={inputValue | ""}
         disabled={disabled}
+        tabIndex={tabIndex}
         onMouseEnter={() => {
           setShowPopover(true);
         }}
@@ -194,11 +207,12 @@ const RangeSlider = React.forwardRef((props, ref) => {
   );
 });
 
-RangeSlider.defaultProps = {
+RangeSliderInput.defaultProps = {
   value: null,
   min: 0,
   max: 100,
   disabled: false,
+  tabIndex: 0,
   //------------------
   onChange: (value) => {},
   onInput: (e) => {},
@@ -209,11 +223,12 @@ RangeSlider.defaultProps = {
   color: "primary",
 };
 
-RangeSlider.propTypes = {
+RangeSliderInput.propTypes = {
   value: PropTypes.number,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   disabled: PropTypes.bool,
+  tabIndex: PropTypes.number,
   //-------------------------
   onChange: PropTypes.func,
   onInput: PropTypes.func,
@@ -228,8 +243,8 @@ RangeSlider.propTypes = {
     "danger",
     "warning",
     "disabled",
+    "info",
   ]),
 };
 
-export default RangeSlider;
-
+export default RangeSliderInput;

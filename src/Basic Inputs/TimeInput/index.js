@@ -63,6 +63,7 @@ const TimeInput = React.forwardRef((props, ref) => {
     value,
     debounceTime,
     type,
+    tabIndex,
     //----------------
     onChange,
     //----------------
@@ -108,6 +109,7 @@ const TimeInput = React.forwardRef((props, ref) => {
       size={size}
       className={className}
       style={style}
+      tabIndex={tabIndex}
       {...rest}
     />
   );
@@ -119,6 +121,7 @@ TimeInput.defaultProps = {
   disabled: false,
   readOnly: false,
   debounceTime: 180,
+  tabIndex: 0,
   //----------------
   onChange: () => {},
   //----------------
@@ -134,6 +137,7 @@ TimeInput.propTypes = {
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,
+  tabIndex: PropTypes.number,
   //----------------
   onChange: PropTypes.func,
   //----------------

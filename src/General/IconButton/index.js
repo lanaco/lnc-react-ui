@@ -5,26 +5,8 @@ import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
 import { isEmpty } from "lodash";
 
-const padding = {
-  default: {
-    small: "0.5rem",
-    medium: "0.59375rem",
-    large: "0.671875rem",
-  },
-  outline: {
-    small: "0.40625rem",
-    medium: "0.5rem",
-    large: "0.578125rem",
-  },
-  outlineHover: {
-    small: "0.34375rem",
-    medium: "0.4375rem",
-    large: "0.515625rem",
-  },
-};
-
 const standardCssFields = ({ theme, size }) => {
-  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+  var height = { small: "2.625rem", medium: "3.75rem", large: "4.5rem" }[
     size
   ];
 
@@ -49,9 +31,6 @@ const standardCssFields = ({ theme, size }) => {
 
 const StyledBtn = styled.button`
   ${(props) => standardCssFields(props)}
-
-  padding: ${(props) =>
-    props.outline ? padding.outline[props.size] : padding.default[props.size]};
 
   background-color: ${(props) =>
     props.outline
@@ -84,12 +63,6 @@ const StyledBtn = styled.button`
         return `0.15625rem solid ${props.theme.test_palette[props.color][400]}`;
       return "none";
     }};
-
-    padding: ${(props) => {
-      if (props.outline) return padding.outlineHover[props.size];
-
-      return padding.default[props.size];
-    }}
   }
 
   &:focus:enabled {
@@ -199,7 +172,6 @@ const IconButton = React.forwardRef((props, ref) => {
 IconButton.defaultProps = {
   id: "",
   disabled: false,
-  readOnly: false,
   outline: false,
   tooltip: "",
   icon: "",
@@ -217,7 +189,6 @@ IconButton.defaultProps = {
 IconButton.propTypes = {
   id: PropTypes.any,
   disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
   outline: PropTypes.bool,
   tooltip: PropTypes.string,
   icon: PropTypes.string.isRequired,

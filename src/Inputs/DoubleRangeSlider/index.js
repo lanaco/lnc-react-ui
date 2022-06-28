@@ -49,10 +49,16 @@ const StyledDoubleRangeSlider = styled.div`
   & > .thumb::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: ${props =>  props.theme.typography[props.size].thumb}; /* Set a specific slider handle width */
-    height: ${props =>  props.theme.typography[props.size].thumb}; /* Slider handle height */
+    width: ${(props) =>
+      props.theme.typography[props.size]
+        .thumb}; /* Set a specific slider handle width */
+    height: ${(props) =>
+      props.theme.typography[props.size].thumb}; /* Slider handle height */
     border-radius: 50%;
-    background: ${(props) => props.disabled ? props.theme.test_palette["disabled"][500] : props.theme.test_palette[props.color][400]};
+    background: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette["disabled"][500]
+        : props.theme.test_palette[props.color][400]};
     cursor: pointer; /* Cursor on hover */
     border: none;
     pointer-events: all;
@@ -60,10 +66,16 @@ const StyledDoubleRangeSlider = styled.div`
 
   /* For Firefox browsers */
   & > .thumb::-moz-range-thumb {
-    width: ${props =>  props.theme.typography[props.size].thumb}; /* Set a specific slider handle width */
-    height: ${props =>  props.theme.typography[props.size].thumb}; /* Slider handle height */
+    width: ${(props) =>
+      props.theme.typography[props.size]
+        .thumb}; /* Set a specific slider handle width */
+    height: ${(props) =>
+      props.theme.typography[props.size].thumb}; /* Slider handle height */
     border-radius: 50%;
-    background: ${(props) => props.disabled ? props.theme.test_palette["disabled"][500] : props.theme.test_palette[props.color][400]};
+    background: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette["disabled"][500]
+        : props.theme.test_palette[props.color][400]};
     cursor: pointer; /* Cursor on hover */
     border: none;
     pointer-events: all;
@@ -80,7 +92,7 @@ const Slider = styled.div`
   }
 
   & > :is(.slider__track, .slider__range) {
-    height: 0.25rem; 
+    height: 0.25rem;
   }
 
   & > .slider__track {
@@ -90,7 +102,10 @@ const Slider = styled.div`
   }
 
   & > .slider__range {
-    background-color: ${(props) => props.disabled ? props.theme.test_palette["disabled"][500] : props.theme.test_palette[props.color][400]};
+    background-color: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette["disabled"][500]
+        : props.theme.test_palette[props.color][400]};
     z-index: 2;
   }
 `;
@@ -102,11 +117,15 @@ const Popover = styled.div`
   position: absolute;
   left: ${(props) =>
     `calc(${props.inputValue + "%"} + (${8 - props.inputValue * 0.15}px))`};
-  top: ${props =>  "-" + props.theme.typography[props.size].thumb};
+  top: ${(props) =>
+    "calc(-" + props.theme.typography[props.size].thumb + " - 0.25rem)"};
   transform: translateX(-50%);
   & > .text-content {
     color: white;
-    background-color: ${(props) => props.theme.test_palette[props.color][400]};
+    background-color: ${(props) =>
+      props.disabled
+        ? props.theme.test_palette["disabled"][500]
+        : props.theme.test_palette[props.color][400]};
     border-radius: 3px;
     z-index: 2;
     padding: 2px 6px;
@@ -118,7 +137,10 @@ const Popover = styled.div`
       & > .inner {
         width: 8px;
         height: 8px;
-        background: ${(props) => props.theme.test_palette[props.color][400]};
+        background: ${(props) =>
+          props.disabled
+            ? props.theme.test_palette["disabled"][500]
+            : props.theme.test_palette[props.color][400]};
         transform: rotate(45deg);
         position: absolute;
         top: -6px;
@@ -131,7 +153,17 @@ const Popover = styled.div`
 `;
 
 const DoubleRangeSlider = React.forwardRef((props, ref) => {
-  const { minValue, maxValue, min, max, disabled, onChange, color, size, ...rest } = props;
+  const {
+    minValue,
+    maxValue,
+    min,
+    max,
+    disabled,
+    onChange,
+    color,
+    size,
+    ...rest
+  } = props;
   const theme = useTheme();
   const themeProps = { theme, size, color };
 
@@ -140,9 +172,9 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
   const [minVal, setMinVal] = useState(minValue);
   const [maxVal, setMaxVal] = useState(maxValue);
   useEffect(() => {
-      setMinVal(minValue);
-      setMaxVal(maxValue);
-  }, [minValue, maxValue])
+    setMinVal(minValue);
+    setMaxVal(maxValue);
+  }, [minValue, maxValue]);
   const range = useRef(null);
 
   // Convert to percentage
@@ -181,7 +213,11 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
     <StyledDoubleRangeSlider disabled={disabled} {...themeProps} {...rest}>
       {showPopover && minVal && (
         <>
-          <Popover {...themeProps} inputValue={getPercent(minVal)}>
+          <Popover
+            {...themeProps}
+            inputValue={getPercent(minVal)}
+            disabled={disabled}
+          >
             <div className="text-content">{minVal}</div>
             <div className="arrow">
               <div className="outer">
@@ -193,7 +229,11 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
       )}
       {showPopover && maxVal && (
         <>
-          <Popover {...themeProps} inputValue={getPercent(maxVal)}>
+          <Popover
+            {...themeProps}
+            inputValue={getPercent(maxVal)}
+            disabled={disabled}
+          >
             <div className="text-content">{maxVal}</div>
             <div className="arrow">
               <div className="outer">
@@ -208,7 +248,7 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
         type="range"
         min={min}
         max={max}
-        value={minVal}
+        value={minVal | ""}
         onChange={(event) => {
           const value = Math.min(Number(event.target.value), maxVal - 1);
           setMinVal(value);
@@ -226,7 +266,7 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
         type="range"
         min={min}
         max={max}
-        value={maxVal}
+        value={maxVal | ""}
         onChange={(event) => {
           const value = Math.max(Number(event.target.value), minVal + 1);
           setMaxVal(value);
@@ -249,8 +289,8 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
 });
 
 DoubleRangeSlider.defaultProps = {
-  minValue: 10,
-  maxValue: 20,
+  minValue: null,
+  maxValue: null,
   min: 0,
   max: 100,
   disabled: false,
@@ -282,6 +322,7 @@ DoubleRangeSlider.propTypes = {
     "danger",
     "warning",
     "disabled",
+    "info",
   ]),
 };
 

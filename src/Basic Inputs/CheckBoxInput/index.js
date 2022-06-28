@@ -30,7 +30,6 @@ const CheckBoxContainer = styled.div`
   align-items: center;
   & > label {
     box-sizing: border-box;
-
     color: ${(props) =>
       props.disabled ? props.theme.test_palette["disabled"][400] : "unset"};
     cursor: pointer;
@@ -47,6 +46,10 @@ const CheckBoxContainer = styled.div`
 const StyledCheckBox = styled.div`
   box-sizing: border-box;
   display: flex;
+  display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox; 
+    display: -webkit-flex;
   align-items: center;
   justify-content: center;
   height: ${(props) => props.theme.typography[props.size].inputSize};
@@ -57,11 +60,12 @@ const StyledCheckBox = styled.div`
   border: ${(props) =>
     props.icon
       ? "none"
-      : " 0.125rem solid " +
+      : " 0.188rem solid " +
         (props.disabled
           ? props.theme.test_palette["disabled"][400]
           : props.theme.test_palette[props.color][400])};
   & > .checkmark {
+    box-sizing: border-box;
     border-radius: 0.1875rem;
     height: ${(props) =>
       props.indeterminate ? "2px" : (props.checked ? "100%" : "0")};
@@ -78,7 +82,7 @@ const StyledCheckBox = styled.div`
   }
 `;
 
-const CheckBox = React.forwardRef((props, ref) => {
+const CheckBoxInput = React.forwardRef((props, ref) => {
   const {
     id,
     checked,
@@ -88,6 +92,7 @@ const CheckBox = React.forwardRef((props, ref) => {
     label,
     labelPosition,
     icon,
+    iconUncheckedStyle,
     tabIndex,
     preventDefault,
     //----------------
@@ -174,7 +179,8 @@ const CheckBox = React.forwardRef((props, ref) => {
       {icon ? (
         <Icon
           icon={icon}
-          color={checkBoxChecked && !disabled ? color : "disabled"}
+          color={(checkBoxChecked && !disabled) ? color : "disabled"}
+          iconStyle={iconUncheckedStyle == "regular" ? ((checkBoxChecked && !disabled) ? "solid" : "regular") : "solid"}
           size={size}
           className="lnc-checkbox-icon"
           onClick={handleClick}
@@ -206,7 +212,7 @@ const CheckBox = React.forwardRef((props, ref) => {
   );
 });
 
-CheckBox.defaultProps = {
+CheckBoxInput.defaultProps = {
   id: "",
   checked: false,
   disabled: false,
@@ -215,6 +221,7 @@ CheckBox.defaultProps = {
   indeterminate: false,
   labelPosition: "right",
   icon: null,
+  iconUncheckedStyle: "solid",
   tabIndex: 0,
   preventDefault: true,
   //-------------------------
@@ -230,7 +237,7 @@ CheckBox.defaultProps = {
   inputProps: { },
 };
 
-CheckBox.propTypes = {
+CheckBoxInput.propTypes = {
   id: PropTypes.any.isRequired,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -239,6 +246,7 @@ CheckBox.propTypes = {
   indeterminate: PropTypes.bool,
   labelPosition: PropTypes.oneOf(["up", "down", "right", "left"]),
   icon: PropTypes.string,
+  iconUncheckedStyle: PropTypes.oneOf(["regular", "solid"]),
   tabIndex: PropTypes.number,
   preventDefault: PropTypes.bool,
   //---------------------------------------------------------------
@@ -261,4 +269,4 @@ CheckBox.propTypes = {
   inputProps: PropTypes.object,
 };
 
-export default CheckBox;
+export default CheckBoxInput;
