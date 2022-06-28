@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "../src/ThemeProvider";
+import { themes } from '../src/_utils/theme';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -13,8 +14,12 @@ export const parameters = {
     source: {
       type: "code"
     }
-  }
-}
+  },
+  themes: {
+    default: 'twitter',
+    list: themes,
+  },
+};
 
 export const decorators = [
   (Story) => (

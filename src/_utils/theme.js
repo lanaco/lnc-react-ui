@@ -2,6 +2,7 @@ import "./nunito-font.css";
 
 const theme = {
   name: "Main",
+  class: "lnc-main",
   backgroundColor: "#fff",
   test_palette: {
     primary: {
@@ -200,6 +201,8 @@ const theme = {
       subTextSize: "0.625rem",
       thumb: "1rem",
       inputSize: "1.85rem",
+      buttonSize: "2rem",
+      iconButtonSize: "2.625rem",
     },
     medium: {
       fontSize: "1rem",
@@ -208,6 +211,8 @@ const theme = {
       subTextSize: "0.725rem",
       thumb: "1.2rem",
       inputSize: "2.25rem",
+      buttonSize: "2rem",
+      iconButtonSize: "3.75rem",
     },
     large: {
       fontSize: "1.125rem",
@@ -216,6 +221,8 @@ const theme = {
       subTextSize: "0.825rem",
       thumb: "1.4rem",
       inputSize: "2.625rem",
+      buttonSize: "2.25rem",
+      iconButtonSize: "4.5rem",
     },
     h1: {
       fontWeight: 300,
@@ -247,8 +254,7 @@ const theme = {
       fontSize: "0.75rem",
     },
     button: {
-      fontWeight: 500,
-      fontSize: "0.75rem",
+      fontWeight: 600,
     },
     subtitle1: {
       fontWeight: 400,
@@ -289,6 +295,7 @@ const themes = [
   {
     ...theme,
     name: "Dark",
+    class: "lnc-dark",
     backgroundColor: "#000",
   },
 ];
