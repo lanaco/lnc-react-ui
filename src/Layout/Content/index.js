@@ -1,22 +1,22 @@
-import React from 'react'
+import React from "react";
 import PropTypes from "prop-types";
 
 const Content = (props) => {
   const { children, __TYPE__, ...rest } = props;
 
-  return (
-    <main {...rest}>
-      {children}
-    </main>
-  )
-}
+  return <main {...rest}>{children}</main>;
+};
 
 Content.defaultProps = {
-  __TYPE__: "Content"
+  __TYPE__: "Content",
 };
 
 Content.propTypes = {
-  __TYPE__: PropTypes.string
+  /**
+   * Do not override this property. 
+   * Should only be used as indicator for type if you are passing custom component.
+   */
+  __TYPE__: PropTypes.string,
 };
 
-export default Content
+export default Content;
