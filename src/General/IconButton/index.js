@@ -6,17 +6,14 @@ import "../../Base/fontawesome/css/fontawesome.css";
 import { isEmpty } from "lodash";
 
 const standardCssFields = ({ theme, size }) => {
-  var height = { small: "2.625rem", medium: "3.75rem", large: "4.5rem" }[
-    size
-  ];
 
   return `
     font-family: ${theme.typography.fontFamily};
     font-size: ${theme.typography[size].fontSize};
-    min-height: ${height};
-    max-height: ${height};
-    min-width: ${height};
-    max-width: ${height};
+    min-height: ${theme.typography[size].iconButtonSize};
+    max-height: ${theme.typography[size].iconButtonSize};
+    min-width: ${theme.typography[size].iconButtonSize};
+    max-width: ${theme.typography[size].iconButtonSize};
     width: fit-content;
     box-sizing: border-box;
     appearance: none;
@@ -204,8 +201,10 @@ IconButton.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
+    "disabled",
+    "white",
     "info",
   ]),
 };

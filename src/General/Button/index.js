@@ -7,15 +7,11 @@ import { isEmpty } from "lodash";
 
 
 const standardCssFields = ({ theme, size }) => {
-  var height = { small: "2rem", medium: "2.25rem", large: "2.5rem" }[
-    size
-  ];
-
   return `
     font-family: ${theme.typography.fontFamily};
     font-size: ${theme.typography[size].fontSize};
-    min-height: ${height};
-    max-height: ${height};
+    min-height: ${theme.typography[size].buttonSize};
+    max-height: ${theme.typography[size].buttonSize};
     width: 100%;
     box-sizing: border-box;
     appearance: none;
@@ -25,7 +21,7 @@ const standardCssFields = ({ theme, size }) => {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: ${theme.typography.button.fontWeight};
   `;
 };
 
@@ -206,8 +202,10 @@ Button.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
+    "disabled",
+    "white",
     "info",
   ]),
 };
