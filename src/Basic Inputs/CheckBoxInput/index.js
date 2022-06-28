@@ -82,7 +82,7 @@ const StyledCheckBox = styled.div`
   }
 `;
 
-const CheckBox = React.forwardRef((props, ref) => {
+const CheckBoxInput = React.forwardRef((props, ref) => {
   const {
     id,
     checked,
@@ -212,7 +212,7 @@ const CheckBox = React.forwardRef((props, ref) => {
   );
 });
 
-CheckBox.defaultProps = {
+CheckBoxInput.defaultProps = {
   id: "",
   checked: false,
   disabled: false,
@@ -237,7 +237,7 @@ CheckBox.defaultProps = {
   inputProps: { },
 };
 
-CheckBox.propTypes = {
+CheckBoxInput.propTypes = {
   id: PropTypes.any.isRequired,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -269,4 +269,4 @@ CheckBox.propTypes = {
   inputProps: PropTypes.object,
 };
 
-export default CheckBox;
+export default CheckBoxInput;

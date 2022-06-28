@@ -1,0 +1,89 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import ColorInput from "./index";
+
+<Meta title="Basic Inputs/Color Input" component={ColorInput} />
+
+export const TemplateDefault = (args) => <ColorInput {...args} />;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <ColorInput {...args} size="small" />
+    <ColorInput {...args} size="medium" />
+    <ColorInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <ColorInput {...args} color="primary" />
+    <ColorInput {...args} color="secondary" />
+    <ColorInput {...args} color="success" />
+    <ColorInput {...args} color="warning" />
+    <ColorInput {...args} color="danger" />
+    <ColorInput {...args} color="info" />
+  </div>
+);
+
+# Color Input
+```jsx
+import ColorInput from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas>
+  <Story
+    name="Read Only"
+    args={{
+      readOnly: true,
+      value: "#00537a",
+      style: { width: "300px" },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas withSource="open">
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      value: "#00537a",
+      style: { width: "300px" },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

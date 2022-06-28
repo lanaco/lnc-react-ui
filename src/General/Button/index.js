@@ -5,26 +5,9 @@ import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
 import { isEmpty } from "lodash";
 
-const padding = {
-  default: {
-    small: "0.5rem 0.875rem",
-    medium: "0.59375rem 0.96875rem",
-    large: "0.671875rem 1.15625rem",
-  },
-  outline: {
-    small: "0.40625rem 0.78125rem",
-    medium: "0.5rem 0.875rem",
-    large: "0.578125rem 1.0625rem",
-  },
-  outlineHover: {
-    small: "0.34375rem 0.71875rem",
-    medium: "0.4375rem 0.8125rem",
-    large: "0.515625rem 1rem",
-  },
-};
 
 const standardCssFields = ({ theme, size }) => {
-  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+  var height = { small: "2rem", medium: "2.25rem", large: "2.5rem" }[
     size
   ];
 
@@ -42,15 +25,12 @@ const standardCssFields = ({ theme, size }) => {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    font-weight: 600;
   `;
 };
 
 const StyledBtn = styled.button`
   ${(props) => standardCssFields(props)}
-
-  padding: ${(props) =>
-    props.outline ? padding.outline[props.size] : padding.default[props.size]};
-
   background-color: ${(props) =>
     props.outline
       ? props.theme.test_palette.light[100]
@@ -83,11 +63,6 @@ const StyledBtn = styled.button`
       return "none";
     }};
 
-    padding: ${(props) => {
-      if (props.outline) return padding.outlineHover[props.size];
-
-      return padding.default[props.size];
-    }}
   }
 
   &:focus:enabled {
@@ -197,7 +172,6 @@ const Button = React.forwardRef((props, ref) => {
 Button.defaultProps = {
   id: "",
   disabled: false,
-  readOnly: false,
   outline: false,
   text: "",
   tooltip: "",
@@ -216,7 +190,6 @@ Button.defaultProps = {
 Button.propTypes = {
   id: PropTypes.any,
   disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
   outline: PropTypes.bool,
   tooltip: PropTypes.string,
   text: PropTypes.string.isRequired,

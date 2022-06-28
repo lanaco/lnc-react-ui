@@ -1,6 +1,5 @@
-import React from 'react'
-import theme, { themes } from "../src/_utils/theme";
-import { ThemeProvider } from "@emotion/react";
+import React from "react";
+import { ThemeProvider } from "../src/ThemeProvider";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -10,12 +9,12 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={themes[1]}>
+    <ThemeProvider>
       <Story />
     </ThemeProvider>
   ),
-]
+];

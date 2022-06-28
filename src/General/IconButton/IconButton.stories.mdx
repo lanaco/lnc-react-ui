@@ -1,0 +1,103 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import IconButton from "./index";
+
+<Meta title="General/Icon Button" component={IconButton} />
+
+export const TemplateDefault = (args) => <IconButton {...args} />
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <IconButton {...args} size="small" />
+    <IconButton {...args} size="medium" />
+    <IconButton {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <IconButton {...args} color="primary" />
+    <IconButton {...args} color="secondary" />
+    <IconButton {...args} color="success" />
+    <IconButton {...args} color="warning" />
+    <IconButton {...args} color="danger" />
+    <IconButton {...args} color="info" />
+  </div>
+);
+
+# Icon Button
+
+```jsx
+import IconButton from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    args={{
+      icon: "plus",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Outline
+
+<Canvas withSource="open">
+  <Story
+    name="Outline"
+    args={{
+      icon: "plus",
+      outline: true
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      icon: "plus",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      icon: "save",
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      icon: "trash",
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

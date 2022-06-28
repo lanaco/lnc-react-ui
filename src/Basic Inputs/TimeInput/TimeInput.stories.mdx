@@ -1,0 +1,75 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import TimeInput from "./index";
+
+<Meta title="Basic Inputs/Time Input" component={TimeInput} />
+
+export const TemplateDefault = (args) => <TimeInput {...args} />;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <TimeInput {...args} size="small" />
+    <TimeInput {...args} size="medium" />
+    <TimeInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <TimeInput {...args} color="primary" />
+    <TimeInput {...args} color="secondary" />
+    <TimeInput {...args} color="success" />
+    <TimeInput {...args} color="warning" />
+    <TimeInput {...args} color="danger" />
+    <TimeInput {...args} color="info" />
+  </div>
+);
+
+# Time Input
+```jsx
+import TimeInput from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas withSource="open">
+  <Story name="Read Only" args={{ readOnly: true }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas withSource="open">
+  <Story name="Disabled" args={{ disabled: true }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

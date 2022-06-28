@@ -1,0 +1,121 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import DateInput from "./index";
+
+<Meta title="Basic Inputs/Date Input" component={DateInput} />
+
+export const TemplateDefault = (args) => <DateInput {...args} />;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DateInput {...args} size="small" />
+    <DateInput {...args} size="medium" />
+    <DateInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DateInput {...args} color="primary" />
+    <DateInput {...args} color="secondary" />
+    <DateInput {...args} color="success" />
+    <DateInput {...args} color="warning" />
+    <DateInput {...args} color="danger" />
+    <DateInput {...args} color="info" />
+  </div>
+);
+
+# Date Input
+
+```jsx
+import DateInput from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas>
+  <Story
+    name="Read Only"
+    args={{
+      readOnly: true,
+      style: { width: "300px" },
+      value: "2022-01-01",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas withSource="open">
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      placeholder: "Disabled",
+      style: { width: "300px" },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Range
+
+Range can be defined with `minDate` and `maxDate` props.
+
+<Canvas withSource="open">
+  <Story
+    name="Range"
+    args={{
+      value: "2022-01-05",
+      minDate: "2022-01-01",
+      maxDate: "2022-01-15",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Alternative Format
+
+<Canvas withSource="open">
+  <Story
+    name="Alternative Format"
+    args={{
+      value: "2022-01-05",
+      format: "YYYY-MM-DD",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

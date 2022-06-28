@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+<Meta title="Intro" />
+
+# LNC React UI Web Components for React
+#
+
+Lnc React UI Web Components can be used as if they were native React components.
+  Lnc React UI Web Components provide simple and complex components and layout.
+
+<Story name="Intro"><div></div></Story>
+
+# 
+## Requirements
+
+* [React](https://www.npmjs.com/package/react) and [React-Dom](https://www.npmjs.com/package/react-dom) (**17.0.2 or higher**)
+* [Node.js](https://nodejs.org/en/) (**16.13.0 or higher**)
+---
+
+# Getting Started
+---
+
+## Add @lnc-react-ui (kako ce se zvati vec) to an existing app
+First of all dependency `@lnc-react-ui` needs to be added to the project
+````
+npm install @lnc-react-ui --save
+````
+  
+In order to use @lnc-react-ui you have to wrap your application's root component into the ThemeProvider.
+You will find this component most likely in src/App.js:
+````jsx
+
+import { ThemeProvider } from '@lnc-react-ui';
+...
+render() {
+  return (
+    <div>
+      <ThemeProvider>
+        <MyApp />
+      </ThemeProvider>
+    </div>
+  );
+}
+````

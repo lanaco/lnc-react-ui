@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
-import Checkbox from "../../../Basic Inputs/CheckBox/index";
+import Checkbox from "../../../Basic Inputs/CheckBoxInput/index";
 
 const HtmlCell = styled.th`
   text-align: left;

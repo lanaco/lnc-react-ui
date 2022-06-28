@@ -1,0 +1,105 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import TextAreaInput from "./index";
+
+<Meta title="Basic Inputs/Text Area Input" component={TextAreaInput} />
+
+export const TemplateDefault = (args) => <TextAreaInput {...args} />
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <TextAreaInput {...args} size="small" />
+    <TextAreaInput {...args} size="medium" />
+    <TextAreaInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <TextAreaInput {...args} color="primary" />
+    <TextAreaInput {...args} color="secondary" />
+    <TextAreaInput {...args} color="success" />
+    <TextAreaInput {...args} color="warning" />
+    <TextAreaInput {...args} color="danger" />
+    <TextAreaInput {...args} color="info" />
+  </div>
+);
+
+# Text Area Input
+```jsx
+import TextAreaInput from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## With Value
+
+<Canvas>
+  <Story name="With Value" args={{value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Read Only
+
+<Canvas>
+  <Story
+    name="Read Only"
+    args={{
+        readOnly: true,
+        placeholder: "Type text here",
+        style: {width: '300px'}
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas withSource="open">
+  <Story
+    name="Disabled"
+    args={{
+        disabled: true,
+        placeholder: "Disabled",
+        style: {width: '300px'}
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

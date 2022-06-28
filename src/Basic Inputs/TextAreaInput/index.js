@@ -68,7 +68,7 @@ const StyledTextArea = styled.textarea`
 
 //===================================================
 
-const TextArea = React.forwardRef((props, ref) => {
+const TextAreaInput = React.forwardRef((props, ref) => {
   const {
     id,
     disabled,
@@ -78,6 +78,7 @@ const TextArea = React.forwardRef((props, ref) => {
     debounceTime,
     type,
     placeholder,
+    tabIndex,
     //----------------
     onChange,
     onKeyDown,
@@ -118,6 +119,7 @@ const TextArea = React.forwardRef((props, ref) => {
       onChange={onValueChange}
       disabled={disabled}
       value={inputValue}
+      tabIndex={tabIndex}
       onFocus={(e) => {
         e.target.style.whiteSpace = "inherit";
         e.target.style.height = `${e.target.scrollHeight}px`;
@@ -139,13 +141,14 @@ const TextArea = React.forwardRef((props, ref) => {
   );
 });
 
-TextArea.defaultProps = {
+TextAreaInput.defaultProps = {
   id: "",
   value: "",
   disabled: false,
   readOnly: false,
   debounceTime: 180,
   placeholder: "",
+  tabIndex: 0,
   //----------------
   onChange: () => {},
   onBlur: () => {},
@@ -157,13 +160,14 @@ TextArea.defaultProps = {
   color: "primary",
 };
 
-TextArea.propTypes = {
+TextAreaInput.propTypes = {
   id: PropTypes.string,
   value: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,
   placeholder: PropTypes.string,
+  tabIndex: PropTypes.number,
   //----------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
@@ -182,4 +186,4 @@ TextArea.propTypes = {
   ]),
 };
 
-export default TextArea;
+export default TextAreaInput;

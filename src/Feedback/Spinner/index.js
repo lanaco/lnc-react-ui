@@ -27,7 +27,7 @@ const standardCssFields = ({ theme, color, size }) => {
   return `
     font-family: ${theme.typography.fontFamily};
     font-size: ${theme.typography[size].fontSize};
-    color: ${theme.test_palette[color][400]}
+    color: ${theme.test_palette[color][400]};
   `;
 };
 
@@ -49,6 +49,7 @@ const SpinnerWrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     ${(props) => standardCssFields(props)}
+    font-weight: 600;
   }
 `;
 

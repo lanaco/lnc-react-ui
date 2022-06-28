@@ -27,8 +27,11 @@ export const TemplateColors = (args) => <div>
 
 
 # Drag & Drop Files
+```jsx
+import DragAndDropFiles from "@lnc-react-ui";
+```
 
-<Canvas>
+<Canvas withSource="open">
   <Story name="Default">{TemplateDefault.bind({})}</Story>
 </Canvas>
 
@@ -60,7 +63,7 @@ export const TemplateColors = (args) => <div>
 </Canvas>
 
 ## With Files
-  Show file size with `showFileSize={true}`. File size is provided in Bytes and it will formatted. 
+  Show file size with `showFileSize={true}`. File size is provided in Bytes and it will formatted accordingly. 
 
 <Canvas withSource="open">
   <Story

@@ -116,7 +116,6 @@ const Container = styled.div`
 
   & .react-calendar__tile--hasActive {
     background: ${(props) => props.theme.test_palette[props.color][400]};
-    color: ${(props) => props.theme.palette[props.color].text};
   }
 
   & .react-calendar__tile--hasActive:enabled:hover,
@@ -199,6 +198,7 @@ const DateInput = React.forwardRef((props, ref) => {
     onBlur,
     value,
     format,
+    tabIndex,
     onChange,
     useCalendar,
     minDate,
@@ -415,6 +415,7 @@ const DateInput = React.forwardRef((props, ref) => {
           if (onFocus) onFocus(e);
         }}
         placeholder={format}
+        tabIndex={tabIndex}
         {...rest}
       />
 
@@ -471,6 +472,7 @@ DateInput.defaultProps = {
   format: "yyyy-mm-dd",
   minDate: "",
   maxDate: "",
+  tabIndex: 0,
   //------------------------------
   onChange: () => {},
   onFocus: () => {},
@@ -491,6 +493,7 @@ DateInput.propTypes = {
   format: PropTypes.string,
   minDate: PropTypes.string,
   maxDate: PropTypes.string,
+  tabIndex: PropTypes.number,
   //-----------------------------------------------------------
   onChange: PropTypes.func,
   onFocus: PropTypes.func,

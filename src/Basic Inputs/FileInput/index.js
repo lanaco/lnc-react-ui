@@ -19,7 +19,7 @@ const standardCssFields = ({ theme, size }) => {
   `;
 };
 
-const Container = styled.div`
+const Container = styled.label`
   display: flex;
   max-height: ${(props) => heightBySize[props.size]};
   min-height: ${(props) => heightBySize[props.size]};
@@ -54,10 +54,11 @@ const Input = styled.input`
   z-index: -1;
 `;
 
-const Label = styled.label`
+const Label = styled.div`
+  display: flex;
+  align-items: center;
   ${(props) => standardCssFields(props)}
   white-space: nowrap;
-  display: inline-block;
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   background-color: ${(props) =>
     props.disabled
@@ -96,7 +97,8 @@ const FileInput = React.forwardRef((props, ref) => {
     disabled,
     readOnly,
     accept,
-    chooseFileText,
+    label,
+    tabIndex,
     color,
     size,
     ...rest
@@ -134,6 +136,7 @@ const FileInput = React.forwardRef((props, ref) => {
         onChange={disabled || readOnly ? () => {} : handleOnChange}
         type="file"
         id={id}
+        tabIndex={tabIndex}
         onFocus={(e) => {
           if (!disabled) setFocused(true);
           if (onFocus && !disabled) onFocus(e);
@@ -144,8 +147,8 @@ const FileInput = React.forwardRef((props, ref) => {
         }}
         {...rest}
       />
-      <Label {...themeProps} htmlFor={id}>
-        {chooseFileText}
+      <Label {...themeProps}>
+        {label}
       </Label>
       <FileName
         tabIndex={-1}
@@ -162,7 +165,8 @@ FileInput.defaultProps = {
   disabled: false,
   readOnly: false,
   accept: "",
-  chooseFileText: "Choose file",
+  label: "Choose File",
+  tabIndex: 0,
   //------------------
   onChange: () => {},
   onFocus: () => {},
@@ -178,7 +182,8 @@ FileInput.propTypes = {
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   accept: PropTypes.string,
-  chooseFileText: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tabIndex: PropTypes.number,
   //-------------------------
   onChange: PropTypes.func,
   onFocus: PropTypes.func,

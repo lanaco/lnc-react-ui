@@ -1,3 +1,5 @@
+import "./nunito-font.css";
+
 const theme = {
   name: "Main",
   backgroundColor: "#fff",
@@ -186,13 +188,13 @@ const theme = {
     },
   },
   typography: {
-    fontFamily: "Arial",
+    fontFamily: "Nunito",
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
     fontWeightBold: 700,
     small: {
-      fontSize: "0.75rem",
+      fontSize: "0.875rem",
       iconFontSize: "1.25rem",
       gap: "0.3rem",
       subTextSize: "0.625rem",
@@ -200,7 +202,7 @@ const theme = {
       inputSize: "1.85rem",
     },
     medium: {
-      fontSize: "0.9375rem",
+      fontSize: "1rem",
       iconFontSize: "1.425rem",
       gap: "0.45rem",
       subTextSize: "0.725rem",

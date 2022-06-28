@@ -45,6 +45,7 @@ const ColorInput = React.forwardRef((props, ref) => {
     name,
     value,
     size,
+    tabIndex,
     className,
     style,
     color,
@@ -80,6 +81,7 @@ const ColorInput = React.forwardRef((props, ref) => {
       readOnly={readOnly}
       value={val}
       disabled={disabled}
+      tabIndex={tabIndex}
       onChange={readOnly ? () => {} : handleOnChange}
       onBlur={readOnly ? () => {} : onBlur}
       onFocus={readOnly ? () => {} : onFocus}
@@ -98,6 +100,7 @@ ColorInput.defaultProps = {
   value: "",
   disabled: false,
   readOnly: false,
+  tabIndex: 0,
   preventDefault: true,
   //-------------------------
   onChange: () => {},
@@ -115,6 +118,7 @@ ColorInput.propTypes = {
   value: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
+  tabIndex: PropTypes.number,
   preventDefault: PropTypes.bool,
   //---------------------------------------------------------------
   onChange: PropTypes.func,

@@ -90,7 +90,7 @@ const UploadedFile = React.forwardRef((props, ref) => {
                 icon={fileIcon}
                 sizeInUnits={getIconSize(themeProps.size)}
                 style={{ cursor: (onFileClick ? 'pointer' : 'default') }}
-                onClick={onFileClick ? onFileClick : null}
+                onClick={(e) => onFileClick ? onFileClick(e) : null}
                 {...rest} />
             <ProgressContent {...themeProps}>
                 <ProgressText>
@@ -129,7 +129,7 @@ UploadedFile.defaultProps = {
 UploadedFile.propTypes = {
     id: PropTypes.any.isRequired,
     fileName: PropTypes.string,
-    fileSize: PropTypes.string,
+    fileSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     showFileSize: PropTypes.bool,
     progressPercentage: PropTypes.number,
     className: PropTypes.string,
@@ -144,6 +144,7 @@ UploadedFile.propTypes = {
         "danger",
         "warning",
         "disabled",
+        "info"
     ]),
     fileIcon: PropTypes.string,
     cancelIcon: PropTypes.string,
