@@ -30,7 +30,7 @@ const StyledLayout = styled.section`
   }
 `;
 
-const Layout = React.forwardRef((props, ref) => {
+const PageLayout = React.forwardRef((props, ref) => {
   const { children, isChild, __TYPE__, ...rest } = props;
   const theme = useTheme();
 

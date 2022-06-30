@@ -4,6 +4,7 @@ import Sidebar from "../Sidebar/index";
 import Header from "../Header/index";
 import Footer from "../Footer/index";
 import Content from "../Content/index";
+import FeatureHeader from "../Header/FeatureHeader";
 import { useTheme } from "@emotion/react";
 
 <Meta title="Layout/Page Layout" component={PageLayout} />
@@ -230,6 +231,75 @@ Having `Sidebar` positioned next to a nested `PageLayout` makes the rest of the 
             <span>Footer</span>
           </Footer>
         </PageLayout>
+      </PageLayout>
+    )}
+  </Story>
+</Canvas>
+
+## Feature components
+
+### Header
+
+<Canvas>
+  <Story name="Feature Header">
+    {(args) => (
+      <PageLayout>
+        <FeatureHeader
+          style={{
+            backgroundColor: "rgb(0, 83, 122)",
+            textAlign: "center",
+          }}
+          logoImg={
+            <img
+              src="https://www.lanaco.com/wp-content/uploads/2020/12/footer-logo-primary.png"
+              alt="Logo image"
+              width={150}
+            />
+          }
+          avatarImg={
+            <img
+              src="https://www.w3schools.com/howto/img_avatar.png"
+              alt="Logo image"
+            />
+          }
+        >
+          <span>Header</span>
+        </FeatureHeader>
+        <PageLayout>
+          <Sidebar style={{ backgroundColor: "rgb(235, 249, 255)" }}>
+            <div
+              style={{
+                display: "flex", 
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              Sidebar
+            </div>
+          </Sidebar>
+          <Content>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              <span>Content</span>
+            </div>
+          </Content>
+        </PageLayout>
+        <Footer
+          style={{
+            backgroundColor: "rgb(0, 83, 122)",
+            lineHeight: "64px",
+            textAlign: "center",
+          }}
+        >
+          <span>Footer</span>
+        </Footer>
       </PageLayout>
     )}
   </Story>
