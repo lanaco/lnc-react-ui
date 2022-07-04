@@ -16,7 +16,7 @@ export const parameters = {
     }
   },
   themes: {
-    default: 'twitter',
+    default: 'Main',
     list: themes,
   },
 };

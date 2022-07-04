@@ -1,0 +1,112 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import RadioInput from "./index";
+
+<Meta title="Basic Inputs/Radio Input" component={RadioInput} />
+
+export const TemplateDefault = (args) => <RadioInput {...args} />;
+
+export const TemplateLabel = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <RadioInput {...args} labelPosition="left" />
+    <RadioInput {...args} labelPosition="right" />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <RadioInput {...args} size="small" />
+    <RadioInput {...args} size="medium" />
+    <RadioInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <RadioInput {...args} color="primary" />
+    <RadioInput {...args} color="secondary" />
+    <RadioInput {...args} color="success" />
+    <RadioInput {...args} color="warning" />
+    <RadioInput {...args} color="danger" />
+    <RadioInput {...args} color="info" />
+  </div>
+);
+
+# Radio Input
+
+```jsx
+import RadioInput from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    args={{
+      checked: true,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Label
+
+<Canvas>
+  <Story
+    name="Label"
+    args={{
+      checked: true,
+      label: "Label text",
+    }}
+  >
+    {TemplateLabel.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled state
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      checked: true,
+      disabled: true,
+      label: "disabled",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      checked: true,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      size: "small",
+      checked: true,
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

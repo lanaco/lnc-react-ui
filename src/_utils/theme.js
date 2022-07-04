@@ -294,7 +294,7 @@ const themes = [
   theme,
   {
     ...theme,
-    name: "Dark",
+    name: "Main copy",
     class: "lnc-dark",
     backgroundColor: "#000",
   },
