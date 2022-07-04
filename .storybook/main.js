@@ -37,5 +37,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-cssresources",
     "@storybook/addon-docs",
+    'storybook-addon-themes',
   ],
 };

@@ -5,8 +5,6 @@ import styled from "@emotion/styled";
 import Icon from "../../General/Icon";
 
 const getLabelDirection = (direction) => {
-  if (direction == "up") return "column-reverse";
-  if (direction == "down") return "column";
   if (direction == "left") return "row-reverse";
 
   return "row";
@@ -26,6 +24,7 @@ const CheckBoxContainer = styled.div`
   flex-direction: ${(props) => getLabelDirection(props.direction)};
   width: max-content;
   gap: 0.5rem;
+  height: ${(props) => props.theme.typography[props.size].inputSize};
   ${(props) => standardCssFields(props)}
   align-items: center;
   & > label {
@@ -38,7 +37,6 @@ const CheckBoxContainer = styled.div`
 
   & > input {
     box-sizing: border-box;
-
     display: none;
   }
 `;
@@ -47,16 +45,17 @@ const StyledCheckBox = styled.div`
   box-sizing: border-box;
   display: flex;
   display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox; 
-    display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   align-items: center;
   justify-content: center;
-  height: ${(props) => props.theme.typography[props.size].inputSize};
-  width: ${(props) => props.theme.typography[props.size].inputSize};
+
+  height: ${(props) => props.theme.typography[props.size].iconFontSize};
+  width: ${(props) => props.theme.typography[props.size].iconFontSize};
   border-radius: 0.1875rem;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.125rem;
   border: ${(props) =>
     props.icon
       ? "none"
@@ -68,9 +67,9 @@ const StyledCheckBox = styled.div`
     box-sizing: border-box;
     border-radius: 0.1875rem;
     height: ${(props) =>
-      props.indeterminate ? "2px" : (props.checked ? "100%" : "0")};
+      props.indeterminate ? "2px" : props.checked ? "100%" : "0"};
     width: ${(props) =>
-      props.indeterminate ? "90%" : (props.checked ? "100%" : "0")};
+      props.indeterminate ? "90%" : props.checked ? "100%" : "0"};
     background-color: ${(props) =>
       props.disabled
         ? props.theme.test_palette["disabled"][400]
@@ -79,6 +78,10 @@ const StyledCheckBox = styled.div`
 
   &:hover {
     box-shadow: 0px 0px 0.375rem -0.125rem ${(props) => (props.disabled ? "unset" : props.theme.test_palette[props.color][400])};
+  }
+  &:focus {
+    outline: none;
+    box-shadow: ${(props) => `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`};
   }
 `;
 
@@ -94,11 +97,11 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     icon,
     iconUncheckedStyle,
     tabIndex,
-    preventDefault,
     //----------------
     onChange,
     onFocus,
     onBlur,
+    onClick,
     onKeyDown,
     //----------------
     color,
@@ -128,11 +131,13 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
 
+    if (onClick) onClick(e);
+
     if (readOnly || disabled) return;
     if (indeterminateState) setIndeterminateState(false);
 
     setCheckBoxChecked(!checkBoxChecked);
-    onChange(e, !checkBoxChecked);
+    if (onChange) onChange(e, !checkBoxChecked);
   };
 
   const handleOnKeyDown = (e) => {
@@ -144,17 +149,17 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       if (indeterminateState) setIndeterminateState(false);
 
       setCheckBoxChecked(!checkBoxChecked);
-      onChange(e, !checkBoxChecked);
+      if (onChange) onChange(e, !checkBoxChecked);
     }
     if (onKeyDown) onKeyDown(e);
   };
 
   const handleOnBlur = (e) => {
-    if (onBlur) onBlur(e, id);
+    if (onBlur) onBlur(e);
   };
 
   const handleOnFocus = (e) => {
-    if (onFocus) onFocus(e, id);
+    if (onFocus) onFocus(e);
   };
 
   return (
@@ -179,8 +184,14 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       {icon ? (
         <Icon
           icon={icon}
-          color={(checkBoxChecked && !disabled) ? color : "disabled"}
-          iconStyle={iconUncheckedStyle == "regular" ? ((checkBoxChecked && !disabled) ? "solid" : "regular") : "solid"}
+          color={checkBoxChecked && !disabled ? color : "disabled"}
+          iconStyle={
+            iconUncheckedStyle == "regular"
+              ? checkBoxChecked && !disabled
+                ? "solid"
+                : "regular"
+              : "solid"
+          }
           size={size}
           className="lnc-checkbox-icon"
           onClick={handleClick}
@@ -223,18 +234,18 @@ CheckBoxInput.defaultProps = {
   icon: null,
   iconUncheckedStyle: "solid",
   tabIndex: 0,
-  preventDefault: true,
   //-------------------------
   onChange: (e, value) => {},
   onBlur: () => {},
   onFocus: () => {},
+  onClick: () => {},
   onKeyDown: () => {},
   //-------------------------
   className: "",
   style: {},
   size: "small",
   color: "primary",
-  inputProps: { },
+  inputProps: {},
 };
 
 CheckBoxInput.propTypes = {
@@ -244,15 +255,15 @@ CheckBoxInput.propTypes = {
   readOnly: PropTypes.bool,
   label: PropTypes.string,
   indeterminate: PropTypes.bool,
-  labelPosition: PropTypes.oneOf(["up", "down", "right", "left"]),
+  labelPosition: PropTypes.oneOf(["right", "left"]),
   icon: PropTypes.string,
   iconUncheckedStyle: PropTypes.oneOf(["regular", "solid"]),
   tabIndex: PropTypes.number,
-  preventDefault: PropTypes.bool,
   //---------------------------------------------------------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
+  onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   //---------------------------------------------------------------
   className: PropTypes.string,
