@@ -41,7 +41,7 @@ const SpinnerWrapper = styled.div`
   position: relative;
   height: max-content;
   width: max-content;
-
+  display: flex;
   & .label-text {
     display: ${props => props.label ? 'unset': 'none'};
     position: absolute;
