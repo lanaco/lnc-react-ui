@@ -30,7 +30,7 @@ const StyledLayout = styled.section`
   }
 `;
 
-const Layout = (props) => {
+const Layout = React.forwardRef((props, ref) => {
   const { children, isChild, __TYPE__, ...rest } = props;
   const theme = useTheme();
 
@@ -81,12 +81,13 @@ const Layout = (props) => {
       isChild={isChild}
       hasSidebar={hasSidebar}
       theme={theme}
+      ref={ref}
       {...rest}
     >
       {clonedChildren}
     </StyledLayout>
   );
-};
+});
 
 Layout.defaultProps = {
   __TYPE__: "Layout",

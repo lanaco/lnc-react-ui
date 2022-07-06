@@ -50,7 +50,7 @@ const ToggleSidebarButton = styled.div`
   }
 `;
 
-const Sidebar = (props) => {
+const Sidebar = React.forwardRef((props, ref) => {
   const {
     placement,
     collapsed,
@@ -81,6 +81,7 @@ const Sidebar = (props) => {
       placement={placement}
       size={size}
       theme={theme}
+      ref={ref}
       {...rest}
     >
       {!hideCollapseButton && (
@@ -108,7 +109,7 @@ const Sidebar = (props) => {
       </StyledSidebar>
     </SidebarContainer>
   );
-};
+});
 
 Sidebar.defaultProps = {
   collapsed: undefined,
