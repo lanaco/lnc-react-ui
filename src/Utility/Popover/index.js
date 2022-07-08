@@ -5,21 +5,50 @@ import styled from "@emotion/styled";
 import { createPortal } from 'react-dom';
 
 const StyledPopover = styled.div`
-  background-color: ${props => props.theme.test_palette.white[400]};
-  font-family: ${props => props.theme.typography.fontFamily};
-  display: ${props => props.show ? 'block' : 'none'};
-  position: absolute;
-  top: ${props => props.position ? `${(props.position?.top + props.position?.height)}` : '0'};
-  left: ${props => props.position ? props.left : ''};
-  ${props => props.position?.horizontalPosition};
-  ${props => props.position?.verticalPosition};
-  overflow: auto;
-  box-shadow: ${(props) => `0px 0px 6px -2px ${props.theme.test_palette["disabled"][400]}`};
-  box-sizing: border-box;
-  max-width: ${props => props.position?.maxWidth ? (props.position.maxWidth != "100vw" ? props.position.maxWidth+"px" : "100vw" ) : "100vw"};
-  max-height: ${props => props.position?.maxHeight ? (props.position.maxHeight != "100vh" ? props.position.maxHeight+"px" : "100vh") : "100vh"};
-  z-index: ${props => props.zIndex ? props.zIndex : props.theme.zIndex.popover };
-  padding: ${props => props.theme.spaces.paddings.popover};;
+background-color: ${props => props.theme.test_palette.white[400]};
+font-family: ${props => props.theme.typography.fontFamily};
+display: ${props => props.show ? 'block' : 'none'};
+opacity: 0;
+opacity: ${props => props.show ? '1' : '0'};
+animation: fadeIn 0.4s;
+
+position: absolute;
+top: ${props => props.position ? `${(props.position?.top + props.position?.height)}` : '0'};
+left: ${props => props.position ? props.left : ''};
+${props => props.position?.horizontalPosition};
+${props => props.position?.verticalPosition};
+overflow: auto;
+box-shadow: ${(props) => `0px 0px 6px -2px ${props.theme.test_palette["disabled"][400]}`};
+box-sizing: border-box;
+max-width: ${props => props.position?.maxWidth ? (props.position.maxWidth != "100vw" ? props.position.maxWidth + "px" : "100vw") : "100vw"};
+max-height: ${props => props.position?.maxHeight ? (props.position.maxHeight != "100vh" ? props.position.maxHeight + "px" : "100vh") : "100vh"};
+z-index: ${props => props.zIndex ? props.zIndex : props.theme.zIndex.popover};
+padding: ${props => props.theme.spaces.paddings.popover};
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-moz-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-o-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-ms-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 `
 
 const Popover = React.forwardRef((props, ref) => {
