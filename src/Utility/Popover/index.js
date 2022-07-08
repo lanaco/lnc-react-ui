@@ -8,6 +8,10 @@ const StyledPopover = styled.div`
   background-color: ${props => props.theme.test_palette.white[400]};
   font-family: ${props => props.theme.typography.fontFamily};
   display: ${props => props.show ? 'block' : 'none'};
+  opacity: 0;
+  opacity: ${props => props.show ? '1' : '0'};
+  animation: fadeIn 0.3s;
+
   position: absolute;
   top: ${props => props.position ? `${(props.position?.top + props.position?.height)}` : '0'};
   left: ${props => props.position ? props.left : ''};
@@ -16,10 +20,35 @@ const StyledPopover = styled.div`
   overflow: auto;
   box-shadow: ${(props) => `0px 0px 6px -2px ${props.theme.test_palette["disabled"][400]}`};
   box-sizing: border-box;
-  max-width: ${props => props.position?.maxWidth ? (props.position.maxWidth != "100vw" ? props.position.maxWidth+"px" : "100vw" ) : "100vw"};
-  max-height: ${props => props.position?.maxHeight ? (props.position.maxHeight != "100vh" ? props.position.maxHeight+"px" : "100vh") : "100vh"};
-  z-index: ${props => props.zIndex ? props.zIndex : props.theme.zIndex.popover };
-  padding: ${props => props.theme.spaces.paddings.popover};;
+  max-width: ${props => props.position?.maxWidth ? (props.position.maxWidth != "100vw" ? props.position.maxWidth + "px" : "100vw") : "100vw"};
+  max-height: ${props => props.position?.maxHeight ? (props.position.maxHeight != "100vh" ? props.position.maxHeight + "px" : "100vh") : "100vh"};
+  z-index: ${props => props.zIndex ? props.zIndex : props.theme.zIndex.popover};
+  padding: ${props => props.theme.spaces.paddings.popover};
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
 `
 
 const Popover = React.forwardRef((props, ref) => {
@@ -64,7 +93,7 @@ const Popover = React.forwardRef((props, ref) => {
       let { verticalPosition, maxHeight } = vertical ? findVerticalPosition(vertical, anchorElPosition, popoverMeasures, anchorViewPortPosition, windowInnerHeight) : { verticalPosition: "", maxHeight: "100vh" };
 
       if (!horizontal) {
-        maxWidth  = "100vw";
+        maxWidth = "100vw";
         //horizontal
         if ((popoverMeasures.width / 2 <= (anchorElPosition.left + anchorElPosition.width / 2)) && (popoverMeasures.width / 2 <= (windowWidth - anchorElPosition.right + anchorElPosition.width / 2))) {
           horizontalPosition = `left: ${(anchorElPosition.left + anchorElPosition.width / 2 - popoverMeasures.width / 2)}px`;
@@ -79,7 +108,7 @@ const Popover = React.forwardRef((props, ref) => {
         if (anchorElPosition.top >= windowWidth - anchorElPosition.bottom) {
           //on top
           maxHeight = `${anchorViewPortPosition.top - offset}`
-          verticalPosition = `top: ${anchorElPosition.top - (popoverMeasures.height > maxHeight ? (+maxHeight+offset) : (popoverMeasures.height+offset))}px`;
+          verticalPosition = `top: ${anchorElPosition.top - (popoverMeasures.height > maxHeight ? (+maxHeight + offset) : (popoverMeasures.height + offset))}px`;
         } else {
           //on bottom
           maxHeight = `${windowInnerHeight - anchorViewPortPosition.bottom - offset}`;
@@ -95,11 +124,11 @@ const Popover = React.forwardRef((props, ref) => {
   const findHorizontalPosition = (horizontalPosition, anchorElPosition, popoverMeasures, anchorViewPortPosition, windowInnerWidht) => {
     let horizontalResult = "";
     let maxWidth = "";
-    if (horizontalPosition == "right") { 
+    if (horizontalPosition == "right") {
       maxWidth = `${anchorViewPortPosition.right}`;
       horizontalResult = `left: ${anchorElPosition.right - (popoverMeasures.width > +maxWidth ? +maxWidth : popoverMeasures.width)}px`;
     } else if (horizontalPosition == "left") {
-      maxWidth = `${windowInnerWidht - anchorViewPortPosition.left}`;
+      maxWidth = `${windowInnerWidht - anchorViewPortPosition.left}+`;
       horizontalResult = `left: ${anchorElPosition.left}px`;
     } else if (horizontalPosition == "center") {
       maxWidth = `100vw`;
@@ -112,9 +141,9 @@ const Popover = React.forwardRef((props, ref) => {
     let verticalResult = "";
     let maxHeight = "";
 
-    if (verticalPosition == "top") { 
+    if (verticalPosition == "top") {
       maxHeight = `${anchorViewPortPosition.top - offset}`;
-      verticalResult = `top: ${anchorElPosition.top - (popoverMeasures.height > maxHeight ? (+maxHeight+offset) : (popoverMeasures.height+offset))}px`;
+      verticalResult = `top: ${anchorElPosition.top - (popoverMeasures.height > maxHeight ? (+maxHeight + offset) : (popoverMeasures.height + offset))}px`;
     } else if (verticalPosition == "bottom") {
       maxHeight = `${windowInnerHeight - anchorViewPortPosition.bottom - offset}`;
       verticalResult = `top: ${anchorElPosition.bottom + offset}px`;
@@ -145,9 +174,9 @@ const Popover = React.forwardRef((props, ref) => {
 
   return (
     createPortal(
-    <StyledPopover theme={theme} ref={ref ? ref : popoverRef} zIndex={zIndex} position={popoverPosition} show={show} className={className} style={style} {...rest}>
-      {children}
-    </StyledPopover>, popoverContainer)
+      <StyledPopover theme={theme} ref={ref ? ref : popoverRef} zIndex={zIndex} position={popoverPosition} show={show} className={className} style={style} {...rest}>
+        {children}
+      </StyledPopover>, popoverContainer)
   )
 });
 
@@ -168,7 +197,7 @@ Popover.propTypes = {
   /**
    * popoverContainer is DOM element, popover won't be mounted into the DOM as a child of the nearest parent node, it will be inserted as a child of popoverContainer location in the DOM
   */
-  popoverContainer: PropTypes.any, 
+  popoverContainer: PropTypes.any,
   /**
    * Offset from anchor element in pixels
    */
