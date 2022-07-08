@@ -82,8 +82,12 @@ const theme = {
       disabled: "#CCCCCC",
       disabledDark: "#C4C4C4",
     },
-
-    
+    white: {
+      100: "#EDEADE",
+      200: "#F9F6EE",
+      300: "#FAF9F6",
+      400: "#ffffff",
+    }
   },
   palette: {
     common: {
@@ -287,7 +291,14 @@ const theme = {
     modal: 1300,
     snackbar: 1400,
     tooltip: 1500,
+    popover: 1299,
   },
+  spaces: {
+    paddings: {
+      popover: "1.25rem"
+    },
+    margins: {}
+  }
 };
 
 const themes = [

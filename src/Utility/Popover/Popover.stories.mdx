@@ -1,0 +1,187 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Popover from "./index";
+import Button from "../../General/Button/index";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
+
+<Meta title="Utility/Popover" component={Popover} />
+
+export const TemplateDefault = (args) => {
+  const [show, setShow] = useState(false);
+  const [anchor, setAnchor] = useState();
+  return (
+    <div
+      style={{
+        height: "100px",
+      }}
+    >
+      <Button
+        text="Open Popover On Hover"
+        onMouseEnter={(e) => {
+          setAnchor(e.currentTarget);
+          setShow(true);
+        }}
+        onMouseLeave={(e) => setShow(false)}
+        style={{ width: "180px" }}
+      />
+      <Popover {...args} anchorElement={anchor} show={show}>
+        Popover Content
+      </Popover>
+    </div>
+  );
+};
+
+export const TemplateAlignment = (args) => {
+  const [show, setShow] = useState(false);
+  const [anchor, setAnchor] = useState();
+  const [alignment, setAlignment] = useState({ vertical: null, horizontal: null });
+  return (
+    <div
+      style={{
+        height: "200px",
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between"  }}>
+        <Button
+          text="Bottom Left"
+          onMouseEnter={(e) => {
+            setAnchor(e.currentTarget);
+            setShow(true);
+            setAlignment({ vertical: "bottom", horizontal: "left" });
+          }}
+          onMouseLeave={(e) => setShow(false)}
+          style={{ width: "180px" }}
+        />
+        <Button
+          text="Top Left"
+          onMouseEnter={(e) => {
+            setAnchor(e.currentTarget);
+            setShow(true);
+            setAlignment({ vertical: "top", horizontal: "left" });
+          }}
+          onMouseLeave={(e) => setShow(false)}
+          style={{ width: "180px" }}
+        />
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between"  }}>
+        <Button
+          text="Bottom Center"
+          onMouseEnter={(e) => {
+            setAnchor(e.currentTarget);
+            setShow(true);
+            setAlignment({ vertical: "bottom", horizontal: "center" });
+          }}
+          onMouseLeave={(e) => setShow(false)}
+          style={{ width: "180px" }}
+        />
+        <Button
+          text="Top Center"
+          onMouseEnter={(e) => {
+            setAnchor(e.currentTarget);
+            setShow(true);
+            setAlignment({ vertical: "top", horizontal: "center" });
+          }}
+          onMouseLeave={(e) => setShow(false)}
+          style={{ width: "180px" }}
+        />
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <Button
+          text="Bottom Right"
+          onMouseEnter={(e) => {
+            setAnchor(e.currentTarget);
+            setShow(true);
+            setAlignment({ vertical: "bottom", horizontal: "right" });
+          }}
+          onMouseLeave={(e) => setShow(false)}
+          style={{ width: "180px" }}
+        />
+        <Button
+          text="Top Right"
+          onMouseEnter={(e) => {
+            setAnchor(e.currentTarget);
+            setShow(true);
+            setAlignment({ vertical: "top", horizontal: "right" });
+          }}
+          onMouseLeave={(e) => setShow(false)}
+          style={{ width: "180px" }}
+        />
+      </div>
+      <Popover {...args} anchorElement={anchor} show={show} vertical={alignment.vertical} horizontal={alignment.horizontal}>
+        Popover Content
+      </Popover>
+    </div>
+  );
+};
+
+export const TemplateOffset = (args) => {
+  const [show, setShow] = useState(false);
+  const [anchor, setAnchor] = useState();
+  return (
+    <div>
+      <Button
+        text="Open Popover On Click"
+        onClick={(e) => {
+          setAnchor(e.currentTarget);
+          setShow(!show);
+        }}
+        style={{ width: "180px" }}/>
+      <Popover {...args} anchorElement={anchor} show={show} offset={15}>
+        Popover Content
+      </Popover>
+    </div>
+  );
+};
+
+# Popover
+
+```jsx
+import { Popover } from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Alignment
+
+Props `vertical` and `horizontal` define alignment of popover. If alignment props are not set `horizontal` alignment will be `center`, `vertical` alignment will be determined depending on where there is more available space in document.
+
+<Canvas>
+  <Story
+    name="Alignment"
+    args={{}}
+  >
+    {TemplateAlignment.bind({})}
+  </Story>
+</Canvas>
+
+## Offset
+
+`offset` from anchor element is defined in `px`.
+
+<Canvas>
+  <Story name="Offset" args={{}}>
+    {TemplateOffset.bind({})}
+  </Story>
+</Canvas>
+
+---
+### z-index
+
+There might be need to increase value of prop `zIndex` when popover is in modal or in other similar situations.
+
+---
+
+### popoverContainer 
+
+Popover uses create [ReactDOM.createPortal](https://reactjs.org/docs/portals.html) in order to insert popover as child of `popoverContainer` location in the DOM (default value of `popoverContainer` is `document.body`), instead of mounting it into the DOM as a child of the nearest parent node, which would couse problems whene there are popover parents with `position: relative`. 
+
+---

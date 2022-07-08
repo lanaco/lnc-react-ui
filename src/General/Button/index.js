@@ -102,21 +102,22 @@ const Button = React.forwardRef((props, ref) => {
     id,
     onClick,
     disabled,
+    text,
     tooltip,
     className,
     icon,
     iconStyle,
     size,
     iconLocation,
-    text,
     outline,
+    children,
     ...rest
   } = props;
 
   const theme = useTheme();
 
   const handleOnClick = (e) => {
-    onClick(e, id);
+    onClick(e);
     if (e.stopImmediatePropagation) e.stopImmediatePropagation();
   };
 
@@ -188,8 +189,8 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   outline: PropTypes.bool,
   tooltip: PropTypes.string,
-  text: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  icon: PropTypes.string,
   iconStyle: PropTypes.oneOf(["regular", "solid"]),
   iconLocation: PropTypes.oneOf(["right", "left"]),
   //-------------
