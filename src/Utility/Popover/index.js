@@ -99,7 +99,7 @@ const Popover = React.forwardRef((props, ref) => {
       maxWidth = `${anchorViewPortPosition.right}`;
       horizontalResult = `left: ${anchorElPosition.right - (popoverMeasures.width > +maxWidth ? +maxWidth : popoverMeasures.width)}px`;
     } else if (horizontalPosition == "left") {
-      maxWidth = `${windowInnerWidht - anchorViewPortPosition.left}px`;
+      maxWidth = `${windowInnerWidht - anchorViewPortPosition.left}`;
       horizontalResult = `left: ${anchorElPosition.left}px`;
     } else if (horizontalPosition == "center") {
       maxWidth = `100vw`;
