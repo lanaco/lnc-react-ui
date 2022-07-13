@@ -2,8 +2,6 @@ export { default as theme } from "./_utils/theme";
 
 //============ BASIC INPUTS ===================================================================
 
-
-
 export * from "./Basic Inputs/PasswordInput";
 export { default as PasswordInput } from "./Basic Inputs/PasswordInput";
 
@@ -39,7 +37,6 @@ export { default as TimeInput } from "./Basic Inputs/TimeInput";
 
 //=============================================================================================
 
-
 //============ GENERAL==================================================================
 
 export * from "./General/Button";
@@ -53,12 +50,11 @@ export { default as Icon } from "./General/Icon";
 
 //=============================================================================================
 
-
 export * from "./Inputs/CheckboxLookup";
 export { default as CheckboxLookup } from "./Inputs/CheckboxLookup";
 
-export * from "./Inputs/DropDown";
-export { default as DropDown } from "./Inputs/DropDown";
+export * from "./Inputs/Dropdown";
+export { default as Dropdown } from "./Inputs/Dropdown";
 
 export * from "./Inputs/DropdownLookup";
 export { default as DropdownLookup } from "./Inputs/DropdownLookup";

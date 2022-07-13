@@ -5,15 +5,36 @@ import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
 import { isEmpty } from "lodash";
 
+const padding = {
+  default: {
+    small: "0.5rem",
+    medium: "0.59375rem",
+    large: "0.671875rem",
+  },
+  outline: {
+    small: "0.40625rem",
+    medium: "0.5rem",
+    large: "0.578125rem",
+  },
+  outlineHover: {
+    small: "0.34375rem",
+    medium: "0.4375rem",
+    large: "0.515625rem",
+  },
+};
+
 const standardCssFields = ({ theme, size }) => {
+  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
+    size
+  ];
 
   return `
     font-family: ${theme.typography.fontFamily};
     font-size: ${theme.typography[size].fontSize};
-    min-height: ${theme.typography[size].iconButtonSize};
-    max-height: ${theme.typography[size].iconButtonSize};
-    min-width: ${theme.typography[size].iconButtonSize};
-    max-width: ${theme.typography[size].iconButtonSize};
+    min-height: ${height};
+    max-height: ${height};
+    min-width: ${height};
+    max-width: ${height};
     width: fit-content;
     box-sizing: border-box;
     appearance: none;
@@ -28,6 +49,9 @@ const standardCssFields = ({ theme, size }) => {
 
 const StyledBtn = styled.button`
   ${(props) => standardCssFields(props)}
+
+  padding: ${(props) =>
+    props.outline ? padding.outline[props.size] : padding.default[props.size]};
 
   background-color: ${(props) =>
     props.outline
@@ -61,6 +85,11 @@ const StyledBtn = styled.button`
       return "none";
     }};
   }
+
+  padding: ${(props) => {
+    if (props.outline) return padding.outlineHover[props.size];
+    return padding.default[props.size];
+  }}
 
   &:focus:enabled {
     color: ${(props) => props.theme.test_palette.light[100]};

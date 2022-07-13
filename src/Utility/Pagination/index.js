@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DropDown from "../../Inputs/DropDown/index";
+import Dropdown from "../../Inputs/Dropdown/index";
 import Button from "../../General/Button/index";
 import styled from "@emotion/styled";
 import theme from "../../_utils/theme";
@@ -211,7 +211,7 @@ const Pagination = (props) => {
   const renderPageSize = () => {
     return (
       <ItemDropdown key={5} {...themeProps}>
-        <DropDown
+        <Dropdown
           {...themeProps}
           items={getPageSizes()}
           value={PageSize}

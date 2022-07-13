@@ -201,7 +201,7 @@ const Item = styled.li`
       : ""};
 `;
 
-const DropDown = React.forwardRef((props, ref) => {
+const Dropdown = React.forwardRef((props, ref) => {
   //
 
   const theme = useTheme();
@@ -265,7 +265,15 @@ const DropDown = React.forwardRef((props, ref) => {
   //========================== FUNCTIONS =============================================
 
   const toggleOptions = () => {
-    if (disabled || readOnly) return;
+    if (
+      disabled ||
+      readOnly ||
+      items === null ||
+      items === undefined ||
+      items.length === 0
+    )
+      return;
+
     setIsOptionsOpen(!isOptionsOpen, () => {
       if (!isOptionsOpen) adjustScroll(activeOption);
     });
@@ -299,7 +307,8 @@ const DropDown = React.forwardRef((props, ref) => {
     var itemElement = document.querySelector(`[data-id="${id}-${itemId}"]`);
 
     moveMouse.current = false;
-    itemElement.scrollIntoView(false);
+
+    if (itemElement) itemElement.scrollIntoView(false);
   };
 
   const scrollUp = (itemId) => {
@@ -314,7 +323,6 @@ const DropDown = React.forwardRef((props, ref) => {
     if (itemPosition < itemElement.getBoundingClientRect().height) {
       moveMouse.current = false;
 
-      console.log("SCROLL-UP");
       listElement.scroll({
         top:
           listElement.scrollTop -
@@ -338,7 +346,6 @@ const DropDown = React.forwardRef((props, ref) => {
     if (itemPosition > listRect.height) {
       moveMouse.current = false;
 
-      console.log("SCROLL-DOWN");
       listElement.scroll({
         top: listElement.scrollTop + (itemPosition - listRect.height),
         left: 0,
@@ -375,7 +382,6 @@ const DropDown = React.forwardRef((props, ref) => {
       e.preventDefault();
 
       if (activeOption === -1) {
-        // setActiveOption(items[0][mapId]);
         setActiveOption(items[0][mapId]);
 
         if (!isOptionsOpen) setSelectedOption(items[0][mapId]);
@@ -387,7 +393,6 @@ const DropDown = React.forwardRef((props, ref) => {
         if (currentActiveIndex < items.length - 1) {
           var itemId = items[currentActiveIndex + 1][mapId];
 
-          // setActiveOption(itemId)
           setActiveOption(itemId);
           scrollDown(itemId);
 
@@ -406,7 +411,6 @@ const DropDown = React.forwardRef((props, ref) => {
 
         if (currentActiveIndex > 0) {
           var itemId = items[currentActiveIndex - 1][mapId];
-          // setActiveOption(itemId);
           setActiveOption(itemId);
           scrollUp(itemId);
 
@@ -486,7 +490,7 @@ const DropDown = React.forwardRef((props, ref) => {
   );
 });
 
-DropDown.defaultProps = {
+Dropdown.defaultProps = {
   id: "",
   value: 0,
   disabled: false,
@@ -506,8 +510,8 @@ DropDown.defaultProps = {
   color: "primary",
 };
 
-DropDown.propTypes = {
-  id: PropTypes.string,
+Dropdown.propTypes = {
+  id: PropTypes.string.isRequired,
   value: PropTypes.number,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
@@ -533,4 +537,4 @@ DropDown.propTypes = {
   ]),
 };
 
-export default DropDown;
+export default Dropdown;

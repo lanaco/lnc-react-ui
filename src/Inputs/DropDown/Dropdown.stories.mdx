@@ -1,0 +1,133 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Dropdown from "./index";
+
+<Meta title="Inputs/Dropdown" component={Dropdown} />
+
+export const TemplateDefault = (args) => (
+  <Dropdown
+    {...args}
+    id={"Default"}
+    items={[
+      { id: 1, value: "Option 1" },
+      { id: 2, value: "Option 2" },
+      { id: 3, value: "Option 3" },
+      { id: 4, value: "Option 4" },
+      { id: 5, value: "Option 5" },
+      { id: 6, value: "Option 6" },
+      { id: 7, value: "Option 7" },
+      { id: 8, value: "Option 8" },
+      { id: 9, value: "Option 9" },
+      { id: 10, value: "Option 10" },
+    ]}
+  />
+);
+
+export const TemplateSizes = (args) => {
+  var items = [
+    { id: 1, value: "Option 1" },
+    { id: 2, value: "Option 2" },
+    { id: 3, value: "Option 3" },
+    { id: 4, value: "Option 4" },
+    { id: 5, value: "Option 5" },
+    { id: 6, value: "Option 6" },
+    { id: 7, value: "Option 7" },
+    { id: 8, value: "Option 8" },
+    { id: 9, value: "Option 9" },
+    { id: 10, value: "Option 10" },
+  ];
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <Dropdown {...args} size="small" id={"Sizes_s"} items={items} />
+      <Dropdown {...args} size="medium" id={"Sizes_m"} items={items} />
+      <Dropdown {...args} size="large" id={"Sizes_l"} items={items} />
+    </div>
+  );
+};
+
+export const TemplateColors = (args) => {
+  var items = [
+    { id: 1, value: "Option 1" },
+    { id: 2, value: "Option 2" },
+    { id: 3, value: "Option 3" },
+    { id: 4, value: "Option 4" },
+    { id: 5, value: "Option 5" },
+    { id: 6, value: "Option 6" },
+    { id: 7, value: "Option 7" },
+    { id: 8, value: "Option 8" },
+    { id: 9, value: "Option 9" },
+    { id: 10, value: "Option 10" },
+  ];
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <Dropdown {...args} color="primary" id={"Colors_p"} items={items} />
+      <Dropdown {...args} color="secondary" id={"Colors_s"} items={items} />
+      <Dropdown {...args} color="success" id={"Colors_ss"} items={items} />
+      <Dropdown {...args} color="warning" id={"Colors_w"} items={items} />
+      <Dropdown {...args} color="danger" id={"Colors_d"} items={items} />
+      <Dropdown {...args} color="info" id={"Colors_i"} items={items} />
+    </div>
+  );
+};
+
+# Dropdown
+
+```jsx
+import { Dropdown } from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas withSource="open">
+  <Story
+    name="Read Only"
+    args={{
+      readOnly: true,
+      style: { width: "300px" },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas withSource="open">
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      style: { width: "300px" },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
