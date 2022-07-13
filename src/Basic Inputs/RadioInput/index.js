@@ -34,19 +34,13 @@ const Container = styled.div`
 const StyledRadio = styled.div`
   box-sizing: border-box;
   cursor: pointer;
-  border: 0.125rem solid
-    ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][400]
-        : props.theme.test_palette[props.color][400]};
+  
   height: ${(props) => props.theme.typography[props.size].iconFontSize};
   width: ${(props) => props.theme.typography[props.size].iconFontSize};
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.188rem;
-
   &:hover {
     box-shadow: ${(props) =>
       props.disabled
@@ -55,18 +49,7 @@ const StyledRadio = styled.div`
   }
   &:focus {
     outline: none;
-    box-shadow: ${(props) => `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`};
-  }
-
-  & .checkmark {
-    box-sizing: border-box;
-    border-radius: 50%;
-    height: ${props => props.checked ? "100%" : "0"};
-    width: ${props => props.checked ? "100%" : "0"};;
-    background-color: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][400]
-        : props.theme.test_palette[props.color][400]};
+    box-shadow: ${(props) => props.disabled ? "" : `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`};
   }
 `;
 
@@ -165,7 +148,10 @@ const RadioInput = React.forwardRef((props, ref) => {
         onClick={handleClick}
         checked={isChecked}
       >
-        <div className="checkmark"></div>
+        <svg id="eqw1eBsfm9l1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" shapeRendering="geometricPrecision" textRendering="geometricPrecision">
+          {isChecked && <ellipse rx="5" ry="5" transform="translate(10 10)" fill={theme.test_palette[disabled ? "disabled" : color][400]} strokeWidth="0"/>}
+          <ellipse rx="9.5" ry="9.5" transform="translate(10 10)" fill="rgba(210,219,237,0)" fillRule="evenodd" stroke={theme.test_palette[disabled ? "disabled" : color][400]}/>
+        </svg>
       </StyledRadio>
       <Label {...themeProps} htmlFor={id}>
         {label}

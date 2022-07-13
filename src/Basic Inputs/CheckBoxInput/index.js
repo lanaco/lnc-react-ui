@@ -30,7 +30,7 @@ const CheckBoxContainer = styled.div`
   & > label {
     box-sizing: border-box;
     color: ${(props) =>
-      props.disabled ? props.theme.test_palette["disabled"][400] : "unset"};
+    props.disabled ? props.theme.test_palette["disabled"][400] : "unset"};
     cursor: pointer;
     display: ${(props) => (props.label ? "unset" : "none")};
   }
@@ -42,46 +42,17 @@ const CheckBoxContainer = styled.div`
 `;
 
 const StyledCheckBox = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  align-items: center;
-  justify-content: center;
-
   height: ${(props) => props.theme.typography[props.size].iconFontSize};
   width: ${(props) => props.theme.typography[props.size].iconFontSize};
-  border-radius: 0.1875rem;
   cursor: pointer;
-  padding: 0.125rem;
-  border: ${(props) =>
-    props.icon
-      ? "none"
-      : " 0.188rem solid " +
-        (props.disabled
-          ? props.theme.test_palette["disabled"][400]
-          : props.theme.test_palette[props.color][400])};
-  & > .checkmark {
-    box-sizing: border-box;
-    border-radius: 0.1875rem;
-    height: ${(props) =>
-      props.indeterminate ? "2px" : props.checked ? "100%" : "0"};
-    width: ${(props) =>
-      props.indeterminate ? "90%" : props.checked ? "100%" : "0"};
-    background-color: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][400]
-        : props.theme.test_palette[props.color][400]};
-  }
-
+  border-radius: 4px;
   &:hover {
     box-shadow: 0px 0px 0.375rem -0.125rem ${(props) => (props.disabled ? "unset" : props.theme.test_palette[props.color][400])};
   }
   &:focus {
     outline: none;
-    box-shadow: ${(props) => `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`};
+    box-shadow: ${(props) =>
+    (props.disabled ? 'unset' : `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`)};
   }
 `;
 
@@ -178,7 +149,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
         checked={checkBoxChecked}
         disabled={disabled}
         readOnly={readOnly}
-        onChange={() => {}}
+        onChange={() => { }}
         {...inputProps}
       />
       {icon ? (
@@ -205,17 +176,21 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       ) : (
         <StyledCheckBox
           {...themeProps}
-          indeterminate={indeterminateState}
           disabled={disabled}
           onClick={handleClick}
-          checked={checkBoxChecked}
           tabIndex={tabIndex}
           onKeyDown={handleOnKeyDown}
           onBlur={handleOnBlur}
           onFocus={handleOnFocus}
           {...rest}
         >
-          <div className="checkmark"></div>
+          <svg id="etYJwPFTLeI1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" shapeEendering="geometricPrecision" textRendering="geometricPrecision">
+            {/* CHECKED */}
+            {(checkBoxChecked && !indeterminateState) && <rect width="12" height="12" rx="2" ry="2" transform="translate(4 4)" fill={theme.test_palette[disabled ? "disabled" : color][400]} />}
+            {/* INDETERMINATE */}
+            {indeterminateState && <rect width="12" height="2" rx="1" ry="1" transform="translate(4 9)" fill={theme.test_palette[disabled ? "disabled" : color][400]} />}
+            <rect width="18" height="18" rx="2" ry="2" transform="translate(1 1)" fill="rgba(210,219,237,0)" fillRule="evenodd" stroke={theme.test_palette[disabled ? "disabled" : color][400]} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </StyledCheckBox>
       )}
       <label onClick={handleClick}>{label}</label>
@@ -235,11 +210,11 @@ CheckBoxInput.defaultProps = {
   iconUncheckedStyle: "solid",
   tabIndex: 0,
   //-------------------------
-  onChange: (e, value) => {},
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  onKeyDown: () => {},
+  onChange: (e, value) => { },
+  onBlur: () => { },
+  onFocus: () => { },
+  onClick: () => { },
+  onKeyDown: () => { },
   //-------------------------
   className: "",
   style: {},
