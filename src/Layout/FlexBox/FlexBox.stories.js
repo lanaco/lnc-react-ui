@@ -3,11 +3,9 @@ import FlexBox from ".";
 
 export default {
   title: "Layout/FlexBox",
-  component: FlexBox
+  component: FlexBox,
 };
 
-const Template = (args) => (
-  <FlexBox />
-);
+const Template = (args) => <FlexBox {...args}><div>asa</div><div>masa</div></FlexBox>;
 
 export const Default = Template.bind({});
