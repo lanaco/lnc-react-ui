@@ -19,7 +19,7 @@ const standardCssFields = ({ theme, size }) => {
 const StyledRangeSlider = styled.div`
   position: relative;
   ${(props) => standardCssFields(props)};
-  display: flex;
+  display: inline-flex;
   align-items: center;
 `;
 
@@ -116,11 +116,13 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
     onInput,
     color,
     size,
+    className,
+    style,
     ...rest
   } = props;
 
   const theme = useTheme();
-  const themeProps = { theme, size, color };
+  const themeProps = { theme, size, color, className, style };
 
   const sliderColor = theme.test_palette["disabled"][400];
   const [rangeBackground, setRangeBackground] = useState();

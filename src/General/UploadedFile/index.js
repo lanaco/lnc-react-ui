@@ -24,7 +24,7 @@ const getIconSize = (size) => {
 }
 
 const Container = styled.div`
-  display: flex;
+  display: inline-flex;
   gap: 0.5rem;
   align-items: center;
   `

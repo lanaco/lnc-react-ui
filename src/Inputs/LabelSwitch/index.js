@@ -10,7 +10,7 @@ var height = {
 };
 
 const SwitchContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   background-color: ${(props) =>
     props.disabled
       ? props.theme.test_palette.light[100]

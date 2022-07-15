@@ -20,7 +20,7 @@ const standardCssFields = ({ theme, size }) => {
 };
 
 const Container = styled.label`
-  display: flex;
+  display: inline-flex;
   max-height: ${(props) => heightBySize[props.size]};
   min-height: ${(props) => heightBySize[props.size]};
   box-sizing: border-box;

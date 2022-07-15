@@ -23,7 +23,7 @@ const paddingBySize = (size) => {
 const Container = styled.div`
   width: 100%;
   position: relative;
-  display: flex;
+  display: inline-flex;
   border-radius: 0.25rem;
   box-sizing: border-box;
   min-height: ${(props) => heightBySize(props.size)};

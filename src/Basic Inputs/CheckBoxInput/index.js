@@ -20,7 +20,7 @@ const standardCssFields = ({ theme, color, size }) => {
 const CheckBoxContainer = styled.div`
   box-sizing: border-box;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   flex-direction: ${(props) => getLabelDirection(props.direction)};
   width: max-content;
   gap: 0.5rem;
