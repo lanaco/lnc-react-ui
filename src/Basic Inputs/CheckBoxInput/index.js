@@ -184,7 +184,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           onFocus={handleOnFocus}
           {...rest}
         >
-          <svg id="etYJwPFTLeI1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" shapeEendering="geometricPrecision" textRendering="geometricPrecision">
+          <svg id="etYJwPFTLeI1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" shapeEndering="geometricPrecision" textRendering="geometricPrecision">
             {/* CHECKED */}
             {(checkBoxChecked && !indeterminateState) && <rect width="12" height="12" rx="2" ry="2" transform="translate(4 4)" fill={theme.test_palette[disabled ? "disabled" : color][400]} />}
             {/* INDETERMINATE */}
