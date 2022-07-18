@@ -1,13 +1,17 @@
 import { Meta, Story, Canvas, Props, ArgsTable } from "@storybook/addon-docs";
-import Layout from "./index";
+import PageLayout from "./index";
 import Sidebar from "../Sidebar/index";
 import Header from "../Header/index";
 import Footer from "../Footer/index";
 import Content from "../Content/index";
 
-<Meta title="Layout/Layout" component={Layout} />
+<Meta title="Layout/Page Layout" component={PageLayout} />
 
-# Layout
+# Page Layout
+
+```jsx
+import { PageLayout, Sidebar, Header, Footer, Content } from "@lnc-react-ui";
+```
 
 Used to structure the layout of your application, without styles. Considering that, you are in charge of styling all the pieces,
 or you can use the predefined components.
@@ -16,11 +20,15 @@ or you can use the predefined components.
 
 Every component is only a semantic container for your content, which is laid out based on flex.
 
--`Layout` is the top-level wrapper in which you can nest `Header` `Footer` `Content` `Sidebar` or `Layout` itself.<br/> -`Header` is intended to be used at the top of the `Layout`.<br/> -`Sidebar` is intented to be used at either right or left side of `Layout`, and only has basic collapse function.<br/> -`Content` is intented as the central piece of `Layout`.<br/> -`Footer` is intended to be used at the bottom of the `Layout`.
+- `PageLayout` is the top-level wrapper in which you can nest `Header` `Footer` `Content` `Sidebar` or `PageLayout` itself.
+- `Header` is intended to be used at the top of the `PageLayout`.
+- `Sidebar` is intented to be used at either right or left side of `PageLayout`, and only has basic collapse function.
+- `Content` is intented as the central piece of `PageLayout`.
+- `Footer` is intended to be used at the bottom of the `PageLayout`.
 
 ## Properties
 
-<Props components={{ Layout, Sidebar, Content, Header, Footer }} />
+<Props components={{ PageLayout, Sidebar, Content, Header, Footer }} />
 
 ## Examples
 
@@ -31,7 +39,7 @@ Most common layout used for applications. Consists of only `Header`, `Content` a
 <Canvas>
   <Story name="No sidebar">
     {(args) => (
-      <Layout>
+      <PageLayout>
         <Header
           style={{
             backgroundColor: "rgb(0, 83, 122)",
@@ -62,7 +70,7 @@ Most common layout used for applications. Consists of only `Header`, `Content` a
         >
           <span>Footer</span>
         </Footer>
-      </Layout>
+      </PageLayout>
     )}
   </Story>
 </Canvas>
@@ -74,7 +82,7 @@ Here, `Sidebar` is located on the either left or right side of `Content`. This w
 <Canvas>
   <Story name="Left sidebar within content">
     {(args) => (
-      <Layout>
+      <PageLayout>
         <Header
           style={{
             backgroundColor: "rgb(0, 83, 122)",
@@ -84,7 +92,7 @@ Here, `Sidebar` is located on the either left or right side of `Content`. This w
         >
           <span>Header</span>
         </Header>
-        <Layout>
+        <PageLayout>
           <Sidebar style={{ backgroundColor: "rgb(235, 249, 255)" }}>
             <div
               style={{
@@ -109,7 +117,7 @@ Here, `Sidebar` is located on the either left or right side of `Content`. This w
               <span>Content</span>
             </div>
           </Content>
-        </Layout>
+        </PageLayout>
         <Footer
           style={{
             backgroundColor: "rgb(0, 83, 122)",
@@ -119,7 +127,7 @@ Here, `Sidebar` is located on the either left or right side of `Content`. This w
         >
           <span>Footer</span>
         </Footer>
-      </Layout>
+      </PageLayout>
     )}
   </Story>
 </Canvas>
@@ -127,7 +135,7 @@ Here, `Sidebar` is located on the either left or right side of `Content`. This w
 <Canvas>
   <Story name="Right sidebar within content">
     {(args) => (
-      <Layout>
+      <PageLayout>
         <Header
           style={{
             backgroundColor: "rgb(0, 83, 122)",
@@ -137,7 +145,7 @@ Here, `Sidebar` is located on the either left or right side of `Content`. This w
         >
           <span>Header</span>
         </Header>
-        <Layout>
+        <PageLayout>
           <Content>
             <div
               style={{
@@ -162,7 +170,7 @@ Here, `Sidebar` is located on the either left or right side of `Content`. This w
               Sidebar
             </div>
           </Sidebar>
-        </Layout>
+        </PageLayout>
         <Footer
           style={{
             backgroundColor: "rgb(0, 83, 122)",
@@ -172,19 +180,19 @@ Here, `Sidebar` is located on the either left or right side of `Content`. This w
         >
           <span>Footer</span>
         </Footer>
-      </Layout>
+      </PageLayout>
     )}
   </Story>
 </Canvas>
 
 ### Sidebar outside content
 
-Having `Sidebar` positioned next to a nested `Layout` makes the rest of the components positioned adjacent to it.
+Having `Sidebar` positioned next to a nested `PageLayout` makes the rest of the components positioned adjacent to it.
 
 <Canvas>
   <Story name="Sidebar outside content">
     {(args) => (
-      <Layout>
+      <PageLayout>
         <Sidebar style={{ backgroundColor: "rgb(235, 249, 255)" }}>
           <div
             style={{
@@ -197,7 +205,7 @@ Having `Sidebar` positioned next to a nested `Layout` makes the rest of the comp
             Sidebar
           </div>
         </Sidebar>
-        <Layout>
+        <PageLayout>
           <Header
             style={{
               backgroundColor: "rgb(0, 83, 122)",
@@ -228,8 +236,8 @@ Having `Sidebar` positioned next to a nested `Layout` makes the rest of the comp
           >
             <span>Footer</span>
           </Footer>
-        </Layout>
-      </Layout>
+        </PageLayout>
+      </PageLayout>
     )}
   </Story>
 </Canvas>
