@@ -1,0 +1,254 @@
+import { Meta, Story, Canvas, Props, ArgsTable } from "@storybook/addon-docs";
+import FlexGrid from "./index";
+import FlexGridItem from "./FlexGridItem";
+
+<Meta
+  title="Layout/Flex Grid"
+  component={FlexGrid}
+  subcomponents={{ FlexGridItem }}
+/>
+
+# Flex Grid
+
+```jsx
+import { FlexGrid, FlexGridItem } from "@lnc-react-ui";
+```
+
+`Flex Grid` is a responsive, column based layout. It allows user to define the column breakpoints, ensuring consistency across different screen sizes.
+
+## Example
+
+<Canvas>
+  <Story name="Default" args={{ spacing: 5 }}>
+    {(args) => (
+      <FlexGrid {...args}>
+        <FlexGridItem col={4}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            col=4
+          </div>
+        </FlexGridItem>
+        <FlexGridItem col={8}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            col=8
+          </div>
+        </FlexGridItem>
+        <FlexGridItem L={10}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            L=10
+          </div>
+        </FlexGridItem>
+        <FlexGridItem L={2}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            L=2
+          </div>
+        </FlexGridItem>
+      </FlexGrid>
+    )}
+  </Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable story="Default" />
+
+## How it works
+
+- Based on CSS Flexbox.
+- Consists of `FlexGrid` as a container and `FlexGridItem` as items.
+- Uses padding to create spacing between items.
+- Has following responsive breakpoints: `XS`, `S`, `M`, `L`, `XL`.
+- Number of total columns is user defined (default is 12).
+
+If you are not familiar with CSS Flexbox, we recommend having a look at [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/).
+
+## Basic grid
+
+Column width is an integer between 1 and `columns` property. It indicates how many of the available columns is occupied by the component.
+A value given to a breakpoint applies to all the other breakpoints larger than it.
+For example, `M={12}` sizes a component to occupy all 12 columns on medium screen size, and if `L` and `XL` don't override that, it will take up 12 columns on those screens as well.
+Screen sizes below `M` will take up their specified sizes, but if they are not specified, they will be auto sized.
+
+<Canvas>
+  <Story name="Basic grid" args={{ spacing: 5 }}>
+    {(args) => (
+      <FlexGrid {...args}>
+        <FlexGridItem M={12}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            M=12
+          </div>
+        </FlexGridItem>
+        <FlexGridItem M={12}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            M=12
+          </div>
+        </FlexGridItem>
+        <FlexGridItem L={10} M={5}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            L=10, M=5
+          </div>
+        </FlexGridItem>
+        <FlexGridItem L={2} M={7}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            L=2, M=7
+          </div>
+        </FlexGridItem>
+      </FlexGrid>
+    )}
+  </Story>
+</Canvas>
+
+## Auto layout
+
+Auto sizing makes the items share the available space equally. Auto sizing is applied when item doesnt have breakpoints defined.
+That also means you can set the width of one item and the others will automatically fill up the remaining space.
+
+<Canvas>
+  <Story name="Auto size" args={{ spacing: 5 }}>
+    {(args) => (
+      <FlexGrid {...args}>
+        <FlexGridItem M={10}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            M=10
+          </div>
+        </FlexGridItem>
+        <FlexGridItem>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            Auto
+          </div>
+        </FlexGridItem>
+        <FlexGridItem>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            Auto
+          </div>
+        </FlexGridItem>
+      </FlexGrid>
+    )}
+  </Story>
+</Canvas>
+
+## Spacing
+
+Spacing can be defined for both rows and columns at once, or you can define them separately. They can be defined as an integer and be applied to all breakpoints,
+or be defined per breakpoint. For example, `spacing={10}` would set the both column and row spacing at 10px on all breakpoints. On the other hand `spacing={{M=5, XL=10}}`
+would set spacing at 5px for columns and rows on medium screen, while on the extra large it would be 10px. If you omit a certain breakpoint, it will be 0.
+
+**Note that `spacing` property takes priority over `rowSpacing` and `columnSpacing`.**
+
+<Canvas>
+  <Story name="Spacing" args={{}}>
+    {(args) => (
+      <FlexGrid {...args} spacing={15}>
+        <FlexGridItem>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            spacing=15
+          </div>
+        </FlexGridItem>
+        <FlexGridItem>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            spacing=15
+          </div>
+        </FlexGridItem>
+        <FlexGridItem>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            spacing=15
+          </div>
+        </FlexGridItem>
+        <FlexGridItem col={12}>
+          <div
+            style={{
+              backgroundColor: "#3284CB",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            spacing=15
+          </div>
+        </FlexGridItem>
+      </FlexGrid>
+    )}
+  </Story>
+</Canvas>
