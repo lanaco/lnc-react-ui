@@ -128,6 +128,7 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
         onDropAccepted: handleOnDropAccepted,
         multiple: multiple,
         disabled: disabled,
+        noClick: true,
     });
 
 

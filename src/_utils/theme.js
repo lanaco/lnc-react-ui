@@ -204,9 +204,8 @@ const theme = {
       gap: "0.3rem",
       subTextSize: "0.625rem",
       thumb: "1rem",
-      inputSize: "1.85rem",
-      buttonSize: "2rem",
-      iconButtonSize: "2.625rem",
+      inputSize: "1.875rem",
+      buttonSize: "1.875rem",
     },
     medium: {
       fontSize: "1rem",
@@ -215,8 +214,7 @@ const theme = {
       subTextSize: "0.725rem",
       thumb: "1.2rem",
       inputSize: "2.25rem",
-      buttonSize: "2rem",
-      iconButtonSize: "3.75rem",
+      buttonSize: "2.25rem",
     },
     large: {
       fontSize: "1.125rem",
@@ -225,8 +223,7 @@ const theme = {
       subTextSize: "0.825rem",
       thumb: "1.4rem",
       inputSize: "2.625rem",
-      buttonSize: "2.25rem",
-      iconButtonSize: "4.5rem",
+      buttonSize: "2.625rem",
     },
     h1: {
       fontWeight: 300,

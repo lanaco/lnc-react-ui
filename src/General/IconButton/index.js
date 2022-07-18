@@ -10,10 +10,10 @@ const standardCssFields = ({ theme, size }) => {
   return `
     font-family: ${theme.typography.fontFamily};
     font-size: ${theme.typography[size].fontSize};
-    min-height: ${theme.typography[size].iconButtonSize};
-    max-height: ${theme.typography[size].iconButtonSize};
-    min-width: ${theme.typography[size].iconButtonSize};
-    max-width: ${theme.typography[size].iconButtonSize};
+    min-height: ${theme.typography[size].buttonSize};
+    max-height: ${theme.typography[size].buttonSize};
+    min-width: ${theme.typography[size].buttonSize};
+    max-width: ${theme.typography[size].buttonSize};
     width: fit-content;
     box-sizing: border-box;
     appearance: none;

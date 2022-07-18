@@ -24,7 +24,7 @@ const Input = styled.input`
 const Container = styled.div`
   width: fit-content;
   height: ${(props) => props.theme.typography[props.size].inputSize};
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   flex-direction: ${props => getLabelDirection(props.labelPosition)};

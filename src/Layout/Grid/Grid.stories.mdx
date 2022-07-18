@@ -1,0 +1,246 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Grid from ".";
+import GridItem from "../GridItem";
+
+<Meta title="Layout/Grid" component={Grid} />
+
+export const TemplateDefault = (args) => (
+  <Grid {...args}>
+    <GridItem>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 1
+      </div>
+    </GridItem>
+    <GridItem>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 2
+      </div>
+    </GridItem>
+    <GridItem>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 3
+      </div>
+    </GridItem>
+    <GridItem>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 4
+      </div>
+    </GridItem>
+    <GridItem>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 5
+      </div>
+    </GridItem>
+    <GridItem>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 6
+      </div>
+    </GridItem>
+  </Grid>
+);
+
+export const TemplatePositioning = (args) => (
+  <Grid
+    {...args}
+    templateRows="repeat(2, 1fr)"
+    templateColumns="repeat(5, 1fr)"
+    gap="1rem"
+  >
+    <GridItem rowSpan={2} colSpan={1}>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 1
+      </div>
+    </GridItem>
+    <GridItem colSpan={2}>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 2
+      </div>
+    </GridItem>
+    <GridItem colSpan={2}>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 3
+      </div>
+    </GridItem>
+    <GridItem colStart={2} colEnd={4}>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Grid Item 4
+      </div>
+    </GridItem>
+  </Grid>
+);
+
+export const TemplateArea = (args) => (
+  <Grid
+    style={{ height: "200px" }}
+    templateAreas={`"nav top"
+                  "nav bottom"
+                  "footer footer"`}
+    gridTemplateRows={"80px 1fr 30px"}
+    gridTemplateColumns={"150px 1fr"}
+    gap="4px"
+  >
+    <GridItem area={"nav"}>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Nav
+      </div>
+    </GridItem>
+    <GridItem area={"top"}>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Top
+      </div>
+    </GridItem>
+    <GridItem area={"bottom"}>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Bottom
+      </div>
+    </GridItem>
+    <GridItem area={"footer"}>
+      <div
+        style={{
+          border: "3px solid #00628F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Footer
+      </div>
+    </GridItem>
+  </Grid>
+);
+
+# Grid
+
+```jsx
+import { Grid, GridItem } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      templateRows: "repeat(2, 1fr)",
+      templateColumns: "repeat(3, 1fr)",
+      gap: "1rem",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+### To know more about CSS Grid see [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
+
+---
+## Grid Item
+
+<ArgsTable components={{ GridItem }} />
+
+## Positioning
+
+Props `rowSpan`, `colSpan`, `rowStart`, `rowEnd`, `colStart`, `colEnd` define position of item in the grid,
+
+<Canvas withSource="open">
+  <Story name="Positioning">{TemplatePositioning.bind({})}</Story>
+</Canvas>
+
+## Grid Template Areas
+
+`templateAreas` prop defines a grid template by referencing the names of the grid areas which are specified with the `area` property of `GridItem` element.
+
+<Canvas withSource="open">
+  <Story name="Template Areas">{TemplateArea.bind({})}</Story>
+</Canvas>
