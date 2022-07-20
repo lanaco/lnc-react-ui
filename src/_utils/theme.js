@@ -307,6 +307,7 @@ const lanaco_light = {
       width: "0.125rem solid",
       color: "secondary",
       weight: 500,
+      outlineOffset: "0.125rem",
     },
     disabled: {
       color: "gray",
