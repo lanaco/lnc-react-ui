@@ -53,3 +53,17 @@ export const renderCustomElement = (
 
   return null;
 };
+
+export const hexToRgba = (hex, a) => {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  let value = result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+          a: a,
+      }
+      : null;
+
+  return value ? `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})` : null;
+};
