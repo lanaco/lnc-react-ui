@@ -298,13 +298,315 @@ const theme = {
   }
 };
 
+const lanaco_light = {
+  name: "Lanaco Light",
+  class: "lnc-light",
+  backgroundColor: "#fff",
+  palette: {
+    outline: {
+      width: "0.125rem solid",
+      color: "secondary",
+      weight: 500,
+    },
+    disabled: {
+      color: "gray",
+      textWeight: 400,
+      backgroundWeight: 200,
+      opacity: 50,
+    },
+    primary: {
+      50: "#F4FAFF",
+      100: "#E3F2FF",
+      200: "#C6E4FF",
+      300: "#96CEFF",
+      400: "#6AB7FB",
+      500: "#4FA2EB",
+      600: "#3284CB",
+      700: "#2667A0",
+      800: "#00427C",
+      900: "#003461",
+      cssStates: {
+        enabled: 200,
+        hover: 300,
+        focus: 300,
+        active: 400,
+        text: 600,
+      }
+    },
+    secondary: {
+      50: "#F0FDFD",
+      100: "#CCFAFB",
+      200: "#ADF4F5",
+      300: "#73E3E4",
+      400: "#2DD1D4",
+      500: "#00B9BD",
+      600: "#008C8F",
+      700: "#00787A",
+      800: "#045F61",
+      900: "#0A4D4F",
+      cssStates: {
+        enabled: 200,
+        hover: 300,
+        focus: 300,
+        active: 400,
+        text: 600,
+      }
+    },
+    red: {
+      50: "#FFF1F2",
+      100: "#FFE4E6",
+      200: "#FECDD3",
+      300: "#FDA4AF",
+      400: "#FB7185",
+      500: "#F43F5E",
+      600: "#E11D48",
+      700: "#BE123C",
+      800: "#9F1239",
+      900: "#881337",
+      cssStates: {
+        enabled: 200,
+        hover: 300,
+        focus: 300,
+        active: 400,
+        text: 600,
+      }
+    },
+    violet: {
+      50: "#F5F3FF",
+      100: "#EDE9FE",
+      200: "#DDD6FE",
+      300: "#C4B5FD",
+      400: "#A78BFA",
+      500: "#8B5CF6",
+      600: "#7C3AED",
+      700: "#6D28D9",
+      800: "#5B21B6",
+      900: "#4C1D95",
+      cssStates: {
+        enabled: 200,
+        hover: 300,
+        focus: 300,
+        active: 400,
+        text: 600,
+      }
+    },
+    yellow: {
+      50: "#FFFBEB",
+      100: "#FEF3C7",
+      200: "#FDE68A",
+      300: "#FCD34D",
+      400: "#FBBF24",
+      500: "#F59E0B",
+      600: "#D97706",
+      700: "#B45309",
+      800: "#92400E",
+      900: "#78350F",
+      cssStates: {
+        enabled: 200,
+        hover: 300,
+        focus: 300,
+        active: 400,
+        text: 600,
+      }
+    },
+    green: {
+      50: "#ECFDF5",
+      100: "#D1FAE5",
+      200: "#A7F3D0",
+      300: "#6EE7B7",
+      400: "#34D399",
+      500: "#10B981",
+      600: "#059669",
+      700: "#047857",
+      800: "#065F46",
+      900: "#064E3B",
+      cssStates: {
+        enabled: 200,
+        hover: 300,
+        focus: 300,
+        active: 400,
+        text: 600,
+      }
+    },
+    gray: {
+      50: "#F8FAFC",
+      100: "#F1F5F9",
+      200: "#E2E8F0",
+      300: "#CBD5E1",
+      400: "#94A3B8",
+      500: "#64748B",
+      600: "#475569",
+      700: "#334155",
+      800: "#1E293B",
+      900: "#0F172A",
+      cssStates: {
+        enabled: 50,
+        hover: 100,
+        focus: 100,
+        active: 200,
+        text: 600,
+      }
+    },
+    neutral: {
+      50: "#FAFAFA",
+      100: "#F4F4F5",
+      200: "#E4E4E7",
+      300: "#D4D4D8",
+      400: "#A1A1AA",
+      500: "#71717A",
+      600: "#52525B",
+      700: "#3F3F46",
+      800: "#27272A",
+      900: "#18181B",
+      cssStates: {
+        enabled: 50,
+        hover: 100,
+        focus: 100,
+        active: 200,
+        text: 600,
+      }
+    },
+    opacity: {
+      50: "5%",
+      100: "10%",
+      200: "20%",
+      250: "25",
+      300: "30%",
+      400: "40%",
+      500: "50%",
+      600: "60%",
+      700: "70%",
+      800: "80%",
+      900: "90%",
+      950: "95%",
+    },
+    values: {
+      default: 500,
+      container: 100,
+      hover: 700,
+      background: "gray[100]",
+      surface: "white",
+    },
+  },
+  sizes: {
+    chip: {
+      regular: "2rem",
+      compact: "2.25rem",
+      chipIconSize: "1.25rem",
+    }
+  },
+  borderRadius: {
+    chip: {
+      regular: "0.5rem",
+      full: "62.5rem",
+    }
+  },
+  typography: {
+      headline: {
+        weight: 600,
+        large: {
+          fontSize: "1.375rem",
+          lineHeight: "1.75rem",
+        },
+        medium: {
+          fontSize: "1rem",
+          lineHeight: "1.5rem",
+        },
+        small: {
+          fontSize: "0.875rem",
+          lineHeight: "1.25rem",
+        },
+      },
+      title: {
+        weight: 600,
+        large: {
+          fontSize: "1.375rem",
+          lineHeight: "1.75rem",
+        },
+        medium: {
+          fontSize: "rem",
+          lineHeight: "1.5rem",
+        },
+        small: {
+          fontSize: "0.875rem",
+          lineHeight: "1.25rem",
+        },
+      },
+      label: {
+        weight: 500,
+        large: {
+          fontSize: "1rem",
+          lineHeight: "1.5rem",
+        },
+        medium: {
+          fontSize: "0.875rem",
+          lineHeight: "1.25rem",
+        },
+        small: {
+          fontSize: "0.75rem",
+          lineHeight: "1rem",
+        },
+      },
+      body: {
+        weight: 400,
+        large: {
+          fontSize: "1rem",
+          lineHeight: "1.5rem",
+        },
+        medium: {
+          fontSize: "0.875rem",
+          lineHeight: "1.25rem",
+        },
+        small: {
+          fontSize: "0.75rem",
+          lineHeight: "1rem",
+        },
+      },
+  },
+  paddings: {
+    chip: {
+      compact: {
+        gap: "0.375rem",
+        left: {
+          labelOnly: "0.75rem",
+          trailingIconOnly: "0.625rem",
+          leadingIcon: "0.375rem",
+          avatar: "0.125rem"
+        },
+        right: {
+          labelOnly: "0.75rem",
+          trailingIconOnly: "0.375rem",
+          leadingIcon: "0.375rem",
+          avatar: "0.625rem",
+        }
+      },
+      regular: {
+        gap: "0.5rem",
+        left: {
+          labelOnly: "1rem",
+          trailingIconOnly: "0.75rem",
+          leadingIcon: "0.5rem",
+          avatar: "0.25rem"
+        },
+        right: {
+          labelOnly: "1rem",
+          trailingIconOnly: "0.5rem",
+          leadingIcon: "0.5rem",
+          avatar: "0.75rem",
+        }
+      }
+    }
+  }
+}
+
 const themes = [
   theme,
+  lanaco_light,
   {
     ...theme,
     name: "Main copy",
     class: "lnc-dark",
-    backgroundColor: "#000",
+    appBg: "#fff",
   },
 ];
 
