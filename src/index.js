@@ -1,9 +1,6 @@
 export { default as theme } from "./_utils/theme";
 
 //============ BASIC INPUTS ===================================================================
-
-
-
 export * from "./Basic Inputs/PasswordInput";
 export { default as PasswordInput } from "./Basic Inputs/PasswordInput";
 
@@ -36,12 +33,28 @@ export { default as RangeSlider } from "./Basic Inputs/RangeSlider";
 
 export * from "./Basic Inputs/TimeInput";
 export { default as TimeInput } from "./Basic Inputs/TimeInput";
-
 //=============================================================================================
 
+//============ DATA DISPLAY ===================================================================
+export * from "./Data display/DataView";
+export { default as DataView } from "./Data display/DataView";
 
-//============ GENERAL==================================================================
+export * from "./Data dipslay/Grid";
+export { default as Grid } from "./Data display/Grid";
 
+export * from "./Data display/ItemCounter";
+export { default as ItemCounter } from "./Data display/ItemCounter";
+//=============================================================================================
+
+//============ FEEDBACK =======================================================================
+export * from "./Feedback/Spinner";
+export { default as Spinner } from "./Feedback/Spinner";
+
+export * from "./Feedback/Alert";
+export { default as Alert } from "./Feedback/Alert";
+//=============================================================================================
+
+//============ GENERAL ========================================================================
 export * from "./General/Button";
 export { default as Button } from "./General/Button";
 
@@ -50,10 +63,9 @@ export { default as UploadedFile } from "./General/UploadedFile";
 
 export * from "./General/Icon";
 export { default as Icon } from "./General/Icon";
-
 //=============================================================================================
 
-
+//============ INPUTS =========================================================================
 export * from "./Inputs/CheckboxLookup";
 export { default as CheckboxLookup } from "./Inputs/CheckboxLookup";
 
@@ -66,53 +78,31 @@ export { default as DropdownLookup } from "./Inputs/DropdownLookup";
 export * from "./Inputs/ToggleSwitch";
 export { default as ToggleSwitch } from "./Inputs/ToggleSwitch";
 
-export * from "./Data display/DataView";
-export { default as DataView } from "./Data display/DataView";
-
-export * from "./Utility/Modal";
-export { default as Modal } from "./Utility/Modal";
-
-export * from "./Utility/ConfirmationForm";
-export { default as ConfirmationForm } from "./Utility/ConfirmationForm";
-
 export * from "./Inputs/DropdownMenu";
 export { default as DropdownMenu } from "./Inputs/DropdownMenu";
 
 export * from "./Inputs/DoubleRangeSlider";
 export { default as DoubleRangeSlider } from "./Inputs/DoubleRangeSlider";
 
-export * from "./Data dipslay/Grid";
-export { default as Grid } from "./Data display/Grid";
-
-export * from "./Data display/ItemCounter";
-export { default as ItemCounter } from "./Data display/ItemCounter";
-
 export * from "./Inputs/SearchBar";
 export { default as SearchBar } from "./Inputs/SearchBar";
-
-export * from "./Feedback/Spinner";
-export { default as Spinner } from "./Feedback/Spinner";
-
-export * from "./Layout/Tabs";
-export { default as Tabs } from "./Layout/Tabs";
-
-export * from "./Utility/Pagination";
-export { default as Pagination } from "./Utility/Pagination";
-
-export * from "./Layout/FormField";
-export { default as FormField } from "./Layout/FormField";
-
-export * from "./Layout/FormContainer";
-export { default as FormContainer } from "./Layout/FormContainer";
-
-export * from "./Feedback/Alert";
-export { default as Alert } from "./Feedback/Alert";
 
 export * from "./Inputs/PeriodSelector";
 export { default as PeriodSelector } from "./Inputs/PeriodSelector";
 
 export * from "./Inputs/MultiSelectDropdown";
 export { default as MultiSelectDropdown } from "./Inputs/MultiSelectDropdown";
+//=============================================================================================
+
+//============ LAYOUT =========================================================================
+export * from "./Layout/Tabs";
+export { default as Tabs } from "./Layout/Tabs";
+
+export * from "./Layout/FormField";
+export { default as FormField } from "./Layout/FormField";
+
+export * from "./Layout/FormContainer";
+export { default as FormContainer } from "./Layout/FormContainer";
 
 export * from "./Layout/Layout";
 export { default as Layout } from "./Layout/Layout";
@@ -131,3 +121,18 @@ export { default as Content } from "./Layout/Content";
 
 export * from "./Layout/Button Group";
 export { default as ButtonGroup } from "./Layout/Button Group";
+
+export * from "./Layout/FlexGrid";
+export { default as FlexGrid } from "./Layout/FlexGrid";
+//=============================================================================================
+
+//============ UTILITY ========================================================================
+export * from "./Utility/Modal";
+export { default as Modal } from "./Utility/Modal";
+
+export * from "./Utility/ConfirmationForm";
+export { default as ConfirmationForm } from "./Utility/ConfirmationForm";
+
+export * from "./Utility/Pagination";
+export { default as Pagination } from "./Utility/Pagination";
+//=============================================================================================

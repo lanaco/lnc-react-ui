@@ -12,8 +12,10 @@ const StyledFlexbox = styled.div`
 `;
 
 const FlexBox = React.forwardRef((props, ref) => {
+  //============================================== PROPS ===============================================
   const { className, children, ...rest } = props;
 
+  //============================================== RENDER ==============================================
   return (
     <StyledFlexbox
       className={"lnc-flexbox-container " + (className ? className : "")}
@@ -25,6 +27,7 @@ const FlexBox = React.forwardRef((props, ref) => {
   );
 });
 
+//====================================== PROP TYPES / DEFAULT PROPS ====================================
 FlexBox.defaultProps = {
   direction: "Row",
   wrap: "NoWrap",
