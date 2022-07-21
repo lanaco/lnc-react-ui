@@ -497,10 +497,8 @@ const lanaco_light = {
     },
   },
   borderRadius: {
-    chip: {
       regular: "0.5rem",
       full: "62.5rem",
-    },
   },
   typography: {
     fontFamily: "Nunito-sans, sans-serif",
