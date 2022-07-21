@@ -87,7 +87,7 @@ const theme = {
       200: "#F9F6EE",
       300: "#FAF9F6",
       400: "#ffffff",
-    }
+    },
   },
   palette: {
     common: {
@@ -292,10 +292,10 @@ const theme = {
   },
   spaces: {
     paddings: {
-      popover: "1.25rem"
+      popover: "1.25rem",
     },
-    margins: {}
-  }
+    margins: {},
+  },
 };
 
 const lanaco_light = {
@@ -332,7 +332,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     secondary: {
       50: "#F0FDFD",
@@ -351,7 +351,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     red: {
       50: "#FFF1F2",
@@ -370,7 +370,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     violet: {
       50: "#F5F3FF",
@@ -389,7 +389,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     yellow: {
       50: "#FFFBEB",
@@ -408,7 +408,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     green: {
       50: "#ECFDF5",
@@ -427,7 +427,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     gray: {
       50: "#F8FAFC",
@@ -446,7 +446,7 @@ const lanaco_light = {
         focus: 100,
         active: 200,
         text: 600,
-      }
+      },
     },
     neutral: {
       50: "#FAFAFA",
@@ -465,7 +465,7 @@ const lanaco_light = {
         focus: 100,
         active: 200,
         text: 600,
-      }
+      },
     },
     opacity: {
       50: "5%",
@@ -494,13 +494,16 @@ const lanaco_light = {
       regular: "2rem",
       compact: "2.25rem",
       avatar: "1.75rem",
-    }
+    },
   },
   borderRadius: {
-    regular: "0.5rem",
-    full: "62.5rem",
+    chip: {
+      regular: "0.5rem",
+      full: "62.5rem",
+    },
   },
   typography: {
+    fontFamily: "Nunito-sans, sans-serif",
     headline: {
       weight: 600,
       large: {
