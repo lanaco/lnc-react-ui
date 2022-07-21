@@ -471,7 +471,7 @@ const lanaco_light = {
       50: "5%",
       100: "10%",
       200: "20%",
-      250: "25",
+      250: "25%",
       300: "30%",
       400: "40%",
       500: "50%",
@@ -481,89 +481,36 @@ const lanaco_light = {
       900: "90%",
       950: "95%",
     },
-    values: {
-      default: 500,
-      container: 100,
-      hover: 700,
-      background: "gray[100]",
-      surface: "white",
-    },
   },
   sizes: {
-    chip: {
-      regular: "2rem",
-      compact: "2.25rem",
-      avatar: "1.75rem",
-    },
-  },
+    small: "2.25rem",
+    medium: "2.5rem",
+    large: "2.75rem",
+  }
   borderRadius: {
-      regular: "0.5rem",
-      full: "62.5rem",
+    regular: "8px",
+    curved: "1000px",
+    none: "0"
   },
   typography: {
     fontFamily: "Nunito-sans, sans-serif",
-    headline: {
-      weight: 600,
-      large: {
-        fontSize: "1.375rem",
-        lineHeight: "1.75rem",
-      },
-      medium: {
-        fontSize: "1rem",
-        lineHeight: "1.5rem",
-      },
-      small: {
-        fontSize: "0.875rem",
-        lineHeight: "1.25rem",
-      },
-    },
-    title: {
-      weight: 600,
-      large: {
-        fontSize: "1.375rem",
-        lineHeight: "1.75rem",
-      },
-      medium: {
-        fontSize: "rem",
-        lineHeight: "1.5rem",
-      },
-      small: {
-        fontSize: "0.875rem",
-        lineHeight: "1.25rem",
-      },
-    },
-    label: {
-      weight: 500,
+    component: {
+      weight: 700,
       large: {
         fontSize: "1rem",
-        lineHeight: "1.5rem",
+        lineHeight: "1",
       },
       medium: {
         fontSize: "0.875rem",
-        lineHeight: "1.25rem",
+        lineHeight: "1",
       },
       small: {
-        fontSize: "0.75rem",
-        lineHeight: "1rem",
-      },
-    },
-    body: {
-      weight: 400,
-      large: {
-        fontSize: "1rem",
-        lineHeight: "1.5rem",
-      },
-      medium: {
         fontSize: "0.875rem",
-        lineHeight: "1.25rem",
+        lineHeight: "1",
       },
-      small: {
-        fontSize: "0.75rem",
-        lineHeight: "1rem",
-      },
-    },
+    }
   },
-}
+};
 
 const themes = [
   theme,
