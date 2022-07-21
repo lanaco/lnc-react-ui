@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "../src/ThemeProvider";
 import { themes } from '../src/_utils/theme';
+import { themes as storyBookThemes } from '@storybook/theming';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -10,14 +11,15 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  docs:{
-    source: {
-      type: "code"
-    }
-  },
   themes: {
     default: 'Main',
     list: themes,
+  },
+  docs:{
+    source: {
+      type: "code"
+    },
+    // theme: storyBookThemes.dark,
   },
 };
 

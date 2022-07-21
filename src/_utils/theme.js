@@ -493,111 +493,75 @@ const lanaco_light = {
     chip: {
       regular: "2rem",
       compact: "2.25rem",
-      chipIconSize: "1.25rem",
+      avatar: "1.75rem",
     }
   },
   borderRadius: {
-    chip: {
-      regular: "0.5rem",
-      full: "62.5rem",
-    }
+    regular: "0.5rem",
+    full: "62.5rem",
   },
   typography: {
-      headline: {
-        weight: 600,
-        large: {
-          fontSize: "1.375rem",
-          lineHeight: "1.75rem",
-        },
-        medium: {
-          fontSize: "1rem",
-          lineHeight: "1.5rem",
-        },
-        small: {
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-        },
+    headline: {
+      weight: 600,
+      large: {
+        fontSize: "1.375rem",
+        lineHeight: "1.75rem",
       },
-      title: {
-        weight: 600,
-        large: {
-          fontSize: "1.375rem",
-          lineHeight: "1.75rem",
-        },
-        medium: {
-          fontSize: "rem",
-          lineHeight: "1.5rem",
-        },
-        small: {
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-        },
+      medium: {
+        fontSize: "1rem",
+        lineHeight: "1.5rem",
       },
-      label: {
-        weight: 500,
-        large: {
-          fontSize: "1rem",
-          lineHeight: "1.5rem",
-        },
-        medium: {
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-        },
-        small: {
-          fontSize: "0.75rem",
-          lineHeight: "1rem",
-        },
+      small: {
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
       },
-      body: {
-        weight: 400,
-        large: {
-          fontSize: "1rem",
-          lineHeight: "1.5rem",
-        },
-        medium: {
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-        },
-        small: {
-          fontSize: "0.75rem",
-          lineHeight: "1rem",
-        },
+    },
+    title: {
+      weight: 600,
+      large: {
+        fontSize: "1.375rem",
+        lineHeight: "1.75rem",
       },
+      medium: {
+        fontSize: "rem",
+        lineHeight: "1.5rem",
+      },
+      small: {
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+      },
+    },
+    label: {
+      weight: 500,
+      large: {
+        fontSize: "1rem",
+        lineHeight: "1.5rem",
+      },
+      medium: {
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+      },
+      small: {
+        fontSize: "0.75rem",
+        lineHeight: "1rem",
+      },
+    },
+    body: {
+      weight: 400,
+      large: {
+        fontSize: "1rem",
+        lineHeight: "1.5rem",
+      },
+      medium: {
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+      },
+      small: {
+        fontSize: "0.75rem",
+        lineHeight: "1rem",
+      },
+    },
   },
-  paddings: {
-    chip: {
-      compact: {
-        gap: "0.375rem",
-        left: {
-          labelOnly: "0.75rem",
-          trailingIconOnly: "0.625rem",
-          leadingIcon: "0.375rem",
-          avatar: "0.125rem"
-        },
-        right: {
-          labelOnly: "0.75rem",
-          trailingIconOnly: "0.375rem",
-          leadingIcon: "0.375rem",
-          avatar: "0.625rem",
-        }
-      },
-      regular: {
-        gap: "0.5rem",
-        left: {
-          labelOnly: "1rem",
-          trailingIconOnly: "0.75rem",
-          leadingIcon: "0.5rem",
-          avatar: "0.25rem"
-        },
-        right: {
-          labelOnly: "1rem",
-          trailingIconOnly: "0.5rem",
-          leadingIcon: "0.5rem",
-          avatar: "0.75rem",
-        }
-      }
-    }
-  }
 }
 
 const themes = [

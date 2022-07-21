@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Chip from "./index";
+
+<Meta title="General/Chip" component={Chip} />
+
+export const TemplateDefault = (args) => <Chip {...args} />
+
+# Chip
+
+```jsx
+import { Chip } from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    args={{
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+
+

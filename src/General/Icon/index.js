@@ -2,7 +2,8 @@ import React from "react";
 import "../../Base/fontawesome/css/fontawesome.css";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import theme from "../../_utils/theme";
+import { useTheme } from "@emotion/react";
+
 
 const Span = styled.span`
   box-sizing: border-box;
@@ -24,6 +25,8 @@ const Icon = (props) => {
     sizeInUnits,
     color,
     ...rest } = props;
+
+  const theme = useTheme();
 
   const themeProps = { theme, size, color, sizeInUnits };
 
