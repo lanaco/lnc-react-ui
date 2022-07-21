@@ -68,13 +68,13 @@ export const hexToRgba = (hex, a) => {
   return value ? `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})` : null;
 };
 
-export const getColor = (theme, color, state, opacity) => {
-  const color = theme.palette[color];
-  const state = color.cssStates[state];
-  const opacity = theme.palette.opacity[opacity];
-  const hexColorValue = color[state];
+export const getColor = (theme, color, state, colorWeight) => {
+  const paletteColor = theme.palette[color];
+  const cssState = paletteColor.cssStates[state];
+  const paletteOpacity = theme.palette.opacity[cssState];
+  const hexColorValue = paletteColor[colorWeight];
 
-  return hexToRgba(hexColorValue, opacity ?? "100%");
+  return hexToRgba(hexColorValue, paletteOpacity ?? "100%");
 };
 
 export const getSize = (theme, size) => {
