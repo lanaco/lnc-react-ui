@@ -4,7 +4,50 @@ import Chip from "./index";
 
 <Meta title="General/Chip" component={Chip} />
 
-export const TemplateDefault = (args) => <Chip {...args} />
+export const TemplateDefault = (args) => <Chip {...args} />;
+
+export const TemplateConfigurations = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Chip {...args} label={"Chip"} />
+    <Chip {...args} label={"Chip"} leadingIcon="square" />
+    <Chip {...args} label={"Chip"} leadingIcon="square" trailingIcon="times" />
+    <Chip {...args} label={"Chip"} avatar="user" borderRadius="full" />
+    <Chip
+      {...args}
+      label={"Chip"}
+      avatar="user"
+      trailingIcon="times"
+      borderRadius="full"
+    />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Chip {...args} label={"Chip"} color="primary" />
+    <Chip {...args} label={"Chip"} color="secondary" />
+    <Chip {...args} label={"Chip"} color="red" />
+    <Chip {...args} label={"Chip"} color="violet" />
+    <Chip {...args} label={"Chip"} color="yellow" />
+    <Chip {...args} label={"Chip"} color="green" />
+    <Chip {...args} label={"Chip"} color="gray" />
+    <Chip {...args} label={"Chip"} color="neutral" />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "7px" }}>
+    <Chip {...args} label={"Chip"} size="regular" />
+    <Chip {...args} label={"Chip"} size="compact" />
+  </div>
+);
+
+export const TemplateRounding = (args) => (
+  <div style={{ display: "flex", gap: "7px" }}>
+    <Chip {...args} label={"Chip"} borderRadius="regular" />
+    <Chip {...args} label={"Chip"} borderRadius="full" />
+  </div>
+);
 
 # Chip
 
@@ -13,16 +56,50 @@ import { Chip } from "@lnc-react-ui";
 ```
 
 <Canvas withSource="open">
-  <Story
-    name="Default"
-    args={{
-    }}
-  >
+  <Story name="Default" args={{label: "Chip"}}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
 
 <ArgsTable story="Default" />
 
+## Configurations
 
+Configuration for
 
+- Label only
+- Label & Trailing icon
+- Label & Leading icon
+- Label, Leading & Trailing Icon
+- Label & Avatar
+- Label, Avatar & Trailing icon
+
+<Canvas>
+  <Story name="Configurations" args={{}}>
+    {TemplateConfigurations.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Corner roundings
+
+<Canvas>
+  <Story name="Corner Roundings" args={{}}>
+    {TemplateRounding.bind({})}
+  </Story>
+</Canvas>
