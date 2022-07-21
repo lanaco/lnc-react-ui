@@ -61,7 +61,6 @@ const StyledChip = styled.span`
   border-radius: ${(props) => props.theme.borderRadius[props.borderRadius]};
   justify-content: center;
   align-items: center;
-  font-size: ${(props) => props.theme.typography.body.medium.fontSize};
   font-weight: 700;
   &:hover {
     background-color: ${(props) =>
@@ -194,7 +193,7 @@ Chip.propTypes = {
   trailingIcon: PropTypes.string,
   avatar: PropTypes.string,
   size: PropTypes.oneOf(["compact", "regular"]),
-  borderRadius: PropTypes.oneOf(["regular", "full"]),
+  borderRadius: PropTypes.oneOf(["regular", "curved"]),
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
   //---------------------------------------------------------------
