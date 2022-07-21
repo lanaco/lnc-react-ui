@@ -16,7 +16,7 @@ export const parameters = {
     }
   },
   themes: {
-    default: 'Main',
+    default: 'Lanaco Light',
     list: themes,
   },
 };
