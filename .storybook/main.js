@@ -38,5 +38,6 @@ module.exports = {
     "@storybook/addon-cssresources",
     "@storybook/addon-docs",
     'storybook-addon-themes',
+    'storybook-dark-mode'
   ],
 };

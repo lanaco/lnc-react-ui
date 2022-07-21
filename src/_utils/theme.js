@@ -87,7 +87,7 @@ const theme = {
       200: "#F9F6EE",
       300: "#FAF9F6",
       400: "#ffffff",
-    }
+    },
   },
   palette: {
     common: {
@@ -292,10 +292,10 @@ const theme = {
   },
   spaces: {
     paddings: {
-      popover: "1.25rem"
+      popover: "1.25rem",
     },
-    margins: {}
-  }
+    margins: {},
+  },
 };
 
 const lanaco_light = {
@@ -332,7 +332,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     secondary: {
       50: "#F0FDFD",
@@ -351,7 +351,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     red: {
       50: "#FFF1F2",
@@ -370,7 +370,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     violet: {
       50: "#F5F3FF",
@@ -389,7 +389,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     yellow: {
       50: "#FFFBEB",
@@ -408,7 +408,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     green: {
       50: "#ECFDF5",
@@ -427,7 +427,7 @@ const lanaco_light = {
         focus: 300,
         active: 400,
         text: 600,
-      }
+      },
     },
     gray: {
       50: "#F8FAFC",
@@ -446,7 +446,7 @@ const lanaco_light = {
         focus: 100,
         active: 200,
         text: 600,
-      }
+      },
     },
     neutral: {
       50: "#FAFAFA",
@@ -465,7 +465,7 @@ const lanaco_light = {
         focus: 100,
         active: 200,
         text: 600,
-      }
+      },
     },
     opacity: {
       50: "5%",
@@ -493,111 +493,78 @@ const lanaco_light = {
     chip: {
       regular: "2rem",
       compact: "2.25rem",
-      chipIconSize: "1.25rem",
-    }
+      avatar: "1.75rem",
+    },
   },
   borderRadius: {
     chip: {
       regular: "0.5rem",
       full: "62.5rem",
-    }
+    },
   },
   typography: {
-      headline: {
-        weight: 600,
-        large: {
-          fontSize: "1.375rem",
-          lineHeight: "1.75rem",
-        },
-        medium: {
-          fontSize: "1rem",
-          lineHeight: "1.5rem",
-        },
-        small: {
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-        },
+    fontFamily: "Nunito-sans, sans-serif",
+    headline: {
+      weight: 600,
+      large: {
+        fontSize: "1.375rem",
+        lineHeight: "1.75rem",
       },
-      title: {
-        weight: 600,
-        large: {
-          fontSize: "1.375rem",
-          lineHeight: "1.75rem",
-        },
-        medium: {
-          fontSize: "rem",
-          lineHeight: "1.5rem",
-        },
-        small: {
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-        },
+      medium: {
+        fontSize: "1rem",
+        lineHeight: "1.5rem",
       },
-      label: {
-        weight: 500,
-        large: {
-          fontSize: "1rem",
-          lineHeight: "1.5rem",
-        },
-        medium: {
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-        },
-        small: {
-          fontSize: "0.75rem",
-          lineHeight: "1rem",
-        },
+      small: {
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
       },
-      body: {
-        weight: 400,
-        large: {
-          fontSize: "1rem",
-          lineHeight: "1.5rem",
-        },
-        medium: {
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-        },
-        small: {
-          fontSize: "0.75rem",
-          lineHeight: "1rem",
-        },
+    },
+    title: {
+      weight: 600,
+      large: {
+        fontSize: "1.375rem",
+        lineHeight: "1.75rem",
       },
+      medium: {
+        fontSize: "rem",
+        lineHeight: "1.5rem",
+      },
+      small: {
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+      },
+    },
+    label: {
+      weight: 500,
+      large: {
+        fontSize: "1rem",
+        lineHeight: "1.5rem",
+      },
+      medium: {
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+      },
+      small: {
+        fontSize: "0.75rem",
+        lineHeight: "1rem",
+      },
+    },
+    body: {
+      weight: 400,
+      large: {
+        fontSize: "1rem",
+        lineHeight: "1.5rem",
+      },
+      medium: {
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+      },
+      small: {
+        fontSize: "0.75rem",
+        lineHeight: "1rem",
+      },
+    },
   },
-  paddings: {
-    chip: {
-      compact: {
-        gap: "0.375rem",
-        left: {
-          labelOnly: "0.75rem",
-          trailingIconOnly: "0.625rem",
-          leadingIcon: "0.375rem",
-          avatar: "0.125rem"
-        },
-        right: {
-          labelOnly: "0.75rem",
-          trailingIconOnly: "0.375rem",
-          leadingIcon: "0.375rem",
-          avatar: "0.625rem",
-        }
-      },
-      regular: {
-        gap: "0.5rem",
-        left: {
-          labelOnly: "1rem",
-          trailingIconOnly: "0.75rem",
-          leadingIcon: "0.5rem",
-          avatar: "0.25rem"
-        },
-        right: {
-          labelOnly: "1rem",
-          trailingIconOnly: "0.5rem",
-          leadingIcon: "0.5rem",
-          avatar: "0.75rem",
-        }
-      }
-    }
-  }
 }
 
 const themes = [
