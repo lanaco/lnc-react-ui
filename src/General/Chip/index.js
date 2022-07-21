@@ -29,7 +29,6 @@ const getPadding = (avatar, leadingIcon, trailingIcon, size) => {
     }; padding-left: ${size == "regular" ? "1rem" : "0.75rem"};`;
   }
 };
-
 const StyledChip = styled.span`
   cursor: pointer;
   display: inline-flex;
