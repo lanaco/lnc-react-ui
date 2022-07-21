@@ -304,10 +304,11 @@ const lanaco_light = {
   backgroundColor: "#fff",
   palette: {
     outline: {
-      width: "0.125rem solid",
+      width: "0.125rem",
+      style: "solid",
       color: "secondary",
       weight: 500,
-      outlineOffset: "0.125rem",
+      offset: "0.125rem",
     },
     disabled: {
       color: "gray",
@@ -486,7 +487,7 @@ const lanaco_light = {
     small: "2.25rem",
     medium: "2.5rem",
     large: "2.75rem",
-  }
+  },
   borderRadius: {
     regular: "8px",
     curved: "1000px",
@@ -498,15 +499,15 @@ const lanaco_light = {
       weight: 700,
       large: {
         fontSize: "1rem",
-        lineHeight: "1",
+        lineHeight: "1.125rem",
       },
       medium: {
         fontSize: "0.875rem",
-        lineHeight: "1",
+        lineHeight: "1rem",
       },
       small: {
         fontSize: "0.875rem",
-        lineHeight: "1",
+        lineHeight: "1rem",
       },
     }
   },
