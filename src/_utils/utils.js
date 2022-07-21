@@ -57,13 +57,63 @@ export const renderCustomElement = (
 export const hexToRgba = (hex, a) => {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   let value = result
-      ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-          a: a,
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+        a: a,
       }
-      : null;
+    : null;
 
   return value ? `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})` : null;
+};
+
+export const getColor = (theme, color, state, opacity) => {
+  const color = theme.palette[color];
+  const state = color.cssStates[state];
+  const opacity = theme.palette.opacity[opacity];
+  const hexColorValue = color[state];
+
+  return hexToRgba(hexColorValue, opacity ?? "100%");
+};
+
+export const getSize = (theme, size) => {
+  return theme.sizes[size];
+};
+
+export const getComponentTypography = (theme, size) => {
+  return `
+    font-weight: ${theme.typography.component.weight};
+    font-size: ${theme.typography.component[size].fontSize};
+    line-height: ${theme.typography.component[size].lineHeight};
+  `;
+};
+
+export const getBorderRadius = (theme, type) => {
+  return theme.borderRadius[type];
+};
+
+export const getOutline = (theme) => {
+  const color =
+    theme.palette[theme.palette.outline.color][theme.palette.outline.weight];
+
+  const outline = `outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};`;
+  const offset = `outline-offset: ${theme.palette.outline.offset};`;
+
+  return { outline, offset };
+};
+
+export const getDisabledState = (theme) => {
+  const paletteColor = theme.palette.disabled.color;
+  const bgColorHex =
+    theme.palette[paletteColor][theme.palette.disabled.backgroundWeight];
+  const fontColorHex =
+    theme.palette[paletteColor][theme.palette.disabled.textWeight];
+  const opacity = theme.palette.opacity[theme.palette.disabled.opacityWeight];
+  const bgColorRgba = hexToRgba(bgColorHex, opacity ?? "100%");
+
+  return `
+    background-color: ${bgColorRgba};
+    color: ${fontColorHex};
+  `;
 };
