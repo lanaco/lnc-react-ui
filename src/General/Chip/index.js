@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
-import { hexToRgba } from "../../_utils/utils";
+import { getColor, getComponentTypography, getOutline, hexToRgba } from "../../_utils/utils";
 
 const getIconClass = (icon) => {
   var style = "fas";
@@ -41,12 +41,9 @@ const StyledChip = styled.span`
           ],
           props.theme.palette.opacity[props.theme.palette.disabled.opacity]
         )
-      : hexToRgba(
-          props.theme.palette[props.color][500],
-          props.theme.palette.opacity[
-            props.theme.palette[props.color].cssStates.enabled
-          ]
-        )};
+      : 
+     getColor(props.theme, props.color, "enabled", 500) 
+      };
   color: ${(props) =>
     props.disabled
       ? props.theme.palette[props.theme.palette.disabled.color][
@@ -61,7 +58,7 @@ const StyledChip = styled.span`
   border-radius: ${(props) => props.theme.borderRadius[props.borderRadius]};
   justify-content: center;
   align-items: center;
-  font-weight: 700;
+  ${props => getComponentTypography(props.theme, "small")};
   &:hover {
     background-color: ${(props) =>
       hexToRgba(
@@ -79,13 +76,8 @@ const StyledChip = styled.span`
           props.theme.palette[props.color].cssStates.focus
         ]
       )};
-    outline: ${(props) =>
-      props.theme.palette.outline.width +
-      " " +
-      props.theme.palette[props.theme.palette.outline.color][
-        props.theme.palette.outline.weight
-      ]};
-    outline-offset: ${(props) => props.theme.palette.outline.outlineOffset};
+    ${(props) => getOutline(props.theme).outline};
+    ${(props) => getOutline(props.theme).offset};
   }
   &:active {
     background-color: ${(props) =>
@@ -131,6 +123,9 @@ const Chip = React.forwardRef((props, ref) => {
     onBlur,
     onClick,
     onKeyDown,
+    onLeadingIconClick,
+    onTrailingIconClick,
+    onAvatarClick,
     //----------------
     className,
     style,
@@ -160,14 +155,14 @@ const Chip = React.forwardRef((props, ref) => {
       {...rest}
     >
       {avatar && (
-        <Avatar {...themeProps}>
+        <Avatar {...themeProps} onClick={onAvatarClick}>
           <i className={getIconClass(avatar)} />
         </Avatar>
       )}
 
-      {leadingIcon && <i className={getIconClass(leadingIcon)} />}
+      {leadingIcon && <i className={getIconClass(leadingIcon)} onClick={onLeadingIconClick}/>}
       {label}
-      {trailingIcon && <i className={getIconClass(trailingIcon)} />}
+      {trailingIcon && <i className={getIconClass(trailingIcon)} onClick={onTrailingIconClick}/>}
     </StyledChip>
   );
 });
@@ -182,6 +177,9 @@ Chip.defaultProps = {
   onFocus: () => {},
   onClick: () => {},
   onKeyDown: () => {},
+  onLeadingIconClick: () => {},
+  onTrailingIconClick: () => {},
+  onAvatarClick: () => {},
   //-------------------------
   style: {},
   color: "primary",
@@ -201,6 +199,9 @@ Chip.propTypes = {
   onFocus: PropTypes.func,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
+  onLeadingIconClick: PropTypes.func,
+  onTrailingIconClick: PropTypes.func,
+  onAvatarClick: PropTypes.func,
   //---------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,
