@@ -315,51 +315,33 @@ const lanaco_light = {
       default: {
         palette: "gray",
         enabled: {
-          background: 700,
+          background: 0,
           border: 200,
           placeholder: 500,
           text: 900,
         },
         focus: {
-          background: 700,
+          background: 0,
           border: 200,
           placeholder: 500,
           text: 900,
         },
         hover: {
-          background: 700,
+          background: 0,
           border: 200,
           placeholder: 500,
           text: 900,
         },
         active: {
-          background: 700,
+          background: 0,
           border: 200,
           placeholder: 500,
           text: 900,
         },
       },
-      teal: {
+      green: {
         enabled: {
-          background: 0,
-          text: 500,
-        },
-        focus: {
-          background: 0,
           border: 200,
-          text: 900,
-        },
-      },
-      gray: {
-        enabled: {
-          background: 0,
-          border: 200,
-          text: 500,
-        },
-        focus: {
-          background: 0,
-          border: 200,
-          text: 900,
         },
       },
     },

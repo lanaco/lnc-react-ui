@@ -58,11 +58,11 @@ export const hexToRgba = (hex, a) => {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   let value = result
     ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16),
-      a: a,
-    }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+        a: a,
+      }
     : null;
 
   return value ? `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})` : null;
@@ -79,8 +79,12 @@ export const getColorRgbaValue = (
   const palette = theme.colorContext[context];
   const componentDefault = theme.component[component].default;
   const componentState = theme.components[component][palette][stateProp];
-  const colorWeight = componentState[colorProp] ? componentState[colorProp] : componentDefault[colorProp];
-  const opacityWeight = componentState[opacityProp] ? componentState[opacityProp] : componentDefault[opacityProp];
+  const colorWeight = componentState[colorProp]
+    ? componentState[colorProp]
+    : componentDefault[colorProp];
+  const opacityWeight = componentState[opacityProp]
+    ? componentState[opacityProp]
+    : componentDefault[opacityProp];
 
   const hexColorValue = theme.palette[palette][colorWeight];
   const opacityValue = theme.palette[palette][opacityWeight];
@@ -104,7 +108,7 @@ export const getBorderRadiusValueWithUnits = (theme, type) => {
   return theme.borderRadius[type];
 };
 
-export const getOutline = (theme) => {
+export const getOutlineCss = (theme) => {
   const color =
     theme.palette[theme.palette.outline.color][theme.palette.outline.weight];
 
@@ -114,7 +118,7 @@ export const getOutline = (theme) => {
     `;
 };
 
-export const getDisabledState = (theme) => {
+export const getDisabledStateCss = (theme) => {
   const paletteColor = theme.palette.disabled.color;
   const bgColorHex =
     theme.palette[paletteColor][theme.palette.disabled.backgroundWeight];
