@@ -38,6 +38,7 @@ const StyledChip = styled.span`
     !props.disabled && getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "background", "backgroundOpacity") };
   color: ${(props) =>
     !props.disabled &&  getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "text")};
+  font-weight: ${props => props.theme.typography.fontWeightBold};
   ${(props) =>
     getPadding(props.avatar, props.leadingIcon, props.trailingIcon, props.size)}
   gap: 0.375rem;
@@ -53,7 +54,7 @@ const StyledChip = styled.span`
   &:focus {
     background-color: ${(props) =>
       !props.disabled && getColorRgbaValue(props.theme, "Chip", props.color, "focus", "background", "backgroundOpacity") };
-      ${(props) => getOutlineCss(props.theme)};
+      ${(props) => !props.disabled && getOutlineCss(props.theme)};
   }
   &:active {
     background-color: ${(props) =>
@@ -121,7 +122,7 @@ const Chip = React.forwardRef((props, ref) => {
       {...rest}
     >
       {avatar && (
-        <Avatar {...themeProps} onClick={onAvatarClick}>
+        <Avatar {...themeProps} onClick={onAvatarClick} disabled={disabled}>
           <i className={getIconClass(avatar)} />
         </Avatar>
       )}
