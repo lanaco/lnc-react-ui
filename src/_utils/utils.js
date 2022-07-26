@@ -58,11 +58,11 @@ export const hexToRgba = (hex, a) => {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   let value = result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-        a: a,
-      }
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+      a: a,
+    }
     : null;
 
   return value ? `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})` : null;
@@ -77,17 +77,13 @@ export const getColorRgbaValue = (
   opacityProp
 ) => {
   const palette = theme.colorContext[context];
-  const componentDefault = theme.component[component].default;
+  const componentDefault = theme.components[component].default;
   const componentState = theme.components[component][palette][stateProp];
-  const colorWeight = componentState[colorProp]
-    ? componentState[colorProp]
-    : componentDefault[colorProp];
-  const opacityWeight = componentState[opacityProp]
-    ? componentState[opacityProp]
-    : componentDefault[opacityProp];
+  const colorWeight = componentState[colorProp] ? componentState[colorProp] : componentDefault[colorProp];
+  const opacityWeight = componentState[opacityProp] ? componentState[opacityProp] : componentDefault[opacityProp];
 
   const hexColorValue = theme.palette[palette][colorWeight];
-  const opacityValue = theme.palette[palette][opacityWeight];
+  const opacityValue = theme.palette.opacity[opacityWeight];
 
   return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
@@ -109,8 +105,10 @@ export const getBorderRadiusValueWithUnits = (theme, type) => {
 };
 
 export const getOutlineCss = (theme) => {
+  const palette = theme.colorContext[theme.palette.outline.context];
+
   const color =
-    theme.palette[theme.palette.outline.color][theme.palette.outline.weight];
+    theme.palette[palette][theme.palette.outline.weight];
 
   return `
     outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};
@@ -121,10 +119,10 @@ export const getOutlineCss = (theme) => {
 export const getDisabledStateCss = (theme) => {
   const paletteColor = theme.palette.disabled.color;
   const bgColorHex =
-    theme.palette[paletteColor][theme.palette.disabled.backgroundWeight];
+    theme.palette[paletteColor][theme.palette.disabled.background];
   const fontColorHex =
-    theme.palette[paletteColor][theme.palette.disabled.textWeight];
-  const opacity = theme.palette.opacity[theme.palette.disabled.opacityWeight];
+    theme.palette[paletteColor][theme.palette.disabled.text];
+  const opacity = theme.palette.opacity[theme.palette.disabled.opacity];
   const bgColorRgba = hexToRgba(bgColorHex, opacity ?? "100%");
 
   return `
