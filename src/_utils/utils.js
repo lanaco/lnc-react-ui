@@ -77,7 +77,7 @@ export const getColorRgbaValue = (
   opacityProp
 ) => {
   const palette = theme.colorContext[context];
-  const componentDefault = theme.component[component].default;
+  const componentDefault = theme.components[component].default;
   const componentState = theme.components[component][palette][stateProp];
   const colorWeight = componentState[colorProp]
     ? componentState[colorProp]
@@ -87,7 +87,7 @@ export const getColorRgbaValue = (
     : componentDefault[opacityProp];
 
   const hexColorValue = theme.palette[palette][colorWeight];
-  const opacityValue = theme.palette[palette][opacityWeight];
+  const opacityValue = theme.palette.opacity[opacityWeight];
 
   return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
@@ -110,7 +110,7 @@ export const getBorderRadiusValueWithUnits = (theme, type) => {
 
 export const getOutlineCss = (theme) => {
   const color =
-    theme.palette[theme.palette.outline.color][theme.palette.outline.weight];
+    theme.palette[palette][theme.palette.outline.weight];
 
   return `
     outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};

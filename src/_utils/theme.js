@@ -345,12 +345,213 @@ const lanaco_light = {
         },
       },
     },
+    Chip: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 50,
+          backgroundOpacity: 50,
+          text: 900,
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 100,
+          text: 900,
+        },
+        focus: {
+          background: 100,
+          backgroundOpacity: 100,
+          text: 900,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 200,
+          text: 900,
+        },
+      },
+      teal: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 500,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 500,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      red: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 500,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 500,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 500,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      green: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 500,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 500,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 500,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 500,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+    },
   },
   palette: {
     outline: {
       width: "0.125rem",
       style: "solid",
-      color: "secondary",
+      context: "secondary",
       weight: 500,
       offset: "0.125rem",
     },
