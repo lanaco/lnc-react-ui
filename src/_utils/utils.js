@@ -58,17 +58,17 @@ export const hexToRgba = (hex, a) => {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   let value = result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-        a: a,
-      }
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+      a: a,
+    }
     : null;
 
   return value ? `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})` : null;
 };
 
-export const getColorRgba = (
+export const getColorRgbaValue = (
   theme,
   component,
   context,
@@ -80,7 +80,7 @@ export const getColorRgba = (
   const componentDefault = theme.component[component].default;
   const componentState = theme.components[component][palette][stateProp];
   const colorWeight = componentState[colorProp] ? componentState[colorProp] : componentDefault[colorProp];
-  const opacityWeight = componentState[opacityProp];
+  const opacityWeight = componentState[opacityProp] ? componentState[opacityProp] : componentDefault[opacityProp];
 
   const hexColorValue = theme.palette[palette][colorWeight];
   const opacityValue = theme.palette[palette][opacityWeight];
@@ -88,45 +88,43 @@ export const getColorRgba = (
   return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
 
-// export const getDefaultColorRgba = (theme, )
+export const getSizeValueWithUnits = (theme, size) => {
+  return theme.sizes[size];
+};
 
-// export const getSize = (theme, size) => {
-//   return theme.sizes[size];
-// };
+export const getComponentTypographyCss = (theme, size) => {
+  return `
+    font-weight: ${theme.typography.component.weight};
+    font-size: ${theme.typography.component[size].fontSize};
+    line-height: ${theme.typography.component[size].lineHeight};
+  `;
+};
 
-// export const getComponentTypography = (theme, size) => {
-//   return `
-//     font-weight: ${theme.typography.component.weight};
-//     font-size: ${theme.typography.component[size].fontSize};
-//     line-height: ${theme.typography.component[size].lineHeight};
-//   `;
-// };
+export const getBorderRadiusValueWithUnits = (theme, type) => {
+  return theme.borderRadius[type];
+};
 
-// export const getBorderRadius = (theme, type) => {
-//   return theme.borderRadius[type];
-// };
+export const getOutline = (theme) => {
+  const color =
+    theme.palette[theme.palette.outline.color][theme.palette.outline.weight];
 
-// export const getOutline = (theme) => {
-//   const color =
-//     theme.palette[theme.palette.outline.color][theme.palette.outline.weight];
+  return `
+    outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};
+    outline-offset: ${theme.palette.outline.offset};
+    `;
+};
 
-//   const outline = `outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};`;
-//   const offset = `outline-offset: ${theme.palette.outline.offset};`;
+export const getDisabledState = (theme) => {
+  const paletteColor = theme.palette.disabled.color;
+  const bgColorHex =
+    theme.palette[paletteColor][theme.palette.disabled.backgroundWeight];
+  const fontColorHex =
+    theme.palette[paletteColor][theme.palette.disabled.textWeight];
+  const opacity = theme.palette.opacity[theme.palette.disabled.opacityWeight];
+  const bgColorRgba = hexToRgba(bgColorHex, opacity ?? "100%");
 
-//   return { outline, offset };
-// };
-
-// export const getDisabledState = (theme) => {
-//   const paletteColor = theme.palette.disabled.color;
-//   const bgColorHex =
-//     theme.palette[paletteColor][theme.palette.disabled.backgroundWeight];
-//   const fontColorHex =
-//     theme.palette[paletteColor][theme.palette.disabled.textWeight];
-//   const opacity = theme.palette.opacity[theme.palette.disabled.opacityWeight];
-//   const bgColorRgba = hexToRgba(bgColorHex, opacity ?? "100%");
-
-//   return `
-//     background-color: ${bgColorRgba};
-//     color: ${fontColorHex};
-//   `;
-// };
+  return `
+    background-color: ${bgColorRgba};
+    color: ${fontColorHex};
+  `;
+};
