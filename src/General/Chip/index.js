@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
-import { getColor, getComponentTypography, getOutline, hexToRgba } from "../../_utils/utils";
+import { getBorderRadiusValueWithUnits, getColorRgbaValue, getComponentTypographyCss, getDisabledStateCss, getOutlineCss } from "../../_utils/utils";
 
 const getIconClass = (icon) => {
   var style = "fas";
@@ -29,83 +29,50 @@ const getPadding = (avatar, leadingIcon, trailingIcon, size) => {
     }; padding-left: ${size == "regular" ? "1rem" : "0.75rem"};`;
   }
 };
+
 const StyledChip = styled.span`
   cursor: pointer;
   display: inline-flex;
   height: ${(props) => props.size === 'regular' ?  '2rem' : '2.25rem'};
+  ${props => props.disabled && getDisabledStateCss(props.theme)};
   background-color: ${(props) =>
-    props.disabled
-      ? hexToRgba(
-          props.theme.palette[props.theme.palette.disabled.color][
-            props.theme.palette.disabled.backgroundWeight
-          ],
-          props.theme.palette.opacity[props.theme.palette.disabled.opacity]
-        )
-      : 
-     getColor(props.theme, props.color, "enabled", 500) 
-      };
+    !props.disabled && getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "background", "backgroundOpacity") };
   color: ${(props) =>
-    props.disabled
-      ? props.theme.palette[props.theme.palette.disabled.color][
-          props.theme.palette.disabled.textWeight
-        ]
-      : props.theme.palette[props.color][
-          props.theme.palette[props.color].cssStates.text
-        ]};
+    !props.disabled &&  getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "text")};
   ${(props) =>
     getPadding(props.avatar, props.leadingIcon, props.trailingIcon, props.size)}
   gap: 0.375rem;
-  border-radius: ${(props) => props.theme.borderRadius[props.borderRadius]};
+  border-radius: ${(props) => getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
   justify-content: center;
   align-items: center;
-  ${props => getComponentTypography(props.theme, "small")};
+  ${props => getComponentTypographyCss(props.theme, "small")};
+ 
   &:hover {
     background-color: ${(props) =>
-      hexToRgba(
-        props.theme.palette[props.color][500],
-        props.theme.palette.opacity[
-          props.theme.palette[props.color].cssStates.hover
-        ]
-      )};
+      !props.disabled && getColorRgbaValue(props.theme, "Chip", props.color, "hover", "background", "backgroundOpacity") };
   }
   &:focus {
     background-color: ${(props) =>
-      hexToRgba(
-        props.theme.palette[props.color][500],
-        props.theme.palette.opacity[
-          props.theme.palette[props.color].cssStates.focus
-        ]
-      )};
-    ${(props) => getOutline(props.theme).outline};
-    ${(props) => getOutline(props.theme).offset};
+      !props.disabled && getColorRgbaValue(props.theme, "Chip", props.color, "focus", "background", "backgroundOpacity") };
+      ${(props) => getOutlineCss(props.theme)};
   }
   &:active {
     background-color: ${(props) =>
-      hexToRgba(
-        props.theme.palette[props.color][500],
-        props.theme.palette.opacity[
-          props.theme.palette[props.color].cssStates.active
-        ]
-      )};
+      !props.disabled && getColorRgbaValue(props.theme, "Chip", props.color, "active", "background", "backgroundOpacity") };
   }
 `;
 
 const Avatar = styled.div`
-  border-radius: 50%;
-  background-color: ${(props) =>
-    props.disabled
-      ? props.theme.palette[props.theme.palette.disabled.color][
-          props.theme.palette.disabled.textWeight
-        ]
-      : props.theme.palette[props.color][
-          props.theme.palette[props.color].cssStates.text
-        ]};
+  border-radius: ${props => getBorderRadiusValueWithUnits(props.theme, "curved")};
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 1.75rem;
   width: 1.75rem;
+  ${props => props.disabled && getDisabledStateCss(props.theme)};
+  background-color: ${(props) =>
+    !props.disabled && getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "text")};
 `;
 
 const Chip = React.forwardRef((props, ref) => {
@@ -208,12 +175,10 @@ Chip.propTypes = {
   color: PropTypes.oneOf([
     "primary",
     "secondary",
-    "red",
-    "violet",
-    "yellow",
-    "green",
-    "gray",
-    "neutral",
+    "success",
+    "warning",
+    "danger",
+    "information",
   ]),
 };
 

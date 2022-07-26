@@ -77,13 +77,13 @@ export const getColorRgbaValue = (
   opacityProp
 ) => {
   const palette = theme.colorContext[context];
-  const componentDefault = theme.component[component].default;
+  const componentDefault = theme.components[component].default;
   const componentState = theme.components[component][palette][stateProp];
   const colorWeight = componentState[colorProp] ? componentState[colorProp] : componentDefault[colorProp];
   const opacityWeight = componentState[opacityProp] ? componentState[opacityProp] : componentDefault[opacityProp];
 
   const hexColorValue = theme.palette[palette][colorWeight];
-  const opacityValue = theme.palette[palette][opacityWeight];
+  const opacityValue = theme.palette.opacity[opacityWeight];
 
   return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
@@ -104,9 +104,11 @@ export const getBorderRadiusValueWithUnits = (theme, type) => {
   return theme.borderRadius[type];
 };
 
-export const getOutline = (theme) => {
+export const getOutlineCss = (theme) => {
+  const palette = theme.colorContext[theme.palette.outline.context];
+
   const color =
-    theme.palette[theme.palette.outline.color][theme.palette.outline.weight];
+    theme.palette[palette][theme.palette.outline.weight];
 
   return `
     outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};
@@ -114,7 +116,7 @@ export const getOutline = (theme) => {
     `;
 };
 
-export const getDisabledState = (theme) => {
+export const getDisabledStateCss = (theme) => {
   const paletteColor = theme.palette.disabled.color;
   const bgColorHex =
     theme.palette[paletteColor][theme.palette.disabled.backgroundWeight];
