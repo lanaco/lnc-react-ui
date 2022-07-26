@@ -119,10 +119,10 @@ export const getOutlineCss = (theme) => {
 export const getDisabledStateCss = (theme) => {
   const paletteColor = theme.palette.disabled.color;
   const bgColorHex =
-    theme.palette[paletteColor][theme.palette.disabled.backgroundWeight];
+    theme.palette[paletteColor][theme.palette.disabled.background];
   const fontColorHex =
-    theme.palette[paletteColor][theme.palette.disabled.textWeight];
-  const opacity = theme.palette.opacity[theme.palette.disabled.opacityWeight];
+    theme.palette[paletteColor][theme.palette.disabled.text];
+  const opacity = theme.palette.opacity[theme.palette.disabled.opacity];
   const bgColorRgba = hexToRgba(bgColorHex, opacity ?? "100%");
 
   return `

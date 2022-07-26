@@ -576,7 +576,7 @@ const lanaco_light = {
     disabled: {
       color: "gray",
       text: 400,
-      background: 200,
+      background: 900,
       opacity: 50,
     },
     gray: {
