@@ -79,11 +79,13 @@ export const getColorRgbaValue = (
   const palette = theme.colorContext[context];
   const componentDefault = theme.components[component].default;
   const componentState = theme.components[component][palette][stateProp];
-  const colorWeight = componentState[colorProp] ? componentState[colorProp] : componentDefault[colorProp];
-  const opacityWeight = componentState[opacityProp] ? componentState[opacityProp] : componentDefault[opacityProp];
+  const colorWeight = componentState[colorProp];
+  const defaultColorWeight = componentDefault[stateProp][colorProp];
+  const opacityWeight = componentState[opacityProp];
+  const defaultOpacityWeight = componentDefault[stateProp][opacityProp];
 
-  const hexColorValue = theme.palette[palette][colorWeight];
-  const opacityValue = theme.palette.opacity[opacityWeight];
+  const hexColorValue = colorWeight ? theme.palette[palette][colorWeight] : theme.palette[componentDefault.palette][defaultColorWeight];
+  const opacityValue = opacityWeight ? theme.palette.opacity[opacityWeight] : theme.palette.opacity[defaultOpacityWeight];
 
   return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
