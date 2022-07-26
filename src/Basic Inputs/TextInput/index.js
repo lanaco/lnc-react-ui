@@ -3,57 +3,33 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useCallback, useState, useEffect } from "react";
 import { debounce } from "lodash";
-
-const paddingBySize = (size) => {
-  return {
-    small: "0.41875rem 0.5rem",
-    medium: "0.48125rem 0.6rem",
-    large: "0.65625rem 0.7rem",
-  }[size];
-};
-
-const standardCssFields = ({ theme, size }) => {
-  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
-    size
-  ];
-
-  return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
-    min-height: ${height};
-    max-height: ${height};
-  `;
-};
+import { getColorRgbaValue, getSizeValueWithUnits } from "../../_utils/utils";
 
 const Input = styled.input`
-  ${(props) => standardCssFields(props)}
-  padding: ${(props) => paddingBySize(props.size)};
-  background-color: ${(props) => props.theme.test_palette.light[100]};
-  color: ${(props) => props.theme.test_palette.dark[500]};
-  border: 0.09375rem solid ${(props) => props.theme.test_palette.light[500]};
-  line-height: inherit;
-  appearance: none;
-  outline: none;
-  display: inline-block;
-  border-radius: 0.25rem;
-  width: 100%;
-  box-sizing: border-box;
+  // width: 100%;
+  min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "enabled",
+      "background"
+    )};
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "Input", props.color, "enabled", "text")};
+  border: 1px solid
+    ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Input",
+        props.color,
+        "enabled",
+        "border"
+      )};
 
   &:disabled {
-    border: 0.09375rem solid ${(props) => props.theme.test_palette.light[400]};
-    color: ${(props) => props.theme.test_palette.light[500]};
-    cursor: default;
-  }
-
-  &:hover:enabled {
-    border: 0.09375rem solid
-      ${(props) => props.theme.test_palette[props.color][400]};
-  }
-
-  &:focus:enabled {
-    border: 0.09375rem solid
-      ${(props) => props.theme.test_palette[props.color][400]};
-    box-shadow: 0px 0px 0.375rem -0.125rem ${(props) => props.theme.test_palette[props.color][400]};
   }
 `;
 
