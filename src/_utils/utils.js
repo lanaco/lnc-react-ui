@@ -58,30 +58,41 @@ export const hexToRgba = (hex, a) => {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   let value = result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-        a: a,
-      }
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+      a: a,
+    }
     : null;
 
   return value ? `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})` : null;
 };
 
-export const getColor = (theme, color, state, opacity) => {
-  const color = theme.palette[color];
-  const state = color.cssStates[state];
-  const opacity = theme.palette.opacity[opacity];
-  const hexColorValue = color[state];
+export const getColorRgbaValue = (
+  theme,
+  component,
+  context,
+  stateProp,
+  colorProp,
+  opacityProp
+) => {
+  const palette = theme.colorContext[context];
+  const componentDefault = theme.component[component].default;
+  const componentState = theme.components[component][palette][stateProp];
+  const colorWeight = componentState[colorProp] ? componentState[colorProp] : componentDefault[colorProp];
+  const opacityWeight = componentState[opacityProp] ? componentState[opacityProp] : componentDefault[opacityProp];
 
-  return hexToRgba(hexColorValue, opacity ?? "100%");
+  const hexColorValue = theme.palette[palette][colorWeight];
+  const opacityValue = theme.palette[palette][opacityWeight];
+
+  return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
 
-export const getSize = (theme, size) => {
+export const getSizeValueWithUnits = (theme, size) => {
   return theme.sizes[size];
 };
 
-export const getComponentTypography = (theme, size) => {
+export const getComponentTypographyCss = (theme, size) => {
   return `
     font-weight: ${theme.typography.component.weight};
     font-size: ${theme.typography.component[size].fontSize};
@@ -89,7 +100,7 @@ export const getComponentTypography = (theme, size) => {
   `;
 };
 
-export const getBorderRadius = (theme, type) => {
+export const getBorderRadiusValueWithUnits = (theme, type) => {
   return theme.borderRadius[type];
 };
 
@@ -97,10 +108,10 @@ export const getOutline = (theme) => {
   const color =
     theme.palette[theme.palette.outline.color][theme.palette.outline.weight];
 
-  const outline = `outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};`;
-  const offset = `outline-offset: ${theme.palette.outline.offset};`;
-
-  return { outline, offset };
+  return `
+    outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};
+    outline-offset: ${theme.palette.outline.offset};
+    `;
 };
 
 export const getDisabledState = (theme) => {
