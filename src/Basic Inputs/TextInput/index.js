@@ -3,10 +3,18 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useCallback, useState, useEffect } from "react";
 import { debounce } from "lodash";
-import { getColorRgbaValue, getSizeValueWithUnits } from "../../_utils/utils";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledStateCss,
+  getOutlineCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const Input = styled.input`
-  // width: 100%;
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   background-color: ${(props) =>
@@ -18,18 +26,54 @@ const Input = styled.input`
       "background"
     )};
   color: ${(props) =>
-    getColorRgbaValue(props.theme, "Input", props.color, "enabled", "text")};
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.isFocused ? "primary" : props.color,
+      "enabled",
+      "text"
+    )};
   border: 1px solid
     ${(props) =>
       getColorRgbaValue(
         props.theme,
         "Input",
-        props.color,
+        props.isFocused ? "primary" : props.color,
         "enabled",
         "border"
       )};
+  caret-color: ${(props) =>
+    getColorRgbaValue(props.theme, "Input", props.color, "enabled", "caret")};
+  border-radius: ${(props) =>
+    getBorderRadiusValueWithUnits(props.theme, "regular")};
+  padding: 0.625rem 0.75rem;
+  width: 100%;
+
+  &::placeholder {
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Input",
+        props.color,
+        "enabled",
+        "placeholder"
+      )};
+  }
+
+  &:focus {
+    ${(props) => getOutlineCss(props.theme)}
+  }
 
   &:disabled {
+    ${(props) => getDisabledStateCss(props.theme)}
+    border: 1px solid ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Input",
+        props.color,
+        "disabled",
+        "border"
+      )};
   }
 `;
 
@@ -60,6 +104,7 @@ const TextInput = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
   const [inputValue, setInputValue] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => setInputValue(value ? value : ""), [value]);
 
@@ -77,6 +122,16 @@ const TextInput = React.forwardRef((props, ref) => {
     debouncedOnChange(e, e.target.value);
   };
 
+  const handleFocus = (e) => {
+    setIsFocused(true);
+    onFocus(e);
+  };
+
+  const handleBlur = (e) => {
+    setIsFocused(false);
+    onBlur(e);
+  };
+
   return (
     <Input
       ref={ref}
@@ -89,9 +144,10 @@ const TextInput = React.forwardRef((props, ref) => {
       style={style}
       disabled={disabled}
       readOnly={readOnly}
+      isFocused={isFocused}
       value={inputValue}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       onChange={onValueChange}
       tabIndex={tabIndex}
       {...rest}

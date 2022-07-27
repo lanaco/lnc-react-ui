@@ -319,29 +319,56 @@ const lanaco_light = {
           border: 200,
           placeholder: 500,
           text: 900,
+          caret: 900,
+          fontWeight: 400,
         },
         focus: {
           background: 0,
           border: 200,
           placeholder: 500,
           text: 900,
+          caret: 900,
+          fontWeight: 400,
         },
         hover: {
           background: 0,
           border: 200,
           placeholder: 500,
           text: 900,
+          caret: 900,
+          fontWeight: 400,
         },
         active: {
           background: 0,
           border: 200,
           placeholder: 500,
           text: 900,
+          caret: 900,
+          fontWeight: 400,
+        },
+        disabled: {
+          border: 200,
+        },
+      },
+      teal: {
+        enabled: {
+          caret: 500,
         },
       },
       green: {
         enabled: {
-          border: 200,
+          border: 300,
+        },
+      },
+      yellow: {
+        enabled: {
+          border: 300,
+        },
+      },
+      red: {
+        enabled: {
+          border: 300,
+          text: 900,
         },
       },
     },
@@ -892,7 +919,7 @@ const lanaco_light = {
     none: "0",
   },
   typography: {
-    fontFamily: "Nunito-sans, sans-serif",
+    fontFamily: "Nunito",
     component: {
       weight: 700,
       large: {
