@@ -3,13 +3,14 @@ import "../../Base/fontawesome/css/fontawesome.css";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
+import { getColorRgbaValue, getComponentTypographyCss } from "../../_utils/utils";
 
 
 const Span = styled.span`
   box-sizing: border-box;
   background-color: inherit;
-  font-size: ${(props) => (props.sizeInUnits && props.sizeInUnits != "") ? props.sizeInUnits : props.theme.typography[props.size].iconFontSize};
-  color: ${(props) => props.theme.test_palette[props.color][400]};
+  ${(props) => (props.sizeInUnits && props.sizeInUnits != "") ? `font-size: ${props.sizeInUnits}` : getComponentTypographyCss(props.theme, "Icon", "small", "enabled")};
+  color: ${(props) => getColorRgbaValue(props.theme, "Icon", props.color, "enabled", "icon")};
 
 `;
 

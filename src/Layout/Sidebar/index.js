@@ -30,7 +30,7 @@ const ToggleSidebarButton = styled.div`
   align-items: center;
   width: 2rem;
   height: 2rem;
-  background-color: ${(props) => props.theme.palette.primary.dark};
+  background-color: ${(props) => props.theme.palette[props.theme.colorContext.neutral][900]};
   opacity: 0.7;
   border-radius: ${(props) =>
     props.placement == "left" ? "0 5px 5px 0" : "5px 0 0 5px"};
