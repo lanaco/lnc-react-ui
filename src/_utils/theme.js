@@ -546,207 +546,365 @@ const lanaco_light = {
         },
       },
     },
-    Chip: {
+    TabRegular: {
       default: {
         palette: "gray",
         enabled: {
-          background: 50,
-          backgroundOpacity: 50,
-          text: 900,
+          text: 500,
+          line: 300,
         },
         hover: {
-          background: 100,
-          backgroundOpacity: 100,
-          text: 900,
-        },
-        focus: {
-          background: 100,
-          backgroundOpacity: 100,
-          text: 900,
+          text: 500,
+          line: 300,
         },
         active: {
-          background: 100,
-          backgroundOpacity: 200,
-          text: 900,
-        },
+          text: 500,
+          line: 300,
+        }
       },
       teal: {
         enabled: {
-          background: 500,
-          backgroundOpacity: 200,
-          text: 600,
         },
         hover: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
-        },
-        focus: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
+          text: 700,
+          line: 700
         },
         active: {
-          background: 500,
-          backgroundOpacity: 400,
-          text: 600,
-        },
+          text: 700,
+          line: 700
+        }
       },
       blue: {
         enabled: {
-          background: 500,
-          backgroundOpacity: 200,
-          text: 600,
         },
         hover: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
-        },
-        focus: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
+          text: 700,
+          line: 700
         },
         active: {
-          background: 500,
-          backgroundOpacity: 400,
-          text: 600,
-        },
+          text: 700,
+          line: 700
+        }
       },
       red: {
         enabled: {
-          background: 500,
-          backgroundOpacity: 200,
-          text: 600,
         },
         hover: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
-        },
-        focus: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
+          text: 700,
+          line: 700
         },
         active: {
-          background: 500,
-          backgroundOpacity: 400,
-          text: 600,
-        },
+          text: 700,
+          line: 700
+        }
       },
       violet: {
         enabled: {
-          background: 500,
-          backgroundOpacity: 200,
-          text: 600,
         },
         hover: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
-        },
-        focus: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
+          text: 700,
+          line: 700
         },
         active: {
-          background: 500,
-          backgroundOpacity: 400,
-          text: 600,
-        },
+          text: 700,
+          line: 700
+        }
       },
       yellow: {
         enabled: {
-          background: 500,
-          backgroundOpacity: 200,
-          text: 600,
         },
         hover: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
-        },
-        focus: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
+          text: 700,
+          line: 700
         },
         active: {
-          background: 500,
-          backgroundOpacity: 400,
-          text: 600,
-        },
+          text: 700,
+          line: 700
+        }
       },
       green: {
         enabled: {
-          background: 500,
-          backgroundOpacity: 200,
-          text: 600,
         },
         hover: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
-        },
-        focus: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
+          text: 700,
+          line: 700
         },
         active: {
-          background: 500,
-          backgroundOpacity: 400,
-          text: 600,
-        },
+          text: 700,
+          line: 700
+        }
       },
       gray: {
         enabled: {
-          background: 500,
-          backgroundOpacity: 200,
-          text: 600,
         },
         hover: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
-        },
-        focus: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
+          text: 700,
+          line: 700
         },
         active: {
-          background: 500,
-          backgroundOpacity: 400,
-          text: 600,
-        },
+          text: 700,
+          line: 700
+        }
       },
       neutral: {
         enabled: {
-          background: 500,
-          backgroundOpacity: 200,
-          text: 600,
         },
         hover: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
-        },
-        focus: {
-          background: 500,
-          backgroundOpacity: 300,
-          text: 600,
+          text: 700,
+          line: 700
         },
         active: {
-          background: 500,
-          backgroundOpacity: 400,
-          text: 600,
-        },
-      },
+          text: 700,
+          line: 700
+        }
+      }
     },
+    TabPill: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 500,
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 1000,
+          text: 500,
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 500,
+        }
+      },
+      teal: {
+        enabled: {
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 500,
+          text: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 1000,
+          text: 700,
+        }
+      },
+      blue: {
+        enabled: {
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 50,
+          text: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 0,
+          text: 700,
+        }
+      },
+      red: {
+        enabled: {
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 50,
+          text: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 0,
+          text: 700,
+        }
+      },
+      violet: {
+        enabled: {
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 50,
+          text: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 0,
+          text: 700,
+        }
+      },
+      yellow: {
+        enabled: {
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 50,
+          text: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 0,
+          text: 700,
+        }
+      },
+      green: {
+        enabled: {
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 50,
+          text: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 0,
+          text: 700,
+        }
+      },
+      gray: {
+        enabled: {
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 50,
+          text: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 0,
+          text: 700,
+        }
+      },
+      neutral: {
+        enabled: {
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 50,
+          text: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 0,
+          text: 700,
+        }
+      }
+    },
+    TabUnderline: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 500,
+          line: 200,
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 0,
+          text: 500,
+          line: 200,
+        },
+        active: {}
+      },
+      teal: {
+        enabled: {
+        },
+        hover: {
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 700,
+          line: 700,
+        }
+      },
+      blue: {
+        enabled: {
+        },
+        hover: {
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 700,
+          line: 700,
+        }
+      },
+      red: {
+        enabled: {
+        },
+        hover: {
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 700,
+          line: 700,
+        }
+      },
+      violet: {
+        enabled: {
+        },
+        hover: {
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 700,
+          line: 700,
+        }
+      },
+      yellow: {
+        enabled: {
+        },
+        hover: {
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 700,
+          line: 700,
+        }
+      },
+      green: {
+        enabled: {
+        },
+        hover: {
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 700,
+          line: 700,
+        }
+      },
+      gray: {
+        enabled: {
+        },
+        hover: {
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 700,
+          line: 700,
+        }
+      },
+      neutral: {
+        enabled: {
+        },
+        hover: {
+        },
+        active: {
+          background: 0,
+          backgroundOpacity: 0,
+          text: 700,
+          line: 700,
+        }
+      },
+    }
   },
   palette: {
     outline: {
@@ -879,6 +1037,7 @@ const lanaco_light = {
       800: "80%",
       900: "90%",
       950: "95%",
+      1000: "100%",
     },
   },
   sizes: {
