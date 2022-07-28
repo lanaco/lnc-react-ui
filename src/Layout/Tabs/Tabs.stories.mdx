@@ -1,0 +1,172 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Tabs from "./index";
+import TabItem from "./TabItem";
+
+<Meta title="Layout/Tabs" component={Tabs} />
+
+export const TemplateDefault = (args) => (
+  <Tabs {...args}>
+    <TabItem active={true}>Feed</TabItem>
+    <TabItem>Photos</TabItem>
+    <TabItem>Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+);
+
+export const TemplatePill = (args) => (
+  <Tabs {...args} type="pill">
+    <TabItem>Feed</TabItem>
+    <TabItem active={true}>Photos</TabItem>
+    <TabItem>Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+);
+
+export const TemplateUnderline = (args) => (
+  <Tabs {...args} type="underline" fullWidth={true}>
+    <TabItem>Feed</TabItem>
+    <TabItem active={true}>Photos</TabItem>
+    <TabItem>Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+);
+
+export const TemplateDisabled = (args) => (
+  <Tabs {...args} fullWidth={true}>
+    <TabItem active={true}>Feed</TabItem>
+    <TabItem disabled={true}>Photos</TabItem>
+    <TabItem disabled={true}>Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+);
+
+export const TemplateColors = (args) => (
+  <div>
+    <Tabs {...args} color="primary" fullWidth={true}>
+      <TabItem>Feed</TabItem>
+      <TabItem active={true}>Photos</TabItem>
+      <TabItem>Members</TabItem>
+      <TabItem>About</TabItem>
+    </Tabs>
+    <br />
+     <Tabs {...args} color="secondary" fullWidth={true}>
+    <TabItem>Feed</TabItem>
+    <TabItem active={true}>Photos</TabItem>
+    <TabItem >Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+  <br />
+   <Tabs {...args} color="success" fullWidth={true}>
+    <TabItem>Feed</TabItem>
+    <TabItem active={true}>Photos</TabItem>
+    <TabItem >Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+  <br />
+   <Tabs {...args} color="warning" fullWidth={true} type="underline">
+    <TabItem>Feed</TabItem>
+    <TabItem active={true}>Photos</TabItem>
+    <TabItem >Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+  <br />
+   <Tabs {...args} color="danger" fullWidth={true} type="underline">
+    <TabItem>Feed</TabItem>
+    <TabItem active={true}>Photos</TabItem>
+    <TabItem >Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div>
+    <Tabs {...args} color="primary" fullWidth={true} size="small">
+      <TabItem>Feed</TabItem>
+      <TabItem active={true}>Photos</TabItem>
+      <TabItem>Members</TabItem>
+      <TabItem>About</TabItem>
+    </Tabs>
+    <br />
+     <Tabs {...args} color="secondary" fullWidth={true} size="medium">
+    <TabItem>Feed</TabItem>
+    <TabItem active={true}>Photos</TabItem>
+    <TabItem >Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+  <br />
+   <Tabs {...args} color="success" fullWidth={true} size="large">
+    <TabItem>Feed</TabItem>
+    <TabItem active={true}>Photos</TabItem>
+    <TabItem >Members</TabItem>
+    <TabItem>About</TabItem>
+  </Tabs>
+  </div>
+);
+
+# Tabs
+
+```jsx
+import { Tabs, TabItem } from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+---
+
+## Tab Item
+
+<ArgsTable components={{ TabItem }} />
+
+---
+
+## Types
+
+Tabs types are `regular`, `pill` and `underline`
+
+#### Pill
+
+<Canvas>
+  <Story name="Pill" args={{}}>
+    {TemplatePill.bind({})}
+  </Story>
+</Canvas>
+
+#### Underline with full widht
+
+<Canvas>
+  <Story name="Underline" args={{}}>
+    {TemplateUnderline.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled Tab Items
+
+<Canvas>
+  <Story name="Disabled Tabs" args={{}}>
+    {TemplateDisabled.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
