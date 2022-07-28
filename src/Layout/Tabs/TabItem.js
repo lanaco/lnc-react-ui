@@ -19,7 +19,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 padding: 1rem 0;
-  ${(props) => getComponentTypographyCss(props.theme, "Chip", props.size, "enabled")};
+  ${(props) => getComponentTypographyCss(props.theme, getTypeName(props.type), props.size, "enabled")};
   ${(props) => !props.disabled && "cursor: pointer"};
   color: ${(props) =>
         !props.disabled &&

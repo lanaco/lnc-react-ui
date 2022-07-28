@@ -61,7 +61,7 @@ const StyledChip = styled.span`
     getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
   justify-content: center;
   align-items: center;
-  ${(props) => getComponentTypographyCss(props.theme, "small")};
+  ${(props) => getComponentTypographyCss(props.theme, "Chip", "small", "enabled")};
 
   &:hover {
     background-color: ${(props) =>

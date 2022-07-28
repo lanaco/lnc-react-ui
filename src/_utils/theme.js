@@ -379,21 +379,25 @@ const lanaco_light = {
           background: 50,
           backgroundOpacity: 50,
           text: 900,
+          fontWeight: 700,
         },
         hover: {
           background: 100,
           backgroundOpacity: 100,
           text: 900,
+          fontWeight: 700,
         },
         focus: {
           background: 100,
           backgroundOpacity: 100,
           text: 900,
+          fontWeight: 700,
         },
         active: {
           background: 100,
           backgroundOpacity: 200,
           text: 900,
+          fontWeight: 700,
         },
       },
       teal: {
@@ -579,14 +583,17 @@ const lanaco_light = {
         enabled: {
           text: 500,
           line: 300,
+          fontWeight: 700,
         },
         hover: {
           text: 500,
           line: 300,
+          fontWeight: 700,
         },
         active: {
           text: 500,
           line: 300,
+          fontWeight: 700,
         }
       },
       teal: {
@@ -693,16 +700,19 @@ const lanaco_light = {
           background: 0,
           backgroundOpacity: 0,
           text: 500,
+          fontWeight: 600,
         },
         hover: {
           background: 100,
           backgroundOpacity: 1000,
           text: 500,
+          fontWeight: 600,
         },
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 500,
+          fontWeight: 600,
         }
       },
       teal: {
@@ -826,14 +836,18 @@ const lanaco_light = {
           backgroundOpacity: 0,
           text: 500,
           line: 200,
+          fontWeight: 700,
         },
         hover: {
           background: 100,
           backgroundOpacity: 0,
           text: 500,
           line: 200,
+          fontWeight: 700,
         },
-        active: {}
+        active: {
+          fontWeight: 700,
+        }
       },
       teal: {
         enabled: {
