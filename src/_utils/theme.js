@@ -309,6 +309,7 @@ const lanaco_light = {
     warning: "yellow",
     danger: "red",
     information: "blue",
+    neutral: "neutral"
   },
   components: {
     Input: {
@@ -574,6 +575,54 @@ const lanaco_light = {
           background: 500,
           backgroundOpacity: 400,
           text: 600,
+        },
+      },
+    },
+    Icon: {
+      default: {
+        palette: "gray",
+        enabled: {
+          icon: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          icon: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          icon: 600,
+        },
+      },
+      red: {
+        enabled: {
+          icon: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          icon: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          icon: 600,
+        },       
+      },
+      green: {
+        enabled: {
+          icon: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          icon: 500,
+        },
+      },
+      neutral: {
+        enabled: {
+          icon: 600,
         },
       },
     },
