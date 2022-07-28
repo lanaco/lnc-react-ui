@@ -78,10 +78,10 @@ export const getColorRgbaValue = (
 ) => {
   const palette = theme.colorContext[context];
   const componentDefault = theme.components[component].default;
-  const componentState = theme.components[component][palette][stateProp];
-  const colorWeight = componentState[colorProp];
+  const componentState = theme.components[component]?.[palette]?.[stateProp];
+  const colorWeight = componentState?.[colorProp];
   const defaultColorWeight = componentDefault[stateProp][colorProp];
-  const opacityWeight = componentState[opacityProp];
+  const opacityWeight = componentState?.[opacityProp];
   const defaultOpacityWeight = componentDefault[stateProp][opacityProp];
 
   const hexColorValue = colorWeight ? theme.palette[palette][colorWeight] : theme.palette[componentDefault.palette][defaultColorWeight];
@@ -94,9 +94,12 @@ export const getSizeValueWithUnits = (theme, size) => {
   return theme.sizes[size];
 };
 
-export const getComponentTypographyCss = (theme, size) => {
+export const getComponentTypographyCss = (theme, component, size, stateProp) => {
+  const componentDefault = theme.components[component].default;
+  const fontWeight = componentDefault[stateProp].fontWeight;
+
   return `
-    font-weight: ${theme.typography.component.weight};
+    font-weight: ${fontWeight};
     font-size: ${theme.typography.component[size].fontSize};
     line-height: ${theme.typography.component[size].lineHeight};
   `;
