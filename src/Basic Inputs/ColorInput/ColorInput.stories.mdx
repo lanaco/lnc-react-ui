@@ -6,26 +6,43 @@ import ColorInput from "./index";
 
 export const TemplateDefault = (args) => <ColorInput {...args} />;
 
-export const TemplateSizes = (args) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-    <ColorInput {...args} size="small" />
-    <ColorInput {...args} size="medium" />
-    <ColorInput {...args} size="large" />
-  </div>
+export const TemplateReadOnly = (args) => (
+  <ColorInput {...args} readOnly={readOnly} value="#00537a" />
 );
 
-export const TemplateColors = (args) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-    <ColorInput {...args} color="primary" />
-    <ColorInput {...args} color="secondary" />
-    <ColorInput {...args} color="success" />
-    <ColorInput {...args} color="warning" />
-    <ColorInput {...args} color="danger" />
-    <ColorInput {...args} color="info" />
-  </div>
+export const TemplateDisabled = (args) => (
+  <ColorInput {...args} disabled={true} value="#00537b" />
+);
+
+export const TemplateWithInput = (args) => (
+  <>
+    <ColorInput
+      {...args}
+      style={{ width: "200px" }}
+      withInput={true}
+      value="#00537b"
+    />
+    &nbsp;&nbsp;
+    <ColorInput
+      {...args}
+      style={{ width: "200px" }}
+      withInput={true}
+      disabled={true}
+      value="#00537b"
+    />
+  </>
+);
+
+export const TemplateSizes = (args) => (
+  <>
+    <ColorInput {...args} size="regular" />
+    <br />
+    <ColorInput {...args} size="compact" />
+  </>
 );
 
 # Color Input
+
 ```jsx
 import { ColorInput } from "@lnc-react-ui";
 ```
@@ -41,49 +58,27 @@ import { ColorInput } from "@lnc-react-ui";
 ## Read Only
 
 <Canvas>
-  <Story
-    name="Read Only"
-    args={{
-      readOnly: true,
-      value: "#00537a",
-      style: { width: "300px" },
-    }}
-  >
-    {TemplateDefault.bind({})}
-  </Story>
+  <Story name="Read Only">{TemplateReadOnly.bind({})}</Story>
 </Canvas>
 
 ## Disabled
 
-<Canvas withSource="open">
-  <Story
-    name="Disabled"
-    args={{
-      disabled: true,
-      value: "#00537a",
-      style: { width: "300px" },
-    }}
-  >
-    {TemplateDefault.bind({})}
-  </Story>
+<Canvas>
+  <Story name="Disabled">{TemplateDisabled.bind({})}</Story>
+</Canvas>
+
+## With Input
+
+<Canvas>
+  <Story name="With Input">{TemplateWithInput.bind({})}</Story>
 </Canvas>
 
 ## Sizes
 
-Defining `size` with `small`, `medium` and `large` values.
+Defining `size` with `regular` and `compact` values.
 
 <Canvas>
   <Story name="Sizes" args={{}}>
     {TemplateSizes.bind({})}
-  </Story>
-</Canvas>
-
-## Colors
-
-Defining `color`
-
-<Canvas>
-  <Story name="Colors" args={{}}>
-    {TemplateColors.bind({})}
   </Story>
 </Canvas>

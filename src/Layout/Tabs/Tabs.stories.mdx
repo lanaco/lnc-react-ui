@@ -4,7 +4,6 @@ import Tabs from "./index";
 import TabItem from "./TabItem";
 import Icon from "../../General/Icon";
 
-
 <Meta title="Layout/Tabs" component={Tabs} />
 
 export const TemplateDefault = (args) => (
@@ -39,7 +38,10 @@ export const TemplateDisabled = (args) => (
     <TabItem active={true}>Feed</TabItem>
     <TabItem disabled={true}>Photos</TabItem>
     <TabItem disabled={true}>Members</TabItem>
-    <TabItem><Icon icon={"question-circle"} style={{paddingRight: "10px"}}/>About</TabItem>
+    <TabItem>
+      <Icon icon={"question-circle"} style={{ paddingRight: "10px" }} />
+      About
+    </TabItem>
   </Tabs>
 );
 
@@ -52,33 +54,39 @@ export const TemplateColors = (args) => (
       <TabItem>About</TabItem>
     </Tabs>
     <br />
-     <Tabs {...args} color="secondary" fullWidth={true}>
-    <TabItem>Feed</TabItem>
-    <TabItem active={true}>Photos</TabItem>
-    <TabItem >Members</TabItem>
-    <TabItem>About</TabItem>
-  </Tabs>
-  <br />
-   <Tabs {...args} color="success" fullWidth={true}>
-    <TabItem>Feed</TabItem>
-    <TabItem active={true}>Photos</TabItem>
-    <TabItem >Members</TabItem>
-    <TabItem>About</TabItem>
-  </Tabs>
-  <br />
-   <Tabs {...args} color="warning" fullWidth={true} type="underline">
-    <TabItem>Feed</TabItem>
-    <TabItem active={true}>Photos</TabItem>
-    <TabItem >Members</TabItem>
-    <TabItem>About</TabItem>
-  </Tabs>
-  <br />
-   <Tabs {...args} color="danger" fullWidth={true} type="underline">
-    <TabItem>Feed</TabItem>
-    <TabItem active={true}>Photos</TabItem>
-    <TabItem >Members</TabItem>
-    <TabItem>About</TabItem>
-  </Tabs>
+    <Tabs {...args} color="secondary" fullWidth={true}>
+      <TabItem>Feed</TabItem>
+      <TabItem active={true}>Photos</TabItem>
+      <TabItem>Members</TabItem>
+      <TabItem>About</TabItem>
+    </Tabs>
+    <br />
+    <Tabs {...args} color="success" fullWidth={true}>
+      <TabItem>Feed</TabItem>
+      <TabItem active={true}>Photos</TabItem>
+      <TabItem>Members</TabItem>
+      <TabItem>
+        <Icon icon={"question-circle"} style={{ paddingRight: "10px" }} />
+        About
+      </TabItem>
+    </Tabs>
+    <br />
+    <Tabs {...args} color="warning" fullWidth={true} type="underline">
+      <TabItem>Feed</TabItem>
+      <TabItem active={true}>Photos</TabItem>
+      <TabItem>Members</TabItem>
+      <TabItem>About</TabItem>
+    </Tabs>
+    <br />
+    <Tabs {...args} color="danger" fullWidth={true} type="underline">
+      <TabItem>Feed</TabItem>
+      <TabItem active={true}>Photos</TabItem>
+      <TabItem>Members</TabItem>
+      <TabItem>
+        <Icon icon={"question-circle"} style={{ paddingRight: "10px" }} />
+        About
+      </TabItem>
+    </Tabs>
   </div>
 );
 
@@ -91,19 +99,19 @@ export const TemplateSizes = (args) => (
       <TabItem>About</TabItem>
     </Tabs>
     <br />
-     <Tabs {...args} color="secondary" fullWidth={true} size="medium">
-    <TabItem>Feed</TabItem>
-    <TabItem active={true}>Photos</TabItem>
-    <TabItem >Members</TabItem>
-    <TabItem>About</TabItem>
-  </Tabs>
-  <br />
-   <Tabs {...args} color="success" fullWidth={true} size="large">
-    <TabItem>Feed</TabItem>
-    <TabItem active={true}>Photos</TabItem>
-    <TabItem >Members</TabItem>
-    <TabItem>About</TabItem>
-  </Tabs>
+    <Tabs {...args} color="secondary" fullWidth={true} size="medium">
+      <TabItem>Feed</TabItem>
+      <TabItem active={true}>Photos</TabItem>
+      <TabItem>Members</TabItem>
+      <TabItem>About</TabItem>
+    </Tabs>
+    <br />
+    <Tabs {...args} color="success" fullWidth={true} size="large">
+      <TabItem>Feed</TabItem>
+      <TabItem active={true}>Photos</TabItem>
+      <TabItem>Members</TabItem>
+      <TabItem>About</TabItem>
+    </Tabs>
   </div>
 );
 

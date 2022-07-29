@@ -12,7 +12,7 @@ export const parameters = {
     },
   },
   themes: {
-    default: 'Lanaco Light',
+    default: 'Main',
     list: themes,
   },
   docs:{
