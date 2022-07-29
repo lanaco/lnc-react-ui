@@ -2,6 +2,8 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Tabs from "./index";
 import TabItem from "./TabItem";
+import Icon from "../../General/Icon";
+
 
 <Meta title="Layout/Tabs" component={Tabs} />
 
@@ -37,7 +39,7 @@ export const TemplateDisabled = (args) => (
     <TabItem active={true}>Feed</TabItem>
     <TabItem disabled={true}>Photos</TabItem>
     <TabItem disabled={true}>Members</TabItem>
-    <TabItem>About</TabItem>
+    <TabItem><Icon icon={"question-circle"} style={{paddingRight: "10px"}}/>About</TabItem>
   </Tabs>
 );
 
