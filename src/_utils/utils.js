@@ -109,7 +109,7 @@ export const getBorderRadiusValueWithUnits = (theme, type) => {
   return theme.borderRadius[type];
 };
 
-export const getOutlineCss = (theme) => {
+export const getOutlineCss = (theme, noOffset) => {
   const palette = theme.colorContext[theme.palette.outline.context];
 
   const color =
@@ -117,7 +117,7 @@ export const getOutlineCss = (theme) => {
 
   return `
     outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};
-    outline-offset: ${theme.palette.outline.offset};
+    ${!noOffset && `outline-offset: ${theme.palette.outline.offset}`};
     `;
 };
 
@@ -135,3 +135,15 @@ export const getDisabledStateCss = (theme) => {
     color: ${fontColorHex};
   `;
 };
+
+export const getDisabledBackgroundCss = (theme) => {
+  const paletteColor = theme.palette.disabled.color;
+  const bgColorHex =
+    theme.palette[paletteColor][theme.palette.disabled.background];
+  const opacity = theme.palette.opacity[theme.palette.disabled.opacity];
+  const bgColorRgba = hexToRgba(bgColorHex, opacity ?? "100%");
+  return `
+    background-color: ${bgColorRgba};
+  `;
+
+}

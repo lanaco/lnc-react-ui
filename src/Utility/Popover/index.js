@@ -3,10 +3,18 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import { createPortal } from 'react-dom';
+import { getComponentTypographyCss } from '../../_utils/utils';
 
 const StyledPopover = styled.div`
-background-color: ${props => props.theme.test_palette.white[400]};
-font-family: ${props => props.theme.typography.fontFamily};
+background-color: ${(props) => props.theme.palette[props.theme.colorContext.neutral][100]};
+${(props) =>
+  getComponentTypographyCss(
+    props.theme,
+    "Chip",
+    "small",
+    "enabled"
+  )};
+
 display: ${props => props.show ? 'block' : 'none'};
 opacity: 0;
 opacity: ${props => props.show ? '1' : '0'};
@@ -18,7 +26,7 @@ left: ${props => props.position ? props.left : ''};
 ${props => props.position?.horizontalPosition};
 ${props => props.position?.verticalPosition};
 overflow: auto;
-box-shadow: ${(props) => `0px 0px 6px -2px ${props.theme.test_palette["disabled"][400]}`};
+box-shadow: ${(props) => `0px 0px 6px -2px ${props.theme.palette[props.theme.colorContext.neutral][300]}`};
 box-sizing: border-box;
 max-width: ${props => props.position?.maxWidth ? (props.position.maxWidth != "100vw" ? props.position.maxWidth + "px" : "100vw") : "100vw"};
 max-height: ${props => props.position?.maxHeight ? (props.position.maxHeight != "100vh" ? props.position.maxHeight + "px" : "100vh") : "100vh"};
