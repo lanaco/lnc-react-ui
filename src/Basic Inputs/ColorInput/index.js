@@ -24,8 +24,8 @@ const StyledInput = styled.label`
   gap: 0.5rem;
   ${(props) =>
     getComponentTypographyCss(props.theme, "Input", "small", "enabled")};
-    min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
-    max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   background-color: ${(props) =>
     getColorRgbaValue(
       props.theme,
@@ -44,13 +44,13 @@ const StyledInput = styled.label`
     )};
   border: 1px solid
     ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Input",
-      props.isFocused ? "primary" : props.color,
-      "enabled",
-      "border"
-    )};
+      getColorRgbaValue(
+        props.theme,
+        "Input",
+        props.isFocused ? "primary" : props.color,
+        "enabled",
+        "border"
+      )};
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "regular")};
   padding: 0.625rem 0.75rem;
@@ -64,25 +64,28 @@ const StyledInput = styled.label`
 `;
 
 const StyledColorInput = styled.div`
+  min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   & div {
     &:focus {
       ${(props) =>
-    !props.disabled && !props.withInput && getOutlineCss(props.theme)};
+        !props.disabled && !props.withInput && getOutlineCss(props.theme)};
     }
     &:hover {
       ${(props) =>
-    !props.disabled && !props.withInput && getOutlineCss(props.theme)};
+        !props.disabled && !props.withInput && getOutlineCss(props.theme)};
     }
 
     ${(props) =>
-    props.disabled &&
-    `opacity: ${props.theme.palette.opacity[props.theme.palette.disabled.opacity]
-    };`}
+      props.disabled &&
+      `opacity: ${
+        props.theme.palette.opacity[props.theme.palette.disabled.opacity]
+      };`}
     box-sizing: border-box;
     width: ${(props) => getSize(props.theme, props.size)};
     height: ${(props) => getSize(props.theme, props.size)};
     border-radius: ${(props) =>
-    getBorderRadiusValueWithUnits(props.theme, "curved")};
+      getBorderRadiusValueWithUnits(props.theme, "curved")};
     overflow: hidden;
     & input[type="color"] {
       border: 0;
@@ -165,9 +168,9 @@ const ColorInput = React.forwardRef((props, ref) => {
               name={name}
               value={val}
               disabled={disabled || readOnly}
-              onChange={readOnly ? () => { } : handleOnChange}
-              onBlur={readOnly ? () => { } : onBlur}
-              onFocus={readOnly ? () => { } : onFocus}
+              onChange={readOnly ? () => {} : handleOnChange}
+              onBlur={readOnly ? () => {} : onBlur}
+              onFocus={readOnly ? () => {} : onFocus}
               color={color}
               {...inputProps}
             />
@@ -183,9 +186,9 @@ const ColorInput = React.forwardRef((props, ref) => {
             name={name}
             value={val}
             disabled={disabled || readOnly}
-            onChange={readOnly ? () => { } : handleOnChange}
-            onBlur={readOnly ? () => { } : onBlur}
-            onFocus={readOnly ? () => { } : onFocus}
+            onChange={readOnly ? () => {} : handleOnChange}
+            onBlur={readOnly ? () => {} : onBlur}
+            onFocus={readOnly ? () => {} : onFocus}
             color={color}
             tabIndex={tabIndex}
             {...inputProps}
@@ -203,9 +206,9 @@ ColorInput.defaultProps = {
   preventDefault: true,
   withInput: false,
   //-------------------------
-  onChange: () => { },
-  onBlur: () => { },
-  onFocus: () => { },
+  onChange: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
   //-------------------------
   className: "",
   style: {},
