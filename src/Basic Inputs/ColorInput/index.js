@@ -12,34 +12,26 @@ import {
   getSizeValueWithUnits,
 } from "../../_utils/utils";
 
-const getInputSize = (size) => {
+const getInputSize = (theme, size) => {
   if (size == "compact") return "1.75rem";
-
-  return "2.5rem";
-}
-
-const getSize = (size) => {
-  if (size == "compact") return "1.25rem";
-
-  return "2rem";
+  let componentSize = getSizeValueWithUnits(theme, size);
+  return `calc(${componentSize} - 0.5rem)`;
 };
 
-//4px more then regular size (outline + offset)
-const getWrapperSize = (size) => {
-  if (size == "compact") return "1.5rem";
-
-  return "2.25rem";
+const getSize = (theme, size) => {
+  let componentSize = getSizeValueWithUnits(theme, size);
+  return `calc(${componentSize} - 1rem)`;
 };
 
 const StyledInput = styled.label`
-cursor: pointer;
-   display: inline-flex;
-   align-items: center;
-   gap: 0.5rem;
-   ${(props) =>
-    getComponentTypographyCss(props.theme, "Input", "small", "enabled")}
-  min-height: ${(props) => getInputSize(props.size)};
-  max-height: ${(props) => getInputSize(props.size)};
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Input", "small", "enabled")};
+    min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+    max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   background-color: ${(props) =>
     getColorRgbaValue(
       props.theme,
@@ -74,36 +66,27 @@ cursor: pointer;
   }
   ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
   border: 1px solid ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Input",
-      props.color,
-      "disabled",
-      "border"
-    )};
+    getColorRgbaValue(props.theme, "Input", props.color, "disabled", "border")};
 `;
 
 const StyledColorInput = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: ${(props) => getWrapperSize(props.size)};
-  height: ${(props) => getWrapperSize(props.size)};
-  border-radius: ${(props) =>
-    getBorderRadiusValueWithUnits(props.theme, "curved")};
-
-  &:focus {
-    ${(props) => (!props.disabled && !props.withInput) && getOutlineCss(props.theme, true)};
-  }
-  &:hover {
-    ${(props) => (!props.disabled && !props.withInput) && getOutlineCss(props.theme, true)};
-  }
-  ${props => props.disabled && `opacity: ${props.theme.palette.opacity[props.theme.palette.disabled.opacity]};`}
-
   & div {
+    &:focus {
+      ${(props) =>
+    !props.disabled && !props.withInput && getOutlineCss(props.theme)};
+    }
+    &:hover {
+      ${(props) =>
+    !props.disabled && !props.withInput && getOutlineCss(props.theme)};
+    }
+
+    ${(props) =>
+    props.disabled &&
+    `opacity: ${props.theme.palette.opacity[props.theme.palette.disabled.opacity]
+    };`}
     box-sizing: border-box;
-    width: ${(props) => getSize(props.size)};
-    height: ${(props) => getSize(props.size)};
+    width: ${(props) => getSize(props.theme, props.size)};
+    height: ${(props) => getSize(props.theme, props.size)};
     border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "curved")};
     overflow: hidden;
@@ -114,9 +97,14 @@ const StyledColorInput = styled.div`
       height: 200%;
       cursor: pointer;
       transform: translate(-25%, -25%);
-      ${props => props.disabled && getDisabledStateCss(props.theme)};
+      ${(props) => props.disabled && getDisabledStateCss(props.theme)};
     }
   }
+`;
+
+const LabelText = styled.span`
+  display: flex;
+  align-items: center;
 `;
 
 const ColorInput = React.forwardRef((props, ref) => {
@@ -156,48 +144,24 @@ const ColorInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <>
-      {withInput ?
-        <StyledInput ref={ref} withInput={withInput} theme={theme} color={color} size={size} disabled={disabled} tabIndex={tabIndex} className={className}
-          style={style} {...rest}>
-          <StyledColorInput
-            ref={ref}
-            theme={theme}
-            size={size}
-            disabled={disabled}
-            withInput={withInput}
-          >
-            <div>
-              <input
-                type="color"
-                ref={inputRef}
-                id={id}
-                name={name}
-                value={val}
-                disabled={disabled || readOnly}
-                onChange={readOnly ? () => { } : handleOnChange}
-                onBlur={readOnly ? () => { } : onBlur}
-                onFocus={readOnly ? () => { } : onFocus}
-                color={color}
-                {...inputProps}
-              />
-            </div>
-          </StyledColorInput>
-          <div>
-            {val}
-          </div>
-        </StyledInput>
-        :
-        <StyledColorInput
-          ref={ref}
-          tabIndex={tabIndex}
-          theme={theme}
-          size={size}
-          className={className}
-          style={style}
-          disabled={disabled}
+    <StyledColorInput
+      ref={ref}
+      theme={theme}
+      size={size}
+      className={className}
+      style={style}
+      disabled={disabled}
+      withInput={withInput}
+      {...rest}
+    >
+      {withInput ? (
+        <StyledInput
           withInput={withInput}
-          {...rest}
+          theme={theme}
+          color={color}
+          size={size}
+          disabled={disabled}
+          tabIndex={tabIndex}
         >
           <div>
             <input
@@ -214,8 +178,27 @@ const ColorInput = React.forwardRef((props, ref) => {
               {...inputProps}
             />
           </div>
-        </StyledColorInput>}
-    </>
+          <LabelText>{val}</LabelText>
+        </StyledInput>
+      ) : (
+        <div>
+          <input
+            type="color"
+            ref={inputRef}
+            id={id}
+            name={name}
+            value={val}
+            disabled={disabled || readOnly}
+            onChange={readOnly ? () => { } : handleOnChange}
+            onBlur={readOnly ? () => { } : onBlur}
+            onFocus={readOnly ? () => { } : onFocus}
+            color={color}
+            tabIndex={tabIndex}
+            {...inputProps}
+          />
+        </div>
+      )}
+    </StyledColorInput>
   );
 });
 
@@ -232,7 +215,7 @@ ColorInput.defaultProps = {
   //-------------------------
   className: "",
   style: {},
-  size: "regular",
+  size: "small",
   color: "primary",
 };
 
@@ -254,7 +237,7 @@ ColorInput.propTypes = {
   //---------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,
-  size: PropTypes.oneOf(["compact", "regular"]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
