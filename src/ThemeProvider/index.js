@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 const Wrapper = styled.div`
   & * {
     box-sizing: border-box;
-    font-family: ${(props) => props.theme.typography.fontFamily};
+    font-family: ${(props) => props.theme?.typography?.fontFamily};
   }
   & i {
     font-family: "Font Awesome 5 Free";
