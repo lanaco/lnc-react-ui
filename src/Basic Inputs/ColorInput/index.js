@@ -12,12 +12,6 @@ import {
   getSizeValueWithUnits,
 } from "../../_utils/utils";
 
-const getInputSize = (theme, size) => {
-  if (size == "compact") return "1.75rem";
-  let componentSize = getSizeValueWithUnits(theme, size);
-  return `calc(${componentSize} - 0.5rem)`;
-};
-
 const getSize = (theme, size) => {
   let componentSize = getSizeValueWithUnits(theme, size);
   return `calc(${componentSize} - 1rem)`;
