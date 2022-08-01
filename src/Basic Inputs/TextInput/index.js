@@ -1,81 +1,13 @@
 import { useTheme } from "@emotion/react";
-import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useCallback, useState, useEffect } from "react";
 import { debounce } from "lodash";
 import {
-  getBorderRadiusValueWithUnits,
-  getColorRgbaValue,
-  getComponentTypographyCss,
-  getDisabledStateCss,
-  getOutlineCss,
-  getSizeValueWithUnits,
-} from "../../_utils/utils";
-
-const Input = styled.input`
-  ${(props) =>
-    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
-  min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
-  max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
-  background-color: ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Input",
-      props.color,
-      "enabled",
-      "background"
-    )};
-  color: ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Input",
-      props.isFocused ? "primary" : props.color,
-      "enabled",
-      "text"
-    )};
-  border: 1px solid
-    ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "Input",
-        props.isFocused ? "primary" : props.color,
-        "enabled",
-        "border"
-      )};
-  caret-color: ${(props) =>
-    getColorRgbaValue(props.theme, "Input", props.color, "enabled", "caret")};
-  border-radius: ${(props) =>
-    getBorderRadiusValueWithUnits(props.theme, "regular")};
-  padding: 0.625rem 0.75rem;
-  width: 100%;
-
-  &::placeholder {
-    color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "Input",
-        props.color,
-        "enabled",
-        "placeholder"
-      )};
-  }
-
-  &:focus {
-    ${(props) => getOutlineCss(props.theme)}
-  }
-
-  &:disabled {
-    ${(props) => getDisabledStateCss(props.theme)}
-    border: 1px solid ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "Input",
-        props.color,
-        "disabled",
-        "border"
-      )};
-  }
-`;
+  StyledInput,
+  StyledPrefix,
+  StyledSuffix,
+  StyledWrapper,
+} from "./styledComponents";
 
 //===================================================
 
@@ -90,6 +22,8 @@ const TextInput = React.forwardRef((props, ref) => {
     type,
     placeholder,
     tabIndex,
+    prefix,
+    suffix,
     //----------------
     onChange,
     onBlur,
@@ -133,25 +67,56 @@ const TextInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Input
+    <StyledWrapper
       ref={ref}
-      type={type}
+      className={className}
       theme={theme}
       color={color}
       size={size}
-      className={className}
-      placeholder={placeholder}
-      style={style}
-      disabled={disabled}
-      readOnly={readOnly}
       isFocused={isFocused}
-      value={inputValue}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onChange={onValueChange}
-      tabIndex={tabIndex}
-      {...rest}
-    />
+      isDisabled={disabled}
+      isReadOnly={readOnly}
+    >
+      {prefix && (
+        <StyledPrefix
+          theme={theme}
+          color={color}
+          isFocused={isFocused}
+          className="lnc-input-prefix"
+        >
+          {prefix}
+        </StyledPrefix>
+      )}
+      <StyledInput
+        type={type}
+        theme={theme}
+        color={color}
+        size={size}
+        placeholder={placeholder}
+        prefix={prefix}
+        suffix={suffix}
+        style={style}
+        disabled={disabled}
+        readOnly={readOnly}
+        isFocused={isFocused}
+        value={inputValue}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={onValueChange}
+        tabIndex={tabIndex}
+        {...rest}
+      />
+      {suffix && (
+        <StyledSuffix
+          theme={theme}
+          color={color}
+          isFocused={isFocused}
+          className="lnc-input-suffix"
+        >
+          {suffix}
+        </StyledSuffix>
+      )}
+    </StyledWrapper>
   );
 });
 
@@ -180,10 +145,21 @@ TextInput.propTypes = {
   value: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
+  /**
+   * Time in miliseconds before onChange event fires after it has been triggered.
+   */
   debounceTime: PropTypes.number,
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(["text", "email"]),
   tabIndex: PropTypes.number,
+  /**
+   * Reserved space before input. Intented to be used with plain text or `Icon` component.
+   */
+  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Reserved space after input. Intented to be used with plain text or `Icon` component.
+   */
+  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   //----------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,

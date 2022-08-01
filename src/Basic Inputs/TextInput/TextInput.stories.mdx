@@ -1,37 +1,56 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import TextInput from "./index";
+import Icon from "../../General/Icon";
 
 <Meta title="Basic Inputs/Text Input" component={TextInput} />
 
-export const TemplateDefault = (args) => <TextInput {...args} />;
+export const TemplateDefault = (args) => {
+  return <TextInput {...args} />;
+};
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-    <TextInput {...args} size="small" />
-    <TextInput {...args} size="medium" />
-    <TextInput {...args} size="large" />
+    <TextInput {...args} size="small" placeholder="This is small input." />
+    <TextInput {...args} size="medium" placeholder="This is medium input." />
+    <TextInput {...args} size="large" placeholder="This is large input." />
   </div>
 );
 
 export const TemplateColors = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-    <TextInput {...args} color="primary" />
-    <TextInput {...args} color="secondary" />
-    <TextInput {...args} color="success" />
-    <TextInput {...args} color="warning" />
-    <TextInput {...args} color="danger" />
-    <TextInput {...args} color="info" />
+    <TextInput {...args} color="primary" placeholder="This is primary input." />
+    <TextInput
+      {...args}
+      color="secondary"
+      placeholder="This is secondary input."
+    />
+    <TextInput {...args} color="success" placeholder="This is success input." />
+    <TextInput {...args} color="warning" placeholder="This is warning input." />
+    <TextInput {...args} color="danger" placeholder="This is danger input." />
+    <TextInput {...args} color="info" placeholder="This is info input." />
+  </div>
+);
+
+export const TemplateAddons = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <TextInput
+      {...args}
+      prefix={<Icon icon="envelope" />}
+      suffix="EUR"
+      placeholder="Icon prefix and text suffix."
+    />
   </div>
 );
 
 # Text Input
+
 ```jsx
 import { TextInput } from "@lnc-react-ui";
 ```
 
-<Canvas withSource="open">
-  <Story name="Default" args={{}}>
+<Canvas>
+  <Story name="Default" args={{ placeholder: "Type text here." }}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
@@ -45,8 +64,7 @@ import { TextInput } from "@lnc-react-ui";
     name="Read Only"
     args={{
       readOnly: true,
-      placeholder: "Type text here",
-      style: { width: "300px" },
+      placeholder: "This text cant be changed.",
     }}
   >
     {TemplateDefault.bind({})}
@@ -55,13 +73,12 @@ import { TextInput } from "@lnc-react-ui";
 
 ## Disabled
 
-<Canvas withSource="open">
+<Canvas>
   <Story
     name="Disabled"
     args={{
       disabled: true,
-      placeholder: "Disabled",
-      style: { width: "300px" },
+      placeholder: "This input is disabled.",
     }}
   >
     {TemplateDefault.bind({})}
@@ -80,10 +97,16 @@ Defining `size` with `small`, `medium` and `large` values.
 
 ## Colors
 
-Defining `color`
-
 <Canvas>
   <Story name="Colors" args={{}}>
     {TemplateColors.bind({})}
+  </Story>
+</Canvas>
+
+## Prefix and suffix
+
+<Canvas>
+  <Story name="Prefix and suffix" args={{}}>
+    {TemplateAddons.bind({})}
   </Story>
 </Canvas>

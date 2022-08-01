@@ -309,7 +309,7 @@ const lanaco_light = {
     warning: "yellow",
     danger: "red",
     information: "blue",
-    neutral: "neutral"
+    neutral: "neutral",
   },
   components: {
     Input: {
@@ -320,6 +320,8 @@ const lanaco_light = {
           border: 200,
           placeholder: 500,
           text: 900,
+          prefix: 500,
+          suffix: 500,
           caret: 900,
           fontWeight: 400,
         },
@@ -328,6 +330,8 @@ const lanaco_light = {
           border: 200,
           placeholder: 500,
           text: 900,
+          prefix: 500,
+          suffix: 500,
           caret: 900,
           fontWeight: 400,
         },
@@ -336,6 +340,8 @@ const lanaco_light = {
           border: 200,
           placeholder: 500,
           text: 900,
+          prefix: 500,
+          suffix: 500,
           caret: 900,
           fontWeight: 400,
         },
@@ -344,6 +350,8 @@ const lanaco_light = {
           border: 200,
           placeholder: 500,
           text: 900,
+          prefix: 500,
+          suffix: 500,
           caret: 900,
           fontWeight: 400,
         },
@@ -359,17 +367,25 @@ const lanaco_light = {
       green: {
         enabled: {
           border: 300,
+          text: 900,
+          prefix: 600,
+          suffix: 600,
         },
       },
       yellow: {
         enabled: {
           border: 300,
+          text: 900,
+          prefix: 600,
+          suffix: 600,
         },
       },
       red: {
         enabled: {
           border: 300,
           text: 900,
+          prefix: 600,
+          suffix: 600,
         },
       },
     },
@@ -608,7 +624,7 @@ const lanaco_light = {
       yellow: {
         enabled: {
           icon: 600,
-        },       
+        },
       },
       green: {
         enabled: {
@@ -643,104 +659,96 @@ const lanaco_light = {
           text: 500,
           line: 300,
           fontWeight: 700,
-        }
+        },
       },
       teal: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           text: 700,
-          line: 700
+          line: 700,
         },
         active: {
           text: 700,
-          line: 700
-        }
+          line: 700,
+        },
       },
       blue: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           text: 700,
-          line: 700
+          line: 700,
         },
         active: {
           text: 700,
-          line: 700
-        }
+          line: 700,
+        },
       },
       red: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           text: 700,
-          line: 700
+          line: 700,
         },
         active: {
           text: 700,
-          line: 700
-        }
+          line: 700,
+        },
       },
       violet: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           text: 700,
-          line: 700
+          line: 700,
         },
         active: {
           text: 700,
-          line: 700
-        }
+          line: 700,
+        },
       },
       yellow: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           text: 700,
-          line: 700
+          line: 700,
         },
         active: {
           text: 700,
-          line: 700
-        }
+          line: 700,
+        },
       },
       green: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           text: 700,
-          line: 700
+          line: 700,
         },
         active: {
           text: 700,
-          line: 700
-        }
+          line: 700,
+        },
       },
       gray: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           text: 700,
-          line: 700
+          line: 700,
         },
         active: {
           text: 700,
-          line: 700
-        }
+          line: 700,
+        },
       },
       neutral: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           text: 700,
-          line: 700
+          line: 700,
         },
         active: {
           text: 700,
-          line: 700
-        }
-      }
+          line: 700,
+        },
+      },
     },
     TabPill: {
       default: {
@@ -762,11 +770,10 @@ const lanaco_light = {
           backgroundOpacity: 0,
           text: 500,
           fontWeight: 600,
-        }
+        },
       },
       teal: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           background: 100,
           backgroundOpacity: 500,
@@ -776,11 +783,10 @@ const lanaco_light = {
           background: 100,
           backgroundOpacity: 1000,
           text: 700,
-        }
+        },
       },
       blue: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           background: 100,
           backgroundOpacity: 50,
@@ -790,11 +796,10 @@ const lanaco_light = {
           background: 100,
           backgroundOpacity: 0,
           text: 700,
-        }
+        },
       },
       red: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           background: 100,
           backgroundOpacity: 50,
@@ -804,11 +809,10 @@ const lanaco_light = {
           background: 100,
           backgroundOpacity: 0,
           text: 700,
-        }
+        },
       },
       violet: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           background: 100,
           backgroundOpacity: 50,
@@ -818,11 +822,10 @@ const lanaco_light = {
           background: 100,
           backgroundOpacity: 0,
           text: 700,
-        }
+        },
       },
       yellow: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           background: 100,
           backgroundOpacity: 50,
@@ -832,11 +835,10 @@ const lanaco_light = {
           background: 100,
           backgroundOpacity: 0,
           text: 700,
-        }
+        },
       },
       green: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           background: 100,
           backgroundOpacity: 50,
@@ -846,11 +848,10 @@ const lanaco_light = {
           background: 100,
           backgroundOpacity: 0,
           text: 700,
-        }
+        },
       },
       gray: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           background: 100,
           backgroundOpacity: 50,
@@ -860,11 +861,10 @@ const lanaco_light = {
           background: 100,
           backgroundOpacity: 0,
           text: 700,
-        }
+        },
       },
       neutral: {
-        enabled: {
-        },
+        enabled: {},
         hover: {
           background: 100,
           backgroundOpacity: 50,
@@ -874,8 +874,8 @@ const lanaco_light = {
           background: 100,
           backgroundOpacity: 0,
           text: 700,
-        }
-      }
+        },
+      },
     },
     TabUnderline: {
       default: {
@@ -896,103 +896,87 @@ const lanaco_light = {
         },
         active: {
           fontWeight: 700,
-        }
+        },
       },
       teal: {
-        enabled: {
-        },
-        hover: {
-        },
+        enabled: {},
+        hover: {},
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 700,
           line: 700,
-        }
+        },
       },
       blue: {
-        enabled: {
-        },
-        hover: {
-        },
+        enabled: {},
+        hover: {},
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 700,
           line: 700,
-        }
+        },
       },
       red: {
-        enabled: {
-        },
-        hover: {
-        },
+        enabled: {},
+        hover: {},
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 700,
           line: 700,
-        }
+        },
       },
       violet: {
-        enabled: {
-        },
-        hover: {
-        },
+        enabled: {},
+        hover: {},
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 700,
           line: 700,
-        }
+        },
       },
       yellow: {
-        enabled: {
-        },
-        hover: {
-        },
+        enabled: {},
+        hover: {},
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 700,
           line: 700,
-        }
+        },
       },
       green: {
-        enabled: {
-        },
-        hover: {
-        },
+        enabled: {},
+        hover: {},
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 700,
           line: 700,
-        }
+        },
       },
       gray: {
-        enabled: {
-        },
-        hover: {
-        },
+        enabled: {},
+        hover: {},
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 700,
           line: 700,
-        }
+        },
       },
       neutral: {
-        enabled: {
-        },
-        hover: {
-        },
+        enabled: {},
+        hover: {},
         active: {
           background: 0,
           backgroundOpacity: 0,
           text: 700,
           line: 700,
-        }
+        },
       },
     },
     Checkbox: {
