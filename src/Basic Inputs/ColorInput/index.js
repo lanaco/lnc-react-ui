@@ -66,6 +66,9 @@ const StyledInput = styled.label`
 const StyledColorInput = styled.div`
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   & div {
     &:focus {
       ${(props) =>
