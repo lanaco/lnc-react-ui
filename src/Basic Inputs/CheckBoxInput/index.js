@@ -115,6 +115,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     style,
     inputRef,
     inputProps,
+    children,
     ...rest
   } = props;
 
@@ -177,7 +178,6 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       label={label}
       labelPosition={labelPosition}
       {...themeProps}
-      {...rest}
     >
       <Checkmark
         {...themeProps}
@@ -189,6 +189,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
         onKeyDown={handleOnKeyDown}
         onBlur={handleOnBlur}
         onFocus={handleOnFocus}
+        {...rest}
       >
         {checkBoxChecked &&
           !customCheckmark &&
@@ -227,7 +228,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           </svg>
         )}
         {customCheckmark && checkBoxChecked && !disabled && !indeterminate && (
-          <img src={logo} alt=""></img>
+          <>{customCheckmark}</>
         )}
       </Checkmark>
       <div onClick={handleClick}>{label}</div>
@@ -268,7 +269,7 @@ CheckBoxInput.defaultProps = {
 };
 
 CheckBoxInput.propTypes = {
-  id: PropTypes.any.isRequired,
+  id: PropTypes.any,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
@@ -276,7 +277,7 @@ CheckBoxInput.propTypes = {
   indeterminate: PropTypes.bool,
   labelPosition: PropTypes.oneOf(["right", "left"]),
   tabIndex: PropTypes.number,
-  customCheckmark: PropTypes.any,
+  customCheckmark: PropTypes.element,
   //---------------------------------------------------------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
