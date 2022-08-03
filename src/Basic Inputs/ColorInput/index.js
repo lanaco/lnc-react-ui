@@ -23,7 +23,7 @@ const StyledInput = styled.label`
   align-items: center;
   gap: 0.5rem;
   ${(props) =>
-    getComponentTypographyCss(props.theme, "Input", "small", "enabled")};
+    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")};
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   background-color: ${(props) =>

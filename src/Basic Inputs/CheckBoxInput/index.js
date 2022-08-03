@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import Icon from "../../General/Icon";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledBackgroundCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const getLabelDirection = (direction) => {
   if (direction == "left") return "row-reverse";
@@ -10,51 +16,80 @@ const getLabelDirection = (direction) => {
   return "row";
 };
 
-const standardCssFields = ({ theme, color, size }) => {
-  return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
-  `;
+const getCheckSize = (theme, size) => {
+  return `calc(${theme.components.Checkbox.default.enabled.checkmarkSizes[size]} / 2)`;
 };
 
-const CheckBoxContainer = styled.div`
-  box-sizing: border-box;
-  cursor: pointer;
+const CheckboxContainer = styled.label`
+  min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   display: inline-flex;
-  flex-direction: ${(props) => getLabelDirection(props.direction)};
-  width: max-content;
-  gap: 0.5rem;
-  height: ${(props) => props.theme.typography[props.size].inputSize};
-  ${(props) => standardCssFields(props)}
+  justify-content: center;
   align-items: center;
-  & > label {
-    box-sizing: border-box;
-    color: ${(props) =>
-    props.disabled ? props.theme.test_palette["disabled"][400] : "unset"};
-    cursor: pointer;
-    display: ${(props) => (props.label ? "unset" : "none")};
-  }
+  column-direction: ${(props) => getLabelDirection(props.labelPosition)};
 
-  & > input {
-    box-sizing: border-box;
+  ${(props) => props.disabled && "pointer-events: none;"}
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")};
+  gap: 0.75rem;
+  cursor: pointer;
+  & input {
     display: none;
   }
 `;
 
-const StyledCheckBox = styled.div`
-  height: ${(props) => props.theme.typography[props.size].iconFontSize};
-  width: ${(props) => props.theme.typography[props.size].iconFontSize};
-  cursor: pointer;
-  border-radius: 4px;
-  &:hover {
-    box-shadow: 0px 0px 0.375rem -0.125rem ${(props) => (props.disabled ? "unset" : props.theme.test_palette[props.color][400])};
+const Checkmark = styled.div`
+height: ${(props) =>
+  props.theme.components.Checkbox.default.enabled.checkmarkSizes[props.size]};
+width: ${(props) =>
+  props.theme.components.Checkbox.default.enabled.checkmarkSizes[props.size]};
+display: flex;
+justify-content: center;
+align-items: center;
+transition: all 0.2s ease;
+
+background-color: ${(props) =>
+  props.checked || props.indeterminate
+    ? getColorRgbaValue(
+        props.theme,
+        "Checkbox",
+        props.color,
+        "active",
+        "background",
+        "backgroundOpacity"
+      )
+    : "transparent"};
+color: ${(props) =>
+  getColorRgbaValue(props.theme, "Checkbox", props.color, "enabled", "text")};
+border: 1px solid 
+  ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Checkbox",
+      props.isFocused ? "primary" : props.color,
+      props.checked || props.indeterminate
+        ? props.disabled
+          ? "disabled"
+          : "active"
+        : "enabled",
+      "border"
+    )};
+border-radius: ${(props) =>
+  getBorderRadiusValueWithUnits(props.theme, "slight")};
+  ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
+
+  & svg {
+    height: ${(props) => getCheckSize(props.theme, props.size)};
+    width: ${(props) => getCheckSize(props.theme, props.size)};
   }
-  &:focus {
-    outline: none;
-    box-shadow: ${(props) =>
-    (props.disabled ? 'unset' : `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`)};
-  }
-`;
+
+  & img {
+    max-height: ${(props) => getCheckSize(props.theme, props.size)};
+    max-width: ${(props) => getCheckSize(props.theme, props.size)};
+    filter: brightness(0) invert(1);
+  } 
+
+}`;
 
 const CheckBoxInput = React.forwardRef((props, ref) => {
   const {
@@ -65,9 +100,8 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     readOnly,
     label,
     labelPosition,
-    icon,
-    iconUncheckedStyle,
     tabIndex,
+    customCheckmark,
     //----------------
     onChange,
     onFocus,
@@ -81,6 +115,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     style,
     inputRef,
     inputProps,
+    children,
     ...rest
   } = props;
 
@@ -134,67 +169,79 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <CheckBoxContainer
-      {...themeProps}
+    <CheckboxContainer
       direction={labelPosition}
       disabled={disabled}
       ref={ref}
       className={className}
       style={style}
       label={label}
+      labelPosition={labelPosition}
+      {...themeProps}
     >
+      <Checkmark
+        {...themeProps}
+        checked={checkBoxChecked}
+        indeterminate={indeterminateState}
+        disabled={disabled}
+        onClick={handleClick}
+        tabIndex={tabIndex}
+        onKeyDown={handleOnKeyDown}
+        onBlur={handleOnBlur}
+        onFocus={handleOnFocus}
+        {...rest}
+      >
+        {checkBoxChecked &&
+          !customCheckmark &&
+          !disabled &&
+          !indeterminateState && (
+            <svg
+              viewBox="0 0 8 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="white"
+            >
+              <path
+                d="M1 3.15385L2.89474 5L7 1"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        {indeterminateState && !disabled && (
+          <svg
+            width="8"
+            height="2"
+            viewBox="0 0 8 2"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 1H7"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+        {customCheckmark && checkBoxChecked && !disabled && !indeterminate && (
+          <>{customCheckmark}</>
+        )}
+      </Checkmark>
+      <div onClick={handleClick}>{label}</div>
       <input
         ref={inputRef}
         type="checkbox"
         checked={checkBoxChecked}
         disabled={disabled}
         readOnly={readOnly}
-        onChange={() => { }}
+        onChange={() => {}}
         {...inputProps}
       />
-      {icon ? (
-        <Icon
-          icon={icon}
-          color={checkBoxChecked && !disabled ? color : "disabled"}
-          iconStyle={
-            iconUncheckedStyle == "regular"
-              ? checkBoxChecked && !disabled
-                ? "solid"
-                : "regular"
-              : "solid"
-          }
-          size={size}
-          className="lnc-checkbox-icon"
-          onClick={handleClick}
-          tabIndex={tabIndex}
-          onKeyDown={handleOnKeyDown}
-          onBlur={handleOnBlur}
-          onFocus={handleOnFocus}
-          sizeInUnits={theme.typography[size].inputSize}
-          {...rest}
-        />
-      ) : (
-        <StyledCheckBox
-          {...themeProps}
-          disabled={disabled}
-          onClick={handleClick}
-          tabIndex={tabIndex}
-          onKeyDown={handleOnKeyDown}
-          onBlur={handleOnBlur}
-          onFocus={handleOnFocus}
-          {...rest}
-        >
-          <svg id="etYJwPFTLeI1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" shapeEndering="geometricPrecision" textRendering="geometricPrecision">
-            {/* CHECKED */}
-            {(checkBoxChecked && !indeterminateState) && <rect width="12" height="12" rx="2" ry="2" transform="translate(4 4)" fill={theme.test_palette[disabled ? "disabled" : color][400]} />}
-            {/* INDETERMINATE */}
-            {indeterminateState && <rect width="12" height="2" rx="1" ry="1" transform="translate(4 9)" fill={theme.test_palette[disabled ? "disabled" : color][400]} />}
-            <rect width="18" height="18" rx="2" ry="2" transform="translate(1 1)" fill="rgba(210,219,237,0)" fillRule="evenodd" stroke={theme.test_palette[disabled ? "disabled" : color][400]} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </StyledCheckBox>
-      )}
-      <label onClick={handleClick}>{label}</label>
-    </CheckBoxContainer>
+    </CheckboxContainer>
   );
 });
 
@@ -206,15 +253,13 @@ CheckBoxInput.defaultProps = {
   label: "",
   indeterminate: false,
   labelPosition: "right",
-  icon: null,
-  iconUncheckedStyle: "solid",
   tabIndex: 0,
   //-------------------------
-  onChange: (e, value) => { },
-  onBlur: () => { },
-  onFocus: () => { },
-  onClick: () => { },
-  onKeyDown: () => { },
+  onChange: (e, value) => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  onClick: () => {},
+  onKeyDown: () => {},
   //-------------------------
   className: "",
   style: {},
@@ -224,16 +269,15 @@ CheckBoxInput.defaultProps = {
 };
 
 CheckBoxInput.propTypes = {
-  id: PropTypes.any.isRequired,
+  id: PropTypes.any,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   label: PropTypes.string,
   indeterminate: PropTypes.bool,
   labelPosition: PropTypes.oneOf(["right", "left"]),
-  icon: PropTypes.string,
-  iconUncheckedStyle: PropTypes.oneOf(["regular", "solid"]),
   tabIndex: PropTypes.number,
+  customCheckmark: PropTypes.element,
   //---------------------------------------------------------------
   onChange: PropTypes.func,
   onBlur: PropTypes.func,

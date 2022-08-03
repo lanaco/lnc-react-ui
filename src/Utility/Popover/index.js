@@ -7,14 +7,6 @@ import { getComponentTypographyCss } from '../../_utils/utils';
 
 const StyledPopover = styled.div`
 background-color: ${(props) => props.theme.palette[props.theme.colorContext.neutral][100]};
-${(props) =>
-  getComponentTypographyCss(
-    props.theme,
-    "Chip",
-    "small",
-    "enabled"
-  )};
-
 display: ${props => props.show ? 'block' : 'none'};
 opacity: 0;
 opacity: ${props => props.show ? '1' : '0'};
@@ -30,8 +22,11 @@ box-shadow: ${(props) => `0px 0px 6px -2px ${props.theme.palette[props.theme.col
 box-sizing: border-box;
 max-width: ${props => props.position?.maxWidth ? (props.position.maxWidth != "100vw" ? props.position.maxWidth + "px" : "100vw") : "100vw"};
 max-height: ${props => props.position?.maxHeight ? (props.position.maxHeight != "100vh" ? props.position.maxHeight + "px" : "100vh") : "100vh"};
+padding: 12px;
+
 z-index: ${props => props.zIndex ? props.zIndex : props.theme.zIndex.popover};
-padding: ${props => props.theme.spaces.paddings.popover};
+ ${(props) =>
+    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")};
 
 @keyframes fadeIn {
   0% { opacity: 0; }
