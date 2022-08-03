@@ -82,7 +82,7 @@ ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
 
   &:focus {
     ${(props) =>
-      !props.disabled && !props.readOnly && getOutlineCss(props.theme)}
+      !props.disabled && props.readOnly==false && getOutlineCss(props.theme)}
   }
 
   & svg {
