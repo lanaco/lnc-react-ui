@@ -56,7 +56,7 @@ const StyledInput = styled.label`
     getBorderRadiusValueWithUnits(props.theme, "regular")};
   padding: 0.625rem 0.75rem;
   width: 100%;
-  ${(props) => (!props.disabled && !props.readOnly && props.isFocused) && getOutlineCss(props.theme)};
+  ${(props) => (!props.disabled && props.readOnly == false && props.isFocused) && getOutlineCss(props.theme)};
 
   ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
   border: 1px solid ${(props) =>
@@ -72,11 +72,11 @@ const StyledColorInput = styled.div`
   & div {
     &:focus {
       ${(props) =>
-        (!props.disabled && !props.withInput && !props.readOnly) && getOutlineCss(props.theme)};
+        (!props.disabled && !props.withInput && props.readOnly == false) && getOutlineCss(props.theme)};
     }
     &:hover {
       ${(props) =>
-        (!props.disabled && !props.withInput && !props.readOnly) && getOutlineCss(props.theme)};
+        (!props.disabled && !props.withInput && props.readOnly == false) && getOutlineCss(props.theme)};
     }
 
     ${(props) =>
@@ -178,6 +178,7 @@ const ColorInput = React.forwardRef((props, ref) => {
       className={className}
       style={style}
       disabled={disabled}
+      readOnly={readOnly}
       withInput={withInput}
       {...rest}
     >

@@ -77,12 +77,12 @@ const StyledRadio = styled.div`
     }
   }
   &:focus {
-    ${(props) => (!props.disabled && !props.readOnly) && getOutlineCss(props.theme)};
+    ${(props) => (!props.disabled && props.readOnly == false) && getOutlineCss(props.theme)};
   }
 `;
 
 const Label = styled.label`
-  ${props => (!props.disabled && !props.readOnly) && 'cursor: pointer'};
+  ${props => (!props.disabled && props.readOnly == false) && 'cursor: pointer'};
 `;
 
 const RadioInput = React.forwardRef((props, ref) => {
@@ -159,8 +159,7 @@ const RadioInput = React.forwardRef((props, ref) => {
       {...rest}
     >
       <Input
-        disabled={disabled}
-        readOnly={readOnly}
+        disabled={disabled || readOnly}
         onChange={() => {}}
         type="radio"
         id={id}
@@ -176,6 +175,7 @@ const RadioInput = React.forwardRef((props, ref) => {
         onFocus={handleOnFocus}
         onClick={handleClick}
         checked={isChecked}
+        readOnly={readOnly}
       >
         <svg
           id="eqw1eBsfm9l1"
