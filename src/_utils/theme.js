@@ -1003,7 +1003,7 @@ const lanaco_light = {
           border: 300,
           text: 600,
           fontWeight: 600,
-          checkmarkSizes: {
+          sizes: {
             small: "1rem",
             medium: "1.25rem",
             large: "1.5rem"
@@ -1137,6 +1137,150 @@ const lanaco_light = {
           border:600,
         }
       }
+    },
+    Radio: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          border: 300,
+          text: 600,
+          fontWeight: 600,
+          sizes: {
+            small: "1rem",
+            medium: "1.25rem",
+            large: "1.5rem"
+          }
+        },
+        focus: {
+          border: 300,
+          text: 600,
+          backgroundOpacity: 1000,
+          fontWeight: 600,
+        },
+        hover: {
+          background: 900,
+          backgroundOpacity: 100,
+          border: 300,
+          text: 600,
+          fontWeight: 600,
+        },
+        active: {
+          background: 600,
+          backgroundOpacity: 1000,
+          border: 600,
+          text: 600,
+          fontWeight: 600,
+        },
+        disabled: {
+          border: 300,
+          background: 300,
+        }
+      },
+      teal: {
+        active: {
+          background: 600,
+          border: 600,
+        },
+        focus: {
+          border: 600,
+        },
+        indterminate: {
+          background: 600,
+          border:600,
+        }
+      },
+      blue: {
+        active: {
+          background: 600,
+          border: 600,
+        },
+        focus: {
+          border: 600,
+        },
+        indterminate: {
+          background: 600,
+          border:600,
+        }
+      },
+      red: {
+        active: {
+          background: 600,
+          border: 600,
+        },
+        focus: {
+          border: 600,
+        },
+        indterminate: {
+          background: 600,
+          border:600,
+        }
+      },
+      violet: {
+        active: {
+          background: 600,
+          border: 600,
+        },
+        focus: {
+          border: 600,
+        },
+        indterminate: {
+          background: 600,
+          border:600,
+        }
+      },
+      yellow: {
+        active: {
+          background: 600,
+          border: 600,
+        },
+        focus: {
+          border: 600,
+        },
+        indterminate: {
+          background: 600,
+          border:600,
+        }
+      },
+      green: {
+        active: {
+          background: 600,
+          border: 600,
+        },
+        focus: {
+          border: 600,
+        },
+        indterminate: {
+          background: 600,
+          border:600,
+        }
+      },
+      gray: {
+        active: {
+          background: 600,
+          border: 600,
+        },
+        focus: {
+          border: 600,
+        },
+        indterminate: {
+          background: 600,
+          border:600,
+        }
+      },
+      neutral: {
+        active: {
+          background: 600,
+          border: 600,
+        },
+        focus: {
+          border: 600,
+        },
+        indterminate: {
+          background: 600,
+          border:600,
+        }
+      }
     }
   },
   palette: {
@@ -1145,7 +1289,7 @@ const lanaco_light = {
       style: "solid",
       context: "secondary",
       weight: 500,
-      offset: "0.125rem",
+      offset: "0.188rem",
     },
     disabled: {
       color: "gray",
