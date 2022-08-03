@@ -81,11 +81,14 @@ const StyledRadio = styled.div`
   }
 `;
 
-const Label = styled.label``;
+const Label = styled.label`
+  ${props => (!props.disabled && !props.readOnly) && 'cursor: pointer'};
+`;
 
 const RadioInput = React.forwardRef((props, ref) => {
   const {
     id,
+    name,
     tabIndex,
     checked,
     className,
@@ -153,7 +156,6 @@ const RadioInput = React.forwardRef((props, ref) => {
       ref={ref}
       className={className}
       style={style}
-      id={id}
       {...rest}
     >
       <Input
@@ -162,6 +164,7 @@ const RadioInput = React.forwardRef((props, ref) => {
         onChange={() => {}}
         type="radio"
         id={id}
+        name={name}
         checked={isChecked}
         {...inputProps}
       />
@@ -200,7 +203,7 @@ const RadioInput = React.forwardRef((props, ref) => {
           )}
         </svg>
       </StyledRadio>
-      <Label {...themeProps} htmlFor={id}>
+      <Label {...themeProps} onClick={handleClick}>
         {label}
       </Label>
     </Container>
@@ -230,7 +233,8 @@ RadioInput.defaultProps = {
 };
 
 RadioInput.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  name: PropTypes.string,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
