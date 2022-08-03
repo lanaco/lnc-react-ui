@@ -160,11 +160,18 @@ TextInput.propTypes = {
    * Reserved space after input. Intented to be used with plain text or `Icon` component.
    */
   suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  //----------------
+  /**
+   * `(event, value) => void`
+   */
   onChange: PropTypes.func,
+  /**
+   * `(event) => void`
+   */
   onBlur: PropTypes.func,
+  /**
+   * `(event) => void`
+   */
   onFocus: PropTypes.func,
-  //----------------
   className: PropTypes.string,
   style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
