@@ -81,7 +81,8 @@ border-radius: ${(props) =>
 ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
 
   &:focus {
-    ${(props) => (!props.disabled && !props.readOnly) && getOutlineCss(props.theme)}
+    ${(props) =>
+      !props.disabled && !props.readOnly && getOutlineCss(props.theme)}
   }
 
   & svg {
@@ -100,6 +101,7 @@ ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
 const CheckBoxInput = React.forwardRef((props, ref) => {
   const {
     id,
+    name,
     checked,
     indeterminate,
     disabled,
@@ -239,6 +241,8 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       </Checkmark>
       <div onClick={handleClick}>{label}</div>
       <input
+        id={id}
+        name={name}
         ref={inputRef}
         type="checkbox"
         checked={checkBoxChecked}
@@ -275,7 +279,8 @@ CheckBoxInput.defaultProps = {
 };
 
 CheckBoxInput.propTypes = {
-  id: PropTypes.any,
+  id: PropTypes.string,
+  name: PropTypes.string,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
