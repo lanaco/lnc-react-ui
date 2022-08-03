@@ -6,10 +6,14 @@ import RadioInput from "./index";
 
 export const TemplateDefault = (args) => <RadioInput {...args} />;
 
+export const TemplateReadOnly = (args) => <><RadioInput {...args} readOnly={true} checked={true}/><RadioInput {...args} readOnly={true}/></>;
+
+export const TemplateDisabled = (args) => <><RadioInput {...args} disabled={true} checked={true}/><RadioInput {...args} disabled={true}/></>;
+
 export const TemplateLabel = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
-    <RadioInput {...args} labelPosition="left" />
-    <RadioInput {...args} labelPosition="right" />
+    <RadioInput {...args} labelPosition="left" label={"label"} checked={true}/>
+    <RadioInput {...args} labelPosition="right" label={"label"}/>
   </div>
 );
 
@@ -40,11 +44,7 @@ import { RadioInput } from "@lnc-react-ui";
 
 <Canvas withSource="open">
   <Story
-    name="Default"
-    args={{
-      checked: true,
-    }}
-  >
+    name="Default">
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
@@ -55,13 +55,17 @@ import { RadioInput } from "@lnc-react-ui";
 
 <Canvas>
   <Story
-    name="Label"
-    args={{
-      checked: true,
-      label: "Label text",
-    }}
-  >
+    name="Label">
     {TemplateLabel.bind({})}
+  </Story>
+</Canvas>
+
+## Read Only
+
+<Canvas>
+  <Story
+    name="Read Only">
+    {TemplateReadOnly.bind({})}
   </Story>
 </Canvas>
 
@@ -69,14 +73,8 @@ import { RadioInput } from "@lnc-react-ui";
 
 <Canvas>
   <Story
-    name="Disabled"
-    args={{
-      checked: true,
-      disabled: true,
-      label: "disabled",
-    }}
-  >
-    {TemplateDefault.bind({})}
+    name="Disabled">
+    {TemplateDisabled.bind({})}
   </Story>
 </Canvas>
 
@@ -86,11 +84,7 @@ Defining `size` with `small`, `medium` and `large` values.
 
 <Canvas>
   <Story
-    name="Sizes"
-    args={{
-      checked: true,
-    }}
-  >
+    name="Sizes">
     {TemplateSizes.bind({})}
   </Story>
 </Canvas>

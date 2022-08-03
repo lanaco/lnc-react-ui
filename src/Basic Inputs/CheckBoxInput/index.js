@@ -7,6 +7,7 @@ import {
   getColorRgbaValue,
   getComponentTypographyCss,
   getDisabledBackgroundCss,
+  getOutlineCss,
   getSizeValueWithUnits,
 } from "../../_utils/utils";
 
@@ -17,7 +18,7 @@ const getLabelDirection = (direction) => {
 };
 
 const getCheckSize = (theme, size) => {
-  return `calc(${theme.components.Checkbox.default.enabled.checkmarkSizes[size]} / 2)`;
+  return `calc(${theme.components.Checkbox.default.enabled.sizes[size]} / 2)`;
 };
 
 const CheckboxContainer = styled.label`
@@ -30,7 +31,7 @@ const CheckboxContainer = styled.label`
 
   ${(props) => props.disabled && "pointer-events: none;"}
   ${(props) =>
-    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")};
+    getComponentTypographyCss(props.theme, "Checkbox", props.size, "enabled")};
   gap: 0.75rem;
   cursor: pointer;
   & input {
@@ -40,9 +41,9 @@ const CheckboxContainer = styled.label`
 
 const Checkmark = styled.div`
 height: ${(props) =>
-  props.theme.components.Checkbox.default.enabled.checkmarkSizes[props.size]};
+  props.theme.components.Checkbox.default.enabled.sizes[props.size]};
 width: ${(props) =>
-  props.theme.components.Checkbox.default.enabled.checkmarkSizes[props.size]};
+  props.theme.components.Checkbox.default.enabled.sizes[props.size]};
 display: flex;
 justify-content: center;
 align-items: center;
@@ -66,7 +67,7 @@ border: 1px solid
     getColorRgbaValue(
       props.theme,
       "Checkbox",
-      props.isFocused ? "primary" : props.color,
+      props.color,
       props.checked || props.indeterminate
         ? props.disabled
           ? "disabled"
@@ -76,7 +77,12 @@ border: 1px solid
     )};
 border-radius: ${(props) =>
   getBorderRadiusValueWithUnits(props.theme, "slight")};
-  ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
+  
+${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
+
+  &:focus {
+    ${(props) => (!props.disabled && !props.readOnly) && getOutlineCss(props.theme)}
+  }
 
   & svg {
     height: ${(props) => getCheckSize(props.theme, props.size)};

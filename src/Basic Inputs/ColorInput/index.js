@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -11,6 +11,7 @@ import {
   getOutlineCss,
   getSizeValueWithUnits,
 } from "../../_utils/utils";
+import debounce from "lodash.debounce";
 
 const getSize = (theme, size) => {
   let componentSize = getSizeValueWithUnits(theme, size);
@@ -55,9 +56,8 @@ const StyledInput = styled.label`
     getBorderRadiusValueWithUnits(props.theme, "regular")};
   padding: 0.625rem 0.75rem;
   width: 100%;
-  &:focus {
-    ${(props) => !props.disabled && getOutlineCss(props.theme)}
-  }
+  ${(props) => (!props.disabled && !props.readOnly && props.isFocused) && getOutlineCss(props.theme)};
+
   ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
   border: 1px solid ${(props) =>
     getColorRgbaValue(props.theme, "Input", props.color, "disabled", "border")};
@@ -72,11 +72,11 @@ const StyledColorInput = styled.div`
   & div {
     &:focus {
       ${(props) =>
-        !props.disabled && !props.withInput && getOutlineCss(props.theme)};
+        (!props.disabled && !props.withInput && !props.readOnly) && getOutlineCss(props.theme)};
     }
     &:hover {
       ${(props) =>
-        !props.disabled && !props.withInput && getOutlineCss(props.theme)};
+        (!props.disabled && !props.withInput && !props.readOnly) && getOutlineCss(props.theme)};
     }
 
     ${(props) =>
@@ -85,7 +85,7 @@ const StyledColorInput = styled.div`
         props.theme.palette.opacity[props.theme.palette.disabled.opacity]
       };`}
     box-sizing: border-box;
-    width: ${(props) => getSize(props.theme, props.size)};
+    min-width: ${(props) => getSize(props.theme, props.size)};
     height: ${(props) => getSize(props.theme, props.size)};
     border-radius: ${(props) =>
       getBorderRadiusValueWithUnits(props.theme, "curved")};
@@ -105,6 +105,12 @@ const StyledColorInput = styled.div`
 const LabelText = styled.span`
   display: flex;
   align-items: center;
+  overflow: hidden;
+  & input {
+    outline: none;
+    border: none;
+    background-color: transparent;
+  }
 `;
 
 const ColorInput = React.forwardRef((props, ref) => {
@@ -118,11 +124,14 @@ const ColorInput = React.forwardRef((props, ref) => {
     className,
     style,
     color,
+    debounceTime,
     readOnly,
     disabled,
     onChange,
     onFocus,
     onBlur,
+    onInput,
+    onKeyDown,
     preventDefault,
     inputRef,
     inputProps,
@@ -131,16 +140,34 @@ const ColorInput = React.forwardRef((props, ref) => {
   const theme = useTheme();
 
   const [val, setVal] = useState(value);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     setVal(value);
   }, [value]);
 
-  const handleOnChange = (e) => {
-    if (preventDefault) e.preventDefault();
+  const debouncedOnChange = useCallback(
+    debounce((e, val) => handleChange(e, val), debounceTime),
+    []
+  );
 
+  const handleChange = (e, value) => {
+    if (onChange) onChange(e, value);
+  };
+
+  const onValueChange = (e) => {
     setVal(e.target.value);
-    if (onChange) onChange(id, e.target.value);
+    debouncedOnChange(e, e.target.value);
+  };
+
+  const handleFocus = (e) => {
+    setIsFocused(true);
+    onFocus(e);
+  };
+
+  const handleBlur = (e) => {
+    setIsFocused(false);
+    onBlur(e);
   };
 
   return (
@@ -161,7 +188,9 @@ const ColorInput = React.forwardRef((props, ref) => {
           color={color}
           size={size}
           disabled={disabled}
+          readOnly={readOnly}
           tabIndex={tabIndex}
+          isFocused={isFocused}
         >
           <div>
             <input
@@ -171,14 +200,14 @@ const ColorInput = React.forwardRef((props, ref) => {
               name={name}
               value={val}
               disabled={disabled || readOnly}
-              onChange={readOnly ? () => {} : handleOnChange}
-              onBlur={readOnly ? () => {} : onBlur}
-              onFocus={readOnly ? () => {} : onFocus}
+              onChange={readOnly ? () => {} : onValueChange}
+              onBlur={readOnly ? () => {} : handleBlur}
+              onFocus={readOnly ? () => {} : handleFocus}
               color={color}
               {...inputProps}
             />
           </div>
-          <LabelText>{val}</LabelText>
+          <LabelText>{<input value={val} onChange={onValueChange} onFocus={handleFocus} onBlur={handleBlur} onInput={onInput} onKeyDown={onKeyDown} disabled={disabled || readOnly} {...rest} />}</LabelText>
         </StyledInput>
       ) : (
         <div>
@@ -189,9 +218,9 @@ const ColorInput = React.forwardRef((props, ref) => {
             name={name}
             value={val}
             disabled={disabled || readOnly}
-            onChange={readOnly ? () => {} : handleOnChange}
-            onBlur={readOnly ? () => {} : onBlur}
-            onFocus={readOnly ? () => {} : onFocus}
+            onChange={readOnly ? () => {} : onValueChange}
+            onBlur={readOnly ? () => {} : handleBlur}
+            onFocus={readOnly ? () => {} : handleFocus}
             color={color}
             tabIndex={tabIndex}
             {...inputProps}
@@ -203,6 +232,7 @@ const ColorInput = React.forwardRef((props, ref) => {
 });
 
 ColorInput.defaultProps = {
+  debounceTime: 180,
   disabled: false,
   readOnly: false,
   tabIndex: 0,
@@ -212,6 +242,8 @@ ColorInput.defaultProps = {
   onChange: () => {},
   onBlur: () => {},
   onFocus: () => {},
+  onInput: () => {},
+  onKeyDown: () => {},
   //-------------------------
   className: "",
   style: {},
@@ -223,6 +255,7 @@ ColorInput.propTypes = {
   id: PropTypes.any,
   name: PropTypes.string,
   value: PropTypes.any,
+  debounceTime: PropTypes.number,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   tabIndex: PropTypes.number,
@@ -234,6 +267,8 @@ ColorInput.propTypes = {
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
+  onInput: PropTypes.func,
+  onKeyDown: PropTypes.func,
   //---------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,

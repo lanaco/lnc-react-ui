@@ -2,6 +2,12 @@ import { useTheme } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getOutlineCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const getLabelDirection = (direction) => {
   if (direction == "left") return "row-reverse";
@@ -9,53 +15,73 @@ const getLabelDirection = (direction) => {
   return "row";
 };
 
-const standardCssFields = ({ theme, color, size }) => {
-  return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
-  `;
-};
-
-
 const Input = styled.input`
   display: none;
 `;
 
-const Container = styled.div`
-  width: fit-content;
-  height: ${(props) => props.theme.typography[props.size].inputSize};
+const Container = styled.label`
+  min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  flex-direction: ${props => getLabelDirection(props.labelPosition)};
+  flex-direction: ${(props) => getLabelDirection(props.labelPosition)};
   gap: 0.5rem;
+  ${(props) => props.disabled && "pointer-events: none;"}
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Radio", props.size, "enabled")};
+  gap: 0.75rem;
+  cursor: pointer;
+  & input {
+    display: none;
+  }
 `;
 
 const StyledRadio = styled.div`
   box-sizing: border-box;
   cursor: pointer;
-  
-  height: ${(props) => props.theme.typography[props.size].iconFontSize};
-  width: ${(props) => props.theme.typography[props.size].iconFontSize};
+  height: ${(props) =>
+    props.theme.components.Radio.default.enabled.sizes[props.size]};
+  width: ${(props) =>
+    props.theme.components.Radio.default.enabled.sizes[props.size]};
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover {
-    box-shadow: ${(props) =>
-      props.disabled
-        ? ""
-        : `0px 0px 6px -2px ${props.theme.test_palette[props.color][400]}`};
+  transition: all 0.2s ease;
+
+  & svg {
+    fill: ${(props) =>
+      props.checked || props.indeterminate
+        ? getColorRgbaValue(
+            props.theme,
+            "Radio",
+            props.color,
+            props.disabled ? "disabled" : "active",
+            "background",
+            "backgroundOpacity"
+          )
+        : "transparent"};
+    & .outer-circle {
+       stroke: ${props => getColorRgbaValue(
+        props.theme,
+        "Radio",
+        props.color,
+        props.checked 
+          ? props.disabled
+            ? "disabled"
+            : "active"
+          : "enabled",
+        "border"
+      )};
+    }
   }
   &:focus {
-    outline: none;
-    box-shadow: ${(props) => props.disabled ? "" : `0px 0px 8px -1px ${props.theme.test_palette[props.color][400]}`};
+    ${(props) => (!props.disabled && !props.readOnly) && getOutlineCss(props.theme)};
   }
 `;
 
-const Label = styled.label`
-  ${(props) => standardCssFields(props)}
-`;
+const Label = styled.label``;
 
 const RadioInput = React.forwardRef((props, ref) => {
   const {
@@ -93,7 +119,7 @@ const RadioInput = React.forwardRef((props, ref) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
 
-    if(onClick) onClick(e);
+    if (onClick) onClick(e);
 
     if (readOnly || disabled) return;
 
@@ -148,9 +174,30 @@ const RadioInput = React.forwardRef((props, ref) => {
         onClick={handleClick}
         checked={isChecked}
       >
-        <svg id="eqw1eBsfm9l1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" shapeRendering="geometricPrecision" textRendering="geometricPrecision">
-          {isChecked && <ellipse rx="5" ry="5" transform="translate(10 10)" fill={theme.test_palette[disabled ? "disabled" : color][400]} strokeWidth="0"/>}
-          <ellipse rx="9.5" ry="9.5" transform="translate(10 10)" fill="rgba(210,219,237,0)" fillRule="evenodd" stroke={theme.test_palette[disabled ? "disabled" : color][400]}/>
+        <svg
+          id="eqw1eBsfm9l1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          shapeRendering="geometricPrecision"
+          textRendering="geometricPrecision"
+        >
+          <ellipse
+            className="outer-circle"
+            rx="9.5"
+            ry="9.5"
+            transform="translate(10 10)"
+            fillRule="evenodd"
+            stroke={"red"}
+          />
+          {isChecked && (
+            <ellipse
+              rx="5"
+              ry="5"
+              transform="translate(10 10)"
+              fill={"white"}
+              strokeWidth="0"
+            />
+          )}
         </svg>
       </StyledRadio>
       <Label {...themeProps} htmlFor={id}>
@@ -179,7 +226,7 @@ RadioInput.defaultProps = {
   style: {},
   size: "small",
   color: "primary",
-  inputProps: { },
+  inputProps: {},
 };
 
 RadioInput.propTypes = {
