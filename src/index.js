@@ -41,9 +41,6 @@ export { default as DataView } from "./Data display/DataView";
 
 export * from "./Data dipslay/Grid";
 export { default as Grid } from "./Data display/Grid";
-
-export * from "./Data display/ItemCounter";
-export { default as ItemCounter } from "./Data display/ItemCounter";
 //=============================================================================================
 
 //============ FEEDBACK =======================================================================
