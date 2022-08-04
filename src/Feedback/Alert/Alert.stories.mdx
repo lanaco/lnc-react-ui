@@ -6,10 +6,7 @@ import { useState } from "react";
 <Meta title="Feedback/Alert" component={Alert} />
 
 export const TemplateDefault = (args) => (
-  <Alert
-    {...args}
-    status={"information"}
-    title="A new software update is available. See what’s new in version 3.0.0."
+  <Alert {...args}
   ></Alert>
 );
 
@@ -80,8 +77,8 @@ export const TemplateCustom = (args) => {
 import { Alert } from "@lnc-react-ui";
 ```
 
-<Canvas withSource="open">
-  <Story name="Default">{TemplateDefault.bind({})}</Story>
+<Canvas>
+  <Story name="Default" args={{ status: "information", title: "A new software update is available. See what’s new in version 3.0.0."}}>{TemplateDefault.bind({})}</Story>
 </Canvas>
 
 <ArgsTable story="Default" />
