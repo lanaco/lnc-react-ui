@@ -22,6 +22,7 @@ const getCheckSize = (theme, size) => {
 };
 
 const CheckboxContainer = styled.label`
+  ${(props) => (!props.disabled && props.readOnly == false) && "cursor: pointer;"}
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   display: inline-flex;
