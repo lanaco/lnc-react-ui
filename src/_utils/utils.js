@@ -84,11 +84,27 @@ export const getColorRgbaValue = (
   const opacityWeight = componentState?.[opacityProp];
   const defaultOpacityWeight = componentDefault[stateProp][opacityProp];
 
+
   const hexColorValue = colorWeight ? theme.palette[palette][colorWeight] : theme.palette[componentDefault.palette][defaultColorWeight];
   const opacityValue = opacityWeight ? theme.palette.opacity[opacityWeight] : theme.palette.opacity[defaultOpacityWeight];
 
   return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
+
+export const getComponentPropValue = (
+  theme,
+  component,
+  context,
+  stateProp,
+  prop) => {
+    const palette = theme.colorContext[context];
+    const componentDefault = theme.components[component].default;
+    const componentState = theme.components[component]?.[palette]?.[stateProp];
+    const value = componentState?.[prop];
+    const defaultValue = componentDefault[stateProp][prop];
+  
+    return value ? value : defaultValue;
+}
 
 export const getSizeValueWithUnits = (theme, size) => {
   return theme.sizes[size];

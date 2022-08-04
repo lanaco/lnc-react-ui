@@ -1263,6 +1263,117 @@ const lanaco_light = {
         indterminate: {
           background: 600,
           border:600,
+        },
+      }
+    },
+    Alert: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        },
+      },
+      teal: {
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        }
+      },
+      blue: {
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        }
+      },
+      red: {
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        }
+      },
+      violet: {
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        }
+      },
+      yellow: {
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        }
+      },
+      green: {
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        }
+      },
+      gray: {
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        }
+      },
+      neutral: {
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+          text: 700,
+          action: 800,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
         }
       }
     }

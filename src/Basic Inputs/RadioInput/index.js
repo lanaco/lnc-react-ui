@@ -203,7 +203,7 @@ const RadioInput = React.forwardRef((props, ref) => {
           )}
         </svg>
       </StyledRadio>
-      <Label {...themeProps} onClick={handleClick}>
+      <Label {...themeProps} onClick={handleClick} disalbed={disabled} readOnly={readOnly}>
         {label}
       </Label>
     </Container>
@@ -257,7 +257,8 @@ RadioInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
+    "neutral"
   ]),
   inputProps: PropTypes.any,
 };
