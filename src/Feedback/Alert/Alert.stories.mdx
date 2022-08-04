@@ -1,0 +1,107 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Alert from "./index";
+import { useState } from "react";
+
+<Meta title="Feedback/Alert" component={Alert} />
+
+export const TemplateDefault = (args) => (
+  <Alert
+    {...args}
+    status={"information"}
+    title="A new software update is available. See what’s new in version 3.0.0."
+  ></Alert>
+);
+
+export const TemplateContentActions = (args) => (
+  <Alert
+    {...args}
+    status={"danger"}
+    title="No internet connection"
+    actions={<a onClick={() => alert("Connection failed")}>Reconnect</a>}
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et sed.
+  </Alert>
+);
+
+export const TemplateStatuses = (args) => (
+  <div>
+    <Alert
+      {...args}
+      status={"information"}
+      title="A new software update is available. See what’s new in version 3.0.0."
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert {...args} status={"success"} title="Order completed">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert {...args} status={"warning"} title="Attention needed">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert {...args} status={"danger"} title="No internet connection">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+  </div>
+);
+
+export const TemplateCustom = (args) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <>
+      {open && <Alert
+        {...args}
+        open={open}
+        color={"primary"}
+        statusIcon={"question-circle"}
+        title="Custom alert"
+        actions={<><a onClick={() => alert("Connection failed")}>Connect</a><a onClick={() => setOpen(false)}>Dismiss</a></>}
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et sed.
+      </Alert>}
+      <br/>
+      <button disabled={open} onClick={() => setOpen(!open)}>Open</button>
+    </>
+  );
+};
+
+# Alert
+
+```jsx
+import { Alert } from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default">{TemplateDefault.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Actions
+
+<Canvas>
+  <Story name="Actoins">{TemplateContentActions.bind({})}</Story>
+</Canvas>
+
+## Statuses
+
+<Canvas>
+  <Story name="Statuses">{TemplateStatuses.bind({})}</Story>
+</Canvas>
+
+## Custom Alert
+
+Status icon can be disabled with `noIcon={true}`. Custom icon can be defined with prop `customIcon`. If `status` is not defined, one way to define alert color is with `color` prop.
+
+<Canvas withSource="open">
+  <Story name="Custom">{TemplateCustom.bind({})}</Story>
+</Canvas>
