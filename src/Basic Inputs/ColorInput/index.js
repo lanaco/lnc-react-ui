@@ -19,7 +19,6 @@ const getSize = (theme, size) => {
 };
 
 const StyledInput = styled.label`
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -56,7 +55,11 @@ const StyledInput = styled.label`
     getBorderRadiusValueWithUnits(props.theme, "regular")};
   padding: 0.625rem 0.75rem;
   width: 100%;
-  ${(props) => (!props.disabled && props.readOnly == false && props.isFocused) && getOutlineCss(props.theme)};
+  ${(props) =>
+    !props.disabled &&
+    props.readOnly == false &&
+    props.isFocused &&
+    getOutlineCss(props.theme)};
 
   ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
   border: 1px solid ${(props) =>
@@ -64,6 +67,7 @@ const StyledInput = styled.label`
 `;
 
 const StyledColorInput = styled.div`
+  ${(props) => !props.disabled && props.readOnly == false && "cursor: pointer;"}
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   display: inline-flex;
@@ -72,11 +76,17 @@ const StyledColorInput = styled.div`
   & div {
     &:focus {
       ${(props) =>
-        (!props.disabled && !props.withInput && props.readOnly == false) && getOutlineCss(props.theme)};
+        !props.disabled &&
+        !props.withInput &&
+        props.readOnly == false &&
+        getOutlineCss(props.theme)};
     }
     &:hover {
       ${(props) =>
-        (!props.disabled && !props.withInput && props.readOnly == false) && getOutlineCss(props.theme)};
+        !props.disabled &&
+        !props.withInput &&
+        props.readOnly == false &&
+        getOutlineCss(props.theme)};
     }
 
     ${(props) =>
@@ -208,7 +218,20 @@ const ColorInput = React.forwardRef((props, ref) => {
               {...inputProps}
             />
           </div>
-          <LabelText>{<input value={val} onChange={onValueChange} onFocus={handleFocus} onBlur={handleBlur} onInput={onInput} onKeyDown={onKeyDown} disabled={disabled || readOnly} {...rest} />}</LabelText>
+          <LabelText>
+            {
+              <input
+                value={val}
+                onChange={onValueChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                onInput={onInput}
+                onKeyDown={onKeyDown}
+                disabled={disabled || readOnly}
+                {...rest}
+              />
+            }
+          </LabelText>
         </StyledInput>
       ) : (
         <div>
@@ -280,7 +303,8 @@ ColorInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
+    "neutral",
   ]),
 };
 

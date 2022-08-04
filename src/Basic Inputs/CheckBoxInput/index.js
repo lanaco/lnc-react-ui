@@ -22,6 +22,7 @@ const getCheckSize = (theme, size) => {
 };
 
 const CheckboxContainer = styled.label`
+  ${(props) => (!props.disabled && props.readOnly == false) && "cursor: pointer;"}
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   display: inline-flex;
@@ -33,13 +34,13 @@ const CheckboxContainer = styled.label`
   ${(props) =>
     getComponentTypographyCss(props.theme, "Checkbox", props.size, "enabled")};
   gap: 0.75rem;
-  cursor: pointer;
   & input {
     display: none;
   }
 `;
 
 const Checkmark = styled.div`
+${(props) => !props.disabled && props.readOnly == false && "cursor: pointer;"}
 height: ${(props) =>
   props.theme.components.Checkbox.default.enabled.sizes[props.size]};
 width: ${(props) =>
@@ -192,6 +193,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
         checked={checkBoxChecked}
         indeterminate={indeterminateState}
         disabled={disabled}
+        readOnly={readOnly}
         onClick={handleClick}
         tabIndex={tabIndex}
         onKeyDown={handleOnKeyDown}
@@ -239,7 +241,14 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           <>{customCheckmark}</>
         )}
       </Checkmark>
-      <div onClick={handleClick}>{label}</div>
+      <div
+        onClick={handleClick}
+        className="checkbox-label"
+        disabled={disabled}
+        readOnly={readOnly}
+      >
+        {label}
+      </div>
       <input
         id={id}
         name={name}
@@ -305,7 +314,8 @@ CheckBoxInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
+    "neutral",
   ]),
   inputProps: PropTypes.object,
 };

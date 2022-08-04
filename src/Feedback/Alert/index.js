@@ -2,109 +2,86 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
+import { getBorderRadiusValueWithUnits, getColorRgbaValue, getComponentPropValue, getComponentTypographyCss } from "../../_utils/utils";
+import Icon from "../../General/Icon";
 
-const fontSize = (props) => {
-
-  let fontSize = props.theme.typography[props.size].fontSize;
-  let newFontSize = "";
-
-  if (fontSize.includes("px")) {
-    newFontSize =
-      parseFloat(
-        props.theme.typography[props.size].fontSize.replace("px", "")
-      ) -
-      1.5 +
-      "px";
-  }
-
-  if (fontSize.includes("rem")) {
-    newFontSize =
-      parseFloat(
-        props.theme.typography[props.size].fontSize.replace("rem", "")
-      ) -
-      0.09375 +
-      "rem";
-  }
-
-  return newFontSize;
-};
-
-const paddingBySize = (size) => {
-  if (size === "small") return `0.1rem 0.3rem 0.1rem 0.1rem`;
-  if (size === "medium") return `0.13rem 0.4rem 0.13rem 0.1rem`;
-  if (size === "large") return `0.16rem 0.5rem 0.16rem 0.1rem`;
-};
-
-const paddingBySizeContainerBox = (size) => {
-  if (size === "small") return `0.1875rem 0.3rem`;
-  if (size === "medium") return `0.25rem 0.4rem`;
-  if (size === "large") return `0.3125rem 0.5rem`;
-};
-
-
-const ContainerBox = styled.div`
-  border: 0.0625rem solid ${(props) => props.theme.palette[props.color].dark};
-  border-radius: 0.15625rem;
-  background-color: ${(props) => props.theme.palette[props.color].lighter};
-  color: ${(props) => props.theme.palette[props.color].dark};
-  font-size: ${(props) => fontSize(props)};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  padding: ${(props) => paddingBySizeContainerBox(props.size)};
-  word-wrap: break-word;
-  box-sizing: border-box;
-`;
 
 const Container = styled.div`
-  color: ${(props) => props.theme.palette[props.color].dark};
-  font-size: ${(props) => fontSize(props)};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  padding: ${(props) => paddingBySize(props.size)};
-  padding-left: 0px;
-  word-wrap: break-word;
-  box-sizing: border-box;
+min-height: 3rem;
+${(props) =>
+    getComponentTypographyCss(props.theme, "Alert", props.size, "enabled")};
+border-radius: ${(props) =>
+    getBorderRadiusValueWithUnits(props.theme, "regular")};
+background-color: ${props => getColorRgbaValue(props.theme, "Alert", props.color, "enabled", "background", "backgroundOpacity")};
+color:  ${props => getColorRgbaValue(props.theme, "Alert", props.color, "enabled", "text")};
+word-wrap: break-word;
+box-sizing: border-box;
+padding: 0.875rem 1rem;
+display: flex;
+gap: 1rem;
+& .alert-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+& .alert-icon {
+  align-items: flex-start;
+}
+& .alert-title {
+  font-weight: ${props => getComponentPropValue(props.theme, "Alert", props.color, "enabled", "fontWeightTitle")};
+  color:  ${props => getColorRgbaValue(props.theme, "Alert", props.color, "enabled", "title")};
+}
+& .alert-actions {
+  padding-top: 0.5rem;
+}
+
+& .alert-actions > * {
+  font-weight: ${props => getComponentPropValue(props.theme, "Alert", props.color, "enabled", "fontWeightAction")};
+  color:  ${props => getColorRgbaValue(props.theme, "Alert", props.color, "enabled", "action")};
+  cursor: pointer;
+}
 `;
 
 const Alet = (props) => {
-  const { className, size, color, message, hasContainer } = props;
+  const { className, size, color, title, actions, children, ...rest } = props;
   const theme = useTheme();
   const themeProps = { theme, size, color };
-  
-  if (hasContainer)
-  return (
-      <ContainerBox {...themeProps} className={className}>
-        {message}
-      </ContainerBox>
-  );
 
-  if (!hasContainer)
-    return (
-      <Container {...themeProps} className={className}>
-        {message}
-      </Container>
-    );
+
+  return (
+    <Container {...themeProps} className={className} {...rest}>
+      <Icon className={"alert-icon"} icon={"question-circle"}/>
+      <div className="alert-content">
+        <div className="alert-title">
+
+          {title}
+        </div>
+        {children}
+        <div className="alert-actions">{actions}</div>
+      </div>
+    </Container>
+  );
 };
 
 Alet.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  hasContainer: true,
-  message: "",
 };
 
 Alet.propTypes = {
-  message: PropTypes.string,
+  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  actions: PropTypes.element,
   className: PropTypes.string,
-  hasContainer: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "background",
+    "information",
+    "neutral"
   ]),
 };
 
