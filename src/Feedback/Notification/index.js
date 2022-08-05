@@ -4,10 +4,21 @@ import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getColorRgbaValue } from "../../_utils/utils";
 
 const StyledNotification = styled.div`
  & .lnc-notification {
   & > div {
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Notification",
+        props.color,
+        "enabled",
+        "background",
+        "backgroundOpacity"
+      )};
+
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
  }
@@ -57,7 +68,7 @@ const NotificationContainer = React.forwardRef((props, ref) => {
 
 NotificationContainer.defaultProps = {
   position: "top-right",
-  autoClose: 500000,
+  autoClose: 5000,
   hideProgressBar: true,
   newestOnTop: true,
   closeOnClick: true,

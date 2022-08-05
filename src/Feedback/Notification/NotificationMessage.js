@@ -14,7 +14,7 @@ import Avatar from "../../General/Avatar";
 
 const StyledMessage = styled.div`
   ${(props) =>
-        getComponentTypographyCss(props.theme, "Alert", props.size, "enabled")};
+        getComponentTypographyCss(props.theme, "Notification", "small", "enabled")};
 
   word-wrap: break-word;
   box-sizing: border-box;
@@ -57,7 +57,7 @@ const StyledMessage = styled.div`
     font-weight: ${(props) =>
         getComponentPropValue(
             props.theme,
-            "Alert",
+            "Notification",
             props.color,
             "enabled",
             "fontWeightTitle"
@@ -65,7 +65,7 @@ const StyledMessage = styled.div`
     color: ${(props) =>
         getColorRgbaValue(
             props.theme,
-            "Alert",
+            "Notification",
             props.status ? props.status : props.color,
             "enabled",
             "title"
@@ -143,7 +143,6 @@ NotificationMessage.propTypes = {
     //-----------------------
     className: PropTypes.string,
     style: PropTypes.object,
-    size: PropTypes.oneOf(["small", "medium", "large"]),
     iconProps: PropTypes.any,
     avatarProps: PropTypes.any,
 };
