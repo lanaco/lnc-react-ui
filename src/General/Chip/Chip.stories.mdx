@@ -1,6 +1,9 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Chip from "./index";
+import Avatar from "../Avatar";
+import logo from '../../_utils/images/Image.png'
+
 
 <Meta title="General/Chip" component={Chip} />
 
@@ -11,14 +14,32 @@ export const TemplateConfigurations = (args) => (
     <Chip {...args} label={"Chip"} />
     <Chip {...args} label={"Chip"} leadingIcon="square" />
     <Chip {...args} label={"Chip"} leadingIcon="square" trailingIcon="times" />
-    <Chip {...args} label={"Chip"} avatar="user" borderRadius="curved" />
+    <Chip {...args} label={"Chip"} avatar={true} borderRadius="curved" />
     <Chip
       {...args}
       label={"Chip"}
-      avatar="user"
+      avatar={true}
       trailingIcon="times"
       borderRadius="curved"
     />
+  </div>
+);
+
+export const TemplateAvatar = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Chip
+      {...args}
+      label={"Cat"}
+      avatar={true}
+      avatarProps={{icon: "cat"}}
+    />
+    <Chip 
+    {...args}
+     label={"User"}
+     avatar={true}
+     borderRadius="curved" 
+     avatarProps={{image: logo}}
+     />
   </div>
 );
 
@@ -35,8 +56,9 @@ export const TemplateColors = (args) => (
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", gap: "7px" }}>
-    <Chip {...args} label={"Chip"} size="regular" />
-    <Chip {...args} label={"Chip"} size="compact" />
+    <Chip {...args} label={"Chip"} size="small" />
+    <Chip {...args} label={"Chip"} size="medium" />
+    <Chip {...args} label={"Chip"} size="large" />
   </div>
 );
 
@@ -54,7 +76,7 @@ import { Chip } from "@lnc-react-ui";
 ```
 
 <Canvas withSource="open">
-  <Story name="Default" args={{label: "Chip"}}>
+  <Story name="Default" args={{ label: "Chip" }}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
@@ -77,6 +99,20 @@ Configuration for
     {TemplateConfigurations.bind({})}
   </Story>
 </Canvas>
+
+## With Avatar
+
+<Canvas>
+  <Story name="With Avatar" args={{}}>
+    {TemplateAvatar.bind({})}
+  </Story>
+</Canvas>
+
+### Avatar Props
+
+<ArgsTable components={{ Avatar }} />
+
+---
 
 ## Colors
 

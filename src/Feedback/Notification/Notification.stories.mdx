@@ -1,0 +1,64 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import { NotificationContainer, notification } from "./index";
+import { useState } from "react";
+import NotificationMessage from "./NotificationMessage";
+import logo from '../../_utils/images/Image.png'
+
+<Meta title="Feedback/Notification" component={NotificationContainer} />
+
+export const TemplateDefault = (args) => {
+  const notify = () => notification("Message");
+  return (
+    <div>
+      <button onClick={notify}>Notify!</button>
+      <NotificationContainer {...args}/>
+    </div>
+  );
+};
+
+export const TemplateCustom= (args) => {
+  const notify = () => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>);
+  return (
+    <div>
+      <button onClick={() => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)}>With Icon</button>
+      <br /><br />
+      <button onClick={() => notification(<NotificationMessage avatar={true} avatarProps={{ image: logo }} title={"Title"} actions={<><button>Confirm</button><button>Dismiss</button></>}>Message</NotificationMessage>)}>With Action</button>
+      <br /><br />
+      <button onClick={() => notification(<NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>Message</NotificationMessage>)}>With Inline Actions</button>
+      <br /><br />
+      <button onClick={() => notification(<NotificationMessage sideButtons={true} avatar={true} avatarProps={{ image: logo }}  title={"Title"} actions={<><button>Confirm</button><button>Dismiss</button></>}>Message</NotificationMessage>, {closeButton: false})}>With Side Buttons</button>
+      <NotificationContainer {...args}/>
+    </div>
+  );
+};
+
+# Notification
+
+```jsx
+import {
+  NotificationContainer,
+  notification,
+  NotifcationMessage,
+} from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default">{TemplateDefault.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+### NotificationMessage Props
+
+<ArgsTable components={{ NotificationMessage }} />
+
+---
+
+## Custom
+
+<Canvas>
+  <Story name="Custom">{TemplateCustom.bind({})}</Story>
+</Canvas>
+
+This component is build on [React-Toastify](https://www.npmjs.com/package/react-toastify). React-Toastify [documentaion](https://fkhadra.github.io/react-toastify/use-a-custom-close-button-or-remove-it/).
