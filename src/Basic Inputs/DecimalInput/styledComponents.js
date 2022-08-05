@@ -38,9 +38,9 @@ export const StyledWrapper = styled.div`
     props.focused && props.readOnly == false
       ? getOutlineCss(props.theme)
       : ""}
-  ${(props) => (props.disabled ? getDisabledStateCss(props.theme) : "")}
+  ${(props) => (props.isDisabled ? getDisabledStateCss(props.theme) : "")}
   ${(props) =>
-    props.disabled
+    props.isDisabled
       ? "border: 1px solid " +
         getColorRgbaValue(
           props.theme,
@@ -50,6 +50,52 @@ export const StyledWrapper = styled.div`
           "border"
         )
       : ""}
+
+  & input {
+    background: none;
+    border: none;
+    outline: none;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    width: 100%;
+
+    ${(props) =>
+      getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
+    min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+    max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Input",
+        props.focused ? "primary" : props.color,
+        "enabled",
+        "text"
+      )};
+    caret-color: ${(props) =>
+      getColorRgbaValue(props.theme, "Input", props.color, "enabled", "caret")};
+    padding-right: ${(props) => (props.suffix ? "0" : "0.75rem")};
+    padding-left: ${(props) => (props.prefix ? "0" : "0.75rem")};
+  }
+
+  & input:disabled {
+    ${(props) => getDisabledStateCss(props.theme)}
+    background: none;
+  }
+
+  & input:read-only {
+    cursor: default;
+  }
+
+  & input::placeholder {
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Input",
+        props.color,
+        "enabled",
+        "placeholder"
+      )};
+  }
 `;
 
 export const StyledPrefix = styled.span`
@@ -65,49 +111,3 @@ export const StyledPrefix = styled.span`
 `;
 
 export const StyledSuffix = styled(StyledPrefix)``;
-
-export const StyledInput = styled.input`
-  background: none;
-  border: none;
-  outline: none;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  width: 100%;
-
-  ${(props) =>
-    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
-  min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
-  max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
-  color: ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Input",
-      props.focused ? "primary" : props.color,
-      "enabled",
-      "text"
-    )};
-  caret-color: ${(props) =>
-    getColorRgbaValue(props.theme, "Input", props.color, "enabled", "caret")};
-  padding-right: ${(props) => (props.suffix ? "0" : "0.75rem")};
-  padding-left: ${(props) => (props.prefix ? "0" : "0.75rem")};
-
-  &::placeholder {
-    color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "Input",
-        props.color,
-        "enabled",
-        "placeholder"
-      )};
-  }
-
-  &:read-only {
-    cursor: default;
-  }
-
-  &:disabled {
-    ${(props) => getDisabledStateCss(props.theme)}
-    background: none;
-  }
-`;

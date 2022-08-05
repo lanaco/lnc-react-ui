@@ -1,75 +1,13 @@
 import { useTheme } from "@emotion/react";
-import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { debounce } from "lodash";
-
-const paddingBySize = (size) => {
-  return {
-    small: "0.41875rem 0.5rem",
-    medium: "0.48125rem 0.6rem",
-    large: "0.65625rem 0.7rem",
-  }[size];
-};
-
-const standardCssFields = ({ theme, size }) => {
-  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
-    size
-  ];
-
-  return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
-    min-height: ${height};
-    max-height: ${height};
-  `;
-};
-
-const Container = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-
-  ${(props) => standardCssFields(props)}
-
-  & input {
-    padding: ${(props) => paddingBySize(props.size)};
-    background-color: ${(props) => props.theme.test_palette.light[100]};
-    color: ${(props) => props.theme.test_palette.dark[500]};
-    border: 0.09375rem solid ${(props) => props.theme.test_palette.light[500]};
-
-    min-height: inherit;
-    max-height: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    appearance: none;
-    outline: none;
-    display: inline-block;
-    border-radius: 0.25rem;
-    width: 100%;
-    box-sizing: border-box;
-
-    &:disabled {
-      border: 0.09375rem solid ${(props) => props.theme.test_palette.light[400]};
-      color: ${(props) => props.theme.test_palette.light[500]};
-      cursor: default;
-    }
-
-    &:hover:enabled {
-      border: 0.09375rem solid
-        ${(props) => props.theme.test_palette[props.color][400]};
-    }
-
-    &:focus:enabled {
-      border: 0.09375rem solid
-        ${(props) => props.theme.test_palette[props.color][400]};
-      box-shadow: 0px 0px 0.375rem -0.125rem ${(props) => props.theme.test_palette[props.color][400]};
-    }
-  }
-`;
+import {
+  StyledPrefix,
+  StyledSuffix,
+  StyledWrapper,
+} from "./styledComponents";
 
 //===================================================
 
@@ -84,6 +22,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
     defaultValue,
     debounceTime,
     prefix,
+    suffix,
     thousandSeparator,
     decimalSeparator,
     decimalScale,
@@ -105,6 +44,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
   const theme = useTheme();
   const [inputValue, setInputValue] = useState(0);
   const [refresh, setRefresh] = useState(true);
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => setInputValue(value), [value]);
 
@@ -157,13 +97,45 @@ const DecimalInput = React.forwardRef((props, ref) => {
     return decimalScale;
   };
 
+  const handleFocus = (e) => {
+    setFocused(true);
+    onFocus(e);
+  };
+
+  const handleBlur = (e) => {
+    if (inputValue === 0 && e.target.value.includes("-")) forceRefresh();
+    setFocused(false);
+    onBlur(e);
+  };
+
   return (
-    <Container {...{ theme, size, color, disabled, readOnly }} className={className} style={style}>
+    <StyledWrapper
+      ref={ref}
+      style={style}
+      className={className}
+      theme={theme}
+      color={color}
+      size={size}
+      prefix={prefix}
+      suffix={suffix}
+      focused={focused}
+      disabled={disabled}
+      readOnly={readOnly}
+    >
+      {prefix && (
+        <StyledPrefix
+          theme={theme}
+          color={color}
+          focused={focused}
+          className="lnc-input-prefix"
+        >
+          {prefix}
+        </StyledPrefix>
+      )}
       <NumberFormat
+        className="lnc-decimal-input"
         disabled={disabled}
         readOnly={readOnly}
-        ref={ref}
-        prefix={prefix}
         thousandSeparator={thousandSeparator}
         decimalSeparator={decimalSeparator}
         decimalScale={getDecimalScale()}
@@ -171,15 +143,22 @@ const DecimalInput = React.forwardRef((props, ref) => {
         allowNegative={allowNegative}
         value={inputValue}
         defaultValue={defaultValue}
-        onFocus={onFocus}
-        onBlur={(e) => {
-          if (inputValue === 0 && e.target.value.includes("-")) forceRefresh();
-          if (onBlur) onBlur(e);
-        }}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         onValueChange={onValueChange}
         {...rest}
       />
-    </Container>
+      {suffix && (
+        <StyledSuffix
+          theme={theme}
+          color={color}
+          focused={focused}
+          className="lnc-input-suffix"
+        >
+          {suffix}
+        </StyledSuffix>
+      )}
+    </StyledWrapper>
   );
 });
 
@@ -190,7 +169,6 @@ DecimalInput.defaultProps = {
   disabled: false,
   readOnly: false,
   debounceTime: 180,
-  prefix: "",
   thousandSeparator: ".",
   decimalSeparator: ",",
   decimalScale: 2,
@@ -198,7 +176,6 @@ DecimalInput.defaultProps = {
   allowNegative: true,
   //----------------
   onChange: () => {},
-  onKeyDown: () => {},
   onBlur: () => {},
   onFocus: () => {},
   //----------------
@@ -215,16 +192,31 @@ DecimalInput.propTypes = {
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,
-  prefix: PropTypes.string,
+  /**
+   * Reserved space before input. Intented to be used with plain text or `Icon` component.
+   */
+  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Reserved space after input. Intented to be used with plain text or `Icon` component.
+   */
+  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   thousandSeparator: PropTypes.oneOf([".", ",", " "]),
   decimalSeparator: PropTypes.oneOf([".", ","]),
   decimalScale: PropTypes.number,
   fixedDecimalScale: PropTypes.bool,
   allowNegative: PropTypes.bool,
   //----------------
+  /**
+   * `(event, value) => void`
+   */
   onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
+  /**
+   * `(event) => void`
+   */
   onBlur: PropTypes.func,
+  /**
+   * `(event) => void`
+   */
   onFocus: PropTypes.func,
   //----------------
   className: PropTypes.string,

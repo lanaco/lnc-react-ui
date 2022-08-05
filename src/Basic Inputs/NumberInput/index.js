@@ -41,7 +41,7 @@ const NumberInput = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
   const [inputValue, setInputValue] = useState();
-  const [isFocused, setIsFocused] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => setInputValue(value), [value]);
 
@@ -73,12 +73,12 @@ const NumberInput = React.forwardRef((props, ref) => {
   };
 
   const handleFocus = (e) => {
-    setIsFocused(true);
+    setFocused(true);
     onFocus(e);
   };
 
   const handleBlur = (e) => {
-    setIsFocused(false);
+    setFocused(false);
     onBlur(e);
   };
 
@@ -90,15 +90,15 @@ const NumberInput = React.forwardRef((props, ref) => {
       theme={theme}
       color={color}
       size={size}
-      isFocused={isFocused}
-      isDisabled={disabled}
-      isReadOnly={readOnly}
+      focused={focused}
+      disabled={disabled}
+      readOnly={readOnly}
     >
       {prefix && (
         <StyledPrefix
           theme={theme}
           color={color}
-          isFocused={isFocused}
+          focused={focused}
           className="lnc-input-prefix"
         >
           {prefix}
@@ -126,7 +126,7 @@ const NumberInput = React.forwardRef((props, ref) => {
         <StyledSuffix
           theme={theme}
           color={color}
-          isFocused={isFocused}
+          focused={focused}
           className="lnc-input-suffix"
         >
           {suffix}
