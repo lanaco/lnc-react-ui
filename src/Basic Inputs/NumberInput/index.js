@@ -1,61 +1,13 @@
 import { useTheme } from "@emotion/react";
-import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useCallback, useState, useEffect } from "react";
 import { debounce } from "lodash";
-
-const paddingBySize = (size) => {
-  return {
-    small: "0.41875rem 0.5rem",
-    medium: "0.48125rem 0.6rem",
-    large: "0.65625rem 0.7rem",
-  }[size];
-};
-
-const standardCssFields = ({ theme, size }) => {
-  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
-    size
-  ];
-
-  return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
-    min-height: ${height};
-    max-height: ${height};
-  `;
-};
-
-const Input = styled.input`
-  ${(props) => standardCssFields(props)}
-  padding: ${(props) => paddingBySize(props.size)};
-  background-color: ${(props) => props.theme.test_palette.light[100]};
-  color: ${(props) => props.theme.test_palette.dark[500]};
-  border: 0.09375rem solid ${(props) => props.theme.test_palette.light[500]};
-  line-height: inherit;
-  appearance: none;
-  outline: none;
-  display: inline-block;
-  border-radius: 0.25rem;
-  width: 100%;
-  box-sizing: border-box;
-
-  &:disabled {
-    border: 0.09375rem solid ${(props) => props.theme.test_palette.light[400]};
-    color: ${(props) => props.theme.test_palette.light[500]};
-    cursor: default;
-  }
-
-  &:hover:enabled {
-    border: 0.09375rem solid
-      ${(props) => props.theme.test_palette[props.color][400]};
-  }
-
-  &:focus:enabled {
-    border: 0.09375rem solid
-      ${(props) => props.theme.test_palette[props.color][400]};
-    box-shadow: 0px 0px 0.375rem -0.125rem ${(props) => props.theme.test_palette[props.color][400]};
-  }
-`;
+import {
+  StyledInput,
+  StyledPrefix,
+  StyledSuffix,
+  StyledWrapper,
+} from "./styledComponents";
 
 //===================================================
 
@@ -67,16 +19,16 @@ const NumberInput = React.forwardRef((props, ref) => {
     readOnly,
     preventDefault,
     value,
-    defaultValue,
     debounceTime,
     step,
     min,
     max,
+    prefix,
+    suffix,
     placeholder,
     tabIndex,
     //----------------
     onChange,
-    onKeyDown,
     onBlur,
     onFocus,
     //----------------
@@ -88,7 +40,8 @@ const NumberInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState();
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => setInputValue(value), [value]);
 
@@ -119,32 +72,72 @@ const NumberInput = React.forwardRef((props, ref) => {
     debouncedOnChange(e, _value);
   };
 
+  const handleFocus = (e) => {
+    setIsFocused(true);
+    onFocus(e);
+  };
+
+  const handleBlur = (e) => {
+    setIsFocused(false);
+    onBlur(e);
+  };
+
   return (
-    <Input
-      type={"number"}
+    <StyledWrapper
+      ref={ref}
+      style={style}
+      className={className}
       theme={theme}
       color={color}
       size={size}
-      className={className}
-      style={style}
-      disabled={disabled}
-      readOnly={readOnly}
-      ref={ref}
-      step={step}
-      value={inputValue}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onChange={onValueChange}
-      tabIndex={tabIndex}
-      {...rest}
-    />
+      isFocused={isFocused}
+      isDisabled={disabled}
+      isReadOnly={readOnly}
+    >
+      {prefix && (
+        <StyledPrefix
+          theme={theme}
+          color={color}
+          isFocused={isFocused}
+          className="lnc-input-prefix"
+        >
+          {prefix}
+        </StyledPrefix>
+      )}
+      <StyledInput
+        type="number"
+        theme={theme}
+        color={color}
+        size={size}
+        placeholder={placeholder}
+        prefix={prefix}
+        suffix={suffix}
+        disabled={disabled}
+        readOnly={readOnly}
+        step={step}
+        value={inputValue}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={onValueChange}
+        tabIndex={tabIndex}
+        {...rest}
+      />
+      {suffix && (
+        <StyledSuffix
+          theme={theme}
+          color={color}
+          isFocused={isFocused}
+          className="lnc-input-suffix"
+        >
+          {suffix}
+        </StyledSuffix>
+      )}
+    </StyledWrapper>
   );
 });
 
 NumberInput.defaultProps = {
   id: "",
-  value: 0,
-  defaultValue: 0,
   disabled: false,
   readOnly: false,
   debounceTime: 180,
@@ -155,7 +148,6 @@ NumberInput.defaultProps = {
   tabIndex: 0,
   //----------------
   onChange: () => {},
-  onKeyDown: () => {},
   onBlur: () => {},
   onFocus: () => {},
   //----------------
@@ -168,19 +160,45 @@ NumberInput.defaultProps = {
 NumberInput.propTypes = {
   id: PropTypes.string,
   value: PropTypes.number,
-  defaultValue: PropTypes.number,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
+  /**
+   * Time in miliseconds before onChange event fires after it has been triggered.
+   */
   debounceTime: PropTypes.number,
+  /**
+   * The amount that is added to the current value in the input if its incremented using the arrows/spinners.
+   */
   step: PropTypes.number,
+  /**
+   * Minimum number value user can input.
+   */
   min: PropTypes.number,
+  /**
+   * Maximum number value user can input.
+   */
   max: PropTypes.number,
+  /**
+   * Reserved space before input. Intented to be used with plain text or `Icon` component.
+   */
+  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Reserved space after input. Intented to be used with plain text or `Icon` component.
+   */
+  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   placeholder: PropTypes.string,
   tabIndex: PropTypes.number,
-  //----------------
+  /**
+   * `(event, value) => void`
+   */
   onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
+  /**
+   * `(event) => void`
+   */
   onBlur: PropTypes.func,
+  /**
+   * `(event) => void`
+   */
   onFocus: PropTypes.func,
   //----------------
   className: PropTypes.string,

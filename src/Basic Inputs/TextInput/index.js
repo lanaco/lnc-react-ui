@@ -69,6 +69,7 @@ const TextInput = React.forwardRef((props, ref) => {
   return (
     <StyledWrapper
       ref={ref}
+      style={style}
       className={className}
       theme={theme}
       color={color}
@@ -95,7 +96,6 @@ const TextInput = React.forwardRef((props, ref) => {
         placeholder={placeholder}
         prefix={prefix}
         suffix={suffix}
-        style={style}
         disabled={disabled}
         readOnly={readOnly}
         isFocused={isFocused}
