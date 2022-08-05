@@ -161,5 +161,4 @@ export const getDisabledBackgroundCss = (theme) => {
   return `
     background-color: ${bgColorRgba};
   `;
-
 }

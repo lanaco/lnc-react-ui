@@ -1,0 +1,90 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Avatar from "./index";
+import logo from '../../_utils/images/Image.png'
+
+<Meta title="General/Avatar" component={Avatar} />
+
+export const TemplateDefault = (args) => <Avatar {...args}/>;
+
+export const TemplateIcon = (args) => <Avatar {...args} icon={"cat"}/>;
+
+export const TemplateImage = (args) => <Avatar {...args} image={logo}/>;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Avatar {...args} sizeInUnits="50px" />
+    <Avatar {...args} size="small" />
+    <Avatar {...args} size="medium" />
+    <Avatar {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Avatar {...args} color="primary" />
+    <Avatar {...args} color="secondary" />
+    <Avatar {...args} color="success" />
+    <Avatar {...args} color="warning" />
+    <Avatar {...args} color="danger" />
+    <Avatar {...args} color="information" />
+  </div>
+);
+
+# Avatar
+
+```jsx
+import { Avatar } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story
+    name="Default">
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+---
+
+If prop `image` is not defined, `icon` can be set as Avatar
+
+## Icon
+
+<Canvas>
+  <Story
+    name="Icon">
+    {TemplateIcon.bind({})}
+  </Story>
+</Canvas>
+
+## Image
+
+<Canvas>
+  <Story
+    name="Image">
+    {TemplateImage.bind({})}
+  </Story>
+</Canvas>
+
+## Size
+
+Prop `sizeInUnits` has higher priority than prop `size`.
+
+<Canvas>
+  <Story
+    name="Size">
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+
+## Colors
+
+<Canvas>
+  <Story
+    name="Colors">
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

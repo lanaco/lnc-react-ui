@@ -22,7 +22,6 @@ const getCheckSize = (theme, size) => {
 };
 
 const CheckboxContainer = styled.label`
-  ${(props) => (!props.disabled && props.readOnly == false) && "cursor: pointer;"}
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   display: inline-flex;
@@ -36,6 +35,9 @@ const CheckboxContainer = styled.label`
   gap: 0.75rem;
   & input {
     display: none;
+  }
+  & .checkbox-label {
+    ${(props) => (!props.disabled && props.readOnly == false) && "cursor: pointer;"}
   }
 `;
 
@@ -181,6 +183,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     <CheckboxContainer
       direction={labelPosition}
       disabled={disabled}
+      readOnly={readOnly}
       ref={ref}
       className={className}
       style={style}

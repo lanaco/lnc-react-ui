@@ -3,8 +3,16 @@ import React, { useEffect, useState } from "react";
 import { themes } from "../_utils/theme";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import { getSizeValueWithUnits, hexToRgba } from "../_utils/utils";
+import { getDisabledBg, getDisabledColor } from "./_themeutils";
 
 const Wrapper = styled.div`
+  --size-small: ${(props) => getSizeValueWithUnits(props.theme, "small")};
+  --size-medium: ${(props) => getSizeValueWithUnits(props.theme, "medium")};
+  --size-large: ${(props) => getSizeValueWithUnits(props.theme, "large")};
+  --disabled-text: ${props => getDisabledColor(props.theme)};
+  --disabled-bg: ${props => getDisabledBg(props.theme)};
+
   & * {
     box-sizing: border-box;
     font-family: ${(props) => props.theme?.typography?.fontFamily};
