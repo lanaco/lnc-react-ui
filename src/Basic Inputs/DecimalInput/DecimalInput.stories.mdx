@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import DecimalInput from "./index";
+import Icon from "../../General/Icon";
 
 <Meta title="Basic Inputs/Decimal Input" component={DecimalInput} />
 
@@ -31,99 +32,10 @@ export const TemplateColors = (args) => (
 import { DecimalInput } from "@lnc-react-ui";
 ```
 
-<Canvas withSource="open">
+<Canvas>
   <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
 
 <ArgsTable story="Default" />
-
-## Read Only
-
-<Canvas>
-  <Story
-    name="Read Only"
-    args={{
-      readOnly: true,
-      placeholder: "Type text here",
-      style: { width: "300px" },
-      value: -1234.56,
-    }}
-  >
-    {TemplateDefault.bind({})}
-  </Story>
-</Canvas>
-
-## Disabled
-
-<Canvas withSource="open">
-  <Story
-    name="Disabled"
-    args={{
-      disabled: true,
-      placeholder: "Disabled",
-      style: { width: "300px" },
-    }}
-  >
-    {TemplateDefault.bind({})}
-  </Story>
-</Canvas>
-
-## Alternative Format
-
-<Canvas withSource="open">
-  <Story
-    name="Alternative Format"
-    args={{
-      style: { width: "300px" },
-      value: -1234.56,
-      decimalScale: 2,
-      fixedDecimalScale: true,
-      allowNegative: true,
-    }}
-  >
-    {TemplateDefault.bind({})}
-  </Story>
-</Canvas>
-
-## With Prefix
-
-<Canvas withSource="open">
-  <Story
-    name="With Prefix"
-    args={{
-      style: { width: "300px" },
-      value: 3456.78,
-      debounceTime: 180,
-      prefix: "$ ",
-      thousandSeparator: ".",
-      decimalSeparator: ",",
-      decimalScale: 2,
-      fixedDecimalScale: true,
-      allowNegative: true,
-    }}
-  >
-    {TemplateDefault.bind({})}
-  </Story>
-</Canvas>
-
-## Sizes
-
-Defining `size` with `small`, `medium` and `large` values.
-
-<Canvas>
-  <Story name="Sizes" args={{}}>
-    {TemplateSizes.bind({})}
-  </Story>
-</Canvas>
-
-## Colors
-
-Defining `color`
-
-<Canvas>
-  <Story name="Colors" args={{}}>
-    {TemplateColors.bind({})}
-  </Story>
-</Canvas>
