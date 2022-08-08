@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { keyframes, useTheme } from "@emotion/react";
+import { getColorRgbaValue, getComponentTypographyCss } from "../../_utils/utils";
 
 const heightBySize = (size) => {
   if (size === "small")
@@ -23,14 +24,6 @@ const heightBySize = (size) => {
         `;
 };
 
-const standardCssFields = ({ theme, color, size }) => {
-  return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
-    color: ${theme.test_palette[color][400]};
-  `;
-};
-
 const spin = keyframes`
   to {
     transform: rotate(360deg);
@@ -48,19 +41,22 @@ const SpinnerWrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    ${(props) => standardCssFields(props)}
-    font-weight: 600;
+    ${(props) =>
+      getComponentTypographyCss(props.theme, "Spinner", props.size, "enabled")};
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Spinner", props.color, "enabled", "text")};
   }
 `;
 
 const StyledSpinner = styled.div`
   display: inline-block;
   ${(props) => heightBySize(props.size)}
-  border: 0.3125rem solid ${(props) =>
-    props.theme.test_palette["disabled"][400]};
+  border: ${props =>  `0.3125rem solid ${getColorRgbaValue(props.theme, "Spinner", props.color, "enabled", "unfilled")}`};
   border-radius: 50%;
-  border-top-color: ${(props) => props.theme.test_palette[props.color][400]};
-  border-right-color: ${(props) => props.theme.test_palette[props.color][400]};
+  border-top-color: ${(props) =>
+    getColorRgbaValue(props.theme, "Spinner", props.color, "enabled", "background")};
+  border-right-color: ${(props) =>
+    getColorRgbaValue(props.theme, "Spinner", props.color, "enabled", "background")};
 
   animation: ${spin} 0.8s ease-in-out infinite;
 `;
@@ -72,8 +68,8 @@ const Spinner = (props) => {
   const themeProps = { theme, size, color };
 
   return (
-    <SpinnerWrapper {...themeProps} style={style} label={label}>
-      <StyledSpinner {...themeProps} className={className}></StyledSpinner>
+    <SpinnerWrapper {...themeProps} className={className} style={style} label={label}>
+      <StyledSpinner {...themeProps}></StyledSpinner>
       <div className="label-text">{label}</div>
     </SpinnerWrapper>
   );
@@ -87,7 +83,6 @@ Spinner.defaultProps = {
 };
 
 Spinner.propTypes = {
-  id: PropTypes.string,
   label: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
@@ -98,7 +93,7 @@ Spinner.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
   ]),
 };
 
