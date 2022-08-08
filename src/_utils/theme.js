@@ -1391,6 +1391,72 @@ const lanaco_light = {
           fontWeightTitle: 600
         },
       }
+    },
+    Badge: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      teal: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      blue: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      red: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      yellow: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      green: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      gray: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      neutral: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      }
     }
   },
   palette: {
