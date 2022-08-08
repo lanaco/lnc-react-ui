@@ -9,7 +9,9 @@ import {
   getComponentTypographyCss,
   getDisabledStateCss,
   getOutlineCss,
+  getSizeValueWithUnits,
 } from "../../_utils/utils";
+import Avatar from "../Avatar";
 
 const getIconClass = (icon) => {
   var style = "fas";
@@ -19,26 +21,26 @@ const getIconClass = (icon) => {
 const getPadding = (avatar, leadingIcon, trailingIcon, size) => {
   if (avatar) {
     return `padding-right: ${
-      size == "regular" ? "0.75rem" : "0.625rem"
-    }; padding-left: ${size == "regular" ? "0.25rem" : "0.125rem"};`;
+      size == "small" ? "0.75rem" : "0.625rem"
+    }; padding-left: ${size == "small" ? "0.25rem" : "0.125rem"};`;
   } else if (leadingIcon) {
     return `padding-right: ${
-      size == "regular" ? "0.5rem" : "0.375rem"
-    }; padding-left: ${size == "regular" ? "0.5rem" : "0.375rem"};`;
+      size == "small" ? "0.5rem" : "0.375rem"
+    }; padding-left: ${size == "small" ? "0.5rem" : "0.375rem"};`;
   } else if (trailingIcon) {
     return `padding-right: ${
-      size == "regular" ? "0.5rem" : "0.375rem"
-    }; padding-left: ${size == "regular" ? "0.75rem" : "0.625rem"};`;
+      size == "small" ? "0.5rem" : "0.375rem"
+    }; padding-left: ${size == "small" ? "0.75rem" : "0.625rem"};`;
   } else {
     return `padding-right: ${
-      size == "regular" ? "1rem" : "0.75rem"
-    }; padding-left: ${size == "regular" ? "1rem" : "0.75rem"};`;
+      size == "small" ? "1rem" : "0.75rem"
+    }; padding-left: ${size == "small" ? "1rem" : "0.75rem"};`;
   }
 };
 const StyledChip = styled.span`
   cursor: pointer;
   display: inline-flex;
-  height: ${(props) => (props.size === "regular" ? "2rem" : "2.25rem")};
+  height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   ${(props) => props.disabled && getDisabledStateCss(props.theme)};
   background-color: ${(props) =>
     !props.disabled &&
@@ -102,20 +104,9 @@ const StyledChip = styled.span`
   }
 `;
 
-const Avatar = styled.div`
-  border-radius: ${(props) =>
-    getBorderRadiusValueWithUnits(props.theme, "curved")};
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 1.75rem;
-  width: 1.75rem;
-  ${(props) => props.disabled && getDisabledStateCss(props.theme)};
-  background-color: ${(props) =>
-    !props.disabled &&
-    getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "text")};
-`;
+const getAvatarSize = (theme, size) => {
+    return `calc(${getSizeValueWithUnits(theme, size)} - 8px)`;
+}
 
 const Chip = React.forwardRef((props, ref) => {
   const {
@@ -134,11 +125,11 @@ const Chip = React.forwardRef((props, ref) => {
     onKeyDown,
     onLeadingIconClick,
     onTrailingIconClick,
-    onAvatarClick,
     //----------------
     className,
     style,
     color,
+    avatarProps,
     ...rest
   } = props;
 
@@ -164,9 +155,7 @@ const Chip = React.forwardRef((props, ref) => {
       {...rest}
     >
       {avatar && (
-        <Avatar {...themeProps} onClick={onAvatarClick} disabled={disabled}>
-          <i className={getIconClass(avatar)} />
-        </Avatar>
+        <Avatar {...themeProps}  disabled={disabled} sizeInUnits={getAvatarSize(theme, size)} {...avatarProps}/>
       )}
 
       {leadingIcon && (
@@ -184,6 +173,7 @@ const Chip = React.forwardRef((props, ref) => {
 });
 
 Chip.defaultProps = {
+  avatar: false,
   borderRadius: "regular",
   disalbed: false,
   tabIndex: 0,
@@ -194,18 +184,17 @@ Chip.defaultProps = {
   onKeyDown: () => {},
   onLeadingIconClick: () => {},
   onTrailingIconClick: () => {},
-  onAvatarClick: () => {},
   //-------------------------
   style: {},
   color: "primary",
-  size: "compact",
+  size: "small",
 };
 
 Chip.propTypes = {
   label: PropTypes.string,
   leadingIcon: PropTypes.string,
   trailingIcon: PropTypes.string,
-  avatar: PropTypes.string,
+  avatar: PropTypes.bool,
   borderRadius: PropTypes.oneOf(["regular", "curved"]),
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
@@ -216,7 +205,6 @@ Chip.propTypes = {
   onKeyDown: PropTypes.func,
   onLeadingIconClick: PropTypes.func,
   onTrailingIconClick: PropTypes.func,
-  onAvatarClick: PropTypes.func,
   //---------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,
@@ -228,7 +216,8 @@ Chip.propTypes = {
     "danger",
     "information",
   ]),
-  size: PropTypes.oneOf(["compact", "regular"]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  avatarProps: PropTypes.any,
 };
 
 export default Chip;

@@ -92,13 +92,13 @@ const getIcon = (status) => {
   return "exclamation-circle";
 }
 
-const Alert = (props) => {
+const Alert = React.forwardRef((props, ref) => {
   const { className, size, color, title, actions, status, noIcon, statusIcon, children, ...rest } = props;
   const theme = useTheme();
   const themeProps = { theme, size, color, status };
 
   return (
-    <Container {...themeProps} className={className} actions={actions} {...rest}>
+    <Container ref={ref} {...themeProps} className={className} actions={actions} {...rest}>
       {(noIcon == false && (statusIcon || status)) && <Icon className={"alert-icon"} icon={statusIcon ? statusIcon : getIcon(status)} />}
       <div className="alert-content">
         <div className="alert-title">{title}</div>
@@ -109,7 +109,7 @@ const Alert = (props) => {
       </div>
     </Container>
   );
-};
+});
 
 Alert.defaultProps = {
   noIcon: false,

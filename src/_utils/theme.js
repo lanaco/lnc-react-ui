@@ -1376,6 +1376,21 @@ const lanaco_light = {
           fontWeightTitle: 600
         }
       }
+    },
+    Notification: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          backgroundOpacity: 1000,
+          text: 500,
+          action: 600,
+          title: 800,
+          fontWeight: 400,
+          fontWeightAction: 600, 
+          fontWeightTitle: 600
+        },
+      }
     }
   },
   palette: {
