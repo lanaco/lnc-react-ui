@@ -1,214 +1,224 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
 import { isEmpty } from "lodash";
+import {
+  FilledButton,
+  TintedButton,
+  OutlineButton,
+  BasicButton,
+  LeadingIconContainer,
+  TrailingIconContainer,
+} from "./styledComponents";
+import Icon from "../Icon/index";
 
+//=================================================
 
-const standardCssFields = ({ theme, size }) => {
-  return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
-    min-height: ${theme.typography[size].buttonSize};
-    max-height: ${theme.typography[size].buttonSize};
-    width: 100%;
-    box-sizing: border-box;
-    appearance: none;
-    outline: none;
-    border: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-weight: ${theme.typography.button.fontWeight};
-  `;
-};
-
-const StyledBtn = styled.button`
-  ${(props) => standardCssFields(props)}
-  background-color: ${(props) =>
-    props.outline
-      ? props.theme.test_palette.light[100]
-      : props.theme.test_palette[props.color][400]};
-  color: ${(props) =>
-    props.outline
-      ? props.theme.test_palette[props.color][400]
-      : props.theme.test_palette.light[100]};
-  border-radius: 0.5625rem;
-
-  border: ${(props) =>
-    props.outline
-      ? `0.09375rem solid ${props.theme.test_palette[props.color][300]};`
-      : "none;"}
-
-  &:hover:enabled {
-    background-color: ${(props) => {
-      if (props.outline) return props.theme.test_palette.light[100];
-      return props.theme.test_palette[props.color][200];
-    }};
-
-    color: ${(props) => {
-      if (props.outline) return props.theme.test_palette[props.color][400];
-      return props.theme.test_palette.light[100];
-    }};
-
-    border: ${(props) => {
-      if (props.outline)
-        return `0.15625rem solid ${props.theme.test_palette[props.color][400]}`;
-      return "none";
-    }};
-
-  }
-
-  &:focus:enabled {
-    color: ${(props) => props.theme.test_palette.light[100]};
-    background-color: ${(props) =>
-      props.outline
-        ? props.theme.test_palette[props.color][400]
-        : props.theme.test_palette[props.color][500]};
-  }
-
-  &:disabled {
-    cursor: default;
-    background-color: ${(props) => props.theme.test_palette.light[500]};
-    color: ${(props) => props.theme.test_palette.light[100]};
-    border: ${(props) =>
-      props.outline
-        ? `0.125rem solid ${props.theme.test_palette.light[500]}`
-        : "none"};
-  }
-`;
-
-const Text = styled.span``;
-
-const Icon = styled.i`
-  ${(props) =>
-    props.location === "left" && props.hasText
-      ? "padding-right: 0.3125rem;"
-      : ""}
-  ${(props) =>
-    props.location === "right" && props.hasText
-      ? "padding-left: 0.3125rem;"
-      : ""}
-`;
-
-//===================================================
-
-const Button = React.forwardRef((props, ref) => {
-  //
+const Button = (props) => {
   const {
-    color,
-    id,
-    onClick,
-    disabled,
     text,
-    tooltip,
-    className,
-    icon,
-    iconStyle,
+    leadingIcon,
+    trailingIcon,
     size,
-    iconLocation,
-    outline,
-    children,
+    borderRadius,
+    type,
+    disabled,
+    tabIndex,
+    //----------------
+    onFocus,
+    onBlur,
+    onClick,
+    onKeyDown,
+    onLeadingIconClick,
+    onTrailingIconClick,
+    //----------------
+    className,
+    style,
+    color,
     ...rest
   } = props;
 
   const theme = useTheme();
-
-  const handleOnClick = (e) => {
-    onClick(e);
-    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+  const themeProps = {
+    theme,
+    color,
+    size,
+    style,
+    className,
+    disabled,
+    borderRadius,
+    type,
   };
 
-  var title = "";
-  if (tooltip && tooltip !== "") title = tooltip;
+  const hasLeadingIcon = !isEmpty(leadingIcon);
+  const hasTrailingIcon = !isEmpty(trailingIcon);
+  const hasText = !isEmpty(text);
 
-  const getIconClass = () => {
-    var style = iconStyle === "solid" ? "fas" : "far";
-    return `${style} fa-${icon} fa-fw`;
+  const renderContent = () => {
+    return (
+      <>
+        {hasLeadingIcon && (
+          <LeadingIconContainer size={size} hasText={hasText}>
+            <Icon icon={leadingIcon} sizeInUnits={"1.125rem"} />
+          </LeadingIconContainer>
+        )}
+
+        {text}
+
+        {hasTrailingIcon && (
+          <TrailingIconContainer size={size} hasText={hasText}>
+            <Icon icon={trailingIcon} sizeInUnits={"1.125rem"} />
+          </TrailingIconContainer>
+        )}
+      </>
+    );
   };
 
-  var themeProps = { theme, size, color, outline, disabled };
+  if (type === "filled") {
+    return (
+      <FilledButton
+        {...themeProps}
+        hasLeadingIcon={hasLeadingIcon}
+        hasTrailingIcon={hasTrailingIcon}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+        hasText={hasText}
+        {...rest}
+      >
+        {renderContent()}
+      </FilledButton>
+    );
+  }
+
+  if (type === "tinted") {
+    return (
+      <TintedButton
+        {...themeProps}
+        hasLeadingIcon={hasLeadingIcon}
+        hasTrailingIcon={hasTrailingIcon}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+        hasText={hasText}
+        {...rest}
+      >
+        {renderContent()}
+      </TintedButton>
+    );
+  }
+
+  if (type === "outline") {
+    return (
+      <OutlineButton
+        {...themeProps}
+        hasLeadingIcon={hasLeadingIcon}
+        hasTrailingIcon={hasTrailingIcon}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+        hasText={hasText}
+        {...rest}
+      >
+        {renderContent()}
+      </OutlineButton>
+    );
+  }
+
+  if (type === "basic") {
+    return (
+      <BasicButton
+        {...themeProps}
+        hasLeadingIcon={hasLeadingIcon}
+        hasTrailingIcon={hasTrailingIcon}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+        hasText={hasText}
+        {...rest}
+      >
+        {renderContent()}
+      </BasicButton>
+    );
+  }
 
   return (
-    <StyledBtn
+    <FilledButton
+      size={size}
       {...themeProps}
-      data-testid="button"
-      onClick={handleOnClick}
-      className={className}
-      disabled={disabled}
-      title={title}
-      hasText={!isEmpty(text)}
-      ref={ref}
+      hasLeadingIcon={hasLeadingIcon}
+      hasTrailingIcon={hasTrailingIcon}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      hasText={hasText}
       {...rest}
     >
-      {!isEmpty(iconLocation) && !isEmpty(icon) && iconLocation === "left" && (
-        <Icon
-          {...themeProps}
-          className={getIconClass()}
-          hasText={!isEmpty(text)}
-          location={"left"}
-        />
-      )}
-
-      {!isEmpty(text) && <Text {...themeProps}>{text}</Text>}
-
-      {!isEmpty(iconLocation) && !isEmpty(icon) && iconLocation === "right" && (
-        <Icon
-          {...themeProps}
-          className={getIconClass()}
-          hasText={!isEmpty(text)}
-          location={"right"}
-        />
-      )}
-    </StyledBtn>
+      {renderContent()}
+    </FilledButton>
   );
-});
+};
 
 Button.defaultProps = {
-  id: "",
-  disabled: false,
-  outline: false,
   text: "",
-  tooltip: "",
-  icon: "",
-  iconStyle: "solid",
-  iconLocation: "right",
-  //-------------
+  borderRadius: "regular",
+  type: "filled",
+  disalbed: false,
+  tabIndex: 0,
+  leadingIcon: null,
+  trailingIcon: null,
+  //-------------------------
+  onBlur: () => {},
+  onFocus: () => {},
   onClick: () => {},
-  //-------------
+  onKeyDown: () => {},
+  //-------------------------
   style: {},
-  className: "",
-  size: "small",
   color: "primary",
+  size: "small",
 };
 
 Button.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  outline: PropTypes.bool,
-  tooltip: PropTypes.string,
   text: PropTypes.string,
-  icon: PropTypes.string,
-  iconStyle: PropTypes.oneOf(["regular", "solid"]),
-  iconLocation: PropTypes.oneOf(["right", "left"]),
-  //-------------
+  /**
+   * Icon before the text
+   */
+  leadingIcon: PropTypes.string,
+  /**
+   * Icon after the text
+   */
+  trailingIcon: PropTypes.string,
+  borderRadius: PropTypes.oneOf(["regular", "curved"]),
+  /**
+   * Different styles
+   */
+  type: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
+  disabled: PropTypes.bool,
+  tabIndex: PropTypes.number,
+  //---------------------------------------------------------------
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
   onClick: PropTypes.func,
-  //-------------
-  style: PropTypes.object,
+  onKeyDown: PropTypes.func,
+  //---------------------------------------------------------------
   className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  style: PropTypes.object,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "danger",
     "warning",
-    "disabled",
-    "white",
-    "info",
+    "danger",
+    "information",
   ]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
 export default Button;

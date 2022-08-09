@@ -308,7 +308,7 @@ const lanaco_light = {
     success: "green",
     warning: "yellow",
     danger: "red",
-    information: "blue",
+    information: "violet",
     neutral: "neutral",
   },
   components: {
@@ -990,8 +990,8 @@ const lanaco_light = {
           sizes: {
             small: "1rem",
             medium: "1.25rem",
-            large: "1.5rem"
-          }
+            large: "1.5rem",
+          },
         },
         focus: {
           border: 300,
@@ -1014,8 +1014,8 @@ const lanaco_light = {
           fontWeight: 600,
         },
         disabled: {
-          border: 300
-        }
+          border: 300,
+        },
       },
       teal: {
         active: {
@@ -1027,8 +1027,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       blue: {
         active: {
@@ -1040,8 +1040,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       red: {
         active: {
@@ -1053,8 +1053,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       violet: {
         active: {
@@ -1066,8 +1066,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       yellow: {
         active: {
@@ -1079,8 +1079,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       green: {
         active: {
@@ -1092,8 +1092,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       gray: {
         active: {
@@ -1105,8 +1105,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       neutral: {
         active: {
@@ -1118,9 +1118,9 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
-      }
+          border: 600,
+        },
+      },
     },
     Radio: {
       default: {
@@ -1133,8 +1133,8 @@ const lanaco_light = {
           sizes: {
             small: "1rem",
             medium: "1.25rem",
-            large: "1.5rem"
-          }
+            large: "1.5rem",
+          },
         },
         focus: {
           border: 300,
@@ -1159,7 +1159,7 @@ const lanaco_light = {
         disabled: {
           border: 300,
           background: 300,
-        }
+        },
       },
       teal: {
         active: {
@@ -1171,8 +1171,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       blue: {
         active: {
@@ -1184,8 +1184,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       red: {
         active: {
@@ -1197,8 +1197,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       violet: {
         active: {
@@ -1210,8 +1210,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       yellow: {
         active: {
@@ -1223,8 +1223,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       green: {
         active: {
@@ -1236,8 +1236,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       gray: {
         active: {
@@ -1249,8 +1249,8 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
-        }
+          border: 600,
+        },
       },
       neutral: {
         active: {
@@ -1262,9 +1262,9 @@ const lanaco_light = {
         },
         indterminate: {
           background: 600,
-          border:600,
+          border: 600,
         },
-      }
+      },
     },
     Alert: {
       default: {
@@ -1276,8 +1276,8 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
         },
       },
       teal: {
@@ -1288,9 +1288,9 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
-        }
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
+        },
       },
       blue: {
         enabled: {
@@ -1300,9 +1300,9 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
-        }
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
+        },
       },
       red: {
         enabled: {
@@ -1312,9 +1312,9 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
-        }
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
+        },
       },
       violet: {
         enabled: {
@@ -1324,9 +1324,9 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
-        }
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
+        },
       },
       yellow: {
         enabled: {
@@ -1336,9 +1336,9 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
-        }
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
+        },
       },
       green: {
         enabled: {
@@ -1348,9 +1348,9 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
-        }
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
+        },
       },
       gray: {
         enabled: {
@@ -1360,9 +1360,9 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
-        }
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
+        },
       },
       neutral: {
         enabled: {
@@ -1372,10 +1372,10 @@ const lanaco_light = {
           action: 800,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
-        }
-      }
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
+        },
+      },
     },
     Notification: {
       default: {
@@ -1387,11 +1387,546 @@ const lanaco_light = {
           action: 600,
           title: 800,
           fontWeight: 400,
-          fontWeightAction: 600, 
-          fontWeightTitle: 600
+          fontWeightAction: 600,
+          fontWeightTitle: 600,
         },
-      }
-    }
+      },
+    },
+    ButtonFilled: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 50,
+          backgroundOpacity: 50,
+          text: 900,
+          fontWeight: 700,
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 100,
+          text: 900,
+          fontWeight: 700,
+        },
+        focus: {
+          background: 100,
+          backgroundOpacity: 100,
+          text: 900,
+          fontWeight: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 200,
+          text: 900,
+          fontWeight: 700,
+        },
+        disabled: {
+          background: 200,
+        },
+      },
+      teal: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      blue: {
+        enabled: {
+          background: 600,
+        },
+        hover: {
+          background: 700,
+        },
+        focus: {
+          background: 700,
+        },
+        active: {
+          background: 800,
+        },
+      },
+      red: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      yellow: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      green: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      gray: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+        disabled: {
+          background: 200,
+        },
+      },
+      neutral: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+    },
+    ButtonTinted: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 50,
+          backgroundOpacity: 50,
+          text: 900,
+          fontWeight: 700,
+        },
+        hover: {
+          background: 100,
+          backgroundOpacity: 100,
+          text: 900,
+          fontWeight: 700,
+        },
+        focus: {
+          background: 100,
+          backgroundOpacity: 100,
+          text: 900,
+          fontWeight: 700,
+        },
+        active: {
+          background: 100,
+          backgroundOpacity: 200,
+          text: 900,
+          fontWeight: 700,
+        },
+        disabled: {
+          background: 200,
+        },
+      },
+      teal: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 700,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          background: 600,
+          backgroundOpacity: 200,
+          text: 700,
+        },
+        hover: {
+          background: 700,
+          backgroundOpacity: 300,
+          text: 700,
+        },
+        focus: {
+          background: 700,
+          backgroundOpacity: 300,
+          text: 700,
+        },
+        active: {
+          background: 800,
+          backgroundOpacity: 400,
+          text: 700,
+        },
+      },
+      red: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 700,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 700,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 700,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      green: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 700,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 700,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+        disabled: {
+          background: 200,
+        },
+      },
+      neutral: {
+        enabled: {
+          background: 500,
+          backgroundOpacity: 200,
+          text: 600,
+        },
+        hover: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        focus: {
+          background: 600,
+          backgroundOpacity: 300,
+          text: 600,
+        },
+        active: {
+          background: 700,
+          backgroundOpacity: 400,
+          text: 600,
+        },
+      },
+    },
+    ButtonOutline: {
+      default: {
+        palette: "gray",
+        enabled: {
+          border: 900,
+          borderOpacity: 100,
+          background: 0,
+          backgroundOpacity: 50,
+          text: 600,
+          fontWeight: 700,
+        },
+        hover: {
+          border: 900,
+          borderOpacity: 100,
+          background: 900,
+          backgroundOpacity: 50,
+          text: 600,
+          fontWeight: 700,
+        },
+        focus: {
+          border: 900,
+          borderOpacity: 100,
+          background: 900,
+          backgroundOpacity: 50,
+          text: 600,
+          fontWeight: 700,
+        },
+        active: {
+          border: 900,
+          borderOpacity: 100,
+          background: 900,
+          backgroundOpacity: 100,
+          text: 600,
+          fontWeight: 700,
+        },
+        disabled: {
+          background: 0,
+          backgroundOpacity: 50,
+        },
+      },
+      teal: {
+        enabled: {
+          text: 600,
+        },
+        hover: {
+          text: 600,
+        },
+        focus: {
+          text: 600,
+        },
+        active: {
+          text: 600,
+        },
+        disabled: {
+          text: 400,
+        },
+      },
+      blue: {
+        enabled: {
+          text: 600,
+        },
+        hover: {
+          text: 600,
+        },
+        focus: {
+          text: 600,
+        },
+        active: {
+          text: 600,
+        },
+        disabled: {
+          text: 400,
+        },
+      },
+      red: {
+        enabled: {
+          text: 600,
+        },
+        hover: {
+          text: 600,
+        },
+        focus: {
+          text: 600,
+        },
+        active: {
+          text: 600,
+        },
+        disabled: {
+          text: 400,
+        },
+      },
+      violet: {
+        enabled: {
+          text: 600,
+        },
+        hover: {
+          text: 600,
+        },
+        focus: {
+          text: 600,
+        },
+        active: {
+          text: 600,
+        },
+        disabled: {
+          text: 400,
+        },
+      },
+      yellow: {
+        enabled: {
+          text: 600,
+        },
+        hover: {
+          text: 600,
+        },
+        focus: {
+          text: 600,
+        },
+        active: {
+          text: 600,
+        },
+        disabled: {
+          text: 400,
+        },
+      },
+      green: {
+        enabled: {
+          text: 600,
+        },
+        hover: {
+          text: 600,
+        },
+        focus: {
+          text: 600,
+        },
+        active: {
+          text: 600,
+        },
+        disabled: {
+          text: 400,
+        },
+      },
+      gray: {
+        enabled: {
+          text: 600,
+        },
+        hover: {
+          text: 600,
+        },
+        focus: {
+          text: 600,
+        },
+        active: {
+          text: 600,
+        },
+        disabled: {
+          text: 400,
+        },
+      },
+      neutral: {
+        enabled: {
+          text: 600,
+        },
+        hover: {
+          text: 600,
+        },
+        focus: {
+          text: 600,
+        },
+        active: {
+          text: 600,
+        },
+        disabled: {
+          text: 400,
+        },
+      },
+    },
   },
   palette: {
     outline: {

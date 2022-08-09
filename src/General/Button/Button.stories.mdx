@@ -6,15 +6,92 @@ import Button from "./index";
 
 export const TemplateDefault = (args) => <Button {...args} />;
 
+export const TemplateTypes = (args) => (
+  <div style={{ display: "flex", gap: "16px" }}>
+    <Button {...args} type={"filled"} />
+    <Button {...args} type={"tinted"} />
+    <Button {...args} type={"outline"} />
+    <Button {...args} type={"basic"} />
+  </div>
+);
+
+export const TemplateBorderRadius = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <Button {...args} type={"filled"} borderRadius={"regular"} />
+      <Button {...args} type={"tinted"} borderRadius={"regular"} />
+      <Button {...args} type={"outline"} borderRadius={"regular"} />
+      <Button {...args} type={"basic"} borderRadius={"regular"} />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Button
+        {...args}
+        type={"filled"}
+        borderRadius={"curved"}
+        leadingIcon="heart"
+        text=""
+      />
+      <Button
+        {...args}
+        type={"tinted"}
+        borderRadius={"curved"}
+        leadingIcon="heart"
+        text=""
+      />
+      <Button
+        {...args}
+        type={"outline"}
+        borderRadius={"curved"}
+        leadingIcon="heart"
+        text=""
+      />
+      <Button
+        {...args}
+        type={"basic"}
+        borderRadius={"curved"}
+        leadingIcon="heart"
+        text=""
+      />
+    </div>
+  </div>
+);
+
+export const TemplateDisabled = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "12px" }}>
+      <Button {...args} leadingIcon={"user"} type={"filled"} />
+      <Button {...args} leadingIcon={"user"} type={"tinted"} />
+      <Button {...args} leadingIcon={"user"} type={"outline"} />
+      <Button {...args} leadingIcon={"user"} type={"basic"} />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Button {...args} trailingIcon={"clock"} type={"filled"} />
+      <Button {...args} trailingIcon={"clock"} type={"tinted"} />
+      <Button {...args} trailingIcon={"clock"} type={"outline"} />
+      <Button {...args} trailingIcon={"clock"} type={"basic"} />
+    </div>
+  </div>
+);
+
 export const TemplateIcons = (args) => (
-  <div style={{ display: "flex", gap: "12px" }}>
-    <Button {...args} iconLocation="left" />
-    <Button {...args} iconLocation="right" />
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "12px" }}>
+      <Button {...args} leadingIcon={"user"} type={"filled"} />
+      <Button {...args} leadingIcon={"user"} type={"tinted"} />
+      <Button {...args} leadingIcon={"user"} type={"outline"} />
+      <Button {...args} leadingIcon={"user"} type={"basic"} />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Button {...args} trailingIcon={"clock"} type={"filled"} />
+      <Button {...args} trailingIcon={"clock"} type={"tinted"} />
+      <Button {...args} trailingIcon={"clock"} type={"outline"} />
+      <Button {...args} trailingIcon={"clock"} type={"basic"} />
+    </div>
   </div>
 );
 
 export const TemplateSizes = (args) => (
-  <div style={{ display: "flex", gap: "12px" }}>
+  <div style={{ display: "flex", gap: "16px" }}>
     <Button {...args} size="small" />
     <Button {...args} size="medium" />
     <Button {...args} size="large" />
@@ -22,13 +99,64 @@ export const TemplateSizes = (args) => (
 );
 
 export const TemplateColors = (args) => (
-  <div style={{ display: "flex", gap: "12px" }}>
-    <Button {...args} color="primary" />
-    <Button {...args} color="secondary" />
-    <Button {...args} color="success" />
-    <Button {...args} color="warning" />
-    <Button {...args} color="danger" />
-    <Button {...args} color="info" />
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <Button {...args} type={"filled"} color="primary" leadingIcon={"user"} />
+      <Button {...args} type={"filled"} color="secondary" />
+      <Button {...args} type={"filled"} color="success" />
+      <Button {...args} type={"filled"} color="warning" />
+      <Button {...args} type={"filled"} color="danger" />
+      <Button {...args} type={"filled"} color="information" />
+      <Button
+        {...args}
+        type={"filled"}
+        color="neutral"
+        trailingIcon={"clock"}
+      />
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <Button {...args} type={"tinted"} color="primary" />
+      <Button
+        {...args}
+        type={"tinted"}
+        color="secondary"
+        leadingIcon={"user"}
+      />
+      <Button {...args} type={"tinted"} color="success" />
+      <Button {...args} type={"tinted"} color="warning" />
+      <Button {...args} type={"tinted"} color="danger" />
+      <Button
+        {...args}
+        type={"tinted"}
+        color="information"
+        trailingIcon={"clock"}
+      />
+      <Button {...args} type={"tinted"} color="neutral" />
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <Button {...args} type={"basic"} color="primary" />
+      <Button {...args} type={"basic"} color="secondary" />
+      <Button {...args} type={"basic"} color="success" leadingIcon={"user"} />
+      <Button {...args} type={"basic"} color="warning" />
+      <Button {...args} type={"basic"} color="danger" trailingIcon={"clock"} />
+      <Button {...args} type={"basic"} color="information" />
+      <Button {...args} type={"basic"} color="neutral" />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Button {...args} type={"outline"} color="primary" />
+      <Button {...args} type={"outline"} color="secondary" />
+      <Button {...args} type={"outline"} color="success" />
+      <Button
+        {...args}
+        type={"outline"}
+        color="warning"
+        leadingIcon={"user"}
+        trailingIcon={"clock"}
+      />
+      <Button {...args} type={"outline"} color="danger" />
+      <Button {...args} type={"outline"} color="information" />
+      <Button {...args} type={"outline"} color="neutral" />
+    </div>
   </div>
 );
 
@@ -51,17 +179,18 @@ import { Button } from "@lnc-react-ui";
 
 <ArgsTable story="Default" />
 
-## Outline
+## Types
 
-<Canvas withSource="open">
+`type:` `filled` / `tinted` / `outline` / `basic`
+
+<Canvas>
   <Story
-    name="Outline"
+    name="Types"
     args={{
       text: "Button",
-      outline: true,
     }}
   >
-    {TemplateDefault.bind({})}
+    {TemplateTypes.bind({})}
   </Story>
 </Canvas>
 
@@ -75,14 +204,15 @@ import { Button } from "@lnc-react-ui";
       text: "Button",
     }}
   >
-    {TemplateDefault.bind({})}
+    {TemplateDisabled.bind({})}
   </Story>
 </Canvas>
 
 ## With Icon
-Icon is set with `icon` prop, `iconLocation` can have `left` or `right` value.
 
-<Canvas withSource="open">
+Icon is set with the `leadingIcon` or the `trailingIcon` prop.
+
+<Canvas>
   <Story
     name="With Icon"
     args={{
@@ -94,9 +224,24 @@ Icon is set with `icon` prop, `iconLocation` can have `left` or `right` value.
   </Story>
 </Canvas>
 
+## Border Radius
+
+`borderRadius:` `regular` / `curved`
+
+<Canvas>
+  <Story
+    name="Border Radius"
+    args={{
+      text: "Button",
+    }}
+  >
+    {TemplateBorderRadius.bind({})}
+  </Story>
+</Canvas>
+
 ## Sizes
 
-Defining `size` with `small`, `medium` and `large` values.
+`size:` `small` / `medium` / `large`
 
 <Canvas>
   <Story
@@ -111,7 +256,7 @@ Defining `size` with `small`, `medium` and `large` values.
 
 ## Colors
 
-Defining `color`
+`color:` `primary` / `secondary` / `success` / `warning` / `danger` / `information` / `neutral`
 
 <Canvas>
   <Story
