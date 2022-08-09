@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
@@ -68,16 +68,32 @@ const TextArea = React.forwardRef((props, ref) => {
     onChange,
   } = props;
 
-  const [val, setVal] = useState(value ? value : "");
+  const [text, setText] = useState("");
+  const [isFirst, setIsFirst] = useState(true);
+
+  useEffect(() => {
+    if (text !== value) setText(value === null ? "" : value);
+  }, [value]);
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => handleDelayedOnChange(), 350);
+    return () => clearTimeout(timeOutId);
+  }, [text]);
+
+  const handleDelayedOnChange = () => {
+    if (!isFirst) onChange(id, text);
+
+    if (isFirst) setIsFirst(false);
+  };
 
   const handleOnChange = (e) => {
     if (preventDefault) e.preventDefault();
-    setVal(e.target.value);
+    setText(e.target.value);
   };
 
   const handleOnBlur = (e) => {
     if (preventDefault) e.preventDefault();
-    onChange(id, val);
+    onChange(id, text);
   };
 
   return (
@@ -86,7 +102,7 @@ const TextArea = React.forwardRef((props, ref) => {
       onChange={handleOnChange}
       className={className}
       disabled={disabled}
-      value={val}
+      value={text}
       ref={ref}
       onFocus={(e) => {
         e.target.style.whiteSpace = "inherit";
