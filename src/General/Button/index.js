@@ -88,6 +88,7 @@ const Button = (props) => {
   if (type === "filled") {
     return (
       <FilledButton
+        data-type="filled"
         {...themeProps}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
@@ -105,6 +106,7 @@ const Button = (props) => {
   if (type === "tinted") {
     return (
       <TintedButton
+        data-type="tinted"
         {...themeProps}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
@@ -122,6 +124,7 @@ const Button = (props) => {
   if (type === "outline") {
     return (
       <OutlineButton
+        data-type="outline"
         {...themeProps}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
@@ -139,6 +142,7 @@ const Button = (props) => {
   if (type === "basic") {
     return (
       <BasicButton
+        data-type="basic"
         {...themeProps}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
@@ -155,6 +159,7 @@ const Button = (props) => {
 
   return (
     <FilledButton
+      data-type="filled"
       size={size}
       {...themeProps}
       hasLeadingIcon={hasLeadingIcon}

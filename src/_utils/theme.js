@@ -1526,16 +1526,16 @@ const lanaco_light = {
       },
       neutral: {
         enabled: {
-          background: 500,
+          background: 400,
         },
         hover: {
-          background: 600,
+          background: 500,
         },
         focus: {
-          background: 600,
+          background: 500,
         },
         active: {
-          background: 700,
+          background: 600,
         },
       },
     },
@@ -2110,6 +2110,22 @@ const lanaco_light = {
           background: 600,
         },
       },
+    },
+    ButtonGroup: {
+      default: {
+        palette: "gray",
+        enabled: {
+          border: 200,
+        },
+      },
+      teal: {},
+      blue: {},
+      red: {},
+      violet: {},
+      yellow: {},
+      green: {},
+      gray: {},
+      neutral: {},
     },
   },
   palette: {
