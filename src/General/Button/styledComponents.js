@@ -249,7 +249,7 @@ export const BasicButton = styled.button`
     !props.disabled &&
     getColorRgbaValue(
       props.theme,
-      "ButtonOutline",
+      "ButtonBasic",
       props.color,
       "enabled",
       "text"
@@ -259,7 +259,7 @@ export const BasicButton = styled.button`
     !props.disabled &&
     getColorRgbaValue(
       props.theme,
-      "ButtonOutline",
+      "ButtonBasic",
       props.color,
       "enabled",
       "background",
@@ -275,7 +275,7 @@ export const BasicButton = styled.button`
     background-color: ${(props) =>
       getColorRgbaValue(
         props.theme,
-        "ButtonOutline",
+        "ButtonBasic",
         "gray",
         "disabled",
         "background"
@@ -287,7 +287,7 @@ export const BasicButton = styled.button`
       !props.disabled &&
       getColorRgbaValue(
         props.theme,
-        "ButtonOutline",
+        "ButtonBasic",
         props.color,
         "hover",
         "background",
@@ -300,7 +300,7 @@ export const BasicButton = styled.button`
       !props.disabled &&
       getColorRgbaValue(
         props.theme,
-        "ButtonOutline",
+        "ButtonBasic",
         props.color,
         "focus",
         "background",
@@ -315,7 +315,7 @@ export const BasicButton = styled.button`
       !props.disabled &&
       getColorRgbaValue(
         props.theme,
-        "ButtonOutline",
+        "ButtonBasic",
         props.color,
         "active",
         "background",
@@ -329,7 +329,7 @@ export const OutlineButton = styled(BasicButton)`
     ${(props) =>
       getColorRgbaValue(
         props.theme,
-        "ButtonOutline",
+        "ButtonBasic",
         props.color,
         "enabled",
         "border",

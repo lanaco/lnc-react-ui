@@ -1750,7 +1750,7 @@ const lanaco_light = {
         },
       },
     },
-    ButtonOutline: {
+    ButtonBasic: {
       default: {
         palette: "gray",
         enabled: {
