@@ -28,29 +28,25 @@ export const TemplateBorderRadius = (args) => (
         {...args}
         type={"filled"}
         borderRadius={"curved"}
-        leadingIcon="heart"
-        text=""
+        leadingIcon="user"
       />
       <Button
         {...args}
         type={"tinted"}
         borderRadius={"curved"}
-        leadingIcon="heart"
-        text=""
+        leadingIcon="user"
       />
       <Button
         {...args}
         type={"outline"}
         borderRadius={"curved"}
-        leadingIcon="heart"
-        text=""
+        leadingIcon="user"
       />
       <Button
         {...args}
         type={"basic"}
         borderRadius={"curved"}
-        leadingIcon="heart"
-        text=""
+        leadingIcon="user"
       />
     </div>
   </div>
@@ -82,10 +78,30 @@ export const TemplateIcons = (args) => (
       <Button {...args} leadingIcon={"user"} type={"basic"} />
     </div>
     <div style={{ display: "flex", gap: "16px" }}>
-      <Button {...args} trailingIcon={"clock"} type={"filled"} />
-      <Button {...args} trailingIcon={"clock"} type={"tinted"} />
-      <Button {...args} trailingIcon={"clock"} type={"outline"} />
-      <Button {...args} trailingIcon={"clock"} type={"basic"} />
+      <Button
+        {...args}
+        trailingIcon={"clock"}
+        type={"filled"}
+        iconStyle={"regular"}
+      />
+      <Button
+        {...args}
+        trailingIcon={"clock"}
+        type={"tinted"}
+        iconStyle={"regular"}
+      />
+      <Button
+        {...args}
+        trailingIcon={"clock"}
+        type={"outline"}
+        iconStyle={"regular"}
+      />
+      <Button
+        {...args}
+        trailingIcon={"clock"}
+        type={"basic"}
+        iconStyle={"regular"}
+      />
     </div>
   </div>
 );
@@ -202,6 +218,7 @@ import { Button } from "@lnc-react-ui";
     args={{
       disabled: true,
       text: "Button",
+      iconStyle: "solid",
     }}
   >
     {TemplateDisabled.bind({})}
@@ -217,7 +234,6 @@ Icon is set with the `leadingIcon` or the `trailingIcon` prop.
     name="With Icon"
     args={{
       text: "Button",
-      icon: "pause",
     }}
   >
     {TemplateIcons.bind({})}

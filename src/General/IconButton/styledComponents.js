@@ -11,24 +11,6 @@ import {
 
 //=================================================
 
-const paddings = {
-  small: {
-    regular: "1rem",
-    icon: "0.75rem",
-    justIcon: "0.5rem",
-  },
-  medium: {
-    regular: "1.5rem",
-    icon: "1rem",
-    justIcon: "0.5rem",
-  },
-  large: {
-    regular: "1.5rem",
-    icon: "1rem",
-    justIcon: "0.5rem",
-  },
-};
-
 const commonCss = (props) => {
   return `
         outline: none;
@@ -45,26 +27,14 @@ const commonCss = (props) => {
           props.theme,
           props.borderRadius
         )};
-        
-        padding-left: ${
-          props.hasLeadingIcon
-            ? paddings[props.size].icon
-            : paddings[props.size].regular
-        };
-        padding-right: ${
-          props.hasTrailingIcon
-            ? paddings[props.size].icon
-            : paddings[props.size].regular
-        };
+
+        min-width: ${getSizeValueWithUnits(props.theme, props.size)};
+        max-width: ${getSizeValueWithUnits(props.theme, props.size)};
     `;
 };
 
-export const LeadingIconContainer = styled.span`
-  padding-right: ${(props) => (props.size === "small" ? "0.25rem" : "0.5rem")};
-`;
-
-export const TrailingIconContainer = styled.span`
-  padding-left: ${(props) => (props.size === "small" ? "0.25rem" : "0.5rem")};
+export const StyledIcon = styled.i`
+  font-size: 1.125rem;
 `;
 
 export const FilledButton = styled.button`

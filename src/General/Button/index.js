@@ -19,6 +19,7 @@ import Icon from "../Icon/index";
 const Button = (props) => {
   const {
     text,
+    iconStyle,
     leadingIcon,
     trailingIcon,
     size,
@@ -60,16 +61,24 @@ const Button = (props) => {
     return (
       <>
         {hasLeadingIcon && (
-          <LeadingIconContainer size={size} hasText={hasText}>
-            <Icon icon={leadingIcon} sizeInUnits={"1.125rem"} />
+          <LeadingIconContainer size={size}>
+            <Icon
+              icon={leadingIcon}
+              sizeInUnits={"1.125rem"}
+              iconStyle={iconStyle}
+            />
           </LeadingIconContainer>
         )}
 
         {text}
 
         {hasTrailingIcon && (
-          <TrailingIconContainer size={size} hasText={hasText}>
-            <Icon icon={trailingIcon} sizeInUnits={"1.125rem"} />
+          <TrailingIconContainer size={size}>
+            <Icon
+              icon={trailingIcon}
+              sizeInUnits={"1.125rem"}
+              iconStyle={iconStyle}
+            />
           </TrailingIconContainer>
         )}
       </>
@@ -86,7 +95,6 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        hasText={hasText}
         {...rest}
       >
         {renderContent()}
@@ -104,7 +112,6 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        hasText={hasText}
         {...rest}
       >
         {renderContent()}
@@ -122,7 +129,6 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        hasText={hasText}
         {...rest}
       >
         {renderContent()}
@@ -140,7 +146,6 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        hasText={hasText}
         {...rest}
       >
         {renderContent()}
@@ -168,6 +173,7 @@ const Button = (props) => {
 
 Button.defaultProps = {
   text: "",
+  iconStyle: "solid",
   borderRadius: "regular",
   type: "filled",
   disalbed: false,
@@ -187,6 +193,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
   text: PropTypes.string,
+  iconStyle: PropTypes.oneOf(["regular", "solid"]),
   /**
    * Icon before the text
    */
