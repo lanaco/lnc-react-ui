@@ -60,6 +60,7 @@ const Button = (props) => {
   if (type === "filled") {
     return (
       <FilledButton
+        data-type="filled"
         {...themeProps}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -75,6 +76,7 @@ const Button = (props) => {
   if (type === "tinted") {
     return (
       <TintedButton
+        data-type="tinted"
         {...themeProps}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -90,6 +92,7 @@ const Button = (props) => {
   if (type === "outline") {
     return (
       <OutlineButton
+        data-type="outline"
         {...themeProps}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -105,6 +108,7 @@ const Button = (props) => {
   if (type === "basic") {
     return (
       <BasicButton
+        data-type="basic"
         {...themeProps}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -119,6 +123,7 @@ const Button = (props) => {
 
   return (
     <FilledButton
+      data-type="filled"
       size={size}
       {...themeProps}
       onFocus={onFocus}
