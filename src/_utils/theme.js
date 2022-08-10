@@ -1927,6 +1927,190 @@ const lanaco_light = {
         },
       },
     },
+    Badge: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      teal: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      blue: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      red: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      yellow: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      green: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      gray: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+      neutral: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 0,
+        },
+      },
+    },
+    Spinner: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+          unfilled: 200,
+        },
+      },
+      teal: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      red: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      green: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          background: 600,
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+    },
+    Progress: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 600,
+          fontWeight: 700,
+          text: 0,
+          unfilled: 300,
+        },
+      },
+      teal: {
+        enabled: {
+          background: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          background: 600,
+        },
+      },
+      red: {
+        enabled: {
+          background: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          background: 600,
+        },
+      },
+      green: {
+        enabled: {
+          background: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          background: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          background: 600,
+        },
+      },
+    },
   },
   palette: {
     outline: {

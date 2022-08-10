@@ -1,206 +1,222 @@
 import React from "react";
-import styled from "@emotion/styled";
-import theme from "../../_utils/theme";
 import PropTypes from "prop-types";
-import "../../Base/fontawesome/css/fontawesome.css";
+import styled from "@emotion/styled";
+import { useTheme } from "@emotion/react";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledStateCss,
+  getOutlineCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
+import Avatar from "../../General/Avatar";
 
-const getBtnContainerColor = (props) => {
-  if (props.additional && props.inactive) return props.theme.palette.gray[100];
-
-  if (props.additional && !props.inactive)
-    return props.theme.palette.primary.lighter;
-
-  if (!props.additional && !props.inactive)
-    return props.theme.palette.primary.main;
-
-  if (!props.additional && props.inactive) return props.theme.palette.gray[900];
+const getIconClass = (icon) => {
+  var style = "fas";
+  return `${style} fa-${icon} fa-fw`;
 };
 
-const getBtnColor = (props) => {
-  if (props.additional && props.inactive) return props.theme.palette.gray[900];
-
-  if (props.additional && !props.inactive)
-    return props.theme.palette.primary.main;
-
-  if (!props.additional && !props.inactive)
-    return props.theme.palette.primary.lighter;
-
-  if (!props.additional && props.inactive)
-    return props.theme.palette.primary.lighter;
+const getPadding = (avatar, leadingIcon, trailingIcon, size) => {
+  if (avatar) {
+    return `padding-right: ${
+      size == "small" ? "0.75rem" : "0.625rem"
+    }; padding-left: ${size == "small" ? "0.25rem" : "0.125rem"};`;
+  } else if (leadingIcon) {
+    return `padding-right: ${
+      size == "small" ? "0.5rem" : "0.375rem"
+    }; padding-left: ${size == "small" ? "0.5rem" : "0.375rem"};`;
+  } else if (trailingIcon) {
+    return `padding-right: ${
+      size == "small" ? "0.5rem" : "0.375rem"
+    }; padding-left: ${size == "small" ? "0.75rem" : "0.625rem"};`;
+  } else {
+    return `padding-right: ${
+      size == "small" ? "1rem" : "0.75rem"
+    }; padding-left: ${size == "small" ? "1rem" : "0.75rem"};`;
+  }
 };
-
-const paddingBySize = (size) => {
-  if (size === "small") return `0.34375rem 0.5rem 0.34375rem 0.5rem`;
-  if (size === "medium") return `0.40625rem 0.6rem 0.40625rem 0.6rem`;
-  if (size === "large") return `0.46875rem 0.7rem 0.46875rem 0.7rem`;
-};
-
-const heightBySize = (size) => {
-  if (size === "small") return `1.5rem`;
-  if (size === "medium") return `1.875rem`;
-  if (size === "large") return `2.25rem`;
-};
-
-const Container = styled.div`
-  display: inline-block;
-  box-sizing: border-box;
-`;
-
-const Inner = styled.div`
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  border: 0.0625rem solid #bfbfbf80;
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  padding: 0;
-  margin: 0;
-  border-radius: 0.5rem;
-  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-
-  min-height: ${(props) => heightBySize(props.size)};
-  max-height: ${(props) => heightBySize(props.size)};
-`;
-
-const TextSpan = styled.span``;
-
-const Text = styled.div`
-  flex: 1;
-
-  padding: ${(props) => paddingBySize(props.size)};
-  transition: all 250ms ease;
-  border-radius: 0.5rem 0 0 0.5rem;
-  white-space: pre;
-  flex-grow: 10;
-  height: 100%;
-  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
+const StyledChip = styled.span`
+  cursor: pointer;
+  display: inline-flex;
+  height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  ${(props) => props.disabled && getDisabledStateCss(props.theme)};
   background-color: ${(props) =>
-    props.inactive
-      ? props.theme.palette.gray[900]
-      : props.theme.palette.primary.main};
+    !props.disabled &&
+    getColorRgbaValue(
+      props.theme,
+      "Chip",
+      props.color,
+      "enabled",
+      "background",
+      "backgroundOpacity"
+    )};
+  color: ${(props) =>
+    !props.disabled &&
+    getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "text")};
+  font-weight: ${(props) => props.theme.typography.fontWeightBold};
+  ${(props) =>
+    getPadding(props.avatar, props.leadingIcon, props.trailingIcon, props.size)}
+  gap: 0.375rem;
+  border-radius: ${(props) =>
+    getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
+  justify-content: center;
+  align-items: center;
+  ${(props) => getComponentTypographyCss(props.theme, "Chip", props.size, "enabled")};
 
-  color: ${(props) => props.theme.palette.primary.text};
-`;
-
-const AdditionalInfo = styled.div`
-  padding: ${(props) => paddingBySize(props.size)};
-  transition: all 250ms ease;
-  white-space: pre;
-  flex-grow: 10;
-  height: 100%;
-  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
-  background-color: ${(props) =>
-    props.inactive
-      ? props.theme.palette.gray[100]
-      : props.theme.palette.primary.lighter};
-
-  color: ${(props) => props.theme.palette.primary.textDark};
-`;
-
-const ButtonContainer = styled.div`
-  display: inline;
-  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-  padding: ${(props) => paddingBySize(props.size)};
-  transition: all 250ms ease;
-  border-radius: 0 0.5rem 0.5rem 0;
-  // flex-grow: 0;
-  align-self: flex-end;
-  margin-left: auto;
-  height: 100%;
-  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
-  background-color: ${(props) => getBtnContainerColor(props)};
-
-  color: ${(props) => getBtnColor(props)};
-
-  & i {
-    font-size: ${(props) => props.theme.typography[props.size].fontSize};
+  &:hover {
+    background-color: ${(props) =>
+      !props.disabled &&
+      getColorRgbaValue(
+        props.theme,
+        "Chip",
+        props.color,
+        "hover",
+        "background",
+        "backgroundOpacity"
+      )};
+  }
+  &:focus {
+    background-color: ${(props) =>
+      !props.disabled &&
+      getColorRgbaValue(
+        props.theme,
+        "Chip",
+        props.color,
+        "focus",
+        "background",
+        "backgroundOpacity"
+      )};
+    ${(props) => !props.disabled && getOutlineCss(props.theme)};
+  }
+  &:active {
+    background-color: ${(props) =>
+      !props.disabled &&
+      getColorRgbaValue(
+        props.theme,
+        "Chip",
+        props.color,
+        "active",
+        "background",
+        "backgroundOpacity"
+      )};
   }
 `;
 
-const Chip = (props) => {
+const getAvatarSize = (theme, size) => {
+    return `calc(${getSizeValueWithUnits(theme, size)} - 8px)`;
+}
+
+const Chip = React.forwardRef((props, ref) => {
   const {
-    theme,
-    color,
-    id,
-    onClick,
-    onRemove,
-    disabled,
-    inactive,
-    tooltip,
-    preventDefault,
-    className,
+    label,
+    leadingIcon,
+    trailingIcon,
+    avatar,
     size,
-    text,
-    additionalInfo,
+    borderRadius,
+    disabled,
+    tabIndex,
+    //----------------
+    onFocus,
+    onBlur,
+    onClick,
+    onKeyDown,
+    onLeadingIconClick,
+    onTrailingIconClick,
+    //----------------
+    className,
+    style,
+    color,
+    avatarProps,
+    ...rest
   } = props;
 
-  const themeProps = { theme, size, color, disabled, inactive };
+  const theme = useTheme();
+
+  const themeProps = { theme, color, style, className };
 
   return (
-    <Container {...themeProps} className={className}>
-      <Inner {...themeProps}>
-        <Text {...themeProps} onClick={() => onClick(id)} title={tooltip}>
-          <TextSpan>{text}</TextSpan>
-        </Text>
+    <StyledChip
+      ref={ref}
+      size={size}
+      {...themeProps}
+      trailingIcon={trailingIcon}
+      leadingIcon={leadingIcon}
+      avatar={avatar}
+      borderRadius={borderRadius}
+      disabled={disabled}
+      tabIndex={tabIndex}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      {...rest}
+    >
+      {avatar && (
+        <Avatar {...themeProps}  disabled={disabled} sizeInUnits={getAvatarSize(theme, size)} {...avatarProps}/>
+      )}
 
-        {additionalInfo && additionalInfo !== "" && (
-          <AdditionalInfo onClick={() => onClick(id)} {...themeProps}>
-            {additionalInfo}
-          </AdditionalInfo>
-        )}
-
-        <ButtonContainer
-          {...themeProps}
-          additional={additionalInfo && additionalInfo !== ""}
-          onClick={() => onRemove(id)}
-          disabled={disabled}
-        >
-          <i className="fas fa-times" />
-        </ButtonContainer>
-      </Inner>
-    </Container>
+      {leadingIcon && (
+        <i className={getIconClass(leadingIcon)} onClick={onLeadingIconClick} />
+      )}
+      {label}
+      {trailingIcon && (
+        <i
+          className={getIconClass(trailingIcon)}
+          onClick={onTrailingIconClick}
+        />
+      )}
+    </StyledChip>
   );
-};
+});
 
 Chip.defaultProps = {
-  id: "",
-  disabled: false,
-  inactive: false,
-  tooltip: "",
+  avatar: false,
+  borderRadius: "regular",
+  disalbed: false,
+  tabIndex: 0,
+  //-------------------------
+  onBlur: () => {},
+  onFocus: () => {},
   onClick: () => {},
-  onRemove: () => {},
-  className: "",
-  preventDefault: true,
-  size: "small",
-  text: "",
-  additionalInfo: "",
+  onKeyDown: () => {},
+  onLeadingIconClick: () => {},
+  onTrailingIconClick: () => {},
+  //-------------------------
+  style: {},
   color: "primary",
-  theme: theme,
+  size: "small",
 };
 
 Chip.propTypes = {
-  theme: PropTypes.object.isRequired,
-  id: PropTypes.any,
+  label: PropTypes.string,
+  leadingIcon: PropTypes.string,
+  trailingIcon: PropTypes.string,
+  avatar: PropTypes.bool,
+  borderRadius: PropTypes.oneOf(["regular", "curved"]),
   disabled: PropTypes.bool,
-  inactive: PropTypes.bool,
-  tooltip: PropTypes.string,
+  tabIndex: PropTypes.number,
+  //---------------------------------------------------------------
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
   onClick: PropTypes.func,
-  onRemove: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onLeadingIconClick: PropTypes.func,
+  onTrailingIconClick: PropTypes.func,
+  //---------------------------------------------------------------
   className: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  text: PropTypes.string,
-  additionalInfo: PropTypes.string,
+  style: PropTypes.object,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "background",
-    "transparent",
+    "danger",
+    "information",
   ]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  avatarProps: PropTypes.any,
 };
 
 export default Chip;
