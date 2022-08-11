@@ -337,7 +337,7 @@ const DataView = (props) => {
           onClick={
             loading ? () => {} : () => setDeleteConfirmationBoxOpen(true)
           }
-          disabled={Table.SelectedData.length === 0}
+          disabled={props.disabled || Table.SelectedData.length === 0}
           tooltip={Localization.DeleteSelected}
           icon={"trash"}
           inverted={true}
@@ -375,6 +375,7 @@ const DataView = (props) => {
             onClick={freezeLoading() ? () => {} : GoToAdd}
             icon={"plus"}
             inverted={true}
+            disabled={props.disabled}
           />
         </FlexItem>
       );
@@ -569,6 +570,7 @@ const DataView = (props) => {
             Export={Export}
             Icons={Icons}
             accentColor={props.accentColor}
+            disabled={props.disabled}
           />
         </DivRelative>
       )

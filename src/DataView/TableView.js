@@ -199,7 +199,7 @@ const TableView = (props) => {
     var tabIndex = rowIndex * Columns.length + cellIndex + 50;
 
     let onClick = () => {
-      ChangeToFormView(dataItem, rowIndex);
+      props.disabled ? null : ChangeToFormView(dataItem, rowIndex);
     };
 
     if (!EnableFormView) onClick = () => {};
@@ -242,6 +242,7 @@ const TableView = (props) => {
               }
             }}
             icon={"arrow-right"}
+            disabled={props.disabled}
           />
         </TableBodyCell>
       );
@@ -255,6 +256,7 @@ const TableView = (props) => {
           checked={selected}
           onChange={(e, val) => handleOnSelection(dataItem, val)}
           id={rowIndex}
+          disabled={props.disabled}
         />
       </TableBodyCell>
     );
@@ -328,6 +330,7 @@ const TableView = (props) => {
           selectionCell={true}
           key={-1}
           title={title}
+          disabled={props.disabled}
         ></TableHeadCell>
       );
 
@@ -345,6 +348,7 @@ const TableView = (props) => {
             checked={SelectedEntirePage}
             onChange={() => handleSelectAll(!SelectedEntirePage)}
             id="SelectedEntirePage"
+            disabled={props.disabled}
           />
         )}
       </TableHeadCell>
