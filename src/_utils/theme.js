@@ -397,6 +397,7 @@ const lanaco_light = {
           backgroundOpacity: 50,
           text: 900,
           fontWeight: 700,
+          backdropFilter: "blur(48px)",
         },
         hover: {
           background: 100,
@@ -1575,7 +1576,23 @@ const lanaco_light = {
           background: 600,
         },
       }
-    }
+    },
+    Modal: {
+      default: {
+        palette: "gray",
+        enabled: {
+          cancelButton: 400,
+        },
+        hover: {
+          cancelBtnBg: 900,
+          cancelBtnBgOpacity: 50
+        },
+        focus: {
+          cancelBtnBg: 900,
+          cancelBtnBgOpacity: 100
+        }
+      }
+    },
   },
   palette: {
     outline: {

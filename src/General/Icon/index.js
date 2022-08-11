@@ -8,7 +8,6 @@ import { getColorRgbaValue, getComponentTypographyCss } from "../../_utils/utils
 
 const Span = styled.span`
   box-sizing: border-box;
-  background-color: inherit;
   ${(props) => (props.sizeInUnits && props.sizeInUnits != "") ? `font-size: ${props.sizeInUnits}` : getComponentTypographyCss(props.theme, "Icon", props.size, "enabled")};
   ${(props) => props.color && `color: ${getColorRgbaValue(props.theme, "Icon", props.color, "enabled", "icon")}`};
   display: inline-flex;
