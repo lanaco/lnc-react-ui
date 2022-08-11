@@ -63,26 +63,24 @@ const StyledRadio = styled.div`
           )
         : "transparent"};
     & .outer-circle {
-       stroke: ${props => getColorRgbaValue(
-        props.theme,
-        "Radio",
-        props.color,
-        props.checked 
-          ? props.disabled
-            ? "disabled"
-            : "active"
-          : "enabled",
-        "border"
-      )};
+      stroke: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "Radio",
+          props.color,
+          props.checked ? (props.disabled ? "disabled" : "active") : "enabled",
+          "border"
+        )};
     }
   }
   &:focus {
-    ${(props) => (!props.disabled && props.readOnly == false) && getOutlineCss(props.theme)};
+    ${(props) =>
+      !props.disabled && props.readOnly == false && getOutlineCss(props.theme)};
   }
 `;
 
 const Label = styled.label`
-  ${props => (!props.disabled && props.readOnly == false) && 'cursor: pointer'};
+  ${(props) => !props.disabled && props.readOnly == false && "cursor: pointer"};
 `;
 
 const RadioInput = React.forwardRef((props, ref) => {
@@ -122,7 +120,7 @@ const RadioInput = React.forwardRef((props, ref) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
 
-    if (onClick) onClick(e);
+    if (onClick && !disabled && !readOnly) onClick(e);
 
     if (readOnly || disabled) return;
 
@@ -139,15 +137,16 @@ const RadioInput = React.forwardRef((props, ref) => {
 
       if (onChange) onChange(e, id);
     }
-    if (onKeyDown) onKeyDown(e);
+
+    if (onKeyDown && !disabled && !readOnly) onKeyDown(e);
   };
 
   const handleOnBlur = (e) => {
-    if (onBlur) onBlur(e);
+    if (onBlur && !disabled && !readOnly) onBlur(e);
   };
 
   const handleOnFocus = (e) => {
-    if (onFocus) onFocus(e);
+    if (onFocus && !disabled && !readOnly) onFocus(e);
   };
 
   return (
@@ -203,7 +202,12 @@ const RadioInput = React.forwardRef((props, ref) => {
           )}
         </svg>
       </StyledRadio>
-      <Label {...themeProps} onClick={handleClick} disalbed={disabled} readOnly={readOnly}>
+      <Label
+        {...themeProps}
+        onClick={handleClick}
+        disalbed={disabled}
+        readOnly={readOnly}
+      >
         {label}
       </Label>
     </Container>
@@ -258,7 +262,7 @@ RadioInput.propTypes = {
     "danger",
     "warning",
     "information",
-    "neutral"
+    "neutral",
   ]),
   inputProps: PropTypes.any,
 };
