@@ -8,7 +8,8 @@ import {
 } from "../../_utils/utils";
 
 const Container = styled.div`
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   width: fit-content;
   border-radius: ${(props) => props.borderRadius};
 
@@ -39,7 +40,7 @@ const Container = styled.div`
     outline: none;
   }
 
-  & > button:not(:first-child):not(:last-child) {
+  & > button:not(:first-of-type):not(:last-child) {
     border-radius: 0;
   }
 
@@ -48,7 +49,7 @@ const Container = styled.div`
     border: none;
   }
 
-  & > button:first-child {
+  & > button:first-of-type {
     border-radius: ${(props) =>
       `${props.borderRadius} 0 0 ${props.borderRadius}`};
     border-left: ${(props) =>
@@ -76,7 +77,7 @@ const Container = styled.div`
       )};
   }
 
-  & > button:first-child:not([data-type="filled"]) {
+  & > button:first-of-type:not([data-type="filled"]) {
     border-right: ${(props) =>
       "0.0625rem solid " +
       getColorRgbaValue(
@@ -88,7 +89,7 @@ const Container = styled.div`
       )};
   }
 
-  & > button:not(:first-child):not(:last-child):not([data-type="filled"]) {
+  & > button:not(:first-of-type):not(:last-child):not([data-type="filled"]) {
     border-right: ${(props) =>
       "0.0625rem solid " +
       getColorRgbaValue(
