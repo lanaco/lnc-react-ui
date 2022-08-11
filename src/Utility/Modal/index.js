@@ -1,9 +1,49 @@
-import React from "react";
+import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from "react";
 import Button from "../../General/Button/index.js";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import theme from "../../_utils/theme";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "@emotion/react";
+import Icon from "../../General/Icon";
+import { getColorRgbaValue } from "../../_utils/utils.js";
+
+const FOOTER_HEIGHT = "4rem";
+const HEADER_HEIGHT = "3rem";
+const MODAL_PADDING = "25px";
+
+const getMaxHeight = (size, header, footer) => {
+
+  if (header && footer) {
+    if (size == "FULL") return `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT})`;
+
+    return `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - ${MODAL_PADDING})`;
+  } else if (header) {
+    if (size == "FULL") return `calc(100vh - ${HEADER_HEIGHT})`;
+
+    return `calc(100vh - ${HEADER_HEIGHT} - ${MODAL_PADDING})`;
+  } else if (footer) {
+    if (size == "FULL") return `calc(100vh - ${FOOTER_HEIGHT})`;
+
+    return `calc(100vh - ${FOOTER_HEIGHT} - ${MODAL_PADDING})`;
+  }
+
+  if (size == "FULL") return `100vh`;
+
+  return `calc(100vh - ${MODAL_PADDING})`;
+}
+
+const getMaxWidth = (size) => {
+  if (size == "FULL") return `100vw`;
+
+  return `calc(100vw - ${MODAL_PADDING})`;
+}
+
+const getMargin = (size, header, footer) => {
+  if (size == "FULL") return "0";
+
+  //Needed because of border-radius and scrollbar (with scrollbar and without margin border radius would be lost to the right)
+  return `${(header ? '0' : '16px')} 0 ${(footer ? '0' : '16px')} 0`;
+}
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -21,164 +61,210 @@ const ModalContainer = styled(motion.div)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: ${(props) => props.width};
-  border-radius: 0.2rem;
   background: white;
   z-index: ${(props) => props.zIndex};
+  width: ${props => ModalSizes[props.size.toUpperCase()]};
+  max-width: ${props => getMaxWidth(props.size.toUpperCase())};
+  box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-radius: ${props => props.size.toUpperCase() != "FULL" ? "16px" : "0"};
+
+  & .lnc-modal-header {
+    max-height: ${HEADER_HEIGHT};
+    overflow: hidden;
+    padding: 0 1.5rem;
+  }
+  & .lnc-modal-footer {
+    max-height: ${FOOTER_HEIGHT};
+    overflow: hidden;
+  }
+  ${props => props.size.toUpperCase() == "FULL" && "height: 100vh"};
+
+  & .lnc-modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    scrollbar-width: thin;
+    ${props => `max-height: ${getMaxHeight(props.size.toUpperCase(), props.header, props.footer)}`};
+    overflow: auto;
+    padding: 1.5rem;
+    margin: ${props => getMargin(props.size, props.header, props.footer)};
+  }
 `;
 
-const Header = styled.div((props) => ({
-  padding: "0.2rem",
-  display: "flex",
-  background: props.basic
-    ? "transparent"
-    : props.theme.palette[props.color].main,
-  borderRadius: "0.2rem 0.2rem 0 0",
+const CloseButton = styled.div`
+ position: absolute;
+ cursor: pointer;
+ top: 1.375rem;
+ right: 1.375rem;
+ color: ${props => getColorRgbaValue(
+  props.theme,
+  "Modal",
+  "primary",
+  "enabled",
+  "cancelButton"
+)};
+height: 1.5rem;
+width: 1.5rem;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 4px;
+& i {
+  font-size: 1.125rem;
+}
 
-  border: props.basic
-    ? `0.065rem solid ${props.theme.palette.gray[600]}`
-    : "none",
-}));
+&:hover {
+  background-color: ${props => getColorRgbaValue(
+  props.theme,
+  "Modal",
+  "primary",
+  "hover",
+  "cancelBtnBg",
+  "cancelBtnBgOpacity"
+)};
+}
+&:focus {
+  background-color: ${props => getColorRgbaValue(
+  props.theme,
+  "Modal",
+  "primary",
+  "focus",
+  "cancelBtnBg",
+  "cancelBtnBgOpacity"
+)};
+}
+`
 
-const Title = styled.div((props) => ({
-  fontSize: props.theme.typography[props.size].fontSize,
-  fontFamily: props.theme.typography.fontFamily,
-  fontWeight: "bold",
-  color: props.basic
-    ? props.theme.palette.gray[800]
-    : props.theme.palette[props.color].text,
-  paddingLeft: "0.3rem",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
 
-const CloseButton = styled.div((props) => ({
-  marginLeft: "auto",
-}));
-
-const Content = styled.div((props) => ({
-  padding: "0.3125rem",
-  border: `0.065rem solid ${props.theme.palette.gray[600]}`,
-  borderTop: props.basic
-    ? "none"
-    : `0.065rem solid ${props.theme.palette.gray[600]}`,
-  borderRadius: "0 0 0.2rem 0.2rem",
-  maxHeight: "calc(100vh - 220px)",
-  overflowY: "auto",
-}));
-
-function Modal(props) {
+const Modal = React.forwardRef((props, ref) => {
   const {
-    onClose,
-    open,
-    zIndex,
     header,
-    className,
-    theme,
+    footer,
+    overlay,
+    showCloseButton,
+    onClose,
+    zIndex,
     size,
-    color,
-    children,
     clickOutsideToClose,
-    showHeader,
-    width,
-    basic,
+    className,
+    style,
+    overlayProps,
+    children,
+    rest,
   } = props;
+  const [show, setShow] = useState(false);
 
-  let themeProps = { theme, size, color, zIndex, open, width, basic };
+  const theme = useTheme();
+  let themeProps = { theme, size, zIndex, className, style };
 
   const onClickOutsideModal = (event) => {
+
     if (event.target !== event.currentTarget) return;
-    if (clickOutsideToClose || !showHeader) onClose(event);
+    if (clickOutsideToClose) close(event);
   };
 
-  const modalVariant = {
-    initial: { opacity: 0 },
-    isOpen: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
+  //Expose functions through ref
+  useImperativeHandle(ref, () => ({
+    open() {
+      open()
+    },
+    close() {
+      close()
+    }
+  }))
+
+  const open = () => {
+    setShow(true);
+  }
+
+  const close = (event) => {
+    setShow(false);
+    onClose(event);
+  }
 
   const containerVariant = {
-    initial: { top: "-50%", transition: { type: "spring" } },
-    isOpen: { top: "50%" },
-    exit: { top: "-50%" },
+    initial: { top: "50%", opacity: 0, transition: { type: "spring", duration: 3 } },
+    isOpen: { top: "50%", opacity: 1 },
+    exit: { top: "50%", opacity: 0 },
   };
+
+  const ModalWrapper = ({ modalRef, themeProps, containerVariant, header, footer, children }) => {
+    return (<AnimatePresence>
+      <ModalContainer
+        ref={modalRef}
+        {...themeProps}
+        initial={"initial"}
+        animate={"isOpen"}
+        exit={"exit"}
+        variants={containerVariant}
+        header={header}
+        footer={footer}
+        {...rest}
+      >
+        {showCloseButton && <CloseButton {...themeProps} onClick={close}><Icon icon={"times"}></Icon></CloseButton>}
+        {header && <div className="lnc-modal-header">{header}</div>}
+        <div className="lnc-modal-content">
+          {children}
+        </div>
+        {footer && <div className="lnc-modal-footer">{footer}</div>}
+      </ModalContainer>
+    </AnimatePresence>);
+  }
 
   return (
     <>
-      {open && (
-        <Overlay
-          {...themeProps}
-          onClick={onClickOutsideModal}
-          className={className}
-        >
-          <AnimatePresence>
-            <ModalContainer
-              {...themeProps}
-              initial={"initial"}
-              animate={"isOpen"}
-              exit={"exit"}
-              variants={containerVariant}
-            >
-              {showHeader && (
-                <Header {...themeProps}>
-                  <Title {...themeProps}>{header}</Title>
-                  <CloseButton {...themeProps}>
-                    <Button
-                      {...themeProps}
-                      icon={"times"}
-                      iconStyle={"solid"}
-                      onClick={(e) => onClose(e)}
-                      color={basic ? "transparent" : themeProps.color}
-                    />
-                  </CloseButton>
-                </Header>
-              )}
-              <Content {...themeProps}>{children}</Content>
-            </ModalContainer>
-          </AnimatePresence>
-        </Overlay>
+      {show && (
+        overlay ?
+          <Overlay
+            {...themeProps}
+            onClick={onClickOutsideModal}
+            {...overlayProps}>
+            <ModalWrapper modalRef={ref} themeProps={themeProps} containerVariant={containerVariant} header={header} footer={footer} {...rest}>
+              {children}
+            </ModalWrapper>
+          </Overlay>
+          :
+          <ModalWrapper modalRef={ref} themeProps={themeProps} containerVariant={containerVariant} header={header} footer={footer} {...rest}>
+            {children}
+          </ModalWrapper>
       )}
     </>
   );
-}
+});
 
 Modal.defaultProps = {
-  open: false,
-  onClose: () => {},
+  showCloseButton: true,
+  overlay: true,
+  onClose: () => { },
   className: "",
-  header: "",
   zIndex: 1000,
-  size: "small",
-  color: "primary",
-  theme: theme,
-  basic: false,
+  size: "fluid",
   clickOutsideToClose: false,
-  showHeader: true,
-  width: "70%",
 };
 
 Modal.propTypes = {
-  theme: PropTypes.object.isRequired,
+  header: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  showCloseButton: PropTypes.func,
+  overlay: PropTypes.bool,
   onClose: PropTypes.func,
-  className: PropTypes.string,
-  header: PropTypes.string,
   zIndex: PropTypes.number,
-  open: PropTypes.bool,
-  showHeader: PropTypes.bool,
-  basic: PropTypes.bool,
   clickOutsideToClose: PropTypes.bool,
-  width: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "error",
-    "warning",
-    "gray",
-    "background",
-  ]),
+  className: PropTypes.string,
+  style: PropTypes.object,
+  size: PropTypes.oneOf(["fluid", "xs", "s", "m", "l", "xl", "full"]),
+  overlayProps: PropTypes.any,
 };
 
 export default Modal;
+
+
+const ModalSizes = {
+  FLUID: "max-content",
+  XS: "320px",
+  S: "412px",
+  M: "672px",
+  L: "1112px",
+  XL: "1376px",
+  FULL: "100vw",
+}

@@ -1,0 +1,118 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Modal from "./index";
+import Icon from "../../General/Icon";
+import { useState, useRef } from "react";
+
+<Meta title="Utility/Modal" component={Modal} />
+
+export const TemplateDefault = (args) => {
+  const modalRef = useRef();
+  return (
+    <>
+      <button onClick={() => modalRef.current.open()}>Open Modal</button>
+      <Modal ref={modalRef} header={<h3>Title</h3>} {...args}>
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+          <br />
+        </span>
+      </Modal>
+    </>
+  );
+};
+
+export const TemplateSizes = (args) => {
+  const modalRef = useRef();
+  const [size, setSize] = useState("fluid");
+  const openModal = (modalSize) => {
+    setSize(modalSize);
+    modalRef.current.open();
+  };
+  return (
+    <>
+      <div style={{ display: "flex", gap: "12px" }}>
+        <button onClick={() => openModal("xs")}>Open XS Modal</button>
+        <button onClick={() => openModal("s")}>Open S Modal</button>
+        <button onClick={() => openModal("m")}>Open M Modal</button>
+        <button onClick={() => openModal("l")}>Open L Modal</button>
+        <button onClick={() => openModal("xl")}>OpenXL Modal</button>
+        <button onClick={() => openModal("fluid")}>Open Fluid Modal</button>
+        <button onClick={() => openModal("full")}>Open Full Modal</button>
+      </div>
+      <Modal ref={modalRef} size={size} clickOutsideToClose={true} header={<h3>Title</h3>} {...args}>
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
+      </Modal>
+    </>
+  );
+};
+
+# Modal
+
+```jsx
+import { Modal } from "@lnc-react-ui";
+```
+
+<Story name="Default" args={{}}>
+  {TemplateDefault.bind({})}
+</Story>
+
+```jsx
+(args) => {
+  const modalRef = useRef();
+  return (
+    <>
+      <button onClick={() => modalRef.current.open()}>Modal</button>
+      <Modal ref={modalRef}>
+        <h1>Title</h1>
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+          <br />
+        </span>
+      </Modal>
+    </>
+  );
+};
+```
+
+<ArgsTable story="Default" />
+
+## Sizes
+
+<Story name="Sizes" args={{}}>
+  {TemplateSizes.bind({})}
+</Story>
+
+```jsx
+(args) => {
+  const modalRef = useRef();
+  const [size, setSize] = useState("fluid");
+  const openModal = (modalSize) => {
+    setSize(modalSize);
+    modalRef.current.open();
+  };
+  return (
+    <>
+      <div style={{ display: "flex", gap: "12px" }}>
+        <button onClick={() => openModal("xs")}>Open XS Modal</button>
+        <button onClick={() => openModal("s")}>Open S Modal</button>
+        <button onClick={() => openModal("m")}>Open M Modal</button>
+        <button onClick={() => openModal("l")}>Open L Modal</button>
+        <button onClick={() => openModal("xl")}>OpenXL Modal</button>
+        <button onClick={() => openModal("fluid")}>Open Fluid Modal</button>
+        <button onClick={() => openModal("full")}>Open Full Modal</button>
+      </div>
+      <Modal ref={modalRef} size={size} clickOutsideToClose={true} header={<h3>Title</h3>} {...args}>
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
+      </Modal>
+    </>
+  );
+};
+```
