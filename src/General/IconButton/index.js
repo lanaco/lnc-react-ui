@@ -1,9 +1,7 @@
 import React from "react";
-import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
-import { isEmpty } from "lodash";
 import {
   FilledButton,
   TintedButton,
@@ -11,7 +9,6 @@ import {
   BasicButton,
   StyledIcon,
 } from "./styledComponents";
-import Icon from "../Icon/index";
 
 //=================================================
 

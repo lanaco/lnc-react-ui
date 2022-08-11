@@ -1,0 +1,168 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Pagination from "./index";
+
+<Meta title="Utility/Pagination" component={Pagination} />
+
+export const TemplateDefault = (args) => <Pagination {...args} />;
+
+export const TemplateTypes = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Pagination {...args} />
+    </div>
+  </div>
+);
+
+export const TemplateMultiplePageNumbers = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Pagination {...args} />
+    </div>
+  </div>
+);
+
+export const TemplateBorderRadius = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "20px" }}>
+      <Pagination {...args} />
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "20px" }}>
+      <Pagination {...args} borderRadius={"curved"} />
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "20px" }}>
+      <Pagination {...args} color={"secondary"} withButtonGroup={false} />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Pagination
+        {...args}
+        color={"secondary"}
+        borderRadius={"curved"}
+        withButtonGroup={false}
+      />
+    </div>
+  </div>
+);
+
+export const TemplateButtonTypes = (args) => (
+  <div>
+    <div style={{ display: "flex", marginBottom: "16px" }}>
+      <Pagination {...args} />
+    </div>
+    <div style={{ display: "flex", marginBottom: "16px" }}>
+      <Pagination
+        {...args}
+        buttonType={"filled"}
+        currentPageButtonType={"basic"}
+        color={"secondary"}
+      />
+    </div>
+    <div style={{ display: "flex" }}>
+      <Pagination
+        {...args}
+        buttonType={"tinted"}
+        currentPageButtonType={"filled"}
+        color={"information"}
+      />
+    </div>
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination {...args} />
+    </div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination {...args} color={"secondary"} />
+    </div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination {...args} color={"success"} />
+    </div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination {...args} color={"warning"} />
+    </div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination {...args} color={"danger"} />
+    </div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination {...args} color={"information"} />
+    </div>
+    <div style={{ display: "flex" }}>
+      <Pagination {...args} color={"neutral"} />
+    </div>
+  </div>
+);
+
+# Pagination
+
+```jsx
+import { Pagination } from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+# Disabled State
+
+<Canvas>
+  <Story name="Disabled State" args={{ disabled: true }}>
+    {TemplateTypes.bind({})}
+  </Story>
+</Canvas>
+
+# Multiple Page Numbers
+
+<Canvas>
+  <Story
+    name="Multiple Page Numbers"
+    args={{ pages: [1, 2, 3], currentPage: 2 }}
+  >
+    {TemplateMultiplePageNumbers.bind({})}
+  </Story>
+</Canvas>
+
+# Without First and Last
+
+<Canvas>
+  <Story name="Without First and Last" args={{ withFirstLast: false }}>
+    {TemplateTypes.bind({})}
+  </Story>
+</Canvas>
+
+# Without Button Group
+
+<Canvas>
+  <Story name="Without Button Group" args={{ withButtonGroup: false }}>
+    {TemplateTypes.bind({})}
+  </Story>
+</Canvas>
+
+# Border Radius
+
+<Canvas>
+  <Story name="Border Radius" args={{}}>
+    {TemplateBorderRadius.bind({})}
+  </Story>
+</Canvas>
+
+# Button Types
+
+<Canvas>
+  <Story name=" Button Types" args={{}}>
+    {TemplateButtonTypes.bind({})}
+  </Story>
+</Canvas>
+
+# Colors
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

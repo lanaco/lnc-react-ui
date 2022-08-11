@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
@@ -192,6 +191,7 @@ Button.defaultProps = {
   onKeyDown: () => {},
   //-------------------------
   style: {},
+  className: "",
   color: "primary",
   size: "small",
 };
