@@ -10,6 +10,7 @@ import styled from "@emotion/styled";
 
 const Container = styled.div`
   display: inline-flex;
+  flex-wrap: wrap;
   width: fit-content;
   gap: 0.375rem;
 `;
@@ -58,6 +59,7 @@ const Pagination = (props) => {
         <>
           {pages.map((p) => (
             <Button
+              key={p}
               {...themeProps}
               borderRadius={borderRadius}
               onClick={(e) => onPageNumberClick(e, p)}
@@ -76,7 +78,7 @@ const Pagination = (props) => {
           {...themeProps}
           borderRadius={borderRadius}
           type={currentPageButtonType}
-          text={currentPage}
+          text={currentPage.toString()}
           disabled={disabled}
         />
       </>
