@@ -1,103 +1,15 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import "../../Base/fontawesome/css/fontawesome.css";
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { debounce } from "lodash";
-
-const heightBySize = (size) => {
-  return { small: `1.875rem`, medium: `2.25rem`, large: `2.625rem` }[size];
-};
-
-const paddingBySize = (size) => {
-  if (size === "small") return "0.41875rem 0.375rem";
-  if (size === "medium") return "0.475rem 0.4rem";
-  if (size === "large") return "0.5625rem 0.425rem";
-};
-
-const Container = styled.div`
-  width: 100%;
-  position: relative;
-  display: inline-flex;
-  border-radius: 0.25rem;
-  box-sizing: border-box;
-  min-height: ${(props) => heightBySize(props.size)};
-  max-height: ${(props) => heightBySize(props.size)};
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  color: ${(props) => props.theme.test_palette.dark[500]};
-
-  border: 0.09375rem solid
-    ${(props) =>
-      props.disabled
-        ? props.theme.test_palette.light[400]
-        : props.focused
-        ? props.theme.test_palette[props.color][400]
-        : props.theme.test_palette.light[500]};
-
-  box-shadow: ${(props) =>
-    props.focused
-      ? "0px 0px 0.375rem -0.125rem " +
-        props.theme.test_palette[props.color][400]
-      : "none"};
-
-  &:hover {
-    border: 0.09375rem solid
-      ${(props) =>
-        props.disabled
-          ? props.theme.test_palette.light[400]
-          : props.theme.test_palette[props.color][400]};
-  }
-
-  &:hover i {
-    color: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette.light[400]
-        : props.theme.test_palette[props.color][400]};
-  }
-`;
-
-const IconButton = styled.div`
-  margin-left: auto;
-  cursor: ${(props) => (props.disabled || props.readOnly ? "auto" : "pointer")};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0
-    ${(props) =>
-      ({ small: "0.4rem", medium: "0.5rem", large: "0.6rem" }[props.size])};
-`;
-
-const Icon = styled.i`
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-
-  color: ${(props) =>
-    props.disabled
-      ? props.theme.test_palette.light[400]
-      : props.focused
-      ? props.theme.test_palette[props.color][400]
-      : props.theme.test_palette.light[500]};
-`;
-
-const Input = styled.input`
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  color: ${(props) => props.theme.test_palette.dark[500]};
-  appearance: none;
-  outline: none;
-  border: none;
-  box-sizing: border-box;
-  width: 100%;
-
-  padding: ${(props) => paddingBySize(props.size)};
-  transition: all 250ms ease;
-
-  &:disabled {
-    color: ${(props) => props.theme.test_palette.light[500]};
-    background-color: white;
-    cursor: auto;
-  }
-`;
+import Icon from "../../General/Icon";
+import {
+  StyledInput,
+  StyledLockIcon,
+  StyledPrefix,
+  StyledSuffix,
+  StyledWrapper,
+} from "./styledComponents";
 
 //===================================================
 
@@ -108,7 +20,10 @@ const PasswordInput = React.forwardRef((props, ref) => {
     readOnly,
     value,
     debounceTime,
+    placeholder,
     tabIndex,
+    prefix,
+    suffix,
     //----------------
     onChange,
     onBlur,
@@ -122,14 +37,11 @@ const PasswordInput = React.forwardRef((props, ref) => {
   } = props;
   //
   const theme = useTheme();
+  const inputRef = useRef();
 
   const [locked, setLocked] = useState(true);
   const [focused, setFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
-  const inputRef = useRef();
-
-  var themeProps = { theme, size, color, disabled, readOnly, focused };
 
   useEffect(() => {
     if (ref !== null && ref !== undefined) ref.current = inputRef.current;
@@ -167,33 +79,76 @@ const PasswordInput = React.forwardRef((props, ref) => {
     inputRef.current.focus();
   };
 
+  const handleFocus = (e) => {
+    setFocused(true);
+    onFocus(e);
+  };
+
+  const handleBlur = (e) => {
+    setFocused(false);
+    onBlur(e);
+  };
+
   return (
-    <Container {...themeProps} className={className} style={style}>
-      <Input
+    <StyledWrapper
+      ref={ref}
+      style={style}
+      className={className}
+      theme={theme}
+      color={color}
+      size={size}
+      focused={focused}
+      disabled={disabled}
+      readOnly={readOnly}
+    >
+      {prefix && (
+        <StyledPrefix
+          theme={theme}
+          color={color}
+          focused={focused}
+          className="lnc-input-prefix"
+        >
+          {prefix}
+        </StyledPrefix>
+      )}
+      <StyledInput
         ref={inputRef}
-        {...themeProps}
         type={locked ? "password" : "text"}
-        onChange={onValueChange}
+        theme={theme}
+        color={color}
+        size={size}
+        placeholder={placeholder}
+        prefix={prefix}
+        suffix={suffix}
+        disabled={disabled}
+        readOnly={readOnly}
+        focused={focused}
         value={inputValue || ""}
-        onFocus={(e) => {
-          setFocused(true);
-          if (onFocus) onFocus(e);
-        }}
-        onBlur={(e) => {
-          setFocused(false);
-          if (onBlur) onBlur(e);
-        }}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={onValueChange}
         tabIndex={tabIndex}
         {...rest}
       />
-
-      <IconButton {...themeProps} onClick={toggleLocked}>
-        <Icon
-          {...themeProps}
-          className={`fas fa-${locked ? "eye-slash" : "eye"} fa-fw`}
-        />
-      </IconButton>
-    </Container>
+      <StyledLockIcon
+        theme={theme}
+        color={color}
+        focused={focused}
+        onClick={toggleLocked}
+      >
+        <Icon icon={locked ? "eye-slash" : "eye"} />
+      </StyledLockIcon>
+      {suffix && (
+        <StyledSuffix
+          theme={theme}
+          color={color}
+          focused={focused}
+          className="lnc-input-suffix"
+        >
+          {suffix}
+        </StyledSuffix>
+      )}
+    </StyledWrapper>
   );
 });
 
@@ -222,6 +177,7 @@ PasswordInput.propTypes = {
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,
+  placeholder: PropTypes.string,
   tabIndex: PropTypes.number,
   //----------------
   onChange: PropTypes.func,
