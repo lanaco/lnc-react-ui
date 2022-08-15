@@ -33,7 +33,7 @@ const StyledMessage = styled.div`
     display: flex;
 
     & > button {
-        ${props => props.sideButtons && 'flex: 1'};
+        ${props => props.sideButtons && 'flex: 1; width: 100%;'}
     }
   }
   & .notification-main {

@@ -68,7 +68,7 @@ const NotificationContainer = React.forwardRef((props, ref) => {
 
 NotificationContainer.defaultProps = {
   position: "top-right",
-  autoClose: 5000,
+  autoClose: 500000,
   hideProgressBar: true,
   newestOnTop: true,
   closeOnClick: true,

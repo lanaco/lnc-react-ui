@@ -397,6 +397,7 @@ const lanaco_light = {
           backgroundOpacity: 50,
           text: 900,
           fontWeight: 700,
+          backdropFilter: "blur(48px)",
         },
         hover: {
           background: 100,
@@ -2126,6 +2127,144 @@ const lanaco_light = {
       green: {},
       gray: {},
       neutral: {},
+    },
+    Modal: {
+      default: {
+        palette: "gray",
+        enabled: {
+          cancelButton: 400,
+        },
+        hover: {
+          cancelBtnBg: 900,
+          cancelBtnBgOpacity: 50
+        },
+        focus: {
+          cancelBtnBg: 900,
+          cancelBtnBgOpacity: 100
+        }
+      }
+    },
+    ConfirmationForm: {
+      default: {
+        palette: "gray",
+        enabled: {
+          icon: 600,
+          trackBg: 100,
+        },
+      },
+      teal: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      blue: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      red: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      violet: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      yellow: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      green: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      gray: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      neutral: {
+        enabled: {
+          icon: 600,
+        }
+      }
+    },
+    Popover: {
+      default: {
+        palette: "gray",
+        enabled: {
+          bg: 0,
+        },
+      }
+    },
+    Modal: {
+      default: {
+        palette: "gray",
+        enabled: {
+          cancelButton: 400,
+        },
+        hover: {
+          cancelBtnBg: 900,
+          cancelBtnBgOpacity: 50
+        },
+        focus: {
+          cancelBtnBg: 900,
+          cancelBtnBgOpacity: 100
+        }
+      }
+    },
+    ConfirmationForm: {
+      default: {
+        palette: "gray",
+        enabled: {
+          icon: 600,
+          trackBg: 100,
+        },
+      },
+      teal: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      blue: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      red: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      violet: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      yellow: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      green: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      gray: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      neutral: {
+        enabled: {
+          icon: 600,
+        }
+      }
     },
   },
   palette: {
