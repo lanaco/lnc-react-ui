@@ -32,9 +32,11 @@ const StyledActions = styled.div`
    flex: 1;
    gap: 0.5rem;
    justify-content: ${props => getActionsAlignment(props.actionsAlignment)};
-   ${props => props.type == "regular" && "height: 4rem; border-radius: 0 0 16px 16px; padding: 0.75rem 1.5rem 0.75rem 1.5rem;"}
+   ${props => props.type == "regular" && (props.actionsTrack == false ? 'height: 5rem' : 'height: 4rem')};
+   ${props => props.type == "regular" && "border-radius: 0 0 16px 16px; padding: 0.75rem 1.5rem 0.75rem 1.5rem;"}
    ${props => props.type == "regular" && props.actionsTrack == false && "padding: 0 1.5rem 1.5rem 1.5rem;"}
    ${props => props.type == "regular" && props.actionsTrack == true && `background-color: ${getColorRgbaValue(props.theme, "ConfirmationForm", "primary", "enabled", "trackBg")};`}
+   ${props => props.type == "regular" && props.actionsTrack == false && "padding-top: 1rem;"}
    ${props => props.type == "centered" && "padding: 1rem 0 0.5rem 0;"}
 `;
 

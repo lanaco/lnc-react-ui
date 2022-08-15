@@ -3,7 +3,8 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import { NotificationContainer, notification } from "./index";
 import { useState } from "react";
 import NotificationMessage from "./NotificationMessage";
-import logo from '../../_utils/images/Image.png'
+import logo from '../../_utils/images/Image.png';
+import Button from "../../General/Button";
 
 <Meta title="Feedback/Notification" component={NotificationContainer} />
 
@@ -11,7 +12,7 @@ export const TemplateDefault = (args) => {
   const notify = () => notification("Message");
   return (
     <div>
-      <button onClick={notify}>Notify!</button>
+      <Button onClick={notify} text="Notify!">Notify!</Button>
       <NotificationContainer {...args}/>
     </div>
   );
@@ -21,13 +22,13 @@ export const TemplateCustom= (args) => {
   const notify = () => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>);
   return (
     <div>
-      <button onClick={() => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)}>With Icon</button>
+      <Button onClick={() => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)} text="With Icon">With Icon</Button>
       <br /><br />
-      <button onClick={() => notification(<NotificationMessage avatar={true} avatarProps={{ image: logo }} title={"Title"} actions={<><button>Confirm</button><button>Dismiss</button></>}>Message</NotificationMessage>)}>With Action</button>
+      <Button onClick={() => notification(<NotificationMessage avatar={true} avatarProps={{ image: logo }} title={"Title"} actions={<><Button text="Confirm">Confirm</Button><Button text="Dismiss">Dismiss</Button></>}>Message</NotificationMessage>)} text="With Action">With Action</Button>
       <br /><br />
-      <button onClick={() => notification(<NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>Message</NotificationMessage>)}>With Inline Actions</button>
+      <Button onClick={() => notification(<NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>Message</NotificationMessage>)} text="With Inline Actions">With Inline Actions</Button>
       <br /><br />
-      <button onClick={() => notification(<NotificationMessage sideButtons={true} avatar={true} avatarProps={{ image: logo }}  title={"Title"} actions={<><button>Confirm</button><button>Dismiss</button></>}>Message</NotificationMessage>, {closeButton: false})}>With Side Buttons</button>
+      <Button onClick={() => notification(<NotificationMessage sideButtons={true} avatar={true} avatarProps={{ image: logo }}  title={"Title"} actions={<><Button type="outline" color="secondary" text="Confirm" borderRadius="none">Confirm</Button><Button text="Dismiss" type="outline" color="neutral" borderRadius="none">Dismiss</Button></>}>Message</NotificationMessage>, {closeButton: false})} text="With Side Buttons">With Side Buttons</Button>
       <NotificationContainer {...args}/>
     </div>
   );

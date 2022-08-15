@@ -207,7 +207,7 @@ Button.propTypes = {
    * Icon after the text
    */
   trailingIcon: PropTypes.string,
-  borderRadius: PropTypes.oneOf(["regular", "curved"]),
+  borderRadius: PropTypes.oneOf(["regular", "curved", "none"]),
   /**
    * Different styles
    */

@@ -7,7 +7,7 @@ import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon";
 import { getColorRgbaValue } from "../../_utils/utils.js";
 
-const FOOTER_HEIGHT = "4rem";
+const FOOTER_HEIGHT = "5rem";
 const HEADER_HEIGHT = "3.8rem";
 const MODAL_PADDING = "1.5rem";
 

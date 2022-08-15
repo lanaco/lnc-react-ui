@@ -2193,6 +2193,14 @@ const lanaco_light = {
         }
       }
     },
+    Popover: {
+      default: {
+        palette: "gray",
+        enabled: {
+          bg: 0,
+        },
+      }
+    },
   },
   palette: {
     outline: {

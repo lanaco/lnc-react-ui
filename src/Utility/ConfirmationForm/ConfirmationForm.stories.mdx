@@ -3,6 +3,8 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import ConfirmationForm from "./index";
 import Icon from "../../General/Icon";
 import { useState, useRef } from "react";
+import Button from "../../General/Button";
+
 
 <Meta title="Utility/Confirmation Form" component={ConfirmationForm} />
 
@@ -10,8 +12,8 @@ export const TemplateDefault = (args) => {
   const modalRef = useRef();
   return (
     <>
-      <button onClick={() => modalRef.current.open()}>Open Modal</button>
-      <ConfirmationForm ref={modalRef} actions={<><button>Button 1</button><button>Button 2</button></>} title={"Payment successful"} {...args}>
+      <Button onClick={() => modalRef.current.open()} text="Open Modal">Open Modal</Button>
+      <ConfirmationForm ref={modalRef} actions={<Button text="Got it, thanks!" onClick={() => modalRef.current.close()}>Got it, thanks!</Button>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -29,12 +31,12 @@ export const TemplateStatus = (args) => {
   return (
     <>
       <div style={{display: 'flex', gap: '12px'}}>
-        <button onClick={() => openModal("success")}>Success Status</button>
-        <button onClick={() => openModal("danger")}>Danger Status</button>
-        <button onClick={() => openModal("warning")}>Warning Status</button>
-        <button onClick={() => openModal("information")}>Information Status</button>
+        <Button onClick={() => openModal("success")} text="Success Status" color="success">Success Status</Button>
+        <Button onClick={() => openModal("danger")} text="Danger Status" color="danger">Danger Status</Button>
+        <Button onClick={() => openModal("warning")} text="Warning Status" color="warning">Warning Status</Button>
+        <Button onClick={() => openModal("information")} text="Information Status" color="information">Information Status</Button>
       </div>
-      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><button>Button 1</button><button>Button 2</button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -46,8 +48,8 @@ export const TemplateCentered = (args) => {
   const modalRef = useRef();
   return (
     <>
-      <button onClick={() => modalRef.current.open()}>Open Modal</button>
-      <ConfirmationForm ref={modalRef} type={"centered"} actions={<><button>Button 1</button><button>Button 2</button></>} title={"Payment successful"} {...args}>
+      <Button onClick={() => modalRef.current.open()} text="Open Modal">Open Modal</Button>
+      <ConfirmationForm ref={modalRef} type={"centered"} actions={<><Button text="Open" type="tinted" color="secondary">Open</Button><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -71,15 +73,11 @@ import { ConfirmationForm } from "@lnc-react-ui";
   const modalRef = useRef();
   return (
     <>
-      <button onClick={() => modalRef.current.open()}>Modal</button>
-      <Modal ref={modalRef}>
-        <h1>Title</h1>
-        <span>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
-          <br />
-        </span>
-      </Modal>
+      <Button onClick={() => modalRef.current.open()} text="Open Modal">Open Modal</Button>
+      <ConfirmationForm ref={modalRef} actions={<Button text="Got it, thanks!" onClick={() => modalRef.current.close()}>Got it, thanks!</Button>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
     </>
   );
 };
@@ -104,12 +102,12 @@ import { ConfirmationForm } from "@lnc-react-ui";
   return (
     <>
       <div style={{display: 'flex', gap: '12px'}}>
-        <button onClick={() => openModal("success")}>Success Status</button>
-        <button onClick={() => openModal("danger")}>Danger Status</button>
-        <button onClick={() => openModal("warning")}>Warning Status</button>
-        <button onClick={() => openModal("information")}>Information Status</button>
+        <Button onClick={() => openModal("success")} text="Success Status" color="success">Success Status</Button>
+        <Button onClick={() => openModal("danger")} text="Danger Status" color="danger">Danger Status</Button>
+        <Button onClick={() => openModal("warning")} text="Warning Status" color="warning">Warning Status</Button>
+        <Button onClick={() => openModal("information")} text="Information Status" color="information">Information Status</Button>
       </div>
-      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><button>Button 1</button><button>Button 2</button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -123,3 +121,18 @@ import { ConfirmationForm } from "@lnc-react-ui";
 <Story name="Centered" args={{}}>
   {TemplateCentered.bind({})}
 </Story>
+
+```jsx
+(args) => {
+  const modalRef = useRef();
+  return (
+    <>
+      <Button onClick={() => modalRef.current.open()} text="Open Modal">Open Modal</Button>
+      <ConfirmationForm ref={modalRef} type={"centered"} actions={<><Button text="Open" type="tinted" color="secondary">Open</Button><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+};
+```
