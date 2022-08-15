@@ -8,8 +8,8 @@ import Icon from "../../General/Icon";
 import { getColorRgbaValue } from "../../_utils/utils.js";
 
 const FOOTER_HEIGHT = "4rem";
-const HEADER_HEIGHT = "3rem";
-const MODAL_PADDING = "25px";
+const HEADER_HEIGHT = "3.8rem";
+const MODAL_PADDING = "1.5rem";
 
 const getMaxHeight = (size, header, footer) => {
 
@@ -67,11 +67,17 @@ const ModalContainer = styled(motion.div)`
   max-width: ${props => getMaxWidth(props.size.toUpperCase())};
   box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-radius: ${props => props.size.toUpperCase() != "FULL" ? "16px" : "0"};
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
   & .lnc-modal-header {
     max-height: ${HEADER_HEIGHT};
     overflow: hidden;
-    padding: 0 1.5rem;
+    padding: ${MODAL_PADDING} ${MODAL_PADDING} 0 ${MODAL_PADDING};
+  }
+  & .lnc-modal-header > h1,h2,h3 {
+    margin: 0;
   }
   & .lnc-modal-footer {
     max-height: ${FOOTER_HEIGHT};
@@ -86,8 +92,8 @@ const ModalContainer = styled(motion.div)`
     scrollbar-width: thin;
     ${props => `max-height: ${getMaxHeight(props.size.toUpperCase(), props.header, props.footer)}`};
     overflow: auto;
-    padding: 1.5rem;
     margin: ${props => getMargin(props.size, props.header, props.footer)};
+    padding: 0 ${MODAL_PADDING} 0 ${MODAL_PADDING};
   }
 `;
 
@@ -245,7 +251,7 @@ Modal.defaultProps = {
 Modal.propTypes = {
   header: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  showCloseButton: PropTypes.func,
+  showCloseButton: PropTypes.bool,
   overlay: PropTypes.bool,
   onClose: PropTypes.func,
   zIndex: PropTypes.number,

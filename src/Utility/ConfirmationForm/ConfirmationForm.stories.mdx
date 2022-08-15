@@ -1,0 +1,125 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import ConfirmationForm from "./index";
+import Icon from "../../General/Icon";
+import { useState, useRef } from "react";
+
+<Meta title="Utility/Confirmation Form" component={ConfirmationForm} />
+
+export const TemplateDefault = (args) => {
+  const modalRef = useRef();
+  return (
+    <>
+      <button onClick={() => modalRef.current.open()}>Open Modal</button>
+      <ConfirmationForm ref={modalRef} actions={<><button>Button 1</button><button>Button 2</button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+};
+
+export const TemplateStatus = (args) => {
+  const [status, setStatus] = useState("information");
+  const modalRef = useRef();
+  const openModal = (modalStatus) => {
+    setStatus(modalStatus);
+    modalRef.current.open();
+  }
+  return (
+    <>
+      <div style={{display: 'flex', gap: '12px'}}>
+        <button onClick={() => openModal("success")}>Success Status</button>
+        <button onClick={() => openModal("danger")}>Danger Status</button>
+        <button onClick={() => openModal("warning")}>Warning Status</button>
+        <button onClick={() => openModal("information")}>Information Status</button>
+      </div>
+      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><button>Button 1</button><button>Button 2</button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+};
+
+export const TemplateCentered = (args) => {
+  const modalRef = useRef();
+  return (
+    <>
+      <button onClick={() => modalRef.current.open()}>Open Modal</button>
+      <ConfirmationForm ref={modalRef} type={"centered"} actions={<><button>Button 1</button><button>Button 2</button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+};
+
+
+# Confirmation Form
+
+```jsx
+import { ConfirmationForm } from "@lnc-react-ui";
+```
+
+<Story name="Default" args={{}}>
+  {TemplateDefault.bind({})}
+</Story>
+
+```jsx
+(args) => {
+  const modalRef = useRef();
+  return (
+    <>
+      <button onClick={() => modalRef.current.open()}>Modal</button>
+      <Modal ref={modalRef}>
+        <h1>Title</h1>
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+          <br />
+        </span>
+      </Modal>
+    </>
+  );
+};
+```
+
+<ArgsTable story="Default" />
+
+## Status
+
+<Story name="Status" args={{}}>
+  {TemplateStatus.bind({})}
+</Story>
+
+```jsx
+(args) => {
+  const [status, setStatus] = useState("information");
+  const modalRef = useRef();
+  const openModal = (modalStatus) => {
+    setStatus(modalStatus);
+    modalRef.current.open();
+  }
+  return (
+    <>
+      <div style={{display: 'flex', gap: '12px'}}>
+        <button onClick={() => openModal("success")}>Success Status</button>
+        <button onClick={() => openModal("danger")}>Danger Status</button>
+        <button onClick={() => openModal("warning")}>Warning Status</button>
+        <button onClick={() => openModal("information")}>Information Status</button>
+      </div>
+      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><button>Button 1</button><button>Button 2</button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+};
+```
+
+## Centered
+
+<Story name="Centered" args={{}}>
+  {TemplateCentered.bind({})}
+</Story>
