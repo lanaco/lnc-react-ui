@@ -84,7 +84,6 @@ export const getColorRgbaValue = (
   const opacityWeight = componentState?.[opacityProp];
   const defaultOpacityWeight = componentDefault[stateProp][opacityProp];
 
-
   const hexColorValue = colorWeight ? theme.palette[palette][colorWeight] : theme.palette[componentDefault.palette][defaultColorWeight];
   const opacityValue = opacityWeight ? theme.palette.opacity[opacityWeight] : theme.palette.opacity[defaultOpacityWeight];
 
