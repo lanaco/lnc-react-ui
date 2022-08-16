@@ -1,26 +1,50 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
 import Checkbox from "../../../Basic Inputs/CheckBoxInput/index";
+import { getColorRgbaValue } from "../../../_utils/utils";
 
 const HtmlCell = styled.th`
   text-align: left;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  border-bottom: 1px solid ${(props) => props.theme.palette.transparent.light};
-  border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
   width: ${(props) => props.width};
-  padding: ${(props) =>
-    props.selection ? "2px 2px 2px 6px" : "8px 2px 8px 6px"};
-  width: ${(props) => props.width}%;
+  padding-left: 1.25rem;
+
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "background"
+    )}};
+
+  border-top: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "border"
+    )}};
+  
+  border-bottom: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "border"
+    )}};
+  
+  border-radius: 0.5rem 0 0 0;
 `;
 
 const TableHeadSelectionCell = (props) => {
   //--------------------------
   const {
-    Column,
-    RowData,
-    SelectedData,
     EnableSelectAll,
     IsSelected,
     Index,
@@ -29,8 +53,9 @@ const TableHeadSelectionCell = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -60,26 +85,19 @@ const TableHeadSelectionCell = (props) => {
 TableHeadSelectionCell.defaultProps = {
   __TYPE__: "TABLE_HEAD_SELECTION_CELL",
   //--------------------
-  Column: {},
-  RowData: {},
   Index: 0,
-  SelectedData: [],
   IsSelected: null,
   EnableSelectAll: false,
   //--------------------
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableHeadSelectionCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Column: PropTypes.object.isRequired,
-  RowData: PropTypes.object.isRequired,
   Index: PropTypes.number.isRequired,
-  SelectedData: PropTypes.array,
   IsSelected: PropTypes.bool,
   EnableSelectAll: PropTypes.bool,
   //----------------------------------------
@@ -89,13 +107,11 @@ TableHeadSelectionCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableHeadSelectionCell;

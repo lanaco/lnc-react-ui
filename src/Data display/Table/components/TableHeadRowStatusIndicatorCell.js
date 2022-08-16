@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
+import { getColorRgbaValue } from "../../../_utils/utils";
 
-const HtmlHeadCell = styled.th`
+const HtmlHeadCellOld = styled.th`
   text-align: left;
   transition: all 250ms ease;
   font-weight: 900;
@@ -12,12 +13,37 @@ const HtmlHeadCell = styled.th`
   border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
 
   &:first-of-type {
-    border-radius: 3px 0 0 0;
+    border-radius: 8px 0 0 0;
   }
 
   &:last-of-type {
-    border-radius: 0 3px 0 0;
+    border-radius: 0 8px 0 0;
   }
+`;
+
+const HtmlHeadCell = styled.th`
+  padding: 0.125rem;
+
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "background"
+    )}};
+
+  border-bottom: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "border"
+    )}};
+  
+  border-radius: 0.5rem 0 0 0;
 `;
 
 const TableHeadRowStatusIndicatorCell = (props) => {
@@ -28,8 +54,9 @@ const TableHeadRowStatusIndicatorCell = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -47,7 +74,6 @@ TableHeadRowStatusIndicatorCell.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableHeadRowStatusIndicatorCell.propTypes = {
@@ -59,13 +85,11 @@ TableHeadRowStatusIndicatorCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableHeadRowStatusIndicatorCell;

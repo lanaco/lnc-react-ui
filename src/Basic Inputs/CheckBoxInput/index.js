@@ -37,7 +37,8 @@ const CheckboxContainer = styled.label`
     display: none;
   }
   & .checkbox-label {
-    ${(props) => (!props.disabled && props.readOnly == false) && "cursor: pointer;"}
+    ${(props) =>
+      !props.disabled && props.readOnly == false && "cursor: pointer;"}
   }
 `;
 
@@ -85,7 +86,7 @@ ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
 
   &:focus {
     ${(props) =>
-      !props.disabled && props.readOnly==false && getOutlineCss(props.theme)}
+      !props.disabled && props.readOnly == false && getOutlineCss(props.theme)}
   }
 
   & svg {
@@ -244,14 +245,18 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           <>{customCheckmark}</>
         )}
       </Checkmark>
-      <div
-        onClick={handleClick}
-        className="checkbox-label"
-        disabled={disabled}
-        readOnly={readOnly}
-      >
-        {label}
-      </div>
+
+      {label && (
+        <div
+          onClick={handleClick}
+          className="checkbox-label"
+          disabled={disabled}
+          readOnly={readOnly}
+        >
+          {label}
+        </div>
+      )}
+
       <input
         id={id}
         name={name}

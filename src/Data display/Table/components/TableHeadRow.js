@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
 
 const HtmlRow = styled.tr`
-  border-bottom: 1px solid transparent;
+  border-radius: 0.5rem 0.5rem 0 0;
 `;
 
 const TableHeadRow = (props) => {
@@ -15,8 +15,9 @@ const TableHeadRow = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -40,7 +41,6 @@ TableHeadRow.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableHeadRow.propTypes = {
@@ -54,13 +54,11 @@ TableHeadRow.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableHeadRow;

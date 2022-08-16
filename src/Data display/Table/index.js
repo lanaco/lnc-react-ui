@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 import { isObject, isFinite, cloneDeep } from "lodash";
 import { useScreenSize } from "../../_utils/utils";
-import theme from "../../_utils/theme";
+import { useMeasure } from "react-use";
+import { useTheme } from "@emotion/react";
 import { screenSizes } from "./constants/constants";
 import TableBody from "./components/TableBody";
 import TableHead from "./components/TableHead";
@@ -16,18 +17,26 @@ import TableHeadCell from "./components/TableHeadCell";
 import TableHeadSelectionCell from "./components/TableHeadSelectionCell";
 import TableRowStatusIndicatorCell from "./components/TableRowStatusIndicatorCell";
 import TableHeadRowStatusIndicatorCell from "./components/TableHeadRowStatusIndicatorCell";
-import { useMeasure } from "react-use";
 import Spinner from "../../Feedback/Spinner/index";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledStateCss,
+  getOutlineCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const Container = styled.div`
-  padding: 10px;
-  margin: 2px;
-  border-radius: 2px;
+  padding: 0.625rem;
+  margin: 0.125rem;
+  border-radius: 0.125rem;
   overflow-x: auto;
   white-space: nowrap;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
   position: relative;
+
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Table", props.size, "enabled")};
 `;
 
 const LoaderContainer = styled.div`
@@ -37,7 +46,7 @@ const LoaderContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: #eceaea;
-  z-index: 10000000;
+  z-index: 1000;
   opacity: 0.7;
   background-color: white;
   filter: alpha(opacity=10);
@@ -50,36 +59,31 @@ const LoaderContainerTransparent = styled.div`
   width: 100%;
   height: 100%;
   background-color: transparent;
-  z-index: 10000000;
-`;
-
-const Loader = styled.div`
-  position: absolute;
-  top: 48%;
-  left: 47%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const HtmlTable = styled.table`
-  // table-layout: fixed;
+  height: 1px;
   width: 100%;
   white-space: nowrap;
   border-collapse: collapse;
+  border-radius: 0.5rem;
+  border-style: hidden;
+  box-shadow: 0 0 0 0.0625rem
+    ${(props) =>
+      getColorRgbaValue(props.theme, "Table", null, "enabled", "border")};
 `;
-
-const HtmlHead = styled.thead``;
-
-const HtmlBody = styled.tbody``;
 
 const NoDataRow = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  padding: 8px 8px 8px 8px;
-  background-color: whitesmoke;
-  border-radius: 3px;
-  margin-top: 4px;
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Table", props.size, "enabled")};
+  padding: 0.5rem;
 `;
 
 /**
@@ -118,11 +122,12 @@ const Table = forwardRef((props, ref) => {
     onSelectRow,
     onSelectAll,
     //--------------------
-    theme,
     color,
     size,
     className,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     theme,
@@ -133,6 +138,7 @@ const Table = forwardRef((props, ref) => {
   //================== LIFECYCLE =======================================
 
   // Functions exposed to parent via ref
+
   useImperativeHandle(
     ref,
     () => ({
@@ -143,10 +149,13 @@ const Table = forwardRef((props, ref) => {
     ]
   );
 
+  // Get width property of the table
   const [tableRef, { width }] = useMeasure();
 
+  // Get the current screen size
   var screenSize = useScreenSize();
 
+  // Missing RowIdentifier console error
   useEffect(() => {
     if (
       EnableSelection === true &&
@@ -157,11 +166,13 @@ const Table = forwardRef((props, ref) => {
       );
   }, []);
 
+  // Missing Columns definition
   useEffect(() => {
     if (Columns === null || Columns === undefined || Columns.length === 0)
       console.error("Error: Columns array must have at least one item.");
   }, [Columns]);
 
+  // VisibilityPattern errors
   useEffect(() => {
     if (VisibilityPattern) {
       if (!VisibilityPattern.hasOwnProperty(screenSizes.XS.type))
@@ -544,17 +555,15 @@ const Table = forwardRef((props, ref) => {
     if (EnableLoader === true && Loading === true)
       return (
         <>
-          <LoaderContainer></LoaderContainer>
+          <LoaderContainer />
           <LoaderContainerTransparent>
-            <Loader>
-              {renderCustomElement(
-                getCustomRender("TABLE_LOADER", props.children),
-                {
-                  ...themeProps,
-                  Loading,
-                }
-              ) || <Spinner />}
-            </Loader>
+            {renderCustomElement(
+              getCustomRender("TABLE_LOADER", props.children),
+              {
+                ...themeProps,
+                Loading,
+              }
+            ) || <Spinner {...themeProps} />}
           </LoaderContainerTransparent>
         </>
       );
@@ -661,7 +670,6 @@ Table.defaultProps = {
   //--------------------
   size: "small",
   color: "primary",
-  theme: theme,
   className: "",
 };
 
@@ -784,10 +792,6 @@ Table.propTypes = {
    */
   onSelectAll: PropTypes.func,
   //----------------------------------------
-  /**
-   * Theme object.
-   */
-  theme: PropTypes.object.isRequired,
   /**
    * `className` applied to the component container.
    */

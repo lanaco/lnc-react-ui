@@ -18,8 +18,8 @@ Default.args = {
   EnableSelectAll: true,
   EnableLoader: true,
   //-------------------------------------
-  EnableRowStatusIndicator: true,
-  EnableRowTextHighlight: true,
+  EnableRowStatusIndicator: false,
+  EnableRowTextHighlight: false,
   GetRowStatusIndicatorColor: (rowData) => {
     if (rowData.company === "QUAREX") return statusColor.DISABLED;
     if (rowData.company !== "QUAREX") return statusColor.SUCCESS;
@@ -126,6 +126,7 @@ Default.args = {
       status: "banned",
     },
   ],
+  // Data: [],
   //-------------------------------------
   Columns: [
     {

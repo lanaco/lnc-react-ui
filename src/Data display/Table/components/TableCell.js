@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
 import { isFunction, isEmpty } from "lodash";
+import { useTheme } from "@emotion/react";
+import { getComponentTypographyCss } from "../../../_utils/utils";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: ${(props) => props.width};
-  padding: ${(props) =>
-    props.selection === false ? "11.4px 6px 11.4px 6px" : "4px 6px 4px 6px"};
+  padding: 0.875rem 1.5rem;
+
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "TableCell", props.size, "enabled")};
 `;
 
 const CellText = styled.span`
@@ -30,8 +33,9 @@ const TableCell = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -40,7 +44,6 @@ const TableCell = (props) => {
     theme,
   };
 
-  // TODO: move to service
   const isColor = (strColor) => {
     const s = new Option().style;
     s.color = strColor;
@@ -110,7 +113,6 @@ TableCell.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableCell.propTypes = {
@@ -127,13 +129,11 @@ TableCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableCell;
