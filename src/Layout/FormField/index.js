@@ -1,106 +1,83 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import theme from "../../_utils/theme";
-import Alet from "../../Feedback/Alert/index";
+import { useTheme } from "@emotion/react";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+} from "../../_utils/utils";
 
-const fontSize = (props) => {
-  let fontSize = props.theme.typography[props.size].fontSize;
-  let newFontSize = "";
-
-  if (fontSize.includes("px")) {
-    newFontSize =
-      parseFloat(
-        props.theme.typography[props.size].fontSize.replace("px", "")
-      ) -
-      1.5 +
-      "px";
-  }
-
-  if (fontSize.includes("rem")) {
-    newFontSize =
-      parseFloat(
-        props.theme.typography[props.size].fontSize.replace("rem", "")
-      ) -
-      0.09375 +
-      "rem";
-  }
-
-  return newFontSize;
-};
-const Container = styled.div`
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
+const StyledLabel = styled.label`
+  display: block;
+  margin-bottom: 4px;
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "FormField", props.size, "enabled")}
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "FormField", "primary", "enabled", "label")};
 `;
 
-const LabelContainer = styled.div`
-  font-size: ${(props) => fontSize(props)};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  margin-bottom: 0.1875rem;
-  color: #777a80;
-`;
-
-const ErrorContainer = styled.div`
-  margin-top: ${(props) => (props.hasContainer ? "0.2rem" : "0.05rem")};
+const StyledText = styled.span`
+  display: block;
+  margin-top: 8px;
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "FormField", props.size, "enabled")}
+  color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "FormField",
+      props.color,
+      "enabled",
+      "text"
+    )};
 `;
 
 const FormField = (props) => {
-  const {
-    className,
-    size,
-    color,
-    theme,
-    children,
-    errorMessage,
-    label,
-    required,
-    hasContainer,
-  } = props;
+  const { size, color, text, label, children } = props;
 
-  const themeProps = { theme, size, color };
+  const theme = useTheme();
 
   return (
-    <Container {...themeProps} className={className}>
-      {label && label !== null && (
-        <LabelContainer {...themeProps}>
+    <div>
+      {label && (
+        <StyledLabel theme={theme} size={size}>
           {label}
-          {required ? "*" : ""}
-        </LabelContainer>
+        </StyledLabel>
       )}
-
       {children}
-      {errorMessage && errorMessage !== "" && (
-        <ErrorContainer {...themeProps} hasContainer={hasContainer}>
-          <Alet
-            {...themeProps}
-            color="error"
-            message={errorMessage}
-            hasContainer={hasContainer}
-          />
-        </ErrorContainer>
+      {text && (
+        <StyledText size={size} theme={theme} color={color}>
+          {text}
+        </StyledText>
       )}
-    </Container>
+    </div>
   );
 };
 
 FormField.defaultProps = {
-  className: "",
-  size: "small",
-  theme: theme,
-  errorMessage: "",
+  text: "",
   label: "",
-  required: false,
-  hasContainer: true,
+  size: "small",
+  color: "primary",
 };
 
 FormField.propTypes = {
-  theme: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  errorMessage: PropTypes.string,
+  /**
+   * Additional text that appears below the main element.
+   */
+  text: PropTypes.string,
+  /**
+   * Label text that appears above the main element.
+   */
   label: PropTypes.string,
-  required: PropTypes.bool,
-  hasContainer: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "danger",
+    "warning",
+    "info",
+  ]),
 };
 
 export default FormField;

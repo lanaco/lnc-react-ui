@@ -2136,13 +2136,13 @@ const lanaco_light = {
         },
         hover: {
           cancelBtnBg: 900,
-          cancelBtnBgOpacity: 50
+          cancelBtnBgOpacity: 50,
         },
         focus: {
           cancelBtnBg: 900,
-          cancelBtnBgOpacity: 100
-        }
-      }
+          cancelBtnBgOpacity: 100,
+        },
+      },
     },
     ConfirmationForm: {
       default: {
@@ -2155,43 +2155,43 @@ const lanaco_light = {
       teal: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       blue: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       red: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       violet: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       yellow: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       green: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       gray: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       neutral: {
         enabled: {
           icon: 600,
-        }
-      }
+        },
+      },
     },
     Popover: {
       default: {
@@ -2199,7 +2199,7 @@ const lanaco_light = {
         enabled: {
           bg: 0,
         },
-      }
+      },
     },
     Modal: {
       default: {
@@ -2209,13 +2209,13 @@ const lanaco_light = {
         },
         hover: {
           cancelBtnBg: 900,
-          cancelBtnBgOpacity: 50
+          cancelBtnBgOpacity: 50,
         },
         focus: {
           cancelBtnBg: 900,
-          cancelBtnBgOpacity: 100
-        }
-      }
+          cancelBtnBgOpacity: 100,
+        },
+      },
     },
     ConfirmationForm: {
       default: {
@@ -2228,43 +2228,68 @@ const lanaco_light = {
       teal: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       blue: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       red: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       violet: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       yellow: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       green: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       gray: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       neutral: {
         enabled: {
           icon: 600,
-        }
-      }
+        },
+      },
+    },
+    FormField: {
+      default: {
+        palette: "gray",
+        enabled: {
+          label: 600,
+          text: 600,
+          fontWeight: 600,
+        },
+      },
+      red: {
+        enabled: {
+          text: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          text: 600,
+        },
+      },
+      green: {
+        enabled: {
+          text: 600,
+        },
+      },
     },
   },
   palette: {

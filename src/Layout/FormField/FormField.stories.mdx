@@ -1,0 +1,72 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import FormField from "./index";
+import FlexGrid from "../FlexGrid";
+import FlexGridItem from "../FlexGrid/FlexGridItem";
+import TextInput from "../../Basic Inputs/TextInput";
+import TextAreaInput from "../../Basic Inputs/TextAreaInput";
+import NumberInput from "../../Basic Inputs/NumberInput";
+import ColorInput from "../../Basic Inputs/ColorInput";
+
+<Meta title="Layout/Form Field" component={FormField} />
+
+export const TemplateDefault = (args) => (
+  <FormField {...args}>
+    <TextInput size={args.size} color={args.color} />
+  </FormField>
+);
+
+# Form Field
+
+```jsx
+import { FormField } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{ label: "Label", text: "Additional text." }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+# Form layout example
+
+Here you can see an example of a form using FlexGrid for layout.
+
+<Canvas>
+  <Story name="Form Layout" args={{}}>
+    <FlexGrid spacing={10}>
+      <FlexGridItem col={6}>
+        <FormField label="First name">
+          <TextInput />
+        </FormField>
+      </FlexGridItem>
+      <FlexGridItem col={6}>
+        <FormField label="Last name">
+          <TextInput />
+        </FormField>
+      </FlexGridItem>
+      <FlexGridItem>
+        <FormField label="Height">
+          <NumberInput suffix="cm" />
+        </FormField>
+      </FlexGridItem>
+      <FlexGridItem>
+        <FormField label="Weight">
+          <NumberInput suffix="kg" />
+        </FormField>
+      </FlexGridItem>
+      <FlexGridItem>
+        <FormField label="Hair color">
+          <ColorInput withInput />
+        </FormField>
+      </FlexGridItem>
+      <FlexGridItem col={12}>
+        <FormField label="About me">
+          <TextAreaInput minRows={5} />
+        </FormField>
+      </FlexGridItem>
+    </FlexGrid>
+  </Story>
+</Canvas>
