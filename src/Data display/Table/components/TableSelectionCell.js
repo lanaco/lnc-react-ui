@@ -36,20 +36,8 @@ const TableSelectionCell = (props) => {
     onSelectRow(e, RowData, IsSelected);
   };
 
-  const onCellClick = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-
-    onSelectRow(e, RowData, IsSelected);
-  };
-
   return (
-    <HtmlCell
-      {...themeProps}
-      key={Index}
-      width={props.width}
-      onClick={onCellClick}
-    >
+    <HtmlCell {...themeProps} key={Index} width={props.width}>
       <Checkbox id={Index} checked={IsSelected} onChange={onChange} />
     </HtmlCell>
   );

@@ -31,25 +31,12 @@ const Container = styled.div`
   padding: 0.625rem;
   margin: 0.125rem;
   border-radius: 0.125rem;
-  overflow-x: auto;
+  overflow-x: ${(props) => (props.isLoading ? "hidden" : "auto")};
   white-space: nowrap;
   position: relative;
 
   ${(props) =>
     getComponentTypographyCss(props.theme, "Table", props.size, "enabled")};
-`;
-
-const LoaderContainer = styled.div`
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 100%;
-  height: 100%;
-  background-color: #eceaea;
-  z-index: 1000;
-  opacity: 0.7;
-  background-color: white;
-  filter: alpha(opacity=10);
 `;
 
 const LoaderContainerTransparent = styled.div`
@@ -58,8 +45,11 @@ const LoaderContainerTransparent = styled.div`
   right: 0px;
   width: 100%;
   height: 100%;
-  background-color: transparent;
+  overflow: auto;
   z-index: 1000;
+  opacity: 0.7;
+  background-color: white;
+  filter: alpha(opacity=10);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,6 +96,7 @@ const Table = forwardRef((props, ref) => {
     GetRowTextHighlightColor,
     //--------------------
     NoDataText,
+    NoDataComponent,
     //--------------------
     Loading,
     // TODO: add alignText prop to Column object
@@ -249,18 +240,20 @@ const Table = forwardRef((props, ref) => {
   };
 
   const checkColumnsWidthSum = (columnsToRender, index) => {
-    var reduceWidthByAmount = 0;
-    var widthSum = columnsToRender
-      .map((x) => x.width)
-      .reduce((prev, next) => prev + next);
+    if (columnsToRender && columnsToRender.length > 0) {
+      var reduceWidthByAmount = 0;
+      var widthSum = columnsToRender
+        .map((x) => x.width)
+        .reduce((prev, next) => prev + next);
 
-    if (EnableSelection === true)
-      reduceWidthByAmount = (getSelectionCellWidthBySize() / width) * 100;
+      if (EnableSelection === true)
+        reduceWidthByAmount = (getSelectionCellWidthBySize() / width) * 100;
 
-    var sum = widthSum + reduceWidthByAmount;
+      var sum = widthSum + reduceWidthByAmount;
 
-    if (isFinite(sum) && (sum > 101 || sum < 98))
-      console.error(`Error: Row ${index} - sum of column widths is ${sum}.`);
+      if (isFinite(sum) && (sum > 101 || sum < 98))
+        console.error(`Error: Row ${index} - sum of column widths is ${sum}.`);
+    }
   };
 
   const calculateRowSelection = (rowData) => {
@@ -494,12 +487,17 @@ const Table = forwardRef((props, ref) => {
     if (Data === null || Data === undefined || (Data && Data.length === 0)) {
       var colspan = filterColumns().length;
 
-      if (EnableSelection) colspan++;
+      if (EnableSelection === true) colspan++;
+      if (EnableRowStatusIndicator === true) colspan++;
 
       return (
         <tr>
           <td colSpan={colspan}>
-            <NoDataRow {...themeProps}>{NoDataText}</NoDataRow>
+            {NoDataComponent ? (
+              <NoDataComponent />
+            ) : (
+              <NoDataRow {...themeProps}>{NoDataText}</NoDataRow>
+            )}
           </td>
         </tr>
       );
@@ -552,10 +550,9 @@ const Table = forwardRef((props, ref) => {
   };
 
   const renderSpinner = () => {
-    if (EnableLoader === true && Loading === true)
+    if (EnableLoader === true && Loading === true) {
       return (
         <>
-          <LoaderContainer />
           <LoaderContainerTransparent>
             {renderCustomElement(
               getCustomRender("TABLE_LOADER", props.children),
@@ -567,6 +564,7 @@ const Table = forwardRef((props, ref) => {
           </LoaderContainerTransparent>
         </>
       );
+    }
 
     return <></>;
   };
@@ -609,11 +607,12 @@ const Table = forwardRef((props, ref) => {
   const renderTable = () => {
     var containerProps = {
       className,
+      Loading,
       ...themeProps,
     };
 
     var children = (
-      <div>
+      <>
         {renderSpinner()}
         {renderHeader()}
 
@@ -624,7 +623,7 @@ const Table = forwardRef((props, ref) => {
 
         {renderSpecialLastRow()}
         {renderFooter()}
-      </div>
+      </>
     );
 
     return (
@@ -632,7 +631,14 @@ const Table = forwardRef((props, ref) => {
         getCustomRender("TABLE_CONTAINER", props.children),
         containerProps,
         children
-      ) || <Container {...containerProps}>{children}</Container>
+      ) || (
+        <Container
+          {...containerProps}
+          isLoading={EnableLoader ? Loading : false}
+        >
+          {children}
+        </Container>
+      )
     );
   };
 
@@ -657,10 +663,12 @@ Table.defaultProps = {
   GetRowTextHighlightColor: () => {},
   //--------------------
   NoDataText: "No data to show",
+  NoDataComponet: null,
+  //--------------------
   SelectedData: [],
   SelectedEntirePage: false,
   RowIdentifier: "id",
-  VisibilityPattern: {},
+  VisibilityPattern: null,
   Ordering: {},
   //--------------------
   onColumnClick: () => {},
@@ -724,6 +732,11 @@ Table.propTypes = {
    */
   NoDataText: PropTypes.string,
   /**
+   * React component to show instead of the `NoDataText`
+   */
+  NoDataComponet: PropTypes.node,
+  //--------------------
+  /**
    *  Disables some events and actions when set to `true`. Also triggers the spinner if `EnableLoader` is set to `true`.
    */
   Loading: PropTypes.bool,
@@ -763,7 +776,11 @@ Table.propTypes = {
    * Describe how the data is ordered.
    * @param columnId - Column identifier, maps to the id on the Column object
    */
-  Ordering: PropTypes.object,
+  Ordering: PropTypes.shape({
+    columnId: PropTypes.number,
+    ascending: PropTypes.bool,
+    descending: PropTypes.bool,
+  }),
   //----------------------------------------
   /**
    * Triggered on header cell click.

@@ -12,6 +12,20 @@ const HtmlHeadCell = styled.th`
   text-align: left;
   transition: all 250ms ease;
   padding: 0.875rem 1.5rem;
+  cursor: ${(props) => (props.ordering ? "pointer" : "default")};
+
+  &:hover {
+    ${(props) =>
+      props.ordering
+        ? `background-color: ${getColorRgbaValue(
+            props.theme,
+            "TableHeadCell",
+            null,
+            "hover",
+            "background"
+          )};`
+        : ""}
+  }
 
   ${(props) =>
     getComponentTypographyCss(
@@ -170,8 +184,6 @@ const TableHeadCell = (props) => {
           orderingIconClass = "sort";
       } else orderingIconClass = "sort";
 
-      // console.log(Column.accessor, orderingIconClass);
-
       return (
         <HeaderCellIcon {...themeProps} sort={orderingIconClass === "sort"}>
           <Icon {...themeProps} sizeInUnits={"14px"} icon={orderingIconClass} />
@@ -227,6 +239,7 @@ const TableHeadCell = (props) => {
       onClick={handleColumnClick}
       {...themeProps}
       selection={EnableSelectAll}
+      ordering={EnableOrdering && Column.sortable}
       key={Index}
     >
       <HeaderInnerCell {...themeProps}>
@@ -245,6 +258,7 @@ TableHeadCell.defaultProps = {
   Ordering: {},
   Index: 0,
   EnableSelectAll: false,
+  EnableOrdering: false,
   onColumnClick: () => {},
   //--------------------
   className: "",
@@ -259,6 +273,7 @@ TableHeadCell.propTypes = {
   Ordering: PropTypes.object,
   Index: PropTypes.any,
   EnableSelectAll: PropTypes.bool,
+  EnableOrdering: PropTypes.bool,
   onColumnClick: PropTypes.func,
   //----------------------------------------
   className: PropTypes.string,

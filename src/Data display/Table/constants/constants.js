@@ -1,3 +1,5 @@
+import { lanaco_light } from "../../../_utils/theme";
+
 export const mode = {
   CREATE: "CREATE",
   READ: "READ",
@@ -17,13 +19,13 @@ export const selectionType = {
 };
 
 export const statusColor = {
-  SUCCESS: "#55B472",
-  ERROR: "#DB575B",
-  WARNING: "#FFAC47",
-  PRIMARY: "#00537A",
-  SECONDARY: "#7b185d",
-  DISABLED: "#B8B8B8",
-  NONE: "inherit",
+  SUCCESS: lanaco_light.palette.green[500],
+  ERROR: lanaco_light.palette.red[500],
+  WARNING: lanaco_light.palette.yellow[500],
+  PRIMARY: lanaco_light.palette.teal[500],
+  SECONDARY: lanaco_light.palette.blue[500],
+  DISABLED: lanaco_light.palette.gray[300],
+  NONE: "white",
 };
 
 export const screenSizes = {

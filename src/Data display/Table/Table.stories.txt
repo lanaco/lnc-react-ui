@@ -21,16 +21,12 @@ Default.args = {
   EnableRowStatusIndicator: false,
   EnableRowTextHighlight: false,
   GetRowStatusIndicatorColor: (rowData) => {
-    if (rowData.company === "QUAREX") return statusColor.DISABLED;
-    if (rowData.company !== "QUAREX") return statusColor.SUCCESS;
-
-    return statusColor.NONE;
+    if (rowData.company === "QUAREX") return statusColor.PRIMARY;
+    return statusColor.ERROR;
   },
   GetRowTextHighlightColor: (rowData) => {
-    if (rowData.company === "QUAREX") return statusColor.DISABLED;
-    if (rowData.company !== "QUAREX") return statusColor.SUCCESS;
-
-    return "black";
+    if (rowData.company === "QUAREX") return statusColor.PRIMARY;
+    return statusColor.ERROR;
   },
   //-------------------------------------
   Loading: false,
@@ -183,7 +179,6 @@ Default.args = {
         accessor: "address",
         width: 10,
       },
-
       {
         id: 1,
         accessor: "name",

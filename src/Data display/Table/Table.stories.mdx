@@ -1,0 +1,402 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Table from "./index";
+import { statusColor } from "./constants/constants";
+import Button from "../../General/Button/index";
+import { useState } from "react";
+
+<Meta title="Data Display/Table" component={Table} />
+
+export const Columns = [
+  {
+    id: 1,
+    displayName: "Name",
+    accessor: "name",
+    width: 18,
+    sortable: true,
+  },
+  {
+    id: 2,
+    displayName: "Company",
+    accessor: "company",
+    width: 12,
+    sortable: false,
+  },
+  {
+    id: 3,
+    displayName: "Address",
+    accessor: "address",
+    width: 40,
+    sortable: true,
+  },
+  {
+    id: 4,
+    displayName: "Gender",
+    accessor: "gender",
+    width: 15,
+    sortable: true,
+  },
+  {
+    id: 5,
+    displayName: "Balance",
+    accessor: "balance",
+    width: 15,
+    sortable: true,
+  },
+];
+
+export const Data = [
+  {
+    id: "61f7b8ea2fe061cacbcdbfea",
+    isActive: true,
+    balance: "$1,476.66",
+    age: 21,
+    name: "Katie Wilson",
+    gender: "female",
+    company: "QUAREX",
+    email: "katiewilson@quarex.com",
+    phone: "(807) 443-2274",
+    address: "125 Oceanview Avenue, Moquino, Mississippi, 418",
+    status: "banned",
+  },
+  {
+    id: "61f7b8ea63d0fc830f326350",
+    isActive: false,
+    balance: "$3,239.46",
+    age: 32,
+    name: "Delgado Lott",
+    gender: "male",
+    company: "XYMONK",
+    email: "delgadolott@xymonk.com",
+    phone: "(973) 427-2565",
+    address: "402 Vernon Avenue, Draper, Florida, 6921",
+    status: "banned",
+  },
+  {
+    id: "61f7b8eaf418ca604fcdffba",
+    isActive: false,
+    balance: "$3,804.94",
+    age: 21,
+    name: "Frankie Jacobson",
+    gender: "female",
+    company: "QUAREX",
+    email: "frankiejacobson@qualitex.com",
+    phone: "(825) 404-3871",
+    address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
+    status: "inactive",
+  },
+  {
+    id: "61f7b8ea066dfb5760224b71",
+    isActive: true,
+    balance: "$3,731.79",
+    age: 29,
+    name: "Lynch Sims",
+    gender: "male",
+    company: "EARTHPURE",
+    email: "lynchsims@earthpure.com",
+    phone: "(979) 489-3188",
+    address: "620 Riverdale Avenue, Greenbush, New Mexico, 9605",
+    status: "active",
+  },
+  {
+    id: "61f7b8eadd6586c40491b91e",
+    isActive: true,
+    balance: "$2,116.41",
+    age: 30,
+    name: "Black William",
+    gender: "male",
+    company: "QUAREX",
+    email: "blackwilliam@rodeomad.com",
+    phone: "(818) 583-2805",
+    address: "125 Kathleen Court, Bergoo, Michigan, 1206",
+    status: "banned",
+  },
+];
+
+export const TemplateDefault = (args) => <Table {...args} />;
+
+export const TemplateLoading = (args) => {
+  const [loading, setLoading] = useState(true);
+  return (
+    <div>
+      <div style={{ padding: "4px 4px 4px 10px" }}>
+        <Button
+          text={`Loading: ${loading ? "ON" : "OFF"}`}
+          type={loading ? "filled" : "tinted"}
+          onClick={() => setLoading(!loading)}
+        />
+      </div>
+      <Table {...args} Loading={loading} />
+    </div>
+  );
+};
+
+export const TemplateSelection = (args) => {
+  const [selectedEntirePage, setSelectedEntirePage] = useState(false);
+  const [selectedData, setSelectedData] = useState([
+    {
+      id: "61f7b8ea2fe061cacbcdbfea",
+    },
+    {
+      id: "61f7b8eaf418ca604fcdffba",
+    },
+  ]);
+  return (
+    <Table
+      {...args}
+      SelectedData={selectedData}
+      SelectedEntirePage={selectedEntirePage}
+      onSelectAll={(e, IsSelected) => {
+        if (!IsSelected) {
+          setSelectedEntirePage(true);
+          setSelectedData(Data.map((x) => ({ id: x.id })));
+        } else {
+          setSelectedEntirePage(false);
+          setSelectedData([]);
+        }
+      }}
+      onSelectRow={(e, RowData, IsSelected) => {
+        if (IsSelected) {
+          var copy = [...selectedData];
+          setSelectedData(copy.filter((x) => x.id !== RowData.id));
+          setSelectedEntirePage(copy.length === 0);
+        } else {
+          var copy = [...selectedData, { id: RowData.id }];
+          setSelectedData(copy);
+          setSelectedEntirePage(copy.length === 5);
+        }
+      }}
+    />
+  );
+};
+
+export const TemplateOrdering = (args) => {
+  const [state, setState] = useState({
+    columnId: 1,
+    ascending: false,
+    descending: true,
+  });
+  return (
+    <Table
+      {...args}
+      Ordering={state}
+      onColumnClick={(e, Column, Ordering) => {
+        setState(Ordering);
+      }}
+    />
+  );
+};
+
+# Table
+
+```jsx
+import { Table } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      Columns: Columns,
+      Data: Data,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Loading
+
+The loading option is enabled via the `EnableLoader` property.
+Loading overlay and spinner is triggered with the `Loading` property.
+Spinner component can be replaced with a custom component.
+
+<Canvas>
+  <Story
+    name="Loading"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      EnableLoader: true,
+      Loading: true,
+      Columns: Columns,
+      Data: Data,
+    }}
+  >
+    {TemplateLoading.bind({})}
+  </Story>
+</Canvas>
+
+## No Data
+
+When the `Data` array is empty, an empty row with `NoDataText` value is shown.
+If the `NoDataComponent` is defined, it will be shown instead of the `NoDataText`.
+
+<Canvas>
+  <Story
+    name="No Data"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      Columns: Columns,
+      Data: [],
+      NoDataText: "",
+      NoDataComponent: () => (
+        <div
+          style={{
+            padding: "6px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            size="small"
+            color="warning"
+            type="basic"
+            text="No data avaliable. Reload ?"
+            onClick={() => alert("Reloading...")}
+          />
+        </div>
+      ),
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Selection
+
+The selection option is enabled via the `EnableSelection` property.
+`EnableSelectAll` provides you with an select all/deselect all checkbox in the table header.
+Selection is dictated by the `SelectedData` - array of objects containg the row identifier property.
+
+<Canvas>
+  <Story
+    name="Selection"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      EnableSelection: true,
+      EnableSelectAll: true,
+      Columns: Columns,
+      Data: Data,
+    }}
+  >
+    {TemplateSelection.bind({})}
+  </Story>
+</Canvas>
+
+## Ordering
+
+The selection option is enabled via the `EnableOrdering` property.
+Also, the `sortable` property on the column defintion object must be set to `true` (it is `false` by default).
+Ordering is dictated by the `Ordering` property (`{ ascending, descending, columnId }`).
+The `onColumnClick` event provides the next ordering object with the mentioned parameters preset.
+
+<Canvas>
+  <Story
+    name="Ordering"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      EnableOrdering: true,
+      Columns: Columns,
+      Data: Data,
+    }}
+  >
+    {TemplateOrdering.bind({})}
+  </Story>
+</Canvas>
+
+## Visibility Pattern
+
+<Canvas>
+  <Story
+    name="Visibility Pattern"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      Columns: Columns,
+      Data: Data,
+      //=====================================
+      VisibilityPattern: {
+        XS: [
+          {
+            id: 1,
+            accessor: "name",
+            width: 70,
+          },
+          {
+            id: 2,
+            accessor: "company",
+            width: 30,
+          },
+        ],
+        S: [
+          {
+            id: 2,
+            accessor: "company",
+            width: 40,
+          },
+          {
+            id: 1,
+            accessor: "name",
+            width: 60,
+          },
+        ],
+        M: [
+          {
+            id: 3,
+            accessor: "address",
+            width: 10,
+          },
+          {
+            id: 1,
+            accessor: "name",
+            width: 90,
+          },
+        ],
+        L: [
+          {
+            id: 3,
+            accessor: "address",
+            width: 25,
+          },
+          {
+            id: 2,
+            accessor: "company",
+            width: 15,
+          },
+          {
+            id: 1,
+            accessor: "name",
+            width: 60,
+          },
+        ],
+        XL: [
+          {
+            id: 3,
+            accessor: "address",
+            width: 20,
+          },
+          {
+            id: 2,
+            accessor: "company",
+            width: 15,
+          },
+          {
+            id: 1,
+            accessor: "name",
+            width: 65,
+          },
+        ],
+      },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

@@ -298,7 +298,7 @@ const theme = {
   },
 };
 
-const lanaco_light = {
+export const lanaco_light = {
   name: "Lanaco Light",
   class: "lnc-light",
   backgroundColor: "#fff",
@@ -2309,7 +2309,7 @@ const lanaco_light = {
         },
         hover: {
           border: 300,
-          background: 50,
+          background: 100,
           text: 900,
           fontWeight: 700,
         },
