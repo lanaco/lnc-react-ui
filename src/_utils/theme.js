@@ -2581,6 +2581,138 @@ export const lanaco_light = {
         },
       },
     },
+    UploadedFile: {
+      default: {
+        palette: "gray",
+        enabled: {
+          color: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          color: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          color: 600,
+        },
+      },
+      red: {
+        enabled: {
+          color: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          color: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          color: 600,
+        },
+      },
+      green: {
+        enabled: {
+          color: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          color: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          color: 600,
+        },
+      },
+    },
+    Select: {
+      default: {
+        palette: "gray",
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      teal: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      blue: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      red: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      violet: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      yellow: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      green: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      gray: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      neutral: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      }
+    },
+    Danger: {
+      default: {
+        palette: "red",
+        enabled: {
+          text: 600,
+          border: 300,
+        },
+      },
+    }
   },
 
   palette: {

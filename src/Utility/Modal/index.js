@@ -82,6 +82,7 @@ const ModalContainer = styled(motion.div)`
   & .lnc-modal-footer {
     max-height: ${FOOTER_HEIGHT};
     overflow: hidden;
+    padding-top: 1rem;
   }
   ${props => props.size.toUpperCase() == "FULL" && "height: 100vh"};
 
