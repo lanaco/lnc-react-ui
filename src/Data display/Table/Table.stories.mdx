@@ -4,6 +4,9 @@ import Table from "./index";
 import { statusColor } from "./constants/constants";
 import Button from "../../General/Button/index";
 import { useState } from "react";
+import CustomTableCell from "./components/CustomTableCell";
+import CustomTableHeader from "./components/CustomTableHeader";
+import CustomTableFooter from "./components/CustomTableFooter";
 
 <Meta title="Data Display/Table" component={Table} />
 
@@ -26,7 +29,7 @@ export const Columns = [
     id: 3,
     displayName: "Address",
     accessor: "address",
-    width: 40,
+    width: 35,
     sortable: true,
   },
   {
@@ -40,7 +43,7 @@ export const Columns = [
     id: 5,
     displayName: "Balance",
     accessor: "balance",
-    width: 15,
+    width: 20,
     sortable: true,
   },
 ];
@@ -186,6 +189,59 @@ export const TemplateOrdering = (args) => {
     />
   );
 };
+
+export const TemplateCellRender = (args) => (
+  <Table
+    {...args}
+    Columns={[
+      {
+        id: 1,
+        displayName: "Name",
+        accessor: "name",
+        width: 28,
+        render: (rowData) => {
+          var name = rowData.name.split(" ")[0];
+          var surname = rowData.name.split(" ")[1];
+          return (
+            <span>
+              {name}
+              <span style={{ fontWeight: "bold", paddingLeft: "5px" }}>
+                {surname}
+              </span>
+            </span>
+          );
+        },
+      },
+      {
+        id: 2,
+        displayName: "Address",
+        accessor: "address",
+        width: 45,
+      },
+      {
+        id: 3,
+        displayName: "Gender",
+        accessor: "gender",
+        width: 27,
+        render: (rowData) => {
+          return (
+            <span
+              style={{
+                backgroundColor:
+                  rowData.gender === "female" ? "#e36bbf" : "#4992d6",
+                color: "white",
+                padding: "4px 8px",
+                borderRadius: "100px",
+              }}
+            >
+              {rowData.gender}
+            </span>
+          );
+        },
+      },
+    ]}
+  />
+);
 
 # Table
 
@@ -466,5 +522,154 @@ is defined.
     }}
   >
     {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Custom Components
+
+Most of the table components can be overridden with a custom component.
+The component will receive the same props as the 'built-in' component.
+The custom component must have a `__TYPE__` property with one of the values below:
+
+`TABLE_CONTAINER` /
+`TABLE_ROW` /
+`TABLE_CELL` /
+`TABLE_SELLECTION_CELL` /
+`TABLE_HEAD_ROW` /
+`TABLE_HEAD_CELL` /
+`TABLE_HEAD_SELECTION_CELL` /
+`TABLE_HEADER` /
+`TABLE_FOOTER` /
+`TABLE_SPECIAL_LAST_ROW` /
+`TABLE_ROW_STATUS_INDICATOR_CELL` /
+`TABLE_HEAD_ROW_STATUS_INDICATOR_CELL` /
+`TABLE_LOADER` /
+`TABLE_BODY` /
+`TABLE_HEAD` /
+
+- exported as `TableComponentOverrides`
+
+<Canvas withSource="open">
+  <Story
+    name="Custom Components"
+    args={{
+      ID: "CustomComponents",
+      RowIdentifier: "id",
+      Columns: Columns,
+      Data: Data,
+      VisibilityPattern: {
+        XS: [
+          {
+            id: 1,
+            accessor: "name",
+            width: 30,
+          },
+          {
+            id: 2,
+            accessor: "company",
+            width: 30,
+          },
+          {
+            id: 5,
+            accessor: "balance",
+            width: 40,
+          },
+        ],
+        S: [
+          {
+            id: 1,
+            accessor: "name",
+            width: 30,
+          },
+          {
+            id: 2,
+            accessor: "company",
+            width: 30,
+          },
+          {
+            id: 5,
+            accessor: "balance",
+            width: 40,
+          },
+        ],
+        M: [
+          {
+            id: 1,
+            accessor: "name",
+            width: 30,
+          },
+          {
+            id: 2,
+            accessor: "company",
+            width: 30,
+          },
+          {
+            id: 5,
+            accessor: "balance",
+            width: 40,
+          },
+        ],
+        L: [
+          {
+            id: 1,
+            accessor: "name",
+            width: 30,
+          },
+          {
+            id: 2,
+            accessor: "company",
+            width: 30,
+          },
+          {
+            id: 5,
+            accessor: "balance",
+            width: 40,
+          },
+        ],
+        XL: [
+          {
+            id: 1,
+            accessor: "name",
+            width: 30,
+          },
+          {
+            id: 2,
+            accessor: "company",
+            width: 30,
+          },
+          {
+            id: 5,
+            accessor: "balance",
+            width: 40,
+          },
+        ],
+      },
+    }}
+  >
+    {(args) => (
+      <Table {...args}>
+        <CustomTableHeader />
+        <CustomTableCell />
+        <CustomTableFooter />
+      </Table>
+    )}
+  </Story>
+</Canvas>
+
+## Cell Render
+
+The default cell data rendering can be overridden by
+implementing the `render` function in the `Columns` definition.
+
+<Canvas withSource="open">
+  <Story
+    name="Cell Render"
+    args={{
+      ID: "CellRender",
+      RowIdentifier: "id",
+      Data: Data,
+    }}
+  >
+    {TemplateCellRender.bind({})}
   </Story>
 </Canvas>
