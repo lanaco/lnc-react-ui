@@ -83,6 +83,7 @@ function Modal(props) {
     showHeader,
     width,
     basic,
+    headerTitleComponent,
   } = props;
 
   let themeProps = { theme, size, color, zIndex, open, width, basic };
@@ -122,7 +123,13 @@ function Modal(props) {
             >
               {showHeader && (
                 <Header {...themeProps}>
-                  <Title {...themeProps}>{header}</Title>
+                  {headerTitleComponent !== undefined &&
+                  headerTitleComponent !== null &&
+                  React.isValidElement(headerTitleComponent) ? (
+                    headerTitleComponent
+                  ) : (
+                    <Title {...themeProps}>{header}</Title>
+                  )}
                   <CloseButton {...themeProps}>
                     <Button
                       {...themeProps}
@@ -179,6 +186,7 @@ Modal.propTypes = {
     "gray",
     "background",
   ]),
+  headerTitleComponent: PropTypes.node,
 };
 
 export default Modal;
