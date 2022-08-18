@@ -91,9 +91,9 @@ const Table = forwardRef((props, ref) => {
     PreRenderedTableHead = false,
     //--------------------
     EnableRowStatusIndicator,
-    EnableRowTextHighlight,
+    EnableRowHighlight,
     GetRowStatusIndicatorColor,
-    GetRowTextHighlightColor,
+    GetRowHighlightColor,
     //--------------------
     NoDataText,
     NoDataComponent,
@@ -340,8 +340,8 @@ const Table = forwardRef((props, ref) => {
       key: index,
       EnableSelection,
       RowIdentifier,
-      EnableRowTextHighlight,
-      GetRowTextHighlightColor,
+      EnableRowHighlight,
+      GetRowHighlightColor,
       ...themeProps,
     };
 
@@ -361,6 +361,8 @@ const Table = forwardRef((props, ref) => {
       Index: index,
       key: index,
       IsSelected: isSelected,
+      EnableRowHighlight,
+      GetRowHighlightColor,
       ...themeProps,
     };
 
@@ -658,9 +660,9 @@ Table.defaultProps = {
   EnableLoader: false,
   EnableSelectAll: false,
   EnableRowStatusIndicator: false,
-  EnableRowTextHighlight: false,
+  EnableRowHighlight: false,
   GetRowStatusIndicatorColor: () => {},
-  GetRowTextHighlightColor: () => {},
+  GetRowHighlightColor: () => {},
   //--------------------
   NoDataText: "No data to show",
   NoDataComponet: null,
@@ -717,7 +719,7 @@ Table.propTypes = {
   /**
    *
    */
-  EnableRowTextHighlight: PropTypes.bool,
+  EnableRowHighlight: PropTypes.bool,
   /**
    *
    */
@@ -725,7 +727,7 @@ Table.propTypes = {
   /**
    *
    */
-  GetRowTextHighlightColor: PropTypes.func,
+  GetRowHighlightColor: PropTypes.func,
   //----------------------------------------
   /**
    * Specify the text that is shown when there are 0 rows in the `Data`.

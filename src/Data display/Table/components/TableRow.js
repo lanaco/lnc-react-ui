@@ -38,8 +38,6 @@ const HtmlRow = styled.tr`
               "background"
             )};
           }
-
-          // cursor: pointer;
       }`;
     else return "";
   }}
@@ -47,14 +45,15 @@ const HtmlRow = styled.tr`
   ${(props) => {
     if (props.IsSelected === true) {
       return `
-        // cursor: pointer;
-        background-color: ${getColorRgbaValue(
-          props.theme,
-          "TableRow",
-          props.color,
-          "active",
-          "background"
-        )};
+        & > td {
+          background-color: ${getColorRgbaValue(
+            props.theme,
+            "TableRow",
+            props.color,
+            "active",
+            "background"
+          )};
+        }
       `;
     } else return "";
   }}

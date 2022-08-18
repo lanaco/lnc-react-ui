@@ -87,7 +87,7 @@ TableHeadSelectionCell.defaultProps = {
   //--------------------
   Index: 0,
   IsSelected: null,
-  EnableSelectAll: false,
+  GetRowHighlightColor: () => "",
   //--------------------
   className: "",
   size: "small",

@@ -312,7 +312,60 @@ The `onColumnClick` event provides the next ordering object with the mentioned p
   </Story>
 </Canvas>
 
+## Status Indicators
+
+The status indicator option is enabled via the `EnableRowStatusIndicator` property.
+Color of the status indicator is set using the `GetRowStatusIndicatorColor: (RowData)` callback.
+
+<Canvas>
+  <Story
+    name="Status Indicators"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      Columns: Columns,
+      Data: Data,
+      EnableRowStatusIndicator: true,
+      GetRowStatusIndicatorColor: (rowData) => {
+        if (rowData.company === "QUAREX") return statusColor.PRIMARY;
+        return statusColor.ERROR;
+      },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Row Highlighting
+
+The row highlighting option is enabled via the `EnableRowHighlight` property.
+Color of the status indicator is set using the `EnableRowHighlight: (RowData)` callback.
+
+<Canvas>
+  <Story
+    name="Row Highlighting"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      Columns: Columns,
+      Data: Data,
+      EnableRowHighlight: true,
+      GetRowHighlightColor: (rowData) => {
+        if (rowData.company === "QUAREX") return "#ECFDF5";
+        return "#FFF1F2";
+      },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
 ## Visibility Pattern
+
+The `VisibilityPattern` object allows you to define which columns are rendered on different screen sizes,
+in what order will the columns be and what percentage of the table width will they take.
+For each of the given screen sizes (`XS`,`S`,`M`,`L`,`XL`), an array of column objects (`{ id, accessor, width }`)
+is defined.
 
 <Canvas>
   <Story
@@ -328,12 +381,7 @@ The `onColumnClick` event provides the next ordering object with the mentioned p
           {
             id: 1,
             accessor: "name",
-            width: 70,
-          },
-          {
-            id: 2,
-            accessor: "company",
-            width: 30,
+            width: 100,
           },
         ],
         S: [
@@ -350,6 +398,11 @@ The `onColumnClick` event provides the next ordering object with the mentioned p
         ],
         M: [
           {
+            id: 2,
+            accessor: "company",
+            width: 15,
+          },
+          {
             id: 3,
             accessor: "address",
             width: 10,
@@ -357,10 +410,15 @@ The `onColumnClick` event provides the next ordering object with the mentioned p
           {
             id: 1,
             accessor: "name",
-            width: 90,
+            width: 75,
           },
         ],
         L: [
+          {
+            id: 5,
+            accessor: "balance",
+            width: 15,
+          },
           {
             id: 3,
             accessor: "address",
@@ -374,24 +432,34 @@ The `onColumnClick` event provides the next ordering object with the mentioned p
           {
             id: 1,
             accessor: "name",
-            width: 60,
+            width: 45,
           },
         ],
         XL: [
           {
-            id: 3,
-            accessor: "address",
-            width: 20,
+            id: 1,
+            accessor: "name",
+            width: 18,
           },
           {
             id: 2,
             accessor: "company",
+            width: 12,
+          },
+          {
+            id: 3,
+            accessor: "address",
+            width: 40,
+          },
+          {
+            id: 4,
+            accessor: "gender",
             width: 15,
           },
           {
-            id: 1,
-            accessor: "name",
-            width: 65,
+            id: 5,
+            accessor: "balance",
+            width: 15,
           },
         ],
       },

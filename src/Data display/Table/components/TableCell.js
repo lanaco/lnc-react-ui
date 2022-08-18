@@ -11,13 +11,10 @@ const HtmlCell = styled.td`
   text-overflow: ellipsis;
   width: ${(props) => props.width};
   padding: 0.875rem 1.5rem;
+  ${(props) => props.bgColor}
 
   ${(props) =>
     getComponentTypographyCss(props.theme, "TableCell", props.size, "enabled")};
-`;
-
-const CellText = styled.span`
-  ${(props) => props.textColor}
 `;
 
 const TableCell = (props) => {
@@ -27,8 +24,8 @@ const TableCell = (props) => {
     RowData,
     Index,
     EnableSelection,
-    EnableRowTextHighlight,
-    GetRowTextHighlightColor,
+    EnableRowHighlight,
+    GetRowHighlightColor,
     //----------------
     className,
     size,
@@ -58,12 +55,12 @@ const TableCell = (props) => {
     return "auto";
   };
 
-  const getTextColor = () => {
-    var color = GetRowTextHighlightColor(RowData);
+  const getBgColor = () => {
+    var color = GetRowHighlightColor(RowData);
 
-    if (EnableRowTextHighlight === true && isColor(color))
+    if (EnableRowHighlight === true && isColor(color))
       return `
-        color: ${color}
+        background-color: ${color};
       `;
 
     return "";
@@ -85,14 +82,13 @@ const TableCell = (props) => {
         `${Column.index}: accessor property is required when the render function is not suplied`
       );
 
-    return (
-      <CellText textColor={getTextColor()}>{RowData[Column.accessor]}</CellText>
-    );
+    return <span>{RowData[Column.accessor]}</span>;
   };
 
   return (
     <HtmlCell
       {...themeProps}
+      bgColor={getBgColor()}
       selection={EnableSelection}
       width={getWidth()}
       key={Index}
@@ -109,6 +105,8 @@ TableCell.defaultProps = {
   RowData: {},
   Index: 0,
   EnableSelection: false,
+  EnableRowHighlight: false,
+  GetRowHighlightColor: () => "",
   //--------------------
   className: "",
   size: "small",
@@ -122,6 +120,8 @@ TableCell.propTypes = {
   RowData: PropTypes.object.isRequired,
   Index: PropTypes.number.isRequired,
   EnableSelection: PropTypes.bool,
+  EnableRowHighlight: PropTypes.bool,
+  GetRowHighlightColor: PropTypes.func,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),

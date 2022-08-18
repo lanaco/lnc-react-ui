@@ -239,7 +239,7 @@ const TableHeadCell = (props) => {
       onClick={handleColumnClick}
       {...themeProps}
       selection={EnableSelectAll}
-      ordering={EnableOrdering && Column.sortable}
+      ordering={EnableOrdering === true && Column.sortable === true}
       key={Index}
     >
       <HeaderInnerCell {...themeProps}>

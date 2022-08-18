@@ -8,6 +8,7 @@ const HtmlCell = styled.td`
   padding: 0 0 0 1.25rem;
   background-color: transparent;
   width: ${(props) => props.width}%;
+  ${(props) => props.bgColor}
 `;
 
 const TableSelectionCell = (props) => {
@@ -17,6 +18,8 @@ const TableSelectionCell = (props) => {
     onSelectRow,
     IsSelected,
     Index,
+    EnableRowHighlight,
+    GetRowHighlightColor,
     //----------------
     className,
     size,
@@ -36,8 +39,30 @@ const TableSelectionCell = (props) => {
     onSelectRow(e, RowData, IsSelected);
   };
 
+  const isColor = (strColor) => {
+    const s = new Option().style;
+    s.color = strColor;
+    return s.color !== "";
+  };
+
+  const getBgColor = () => {
+    var color = GetRowHighlightColor(RowData);
+
+    if (EnableRowHighlight === true && isColor(color))
+      return `
+        background-color: ${color};
+      `;
+
+    return "";
+  };
+
   return (
-    <HtmlCell {...themeProps} key={Index} width={props.width}>
+    <HtmlCell
+      bgColor={getBgColor()}
+      {...themeProps}
+      key={Index}
+      width={props.width}
+    >
       <Checkbox id={Index} checked={IsSelected} onChange={onChange} />
     </HtmlCell>
   );
@@ -50,8 +75,9 @@ TableSelectionCell.defaultProps = {
   RowData: {},
   onSelectRow: () => {},
   Index: 0,
-  SelectedData: [],
   IsSelected: null,
+  EnableRowHighlight: false,
+  GetRowHighlightColor: () => "",
   //--------------------
   className: "",
   size: "small",
@@ -67,6 +93,8 @@ TableSelectionCell.propTypes = {
   Index: PropTypes.number.isRequired,
   SelectedData: PropTypes.array,
   IsSelected: PropTypes.bool,
+  EnableRowHighlight: PropTypes.bool,
+  GetRowHighlightColor: PropTypes.func,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
