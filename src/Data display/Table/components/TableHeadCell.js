@@ -1,31 +1,97 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
 import Icon from "../../../General/Icon/index";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+} from "../../../_utils/utils";
+import { useTheme } from "@emotion/react";
 
 const HtmlHeadCell = styled.th`
   text-align: left;
   transition: all 250ms ease;
-  font-weight: 900;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  border-bottom: 1px solid ${(props) => props.theme.palette.transparent.light};
-  border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
+  padding: 0.875rem 1.5rem;
+  cursor: ${(props) => (props.ordering ? "pointer" : "default")};
 
-  padding: ${(props) =>
-    props.selection ? "2px 2px 2px 6px" : "4px 2px 4px 6px"};
+  &:hover {
+    ${(props) =>
+      props.ordering
+        ? `background-color: ${getColorRgbaValue(
+            props.theme,
+            "TableHeadCell",
+            null,
+            "hover",
+            "background"
+          )};`
+        : ""}
+  }
+
+  ${(props) =>
+    getComponentTypographyCss(
+      props.theme,
+      "TableHeadCell",
+      props.size,
+      "enabled"
+    )};
+
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "TableHeadCell", null, "enabled", "text")}};
+
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "background"
+    )}};
+
+  border-top: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "border"
+    )}};
+
+  border-bottom: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "border"
+    )}};
+
 
   &:first-of-type {
-    border-radius: 3px 0 0 0;
+    border-radius: 0.5rem 0 0 0;
+    border-left: ${(props) =>
+      "1px solid " +
+      getColorRgbaValue(
+        props.theme,
+        "TableHeadCell",
+        null,
+        "enabled",
+        "border"
+      )}};
   }
 
   &:last-of-type {
-    border-radius: 0 3px 0 0;
-  }
-
-  &:hover {
-    background-color: whitesmoke;
-    cursor: pointer;
+    border-radius: 0 0.5rem 0 0;
+    border-right: ${(props) =>
+      "1px solid " +
+      getColorRgbaValue(
+        props.theme,
+        "TableHeadCell",
+        null,
+        "enabled",
+        "border"
+      )}};
   }
 `;
 
@@ -33,23 +99,51 @@ const HeaderInnerCell = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  // justify-content: center;
-
-  & i {
-    color: black;
-  }
 `;
 
 const HeaderCellText = styled.span`
-  color: black;
+  padding-right: 0.25rem;
+
+  color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      props.color,
+      "enabled",
+      "text"
+    )};
+
+  font-weight: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      props.color,
+      "enabled",
+      "fontWeight"
+    )};
 `;
 
 const HeaderCellIcon = styled.span`
-  color: black;
-
   & i {
     color: ${(props) =>
-      props.sort ? "transparent" : theme.palette[props.color].main};
+      props.sort
+        ? "transparent"
+        : getColorRgbaValue(
+            props.theme,
+            "TableHeadCell",
+            props.color,
+            "enabled",
+            "text"
+          )};
+
+    font-weight: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "TableHeadCell",
+        props.color,
+        "enabled",
+        "fontWeight"
+      )};
   }
 `;
 
@@ -66,8 +160,9 @@ const TableHeadCell = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -81,21 +176,17 @@ const TableHeadCell = (props) => {
       let orderingIconClass;
 
       if (Ordering && Ordering.columnId === Column.id) {
-        if (Ordering.ascending === true)
-          orderingIconClass = "long-arrow-alt-up";
+        if (Ordering.ascending === true) orderingIconClass = "angle-up";
 
-        if (Ordering.descending === true)
-          orderingIconClass = "long-arrow-alt-down";
+        if (Ordering.descending === true) orderingIconClass = "angle-down";
 
         if (!Ordering.ascending === false && !Ordering.descending === false)
           orderingIconClass = "sort";
       } else orderingIconClass = "sort";
 
-      // console.log(Column.accessor, orderingIconClass);
-
       return (
-        <HeaderCellIcon color={"primary"} sort={orderingIconClass === "sort"}>
-          <Icon color={"primary"} icon={orderingIconClass} />
+        <HeaderCellIcon {...themeProps} sort={orderingIconClass === "sort"}>
+          <Icon {...themeProps} sizeInUnits={"14px"} icon={orderingIconClass} />
         </HeaderCellIcon>
       );
     }
@@ -148,10 +239,11 @@ const TableHeadCell = (props) => {
       onClick={handleColumnClick}
       {...themeProps}
       selection={EnableSelectAll}
+      ordering={EnableOrdering === true && Column.sortable === true}
       key={Index}
     >
-      <HeaderInnerCell>
-        <HeaderCellText>{Column.displayName}</HeaderCellText>
+      <HeaderInnerCell {...themeProps}>
+        <HeaderCellText {...themeProps}>{Column.displayName}</HeaderCellText>
 
         {renderOrdering()}
       </HeaderInnerCell>
@@ -166,12 +258,12 @@ TableHeadCell.defaultProps = {
   Ordering: {},
   Index: 0,
   EnableSelectAll: false,
+  EnableOrdering: false,
   onColumnClick: () => {},
   //--------------------
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableHeadCell.propTypes = {
@@ -181,6 +273,7 @@ TableHeadCell.propTypes = {
   Ordering: PropTypes.object,
   Index: PropTypes.any,
   EnableSelectAll: PropTypes.bool,
+  EnableOrdering: PropTypes.bool,
   onColumnClick: PropTypes.func,
   //----------------------------------------
   className: PropTypes.string,
@@ -189,13 +282,11 @@ TableHeadCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableHeadCell;

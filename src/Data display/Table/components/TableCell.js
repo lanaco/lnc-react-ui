@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
 import { isFunction, isEmpty } from "lodash";
+import { useTheme } from "@emotion/react";
+import { getComponentTypographyCss } from "../../../_utils/utils";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: ${(props) => props.width};
-  padding: ${(props) =>
-    props.selection === false ? "11.4px 6px 11.4px 6px" : "4px 6px 4px 6px"};
-`;
+  padding: 0.875rem 1.5rem;
+  ${(props) => props.bgColor}
 
-const CellText = styled.span`
-  ${(props) => props.textColor}
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "TableCell", props.size, "enabled")};
 `;
 
 const TableCell = (props) => {
@@ -24,14 +24,15 @@ const TableCell = (props) => {
     RowData,
     Index,
     EnableSelection,
-    EnableRowTextHighlight,
-    GetRowTextHighlightColor,
+    EnableRowHighlight,
+    GetRowHighlightColor,
     //----------------
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -40,7 +41,6 @@ const TableCell = (props) => {
     theme,
   };
 
-  // TODO: move to service
   const isColor = (strColor) => {
     const s = new Option().style;
     s.color = strColor;
@@ -55,12 +55,12 @@ const TableCell = (props) => {
     return "auto";
   };
 
-  const getTextColor = () => {
-    var color = GetRowTextHighlightColor(RowData);
+  const getBgColor = () => {
+    var color = GetRowHighlightColor(RowData);
 
-    if (EnableRowTextHighlight === true && isColor(color))
+    if (EnableRowHighlight === true && isColor(color))
       return `
-        color: ${color}
+        background-color: ${color};
       `;
 
     return "";
@@ -82,14 +82,13 @@ const TableCell = (props) => {
         `${Column.index}: accessor property is required when the render function is not suplied`
       );
 
-    return (
-      <CellText textColor={getTextColor()}>{RowData[Column.accessor]}</CellText>
-    );
+    return <span>{RowData[Column.accessor]}</span>;
   };
 
   return (
     <HtmlCell
       {...themeProps}
+      bgColor={getBgColor()}
       selection={EnableSelection}
       width={getWidth()}
       key={Index}
@@ -106,11 +105,12 @@ TableCell.defaultProps = {
   RowData: {},
   Index: 0,
   EnableSelection: false,
+  EnableRowHighlight: false,
+  GetRowHighlightColor: () => "",
   //--------------------
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableCell.propTypes = {
@@ -120,6 +120,8 @@ TableCell.propTypes = {
   RowData: PropTypes.object.isRequired,
   Index: PropTypes.number.isRequired,
   EnableSelection: PropTypes.bool,
+  EnableRowHighlight: PropTypes.bool,
+  GetRowHighlightColor: PropTypes.func,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
@@ -127,13 +129,11 @@ TableCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableCell;

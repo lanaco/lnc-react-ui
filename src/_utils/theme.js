@@ -298,7 +298,7 @@ const theme = {
   },
 };
 
-const lanaco_light = {
+export const lanaco_light = {
   name: "Lanaco Light",
   class: "lnc-light",
   backgroundColor: "#fff",
@@ -2119,14 +2119,139 @@ const lanaco_light = {
           border: 200,
         },
       },
-      teal: {},
-      blue: {},
-      red: {},
-      violet: {},
-      yellow: {},
-      green: {},
-      gray: {},
-      neutral: {},
+    },
+    TableCell: {
+      default: {
+        palette: "gray",
+        enabled: {},
+        hover: {},
+        focus: {},
+        active: {},
+        disabled: {},
+      },
+    },
+    Table: {
+      default: {
+        palette: "gray",
+        enabled: {
+          border: 300,
+          background: 0,
+        },
+        hover: {
+          border: 300,
+          background: 0,
+        },
+        focus: {
+          border: 300,
+          background: 0,
+        },
+        active: {
+          border: 300,
+          background: 0,
+        },
+        disabled: {
+          border: 300,
+          background: 0,
+        },
+      },
+    },
+    TableHeadCell: {
+      default: {
+        palette: "gray",
+        enabled: {
+          border: 300,
+          background: 50,
+          text: 900,
+          fontWeight: 700,
+        },
+        hover: {
+          border: 300,
+          background: 100,
+          text: 900,
+          fontWeight: 700,
+        },
+        focus: {
+          border: 300,
+          background: 50,
+          text: 900,
+          fontWeight: 700,
+        },
+        active: {
+          border: 300,
+          background: 50,
+          text: 900,
+          fontWeight: 700,
+        },
+        disabled: {
+          background: 0,
+          backgroundOpacity: 50,
+        },
+      },
+    },
+    TableRow: {
+      default: {
+        palette: "gray",
+        enabled: {
+          border: 200,
+          background: 50,
+        },
+        hover: {
+          border: 200,
+          background: 50,
+        },
+        focus: {
+          border: 200,
+          background: 50,
+        },
+        active: {
+          border: 200,
+          background: 50,
+        },
+        disabled: {
+          border: 200,
+          background: 50,
+        },
+      },
+      teal: {
+        active: {
+          background: 50,
+        },
+      },
+      blue: {
+        active: {
+          background: 50,
+        },
+      },
+      red: {
+        active: {
+          background: 50,
+        },
+      },
+      violet: {
+        active: {
+          background: 50,
+        },
+      },
+      yellow: {
+        active: {
+          background: 50,
+        },
+      },
+      green: {
+        active: {
+          background: 50,
+        },
+      },
+      gray: {
+        active: {
+          background: 50,
+        },
+      },
+      neutral: {
+        active: {
+          background: 50,
+        },
+      },
     },
     Modal: {
       default: {
@@ -2292,6 +2417,7 @@ const lanaco_light = {
       },
     },
   },
+
   palette: {
     outline: {
       width: "0.125rem",

@@ -2,25 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { keyframes, useTheme } from "@emotion/react";
-import { getColorRgbaValue, getComponentTypographyCss } from "../../_utils/utils";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+} from "../../_utils/utils";
 
-const heightBySize = (size) => {
+const heightBySize = (size, theme) => {
   if (size === "small")
     return `
-          width: 3.125rem;
-          height: 3.125rem;
+          width: ${theme.sizes.small};
+          height: ${theme.sizes.small};
         `;
 
   if (size === "medium")
     return `
-            width: 4.375rem;
-            height: 4.375rem;
+            width: ${theme.sizes.medium};
+            height: ${theme.sizes.medium};
         `;
 
   if (size === "large")
     return `
-          width: 6.25rem;
-          height: 6.25rem;
+          width: ${theme.sizes.large};
+          height: ${theme.sizes.large};
         `;
 };
 
@@ -36,7 +39,7 @@ const SpinnerWrapper = styled.div`
   width: max-content;
   display: flex;
   & .label-text {
-    display: ${props => props.label ? 'unset': 'none'};
+    display: ${(props) => (props.label ? "unset" : "none")};
     position: absolute;
     top: 50%;
     left: 50%;
@@ -44,19 +47,44 @@ const SpinnerWrapper = styled.div`
     ${(props) =>
       getComponentTypographyCss(props.theme, "Spinner", props.size, "enabled")};
     color: ${(props) =>
-      getColorRgbaValue(props.theme, "Spinner", props.color, "enabled", "text")};
+      getColorRgbaValue(
+        props.theme,
+        "Spinner",
+        props.color,
+        "enabled",
+        "text"
+      )};
   }
 `;
 
 const StyledSpinner = styled.div`
   display: inline-block;
-  ${(props) => heightBySize(props.size)}
-  border: ${props =>  `0.3125rem solid ${getColorRgbaValue(props.theme, "Spinner", props.color, "enabled", "unfilled")}`};
+  ${(props) => heightBySize(props.size, props.theme)}
+  border: ${(props) =>
+    `0.3125rem solid ${getColorRgbaValue(
+      props.theme,
+      "Spinner",
+      props.color,
+      "enabled",
+      "unfilled"
+    )}`};
   border-radius: 50%;
   border-top-color: ${(props) =>
-    getColorRgbaValue(props.theme, "Spinner", props.color, "enabled", "background")};
+    getColorRgbaValue(
+      props.theme,
+      "Spinner",
+      props.color,
+      "enabled",
+      "background"
+    )};
   border-right-color: ${(props) =>
-    getColorRgbaValue(props.theme, "Spinner", props.color, "enabled", "background")};
+    getColorRgbaValue(
+      props.theme,
+      "Spinner",
+      props.color,
+      "enabled",
+      "background"
+    )};
 
   animation: ${spin} 0.8s ease-in-out infinite;
 `;
@@ -68,7 +96,12 @@ const Spinner = (props) => {
   const themeProps = { theme, size, color };
 
   return (
-    <SpinnerWrapper {...themeProps} className={className} style={style} label={label}>
+    <SpinnerWrapper
+      {...themeProps}
+      className={className}
+      style={style}
+      label={label}
+    >
       <StyledSpinner {...themeProps}></StyledSpinner>
       <div className="label-text">{label}</div>
     </SpinnerWrapper>

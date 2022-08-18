@@ -1,32 +1,61 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { getColorRgbaValue } from "../../../_utils/utils";
+import { useTheme } from "@emotion/react";
 
 const HtmlRow = styled.tr`
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
+  border-bottom: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+
+  border-left: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+
+  border-right: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+
+  &:last-of-type > td:first-of-type {
+    border-radius: 0 0 0 0.5rem;
+  }
+
+  &:last-of-type > td:last-of-type {
+    border-radius: 0 0 0.5rem 0;
+  }
 
   ${(props) => {
     if (props.IsSelected !== true)
       return `
        &:hover {
           & > td {
-            background-color: whitesmoke ;
+            background-color: ${getColorRgbaValue(
+              props.theme,
+              "TableRow",
+              null,
+              "hover",
+              "background"
+            )};
           }
-
-          cursor: pointer;
       }`;
     else return "";
   }}
 
   ${(props) => {
-    if (props.IsSelected === true)
+    if (props.IsSelected === true) {
       return `
-        background-color: ${theme.palette.primary.lighter};
-        cursor: pointer;
+        & > td {
+          background-color: ${getColorRgbaValue(
+            props.theme,
+            "TableRow",
+            props.color,
+            "active",
+            "background"
+          )};
+        }
       `;
-    else return "";
+    } else return "";
   }}
 `;
 
@@ -34,20 +63,16 @@ const TableRow = (props) => {
   //--------------------------
   const {
     onRowClick,
-    onSelectRow,
     RowData,
-    // SelectedData,
-    // Columns,
-    // ColumnsToRender,
     Index,
     IsSelected,
     //----------------
     className,
     size,
     color,
-    theme,
   } = props;
 
+  const theme = useTheme();
   const themeProps = {
     className,
     size,
@@ -58,7 +83,7 @@ const TableRow = (props) => {
   const onClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    onRowClick(e, RowData);
+    if (onRowClick) onRowClick(e, RowData);
   };
 
   return (
@@ -77,29 +102,20 @@ TableRow.defaultProps = {
   __TYPE__: "TABLE_ROW",
   //--------------------
   onRowClick: () => {},
-  onSelectRow: () => {},
   RowData: {},
-  // SelectedData: [],
-  // Columns: [],
-  // ColumnsToRender: [],
   //--------------------
   IsSelected: null,
   //--------------------
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableRow.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
   onRowClick: PropTypes.func,
-  onSelectRow: PropTypes.func,
   RowData: PropTypes.object,
-  // SelectedData: PropTypes.array,
-  // Columns: PropTypes.arrayOf(PropTypes.object),
-  // ColumnsToRender: PropTypes.arrayOf(PropTypes.object),
   //----------------------------------------
   IsSelected: PropTypes.bool,
   //----------------------------------------
@@ -109,13 +125,11 @@ TableRow.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableRow;

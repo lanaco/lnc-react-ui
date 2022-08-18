@@ -1,30 +1,32 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
 import Checkbox from "../../../Basic Inputs/CheckBoxInput/index";
 
 const HtmlCell = styled.td`
-  padding: 4px 2px 4px 6px;
+  padding: 0 0 0 1.25rem;
   background-color: transparent;
   width: ${(props) => props.width}%;
+  ${(props) => props.bgColor}
 `;
 
 const TableSelectionCell = (props) => {
   //--------------------------
   const {
-    Column,
     RowData,
-    SelectedData,
     onSelectRow,
     IsSelected,
     Index,
+    EnableRowHighlight,
+    GetRowHighlightColor,
     //----------------
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -33,25 +35,33 @@ const TableSelectionCell = (props) => {
     theme,
   };
 
-  const onChange = (_, value) => {
-    //TODO: when the new checkbox is implemented, the first param should be the event object
-    onSelectRow(null, RowData, IsSelected);
+  const onChange = (e) => {
+    onSelectRow(e, RowData, IsSelected);
   };
 
-  const onCellClick = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
+  const isColor = (strColor) => {
+    const s = new Option().style;
+    s.color = strColor;
+    return s.color !== "";
+  };
 
-    //TODO: when the new checkbox is implemented, the first param should be the event object
-    onSelectRow(null, RowData, IsSelected);
+  const getBgColor = () => {
+    var color = GetRowHighlightColor(RowData);
+
+    if (EnableRowHighlight === true && isColor(color))
+      return `
+        background-color: ${color};
+      `;
+
+    return "";
   };
 
   return (
     <HtmlCell
+      bgColor={getBgColor()}
       {...themeProps}
       key={Index}
       width={props.width}
-      onClick={onCellClick}
     >
       <Checkbox id={Index} checked={IsSelected} onChange={onChange} />
     </HtmlCell>
@@ -65,13 +75,13 @@ TableSelectionCell.defaultProps = {
   RowData: {},
   onSelectRow: () => {},
   Index: 0,
-  SelectedData: [],
   IsSelected: null,
+  EnableRowHighlight: false,
+  GetRowHighlightColor: () => "",
   //--------------------
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableSelectionCell.propTypes = {
@@ -83,6 +93,8 @@ TableSelectionCell.propTypes = {
   Index: PropTypes.number.isRequired,
   SelectedData: PropTypes.array,
   IsSelected: PropTypes.bool,
+  EnableRowHighlight: PropTypes.bool,
+  GetRowHighlightColor: PropTypes.func,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
@@ -90,13 +102,11 @@ TableSelectionCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableSelectionCell;

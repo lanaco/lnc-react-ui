@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
 
-const HtmlHead = styled.thead``;
+const HtmlHead = styled.thead`
+  border-radius: 0.5rem 0.5rem 0 0;
+`;
 
 const TableHead = (props) => {
   //--------------------------
-  const { className, size, color, theme } = props;
+  const { className, size, color } = props;
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -25,7 +28,6 @@ TableHead.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableHead.propTypes = {
@@ -43,7 +45,6 @@ TableHead.propTypes = {
     "white",
     "black",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableHead;

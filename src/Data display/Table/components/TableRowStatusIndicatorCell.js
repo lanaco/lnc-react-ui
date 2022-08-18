@@ -1,17 +1,21 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
 import { statusColor } from "../constants/constants";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: ${(props) => props.bgColor} !important;
-  padding-right: 2px;
-  border-radius: 2px;
+  padding: 0.25rem 0.125rem;
+`;
+
+const Indicator = styled.div`
   width: ${(props) => props.width};
+  height: 100%;
+  border-radius: 100px;
+  background-color: ${(props) => props.bgColor} !important;
 `;
 
 const TableRowStatusIndicatorCell = (props) => {
@@ -24,8 +28,9 @@ const TableRowStatusIndicatorCell = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -35,7 +40,7 @@ const TableRowStatusIndicatorCell = (props) => {
   };
 
   const getWidth = () => {
-    return "2px";
+    return "4px";
   };
 
   const isColor = (strColor) => {
@@ -56,7 +61,19 @@ const TableRowStatusIndicatorCell = (props) => {
 
         return statusColor.NONE;
       }}
-    ></HtmlCell>
+    >
+      <Indicator
+        {...themeProps}
+        width={getWidth()}
+        bgColor={() => {
+          var color = GetRowStatusIndicatorColor(RowData);
+
+          if (isColor(color)) return color;
+
+          return statusColor.NONE;
+        }}
+      />
+    </HtmlCell>
   );
 };
 
@@ -69,7 +86,6 @@ TableRowStatusIndicatorCell.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableRowStatusIndicatorCell.propTypes = {
@@ -84,13 +100,11 @@ TableRowStatusIndicatorCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableRowStatusIndicatorCell;

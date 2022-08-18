@@ -2,15 +2,24 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import CheckBoxInput from "./index";
 import Icon from "../../General/Icon";
-import image from '../../_utils/images/testsvg.svg'
+import image from "../../_utils/images/testsvg.svg";
 
 <Meta title="Basic Inputs/Check Box Input" component={CheckBoxInput} />
 
-export const TemplateDefault = (args) => <CheckBoxInput {...args} />
+export const TemplateDefault = (args) => <CheckBoxInput {...args} />;
 
-export const TemplateIndeterminate = (args) => <CheckBoxInput {...args} indeterminate={true} label="Indeterminate"/>
+export const TemplateIndeterminate = (args) => (
+  <CheckBoxInput {...args} indeterminate={true} label="Indeterminate" />
+);
 
-export const TemplateDisabled = (args) => <CheckBoxInput {...args} disabled={true} label="Disabled" labelPosition="left"/>
+export const TemplateDisabled = (args) => (
+  <CheckBoxInput
+    {...args}
+    disabled={true}
+    label="Disabled"
+    labelPosition="left"
+  />
+);
 
 export const TemplateReadOnly = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
@@ -20,7 +29,12 @@ export const TemplateReadOnly = (args) => (
 );
 
 export const TemplateCustom = (args) => (
-    <CheckBoxInput checked customCheckmark={<img src={image} alt=""/>} label="Custom" checked={true}></CheckBoxInput>
+  <CheckBoxInput
+    checked
+    customCheckmark={<img src={image} alt="" />}
+    label="Custom"
+    checked={true}
+  ></CheckBoxInput>
 );
 
 export const TemplateSizes = (args) => (
@@ -64,29 +78,19 @@ import { CheckBoxInput } from "@lnc-react-ui";
 ## Disabled state
 
 <Canvas>
-  <Story
-    name="Disabled"
-  >
-    {TemplateDisabled.bind({})}
-  </Story>
+  <Story name="Disabled">{TemplateDisabled.bind({})}</Story>
 </Canvas>
 
 ## Indeterminate state
 
 <Canvas>
-  <Story
-    name="Indeterminate">
-    {TemplateIndeterminate.bind({})}
-  </Story>
+  <Story name="Indeterminate">{TemplateIndeterminate.bind({})}</Story>
 </Canvas>
 
 ## Read only
 
 <Canvas>
-  <Story
-    name="Read Only">
-    {TemplateReadOnly.bind({})}
-  </Story>
+  <Story name="Read Only">{TemplateReadOnly.bind({})}</Story>
 </Canvas>
 
 ## Custom checkmark
