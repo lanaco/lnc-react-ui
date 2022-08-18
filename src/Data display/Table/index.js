@@ -76,6 +76,24 @@ const NoDataRow = styled.span`
   padding: 0.5rem;
 `;
 
+export const TableComponentOverrides = {
+  TableContainer: "TABLE_CONTAINER",
+  TableRow: "TABLE_ROW",
+  TableCell: "TABLE_CELL",
+  TableSelectionCell: "TABLE_SELLECTION_CELL",
+  TableHeadRow: "TABLE_HEAD_ROW",
+  TableHeadCell: "TABLE_HEAD_CELL",
+  TableHeadSelectionCell: "TABLE_HEAD_SELECTION_CELL",
+  TableHeader: "TABLE_HEADER",
+  TableFooter: "TABLE_FOOTER",
+  TableSpecialLastRow: "TABLE_SPECIAL_LAST_ROW",
+  TableRowStatusIndicatorCell: "TABLE_ROW_STATUS_INDICATOR_CELL",
+  TableHeadRowStatusIndicatorCell: "TABLE_HEAD_ROW_STATUS_INDICATOR_CELL",
+  TableLoader: "TABLE_LOADER",
+  TableBody: "TABLE_BODY",
+  TableHead: "TABLE_HEAD",
+};
+
 /**
  * A table component.
  */
