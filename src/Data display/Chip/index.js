@@ -5,6 +5,7 @@ import { useTheme } from "@emotion/react";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
+  getComponentPropValue,
   getComponentTypographyCss,
   getDisabledStateCss,
   getOutlineCss,
@@ -62,7 +63,16 @@ const StyledChip = styled.span`
     getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
   justify-content: center;
   align-items: center;
-  ${(props) => getComponentTypographyCss(props.theme, "Chip", props.size, "enabled")};
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Chip", props.size, "enabled")};
+  backdrop-filter: ${(props) =>
+    getComponentPropValue(
+      props.theme,
+      "Chip",
+      props.color,
+      "enabled",
+      "backDropFilter"
+    )};
 
   &:hover {
     background-color: ${(props) =>
@@ -104,8 +114,8 @@ const StyledChip = styled.span`
 `;
 
 const getAvatarSize = (theme, size) => {
-    return `calc(${getSizeValueWithUnits(theme, size)} - 8px)`;
-}
+  return `calc(${getSizeValueWithUnits(theme, size)} - 8px)`;
+};
 
 const Chip = React.forwardRef((props, ref) => {
   const {
@@ -154,7 +164,12 @@ const Chip = React.forwardRef((props, ref) => {
       {...rest}
     >
       {avatar && (
-        <Avatar {...themeProps}  disabled={disabled} sizeInUnits={getAvatarSize(theme, size)} {...avatarProps}/>
+        <Avatar
+          {...themeProps}
+          disabled={disabled}
+          sizeInUnits={getAvatarSize(theme, size)}
+          {...avatarProps}
+        />
       )}
 
       {leadingIcon && (

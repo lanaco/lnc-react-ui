@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import { createPortal } from 'react-dom';
-import { getComponentTypographyCss } from '../../_utils/utils';
+import { getBorderRadiusValueWithUnits, getColorRgbaValue, getComponentTypographyCss } from '../../_utils/utils';
 
 const StyledPopover = styled.div`
-background-color: ${(props) => props.theme.palette[props.theme.colorContext.neutral][100]};
+box-sizing: border-box;
+font-family: ${(props) => props.theme?.typography?.fontFamily};
 display: ${props => props.show ? 'block' : 'none'};
 opacity: 0;
 opacity: ${props => props.show ? '1' : '0'};
@@ -19,14 +20,16 @@ ${props => props.position?.horizontalPosition};
 ${props => props.position?.verticalPosition};
 overflow: auto;
 box-shadow: ${(props) => `0px 0px 6px -2px ${props.theme.palette[props.theme.colorContext.neutral][300]}`};
+box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+border-radius: ${props => getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
+
 box-sizing: border-box;
 max-width: ${props => props.position?.maxWidth ? (props.position.maxWidth != "100vw" ? props.position.maxWidth + "px" : "100vw") : "100vw"};
 max-height: ${props => props.position?.maxHeight ? (props.position.maxHeight != "100vh" ? props.position.maxHeight + "px" : "100vh") : "100vh"};
 padding: 12px;
+background-color: ${props =>  getColorRgbaValue(props.theme, "Popover", "default", "enabled", "bg")};
 
 z-index: ${props => props.zIndex ? props.zIndex : props.theme.zIndex.popover};
- ${(props) =>
-    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")};
 
 @keyframes fadeIn {
   0% { opacity: 0; }
@@ -58,6 +61,7 @@ const Popover = React.forwardRef((props, ref) => {
   const {
     anchorElement,
     show,
+    borderRadius,
     vertical,
     horizontal,
     offset,
@@ -177,7 +181,7 @@ const Popover = React.forwardRef((props, ref) => {
 
   return (
     createPortal(
-    <StyledPopover theme={theme} ref={ref ? ref : popoverRef} zIndex={zIndex} position={popoverPosition} show={show} className={className} style={style} {...rest}>
+    <StyledPopover theme={theme} ref={ref ? ref : popoverRef} zIndex={zIndex} position={popoverPosition} show={show} borderRadius={borderRadius} className={className} style={style} {...rest}>
       {children}
     </StyledPopover>, popoverContainer)
   )
@@ -186,6 +190,7 @@ const Popover = React.forwardRef((props, ref) => {
 Popover.defaultProps = {
   className: "",
   style: {},
+  borderRadius: "regular",
   horizontal: null,
   offset: 0,
   popoverContainer: document.body,
@@ -195,6 +200,7 @@ Popover.propTypes = {
   id: PropTypes.any,
   anchorElement: PropTypes.object,
   show: PropTypes.bool,
+  borderRadius: PropTypes.oneOf(["regular", "curved"]),
   horizontal: PropTypes.oneOf(["left", "right", "center"]),
   vertical: PropTypes.oneOf(["top", "bottom"]),
   /**

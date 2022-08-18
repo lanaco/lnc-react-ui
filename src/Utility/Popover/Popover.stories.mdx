@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Popover from "./index";
-import Button from "../../General/Button/index";
+import Button from "../../General/Button";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
@@ -23,7 +23,6 @@ export const TemplateDefault = (args) => {
           setShow(true);
         }}
         onMouseLeave={(e) => setShow(false)}
-        style={{ width: "180px" }}
       />
       <Popover {...args} anchorElement={anchor} show={show}>
         Popover Content
@@ -127,8 +126,7 @@ export const TemplateOffset = (args) => {
         onClick={(e) => {
           setAnchor(e.currentTarget);
           setShow(!show);
-        }}
-        style={{ width: "180px" }}/>
+        }}/>
       <Popover {...args} anchorElement={anchor} show={show} offset={15}>
         Popover Content
       </Popover>

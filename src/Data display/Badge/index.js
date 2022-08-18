@@ -35,6 +35,10 @@ const StyledBadge = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0.313rem;
+
+  & i {
+    font-size: ${props => props.size == "small" ? "0.75rem" : (props.size=="medium" ? "0.875rem" : "1rem")}
+  }
 `;
 
 const Badge = React.forwardRef((props, ref) => {

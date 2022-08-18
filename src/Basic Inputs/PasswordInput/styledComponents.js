@@ -52,6 +52,9 @@ export const StyledPrefix = styled.span`
 `;
 
 export const StyledSuffix = styled(StyledPrefix)``;
+export const StyledLockIcon = styled(StyledPrefix)`
+  cursor: pointer;
+`;
 
 export const StyledInput = styled.input`
   background: none;

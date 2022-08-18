@@ -28,28 +28,15 @@ export const StyledWrapper = styled.div`
         props.theme,
         "Input",
         props.focused ? "primary" : props.color,
-        "enabled",
+        props.disabled ? "disabled" : "enabled",
         "border"
       )};
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "regular")};
 
   ${(props) =>
-    props.focused && props.readOnly == false
-      ? getOutlineCss(props.theme)
-      : ""}
+    props.focused && props.readOnly == false ? getOutlineCss(props.theme) : ""}
   ${(props) => (props.disabled ? getDisabledStateCss(props.theme) : "")}
-  ${(props) =>
-    props.disabled
-      ? "border: 1px solid " +
-        getColorRgbaValue(
-          props.theme,
-          "Input",
-          props.color,
-          "disabled",
-          "border"
-        )
-      : ""}
 `;
 
 export const StyledPrefix = styled.span`

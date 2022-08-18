@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Alert from "./index";
 import { useState } from "react";
+import Button from "../../General/Button";
 
 <Meta title="Feedback/Alert" component={Alert} />
 
@@ -66,7 +67,7 @@ export const TemplateCustom = (args) => {
         tempor incididunt ut labore et sed.
       </Alert>}
       <br/>
-      <button disabled={open} onClick={() => setOpen(!open)}>Open</button>
+      <Button disabled={open} onClick={() => setOpen(!open)} text="Open">Open</Button>
     </>
   );
 };
