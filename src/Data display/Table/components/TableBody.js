@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
 
 const HtmlBody = styled.tbody``;
 
 const TableBody = (props) => {
   //--------------------------
-  const { className, size, color, theme } = props;
+  const { className, size, color } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -29,7 +31,6 @@ TableBody.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableBody.propTypes = {
@@ -41,13 +42,11 @@ TableBody.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableBody;
