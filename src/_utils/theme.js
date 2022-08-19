@@ -2416,6 +2416,171 @@ export const lanaco_light = {
         },
       },
     },
+    Toggle: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 900,
+          backgroundOpacity: 200,
+        },
+        hover: {
+          background: 900,
+          backgroundOpacity: 300,
+        },
+        focus: {
+          background: 900,
+          backgroundOpacity: 300,
+        },
+        active: {
+          background: 900,
+          backgroundOpacity: 400,
+        },
+        disabled: {
+          background: 900,
+          backgroundOpacity: 200,
+        },
+      },
+      teal: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      blue: {
+        enabled: {
+          background: 600,
+        },
+        hover: {
+          background: 700,
+        },
+        focus: {
+          background: 700,
+        },
+        active: {
+          background: 800,
+        },
+      },
+      red: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      yellow: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      green: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+      },
+      gray: {
+        enabled: {
+          background: 500,
+        },
+        hover: {
+          background: 600,
+        },
+        focus: {
+          background: 600,
+        },
+        active: {
+          background: 700,
+        },
+        disabled: {
+          background: 200,
+        },
+      },
+      neutral: {
+        enabled: {
+          background: 400,
+        },
+        hover: {
+          background: 500,
+        },
+        focus: {
+          background: 500,
+        },
+        active: {
+          background: 600,
+        },
+      },
+    },
+    ToggleSlider: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 50,
+          backgroundOpacity: 1000,
+        },
+        hover: {
+          background: 50,
+          backgroundOpacity: 1000,
+        },
+        focus: {
+          background: 50,
+          backgroundOpacity: 1000,
+        },
+        active: {
+          background: 50,
+          backgroundOpacity: 1000,
+        },
+        disabled: {
+          background: 50,
+          backgroundOpacity: 700,
+        },
+      },
+    },
   },
 
   palette: {
