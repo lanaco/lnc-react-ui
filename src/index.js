@@ -63,8 +63,6 @@ export { default as Icon } from "./General/Icon";
 //=============================================================================================
 
 //============ INPUTS =========================================================================
-export * from "./Inputs/CheckboxLookup";
-export { default as CheckboxLookup } from "./Inputs/CheckboxLookup";
 
 export * from "./Inputs/DropDown";
 export { default as DropDown } from "./Inputs/DropDown";
@@ -72,8 +70,8 @@ export { default as DropDown } from "./Inputs/DropDown";
 export * from "./Inputs/DropdownLookup";
 export { default as DropdownLookup } from "./Inputs/DropdownLookup";
 
-export * from "./Inputs/ToggleSwitch";
-export { default as ToggleSwitch } from "./Inputs/ToggleSwitch";
+export * from "./Inputs/Toggle/index";
+export { default as Toggle } from "./Inputs/Toggle/index";
 
 export * from "./Inputs/DropdownMenu";
 export { default as DropdownMenu } from "./Inputs/DropdownMenu";

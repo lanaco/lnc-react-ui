@@ -1,0 +1,127 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Toggle from "./index";
+import { useState } from "react";
+
+<Meta title="Inputs/Toggle" component={Toggle} />
+
+export const ToggleComponent = (props) => {
+  const [checked, setChecked] = useState(props.value || false);
+  return (
+    <div style={{ paddingBottom: "12px" }}>
+      <Toggle
+        {...props}
+        value={checked}
+        onChange={() => setChecked(!checked)}
+      />
+    </div>
+  );
+};
+
+export const TemplateDefault = (args) => (
+  <div>
+    <ToggleComponent {...args} />
+  </div>
+);
+
+export const TemplateTrueFalse = (args) => (
+  <div>
+    <ToggleComponent {...args} />
+    <ToggleComponent {...args} value={true} />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div>
+    <ToggleComponent {...args} size="small" />
+    <ToggleComponent {...args} size="medium" />
+    <ToggleComponent {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "columns",
+    }}
+  >
+    <div>
+      <ToggleComponent {...args} color="primary" />
+      <ToggleComponent {...args} color="secondary" />
+      <ToggleComponent {...args} color="warning" />
+      <ToggleComponent {...args} color="danger" />
+      <ToggleComponent {...args} color="information" />
+    </div>
+    <div style={{ paddingLeft: "12px" }}>
+      <ToggleComponent {...args} value={true} color="primary" />
+      <ToggleComponent {...args} value={true} color="secondary" />
+      <ToggleComponent {...args} value={true} color="warning" />
+      <ToggleComponent {...args} value={true} color="danger" />
+      <ToggleComponent {...args} value={true} color="information" />
+    </div>
+    <div style={{ paddingLeft: "12px" }}>
+      <ToggleComponent {...args} value={true} disabled={true} color="primary" />
+      <ToggleComponent
+        {...args}
+        value={true}
+        disabled={true}
+        color="secondary"
+      />
+      <ToggleComponent {...args} value={true} disabled={true} color="warning" />
+      <ToggleComponent {...args} value={true} disabled={true} color="danger" />
+      <ToggleComponent
+        {...args}
+        value={true}
+        disabled={true}
+        color="information"
+      />
+    </div>
+  </div>
+);
+
+# Toggle
+
+```jsx
+import { Toggle } from "@lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Disabled
+
+<Canvas>
+  <Story name="Disabled" args={{ disabled: true }}>
+    {TemplateTrueFalse.bind({})}
+  </Story>
+</Canvas>
+
+## With Label
+
+<Canvas>
+  <Story name="With Label" args={{ label: "Toggle" }}>
+    {TemplateTrueFalse.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
