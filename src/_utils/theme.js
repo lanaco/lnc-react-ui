@@ -2326,71 +2326,6 @@ export const lanaco_light = {
         },
       },
     },
-    Modal: {
-      default: {
-        palette: "gray",
-        enabled: {
-          cancelButton: 400,
-        },
-        hover: {
-          cancelBtnBg: 900,
-          cancelBtnBgOpacity: 50,
-        },
-        focus: {
-          cancelBtnBg: 900,
-          cancelBtnBgOpacity: 100,
-        },
-      },
-    },
-    ConfirmationForm: {
-      default: {
-        palette: "gray",
-        enabled: {
-          icon: 600,
-          trackBg: 100,
-        },
-      },
-      teal: {
-        enabled: {
-          icon: 600,
-        },
-      },
-      blue: {
-        enabled: {
-          icon: 600,
-        },
-      },
-      red: {
-        enabled: {
-          icon: 600,
-        },
-      },
-      violet: {
-        enabled: {
-          icon: 600,
-        },
-      },
-      yellow: {
-        enabled: {
-          icon: 600,
-        },
-      },
-      green: {
-        enabled: {
-          icon: 600,
-        },
-      },
-      gray: {
-        enabled: {
-          icon: 600,
-        },
-      },
-      neutral: {
-        enabled: {
-          icon: 600,
-        },
-      },
-    },
     FormField: {
       default: {
         palette: "gray",
@@ -2423,136 +2358,35 @@ export const lanaco_light = {
           background: 900,
           backgroundOpacity: 200,
         },
-        hover: {
-          background: 900,
-          backgroundOpacity: 300,
-        },
-        focus: {
-          background: 900,
-          backgroundOpacity: 300,
-        },
-        active: {
-          background: 900,
-          backgroundOpacity: 400,
-        },
-        disabled: {
-          background: 900,
-          backgroundOpacity: 200,
-        },
-      },
-      teal: {
-        enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
-        },
-      },
-      blue: {
-        enabled: {
-          background: 600,
-        },
-        hover: {
-          background: 700,
-        },
-        focus: {
-          background: 700,
-        },
-        active: {
-          background: 800,
-        },
       },
       red: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
+          color: 600,
         },
       },
       violet: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
+          color: 600,
         },
       },
       yellow: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
+          color: 600,
         },
       },
       green: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
+          color: 600,
         },
       },
       gray: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
-        },
-        disabled: {
-          background: 200,
+          color: 600,
         },
       },
       neutral: {
         enabled: {
-          background: 400,
-        },
-        hover: {
-          background: 500,
-        },
-        focus: {
-          background: 500,
-        },
-        active: {
-          background: 600,
+          color: 600,
         },
       },
     },
@@ -2581,6 +2415,278 @@ export const lanaco_light = {
         },
       },
     },
+    UploadedFile: {
+      default: {
+        palette: "gray",
+        enabled: {
+          color: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          color: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          color: 600,
+        },
+      },
+      red: {
+        enabled: {
+          color: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          color: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          color: 600,
+        },
+      },
+      green: {
+        enabled: {
+          color: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          color: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          color: 600,
+        },
+      },
+    },
+    Select: {
+      default: {
+        palette: "gray",
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      teal: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      blue: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      red: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      violet: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      yellow: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      green: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      gray: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      },
+      neutral: {
+        hover: {
+          background: 100,
+        },
+        selected: {
+          background: 500,
+        }
+      }
+    },
+    DropDownItem: {
+      default: {
+        palette: "gray",
+        enabled: {
+          icon: 600,
+          fontWeight: 600,
+          separator: 100,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      teal: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      blue: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      red: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      violet: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      yellow: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      green: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      gray: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      neutral: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      }
+    },
+    Danger: {
+      default: {
+        palette: "red",
+        enabled: {
+          text: 600,
+          border: 300,
+        },
+      },
+    }
   },
 
   palette: {

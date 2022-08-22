@@ -73,6 +73,7 @@ const StyledColorInput = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  ${props => props.withInput == true && "width: 100%;"}
   & div {
     &:focus {
       ${(props) =>
@@ -116,10 +117,12 @@ const LabelText = styled.span`
   display: flex;
   align-items: center;
   overflow: hidden;
+  width: 100%;
   & input {
     outline: none;
     border: none;
     background-color: transparent;
+    width: 100%;
   }
 `;
 

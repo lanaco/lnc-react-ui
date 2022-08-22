@@ -4,14 +4,8 @@ import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import Icon from "../Icon";
 import ProgressBar from "../../Feedback/ProgressBar";
+import { getColorRgbaValue } from "../../_utils/utils";
 
-
-const standardCssFields = ({ theme, color, size }) => {
-    return `
-      font-family: ${theme.typography.fontFamily};
-      font-size: ${theme.typography[size].fontSize};
-    `;
-};
 
 const getIconSize = (size) => {
     if (size === "small") {
@@ -29,8 +23,14 @@ const Container = styled.div`
   align-items: center;
   `
 const ProgressContent = styled.div`
-    ${(props) => standardCssFields(props)}
-    color: ${(props) => props.theme.test_palette[props.color][400]};
+    color: ${(props) => getColorRgbaValue(
+        props.theme,
+        "UploadedFile",
+        props.color,
+        "enabled",
+        "color"
+      )};
+
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -144,7 +144,8 @@ UploadedFile.propTypes = {
         "danger",
         "warning",
         "disabled",
-        "info"
+        "neutral",
+        "information"
     ]),
     fileIcon: PropTypes.string,
     cancelIcon: PropTypes.string,

@@ -1,0 +1,269 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Select from "./index";
+import Avatar from "../../General/Avatar";
+import { components } from "./index";
+import logo from "../../_utils/images/Image.png";
+import Icon from "../../General/Icon";
+import { useState } from "react";
+
+
+<Meta title="Inputs/Select" component={Select} />
+
+export const TemplateDefault = (args) => (
+  <div style={{ height: "130px" }}>
+    <Select {...args} />
+  </div>
+);
+
+export const CustomOption = ({ children, ...props }) => {
+  return (
+    <components.Option {...props}>
+      <span style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <Avatar image={props?.data?.logo} sizeInUnits="1.5rem" />
+          {children}
+        </span>
+        <Icon icon="check" color="primary" />
+      </span>
+    </components.Option>
+  );
+};
+
+export const CustomControl = ({ children, ...props }) => {
+  return (
+    <components.Control {...props}>
+      <span
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          width: "100%",
+          paddingLeft: "12px",
+        }}
+      >
+        <Avatar image={props?.selectProps?.value?.logo} sizeInUnits="1.5rem" />
+        {children}
+      </span>
+    </components.Control>
+  );
+};
+
+export const TemplateCustom = (args) => (
+  <div style={{ height: "130px" }}>
+    <Select
+      {...args}
+      components={{ Option: CustomOption, Control: CustomControl }}
+    />
+  </div>
+);
+
+export const TemplateMulti = (args) => (
+  <div style={{ height: "130px" }}>
+    <Select {...args} isMulti={true} />
+  </div>
+);
+
+export const externalOptions = [
+  { value: "1", label: "option 1" },
+  { value: "2", label: "option 2" },
+  { value: "3", label: "option 3" },
+];
+
+export const TemplateAsync = (args) => {
+  const [options, setOptions] = useState(externalOptions);
+  const filterOptions = (inputValue) => {
+    setOptions(
+      externalOptions.filter((i) =>
+        i.label.toLowerCase().includes(inputValue.toLowerCase())
+      )
+    );
+  };
+  const handleOnInputChange = (inputValue) => {
+    filterOptions(inputValue);
+  };
+  return (
+    <div style={{ height: "130px" }}>
+      <Select
+        {...args}
+        asyncSelect={true}
+        options={options}
+        onInputChange={handleOnInputChange}
+      />
+    </div>
+  );
+};
+
+export const TemplateAsyncMulti = (args) => {
+  const [options, setOptions] = useState(externalOptions);
+  const filterOptions = (inputValue) => {
+    setOptions(
+      externalOptions.filter((i) =>
+        i.label.toLowerCase().includes(inputValue.toLowerCase())
+      )
+    );
+  };
+  const handleOnInputChange = (inputValue) => {
+    filterOptions(inputValue);
+  };
+  return (
+    <div style={{ height: "130px" }}>
+      <Select
+        {...args}
+        asyncSelect={true}
+        isMulti={true}
+        options={options}
+        onInputChange={handleOnInputChange}
+      />
+    </div>
+  );
+};
+
+# Select
+
+```jsx
+import { Select } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      options: [
+        { value: "1", label: "option 1" },
+        { value: "2", label: "option 2" },
+        { value: "3", label: "option 3" },
+      ],
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+---
+
+Select is built on top of [React-Select](https://react-select.com/home).
+
+## Methods
+
+This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
+
+| Method | Args |
+| ------ | :--: |
+| focus  |  -   |
+| blur   |  -   |
+
+---
+
+## Custom components
+
+React-Select library provides consumers with the building block necessary to create their component. [Documentation](https://react-select.com/components).
+
+<Story
+  name="Custom Options"
+  args={{
+    options: [
+      { value: "1", label: "User 1", logo: logo },
+      { value: "2", label: "User 2", logo: logo },
+      { value: "3", label: "User 3", logo: logo },
+    ],
+  }}
+>
+  {TemplateCustom.bind({})}
+</Story>
+
+```jsx
+import { Select } from "@lnc-react-ui";
+import { components } from "react-select";
+
+const CustomOption = ({ children, ...props }) => {
+  return (
+    <components.Option {...props}>
+      <span style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <Avatar image={props?.data?.logo} sizeInUnits="1.5rem" />
+          {children}
+        </span>
+        <Icon icon="check" color="primary" />
+      </span>
+    </components.Option>
+  );
+};
+
+const CustomControl = ({ children, ...props }) => {
+  return (
+    <components.Control {...props}>
+      <span
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          width: "100%",
+          paddingLeft: "12px",
+        }}
+      >
+        <Avatar image={props?.selectProps?.value?.logo} sizeInUnits="1.5rem" />
+        {children}
+      </span>
+    </components.Control>
+  );
+};
+
+export const Template = (args) => (
+  <Select
+    {...args}
+    components={{ Option: CustomOption, Control: CustomControl }}
+  />
+);
+```
+
+## Multi input
+
+<Canvas>
+  <Story
+    name="Multi"
+    args={{
+      options: [
+        { value: "1", label: "option 1" },
+        { value: "2", label: "option 2" },
+        { value: "3", label: "option 3" },
+      ],
+    }}
+  >
+    {TemplateMulti.bind({})}
+  </Story>
+</Canvas>
+
+---
+
+# Async Select
+
+`asyncSelect=true` enables loading of options from a remote source as the user types.
+
+<Canvas>
+  <Story
+    name="Async Select"
+    args={{}}>
+    {TemplateAsync.bind({})}
+  </Story>
+</Canvas>
+
+## Async Multi Select
+
+`asyncSelect=true` `isMulti=true`
+
+<Canvas>
+  <Story
+    name="Async Multi Select"
+    args={{}}>
+    {TemplateAsyncMulti.bind({})}
+  </Story>
+</Canvas>
+
+
+## Custom style
+
+It is possible to define custom style with `styles` prop.
+[React-Select offers a flexible, light-weight styling framework which is a thin abstraction over simple javascript objects using emotion.](https://react-select.com/styles)

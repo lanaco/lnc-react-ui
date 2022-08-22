@@ -15,7 +15,7 @@ const StyledAvatar = styled.div`
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "curved")};
   color: white;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   height: ${(props) =>

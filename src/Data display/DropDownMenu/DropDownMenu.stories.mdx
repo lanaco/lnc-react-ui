@@ -1,0 +1,95 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import DropDownMenu from "./index";
+import DropDownItem from "./DropDownItem";
+import NestedDropDownItem from "./NestedDropDownItem";
+import Button from "../../General/Button";
+import Separator from "./Separator";
+
+<Meta title="Data display/Drop Down Menu" component={DropDownMenu} />
+
+# Drop Down Menu
+
+```jsx
+import {
+  DropDownMenu,
+  DropDownItem,
+  NestedDropDownItem,
+  Separator,
+} from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {(args) => (
+      <DropDownMenu {...args} control={"Options"}>
+        <DropDownItem icon="pen">Edit</DropDownItem>
+        <DropDownItem icon="clone">Duplicate</DropDownItem>
+        <Separator />
+        <DropDownItem icon="archive">Archive</DropDownItem>
+        <DropDownItem icon="arrow-right">Move</DropDownItem>
+        <Separator />
+        <DropDownItem icon="trash">Delete</DropDownItem>
+      </DropDownMenu>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+### Subcompnents
+
+<ArgsTable components={{ DropDownItem, NestedDropDownItem, Separator }} />
+
+## Custom control
+
+<Canvas>
+  <Story name="Custom Control" args={{}}>
+    {(args) => (
+      <DropDownMenu
+        {...args}
+        control={
+          <Button
+            type={"outline"}
+            borderRadius={"curved"}
+            text="Options"
+            trailingIcon="angle-down"
+          />
+        }
+      >
+        <DropDownItem icon="pen">Edit</DropDownItem>
+        <DropDownItem icon="clone">Duplicate</DropDownItem>
+        <Separator />
+        <DropDownItem icon="archive" disabled>Archive</DropDownItem>
+        <DropDownItem icon="arrow-right">Move</DropDownItem>
+        <Separator />
+        <DropDownItem icon="trash">Delete</DropDownItem>
+      </DropDownMenu>
+    )}
+  </Story>
+</Canvas>
+
+## Nested Items
+
+<Canvas  style={{height: "400px"}}>
+  <Story name="NestedItems" args={{}}>
+    {(args) => (<DropDownMenu {...args} control={<Button text="Options" trailingIcon="angle-down"/>}>
+       <DropDownItem icon="pen">Edit</DropDownItem>
+        <DropDownItem icon="clone">Duplicate</DropDownItem>
+        <Separator />
+        <NestedDropDownItem item={<DropDownItem icon="archive">Archive</DropDownItem>}>
+          <DropDownItem icon="clock">History</DropDownItem>
+          <NestedDropDownItem
+            item={<DropDownItem icon="pen">Data</DropDownItem>}
+          >
+            <DropDownItem icon="users">Users</DropDownItem>
+            <DropDownItem icon="file">Documents</DropDownItem>
+          </NestedDropDownItem>
+           <DropDownItem icon="arrow-right">Move</DropDownItem>
+        </NestedDropDownItem>
+        <Separator />
+        <DropDownItem icon="trash">Delete</DropDownItem>
+      </DropDownMenu>
+    )}
+  </Story>
+</Canvas>

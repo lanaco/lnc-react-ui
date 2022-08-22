@@ -15,7 +15,7 @@ import Icon from "../Icon/index";
 
 //=================================================
 
-const Button = (props) => {
+const Button = React.forwardRef((props, ref) => {
   const {
     text,
     iconStyle,
@@ -87,6 +87,7 @@ const Button = (props) => {
   if (type === "filled") {
     return (
       <FilledButton
+        ref={ref}
         data-type="filled"
         {...themeProps}
         hasLeadingIcon={hasLeadingIcon}
@@ -105,6 +106,7 @@ const Button = (props) => {
   if (type === "tinted") {
     return (
       <TintedButton
+        ref={ref}
         data-type="tinted"
         {...themeProps}
         hasLeadingIcon={hasLeadingIcon}
@@ -123,6 +125,7 @@ const Button = (props) => {
   if (type === "outline") {
     return (
       <OutlineButton
+        ref={ref}
         data-type="outline"
         {...themeProps}
         hasLeadingIcon={hasLeadingIcon}
@@ -141,6 +144,7 @@ const Button = (props) => {
   if (type === "basic") {
     return (
       <BasicButton
+        ref={ref}
         data-type="basic"
         {...themeProps}
         hasLeadingIcon={hasLeadingIcon}
@@ -158,6 +162,7 @@ const Button = (props) => {
 
   return (
     <FilledButton
+      ref={ref}
       data-type="filled"
       size={size}
       {...themeProps}
@@ -173,7 +178,7 @@ const Button = (props) => {
       {renderContent()}
     </FilledButton>
   );
-};
+});
 
 Button.defaultProps = {
   text: "",
@@ -185,10 +190,10 @@ Button.defaultProps = {
   leadingIcon: null,
   trailingIcon: null,
   //-------------------------
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  onKeyDown: () => {},
+  onBlur: () => { },
+  onFocus: () => { },
+  onClick: () => { },
+  onKeyDown: () => { },
   //-------------------------
   style: {},
   className: "",

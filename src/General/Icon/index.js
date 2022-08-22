@@ -15,7 +15,7 @@ const Span = styled.span`
   align-items: center;
 `;
 
-const Icon = (props) => {
+const Icon = React.forwardRef((props, ref) => {
   const {
     id,
     icon,
@@ -38,11 +38,11 @@ const Icon = (props) => {
   };
 
   return (
-    <Span {...themeProps} tooltip={tooltip} className={className} style={style} {...rest}>
+    <Span ref={ref} {...themeProps} tooltip={tooltip} className={className} style={style} {...rest}>
       <i className={getIconClass()} />
     </Span>
   );
-};
+});
 
 Icon.defaultProps = {
   id: "",
