@@ -2201,71 +2201,6 @@ const lanaco_light = {
         },
       }
     },
-    Modal: {
-      default: {
-        palette: "gray",
-        enabled: {
-          cancelButton: 400,
-        },
-        hover: {
-          cancelBtnBg: 900,
-          cancelBtnBgOpacity: 50
-        },
-        focus: {
-          cancelBtnBg: 900,
-          cancelBtnBgOpacity: 100
-        }
-      }
-    },
-    ConfirmationForm: {
-      default: {
-        palette: "gray",
-        enabled: {
-          icon: 600,
-          trackBg: 100,
-        },
-      },
-      teal: {
-        enabled: {
-          icon: 600,
-        }
-      },
-      blue: {
-        enabled: {
-          icon: 600,
-        }
-      },
-      red: {
-        enabled: {
-          icon: 600,
-        }
-      },
-      violet: {
-        enabled: {
-          icon: 600,
-        }
-      },
-      yellow: {
-        enabled: {
-          icon: 600,
-        }
-      },
-      green: {
-        enabled: {
-          icon: 600,
-        }
-      },
-      gray: {
-        enabled: {
-          icon: 600,
-        }
-      },
-      neutral: {
-        enabled: {
-          icon: 600,
-        }
-      }
-    },
     UploadedFile: {
       default: {
         palette: "gray",
@@ -2386,6 +2321,146 @@ const lanaco_light = {
         },
         selected: {
           background: 500,
+        }
+      }
+    },
+    DropDownItem: {
+      default: {
+        palette: "gray",
+        enabled: {
+          icon: 600,
+          fontWeight: 600,
+          separator: 100,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      teal: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      blue: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      red: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      violet: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      yellow: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      green: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      gray: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
+        }
+      },
+      neutral: {
+        enabled: {
+          icon: 600,
+        },
+        focus: {
+          backgoround: 500,
+          icon: 300,
+          text:0,
+        },
+        active: {
+          backgoround: 600,
+          icon: 300,
+          text:0,
         }
       }
     },
