@@ -2358,136 +2358,35 @@ export const lanaco_light = {
           background: 900,
           backgroundOpacity: 200,
         },
-        hover: {
-          background: 900,
-          backgroundOpacity: 300,
-        },
-        focus: {
-          background: 900,
-          backgroundOpacity: 300,
-        },
-        active: {
-          background: 900,
-          backgroundOpacity: 400,
-        },
-        disabled: {
-          background: 900,
-          backgroundOpacity: 200,
-        },
-      },
-      teal: {
-        enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
-        },
-      },
-      blue: {
-        enabled: {
-          background: 600,
-        },
-        hover: {
-          background: 700,
-        },
-        focus: {
-          background: 700,
-        },
-        active: {
-          background: 800,
-        },
       },
       red: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
+          color: 600,
         },
       },
       violet: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
+          color: 600,
         },
       },
       yellow: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
+          color: 600,
         },
       },
       green: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
+          color: 600,
         },
       },
       gray: {
         enabled: {
-          background: 500,
-        },
-        hover: {
-          background: 600,
-        },
-        focus: {
-          background: 600,
-        },
-        active: {
-          background: 700,
-        },
-        disabled: {
-          background: 200,
+          color: 600,
         },
       },
       neutral: {
         enabled: {
-          background: 400,
-        },
-        hover: {
-          background: 500,
-        },
-        focus: {
-          background: 500,
-        },
-        active: {
-          background: 600,
+          color: 600,
         },
       },
     },
