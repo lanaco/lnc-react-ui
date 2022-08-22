@@ -37,6 +37,10 @@ import {
 
 <ArgsTable story="Default" />
 
+### Subcompnents
+
+<ArgsTable components={{ DropDownItem, NestedDropDownItem, Separator }} />
+
 ## Custom control
 
 <Canvas>
@@ -69,8 +73,7 @@ import {
 
 <Canvas  style={{height: "400px"}}>
   <Story name="NestedItems" args={{}}>
-    {(args) => (
-      <DropDownMenu {...args} control={<Button text="Options" trailingIcon="angle-down"/>}>
+    {(args) => (<DropDownMenu {...args} control={<Button text="Options" trailingIcon="angle-down"/>}>
        <DropDownItem icon="pen">Edit</DropDownItem>
         <DropDownItem icon="clone">Duplicate</DropDownItem>
         <Separator />
