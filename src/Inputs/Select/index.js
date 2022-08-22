@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useRef } from "react";
 import ReactSelect from "react-select";
@@ -111,7 +110,6 @@ const Select = React.forwardRef((props, ref) => {
         menuIsOpen={menuIsOpen}
         isClearable={isClearable}
         show={show}
-        cacheOptions
         defaultValue
         defaultInputValue={defaultInputValue}
         defaultMenuIsOpen={defaultMenuIsOpen}
@@ -216,3 +214,4 @@ Select.propTypes = {
 };
 
 export default Select;
+export { components };
