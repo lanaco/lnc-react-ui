@@ -46,7 +46,7 @@ const DropDownMenu = React.forwardRef((props, ref) => {
   const [anch, setAnch] = useState();
 
   const controlRef = useRef();
-  const firstItemRef = useRef();
+  const firstItemRef = useRef();  
 
   const clonedChildren = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
@@ -73,8 +73,6 @@ const DropDownMenu = React.forwardRef((props, ref) => {
     return child;
   });
 
-  // const clonedItem = React.cloneElement(item, { isNested: true, showNested: show, toggleNested: toggleNested, color: color, size: size })
-
   const clonedControl = () => {
     if (typeof control === "string" || control instanceof String) {
       return (
@@ -85,15 +83,16 @@ const DropDownMenu = React.forwardRef((props, ref) => {
           onMouseLeave={handleOnMouseLeave}
           onBlur={onBlur}
           onFocus={onFocus}
-          ref={controlRef}
+          ref={control?.ref ? control.ref : controlRef}
           onKeyDown={handleOnControlKeyDown}
+          trailingIcon="angle-down"
         />
       );
     } else {
       return React.cloneElement(control, {
         color: color,
         size: size,
-        ref: controlRef,
+        ref: control?.ref ? control?.ref : controlRef,
         onClick: handleOnClick,
         onMouseEnter: handleOnMouseEnter,
         onMouseLeave: handleOnMouseLeave,
@@ -127,7 +126,7 @@ const DropDownMenu = React.forwardRef((props, ref) => {
     <StyledDropDown ref={ref} {...rest}>
       {clonedControl()}
       <Popover
-        anchorElement={controlRef?.current}
+        anchorElement={control?.ref?.current ? control.ref.current : controlRef?.current}
         show={show}
         vertical={verticalAlignment}
         horizontal={horizontalAlignment}
