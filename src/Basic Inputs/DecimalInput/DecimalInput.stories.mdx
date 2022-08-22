@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import DecimalInput from "./index";
-import Icon from "../../General/Icon";
+import Icon from "../../General/Icon/index";
 
 <Meta title="Basic Inputs/Decimal Input" component={DecimalInput} />
 
@@ -22,7 +22,69 @@ export const TemplateColors = (args) => (
     <DecimalInput {...args} color="success" />
     <DecimalInput {...args} color="warning" />
     <DecimalInput {...args} color="danger" />
-    <DecimalInput {...args} color="info" />
+    <DecimalInput {...args} color="information" />
+  </div>
+);
+
+export const TemplateAddons = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DecimalInput {...args} prefix={<Icon icon="coins" />} suffix="USD" />
+  </div>
+);
+
+export const TemplateDefaultValues = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DecimalInput {...args} value={1.1} defaultValue={null} />
+    <DecimalInput {...args} value={null} defaultValue={1.2} />
+    <DecimalInput {...args} value={null} defaultValue={null} />
+  </div>
+);
+
+export const TemplateSeparators = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DecimalInput
+      {...args}
+      value={1234.56}
+      thousandSeparator={"."}
+      decimalSeparator={","}
+    />
+    <DecimalInput
+      {...args}
+      value={1234.56}
+      thousandSeparator={"."}
+      decimalSeparator={","}
+    />
+    <DecimalInput
+      {...args}
+      value={1234.56}
+      thousandSeparator={" "}
+      decimalSeparator={"."}
+    />
+  </div>
+);
+
+export const TemplateScales = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DecimalInput {...args} value={1234.56789} decimalScale={5} />
+    <DecimalInput
+      {...args}
+      value={1234.567}
+      decimalScale={5}
+      fixedDecimalScale={false}
+    />
+    <DecimalInput
+      {...args}
+      value={1234.5}
+      decimalScale={5}
+      fixedDecimalScale={true}
+    />
+  </div>
+);
+
+export const TemplateNegativeValues = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DecimalInput {...args} value={-1234.567} allowNegative={true} />
+    <DecimalInput {...args} value={-1234.567} allowNegative={false} />
   </div>
 );
 
@@ -39,3 +101,107 @@ import { DecimalInput } from "@lnc-react-ui";
 </Canvas>
 
 <ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas>
+  <Story
+    name="Read Only"
+    args={{
+      readOnly: true,
+      value: 123,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      value: 123,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Placeholder
+
+<Canvas>
+  <Story
+    name="Placeholder"
+    args={{
+      placeholder: "Enter decimal number...",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Default Values
+
+<Canvas withSource="open">
+  <Story name="Default Values" args={{}}>
+    {TemplateDefaultValues.bind({})}
+  </Story>
+</Canvas>
+
+## Negative Values
+
+<Canvas withSource="open">
+  <Story name="Negative Values" args={{}}>
+    {TemplateNegativeValues.bind({})}
+  </Story>
+</Canvas>
+
+## Separators
+
+<Canvas withSource="open">
+  <Story name="Separators" args={{}}>
+    {TemplateSeparators.bind({})}
+  </Story>
+</Canvas>
+
+## Scales
+
+<Canvas withSource="open">
+  <Story name="Scales" args={{}}>
+    {TemplateScales.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      value: 333,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{ value: 555 }}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
+
+## Prefix and suffix
+
+<Canvas>
+  <Story name="Prefix and suffix" args={{ value: 789.13 }}>
+    {TemplateAddons.bind({})}
+  </Story>
+</Canvas>

@@ -3,11 +3,7 @@ import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { debounce } from "lodash";
-import {
-  StyledPrefix,
-  StyledSuffix,
-  StyledWrapper,
-} from "./styledComponents";
+import { StyledPrefix, StyledSuffix, StyledWrapper } from "./styledComponents";
 
 //===================================================
 
@@ -42,7 +38,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState(defaultValue);
   const [refresh, setRefresh] = useState(true);
   const [focused, setFocused] = useState(false);
 
@@ -60,17 +56,24 @@ const DecimalInput = React.forwardRef((props, ref) => {
   const forceRefresh = () => setRefresh(!refresh);
 
   const onValueChange = (valueObject, eventObject) => {
+    console.log;
+
     var triggerRefresh = false;
     var _value = valueObject.floatValue || 0;
 
+    if (defaultValue === null && valueObject.floatValue === undefined) {
+      triggerRefresh = true;
+      _value = defaultValue === null ? null : 0;
+    }
+
     if (_value === -0) {
       triggerRefresh = true;
-      _value = 0;
+      _value = defaultValue === null ? null : 0;
     }
 
     if (_value === undefined) {
       triggerRefresh = true;
-      _value = 0;
+      _value = defaultValue === null ? null : 0;
     }
 
     if (_value > Number.MAX_SAFE_INTEGER) {
@@ -132,6 +135,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
           {prefix}
         </StyledPrefix>
       )}
+
       <NumberFormat
         className="lnc-decimal-input"
         disabled={disabled}
@@ -148,6 +152,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
         onValueChange={onValueChange}
         {...rest}
       />
+
       {suffix && (
         <StyledSuffix
           theme={theme}
@@ -164,8 +169,8 @@ const DecimalInput = React.forwardRef((props, ref) => {
 
 DecimalInput.defaultProps = {
   id: "",
-  value: 0,
-  defaultValue: 0,
+  value: null,
+  defaultValue: null,
   disabled: false,
   readOnly: false,
   debounceTime: 180,
@@ -187,8 +192,8 @@ DecimalInput.defaultProps = {
 
 DecimalInput.propTypes = {
   id: PropTypes.string,
-  value: PropTypes.number,
-  defaultValue: PropTypes.number,
+  value: PropTypes.any,
+  defaultValue: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   debounceTime: PropTypes.number,

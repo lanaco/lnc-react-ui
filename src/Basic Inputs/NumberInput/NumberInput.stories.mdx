@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import NumberInput from "./index";
-import Icon from "../../General/Icon";
+import Icon from "../../General/Icon/index";
 
 <Meta title="Basic Inputs/Number Input" component={NumberInput} />
 
@@ -22,19 +22,129 @@ export const TemplateColors = (args) => (
     <NumberInput {...args} color="success" />
     <NumberInput {...args} color="warning" />
     <NumberInput {...args} color="danger" />
-    <NumberInput {...args} color="info" />
+    <NumberInput {...args} color="information" />
   </div>
 );
 
-# Number Input
+export const TemplateAddons = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <NumberInput {...args} prefix={<Icon icon="coins" />} suffix="EUR" />
+  </div>
+);
+
+export const TemplateDefaultValues = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <NumberInput {...args} value={1} defaultValue={null} />
+    <NumberInput {...args} value={null} defaultValue={2} />
+    <NumberInput {...args} value={null} defaultValue={null} />
+  </div>
+);
+
+export const TemplateStep = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <NumberInput {...args} value={10} step={5} />
+  </div>
+);
+
+export const TemplateMinMax = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <NumberInput {...args} value={10} min={1} max={20} step={1} />
+  </div>
+);
+
+# Decimal Input
+
 ```jsx
 import { NumberInput } from "@lnc-react-ui";
 ```
 
 <Canvas>
-  <Story name="Default" args={{placeholder: "Type your number here."}}>
+  <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
 
 <ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas>
+  <Story
+    name="Read Only"
+    args={{
+      readOnly: true,
+      value: 123,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      value: 123,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Default Values
+
+<Canvas withSource="open">
+  <Story name="Default Values" args={{}}>
+    {TemplateDefaultValues.bind({})}
+  </Story>
+</Canvas>
+
+## Step
+
+<Canvas withSource="open">
+  <Story name="Step" args={{}}>
+    {TemplateStep.bind({})}
+  </Story>
+</Canvas>
+
+## Min Max
+
+<Canvas withSource="open">
+  <Story name="Min Max" args={{}}>
+    {TemplateMinMax.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      value: 333,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{ value: 555 }}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
+
+## Prefix and suffix
+
+<Canvas>
+  <Story name="Prefix and suffix" args={{ value: 789 }}>
+    {TemplateAddons.bind({})}
+  </Story>
+</Canvas>

@@ -19,6 +19,7 @@ const NumberInput = React.forwardRef((props, ref) => {
     readOnly,
     preventDefault,
     value,
+    defaultValue,
     debounceTime,
     step,
     min,
@@ -40,7 +41,7 @@ const NumberInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState(defaultValue);
   const [focused, setFocused] = useState(false);
 
   useEffect(() => setInputValue(value), [value]);
@@ -55,18 +56,23 @@ const NumberInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    var _value = e.target.value || 0;
+    var _value = null;
 
-    if (_value === -0) _value = 0;
+    if (e.target.value) _value = e.target.value;
+    else _value = defaultValue === null ? null : 0;
 
-    if (_value === undefined) _value = 0;
+    if (_value === -0) {
+      _value = defaultValue === null ? null : 0;
+    }
+
+    if (_value === undefined) _value = dfeaultValue === null ? null : 0;
 
     if (_value > Number.MAX_SAFE_INTEGER) _value = Number.MAX_SAFE_INTEGER;
 
     if (_value < Number.MIN_SAFE_INTEGER) _value = Number.MIN_SAFE_INTEGER;
 
-    if (min && _value < min) _value = min;
-    if (max && _value > max) _value = max;
+    if (min && (_value < min || _value === null)) _value = min;
+    if (max && (_value > max || _value === null)) _value = max;
 
     setInputValue(_value);
     debouncedOnChange(e, _value);
@@ -104,6 +110,7 @@ const NumberInput = React.forwardRef((props, ref) => {
           {prefix}
         </StyledPrefix>
       )}
+
       <StyledInput
         type="number"
         theme={theme}
@@ -122,6 +129,7 @@ const NumberInput = React.forwardRef((props, ref) => {
         tabIndex={tabIndex}
         {...rest}
       />
+
       {suffix && (
         <StyledSuffix
           theme={theme}
@@ -138,6 +146,8 @@ const NumberInput = React.forwardRef((props, ref) => {
 
 NumberInput.defaultProps = {
   id: "",
+  value: null,
+  defaultValue: null,
   disabled: false,
   readOnly: false,
   debounceTime: 180,
@@ -159,7 +169,8 @@ NumberInput.defaultProps = {
 
 NumberInput.propTypes = {
   id: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.any,
+  defaultValue: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   /**
