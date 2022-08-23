@@ -8,7 +8,7 @@ import { getColorRgbaValue } from "../../_utils/utils.js";
 import Modal from "../Modal/index.js";
 
 const Content = styled.div`
-  ${(props) => (props.type == "regular" && (props.status || props.statusIcon)) && "padding-left: 3.813rem"};
+  ${(props) => (props.type == "regular" && props.statusIcon) && "padding-left: 3.813rem"};
   ${props => props.type == "centered" && "flex-direction: column; gap: 0.5rem; display: flex;"}
 `;
 
@@ -18,9 +18,9 @@ const StyledTitle = styled.div`
   align-items: center;
   ${props => props.type == "centered" && "flex-direction: column; gap: 1.25rem;"}
   & .alert-icon {
-    font-size: 2.25rem;
+    font-size: 2.2rem;
     color: ${(props) =>
-    getColorRgbaValue(props.theme, "ConfirmationForm", props.status, "enabled", "icon")};
+    getColorRgbaValue(props.theme, "ConfirmationForm", props.color, "enabled", "icon")};
   }
   ${props => props.type == "centered" && "padding-top: 0.5rem;"}
 `;
@@ -39,15 +39,15 @@ const StyledActions = styled.div`
 `;
 
 const getActionsAlignment = (actionsAlignment) => {
-  if(actionsAlignment == "right") return "end";
-  if(actionsAlignment == "left") return "start";
+  if (actionsAlignment == "right") return "end";
+  if (actionsAlignment == "left") return "start";
 
   return "center";
 }
 
 const ConfirmationForm = React.forwardRef((props, ref) => {
   const {
-    status,
+    color,
     statusIcon,
     title,
     type,
@@ -69,23 +69,36 @@ const ConfirmationForm = React.forwardRef((props, ref) => {
   const theme = useTheme();
   let themeProps = { theme, size, zIndex, className, style };
 
-  const getIcon = (status) => {
-    if (status == "danger") return "times-circle";
-    if (status == "warning") return "exclamation-triangle";
-    if (status == "success") return "check-circle";
+  const getIcon = (color) => {
+    if (color == "danger") return "times-circle";
+    if (color == "warning") return "exclamation-triangle";
+    if (color == "success") return "check-circle";
 
     return "exclamation-circle";
   };
 
-  const Title = ({ statusIcon, status, title, type, themeProps }) => {
+  const IconComponent = ({statusIcon, color}) => {
+    if (typeof statusIcon == "boolean" && statusIcon == true) {
+      return <Icon
+        className={"alert-icon"}
+        icon={getIcon(color)}
+      />
+    }
+    if(typeof statusIcon == "string" && statusIcon !== "") {
+      return <Icon
+        className={"alert-icon"}
+        icon={statusIcon}
+      />
+    }
+    return React.cloneElement(statusIcon, {
+      className: "alert-icon "+statusIcon?.className,
+    });
+  }
+
+  const Title = ({ statusIcon, color, title, type, themeProps }) => {
     return (
-      <StyledTitle {...themeProps} status={status} type={type}>
-        {(statusIcon || status) && (
-          <Icon
-            className={"alert-icon"}
-            icon={statusIcon ? statusIcon : getIcon(status)}
-          />
-        )}
+      <StyledTitle {...themeProps} color={color} type={type}>
+        <IconComponent statusIcon={statusIcon} color={color}/>
         <h3>{title}</h3>
       </StyledTitle>
     );
@@ -101,8 +114,8 @@ const ConfirmationForm = React.forwardRef((props, ref) => {
     <Modal
       ref={ref}
       {...themeProps}
-      header={(type == "regular" ? <Title statusIcon={statusIcon} status={status} title={title} type={type} themeProps={themeProps} /> : null)}
-      footer={(type == "regular" ? <Actions actions={actions} type={type} actionsAlignment={actionsAlignment} actionsTrack={actionsTrack} themeProps={themeProps}/> : null)}
+      header={(type == "regular" ? <Title statusIcon={statusIcon} color={color} title={title} type={type} themeProps={themeProps} /> : null)}
+      footer={(type == "regular" ? <Actions actions={actions} type={type} actionsAlignment={actionsAlignment} actionsTrack={actionsTrack} themeProps={themeProps} /> : null)}
       overlay={overlay}
       showCloseButton={showCloseButton}
       onClose={onClose}
@@ -110,18 +123,19 @@ const ConfirmationForm = React.forwardRef((props, ref) => {
       overlayProps={overlayProps}
       {...rest}
     >
-      <Content statusIcon={statusIcon} status={status} type={type}>
-        {type == "centered" && <Title statusIcon={statusIcon} status={status} title={title} type={type} themeProps={themeProps} />}
+      <Content statusIcon={statusIcon} color={color} type={type}>
+        {type == "centered" && <Title statusIcon={statusIcon} color={color} title={title} type={type} themeProps={themeProps} />}
         <div>
           {children}
         </div>
-        {type == "centered" && actions && <Actions actions={actions} type={type} actionsAlignment={actionsAlignment} actionsTrack={actionsTrack} themeProps={themeProps}/>}
+        {type == "centered" && actions && <Actions actions={actions} type={type} actionsAlignment={actionsAlignment} actionsTrack={actionsTrack} themeProps={themeProps} />}
       </Content>
     </Modal>
   );
 });
 
 ConfirmationForm.defaultProps = {
+  statusIcon: true,
   type: "regular",
   actionsAlignment: "left",
   actionsTrack: false,
@@ -135,11 +149,11 @@ ConfirmationForm.defaultProps = {
 };
 
 ConfirmationForm.propTypes = {
-  status: PropTypes.oneOf(["success", "danger", "warning", "information"]),
-  /**
-   * Custom status icon
+  color: PropTypes.oneOf(["primary", "secondary", "success", "danger", "warning", "information", "neutral"]),
+   /**
+   * Can be boolean (true - display default icon, false - don't display icon at all), string (display custom icon), element (display custom element as icon)
    */
-  statusIcon: PropTypes.string,
+  statusIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.bool]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   type: PropTypes.oneOf(["regular", "centered"]),
   actions: PropTypes.element,

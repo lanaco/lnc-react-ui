@@ -18,8 +18,7 @@ export const TemplateDefault = (args) => {
   );
 };
 
-export const TemplateCustom= (args) => {
-  const notify = () => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>);
+export const TemplateCustom = (args) => {
   return (
     <div>
       <Button onClick={() => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)} text="With Icon">With Icon</Button>
@@ -28,7 +27,15 @@ export const TemplateCustom= (args) => {
       <br /><br />
       <Button onClick={() => notification(<NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>Message</NotificationMessage>)} text="With Inline Actions">With Inline Actions</Button>
       <br /><br />
-      <Button onClick={() => notification(<NotificationMessage sideButtons={true} avatar={true} avatarProps={{ image: logo }}  title={"Title"} actions={<><Button type="outline" color="secondary" text="Confirm" borderRadius="none">Confirm</Button><Button text="Dismiss" type="outline" color="neutral" borderRadius="none">Dismiss</Button></>}>Message</NotificationMessage>, {closeButton: false})} text="With Side Buttons">With Side Buttons</Button>
+      <Button onClick={() => notification(<NotificationMessage sideButtons={true} avatar={true} avatarProps={{ image: logo }}  title={"Title"} actions={<><Button type="outline" color="secondary" text="Confirm" borderRadius="none" style={{borderTopRightRadius: "8px"}}>Confirm</Button><Button text="Dismiss" type="outline" color="neutral" borderRadius="none" style={{borderBottomRightRadius: "8px"}}>Dismiss</Button></>}>Message</NotificationMessage>, {closeButton: false})} text="With Side Buttons">With Side Buttons</Button>
+      <br /><br />
+      <Button onClick={() => notification.success(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Success Notification">Success Notification</Button>
+      <br /><br />
+      <Button onClick={() => notification.warning(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Warning Notification">Warning Notification</Button>
+      <br /><br />
+      <Button onClick={() => notification.error(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Error Notification">Error Notification</Button>
+      <br /><br />
+      <Button onClick={() => notification.info(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Information Notification">Information Notification</Button>
       <NotificationContainer {...args}/>
     </div>
   );
@@ -44,9 +51,19 @@ import {
 } from "@lnc-react-ui";
 ```
 
-<Canvas>
-  <Story name="Default">{TemplateDefault.bind({})}</Story>
-</Canvas>
+<Story name="Default">{TemplateDefault.bind({})}</Story>
+
+```jsx
+(args) => {
+  const notify = () => notification("Message");
+  return (
+    <div>
+      <Button onClick={notify} text="Notify!">Notify!</Button>
+      <NotificationContainer {...args}/>
+    </div>
+  );
+};
+```
 
 <ArgsTable story="Default" />
 
@@ -58,8 +75,31 @@ import {
 
 ## Custom
 
-<Canvas>
-  <Story name="Custom">{TemplateCustom.bind({})}</Story>
-</Canvas>
+<Story name="Custom">{TemplateCustom.bind({})}</Story>
 
-This component is build on [React-Toastify](https://www.npmjs.com/package/react-toastify). React-Toastify [documentaion](https://fkhadra.github.io/react-toastify/use-a-custom-close-button-or-remove-it/).
+```jsx
+(args) => {
+  return (
+    <div>
+      <Button onClick={() => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)} text="With Icon">With Icon</Button>
+      <br /><br />
+      <Button onClick={() => notification(<NotificationMessage avatar={true} avatarProps={{ image: logo }} title={"Title"} actions={<><Button text="Confirm">Confirm</Button><Button text="Dismiss">Dismiss</Button></>}>Message</NotificationMessage>)} text="With Action">With Action</Button>
+      <br /><br />
+      <Button onClick={() => notification(<NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>Message</NotificationMessage>)} text="With Inline Actions">With Inline Actions</Button>
+      <br /><br />
+      <Button onClick={() => notification(<NotificationMessage sideButtons={true} avatar={true} avatarProps={{ image: logo }}  title={"Title"} actions={<><Button type="outline" color="secondary" text="Confirm" borderRadius="none" style={{borderTopRightRadius: "8px"}}>Confirm</Button><Button text="Dismiss" type="outline" color="neutral" borderRadius="none" style={{borderBottomRightRadius: "8px"}}>Dismiss</Button></>}>Message</NotificationMessage>, {closeButton: false})} text="With Side Buttons">With Side Buttons</Button>
+      <br /><br />
+      <Button onClick={() => notification.success(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Success Notification">Success Notification</Button>
+      <br /><br />
+      <Button onClick={() => notification.warning(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Warning Notification">Warning Notification</Button>
+      <br /><br />
+      <Button onClick={() => notification.error(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Error Notification">Error Notification</Button>
+      <br /><br />
+      <Button onClick={() => notification.info(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Information Notification">Information Notification</Button>
+      <NotificationContainer {...args}/>
+    </div>
+  );
+};
+```
+
+This component is built on top of [React-Toastify](https://www.npmjs.com/package/react-toastify). React-Toastify [documentaion](https://fkhadra.github.io/react-toastify/use-a-custom-close-button-or-remove-it/).

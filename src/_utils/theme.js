@@ -1390,8 +1390,50 @@ export const lanaco_light = {
           fontWeight: 400,
           fontWeightAction: 600,
           fontWeightTitle: 600,
+          border: 200,
+          icon: 600,
         },
       },
+      teal: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      blue: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      red: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      violet: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      yellow: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      green: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      gray: {
+        enabled: {
+          icon: 600,
+        }
+      },
+      neutral: {
+        enabled: {
+          icon: 600,
+        }
+      }
     },
     ButtonFilled: {
       default: {

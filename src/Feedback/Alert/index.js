@@ -21,13 +21,13 @@ const Container = styled.div`
     getColorRgbaValue(
       props.theme,
       "Alert",
-      props.status ? props.status : props.color,
+      props.color,
       "enabled",
       "background",
       "backgroundOpacity"
     )};
   color: ${(props) =>
-    getColorRgbaValue(props.theme, "Alert", props.status ? props.status : props.color, "enabled", "text")};
+    getColorRgbaValue(props.theme, "Alert", props.color, "enabled", "text")};
   word-wrap: break-word;
   box-sizing: border-box;
   padding: 0.875rem 1rem;
@@ -54,7 +54,7 @@ const Container = styled.div`
         "fontWeightTitle"
       )};
     color: ${(props) =>
-      getColorRgbaValue(props.theme, "Alert", props.status ? props.status : props.color, "enabled", "title")};
+      getColorRgbaValue(props.theme, "Alert", props.color, "enabled", "title")};
   }
   & .alert-actions {
     display: ${(props) => (props.actions ? "flex" : "none")};
@@ -68,7 +68,7 @@ const Container = styled.div`
       getComponentPropValue(
         props.theme,
         "Alert",
-        props.status ? props.status: props.color,
+        props.color,
         "enabled",
         "fontWeightAction"
       )};
@@ -76,7 +76,7 @@ const Container = styled.div`
       getColorRgbaValue(
         props.theme,
         "Alert",
-        props.status ? props.status : props.color,
+        props.color,
         "enabled",
         "action"
       )};
@@ -84,22 +84,40 @@ const Container = styled.div`
   }
 `;
 
-const getIcon = (status) => {
-  if(status == "danger") return "times-circle";
-  if(status == "warning") return "exclamation-triangle";
-  if(status == "success") return "check-circle";
+const getIcon = (color) => {
+  if(color == "danger") return "times-circle";
+  if(color == "warning") return "exclamation-triangle";
+  if(color == "success") return "check-circle";
 
   return "exclamation-circle";
 }
 
+const IconComponent = ({statusIcon, color}) => {
+  if (typeof statusIcon == "boolean" && statusIcon == true) {
+    return <Icon
+      className={"alert-icon"}
+      icon={getIcon(color)}
+    />
+  }
+  if(typeof statusIcon == "string" && statusIcon !== "") {
+    return <Icon
+      className={"alert-icon"}
+      icon={statusIcon}
+    />
+  }
+  return React.cloneElement(statusIcon, {
+    className: "alert-icon "+statusIcon?.className,
+  });
+}
+
 const Alert = React.forwardRef((props, ref) => {
-  const { className, size, color, title, actions, status, noIcon, statusIcon, children, ...rest } = props;
+  const { className, size, color, title, actions, noIcon, statusIcon, children, ...rest } = props;
   const theme = useTheme();
-  const themeProps = { theme, size, color, status };
+  const themeProps = { theme, size, color };
 
   return (
     <Container ref={ref} {...themeProps} className={className} actions={actions} {...rest}>
-      {(noIcon == false && (statusIcon || status)) && <Icon className={"alert-icon"} icon={statusIcon ? statusIcon : getIcon(status)} />}
+      {(noIcon == false && (statusIcon)) && <IconComponent color={color} statusIcon={statusIcon} />}
       <div className="alert-content">
         <div className="alert-title">{title}</div>
         {children}
@@ -112,6 +130,7 @@ const Alert = React.forwardRef((props, ref) => {
 });
 
 Alert.defaultProps = {
+  statusIcon: true,
   noIcon: false,
   className: "",
   size: "small",
@@ -122,21 +141,15 @@ Alert.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   actions: PropTypes.element,
   /**
-   * Custom status icon
+   * Can be boolean (true - display default icon, false - don't display icon at all), string (display custom icon), element (display custom element as icon)
    */
-  statusIcon: PropTypes.string,
+  statusIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.bool]),
   /**
    * Disable display of status icon
    */
   noIcon: PropTypes.bool,
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  status: PropTypes.oneOf([
-    "success",
-    "danger",
-    "warning",
-    "information"
-  ]),
   /**
    * When `status` is not defined color of alert can be defined with `color` prop
    */

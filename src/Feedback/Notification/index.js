@@ -2,26 +2,84 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { getColorRgbaValue } from "../../_utils/utils";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+} from "../../_utils/utils";
 
 const StyledNotification = styled.div`
- & .lnc-notification {
-  & > div {
-    background-color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "Notification",
-        props.color,
-        "enabled",
-        "background",
-        "backgroundOpacity"
-      )};
+  & .lnc-notification {
+    & > div {
+      background-color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "Notification",
+          props.color,
+          "enabled",
+          "background",
+          "backgroundOpacity"
+        )};
 
-    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+      box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+      border: ${(props) =>
+        `1px solid ${getColorRgbaValue(
+          props.theme,
+          "Notification",
+          "default",
+          "enabled",
+          "border"
+        )}`};
+      border-radius: ${(props) =>
+        getBorderRadiusValueWithUnits(props.theme, "regular")};
+    }
+    & .Toastify__toast--success {
+      & svg {
+        fill: ${props => getColorRgbaValue(
+          props.theme,
+          "Notification",
+          "success",
+          "enabled",
+          "icon"
+        )};
+      }
+    }
+    & .Toastify__toast--information {
+      & svg {
+        fill: ${props => getColorRgbaValue(
+          props.theme,
+          "Notification",
+          "information",
+          "enabled",
+          "icon"
+        )};
+      }
+    }
+    & .Toastify__toast--danger {
+      & svg {
+        fill: ${props => getColorRgbaValue(
+          props.theme,
+          "Notification",
+          "warning",
+          "enabled",
+          "icon"
+        )};
+      }
+    }
+    & .Toastify__toast--error {
+      & svg {
+        fill: ${props => getColorRgbaValue(
+          props.theme,
+          "Notification",
+          "danger",
+          "enabled",
+          "icon"
+        )};
+      }
+    }
   }
- }
 `;
 
 const NotificationContainer = React.forwardRef((props, ref) => {
@@ -36,7 +94,6 @@ const NotificationContainer = React.forwardRef((props, ref) => {
     draggable,
     pauseOnHover,
     closeButton,
-    status,
     className,
     style,
     toastContainerProps,
@@ -45,7 +102,7 @@ const NotificationContainer = React.forwardRef((props, ref) => {
   } = props;
   const theme = useTheme();
 
-  const themeProps = { theme, className, style };  
+  const themeProps = { theme, className, style };
 
   return (
     <StyledNotification ref={ref} {...themeProps} {...rest}>
@@ -61,7 +118,8 @@ const NotificationContainer = React.forwardRef((props, ref) => {
         pauseOnHover={pauseOnHover}
         closeButton={closeButton}
         className="lnc-notification"
-        {...toastContainerProps} />
+        {...toastContainerProps}
+      />
     </StyledNotification>
   );
 });
@@ -82,7 +140,14 @@ NotificationContainer.defaultProps = {
 };
 
 NotificationContainer.propTypes = {
-  position: PropTypes.oneOf(['top-right', 'top-center', 'top-left', 'bottom-right', 'bottom-center', 'bottom-left']),
+  position: PropTypes.oneOf([
+    "top-right",
+    "top-center",
+    "top-left",
+    "bottom-right",
+    "bottom-center",
+    "bottom-left",
+  ]),
   /**
    * Value in ms
    */
@@ -99,12 +164,6 @@ NotificationContainer.propTypes = {
   pauseOnHover: PropTypes.bool,
   closeButton: PropTypes.bool,
   //----------------------------
-  status: PropTypes.oneOf([
-    "success",
-    "danger",
-    "warning",
-    "information"
-  ]),
   className: PropTypes.string,
   style: PropTypes.object,
   /**

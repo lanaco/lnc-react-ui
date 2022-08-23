@@ -145,6 +145,7 @@ border-radius: 4px;
 
 const Modal = React.forwardRef((props, ref) => {
   const {
+    isOpen,
     header,
     footer,
     overlay,
@@ -159,7 +160,7 @@ const Modal = React.forwardRef((props, ref) => {
     children,
     rest,
   } = props;
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(isOpen);
 
   const theme = useTheme();
   let themeProps = { theme, size, zIndex, className, style };
@@ -240,6 +241,7 @@ const Modal = React.forwardRef((props, ref) => {
 });
 
 Modal.defaultProps = {
+  isOpen: false,
   showCloseButton: true,
   overlay: true,
   onClose: () => { },
@@ -250,6 +252,10 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
+  /**
+   * Is modal open by default
+   */
+  isOpen: PropTypes.bool,
   header: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   showCloseButton: PropTypes.bool,

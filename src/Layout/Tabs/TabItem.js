@@ -10,6 +10,13 @@ import {
 } from "../../_utils/utils";
 import { useUpdateEffect } from "react-use";
 
+const getHeight = (size) => {
+  if(size == "small") return "3.125rem";
+  if(size == "medium") return "3.375rem";
+
+  return "3.625rem";
+}
+
 const Tab = styled.div`
   box-sizing: border-box;
   ${(props) => props.disabled && getDisabledStateCss(props.theme)};
@@ -18,7 +25,8 @@ const Tab = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+
+  height: ${props => getHeight(props.size)};
   ${(props) =>
     getComponentTypographyCss(
       props.theme,
