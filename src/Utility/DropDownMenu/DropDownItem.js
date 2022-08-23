@@ -67,7 +67,8 @@ const Item = styled.div`
       "focus",
       "text"
     )};
-    outline: none;`}
+  `}
+    outline: none;
     
     ${(props) => props.disabled && getDisabledStateCss(props.theme)};
 `;

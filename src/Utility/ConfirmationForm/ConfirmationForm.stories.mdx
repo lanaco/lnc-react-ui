@@ -5,7 +5,6 @@ import Icon from "../../General/Icon";
 import { useState, useRef } from "react";
 import Button from "../../General/Button";
 
-
 <Meta title="Utility/Confirmation Form" component={ConfirmationForm} />
 
 export const TemplateDefault = (args) => {
@@ -36,7 +35,48 @@ export const TemplateStatus = (args) => {
         <Button onClick={() => openModal("warning")} text="Warning Status" color="warning">Warning Status</Button>
         <Button onClick={() => openModal("information")} text="Information Status" color="information">Information Status</Button>
       </div>
-      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} color={status} actionsAlignment={"right"} actionsTrack={true} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+};
+
+export const TemplateStatusIconString = (args) => {
+  const [status, setStatus] = useState("information");
+  const modalRef = useRef();
+  const openModal = (modalStatus) => {
+    setStatus(modalStatus);
+    modalRef.current.open();
+  }
+  return (
+    <>
+      <div style={{display: 'flex', gap: '12px'}}>
+        <Button onClick={() => openModal("secondary")} text="Open Modal" color="secondary">Open Modal</Button>
+      </div>
+      <ConfirmationForm ref={modalRef} statusIcon="user" color={status} actionsAlignment={"right"} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+};
+
+
+export const TemplateStatusElement = (args) => {
+  const [status, setStatus] = useState("information");
+  const modalRef = useRef();
+  const openModal = (modalStatus) => {
+    setStatus(modalStatus);
+    modalRef.current.open();
+  }
+  return (
+    <>
+      <div style={{display: 'flex', gap: '12px'}}>
+        <Button onClick={() => openModal("secondary")} text="Open Modal" color="secondary">Open Modal</Button>
+      </div>
+      <ConfirmationForm ref={modalRef} statusIcon={<Icon icon="user"/>} color={status} actionsAlignment={"right"} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -87,6 +127,8 @@ import { ConfirmationForm } from "@lnc-react-ui";
 
 ## Status
 
+Default status icon is set wiht `statusIcon={true}`. Different statuses are defined with `color={"success"}`, `color={"warning"}`, `color={"danger"}`, `color={"information"}`.
+
 <Story name="Status" args={{}}>
   {TemplateStatus.bind({})}
 </Story>
@@ -114,6 +156,61 @@ import { ConfirmationForm } from "@lnc-react-ui";
     </>
   );
 };
+```
+
+---
+Default statusIcon is shown with `statusIcon={true}`, or not shown with `statusIcon={false}`. Custom status icon can be defined by setting `statusIcon` as `String`, or as element.
+
+<Story name="Status Icon" args={{}}>
+  {TemplateStatusIconString.bind({})}
+</Story>
+
+```jsx
+(args) => {
+  const [status, setStatus] = useState("information");
+  const modalRef = useRef();
+  const openModal = (modalStatus) => {
+    setStatus(modalStatus);
+    modalRef.current.open();
+  }
+  return (
+    <>
+      <div style={{display: 'flex', gap: '12px'}}>
+        <Button onClick={() => openModal("secondary")} text="Open Modal" color="secondary">Open Modal</Button>
+      </div>
+      <ConfirmationForm ref={modalRef} statusIcon="user" color={status} actionsAlignment={"right"} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+};
+```
+
+<Story name="Status Element" args={{}}>
+  {TemplateStatusElement.bind({})}
+</Story>
+
+```jsx
+(args) => {
+  const [status, setStatus] = useState("information");
+  const modalRef = useRef();
+  const openModal = (modalStatus) => {
+    setStatus(modalStatus);
+    modalRef.current.open();
+  }
+  return (
+    <>
+      <div style={{display: 'flex', gap: '12px'}}>
+        <Button onClick={() => openModal("secondary")} text="Open Modal" color="secondary">Open Modal</Button>
+      </div>
+      <ConfirmationForm ref={modalRef} statusIcon={<Icon icon="user"/>} color={status} actionsAlignment={"right"} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+        Your payment has been successfully submitted. We’ve sent you an email
+        with all of the details of your order.
+      </ConfirmationForm>
+    </>
+  );
+}
 ```
 
 ## Centered

@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import { useTheme } from "@emotion/react";
 import Button from "../../General/Button";
 import Popover from "../../Utility/Popover";
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const StyledDropDown = styled.div``;
 
@@ -40,13 +40,12 @@ const DropDownMenu = React.forwardRef((props, ref) => {
     children,
     ...rest
   } = props;
-  const theme = useTheme();
 
+  const menuContentRef = useRef();
   const [show, setShow] = useState(false);
-  const [anch, setAnch] = useState();
 
   const controlRef = useRef();
-  const firstItemRef = useRef();  
+  const firstItemRef = useRef();
 
   const clonedChildren = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
@@ -86,6 +85,7 @@ const DropDownMenu = React.forwardRef((props, ref) => {
           ref={control?.ref ? control.ref : controlRef}
           onKeyDown={handleOnControlKeyDown}
           trailingIcon="angle-down"
+          data-control={true} //Used for when click on outside of menu to ignore control click (control is outside)
         />
       );
     } else {
@@ -99,17 +99,23 @@ const DropDownMenu = React.forwardRef((props, ref) => {
         onBlur: onBlur,
         onFocus: onFocus,
         onKeyDown: handleOnControlKeyDown,
+        ["data-control"]: true
       });
     }
   };
 
   const handleOnClick = (e) => {
-    setAnch(e.currentTarget);
-    setShow(!show);
+    if (openOnClick && !openOnHover) {
+      setShow(!show)
+    }
 
     onClick(e);
   };
   const handleOnMouseEnter = (e) => {
+    if (openOnHover == true) {
+      setShow(!show)
+    };
+
     onMouseEnter(e);
   };
   const handleOnMouseLeave = (e) => {
@@ -121,6 +127,13 @@ const DropDownMenu = React.forwardRef((props, ref) => {
     firstItemRef?.current?.focus();
     onKeyDown(e);
   };
+
+  const handleClickOutside = (e) => {
+    //ignore if click is on control
+    if(e.target?.attributes?.["data-control"]) return;
+
+    setShow(false); 
+  }
 
   return (
     <StyledDropDown ref={ref} {...rest}>
@@ -134,9 +147,13 @@ const DropDownMenu = React.forwardRef((props, ref) => {
         style={{ padding: 0 }}
         {...popoverProps}
       >
-        <PopoverContent>{clonedChildren}</PopoverContent>
+        <OutsideClickHandler
+          onOutsideClick={handleClickOutside}>
+          <PopoverContent ref={menuContentRef}>{clonedChildren}</PopoverContent>
+        </OutsideClickHandler>
       </Popover>
-    </StyledDropDown>
+    </StyledDropDown >
+
   );
 });
 
@@ -145,15 +162,15 @@ DropDownMenu.defaultProps = {
   openOnHover: false,
   offset: 8,
   verticalAlignment: "bottom",
-  horizontalAlignment: "right",
+  // horizontalAlignment: "right",
   //-------------------------
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  onKeyDown: () => {},
-  onMouseEnter: () => {},
-  onMouseLeave: () => {},
-  onItemSelected: () => {},
+  onBlur: () => { },
+  onFocus: () => { },
+  onClick: () => { },
+  onKeyDown: () => { },
+  onMouseEnter: () => { },
+  onMouseLeave: () => { },
+  onItemSelected: () => { },
   //-------------------------
   style: {},
   color: "primary",
@@ -193,6 +210,7 @@ DropDownMenu.propTypes = {
     "information",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  popoverProps: PropTypes.any,
 };
 
 export default DropDownMenu;
