@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import { createPortal } from 'react-dom';
-import { getBorderRadiusValueWithUnits, getColorRgbaValue, getComponentTypographyCss } from '../../_utils/utils';
+import { getBorderRadiusValueWithUnits, getColorRgbaValue, getComponentPropValue } from '../../_utils/utils';
 
 const StyledPopover = styled.div`
 box-sizing: border-box;
@@ -19,8 +19,12 @@ left: ${props => props.position ? props.left : ''};
 ${props => props.position?.horizontalPosition};
 ${props => props.position?.verticalPosition};
 overflow: auto;
-box-shadow: ${(props) => `0px 0px 6px -2px ${props.theme.palette[props.theme.colorContext.neutral][300]}`};
-box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+box-shadow: ${props => getComponentPropValue(
+  props.theme,
+  "Popover",
+  props.color,
+  "enabled",
+  "boxShadow")};
 border-radius: ${props => getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
 
 box-sizing: border-box;
