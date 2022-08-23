@@ -73,7 +73,7 @@ const StyledColorInput = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  ${props => props.withInput == true && "width: 100%;"}
+  ${(props) => props.withInput == true && "width: 100%;"}
   & div {
     &:focus {
       ${(props) =>
@@ -130,6 +130,7 @@ const ColorInput = React.forwardRef((props, ref) => {
   const {
     id,
     name,
+    defaultValue,
     value,
     size,
     tabIndex,
@@ -152,11 +153,12 @@ const ColorInput = React.forwardRef((props, ref) => {
   } = props;
   const theme = useTheme();
 
-  const [val, setVal] = useState(value);
+  const [val, setVal] = useState(defaultValue);
   const [isFocused, setIsFocused] = useState(false);
+  const validHexRegex = new RegExp(/^#[0-9A-F]{6}$/i);
 
   useEffect(() => {
-    setVal(value);
+    setVal(value ? value : defaultValue);
   }, [value]);
 
   const debouncedOnChange = useCallback(
@@ -179,6 +181,7 @@ const ColorInput = React.forwardRef((props, ref) => {
   };
 
   const handleBlur = (e) => {
+    if (!validHexRegex.test(val)) setVal(defaultValue);
     setIsFocused(false);
     onBlur(e);
   };
@@ -214,9 +217,9 @@ const ColorInput = React.forwardRef((props, ref) => {
               name={name}
               value={val}
               disabled={disabled || readOnly}
-              onChange={readOnly ? () => {} : onValueChange}
-              onBlur={readOnly ? () => {} : handleBlur}
-              onFocus={readOnly ? () => {} : handleFocus}
+              onChange={onValueChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
               color={color}
               {...inputProps}
             />
@@ -245,9 +248,9 @@ const ColorInput = React.forwardRef((props, ref) => {
             name={name}
             value={val}
             disabled={disabled || readOnly}
-            onChange={readOnly ? () => {} : onValueChange}
-            onBlur={readOnly ? () => {} : handleBlur}
-            onFocus={readOnly ? () => {} : handleFocus}
+            onChange={onValueChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
             color={color}
             tabIndex={tabIndex}
             {...inputProps}
@@ -265,6 +268,7 @@ ColorInput.defaultProps = {
   tabIndex: 0,
   preventDefault: true,
   withInput: false,
+  defaultValue: "#000000",
   //-------------------------
   onChange: () => {},
   onBlur: () => {},
@@ -281,7 +285,8 @@ ColorInput.defaultProps = {
 ColorInput.propTypes = {
   id: PropTypes.any,
   name: PropTypes.string,
-  value: PropTypes.any,
+  defaultValue: PropTypes.string,
+  value: PropTypes.string,
   debounceTime: PropTypes.number,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
