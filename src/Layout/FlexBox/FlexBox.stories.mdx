@@ -1,0 +1,94 @@
+import { Meta, Story, Canvas, Props, ArgsTable } from "@storybook/addon-docs";
+import FlexBox from ".";
+
+<Meta title="Layout/Flex Box" component={FlexBox} />
+
+# Flex Box
+
+```jsx
+import { FlexBox } from "@lnc-react-ui";
+```
+
+export const perfectCenterStyle = {
+  backgroundColor: "#00628F",
+  color: "white",
+  padding: "5px",
+  width: "200px",
+  height: "150px",
+  fontWeight: "bold",
+  fontSize: "3em",
+  textAlign: "center",
+  lineHeight: "150px",
+  marginTop: "10px",
+};
+
+export const TemplateDefault = (args) => (
+  <FlexBox {...args}>
+    <div style={perfectCenterStyle}>Item</div>
+    <div style={perfectCenterStyle}>Item</div>
+    <div style={perfectCenterStyle}>Item</div>
+  </FlexBox>
+);
+
+export const TemplatePerfectCenter = (args) => (
+  <FlexBox {...args}>
+    <div style={perfectCenterStyle}>1</div>
+    <div style={perfectCenterStyle}>2</div>
+    <div style={perfectCenterStyle}>3</div>
+    <div style={perfectCenterStyle}>4</div>
+    <div style={perfectCenterStyle}>5</div>
+    <div style={perfectCenterStyle}>6</div>
+    <div style={perfectCenterStyle}>7</div>
+    <div style={perfectCenterStyle}>8</div>
+  </FlexBox>
+);
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      justifyContent: "SpaceEvenly",
+      alignItems: "Center",
+      direction: "Row",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable story="Default" />
+
+# Perfect centering
+
+It couldn’t be any simpler if you use flexbox.
+Consider a list of 8 items, all with fixed dimensions, but can be auto-sized.
+We want them to be evenly distributed on the horizontal axis so that when we resize the browser, everything scales nicely, and without media queries.
+
+<Canvas>
+  <Story
+    name="Centering"
+    args={{
+      justifyContent: "SpaceAround",
+      direction: "Row",
+      wrap: "Wrap",
+    }}
+  >
+    {TemplatePerfectCenter.bind({})}
+  </Story>
+</Canvas>
+
+# Column centering
+
+<Canvas>
+  <Story
+    name="Columns"
+    args={{
+      alignItems: "Center",
+      direction: "Column",
+    }}
+  >
+    {TemplatePerfectCenter.bind({})}
+  </Story>
+</Canvas>
