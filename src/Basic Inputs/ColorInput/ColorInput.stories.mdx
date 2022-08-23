@@ -38,7 +38,7 @@ export const TemplateSizes = (args) => (
     <ColorInput {...args} size="small" />
     <br />
     <ColorInput {...args} size="medium" />
-     <br />
+    <br />
     <ColorInput {...args} size="large" />
   </>
 );
@@ -74,6 +74,8 @@ import { ColorInput } from "@lnc-react-ui";
 <Canvas>
   <Story name="With Input">{TemplateWithInput.bind({})}</Story>
 </Canvas>
+
+Note that the control will **NOT** allow you to enter invalid HEX strings. If you try to do so, the value will be set to `defaultValue`.
 
 ## Sizes
 
