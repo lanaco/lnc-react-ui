@@ -2497,6 +2497,7 @@ export const lanaco_light = {
         enabled: {
           background: 50,
           backgroundOpacity: 1000,
+          fontWeight: 900,
         },
         hover: {
           background: 50,
@@ -2513,6 +2514,26 @@ export const lanaco_light = {
         disabled: {
           background: 50,
           backgroundOpacity: 700,
+        },
+      },
+    },
+    ToggleIcon: {
+      default: {
+        palette: "gray",
+        enabled: {
+          text: 400,
+        },
+        hover: {
+          text: 400,
+        },
+        focus: {
+          text: 400,
+        },
+        active: {
+          text: 400,
+        },
+        disabled: {
+          text: 400,
         },
       },
     },
@@ -2572,7 +2593,7 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
+        },
       },
       teal: {
         hover: {
@@ -2580,7 +2601,7 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
+        },
       },
       blue: {
         hover: {
@@ -2588,7 +2609,7 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
+        },
       },
       red: {
         hover: {
@@ -2596,7 +2617,7 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
+        },
       },
       violet: {
         hover: {
@@ -2604,7 +2625,7 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
+        },
       },
       yellow: {
         hover: {
@@ -2612,7 +2633,7 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
+        },
       },
       green: {
         hover: {
@@ -2620,7 +2641,7 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
+        },
       },
       gray: {
         hover: {
@@ -2628,7 +2649,7 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
+        },
       },
       neutral: {
         hover: {
@@ -2636,8 +2657,8 @@ export const lanaco_light = {
         },
         selected: {
           background: 500,
-        }
-      }
+        },
+      },
     },
     DropDownItem: {
       default: {
@@ -2650,13 +2671,13 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
+          text: 0,
+        },
       },
       teal: {
         enabled: {
@@ -2665,13 +2686,13 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
+          text: 0,
+        },
       },
       blue: {
         enabled: {
@@ -2680,13 +2701,13 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
+          text: 0,
+        },
       },
       red: {
         enabled: {
@@ -2695,13 +2716,13 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
+          text: 0,
+        },
       },
       violet: {
         enabled: {
@@ -2710,13 +2731,13 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
+          text: 0,
+        },
       },
       yellow: {
         enabled: {
@@ -2725,13 +2746,13 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
+          text: 0,
+        },
       },
       green: {
         enabled: {
@@ -2740,13 +2761,13 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
+          text: 0,
+        },
       },
       gray: {
         enabled: {
@@ -2755,13 +2776,13 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
+          text: 0,
+        },
       },
       neutral: {
         enabled: {
@@ -2770,14 +2791,14 @@ export const lanaco_light = {
         focus: {
           backgoround: 500,
           icon: 300,
-          text:0,
+          text: 0,
         },
         active: {
           backgoround: 600,
           icon: 300,
-          text:0,
-        }
-      }
+          text: 0,
+        },
+      },
     },
     Danger: {
       default: {
@@ -2787,7 +2808,7 @@ export const lanaco_light = {
           border: 300,
         },
       },
-    }
+    },
   },
 
   palette: {

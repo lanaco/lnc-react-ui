@@ -21,6 +21,9 @@ export const ToggleComponent = (props) => {
 export const TemplateDefault = (args) => (
   <div>
     <ToggleComponent {...args} />
+    <ToggleComponent {...args} color="secondary" />
+    <ToggleComponent {...args} color="danger" />
+    <ToggleComponent {...args} disabled />
   </div>
 );
 
