@@ -4,10 +4,25 @@ import UploadedFile from "./index";
 
 <Meta title="General/Uploaded File" component={UploadedFile} />
 
-export const TemplateDefault = (args) => <UploadedFile {...args} />;
+export const TemplateDefault = (args) => (
+  <div
+    style={{
+      width: "300px",
+    }}
+  >
+    <UploadedFile {...args} size="large" />
+  </div>
+);
 
 export const TemplateSizes = (args) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+  <div
+    style={{
+      width: "200px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "12px",
+    }}
+  >
     <UploadedFile {...args} size="small" />
     <UploadedFile {...args} size="medium" />
     <UploadedFile {...args} size="large" />
@@ -15,7 +30,14 @@ export const TemplateSizes = (args) => (
 );
 
 export const TemplateColors = (args) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+  <div
+    style={{
+      width: "200px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "12px",
+    }}
+  >
     <UploadedFile {...args} color="primary" />
     <UploadedFile {...args} color="secondary" />
     <UploadedFile {...args} color="success" />
@@ -26,6 +48,7 @@ export const TemplateColors = (args) => (
 );
 
 # Uploaded File
+
 ```jsx
 import { UploadedFile } from "@lnc-react-ui";
 ```
@@ -44,7 +67,7 @@ import { UploadedFile } from "@lnc-react-ui";
   <Story
     name="Uploading Progress"
     args={{
-      progressPercentage: 70,
+      progressPercentage: undefined,
     }}
   >
     {TemplateDefault.bind({})}
