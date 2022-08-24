@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Button from "../../General/Button";
-import Popover from "../../Utility/Popover";
+import Popover from "../Popover";
 import OutsideClickHandler from 'react-outside-click-handler';
 
 const StyledDropDown = styled.div``;
