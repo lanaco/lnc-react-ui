@@ -1,446 +1,349 @@
-import React, { useState, useEffect, useRef, createRef } from "react";
-import theme from "../../_utils/theme";
-import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import { keyframes } from "@emotion/react";
-import FadeIn from "../../FadeIn/FadeIn";
+import React, { useCallback } from "react";
+import AsyncReactSelect from 'react-select/async';
+import customStyles from "../Dropdown/CustomStyles";
+import { useTheme } from "@emotion/react";
+import debounce from "lodash.debounce";
 
-const paddingBySize = (size) => {
-  if (size === "small") return "0.325rem 0.375rem";
-  if (size === "medium") return "0.3875rem 0.375rem";
-  if (size === "large") return "0.422375rem 0.375rem";
-};
-
-const heightBySize = (size) => {
-  if (size === "small") return `1.5rem`;
-  if (size === "medium") return `1.875rem`;
-  if (size === "large") return `2.25rem`;
-};
-
-const spin = keyframes`
-    100% {
-      transform: rotate(360deg);
-    }
-
-    0% {
-      transform: rotate(0deg);
-    }
-`;
-
-const Container = styled.div`
-  display: inline-block;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  border-bottom: 0.125rem solid
-    ${(props) =>
-      props.disabled
-        ? props.theme.palette.gray[900]
-        : props.theme.palette[props.color].main};
-  min-height: ${(props) => heightBySize(props.size)};
-  max-height: ${(props) => heightBySize(props.size)};
-  transition: all 250ms ease;
-  border-radius: 0.125rem;
-  background-color: ${(props) =>
-    props.disabled
-      ? props.theme.palette.gray[200]
-      : props.theme.palette[props.color].lighter};
-`;
-
-const Inner = styled.div`
-  display: flex;
-`;
-
-const InputContainer = styled.div`
-  flex-grow: 1;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ButtonContainer = styled.div`
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 250ms ease;
-  color: ${(props) =>
-    props.disabled
-      ? props.theme.palette.gray.textLight
-      : props.theme.palette[props.color].main};
-  padding: 0 0.1875rem;
-  cursor: ${(props) => (props.clickable ? "pointer" : "inherit")};
-`;
-
-const TimesButtonContainer = styled.div`
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 250ms ease;
-  color: ${(props) =>
-    props.disabled
-      ? props.theme.palette.gray.textLight
-      : props.theme.palette[props.color].main};
-  padding: 0 0.1875rem;
-  cursor: pointer;
-`;
-
-const LoadingButtonContainer = styled.div`
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 250ms ease;
-  color: ${(props) =>
-    props.disabled
-      ? props.theme.palette.gray.textLight
-      : props.theme.palette[props.color].main};
-  padding: 0 0.1875rem;
-
-  animation: ${spin} 0.7s ease-in-out infinite;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  //   height: 100%;
-  box-sizing: border-box;
-  appearance: none;
-  outline: none;
-  border: none;
-  transition: all 250ms ease;
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-
-  background-color: ${(props) =>
-    props.disabled
-      ? props.theme.palette.gray[200]
-      : props.theme.palette[props.color].lighter};
-
-  color: ${(props) =>
-    props.disabled
-      ? props.theme.palette.gray.textLight
-      : props.theme.palette[props.color].textDark};
-  padding: ${(props) => paddingBySize(props.size)};
-
-  &:focus {
-    background-color: white;
-  }
-`;
-
-const Content = styled.div`
-  display: flex;
-  position: absolute;
-  background-color: white;
-  z-index: 1;
-  margin-top: 0.0625rem;
-  padding: 0.1875rem;
-  width: calc(100% - 0.625rem);
-  border-radius: 0.15625rem;
-  box-shadow: 0 0 0.375rem #bebebe;
-  border: 0.125rem solid ${(props) => props.theme.palette[props.color].main};
-  flex-direction: column;
-  transition: all 250ms ease;
-`;
-
-const ContentItem = styled.div`
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  padding: 0.375rem;
-  cursor: pointer;
-  background-color: ${(props) => (props.hover ? "whitesmoke" : "inherit")};
-  color: ${(props) =>
-    props.hover ? props.theme.palette[props.color].main : "inherit"};
-
-  &:hover {
-    background-color: whitesmoke;
-    color: ${(props) => props.theme.palette[props.color].main};
-  }
-`;
-
-const usePrevious = (value) => {
-  const ref = useRef();
-
-  useEffect(() => {
-    ref.current = value;
-  });
-
-  return ref.current;
-};
-
-const DropdownLookup = (props) => {
+const DropdownLookup = React.forwardRef((props, ref) => {
   const {
-    initialValue,
-    options,
-    load,
-    onChange,
-    clear,
-    loading,
-    notItemsFoundText,
-    disabled,
-    tooltip,
+    defaultOptions,
+    cacheOptions,
+    loadOptions,
+    styles,
+    debounceTime,
+    name,
+    hideSelectedOptions,
     id,
-    theme,
+    inputId,
+    value,
+    readOnly,
+    tabIndex,
+    isSearchable,
+    isClearable,
+    isLoading,
+    isRtl,
+    isDisabled,
+    closeMenuOnSelect,
+    closeMenuOnScroll,
+    escapeClearsValue,
+    filterOption,
+    formatGroupLabel,
+    formatOptionLabel,
+    getOptionLabel,
+    getOptionValue,
+    isOptionDisabled,
+    isOptionSelected,
+    loadingMessage,
+    minMenuHeight,
+    maxMenuHeight,
+    menuPlacement,
+    menuPosition,
+    menuShouldBlockScroll,
+    menuShouldScrollIntoView,
+    openMenuOnFocus,
+    openMenuOnClick,
+    autoFocus,
+    placeholder,
+    noOptionsMessage,
+    menuIsOpen,
+    components,
+    inputValue,
+    defaultValue,
+    defaultInputValue,
+    defaultMenuIsOpen,
+    delimiter,
+    onChange,
+    onInputChange,
+    onMenuOpen,
+    onMenuClose,
+    onBlur,
+    onFocus,
     size,
     color,
+    className,
+    style,
+    children,
+    ...rest
   } = props;
 
-  const [inFocus, setInFocus] = useState(false);
-  const [value, setValue] = useState("");
-  const [selectedOption, setSelectedOption] = useState({});
+  const theme = useTheme();
 
-  const previousInitialValue = usePrevious(initialValue);
-  const [cursor, setCursor] = useState(0);
-  let InputRef = createRef();
+  const handleOnInput = useCallback(
+    debounce((inputValue, meta) => {
 
-  const themeProps = {
-    theme,
-    color,
-    size,
-    disabled,
-  };
-
-  useEffect(() => {
-    updateSelectedValue(initialValue);
-  }, []);
-
-  useEffect(() => {
-    if (previousInitialValue === undefined)
-      updateSelectedValue(initialValue, true);
-
-    if (previousInitialValue && previousInitialValue.key !== initialValue.key)
-      updateSelectedValue(initialValue, true);
-
-    if (initialValue.key === "" && !inFocus) setValue("");
-  }, [initialValue]);
-
-  useEffect(() => {
-    if (selectedOption && options.lenght === 0) {
-      setValue(selectedOption.value);
-    }
-  }, [selectedOption]);
-
-  const updateSelectedValue = (data, updateText = false) => {
-    if (data && data.key) {
-      setSelectedOption(data);
-      if (updateText) setValue(data.value);
-    } else {
-      setSelectedOption({ key: "", value: "" });
-      if (updateText) setValue("");
-    }
-  };
-
-  const onTextChange = (e) => {
-    setValue(e.target.value);
-    setInFocus(true);
-    load(e.target.value);
-    setCursor(0);
-  };
-
-  const suggestionSelected = (item) => {
-    updateSelectedValue(item, true);
-    onChange(id, item);
-    clear();
-    setInFocus(false);
-    setCursor(0);
-  };
-
-  const onBlur = () => {
-    setInFocus(false);
-
-    if (
-      selectedOption &&
-      selectedOption.key &&
-      value !== selectedOption.value
-    ) {
-      setValue(selectedOption.value);
-      clear();
-    }
-
-    if (!selectedOption || !selectedOption.key) {
-      onClearSelection();
-    }
-  };
-
-  const onClearSelection = () => {
-    clear();
-    setValue("");
-    setSelectedOption({ key: "", value: "" });
-    onChange(id, { key: "", value: "" });
-    setCursor(0);
-  };
-
-  const onKeyDown = (e) => {
-    if (e.keyCode === 38 || e.keyCode === 40) e.preventDefault();
-
-    if (e.keyCode === 27) {
-      InputRef.current.blur();
-      return;
-    }
-
-    if (options !== null && options.length !== 0 && inFocus) {
-      if (e.keyCode === 38 && cursor > 0) setCursor(cursor - 1);
-
-      if (e.keyCode === 40 && cursor < options.length - 1)
-        setCursor(cursor + 1);
-
-      if (e.keyCode === 13) suggestionSelected(options[cursor]);
-
-      return;
-    }
-
-    if (e.keyCode === 40) {
-      setInFocus(true);
-      load(value);
-    }
-
-    if (e.keyCode === 13) {
-      onBlur();
-    }
-  };
-
-  const getIcon = () => {
-    return options !== null && options.length !== 0
-      ? "chevron-down"
-      : "chevron-left";
-  };
-
-  const renderSuggestions = () => {
-    if (options !== null && options.length > 0 && inFocus) {
-      return (
-        <FadeIn>
-          <Content {...themeProps}>
-            {options.map((item, i) => {
-              return (
-                <ContentItem
-                  {...themeProps}
-                  key={i}
-                  onMouseDown={() => suggestionSelected(item)}
-                  hover={i === cursor}
-                >
-                  {item.value}
-                </ContentItem>
-              );
-            })}
-          </Content>
-        </FadeIn>
-      );
-    }
-
-    let empty = options === null || (options !== null && options.length === 0);
-
-    if (inFocus && empty && loading === false && value !== "") {
-      return (
-        <FadeIn>
-          <Content {...themeProps} key={0}>
-            <ContentItem
-              {...themeProps}
-              key={0}
-              hover={true}
-              onMouseDown={onBlur}
-            >
-              {notItemsFoundText}
-            </ContentItem>
-          </Content>
-        </FadeIn>
-      );
-    }
-  };
+      onInputChange(inputValue, meta);
+    }, debounceTime),
+  )
 
   return (
-    <Container {...themeProps}>
-      <Inner {...themeProps}>
-        <InputContainer {...themeProps}>
-          <Input
-            {...themeProps}
-            ref={InputRef}
-            autoComplete="off"
-            id={id}
-            type={"text"}
-            value={value ?? ""}
-            onChange={onTextChange}
-            title={tooltip}
-            onBlur={onBlur}
-            onKeyDown={onKeyDown}
-            onFocus={clear}
-          />
-        </InputContainer>
-
-        {selectedOption && selectedOption.key && (
-          <TimesButtonContainer {...themeProps} onClick={onClearSelection}>
-            <i className={"fas fa-times fa-fw"} />
-          </TimesButtonContainer>
-        )}
-
-        {loading && (
-          <LoadingButtonContainer {...themeProps}>
-            <i className={`fas fa-redo fa-fw`} />
-          </LoadingButtonContainer>
-        )}
-
-        {!loading && (
-          <ButtonContainer
-            {...themeProps}
-            clickable={options == null || options.length === 0}
-            onClick={() => {
-              if (options == null || options.length === 0) {
-                InputRef.current.focus();
-                setInFocus(true);
-                load(value);
-              }
-            }}
-          >
-            <i className={`fas fa-${getIcon()} fa-fw`} />
-          </ButtonContainer>
-        )}
-      </Inner>
-
-      {renderSuggestions()}
-    </Container>
+    <AsyncReactSelect
+      ref={ref}
+      components={components}
+      defaultOptions={defaultOptions}
+      cacheOptions={cacheOptions}
+      loadOptions={loadOptions}
+      styles={styles ? styles : customStyles}
+      size={size}
+      color={color}
+      theme={theme}
+      name={name}
+      hideSelectedOptions={hideSelectedOptions}
+      id={id}
+      inputId={inputId}
+      value={value}
+      readOnly={readOnly}
+      tabIndex={tabIndex}
+      isSearchable={isSearchable}
+      isClearable={isClearable}
+      isLoading={isLoading}
+      isRtl={isRtl}
+      isDisabled={isDisabled}
+      closeMenuOnSelect={closeMenuOnSelect}
+      closeMenuOnScroll={closeMenuOnScroll}
+      escapeClearsValue={escapeClearsValue}
+      filterOption={filterOption}
+      formatGroupLabel={formatGroupLabel}
+      formatOptionLabel={formatOptionLabel}
+      getOptionLabel={getOptionLabel}
+      getOptionValue={getOptionValue}
+      isOptionDisabled={isOptionDisabled}
+      isOptionSelected={isOptionSelected}
+      loadingMessage={loadingMessage}
+      minMenuHeight={minMenuHeight}
+      maxMenuHeight={maxMenuHeight}
+      menuPlacement={menuPlacement}
+      menuPosition={menuPosition}
+      menuShouldBlockScroll={menuShouldBlockScroll}
+      menuShouldScrollIntoView={menuShouldScrollIntoView}
+      openMenuOnFocus={openMenuOnFocus}
+      openMenuOnClick={openMenuOnClick}
+      autoFocus={autoFocus}
+      placeholder={placeholder}
+      noOptionsMessage={noOptionsMessage}
+      menuIsOpen={menuIsOpen}
+      inputValue={inputValue}
+      defaultValue={defaultValue}
+      defaultInputValue={defaultInputValue}
+      defaultMenuIsOpen={defaultMenuIsOpen}
+      delimiter={delimiter}
+      onChange={onChange}
+      onInputChange={handleOnInput}
+      onMenuOpen={onMenuOpen}
+      onMenuClose={onMenuClose}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      className={className}
+      style={style}
+      {...rest}
+    />
   );
-};
+});
 
 DropdownLookup.defaultProps = {
-  loading: false,
-  initialValue: { key: 0, value: "" },
-  options: [],
-  id: "",
-  theme: theme,
-  disabled: false,
-  load: () => {},
-  onChange: () => {},
-  clear: () => {},
+  readOnly: false,
+  isDisabled: false,
+  isSearchable: true,
+  isClearable: true,
+  autoFocus: false,
+  components: {},
+  debounceTime: 180,
+  //-------------------------
+  onChange: () => { },
+  onInputChange: () => { },
+  onMenuOpen: () => { },
+  onMenuClose: () => { },
+  onFocus: () => { },
+  onBlur: () => { },
+  //-------------------------
+  style: {},
   className: "",
-  size: "small",
   color: "primary",
-  value: "",
-  notItemsFoundText: "No items found...",
+  size: "small",
 };
 
 DropdownLookup.propTypes = {
-  theme: PropTypes.object.isRequired,
+  /**
+ * The default set of options to show before the user starts searching. When set to true, the results for loadOptions('') will be autoloaded.
+ */
+  defaultOptions: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  /**
+   * If cacheOptions is truthy, then the loaded data will be cached. The cache will remain until cacheOptions changes value.
+   */
+  cacheOptions: PropTypes.any,
+  /**
+   * Function that returns a promise, which is the set of options to be used once the promise resolves.
+   */
+  loadOptions: PropTypes.func,
+  styles: PropTypes.object,
+  debounceTime: PropTypes.number,
+  name: PropTypes.string,
+  value: PropTypes.any,
+  /**
+   * Sets the tabIndex attribute on the input
+   */
+  tabIndex: PropTypes.number,
+  /**
+   * Whether to enable search functionality
+   */
+  isSearchable: PropTypes.bool,
+  isClearable: PropTypes.bool,
+  /**
+   * Is the select in a state of loading (async)
+   */
+  isLoading: PropTypes.bool,
+  /**
+   * Is the select direction right-to-left
+   */
+  isRtl: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  /**
+   * Close the select menu when the user selects an option
+   */
+  closeMenuOnSelect: PropTypes.bool,
+  /**
+   * If true, close the select menu when the user scrolls the document/body.
+   * If a function, takes a standard javascript ScrollEvent you return a boolean:
+   * true => The menu closes
+   * false => The menu stays open
+   * This is useful when you have a scrollable modal and want to portal the menu out, but want to avoid graphical issues.
+   */
+  closeMenuOnScroll: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  /**
+   * Clear all values when the user presses escape AND the menu is closed
+   */
+  escapeClearsValue: PropTypes.bool,
+  /**
+   * Custom method to filter whether an option should be displayed in the menu. Type: `null` or `() => boolean`
+   */
+  filterOption: PropTypes.func,
+  /**
+   * Formats group labels in the menu as React components
+   */
+  formatGroupLabel: PropTypes.func,
+  /**
+   * Formats option labels in the menu and control as React components
+   */
+  formatOptionLabel: PropTypes.func,
+  /**
+   * Resolves option data to a string to be displayed as the label by components
+   * Note: Failure to resolve to a string type can interfere with filtering and screen reader support.
+   */
+  getOptionLabel: PropTypes.func,
+  /**
+   * Resolves option data to a string to compare options and specify value attributes
+   */
+  getOptionValue: PropTypes.func,
+  /**
+   * Hide the selected option from the menu
+   */
+  hideSelectedOptions: PropTypes.bool,
+  /**
+   * The id to set on the SelectContainer component
+   */
   id: PropTypes.string,
-  loading: PropTypes.bool,
-  options: PropTypes.array,
-  disabled: PropTypes.bool,
-  load: PropTypes.func,
+  /**
+   * The id of the search input
+   */
+  inputId: PropTypes.string,
+  /**
+   * Override the built-in logic to detect whether an option is disabled. `(...) => boolean`
+   */
+  isOptionDisabled: PropTypes.func,
+  /**
+   * Override the built-in logic to detect whether an option is selected. `(...) => boolean`
+   */
+  isOptionSelected: PropTypes.func,
+  /**
+   * Async: Text to display when loading options `(...) => ...`
+   */
+  loadingMessage: PropTypes.func,
+  /**
+   * Minimum height of the menu before flipping
+   */
+  minMenuHeight: PropTypes.number,
+  /**
+   * Maximum height of the menu before flipping
+   */
+  maxMenuHeight: PropTypes.number,
+  /**
+   * Default placement of the menu in relation to the control. 'auto' will flip when there isn't enough space below the control.
+   */
+  menuPlacement: PropTypes.oneOf(["bottom", "auto", "top"]),
+  /**
+   *The CSS position value of the menu, when "fixed" extra layout management is required.
+   */
+  menuPosition: PropTypes.oneOf(["absolute", "fixed"]),
+  /**
+   * Whether to block scroll events when the menu is open
+   */
+  menuShouldBlockScroll: PropTypes.bool,
+  /**
+   * Whether the menu should be scrolled into view when it opens
+   */
+  menuShouldScrollIntoView: PropTypes.bool,
+  /**
+   * Allows control of whether the menu is opened when the Select is focused
+   */
+  openMenuOnFocus: PropTypes.bool,
+  /**
+  * Allows control of whether the menu is opened when the Select is clicked
+  */
+  openMenuOnClick: PropTypes.bool,
+  //----
+  autoFocus: PropTypes.bool,
+  placeholder: PropTypes.string,
+  noOptionsMessage: PropTypes.string,
+  menuIsOpen: PropTypes.bool,
+  /**
+   *  This complex object includes all the compositional components that are used in react-select. If you wish to overwrite a component, pass in an object with the appropriate namespace.
+   *  If you only wish to restyle a component, we recommend using the styles prop instead.
+   */
+  components: PropTypes.object,
+  /**
+   * control the value of the search input (changing this will update the available options)
+   */
+  inputValue: PropTypes.string,
+  /**
+   * initial value of the control
+   */
+  defaultValue: PropTypes.string,
+  /**
+   * initial value of the search input
+   */
+  defaultInputValue: PropTypes.string,
+  /**
+   * initial open value of the menu
+   */
+  defaultMenuIsOpen: PropTypes.bool,
+  /**
+   * Delimiter used to join multiple values into a single HTML Input value
+   */
+  delimiter: PropTypes.string,
+  //---------------------------------------------------------------
   onChange: PropTypes.func,
-  load: PropTypes.func,
-  clear: PropTypes.func,
+  /**
+   * control the value of the search input (changing this will update the available options)
+   */
+  onInputChange: PropTypes.func,
+  onMenuOpen: PropTypes.func,
+  onMenuClose: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  //---------------------------------------------------------------
   className: PropTypes.string,
-  initialValue: PropTypes.object,
-  notItemsFoundText: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  style: PropTypes.object,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
+    "danger",
+    "information",
+    "neutral",
   ]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
 export default DropdownLookup;

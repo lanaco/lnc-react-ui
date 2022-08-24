@@ -1,20 +1,20 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import DropDownMenu from "./index";
-import DropDownItem from "./DropDownItem";
-import NestedDropDownItem from "./NestedDropDownItem";
+import DropdownMenu from "./index";
+import DropdownItem from "./DropdownItem";
+import NestedDropdownItem from "./NestedDropdownItem";
 import Button from "../../General/Button";
 import Separator from "./Separator";
 
-<Meta title="Utility/Drop Down Menu" component={DropDownMenu} />
+<Meta title="Utility/Dropdown Menu" component={DropdownMenu} />
 
 # Drop Down Menu
 
 ```jsx
 import {
-  DropDownMenu,
-  DropDownItem,
-  NestedDropDownItem,
+  DropdownMenu,
+  DropdownItem,
+  NestedDropdownItem,
   Separator,
 } from "@lnc-react-ui";
 ```
@@ -22,15 +22,15 @@ import {
 <Canvas style={{width:"100%"}}>
   <Story name="Default" args={{}}>
     {(args) => (
-      <DropDownMenu {...args} control={"Options"}>
-        <DropDownItem icon="pen">Edit</DropDownItem>
-        <DropDownItem icon="clone">Duplicate</DropDownItem>
+      <DropdownMenu {...args} control={"Options"}>
+        <DropdownItem icon="pen">Edit</DropdownItem>
+        <DropdownItem icon="clone">Duplicate</DropdownItem>
         <Separator />
-        <DropDownItem icon="archive">Archive</DropDownItem>
-        <DropDownItem icon="arrow-right">Move</DropDownItem>
+        <DropdownItem icon="archive">Archive</DropdownItem>
+        <DropdownItem icon="arrow-right">Move</DropdownItem>
         <Separator />
-        <DropDownItem icon="trash">Delete</DropDownItem>
-      </DropDownMenu>
+        <DropdownItem icon="trash">Delete</DropdownItem>
+      </DropdownMenu>
     )}
   </Story>
 </Canvas>
@@ -39,14 +39,14 @@ import {
 
 ### Subcompnents
 
-<ArgsTable components={{ DropDownItem, NestedDropDownItem, Separator }} />
+<ArgsTable components={{ DropdownItem, NestedDropdownItem, Separator }} />
 
 ## Custom control
 
 <Canvas>
   <Story name="Custom Control" args={{}}>
     {(args) => (
-      <DropDownMenu
+      <DropdownMenu
         {...args}
         control={
           <Button
@@ -57,14 +57,14 @@ import {
           />
         }
       >
-        <DropDownItem icon="pen">Edit</DropDownItem>
-        <DropDownItem icon="clone">Duplicate</DropDownItem>
+        <DropdownItem icon="pen">Edit</DropdownItem>
+        <DropdownItem icon="clone">Duplicate</DropdownItem>
         <Separator />
-        <DropDownItem icon="archive" disabled>Archive</DropDownItem>
-        <DropDownItem icon="arrow-right">Move</DropDownItem>
+        <DropdownItem icon="archive" disabled>Archive</DropdownItem>
+        <DropdownItem icon="arrow-right">Move</DropdownItem>
         <Separator />
-        <DropDownItem icon="trash">Delete</DropDownItem>
-      </DropDownMenu>
+        <DropdownItem icon="trash">Delete</DropdownItem>
+      </DropdownMenu>
     )}
   </Story>
 </Canvas>
@@ -73,23 +73,23 @@ import {
 
 <Canvas  style={{height: "400px"}}>
   <Story name="NestedItems" args={{}}>
-    {(args) => (<DropDownMenu {...args} control={<Button text="Options" trailingIcon="angle-down"/>}>
-       <DropDownItem icon="pen">Edit</DropDownItem>
-        <DropDownItem icon="clone">Duplicate</DropDownItem>
+    {(args) => (<DropdownMenu {...args} control={<Button text="Options" trailingIcon="angle-down"/>}>
+       <DropdownItem icon="pen">Edit</DropdownItem>
+        <DropdownItem icon="clone">Duplicate</DropdownItem>
         <Separator />
-        <NestedDropDownItem item={<DropDownItem icon="archive">Archive</DropDownItem>}>
-          <DropDownItem icon="clock">History</DropDownItem>
-          <NestedDropDownItem
-            item={<DropDownItem icon="pen">Data</DropDownItem>}
+        <NestedDropdownItem item={<DropdownItem icon="archive">Archive</DropdownItem>}>
+          <DropdownItem icon="clock">History</DropdownItem>
+          <NestedDropdownItem
+            item={<DropdownItem icon="pen">Data</DropdownItem>}
           >
-            <DropDownItem icon="users">Users</DropDownItem>
-            <DropDownItem icon="file">Documents</DropDownItem>
-          </NestedDropDownItem>
-           <DropDownItem icon="arrow-right">Move</DropDownItem>
-        </NestedDropDownItem>
+            <DropdownItem icon="users">Users</DropdownItem>
+            <DropdownItem icon="file">Documents</DropdownItem>
+          </NestedDropdownItem>
+           <DropdownItem icon="arrow-right">Move</DropdownItem>
+        </NestedDropdownItem>
         <Separator />
-        <DropDownItem icon="trash">Delete</DropDownItem>
-      </DropDownMenu>
+        <DropdownItem icon="trash">Delete</DropdownItem>
+      </DropdownMenu>
     )}
   </Story>
 </Canvas>

@@ -1,20 +1,33 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Select from "./index";
+import Dropdown from "./index";
 import Avatar from "../../General/Avatar";
 import { components } from "./index";
 import logo from "../../_utils/images/Image.png";
 import Icon from "../../General/Icon";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Button from "../../General/Button";
 
-
-<Meta title="Inputs/Select" component={Select} />
+<Meta title="Inputs/Dropdown" component={Dropdown} />
 
 export const TemplateDefault = (args) => (
   <div style={{ height: "130px" }}>
-    <Select {...args} />
+    <Dropdown {...args} />
   </div>
 );
+
+export const TemplateMethods = (args) => {
+  const dropDownRef = useRef();
+  return (
+    <div style={{ height: "130px" }}>
+      <Button text="Focus" onClick={() => dropDownRef.current.focus()} />
+      &nbsp;&nbsp;
+      <Button text="Blur" onClick={() => dropDownRef.current.blur()} />
+      <br /><br />
+      <Dropdown ref={dropDownRef} {...args} />
+    </div>
+  );
+};
 
 export const CustomOption = ({ children, ...props }) => {
   return (
@@ -51,78 +64,17 @@ export const CustomControl = ({ children, ...props }) => {
 
 export const TemplateCustom = (args) => (
   <div style={{ height: "130px" }}>
-    <Select
+    <Dropdown
       {...args}
       components={{ Option: CustomOption, Control: CustomControl }}
     />
   </div>
 );
 
-export const TemplateMulti = (args) => (
-  <div style={{ height: "130px" }}>
-    <Select {...args} isMulti={true} />
-  </div>
-);
-
-export const externalOptions = [
-  { value: "1", label: "option 1" },
-  { value: "2", label: "option 2" },
-  { value: "3", label: "option 3" },
-];
-
-export const TemplateAsync = (args) => {
-  const [options, setOptions] = useState(externalOptions);
-  const filterOptions = (inputValue) => {
-    setOptions(
-      externalOptions.filter((i) =>
-        i.label.toLowerCase().includes(inputValue.toLowerCase())
-      )
-    );
-  };
-  const handleOnInputChange = (inputValue) => {
-    filterOptions(inputValue);
-  };
-  return (
-    <div style={{ height: "130px" }}>
-      <Select
-        {...args}
-        asyncSelect={true}
-        options={options}
-        onInputChange={handleOnInputChange}
-      />
-    </div>
-  );
-};
-
-export const TemplateAsyncMulti = (args) => {
-  const [options, setOptions] = useState(externalOptions);
-  const filterOptions = (inputValue) => {
-    setOptions(
-      externalOptions.filter((i) =>
-        i.label.toLowerCase().includes(inputValue.toLowerCase())
-      )
-    );
-  };
-  const handleOnInputChange = (inputValue) => {
-    filterOptions(inputValue);
-  };
-  return (
-    <div style={{ height: "130px" }}>
-      <Select
-        {...args}
-        asyncSelect={true}
-        isMulti={true}
-        options={options}
-        onInputChange={handleOnInputChange}
-      />
-    </div>
-  );
-};
-
-# Select
+# Dropdown
 
 ```jsx
-import { Select } from "@lnc-react-ui";
+import { Dropdown } from "@lnc-react-ui";
 ```
 
 <Canvas>
@@ -142,9 +94,9 @@ import { Select } from "@lnc-react-ui";
 
 <ArgsTable story="Default" />
 
----
+#### See more about [React-Select props](https://react-select.com/props#select-props)
 
-Select is built on top of [React-Select](https://react-select.com/home).
+---
 
 ## Methods
 
@@ -154,6 +106,25 @@ This component exposes public methods. You can invoke them directly on the insta
 | ------ | :--: |
 | focus  |  -   |
 | blur   |  -   |
+
+<Canvas>
+  <Story
+    name="Exposed Methods"
+    args={{
+      options: [
+        { value: "1", label: "option 1" },
+        { value: "2", label: "option 2" },
+        { value: "3", label: "option 3" },
+      ],
+    }}
+  >
+    {TemplateMethods.bind({})}
+  </Story>
+</Canvas>
+
+---
+
+#### Prop `styles` is used to style Dropdown components. [Stlyes usage](https://react-select.com/styles).
 
 ---
 
@@ -175,8 +146,8 @@ React-Select library provides consumers with the building block necessary to cre
 </Story>
 
 ```jsx
-import { Select } from "@lnc-react-ui";
-import { components } from "react-select";
+import { Dropdown } from "@lnc-react-ui";
+import { components } from "@lnc-react-ui/Dropdown";
 
 const CustomOption = ({ children, ...props }) => {
   return (
@@ -212,58 +183,11 @@ const CustomControl = ({ children, ...props }) => {
 };
 
 export const Template = (args) => (
-  <Select
+  <Dropdown
     {...args}
     components={{ Option: CustomOption, Control: CustomControl }}
   />
 );
 ```
 
-## Multi input
-
-<Canvas>
-  <Story
-    name="Multi"
-    args={{
-      options: [
-        { value: "1", label: "option 1" },
-        { value: "2", label: "option 2" },
-        { value: "3", label: "option 3" },
-      ],
-    }}
-  >
-    {TemplateMulti.bind({})}
-  </Story>
-</Canvas>
-
----
-
-# Async Select
-
-`asyncSelect=true` enables loading of options from a remote source as the user types.
-
-<Canvas>
-  <Story
-    name="Async Select"
-    args={{}}>
-    {TemplateAsync.bind({})}
-  </Story>
-</Canvas>
-
-## Async Multi Select
-
-`asyncSelect=true` `isMulti=true`
-
-<Canvas>
-  <Story
-    name="Async Multi Select"
-    args={{}}>
-    {TemplateAsyncMulti.bind({})}
-  </Story>
-</Canvas>
-
-
-## Custom style
-
-It is possible to define custom style with `styles` prop.
-[React-Select offers a flexible, light-weight styling framework which is a thin abstraction over simple javascript objects using emotion.](https://react-select.com/styles)
+This component is built on top of [React-Select](https://www.npmjs.com/package/react-select). React-Select [documentaion](https://react-select.com/home).
