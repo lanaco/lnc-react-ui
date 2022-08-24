@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
 import React, { useCallback } from "react";
 import ReactSelect from "react-select";
-import { components } from "react-select";
-import customStyles from "./CustomStyles";
+import customStyles from "../Dropdown/CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 
-const Dropdown = React.forwardRef((props, ref) => {
+const MultiDropdown = React.forwardRef((props, ref) => {
   const {
     options,
     styles,
@@ -77,6 +76,7 @@ const Dropdown = React.forwardRef((props, ref) => {
 
   return (
     <ReactSelect
+      isMulti={true}
       ref={ref}
       components={components}
       options={options}
@@ -137,7 +137,7 @@ const Dropdown = React.forwardRef((props, ref) => {
   );
 });
 
-Dropdown.defaultProps = {
+MultiDropdown.defaultProps = {
   readOnly: false,
   isDisabled: false,
   isSearchable: true,
@@ -159,7 +159,7 @@ Dropdown.defaultProps = {
   size: "small",
 };
 
-Dropdown.propTypes = {
+MultiDropdown.propTypes = {
   options: PropTypes.array,
   styles: PropTypes.object,
   debounceTime: PropTypes.number,
@@ -332,5 +332,4 @@ Dropdown.propTypes = {
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
-export default Dropdown;
-export { components };
+export default MultiDropdown;

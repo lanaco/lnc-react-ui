@@ -22,7 +22,7 @@ const Item = styled.div`
   ${(props) =>
     getComponentTypographyCss(
       props.theme,
-      "DropDownItem",
+      "DropDownMenuItem",
       props.size,
       "enabled"
     )};
@@ -31,14 +31,14 @@ const Item = styled.div`
       (props.isActive && props.disabled == false)
         ? getColorRgbaValue(
             props.theme,
-            "DropDownItem",
+            "DropDownMenuItem",
             props.color,
             "focus",
             "icon"
           )
         : getColorRgbaValue(
             props.theme,
-            "DropDownItem",
+            "DropDownMenuItem",
             props.color,
             "enabled",
             "icon"
@@ -55,14 +55,14 @@ const Item = styled.div`
     props.disabled == false &&
     `background-color: ${getColorRgbaValue(
       props.theme,
-      "DropDownItem",
+      "DropDownMenuItem",
       props.color,
       "focus",
       "backgoround"
     )};
     color: ${getColorRgbaValue(
       props.theme,
-      "DropDownItem",
+      "DropDownMenuItem",
       props.color,
       "focus",
       "text"
@@ -73,7 +73,7 @@ const Item = styled.div`
     ${(props) => props.disabled && getDisabledStateCss(props.theme)};
 `;
 
-const DropDownItem = React.forwardRef((props, ref) => {
+const DropdownItem = React.forwardRef((props, ref) => {
   const {
     active,
     icon,
@@ -108,11 +108,13 @@ const DropDownItem = React.forwardRef((props, ref) => {
   }, [active]);
 
   const handleOnClick = (e) => {
-    if (isNested && toggleNested) {
-      toggleNested();
-    }
-
-    if(disabled == false) onItemSelected(e, children);
+    if(disabled == false){
+      if (isNested && toggleNested) {
+        toggleNested();
+      }
+      
+      onItemSelected(e, children)
+    };
     onClick(onClick);
   };
   const handleOnFocus = (e) => {
@@ -131,7 +133,13 @@ const DropDownItem = React.forwardRef((props, ref) => {
     } else if (e.key == "ArrowUp") {
       focusPreviousItem(ref ? ref.current : itemRef.current);
     } else if (e.key == "Enter") {
-      if(disabled == false) onItemSelected(e, children);
+      if(disabled == false) {
+        if (isNested && toggleNested) {
+          toggleNested();
+        }
+
+        onItemSelected(e, children);
+      };
     }
 
     onKeyDown(e);
@@ -200,7 +208,7 @@ const DropDownItem = React.forwardRef((props, ref) => {
   );
 });
 
-DropDownItem.defaultProps = {
+DropdownItem.defaultProps = {
   active: false,
   disabled: false,
   isNested: false,
@@ -220,7 +228,7 @@ DropDownItem.defaultProps = {
   __TYPE__: "TAB_ITEM",
 };
 
-DropDownItem.propTypes = {
+DropdownItem.propTypes = {
   active: PropTypes.bool,
   icon: PropTypes.string,
   disabled: PropTypes.bool,
@@ -248,4 +256,4 @@ DropDownItem.propTypes = {
   __TYPE__: PropTypes.string,
 };
 
-export default DropDownItem;
+export default DropdownItem;

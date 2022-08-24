@@ -2607,7 +2607,7 @@ export const lanaco_light = {
         },
       },
     },
-    Select: {
+    Dropdown: {
       default: {
         palette: "gray",
         hover: {
@@ -2682,7 +2682,7 @@ export const lanaco_light = {
         }
       }
     },
-    DropDownItem: {
+    DropDownMenuItem: {
       default: {
         palette: "gray",
         enabled: {

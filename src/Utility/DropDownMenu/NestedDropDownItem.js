@@ -18,7 +18,7 @@ const StyledNested = styled.div`
     border-radius: 2px;
 `;
 
-const NestedDropDownItem = React.forwardRef((props, ref) => {
+const NestedDropdownItem = React.forwardRef((props, ref) => {
     const {
         item,
         //------------------
@@ -62,7 +62,7 @@ const NestedDropDownItem = React.forwardRef((props, ref) => {
     </> 
 })
 
-NestedDropDownItem.defaultProps = {
+NestedDropdownItem.defaultProps = {
     size: "small",
     color: "primary",
     style: {},
@@ -70,7 +70,7 @@ NestedDropDownItem.defaultProps = {
     __TYPE__: "NESTED_ITEM",
 };
 
-NestedDropDownItem.propTypes = {
+NestedDropdownItem.propTypes = {
     item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
     //--------------------------
     className: PropTypes.string,
@@ -87,4 +87,4 @@ NestedDropDownItem.propTypes = {
     __TYPE__: PropTypes.string,
 };
 
-export default NestedDropDownItem;
+export default NestedDropdownItem;

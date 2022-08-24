@@ -1,4 +1,4 @@
-import { getBorderRadiusValueWithUnits, getColorRgbaValue, getOutlineCss, getSizeValueWithUnits, hexToRgba } from "../../_utils/utils";
+import { getBorderRadiusValueWithUnits, getColorRgbaValue, getSizeValueWithUnits, hexToRgba } from "../../_utils/utils";
 
 const getOutline = (theme) => {
     const palette = theme.colorContext[theme.palette.outline.context];
@@ -109,14 +109,14 @@ const customStyles = {
         lineHeight: s.theme.typography.component[s.selectProps.size].lineHeight,
         backgroundColor: s.isSelected ? getColorRgbaValue(
             s.theme,
-            "Select",
+            "Dropdown",
             s.selectProps.color,
             "selected",
             "background"
         ) : (s.isFocused ? 
             getColorRgbaValue(
                 s.theme,
-                "Select",
+                "Dropdown",
                 s.selectProps.color,
                 "hover",
                 "background"
@@ -126,7 +126,7 @@ const customStyles = {
         "&:hover": {
             backgroundColor: getColorRgbaValue(
                 s.theme,
-                "Select",
+                "Dropdown",
                 s.selectProps.color,
                 "hover",
                 "background"

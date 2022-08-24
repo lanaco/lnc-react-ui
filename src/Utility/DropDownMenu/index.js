@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Button from "../../General/Button";
@@ -15,7 +15,7 @@ const PopoverContent = styled.div`
   min-width: 200px;
 `;
 
-const DropDownMenu = React.forwardRef((props, ref) => {
+const DropdownMenu = React.forwardRef((props, ref) => {
   const {
     control,
     openOnClick,
@@ -157,7 +157,7 @@ const DropDownMenu = React.forwardRef((props, ref) => {
   );
 });
 
-DropDownMenu.defaultProps = {
+DropdownMenu.defaultProps = {
   openOnClick: true,
   openOnHover: false,
   offset: 8,
@@ -177,7 +177,7 @@ DropDownMenu.defaultProps = {
   size: "small",
 };
 
-DropDownMenu.propTypes = {
+DropdownMenu.propTypes = {
   control: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
     .isRequired,
   openOnClick: PropTypes.bool,
@@ -213,4 +213,4 @@ DropDownMenu.propTypes = {
   popoverProps: PropTypes.any,
 };
 
-export default DropDownMenu;
+export default DropdownMenu;
