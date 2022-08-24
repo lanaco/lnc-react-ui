@@ -5,37 +5,42 @@ import { useState } from "react";
 
 <Meta title="Inputs/Toggle" component={Toggle} />
 
-export const ToggleComponent = (props) => {
+export const TemplateDefault = (props) => {
   const [checked, setChecked] = useState(props.value || false);
   return (
-    <div style={{ paddingBottom: "12px" }}>
-      <Toggle
-        {...props}
-        value={checked}
-        onChange={() => setChecked(!checked)}
-      />
-    </div>
+    <Toggle {...props} value={checked} onChange={() => setChecked(!checked)} />
   );
 };
 
-export const TemplateDefault = (args) => (
+export const TemplateTrueFalse = (args) => (
   <div>
-    <ToggleComponent {...args} />
+    <Toggle {...args} />
+    <Toggle {...args} value={true} />
   </div>
 );
 
-export const TemplateTrueFalse = (args) => (
-  <div>
-    <ToggleComponent {...args} />
-    <ToggleComponent {...args} value={true} />
+export const TemplateLabel = (args) => (
+  <div style={{ width: "220px" }}>
+    <Toggle {...args} label={"Label as string"} />
+    <Toggle {...args} label={<span>Label as component</span>} value={true} />
+    <Toggle {...args} label={"Label as string"} orientation="right" />
+    <Toggle
+      {...args}
+      label={<span>Label as component</span>}
+      value={true}
+      orientation="right"
+    />
   </div>
 );
 
 export const TemplateSizes = (args) => (
   <div>
-    <ToggleComponent {...args} size="small" />
-    <ToggleComponent {...args} size="medium" />
-    <ToggleComponent {...args} size="large" />
+    <Toggle {...args} size="small" />
+    <Toggle {...args} size="medium" />
+    <Toggle {...args} size="large" />
+    <Toggle {...args} size="small" value={true} />
+    <Toggle {...args} size="medium" value={true} />
+    <Toggle {...args} size="large" value={true} />
   </div>
 );
 
@@ -47,35 +52,25 @@ export const TemplateColors = (args) => (
     }}
   >
     <div>
-      <ToggleComponent {...args} color="primary" />
-      <ToggleComponent {...args} color="secondary" />
-      <ToggleComponent {...args} color="warning" />
-      <ToggleComponent {...args} color="danger" />
-      <ToggleComponent {...args} color="information" />
+      <Toggle {...args} color="primary" />
+      <Toggle {...args} color="secondary" />
+      <Toggle {...args} color="warning" />
+      <Toggle {...args} color="danger" />
+      <Toggle {...args} color="information" />
     </div>
     <div style={{ paddingLeft: "12px" }}>
-      <ToggleComponent {...args} value={true} color="primary" />
-      <ToggleComponent {...args} value={true} color="secondary" />
-      <ToggleComponent {...args} value={true} color="warning" />
-      <ToggleComponent {...args} value={true} color="danger" />
-      <ToggleComponent {...args} value={true} color="information" />
+      <Toggle {...args} value={true} color="primary" />
+      <Toggle {...args} value={true} color="secondary" />
+      <Toggle {...args} value={true} color="warning" />
+      <Toggle {...args} value={true} color="danger" />
+      <Toggle {...args} value={true} color="information" />
     </div>
     <div style={{ paddingLeft: "12px" }}>
-      <ToggleComponent {...args} value={true} disabled={true} color="primary" />
-      <ToggleComponent
-        {...args}
-        value={true}
-        disabled={true}
-        color="secondary"
-      />
-      <ToggleComponent {...args} value={true} disabled={true} color="warning" />
-      <ToggleComponent {...args} value={true} disabled={true} color="danger" />
-      <ToggleComponent
-        {...args}
-        value={true}
-        disabled={true}
-        color="information"
-      />
+      <Toggle {...args} value={true} disabled={true} color="primary" />
+      <Toggle {...args} value={true} disabled={true} color="secondary" />
+      <Toggle {...args} value={true} disabled={true} color="warning" />
+      <Toggle {...args} value={true} disabled={true} color="danger" />
+      <Toggle {...args} value={true} disabled={true} color="information" />
     </div>
   </div>
 );
@@ -105,8 +100,23 @@ import { Toggle } from "@lnc-react-ui";
 ## With Label
 
 <Canvas>
-  <Story name="With Label" args={{ label: "Toggle" }}>
-    {TemplateTrueFalse.bind({})}
+  <Story name="With Label" args={{}}>
+    {TemplateLabel.bind({})}
+  </Story>
+</Canvas>
+
+## With Icon
+
+Since the component uses the `content` css property, the icon is in unicode.
+
+<Canvas>
+  <Story
+    name="With Icon"
+    args={{
+      unicodeIcon: "f011",
+    }}
+  >
+    {TemplateSizes.bind({})}
   </Story>
 </Canvas>
 
