@@ -196,7 +196,7 @@ const UploadedFile = React.forwardRef((props, ref) => {
 
 UploadedFile.defaultProps = {
   id: "",
-  fileName: "file-nameeeeeeeeeeeeeeeeeeee.png",
+  fileName: "file",
   fileSize: null,
   showFileSize: false,
   // progressPercentage: 20,
