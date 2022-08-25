@@ -3,44 +3,78 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import DragDropFiles from ".";
 import DragAndDropFile from "../DragAndDropFile";
 import UploadedFile from "../../General/UploadedFile";
+import Chip from "../../Data display/Chip";
 
 <Meta title="Inputs/Drag & Drop Files" component={DragDropFiles} />
 
 export const TemplateDefault = (args) => <DragDropFiles {...args} />;
 
+export const TemplateAcceptImages = (args) => (
+  <DragDropFiles
+    multiple={true}
+    accept={{ "image/jpeg": [], "image/jpg": [], "image/png": [".png"] }}
+    {...args}
+  />
+);
+
+export const TemplateWithFiles = (args) => (
+  <DragDropFiles
+    showFileSize={true}
+    files={[
+      { name: "File 1", size: 20000000 },
+      { name: "File 2", size: 1500 },
+    ]}
+    {...args}
+  />
+);
+
 export const TemplateDragAndDropFile = (args) => <DragAndDropFile {...args} />;
 
-export const TemplateSizes = (args) => <div>
-    <DragDropFiles {...args} size="small"/>
-    <DragDropFiles {...args} size="medium"/>
-    <DragDropFiles {...args} size="large"/>
-</div>;
+export const TemplateCustomControl = (args) => (
+  <DragAndDropFile control={<Chip>Custom control</Chip>} {...args} />
+);
 
+export const TemplateDisabled = (args) => (
+  <DragAndDropFile
+    disabled={true}
+    selectFileText={"FILE"}
+    dndFileText={"This is the place where you should drag and drop your file"}
+    {...args}
+  />
+);
 
-export const TemplateColors = (args) => <div>
-    <DragDropFiles {...args} color="primary"/>
-    <DragDropFiles {...args} color="secondary"/>
-    <DragDropFiles {...args} color="success"/>
-    <DragDropFiles {...args} color="warning"/>
-    <DragDropFiles {...args} color="danger"/>
-</div>;
+export const TemplateSizes = (args) => (
+  <div>
+    <DragDropFiles {...args} size="small" />
+    <DragDropFiles {...args} size="medium" />
+    <DragDropFiles {...args} size="large" />
+  </div>
+);
 
+export const TemplateColors = (args) => (
+  <div>
+    <DragDropFiles {...args} color="primary" />
+    <DragDropFiles {...args} color="secondary" />
+    <DragDropFiles {...args} color="success" />
+    <DragDropFiles {...args} color="warning" />
+    <DragDropFiles {...args} color="danger" />
+    <DragDropFiles {...args} color="neutral" />
+  </div>
+);
 
 # Drag & Drop Files
+
 ```jsx
 import { DragAndDropFiles } from "@lnc-react-ui";
 ```
 
-<Canvas withSource="open">
+<Canvas>
   <Story name="Default">{TemplateDefault.bind({})}</Story>
 </Canvas>
 
 <ArgsTable story="Default" />
 
 ---
-
-## [react-dropzone](https://react-dropzone.js.org/) is used to enable drag and drop functionality.
-
 
 ## Subcomponents
 
@@ -51,32 +85,18 @@ import { DragAndDropFiles } from "@lnc-react-ui";
 ## Accept Multiple Images
 
 <Canvas withSource="open">
-  <Story
-    name="Accept Images"
-    args={{
-      multiple: true,
-      accept: { "image/jpeg": [], "image/jpg": [], "image/png": [".png"] },
-    }}
-  >
-    {TemplateDefault.bind({})}
+  <Story name="Accept Images" args={{}}>
+    {TemplateAcceptImages.bind({})}
   </Story>
 </Canvas>
 
 ## With Files
-  Show file size with `showFileSize={true}`. File size is provided in Bytes and it will formatted accordingly. 
+
+Show file size with `showFileSize={true}`. File size is provided in Bytes and it will formatted accordingly.
 
 <Canvas withSource="open">
-  <Story
-    name="With Files"
-    args={{
-      showFileSize: true,
-      files: [
-        { name: "File 1", size: 20000000 },
-        { name: "File 2", size: 1500 },
-      ],
-    }}
-  >
-    {TemplateDefault.bind({})}
+  <Story name="With Files" args={{}}>
+    {TemplateWithFiles.bind({})}
   </Story>
 </Canvas>
 
@@ -84,43 +104,43 @@ import { DragAndDropFiles } from "@lnc-react-ui";
 
 `DragAndDropFile` component does not display file list, giving ability for custom file list display.
 
-<Canvas withSource="open">
-  <Story name="Drag and Drop File">{TemplateDragAndDropFile.bind({})}</Story>
-</Canvas>
+<Story name="Drag and Drop File">{TemplateDragAndDropFile.bind({})}</Story>
+
+```jsx
+import { DragAndDropFile } from "@lnc-react-ui";
+
+const Component = (args) => <DragAndDropFile {...args} />;
+```
 
 <ArgsTable story="Drag and Drop File" />
 
 ## Disabled With Alternative Labels
 
 <Canvas>
-  <Story
-    name="Disabled With Alternative Labels"
-    args={{
-      disabled: true,
-      selectFileText: "FILE",
-      dndFileText: "This is the place where you should drag and drop your file",
-    }}
-  >
-    {TemplateDefault.bind({})}
+  <Story name="Disabled With Alternative Labels" args={{}}>
+    {TemplateDisabled.bind({})}
+  </Story>
+</Canvas>
+
+## Custom control
+
+<Canvas>
+  <Story name="Custom control" args={{}}>
+    {TemplateCustomControl.bind({})}
   </Story>
 </Canvas>
 
 ## Sizes
 
 <Canvas>
-  <Story
-    name="Sizes"
-  >
-    {TemplateSizes.bind({})}
-  </Story>
+  <Story name="Sizes">{TemplateSizes.bind({})}</Story>
 </Canvas>
 
 ## Colors
 
 <Canvas>
-  <Story
-    name="Colors"
-  >
-    {TemplateColors.bind({})}
-  </Story>
+  <Story name="Colors">{TemplateColors.bind({})}</Story>
 </Canvas>
+
+
+#### This component is built on top of [react-dropzone](https://react-dropzone.js.org/).

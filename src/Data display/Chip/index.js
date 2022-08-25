@@ -139,6 +139,7 @@ const Chip = React.forwardRef((props, ref) => {
     style,
     color,
     avatarProps,
+    children,
     ...rest
   } = props;
 
@@ -175,7 +176,10 @@ const Chip = React.forwardRef((props, ref) => {
       {leadingIcon && (
         <i className={getIconClass(leadingIcon)} onClick={onLeadingIconClick} />
       )}
+      <>
       {label}
+      {children}
+      </>
       {trailingIcon && (
         <i
           className={getIconClass(trailingIcon)}

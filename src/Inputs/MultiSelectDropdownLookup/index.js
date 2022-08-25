@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import React, { useCallback } from "react";
-import AsyncReactSelect from 'react-select/async';
 import customStyles from "../Dropdown/CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
+import DropdownLookup from "../DropdownLookup";
 
-const MultiDropdownLookup = React.forwardRef((props, ref) => {
+const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
     const {
         defaultOptions,
         cacheOptions,
@@ -77,7 +77,7 @@ const MultiDropdownLookup = React.forwardRef((props, ref) => {
     )
 
     return (
-        <AsyncReactSelect
+        <DropdownLookup
             isMulti={true}
             ref={ref}
             components={components}
@@ -141,7 +141,7 @@ const MultiDropdownLookup = React.forwardRef((props, ref) => {
     );
 });
 
-MultiDropdownLookup.defaultProps = {
+MultiSelectDropdownLookup.defaultProps = {
     readOnly: false,
     isDisabled: false,
     isSearchable: true,
@@ -163,7 +163,7 @@ MultiDropdownLookup.defaultProps = {
     size: "small",
 };
 
-MultiDropdownLookup.propTypes = {
+MultiSelectDropdownLookup.propTypes = {
     /**
    * The default set of options to show before the user starts searching. When set to true, the results for loadOptions('') will be autoloaded.
    */
@@ -347,4 +347,4 @@ MultiDropdownLookup.propTypes = {
     size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
-export default MultiDropdownLookup;
+export default MultiSelectDropdownLookup;

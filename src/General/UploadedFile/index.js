@@ -61,6 +61,9 @@ const ProgressContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.1875rem;
+  min-width: 0;
+  flex-shrink: 1;
+  min-height: 0;
 `;
 const ProgressText = styled.div`
   display: flex;
@@ -166,7 +169,7 @@ const UploadedFile = React.forwardRef((props, ref) => {
           <FileName
             {...themeProps}
             hasOnClick={onFileClick ? true : false}
-            onClick={onFileClick ? onFileClick : null}
+            onClick={(e) => onFileClick ? onFileClick(e) : null}
           >
             {getFileName()}
           </FileName>
@@ -184,7 +187,6 @@ const UploadedFile = React.forwardRef((props, ref) => {
       <CancelWrapper onCancel={onCancel} onClick={onCancel ? onCancel : null}>
         <Icon
           {...themeProps}
-          color={"gray"}
           icon={cancelIcon}
           sizeInUnits={iconSizes[props.size]}
           {...rest}

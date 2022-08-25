@@ -74,9 +74,8 @@ Icon.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
-    "white",
-    "info",
+    "information",
+    "neutral"
   ]),
 };
 
