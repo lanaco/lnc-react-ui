@@ -21,15 +21,17 @@ export const TemplateColors = (args) => (
 ```jsx
 import { ProgressBar } from "@lnc-react-ui";
 ```
-<Canvas withSource="open">
+<Canvas>
   <Story name="Default"  args={{ progressPercentage: 20 }}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
 
+<ArgsTable story="Default" />
+
 ## With Label
 
-<Canvas withSource="open">
+<Canvas>
   <Story name="With Label" args={{ showLabel: true, progressPercentage: 20 }}>
     {TemplateDefault.bind({})}
   </Story>
