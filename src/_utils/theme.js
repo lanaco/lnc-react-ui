@@ -2111,6 +2111,11 @@ export const lanaco_light = {
           fontWeight: 700,
           text: 0,
           unfilled: 300,
+          sizes: {
+            small: "1rem",
+            medium: "1.25rem",
+            large: "1.5rem",
+          },
         },
       },
       teal: {

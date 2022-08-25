@@ -169,7 +169,7 @@ const UploadedFile = React.forwardRef((props, ref) => {
           <FileName
             {...themeProps}
             hasOnClick={onFileClick ? true : false}
-            onClick={(e) => onFileClick ? onFileClick(e) : null}
+            onClick={(e) => (onFileClick ? onFileClick(e) : null)}
           >
             {getFileName()}
           </FileName>
@@ -179,6 +179,7 @@ const UploadedFile = React.forwardRef((props, ref) => {
         {(progressPercentage || progressPercentage == 0) && (
           <ProgressBar
             progressPercentage={progressPercentage}
+            style={{ height: "0.5rem" }}
             {...themeProps}
           />
         )}

@@ -10,7 +10,7 @@ export const TemplateDefault = (args) => (
       width: "300px",
     }}
   >
-    <UploadedFile {...args} size="large" />
+    <UploadedFile {...args} />
   </div>
 );
 
@@ -43,7 +43,7 @@ export const TemplateColors = (args) => (
     <UploadedFile {...args} color="success" />
     <UploadedFile {...args} color="warning" />
     <UploadedFile {...args} color="danger" />
-    <UploadedFile {...args} color="info" />
+    <UploadedFile {...args} color="information" />
   </div>
 );
 
@@ -67,7 +67,7 @@ import { UploadedFile } from "@lnc-react-ui";
   <Story
     name="Uploading Progress"
     args={{
-      progressPercentage: undefined,
+      progressPercentage: 10,
     }}
   >
     {TemplateDefault.bind({})}
