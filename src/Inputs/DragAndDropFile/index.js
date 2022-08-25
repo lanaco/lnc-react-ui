@@ -1,22 +1,24 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import Icon from "../../General/Icon";
 import { useDropzone } from "react-dropzone";
+import Button from "../../General/Button";
+import { getColorRgbaValue } from "../../_utils/utils";
 
-var paddingBySize = {
-    small: "8px 13px",
-    medium: "9.5px 14.5px",
-    large: "11.75px 16.75px",
+const paddingBySize = {
+    small: "0.5rem 0.813rem",
+    medium: "0.75rem 1.063rem",
+    large: "1rem 1.313rem",
 };
 
-const standardCssFields = ({ theme, color, size }) => {
-    return `
-      font-family: ${theme.typography.fontFamily};
-      font-size: ${theme.typography[size].fontSize};
-    `;
-};
+const getIconSize = {
+    small: "1.25rem",
+    medium: "1.5rem",
+    large: "1.75rem"
+}
+
 
 const Container = styled.label`
   display: flex;
@@ -25,35 +27,34 @@ const Container = styled.label`
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-`;
+  font-size: ${props => props.theme.typography.component[props.size].subTxtFontSize};
+  padding: ${props => paddingBySize[props.size]};
 
-const TextContent = styled.span`
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  font-size: ${(props) => props.theme.typography[props.size].subTextSize};
-  color: ${(props) => props.theme.test_palette.dark[400]};
-`;
+  background-color: ${props => getColorRgbaValue(
+    props.theme,
+    "DragDropFiles",
+    props.color,
+    "enabled",
+    "background",
+    "backgroundOpacity"
+  )};
+  color: ${props => getColorRgbaValue(
+    props.theme,
+    "DragDropFiles",
+    props.color,
+    "enabled",
+    "text"
+  )};
 
-const Label = styled.span`
-  ${(props) => standardCssFields(props)}
-  white-space: nowrap;
-  display: inline-block;
-  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-  background-color: ${(props) =>
-        props.disabled
-            ? props.theme.test_palette.light[400]
-            : props.theme.test_palette[props.color][props.focused ? 200 : 400]};
-  color: white;
-
-  padding: ${(props) => paddingBySize[props.size]};
-  border-radius: 10px;
-
-  &:hover {
-    background-color: ${(props) =>
-        props.disabled
-            ? ""
-            : props.focused
-                ? props.theme.test_palette[props.color][200]
-                : props.theme.test_palette[props.color][300]};
+  & .dnd-icon-lnc {
+    font-size: ${props => getIconSize[props.size]};
+    color: ${props => getColorRgbaValue(
+        props.theme,
+        "DragDropFiles",
+        props.color,
+        "enabled",
+        "text"
+      )};
   }
 `;
 
@@ -73,12 +74,14 @@ const PlusLabel = styled.span`
 
 const DragAndDropFile = React.forwardRef((props, ref) => {
     const {
+        inputRef,
         id,
         disabled,
         preventDefault,
         accept,
         multiple,
         selectFileText,
+        control,
         dndFileText,
         showFileSize,
         showDnD,
@@ -91,16 +94,18 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
         onDrop,
         color,
         size,
+        inputProps,
         ...rest
     } = props;
     const theme = useTheme();
     const [focused, setFocused] = useState(false);
     const [displayDnD, setDisplayDnD] = useState(showDnD);
+    const dropzoneRef = useRef();
 
     useEffect(() => {
-      setDisplayDnD(showDnD);
+        setDisplayDnD(showDnD);
     }, [showDnD])
-    
+
 
     var themeProps = { theme, size, color, disabled, focused };
 
@@ -122,7 +127,29 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
         setDisplayDnD(false);
     }
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    const handleControlClick = (e) => {
+        //open(e) doesen't work for Firefox
+        // open(e);
+
+        ref?.current ? ref.current?.click() : dropzoneRef?.current?.click();
+    }
+
+    const clonedControl = () => {
+        if (control) {
+            return React.cloneElement(control, {
+                onClick: (e) => { handleControlClick(e); if(control.onClick) control.onClick(e); },
+                disabled: disabled,
+            });
+        } else {
+            return (
+                <Button color={color} size={size} text={selectFileText} disabled={disabled} onClick={(e) => { e.preventDefault(); handleControlClick(e); }}>
+                    {selectFileText}
+                </Button>
+            );
+        }
+    };
+
+    const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
         onDrop: handleOnDrop,
         accept: accept,
         onDropAccepted: handleOnDropAccepted,
@@ -138,13 +165,16 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
             className={className}
             style={style}
             {...getRootProps()}
+            {...rest}
+            ref={ref ? ref : dropzoneRef}
         >
             <Input
                 {...getInputProps()}
                 {...themeProps}
                 multiple={multiple}
-                ref={ref}
+                ref={inputRef}
                 type="file"
+                action="bla.html"
                 id={id}
                 onFocus={(e) => {
                     if (!disabled) setFocused(true);
@@ -155,16 +185,14 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
                     if (onBlur && !disabled) onBlur(e);
                 }}
                 onChange={handleOnChange}
-                {...rest}
+                {...inputProps}
             />
-            {(!isDragActive && !displayDnD) && <PlusLabel><Icon icon={"plus"} size={size} color={disabled ? "disabled" : color} /></PlusLabel>}
+            {(!isDragActive && !displayDnD) && <PlusLabel><Icon icon={"plus"} size={size} /></PlusLabel>}
             {(isDragActive || displayDnD) &&
                 <>
-                    <Icon icon={"upload"} size={size} color={"disabled"} />
-                    <TextContent {...themeProps}>{dndFileText}</TextContent>
-                    <Label {...themeProps}>
-                        {selectFileText}
-                    </Label>
+                    <Icon icon={"upload"} size={size} className={"dnd-icon-lnc"} />
+                    {dndFileText}
+                    {clonedControl()}
                 </>}
         </Container>
     );
@@ -193,7 +221,8 @@ DragAndDropFile.defaultProps = {
 };
 
 DragAndDropFile.propTypes = {
-    id: PropTypes.any.isRequired,
+    inputRef: PropTypes.any,
+    id: PropTypes.string,
     disabled: PropTypes.bool,
     /**
      * Type of: { \[key: string]: string[] }
@@ -209,6 +238,10 @@ DragAndDropFile.propTypes = {
     accept: PropTypes.object,
     multiple: PropTypes.bool,
     selectFileText: PropTypes.string,
+    /**
+     * Custom control which opens file explorer on click
+     */
+    control: PropTypes.element,
     dndFileText: PropTypes.string,
     showFileSize: PropTypes.bool,
     /**
@@ -233,8 +266,10 @@ DragAndDropFile.propTypes = {
         "success",
         "danger",
         "warning",
-        "disabled",
+        "information",
+        "neutral",
     ]),
+    inputProps: PropTypes.any,
 };
 
 export default DragAndDropFile;

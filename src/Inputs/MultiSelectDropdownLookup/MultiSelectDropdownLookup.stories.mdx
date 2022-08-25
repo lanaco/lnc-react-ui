@@ -1,8 +1,8 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import MultiDropdownLookup from "./index";
+import MultiSelectDropdownLookup from "./index";
 
-<Meta title="Inputs/Multi Dropdown Lookup" component={MultiDropdownLookup} />
+<Meta title="Inputs/Multi Select Dropdown Lookup" component={MultiSelectDropdownLookup} />
 
 export const apiData = [
   { value: "1", label: "Birch" },
@@ -24,7 +24,7 @@ export const TemplateDefault = (args) => {
   };
   return (
     <div style={{ height: "130px" }}>
-      <MultiDropdownLookup
+      <MultiSelectDropdownLookup
         loadOptions={loadOptions}
         defaultOptions={true}
         {...args}
@@ -33,10 +33,10 @@ export const TemplateDefault = (args) => {
   );
 };
 
-# Multi Dropdown Lookup
+# Multi Select Dropdown Lookup
 
 ```jsx
-import { MultiDropdownLookup } from "@lnc-react-ui";
+import { MultiSelectDropdownLookup } from "@lnc-react-ui";
 ```
 
 <Canvas>

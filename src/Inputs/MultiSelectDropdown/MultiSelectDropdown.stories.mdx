@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import MultiDropdown from "./index";
+import MultiSelectDropdown from "./index";
 import Avatar from "../../General/Avatar";
 import { components } from "../Dropdown/index";
 import logo from "../../_utils/images/Image.png";
@@ -8,11 +8,11 @@ import Icon from "../../General/Icon";
 import { useState, useRef } from "react";
 import Button from "../../General/Button";
 
-<Meta title="Inputs/Multi Dropdown" component={MultiDropdown} />
+<Meta title="Inputs/Multi Select Dropdown" component={MultiSelectDropdown} />
 
 export const TemplateDefault = (args) => (
   <div style={{ height: "130px" }}>
-    <MultiDropdown {...args} />
+    <MultiSelectDropdown {...args} />
   </div>
 );
 
@@ -24,7 +24,7 @@ export const TemplateMethods = (args) => {
       &nbsp;&nbsp;
       <Button text="Blur" onClick={() => dropDownRef.current.blur()} />
       <br /><br />
-      <MultiDropdown ref={dropDownRef} {...args} />
+      <MultiSelectDropdown ref={dropDownRef} {...args} />
     </div>
   );
 };
@@ -45,7 +45,7 @@ export const CustomOption = ({ children, ...props }) => {
 
 export const TemplateCustom = (args) => (
   <div style={{ height: "130px" }}>
-    <MultiDropdown
+    <MultiSelectDropdown
       {...args}
       components={{ Option: CustomOption }}
     />
@@ -127,7 +127,7 @@ React-Select library provides consumers with the building block necessary to cre
 </Story>
 
 ```jsx
-import { Dropdown } from "@lnc-react-ui";
+import { MultiSelectDropdown } from "@lnc-react-ui";
 import { components } from "@lnc-react-ui/Dropdown";
 
 const CustomOption = ({ children, ...props }) => {
@@ -145,7 +145,7 @@ const CustomOption = ({ children, ...props }) => {
 };
 
 export const Template = (args) => (
-  <MultiDropdown
+  <MultiSelectDropdown
     {...args}
     components={{ Option: CustomOption }}
   />

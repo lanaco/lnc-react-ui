@@ -2843,6 +2843,19 @@ export const lanaco_light = {
         },
       },
     },
+    DragDropFiles: {
+      default: {
+        palette: "gray",
+        enabled: {
+          border: 200,
+          text: 500,
+          icon: 500,
+          backgoround: 0,
+          backgroundOpacity: 1000,
+          fontWeight: 400,
+        }
+      }
+    },
     Danger: {
       default: {
         palette: "red",
@@ -3006,14 +3019,17 @@ export const lanaco_light = {
       large: {
         fontSize: "1rem",
         lineHeight: "1.125rem",
+        subTxtFontSize: "0.9rem",
       },
       medium: {
         fontSize: "0.875rem",
         lineHeight: "1rem",
+        subTxtFontSize: "0.775rem",
       },
       small: {
         fontSize: "0.875rem",
         lineHeight: "1rem",
+        subTxtFontSize: "0.775rem",
       },
     },
   },

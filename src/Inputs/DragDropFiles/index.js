@@ -4,15 +4,26 @@ import styled from "@emotion/styled";
 import DragAndDropFile from "../DragAndDropFile";
 import UploadedFile from "../../General/UploadedFile";
 import { useTheme } from "@emotion/react";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+} from "../../_utils/utils";
 
 const StyledDragDropFiles = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
-  border: 1px dashed ${(props) => props.theme.test_palette.light[500]};
-  border-radius: 5px;
-
+  border: ${(props) =>
+    `1px solid ${getColorRgbaValue(
+      props.theme,
+      "DragDropFiles",
+      props.color,
+      "enabled",
+      "border"
+    )}`};
+  border-radius: ${(props) =>
+    getBorderRadiusValueWithUnits(props.theme, "regular")};
   padding: 1.25rem 2.5rem;
 `;
 
@@ -31,6 +42,7 @@ const DragDropFiles = React.forwardRef((props, ref) => {
     multiple,
     selectFileText,
     dndFileText,
+    control,
     showFileSize,
     files,
     onChange,
@@ -38,22 +50,23 @@ const DragDropFiles = React.forwardRef((props, ref) => {
     onBlur,
     onDropAccepted,
     onDrop,
-    onFileClick,
+    fileClick,
     onCancel,
     className,
     style,
     color,
     size,
+    dragAndDropFileProps,
+    uploadedFileProps,
     ...rest
   } = props;
   const theme = useTheme();
   var themeProps = { theme, size, color };
 
-
-  const [inputFiles, setInputFiles] =useState([]);
+  const [inputFiles, setInputFiles] = useState([]);
   useEffect(() => {
-    setInputFiles(files)
-  }, [files])
+    setInputFiles(files);
+  }, [files]);
 
   const handleOnDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (onDrop) onDrop(acceptedFiles, rejectedFiles);
@@ -67,13 +80,13 @@ const DragDropFiles = React.forwardRef((props, ref) => {
     if (e.target?.files) {
       setInputFiles([...inputFiles, ...e.target.files]);
     } else if (e) {
-       setInputFiles([...inputFiles, ...e]);
+      setInputFiles([...inputFiles, ...e]);
     }
     if (onChange) onChange(e);
   };
 
   return (
-    <StyledDragDropFiles {...themeProps}>
+    <StyledDragDropFiles ref={ref} {...themeProps} {...rest}>
       <DragAndDropFile
         id={id}
         disabled={disabled}
@@ -82,6 +95,7 @@ const DragDropFiles = React.forwardRef((props, ref) => {
         multiple={multiple}
         selectFileText={selectFileText}
         dndFileText={dndFileText}
+        control={control}
         showFileSize={showFileSize}
         showDnD={!(inputFiles?.length > 0)}
         onChange={handleOnChange}
@@ -91,18 +105,21 @@ const DragDropFiles = React.forwardRef((props, ref) => {
         onDropAccepted={handleOnDropAccepted}
         color={color}
         size={size}
-        {...rest}
+        {...dragAndDropFileProps}
       />
       <FilesList>
         {inputFiles?.map((file, i) => (
-          <UploadedFile key={i} 
-          fileName={file.name} 
-          fileSize={file.size}
-          showFileSize={showFileSize}
-          color={color} 
-          size={size} 
-          onFileClick={onFileClick}
-          onCancel={onCancel}/>
+          <UploadedFile
+            key={i}
+            fileName={file.name}
+            fileSize={file.size}
+            showFileSize={showFileSize}
+            color={color}
+            size={size}
+            onFileClick={fileClick}
+            onCancel={onCancel}
+            {...uploadedFileProps}
+          />
         ))}
       </FilesList>
     </StyledDragDropFiles>
@@ -125,7 +142,7 @@ DragDropFiles.defaultProps = {
   onBlur: () => {},
   onDropAccepted: () => {},
   onDrop: () => {},
-  onFileClick: () => {},
+  // onFileClick: () => {},
   onCancel: () => {},
   //------------------
   className: "",
@@ -153,6 +170,10 @@ DragDropFiles.propTypes = {
   multiple: PropTypes.bool,
   selectFileText: PropTypes.string,
   dndFileText: PropTypes.string,
+  /**
+   * Custom control which opens file explorer on click
+   */
+  control: PropTypes.element,
   showFileSize: PropTypes.bool,
   files: PropTypes.array,
   //-------------------------
@@ -161,7 +182,7 @@ DragDropFiles.propTypes = {
   onBlur: PropTypes.func,
   onDropAccepted: PropTypes.func,
   onDrop: PropTypes.func,
-  onFileClick: PropTypes.func,
+  fileClick: PropTypes.func,
   onCancel: PropTypes.func,
   //-------------------------
   className: PropTypes.string,
@@ -173,8 +194,10 @@ DragDropFiles.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "neutral",
   ]),
+  dragAndDropFileProps: PropTypes.any,
+  uploadedFileProps: PropTypes.any,
 };
 
 export default DragDropFiles;
