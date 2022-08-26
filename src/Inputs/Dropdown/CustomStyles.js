@@ -1,4 +1,4 @@
-import { getBorderRadiusValueWithUnits, getColorRgbaValue, getSizeValueWithUnits, hexToRgba } from "../../_utils/utils";
+import { getBorderRadiusValueWithUnits, getColorRgbaValue, getComponentPropValue, getSizeValueWithUnits, hexToRgba } from "../../_utils/utils";
 
 const getOutline = (theme) => {
     const palette = theme.colorContext[theme.palette.outline.context];
@@ -113,7 +113,7 @@ const customStyles = {
             s.selectProps.color,
             "selected",
             "background"
-        ) : (s.isFocused ? 
+        ) : (s.isFocused ?
             getColorRgbaValue(
                 s.theme,
                 "Dropdown",
@@ -136,10 +136,36 @@ const customStyles = {
     multiValue: (p, s) => ({
         ...p,
         borderRadius: getBorderRadiusValueWithUnits(s.theme, "regular"),
+        backgroundColor: !s.isDisabled && getColorRgbaValue(
+            s.theme,
+            "Chip",
+            s.selectProps.color,
+            "enabled",
+            "background",
+            "backgroundOpacity"
+        ),
+        backdropFilter: getComponentPropValue(
+            s.theme,
+            "Chip",
+            s.selectProps.color,
+            "enabled",
+            "backDropFilter"
+        ),
+        "&:hover": {
+            backgroundColor: !s.isDisabled && getColorRgbaValue(
+                s.theme,
+                "Chip",
+                s.selectProps.color,
+                "hover",
+                "background",
+                "backgroundOpacity"
+            )
+        }
     }),
     multiValueLabel: (p, s) => ({
         ...p,
-      
+        color: !s.isDisabled && getColorRgbaValue(s.theme, "Chip", s.selectProps.color, "enabled", "text"),
+        fontWeight: s.theme.typography.fontWeightBold,
     }),
     multiValueRemove: (p, s) => ({
         ...p,
@@ -152,6 +178,7 @@ const customStyles = {
                 "enabled",
                 "text"
             ),
+
             cursor: 'pointer',
         }
     })

@@ -2,18 +2,26 @@ import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const standardCssFields = ({ theme, size }) => {
-  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
-    size
-  ];
+  var height = getSizeValueWithUnits(theme, size);
 
   return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
     min-height: ${height};
     max-height: ${height};
   `;
+};
+
+const ThumbSize = {
+  small: "0.875rem",
+  medium: "1.125rem",
+  large: "1.375rem",
 };
 
 const StyledRangeSlider = styled.div`
@@ -36,34 +44,42 @@ const InputSlider = styled.input`
   transition: background 450ms ease-in;
   -webkit-appearance: none;
 
+  border-radius: ${(props) =>
+    getBorderRadiusValueWithUnits(props.theme, "regular")};
+
   &::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
     width: ${(props) =>
-      props.theme.typography[props.size]
-        .thumb}; /* Set a specific slider handle width */
-    height: ${(props) =>
-      props.theme.typography[props.size].thumb}; /* Slider handle height */
+      ThumbSize[props.size]}; /* Set a specific slider handle width */
+    height: ${(props) => ThumbSize[props.size]}; /* Slider handle height */
     border-radius: 50%;
-    background: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][500]
-        : props.theme.test_palette[props.color][400]};
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     cursor: pointer; /* Cursor on hover */
     border: none;
   }
 
   &::-moz-range-thumb {
     width: ${(props) =>
-      props.theme.typography[props.size]
-        .thumb}; /* Set a specific slider handle width */
-    height: ${(props) =>
-      props.theme.typography[props.size].thumb}; /* Slider handle height */
+      ThumbSize[props.size]}; /* Set a specific slider handle width */
+    height: ${(props) => ThumbSize[props.size]}; /* Slider handle height */
     border-radius: 50%;
-    background: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][500]
-        : props.theme.test_palette[props.color][400]};
+
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     cursor: pointer; /* Cursor on hover */
     border: none;
   }
@@ -74,14 +90,22 @@ const Popover = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Range", props.size, "enabled")};
   left: ${(props) =>
     `calc(${props.inputValue + "%"} + (${8 - props.inputValue * 0.15}px))`};
-  top: ${(props) =>
-    "calc(-" + props.theme.typography[props.size].thumb + " - 0.25rem)"};
+  top: ${(props) => "calc(-" + ThumbSize[props.size] + ")"};
   transform: translateX(-50%);
   & > .text-content {
     color: white;
-    background-color: ${(props) => props.theme.test_palette[props.color][400]};
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     border-radius: 3px;
     z-index: 2;
     padding: 2px 6px;
@@ -93,7 +117,14 @@ const Popover = styled.div`
       & > .inner {
         width: 8px;
         height: 8px;
-        background: ${(props) => props.theme.test_palette[props.color][400]};
+        background: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Range",
+            props.color,
+            props.disabled ? "disabled" : "enabled",
+            "background"
+          )};
         transform: rotate(45deg);
         position: absolute;
         top: -6px;
@@ -124,7 +155,22 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
   const theme = useTheme();
   const themeProps = { theme, size, color, className, style };
 
-  const sliderColor = theme.test_palette["disabled"][400];
+  const sliderColor = getColorRgbaValue(
+    theme,
+    "Range",
+    color,
+    "enabled",
+    "unfilled"
+  );
+  const [valueColor, setValueColor] = useState(
+    getColorRgbaValue(
+      theme,
+      "Range",
+      color,
+      disabled ? "disabled" : "enabled",
+      "background"
+    )
+  );
   const [rangeBackground, setRangeBackground] = useState();
 
   const [showPopover, setShowPopover] = useState();
@@ -143,11 +189,19 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     changeSliderColor(inputValue);
-  }, [inputValue, getPercent, disabled]);
+  }, [inputValue, getPercent, disabled, color]);
 
   useEffect(() => {
-    changeSliderColor(inputValue);
-  }, [color]);
+    setValueColor(
+      getColorRgbaValue(
+        theme,
+        "Range",
+        color,
+        disabled ? "disabled" : "enabled",
+        "background"
+      )
+    );
+  }, [color, disabled]);
 
   const handleOnInput = (e) => {
     changeSliderColor(e.target.value);
@@ -156,9 +210,7 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
   };
 
   const changeSliderColor = (sliderValue) => {
-    let valueColor = disabled
-      ? theme.test_palette["disabled"][500]
-      : theme.test_palette[color][400];
+    console.log("slider val", sliderValue);
     setRangeBackground(
       `linear-gradient(to right, ${valueColor} 0%, ${valueColor} ${getPercent(
         sliderValue
@@ -245,7 +297,8 @@ RangeSliderInput.propTypes = {
     "danger",
     "warning",
     "disabled",
-    "info",
+    "information",
+    "neutral",
   ]),
 };
 

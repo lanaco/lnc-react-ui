@@ -25,10 +25,10 @@ const CheckboxContainer = styled.label`
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  column-direction: ${(props) => getLabelDirection(props.labelPosition)};
-
+  justify-content: start;
+  flex-direction: ${(props) => getLabelDirection(props.labelPosition)};
+  width: 100%;
   ${(props) => props.disabled && "pointer-events: none;"}
   ${(props) =>
     getComponentTypographyCss(props.theme, "Checkbox", props.size, "enabled")};
@@ -81,8 +81,15 @@ border: 1px solid
     )};
 border-radius: ${(props) =>
   getBorderRadiusValueWithUnits(props.theme, "slight")};
-  
-${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
+${(props) =>
+  props.disabled &&
+  `background-color: ${getColorRgbaValue(
+    props.theme,
+    "Checkbox",
+    props.color,
+    "disabled",
+    "border"
+  )}`};
 
   &:focus {
     ${(props) =>
@@ -205,26 +212,23 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
         onFocus={handleOnFocus}
         {...rest}
       >
-        {checkBoxChecked &&
-          !customCheckmark &&
-          !disabled &&
-          !indeterminateState && (
-            <svg
-              viewBox="0 0 8 6"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        {checkBoxChecked && !customCheckmark && !indeterminateState && (
+          <svg
+            viewBox="0 0 8 6"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="white"
+          >
+            <path
+              d="M1 3.15385L2.89474 5L7 1"
               stroke="white"
-            >
-              <path
-                d="M1 3.15385L2.89474 5L7 1"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
-        {indeterminateState && !disabled && (
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+        {indeterminateState && (
           <svg
             width="8"
             height="2"
@@ -241,7 +245,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
             />
           </svg>
         )}
-        {customCheckmark && checkBoxChecked && !disabled && !indeterminate && (
+        {customCheckmark && checkBoxChecked && !indeterminate && (
           <>{customCheckmark}</>
         )}
       </Checkmark>

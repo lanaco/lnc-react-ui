@@ -3,6 +3,14 @@ import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledStateCss,
+  getOutlineCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const paddingBySize = (size) => {
   return {
@@ -13,13 +21,9 @@ const paddingBySize = (size) => {
 };
 
 const standardCssFields = ({ theme, size }) => {
-  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
-    size
-  ];
+  var height = getSizeValueWithUnits(theme, size);
 
   return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
     min-height: ${height};
     max-height: ${height};
   `;
@@ -27,10 +31,9 @@ const standardCssFields = ({ theme, size }) => {
 
 const SyledInput = styled.input`
   ${(props) => standardCssFields(props)}
-  padding: ${(props) => paddingBySize(props.size)};
-  background-color: ${(props) => props.theme.test_palette.light[100]};
-  color: ${(props) => props.theme.test_palette.dark[500]};
-  border: 1.5px solid ${(props) => props.theme.test_palette.light[500]};
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
+  padding: 0.75rem 0.625rem 0.75rem 0.625rem;
   line-height: inherit;
   appearance: none;
   outline: none;
@@ -39,19 +42,47 @@ const SyledInput = styled.input`
   width: 100%;
   box-sizing: border-box;
 
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "enabled",
+      "background"
+    )};
+  border: 1px solid
+    ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Input",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "border"
+      )};
+  border-radius: ${(props) =>
+    getBorderRadiusValueWithUnits(props.theme, "regular")};
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "Input", props.color, "enabled", "text")};
+
   &:disabled {
-    border: 1.5px solid ${(props) => props.theme.test_palette.light[400]};
-    color: ${(props) => props.theme.test_palette.light[500]};
+    ${(props) => getDisabledStateCss(props.theme)};
     cursor: default;
   }
 
-  &:hover:enabled {
-    border: 1.5px solid ${(props) => props.theme.test_palette[props.color][400]};
-  }
-
   &:focus:enabled {
-    border: 1.5px solid ${(props) => props.theme.test_palette[props.color][400]};
-    box-shadow: 0px 0px 6px -2px ${(props) => props.theme.test_palette[props.color][400]};
+    border: none;
+    ${(props) => (props.readOnly == false ? getOutlineCss(props.theme) : "")};
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Input", "primary", "enabled", "text")};
+    border: 1px solid
+      ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "Input",
+          "primary",
+          props.disabled ? "disabled" : "enabled",
+          "border"
+        )};
   }
 `;
 
@@ -150,7 +181,8 @@ TimeInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "disabled",
+    "information",
+    "neutral"
   ]),
 };
 

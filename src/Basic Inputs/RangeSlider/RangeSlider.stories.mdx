@@ -4,7 +4,13 @@ import RangeSliderInput from "./index";
 
 <Meta title="Basic Inputs/Range Slider Input" component={RangeSliderInput} />
 
-export const TemplateDefault = (args) => <RangeSliderInput {...args} style={{display: "flex"}}/>;
+export const TemplateDefault = (args) => <RangeSliderInput style={{display: "flex"}} {...args}/>;
+
+export const TemplateWiderRange = (args) => <RangeSliderInput value={-300} min={-500} max={500} style={{display: "flex"}} {...args}/>;
+
+export const TemplateNarrowRange = (args) => <RangeSliderInput value={2} min={1} max={10} style={{display: "flex"}} {...args}/>;
+
+export const TemplateDisabled = (args) => <RangeSliderInput value={50} disabled={true} style={{display: "flex"}} {...args}/>;
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -21,7 +27,7 @@ export const TemplateColors = (args) => (
     <RangeSliderInput {...args} color="success" />
     <RangeSliderInput {...args} color="warning" />
     <RangeSliderInput {...args} color="danger" />
-    <RangeSliderInput {...args} color="info" />
+    <RangeSliderInput {...args} color="information" />
   </div>
 );
 
@@ -36,6 +42,8 @@ import { RangeSliderInput } from "@lnc-react-ui";
   </Story>
 </Canvas>
 
+<ArgsTable story="Default" />
+
 ## Slider Range
 
 Default value for slider range is `1-100`, with props `min` and `max` it can be alternated.
@@ -45,13 +53,9 @@ Default value for slider range is `1-100`, with props `min` and `max` it can be 
 <Canvas withSource="open">
   <Story
     name="Wide Range"
-    args={{
-      value: -300,
-      min: -500,
-      max: 500,
-    }}
+    args={{}}
   >
-    {TemplateDefault.bind({})}
+    {TemplateWiderRange.bind({})}
   </Story>
 </Canvas>
 
@@ -66,7 +70,7 @@ Default value for slider range is `1-100`, with props `min` and `max` it can be 
       max: 10,
     }}
   >
-    {TemplateDefault.bind({})}
+    {TemplateNarrowRange.bind({})}
   </Story>
 </Canvas>
 
@@ -80,7 +84,7 @@ Default value for slider range is `1-100`, with props `min` and `max` it can be 
       value: 50,
     }}
   >
-    {TemplateDefault.bind({})}
+    {TemplateDisabled.bind({})}
   </Story>
 </Canvas>
 
