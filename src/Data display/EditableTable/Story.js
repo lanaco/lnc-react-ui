@@ -124,6 +124,8 @@ const StoryTemplate = (props) => {
   //========== EVENTS ====================================
 
   const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
+    console.log(value, column);
+
     var dataCopy = cloneDeep(data);
     var itemToUpdate = isEmpty(rowData.id)
       ? dataCopy[rowIndex]

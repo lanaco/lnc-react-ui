@@ -57,11 +57,11 @@ import CheckBoxInput from "../../Basic Inputs/CheckBoxInput";
 const customRenderCheckbox = React.forwardRef((props, ref) => {
   return (
     <CheckBoxInput
-      // {...props}
-      // onChange={() => {}}
-      // tabIndex={-1}
+      {...props}
+      onChange={() => {}}
+      tabIndex={-1}
       disabled={true}
-      checked={true}
+      checked={props.value}
       ref={ref}
     />
   );

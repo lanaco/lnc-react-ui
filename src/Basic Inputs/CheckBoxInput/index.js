@@ -33,9 +33,24 @@ const CheckboxContainer = styled.label`
   ${(props) =>
     getComponentTypographyCss(props.theme, "Checkbox", props.size, "enabled")};
   gap: 0.75rem;
+
+  position: relative;
   & input {
-    display: none;
+    // clip: rect(0 0 0 0);
+    // clip-path: inset(50%);
+    // height: 1px;
+    // overflow: hidden;
+    // position: absolute;
+    // white-space: nowrap;
+    // width: 1px;
+
+    cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+    position: absolute;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
   }
+
   & .checkbox-label {
     ${(props) =>
       !props.disabled && props.readOnly == false && "cursor: pointer;"}
@@ -91,10 +106,11 @@ ${(props) =>
     "border"
   )}`};
 
-  &:focus {
-    ${(props) =>
-      !props.disabled && props.readOnly == false && getOutlineCss(props.theme)}
-  }
+
+  ${(props) =>
+    props.focused && !props.disabled && !props.readOnly
+      ? getOutlineCss(props.theme)
+      : ""}
 
   & svg {
     height: ${(props) => getCheckSize(props.theme, props.size)};
@@ -138,8 +154,9 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     ...rest
   } = props;
 
+  const [focused, setFocused] = useState(false);
   const theme = useTheme();
-  var themeProps = { theme, size, color };
+  var themeProps = { theme, size, color, disabled, readOnly, focused };
 
   const [checkBoxChecked, setCheckBoxChecked] = useState(checked);
   const [indeterminateState, setIndeterminateState] = useState(indeterminate);
@@ -156,12 +173,13 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
 
-    if (onClick) onClick(e);
+    // if (onClick) onClick(e);
 
     if (readOnly || disabled) return;
     if (indeterminateState) setIndeterminateState(false);
 
     setCheckBoxChecked(!checkBoxChecked);
+    console.log("checkbox: ", !checkBoxChecked);
     if (onChange) onChange(e, !checkBoxChecked);
   };
 
@@ -180,37 +198,35 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
   };
 
   const handleOnBlur = (e) => {
+    setFocused(false);
     if (onBlur) onBlur(e);
   };
 
   const handleOnFocus = (e) => {
+    console.log("FOCUS");
+    setFocused(true);
     if (onFocus) onFocus(e);
   };
 
   return (
     <CheckboxContainer
       direction={labelPosition}
-      disabled={disabled}
-      readOnly={readOnly}
-      ref={ref}
       className={className}
       style={style}
       label={label}
       labelPosition={labelPosition}
+      tabIndex={-1}
+      disabled={true}
       {...themeProps}
     >
       <Checkmark
         {...themeProps}
         checked={checkBoxChecked}
         indeterminate={indeterminateState}
-        disabled={disabled}
-        readOnly={readOnly}
-        onClick={handleClick}
-        tabIndex={tabIndex}
-        onKeyDown={handleOnKeyDown}
-        onBlur={handleOnBlur}
-        onFocus={handleOnFocus}
-        {...rest}
+        // onClick={handleClick}
+        tabIndex={-1}
+        aria-hidden={true}
+        // {...rest}
       >
         {checkBoxChecked && !customCheckmark && !indeterminateState && (
           <svg
@@ -218,6 +234,9 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             stroke="white"
+            aria-hidden={true}
+            disabled={true}
+            tabIndex={-1}
           >
             <path
               d="M1 3.15385L2.89474 5L7 1"
@@ -225,6 +244,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              tabIndex={-1}
             />
           </svg>
         )}
@@ -235,6 +255,9 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
             viewBox="0 0 8 2"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden={true}
+            disabled={true}
+            tabIndex={-1}
           >
             <path
               d="M1 1H7"
@@ -242,6 +265,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              tabIndex={-1}
             />
           </svg>
         )}
@@ -252,10 +276,11 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
 
       {label && (
         <div
-          onClick={handleClick}
+          // onClick={handleClick}
           className="checkbox-label"
           disabled={disabled}
           readOnly={readOnly}
+          tabIndex={-1}
         >
           {label}
         </div>
@@ -264,12 +289,14 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       <input
         id={id}
         name={name}
-        ref={inputRef}
         type="checkbox"
         checked={checkBoxChecked}
-        disabled={disabled}
-        readOnly={readOnly}
-        onChange={() => {}}
+        onChange={handleClick}
+        ref={ref}
+        tabIndex={tabIndex}
+        // onKeyDown={handleOnKeyDown}
+        onBlur={handleOnBlur}
+        onFocus={handleOnFocus}
         {...inputProps}
       />
     </CheckboxContainer>

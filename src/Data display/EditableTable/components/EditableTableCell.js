@@ -133,10 +133,20 @@ const EditableTableCell = (props) => {
     var inputProps = {
       ...themeProps,
       value: RowData[Column.accessor],
+      checked: RowData[Column.accessor],
       focused: focused,
 
       onChange: (e) =>
-        onChange(e, e.target.value, RowIndex, Index, Column, RowData),
+        onChange(
+          e,
+          Column.inputType === inputType.BOOLEAN
+            ? e.target.checked
+            : e.target.value,
+          RowIndex,
+          Index,
+          Column,
+          RowData
+        ),
       onBlur: (e) => onSetFocus(e, false),
       onFocus: (e) => onSetFocus(e, true),
       onKeyDown: (e) => onKeyDown(e),
