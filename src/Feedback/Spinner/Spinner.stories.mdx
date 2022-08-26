@@ -6,6 +6,8 @@ import Spinner from "./index";
 
 export const TemplateDefault = (args) => <Spinner {...args} />;
 
+export const TemplateLabel = (args) => <Spinner label={"70%"} {...args} />;
+
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
     <Spinner {...args} size="small" />
@@ -21,7 +23,8 @@ export const TemplateColors = (args) => (
     <Spinner {...args} color="success" />
     <Spinner {...args} color="warning" />
     <Spinner {...args} color="danger" />
-    <Spinner {...args} color="info" />
+    <Spinner {...args} color="information" />
+    <Spinner {...args} color="neutral" />
   </div>
 );
 
@@ -40,11 +43,9 @@ import { Spinner } from "@lnc-react-ui";
 <Canvas withSource="open">
   <Story
     name="Label"
-    args={{
-      label: "70%",
-    }}
+    args={{}}
   >
-    {TemplateDefault.bind({})}
+    {TemplateLabel.bind({})}
   </Story>
 </Canvas>
 

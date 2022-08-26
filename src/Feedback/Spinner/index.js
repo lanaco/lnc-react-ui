@@ -7,6 +7,13 @@ import {
   getComponentTypographyCss,
 } from "../../_utils/utils";
 
+
+const FontSize = {
+  small: "0.6rem",
+  medium: "0.7rem",
+  large: "0.8rem"
+};
+
 const heightBySize = (size, theme) => {
   if (size === "small")
     return `
@@ -46,6 +53,7 @@ const SpinnerWrapper = styled.div`
     transform: translate(-50%, -50%);
     ${(props) =>
       getComponentTypographyCss(props.theme, "Spinner", props.size, "enabled")};
+    font-size: ${(props) => FontSize[props.size]};
     color: ${(props) =>
       getColorRgbaValue(
         props.theme,
@@ -127,6 +135,7 @@ Spinner.propTypes = {
     "danger",
     "warning",
     "information",
+    "neutral",
   ]),
 };
 
