@@ -5,6 +5,7 @@ import TableSpecialLastRow from "./components/TableSpecialLastRow";
 import Button from "../../General/Button/index";
 import { cloneDeep, isEmpty, isEqual } from "lodash";
 import { useStateWithCallbackLazy } from "use-state-with-callback";
+import CheckBoxInput from "../../Basic Inputs/CheckBoxInput/index";
 
 const uuidv4 = () => {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -230,6 +231,9 @@ const StoryTemplate = (props) => {
     <Container>
       <Commands>
         <Button text={"Reload"} onClick={loadData} />
+        <div>
+          <CheckBoxInput disabled={true} checked={true} />
+        </div>
       </Commands>
       <EditableTable
         ref={tableRef}

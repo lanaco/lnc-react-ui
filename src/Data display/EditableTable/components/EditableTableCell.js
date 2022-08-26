@@ -1,45 +1,39 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
-import { isFunction, isEmpty } from "lodash";
-import EditableTableRow from "../components/EditableTableRow";
 import { inputType } from "../constants/constants";
+import { useTheme } from "@emotion/react";
+import { getComponentTypographyCss } from "../../../_utils/utils";
+import TextInput from "../../../Basic Inputs/TextInput";
+import NumberInput from "../../../Basic Inputs/NumberInput";
+import DecimalInput from "../../../Basic Inputs/DecimalInput";
+import CheckBoxInput from "../../../Basic Inputs/CheckBoxInput";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: ${(props) => props.width};
-`;
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+  ${(props) => props.bgColor}
 
-const Input = styled.input`
-  box-sizing: border-box;
-  position: relative;
-  width: 100%;
-  appearance: none;
-  outline: none;
-  border: none;
-  border: ${(props) =>
-    props.focused
-      ? `1px solid ${theme.palette.primary.main}`
-      : "1px solid transparent"};
-  padding: 9.5px 6px 9.5px 6px;
-  border-radius: 3px;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "TableCell", props.size, "enabled")};
 `;
 
 const DefaultCellContent = styled.div`
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  padding: ${(props) => (props.hasRender ? "0" : "9.5px 6px 9.5px 6px")};
-  border: 1px solid transparent;
+  ${(props) =>
+    getComponentTypographyCss(
+      props.theme,
+      "TableSpecialLastRow",
+      props.size,
+      "enabled"
+    )};
+  padding: ${(props) => (props.hasRender ? "0" : "9.5px 6px 9.5px 0")};
   cursor: ${(props) => (props.tabIndex !== -1 ? "pointer" : "auto")};
 
   &:focus {
     outline: none;
-    border: 1px solid #c7c7c7;
     border-radius: 3px;
   }
 `;
@@ -71,8 +65,9 @@ const EditableTableCell = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -138,10 +133,10 @@ const EditableTableCell = (props) => {
     var inputProps = {
       ...themeProps,
       value: RowData[Column.accessor],
+      focused: focused,
 
       onChange: (e) =>
         onChange(e, e.target.value, RowIndex, Index, Column, RowData),
-      focused: focused,
       onBlur: (e) => onSetFocus(e, false),
       onFocus: (e) => onSetFocus(e, true),
       onKeyDown: (e) => onKeyDown(e),
@@ -150,28 +145,31 @@ const EditableTableCell = (props) => {
 
     switch (Column.inputType) {
       case inputType.STRING:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <TextInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.INTEGER:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <NumberInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.DECIMAL:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <DecimalInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.DATE:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <TextInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.BOOLEAN:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <CheckBoxInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.SELECT:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <TextInput {...inputProps} ref={inputRef} />;
         break;
+
+      default:
+        inputComponent = <TextInput {...inputProps} ref={inputRef} />;
     }
 
     return inputComponent;
@@ -263,7 +261,6 @@ EditableTableCell.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 EditableTableCell.propTypes = {
@@ -281,13 +278,11 @@ EditableTableCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default EditableTableCell;

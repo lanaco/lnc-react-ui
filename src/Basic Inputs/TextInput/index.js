@@ -68,7 +68,6 @@ const TextInput = React.forwardRef((props, ref) => {
 
   return (
     <StyledWrapper
-      ref={ref}
       style={style}
       className={className}
       theme={theme}
@@ -89,6 +88,7 @@ const TextInput = React.forwardRef((props, ref) => {
         </StyledPrefix>
       )}
       <StyledInput
+        ref={ref}
         type={type}
         theme={theme}
         color={color}

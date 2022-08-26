@@ -1,7 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledStateCss,
+  getOutlineCss,
+  getSizeValueWithUnits,
+} from "../../../_utils/utils";
 
 const SpecialRow = styled.div`
   display: flex;
@@ -10,29 +18,37 @@ const SpecialRow = styled.div`
   padding: 10px;
   box-sizing: border-box;
   width: 100%;
-  border-radius: 3px;
+  border-radius: 8px;
   cursor: pointer;
-  color: ${(props) => props.theme.palette[props.color].textDark};
-  border: 1px solid ${(props) => props.theme.palette.gray[800]};
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
+  background-color: rgba(248, 250, 252, 100%);
+  border: 1px solid rgba(203, 213, 225, 100%);
+  margin-top: 0.5rem;
+
+  ${(props) =>
+    getComponentTypographyCss(
+      props.theme,
+      "TableSpecialLastRow",
+      props.size,
+      "enabled"
+    )};
+
   transition: all 0.2s ease;
 
   &:disabled {
-    color: ${(props) => props.theme.palette.gray[600]};
-    border: 1px solid ${(props) => props.theme.palette.gray[400]};
+    color: gray;
+    border: 1px solid gray;
     background-color: gray;
   }
 
   &:focus {
     outline: none;
-    border: 1px solid ${(props) => props.theme.palette[props.color].main};
+    border: 1px solid teal;
     background-color: whitesmoke;
   }
 
   &:hover {
     outline: none;
-    border: 1px solid ${(props) => props.theme.palette[props.color].main};
+    border: 1px solid teal;
     background-color: whitesmoke;
   }
 
@@ -41,8 +57,8 @@ const SpecialRow = styled.div`
       ? ""
       : `
           cursor: default;
-          color: ${props.theme.palette.gray[600]};
-          border: 1px solid ${props.theme.palette.gray[400]};
+          color: gray;
+          border: 1px solid gray;
         `}
 `;
 
@@ -59,8 +75,9 @@ const TableSpecialLastRow = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -101,7 +118,6 @@ TableSpecialLastRow.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 TableSpecialLastRow.propTypes = {
@@ -114,13 +130,11 @@ TableSpecialLastRow.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default TableSpecialLastRow;

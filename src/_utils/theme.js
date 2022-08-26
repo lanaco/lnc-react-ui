@@ -1397,43 +1397,43 @@ export const lanaco_light = {
       teal: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       blue: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       red: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       violet: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       yellow: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       green: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       gray: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       neutral: {
         enabled: {
           icon: 600,
-        }
-      }
+        },
+      },
     },
     ButtonFilled: {
       default: {
@@ -2370,7 +2370,8 @@ export const lanaco_light = {
         palette: "gray",
         enabled: {
           bg: 0,
-          boxShadow: "0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px -10px 10px -5px rgba(0, 0, 0, 0.02)",
+          boxShadow:
+            "0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px -10px 10px -5px rgba(0, 0, 0, 0.02)",
         },
       },
     },
@@ -2858,8 +2859,8 @@ export const lanaco_light = {
           backgoround: 0,
           backgroundOpacity: 1000,
           fontWeight: 400,
-        }
-      }
+        },
+      },
     },
     Danger: {
       default: {
@@ -2867,6 +2868,26 @@ export const lanaco_light = {
         enabled: {
           text: 600,
           border: 300,
+        },
+      },
+    },
+    TableSpecialLastRow: {
+      default: {
+        palette: "gray",
+        enabled: {
+          fontWeight: 500,
+        },
+        hover: {
+          fontWeight: 700,
+        },
+        focus: {
+          fontWeight: 700,
+        },
+        active: {
+          fontWeight: 700,
+        },
+        disabled: {
+          fontWeight: 700,
         },
       },
     },
