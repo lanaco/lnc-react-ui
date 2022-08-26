@@ -2,7 +2,12 @@ import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
-import { getBorderRadiusValueWithUnits, getColorRgbaValue, getComponentTypographyCss, getSizeValueWithUnits } from "../../_utils/utils";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const standardCssFields = ({ theme, size }) => {
   var height = getSizeValueWithUnits(theme, size);
@@ -17,7 +22,7 @@ const ThumbSize = {
   small: "0.875rem",
   medium: "1.125rem",
   large: "1.375rem",
-}
+};
 
 const StyledRangeSlider = styled.div`
   position: relative;
@@ -45,37 +50,36 @@ const InputSlider = styled.input`
   &::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: ${(props) => ThumbSize[props.size]}; /* Set a specific slider handle width */
+    width: ${(props) =>
+      ThumbSize[props.size]}; /* Set a specific slider handle width */
     height: ${(props) => ThumbSize[props.size]}; /* Slider handle height */
-    border-radius: 50%;  
+    border-radius: 50%;
     background-color: ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Range",
-      props.color,
-      props.disabled ? "disabled" : "enabled",
-      "background"
-    )};
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     cursor: pointer; /* Cursor on hover */
     border: none;
   }
 
   &::-moz-range-thumb {
-    width: ${(props) => ThumbSize[props.size]}; /* Set a specific slider handle width */
+    width: ${(props) =>
+      ThumbSize[props.size]}; /* Set a specific slider handle width */
     height: ${(props) => ThumbSize[props.size]}; /* Slider handle height */
     border-radius: 50%;
 
     background-color: ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Range",
-      props.color,
-      props.disabled ? "disabled" : "enabled",
-      "background"
-    )};
-
-
-
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     cursor: pointer; /* Cursor on hover */
     border: none;
   }
@@ -88,22 +92,20 @@ const Popover = styled.div`
   position: absolute;
   ${(props) =>
     getComponentTypographyCss(props.theme, "Range", props.size, "enabled")};
-
   left: ${(props) =>
     `calc(${props.inputValue + "%"} + (${8 - props.inputValue * 0.15}px))`};
-  top: ${(props) =>
-    "calc(-" + ThumbSize[props.size] + ")"};
+  top: ${(props) => "calc(-" + ThumbSize[props.size] + ")"};
   transform: translateX(-50%);
   & > .text-content {
     color: white;
     background-color: ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Range",
-      props.color,
-      props.disabled ? "disabled" : "enabled",
-      "background"
-    )};
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     border-radius: 3px;
     z-index: 2;
     padding: 2px 6px;
@@ -115,13 +117,14 @@ const Popover = styled.div`
       & > .inner {
         width: 8px;
         height: 8px;
-        background: ${(props) => getColorRgbaValue(
-      props.theme,
-      "Range",
-      props.color,
-      props.disabled ? "disabled" : "enabled",
-      "background"
-    )};
+        background: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Range",
+            props.color,
+            props.disabled ? "disabled" : "enabled",
+            "background"
+          )};
         transform: rotate(45deg);
         position: absolute;
         top: -6px;
@@ -159,13 +162,15 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
     "enabled",
     "unfilled"
   );
-  const [valueColor, setValueColor] = useState(getColorRgbaValue(
-    theme,
-    "Range",
-    color,
-    disabled ? "disabled" : "enabled",
-    "background",
-  ));
+  const [valueColor, setValueColor] = useState(
+    getColorRgbaValue(
+      theme,
+      "Range",
+      color,
+      disabled ? "disabled" : "enabled",
+      "background"
+    )
+  );
   const [rangeBackground, setRangeBackground] = useState();
 
   const [showPopover, setShowPopover] = useState();
@@ -187,13 +192,15 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
   }, [inputValue, getPercent, disabled, color]);
 
   useEffect(() => {
-    setValueColor(getColorRgbaValue(
-      theme,
-      "Range",
-      color,
-      disabled ? "disabled" : "enabled",
-      "background",
-    ));
+    setValueColor(
+      getColorRgbaValue(
+        theme,
+        "Range",
+        color,
+        disabled ? "disabled" : "enabled",
+        "background"
+      )
+    );
   }, [color, disabled]);
 
   const handleOnInput = (e) => {
@@ -261,8 +268,8 @@ RangeSliderInput.defaultProps = {
   disabled: false,
   tabIndex: 0,
   //------------------
-  onChange: (value) => { },
-  onInput: (e) => { },
+  onChange: (value) => {},
+  onInput: (e) => {},
   //------------------
   className: "",
   style: {},
@@ -291,7 +298,7 @@ RangeSliderInput.propTypes = {
     "warning",
     "disabled",
     "information",
-    "neutral"
+    "neutral",
   ]),
 };
 

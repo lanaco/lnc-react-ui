@@ -6,6 +6,10 @@ import TimeInput from "./index";
 
 export const TemplateDefault = (args) => <TimeInput {...args} />;
 
+export const TemplateReadOnly = (args) => <TimeInput readOnly={true} {...args} />;
+
+export const TemplateDisabled = (args) => <TimeInput disabled={true} {...args} />;
+
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
     <TimeInput {...args} size="small" />
@@ -21,7 +25,7 @@ export const TemplateColors = (args) => (
     <TimeInput {...args} color="success" />
     <TimeInput {...args} color="warning" />
     <TimeInput {...args} color="danger" />
-    <TimeInput {...args} color="info" />
+    <TimeInput {...args} color="information" />
   </div>
 );
 
@@ -30,7 +34,7 @@ export const TemplateColors = (args) => (
 import { TimeInput } from "@lnc-react-ui";
 ```
 
-<Canvas withSource="open">
+<Canvas>
   <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
   </Story>
@@ -41,16 +45,16 @@ import { TimeInput } from "@lnc-react-ui";
 ## Read Only
 
 <Canvas withSource="open">
-  <Story name="Read Only" args={{ readOnly: true }}>
-    {TemplateDefault.bind({})}
+  <Story name="Read Only" args={{}}>
+    {TemplateReadOnly.bind({})}
   </Story>
 </Canvas>
 
 ## Disabled
 
 <Canvas withSource="open">
-  <Story name="Disabled" args={{ disabled: true }}>
-    {TemplateDefault.bind({})}
+  <Story name="Disabled" args={{}}>
+    {TemplateDisabled.bind({})}
   </Story>
 </Canvas>
 

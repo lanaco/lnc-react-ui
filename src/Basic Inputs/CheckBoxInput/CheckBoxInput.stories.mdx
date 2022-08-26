@@ -13,12 +13,21 @@ export const TemplateIndeterminate = (args) => (
 );
 
 export const TemplateDisabled = (args) => (
+  <>
   <CheckBoxInput
     {...args}
     disabled={true}
     label="Disabled"
     labelPosition="left"
   />
+  <CheckBoxInput
+    {...args}
+    disabled={true}
+    checked={true}
+    label="Disabled"
+    labelPosition="left"
+  />
+  </>
 );
 
 export const TemplateReadOnly = (args) => (

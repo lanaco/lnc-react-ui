@@ -2,7 +2,12 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
-import { getBorderRadiusValueWithUnits, getColorRgbaValue, getSizeValueWithUnits } from "../../_utils/utils";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const standardCssFields = ({ theme, size }) => {
   var height = getSizeValueWithUnits(theme, size);
@@ -104,7 +109,13 @@ const Slider = styled.div`
 
   & > .slider__track {
     background-color: ${(props) =>
-      getColorRgbaValue(props.theme, "Range", props.color, "enabled", "unfilled")};
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        "enabled",
+        "unfilled"
+      )};
     width: 100%;
     z-index: 1;
     border-radius: ${(props) =>
@@ -133,9 +144,10 @@ const Popover = styled.div`
   position: absolute;
   left: ${(props) =>
     `calc(${props.inputValue + "%"} + (${8 - props.inputValue * 0.15}px))`};
-  top: ${(props) =>
-    "calc(-" + ThumbSize[props.size] + " - 0.35rem)"};
+  top: ${(props) => "calc(-" + ThumbSize[props.size] + ")"};
   transform: translateX(-50%);
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Range", props.size, "enabled")};
   & > .text-content {
     color: white;
     background-color: ${(props) =>
