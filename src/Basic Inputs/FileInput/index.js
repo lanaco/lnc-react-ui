@@ -2,47 +2,23 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
-
-var heightBySize = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" };
-
-var paddingBySize = { small: "8px", medium: "9.5px", large: "11.75px" };
-var fileNamePaddingBySize = {
-  small: "6.5px",
-  medium: "8px",
-  large: "11.75px",
-};
-
-const standardCssFields = ({ theme, size }) => {
-  return `
-    font-family: ${theme.typography.fontFamily};
-    font-size: ${theme.typography[size].fontSize};
-  `;
-};
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledStateCss,
+  getOutlineCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const Container = styled.label`
   display: inline-flex;
-  max-height: ${(props) => heightBySize[props.size]};
-  min-height: ${(props) => heightBySize[props.size]};
   box-sizing: border-box;
   width: 100%;
-
-  &:hover label {
-    background-color: ${(props) =>
-      props.disabled
-        ? ""
-        : props.focused
-        ? props.theme.test_palette[props.color][500]
-        : props.theme.test_palette[props.color][300]};
-  }
-
-  &:hover input {
-    border: 0.09375rem solid
-      ${(props) =>
-        props.disabled
-          ? props.theme.test_palette.light[400]
-          : props.theme.test_palette.light[500]};
-    border-left: transparent;
-  }
+  min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  border-radius: 8px;
+  ${(props) =>
+    props.focused && props.readOnly == false ? getOutlineCss(props.theme) : ""}
 `;
 
 const Input = styled.input`
@@ -57,33 +33,69 @@ const Input = styled.input`
 const Label = styled.div`
   display: flex;
   align-items: center;
-  ${(props) => standardCssFields(props)}
   white-space: nowrap;
+  padding: 0.625rem 0.75rem;
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
+  color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.focused ? "primary" : props.color,
+      "enabled",
+      "prefix"
+    )};
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   background-color: ${(props) =>
-    props.disabled
-      ? props.theme.test_palette.light[400]
-      : props.theme.test_palette[props.color][props.focused ? 500 : 400]};
-  color: white;
-  padding: ${(props) => paddingBySize[props.size]};
-  border-radius: 0.1875rem 0 0 0.1875rem;
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "enabled",
+      "background"
+    )};
+  border: 1px solid
+    ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Input",
+        props.focused ? "primary" : props.color,
+        props.disabled ? "disabled" : "enabled",
+        "border"
+      )};
+  border-radius: 8px 0 0 8px;
+
+  ${(props) => (props.disabled ? getDisabledStateCss(props.theme) : "")}
 `;
 
 const FileName = styled.input`
-  ${(props) => standardCssFields(props)}
-  // flex-grow: 1;
   width: 100%;
-  padding: ${(props) => fileNamePaddingBySize[props.size]};
-  border-radius: 0 0.1875rem 0.1875rem 0;
   appearance: none;
   outline: none;
-  box-sizing: border-box;
-  border: 0.09375rem solid
+  padding: 0.625rem 0.75rem;
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
+  border: 1px solid
     ${(props) =>
-      props.disabled
-        ? props.theme.test_palette.light[400]
-        : props.theme.test_palette.light[500]};
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.focused ? "primary" : props.color,
+      props.disabled ? "disabled" : "enabled",
+      "border"
+    )};
+  border-radius: 0 8px 8px 0;
   border-left: transparent;
+  color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.focused ? "primary" : props.color,
+      "enabled",
+      "text"
+    )};
+
+  ${(props) => (props.disabled ? getDisabledStateCss(props.theme) : "")}
 `;
 
 const FileInput = React.forwardRef((props, ref) => {
@@ -127,7 +139,7 @@ const FileInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Container {...themeProps} className={className} style={style}>
+    <Container {...themeProps} className={className} style={style} focused={focused} readOnly={readOnly}>
       <Input
         {...themeProps}
         accept={accept}
@@ -147,9 +159,7 @@ const FileInput = React.forwardRef((props, ref) => {
         }}
         {...rest}
       />
-      <Label {...themeProps}>
-        {label}
-      </Label>
+      <Label {...themeProps}>{label}</Label>
       <FileName
         tabIndex={-1}
         {...themeProps}
