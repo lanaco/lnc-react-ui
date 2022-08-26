@@ -10,7 +10,7 @@ const StyledNested = styled.div`
     padding-left: 0.3rem;
     border-left: ${props => `2px solid ${getColorRgbaValue(
         props.theme,
-        "DropDownItem",
+        "DropDownMenuItem",
         props.color,
         "focus",
         "backgoround"

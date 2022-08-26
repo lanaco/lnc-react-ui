@@ -2,18 +2,26 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getSizeValueWithUnits,
+} from "../../_utils/utils";
 
 const standardCssFields = ({ theme, size }) => {
-  var height = { small: "1.875rem", medium: "2.25rem", large: "2.625rem" }[
-    size
-  ];
+  var height = getSizeValueWithUnits(theme, size);
 
   return `
-      font-family: ${theme.typography.fontFamily};
-      font-size: ${theme.typography[size].fontSize};
-      min-height: ${height};
-      max-height: ${height};
-    `;
+    min-height: ${height};
+    max-height: ${height};
+  `;
+};
+
+const ThumbSize = {
+  small: "0.875rem",
+  medium: "1.125rem",
+  large: "1.375rem",
 };
 
 const StyledDoubleRangeSlider = styled.div`
@@ -50,15 +58,17 @@ const StyledDoubleRangeSlider = styled.div`
     -webkit-appearance: none; /* Override default look */
     appearance: none;
     width: ${(props) =>
-      props.theme.typography[props.size]
-        .thumb}; /* Set a specific slider handle width */
-    height: ${(props) =>
-      props.theme.typography[props.size].thumb}; /* Slider handle height */
+      ThumbSize[props.size]}; /* Set a specific slider handle width */
+    height: ${(props) => ThumbSize[props.size]}; /* Slider handle height */
     border-radius: 50%;
-    background: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][500]
-        : props.theme.test_palette[props.color][400]};
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     cursor: pointer; /* Cursor on hover */
     border: none;
     pointer-events: all;
@@ -67,15 +77,17 @@ const StyledDoubleRangeSlider = styled.div`
   /* For Firefox browsers */
   & > .thumb::-moz-range-thumb {
     width: ${(props) =>
-      props.theme.typography[props.size]
-        .thumb}; /* Set a specific slider handle width */
-    height: ${(props) =>
-      props.theme.typography[props.size].thumb}; /* Slider handle height */
+      ThumbSize[props.size]}; /* Set a specific slider handle width */
+    height: ${(props) => ThumbSize[props.size]}; /* Slider handle height */
     border-radius: 50%;
-    background: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][500]
-        : props.theme.test_palette[props.color][400]};
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     cursor: pointer; /* Cursor on hover */
     border: none;
     pointer-events: all;
@@ -96,16 +108,31 @@ const Slider = styled.div`
   }
 
   & > .slider__track {
-    background-color: ${(props) => props.theme.test_palette["disabled"][400]};
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        "enabled",
+        "unfilled"
+      )};
     width: 100%;
     z-index: 1;
+    border-radius: ${(props) =>
+      getBorderRadiusValueWithUnits(props.theme, "regular")};
   }
 
   & > .slider__range {
+    border-radius: ${(props) =>
+      getBorderRadiusValueWithUnits(props.theme, "regular")};
     background-color: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][500]
-        : props.theme.test_palette[props.color][400]};
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     z-index: 2;
   }
 `;
@@ -117,15 +144,20 @@ const Popover = styled.div`
   position: absolute;
   left: ${(props) =>
     `calc(${props.inputValue + "%"} + (${8 - props.inputValue * 0.15}px))`};
-  top: ${(props) =>
-    "calc(-" + props.theme.typography[props.size].thumb + " - 0.25rem)"};
+  top: ${(props) => "calc(-" + ThumbSize[props.size] + ")"};
   transform: translateX(-50%);
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Range", props.size, "enabled")};
   & > .text-content {
     color: white;
     background-color: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette["disabled"][500]
-        : props.theme.test_palette[props.color][400]};
+      getColorRgbaValue(
+        props.theme,
+        "Range",
+        props.color,
+        props.disabled ? "disabled" : "enabled",
+        "background"
+      )};
     border-radius: 3px;
     z-index: 2;
     padding: 2px 6px;
@@ -137,10 +169,14 @@ const Popover = styled.div`
       & > .inner {
         width: 8px;
         height: 8px;
-        background: ${(props) =>
-          props.disabled
-            ? props.theme.test_palette["disabled"][500]
-            : props.theme.test_palette[props.color][400]};
+        background-color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Range",
+            props.color,
+            props.disabled ? "disabled" : "enabled",
+            "background"
+          )};
         transform: rotate(45deg);
         position: absolute;
         top: -6px;
