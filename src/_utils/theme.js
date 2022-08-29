@@ -1397,43 +1397,43 @@ export const lanaco_light = {
       teal: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       blue: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       red: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       violet: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       yellow: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       green: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       gray: {
         enabled: {
           icon: 600,
-        }
+        },
       },
       neutral: {
         enabled: {
           icon: 600,
-        }
-      }
+        },
+      },
     },
     ButtonFilled: {
       default: {
@@ -2170,7 +2170,7 @@ export const lanaco_light = {
         },
         disabled: {
           background: 500,
-        }
+        },
       },
       teal: {
         enabled: {
@@ -2424,7 +2424,8 @@ export const lanaco_light = {
         palette: "gray",
         enabled: {
           bg: 0,
-          boxShadow: "0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px -10px 10px -5px rgba(0, 0, 0, 0.02)",
+          boxShadow:
+            "0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px -10px 10px -5px rgba(0, 0, 0, 0.02)",
         },
       },
     },
@@ -2912,8 +2913,8 @@ export const lanaco_light = {
           backgoround: 0,
           backgroundOpacity: 1000,
           fontWeight: 400,
-        }
-      }
+        },
+      },
     },
     Danger: {
       default: {
@@ -3070,6 +3071,14 @@ export const lanaco_light = {
     regular: "8px",
     curved: "1000px",
     none: "0",
+  },
+  boxShadow: {
+    xs: "0px 1px 2px rgba(0, 0, 0, 0.05);",
+    s: "0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);",
+    m: "0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06);",
+    l: " 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);",
+    xl: "0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);",
+    xxl: "0px 25px 50px -12px rgba(0, 0, 0, 0.25);",
   },
   typography: {
     fontFamily: "Nunito",
