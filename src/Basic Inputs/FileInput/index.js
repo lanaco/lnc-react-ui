@@ -108,6 +108,7 @@ const FileInput = React.forwardRef((props, ref) => {
     onBlur,
     disabled,
     readOnly,
+    multiple,
     accept,
     label,
     tabIndex,
@@ -118,32 +119,53 @@ const FileInput = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
 
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [focused, setFocused] = useState(false);
 
   var themeProps = { theme, size, color, disabled, focused };
 
-  const getFileName = () => {
-    if (file) return file.name;
+  const getFileNames = () => {
+    if (files.length > 0) {
+      var nameString = "";
+
+      for (const fileIndex in files) {
+        nameString +=
+          fileIndex == files.length - 1
+            ? `${files[fileIndex].name}`
+            : `${files[fileIndex].name}, `;
+      }
+
+      return nameString;
+    }
+
     return "";
   };
 
   const handleOnChange = (e) => {
-    var file = null;
+    var files = [];
 
-    if (e.target.files && e.target.files.length === 1) file = e.target.files[0];
-    else file = null;
+    if (e.target.files && e.target.files.length > 0) {
+      for (const file of e.target.files) {
+        files.push(file);
+      }
+    } else files = [];
 
-    setFile(file);
-    if (onChange) onChange(e, file);
+    setFiles(files);
+    if (onChange) onChange(e, files);
   };
 
   return (
-    <Container {...themeProps} className={className} style={style} focused={focused} readOnly={readOnly}>
+    <Container
+      {...themeProps}
+      className={className}
+      style={style}
+      focused={focused}
+      readOnly={readOnly}
+    >
       <Input
         {...themeProps}
         accept={accept}
-        multiple={false}
+        multiple={multiple}
         ref={ref}
         onChange={disabled || readOnly ? () => {} : handleOnChange}
         type="file"
@@ -164,7 +186,7 @@ const FileInput = React.forwardRef((props, ref) => {
         tabIndex={-1}
         {...themeProps}
         onChange={() => {}}
-        value={getFileName()}
+        value={getFileNames()}
       />
     </Container>
   );
@@ -174,6 +196,7 @@ FileInput.defaultProps = {
   id: "",
   disabled: false,
   readOnly: false,
+  multiple: false,
   accept: "",
   label: "Choose File",
   tabIndex: 0,
@@ -191,6 +214,7 @@ FileInput.propTypes = {
   id: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
+  multiple: PropTypes.bool,
   accept: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   tabIndex: PropTypes.number,
