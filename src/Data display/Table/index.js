@@ -28,6 +28,8 @@ import {
 } from "../../_utils/utils";
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 0.625rem;
   margin: 0.125rem;
   border-radius: 0.125rem;

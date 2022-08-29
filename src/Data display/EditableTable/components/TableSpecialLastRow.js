@@ -23,6 +23,7 @@ const SpecialRow = styled.div`
   background-color: rgba(248, 250, 252, 100%);
   border: 1px solid rgba(203, 213, 225, 100%);
   margin-top: 0.5rem;
+  overflow-x: auto;
 
   ${(props) =>
     getComponentTypographyCss(
@@ -65,6 +66,7 @@ const SpecialRow = styled.div`
 const TableSpecialLastRow = (props) => {
   //--------------------------
   const {
+    Loading,
     Columns,
     Disabled,
     Data,
@@ -109,6 +111,7 @@ const TableSpecialLastRow = (props) => {
 TableSpecialLastRow.defaultProps = {
   __TYPE__: "TABLE_SPECIAL_LAST_ROW",
   //--------------------
+  Loading: false,
   onRowClick: () => {},
   onSelectRow: () => {},
   RowData: {},

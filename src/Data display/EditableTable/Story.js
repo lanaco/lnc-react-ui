@@ -6,6 +6,7 @@ import Button from "../../General/Button/index";
 import { cloneDeep, isEmpty, isEqual } from "lodash";
 import { useStateWithCallbackLazy } from "use-state-with-callback";
 import CheckBoxInput from "../../Basic Inputs/CheckBoxInput/index";
+import CustomTableFooter from "../Table/components/CustomTableFooter";
 
 const uuidv4 = () => {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -170,7 +171,7 @@ const StoryTemplate = (props) => {
   };
 
   const onSave = (rowIndex) => {
-    var original = db_invoices[rowIndex] || config.EmptyDataItem;
+    var original = db_invoices[rowIndex] || props.args.EmptyDataItem;
     var edited = data[rowIndex];
 
     if (!isEqual(original, edited) || isEmpty(edited.id)) {
@@ -204,7 +205,7 @@ const StoryTemplate = (props) => {
     } else {
       dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
         ? originalItem
-        : config.EmptyDataItem;
+        : props.args.EmptyDataItem;
     }
 
     setData(dataCopy);
@@ -212,7 +213,7 @@ const StoryTemplate = (props) => {
 
   const onCreateNewItem = (timeout) => {
     if (timeout > 0) setLoading(true);
-    setData([...data, config.EmptyDataItem]);
+    setData([...data, props.args.EmptyDataItem]);
 
     setTimeout(() => {
       if (timeout > 0) setLoading(false);
@@ -262,7 +263,8 @@ const StoryTemplate = (props) => {
         }}
         //--------------------------
       >
-        <TableSpecialLastRow onClick={onSpecialRowClick} />
+        <CustomTableFooter />
+        <TableSpecialLastRow Loading={loading} onClick={onSpecialRowClick} />
       </EditableTable>
     </Container>
   );
