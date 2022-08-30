@@ -118,6 +118,10 @@ export const Data = [
 
 export const TemplateDefault = (args) => <Table {...args} />;
 
+export const TemplateFixedWidth = (args) => (
+  <Table {...args} tableWidth={"1500px"} />
+);
+
 export const TemplateVisibiltyPattern = (args) => (
   <Table
     {...args}
@@ -357,6 +361,22 @@ import { Table } from "@lnc-react-ui";
 </Canvas>
 
 <ArgsTable story="Default" />
+
+## Fixed Width
+
+<Canvas>
+  <Story
+    name="Fixed Width"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      Columns: Columns,
+      Data: Data,
+    }}
+  >
+    {TemplateFixedWidth.bind({})}
+  </Story>
+</Canvas>
 
 ## Loading
 

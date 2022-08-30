@@ -23,7 +23,8 @@ export const TemplateMethods = (args) => {
       <Button text="Focus" onClick={() => dropDownRef.current.focus()} />
       &nbsp;&nbsp;
       <Button text="Blur" onClick={() => dropDownRef.current.blur()} />
-      <br /><br />
+      <br />
+      <br />
       <Dropdown ref={dropDownRef} {...args} />
     </div>
   );
@@ -86,6 +87,7 @@ import { Dropdown } from "@lnc-react-ui";
         { value: "2", label: "option 2" },
         { value: "3", label: "option 3" },
       ],
+      onChange: (e) => console.log(e),
     }}
   >
     {TemplateDefault.bind({})}

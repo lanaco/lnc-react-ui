@@ -8,13 +8,17 @@ import TextInput from "../../../Basic Inputs/TextInput";
 import NumberInput from "../../../Basic Inputs/NumberInput";
 import DecimalInput from "../../../Basic Inputs/DecimalInput";
 import CheckBoxInput from "../../../Basic Inputs/CheckBoxInput";
+import Dropdown from "../../../Inputs/Dropdown";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: ${(props) => props.width};
-  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+  max-width: ${(props) => props.width};
+  padding: ${(props) =>
+    props.focused && !props.isBoolean
+      ? "0.5rem 0.5rem 0.5rem 0.7rem"
+      : "0.5rem 0.5rem 0.5rem 1.5rem"};
   ${(props) => props.bgColor}
 
   ${(props) =>
@@ -31,10 +35,12 @@ const DefaultCellContent = styled.div`
     )};
   padding: ${(props) => (props.hasRender ? "0" : "9.5px 6px 9.5px 0")};
   cursor: ${(props) => (props.tabIndex !== -1 ? "pointer" : "auto")};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:focus {
     outline: none;
-    border-radius: 3px;
   }
 `;
 
@@ -130,23 +136,22 @@ const EditableTableCell = (props) => {
     //
     var inputComponent = null;
 
+    var standardOnChange = (e, value) => {
+      onChange(e, value, RowIndex, Index, Column, RowData);
+    };
+
+    // var dropdownOnChange = (value) => {
+    //   onChange(_, value ? value.value : null, RowIndex, Index, Column, RowData);
+    // };
+
     var inputProps = {
       ...themeProps,
+      debounceTime: 0,
+      ...Column.inputProps,
       value: RowData[Column.accessor],
       checked: RowData[Column.accessor],
       focused: focused,
-
-      onChange: (e) =>
-        onChange(
-          e,
-          Column.inputType === inputType.BOOLEAN
-            ? e.target.checked
-            : e.target.value,
-          RowIndex,
-          Index,
-          Column,
-          RowData
-        ),
+      onChange: standardOnChange,
       onBlur: (e) => onSetFocus(e, false),
       onFocus: (e) => onSetFocus(e, true),
       onKeyDown: (e) => onKeyDown(e),
@@ -175,7 +180,7 @@ const EditableTableCell = (props) => {
         break;
 
       case inputType.SELECT:
-        inputComponent = <TextInput {...inputProps} ref={inputRef} />;
+        inputComponent = <Dropdown {...inputProps} ref={inputRef} />;
         break;
 
       default:
@@ -198,7 +203,7 @@ const EditableTableCell = (props) => {
     if (Column.editable === true && Column.editComponent) {
       var additionalProps = {};
 
-      if (Column.inputType === "SELECT")
+      if (Column.inputType === inputType.SELECT)
         additionalProps = {
           items: Column.selectItems,
           mapNameTo: Column.selectProps.mapNameTo,
@@ -253,6 +258,8 @@ const EditableTableCell = (props) => {
       selection={EnableSelection}
       width={getWidth()}
       key={Index}
+      focused={focused}
+      isBoolean={Column.inputType === inputType.BOOLEAN}
     >
       {renderCellContent()}
     </HtmlCell>

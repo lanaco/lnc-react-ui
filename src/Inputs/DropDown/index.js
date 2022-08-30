@@ -70,14 +70,18 @@ const Dropdown = React.forwardRef((props, ref) => {
 
   const handleOnInput = useCallback(
     debounce((inputValue, meta) => {
-
       onInputChange(inputValue, meta);
-    }, debounceTime),
-  )
+    }, debounceTime)
+  );
+
+  const handleOnChange = (value) => {
+    if (onChange) onChange(null, value.value);
+  };
 
   return (
     <ReactSelect
       ref={ref}
+      menuPortalTarget={document.body}
       components={components}
       options={options}
       styles={styles ? styles : customStyles}
@@ -88,7 +92,7 @@ const Dropdown = React.forwardRef((props, ref) => {
       hideSelectedOptions={hideSelectedOptions}
       id={id}
       inputId={inputId}
-      value={value}
+      value={options.find((x) => x.value === value)}
       readOnly={readOnly}
       tabIndex={tabIndex}
       isSearchable={isSearchable}
@@ -124,7 +128,7 @@ const Dropdown = React.forwardRef((props, ref) => {
       defaultInputValue={defaultInputValue}
       defaultMenuIsOpen={defaultMenuIsOpen}
       delimiter={delimiter}
-      onChange={onChange}
+      onChange={handleOnChange}
       onInputChange={handleOnInput}
       onMenuOpen={onMenuOpen}
       onMenuClose={onMenuClose}
@@ -146,12 +150,12 @@ Dropdown.defaultProps = {
   components: {},
   debounceTime: 180,
   //-------------------------
-  onChange: () => { },
-  onInputChange: () => { },
-  onMenuOpen: () => { },
-  onMenuClose: () => { },
-  onFocus: () => { },
-  onBlur: () => { },
+  onChange: () => {},
+  onInputChange: () => {},
+  onMenuOpen: () => {},
+  onMenuClose: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
   //-------------------------
   style: {},
   className: "",
@@ -274,8 +278,8 @@ Dropdown.propTypes = {
    */
   openMenuOnFocus: PropTypes.bool,
   /**
-  * Allows control of whether the menu is opened when the Select is clicked
-  */
+   * Allows control of whether the menu is opened when the Select is clicked
+   */
   openMenuOnClick: PropTypes.bool,
   //----
   autoFocus: PropTypes.bool,

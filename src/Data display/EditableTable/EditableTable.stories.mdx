@@ -1,30 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
-import EditableTable from ".";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import EditableTable from "./index";
+import { statusColor } from "./constants/constants";
+import { useState, useRef, useEffect } from "react";
+import { inputType } from "./constants/constants";
 import styled from "@emotion/styled";
+import CheckBoxInput from "../../Basic Inputs/CheckBoxInput";
+import Dropdown from "../../Inputs/Dropdown";
 import TableSpecialLastRow from "./components/TableSpecialLastRow";
 import Button from "../../General/Button/index";
 import { cloneDeep, isEmpty, isEqual } from "lodash";
 import { useStateWithCallbackLazy } from "use-state-with-callback";
 
-const uuidv4 = () => {
-  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
-    (
-      c ^
-      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-    ).toString(16)
-  );
-};
+<Meta title="Data Display/Editable Table" component={EditableTable} />
 
-const Container = styled.div``;
-
-const Commands = styled.div`
-  padding: 10px 10px 0 10px;
-  display: flex;
-`;
-
-//============================================
-
-var db_invoices = [
+export var db_invoices = [
   {
     id: "db235f2c-2023-47fa-9932-99e25832d90f",
     company_iban: "HR75 3509 8698 7394 1416 4",
@@ -77,155 +67,223 @@ var db_invoices = [
   },
 ];
 
-//============================================
+export const uuidv4 = () => {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
+};
 
-const StoryTemplate = (props) => {
-  //========== STATE =====================================
+export const Container = styled.div``;
 
+export const Commands = styled.div`
+  padding: 10px 10px 0 10px;
+  display: flex;
+`;
+
+export const customRenderSelectedValue = React.forwardRef((props, ref) => {
+  var style = {};
+  if (props.rowData.status_id === 1) {
+    style = {
+      color: "#298c38",
+      fontWeight: "bold",
+    };
+  }
+  if (props.rowData.status_id === 2) {
+    style = {
+      color: "#b32d2d",
+      fontWeight: "bold",
+    };
+  }
+  return <span style={style}>{props.rowData.status}</span>;
+});
+
+export const customRenderCheckbox = React.forwardRef((props, ref) => {
+  return (
+    <CheckBoxInput
+      {...props}
+      onChange={() => {}}
+      tabIndex={-1}
+      disabled={true}
+      checked={props.value}
+      ref={ref}
+    />
+  );
+});
+
+export const TemplateDefault = (props) => {
+  var Columns = [
+    {
+      id: 1,
+      displayName: "Iban",
+      accessor: "company_iban",
+      width: 25,
+      sortable: true,
+      editable: true,
+      inputType: inputType.STRING,
+    },
+    {
+      id: 2,
+      displayName: "Name",
+      accessor: "company_name",
+      width: 15,
+      editable: true,
+      inputType: inputType.STRING,
+    },
+    {
+      id: 3,
+      displayName: "Amount ($)",
+      accessor: "amount",
+      editable: true,
+      width: 15,
+      inputType: inputType.DECIMAL,
+    },
+    {
+      id: 4,
+      displayName: "Date",
+      accessor: "date",
+      width: 15,
+      editable: true,
+      inputType: inputType.STRING,
+    },
+    {
+      id: 5,
+      displayName: "Processed",
+      accessor: "processed",
+      width: 10,
+      editable: true,
+      inputType: inputType.BOOLEAN,
+      readonlyComponent: customRenderCheckbox,
+    },
+    {
+      id: 6,
+      displayName: "Status",
+      accessor: "status_id",
+      width: 20,
+      editable: true,
+      inputType: inputType.SELECT,
+      readonlyComponent: customRenderSelectedValue,
+      inputProps: {
+        options: [
+          { value: 1, label: "Approved" },
+          { value: 2, label: "Rejected" },
+        ],
+      },
+    },
+  ];
+  var EmptyDataItem = {
+    id: "",
+    company_iban: "",
+    company_name: "",
+    amount: 0.0,
+    date: "09.03.2022",
+    status: "Approved",
+    status_id: 1,
+    processed: false,
+  };
   const [loading, setLoading] = useStateWithCallbackLazy(false);
   const [data, setData] = useState([]);
-
   var tableRef = useRef();
-
-  //========== LIFECYCLE =================================
-
-  useEffect(() => setLoading(props.args.Loading), [props.args.Loading]);
-
+  useEffect(() => setLoading(props.Loading), [props.Loading]);
   useEffect(() => loadData(), []);
-
-  //========== METHODS ===================================
-
   const loadData = () => {
     setLoading(true);
-
     setTimeout(() => {
       setData(db_invoices);
       setLoading(false);
     }, 1200);
   };
-
   const commitData = () => {
     var dataCopy = cloneDeep(data);
-
     dataCopy.forEach((item) => {
       if (isEmpty(item.id)) {
         item.id = uuidv4();
       }
     });
-
     db_invoices = dataCopy;
-
     loadData();
   };
-
-  //========== EVENTS ====================================
-
   const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
-    console.log(value, column);
-
     var dataCopy = cloneDeep(data);
     var itemToUpdate = isEmpty(rowData.id)
       ? dataCopy[rowIndex]
       : dataCopy.find((x) => x.id === rowData.id);
-
     if (column.accessor === "status_id") {
-      //
       itemToUpdate[column.accessor] = parseInt(value);
       console.log(itemToUpdate, column);
-      itemToUpdate["status"] = column.selectItems.find(
-        (x) => x.id === parseInt(value)
-      ).name;
-      //
+      itemToUpdate["status"] = column.inputProps.options.find(
+        (x) => x.value === parseInt(value)
+      ).label;
     } else itemToUpdate[column.accessor] = value;
-
     setData(dataCopy);
   };
-
   const validateEdit = (rowData) => {
     return true;
   };
-
   const validateAdd = (rowData) => {
     return true;
   };
-
   const showDialog = (rowIndex, edited) => {
     if (
       confirm(
         "There are validation errors. Do you want to discard the edited data ?"
       )
     ) {
-      //--
       onDiscard(null, rowIndex, -1, edited);
       setLoading(false);
-      //--
     } else if (tableRef.current) {
       setLoading(false, () => {
         tableRef.current.focusLastActiveCell();
       });
     }
   };
-
   const onSave = (rowIndex) => {
-    var original = db_invoices[rowIndex] || props.args.EmptyDataItem;
+    var original = db_invoices[rowIndex] || props.EmptyDataItem;
     var edited = data[rowIndex];
-
     if (!isEqual(original, edited) || isEmpty(edited.id)) {
       setLoading(true);
-
       setTimeout(() => {
         if (isEmpty(data[rowIndex].id) && !validateAdd(edited)) {
           showDialog(rowIndex, edited);
           return;
         }
-
         if (!isEmpty(data[rowIndex].id) && !validateEdit(edited)) {
           showDialog(rowIndex, edited);
           return;
         }
-
         commitData();
         setLoading(false);
       }, 800);
     }
   };
-
   const onDiscard = (e, rowIndex, cellIndex, rowData) => {
     var dataCopy = cloneDeep(data);
-
     var originalItem = db_invoices.find((x) => x.id === rowData.id);
     var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
-
     if (isEmpty(rowData.id)) {
       dataCopy.splice(rowIndex, 1);
     } else {
       dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
         ? originalItem
-        : props.args.EmptyDataItem;
+        : props.EmptyDataItem;
     }
-
     setData(dataCopy);
   };
-
   const onCreateNewItem = (timeout) => {
     if (timeout > 0) setLoading(true);
-    setData([...data, props.args.EmptyDataItem]);
-
+    setData([...data, props.EmptyDataItem]);
     setTimeout(() => {
       if (timeout > 0) setLoading(false);
     }, timeout);
   };
-
   const onSpecialRowClick = (isEnter) => {
     onCreateNewItem(isEnter ? 300 : 0);
-
     setTimeout(() => {
       tableRef.current.focusFirstCellOfLastRow();
     }, 300);
   };
-
-  //========== RENDER ====================================
-
   return (
     <Container>
       <Commands>
@@ -238,24 +296,20 @@ const StoryTemplate = (props) => {
       </Commands>
       <EditableTable
         ref={tableRef}
-        {...props.args}
+        {...props}
+        Columns={Columns}
+        EmptyDataItem={EmptyDataItem}
         Data={data}
         Loading={loading}
-        //--------------------------
         onCellFocusChange={() => {}}
-        //--------------------------
-        //--------------------------
         onRowFocusChange={(e, rowIndex, nextRow) => {
           if (rowIndex !== nextRow) {
             console.log(rowIndex, nextRow);
             onSave(rowIndex);
           }
         }}
-        //--------------------------
         onDiscard={onDiscard}
-        //--------------------------
         onInputChange={onFieldChanged}
-        //--------------------------
       >
         <TableSpecialLastRow Loading={loading} onClick={onSpecialRowClick} />
       </EditableTable>
@@ -263,4 +317,45 @@ const StoryTemplate = (props) => {
   );
 };
 
-export default StoryTemplate;
+# Editable Table
+
+```jsx
+import { EditableTable } from "@lnc-react-ui";
+```
+
+The `EditableTable` uses the standard `Table` component with an `TableCell`
+override and some internal logic to achieve excel-like cell editability features.
+
+Additional column props:
+
+- `editable` - should the column be editable or not
+- `readonlyComponent` - custom cell render when the cell is not in focus
+- `editComponent` - custom cell render when the cell is IN in focus
+- `inputProps` - props applied to the input component in focus
+
+Exposed methods (via ref):
+
+- `focusFirstCellOfLastRow`
+- `focusLastActiveCell`
+
+Supported column data types:
+
+- `BOOLEAN`
+- `STRING`
+- `INTEGER`
+- `DECIMAL`
+- `DATE`
+- `SELECT`
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      EnableLoader: true,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />

@@ -9,10 +9,14 @@ import {
 import { useTheme } from "@emotion/react";
 
 const HtmlHeadCell = styled.th`
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: left;
   transition: all 250ms ease;
   padding: 0.875rem 1.5rem;
   cursor: ${(props) => (props.ordering ? "pointer" : "default")};
+  width: ${(props) => props.width};
 
   &:hover {
     ${(props) =>
@@ -103,6 +107,9 @@ const HeaderInnerCell = styled.div`
 
 const HeaderCellText = styled.span`
   padding-right: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   color: ${(props) =>
     getColorRgbaValue(
@@ -234,6 +241,14 @@ const TableHeadCell = (props) => {
       onColumnClick(e, Column);
   };
 
+  const getWidth = () => {
+    if (Column && Column.width) {
+      return Column.width + "%";
+    }
+
+    return "auto";
+  };
+
   return (
     <HtmlHeadCell
       onClick={handleColumnClick}
@@ -241,6 +256,8 @@ const TableHeadCell = (props) => {
       selection={EnableSelectAll}
       ordering={EnableOrdering === true && Column.sortable === true}
       key={Index}
+      width={getWidth()}
+      title={Column.displayName}
     >
       <HeaderInnerCell {...themeProps}>
         <HeaderCellText {...themeProps}>{Column.displayName}</HeaderCellText>
