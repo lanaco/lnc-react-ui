@@ -52,6 +52,35 @@ export const TemplateCustom = (args) => (
   </div>
 );
 
+export const TemplateAlternativeLabel = (args) => (
+    <div style={{ height: "130px" }}>
+      <MultiSelectDropdown
+        {...args}
+        getOptionLabel={(option) => option.alternativeLabel}
+      />
+    </div>
+  );
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <MultiSelectDropdown {...args} size="small" />
+    <MultiSelectDropdown {...args} size="medium" />
+    <MultiSelectDropdown {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <MultiSelectDropdown {...args} color="primary" />
+    <MultiSelectDropdown {...args} color="secondary" />
+    <MultiSelectDropdown {...args} color="success" />
+    <MultiSelectDropdown {...args} color="warning" />
+    <MultiSelectDropdown {...args} color="danger" />
+    <MultiSelectDropdown {...args} color="information" />
+    <MultiSelectDropdown {...args} color="neutral" />
+  </div>
+);
+
 # Multi Dropdown
 
 ```jsx
@@ -151,5 +180,66 @@ export const Template = (args) => (
   />
 );
 ```
+
+## Alternative Label
+
+For array of options
+```jsx
+[
+  { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+  { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+  { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+];
+``` 
+it is possible to set different label with `getOptionLabel={(option) => option.alternativeLabel}`
+
+<Canvas>
+  <Story
+    name="Alternative Label"
+    args={{
+      options: [
+        { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+        { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+        { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+      ],
+    }}
+  >
+    {TemplateAlternativeLabel.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      options: [
+        { value: "1", label: "option 1"},
+        { value: "2", label: "option 2"},
+        { value: "3", label: "option 3"},
+      ],
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      options: [
+        { value: "1", label: "option 1"},
+        { value: "2", label: "option 2"},
+        { value: "3", label: "option 3"},
+      ],
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
 
 This component is built on top of [React-Select](https://www.npmjs.com/package/react-select). React-Select [documentaion](https://react-select.com/home).

@@ -53,27 +53,27 @@ GridItem.propTypes = {
     /**
      * start the element at the columnStart column position
      */
-    colStart: PropTypes.string,
+    colStart: PropTypes.number,
     /**
      * end the element at the columnEnd column position
      */
-    colEnd: PropTypes.string,
+    colEnd: PropTypes.number,
     /**
      * start the element at the rowStart row position
      */
-    rowStart: PropTypes.string,
+    rowStart: PropTypes.number,
     /**
      * end the element at the rowStart row position
      */
-    rowEnd: PropTypes.string,
+    rowEnd: PropTypes.number,
     /**
      * span specific amount of columns
      */
-    colSpan: PropTypes.string,
+    colSpan: PropTypes.number,
     /**
      * span specific amount of rows
      */
-    rowSpan: PropTypes.string,
+    rowSpan: PropTypes.number,
     justifySelf: PropTypes.oneOf(["start", "end", "center", "stretch"]),
     alignSelf: PropTypes.oneOf(["start", "end", "center", "stretch"]),
     area: PropTypes.string,

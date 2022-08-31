@@ -1,9 +1,48 @@
 import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import customStyles from "../Dropdown/CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 import DropdownLookup from "../DropdownLookup";
+import { components } from "react-select";
+import Icon from "../../General/Icon/index";
+import styled from "@emotion/styled";
+import { getColorRgbaValue } from "../../_utils/utils";
+
+const RemovableWrapper = styled.div`
+height: 100%;
+display: flex;
+  &:focus {
+    color: ${(props) =>
+        getColorRgbaValue(props.theme, "Danger", "danger", "enabled", "text")};
+    outline: none;
+  }
+`;
+
+const MultiValueRemove = (props) => {
+    const removeRef = useRef();
+    const handleOnKeyDown = (e) => {
+        //Simulate remove
+        if (e.key == "Space" || e.key == "Enter") {
+            e.preventDefault();
+            removeRef?.current?.click();
+        }
+    };
+
+    return (
+        <components.MultiValueRemove {...props}>
+            <RemovableWrapper
+                theme={props?.selectProps?.theme}
+                color={props?.selectProps?.color}
+                ref={removeRef}
+                onKeyDown={handleOnKeyDown}
+                tabIndex={0}
+            >
+                <Icon icon="times" />
+            </RemovableWrapper>
+        </components.MultiValueRemove>
+    );
+};
 
 const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
     const {
@@ -59,6 +98,7 @@ const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
         onMenuClose,
         onBlur,
         onFocus,
+        onKeyDown,
         size,
         color,
         className,
@@ -76,11 +116,20 @@ const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
         }, debounceTime),
     )
 
+    const handleOnKeyDown = (e) => {
+        if (e.key == "ArrowLeft" || e.key == "ArrowRight" || e.key == "Space") e.preventDefault();
+
+        onKeyDown(e);
+    };
+
     return (
         <DropdownLookup
             isMulti={true}
             ref={ref}
-            components={components}
+            components={{
+                MultiValueRemove,
+                ...components
+            }}
             defaultOptions={defaultOptions}
             cacheOptions={cacheOptions}
             loadOptions={loadOptions}
@@ -136,6 +185,7 @@ const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
             onFocus={onFocus}
             className={className}
             style={style}
+            onKeyDown={handleOnKeyDown}
             {...rest}
         />
     );
@@ -156,6 +206,7 @@ MultiSelectDropdownLookup.defaultProps = {
     onMenuClose: () => { },
     onFocus: () => { },
     onBlur: () => { },
+    onKeyDown: () => { },
     //-------------------------
     style: {},
     className: "",
@@ -332,6 +383,7 @@ MultiSelectDropdownLookup.propTypes = {
     onMenuClose: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
+    onKeyDown: PropTypes.func,
     //---------------------------------------------------------------
     className: PropTypes.string,
     style: PropTypes.object,

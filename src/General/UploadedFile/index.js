@@ -5,23 +5,9 @@ import styled from "@emotion/styled";
 import Icon from "../Icon";
 import ProgressBar from "../../Feedback/ProgressBar";
 import {
-  getBorderRadiusValueWithUnits,
   getColorRgbaValue,
   getComponentTypographyCss,
-  getDisabledStateCss,
-  getOutlineCss,
-  getSizeValueWithUnits,
 } from "../../_utils/utils";
-
-const getIconSize = (size) => {
-  if (size === "small") {
-    return "1.5rem";
-  } else if (size === "medium") {
-    return "1.75rem";
-  } else if (size === "large") {
-    return "2.0rem";
-  }
-};
 
 const size = {
   small: "1.5rem",
@@ -41,9 +27,9 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
 
-  min-height: ${(props) =>
+  height: ${(props) =>
     props.progress ? sizeWithProgress[props.size] : size[props.size]};
-  max-height: ${(props) =>
+  height: ${(props) =>
     props.progress ? sizeWithProgress[props.size] : size[props.size]};
 `;
 
@@ -154,14 +140,13 @@ const UploadedFile = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Container id="CONTAINER" {...themeProps}>
+    <Container ref={ref} id={id} {...themeProps} className={className} style={style} {...rest}>
       <Icon
         {...themeProps}
         icon={fileIcon}
         sizeInUnits={iconSizes[props.size]}
         style={{ cursor: onFileClick ? "pointer" : "default" }}
         onClick={(e) => (onFileClick ? onFileClick(e) : null)}
-        {...rest}
       />
 
       <ProgressContent {...themeProps}>
@@ -198,7 +183,6 @@ const UploadedFile = React.forwardRef((props, ref) => {
 });
 
 UploadedFile.defaultProps = {
-  id: "",
   fileName: "file",
   fileSize: null,
   showFileSize: false,
@@ -217,7 +201,7 @@ UploadedFile.defaultProps = {
 };
 
 UploadedFile.propTypes = {
-  id: PropTypes.any.isRequired,
+  id: PropTypes.any,
   fileName: PropTypes.string,
   fileSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   showFileSize: PropTypes.bool,

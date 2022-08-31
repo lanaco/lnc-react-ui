@@ -12,7 +12,7 @@ const PopoverContent = styled.div`
   gap: 0.25rem;
   display: flex;
   flex-direction: column;
-  min-width: 200px;
+  ${props => props.widthFitContent == false && "min-width: 12.5rem"};
 `;
 
 const DropdownMenu = React.forwardRef((props, ref) => {
@@ -23,6 +23,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     offset,
     verticalAlignment,
     horizontalAlignment,
+    widthFitContent,
     //----------------
     onFocus,
     onBlur,
@@ -85,6 +86,8 @@ const DropdownMenu = React.forwardRef((props, ref) => {
           ref={control?.ref ? control.ref : controlRef}
           onKeyDown={handleOnControlKeyDown}
           trailingIcon="angle-down"
+          color={color}
+          size={size}
           data-control={true} //Used for when click on outside of menu to ignore control click (control is outside)
         />
       );
@@ -144,12 +147,12 @@ const DropdownMenu = React.forwardRef((props, ref) => {
         vertical={verticalAlignment}
         horizontal={horizontalAlignment}
         offset={offset}
-        style={{ padding: 0 }}
+        style={{ padding: 0, maxHeight: "unset" }}
         {...popoverProps}
       >
         <OutsideClickHandler
           onOutsideClick={handleClickOutside}>
-          <PopoverContent ref={menuContentRef}>{clonedChildren}</PopoverContent>
+          <PopoverContent ref={menuContentRef} widthFitContent={widthFitContent}>{clonedChildren}</PopoverContent>
         </OutsideClickHandler>
       </Popover>
     </StyledDropDown >
@@ -163,6 +166,7 @@ DropdownMenu.defaultProps = {
   offset: 8,
   verticalAlignment: "bottom",
   // horizontalAlignment: "right",
+  widthFitContent: false,
   //-------------------------
   onBlur: () => { },
   onFocus: () => { },
@@ -190,6 +194,7 @@ DropdownMenu.propTypes = {
   horizontalAlignment: PropTypes.oneOf(["left", "right", "center"]),
   //Menu's vertical alignment
   verticalAlignment: PropTypes.oneOf(["top", "bottom"]),
+  widthFitContent: PropTypes.bool,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
@@ -208,6 +213,7 @@ DropdownMenu.propTypes = {
     "warning",
     "danger",
     "information",
+    "neutral"
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   popoverProps: PropTypes.any,
