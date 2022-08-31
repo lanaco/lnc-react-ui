@@ -94,7 +94,7 @@ const Sidebar = React.forwardRef((props, ref) => {
           <span>
             <Icon
               icon={placement == "right" ? "angle-right" : "angle-left"}
-              color="disabled"
+              color="neutral"
             />
           </span>
         </ToggleSidebarButton>

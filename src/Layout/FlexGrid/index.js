@@ -13,6 +13,7 @@ const FlexGrid = React.forwardRef((props, ref) => {
     justifyContent,
     alignItems,
     children,
+    rest
   } = props;
 
   const clonedChildren = React.Children.map(children, (child) => {
@@ -35,6 +36,7 @@ const FlexGrid = React.forwardRef((props, ref) => {
       wrap="Wrap"
       justifyContent={justifyContent}
       alignItems={alignItems}
+      {...rest}
     >
       {clonedChildren}
     </FlexBox>

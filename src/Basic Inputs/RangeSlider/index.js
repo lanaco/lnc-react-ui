@@ -210,7 +210,6 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
   };
 
   const changeSliderColor = (sliderValue) => {
-    console.log("slider val", sliderValue);
     setRangeBackground(
       `linear-gradient(to right, ${valueColor} 0%, ${valueColor} ${getPercent(
         sliderValue

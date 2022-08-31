@@ -1,9 +1,48 @@
 import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import customStyles from "../Dropdown/CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 import Dropdown from "../Dropdown";
+import { components } from "react-select";
+import Icon from "../../General/Icon/index";
+import styled from "@emotion/styled";
+import { getColorRgbaValue } from "../../_utils/utils";
+
+const RemovableWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  &:focus {
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Danger", "danger", "enabled", "text")};
+    outline: none;
+  }
+`;
+
+const MultiValueRemove = (props) => {
+  const removeRef = useRef();
+  const handleOnKeyDown = (e) => {
+    //Simulate remove
+    if (e.key == "Space" || e.key == "Enter") {
+      e.preventDefault();
+      removeRef?.current?.click();
+    }
+  };
+
+  return (
+    <components.MultiValueRemove {...props}>
+      <RemovableWrapper
+        theme={props?.selectProps?.theme}
+        color={props?.selectProps?.color}
+        ref={removeRef}
+        onKeyDown={handleOnKeyDown}
+        tabIndex={0}
+      >
+        <Icon icon="times" sizeInUnits={"0.7rem"}/>
+      </RemovableWrapper>
+    </components.MultiValueRemove>
+  );
+};
 
 const MultiSelectDropdown = React.forwardRef((props, ref) => {
   const {
@@ -57,6 +96,7 @@ const MultiSelectDropdown = React.forwardRef((props, ref) => {
     onMenuClose,
     onBlur,
     onFocus,
+    onKeyDown,
     size,
     color,
     className,
@@ -69,16 +109,25 @@ const MultiSelectDropdown = React.forwardRef((props, ref) => {
 
   const handleOnInput = useCallback(
     debounce((inputValue, meta) => {
-
       onInputChange(inputValue, meta);
-    }, debounceTime),
-  )
+    }, debounceTime)
+  );
+
+  const handleOnKeyDown = (e) => {
+    if (e.key == "ArrowLeft" || e.key == "ArrowRight" || e.key == "Space")
+      e.preventDefault();
+
+    onKeyDown(e);
+  };
 
   return (
     <Dropdown
       isMulti={true}
       ref={ref}
-      components={components}
+      components={{
+        MultiValueRemove,
+        ...components,
+      }}
       options={options}
       styles={styles ? styles : customStyles}
       size={size}
@@ -132,6 +181,7 @@ const MultiSelectDropdown = React.forwardRef((props, ref) => {
       onFocus={onFocus}
       className={className}
       style={style}
+      onKeyDown={handleOnKeyDown}
       {...rest}
     />
   );
@@ -146,12 +196,13 @@ MultiSelectDropdown.defaultProps = {
   components: {},
   debounceTime: 180,
   //-------------------------
-  onChange: () => { },
-  onInputChange: () => { },
-  onMenuOpen: () => { },
-  onMenuClose: () => { },
-  onFocus: () => { },
-  onBlur: () => { },
+  onChange: () => {},
+  onInputChange: () => {},
+  onMenuOpen: () => {},
+  onMenuClose: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  onKeyDown: () => {},
   //-------------------------
   style: {},
   className: "",
@@ -274,8 +325,8 @@ MultiSelectDropdown.propTypes = {
    */
   openMenuOnFocus: PropTypes.bool,
   /**
-  * Allows control of whether the menu is opened when the Select is clicked
-  */
+   * Allows control of whether the menu is opened when the Select is clicked
+   */
   openMenuOnClick: PropTypes.bool,
   //----
   autoFocus: PropTypes.bool,
@@ -317,6 +368,7 @@ MultiSelectDropdown.propTypes = {
   onMenuClose: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  onKeyDown: PropTypes.func,
   //---------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,

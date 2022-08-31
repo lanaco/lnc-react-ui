@@ -58,6 +58,7 @@ export const TemplateColors = (args) => (
     <DragDropFiles {...args} color="success" />
     <DragDropFiles {...args} color="warning" />
     <DragDropFiles {...args} color="danger" />
+    <DragDropFiles {...args} color="information" />
     <DragDropFiles {...args} color="neutral" />
   </div>
 );
@@ -141,6 +142,5 @@ const Component = (args) => <DragAndDropFile {...args} />;
 <Canvas>
   <Story name="Colors">{TemplateColors.bind({})}</Story>
 </Canvas>
-
 
 #### This component is built on top of [react-dropzone](https://react-dropzone.js.org/).

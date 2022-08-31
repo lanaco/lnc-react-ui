@@ -102,6 +102,7 @@ const customStyles = {
         boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)",
         borderRadius: getBorderRadiusValueWithUnits(s.theme, "regular"),
     }),
+    menuPortal: (base) => ({...base, zIndex: 20}),
     option: (p, s) => ({
         ...p,
         fontWeight: s.theme.components["Input"].default["enabled"].fontWeight,
@@ -131,6 +132,7 @@ const customStyles = {
                 "hover",
                 "background"
             ),
+            color: "unset",
         },
     }),
     multiValue: (p, s) => ({
@@ -159,7 +161,7 @@ const customStyles = {
                 "hover",
                 "background",
                 "backgroundOpacity"
-            )
+            ),
         }
     }),
     multiValueLabel: (p, s) => ({

@@ -154,7 +154,6 @@ const PasswordInput = React.forwardRef((props, ref) => {
 
 PasswordInput.defaultProps = {
   id: "",
-  value: 0,
   disabled: false,
   readOnly: false,
   debounceTime: 180,

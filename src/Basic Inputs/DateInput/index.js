@@ -5,6 +5,7 @@ import moment from "moment";
 import Calendar from "react-calendar";
 import { useTheme } from "@emotion/react";
 import "./style.css";
+import { getColorRgbaValue, getComponentTypographyCss, getDisabledStateCss } from "../../_utils/utils";
 
 const heightBySize = (size) => {
   return { small: `1.875rem`, medium: `2.25rem`, large: `2.625rem` }[size];
@@ -28,8 +29,9 @@ const Container = styled.div`
   box-sizing: border-box;
   min-height: ${(props) => heightBySize(props.size)};
   max-height: ${(props) => heightBySize(props.size)};
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
+
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
 
   color: ${(props) => props.theme.test_palette.dark[500]};
 
@@ -125,9 +127,10 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  color: ${(props) => props.theme.test_palette.dark[500]};
+${(props) =>
+  getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "Input", props.color, "enabled", "text")};
   appearance: none;
   outline: none;
   border: none;
@@ -138,8 +141,7 @@ const Input = styled.input`
   transition: all 250ms ease;
 
   &:disabled {
-    color: ${(props) => props.theme.test_palette.light[500]};
-    background-color: white;
+    ${(props) => getDisabledStateCss(props.theme)};
     cursor: auto;
   }
 `;

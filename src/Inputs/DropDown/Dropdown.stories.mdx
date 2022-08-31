@@ -23,7 +23,8 @@ export const TemplateMethods = (args) => {
       <Button text="Focus" onClick={() => dropDownRef.current.focus()} />
       &nbsp;&nbsp;
       <Button text="Blur" onClick={() => dropDownRef.current.blur()} />
-      <br /><br />
+      <br />
+      <br />
       <Dropdown ref={dropDownRef} {...args} />
     </div>
   );
@@ -71,6 +72,35 @@ export const TemplateCustom = (args) => (
   </div>
 );
 
+export const TemplateAlternativeLabel = (args) => (
+    <div style={{ height: "130px" }}>
+      <Dropdown
+        {...args}
+        getOptionLabel={(option) => option.alternativeLabel}
+      />
+    </div>
+  );
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <Dropdown {...args} size="small" />
+    <Dropdown {...args} size="medium" />
+    <Dropdown {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <Dropdown {...args} color="primary" />
+    <Dropdown {...args} color="secondary" />
+    <Dropdown {...args} color="success" />
+    <Dropdown {...args} color="warning" />
+    <Dropdown {...args} color="danger" />
+    <Dropdown {...args} color="information" />
+    <Dropdown {...args} color="neutral" />
+  </div>
+);
+
 # Dropdown
 
 ```jsx
@@ -82,9 +112,9 @@ import { Dropdown } from "@lnc-react-ui";
     name="Default"
     args={{
       options: [
-        { value: "1", label: "option 1" },
-        { value: "2", label: "option 2" },
-        { value: "3", label: "option 3" },
+        { value: "1", label: "option 1", tab: "ok" },
+        { value: "2", label: "option 2", tab: "asda" },
+        { value: "3", label: "option 3", tab: "asdfasdf" },
       ],
     }}
   >
@@ -189,5 +219,68 @@ export const Template = (args) => (
   />
 );
 ```
+
+## Alternative Label
+
+For array of options
+```jsx
+[
+  { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+  { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+  { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+];
+``` 
+it is possible to set different label with `getOptionLabel={(option) => option.alternativeLabel}`
+
+<Canvas>
+  <Story
+    name="Alternative Label"
+    args={{
+      options: [
+        { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+        { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+        { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+      ],
+    }}
+  >
+    {TemplateAlternativeLabel.bind({})}
+  </Story>
+</Canvas>
+
+To set different value use `getOptionValue={(option) => option.alternativeValue}`.
+
+## Sizes
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      options: [
+        { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+        { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+        { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+      ],
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      options: [
+        { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+        { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+        { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+      ],
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
 
 This component is built on top of [React-Select](https://www.npmjs.com/package/react-select). React-Select [documentaion](https://react-select.com/home).

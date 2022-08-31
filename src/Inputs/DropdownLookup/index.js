@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import AsyncReactSelect from 'react-select/async';
 import customStyles from "../Dropdown/CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
+import { components } from "react-select";
+
+const Input = (props) => <components.Input {...props} isHidden={false} />;
 
 const DropdownLookup = React.forwardRef((props, ref) => {
   const {
@@ -69,17 +72,47 @@ const DropdownLookup = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
 
-  const handleOnInput = useCallback(
+  // const handleOnInput = useCallback(
+  //   debounce((inputValue, meta) => {
+
+  //     onInputChange(inputValue, meta);
+  //   }, debounceTime),
+  // )
+
+  const [val, setVal] = useState(value);
+  const [inputVal, setInputVal] = useState(inputValue);
+
+  const inputChange = useCallback(
     debounce((inputValue, meta) => {
 
       onInputChange(inputValue, meta);
     }, debounceTime),
   )
 
+  const handleOnInput = (inputValue, meta) => {
+
+    if (meta?.action === "input-change") {
+      setInputVal(inputValue);
+    }
+
+    inputChange(inputValue, meta);
+    onInputChange(inputValue, meta);
+  };
+
+  const handleOnChange = (option, meta) => {
+    setVal(option);
+    let label = (getOptionLabel && option) ? getOptionLabel(option) : (option ? option.label : "");
+    setInputVal(label);
+    onChange(option);
+  };
+
   return (
     <AsyncReactSelect
       ref={ref}
-      components={components}
+      //components={components}
+      components={{
+        Input, ...components
+      }}
       defaultOptions={defaultOptions}
       cacheOptions={cacheOptions}
       loadOptions={loadOptions}
@@ -91,7 +124,8 @@ const DropdownLookup = React.forwardRef((props, ref) => {
       hideSelectedOptions={hideSelectedOptions}
       id={id}
       inputId={inputId}
-      value={value}
+      // value={value}
+      value={val}
       readOnly={readOnly}
       tabIndex={tabIndex}
       isSearchable={isSearchable}
@@ -122,12 +156,14 @@ const DropdownLookup = React.forwardRef((props, ref) => {
       placeholder={placeholder}
       noOptionsMessage={noOptionsMessage}
       menuIsOpen={menuIsOpen}
-      inputValue={inputValue}
+      // inputValue={inputValue}
+      inputValue={inputVal}
       defaultValue={defaultValue}
       defaultInputValue={defaultInputValue}
       defaultMenuIsOpen={defaultMenuIsOpen}
       delimiter={delimiter}
-      onChange={onChange}
+      // onChange={onChange}
+      onChange={handleOnChange}
       onInputChange={handleOnInput}
       onMenuOpen={onMenuOpen}
       onMenuClose={onMenuClose}
