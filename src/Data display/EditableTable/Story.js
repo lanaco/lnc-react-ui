@@ -121,8 +121,6 @@ const StoryTemplate = (props) => {
   //========== EVENTS ====================================
 
   const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
-    console.log(value, column);
-
     var dataCopy = cloneDeep(data);
     var itemToUpdate = isEmpty(rowData.id)
       ? dataCopy[rowIndex]
@@ -131,7 +129,6 @@ const StoryTemplate = (props) => {
     if (column.accessor === "status_id") {
       //
       itemToUpdate[column.accessor] = parseInt(value);
-      console.log(itemToUpdate, column);
       itemToUpdate["status"] = column.selectItems.find(
         (x) => x.id === parseInt(value)
       ).name;
@@ -247,7 +244,6 @@ const StoryTemplate = (props) => {
         //--------------------------
         onRowFocusChange={(e, rowIndex, nextRow) => {
           if (rowIndex !== nextRow) {
-            console.log(rowIndex, nextRow);
             onSave(rowIndex);
           }
         }}

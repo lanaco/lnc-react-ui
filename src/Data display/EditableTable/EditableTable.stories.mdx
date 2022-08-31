@@ -206,15 +206,15 @@ export const TemplateDefault = (props) => {
     loadData();
   };
   const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
+    console.log(value);
     var dataCopy = cloneDeep(data);
     var itemToUpdate = isEmpty(rowData.id)
       ? dataCopy[rowIndex]
       : dataCopy.find((x) => x.id === rowData.id);
     if (column.accessor === "status_id") {
-      itemToUpdate[column.accessor] = parseInt(value);
-      console.log(itemToUpdate, column);
+      itemToUpdate[column.accessor] = parseInt(value.value);
       itemToUpdate["status"] = column.inputProps.options.find(
-        (x) => x.value === parseInt(value)
+        (x) => x.value === parseInt(value.value)
       ).label;
     } else itemToUpdate[column.accessor] = value;
     setData(dataCopy);
@@ -304,7 +304,6 @@ export const TemplateDefault = (props) => {
         onCellFocusChange={() => {}}
         onRowFocusChange={(e, rowIndex, nextRow) => {
           if (rowIndex !== nextRow) {
-            console.log(rowIndex, nextRow);
             onSave(rowIndex);
           }
         }}
@@ -340,12 +339,12 @@ Exposed methods (via ref):
 
 Supported column data types:
 
-- `BOOLEAN`
-- `STRING`
-- `INTEGER`
-- `DECIMAL`
-- `DATE`
-- `SELECT`
+- `BOOLEAN` - CheckBoxInput
+- `STRING` - TextInput
+- `INTEGER` - NumberInput
+- `DECIMAL` - DecimalInput
+- `DATE` - DateInput
+- `SELECT` - Dropdown
 
 <Canvas>
   <Story

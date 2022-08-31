@@ -140,9 +140,9 @@ const EditableTableCell = (props) => {
       onChange(e, value, RowIndex, Index, Column, RowData);
     };
 
-    // var dropdownOnChange = (value) => {
-    //   onChange(_, value ? value.value : null, RowIndex, Index, Column, RowData);
-    // };
+    var dropdownOnChange = (value) => {
+      onChange(_, value, RowIndex, Index, Column, RowData);
+    };
 
     var inputProps = {
       ...themeProps,
@@ -180,7 +180,16 @@ const EditableTableCell = (props) => {
         break;
 
       case inputType.SELECT:
-        inputComponent = <Dropdown {...inputProps} ref={inputRef} />;
+        inputComponent = (
+          <Dropdown
+            {...inputProps}
+            value={Column.inputProps.options.find(
+              (x) => x.value === RowData[Column.accessor]
+            )}
+            onChange={dropdownOnChange}
+            ref={inputRef}
+          />
+        );
         break;
 
       default:

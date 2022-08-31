@@ -56,8 +56,6 @@ const DecimalInput = React.forwardRef((props, ref) => {
   const forceRefresh = () => setRefresh(!refresh);
 
   const onValueChange = (valueObject, eventObject) => {
-    console.log;
-
     var triggerRefresh = false;
     var _value = valueObject.floatValue || 0;
 

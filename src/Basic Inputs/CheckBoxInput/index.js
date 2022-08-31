@@ -179,7 +179,6 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     if (indeterminateState) setIndeterminateState(false);
 
     setCheckBoxChecked(!checkBoxChecked);
-    console.log("checkbox: ", !checkBoxChecked);
     if (onChange) onChange(e, !checkBoxChecked);
   };
 
@@ -203,7 +202,6 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
   };
 
   const handleOnFocus = (e) => {
-    console.log("FOCUS");
     setFocused(true);
     if (onFocus) onFocus(e);
   };

@@ -74,10 +74,6 @@ const Dropdown = React.forwardRef((props, ref) => {
     }, debounceTime)
   );
 
-  const handleOnChange = (value) => {
-    if (onChange) onChange(null, value.value);
-  };
-
   return (
     <ReactSelect
       ref={ref}
@@ -92,7 +88,7 @@ const Dropdown = React.forwardRef((props, ref) => {
       hideSelectedOptions={hideSelectedOptions}
       id={id}
       inputId={inputId}
-      value={options.find((x) => x.value === value)}
+      value={value}
       readOnly={readOnly}
       tabIndex={tabIndex}
       isSearchable={isSearchable}
@@ -128,7 +124,7 @@ const Dropdown = React.forwardRef((props, ref) => {
       defaultInputValue={defaultInputValue}
       defaultMenuIsOpen={defaultMenuIsOpen}
       delimiter={delimiter}
-      onChange={handleOnChange}
+      onChange={onChange}
       onInputChange={handleOnInput}
       onMenuOpen={onMenuOpen}
       onMenuClose={onMenuClose}

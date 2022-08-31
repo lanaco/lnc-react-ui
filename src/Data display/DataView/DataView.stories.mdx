@@ -1,0 +1,124 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import DataView from "./index";
+import styled from "@emotion/styled";
+import { useRef } from "react";
+import Button from "../../General/Button";
+
+<Meta title="Data Display/Data View" component={DataView} />
+
+export const View = styled.div`
+  padding: 10px;
+  border-radius: 8px;
+  background-color: ${(props) => props.color};
+`;
+
+export const View1 = ({ __TYPE__ = "VIEW1" }) => {
+  return <View color={"rgba(0,185,189,20%)"}>View 1</View>;
+};
+
+export const View2 = ({ __TYPE__ = "VIEW2" }) => {
+  return <View color={"rgba(50,132,203,20%)"}>View 2</View>;
+};
+
+export const View3 = ({ __TYPE__ = "VIEW3" }) => {
+  return <View color={"rgba(113,113,122,20%)"}>View 3</View>;
+};
+
+export const TemplateDefault = (args) => {
+  const dw = useRef();
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "6px",
+      }}
+    >
+      <Button
+        text="Reload"
+        type="tinted"
+        leadingIcon="arrow-right-rotate"
+        onClick={() => {
+          dw.current.toggleLoading();
+        }}
+      />
+      <DataView {...args} ref={dw}>
+        <View1 __TYPE__="VIEW1" />
+        <View2 __TYPE__="VIEW2" />
+        <View3 __TYPE__="VIEW3" />
+      </DataView>
+    </div>
+  );
+};
+
+# Data View
+
+```jsx
+import { DataView } from "@lnc-react-ui";
+```
+
+Options:
+
+- `EnableCreate`
+- `EnableUpdate`
+- `EnableDelete`
+
+- `EnableDiscard`
+- `EnableFilter`
+- `EnableExport`
+- `EnablePagination`
+
+Events:
+
+- `onPageChanged`
+- `onPageSizeChanged`
+
+- `onCreateItem`
+- `onUpdateItem`
+- `onDeleteItems`
+
+- `onDiscard`
+
+- `onFilterItems`
+- `onExportAll`
+- `onExportAllFiltered`
+- `onExportCurrentPage`
+
+- `onChangeViewType`
+
+Params:
+
+- `itemShape`
+- `viewTypes`
+
+Components:
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      views: [
+        {
+          id: 1,
+          name: "View 1",
+          type: "VIEW1",
+        },
+        {
+          id: 2,
+          name: "View 2",
+          type: "VIEW2",
+        },
+        {
+          id: 3,
+          name: "View 3",
+          type: "VIEW3",
+        },
+      ],
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
