@@ -232,7 +232,7 @@ FileInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
   ]),
 };
 

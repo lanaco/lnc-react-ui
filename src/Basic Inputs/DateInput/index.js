@@ -510,7 +510,7 @@ DateInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
   ]),
 };
 

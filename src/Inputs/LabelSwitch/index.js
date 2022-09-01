@@ -253,7 +253,7 @@ LabelSwitch.propTypes = {
     "success",
     "error",
     "warning",
-    "info",
+    "information",
   ]),
   colorAlt: PropTypes.oneOf([
     "primary",
@@ -261,7 +261,7 @@ LabelSwitch.propTypes = {
     "success",
     "error",
     "warning",
-    "info",
+    "information",
   ]),
 };
 

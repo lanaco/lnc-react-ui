@@ -177,7 +177,7 @@ TextAreaInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
   ]),
 };
 
