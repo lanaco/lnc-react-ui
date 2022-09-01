@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 import Button from "../../General/Button";
 import IconButton from "../../General/IconButton";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
-import reducer from "./state/reducer";
 import initialState from "./state/initialState";
 import { useEffect } from "react";
-import { useUpdateEffect, useEffectOnce } from "react-use";
-import actions from "./state/actions";
+import { useUpdateEffect, useEffectOnce, useUnmount } from "react-use";
+import { useMethods } from "react-use";
+import { createActions } from "./state";
 
 const Container = styled.div`
   padding: 20px;
@@ -44,27 +44,34 @@ const DataView = React.forwardRef(
 
     //================ STATE =================
 
-    const [{ Options, View, General }, dis] = useReducer(reducer, initialState);
+    const [{ Options, View, General }, actions] = useMethods(
+      createActions,
+      initialState
+    );
 
     //================ EXPOSED METHODS =================
 
     useImperativeHandle(
       ref,
       () => ({
-        toggleLoading: () => dis(actions.toggleLoading()),
+        toggleLoading: () => actions.toggleLoading(),
       }),
       [Options, View, General]
     );
 
-    //================ MOUNT =================
+    //================ LIFCYCLE =================
 
     useEffectOnce(() => {
-      dis(actions.setViews(views, defaultCurrentView));
+      actions.setViews(views, defaultCurrentView);
 
       setTimeout(() => {
-        dis(actions.ready());
+        actions.ready();
       }, 300);
     }, []);
+
+    useUnmount(() => {
+      console.log("unmount");
+    });
 
     //================ UPDATE =================
 
@@ -95,7 +102,7 @@ const DataView = React.forwardRef(
               key={v.name}
               text={v.name}
               type={"tinted"}
-              onClick={() => dis(actions.setCurrentView(v))}
+              onClick={() => actions.setCurrentView(v)}
             />
           ))}
 
@@ -104,7 +111,7 @@ const DataView = React.forwardRef(
             type="tinted"
             icon="times"
             color="danger"
-            onClick={() => dis(actions.setCurrentView(null))}
+            onClick={() => actions.setCurrentView(null)}
           />
 
           {General.Loading && (
