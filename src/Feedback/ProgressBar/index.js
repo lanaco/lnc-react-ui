@@ -113,7 +113,7 @@ ProgressBar.propTypes = {
     "danger",
     "warning",
     "disabled",
-    "info",
+    "information",
   ]),
 };
 

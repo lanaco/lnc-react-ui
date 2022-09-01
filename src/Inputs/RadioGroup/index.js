@@ -104,7 +104,7 @@ RadioGroup.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
   ]),
 };
 
