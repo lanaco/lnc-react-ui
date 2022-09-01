@@ -461,7 +461,7 @@ Toggle.propTypes = {
   id: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
-  label: PropTypes.element,
+  label: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   unicodeIcon: PropTypes.string,
   orientation: PropTypes.oneOf(["left", "right"]),
   //-------------------------------
