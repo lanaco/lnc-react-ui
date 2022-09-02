@@ -8,6 +8,7 @@ import {
   StyledSuffix,
   StyledWrapper,
 } from "./styledComponents";
+import { useEffectOnce, useUpdateEffect } from "react-use";
 
 //===================================================
 
@@ -40,7 +41,8 @@ const TextInput = React.forwardRef((props, ref) => {
   const [inputValue, setInputValue] = useState("");
   const [focused, setFocused] = useState(false);
 
-  useEffect(() => setInputValue(value ? value : ""), [value]);
+  useUpdateEffect(() => setInputValue(value), [value]);
+  useEffectOnce(() => setInputValue(value === "" ? defaultValue : value));
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),

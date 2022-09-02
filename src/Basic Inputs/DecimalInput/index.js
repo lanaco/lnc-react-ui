@@ -1,9 +1,10 @@
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 import { debounce } from "lodash";
 import { StyledPrefix, StyledSuffix, StyledWrapper } from "./styledComponents";
+import { useEffectOnce, useUpdateEffect } from "react-use";
 
 //===================================================
 
@@ -38,11 +39,12 @@ const DecimalInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState(defaultValue);
+  const [inputValue, setInputValue] = useState("");
   const [refresh, setRefresh] = useState(true);
   const [focused, setFocused] = useState(false);
 
-  useEffect(() => setInputValue(value), [value]);
+  useUpdateEffect(() => setInputValue(value), [value]);
+  useEffectOnce(() => setInputValue(value === "" ? defaultValue : value));
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -56,24 +58,22 @@ const DecimalInput = React.forwardRef((props, ref) => {
   const forceRefresh = () => setRefresh(!refresh);
 
   const onValueChange = (valueObject, eventObject) => {
-    console.log;
-
     var triggerRefresh = false;
     var _value = valueObject.floatValue || 0;
 
-    if (defaultValue === null && valueObject.floatValue === undefined) {
+    if (defaultValue === "" && valueObject.floatValue === undefined) {
       triggerRefresh = true;
-      _value = defaultValue === null ? null : 0;
+      _value = defaultValue === "" ? "" : 0;
     }
 
     if (_value === -0) {
       triggerRefresh = true;
-      _value = defaultValue === null ? null : 0;
+      _value = defaultValue === "" ? "" : 0;
     }
 
     if (_value === undefined) {
       triggerRefresh = true;
-      _value = defaultValue === null ? null : 0;
+      _value = defaultValue === "" ? "" : 0;
     }
 
     if (_value > Number.MAX_SAFE_INTEGER) {
@@ -169,8 +169,8 @@ const DecimalInput = React.forwardRef((props, ref) => {
 
 DecimalInput.defaultProps = {
   id: "",
-  value: null,
-  defaultValue: null,
+  value: "",
+  defaultValue: "",
   disabled: false,
   readOnly: false,
   debounceTime: 180,

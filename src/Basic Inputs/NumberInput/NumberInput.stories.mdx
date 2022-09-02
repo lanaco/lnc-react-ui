@@ -34,9 +34,9 @@ export const TemplateAddons = (args) => (
 
 export const TemplateDefaultValues = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-    <NumberInput {...args} value={1} defaultValue={null} />
-    <NumberInput {...args} value={null} defaultValue={2} />
-    <NumberInput {...args} value={null} defaultValue={null} />
+    <NumberInput {...args} value={1} />
+    <NumberInput {...args} defaultValue={2} />
+    <NumberInput {...args} />
   </div>
 );
 
@@ -52,7 +52,7 @@ export const TemplateMinMax = (args) => (
   </div>
 );
 
-# Decimal Input
+# Number Input
 
 ```jsx
 import { NumberInput } from "@lnc-react-ui";
