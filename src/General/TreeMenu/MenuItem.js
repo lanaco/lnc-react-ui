@@ -139,7 +139,7 @@ const MenuItem = React.forwardRef((props, ref) => {
                 if (isNested && toggleNested) {
                     toggleNested();
                 }
-                onItemSelected(e, children);
+                onItemSelected(e, value);
             };
         }
 
