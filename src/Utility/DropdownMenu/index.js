@@ -59,6 +59,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
           return React.cloneElement(child, {
             ref: ref ? ref : firstItemRef, //needed to focus on navigation
             color: color,
+            size: size,
             onItemSelected: onItemSelected,
           });
         }
