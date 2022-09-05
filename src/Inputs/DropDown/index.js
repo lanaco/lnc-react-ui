@@ -102,7 +102,6 @@ const Dropdown = React.forwardRef((props, ref) => {
   return (
     <ReactSelect
       ref={ref}
-      // components={components}
       components={{
         Input, ...components
       }}

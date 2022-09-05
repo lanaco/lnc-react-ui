@@ -19,31 +19,6 @@ display: flex;
   }
 `;
 
-const MultiValueRemove = (props) => {
-    const removeRef = useRef();
-    const handleOnKeyDown = (e) => {
-        //Simulate remove
-        if (e.key == "Space" || e.key == "Enter") {
-            e.preventDefault();
-            removeRef?.current?.click();
-        }
-    };
-
-    return (
-        <components.MultiValueRemove {...props}>
-            <RemovableWrapper
-                theme={props?.selectProps?.theme}
-                color={props?.selectProps?.color}
-                ref={removeRef}
-                onKeyDown={handleOnKeyDown}
-                tabIndex={0}
-            >
-                <Icon icon="times" />
-            </RemovableWrapper>
-        </components.MultiValueRemove>
-    );
-};
-
 const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
     const {
         defaultOptions,
@@ -116,20 +91,11 @@ const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
         }, debounceTime),
     )
 
-    const handleOnKeyDown = (e) => {
-        if (e.key == "ArrowLeft" || e.key == "ArrowRight" || e.key == "Space") e.preventDefault();
-
-        onKeyDown(e);
-    };
-
     return (
         <DropdownLookup
             isMulti={true}
             ref={ref}
-            components={{
-                MultiValueRemove,
-                ...components
-            }}
+            components={components}
             defaultOptions={defaultOptions}
             cacheOptions={cacheOptions}
             loadOptions={loadOptions}
@@ -185,7 +151,7 @@ const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
             onFocus={onFocus}
             className={className}
             style={style}
-            onKeyDown={handleOnKeyDown}
+            onKeyDown={onKeyDown}
             {...rest}
         />
     );

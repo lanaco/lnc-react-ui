@@ -2763,7 +2763,7 @@ export const lanaco_light = {
         },
       },
     },
-    DropDownMenuItem: {
+    MenuItem: {
       default: {
         palette: "gray",
         enabled: {
