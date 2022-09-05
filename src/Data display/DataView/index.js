@@ -8,8 +8,12 @@ import { useEffect } from "react";
 import { useUpdateEffect, useEffectOnce, useUnmount } from "react-use";
 import { useMethods } from "react-use";
 import { createActions } from "./state";
+import ButtonGroup from "../../Layout/Button Group";
+import JSONPretty from "react-json-pretty";
+import Spinner from "../../Feedback/Spinner/index";
 
 const Container = styled.div`
+  position: relative;
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #ededed;
@@ -18,7 +22,7 @@ const Container = styled.div`
   gap: 8px;
 `;
 
-const Controls = styled.div`
+const ControlsBar = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -30,6 +34,7 @@ const ViewContainer = styled.div`
   flex-direction: column;
   gap: 8px;
   border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
 `;
 
 const Text = styled.span`
@@ -37,94 +42,135 @@ const Text = styled.span`
   color: gray;
 `;
 
-const DataView = React.forwardRef(
-  ({ children, views = [], defaultCurrentView = null }, ref) => {
-    //
-    //================ PROPS =================
+const ViewSelector = styled.div`
+  margin-left: auto;
+`;
 
-    //================ STATE =================
+const StateViewer = styled.div`
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(50, 132, 203, 20%);
+  overflow: hidden;
 
-    const [{ Options, View, General }, actions] = useMethods(
-      createActions,
-      initialState
+  ${(props) => (props.collapsed ? "height: 20px" : "")}
+`;
+
+const LoaderContainerTransparent = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 1000;
+  opacity: 0.7;
+  background-color: white;
+  filter: alpha(opacity=10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DataView = React.forwardRef((props, ref) => {
+  //
+  //================ PROPS =================
+
+  const {
+    children,
+    views = [],
+    defaultCurrentView = null,
+    //----------------------------------------
+  } = props;
+
+  //================ STATE =================
+
+  const [collapsed, setCollapsed] = useState(true);
+
+  const [state, actions] = useMethods(createActions, initialState);
+
+  const { Options, View, General } = state;
+
+  //================ EXPOSED METHODS =================
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      toggleLoading: () => actions.toggleLoading(),
+    }),
+    [Options, View, General]
+  );
+
+  //================ LIFCYCLE =================
+
+  useEffectOnce(() => {
+    actions.setViews(views, defaultCurrentView);
+
+    setTimeout(() => {
+      actions.ready();
+    }, 300);
+  }, []);
+
+  useUnmount(() => {});
+
+  //================ UPDATE =================
+
+  useUpdateEffect(() => {}, [General.Ready]);
+
+  //================ METHODS =================
+
+  //================ RENDER =================
+
+  //================ RETURN =================
+
+  const renderView = () => {
+    if (View.currentView === null) return <Text>No view type selected...</Text>;
+
+    return renderCustomElement(
+      getCustomRender(
+        View.views.find((x) => x.id === View.currentView.id).type,
+        children
+      ),
+      {}
     );
+  };
 
-    //================ EXPOSED METHODS =================
+  //=========================================
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        toggleLoading: () => actions.toggleLoading(),
-      }),
-      [Options, View, General]
-    );
+  return (
+    <Container>
+      {General.Loading && (
+        <LoaderContainerTransparent>
+          <Spinner />
+        </LoaderContainerTransparent>
+      )}
 
-    //================ LIFCYCLE =================
+      <ControlsBar>
+        <ViewSelector>
+          <ButtonGroup>
+            {View.views.map((v) => (
+              <Button
+                key={v.name}
+                text={v.name}
+                type={View.currentView.id === v.id ? "tinted" : "basic"}
+                onClick={() => actions.setCurrentView(v)}
+                disabled={v.disabled}
+              />
+            ))}
+          </ButtonGroup>
+        </ViewSelector>
+      </ControlsBar>
 
-    useEffectOnce(() => {
-      actions.setViews(views, defaultCurrentView);
+      <ViewContainer>{renderView()}</ViewContainer>
 
-      setTimeout(() => {
-        actions.ready();
-      }, 300);
-    }, []);
-
-    useUnmount(() => {
-      console.log("unmount");
-    });
-
-    //================ UPDATE =================
-
-    useUpdateEffect(() => {}, [General.Ready]);
-
-    //================ RENDER =================
-
-    const renderView = () => {
-      if (View.currentView === null)
-        return <Text>No view type selected...</Text>;
-
-      return renderCustomElement(
-        getCustomRender(
-          View.views.find((x) => x.id === View.currentView.id).type,
-          children
-        ),
-        {}
-      );
-    };
-
-    //=========================================
-
-    return (
-      <Container>
-        <Controls>
-          {View.views.map((v) => (
-            <Button
-              key={v.name}
-              text={v.name}
-              type={"tinted"}
-              onClick={() => actions.setCurrentView(v)}
-            />
-          ))}
-
-          <IconButton
-            key={"x"}
-            type="tinted"
-            icon="times"
-            color="danger"
-            onClick={() => actions.setCurrentView(null)}
-          />
-
-          {General.Loading && (
-            <div style={{ marginLeft: "auto" }}>
-              <IconButton color="secondary" type="basic" icon="spinner" />
-            </div>
-          )}
-        </Controls>
-
-        <ViewContainer>{renderView()}</ViewContainer>
-      </Container>
-    );
-  }
-);
+      <StateViewer
+        collapsed={collapsed}
+        onClick={() => setCollapsed(!collapsed)}
+      >
+        <JSONPretty data={state} />
+      </StateViewer>
+    </Container>
+  );
+});
 
 export default DataView;

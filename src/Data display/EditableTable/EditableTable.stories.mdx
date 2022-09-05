@@ -353,7 +353,218 @@ Supported column data types:
       EnableLoader: true,
     }}
   >
-    {TemplateDefault.bind({})}
+    {(props) => {
+      var Columns = [
+        {
+          id: 1,
+          displayName: "Iban",
+          accessor: "company_iban",
+          width: 25,
+          sortable: true,
+          editable: true,
+          inputType: inputType.STRING,
+        },
+        {
+          id: 2,
+          displayName: "Name",
+          accessor: "company_name",
+          width: 15,
+          editable: true,
+          inputType: inputType.STRING,
+        },
+        {
+          id: 3,
+          displayName: "Amount ($)",
+          accessor: "amount",
+          editable: true,
+          width: 15,
+          inputType: inputType.DECIMAL,
+        },
+        {
+          id: 4,
+          displayName: "Date",
+          accessor: "date",
+          width: 15,
+          editable: true,
+          inputType: inputType.STRING,
+        },
+        {
+          id: 5,
+          displayName: "Processed",
+          accessor: "processed",
+          width: 10,
+          editable: true,
+          inputType: inputType.BOOLEAN,
+          readonlyComponent: customRenderCheckbox,
+        },
+        {
+          id: 6,
+          displayName: "Status",
+          accessor: "status_id",
+          width: 20,
+          editable: true,
+          inputType: inputType.SELECT,
+          readonlyComponent: customRenderSelectedValue,
+          inputProps: {
+            options: [
+              { value: 1, label: "Approved" },
+              { value: 2, label: "Rejected" },
+            ],
+          },
+        },
+      ];
+      var EmptyDataItem = {
+        id: "",
+        company_iban: "",
+        company_name: "",
+        amount: 0.0,
+        date: "09.03.2022",
+        status: "Approved",
+        status_id: 1,
+        processed: false,
+      };
+      const [loading, setLoading] = useStateWithCallbackLazy(false);
+      const [data, setData] = useState([]);
+      var tableRef = useRef();
+      useEffect(() => setLoading(props.Loading), [props.Loading]);
+      useEffect(() => loadData(), []);
+      const loadData = () => {
+        setLoading(true);
+        setTimeout(() => {
+          setData(db_invoices);
+          setLoading(false);
+        }, 1200);
+      };
+      const commitData = () => {
+        var dataCopy = cloneDeep(data);
+        dataCopy.forEach((item) => {
+          if (isEmpty(item.id)) {
+            item.id = uuidv4();
+          }
+        });
+        db_invoices = dataCopy;
+        loadData();
+      };
+      const onFieldChanged = (
+        e,
+        value,
+        rowIndex,
+        cellIndex,
+        column,
+        rowData
+      ) => {
+        console.log(value);
+        var dataCopy = cloneDeep(data);
+        var itemToUpdate = isEmpty(rowData.id)
+          ? dataCopy[rowIndex]
+          : dataCopy.find((x) => x.id === rowData.id);
+        if (column.accessor === "status_id") {
+          itemToUpdate[column.accessor] = parseInt(value.value);
+          itemToUpdate["status"] = column.inputProps.options.find(
+            (x) => x.value === parseInt(value.value)
+          ).label;
+        } else itemToUpdate[column.accessor] = value;
+        setData(dataCopy);
+      };
+      const validateEdit = (rowData) => {
+        return true;
+      };
+      const validateAdd = (rowData) => {
+        return true;
+      };
+      const showDialog = (rowIndex, edited) => {
+        if (
+          confirm(
+            "There are validation errors. Do you want to discard the edited data ?"
+          )
+        ) {
+          onDiscard(null, rowIndex, -1, edited);
+          setLoading(false);
+        } else if (tableRef.current) {
+          setLoading(false, () => {
+            tableRef.current.focusLastActiveCell();
+          });
+        }
+      };
+      const onSave = (rowIndex) => {
+        var original = db_invoices[rowIndex] || props.EmptyDataItem;
+        var edited = data[rowIndex];
+        if (!isEqual(original, edited) || isEmpty(edited.id)) {
+          setLoading(true);
+          setTimeout(() => {
+            if (isEmpty(data[rowIndex].id) && !validateAdd(edited)) {
+              showDialog(rowIndex, edited);
+              return;
+            }
+            if (!isEmpty(data[rowIndex].id) && !validateEdit(edited)) {
+              showDialog(rowIndex, edited);
+              return;
+            }
+            commitData();
+            setLoading(false);
+          }, 800);
+        }
+      };
+      const onDiscard = (e, rowIndex, cellIndex, rowData) => {
+        var dataCopy = cloneDeep(data);
+        var originalItem = db_invoices.find((x) => x.id === rowData.id);
+        var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
+        if (isEmpty(rowData.id)) {
+          dataCopy.splice(rowIndex, 1);
+        } else {
+          dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
+            ? originalItem
+            : props.EmptyDataItem;
+        }
+        setData(dataCopy);
+      };
+      const onCreateNewItem = (timeout) => {
+        if (timeout > 0) setLoading(true);
+        setData([...data, props.EmptyDataItem]);
+        setTimeout(() => {
+          if (timeout > 0) setLoading(false);
+        }, timeout);
+      };
+      const onSpecialRowClick = (isEnter) => {
+        onCreateNewItem(isEnter ? 300 : 0);
+        setTimeout(() => {
+          tableRef.current.focusFirstCellOfLastRow();
+        }, 300);
+      };
+      return (
+        <Container>
+          <Commands>
+            <Button
+              type="tinted"
+              leadingIcon="rotate"
+              text={"Reload"}
+              onClick={loadData}
+            />
+          </Commands>
+          <EditableTable
+            ref={tableRef}
+            {...props}
+            Columns={Columns}
+            EmptyDataItem={EmptyDataItem}
+            Data={data}
+            Loading={loading}
+            onCellFocusChange={() => {}}
+            onRowFocusChange={(e, rowIndex, nextRow) => {
+              if (rowIndex !== nextRow) {
+                onSave(rowIndex);
+              }
+            }}
+            onDiscard={onDiscard}
+            onInputChange={onFieldChanged}
+          >
+            <TableSpecialLastRow
+              Loading={loading}
+              onClick={onSpecialRowClick}
+            />
+          </EditableTable>
+        </Container>
+      );
+    }}
   </Story>
 </Canvas>
 
