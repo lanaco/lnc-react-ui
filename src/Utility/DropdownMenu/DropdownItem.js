@@ -11,7 +11,7 @@ import {
 
 const Item = styled.div`
   box-sizing: border-box;
-  cursor: ${props => props.disabled == false ? 'pointer' : 'context-menu'};
+  cursor: ${(props) => (props.disabled == false ? "pointer" : "context-menu")};
   width: 100%;
   border-radius: 6px;
   display: flex;
@@ -22,23 +22,23 @@ const Item = styled.div`
   ${(props) =>
     getComponentTypographyCss(
       props.theme,
-      "DropDownMenuItem",
+      "MenuItem",
       props.size,
       "enabled"
     )};
   & .drop-down-icon-lnc {
     color: ${(props) =>
-      (props.isActive && props.disabled == false)
+      props.isActive && props.disabled == false
         ? getColorRgbaValue(
             props.theme,
-            "DropDownMenuItem",
+            "MenuItem",
             props.color,
             "focus",
             "icon"
           )
         : getColorRgbaValue(
             props.theme,
-            "DropDownMenuItem",
+            "MenuItem",
             props.color,
             "enabled",
             "icon"
@@ -55,22 +55,22 @@ const Item = styled.div`
     props.disabled == false &&
     `background-color: ${getColorRgbaValue(
       props.theme,
-      "DropDownMenuItem",
+      "MenuItem",
       props.color,
       "focus",
       "backgoround"
     )};
     color: ${getColorRgbaValue(
       props.theme,
-      "DropDownMenuItem",
+      "MenuItem",
       props.color,
       "focus",
       "text"
     )};
   `}
-    outline: none;
-    
-    ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+  outline: none;
+
+  ${(props) => props.disabled && getDisabledStateCss(props.theme)};
 `;
 
 const DropdownItem = React.forwardRef((props, ref) => {
@@ -108,13 +108,13 @@ const DropdownItem = React.forwardRef((props, ref) => {
   }, [active]);
 
   const handleOnClick = (e) => {
-    if(disabled == false){
+    if (disabled == false) {
       if (isNested && toggleNested) {
         toggleNested();
       }
-      
-      onItemSelected(e, children)
-    };
+
+      onItemSelected(e, children);
+    }
     onClick(onClick);
   };
   const handleOnFocus = (e) => {
@@ -133,43 +133,98 @@ const DropdownItem = React.forwardRef((props, ref) => {
     } else if (e.key == "ArrowUp") {
       focusPreviousItem(ref ? ref.current : itemRef.current);
     } else if (e.key == "Enter") {
-      if(disabled == false) {
+      if (disabled == false) {
         if (isNested && toggleNested) {
           toggleNested();
         }
 
         onItemSelected(e, children);
-      };
+      }
     }
 
     onKeyDown(e);
   };
 
   const focusNextItem = (currentItem) => {
-    if (currentItem) nextByClass(currentItem, "drop-down-item-lnc")?.focus();
+    if (currentItem?.nextSibling) {
+      let next = findNextItem(currentItem);
+      if (next?.node && next?.type == "item") {
+        next.node.focus();
+      } else if (next?.node && next?.type == "nested") {
+        //next is nested container, find first child item in nested container to focus
+        let firstChildItem = findFirstChildItem(next.node);
+        if (firstChildItem) firstChildItem.focus();
+      } else if (
+        currentItem?.parentElement &&
+        hasClass(currentItem.parentElement, "nested-item-lnc")
+      ) {
+        focusNextItem(currentItem.parentElement);
+      }
+    }
+    //if item is in nested container
+    else if (
+      currentItem?.parentElement &&
+      hasClass(currentItem.parentElement, "nested-item-lnc")
+    ) {
+      //item is in nested contaiener, focus next item
+      focusNextItem(currentItem.parentElement);
+    }
   };
 
   const focusPreviousItem = (currentItem) => {
-    if (currentItem)
-      previousByClass(currentItem, "drop-down-item-lnc")?.focus();
+    if (currentItem?.previousSibling) {
+      let previous = findPrevItem(currentItem);
+      if (previous?.node && previous?.type == "item") {
+        previous.node.focus();
+      } else if (previous?.node && previous?.type == "nested") {
+        //previous is nested container, find last child item in nested container to focus
+        let lastChildItem = findLastChildItem(previous.node);
+        if (lastChildItem) lastChildItem.focus();
+      } else if (
+        currentItem?.parentElement &&
+        hasClass(currentItem.parentElement, "nested-item-lnc")
+      ) {
+        focusPreviousItem(currentItem.parentElement);
+      }
+    }
+    //if item is in nested container
+    else if (
+      currentItem?.parentElement &&
+      hasClass(currentItem.parentElement, "nested-item-lnc")
+    ) {
+      //item is in nested contaiener, focus previous item
+      focusPreviousItem(currentItem.parentElement);
+    }
   };
 
-  const nextByClass = (node, cls) => {
+  const findNextItem = (node) => {
     while ((node = node.nextSibling)) {
-      if (hasClass(node, cls)) {
-        return node;
+      if (hasClass(node, "menu-item-lnc")) {
+        return { node: node, type: "item" };
+      } else if (hasClass(node, "nested-item-lnc")) {
+        return { node: node, type: "nested" };
       }
     }
     return null;
   };
 
-  const previousByClass = (node, cls) => {
+  const findPrevItem = (node) => {
     while ((node = node.previousSibling)) {
-      if (hasClass(node, cls)) {
-        return node;
+      if (hasClass(node, "menu-item-lnc")) {
+        return { node: node, type: "item" };
+      } else if (hasClass(node, "nested-item-lnc")) {
+        return { node: node, type: "nested" };
       }
     }
     return null;
+  };
+
+  const findFirstChildItem = (node) => {
+    return Array.from(node.querySelectorAll(".menu-item-lnc"))?.[0];
+  };
+
+  const findLastChildItem = (node) => {
+    return Array.from(node.querySelectorAll(".menu-item-lnc"))?.pop();
   };
 
   const hasClass = (elem, cls) => {
@@ -182,7 +237,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
     <>
       <Item
         ref={ref ? ref : itemRef}
-        className={`drop-down-item-lnc ` + className}
+        className={`menu-item-lnc ` + className}
         {...themeProps}
         disabled={disabled}
         tabIndex={0}
@@ -225,7 +280,7 @@ DropdownItem.defaultProps = {
   className: "",
   color: "primary",
   size: "small",
-  __TYPE__: "TAB_ITEM",
+  __TYPE__: "MENU_ITEM",
 };
 
 DropdownItem.propTypes = {
@@ -250,7 +305,7 @@ DropdownItem.propTypes = {
     "warning",
     "danger",
     "information",
-    "neutral"
+    "neutral",
   ]),
   iconProps: PropTypes.any,
   size: PropTypes.oneOf(["small", "medium", "large"]),

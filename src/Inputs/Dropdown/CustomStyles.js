@@ -171,6 +171,10 @@ const customStyles = {
     }),
     multiValueRemove: (p, s) => ({
         ...p,
+        borderRadius: `0 ${getBorderRadiusValueWithUnits(s.theme, "regular")} ${getBorderRadiusValueWithUnits(s.theme, "regular")} 0`,
+        "&:active": {
+            backgroundColor: "blue"
+        },
         "&:hover": {
             backgroundColor: 'transparent',
             color: getColorRgbaValue(

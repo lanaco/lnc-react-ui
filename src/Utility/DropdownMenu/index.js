@@ -51,7 +51,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
   const clonedChildren = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
       if (
-        child.props.__TYPE__ == "TAB_ITEM" ||
+        child.props.__TYPE__ == "MENU_ITEM" ||
         child.props.__TYPE__ == "NESTED_ITEM"
       ) {
         if (index == 0) {

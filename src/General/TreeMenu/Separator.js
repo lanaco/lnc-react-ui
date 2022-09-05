@@ -33,10 +33,15 @@ const Separator = React.forwardRef((props, ref) => {
 });
 
 Separator.defaultProps = {
+    justifyToEnd: false,
     style: {},
 };
 
 Separator.propTypes = {
+    /**
+     * When the separator needs to be set beetween Menu Items that are justified to end, prop needs to be set to `justifyToEnd={true}`
+     */
+    justifyToEnd: PropTypes.bool,
     className: PropTypes.string,
     style: PropTypes.object,
 };

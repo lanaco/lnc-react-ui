@@ -4,6 +4,8 @@ import Sidebar from "../Sidebar/index";
 import Header from "../Header/index";
 import Footer from "../Footer/index";
 import Content from "../Content/index";
+import TreeMenu from "../../General/TreeMenu/index";
+import MenuItem from "../../General/TreeMenu/MenuItem";
 
 <Meta title="Layout/Page Layout" component={PageLayout} />
 
@@ -237,6 +239,60 @@ Having `Sidebar` positioned next to a nested `PageLayout` makes the rest of the 
             <span>Footer</span>
           </Footer>
         </PageLayout>
+      </PageLayout>
+    )}
+  </Story>
+</Canvas>
+
+### Sidebar with Tree Menu
+
+<Canvas>
+  <Story name="Sidebar with Tree Menu">
+    {(args) => (
+      <PageLayout>
+        <Header
+          style={{
+            backgroundColor: "rgb(0, 83, 122)",
+            lineHeight: "64px",
+            textAlign: "center",
+          }}
+        >
+          <span>Header</span>
+        </Header>
+        <PageLayout>
+          <Sidebar style={{ backgroundColor: "rgb(235, 249, 255)" }}>
+              <TreeMenu color="secondary" itemsGap="0.3rem">
+                <MenuItem icon="home">Home</MenuItem>
+                <MenuItem icon="clock">History</MenuItem>
+                <Separator />
+                <MenuItem icon="archive">Archive</MenuItem>
+                <MenuItem icon="users" justifyToEnd={true}>Users</MenuItem>
+                <Separator />
+                <MenuItem icon="gears" justifyToEnd={true}>Settings</MenuItem>
+              </TreeMenu>
+          </Sidebar>
+          <Content>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              <span>Content</span>
+            </div>
+          </Content>
+        </PageLayout>
+        <Footer
+          style={{
+            backgroundColor: "rgb(0, 83, 122)",
+            lineHeight: "64px",
+            textAlign: "center",
+          }}
+        >
+          <span>Footer</span>
+        </Footer>
       </PageLayout>
     )}
   </Story>

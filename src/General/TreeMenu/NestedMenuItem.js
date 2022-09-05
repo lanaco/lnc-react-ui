@@ -18,7 +18,7 @@ const StyledNested = styled.div`
     border-radius: 2px;
 `;
 
-const NestedDropdownItem = React.forwardRef((props, ref) => {
+const NestedMenuItem = React.forwardRef((props, ref) => {
     const {
         item,
         //------------------
@@ -52,18 +52,17 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
                 });
             }
         }
-        return child;
     });
 
     return <>
     <>
         {clonedItem}
     </>
-    {show && <StyledNested theme={theme} color={color} size={size} className={"nested-item-lnc " + className} style={style} {...rest}>{clonedChildren}</StyledNested>}
+    {show && <StyledNested theme={theme} color={color} size={size} className={"nested-item-lnc "+className} style={style} ref={ref} {...rest}>{clonedChildren}</StyledNested>}
     </> 
 })
 
-NestedDropdownItem.defaultProps = {
+NestedMenuItem.defaultProps = {
     size: "small",
     color: "primary",
     style: {},
@@ -71,7 +70,7 @@ NestedDropdownItem.defaultProps = {
     __TYPE__: "NESTED_ITEM",
 };
 
-NestedDropdownItem.propTypes = {
+NestedMenuItem.propTypes = {
     item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
     //--------------------------
     className: PropTypes.string,
@@ -89,4 +88,4 @@ NestedDropdownItem.propTypes = {
     __TYPE__: PropTypes.string,
 };
 
-export default NestedDropdownItem;
+export default NestedMenuItem;
