@@ -262,13 +262,13 @@ Having `Sidebar` positioned next to a nested `PageLayout` makes the rest of the 
         <PageLayout>
           <Sidebar style={{ backgroundColor: "rgb(235, 249, 255)" }}>
               <TreeMenu color="secondary" itemsGap="0.3rem">
-                <MenuItem icon="home">Home</MenuItem>
-                <MenuItem icon="clock">History</MenuItem>
+                <MenuItem icon="home" value="Home">Home</MenuItem>
+                <MenuItem icon="clock" value="Hist">History</MenuItem>
                 <Separator />
-                <MenuItem icon="archive">Archive</MenuItem>
-                <MenuItem icon="users" justifyToEnd={true}>Users</MenuItem>
+                <MenuItem icon="archive" value="Arch">Archive</MenuItem>
+                <MenuItem icon="users" value="Users" justifyToEnd={true}>Users</MenuItem>
                 <Separator />
-                <MenuItem icon="gears" justifyToEnd={true}>Settings</MenuItem>
+                <MenuItem icon="gears" value="Sett" justifyToEnd={true}>Settings</MenuItem>
               </TreeMenu>
           </Sidebar>
           <Content>

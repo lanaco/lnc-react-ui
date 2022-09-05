@@ -15,13 +15,23 @@ import Avatar from "../../General/Avatar";
   <Story name="Default" args={{}}>
     {(args) => (
       <TreeMenu {...args}>
-        <MenuItem icon="pen">Edit</MenuItem>
-        <MenuItem icon="clone">Duplicate</MenuItem>
+        <MenuItem icon="pen" value="Edit">
+          Edit
+        </MenuItem>
+        <MenuItem icon="clone" value="Dupl">
+          Duplicate
+        </MenuItem>
         <Separator />
-        <MenuItem icon="archive">Archive</MenuItem>
-        <MenuItem icon="arrow-right">Move</MenuItem>
+        <MenuItem icon="archive" value="Arch">
+          Archive
+        </MenuItem>
+        <MenuItem icon="arrow-right" value="Move">
+          Move
+        </MenuItem>
         <Separator />
-        <MenuItem icon="trash">Delete</MenuItem>
+        <MenuItem icon="trash" value="Del">
+          Delete
+        </MenuItem>
       </TreeMenu>
     )}
   </Story>
@@ -34,18 +44,44 @@ import Avatar from "../../General/Avatar";
 <Story name="Nested Items" args={{}}>
   {(args) => (
     <TreeMenu {...args}>
-      <MenuItem icon="pen">Edit</MenuItem>
-      <MenuItem icon="clone">Duplicate</MenuItem>
-      <NestedMenuItem item={<MenuItem icon="archive">Archive</MenuItem>}>
-        <MenuItem icon="clock">History</MenuItem>
-        <NestedMenuItem item={<MenuItem icon="pen">Data</MenuItem>}>
-          <MenuItem icon="users">Users</MenuItem>
-          <MenuItem icon="file">Documents</MenuItem>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <MenuItem icon="clone" value="Dupl">
+        Duplicate
+      </MenuItem>
+      <NestedMenuItem
+        item={
+          <MenuItem icon="archive" value="Arch">
+            Archive
+          </MenuItem>
+        }
+      >
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+        <NestedMenuItem
+          item={
+            <MenuItem icon="pen" value="Data">
+              Data
+            </MenuItem>
+          }
+        >
+          <MenuItem icon="users" value="Users">
+            Users
+          </MenuItem>
+          <MenuItem icon="file" value="Docs">
+            Documents
+          </MenuItem>
         </NestedMenuItem>
-        <MenuItem icon="arrow-right">Move</MenuItem>
+        <MenuItem icon="arrow-right" value="Move">
+          Move
+        </MenuItem>
       </NestedMenuItem>
       <Separator />
-      <MenuItem icon="trash">Delete</MenuItem>
+      <MenuItem icon="trash" value="Del">
+        Delete
+      </MenuItem>
     </TreeMenu>
   )}
 </Story>
@@ -54,18 +90,44 @@ import Avatar from "../../General/Avatar";
 <Story name="Nested Items" args={{}}>
   {(args) => (
     <TreeMenu {...args}>
-      <MenuItem icon="pen">Edit</MenuItem>
-      <MenuItem icon="clone">Duplicate</MenuItem>
-      <NestedMenuItem item={<MenuItem icon="archive">Archive</MenuItem>}>
-        <MenuItem icon="clock">History</MenuItem>
-        <NestedMenuItem item={<MenuItem icon="pen">Data</MenuItem>}>
-          <MenuItem icon="users">Users</MenuItem>
-          <MenuItem icon="file">Documents</MenuItem>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <MenuItem icon="clone" value="Dupl">
+        Duplicate
+      </MenuItem>
+      <NestedMenuItem
+        item={
+          <MenuItem icon="archive" value="Arch">
+            Archive
+          </MenuItem>
+        }
+      >
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+        <NestedMenuItem
+          item={
+            <MenuItem icon="pen" value="Data">
+              Data
+            </MenuItem>
+          }
+        >
+          <MenuItem icon="users" value="Users">
+            Users
+          </MenuItem>
+          <MenuItem icon="file" value="Docs">
+            Documents
+          </MenuItem>
         </NestedMenuItem>
-        <MenuItem icon="arrow-right">Move</MenuItem>
+        <MenuItem icon="arrow-right" value="Move">
+          Move
+        </MenuItem>
       </NestedMenuItem>
       <Separator />
-      <MenuItem icon="trash">Delete</MenuItem>
+      <MenuItem icon="trash" value="Del">
+        Delete
+      </MenuItem>
     </TreeMenu>
   )}
 </Story>
@@ -77,13 +139,21 @@ import Avatar from "../../General/Avatar";
   <Story name="Custom Items" args={{}}>
     {(args) => (
       <TreeMenu {...args}>
-        <MenuItem icon="pen">Edit</MenuItem>
-        <MenuItem icon="clone">Duplicate</MenuItem>
+        <MenuItem icon="pen" value="Edit">
+          Edit
+        </MenuItem>
+        <MenuItem icon="clone" value="Dupl">
+          Duplicate
+        </MenuItem>
         <Separator />
-        <MenuItem icon="archive">Archive</MenuItem>
-        <MenuItem icon="arrow-right">Move</MenuItem>
+        <MenuItem icon="archive" value="Arch">
+          Archive
+        </MenuItem>
+        <MenuItem icon="arrow-right" value="Move">
+          Move
+        </MenuItem>
         <Separator />
-        <MenuItem>
+        <MenuItem value="Avat">
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <Avatar image={logo} sizeInUnits="1.5rem" />
@@ -110,13 +180,21 @@ import Avatar from "../../General/Avatar";
 {
   (args) => (
     <TreeMenu {...args}>
-      <MenuItem icon="pen">Edit</MenuItem>
-      <MenuItem icon="clone">Duplicate</MenuItem>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <MenuItem icon="clone" value="Dupl">
+        Duplicate
+      </MenuItem>
       <Separator />
-      <MenuItem icon="archive">Archive</MenuItem>
-      <MenuItem icon="arrow-right">Move</MenuItem>
+      <MenuItem icon="archive" value="Arch">
+        Archive
+      </MenuItem>
+      <MenuItem icon="arrow-right" value="Move">
+        Move
+      </MenuItem>
       <Separator />
-      <MenuItem>
+      <MenuItem value="Avat">
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <Avatar image={logo} sizeInUnits="1.5rem" />
@@ -147,14 +225,20 @@ For Menu Items that need to be justifed to end it is necessary to set `justifyTo
   <Story name="Justify Menu Items" args={{}}>
     {(args) => (
       <TreeMenu style={{ height: "450px" }} {...args}>
-        <MenuItem icon="home">Home</MenuItem>
-        <MenuItem icon="clock">History</MenuItem>
-        <MenuItem icon="archive">Archive</MenuItem>
-        <MenuItem icon="users" justifyToEnd={true}>
+        <MenuItem icon="home" value="Home">
+          Home
+        </MenuItem>
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+        <MenuItem icon="archive" value="Arch">
+          Archive
+        </MenuItem>
+        <MenuItem icon="users" value="Users" justifyToEnd={true}>
           Users
         </MenuItem>
-        <Separator justifyToEnd={true}/>
-        <MenuItem icon="gears" justifyToEnd={true}>
+        <Separator justifyToEnd={true} />
+        <MenuItem icon="gears" value="Sett" justifyToEnd={true}>
           Settings
         </MenuItem>
       </TreeMenu>
@@ -170,29 +254,59 @@ For Menu Items that need to be justifed to end it is necessary to set `justifyTo
       <>
         <h3>small</h3>
         <TreeMenu size="small" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
         <br />
         <h3>medium</h3>
         <TreeMenu size="medium" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
         <br />
         <h3>large</h3>
         <TreeMenu size="large" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
       </>
     )}
@@ -206,56 +320,116 @@ For Menu Items that need to be justifed to end it is necessary to set `justifyTo
     {(args) => (
       <>
         <TreeMenu color="primary" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
         <br />
         <hr />
         <TreeMenu color="secondary" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
         <br />
         <hr />
         <TreeMenu color="success" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
         <br />
         <hr />
         <TreeMenu color="warning" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
         <br />
         <hr />
         <TreeMenu color="danger" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
         <br />
         <hr />
         <TreeMenu color="neutral" {...args}>
-          <MenuItem icon="pen">Edit</MenuItem>
-          <MenuItem icon="clone">Duplicate</MenuItem>
-          <MenuItem icon="archive">Archive</MenuItem>
-          <MenuItem icon="arrow-right">Move</MenuItem>
-          <MenuItem icon="trash">Delete</MenuItem>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
         </TreeMenu>
       </>
     )}

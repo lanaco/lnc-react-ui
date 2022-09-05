@@ -75,6 +75,7 @@ const Item = styled.div`
 
 const MenuItem = React.forwardRef((props, ref) => {
     const {
+        value,
         active,
         icon,
         disabled,
@@ -114,7 +115,7 @@ const MenuItem = React.forwardRef((props, ref) => {
                 toggleNested();
             }
 
-            onItemSelected(e, children)
+            onItemSelected(e, value)
         };
         onClick(onClick);
     };
@@ -277,6 +278,7 @@ MenuItem.defaultProps = {
 };
 
 MenuItem.propTypes = {
+    value: PropTypes.any,
     active: PropTypes.bool,
     icon: PropTypes.string,
     disabled: PropTypes.bool,
