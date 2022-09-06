@@ -1,0 +1,22 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Accordion from "./index";
+import AccordionSummary from "./AccordionSummary";
+import AccordionDetails from "./AccordionDetails";
+
+<Meta title="Utility/Accordion" component={Accordion} />
+
+# Accordion
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {(args) => (
+      <Accordion {...args}>
+        <AccordionSummary>Summary</AccordionSummary>
+        <AccordionDetails>Detaqils</AccordionDetails>
+      </Accordion>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
