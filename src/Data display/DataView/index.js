@@ -1,49 +1,25 @@
-import React, { useState, useReducer, useImperativeHandle } from "react";
+import React, { useState, useImperativeHandle, useRef } from "react";
 import styled from "@emotion/styled";
 import Button from "../../General/Button";
 import IconButton from "../../General/IconButton";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 import initialState from "./state/initialState";
-import { useEffect } from "react";
 import { useUpdateEffect, useEffectOnce, useUnmount } from "react-use";
 import { useMethods } from "react-use";
 import { createActions } from "./state";
 import ButtonGroup from "../../Layout/Button Group";
 import JSONPretty from "react-json-pretty";
 import Spinner from "../../Feedback/Spinner/index";
+import Modal from "../../Utility/Modal";
 
 const Container = styled.div`
   position: relative;
-  padding: 20px;
+  padding: 14px;
   border-radius: 8px;
   border: 1px solid #ededed;
   display: flex;
   flex-direction: column;
   gap: 8px;
-`;
-
-const ControlsBar = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-`;
-
-const ViewContainer = styled.div`
-  display: flex;
-  padding: 8px 0;
-  flex-direction: column;
-  gap: 8px;
-  border-top: 1px solid #ededed;
-  border-bottom: 1px solid #ededed;
-`;
-
-const Text = styled.span`
-  font-size: 14px;
-  color: gray;
-`;
-
-const ViewSelector = styled.div`
-  margin-left: auto;
 `;
 
 const StateViewer = styled.div`
@@ -56,7 +32,7 @@ const StateViewer = styled.div`
   ${(props) => (props.collapsed ? "height: 20px" : "")}
 `;
 
-const LoaderContainerTransparent = styled.div`
+const LoaderContainer = styled.div`
   position: absolute;
   top: 0px;
   right: 0px;
@@ -72,24 +48,66 @@ const LoaderContainerTransparent = styled.div`
   justify-content: center;
 `;
 
+const TableViewContainer = styled.div`
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(50, 132, 203, 20%);
+`;
+
+const CalendarViewContainer = styled.div`
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(50, 132, 203, 30%);
+`;
+
+const KanbanViewContainer = styled.div`
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(50, 132, 203, 40%);
+`;
+
+const GanttViewContainer = styled.div`
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(50, 132, 203, 50%);
+`;
+
+const ControlsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+`;
+
+const ViewContainer = styled.div`
+  padding: 8px 0;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+`;
+
+const CreateUpdateContainer = styled.div``;
+
 const DataView = React.forwardRef((props, ref) => {
   //
   //================ PROPS =================
 
   const {
     children,
-    views = [],
-    defaultCurrentView = null,
+    Views = [],
+    DefaultCurrentView = null,
+    DataSource = [],
     //----------------------------------------
   } = props;
 
   //================ STATE =================
 
+  const createUpdateModalRef = useRef();
+
   const [collapsed, setCollapsed] = useState(true);
+  const [createUpdateModalOpen, setCreateUpdateModalOpen] = useState(false);
 
   const [state, actions] = useMethods(createActions, initialState);
 
-  const { Options, View, General } = state;
+  const { Options, View, General, Data, Form } = state;
 
   //================ EXPOSED METHODS =================
 
@@ -104,35 +122,59 @@ const DataView = React.forwardRef((props, ref) => {
   //================ LIFCYCLE =================
 
   useEffectOnce(() => {
-    actions.setViews(views, defaultCurrentView);
-
-    setTimeout(() => {
-      actions.ready();
-    }, 300);
+    actions.setViews(Views, DefaultCurrentView);
+    actions.initialSetup({ DataSource });
   }, []);
 
   useUnmount(() => {});
 
-  //================ UPDATE =================
-
-  useUpdateEffect(() => {}, [General.Ready]);
-
   //================ METHODS =================
+
+  const handleGoToUpdate = (rowData) => {
+    actions.setFormProperties({ DataRecord: rowData });
+    createUpdateModalRef.current.open();
+    setCreateUpdateModalOpen(true);
+  };
+
+  const handleCreateUpdateClose = () => {
+    setCreateUpdateModalOpen(false);
+    actions.setFormProperties({ DataRecord: {} });
+  };
 
   //================ RENDER =================
 
   //================ RETURN =================
 
   const renderView = () => {
-    if (View.currentView === null) return <Text>No view type selected...</Text>;
+    if (View.CurrentView === null) return <></>;
 
     return renderCustomElement(
       getCustomRender(
-        View.views.find((x) => x.id === View.currentView.id).type,
+        View.Views.find((x) => x.id === View.CurrentView.id).type,
         children
       ),
-      {}
+      {
+        Data: Data.DataSource,
+        goToUpdate: handleGoToUpdate,
+      }
     );
+  };
+
+  const renderCreateUpdateContainer = () => {
+    if (Options.EnableFormInModal)
+      return (
+        <Modal
+          ref={createUpdateModalRef}
+          isOpen={createUpdateModalOpen}
+          onClose={handleCreateUpdateClose}
+        >
+          <CreateUpdateContainer>
+            {renderCustomElement(getCustomRender("FORM", children), {
+              DataRecord: Form.DataRecord,
+            }) || <></>}
+          </CreateUpdateContainer>
+        </Modal>
+      );
   };
 
   //=========================================
@@ -140,29 +182,30 @@ const DataView = React.forwardRef((props, ref) => {
   return (
     <Container>
       {General.Loading && (
-        <LoaderContainerTransparent>
+        <LoaderContainer>
           <Spinner />
-        </LoaderContainerTransparent>
+        </LoaderContainer>
       )}
-
-      <ControlsBar>
-        <ViewSelector>
-          <ButtonGroup>
-            {View.views.map((v) => (
-              <Button
-                key={v.name}
-                text={v.name}
-                type={View.currentView.id === v.id ? "tinted" : "basic"}
-                onClick={() => actions.setCurrentView(v)}
-                disabled={v.disabled}
-              />
-            ))}
-          </ButtonGroup>
-        </ViewSelector>
-      </ControlsBar>
+      <ControlsContainer>
+        <ButtonGroup>
+          {View.Views.map((v) => (
+            <Button
+              key={v.id}
+              text={v.name}
+              type={v.id === View.CurrentView.id ? "tinted" : "outline"}
+              onClick={() => {
+                if (v.id !== View.CurrentView.id) actions.setCurrentView(v);
+              }}
+            />
+          ))}
+        </ButtonGroup>
+      </ControlsContainer>
 
       <ViewContainer>{renderView()}</ViewContainer>
 
+      {renderCreateUpdateContainer()}
+
+      {/* <CreateUpdateContainer></CreateUpdateContainer> */}
       <StateViewer
         collapsed={collapsed}
         onClick={() => setCollapsed(!collapsed)}

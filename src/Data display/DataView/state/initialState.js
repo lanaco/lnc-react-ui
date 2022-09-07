@@ -2,22 +2,32 @@ const initialState = {
   General: {
     Ready: false,
     Loading: false,
+    ReadOnly: false,
   },
   Options: {
     EnableCreate: false,
     EnableUpdate: false,
     EnableDelete: false,
     EnableDiscard: false,
-    EnableFilter: false,
-    EnableExport: false,
-    EnablePagination: false,
+    //-----------------------
+    EnableTableView: true,
+    EnableCalendarView: true,
+    EnableGanttView: true,
+    EnableKanbanView: true,
+    EnableFormInModal: true,
   },
   View: {
-    views: [],
-    currentView: null,
+    Views: [],
+    CurrentView: null,
+    FormInModal: false,
   },
   Data: {
-    itemShape: {},
+    DataSource: [],
+    DataShape: {},
+  },
+  Form: {
+    DataRecord: {},
+    FormMethod: "READ",
   },
 };
 

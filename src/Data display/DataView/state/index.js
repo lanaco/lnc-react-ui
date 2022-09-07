@@ -8,21 +8,33 @@ export const createActions = (state) => {
         draft.General.Ready = true;
       });
     },
+    setFormProperties(formProps) {
+      return produce(state, (draft) => {
+        draft.Form.DataRecord = formProps.DataRecord;
+      });
+    },
+    dataRecordChanged({ field, value }) {
+      return produce(state, (draft) => {
+        draft.Form.DataRecord[field] = value;
+      });
+    },
     //-------------------------------------------------------
-    initialSetup() {
-      return produce(state, (draft) => {});
+    initialSetup(setupData) {
+      return produce(state, (draft) => {
+        draft.Data.DataSource = setupData.DataSource;
+      });
     },
     //-------------------------------------------------------
     setViews(views, defaultCurrentView) {
       return produce(state, (draft) => {
-        draft.View.views = views;
-        draft.View.currentView = defaultCurrentView;
+        draft.View.Views = views;
+        draft.View.CurrentView = defaultCurrentView;
       });
     },
     //-------------------------------------------------------
     setCurrentView(currentView) {
       return produce(state, (draft) => {
-        draft.View.currentView = currentView;
+        draft.View.CurrentView = currentView;
       });
     },
     //-------------------------------------------------------
@@ -38,13 +50,6 @@ export const createActions = (state) => {
       });
     },
     //-------------------------------------------------------
-    toggleDisableView(view) {
-      return produce(state, (draft) => {
-        draft.Views.find((x) => x.id === view.id).disabled = !draft.Views.find(
-          (x) => x.id === view.id
-        ).disabled;
-      });
-    },
   };
 };
 

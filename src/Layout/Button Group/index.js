@@ -13,7 +13,7 @@ const Container = styled.div`
   width: fit-content;
   border-radius: ${(props) => props.borderRadius};
 
-  & > button {
+  & button {
     border: none;
     border-top: ${(props) =>
       "0.0625rem solid " +
@@ -36,20 +36,20 @@ const Container = styled.div`
       )};
   }
 
-  & > button:focus {
+  & button:focus {
     outline: none;
   }
 
-  & > button:not(:first-of-type):not(:last-child) {
+  & button:not(:first-of-type):not(:last-child) {
     border-radius: 0;
   }
 
-  & > button[data-type="filled"],
+  & button[data-type="filled"],
   button[data-type="tinted"] {
     border: none;
   }
 
-  & > button:first-of-type {
+  & button:first-of-type {
     border-radius: ${(props) =>
       `${props.borderRadius} 0 0 ${props.borderRadius}`};
     border-left: ${(props) =>
@@ -63,7 +63,7 @@ const Container = styled.div`
       )};
   }
 
-  & > button:last-child {
+  & button:last-child {
     border-radius: ${(props) =>
       `0 ${props.borderRadius} ${props.borderRadius} 0`};
     border-right: ${(props) =>
@@ -77,7 +77,7 @@ const Container = styled.div`
       )};
   }
 
-  & > button:first-of-type:not([data-type="filled"]) {
+  & button:first-of-type:not([data-type="filled"]) {
     border-right: ${(props) =>
       "0.0625rem solid " +
       getColorRgbaValue(
@@ -89,7 +89,7 @@ const Container = styled.div`
       )};
   }
 
-  & > button:not(:first-of-type):not(:last-child):not([data-type="filled"]) {
+  & button:not(:first-of-type):not(:last-child):not([data-type="filled"]) {
     border-right: ${(props) =>
       "0.0625rem solid " +
       getColorRgbaValue(
