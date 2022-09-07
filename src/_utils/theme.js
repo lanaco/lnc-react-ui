@@ -2916,6 +2916,19 @@ export const lanaco_light = {
         },
       },
     },
+    Accordion: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          backgroundOpacity: 0,
+          line: 200,
+          fontWeight: 600,
+          summaryText: 500,
+          text: 700,
+        },
+      },
+    },
     Danger: {
       default: {
         palette: "red",
