@@ -63,7 +63,7 @@ AccordionSummary.defaultProps = {
   //-------------------------
   style: {},
   size: "small",
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  size: "small",
 };
 
 AccordionSummary.propTypes = {

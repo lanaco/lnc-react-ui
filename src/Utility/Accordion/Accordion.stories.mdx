@@ -82,9 +82,7 @@ import { Accordion, AccordionSummary, AccordionSummary } from "@lnc-react-ui";
     {(args) => {
       const [expanded, setExpanded] = useState(false);
       const handleChange = (accordion) => (isExpanded, event) => {
-        console.log("on c", accordion, isExpanded);
         setExpanded(isExpanded ? accordion : false);
-        return "okokoko";
       };
       return (
         <>
