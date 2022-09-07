@@ -20,13 +20,8 @@ const Item = styled.div`
   gap: 0.563rem;
   padding: 0.563rem;
   ${(props) =>
-    getComponentTypographyCss(
-      props.theme,
-      "MenuItem",
-      props.size,
-      "enabled"
-    )};
-  & .drop-down-icon-lnc {
+    getComponentTypographyCss(props.theme, "MenuItem", props.size, "enabled")};
+  & .menu-icon-lnc {
     color: ${(props) =>
       props.isActive && props.disabled == false
         ? getColorRgbaValue(
@@ -76,13 +71,15 @@ const Item = styled.div`
   ${(props) => props.disabled && getDisabledStateCss(props.theme)};
 `;
 
-const DropdownItem = React.forwardRef((props, ref) => {
+const MenuItem = React.forwardRef((props, ref) => {
   const {
+    value,
     active,
     icon,
     disabled,
     isNested,
     showNested,
+    justifyToEnd,
     //----------------
     onFocus,
     onBlur,
@@ -116,7 +113,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
         toggleNested();
       }
 
-      onItemSelected(e, children);
+      onItemSelected(e, value);
     }
     onClick(onClick);
   };
@@ -135,13 +132,12 @@ const DropdownItem = React.forwardRef((props, ref) => {
       focusNextItem(ref ? ref.current : itemRef.current);
     } else if (e.key == "ArrowUp") {
       focusPreviousItem(ref ? ref.current : itemRef.current);
-    } else if (e.key == "Enter") {
+    } else if (e.key == "Enter" || e.keyCode == 32) {
       if (disabled == false) {
         if (isNested && toggleNested) {
           toggleNested();
         }
-
-        onItemSelected(e, children);
+        onItemSelected(e, value);
       }
     }
 
@@ -252,9 +248,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
         showNested={showNested}
         {...rest}
       >
-        {icon && (
-          <Icon icon={icon} className="drop-down-icon-lnc" {...iconProps} />
-        )}
+        {icon && <Icon icon={icon} className="menu-icon-lnc" {...iconProps} />}
         <div>{children}</div>
         {isNested && (
           <Icon
@@ -267,10 +261,11 @@ const DropdownItem = React.forwardRef((props, ref) => {
   );
 });
 
-DropdownItem.defaultProps = {
+MenuItem.defaultProps = {
   active: false,
   disabled: false,
   isNested: false,
+  justifyToEnd: false,
   //-------------------------
   onBlur: () => {},
   onFocus: () => {},
@@ -287,11 +282,13 @@ DropdownItem.defaultProps = {
   __TYPE__: "MENU_ITEM",
 };
 
-DropdownItem.propTypes = {
+MenuItem.propTypes = {
+  value: PropTypes.any,
   active: PropTypes.bool,
   icon: PropTypes.string,
   disabled: PropTypes.bool,
   isNested: PropTypes.bool,
+  justifyToEnd: PropTypes.bool,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
@@ -316,4 +313,4 @@ DropdownItem.propTypes = {
   __TYPE__: PropTypes.string,
 };
 
-export default DropdownItem;
+export default MenuItem;
