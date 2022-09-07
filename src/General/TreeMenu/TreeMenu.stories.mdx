@@ -7,9 +7,14 @@ import Separator from "./Separator";
 import logo from "../../_utils/images/Image.png";
 import Avatar from "../../General/Avatar";
 
-<Meta title="General/Tree Menu" component={TreeMenu} />
+<Meta title="General/Tree Menu" component={TreeMenu}  subcomponents={{ MenuItem, NestedMenuItem, Separator }}/>
 
 # Tree Menu
+
+```jsx
+import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lnc-react-ui";
+```
+
 
 <Canvas style={{ width: "100%" }}>
   <Story name="Default" args={{}}>

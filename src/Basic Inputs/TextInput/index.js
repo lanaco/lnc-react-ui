@@ -18,6 +18,7 @@ const TextInput = React.forwardRef((props, ref) => {
     id,
     disabled,
     readOnly,
+    defaultValue,
     value,
     debounceTime,
     type,
@@ -124,6 +125,7 @@ const TextInput = React.forwardRef((props, ref) => {
 
 TextInput.defaultProps = {
   id: "",
+  defaultValue: "",
   value: "",
   disabled: false,
   readOnly: false,
@@ -144,6 +146,7 @@ TextInput.defaultProps = {
 
 TextInput.propTypes = {
   id: PropTypes.string,
+  defaultValue: PropTypes.string,
   value: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,

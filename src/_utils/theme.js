@@ -2922,9 +2922,10 @@ export const lanaco_light = {
         enabled: {
           background: 0,
           backgroundOpacity: 0,
-          text: 500,
           line: 200,
-          fontWeight: 700,
+          fontWeight: 600,
+          summaryText: 500,
+          text: 700,
         },
       },
     },
