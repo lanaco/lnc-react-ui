@@ -6,6 +6,11 @@ import DateInput from "./index";
 
 export const TemplateDefault = (args) => <DateInput {...args} />;
 
+export const TemplateDisabled = (args) => <DateInput disabled={true} placeholder={"Disabled"} style={{ width: "300px" }} {...args} />;
+
+export const TemplateReadOnly = (args) => <DateInput readOnly={true} style={{ width: "300px" }} value={"2022-01-01"} {...args} />;
+
+
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
     <DateInput {...args} size="small" />
@@ -47,28 +52,19 @@ import { DateInput } from "@lnc-react-ui";
 <Canvas>
   <Story
     name="Read Only"
-    args={{
-      readOnly: true,
-      style: { width: "300px" },
-      value: "2022-01-01",
-    }}
+    args={{}}
   >
-    {TemplateDefault.bind({})}
+    {TemplateReadOnly.bind({})}
   </Story>
 </Canvas>
 
 ## Disabled
 
-<Canvas withSource="open">
+<Canvas>
   <Story
     name="Disabled"
-    args={{
-      disabled: true,
-      placeholder: "Disabled",
-      style: { width: "300px" },
-    }}
-  >
-    {TemplateDefault.bind({})}
+    args={{}}>
+    {TemplateDisabled.bind({})}
   </Story>
 </Canvas>
 
