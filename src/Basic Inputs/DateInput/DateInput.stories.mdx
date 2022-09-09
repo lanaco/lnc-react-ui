@@ -22,6 +22,7 @@ export const TemplateColors = (args) => (
     <DateInput {...args} color="warning" />
     <DateInput {...args} color="danger" />
     <DateInput {...args} color="information" />
+    <DateInput {...args} color="neutral" />
   </div>
 );
 
@@ -31,11 +32,13 @@ export const TemplateColors = (args) => (
 import { DateInput } from "@lnc-react-ui";
 ```
 
-<Canvas withSource="open">
-  <Story name="Default" args={{}}>
-    {TemplateDefault.bind({})}
-  </Story>
-</Canvas>
+<Story name="Default" args={{}}>
+  {TemplateDefault.bind({})}
+</Story>
+
+```jsx
+(args) => <DateInput {...args} />;
+```
 
 <ArgsTable story="Default" />
 
@@ -73,32 +76,43 @@ import { DateInput } from "@lnc-react-ui";
 
 Range can be defined with `minDate` and `maxDate` props.
 
-<Canvas withSource="open">
-  <Story
-    name="Range"
-    args={{
-      value: "2022-01-05",
-      minDate: "2022-01-01",
-      maxDate: "2022-01-15",
-    }}
-  >
-    {TemplateDefault.bind({})}
-  </Story>
-</Canvas>
+<Story
+  name="Range"
+  args={{
+    value: "2022-01-05",
+    minDate: "2022-01-01",
+    maxDate: "2022-01-15",
+  }}
+>
+  {TemplateDefault.bind({})}
+</Story>
+
+```jsx
+(args) => (
+  <DateInput
+    value={"2022-01-05"}
+    minDate={"2022-01-01"}
+    maxDate={"2022-01-15"}
+    {...args}
+  />
+);
+```
 
 ## Alternative Format
 
-<Canvas withSource="open">
-  <Story
-    name="Alternative Format"
-    args={{
-      value: "2022-01-05",
-      format: "YYYY-MM-DD",
-    }}
-  >
-    {TemplateDefault.bind({})}
-  </Story>
-</Canvas>
+<Story
+  name="Alternative Format"
+  args={{
+    value: "2022-01-05",
+    format: "YYYY-MM-dd",
+  }}
+>
+  {TemplateDefault.bind({})}
+</Story>
+
+```jsx
+(args) => <DateInput value={"2022-01-05"} format={"YYYY-MM-dd"} {...args} />;
+```
 
 ## Sizes
 
