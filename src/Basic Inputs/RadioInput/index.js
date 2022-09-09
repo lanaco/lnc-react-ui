@@ -219,6 +219,7 @@ const RadioInput = React.forwardRef((props, ref) => {
         onClick={handleClick}
         disalbed={disabled}
         readOnly={readOnly}
+        title={label}
       >
         {label}
       </Label>

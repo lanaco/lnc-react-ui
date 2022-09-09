@@ -263,6 +263,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           className="checkbox-label"
           disabled={disabled}
           readOnly={readOnly}
+          title={label}
         >
           {label}
         </div>
