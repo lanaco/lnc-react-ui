@@ -6,7 +6,6 @@ import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
   getComponentTypographyCss,
-  getDisabledBackgroundCss,
   getOutlineCss,
   getSizeValueWithUnits,
 } from "../../_utils/utils";
@@ -28,6 +27,7 @@ const CheckboxContainer = styled.label`
   align-items: center;
   justify-content: start;
   flex-direction: ${(props) => getLabelDirection(props.labelPosition)};
+  ${props => props.spaceBetween == true && "justify-content: space-between;"}
   width: 100%;
   ${(props) => props.disabled && "pointer-events: none;"}
   ${(props) =>
@@ -39,14 +39,19 @@ const CheckboxContainer = styled.label`
   & .checkbox-label {
     ${(props) =>
       !props.disabled && props.readOnly == false && "cursor: pointer;"}
+    min-width: 0;
+    flex-shrink: 1;
+    min-height: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
 const Checkmark = styled.div`
 ${(props) => !props.disabled && props.readOnly == false && "cursor: pointer;"}
-height: ${(props) =>
+min-height: ${(props) =>
   props.theme.components.Checkbox.default.enabled.sizes[props.size]};
-width: ${(props) =>
+min-width: ${(props) =>
   props.theme.components.Checkbox.default.enabled.sizes[props.size]};
 display: flex;
 justify-content: center;
@@ -120,6 +125,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     label,
     labelPosition,
     tabIndex,
+    spaceBetween,
     customCheckmark,
     //----------------
     onChange,
@@ -197,6 +203,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       style={style}
       label={label}
       labelPosition={labelPosition}
+      spaceBetween={spaceBetween}
       {...themeProps}
     >
       <Checkmark
@@ -256,6 +263,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           className="checkbox-label"
           disabled={disabled}
           readOnly={readOnly}
+          title={label}
         >
           {label}
         </div>
@@ -285,6 +293,7 @@ CheckBoxInput.defaultProps = {
   indeterminate: false,
   labelPosition: "right",
   tabIndex: 0,
+  spaceBetween: false,
   //-------------------------
   onChange: (e, value) => {},
   onBlur: () => {},
@@ -309,6 +318,7 @@ CheckBoxInput.propTypes = {
   indeterminate: PropTypes.bool,
   labelPosition: PropTypes.oneOf(["right", "left"]),
   tabIndex: PropTypes.number,
+  spaceBetween: PropTypes.bool,
   customCheckmark: PropTypes.element,
   //---------------------------------------------------------------
   onChange: PropTypes.func,

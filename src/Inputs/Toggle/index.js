@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import Icon from "../../General/Icon/index";
-import { Global, css } from "@emotion/react";
 import { useTheme } from "@emotion/react";
 import {
   getColorRgbaValue,
@@ -10,7 +8,6 @@ import {
   getOutlineCss,
 } from "../../_utils/utils";
 import "../../Base/fontawesome/css/fontawesome.css";
-import { isEmpty } from "lodash";
 
 const sizes = {
   containerWidth: {
@@ -99,12 +96,21 @@ const sliderIconOffset = {
 
 //================================================================================================
 
+const getLabelDirection = (direction) => {
+  if (direction == "left") return "row-reverse";
+
+  return "row";
+};
+
 const Container = styled.label`
   box-sizing: content-box !important;
   width: 100%;
   text-align: left;
   line-height: 1.5;
   display: flex;
+  gap: 0.75rem;
+  flex-direction: ${(props) => getLabelDirection(props.labelPosition)};
+  ${props => props.spaceBetween == true && "justify-content: space-between;"}
   position: relative;
   cursor: ${(props) =>
     props.disabled || props.readOnly ? "default" : "pointer"};
@@ -124,25 +130,25 @@ const Container = styled.label`
 
   & input:hover:enabled ~ span.toggle-slider {
     background-color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "Toggle",
-        null,
-        "hover",
-        "background",
-        "backgroundOpacity"
-      )};
+    getColorRgbaValue(
+      props.theme,
+      "Toggle",
+      null,
+      "hover",
+      "background",
+      "backgroundOpacity"
+    )};
   }
 
   & input:checked:hover:enabled ~ span.toggle-slider {
     background-color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "Toggle",
-        props.color,
-        "hover",
-        "background"
-      )};
+    getColorRgbaValue(
+      props.theme,
+      "Toggle",
+      props.color,
+      "hover",
+      "background"
+    )};
   }
 
   & input {
@@ -156,22 +162,22 @@ const Container = styled.label`
 
   & input:checked ~ span.toggle-slider {
     background-color: ${(props) =>
-      !props.disabled
-        ? getColorRgbaValue(
-            props.theme,
-            "Toggle",
-            props.color,
-            "enabled",
-            "background"
-          )
-        : getColorRgbaValue(
-            props.theme,
-            "Toggle",
-            props.color,
-            "disabled",
-            "background",
-            "backgroundOpacity"
-          )};
+    !props.disabled
+      ? getColorRgbaValue(
+        props.theme,
+        "Toggle",
+        props.color,
+        "enabled",
+        "background"
+      )
+      : getColorRgbaValue(
+        props.theme,
+        "Toggle",
+        props.color,
+        "disabled",
+        "background",
+        "backgroundOpacity"
+      )};
     transition: all 0.2s ease;
     border-radius: 100px;
     flex-shrink: 0;
@@ -186,23 +192,23 @@ const Container = styled.label`
     border-radius: 100px;
     box-shadow: 1px 1px 0.25rem rgba(15, 23, 42, 0.16);
     background-color: ${(props) =>
-      props.disabled
-        ? getColorRgbaValue(
-            props.theme,
-            "ToggleSlider",
-            props.color,
-            "disabled",
-            "background",
-            "backgroundOpacity"
-          )
-        : getColorRgbaValue(
-            props.theme,
-            "ToggleSlider",
-            props.color,
-            "enabled",
-            "background",
-            "backgroundOpacity"
-          )};
+    props.disabled
+      ? getColorRgbaValue(
+        props.theme,
+        "ToggleSlider",
+        props.color,
+        "disabled",
+        "background",
+        "backgroundOpacity"
+      )
+      : getColorRgbaValue(
+        props.theme,
+        "ToggleSlider",
+        props.color,
+        "enabled",
+        "background",
+        "backgroundOpacity"
+      )};
   }
 
   & span.toggle-slider {
@@ -225,7 +231,7 @@ const Container = styled.label`
 
   & span.toggle-slider::before {
     content: "${(props) =>
-      props.unicodeIcon ? "\\" + props.unicodeIcon : ""}";
+    props.unicodeIcon ? "\\" + props.unicodeIcon : ""}";
     font-family: FontAwesome;
     font-weight: 900;
     width: ${(props) => sizes.icon[props.size]};
@@ -237,13 +243,13 @@ const Container = styled.label`
 
     position: absolute;
     color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "ToggleIcon",
-        props.color,
-        "enabled",
-        "text"
-      )};
+    getColorRgbaValue(
+      props.theme,
+      "ToggleIcon",
+      props.color,
+      "enabled",
+      "text"
+    )};
       flex-shrink: 0;
     border-radius: 100px;
     z-index: 2;
@@ -258,7 +264,7 @@ const Container = styled.label`
 
   & input:checked ~ span.toggle-slider::before {
     content: "${(props) =>
-      props.unicodeIcon ? "\\" + props.unicodeIcon : ""}";
+    props.unicodeIcon ? "\\" + props.unicodeIcon : ""}";
     font-family: FontAwesome;
     font-weight: 900;
     width: ${(props) => sizes.icon[props.size]};
@@ -269,13 +275,13 @@ const Container = styled.label`
     -webkit-font-smoothing: antialiased;
     flex-shrink: 0;
     color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "ToggleIcon",
-        props.color,
-        "enabled",
-        "text"
-      )};
+    getColorRgbaValue(
+      props.theme,
+      "ToggleIcon",
+      props.color,
+      "enabled",
+      "text"
+    )};
 
     font-size: ${(props) => sizes.icon[props.size]};
     width: ${(props) => sizes.icon[props.size]};
@@ -290,31 +296,25 @@ const Container = styled.label`
     width: ${(props) => sizes.containerWidth[props.size]};
     height: ${(props) => sizes.containerHeight[props.size]};
     background-color: ${(props) =>
-      !props.disabled
-        ? getColorRgbaValue(
-            props.theme,
-            "Toggle",
-            null,
-            "enabled",
-            "background",
-            "backgroundOpacity"
-          )
-        : getColorRgbaValue(
-            props.theme,
-            "Toggle",
-            null,
-            "disabled",
-            "background",
-            "backgroundOpacity"
-          )};
+    !props.disabled
+      ? getColorRgbaValue(
+        props.theme,
+        "Toggle",
+        null,
+        "enabled",
+        "background",
+        "backgroundOpacity"
+      )
+      : getColorRgbaValue(
+        props.theme,
+        "Toggle",
+        null,
+        "disabled",
+        "background",
+        "backgroundOpacity"
+      )};
     transition: all 0.2s ease;
     flex-shrink: 0;
-    ${(props) =>
-      props.orientation === "right"
-        ? "margin-left: auto;"
-        : `margin-right: 0.5rem;`}
-
-    order: ${(props) => (props.orientation === "right" ? "1" : "0")};
   }
 
   & span.toggle-slider:after {
@@ -323,23 +323,23 @@ const Container = styled.label`
     opacity: 1;
     flex-shrink: 0;
     background-color: ${(props) =>
-      props.disabled
-        ? getColorRgbaValue(
-            props.theme,
-            "ToggleSlider",
-            props.color,
-            "disabled",
-            "background",
-            "backgroundOpacity"
-          )
-        : getColorRgbaValue(
-            props.theme,
-            "ToggleSlider",
-            props.color,
-            "enabled",
-            "background",
-            "backgroundOpacity"
-          )};
+    props.disabled
+      ? getColorRgbaValue(
+        props.theme,
+        "ToggleSlider",
+        props.color,
+        "disabled",
+        "background",
+        "backgroundOpacity"
+      )
+      : getColorRgbaValue(
+        props.theme,
+        "ToggleSlider",
+        props.color,
+        "enabled",
+        "background",
+        "backgroundOpacity"
+      )};
 
     box-shadow: 1px 1px 0.25rem rgba(15, 23, 42, 0.16);
     transition: all 0.2s ease-out;
@@ -353,19 +353,14 @@ const Label = styled.span`
   flex-shrink: 3;
 
   ${(props) =>
-    props.orientation === "right"
-      ? "margin-right: auto;"
-      : "margin-left: auto;"}
-
-  ${(props) =>
     props.disabled
       ? getComponentTypographyCss(props.theme, "Toggle", props.size, "disabled")
       : getComponentTypographyCss(
-          props.theme,
-          "Toggle",
-          props.size,
-          "enabled"
-        )};
+        props.theme,
+        "Toggle",
+        props.size,
+        "enabled"
+      )};
 `;
 
 //================================================================================================
@@ -377,7 +372,8 @@ const Toggle = (props) => {
     readOnly,
     value,
     label,
-    orientation,
+    labelPosition,
+    spaceBetween,
     unicodeIcon,
     //----------------
     onChange,
@@ -400,7 +396,8 @@ const Toggle = (props) => {
     disabled,
     readOnly,
     focused,
-    orientation,
+    labelPosition,
+    spaceBetween,
   };
 
   function handleChange(e) {
@@ -434,7 +431,7 @@ const Toggle = (props) => {
       />
       <span className={"toggle-slider"} />
 
-      {label && <Label {...themeProps}>{label}</Label>}
+      {label && <Label title={label} {...themeProps}>{label}</Label>}
     </Container>
   );
 };
@@ -445,11 +442,12 @@ Toggle.defaultProps = {
   readOnly: false,
   label: "",
   unicodeIcon: "",
-  orientation: "left",
+  labelPosition: "right",
+  spaceBetween: false,
   //-------------------------------
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
+  onChange: () => { },
+  onFocus: () => { },
+  onBlur: () => { },
   //-------------------------------
   style: {},
   className: "",
@@ -463,7 +461,8 @@ Toggle.propTypes = {
   readOnly: PropTypes.bool,
   label: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   unicodeIcon: PropTypes.string,
-  orientation: PropTypes.oneOf(["left", "right"]),
+  labelPosition: PropTypes.oneOf(["right", "left"]),
+  spaceBetween: PropTypes.bool,
   //-------------------------------
   onChange: PropTypes.func,
   onFocus: PropTypes.func,

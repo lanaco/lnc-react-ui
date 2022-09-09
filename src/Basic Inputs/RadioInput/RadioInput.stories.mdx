@@ -6,9 +6,9 @@ import RadioInput from "./index";
 
 export const TemplateDefault = (args) => <RadioInput {...args} />;
 
-export const TemplateReadOnly = (args) => <><RadioInput {...args} readOnly={true} checked={true}/><RadioInput {...args} readOnly={true}/></>;
+export const TemplateReadOnly = (args) => <><RadioInput readOnly={true} checked={true} {...args}/><RadioInput readOnly={true} {...args}/></>;
 
-export const TemplateDisabled = (args) => <><RadioInput {...args} disabled={true} checked={true}/><RadioInput {...args} disabled={true}/></>;
+export const TemplateDisabled = (args) => <><RadioInput disabled={true} checked={true} {...args}/><RadioInput disabled={true} {...args}/></>;
 
 export const TemplateLabel = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
@@ -17,23 +17,30 @@ export const TemplateLabel = (args) => (
   </div>
 );
 
+export const TemplateSpaceBetween = (args) => (
+  <>
+    <RadioInput labelPosition="left" label={"label"} checked={true} spaceBetween={true} {...args}/>
+    <br />
+    <RadioInput labelPosition="right" label={"label"} checked={true} spaceBetween={true} {...args}/>
+  </>
+);
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
-    <RadioInput {...args} size="small" />
-    <RadioInput {...args} size="medium" />
-    <RadioInput {...args} size="large" />
+    <RadioInput size="small" {...args}/>
+    <RadioInput size="medium" {...args}/>
+    <RadioInput size="large" {...args}/>
   </div>
 );
 
 export const TemplateColors = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
-    <RadioInput {...args} color="primary" />
-    <RadioInput {...args} color="secondary" />
-    <RadioInput {...args} color="success" />
-    <RadioInput {...args} color="warning" />
-    <RadioInput {...args} color="danger" />
-    <RadioInput {...args} color="information" />
-    <RadioInput {...args} color="neutral" />
+    <RadioInput color="primary" {...args} />
+    <RadioInput color="secondary" {...args} />
+    <RadioInput color="success" {...args} />
+    <RadioInput color="warning" {...args} />
+    <RadioInput color="danger" {...args} />
+    <RadioInput color="information" {...args} />
+    <RadioInput color="neutral" {...args} />
   </div>
 );
 
@@ -76,6 +83,15 @@ import { RadioInput } from "@lnc-react-ui";
   <Story
     name="Disabled">
     {TemplateDisabled.bind({})}
+  </Story>
+</Canvas>
+
+## Space Between
+
+<Canvas>
+  <Story
+    name="Space Between">
+    {TemplateSpaceBetween.bind({})}
   </Story>
 </Canvas>
 

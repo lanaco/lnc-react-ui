@@ -8,14 +8,14 @@ import { useState } from "react";
 export const TemplateDefault = (props) => {
   const [checked, setChecked] = useState(props.value || false);
   return (
-    <Toggle {...props} value={checked} onChange={() => setChecked(!checked)} />
+    <Toggle value={checked} onChange={() => setChecked(!checked)} {...props}/>
   );
 };
 
 export const TemplateTrueFalse = (args) => (
   <div>
     <Toggle {...args} />
-    <Toggle {...args} value={true} />
+    <Toggle value={true} {...args} />
   </div>
 );
 
@@ -23,12 +23,20 @@ export const TemplateLabel = (args) => (
   <div style={{ width: "220px" }}>
     <Toggle {...args} label={"Label as string"} />
     <Toggle {...args} label={<span>Label as component</span>} value={true} />
-    <Toggle {...args} label={"Label as string"} orientation="right" />
+    <Toggle {...args} label={"Label as string"} labelPosition="left" />
     <Toggle
       {...args}
       label={<span>Label as component</span>}
       value={true}
-      orientation="right"
+      labelPosition="left"
+    />
+    <Toggle {...args} label={"Label as string"} labelPosition="right" spaceBetween={true} />
+    <Toggle
+      {...args}
+      label={<span>Label as component</span>}
+      value={true}
+      labelPosition="left"
+      spaceBetween={true}
     />
   </div>
 );
