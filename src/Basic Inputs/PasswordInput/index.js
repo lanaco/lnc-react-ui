@@ -188,7 +188,8 @@ PasswordInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
+    "neutral",
   ]),
 };
 
