@@ -59,9 +59,14 @@ const DateInput = React.forwardRef((props, ref) => {
 
   //=============== METHODS ===========================================================
 
-  const jsDateToIso = (jsDate) => {
-    return jsDate.toISOString().substr(0, 10);
-  };
+  // with time zone can cause problems on some computers, conversion date to iso format can give different day because of time zone
+  const isoDateWithoutTimeZone = (date) => {
+    if (date == null) return date;
+    var timestamp = date.getTime() - date.getTimezoneOffset() * 60000;
+    var correctDate = new Date(timestamp);
+    // correctDate.setUTCHours(0, 0, 0, 0); // uncomment this if you want to remove the time
+    return correctDate.toISOString();
+  }
 
   const isoToUserFormat = (isoDate) => {
     if (isoDate === "") return "";
@@ -160,7 +165,7 @@ const DateInput = React.forwardRef((props, ref) => {
       //
     } else if (date !== null) {
       //
-      isoDate = jsDateToIso(date);
+      isoDate = isoDateWithoutTimeZone(date);
       setText(isoToUserFormat(isoDate));
       //
     } else {
@@ -176,7 +181,7 @@ const DateInput = React.forwardRef((props, ref) => {
   const handleCalendarOnChange = (date) => {
     if (disabled || readOnly) return;
 
-    var isoDate = jsDateToIso(date);
+    var isoDate = isoDateWithoutTimeZone(date);
     var isDateInMinMaxRange = checkMinMaxDate(isoDate);
 
     if (isoDate !== "" && isDateInMinMaxRange) {
@@ -189,7 +194,7 @@ const DateInput = React.forwardRef((props, ref) => {
       //
     } else if (date !== null) {
       //
-      isoDate = jsDateToIso(date);
+      isoDate = isoDateWithoutTimeZone(date);
       setText(isoToUserFormat(isoDate));
       //
     } else {
@@ -297,7 +302,7 @@ DateInput.defaultProps = {
   disabled: false,
   readOnly: false,
   useCalendar: true,
-  format: "yyyy-mm-dd",
+  format: "yyyy-MM-DD",
   minDate: "",
   maxDate: "",
   tabIndex: 0,
@@ -336,7 +341,8 @@ DateInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
+    "neutral"
   ]),
 };
 
