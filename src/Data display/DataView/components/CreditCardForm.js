@@ -11,7 +11,10 @@ import Button from "../../../General/Button";
 const View = styled.div`
   border-radius: 8px;
   background-color: fcfcfc;
-  padding: 4px 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  ${(props) =>
+    !props.InModal ? "border: 1px solid rgba(203, 213, 225, 100%);" : ""}
 `;
 
 const Controls = styled.div`
@@ -43,6 +46,7 @@ const CreditCardForm = (props) => {
     onCreate = () => {},
     onDelete = () => {},
     onDiscard = () => {},
+    InModal = false,
   } = props;
 
   useEffectOnce(() => {
@@ -50,7 +54,7 @@ const CreditCardForm = (props) => {
   });
 
   return (
-    <View>
+    <View InModal={InModal}>
       <FlexGrid spacing={10}>
         <FlexGridItem col={6}>
           <FormField label={"Full Name"}>

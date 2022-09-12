@@ -6,6 +6,7 @@ import Table from "../Table/index";
 import TextInput from "../../Basic Inputs/TextInput";
 import DecimalInput from "../../Basic Inputs/DecimalInput";
 import TableView from "./components/TableView";
+import KanbanView from "./components/KanbanView";
 import CreditCardForm from "./components/CreditCardForm";
 
 var Data = [
@@ -259,15 +260,17 @@ const Story = (props) => {
       {...props}
       ref={dw}
       DefaultCurrentView={{
-        id: 1,
-        name: "Table View",
-        type: "TABLE_VIEW",
+        id: 2,
+        name: "Kanban View",
+        type: "KANBAN_VIEW",
+        icon: "table-columns",
       }}
       Views={[
         {
           id: 1,
           name: "Table View",
           type: "TABLE_VIEW",
+          icon: "table",
         },
         // {
         //   id: 2,
@@ -283,6 +286,7 @@ const Story = (props) => {
           id: 2,
           name: "Kanban View",
           type: "KANBAN_VIEW",
+          icon: "table-columns",
         },
       ]}
       //------------------------
@@ -296,6 +300,7 @@ const Story = (props) => {
       ]}
     >
       <CreditCardForm />
+      <KanbanView GroupByAccesor={"currency"} Groups={["EUR", "USD", "RUB"]} />
       <TableView
         Columns={[
           {
@@ -324,8 +329,6 @@ const Story = (props) => {
           },
         ]}
       />
-
-      <Kanban __TYPE__="KANBAN_VIEW" GroupBy={{ field: "currency" }} />
     </DataView>
   );
 };

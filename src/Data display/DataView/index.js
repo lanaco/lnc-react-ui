@@ -76,14 +76,16 @@ const ControlsContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
+  padding: 0 12px;
 `;
 
 const ViewContainer = styled.div`
-  padding: 8px 0;
-  border-top: 1px solid #ededed;
-  border-bottom: 1px solid #ededed;
+  padding: ${(props) => (props.FormActive ? "12px 12px" : "0 0")};
 `;
 
+const BackButtonWrapper = styled.div`
+  margin-left: auto;
+`;
 const CreateUpdateContainer = styled.div``;
 
 const DataView = React.forwardRef((props, ref) => {
@@ -103,7 +105,6 @@ const DataView = React.forwardRef((props, ref) => {
   const createUpdateModalRef = useRef();
 
   const [collapsed, setCollapsed] = useState(true);
-  const [createUpdateModalOpen, setCreateUpdateModalOpen] = useState(false);
 
   const [state, actions] = useMethods(createActions, initialState);
 
@@ -132,14 +133,17 @@ const DataView = React.forwardRef((props, ref) => {
 
   const handleGoToUpdate = (rowData) => {
     actions.setFormProperties({ DataRecord: rowData });
-    createUpdateModalRef.current.open();
-    setCreateUpdateModalOpen(true);
+
+    if (createUpdateModalRef.current) createUpdateModalRef.current.open();
+    actions.toggleFormActive();
   };
 
   const handleCreateUpdateClose = () => {
-    setCreateUpdateModalOpen(false);
+    actions.toggleFormActive();
     actions.setFormProperties({ DataRecord: {} });
   };
+
+  const backToView = () => {};
 
   //================ RENDER =================
 
@@ -161,18 +165,25 @@ const DataView = React.forwardRef((props, ref) => {
   };
 
   const renderCreateUpdateContainer = () => {
+    return (
+      <CreateUpdateContainer>
+        {renderCustomElement(getCustomRender("FORM", children), {
+          DataRecord: Form.DataRecord,
+          InModal: Options.EnableFormInModal,
+        }) || <></>}
+      </CreateUpdateContainer>
+    );
+  };
+
+  const renderCreateUpdateModal = () => {
     if (Options.EnableFormInModal)
       return (
         <Modal
           ref={createUpdateModalRef}
-          isOpen={createUpdateModalOpen}
+          isOpen={View.FormActive}
           onClose={handleCreateUpdateClose}
         >
-          <CreateUpdateContainer>
-            {renderCustomElement(getCustomRender("FORM", children), {
-              DataRecord: Form.DataRecord,
-            }) || <></>}
-          </CreateUpdateContainer>
+          {renderCreateUpdateContainer()}
         </Modal>
       );
   };
@@ -187,31 +198,56 @@ const DataView = React.forwardRef((props, ref) => {
         </LoaderContainer>
       )}
       <ControlsContainer>
-        <ButtonGroup>
-          {View.Views.map((v) => (
+        {View.FormActive && !Options.EnableFormInModal && (
+          <BackButtonWrapper>
             <Button
-              key={v.id}
-              text={v.name}
-              type={v.id === View.CurrentView.id ? "tinted" : "outline"}
-              onClick={() => {
-                if (v.id !== View.CurrentView.id) actions.setCurrentView(v);
-              }}
+              key={0}
+              leadingIcon={"arrow-circle-left"}
+              text={`Back to ${View.CurrentView.name}`}
+              type={"outline"}
+              onClick={handleCreateUpdateClose}
             />
-          ))}
-        </ButtonGroup>
+          </BackButtonWrapper>
+        )}
+        {/* Dont render the view switcher if the form is active and is rendered
+        inside the view container */}
+        {((!View.FormActive && !Options.EnableFormInModal) ||
+          Options.EnableFormInModal) && (
+          /* View Switcher */
+          <ButtonGroup
+            style={{
+              marginLeft: "auto",
+            }}
+          >
+            {View.Views.map((v) => (
+              <Button
+                key={v.id}
+                text={v.name}
+                leadingIcon={v.icon}
+                type={v.id === View.CurrentView.id ? "tinted" : "outline"}
+                onClick={() => {
+                  if (v.id !== View.CurrentView.id) actions.setCurrentView(v);
+                }}
+              />
+            ))}
+          </ButtonGroup>
+        )}
       </ControlsContainer>
 
-      <ViewContainer>{renderView()}</ViewContainer>
+      <ViewContainer FormActive={View.FormActive && !Options.EnableFormInModal}>
+        {View.FormActive && !Options.EnableFormInModal
+          ? renderCreateUpdateContainer()
+          : renderView()}
+      </ViewContainer>
 
-      {renderCreateUpdateContainer()}
+      {renderCreateUpdateModal()}
 
-      {/* <CreateUpdateContainer></CreateUpdateContainer> */}
-      <StateViewer
+      {/* <StateViewer
         collapsed={collapsed}
         onClick={() => setCollapsed(!collapsed)}
       >
         <JSONPretty data={state} />
-      </StateViewer>
+      </StateViewer> */}
     </Container>
   );
 });

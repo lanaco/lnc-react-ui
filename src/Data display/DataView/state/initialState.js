@@ -14,12 +14,12 @@ const initialState = {
     EnableCalendarView: true,
     EnableGanttView: true,
     EnableKanbanView: true,
-    EnableFormInModal: true,
+    EnableFormInModal: false,
   },
   View: {
     Views: [],
     CurrentView: null,
-    FormInModal: false,
+    FormActive: false,
   },
   Data: {
     DataSource: [],

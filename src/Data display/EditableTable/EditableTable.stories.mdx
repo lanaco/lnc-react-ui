@@ -206,7 +206,6 @@ export const TemplateDefault = (props) => {
     loadData();
   };
   const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
-    console.log(value);
     var dataCopy = cloneDeep(data);
     var itemToUpdate = isEmpty(rowData.id)
       ? dataCopy[rowIndex]
@@ -216,7 +215,9 @@ export const TemplateDefault = (props) => {
       itemToUpdate["status"] = column.inputProps.options.find(
         (x) => x.value === parseInt(value.value)
       ).label;
-    } else itemToUpdate[column.accessor] = value;
+    } else {
+      itemToUpdate[column.accessor] = value;
+    }
     setData(dataCopy);
   };
   const validateEdit = (rowData) => {
@@ -240,7 +241,7 @@ export const TemplateDefault = (props) => {
     }
   };
   const onSave = (rowIndex) => {
-    var original = db_invoices[rowIndex] || props.EmptyDataItem;
+    var original = db_invoices[rowIndex] || EmptyDataItem;
     var edited = data[rowIndex];
     if (!isEqual(original, edited) || isEmpty(edited.id)) {
       setLoading(true);
@@ -267,13 +268,13 @@ export const TemplateDefault = (props) => {
     } else {
       dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
         ? originalItem
-        : props.EmptyDataItem;
+        : EmptyDataItem;
     }
     setData(dataCopy);
   };
   const onCreateNewItem = (timeout) => {
     if (timeout > 0) setLoading(true);
-    setData([...data, props.EmptyDataItem]);
+    setData([...data, EmptyDataItem]);
     setTimeout(() => {
       if (timeout > 0) setLoading(false);
     }, timeout);
@@ -453,7 +454,6 @@ Supported column data types:
         column,
         rowData
       ) => {
-        console.log(value);
         var dataCopy = cloneDeep(data);
         var itemToUpdate = isEmpty(rowData.id)
           ? dataCopy[rowIndex]
@@ -487,7 +487,7 @@ Supported column data types:
         }
       };
       const onSave = (rowIndex) => {
-        var original = db_invoices[rowIndex] || props.EmptyDataItem;
+        var original = db_invoices[rowIndex] || EmptyDataItem;
         var edited = data[rowIndex];
         if (!isEqual(original, edited) || isEmpty(edited.id)) {
           setLoading(true);
@@ -514,13 +514,13 @@ Supported column data types:
         } else {
           dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
             ? originalItem
-            : props.EmptyDataItem;
+            : EmptyDataItem;
         }
         setData(dataCopy);
       };
       const onCreateNewItem = (timeout) => {
         if (timeout > 0) setLoading(true);
-        setData([...data, props.EmptyDataItem]);
+        setData([...data, EmptyDataItem]);
         setTimeout(() => {
           if (timeout > 0) setLoading(false);
         }, timeout);

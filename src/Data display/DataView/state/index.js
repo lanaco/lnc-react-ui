@@ -8,11 +8,19 @@ export const createActions = (state) => {
         draft.General.Ready = true;
       });
     },
+    //-------------------------------------------------------
     setFormProperties(formProps) {
       return produce(state, (draft) => {
         draft.Form.DataRecord = formProps.DataRecord;
       });
     },
+    //-------------------------------------------------------
+    toggleFormActive() {
+      return produce(state, (draft) => {
+        draft.View.FormActive = !draft.View.FormActive;
+      });
+    },
+    //-------------------------------------------------------
     dataRecordChanged({ field, value }) {
       return produce(state, (draft) => {
         draft.Form.DataRecord[field] = value;
