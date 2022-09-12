@@ -148,7 +148,7 @@ const ColorInput = React.forwardRef((props, ref) => {
     onInput,
     onKeyDown,
     preventDefault,
-    inputRef,
+    labelRef,
     inputProps,
     ...rest
   } = props;
@@ -212,7 +212,7 @@ const ColorInput = React.forwardRef((props, ref) => {
           <div>
             <input
               type="color"
-              ref={inputRef}
+              ref={ref}
               id={id}
               name={name}
               value={val}
@@ -227,6 +227,7 @@ const ColorInput = React.forwardRef((props, ref) => {
           <LabelText>
             {
               <input
+                ref={labelRef}
                 value={val}
                 onChange={onValueChange}
                 onFocus={handleFocus}
@@ -243,7 +244,7 @@ const ColorInput = React.forwardRef((props, ref) => {
         <div>
           <input
             type="color"
-            ref={inputRef}
+            ref={ref}
             id={id}
             name={name}
             value={val}
@@ -293,7 +294,7 @@ ColorInput.propTypes = {
   readOnly: PropTypes.bool,
   tabIndex: PropTypes.number,
   preventDefault: PropTypes.bool,
-  inputRef: PropTypes.bool,
+  labelRef: PropTypes.any,
   inputProps: PropTypes.bool,
   withInput: PropTypes.bool,
   //---------------------------------------------------------------
