@@ -82,9 +82,6 @@ export { default as DoubleRangeSlider } from "./Inputs/DoubleRangeSlider";
 export * from "./Inputs/SearchBar";
 export { default as SearchBar } from "./Inputs/SearchBar";
 
-export * from "./Inputs/PeriodSelector";
-export { default as PeriodSelector } from "./Inputs/PeriodSelector";
-
 export * from "./Inputs/MultiSelectDropdown";
 export { default as MultiSelectDropdown } from "./Inputs/MultiSelectDropdown";
 //=============================================================================================

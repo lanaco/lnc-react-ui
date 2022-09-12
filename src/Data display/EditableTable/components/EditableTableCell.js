@@ -1,46 +1,46 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
-import { isFunction, isEmpty } from "lodash";
-import EditableTableRow from "../components/EditableTableRow";
 import { inputType } from "../constants/constants";
+import { useTheme } from "@emotion/react";
+import { getComponentTypographyCss } from "../../../_utils/utils";
+import TextInput from "../../../Basic Inputs/TextInput";
+import NumberInput from "../../../Basic Inputs/NumberInput";
+import DecimalInput from "../../../Basic Inputs/DecimalInput";
+import CheckBoxInput from "../../../Basic Inputs/CheckBoxInput";
+import Dropdown from "../../../Inputs/Dropdown";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: ${(props) => props.width};
-`;
+  max-width: ${(props) => props.width};
+  padding: ${(props) =>
+    props.focused && !props.isBoolean
+      ? "0.5rem 0.5rem 0.5rem 0.7rem"
+      : "0.5rem 0.5rem 0.5rem 1.5rem"};
+  ${(props) => props.bgColor}
 
-const Input = styled.input`
-  box-sizing: border-box;
-  position: relative;
-  width: 100%;
-  appearance: none;
-  outline: none;
-  border: none;
-  border: ${(props) =>
-    props.focused
-      ? `1px solid ${theme.palette.primary.main}`
-      : "1px solid transparent"};
-  padding: 9.5px 6px 9.5px 6px;
-  border-radius: 3px;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "TableCell", props.size, "enabled")};
 `;
 
 const DefaultCellContent = styled.div`
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  padding: ${(props) => (props.hasRender ? "0" : "9.5px 6px 9.5px 6px")};
-  border: 1px solid transparent;
+  ${(props) =>
+    getComponentTypographyCss(
+      props.theme,
+      "TableSpecialLastRow",
+      props.size,
+      "enabled"
+    )};
+  padding: ${(props) => (props.hasRender ? "0" : "9.5px 6px 9.5px 0")};
   cursor: ${(props) => (props.tabIndex !== -1 ? "pointer" : "auto")};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:focus {
     outline: none;
-    border: 1px solid #c7c7c7;
-    border-radius: 3px;
   }
 `;
 
@@ -71,8 +71,9 @@ const EditableTableCell = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -135,13 +136,22 @@ const EditableTableCell = (props) => {
     //
     var inputComponent = null;
 
+    var standardOnChange = (e, value) => {
+      onChange(e, value, RowIndex, Index, Column, RowData);
+    };
+
+    var dropdownOnChange = (value) => {
+      onChange(_, value, RowIndex, Index, Column, RowData);
+    };
+
     var inputProps = {
       ...themeProps,
+      debounceTime: 0,
+      ...Column.inputProps,
       value: RowData[Column.accessor],
-
-      onChange: (e) =>
-        onChange(e, e.target.value, RowIndex, Index, Column, RowData),
+      checked: RowData[Column.accessor],
       focused: focused,
+      onChange: standardOnChange,
       onBlur: (e) => onSetFocus(e, false),
       onFocus: (e) => onSetFocus(e, true),
       onKeyDown: (e) => onKeyDown(e),
@@ -150,28 +160,40 @@ const EditableTableCell = (props) => {
 
     switch (Column.inputType) {
       case inputType.STRING:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <TextInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.INTEGER:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <NumberInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.DECIMAL:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <DecimalInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.DATE:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <TextInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.BOOLEAN:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = <CheckBoxInput {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.SELECT:
-        inputComponent = <Input {...inputProps} ref={inputRef} />;
+        inputComponent = (
+          <Dropdown
+            {...inputProps}
+            value={Column.inputProps.options.find(
+              (x) => x.value === RowData[Column.accessor]
+            )}
+            onChange={dropdownOnChange}
+            ref={inputRef}
+          />
+        );
         break;
+
+      default:
+        inputComponent = <TextInput {...inputProps} ref={inputRef} />;
     }
 
     return inputComponent;
@@ -190,7 +212,7 @@ const EditableTableCell = (props) => {
     if (Column.editable === true && Column.editComponent) {
       var additionalProps = {};
 
-      if (Column.inputType === "SELECT")
+      if (Column.inputType === inputType.SELECT)
         additionalProps = {
           items: Column.selectItems,
           mapNameTo: Column.selectProps.mapNameTo,
@@ -245,6 +267,8 @@ const EditableTableCell = (props) => {
       selection={EnableSelection}
       width={getWidth()}
       key={Index}
+      focused={focused}
+      isBoolean={Column.inputType === inputType.BOOLEAN}
     >
       {renderCellContent()}
     </HtmlCell>
@@ -263,7 +287,6 @@ EditableTableCell.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 EditableTableCell.propTypes = {
@@ -281,13 +304,11 @@ EditableTableCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default EditableTableCell;

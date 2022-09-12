@@ -28,6 +28,8 @@ import {
 } from "../../_utils/utils";
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 0.625rem;
   margin: 0.125rem;
   border-radius: 0.125rem;
@@ -57,11 +59,12 @@ const LoaderContainerTransparent = styled.div`
 
 const HtmlTable = styled.table`
   height: 1px;
-  width: 100%;
+  width: ${(props) => props.tableWidth};
   white-space: nowrap;
   border-collapse: collapse;
   border-radius: 0.5rem;
   border-style: hidden;
+  table-layout: fixed;
   box-shadow: 0 0 0 0.0625rem
     ${(props) =>
       getColorRgbaValue(props.theme, "Table", null, "enabled", "border")};
@@ -131,6 +134,7 @@ const Table = forwardRef((props, ref) => {
     onSelectRow,
     onSelectAll,
     //--------------------
+    tableWidth,
     color,
     size,
     className,
@@ -243,6 +247,7 @@ const Table = forwardRef((props, ref) => {
           ((getSelectionCellWidthBySize() / width) * 100) /
           columnsToRender.length;
 
+        // TODO: check this
         if (EnableRowStatusIndicator === true) {
           reduceWidthByAmount += (3 / width) * 100;
         }
@@ -289,11 +294,11 @@ const Table = forwardRef((props, ref) => {
   };
 
   const getSelectionCellWidthBySize = () => {
-    if (size === "small") return 30;
-    if (size === "medium") return 36;
-    if (size === "large") return 42;
+    if (size === "small") return 37;
+    if (size === "medium") return 43;
+    if (size === "large") return 49;
 
-    return 30;
+    return 37;
   };
 
   //================== RENDER ==========================================
@@ -409,6 +414,7 @@ const Table = forwardRef((props, ref) => {
         {EnableRowStatusIndicator === true &&
           renderHeadRowStatusIndicatorCell()}
         {EnableSelection === true && renderHeadSelectionCell()}
+
         {filterColumns().map((col, index) => renderHeadCell(col, index))}
       </>
     );
@@ -426,7 +432,7 @@ const Table = forwardRef((props, ref) => {
     );
   };
 
-  const renderHeadCell = (column, index) => {
+  const renderHeadCell = (column, index, columnsToRender) => {
     var cellProps = {
       Index: index,
       Column: column,
@@ -434,6 +440,7 @@ const Table = forwardRef((props, ref) => {
       EnableOrdering,
       EnableSelectAll,
       onColumnClick,
+      ColumnsToRender: columnsToRender,
       ...themeProps,
     };
 
@@ -636,7 +643,12 @@ const Table = forwardRef((props, ref) => {
         {renderSpinner()}
         {renderHeader()}
 
-        <HtmlTable {...themeProps} data-table={true} ref={tableRef}>
+        <HtmlTable
+          {...themeProps}
+          width={tableWidth || "100%"}
+          data-table={true}
+          ref={tableRef}
+        >
           {renderTableHead()}
           {renderTableBody()}
         </HtmlTable>
@@ -696,6 +708,7 @@ Table.defaultProps = {
   onSelectRow: () => {},
   onSelectAll: () => {},
   //--------------------
+  tableWidth: "100%",
   size: "small",
   color: "primary",
   className: "",
@@ -829,6 +842,10 @@ Table.propTypes = {
    */
   onSelectAll: PropTypes.func,
   //----------------------------------------
+  /**
+   * `wdith` applied to html table.
+   */
+  tableWidth: PropTypes.string,
   /**
    * `className` applied to the component container.
    */

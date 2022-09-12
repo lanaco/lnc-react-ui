@@ -237,6 +237,7 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
         </>
       )}
       <InputSlider
+        ref={ref}
         id="fader"
         type="range"
         min={min}
@@ -255,7 +256,7 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
         onChange={handleOnChange}
         {...themeProps}
         {...rest}
-      ></InputSlider>
+      />
     </StyledRangeSlider>
   );
 });

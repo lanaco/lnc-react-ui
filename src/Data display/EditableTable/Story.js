@@ -18,10 +18,8 @@ const uuidv4 = () => {
 const Container = styled.div``;
 
 const Commands = styled.div`
-  margin: 2px;
-  padding: 8px 0;
+  padding: 10px 10px 0 10px;
   display: flex;
-  gap: 8px;
 `;
 
 //============================================
@@ -131,7 +129,6 @@ const StoryTemplate = (props) => {
     if (column.accessor === "status_id") {
       //
       itemToUpdate[column.accessor] = parseInt(value);
-      console.log(itemToUpdate, column);
       itemToUpdate["status"] = column.selectItems.find(
         (x) => x.id === parseInt(value)
       ).name;
@@ -167,7 +164,7 @@ const StoryTemplate = (props) => {
   };
 
   const onSave = (rowIndex) => {
-    var original = db_invoices[rowIndex] || config.EmptyDataItem;
+    var original = db_invoices[rowIndex] || props.args.EmptyDataItem;
     var edited = data[rowIndex];
 
     if (!isEqual(original, edited) || isEmpty(edited.id)) {
@@ -201,7 +198,7 @@ const StoryTemplate = (props) => {
     } else {
       dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
         ? originalItem
-        : config.EmptyDataItem;
+        : props.args.EmptyDataItem;
     }
 
     setData(dataCopy);
@@ -209,7 +206,7 @@ const StoryTemplate = (props) => {
 
   const onCreateNewItem = (timeout) => {
     if (timeout > 0) setLoading(true);
-    setData([...data, config.EmptyDataItem]);
+    setData([...data, props.args.EmptyDataItem]);
 
     setTimeout(() => {
       if (timeout > 0) setLoading(false);
@@ -229,7 +226,12 @@ const StoryTemplate = (props) => {
   return (
     <Container>
       <Commands>
-        <Button text={"Reload"} onClick={loadData} />
+        <Button
+          type="tinted"
+          leadingIcon="rotate"
+          text={"Reload"}
+          onClick={loadData}
+        />
       </Commands>
       <EditableTable
         ref={tableRef}
@@ -242,21 +244,16 @@ const StoryTemplate = (props) => {
         //--------------------------
         onRowFocusChange={(e, rowIndex, nextRow) => {
           if (rowIndex !== nextRow) {
-            console.log(rowIndex, nextRow);
             onSave(rowIndex);
           }
         }}
         //--------------------------
-        onDiscard={(e, rowIndex, cellIndex, rowData) => {
-          onDiscard(e, rowIndex, cellIndex, rowData);
-        }}
+        onDiscard={onDiscard}
         //--------------------------
-        onInputChange={(e, value, rowIndex, cellIndex, column, rowData) => {
-          onFieldChanged(e, value, rowIndex, cellIndex, column, rowData);
-        }}
+        onInputChange={onFieldChanged}
         //--------------------------
       >
-        <TableSpecialLastRow onClick={onSpecialRowClick} />
+        <TableSpecialLastRow Loading={loading} onClick={onSpecialRowClick} />
       </EditableTable>
     </Container>
   );

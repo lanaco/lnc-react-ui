@@ -113,7 +113,6 @@ const DecimalInput = React.forwardRef((props, ref) => {
 
   return (
     <StyledWrapper
-      ref={ref}
       style={style}
       className={className}
       theme={theme}
@@ -137,6 +136,7 @@ const DecimalInput = React.forwardRef((props, ref) => {
       )}
 
       <NumberFormat
+        getInputRef={ref}
         className="lnc-decimal-input"
         disabled={disabled}
         readOnly={readOnly}

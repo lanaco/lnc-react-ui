@@ -181,7 +181,6 @@ const EditableTable = forwardRef((props, ref) => {
   return (
     <>
       <Table ref={tableRef} {...props} Data={Data} VisibilityPattern={null}>
-        <EditableTableRow />
         {props.children}
         {renderEditableTableCell()}
         {renderSpecialLastRow()}

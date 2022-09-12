@@ -82,7 +82,7 @@ const TableCell = (props) => {
         `${Column.index}: accessor property is required when the render function is not suplied`
       );
 
-    return <span>{RowData[Column.accessor]}</span>;
+    return RowData[Column.accessor];
   };
 
   return (
@@ -92,6 +92,7 @@ const TableCell = (props) => {
       selection={EnableSelection}
       width={getWidth()}
       key={Index}
+      title={RowData[Column.accessor]}
     >
       {renderCellContent()}
     </HtmlCell>

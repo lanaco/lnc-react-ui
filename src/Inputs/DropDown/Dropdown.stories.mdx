@@ -73,13 +73,10 @@ export const TemplateCustom = (args) => (
 );
 
 export const TemplateAlternativeLabel = (args) => (
-    <div style={{ height: "130px" }}>
-      <Dropdown
-        {...args}
-        getOptionLabel={(option) => option.alternativeLabel}
-      />
-    </div>
-  );
+  <div style={{ height: "130px" }}>
+    <Dropdown {...args} getOptionLabel={(option) => option.alternativeLabel} />
+  </div>
+);
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -223,13 +220,15 @@ export const Template = (args) => (
 ## Alternative Label
 
 For array of options
+
 ```jsx
 [
   { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
   { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
   { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
 ];
-``` 
+```
+
 it is possible to set different label with `getOptionLabel={(option) => option.alternativeLabel}`
 
 <Canvas>

@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import CheckBoxInput from "./index";
 import Icon from "../../General/Icon";
+import Button from "../../General/Button";
 import image from "../../_utils/images/testsvg.svg";
 
 <Meta title="Basic Inputs/Check Box Input" component={CheckBoxInput} />
@@ -14,19 +15,19 @@ export const TemplateIndeterminate = (args) => (
 
 export const TemplateDisabled = (args) => (
   <>
-  <CheckBoxInput
-    {...args}
-    disabled={true}
-    label="Disabled"
-    labelPosition="left"
-  />
-  <CheckBoxInput
-    {...args}
-    disabled={true}
-    checked={true}
-    label="Disabled"
-    labelPosition="left"
-  />
+    <CheckBoxInput
+      {...args}
+      disabled={true}
+      label="Disabled"
+      labelPosition="left"
+    />
+    <CheckBoxInput
+      {...args}
+      disabled={true}
+      checked={true}
+      label="Disabled"
+      labelPosition="left"
+    />
   </>
 );
 

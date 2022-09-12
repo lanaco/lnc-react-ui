@@ -92,7 +92,6 @@ const NumberInput = React.forwardRef((props, ref) => {
 
   return (
     <StyledWrapper
-      ref={ref}
       style={style}
       className={className}
       theme={theme}
@@ -114,6 +113,7 @@ const NumberInput = React.forwardRef((props, ref) => {
       )}
 
       <StyledInput
+        ref={ref}
         type="number"
         theme={theme}
         color={color}

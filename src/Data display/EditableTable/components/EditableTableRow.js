@@ -1,32 +1,84 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledStateCss,
+  getOutlineCss,
+  getSizeValueWithUnits,
+} from "../../../_utils/utils";
 
 const HtmlRow = styled.tr`
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
+  border-bottom: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+
+  border-left: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+
+  border-right: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+
+  &:last-of-type > td:first-of-type {
+    border-radius: 0 0 0 0.5rem;
+  }
+
+  &:last-of-type > td:last-of-type {
+    border-radius: 0 0 0.5rem 0;
+  }
+
+  ${(props) => {
+    if (props.IsSelected !== true)
+      return `
+       &:hover {
+          & > td {
+            background-color: ${getColorRgbaValue(
+              props.theme,
+              "TableRow",
+              null,
+              "hover",
+              "background"
+            )};
+          }
+      }`;
+    else return "";
+  }}
+
+  ${(props) => {
+    if (props.IsSelected === true) {
+      return `
+        & > td {
+          background-color: ${getColorRgbaValue(
+            props.theme,
+            "TableRow",
+            props.color,
+            "active",
+            "background"
+          )};
+        }
+      `;
+    } else return "";
+  }}
 `;
 
 const EditableTableRow = (props) => {
   //--------------------------
   const {
-    onRowClick,
-    onSelectRow,
     RowData,
-    // SelectedData,
-    // Columns,
-    // ColumnsToRender,
     Index,
     IsSelected,
     //----------------
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -35,14 +87,8 @@ const EditableTableRow = (props) => {
     theme,
   };
 
-  // const onClick = (e) => {
-  //   e.stopPropagation();
-  //   e.nativeEvent.stopImmediatePropagation();
-  //   onRowClick(e, RowData);
-  // };
-
   return (
-    <HtmlRow {...themeProps} key={Index}>
+    <HtmlRow {...themeProps} key={Index} IsSelected={IsSelected}>
       {props.children}
     </HtmlRow>
   );
@@ -51,31 +97,18 @@ const EditableTableRow = (props) => {
 EditableTableRow.defaultProps = {
   __TYPE__: "TABLE_ROW",
   //--------------------
-  onRowClick: () => {},
-  onSelectRow: () => {},
   RowData: {},
-  // SelectedData: [],
-  // Columns: [],
-  // ColumnsToRender: [],
-  //--------------------
   IsSelected: null,
   //--------------------
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 EditableTableRow.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  onRowClick: PropTypes.func,
-  onSelectRow: PropTypes.func,
   RowData: PropTypes.object,
-  // SelectedData: PropTypes.array,
-  // Columns: PropTypes.arrayOf(PropTypes.object),
-  // ColumnsToRender: PropTypes.arrayOf(PropTypes.object),
-  //----------------------------------------
   IsSelected: PropTypes.bool,
   //----------------------------------------
   className: PropTypes.string,
@@ -84,13 +117,11 @@ EditableTableRow.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default EditableTableRow;

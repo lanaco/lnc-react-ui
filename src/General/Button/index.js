@@ -96,6 +96,7 @@ const Button = React.forwardRef((props, ref) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
+        tabIndex={tabIndex}
         {...rest}
       >
         {renderContent()}
@@ -115,6 +116,7 @@ const Button = React.forwardRef((props, ref) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
+        tabIndex={tabIndex}
         {...rest}
       >
         {renderContent()}
@@ -134,6 +136,7 @@ const Button = React.forwardRef((props, ref) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
+        tabIndex={tabIndex}
         {...rest}
       >
         {renderContent()}
@@ -153,6 +156,7 @@ const Button = React.forwardRef((props, ref) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
+        tabIndex={tabIndex}
         {...rest}
       >
         {renderContent()}
@@ -173,6 +177,7 @@ const Button = React.forwardRef((props, ref) => {
       onClick={onClick}
       onKeyDown={onKeyDown}
       hasText={hasText}
+      tabIndex={tabIndex}
       {...rest}
     >
       {renderContent()}
@@ -190,10 +195,10 @@ Button.defaultProps = {
   leadingIcon: null,
   trailingIcon: null,
   //-------------------------
-  onBlur: () => { },
-  onFocus: () => { },
-  onClick: () => { },
-  onKeyDown: () => { },
+  onBlur: () => {},
+  onFocus: () => {},
+  onClick: () => {},
+  onKeyDown: () => {},
   //-------------------------
   style: {},
   className: "",

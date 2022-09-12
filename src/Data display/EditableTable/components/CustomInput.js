@@ -85,7 +85,6 @@ const CustomInput = React.forwardRef((props, ref) => {
 
   // const changeHandler = (event) => {
   //   event.persist();
-  //   console.log("ON CHANGE: ", event.target.value);
   //   onChange(event);
   // };
 
@@ -220,11 +219,9 @@ export default React.memo(CustomInput);
 //     <StyledInput
 //       {...props}
 //       onBlur={(e) => {
-//         console.log("BLUR");
 //         props.onBlur(e);
 //       }}
 //       onFocus={(e) => {
-//         console.log("FOCUS");
 //         props.onFocus(e);
 //       }}
 //       ref={ref}

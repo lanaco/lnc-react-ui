@@ -8,7 +8,6 @@ import debounce from "lodash.debounce";
 
 const Input = (props) => <components.Input {...props} isHidden={false} />;
 
-
 const Dropdown = React.forwardRef((props, ref) => {
   const {
     options,
@@ -69,7 +68,6 @@ const Dropdown = React.forwardRef((props, ref) => {
     ...rest
   } = props;
 
-
   const theme = useTheme();
 
   const [val, setVal] = useState(value);
@@ -77,10 +75,9 @@ const Dropdown = React.forwardRef((props, ref) => {
 
   const inputChange = useCallback(
     debounce((inputValue, meta) => {
-
       onInputChange(inputValue, meta);
-    }, debounceTime),
-  )
+    }, debounceTime)
+  );
 
   const handleOnInput = (inputValue, meta) => {
     if (meta?.action === "input-change") {
@@ -93,17 +90,22 @@ const Dropdown = React.forwardRef((props, ref) => {
 
   const handleOnChange = (option) => {
     setVal(option);
-    let label = (getOptionLabel && option) ? getOptionLabel(option) : (option ? option.label : "");
+    let label =
+      getOptionLabel && option
+        ? getOptionLabel(option)
+        : option
+        ? option.label
+        : "";
     setInputVal(label);
     onChange(option);
   };
-  
 
   return (
     <ReactSelect
       ref={ref}
       components={{
-        Input, ...components
+        Input,
+        ...components,
       }}
       options={options}
       styles={styles ? styles : customStyles}
@@ -172,12 +174,12 @@ Dropdown.defaultProps = {
   components: {},
   debounceTime: 180,
   //-------------------------
-  onChange: () => { },
-  onInputChange: () => { },
-  onMenuOpen: () => { },
-  onMenuClose: () => { },
-  onFocus: () => { },
-  onBlur: () => { },
+  onChange: () => {},
+  onInputChange: () => {},
+  onMenuOpen: () => {},
+  onMenuClose: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
   //-------------------------
   style: {},
   className: "",
@@ -300,8 +302,8 @@ Dropdown.propTypes = {
    */
   openMenuOnFocus: PropTypes.bool,
   /**
-  * Allows control of whether the menu is opened when the Select is clicked
-  */
+   * Allows control of whether the menu is opened when the Select is clicked
+   */
   openMenuOnClick: PropTypes.bool,
   //----
   autoFocus: PropTypes.bool,
