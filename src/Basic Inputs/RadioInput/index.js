@@ -22,10 +22,12 @@ const Input = styled.input`
 const Container = styled.label`
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  width: 100%;
   display: inline-flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: ${(props) => getLabelDirection(props.labelPosition)};
+  ${props => props.spaceBetween && "justify-content: space-between;"}
   gap: 0.5rem;
   ${(props) => props.disabled && "pointer-events: none;"}
   ${(props) =>
@@ -40,6 +42,10 @@ const Container = styled.label`
 const StyledRadio = styled.div`
   box-sizing: border-box;
   cursor: pointer;
+  min-height: ${(props) =>
+    props.theme.components.Radio.default.enabled.sizes[props.size]};
+  min-width: ${(props) =>
+    props.theme.components.Radio.default.enabled.sizes[props.size]};
   height: ${(props) =>
     props.theme.components.Radio.default.enabled.sizes[props.size]};
   width: ${(props) =>
@@ -81,6 +87,11 @@ const StyledRadio = styled.div`
 
 const Label = styled.label`
   ${(props) => !props.disabled && props.readOnly == false && "cursor: pointer"};
+  min-width: 0;
+  flex-shrink: 1;
+  min-height: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const RadioInput = React.forwardRef((props, ref) => {
@@ -101,6 +112,7 @@ const RadioInput = React.forwardRef((props, ref) => {
     value,
     label,
     labelPosition,
+    spaceBetween,
     disabled,
     readOnly,
     inputProps,
@@ -114,7 +126,7 @@ const RadioInput = React.forwardRef((props, ref) => {
     setIsChecked(checked);
   }, [checked]);
 
-  var themeProps = { theme, size, color, disabled, labelPosition };
+  var themeProps = { theme, size, color, disabled, labelPosition, spaceBetween };
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -207,6 +219,7 @@ const RadioInput = React.forwardRef((props, ref) => {
         onClick={handleClick}
         disalbed={disabled}
         readOnly={readOnly}
+        title={label}
       >
         {label}
       </Label>
@@ -222,6 +235,7 @@ RadioInput.defaultProps = {
   label: "",
   labelPosition: "right",
   tabIndex: 0,
+  spaceBetween: false,
   //------------------
   onChange: () => {},
   onFocus: () => {},
@@ -245,6 +259,7 @@ RadioInput.propTypes = {
   label: PropTypes.string,
   labelPosition: PropTypes.oneOf(["right", "left"]),
   tabIndex: PropTypes.number,
+  spaceBetween: PropTypes.bool,
   //-------------------------
   onChange: PropTypes.func,
   onFocus: PropTypes.func,

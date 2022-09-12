@@ -1,190 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
 import moment from "moment";
 import Calendar from "react-calendar";
 import { useTheme } from "@emotion/react";
 import "./style.css";
-
-const heightBySize = (size) => {
-  return { small: `1.875rem`, medium: `2.25rem`, large: `2.625rem` }[size];
-};
-
-const calendarOffsetBySize = (size) => {
-  return { small: `2rem`, medium: `2.4rem`, large: `2.8rem` }[size];
-};
-
-const paddingBySize = (size) => {
-  if (size === "small") return "0.41875rem 0.375rem";
-  if (size === "medium") return "0.475rem 0.4rem";
-  if (size === "large") return "0.5625rem 0.425rem";
-};
-
-const Container = styled.div`
-  width: 100%;
-  position: relative;
-  display: inline-flex;
-  border-radius: 0.25rem;
-  box-sizing: border-box;
-  min-height: ${(props) => heightBySize(props.size)};
-  max-height: ${(props) => heightBySize(props.size)};
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-
-  color: ${(props) => props.theme.test_palette.dark[500]};
-
-  border: 0.09375rem solid
-    ${(props) =>
-      props.disabled
-        ? props.theme.test_palette.light[400]
-        : props.focused
-        ? props.theme.test_palette[props.color][400]
-        : props.theme.test_palette.light[500]};
-
-  box-shadow: ${(props) =>
-    props.focused
-      ? "0px 0px 6px -2px " + props.theme.test_palette[props.color][400]
-      : "none"};
-
-  &:hover {
-    border: 0.09375rem solid
-      ${(props) =>
-        props.disabled
-          ? props.theme.test_palette.light[400]
-          : props.theme.test_palette[props.color][400]};
-  }
-
-  &:hover i {
-    color: ${(props) =>
-      props.disabled
-        ? props.theme.test_palette.light[400]
-        : props.theme.test_palette[props.color][400]};
-  }
-
-  & .react-calendar {
-    border-radius: 0.2rem;
-    font-size: ${(props) => props.theme.typography[props.size].fontSize};
-    font-family: ${(props) => props.theme.typography.fontFamily};
-    border: 0.0625rem solid
-      ${(props) => props.theme.test_palette[props.color][400]};
-  }
-
-  & .react-calendar__navigation__arrow,
-  .react-calendar__navigation__label {
-    transition: all 220ms ease;
-    border-radius: 0.1875rem;
-  }
-
-  & .react-calendar__navigation__label {
-    font-size: ${(props) => props.theme.typography[props.size].fontSize};
-    font-family: ${(props) => props.theme.typography.fontFamily};
-  }
-
-  & .react-calendar__month-view__weekdays__weekday {
-    color: ${(props) => props.theme.test_palette[props.color][400]};
-    font-size: ${(props) => props.theme.typography[props.size].fontSize};
-    font-family: ${(props) => props.theme.typography.fontFamily};
-
-    & abbr {
-      text-decoration: none;
-    }
-  }
-
-  & .react-calendar__tile {
-    font-size: ${(props) => props.theme.typography[props.size].fontSize};
-    font-family: ${(props) => props.theme.typography.fontFamily};
-  }
-
-  & .react-calendar__tile--now {
-    background: ${(props) => props.theme.test_palette.secondary[200]};
-  }
-
-  & .react-calendar__tile--now:enabled:hover,
-  .react-calendar__tile--now:enabled:focus {
-    background: ${(props) => props.theme.test_palette.secondary[200]};
-  }
-
-  & .react-calendar__tile--active {
-    background: ${(props) => props.theme.test_palette[props.color][400]};
-    color: white;
-  }
-
-  & .react-calendar__tile--active:enabled:hover,
-  .react-calendar__tile--active:enabled:focus {
-    background: ${(props) => props.theme.test_palette[props.color][300]};
-  }
-
-  & .react-calendar__tile--hasActive {
-    background: ${(props) => props.theme.test_palette[props.color][400]};
-  }
-
-  & .react-calendar__tile--hasActive:enabled:hover,
-  .react-calendar__tile--hasActive:enabled:focus {
-    background: ${(props) => props.theme.test_palette[props.color][300]};
-  }
-`;
-
-const Input = styled.input`
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  color: ${(props) => props.theme.test_palette.dark[500]};
-  appearance: none;
-  outline: none;
-  border: none;
-  box-sizing: border-box;
-  width: 100%;
-
-  padding: ${(props) => paddingBySize(props.size)};
-  transition: all 250ms ease;
-
-  &:disabled {
-    color: ${(props) => props.theme.test_palette.light[500]};
-    background-color: white;
-    cursor: auto;
-  }
-`;
-
-const HiddenInput = styled.input`
-  position: absolute;
-  margin-left: -1000000px;
-`;
-
-const CalendarButton = styled.div`
-  margin-left: auto;
-  cursor: ${(props) => (props.disabled || props.readOnly ? "auto" : "pointer")};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0
-    ${(props) =>
-      ({ small: "0.4rem", medium: "0.5rem", large: "0.6rem" }[props.size])};
-`;
-
-const CalendarContainer = styled.div`
-  position: absolute;
-  top: ${(props) => calendarOffsetBySize(props.size)};
-  z-index: 5;
-`;
-
-const Icon = styled.i`
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-
-  color: ${(props) =>
-    props.disabled
-      ? props.theme.test_palette.light[400]
-      : props.focused
-      ? props.theme.test_palette[props.color][400]
-      : props.theme.test_palette.light[500]};
-`;
-
-const NavigationIcon = styled.i`
-  pointer-events: none;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  color: ${(props) =>
-    props.disabled
-      ? props.theme.palette.gray[900]
-      : props.theme.palette[props.color].dark};
-`;
+import {
+  StyledCalendarButton,
+  StyledCalendarContainer,
+  StyledContainer,
+  StyledHiddenInput,
+  StyledInput,
+  StyledNavigationIcon,
+} from "./styledComponents";
+import Icon from "../../General/Icon";
 
 const DateInput = React.forwardRef((props, ref) => {
   const {
@@ -231,9 +59,14 @@ const DateInput = React.forwardRef((props, ref) => {
 
   //=============== METHODS ===========================================================
 
-  const jsDateToIso = (jsDate) => {
-    return jsDate.toISOString().substr(0, 10);
-  };
+  // with time zone can cause problems on some computers, conversion date to iso format can give different day because of time zone
+  const isoDateWithoutTimeZone = (date) => {
+    if (date == null) return date;
+    var timestamp = date.getTime() - date.getTimezoneOffset() * 60000;
+    var correctDate = new Date(timestamp);
+    // correctDate.setUTCHours(0, 0, 0, 0); // uncomment this if you want to remove the time
+    return correctDate.toISOString();
+  }
 
   const isoToUserFormat = (isoDate) => {
     if (isoDate === "") return "";
@@ -332,7 +165,7 @@ const DateInput = React.forwardRef((props, ref) => {
       //
     } else if (date !== null) {
       //
-      isoDate = jsDateToIso(date);
+      isoDate = isoDateWithoutTimeZone(date);
       setText(isoToUserFormat(isoDate));
       //
     } else {
@@ -348,7 +181,7 @@ const DateInput = React.forwardRef((props, ref) => {
   const handleCalendarOnChange = (date) => {
     if (disabled || readOnly) return;
 
-    var isoDate = jsDateToIso(date);
+    var isoDate = isoDateWithoutTimeZone(date);
     var isDateInMinMaxRange = checkMinMaxDate(isoDate);
 
     if (isoDate !== "" && isDateInMinMaxRange) {
@@ -361,7 +194,7 @@ const DateInput = React.forwardRef((props, ref) => {
       //
     } else if (date !== null) {
       //
-      isoDate = jsDateToIso(date);
+      isoDate = isoDateWithoutTimeZone(date);
       setText(isoToUserFormat(isoDate));
       //
     } else {
@@ -402,8 +235,8 @@ const DateInput = React.forwardRef((props, ref) => {
   }
 
   return (
-    <Container {...themeProps} className={className} style={style}>
-      <Input
+    <StyledContainer {...themeProps} className={className} style={style}>
+      <StyledInput
         ref={ref}
         {...themeProps}
         type={"text"}
@@ -420,46 +253,46 @@ const DateInput = React.forwardRef((props, ref) => {
       />
 
       {useCalendar && (
-        <CalendarButton {...themeProps} onClick={toggleCalendar}>
-          <Icon {...themeProps} className="fas fa-calendar fa-fw" />
-        </CalendarButton>
+        <StyledCalendarButton {...themeProps} onClick={toggleCalendar}>
+          <Icon icon="calendar-days" />
+        </StyledCalendarButton>
       )}
 
       {useCalendar && openCalendar && (
-        <CalendarContainer {...themeProps}>
-          <HiddenInput ref={inpRef} onBlur={onHiddenInputBlur} />
+        <StyledCalendarContainer {...themeProps}>
+          <StyledHiddenInput ref={inpRef} onBlur={onHiddenInputBlur} />
           <Calendar
             onChange={handleCalendarOnChange}
             value={date}
             {...minMaxDate}
             prevLabel={
-              <NavigationIcon
+              <StyledNavigationIcon
                 {...themeProps}
                 className="fas fa-angle-left fa-fw"
               />
             }
             prev2Label={
-              <NavigationIcon
+              <StyledNavigationIcon
                 {...themeProps}
                 className="fas fa-angle-double-left fa-fw"
               />
             }
             nextLabel={
-              <NavigationIcon
+              <StyledNavigationIcon
                 {...themeProps}
                 className="fas fa-angle-right fa-fw"
               />
             }
             next2Label={
-              <NavigationIcon
+              <StyledNavigationIcon
                 {...themeProps}
                 className="fas fa-angle-double-right fa-fw"
               />
             }
           />
-        </CalendarContainer>
+        </StyledCalendarContainer>
       )}
-    </Container>
+    </StyledContainer>
   );
 });
 
@@ -469,7 +302,7 @@ DateInput.defaultProps = {
   disabled: false,
   readOnly: false,
   useCalendar: true,
-  format: "yyyy-mm-dd",
+  format: "yyyy-MM-DD",
   minDate: "",
   maxDate: "",
   tabIndex: 0,
@@ -508,7 +341,8 @@ DateInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
+    "neutral"
   ]),
 };
 

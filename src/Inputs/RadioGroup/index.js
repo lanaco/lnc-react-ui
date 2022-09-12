@@ -20,6 +20,7 @@ const RadioGroup = React.forwardRef((props, ref) => {
     items,
     mapId,
     mapValue,
+    radioProps,
     //----------------
     onChange,
     //----------------
@@ -61,6 +62,7 @@ const RadioGroup = React.forwardRef((props, ref) => {
           label={item[mapValue]}
           checked={checkedId == item[mapId]}
           onChange={handleChange}
+          {...radioProps}
         />
       ))}
     </Container>
@@ -104,8 +106,10 @@ RadioGroup.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
+    "neutral",
   ]),
+  radioProps: PropTypes.any,
 };
 
 export default RadioGroup;

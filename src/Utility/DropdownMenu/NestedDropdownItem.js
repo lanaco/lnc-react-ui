@@ -10,7 +10,7 @@ const StyledNested = styled.div`
     padding-left: 0.3rem;
     border-left: ${props => `2px solid ${getColorRgbaValue(
         props.theme,
-        "DropDownMenuItem",
+        "MenuItem",
         props.color,
         "focus",
         "backgoround"
@@ -44,7 +44,7 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
 
     const clonedChildren = React.Children.map(children, (child, index) => {
         if (React.isValidElement(child)) {
-            if (child.props.__TYPE__ == "TAB_ITEM" || child.props.__TYPE__ == "NESTED_ITEM") {
+            if (child.props.__TYPE__ == "MENU_ITEM" || child.props.__TYPE__ == "NESTED_ITEM") {
                 return React.cloneElement(child, {
                     color: color,
                     size: size,
@@ -52,13 +52,14 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
                 });
             }
         }
+        return child;
     });
 
     return <>
     <>
         {clonedItem}
     </>
-    {show && <StyledNested theme={theme} color={color} size={size} className={className} style={style} {...rest}>{clonedChildren}</StyledNested>}
+    {show && <StyledNested theme={theme} color={color} size={size} className={"nested-item-lnc " + className} style={style} {...rest}>{clonedChildren}</StyledNested>}
     </> 
 })
 
@@ -82,6 +83,7 @@ NestedDropdownItem.propTypes = {
         "warning",
         "danger",
         "information",
+        "neutral"
     ]),
     size: PropTypes.oneOf(["small", "medium", "large"]),
     __TYPE__: PropTypes.string,

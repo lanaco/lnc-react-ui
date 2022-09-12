@@ -12,6 +12,7 @@ import {
   getSizeValueWithUnits,
 } from "../../_utils/utils";
 import debounce from "lodash.debounce";
+import { useEffectOnce, useUpdateEffect } from "react-use";
 
 const getSize = (theme, size) => {
   let componentSize = getSizeValueWithUnits(theme, size);
@@ -153,13 +154,12 @@ const ColorInput = React.forwardRef((props, ref) => {
   } = props;
   const theme = useTheme();
 
-  const [val, setVal] = useState(defaultValue);
+  const [val, setVal] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const validHexRegex = new RegExp(/^#[0-9A-F]{6}$/i);
 
-  useEffect(() => {
-    setVal(value ? value : defaultValue);
-  }, [value]);
+  useUpdateEffect(() => setVal(value), [value]);
+  useEffectOnce(() => setVal(value === "" ? defaultValue : value));
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -268,6 +268,7 @@ ColorInput.defaultProps = {
   tabIndex: 0,
   preventDefault: true,
   withInput: false,
+  value: "",
   defaultValue: "#000000",
   //-------------------------
   onChange: () => {},

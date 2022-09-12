@@ -8,7 +8,7 @@ const StyledSeparator = styled.div`
   height: 1px;
   background-color: ${props => getColorRgbaValue(
     props.theme,
-    "DropDownMenuItem",
+    "MenuItem",
     "default",
     "enabled",
     "separator"

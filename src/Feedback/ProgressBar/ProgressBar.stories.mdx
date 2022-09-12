@@ -6,6 +6,14 @@ import ProgressBar from "./index";
 
 export const TemplateDefault = (args) => <ProgressBar {...args} />;
 
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <ProgressBar {...args} size="small" />
+    <ProgressBar {...args} size="medium" />
+    <ProgressBar {...args} size="large" />
+  </div>
+);
+
 export const TemplateColors = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
     <ProgressBar {...args} color="primary" />
@@ -13,7 +21,7 @@ export const TemplateColors = (args) => (
     <ProgressBar {...args} color="success" />
     <ProgressBar {...args} color="warning" />
     <ProgressBar {...args} color="danger" />
-    <ProgressBar {...args} color="info" />
+    <ProgressBar {...args} color="information" />
   </div>
 );
 
@@ -35,6 +43,12 @@ import { ProgressBar } from "@lnc-react-ui";
   <Story name="With Label" args={{ showLabel: true, progressPercentage: 20 }}>
     {TemplateDefault.bind({})}
   </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes"  args={{ progressPercentage: 40 }}>{TemplateSizes.bind({})}</Story>
 </Canvas>
 
 ## Colors

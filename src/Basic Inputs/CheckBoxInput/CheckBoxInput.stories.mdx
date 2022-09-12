@@ -47,6 +47,12 @@ export const TemplateCustom = (args) => (
   ></CheckBoxInput>
 );
 
+export const TemplateSpaceBetween = (args) => <>
+<CheckBoxInput label="Label" spaceBetween={true} checked={true} {...args} />
+<CheckBoxInput label="Label" labelPosition="left" spaceBetween={true} checked={true} {...args} />
+</>;
+
+
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
     <CheckBoxInput {...args} size="small" />
@@ -109,6 +115,12 @@ It is possible to use custom SVG image as checkmark.
 
 <Canvas withSource="open">
   <Story name="Icon">{TemplateCustom.bind({})}</Story>
+</Canvas>
+
+## Space Between
+
+<Canvas withSource="open">
+  <Story name="Space Betweeen">{TemplateSpaceBetween.bind({})}</Story>
 </Canvas>
 
 ## Sizes

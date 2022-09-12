@@ -2170,7 +2170,7 @@ export const lanaco_light = {
         },
         disabled: {
           background: 500,
-        }
+        },
       },
       teal: {
         enabled: {
@@ -2763,7 +2763,7 @@ export const lanaco_light = {
         },
       },
     },
-    DropDownMenuItem: {
+    MenuItem: {
       default: {
         palette: "gray",
         enabled: {
@@ -2915,6 +2915,393 @@ export const lanaco_light = {
           fontWeight: 400,
         },
       },
+<<<<<<< HEAD
+=======
+    },
+    Accordion: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          backgroundOpacity: 0,
+          line: 200,
+          fontWeight: 600,
+          summaryText: 500,
+          text: 700,
+        },
+      },
+    },
+    Breadcrumbs: {
+      default: {
+        palette: "gray",
+        enabled: {
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          text: 600
+        },
+      },
+      blue: {
+        enabled: {
+          text: 600
+        },
+      },
+      red: {
+        enabled: {
+          text: 600
+        },
+      },
+      violet: {
+        enabled: {
+          text: 600
+        },
+      },
+      yellow: {
+        enabled: {
+          text: 600
+        },
+      },
+      green: {
+        enabled: {
+          text: 600
+        },
+      },
+      gray: {
+        enabled: {
+          text: 600
+        },
+      },
+      neutral: {
+        enabled: {
+          text: 600
+        },
+      }
+    },
+    Link: {
+      default: {
+        palette: "gray",
+        enabled: {
+          fontWeight: 600,
+          text: 600,
+        },
+        hover: {
+          text: 400,
+        },
+        active: {
+          text: 900,
+        },
+        visited: {
+          text: 800,
+        }
+      },
+      teal: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      blue: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      red: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      violet: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      yellow: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      green: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      gray: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      neutral: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      }
+>>>>>>> v3.0.0-rc1
+    },
+    Accordion: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          backgroundOpacity: 0,
+          line: 200,
+          fontWeight: 600,
+          summaryText: 500,
+          text: 700,
+        },
+      },
+    },
+    Breadcrumbs: {
+      default: {
+        palette: "gray",
+        enabled: {
+          fontWeight: 600,
+          text: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          text: 600
+        },
+      },
+      blue: {
+        enabled: {
+          text: 600
+        },
+      },
+      red: {
+        enabled: {
+          text: 600
+        },
+      },
+      violet: {
+        enabled: {
+          text: 600
+        },
+      },
+      yellow: {
+        enabled: {
+          text: 600
+        },
+      },
+      green: {
+        enabled: {
+          text: 600
+        },
+      },
+      gray: {
+        enabled: {
+          text: 600
+        },
+      },
+      neutral: {
+        enabled: {
+          text: 600
+        },
+      }
+    },
+    Link: {
+      default: {
+        palette: "gray",
+        enabled: {
+          fontWeight: 600,
+          text: 600,
+        },
+        hover: {
+          text: 400,
+        },
+        active: {
+          text: 900,
+        },
+        visited: {
+          text: 800,
+        }
+      },
+      teal: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      blue: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      red: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      violet: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      yellow: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      green: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      gray: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      },
+      neutral: {
+        enabled: {
+          text: 600
+        },
+        hover: {
+          text: 500,
+        },
+        active: {
+          text: 800,
+        },
+        visited: {
+          text: 700,
+        }
+      }
     },
     Danger: {
       default: {
@@ -3091,6 +3478,14 @@ export const lanaco_light = {
     regular: "8px",
     curved: "1000px",
     none: "0",
+  },
+  boxShadow: {
+    xs: "0px 1px 2px rgba(0, 0, 0, 0.05);",
+    s: "0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);",
+    m: "0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06);",
+    l: " 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);",
+    xl: "0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);",
+    xxl: "0px 25px 50px -12px rgba(0, 0, 0, 0.25);",
   },
   typography: {
     fontFamily: "Nunito",

@@ -33,7 +33,7 @@ const SyledInput = styled.input`
   ${(props) => standardCssFields(props)}
   ${(props) =>
     getComponentTypographyCss(props.theme, "Input", props.size, "enabled")}
-  padding: 0.75rem 0.625rem 0.75rem 0.625rem;
+  padding: 0.625rem 0.75rem 0.62rem 0.75rem;
   line-height: inherit;
   appearance: none;
   outline: none;

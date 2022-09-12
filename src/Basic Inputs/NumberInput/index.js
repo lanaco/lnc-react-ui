@@ -1,6 +1,6 @@
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import { debounce } from "lodash";
 import {
   StyledInput,
@@ -8,6 +8,7 @@ import {
   StyledSuffix,
   StyledWrapper,
 } from "./styledComponents";
+import { useEffectOnce, useUpdateEffect } from "react-use";
 
 //===================================================
 
@@ -44,7 +45,8 @@ const NumberInput = React.forwardRef((props, ref) => {
   const [inputValue, setInputValue] = useState(defaultValue);
   const [focused, setFocused] = useState(false);
 
-  useEffect(() => setInputValue(value), [value]);
+  useUpdateEffect(() => setInputValue(value), [value]);
+  useEffectOnce(() => setInputValue(value === "" ? defaultValue : value));
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -56,16 +58,16 @@ const NumberInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    var _value = null;
+    var _value = "";
 
     if (e.target.value) _value = e.target.value;
-    else _value = defaultValue === null ? null : 0;
+    else _value = defaultValue === "" ? "" : 0;
 
     if (_value === -0) {
-      _value = defaultValue === null ? null : 0;
+      _value = defaultValue === "" ? "" : 0;
     }
 
-    if (_value === undefined) _value = dfeaultValue === null ? null : 0;
+    if (_value === undefined) _value = defaultValue === "" ? "" : 0;
 
     if (_value > Number.MAX_SAFE_INTEGER) _value = Number.MAX_SAFE_INTEGER;
 
@@ -146,8 +148,8 @@ const NumberInput = React.forwardRef((props, ref) => {
 
 NumberInput.defaultProps = {
   id: "",
-  value: null,
-  defaultValue: null,
+  value: "",
+  defaultValue: "",
   disabled: false,
   readOnly: false,
   debounceTime: 180,
@@ -221,7 +223,7 @@ NumberInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
   ]),
 };
 

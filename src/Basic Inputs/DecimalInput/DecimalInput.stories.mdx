@@ -34,9 +34,9 @@ export const TemplateAddons = (args) => (
 
 export const TemplateDefaultValues = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-    <DecimalInput {...args} value={1.1} defaultValue={null} />
-    <DecimalInput {...args} value={null} defaultValue={1.2} />
-    <DecimalInput {...args} value={null} defaultValue={null} />
+    <DecimalInput {...args} value={1.1} />
+    <DecimalInput {...args} defaultValue={1.2} />
+    <DecimalInput {...args} />
   </div>
 );
 

@@ -4,6 +4,7 @@ import { useTheme } from "@emotion/react";
 import { debounce } from "lodash";
 import { StyledTextareaWrapper } from "./styledComponents";
 import ReactTextareaAutosize from "react-textarea-autosize";
+import { useEffectOnce, useUpdateEffect } from "react-use";
 
 //===================================================
 
@@ -42,7 +43,8 @@ const TextAreaInput = React.forwardRef((props, ref) => {
     collapseOnBlur ? minRows : maxRows
   );
 
-  useEffect(() => setInputValue(value ? value : ""), [value]);
+  useUpdateEffect(() => setInputValue(value), [value]);
+  useEffectOnce(() => setInputValue(value === "" ? defaultValue : value));
 
   useEffect(() => {
     setInnerMinRows(minRows);
@@ -177,7 +179,7 @@ TextAreaInput.propTypes = {
     "success",
     "danger",
     "warning",
-    "info",
+    "information",
   ]),
 };
 

@@ -8,6 +8,9 @@ import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
 } from "../../_utils/utils";
+import FlexGrid from "../../Layout/FlexGrid";
+import FlexGridItem from "../../Layout/FlexGrid/FlexGridItem";
+
 
 const StyledDragDropFiles = styled.div`
   display: flex;
@@ -25,12 +28,11 @@ const StyledDragDropFiles = styled.div`
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "regular")};
   padding: 1.25rem 2.5rem;
-`;
 
-const FilesList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  & .file-item-lnc {
+    padding: 0.5rem 0.813rem;
+    height: 100%;
+  }
 `;
 
 const DragDropFiles = React.forwardRef((props, ref) => {
@@ -87,41 +89,46 @@ const DragDropFiles = React.forwardRef((props, ref) => {
 
   return (
     <StyledDragDropFiles ref={ref} {...themeProps} {...rest}>
-      <DragAndDropFile
-        id={id}
-        disabled={disabled}
-        preventDefault={preventDefault}
-        accept={accept}
-        multiple={multiple}
-        selectFileText={selectFileText}
-        dndFileText={dndFileText}
-        control={control}
-        showFileSize={showFileSize}
-        showDnD={!(inputFiles?.length > 0)}
-        onChange={handleOnChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onDrop={handleOnDrop}
-        onDropAccepted={handleOnDropAccepted}
-        color={color}
-        size={size}
-        {...dragAndDropFileProps}
-      />
-      <FilesList>
-        {inputFiles?.map((file, i) => (
-          <UploadedFile
-            key={i}
-            fileName={file.name}
-            fileSize={file.size}
+      <FlexGrid direction="RowReverse">
+        <FlexGridItem M={inputFiles?.length > 0 ? 6 : 12}>
+          <DragAndDropFile
+            id={id}
+            disabled={disabled}
+            preventDefault={preventDefault}
+            accept={accept}
+            multiple={multiple}
+            selectFileText={selectFileText}
+            dndFileText={dndFileText}
+            control={control}
             showFileSize={showFileSize}
+            showDnD={!(inputFiles?.length > 0)}
+            onChange={handleOnChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onDrop={handleOnDrop}
+            onDropAccepted={handleOnDropAccepted}
             color={color}
             size={size}
-            onFileClick={fileClick}
-            onCancel={onCancel}
-            {...uploadedFileProps}
+            {...dragAndDropFileProps}
           />
-        ))}
-      </FilesList>
+        </FlexGridItem>
+          {inputFiles?.map((file, i) => (
+            <FlexGridItem M={6} key={i}>
+              <UploadedFile
+                key={i}
+                fileName={file.name}
+                fileSize={file.size}
+                showFileSize={showFileSize}
+                color={color}
+                size={size}
+                onFileClick={fileClick}
+                onCancel={onCancel}
+                {...uploadedFileProps}
+                className={"file-item-lnc "+uploadedFileProps?.className}
+              />
+            </FlexGridItem>
+          ))}
+      </FlexGrid>
     </StyledDragDropFiles>
   );
 });
@@ -131,19 +138,19 @@ DragDropFiles.defaultProps = {
   disabled: false,
   preventDefault: false,
   accept: {},
-  multiple: false,
+  multiple: true,
   selectFileText: "Select file",
   dndFileText: "Drag and drop file here or",
   showFileSize: true,
   files: [],
   //------------------
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
-  onDropAccepted: () => {},
-  onDrop: () => {},
+  onChange: () => { },
+  onFocus: () => { },
+  onBlur: () => { },
+  onDropAccepted: () => { },
+  onDrop: () => { },
   // onFileClick: () => {},
-  onCancel: () => {},
+  onCancel: () => { },
   //------------------
   className: "",
   style: {},
@@ -194,6 +201,7 @@ DragDropFiles.propTypes = {
     "success",
     "danger",
     "warning",
+    "information",
     "neutral",
   ]),
   dragAndDropFileProps: PropTypes.any,

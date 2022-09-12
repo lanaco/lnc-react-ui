@@ -58,11 +58,11 @@ export const hexToRgba = (hex, a) => {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   let value = result
     ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16),
-      a: a,
-    }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+        a: a,
+      }
     : null;
 
   return value ? `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})` : null;
@@ -84,8 +84,12 @@ export const getColorRgbaValue = (
   const opacityWeight = componentState?.[opacityProp];
   const defaultOpacityWeight = componentDefault[stateProp][opacityProp];
 
-  const hexColorValue = colorWeight ? theme.palette[palette][colorWeight] : theme.palette[componentDefault.palette][defaultColorWeight];
-  const opacityValue = opacityWeight ? theme.palette.opacity[opacityWeight] : theme.palette.opacity[defaultOpacityWeight];
+  const hexColorValue = colorWeight
+    ? theme.palette[palette][colorWeight]
+    : theme.palette[componentDefault.palette][defaultColorWeight];
+  const opacityValue = opacityWeight
+    ? theme.palette.opacity[opacityWeight]
+    : theme.palette.opacity[defaultOpacityWeight];
 
   return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
@@ -95,21 +99,27 @@ export const getComponentPropValue = (
   component,
   context,
   stateProp,
-  prop) => {
-    const palette = theme.colorContext[context];
-    const componentDefault = theme.components[component].default;
-    const componentState = theme.components[component]?.[palette]?.[stateProp];
-    const value = componentState?.[prop];
-    const defaultValue = componentDefault[stateProp][prop];
-  
-    return value ? value : defaultValue;
-}
+  prop
+) => {
+  const palette = theme.colorContext[context];
+  const componentDefault = theme.components[component].default;
+  const componentState = theme.components[component]?.[palette]?.[stateProp];
+  const value = componentState?.[prop];
+  const defaultValue = componentDefault[stateProp][prop];
+
+  return value ? value : defaultValue;
+};
 
 export const getSizeValueWithUnits = (theme, size) => {
   return theme.sizes[size];
 };
 
-export const getComponentTypographyCss = (theme, component, size, stateProp) => {
+export const getComponentTypographyCss = (
+  theme,
+  component,
+  size,
+  stateProp
+) => {
   const componentDefault = theme.components[component].default;
   const fontWeight = componentDefault[stateProp].fontWeight;
 
@@ -124,14 +134,19 @@ export const getBorderRadiusValueWithUnits = (theme, type) => {
   return theme.borderRadius[type];
 };
 
+export const getBoxShadowValue = (theme, type) => {
+  return theme.boxShadow[type];
+};
+
 export const getOutlineCss = (theme, noOffset) => {
   const palette = theme.colorContext[theme.palette.outline.context];
 
-  const color =
-    theme.palette[palette][theme.palette.outline.weight];
+  const color = theme.palette[palette][theme.palette.outline.weight];
 
   return `
-    outline: ${theme.palette.outline.width} ${theme.palette.outline.style} ${color};
+    outline: ${theme.palette.outline.width} ${
+    theme.palette.outline.style
+  } ${color};
     ${!noOffset && `outline-offset: ${theme.palette.outline.offset}`};
     `;
 };
@@ -140,8 +155,7 @@ export const getDisabledStateCss = (theme) => {
   const paletteColor = theme.palette.disabled.color;
   const bgColorHex =
     theme.palette[paletteColor][theme.palette.disabled.background];
-  const fontColorHex =
-    theme.palette[paletteColor][theme.palette.disabled.text];
+  const fontColorHex = theme.palette[paletteColor][theme.palette.disabled.text];
   const opacity = theme.palette.opacity[theme.palette.disabled.opacity];
   const bgColorRgba = hexToRgba(bgColorHex, opacity ?? "100%");
 
@@ -160,4 +174,4 @@ export const getDisabledBackgroundCss = (theme) => {
   return `
     background-color: ${bgColorRgba};
   `;
-}
+};

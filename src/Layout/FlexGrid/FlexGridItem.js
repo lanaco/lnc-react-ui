@@ -35,7 +35,7 @@ const FlexGridItem = React.forwardRef((props, ref) => {
   //============================================= LIFECYCLE ============================================
   useEffect(() => {
     calculateWidth();
-  }, [columns]);
+  }, [columns, XS, S, M, L, XL, col]);
 
   useEffect(() => {
     calculateWidth();

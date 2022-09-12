@@ -57,6 +57,7 @@ const MultiSelectDropdown = React.forwardRef((props, ref) => {
     onMenuClose,
     onBlur,
     onFocus,
+    onKeyDown,
     size,
     color,
     className,
@@ -69,10 +70,9 @@ const MultiSelectDropdown = React.forwardRef((props, ref) => {
 
   const handleOnInput = useCallback(
     debounce((inputValue, meta) => {
-
       onInputChange(inputValue, meta);
-    }, debounceTime),
-  )
+    }, debounceTime)
+  );
 
   return (
     <Dropdown
@@ -132,6 +132,7 @@ const MultiSelectDropdown = React.forwardRef((props, ref) => {
       onFocus={onFocus}
       className={className}
       style={style}
+      onKeyDown={onKeyDown}
       {...rest}
     />
   );
@@ -146,12 +147,13 @@ MultiSelectDropdown.defaultProps = {
   components: {},
   debounceTime: 180,
   //-------------------------
-  onChange: () => { },
-  onInputChange: () => { },
-  onMenuOpen: () => { },
-  onMenuClose: () => { },
-  onFocus: () => { },
-  onBlur: () => { },
+  onChange: () => {},
+  onInputChange: () => {},
+  onMenuOpen: () => {},
+  onMenuClose: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  onKeyDown: () => {},
   //-------------------------
   style: {},
   className: "",
@@ -274,8 +276,8 @@ MultiSelectDropdown.propTypes = {
    */
   openMenuOnFocus: PropTypes.bool,
   /**
-  * Allows control of whether the menu is opened when the Select is clicked
-  */
+   * Allows control of whether the menu is opened when the Select is clicked
+   */
   openMenuOnClick: PropTypes.bool,
   //----
   autoFocus: PropTypes.bool,
@@ -317,6 +319,7 @@ MultiSelectDropdown.propTypes = {
   onMenuClose: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  onKeyDown: PropTypes.func,
   //---------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,

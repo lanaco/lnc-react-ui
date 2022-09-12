@@ -358,7 +358,7 @@ DoubleRangeSlider.propTypes = {
     "danger",
     "warning",
     "disabled",
-    "info",
+    "information",
   ]),
 };
 
