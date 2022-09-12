@@ -27,7 +27,7 @@ const CheckboxContainer = styled.label`
   align-items: center;
   justify-content: start;
   flex-direction: ${(props) => getLabelDirection(props.labelPosition)};
-  ${props => props.spaceBetween == true && "justify-content: space-between;"}
+  ${(props) => props.spaceBetween == true && "justify-content: space-between;"}
   width: 100%;
   ${(props) => props.disabled && "pointer-events: none;"}
   ${(props) =>
@@ -220,12 +220,8 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       label={label}
       labelPosition={labelPosition}
       spaceBetween={spaceBetween}
-<<<<<<< HEAD
       tabIndex={-1}
       disabled={true}
-=======
-      spaceBetween={spaceBetween}
->>>>>>> v3.0.0-rc1
       {...themeProps}
     >
       <Checkmark
@@ -290,11 +286,8 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           className="checkbox-label"
           disabled={disabled}
           readOnly={readOnly}
-<<<<<<< HEAD
           tabIndex={-1}
-=======
           title={label}
->>>>>>> v3.0.0-rc1
         >
           {label}
         </div>

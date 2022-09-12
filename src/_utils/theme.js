@@ -2915,8 +2915,6 @@ export const lanaco_light = {
           fontWeight: 400,
         },
       },
-<<<<<<< HEAD
-=======
     },
     Accordion: {
       default: {
@@ -2941,44 +2939,44 @@ export const lanaco_light = {
       },
       teal: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       blue: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       red: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       violet: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       yellow: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       green: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       gray: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       neutral: {
         enabled: {
-          text: 600
+          text: 600,
         },
-      }
+      },
     },
     Link: {
       default: {
@@ -2995,11 +2993,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 800,
-        }
+        },
       },
       teal: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3009,11 +3007,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       blue: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3023,11 +3021,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       red: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3037,11 +3035,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       violet: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3051,11 +3049,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       yellow: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3065,11 +3063,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       green: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3079,11 +3077,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       gray: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3093,11 +3091,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       neutral: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3107,9 +3105,8 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
-      }
->>>>>>> v3.0.0-rc1
+        },
+      },
     },
     Accordion: {
       default: {
@@ -3134,44 +3131,44 @@ export const lanaco_light = {
       },
       teal: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       blue: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       red: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       violet: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       yellow: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       green: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       gray: {
         enabled: {
-          text: 600
+          text: 600,
         },
       },
       neutral: {
         enabled: {
-          text: 600
+          text: 600,
         },
-      }
+      },
     },
     Link: {
       default: {
@@ -3188,11 +3185,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 800,
-        }
+        },
       },
       teal: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3202,11 +3199,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       blue: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3216,11 +3213,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       red: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3230,11 +3227,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       violet: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3244,11 +3241,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       yellow: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3258,11 +3255,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       green: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3272,11 +3269,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       gray: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3286,11 +3283,11 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
+        },
       },
       neutral: {
         enabled: {
-          text: 600
+          text: 600,
         },
         hover: {
           text: 500,
@@ -3300,8 +3297,8 @@ export const lanaco_light = {
         },
         visited: {
           text: 700,
-        }
-      }
+        },
+      },
     },
     Danger: {
       default: {
