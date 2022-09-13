@@ -6,6 +6,7 @@ import KanbanCard from "./components/KanbanCard";
 import KanbanColumn from "./components/KanbanColumn";
 import { DndProvider, useDrag } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { cloneDeep } from "lodash";
 
 const Container = styled.div`
   border-radius: 8px;
@@ -41,7 +42,7 @@ const ColumnHeader = styled.div`
   border: 2px solid gray;
   background-color: #ededed;
   box-sizing: border-box;
-  width: 33.3%;
+  width: fit-;
 `;
 
 const Column = styled.div`
@@ -58,7 +59,7 @@ const Column = styled.div`
 
 const Kanban = (props) => {
   //
-  const { size, color, style, className, columns, data, onDrop } = props;
+  const { size, color, style, className, data, onDrop, itemType } = props;
 
   const theme = useTheme();
 
@@ -66,13 +67,15 @@ const Kanban = (props) => {
 
   //==========================================
 
-  const renderColumn = (col) => {
-    var columnItems = data.filter((x) => x[col.accessor] == col.value);
+  const renderColumn = (column) => {
+    var col = cloneDeep(column);
+    delete col.data;
 
     return (
-      <KanbanColumn title={col.name} column={col}>
-        {columnItems.map((item) => (
+      <KanbanColumn title={column.name} column={col} itemType={itemType}>
+        {column.data.map((item) => (
           <KanbanCard
+            itemType={itemType}
             onDrop={onDrop}
             key={item.id}
             column={col}
@@ -89,15 +92,9 @@ const Kanban = (props) => {
 
   return (
     <Container {...themeProps}>
-      <HeaderContainer>
-        {columns.map((c) => (
-          <ColumnHeader>{c.name}</ColumnHeader>
-        ))}
-      </HeaderContainer>
-
       <CardsContainer>
         <DndProvider backend={HTML5Backend}>
-          {columns.map((x) => renderColumn(x))}
+          {data.map((x) => renderColumn(x))}
         </DndProvider>
       </CardsContainer>
     </Container>
@@ -107,6 +104,7 @@ const Kanban = (props) => {
 Kanban.defaultProps = {
   id: "",
   //----------------
+  itemType: "ITEM",
   columns: [],
   groupBy: null,
   data: [],
