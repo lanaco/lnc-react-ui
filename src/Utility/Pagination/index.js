@@ -31,6 +31,9 @@ const Pagination = (props) => {
     disabledFirst,
     disabledLast,
     disabled,
+
+    totalNumberOfPages,
+    pagesOffset,
     //------------------
     onClick,
     onPageNumberClick,
@@ -54,35 +57,76 @@ const Pagination = (props) => {
   //======================== RENDER ==========================================
 
   const renderPages = () => {
-    if (pages && pages.length > 1) {
-      return (
-        <>
-          {pages.map((p) => (
-            <Button
-              key={p}
-              {...themeProps}
-              borderRadius={borderRadius}
-              onClick={(e) => onPageNumberClick(e, p)}
-              type={currentPage === p ? currentPageButtonType : "basic"}
-              text={p.toString()}
-              disabled={disabled}
-            />
-          ))}
-        </>
-      );
+    console.log("render pages", pages);
+    // if (pages && pages.length > 1) {
+    //   return (
+    //     <>
+    //       {pages.map((p) => (
+    //         <Button
+    //           key={p}
+    //           {...themeProps}
+    //           borderRadius={borderRadius}
+    //           onClick={(e) => onPageNumberClick(e, p)}
+    //           type={currentPage === p ? currentPageButtonType : "basic"}
+    //           text={p.toString()}
+    //           disabled={disabled}
+    //         />
+    //       ))}
+    //     </>
+    //   );
+    // }
+    
+    let pagesButtons = [];
+
+    //before offset
+    for (let i = currentPage - pagesOffset; (i < currentPage && i > 0); i++) {
+      pagesButtons.push(<Button
+        key={i}
+        {...themeProps}
+        borderRadius={borderRadius}
+        onClick={(e) => onPageNumberClick(e, i)}
+        type={"basic"}
+        text={i.toString()}
+        disabled={disabled}
+      />)
     }
 
-    return (
-      <>
-        <Button
-          {...themeProps}
-          borderRadius={borderRadius}
-          type={currentPageButtonType}
-          text={currentPage.toString()}
-          disabled={disabled}
-        />
-      </>
-    );
+    //current page
+    pagesButtons.push(<Button
+      key={currentPage}
+      {...themeProps}
+      borderRadius={borderRadius}
+      type={currentPageButtonType}
+      text={currentPage.toString()}
+      disabled={disabled}
+    />)
+
+    //after offset
+    for (let i = currentPage + 1; (i <= currentPage + pagesOffset && i <= totalNumberOfPages); i++) {
+      pagesButtons.push(<Button
+        key={i}
+        {...themeProps}
+        borderRadius={borderRadius}
+        onClick={(e) => onPageNumberClick(e, i)}
+        type={"basic"}
+        text={i.toString()}
+        disabled={disabled}
+      />);
+    }
+
+    return pagesButtons;
+
+    // return (
+    //   <>
+    //     <Button
+    //       {...themeProps}
+    //       borderRadius={borderRadius}
+    //       type={currentPageButtonType}
+    //       text={currentPage.toString()}
+    //       disabled={disabled}
+    //     />
+    //   </>
+    // );
   };
 
   const renderButtons = (borderRadius = null) => {
@@ -164,9 +208,11 @@ Pagination.defaultProps = {
   disabledPrevious: false,
   disabledFirst: false,
   disabledLast: false,
+  totalNumberOfPages: 1,
+  pagesOffset: 0,
   //-------------------------------
-  onPageNumberClick: () => {},
-  onClick: () => {},
+  onPageNumberClick: () => { },
+  onClick: () => { },
   //-------------------------------
   style: {},
   className: "",
@@ -210,6 +256,11 @@ Pagination.propTypes = {
    * Active page number
    */
   currentPage: PropTypes.number,
+  totalNumberOfPages: PropTypes.number,
+  /**
+   * how many page numbers will be shown to the right/left of the current page
+   */
+  pagesOffset: PropTypes.number,
   /**
    *  Applies to the Next button
    */
