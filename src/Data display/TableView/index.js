@@ -72,12 +72,14 @@ const TableView = React.forwardRef((props, ref) => {
     if (table) {
       return React.cloneElement(table, {
         onSelectRow: (e, row, isSelected) => {
-          handleSelectedRow(row, isSelected);
+          handleSelectedRow(row, !isSelected);
         },
+        SelectedData: selectedRows,
         EnableSelection: true,
       });
     }
   };
+
 
   const handleCreate = (e) => {
     onCreate(e);
@@ -99,9 +101,8 @@ const TableView = React.forwardRef((props, ref) => {
     onDelete(selectedRows, e);
   };
 
-  const handlePageChange = (e, p) => {
-    console.log("p change", p);
-    onPageChange(p);
+  const handlePageChange = (page) => {
+    onPageChange(page);
   }
 
   return (
@@ -116,7 +117,7 @@ const TableView = React.forwardRef((props, ref) => {
         onDelete={handleDelete}
       />
       {clonedTable()}
-      <Pagination {...paginationProps} onPageNumberClick={handlePageChange}/>
+      <Pagination {...paginationProps} onPageChange={handlePageChange}/>
     </StyledView>
   );
 });

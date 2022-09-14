@@ -144,7 +144,7 @@ import { TableView } from "@lnc-react-ui";
           },
         ]}
         table={<Table RowIdentifier={"id"} Columns={Columns} Data={Data} />}
-        paginationProps={{ currentPage: 2, pages: [1,2,3] }}
+        paginationProps={{ currentPage: 2, totalNumberOfPages: 10, pagesOffset: 2 }}
       ></TableView>
     }
   </Story>

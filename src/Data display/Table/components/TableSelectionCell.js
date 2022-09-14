@@ -36,11 +36,7 @@ const TableSelectionCell = (props) => {
   };
 
   const onChange = (e, value) => {
-    console.log("ion change", e, value);
-    //TODO
-    setIsSelected(value);
-    onSelectRow(e, RowData, value);
-    //onSelectRow(e, RowData, IsSelected);
+    onSelectRow(e, RowData, IsSelected);
   };
 
   const isColor = (strColor) => {

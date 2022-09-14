@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import Button from "../../General/Button/index";
 import IconButton from "../../General/IconButton/index";
 import ButtonGroup from "../../Layout/Button Group/index";
 import styled from "@emotion/styled";
+import { useUpdateEffect } from "react-use";
 
 //========================================================================
 
@@ -21,7 +22,6 @@ const Pagination = (props) => {
   const {
     borderRadius,
     currentPage,
-    pages,
     buttonType,
     currentPageButtonType,
     withFirstLast,
@@ -35,8 +35,7 @@ const Pagination = (props) => {
     totalNumberOfPages,
     pagesOffset,
     //------------------
-    onClick,
-    onPageNumberClick,
+    onPageChange,
     //------------------
     className,
     style,
@@ -48,43 +47,39 @@ const Pagination = (props) => {
 
   const themeProps = { theme, size, color, type: buttonType };
 
+  const [page, setPage] = useState(currentPage);
+
+  useUpdateEffect(() => {
+    setPage(currentPage);
+  }, [currentPage])
+
+  useUpdateEffect(() => {
+    onPageChange(page);
+  }, [page])
+
   //======================== METHODS ==========================================
 
-  const handleOnClick = (e, type) => {
-    if (onClick) onClick(e, type);
-  };
+
+  const handlePageClick = (e, p) => {
+    if (p == "next" && page < totalNumberOfPages) setPage(page + 1);
+    else if (p == "previous" && page > 1) setPage(page - 1);
+    else if (p == "last" && page != totalNumberOfPages) setPage(totalNumberOfPages);
+    else if (p == "first" && page != 1) setPage(1);
+    else if (!isNaN(+p)) setPage(p);
+  }
 
   //======================== RENDER ==========================================
 
   const renderPages = () => {
-    console.log("render pages", pages);
-    // if (pages && pages.length > 1) {
-    //   return (
-    //     <>
-    //       {pages.map((p) => (
-    //         <Button
-    //           key={p}
-    //           {...themeProps}
-    //           borderRadius={borderRadius}
-    //           onClick={(e) => onPageNumberClick(e, p)}
-    //           type={currentPage === p ? currentPageButtonType : "basic"}
-    //           text={p.toString()}
-    //           disabled={disabled}
-    //         />
-    //       ))}
-    //     </>
-    //   );
-    // }
-    
     let pagesButtons = [];
 
     //before offset
-    for (let i = currentPage - pagesOffset; (i < currentPage && i > 0); i++) {
+    for (let i = (page - pagesOffset > 0 ? page - pagesOffset : 1); (i < page && i > 0); i++) {
       pagesButtons.push(<Button
         key={i}
         {...themeProps}
         borderRadius={borderRadius}
-        onClick={(e) => onPageNumberClick(e, i)}
+        onClick={(e) => handlePageClick(e, i)}
         type={"basic"}
         text={i.toString()}
         disabled={disabled}
@@ -93,21 +88,21 @@ const Pagination = (props) => {
 
     //current page
     pagesButtons.push(<Button
-      key={currentPage}
+      key={page}
       {...themeProps}
       borderRadius={borderRadius}
       type={currentPageButtonType}
-      text={currentPage.toString()}
+      text={page.toString()}
       disabled={disabled}
     />)
 
     //after offset
-    for (let i = currentPage + 1; (i <= currentPage + pagesOffset && i <= totalNumberOfPages); i++) {
+    for (let i = page + 1; (i <= page + pagesOffset && i <= totalNumberOfPages); i++) {
       pagesButtons.push(<Button
         key={i}
         {...themeProps}
         borderRadius={borderRadius}
-        onClick={(e) => onPageNumberClick(e, i)}
+        onClick={(e) => handlePageClick(e, i)}
         type={"basic"}
         text={i.toString()}
         disabled={disabled}
@@ -115,18 +110,6 @@ const Pagination = (props) => {
     }
 
     return pagesButtons;
-
-    // return (
-    //   <>
-    //     <Button
-    //       {...themeProps}
-    //       borderRadius={borderRadius}
-    //       type={currentPageButtonType}
-    //       text={currentPage.toString()}
-    //       disabled={disabled}
-    //     />
-    //   </>
-    // );
   };
 
   const renderButtons = (borderRadius = null) => {
@@ -141,7 +124,7 @@ const Pagination = (props) => {
             {...themeProps}
             icon="angle-double-left"
             disabled={disabledFirst || disabled}
-            onClick={(e) => handleOnClick(e, "first")}
+            onClick={(e) => handlePageClick(e, "first")}
             {...br}
           />
         )}
@@ -150,7 +133,7 @@ const Pagination = (props) => {
           {...themeProps}
           icon="angle-left"
           disabled={disabledPrevious || disabled}
-          onClick={(e) => handleOnClick(e, "previous")}
+          onClick={(e) => handlePageClick(e, "previous")}
           {...br}
         />
 
@@ -160,7 +143,7 @@ const Pagination = (props) => {
           {...themeProps}
           icon="angle-right"
           disabled={disabledNext || disabled}
-          onClick={(e) => handleOnClick(e, "next")}
+          onClick={(e) => handlePageClick(e, "next")}
           {...br}
         />
 
@@ -169,7 +152,7 @@ const Pagination = (props) => {
             {...themeProps}
             icon="angle-double-right"
             disabled={disabledLast || disabled}
-            onClick={(e) => handleOnClick(e, "last")}
+            onClick={(e) => handlePageClick(e, "last")}
             {...br}
           />
         )}
@@ -199,7 +182,6 @@ Pagination.defaultProps = {
   disabled: false,
   borderRadius: "regular",
   currentPage: 1,
-  pages: [],
   buttonType: "outline",
   currentPageButtonType: "tinted",
   withFirstLast: true,
@@ -211,8 +193,7 @@ Pagination.defaultProps = {
   totalNumberOfPages: 1,
   pagesOffset: 0,
   //-------------------------------
-  onPageNumberClick: () => { },
-  onClick: () => { },
+  onPageChange: () => { },
   //-------------------------------
   style: {},
   className: "",
@@ -249,10 +230,6 @@ Pagination.propTypes = {
    */
   withButtonGroup: PropTypes.bool,
   /**
-   * To show multiple page numbers
-   */
-  pages: PropTypes.arrayOf(PropTypes.number),
-  /**
    * Active page number
    */
   currentPage: PropTypes.number,
@@ -278,14 +255,7 @@ Pagination.propTypes = {
    */
   disabledLast: PropTypes.bool,
   //-------------------------------
-  /**
-   *  Click on the page numbers
-   */
-  onPageNumberClick: PropTypes.func,
-  /**
-   *  Click on the movement buttons
-   */
-  onClick: PropTypes.func,
+  onPageChange: PropTypes.func,
   //-------------------------------
   className: PropTypes.string,
   style: PropTypes.object,

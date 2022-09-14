@@ -6,10 +6,18 @@ import Pagination from "./index";
 
 export const TemplateDefault = (args) => <Pagination {...args} />;
 
-export const TemplateTypes = (args) => (
+export const TemplateDisabled = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px" }}>
-      <Pagination {...args} />
+      <Pagination disabled={true} {...args} />
+    </div>
+  </div>
+);
+
+export const TemplateWithoutFirstAndLast = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Pagination withFirstLast={false} {...args} />
     </div>
   </div>
 );
@@ -17,7 +25,15 @@ export const TemplateTypes = (args) => (
 export const TemplateMultiplePageNumbers = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px" }}>
-      <Pagination {...args} />
+      <Pagination totalNumberOfPages={10} currentPage={2} pagesOffset={3} {...args} />
+    </div>
+  </div>
+);
+
+export const TemplateWithoutButtonGroup = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Pagination withButtonGroup={false} {...args} />
     </div>
   </div>
 );
@@ -94,6 +110,20 @@ export const TemplateColors = (args) => (
   </div>
 );
 
+export const TemplateSizes = (args) => (
+  <div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination size="small" {...args} />
+    </div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination size="medium" {...args} />
+    </div>
+    <div style={{ display: "flex", marginBottom: "20px" }}>
+      <Pagination size="large" {...args} />
+    </div>
+  </div>
+);
+
 # Pagination
 
 ```jsx
@@ -108,42 +138,42 @@ import { Pagination } from "@lnc-react-ui";
 
 <ArgsTable story="Default" />
 
-# Disabled State
+## Disabled State
 
 <Canvas>
-  <Story name="Disabled State" args={{ disabled: true }}>
-    {TemplateTypes.bind({})}
+  <Story name="Disabled State" args={{}}>
+    {TemplateDisabled.bind({})}
   </Story>
 </Canvas>
 
-# Multiple Page Numbers
+## Pages offset
 
 <Canvas>
   <Story
     name="Multiple Page Numbers"
-    args={{ pages: [1, 2, 3], currentPage: 2 }}
+    args={{}}
   >
     {TemplateMultiplePageNumbers.bind({})}
   </Story>
 </Canvas>
 
-# Without First and Last
+## Without First and Last
 
 <Canvas>
   <Story name="Without First and Last" args={{ withFirstLast: false }}>
-    {TemplateTypes.bind({})}
+    {TemplateWithoutFirstAndLast.bind({})}
   </Story>
 </Canvas>
 
-# Without Button Group
+## Without Button Group
 
 <Canvas>
-  <Story name="Without Button Group" args={{ withButtonGroup: false }}>
-    {TemplateTypes.bind({})}
+  <Story name="Without Button Group" args={{}}>
+    {TemplateWithoutButtonGroup.bind({})}
   </Story>
 </Canvas>
 
-# Border Radius
+## Border Radius
 
 <Canvas>
   <Story name="Border Radius" args={{}}>
@@ -151,18 +181,27 @@ import { Pagination } from "@lnc-react-ui";
   </Story>
 </Canvas>
 
-# Button Types
+## Button Types
 
 <Canvas>
-  <Story name=" Button Types" args={{}}>
+  <Story name="Button Types" args={{}}>
     {TemplateButtonTypes.bind({})}
   </Story>
 </Canvas>
 
-# Colors
+## Colors
 
 <Canvas>
   <Story name="Colors" args={{}}>
     {TemplateColors.bind({})}
+  </Story>
+</Canvas>
+
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
   </Story>
 </Canvas>

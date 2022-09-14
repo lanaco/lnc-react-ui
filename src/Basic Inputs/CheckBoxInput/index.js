@@ -338,7 +338,7 @@ CheckBoxInput.defaultProps = {
 };
 
 CheckBoxInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   name: PropTypes.string,
   defaultValue: PropTypes.bool,
   checked: PropTypes.bool,
