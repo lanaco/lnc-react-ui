@@ -7,10 +7,9 @@ import Icon from "../../../General/Icon";
 
 const Card = styled.div`
   border-radius: 8px;
-  padding: 8px;
   background-color: white;
+  padding: 12px;
   box-sizing: border-box;
-  padding: 18px;
   border-top: 1px solid #ededed;
   box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1),
     0px 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -21,15 +20,15 @@ const Card = styled.div`
 `;
 
 const DragButton = styled.div`
-  height: 18px;
-  width: 18px;
+  height: 12px;
+  width: 12px;
   border-radius: 8px;
   position: absolute;
   display: flex;
   align-items: center;
 
-  top: 2px;
-  left: 2px;
+  top: 4px;
+  left: 1px;
 
   cursor: move;
   cursor: grab;
@@ -58,8 +57,6 @@ const KanbanCard = (props) => {
     color,
     style,
     className,
-    header,
-    content,
     item,
     column,
     onDrop,
@@ -96,19 +93,20 @@ const KanbanCard = (props) => {
     >
       {withGripIcon && (
         <DragButton ref={drag}>
-          <Icon icon="grip-vertical" />
+          <Icon sizeInUnits={"12px"} icon="grip-vertical" />
         </DragButton>
       )}
 
-      <CardHeader>{header}</CardHeader>
-      <CardContent>{content}</CardContent>
+      {React.Children.map(props.children, (child) =>
+        React.cloneElement(child, { data: item })
+      )}
     </Card>
   );
 };
 
 KanbanCard.defaultProps = {
-  __TYPE__: "KANBAN_CARD",
   id: "",
+  __TYPE__: "KANBAN_CARD",
   //----------------
   withGripIcon: false,
   //----------------

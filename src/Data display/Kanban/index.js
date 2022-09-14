@@ -7,6 +7,7 @@ import KanbanColumn from "./components/KanbanColumn";
 import { DndProvider, useDrag } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { cloneDeep } from "lodash";
+import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 
 const Container = styled.div`
   border-radius: 8px;
@@ -67,12 +68,22 @@ const Kanban = (props) => {
 
   //==========================================
 
+  const renderCard = (cardProps) => {
+    return (
+      renderCustomElement(
+        getCustomRender("KANBAN_CARD_CONTENT", props.children),
+        cardProps
+      ) || <div></div>
+    );
+  };
+
   const renderColumn = (column) => {
     var col = cloneDeep(column);
     delete col.data;
 
     return (
       <KanbanColumn title={column.name} column={col} itemType={itemType}>
+        {props.children}
         {column.data.map((item) => (
           <KanbanCard
             itemType={itemType}
@@ -82,7 +93,9 @@ const Kanban = (props) => {
             item={item}
             header={item.taskName}
             content={item.taskDescription}
-          />
+          >
+            {renderCard(item)}
+          </KanbanCard>
         ))}
       </KanbanColumn>
     );
