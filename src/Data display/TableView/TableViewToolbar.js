@@ -45,12 +45,7 @@ const TableViewToolbar = React.forwardRef((props, ref) => {
         onDelete,
         onDetails,
         onCopy,
-        onCustomAction,
     } = props;
-
-    useEffect(() => {
-      console.log("cus", customActions);
-    }, [customActions])
     
 
     return <StyledToolbar>
@@ -90,7 +85,6 @@ TableViewToolbar.defaultProps = {
     onDelete: () => { },
     onDetails: () => { },
     onCopy: () => { },
-    onCustomAction: (action, e) => { },
 };
 
 TableViewToolbar.propTypes = {
@@ -116,7 +110,6 @@ TableViewToolbar.propTypes = {
     onDelete: PropTypes.func,
     onDetails: PropTypes.func,
     onCopy: PropTypes.func,
-    onCustomAction: PropTypes.func,
 };
 
 export default TableViewToolbar;
