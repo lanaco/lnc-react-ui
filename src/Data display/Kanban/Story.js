@@ -1,5 +1,28 @@
 import React, { useState } from "react";
 import Kanban from ".";
+import styled from "@emotion/styled";
+
+const StyledCardContent = styled.div`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const CardContent = (props) => {
+  return (
+    <StyledCardContent>
+      <div>{props.taskName}</div>
+      <div>{props.taskDescription}</div>
+    </StyledCardContent>
+  );
+};
+
+const ColumnFooter = (props) => {
+  return (
+    <StyledCardContent style={{ padding: "6px" }}>Footer</StyledCardContent>
+  );
+};
 
 const Story = (props) => {
   const [columns, setColumns] = useState([
@@ -75,20 +98,24 @@ const Story = (props) => {
   ]);
 
   const updateItem = (item, column) => {
-    // if (item && column) {
-    //   var dataCopy = [...data];
-    //   var existingItem = dataCopy.find((x) => x.id === item.id);
-    //   dataCopy = dataCopy.filter((x) => x.id !== item.id);
-    //   existingItem.statusId = column.value;
-    //   existingItem.status = column.name;
-    //   dataCopy.push(existingItem);
-    //   setData(dataCopy);
-    // }
+    if (item && column) {
+      //   var dataCopy = [...data];
+      //   var dataColumn = dataCopy.find((x) => x.value === column.value);
+      //   var existingItem = dataCopy.find((x) => x.id === item.id);
+      //   dataCopy = dataCopy.filter((x) => x.id !== item.id);
+      //   existingItem.statusId = column.value;
+      //   existingItem.status = column.name;
+      //   dataCopy.push(existingItem);
+      //   setData(dataCopy);
+    }
   };
 
   return (
     <div>
-      <Kanban onDrop={updateItem} {...props} data={data} />
+      <Kanban onDrop={updateItem} {...props} data={data}>
+        <CardContent __TYPE__="KANBAN_CARD_CONTENT" />
+        <ColumnFooter __TYPE__="KANBAN_COLUMN_FOOTER" />
+      </Kanban>
     </div>
   );
 };

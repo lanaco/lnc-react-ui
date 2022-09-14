@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import { useDrop } from "react-dnd";
+import { getCustomRender, renderCustomElement } from "../../../_utils/utils";
 
 const Container = styled.div`
   border-radius: 8px;
@@ -57,10 +58,51 @@ const KanbanColumn = (props) => {
 
   //==========================================
 
+  const renderColumnHeader = () => {
+    return (
+      renderCustomElement(
+        getCustomRender("KANBAN_COLUMN_HEADER", props.children),
+        { column }
+      ) || <ColumnHeader>{column.name}</ColumnHeader>
+    );
+  };
+
+  const renderColumnFooter = () => {
+    return (
+      renderCustomElement(
+        getCustomRender("KANBAN_COLUMN_FOOTER", props.children),
+        { column }
+      ) || <ColumnHeader>{column.value}</ColumnHeader>
+    );
+  };
+
+  const getKanbanCardChidlren = () => {
+    console.log(React.Children.toArray(props.children));
+
+    return React.Children.map(props.children, (child) => {
+      if (child.props.__TYPE__ === "KANBAN_CARD") {
+        console.log(column.name, child);
+        return React.cloneElement(child, {});
+      }
+
+      return <></>;
+    });
+
+    // .filter(
+    //   (child) => child.props.__TYPE__ === "KANBAN_CARD"
+    // );
+  };
+
+  //==========================================
+
   return (
     <Container isOver={isOver}>
-      <ColumnHeader>{column.name}</ColumnHeader>
-      <Column ref={drop}>{props.children}</Column>
+      {renderColumnHeader()}
+      <Column ref={drop}>
+        {/* {props.children} */}
+        {getKanbanCardChidlren()}
+      </Column>
+      {renderColumnFooter()}
     </Container>
   );
 };
