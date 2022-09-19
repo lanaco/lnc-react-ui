@@ -64,7 +64,6 @@ const KanbanCard = (props) => {
     withGripIcon,
   } = props;
   const theme = useTheme();
-
   const themeProps = { size, color, style, className, theme };
 
   //==========================================

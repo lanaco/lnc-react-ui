@@ -2,62 +2,37 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
-import { useDrop, useDrag } from "react-dnd";
+import { useDrop } from "react-dnd";
 import { getCustomRender, renderCustomElement } from "../../../_utils/utils";
+import KanbanColumn from "./KanbanColumn";
+import update from "immutability-helper";
 
 const Container = styled.div`
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 8px;
-  background-color: #f1f5f9;
+  background-color: #e6faff80;
   border: 1px solid #e2e8f0;
   box-sizing: border-box;
   width: fit-content;
   height: fit-content;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  min-height: 50px;
-  min-width: 268px;
+  flex-direction: row;
+  gap: 8px;
+  min-width: 100%;
   transition: all 0.2s ease;
 
   ${(props) => (props.isOver ? `background-color: #E2E8F0;` : "")}
 `;
 
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 100%;
-  min-height: 50px;
-`;
-
-const ColumnHeader = styled.div`
-  width: 100%;
-  padding: 3px;
-`;
-
-const CardsContainer = styled.div``;
-
-const KanbanColumn = (props) => {
+const KanbanContainer = (props) => {
   //
-  const { size, color, style, className, column, onDrop = () => {} } = props;
+  const { size, color, style, className, data, onColumnDrop, onCardDrop } =
+    props;
   const theme = useTheme();
+
   const themeProps = { size, color, style, className, theme };
 
-  const ref = React.useRef();
-
-  //======== DRAG ============================
-
-  const [{ isDragging }, drag] = useDrag({
-    type: "COLUMN",
-    column,
-    end: (_, monitor) => {
-      onDrop(column, monitor.getDropResult());
-    },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
+  //==========================================
 
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: "COLUMN",
@@ -70,23 +45,29 @@ const KanbanColumn = (props) => {
     },
   });
 
-  const opacity = isDragging ? 0.3 : 1;
-
-  //======== DROP ============================
+  //==========================================
 
   //==========================================
 
-  drag(drop(ref));
-
   return (
-    <Container ref={ref} style={{ opacity }}>
-      {column.name}
+    <Container ref={drop}>
+      {data.map((x, i) => (
+        <KanbanColumn
+          key={x.id}
+          index={i}
+          itemType="COLUMN"
+          column={x}
+          onDrop={onColumnDrop}
+        >
+          {props.children}
+        </KanbanColumn>
+      ))}
     </Container>
   );
 };
 
-KanbanColumn.defaultProps = {
-  __TYPE__: "KANBAN_COLUMN",
+KanbanContainer.defaultProps = {
+  __TYPE__: "KANBAN_CONTAINER",
   id: "",
   //----------------
   className: "",
@@ -95,7 +76,7 @@ KanbanColumn.defaultProps = {
   color: "primary",
 };
 
-KanbanColumn.propTypes = {
+KanbanContainer.propTypes = {
   __TYPE__: PropTypes.string,
   id: PropTypes.string,
   //----------------
@@ -112,4 +93,4 @@ KanbanColumn.propTypes = {
   ]),
 };
 
-export default KanbanColumn;
+export default KanbanContainer;

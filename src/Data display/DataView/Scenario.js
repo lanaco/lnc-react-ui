@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react";
 import DataView from ".";
 import TableView from ".";
+import Table from ".";
 import KanbanView from ".";
 import TaskForm from ".";
 import TaskCard from ".";
 import service from ".";
+
+const CustomControlsContainer = (props) => {
+  const { id } = props;
+
+  return (
+    <div>
+      <Button onClick={props.onDelete} />
+    </div>
+  );
+};
 
 const Scenario = (props) => {
   //
@@ -83,6 +94,12 @@ const Scenario = (props) => {
 
   const deleteTasks = (ids) => {};
 
+  const doSomething = () => {
+    var selected = tableViewRef.current.getSelectedData();
+
+    asdf;
+  };
+
   //-----------------------------------------------------------------
 
   return (
@@ -105,12 +122,14 @@ const Scenario = (props) => {
         {/* ------------------------------------------------------------- */}
 
         <FormView>
-          <TaskForm onCreate={createTaskFromForm} onUpdate={() => {}} />
+          <TaskForm onCreate={createTaskFromForm} onUpdate={generealOnUpdate} />
         </FormView>
 
         {/* ------------------------------------------------------------- */}
 
         <TableView
+          __TYPE__="VIEW"
+          ref={tableViewRef}
           id={"table"}
           columns={[
             { id: 1, accessor: "name", displayName: "Name" },
@@ -119,7 +138,17 @@ const Scenario = (props) => {
           ]}
           data={TableData}
           load={loadTableData}
-        />
+          actions={[
+            {
+              name: "Print",
+              onAction: (selectedData) => {},
+            },
+          ]}
+        >
+          <CustomTable __TYPE__="TABLE" />
+
+          <CustomControlsContainer />
+        </TableView>
 
         {/* ------------------------------------------------------------- */}
 
@@ -134,6 +163,9 @@ const Scenario = (props) => {
           load={loadKanbanData}
           onCreateItem={createTaskFromKanban}
           onDeleteItem={(id) => {}}
+          onUpdateItem={(updatedItem) => {
+            generealOnUpdate("KANBAN_VIEW", updatedItem);
+          }}
         >
           <TaskCard onDeleteItem={(id) => {}} />
         </KanbanView>
