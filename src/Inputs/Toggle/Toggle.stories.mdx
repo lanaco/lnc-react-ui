@@ -8,7 +8,7 @@ import { useState } from "react";
 export const TemplateDefault = (props) => {
   const [checked, setChecked] = useState(props.value || false);
   return (
-    <Toggle value={checked} onChange={() => setChecked(!checked)} {...props}/>
+    <Toggle {...props} value={checked} onChange={(value) => setChecked(!checked)} />
   );
 };
 

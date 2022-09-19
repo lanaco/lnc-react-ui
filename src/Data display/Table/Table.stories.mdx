@@ -340,6 +340,8 @@ export const TemplateCellRender = (args) => (
   />
 );
 
+export const TemplateNoBorders = (args) => <Table noBorder={true} {...args} />;
+
 # Table
 
 ```jsx
@@ -696,5 +698,22 @@ implementing the `render` function in the `Columns` definition.
     }}
   >
     {TemplateCellRender.bind({})}
+  </Story>
+</Canvas>
+
+
+## No Borders 
+
+<Canvas>
+  <Story
+    name="No Border"
+    args={{
+      ID: "UsersTable",
+      RowIdentifier: "id",
+      Columns: Columns,
+      Data: Data,
+    }}
+  >
+    {TemplateNoBorders.bind({})}
   </Story>
 </Canvas>

@@ -9,6 +9,7 @@ import {
   getOutlineCss,
   getSizeValueWithUnits,
 } from "../../_utils/utils";
+import { useUpdateEffect } from "react-use";
 
 const getLabelDirection = (direction) => {
   if (direction == "left") return "row-reverse";
@@ -135,6 +136,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     id,
     name,
     checked,
+    defaultValue,
     indeterminate,
     disabled,
     readOnly,
@@ -164,11 +166,11 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
   const theme = useTheme();
   var themeProps = { theme, size, color, disabled, readOnly, focused };
 
-  const [checkBoxChecked, setCheckBoxChecked] = useState(checked);
+  const [checkBoxChecked, setCheckBoxChecked] = useState(checked ? checked : defaultValue);
   const [indeterminateState, setIndeterminateState] = useState(indeterminate);
 
-  useEffect(() => {
-    setCheckBoxChecked(checked);
+  useUpdateEffect(() => {
+    setCheckBoxChecked(checked ? checked : false);
   }, [checked]);
 
   useEffect(() => {
@@ -184,19 +186,20 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     if (readOnly || disabled) return;
     if (indeterminateState) setIndeterminateState(false);
 
-    setCheckBoxChecked(!checkBoxChecked);
+    if(checked == null) setCheckBoxChecked(!checkBoxChecked);
     if (onChange) onChange(e, !checkBoxChecked);
   };
 
   const handleOnKeyDown = (e) => {
     if (e.code === "Space") {
+      e.preventDefault();
       e.stopPropagation();
       e.nativeEvent.stopImmediatePropagation();
 
       if (readOnly || disabled) return;
       if (indeterminateState) setIndeterminateState(false);
 
-      setCheckBoxChecked(!checkBoxChecked);
+      if(checked == null) setCheckBoxChecked(!checkBoxChecked);
       if (onChange) onChange(e, !checkBoxChecked);
     }
     if (onKeyDown) onKeyDown(e);
@@ -223,6 +226,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       tabIndex={-1}
       disabled={true}
       {...themeProps}
+      {...rest}
     >
       <Checkmark
         {...themeProps}
@@ -297,7 +301,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
         id={id}
         name={name}
         type="checkbox"
-        checked={checkBoxChecked}
+        checked={checked ? checked : checkBoxChecked}
         onChange={handleClick}
         ref={ref}
         tabIndex={tabIndex}
@@ -312,8 +316,8 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
 
 CheckBoxInput.defaultProps = {
   id: "",
-  checked: false,
   disabled: false,
+  defaultValue: false,
   readOnly: false,
   label: "",
   indeterminate: false,
@@ -335,8 +339,9 @@ CheckBoxInput.defaultProps = {
 };
 
 CheckBoxInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   name: PropTypes.string,
+  defaultValue: PropTypes.bool,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,

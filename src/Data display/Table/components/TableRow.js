@@ -5,17 +5,33 @@ import { getColorRgbaValue } from "../../../_utils/utils";
 import { useTheme } from "@emotion/react";
 
 const HtmlRow = styled.tr`
-  border-bottom: ${(props) =>
-    "1px solid " +
-    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
-
-  border-left: ${(props) =>
-    "1px solid " +
-    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
-
-  border-right: ${(props) =>
-    "1px solid " +
-    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+  ${(props) =>
+    props.noBorder == false &&
+    `border-bottom: 1px solid ${getColorRgbaValue(
+      props.theme,
+      "TableRow",
+      null,
+      "enabled",
+      "border"
+    )};`}
+  ${(props) =>
+    props.noBorder == false &&
+    `border-left: 1px solid ${getColorRgbaValue(
+      props.theme,
+      "TableRow",
+      null,
+      "enabled",
+      "border"
+    )};`}
+${(props) =>
+    props.noBorder == false &&
+    `border-right: 1px solid ${getColorRgbaValue(
+      props.theme,
+      "TableRow",
+      null,
+      "enabled",
+      "border"
+    )};`}
 
   &:last-of-type > td:first-of-type {
     border-radius: 0 0 0 0.5rem;
@@ -66,12 +82,13 @@ const TableRow = (props) => {
     RowData,
     Index,
     IsSelected,
+    noBorder,
     //----------------
     className,
     size,
     color,
   } = props;
-
+  
   const theme = useTheme();
   const themeProps = {
     className,
@@ -92,6 +109,7 @@ const TableRow = (props) => {
       IsSelected={IsSelected}
       key={Index}
       onClick={onClick}
+      noBorder={noBorder}
     >
       {props.children}
     </HtmlRow>
@@ -103,6 +121,7 @@ TableRow.defaultProps = {
   //--------------------
   onRowClick: () => {},
   RowData: {},
+  noBorder: false,
   //--------------------
   IsSelected: null,
   //--------------------
@@ -118,6 +137,7 @@ TableRow.propTypes = {
   RowData: PropTypes.object,
   //----------------------------------------
   IsSelected: PropTypes.bool,
+  noBorder: PropTypes.bool,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),

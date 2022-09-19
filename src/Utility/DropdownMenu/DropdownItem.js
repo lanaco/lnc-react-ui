@@ -45,6 +45,7 @@ const Item = styled.div`
           )};
 
     ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+    background: transparent;
   }
   & .sub-menu-icon-lnc {
     margin-left: auto;

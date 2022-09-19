@@ -33,23 +33,22 @@ export const TemplateDisabled = (args) => (
 
 export const TemplateReadOnly = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
-    <CheckBoxInput {...args} readOnly={true} checked />
+    <CheckBoxInput {...args} readOnly={true} defaultValue={true} />
     <CheckBoxInput {...args} readOnly={true} />
   </div>
 );
 
 export const TemplateCustom = (args) => (
   <CheckBoxInput
-    checked
     customCheckmark={<img src={image} alt="" />}
     label="Custom"
-    checked={true}
+    defaultValue={true}
   ></CheckBoxInput>
 );
 
 export const TemplateSpaceBetween = (args) => <>
-<CheckBoxInput label="Label" spaceBetween={true} checked={true} {...args} />
-<CheckBoxInput label="Label" labelPosition="left" spaceBetween={true} checked={true} {...args} />
+<CheckBoxInput label="Label" spaceBetween={true} defaultValue={true} {...args} />
+<CheckBoxInput label="Label" labelPosition="left" spaceBetween={true} defaultValue={true} {...args} />
 </>;
 
 
@@ -82,7 +81,6 @@ import { CheckBoxInput } from "@lnc-react-ui";
   <Story
     name="Default"
     args={{
-      checked: true,
     }}
   >
     {TemplateDefault.bind({})}
@@ -131,7 +129,7 @@ Defining `size` with `small`, `medium` and `large` values.
   <Story
     name="Sizes"
     args={{
-      checked: true,
+      defaultValue: true,
     }}
   >
     {TemplateSizes.bind({})}
@@ -147,7 +145,7 @@ Defining `color`
     name="Colors"
     args={{
       size: "small",
-      checked: true,
+      defaultValue: true,
     }}
   >
     {TemplateColors.bind({})}

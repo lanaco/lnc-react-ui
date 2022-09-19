@@ -35,7 +35,7 @@ const TableSelectionCell = (props) => {
     theme,
   };
 
-  const onChange = (e) => {
+  const onChange = (e, value) => {
     onSelectRow(e, RowData, IsSelected);
   };
 

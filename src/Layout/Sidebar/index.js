@@ -43,10 +43,12 @@ const ToggleSidebarButton = styled.div`
     opacity: 1;
   }
 
-  & span {
-    transform: ${(props) =>
-      props.sidebarCollapsed ? "rotate(180deg)" : "rotate(0)"};
-    transition: transform 0.6s ease-in-out;
+  & > span {
+    & > .sidebar-icon-lnc {
+      transform: ${(props) =>
+        props.sidebarCollapsed ? "rotate(180deg)" : "rotate(0)"};
+      transition: transform 0.6s ease;
+    }
   }
 `;
 
@@ -93,6 +95,7 @@ const Sidebar = React.forwardRef((props, ref) => {
         >
           <span>
             <Icon
+              className="sidebar-icon-lnc"
               icon={placement == "right" ? "angle-right" : "angle-left"}
               color="neutral"
             />
