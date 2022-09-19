@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import KanbanCard from "./components/KanbanCard";
 import KanbanColumn from "./components/KanbanColumn";
-import { DndProvider, useDrag } from "react-dnd";
+import KanbanContainer from "./components/KanbanContainer";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { cloneDeep } from "lodash";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
@@ -12,8 +13,6 @@ import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 const Container = styled.div`
   border-radius: 8px;
   padding: 12px;
-  border: 1px solid #ededed;
-
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -60,7 +59,16 @@ const Column = styled.div`
 
 const Kanban = (props) => {
   //
-  const { size, color, style, className, data, onDrop, itemType } = props;
+  const {
+    size,
+    color,
+    style,
+    className,
+    data,
+    onColumnDrop,
+    onCardDrop,
+    itemType,
+  } = props;
 
   const theme = useTheme();
 
@@ -105,11 +113,15 @@ const Kanban = (props) => {
 
   return (
     <Container {...themeProps}>
-      <CardsContainer>
-        <DndProvider backend={HTML5Backend}>
-          {data.map((x) => renderColumn(x))}
-        </DndProvider>
-      </CardsContainer>
+      <DndProvider backend={HTML5Backend}>
+        <KanbanContainer
+          data={data}
+          onColumnDrop={onColumnDrop}
+          onCardDrop={onCardDrop}
+        >
+          {props.children}
+        </KanbanContainer>
+      </DndProvider>
     </Container>
   );
 };

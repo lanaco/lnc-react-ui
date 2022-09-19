@@ -1,0 +1,25 @@
+import { Meta, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import KanbanV2 from "./index";
+import styled from "@emotion/styled";
+import Story from "./story";
+
+<Meta title="Data Display/Kanban V2" component={KanbanV2} />
+
+export const TemplateDefault = (args) => {
+  return <Story {...args} />;
+};
+
+# KanbanV2
+
+```jsx
+import { KanbanV2 } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
