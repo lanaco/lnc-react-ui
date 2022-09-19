@@ -181,13 +181,14 @@ import { TableView } from "@lnc-react-ui";
 ## Custom Components
 
 Component in TableView can be overriden with custom components. The component will receive the same props as the 'built-in' component.
-The custom component must have a ¨`__TYPE__` property with one of the values: `TABLE`, `ACTIONS_TOOLBAR`, `PAGINATION`.
+The custom component must have a ¨`__TYPE__` property with one of the values: `TABLE`, `ACTIONS_TOOLBAR`, `PAGINATION`. 
+If custom components are not provided, default components will be rendered.
 
 <Canvas>
   <Story name="Custom Components" args={{}}>
     {
       <TableView>
-        <CustomToolbar __TYPE__="TABLE_VIEW_TOOLBAR" />
+        <CustomToolbar __TYPE__="ACTIONS_TOOLBAR" />
         <CustomTable __TYPE__="TABLE" />
         <CustomPagination __TYPE__="PAGINATION" />
       </TableView>
