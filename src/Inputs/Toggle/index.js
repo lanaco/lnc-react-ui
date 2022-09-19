@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -155,8 +155,8 @@ const Container = styled.label`
     position: absolute;
     cursor: pointer;
     opacity: 0;
-    height: 0;
-    width: 0;
+    height: 100%;
+    width: 100%;
     transition: all 0.2s ease;
   }
 
@@ -375,8 +375,10 @@ const Toggle = (props) => {
     labelPosition,
     spaceBetween,
     unicodeIcon,
+    tabIndex,
     //----------------
     onChange,
+    change,
     onFocus,
     onBlur,
     //----------------
@@ -412,6 +414,7 @@ const Toggle = (props) => {
       className={className}
       style={style}
       unicodeIcon={unicodeIcon}
+      tabIndex={-1}
     >
       <input
         type="checkbox"
@@ -427,11 +430,12 @@ const Toggle = (props) => {
           setFocused(false);
           if (onBlur) onBlur(e);
         }}
+        tabIndex={tabIndex}
         {...rest}
       />
-      <span className={"toggle-slider"} />
+      <span tabIndex={-1} className={"toggle-slider"} />
 
-      {label && <Label title={label} {...themeProps}>{label}</Label>}
+      {label && <Label tabIndex={-1} title={label} {...themeProps}>{label}</Label>}
     </Container>
   );
 };
@@ -444,8 +448,10 @@ Toggle.defaultProps = {
   unicodeIcon: "",
   labelPosition: "right",
   spaceBetween: false,
+  tabIndex: 0,
   //-------------------------------
   onChange: () => { },
+  change: () => { },
   onFocus: () => { },
   onBlur: () => { },
   //-------------------------------
@@ -463,8 +469,10 @@ Toggle.propTypes = {
   unicodeIcon: PropTypes.string,
   labelPosition: PropTypes.oneOf(["right", "left"]),
   spaceBetween: PropTypes.bool,
+  tabIndex: PropTypes.number,
   //-------------------------------
   onChange: PropTypes.func,
+  change: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   //-------------------------------

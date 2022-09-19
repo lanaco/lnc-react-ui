@@ -12,8 +12,16 @@ import { useUpdateEffect } from "react-use";
 const Container = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
-  width: fit-content;
+  width: 100%;
   gap: 0.375rem;
+  justify-content: ${props => props.horizontalAlignment};
+`;
+
+const PaginationContainer = styled.div`
+ & > .button-group-pagination-lnc {
+  width: 100%;
+  justify-content: ${props => props.horizontalAlignment};
+ }
 `;
 
 //========================================================================
@@ -31,9 +39,9 @@ const Pagination = (props) => {
     disabledFirst,
     disabledLast,
     disabled,
-
     totalNumberOfPages,
     pagesOffset,
+    horizontalAlignment,
     //------------------
     onPageChange,
     //------------------
@@ -51,22 +59,22 @@ const Pagination = (props) => {
 
   useUpdateEffect(() => {
     setPage(currentPage);
-  }, [currentPage])
+  }, [currentPage]);
 
   useUpdateEffect(() => {
     onPageChange(page);
-  }, [page])
+  }, [page]);
 
   //======================== METHODS ==========================================
-
 
   const handlePageClick = (e, p) => {
     if (p == "next" && page < totalNumberOfPages) setPage(page + 1);
     else if (p == "previous" && page > 1) setPage(page - 1);
-    else if (p == "last" && page != totalNumberOfPages) setPage(totalNumberOfPages);
+    else if (p == "last" && page != totalNumberOfPages)
+      setPage(totalNumberOfPages);
     else if (p == "first" && page != 1) setPage(1);
     else if (!isNaN(+p)) setPage(p);
-  }
+  };
 
   //======================== RENDER ==========================================
 
@@ -74,39 +82,53 @@ const Pagination = (props) => {
     let pagesButtons = [];
 
     //before offset
-    for (let i = (page - pagesOffset > 0 ? page - pagesOffset : 1); (i < page && i > 0); i++) {
-      pagesButtons.push(<Button
-        key={i}
-        {...themeProps}
-        borderRadius={borderRadius}
-        onClick={(e) => handlePageClick(e, i)}
-        type={"basic"}
-        text={i.toString()}
-        disabled={disabled}
-      />)
+    for (
+      let i = page - pagesOffset > 0 ? page - pagesOffset : 1;
+      i < page && i > 0;
+      i++
+    ) {
+      pagesButtons.push(
+        <Button
+          key={i}
+          {...themeProps}
+          borderRadius={borderRadius}
+          onClick={(e) => handlePageClick(e, i)}
+          type={"basic"}
+          text={i.toString()}
+          disabled={disabled}
+        />
+      );
     }
 
     //current page
-    pagesButtons.push(<Button
-      key={page}
-      {...themeProps}
-      borderRadius={borderRadius}
-      type={currentPageButtonType}
-      text={page.toString()}
-      disabled={disabled}
-    />)
-
-    //after offset
-    for (let i = page + 1; (i <= page + pagesOffset && i <= totalNumberOfPages); i++) {
-      pagesButtons.push(<Button
-        key={i}
+    pagesButtons.push(
+      <Button
+        key={page}
         {...themeProps}
         borderRadius={borderRadius}
-        onClick={(e) => handlePageClick(e, i)}
-        type={"basic"}
-        text={i.toString()}
+        type={currentPageButtonType}
+        text={page.toString()}
         disabled={disabled}
-      />);
+      />
+    );
+
+    //after offset
+    for (
+      let i = page + 1;
+      i <= page + pagesOffset && i <= totalNumberOfPages;
+      i++
+    ) {
+      pagesButtons.push(
+        <Button
+          key={i}
+          {...themeProps}
+          borderRadius={borderRadius}
+          onClick={(e) => handlePageClick(e, i)}
+          type={"basic"}
+          text={i.toString()}
+          disabled={disabled}
+        />
+      );
     }
 
     return pagesButtons;
@@ -162,17 +184,19 @@ const Pagination = (props) => {
 
   if (withButtonGroup)
     return (
-      <ButtonGroup
-        className={className}
-        style={style}
-        borderRadius={borderRadius}
-      >
-        {renderButtons()}
-      </ButtonGroup>
+      <PaginationContainer horizontalAlignment={horizontalAlignment}>
+        <ButtonGroup
+          className={"button-group-pagination-lnc " + className}
+          style={style}
+          borderRadius={borderRadius}
+        >
+          {renderButtons()}
+        </ButtonGroup>
+      </PaginationContainer>
     );
 
   return (
-    <Container className={className} style={style}>
+    <Container horizontalAlignment={horizontalAlignment} className={className} style={style}>
       {renderButtons(borderRadius)}
     </Container>
   );
@@ -192,8 +216,9 @@ Pagination.defaultProps = {
   disabledLast: false,
   totalNumberOfPages: 1,
   pagesOffset: 0,
+  horizontalAlignment: "left",
   //-------------------------------
-  onPageChange: () => { },
+  onPageChange: () => {},
   //-------------------------------
   style: {},
   className: "",
@@ -254,6 +279,7 @@ Pagination.propTypes = {
    *  Applies to the Last button
    */
   disabledLast: PropTypes.bool,
+  horizontalAlignment: PropTypes.oneOf(["left", "center", "right"]),
   //-------------------------------
   onPageChange: PropTypes.func,
   //-------------------------------

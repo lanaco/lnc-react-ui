@@ -1,20 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import TableViewToolbar from "./TableViewToolbar";
+import ActionsToolbar from "./ActionsToolbar";
 import { useState } from "react";
 import Pagination from "../../Utility/Pagination/index";
+import { getCustomRender, renderCustomElement } from "../../_utils/utils";
+import Table from "../Table";
 
 const StyledView = styled.div``;
 
 const TableView = React.forwardRef((props, ref) => {
   const {
-    table,
+    tableProps,
+    paginationProps,
+    rowsSingleSelect,
+    rowsMultiSelect,
     loading,
     showCreate,
     enableCreate,
-    showDetails,
-    enableDetailsOnSelection,
+    enableDetails,
     showEdit,
     enableEditOnSelection,
     showDelete,
@@ -25,7 +29,6 @@ const TableView = React.forwardRef((props, ref) => {
     pagination,
     enableSorting,
     enableFiltering,
-    paginationProps,
     //----------------
     onCreate,
     onEdit,
@@ -42,14 +45,11 @@ const TableView = React.forwardRef((props, ref) => {
     ...rest
   } = props;
 
-  //selected row -- ref maybe
   const toolbarProps = {
     showCreate,
     enableCreate,
     showCopy,
     enableCopyOnSelection,
-    showDetails,
-    enableDetailsOnSelection,
     showEdit,
     enableEditOnSelection,
     showDelete,
@@ -61,32 +61,24 @@ const TableView = React.forwardRef((props, ref) => {
 
   const handleSelectedRow = (row, isSelected) => {
     if (isSelected) {
-      setSelectedRows([...selectedRows, row]);
+      rowsMultiSelect ? setSelectedRows([...selectedRows, row]) : (rowsSingleSelect ? setSelectedRows([row]) : null);
     } else {
-      setSelectedRows((rows) => rows.filter((r) => r != row));
+      rowsMultiSelect ? setSelectedRows((rows) => rows.filter((r) => r != row)) : setSelectedRows([]);
     }
   };
 
-  //onSelectRow
-  const clonedTable = () => {
-    if (table) {
-      return React.cloneElement(table, {
-        onSelectRow: (e, row, isSelected) => {
-          handleSelectedRow(row, !isSelected);
-        },
-        SelectedData: selectedRows,
-        EnableSelection: true,
-      });
-    }
-  };
+  const handleRowClick = (e, rowData) => {
+    if(tableProps?.onRowClick) tableProps.onRowClick(e, rowData);
 
-
-  const handleCreate = (e) => {
-    onCreate(e);
+    handleDetails(rowData, e)
   };
 
   const handleDetails = (e) => {
     onDetails(selectedRows, e);
+  };
+
+  const handleCreate = (e) => {
+    onCreate(e);
   };
 
   const handleCopy = (e) => {
@@ -105,29 +97,71 @@ const TableView = React.forwardRef((props, ref) => {
     onPageChange(page);
   }
 
-  return (
-    <StyledView ref={ref} {...rest}>
-      <TableViewToolbar
+  const renderToolbar = () => {
+    return (
+      renderCustomElement(
+        getCustomRender("ACTIONS_TOOLBAR", children),
+        toolbarProps,
+        children
+      ) || <ActionsToolbar
         {...toolbarProps}
         selectedRowsLength={selectedRows?.length ? selectedRows.length : 0}
         onCreate={handleCreate}
         onCopy={handleCopy}
         onEdit={handleEdit}
-        onDetails={handleDetails}
         onDelete={handleDelete}
       />
-      {clonedTable()}
-      <Pagination {...paginationProps} onPageChange={handlePageChange}/>
+    );
+  };
+
+  const renderTable = () => {
+    return (
+      renderCustomElement(
+        getCustomRender("TABLE", children),
+        tableProps,
+        children
+      ) || <Table
+        EnableSelection={rowsSingleSelect || rowsMultiSelect}
+        onSelectRow={(e, row, isSelected) => handleSelectedRow(row, !isSelected)}
+        SelectedData={selectedRows}
+        onRowClick={handleRowClick}
+        {...tableProps}
+      />
+    );
+  };
+
+
+  const renderPagination = () => {
+    return (
+      renderCustomElement(
+        getCustomRender("PAGINATION", children),
+        paginationProps,
+        children
+      ) || <Pagination
+        {...paginationProps}
+        onPageChange={handlePageChange} />
+    );
+  };
+
+  return (
+    <StyledView ref={ref} {...rest}>
+      {renderToolbar()}
+      {renderTable()}
+      {renderPagination()}
     </StyledView>
   );
 });
 
 TableView.defaultProps = {
+  tableProps: {},
+  tableProps: {},
+  paginationProps: {},
+  rowsSingleSelect: true,
+  rowsMultiSelect: false,
   loading: false,
   showCreate: true,
   enableCreate: true,
-  showDetails: true,
-  enableDetailsOnSelection: true,
+  enableDetails: true,
   showDelete: true,
   enableDeleteOnSelection: true,
   showCopy: true,
@@ -136,35 +170,39 @@ TableView.defaultProps = {
   enableSorting: true,
   enableFiltering: true,
   //-----------------------
-  onCreate: () => {},
-  onEdit: (row) => {},
-  onDelete: (row) => {},
-  onDetails: (row) => {},
-  onCopy: (row) => {},
-  onFilter: () => {},
-  onSort: () => {},
-  onPageChange: (page) => {},
+  onCreate: () => { },
+  onEdit: (row) => { },
+  onDelete: (row) => { },
+  onDetails: (row) => { },
+  onCopy: (row) => { },
+  onFilter: () => { },
+  onSort: () => { },
+  onPageChange: (page) => { },
   //-----------------------
   style: {},
 };
 
 TableView.propTypes = {
+  tableProps: PropTypes.object,
+  toolbarProps: PropTypes.object,
+  paginationProps: PropTypes.object,
+  rowsSingleSelect: PropTypes.bool,
+  rowsMultiSelect: PropTypes.bool,
   //table props multi select, loading, view loading ????
   loading: PropTypes.bool,
   showCreate: PropTypes.bool,
   enableCreate: PropTypes.bool,
-  showDetails: PropTypes.bool,
-  enableDetailsOnSelection: PropTypes.bool,
+  enableDetails: PropTypes.bool,
   showEdit: PropTypes.bool,
   enableEditOnSelection: PropTypes.bool,
   showDelete: PropTypes.bool,
   enableDeleteOnSelection: PropTypes.bool,
   showCopy: PropTypes.bool,
   enableCopyOnSelection: PropTypes.bool,
-    /**
-   * if enable=`enable` the action is always enabled, if enableOnSelection=`true` it is enabled only when one row is selected. 
-   * By default show=`true` and enable=`true`
-   */
+  /**
+ * if enable=`enable` the action is always enabled, if enableOnSelection=`true` it is enabled only when one row is selected. 
+ * By default show=`true` and enable=`true`
+ */
   /**
    * Actions that will be shown in toolbar with existing actions
    * customActions=[{name: `<string>`, show: `<bool>`, enable: `<bool>`, enableOnSelection: `<bool>`, onAction: `PropTypes.func`, customAction: `PropTypes.element`}, ...]
@@ -176,7 +214,6 @@ TableView.propTypes = {
   pagination: PropTypes.bool,
   enableSorting: PropTypes.bool,
   enableFiltering: PropTypes.bool,
-  paginationProps: PropTypes.object,
   //-------------------------------------------------------------
   onCreate: PropTypes.func,
   onEdit: PropTypes.func,
@@ -186,7 +223,6 @@ TableView.propTypes = {
   onFilter: PropTypes.func,
   onSort: PropTypes.func,
   onPageChange: PropTypes.func,
-  //page prop?????
   //------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,

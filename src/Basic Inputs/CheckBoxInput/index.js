@@ -226,6 +226,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       tabIndex={-1}
       disabled={true}
       {...themeProps}
+      {...rest}
     >
       <Checkmark
         {...themeProps}

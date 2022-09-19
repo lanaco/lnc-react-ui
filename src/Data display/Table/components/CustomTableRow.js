@@ -63,7 +63,6 @@ CustomTableRow.defaultProps = {
 CustomTableRow.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-
   //----------------------------------------
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([

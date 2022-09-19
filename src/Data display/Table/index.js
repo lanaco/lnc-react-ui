@@ -19,12 +19,8 @@ import TableRowStatusIndicatorCell from "./components/TableRowStatusIndicatorCel
 import TableHeadRowStatusIndicatorCell from "./components/TableHeadRowStatusIndicatorCell";
 import Spinner from "../../Feedback/Spinner/index";
 import {
-  getBorderRadiusValueWithUnits,
   getColorRgbaValue,
   getComponentTypographyCss,
-  getDisabledStateCss,
-  getOutlineCss,
-  getSizeValueWithUnits,
 } from "../../_utils/utils";
 
 const Container = styled.div`
@@ -65,9 +61,7 @@ const HtmlTable = styled.table`
   border-radius: 0.5rem;
   border-style: hidden;
   table-layout: fixed;
-  box-shadow: 0 0 0 0.0625rem
-    ${(props) =>
-      getColorRgbaValue(props.theme, "Table", null, "enabled", "border")};
+  ${props => props.noBorder == false && `box-shadow: 0 0 0 0.0625rem ${getColorRgbaValue(props.theme, "Table", null, "enabled", "border")};`}
 `;
 
 const NoDataRow = styled.span`
@@ -110,6 +104,7 @@ const Table = forwardRef((props, ref) => {
     EnableLoader,
     PreRenderedTableBody = false,
     PreRenderedTableHead = false,
+    noBorder,
     //--------------------
     EnableRowStatusIndicator,
     EnableRowHighlight,
@@ -346,7 +341,7 @@ const Table = forwardRef((props, ref) => {
         rowProps,
         children
       ) || (
-        <TableRow {...rowProps} key={index}>
+        <TableRow {...rowProps} key={index} noBorder={noBorder}>
           {children}
         </TableRow>
       )
@@ -547,7 +542,7 @@ const Table = forwardRef((props, ref) => {
           {renderCustomElement(
             getCustomRender("TABLE_ROW_STATUS_INDICATOR_CELL", props.children),
             cellProps
-          ) || <TableRowStatusIndicatorCell {...cellProps} />}
+          ) || <TableRowStatusIndicatorCell {...cellProps} noBorder={noBorder}/>}
         </>
       );
 
@@ -648,6 +643,7 @@ const Table = forwardRef((props, ref) => {
           width={tableWidth || "100%"}
           data-table={true}
           ref={tableRef}
+          noBorder={noBorder}
         >
           {renderTableHead()}
           {renderTableBody()}
@@ -685,6 +681,7 @@ Table.defaultProps = {
   Columns: [],
   Data: [],
   //--------------------
+  noBorder: false,
   EnableSelection: false,
   EnableOrdering: false,
   EnableLoader: false,
@@ -725,6 +722,7 @@ Table.propTypes = {
    */
   ID: PropTypes.string.isRequired,
   //----------------------------------------
+  noBorder: PropTypes.bool,
   /**
    * Show a selection checkbox in the first cell of every row.
    * Value of the checkbox is determined by the `SelectedData` property.

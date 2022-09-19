@@ -83,14 +83,13 @@ const Popover = React.forwardRef((props, ref) => {
   const [popoverPosition, setPopoverPosition] = useState();
 
   useEffect(() => {
-    if (anchorElement) {
+    if (anchorElement && show == true) {
       let anchorElPosition = getElementPosition(anchorElement);
       let anchorViewPortPosition = getElementViewPortPosition(anchorElement);
       if (anchorElPosition && anchorViewPortPosition)
         setPopoverPosition(findPopoverPosition(anchorElPosition, anchorViewPortPosition));
     }
-  }, [anchorElement, vertical, horizontal])
-
+  }, [anchorElement, vertical, horizontal, show])
 
   const findPopoverPosition = (anchorElPosition, anchorViewPortPosition) => {
     const { clientHeight: windowHeight, clientWidth: windowWidth } = document.body;
@@ -182,7 +181,7 @@ const Popover = React.forwardRef((props, ref) => {
   const getElementViewPortPosition = (element) => {
     return element.getBoundingClientRect();
   }
-
+  
   return (
     createPortal(
     <StyledPopover theme={theme} ref={ref ? ref : popoverRef} zIndex={zIndex} position={popoverPosition} show={show} borderRadius={borderRadius} className={className} style={style} {...rest}>
