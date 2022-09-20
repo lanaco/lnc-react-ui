@@ -27,26 +27,29 @@ const Story = (props) => {
     ],
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  const onColumnMoved = (event, newColumnsOrder) => {
+  const onColumnMoved = (e, columns) => {
     var newData = {};
 
-    newColumnsOrder.forEach((c) => {
+    columns.forEach((c) => {
       newData[c] = data[c];
     });
 
-    setData(newData);
+    setData(cloneDeep(newData));
   };
 
-  const onCardMoved = (id) => {
-    // console.log(`Card ${id} moved!`);
+  const onCardMoved = (e, items, column) => {
+    // var dataCopy = cloneDeep(data);
+    // dataCopy[column] = items[column];
+    // console.log(dataCopy);
+    // setData(dataCopy);
   };
 
-  const onCardChangedColumns = (id) => {
-    // console.log(`Card ${id} changed to new column!`);
+  const onCardChangedColumns = (event, cachedItems, column, previousColumn) => {
+    // var dataCopy = cloneDeep(data);
+    // var current = dataCopy[column];
+    // dataCopy[column] = items[column];
+    // console.log(dataCopy);
+    // setData(dataCopy);
   };
 
   return (

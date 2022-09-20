@@ -499,8 +499,6 @@ const KanbanV2 = (props) => {
       const overIndex = findIndex(items[overContainer], (x) => x.id == overId);
 
       if (activeIndex !== overIndex) {
-        onCardMoved(active.id);
-
         cachedItems = {
           ...cachedItems,
           [overContainer]: arrayMove(
@@ -521,10 +519,9 @@ const KanbanV2 = (props) => {
       }
     }
 
-    // Calculate triggering some kind of save method
     if (!columnReorder) {
-      var prevCol = null;
-      var currCol = null;
+      var prevCol,
+        currCol = null;
 
       var prevIndex,
         newIndex = -1;
@@ -556,10 +553,12 @@ const KanbanV2 = (props) => {
         }
       });
 
-      if (prevCol == currCol) {
-        if (prevIndex !== newIndex) console.log("Just reorder");
-      } else {
-        console.log("New column");
+      if (prevCol === currCol && prevIndex !== newIndex) {
+        onCardMoved(event, cachedItems, currCol);
+      }
+
+      if (prevCol !== currCol) {
+        onCardChangedColumns(event, cachedItems, currCol, prevCol);
       }
     }
 
