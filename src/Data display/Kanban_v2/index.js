@@ -42,6 +42,7 @@ import { createRange } from "./utilities";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { findIndex, cloneDeep } from "lodash";
+import { useEffectOnce, useUpdate, useUpdateEffect } from "react-use";
 
 //============== STYLES ==================================================
 
@@ -256,7 +257,7 @@ const KanbanV2 = (props) => {
       }
   );
 
-  const [containers, setContainers] = useState(Object.keys(items));
+  const [containers, setContainers] = useState(Object.keys(data));
   const [activeId, setActiveId] = useState(null);
 
   const lastOverId = useRef(null);
@@ -340,6 +341,16 @@ const KanbanV2 = (props) => {
   );
 
   //================== LIFECYCLE =====================
+
+  useEffectOnce(() => {
+    setItems(data);
+    setContainers(Object.keys(data));
+  });
+
+  useUpdateEffect(() => {
+    setItems(data);
+    setContainers(Object.keys(data));
+  }, [data]);
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -445,7 +456,7 @@ const KanbanV2 = (props) => {
   const onDragEnd = (event) => {
     const { active, over } = event;
 
-    const columnReorder = false;
+    var columnReorder = false;
     var cachedItems = cloneDeep(items);
 
     if (active.id in items && over?.id) {
@@ -453,11 +464,13 @@ const KanbanV2 = (props) => {
         columnReorder = true;
         const activeIndex = containers.indexOf(active.id);
         const overIndex = containers.indexOf(over.id);
-        var mewContainers = arrayMove(containers, activeIndex, overIndex);
+        var newContainers = arrayMove(containers, activeIndex, overIndex);
 
-        if (active.id !== over.id) onColumnMoved(active.id);
+        if (active.id !== over.id) {
+          onColumnMoved(event, newContainers);
+        }
 
-        return mewContainers;
+        return newContainers;
       });
     }
 

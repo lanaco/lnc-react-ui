@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import KanbanV2 from ".";
 import { useState, useCallback } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
-import { findIndex } from "lodash";
+import { cloneDeep } from "lodash";
+import { useEffect } from "react";
 
 const Container = styled.div``;
 
@@ -26,8 +27,18 @@ const Story = (props) => {
     ],
   });
 
-  const onColumnMoved = (id) => {
-    console.log(`Column ${id} moved!`);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  const onColumnMoved = (event, newColumnsOrder) => {
+    var newData = {};
+
+    newColumnsOrder.forEach((c) => {
+      newData[c] = data[c];
+    });
+
+    setData(newData);
   };
 
   const onCardMoved = (id) => {
