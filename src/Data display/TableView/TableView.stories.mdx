@@ -1,12 +1,22 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Table from "../Table";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import TableView from "./index";
 import Button from "../../General/Button/index";
 import ActionsToolbar from "./ActionsToolbar";
+import Modal from "../../Utility/Modal";
+import FormField from "../../Layout/FormField";
+import FlexGrid from "../../Layout/FlexGrid";
+import FlexGridItem from "../../Layout/FlexGrid/FlexGridItem";
+import TextInput from "../../Basic Inputs/TextInput";
+import NumberInput from "../../Basic Inputs/NumberInput";
 
-<Meta title="Data Display/Table View" component={TableView} subcomponents={{ActionsToolbar}}/>
+<Meta
+  title="Data Display/Table View"
+  component={TableView}
+  subcomponents={{ ActionsToolbar }}
+/>
 
 export const Columns = [
   {
@@ -42,6 +52,21 @@ export const Columns = [
     displayName: "Balance",
     accessor: "balance",
     width: 20,
+    sortable: true,
+  },
+];
+
+export const Cols = [
+  {
+    id: 1,
+    displayName: "Name",
+    accessor: "name",
+    sortable: true,
+  },
+  {
+    id: 2,
+    displayName: "Address",
+    accessor: "address",
     sortable: true,
   },
 ];
@@ -114,9 +139,146 @@ export const Data = [
   },
 ];
 
+export const PagedData = {
+  1: [
+    {
+      id: "61f7b8ea2fe061cacbcdbfea",
+      isActive: true,
+      balance: "$1,476.66",
+      age: 21,
+      name: "Katie Wilson",
+      gender: "female",
+      company: "QUAREX",
+      email: "katiewilson@quarex.com",
+      phone: "(807) 443-2274",
+      address: "125 Oceanview Avenue, Moquino, Mississippi, 418",
+      status: "banned",
+    },
+    {
+      id: "61f7b8ea63d0fc830f326350",
+      isActive: false,
+      balance: "$3,239.46",
+      age: 32,
+      name: "Delgado Lott",
+      gender: "male",
+      company: "XYMONK",
+      email: "delgadolott@xymonk.com",
+      phone: "(973) 427-2565",
+      address: "402 Vernon Avenue, Draper, Florida, 6921",
+      status: "banned",
+    },
+    {
+      id: "61f7b8eaf418ca604fcdffba",
+      isActive: false,
+      balance: "$3,804.94",
+      age: 21,
+      name: "Frankie Jacobson",
+      gender: "female",
+      company: "QUAREX",
+      email: "frankiejacobson@qualitex.com",
+      phone: "(825) 404-3871",
+      address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
+      status: "inactive",
+    },
+    {
+      id: "61f7b8ea066dfb5760224b71",
+      isActive: true,
+      balance: "$3,731.79",
+      age: 29,
+      name: "Lynch Sims",
+      gender: "male",
+      company: "EARTHPURE",
+      email: "lynchsims@earthpure.com",
+      phone: "(979) 489-3188",
+      address: "620 Riverdale Avenue, Greenbush, New Mexico, 9605",
+      status: "active",
+    },
+    {
+      id: "61f7b8eadd6586c40491b91e",
+      isActive: true,
+      balance: "$2,116.41",
+      age: 30,
+      name: "Black William",
+      gender: "male",
+      company: "QUAREX",
+      email: "blackwilliam@rodeomad.com",
+      phone: "(818) 583-2805",
+      address: "125 Kathleen Court, Bergoo, Michigan, 1206",
+      status: "banned",
+    },
+  ],
+  2: [
+    {
+      id: "61f7b1ea2fe061cacbcdbfea",
+      isActive: true,
+      balance: "$1,476.66",
+      age: 21,
+      name: "Will Wilson",
+      gender: "male",
+      company: "QUAREX",
+      email: "katiewilson@quarex.com",
+      phone: "(807) 443-2274",
+      address: "125 Oceanview Avenue, Moquino, Mississippi, 418",
+      status: "banned",
+    },
+    {
+      id: "6117b8ea63d0fc830f326350",
+      isActive: false,
+      balance: "$3,239.46",
+      age: 32,
+      name: "Lottie Delgado",
+      gender: "female",
+      company: "XYMONK",
+      email: "delgadolott@xymonk.com",
+      phone: "(973) 427-2565",
+      address: "402 Vernon Avenue, Draper, Florida, 6921",
+      status: "banned",
+    },
+    {
+      id: "6147b8eaf418ca604fcdffba",
+      isActive: false,
+      balance: "$3,804.94",
+      age: 21,
+      name: "Jacob Frankson",
+      gender: "male",
+      company: "QUAREX",
+      email: "frankiejacobson@qualitex.com",
+      phone: "(825) 404-3871",
+      address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
+      status: "inactive",
+    },
+    {
+      id: "6157b8ea066dfb5760224b71",
+      isActive: true,
+      balance: "$3,731.79",
+      age: 29,
+      name: "Lync Sim",
+      gender: "male",
+      company: "LANACO",
+      email: "lynchsims@earthpure.com",
+      phone: "(979) 489-3188",
+      address: "620 Riverdale Avenue, Greenbush, New Mexico, 9605",
+      status: "active",
+    },
+    {
+      id: "6167b8eadd6586c40491b91e",
+      isActive: false,
+      balance: "$5,116.41",
+      age: 3,
+      name: "White William",
+      gender: "female",
+      company: "QUAREX",
+      email: "whitewilliam@rodeomad.com",
+      phone: "(818) 583-2805",
+      address: "125 Kathleen Court, Bergoo, Michigan, 1206",
+      status: "banned",
+    },
+  ],
+};
+
 export const CustomToolbar = (props) => {
   return (
-    <div>
+    <div className={props?.className}>
       <Button text="Custom Action" type="outline" onClick={() => {}} />
       &nbsp;
       <Button text="Custom Action 2" type="outline" onClick={() => {}} />
@@ -130,7 +292,7 @@ export const CustomTable = (props) => {
 
 export const CustomPagination = (props) => {
   return (
-    <div>
+    <div className={props?.className}>
       <Button text="Previous" type="outline" onClick={() => {}} />
       &nbsp;
       <Button text="Next" type="outline" onClick={() => {}} />
@@ -138,41 +300,39 @@ export const CustomPagination = (props) => {
   );
 };
 
-# Table
+# Table View
 
 ```jsx
 import { TableView } from "@lnc-react-ui";
 ```
 
-<Story name="Default" args={{}}>
-  {
-    <TableView
-      customActions={[
-        {
-          name: "Action 1",
-          enableOnSelection: true,
-          onAction: () => {
-            console.log("onact");
+<Canvas>
+  <Story name="Default" args={{}}>
+    {
+      <TableView
+        customActions={[
+          {
+            name: "Action 1",
+            enableOnSelection: true,
+            onAction: () => {},
           },
-        },
-        {
-          name: "Action 2",
-          icon: "cog",
-          enableOnSelection: true,
-          onAction: () => {
-            console.log("onact");
+          {
+            name: "Action 2",
+            icon: "cog",
+            enableOnSelection: true,
+            onAction: () => {},
           },
-        },
-      ]}
-      tableProps={{ RowIdentifier: "id", Columns: Columns, Data: Data }}
-      paginationProps={{
-        currentPage: 2,
-        totalNumberOfPages: 10,
-        pagesOffset: 2,
-      }}
-    ></TableView>
-  }
-</Story>
+        ]}
+        tableProps={{ RowIdentifier: "id", Columns: Columns, Data: Data }}
+        paginationProps={{
+          currentPage: 2,
+          totalNumberOfPages: 10,
+          pagesOffset: 2,
+        }}
+      ></TableView>
+    }
+  </Story>
+</Canvas>
 
 <br />
 
@@ -181,7 +341,7 @@ import { TableView } from "@lnc-react-ui";
 ## Custom Components
 
 Component in TableView can be overriden with custom components. The component will receive the same props as the 'built-in' component.
-The custom component must have a ¨`__TYPE__` property with one of the values: `TABLE`, `ACTIONS_TOOLBAR`, `PAGINATION`. 
+The custom component must have a ¨`__TYPE__` property with one of the values: `TABLE`, `ACTIONS_TOOLBAR`, `PAGINATION`.
 If custom components are not provided, default components will be rendered.
 
 <Canvas>
@@ -196,11 +356,219 @@ If custom components are not provided, default components will be rendered.
   </Story>
 </Canvas>
 
-
 # Actions Toolbar
 
 If there is need for custom toolbar it is possible to use `ActionsToolbar` component.
 
 ```jsx
 import { ActionsToolbar } from "@lnc-react-ui";
+```
+
+<br />
+
+## Ordering
+
+<Canvas>
+  <Story name="Ordering" args={{}}>
+    {() => {
+      const [data, setData] = useState(Data);
+      const [page, setPage] = useState(1);
+      const [ordering, setOrdering] = useState({
+        columnId: 1,
+        ascending: false,
+        descending: false,
+      });
+      const sortAscending = () =>
+        [...data].sort((a, b) => (a.name > b.name ? 1 : -1));
+      const sortDescending = () =>
+        [...data].sort((a, b) => (a.name > b.name ? -1 : 1));
+      return (
+        <TableView
+          tableProps={{
+            RowIdentifier: "id",
+            Columns: Columns,
+            Data: data,
+            EnableOrdering: true,
+            Ordering: ordering,
+            onColumnClick: (e, Column, Ordering) => {
+              setOrdering(Ordering);
+              if (ordering.ascending == true) {
+                setData(sortAscending);
+              } else if (ordering.descending == true) {
+                setData(sortDescending);
+              } else {
+                setData(Data);
+              }
+            },
+          }}
+          pagination={false}
+        ></TableView>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## Pagination
+
+Handling of paginated data can be done with `onPageChange` prop.
+
+<Canvas>
+  <Story name="Pagination" args={{}}>
+    {() => {
+      const [page, setPage] = useState(1);
+      return (
+        <TableView
+          tableProps={{
+            RowIdentifier: "id",
+            Columns: Columns,
+            Data: PagedData[page],
+          }}
+          paginationProps={{
+            currentPage: 1,
+            totalNumberOfPages: 2,
+            pagesOffset: 1,
+          }}
+          onPageChange={(page) => setPage(page)}
+        ></TableView>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## Creating New Item
+
+<Story name="Creating New Item" args={{}}>
+  {() => {
+    const modalRef = useRef();
+    const formValuesRef = useRef({
+      name: "",
+      address: "",
+    });
+    const [data, setData] = useState(Data);
+    return (
+      <>
+        <TableView
+          tableProps={{
+            RowIdentifier: "id",
+            Columns: Cols,
+            Data: data,
+          }}
+          pagination={false}
+          onCreate={() => {
+            modalRef.current?.open();
+          }}
+        ></TableView>
+        <Modal ref={modalRef} header={<div></div>}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setData([
+                ...data,
+                {
+                  name: formValuesRef.current.name,
+                  address: formValuesRef.current.address,
+                },
+              ]);
+              modalRef.current.close();
+            }}
+          >
+            <FlexGrid spacing={10}>
+              <FlexGridItem col={6}>
+                <FormField label="Name">
+                  <TextInput
+                    name="Name"
+                    onChange={(e, value) =>
+                      (formValuesRef.current.name = value)
+                    }
+                  />
+                </FormField>
+              </FlexGridItem>
+              <FlexGridItem col={6}>
+                <FormField label="Address">
+                  <TextInput
+                    name="Address"
+                    onChange={(e, value) =>
+                      (formValuesRef.current.address = value)
+                    }
+                  />
+                </FormField>
+              </FlexGridItem>
+              <FlexGridItem col={6}>
+                <Button text="Save" />
+              </FlexGridItem>
+            </FlexGrid>
+          </form>
+        </Modal>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+() => {
+  const modalRef = useRef();
+  const formValuesRef = useRef({
+    name: "",
+    address: "",
+  });
+  const [data, setData] = useState(Data);
+  return (
+    <>
+      <TableView
+        tableProps={{
+          RowIdentifier: "id",
+          Columns: Cols,
+          Data: data,
+        }}
+        pagination={false}
+        onCreate={() => {
+          modalRef.current?.open();
+        }}
+      ></TableView>
+      <Modal ref={modalRef} header={<div></div>}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setData([
+              ...data,
+              {
+                name: formValuesRef.current.name,
+                address: formValuesRef.current.address,
+              },
+            ]);
+            modalRef.current.close();
+          }}
+        >
+          <FlexGrid spacing={10}>
+            <FlexGridItem col={6}>
+              <FormField label="Name">
+                <TextInput
+                  name="Name"
+                  onChange={(e, value) => (formValuesRef.current.name = value)}
+                />
+              </FormField>
+            </FlexGridItem>
+            <FlexGridItem col={6}>
+              <FormField label="Address">
+                <TextInput
+                  name="Address"
+                  onChange={(e, value) =>
+                    (formValuesRef.current.address = value)
+                  }
+                />
+              </FormField>
+            </FlexGridItem>
+            <FlexGridItem col={6}>
+              <Button text="Save" />
+            </FlexGridItem>
+          </FlexGrid>
+        </form>
+      </Modal>
+    </>
+  );
+};
 ```

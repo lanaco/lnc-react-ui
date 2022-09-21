@@ -28,110 +28,188 @@ const StyledToolbar = styled.div`
 `;
 
 const ActionsToolbar = React.forwardRef((props, ref) => {
-    const {
-        showCreate,
-        enableCreate,
-        createText,
-        showEdit,
-        enableEditOnSelection,
-        editText,
-        showDelete,
-        enableDeleteOnSelection,
-        deleteText,
-        showCopy,
-        enableCopyOnSelection,
-        copyText,
-        actionsText,
-        customActions,
-        selectedRowsLength,
-        //----------------
-        onCreate,
-        onEdit,
-        onDelete,
-        onCopy,
-    } = props;
+  const {
+    showCreate,
+    enableCreate,
+    createText,
+    showEdit,
+    enableEditOnSelection,
+    editText,
+    showDelete,
+    enableDeleteOnSelection,
+    deleteText,
+    showCopy,
+    enableCopyOnSelection,
+    copyText,
+    actionsText,
+    customActions,
+    selectedRowsLength,
+    //----------------
+    onCreate,
+    onEdit,
+    onDelete,
+    onCopy,
+    className,
+    style,
+    color,
+    size,
+    ...rest
+  } = props;
 
-
-    return <StyledToolbar>
-        <div>
-            {showCreate && <Button leadingIcon="plus" type="outline" color="primary" title={createText} disabled={!enableCreate} onClick={onCreate} text={createText} />}
-        </div>
-        <div>
-            <DropdownMenu control={<Button text={actionsText} type="outline" trailingIcon={"angle-down"}/>}>
-                {showCopy && <DropdownItem icon="copy" disabled={!(enableCopyOnSelection && selectedRowsLength == 1)} onClick={onCopy}>{copyText}</DropdownItem>}
-                {showEdit && <DropdownItem icon="pen" disabled={!(enableEditOnSelection && selectedRowsLength == 1)} onClick={onEdit}>{editText}</DropdownItem>}
-                {showDelete && <DropdownItem icon="trash" disabled={!(enableDeleteOnSelection && selectedRowsLength == 1)} onClick={onDelete}>{deleteText}</DropdownItem>}
-                <Separator />
-                {customActions?.map((action, index) => {
-                    if (action?.show != false) return (
-                        <DropdownItem 
-                        key={index}
-                        icon={action.icon}
-                        disabled={!((action.enableOnSelection == true && selectedRowsLength == 1) || (action.enable == true && action.enableOnSelection == false))} 
-                        onClick={action.onAction}>
-                            {action.name}
-                        </DropdownItem>
+  return (
+    <StyledToolbar ref={ref} className={className} style={style} {...rest}>
+      <div>
+        {showCreate && (
+          <Button
+            leadingIcon="plus"
+            type="outline"
+            color={color}
+            size={size}
+            title={createText}
+            disabled={!enableCreate}
+            onClick={onCreate}
+            text={createText}
+          />
+        )}
+      </div>
+      <div>
+        <DropdownMenu
+          color={color}
+          size={size}
+          control={
+            <Button
+              text={actionsText}
+              type="outline"
+              trailingIcon={"angle-down"}
+              color={color}
+              size={size}
+            />
+          }
+        >
+          {showCopy && (
+            <DropdownItem
+              icon="copy"
+              disabled={!(enableCopyOnSelection && selectedRowsLength == 1)}
+              onClick={onCopy}
+            >
+              {copyText}
+            </DropdownItem>
+          )}
+          {showEdit && (
+            <DropdownItem
+              icon="pen"
+              disabled={!(enableEditOnSelection && selectedRowsLength == 1)}
+              onClick={onEdit}
+            >
+              {editText}
+            </DropdownItem>
+          )}
+          {showDelete && (
+            <DropdownItem
+              icon="trash"
+              disabled={!(enableDeleteOnSelection && selectedRowsLength == 1)}
+              onClick={onDelete}
+            >
+              {deleteText}
+            </DropdownItem>
+          )}
+          <Separator />
+          {customActions?.map((action, index) => {
+            if (action?.show != false)
+              return (
+                <DropdownItem
+                  key={index}
+                  icon={action.icon}
+                  disabled={
+                    !(
+                      (action.enableOnSelection == true &&
+                        selectedRowsLength == 1) ||
+                      (action.enable == true &&
+                        action.enableOnSelection == false)
                     )
-                }
-                )}
-            </DropdownMenu>
-        </div>
+                  }
+                  onClick={action.onAction}
+                >
+                  {action.name}
+                </DropdownItem>
+              );
+          })}
+        </DropdownMenu>
+      </div>
     </StyledToolbar>
+  );
 });
 
 ActionsToolbar.defaultProps = {
-    __TYPE__: "ACTIONS_TOOLBAR",
-    showCreate: true,
-    enableCreate: true,
-    createText: "Create New item",
-    showEdit: true,
-    enableEditOnSelection: true,
-    editText: "Edit",
-    showDelete: true,
-    enableDeleteOnSelection: true,
-    deleteText: "Delete",
-    showCopy: true,
-    enableCopyOnSelection: true,
-    copyText: "Copy",
-    actionsText: "Actions",
-    selectetedRowsLength: 0,
-    //-----------------------
-    onCreate: () => { },
-    onEdit: () => { },
-    onDelete: () => { },
-    onCopy: () => { },
+  __TYPE__: "ACTIONS_TOOLBAR",
+  showCreate: true,
+  enableCreate: true,
+  createText: "Create New item",
+  showEdit: true,
+  enableEditOnSelection: true,
+  editText: "Edit",
+  showDelete: true,
+  enableDeleteOnSelection: true,
+  deleteText: "Delete",
+  showCopy: true,
+  enableCopyOnSelection: true,
+  copyText: "Copy",
+  actionsText: "Actions",
+  selectetedRowsLength: 0,
+  //-----------------------
+  onCreate: () => {},
+  onEdit: () => {},
+  onDelete: () => {},
+  onCopy: () => {},
+  //-----------------------
+  style: {},
+  color: "primary",
+  size: "small"
 };
 
 ActionsToolbar.propTypes = {
-    /**
-  * This property determines where the component is rendered.
-  * Should not be overridden!
-  */
-    __TYPE__: PropTypes.string,
-    showCreate: PropTypes.bool,
-    enableCreate: PropTypes.bool,
-    createText: PropTypes.string,
-    showEdit: PropTypes.bool,
-    enableEditOnSelection: PropTypes.bool,
-    editText: PropTypes.string,
-    showDelete: PropTypes.bool,
-    enableDeleteOnSelection: PropTypes.bool,
-    deleteText: PropTypes.string,
-    showCopy: PropTypes.bool,
-    enableCopyOnSelection: PropTypes.bool,
-    copyText: PropTypes.string,
-    actionsText: PropTypes.string,
-    /**
-     * Actions that will be shown in toolbar with existing actions
-     * customActions=[{name: `<string>`, show: `<bool>`, enable: `<bool>`, enableOnSelection: `<bool>`, onAction: `PropTypes.func`}, ...]
-     */
-    customActions: PropTypes.array,
-    selectedRowsLength: PropTypes.number,
-    //-------------------------------------------------------------
-    onCreate: PropTypes.func,
-    onEdit: PropTypes.func,
-    onDelete: PropTypes.func,
-    onCopy: PropTypes.func,
+  /**
+   * This property determines where the component is rendered.
+   * Should not be overridden!
+   */
+  __TYPE__: PropTypes.string,
+  showCreate: PropTypes.bool,
+  enableCreate: PropTypes.bool,
+  createText: PropTypes.string,
+  showEdit: PropTypes.bool,
+  enableEditOnSelection: PropTypes.bool,
+  editText: PropTypes.string,
+  showDelete: PropTypes.bool,
+  enableDeleteOnSelection: PropTypes.bool,
+  deleteText: PropTypes.string,
+  showCopy: PropTypes.bool,
+  enableCopyOnSelection: PropTypes.bool,
+  copyText: PropTypes.string,
+  actionsText: PropTypes.string,
+  /**
+   * Actions that will be shown in toolbar with existing actions
+   * customActions=[{name: `<string>`, show: `<bool>`, enable: `<bool>`, enableOnSelection: `<bool>`, onAction: `PropTypes.func`}, ...]
+   */
+  customActions: PropTypes.array,
+  selectedRowsLength: PropTypes.number,
+  //-------------------------------------------------------------
+  onCreate: PropTypes.func,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
+  onCopy: PropTypes.func,
+  //------------------------------------------------------------
+  className: PropTypes.string,
+  style: PropTypes.object,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "danger",
+    "warning",
+    "information",
+    "neutral"
+  ]),
 };
 
 export default ActionsToolbar;
