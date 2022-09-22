@@ -859,11 +859,10 @@ Table.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "danger",
+    "information",
+    "neutral",
   ]),
 };
 

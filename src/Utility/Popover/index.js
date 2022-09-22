@@ -26,7 +26,7 @@ box-shadow: ${props => getComponentPropValue(
   "enabled",
   "boxShadow")};
 border-radius: ${props => getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
-
+border-top: 1px solid rgba(0, 0, 0, 0.04);
 box-sizing: border-box;
 max-width: ${props => props.position?.maxWidth ? (props.position.maxWidth != "100vw" ? props.position.maxWidth + "px" : "100vw") : "100vw"};
 max-height: ${props => props.position?.maxHeight ? (props.position.maxHeight != "100vh" ? props.position.maxHeight + "px" : "100vh") : "100vh"};

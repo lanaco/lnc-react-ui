@@ -2,6 +2,10 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import TextInput from "./index";
 import Icon from "../../General/Icon";
+import DropdownMenu from "../../Utility/DropdownMenu";
+import DropdownItem from "../../Utility/DropdownMenu/DropdownItem";
+import { useState } from "react";
+import Button from "../../General/Button";
 
 <Meta title="Basic Inputs/Text Input" component={TextInput} />
 
@@ -26,7 +30,11 @@ export const TemplateColors = (args) => (
     <TextInput {...args} color="success" placeholder="This is success input." />
     <TextInput {...args} color="warning" placeholder="This is warning input." />
     <TextInput {...args} color="danger" placeholder="This is danger input." />
-    <TextInput {...args} color="information" placeholder="This is info input." />
+    <TextInput
+      {...args}
+      color="information"
+      placeholder="This is info input."
+    />
   </div>
 );
 
@@ -34,7 +42,7 @@ export const TemplateAddons = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
     <TextInput
       {...args}
-      prefix={<Icon icon="envelope"/>}
+      prefix={<Icon icon="envelope" />}
       suffix="EUR"
       placeholder="Icon prefix and text suffix."
     />
@@ -106,5 +114,28 @@ Defining `size` with `small`, `medium` and `large` values.
 <Canvas>
   <Story name="Prefix and suffix" args={{}}>
     {TemplateAddons.bind({})}
+  </Story>
+</Canvas>
+
+## Dropdwon sufix
+
+<Canvas>
+  <Story name="Dropdown sufix" args={{}}>
+    {(args) => {
+    const [currency, setCurrency] = useState("EUR");
+     return <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <TextInput
+          {...args}
+          style={{width: "250px"}}
+          prefix={
+            <DropdownMenu control={<div style={{cursor: "pointer", display: "flex", gap: "3px"}}>{currency}<Icon icon="angle-down"/></div>} widthFitContent={true} closeOnItemSelect={true} onItemSelected={(e, children) => setCurrency(children)}>
+              <DropdownItem>DOL</DropdownItem>
+              <DropdownItem>EUR</DropdownItem>
+            </DropdownMenu>
+          }
+          placeholder="Enter value"
+        />
+      </div>
+    }}
   </Story>
 </Canvas>
