@@ -34,8 +34,6 @@ const TableView = React.forwardRef((props, ref) => {
     enableCopyOnSelection,
     customActions,
     pagination,
-    enableSorting,
-    enableFiltering,
     //----------------
     onCreate,
     onEdit,
@@ -213,8 +211,6 @@ TableView.defaultProps = {
   showCopy: true,
   enableCopyOnSelection: true,
   pagination: true,
-  enableSorting: true,
-  enableFiltering: true,
   //-----------------------
   onCreate: () => {},
   onEdit: (row) => {},
@@ -236,21 +232,31 @@ TableView.propTypes = {
   paginationProps: PropTypes.object,
   rowsSingleSelect: PropTypes.bool,
   rowsMultiSelect: PropTypes.bool,
-  //table props multi select, loading, view loading ????
   loading: PropTypes.bool,
   showCreate: PropTypes.bool,
+  /**
+   * Enable create
+   */
   enableCreate: PropTypes.bool,
+  /**
+   * Enable details on row click
+   */
   enableDetails: PropTypes.bool,
   showEdit: PropTypes.bool,
+  /**
+   * Enable edit when one row is selected
+   */
   enableEditOnSelection: PropTypes.bool,
   showDelete: PropTypes.bool,
+  /**
+   * Enable delete when one row is selected
+   */
   enableDeleteOnSelection: PropTypes.bool,
   showCopy: PropTypes.bool,
-  enableCopyOnSelection: PropTypes.bool,
   /**
-   * if enable=`enable` the action is always enabled, if enableOnSelection=`true` it is enabled only when one row is selected.
-   * By default show=`true` and enable=`true`
+   * Enable copy when one row is selected
    */
+  enableCopyOnSelection: PropTypes.bool,
   /**
    * Actions that will be shown in toolbar with existing actions
    * customActions=[{name: `<string>`, show: `<bool>`, enable: `<bool>`, enableOnSelection: `<bool>`, onAction: `PropTypes.func`, customAction: `PropTypes.element`}, ...]
@@ -260,8 +266,6 @@ TableView.propTypes = {
    * Determines whether will pagination be shown in view
    */
   pagination: PropTypes.bool,
-  enableSorting: PropTypes.bool,
-  enableFiltering: PropTypes.bool,
   //-------------------------------------------------------------
   onCreate: PropTypes.func,
   onEdit: PropTypes.func,
