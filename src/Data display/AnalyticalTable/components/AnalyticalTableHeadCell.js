@@ -1,30 +1,94 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
 import Icon from "../../../General/Icon/index";
+import { useTheme } from "@emotion/react";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+} from "../../../_utils/utils";
 
 const HtmlHeadCell = styled.th`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: left;
   transition: all 250ms ease;
-  font-weight: 900;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  border-bottom: 1px solid ${(props) => props.theme.palette.transparent.light};
-  border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
+  padding: 0.875rem 1.5rem;
+  cursor: ${(props) => (props.ordering ? "pointer" : "default")};
+  width: ${(props) => props.width};
+  
+  background-color: ${(props) =>
+    !props.IsGrouped
+      ? getColorRgbaValue(
+          props.theme,
+          "TableHeadCell",
+          null,
+          "enabled",
+          "background"
+        )
+      : "white"}};
 
-  padding: 8px 2px 8px 14px;
+  &:hover {
+    ${(props) =>
+      props.ordering
+        ? `background-color: ${getColorRgbaValue(
+            props.theme,
+            "TableHeadCell",
+            null,
+            "hover",
+            "background"
+          )};`
+        : ""}
+  }
+
+  ${(props) =>
+    getComponentTypographyCss(
+      props.theme,
+      "TableHeadCell",
+      props.size,
+      "enabled"
+    )};
+
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "TableHeadCell", null, "enabled", "text")}};
+
+  border-top: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "border"
+    )}};
+
+  border-bottom: ${(props) =>
+    "1px solid " +
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "border"
+    )}};
+
 
   &:first-of-type {
-    border-radius: 3px 0 0 0;
+    border-radius: 0.5rem 0 0 0;
+    border-left: ${(props) =>
+      "1px solid " +
+      getColorRgbaValue(
+        props.theme,
+        "TableHeadCell",
+        null,
+        "enabled",
+        "border"
+      )}};
   }
 
   &:last-of-type {
-    border-radius: 0 3px 0 0;
-  }
-
-  &:hover {
-    background-color: whitesmoke;
-    cursor: pointer;
+    border-radius: 0 0.5rem 0 0;
   }
 `;
 
@@ -32,29 +96,61 @@ const HeaderInnerCell = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  // justify-content: center;
-
-  & i {
-    color: black;
-  }
 `;
 
 const HeaderCellText = styled.span`
-  color: black;
+  padding-right: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      props.color,
+      "enabled",
+      "text"
+    )};
+
+  font-weight: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      props.color,
+      "enabled",
+      "fontWeight"
+    )};
 `;
 
 const HeaderCellIcon = styled.span`
-  color: black;
-
   & i {
     color: ${(props) =>
-      props.sort ? "transparent" : theme.palette[props.color].main};
+      props.sort
+        ? "transparent"
+        : getColorRgbaValue(
+            props.theme,
+            "TableHeadCell",
+            props.color,
+            "enabled",
+            "text"
+          )};
+
+    font-weight: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "TableHeadCell",
+        props.color,
+        "enabled",
+        "fontWeight"
+      )};
   }
 `;
 
 const AnalyticalTableHeadCell = (props) => {
   //--------------------------
   const {
+    IsGrouped,
     Column,
     Ordering,
     Index,
@@ -64,8 +160,9 @@ const AnalyticalTableHeadCell = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -79,19 +176,17 @@ const AnalyticalTableHeadCell = (props) => {
       let orderingIconClass;
 
       if (Ordering && Ordering.columnId === Column.id) {
-        if (Ordering.ascending === true)
-          orderingIconClass = "long-arrow-alt-up";
+        if (Ordering.ascending === true) orderingIconClass = "angle-up";
 
-        if (Ordering.descending === true)
-          orderingIconClass = "long-arrow-alt-down";
+        if (Ordering.descending === true) orderingIconClass = "angle-down";
 
         if (!Ordering.ascending === false && !Ordering.descending === false)
           orderingIconClass = "sort";
       } else orderingIconClass = "sort";
 
       return (
-        <HeaderCellIcon color={"primary"} sort={orderingIconClass === "sort"}>
-          <Icon color={"primary"} icon={orderingIconClass} />
+        <HeaderCellIcon {...themeProps} sort={orderingIconClass === "sort"}>
+          <Icon {...themeProps} sizeInUnits={"14px"} icon={orderingIconClass} />
         </HeaderCellIcon>
       );
     }
@@ -139,20 +234,48 @@ const AnalyticalTableHeadCell = (props) => {
       onColumnClick(e, Column);
   };
 
+  const getWidth = () => {
+    if (Column && Column.width) {
+      return Column.width + "%";
+    }
+
+    return "auto";
+  };
+
   return (
-    <HtmlHeadCell onClick={handleColumnClick} {...themeProps} key={Index}>
-      <HeaderInnerCell>
-        <HeaderCellText>{Column.displayName}</HeaderCellText>
+    <HtmlHeadCell
+      IsGrouped={IsGrouped}
+      onClick={handleColumnClick}
+      {...themeProps}
+      selection={false}
+      ordering={EnableOrdering === true && Column.sortable === true}
+      key={Index}
+      width={getWidth()}
+      title={Column.displayName}
+    >
+      <HeaderInnerCell {...themeProps}>
+        <HeaderCellText {...themeProps}>{Column.displayName}</HeaderCellText>
 
         {renderOrdering()}
       </HeaderInnerCell>
     </HtmlHeadCell>
   );
+
+  // return (
+  //   <HtmlHeadCell onClick={handleColumnClick} {...themeProps} key={Index}>
+  //     <HeaderInnerCell>
+  //       <HeaderCellText>{Column.displayName}</HeaderCellText>
+
+  //       {renderOrdering()}
+  //     </HeaderInnerCell>
+  //   </HtmlHeadCell>
+  // );
 };
 
 AnalyticalTableHeadCell.defaultProps = {
   __TYPE__: "TABLE_HEAD_CELL",
   //--------------------
+  IsGrouped: false,
   Column: {},
   Ordering: {},
   Index: 0,
@@ -162,7 +285,6 @@ AnalyticalTableHeadCell.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 AnalyticalTableHeadCell.propTypes = {
@@ -180,13 +302,11 @@ AnalyticalTableHeadCell.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default AnalyticalTableHeadCell;

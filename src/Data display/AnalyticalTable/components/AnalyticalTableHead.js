@@ -24,12 +24,23 @@ const AnalyticalTableHead = (props) => {
   //=========================================================================================
 
   const renderHeadCells = () => {
-    var groupedFields = GroupBy.fields.map((field) =>
-      Columns.find((c) => c.accessor === field)
-    );
+    var remainingWidth = 0;
+
+    var groupedFields = GroupBy.fields.map((field) => {
+      var col = Columns.find((c) => c.accessor === field);
+      remainingWidth += col.width;
+
+      return col;
+    });
+
     var remainingFields = Columns.filter(
       (c) => !GroupBy.fields.includes(c.accessor)
     );
+
+    remainingFields = remainingFields.map((c) => ({
+      ...c,
+      width: c.width + remainingWidth / (remainingFields.length + 1),
+    }));
 
     var groupedColumn = {
       columnId: 1,
@@ -38,6 +49,8 @@ const AnalyticalTableHead = (props) => {
 
     groupedFields.forEach((x, i) => {
       groupedColumn.displayName += x.displayName;
+      groupedColumn.width =
+        x.width + remainingWidth / (remainingFields.length + 1);
 
       if (i !== groupedFields.length - 1) groupedColumn.displayName += " / ";
     });
@@ -71,7 +84,7 @@ const AnalyticalTableHead = (props) => {
   };
 
   const renderAnalyticalTableHeadCell = (Column, Index) => {
-    var cellProps = { Column, Index };
+    var cellProps = { Column, Index, IsGrouped: true };
 
     return (
       renderCustomElement(

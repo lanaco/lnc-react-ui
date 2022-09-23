@@ -14,6 +14,7 @@ const HtmlRow = styled.tr`
       "enabled",
       "border"
     )};`}
+
   ${(props) =>
     props.noBorder == false &&
     `border-left: 1px solid ${getColorRgbaValue(
@@ -23,7 +24,8 @@ const HtmlRow = styled.tr`
       "enabled",
       "border"
     )};`}
-${(props) =>
+
+  ${(props) =>
     props.noBorder == false &&
     `border-right: 1px solid ${getColorRgbaValue(
       props.theme,
@@ -88,7 +90,7 @@ const TableRow = (props) => {
     size,
     color,
   } = props;
-  
+
   const theme = useTheme();
   const themeProps = {
     className,

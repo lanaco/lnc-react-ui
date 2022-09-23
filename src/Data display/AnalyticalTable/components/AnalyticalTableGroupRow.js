@@ -10,20 +10,20 @@ import AnalyticalTableCell from "./AnalyticalTableCell";
 import AnalyticalTableRow from "./AnalyticalTableRow";
 import AnalyticalTableSelectionCell from "./AnalyticalTableSelectionCell";
 import Button from "../../../General/Button/index";
+import { useTheme } from "@emotion/react";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+} from "../../../_utils/utils";
 
 const Row = styled.tr`
-  border-radius: 3px;
+  // border-radius: 3px;
   cursor: pointer;
   display: ${(props) => (props.show === false ? "none" : "default")};
 `;
 
 const Cell = styled.td`
-  font-family: Arial;
-  font-size: 12px;
-  background-color: white;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  border-radius: 5px;
+  padding: 0;
 `;
 
 const CellContainer = styled.div`
@@ -36,7 +36,7 @@ const CellPad = styled.div``;
 const CellIcon = styled.div``;
 
 const CellTitle = styled.div`
-  padding-left: 8px;
+  // padding-left: 8px;
 `;
 
 const CellContent = styled.div`
@@ -44,8 +44,16 @@ const CellContent = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 3px 0 3px 0;
-  background-color: ${theme.palette.gray[100]};
+  padding: 10px 0 10px ${(props) => (props.depth + 1) * 20}px;
+  border-bottom: 1px solid #CBD5E1;
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "TableHeadCell",
+      null,
+      "enabled",
+      "background"
+    )}};
 `;
 
 const PaginationContainer = styled.div`
@@ -74,9 +82,17 @@ const AnalyticalTableGroupRow = (props) => {
     SelectedData,
     RowIdentifier,
     GroupByFields,
+    //----
+    size,
+    color,
   } = props;
 
+  const theme = useTheme();
+  const themeProps = { theme, size, color };
+
   const prevGroupBy = usePrevious(GroupByFields);
+
+  console.log("Depth: ", Depth);
 
   useEffect(() => {
     if (!Show) ClearData(Node);
@@ -89,11 +105,11 @@ const AnalyticalTableGroupRow = (props) => {
   //============================================================================
 
   const getIcon = () => {
-    var icon = "caret-right";
+    var icon = "angle-right";
 
-    if (IsLeaf && Data.length === 0) icon = "caret-right";
-    if (IsLeaf && Data.length > 0) icon = "caret-down";
-    if (Expanded) icon = "caret-down";
+    if (IsLeaf && Data.length === 0) icon = "angle-right";
+    if (IsLeaf && Data.length > 0) icon = "angle-down";
+    if (Expanded) icon = "angle-down";
 
     return icon;
   };
@@ -125,8 +141,9 @@ const AnalyticalTableGroupRow = (props) => {
   const renderLeafPagination = () => {
     if (IsLeaf && Data.length > 0) {
       return (
-        <PaginationContainer>
+        <PaginationContainer {...themeProps}>
           <Button
+            {...themeProps}
             inverted={true}
             icon="angle-left"
             onClick={handlePreviousPage}
@@ -174,18 +191,24 @@ const AnalyticalTableGroupRow = (props) => {
 
   const renderGroupCell = () => {
     return (
-      <CellContent>
-        <CellIcon onClick={handleClick}>
-          <Icon icon={getIcon()} onClick={handleClick} />
+      <CellContent {...themeProps} depth={Depth}>
+        <CellIcon {...themeProps} onClick={handleClick}>
+          <Icon {...themeProps} icon={getIcon()} onClick={handleClick} />
         </CellIcon>
-        <CellTitle onClick={handleClick}>{Node.value}</CellTitle>
-        {renderLeafPagination()}
+        <CellTitle {...themeProps} onClick={handleClick}>
+          {Node.value}
+        </CellTitle>
+        {/* {renderLeafPagination()} */}
       </CellContent>
     );
   };
 
   const renderAnalyticalTableRow = (leafData) => {
-    var rowProps = { Index: leafData[RowIdentifier], RowData: leafData };
+    var rowProps = {
+      ...themeProps,
+      Index: leafData[RowIdentifier],
+      RowData: leafData,
+    };
 
     var children = (
       <>
@@ -208,7 +231,7 @@ const AnalyticalTableGroupRow = (props) => {
   };
 
   const renderAnalyticalTableCell = (data) => {
-    var cellProps = { ...data, SelectedData, RowIdentifier };
+    var cellProps = { ...themeProps, ...data, SelectedData, RowIdentifier };
 
     return (
       renderCustomElement(
@@ -220,6 +243,7 @@ const AnalyticalTableGroupRow = (props) => {
 
   const renderAnalyticalTableSelectionCell = (data) => {
     var cellProps = {
+      ...themeProps,
       Index: -1,
       RowData: data,
       onSelectRow,
@@ -237,10 +261,10 @@ const AnalyticalTableGroupRow = (props) => {
 
   return (
     <>
-      <Row show={Show} key={Key}>
-        <Cell colSpan={Columns.length}>
-          <CellContainer>
-            {renderPaddingDiv()}
+      <Row {...themeProps} show={Show} key={Key}>
+        <Cell {...themeProps} colSpan={Columns.length}>
+          <CellContainer {...themeProps}>
+            {/* {renderPaddingDiv()} */}
             {renderGroupCell()}
           </CellContainer>
         </Cell>
@@ -276,7 +300,6 @@ AnalyticalTableGroupRow.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 AnalyticalTableGroupRow.propTypes = {
@@ -307,13 +330,11 @@ AnalyticalTableGroupRow.propTypes = {
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning",
-    "gray",
-    "white",
-    "black",
+    "information",
+    "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default AnalyticalTableGroupRow;

@@ -134,7 +134,7 @@ const data = [
 
 const Story = (props) => {
   const [Loading, SetLoading] = useState(false);
-  const [GroupBy, SetGroupBy] = useState(GroupBy_YearType);
+  const [GroupBy, SetGroupBy] = useState(GroupBy_Year);
   const [SelectedData, SetSelectedData] = useState([]);
 
   const GetDataForGroup = async (parentInfo, currentPage, pageSize) => {

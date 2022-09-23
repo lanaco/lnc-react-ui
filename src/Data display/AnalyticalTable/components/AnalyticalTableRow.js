@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
 
 const HtmlRow = styled.tr`
   border-bottom: 1px solid transparent;
@@ -47,8 +47,9 @@ const AnalyticalTableRow = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
+
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -91,7 +92,6 @@ AnalyticalTableRow.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 AnalyticalTableRow.propTypes = {
@@ -118,7 +118,6 @@ AnalyticalTableRow.propTypes = {
     "white",
     "black",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default AnalyticalTableRow;

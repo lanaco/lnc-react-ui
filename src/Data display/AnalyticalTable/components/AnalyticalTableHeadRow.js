@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import theme from "../../../_utils/theme";
 
 const HtmlRow = styled.tr`
-  border-bottom: 1px solid transparent;
+  border-radius: 0.5rem 0.5rem 0 0;
 `;
 
 const AnalyticalTableHeadRow = (props) => {
