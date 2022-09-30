@@ -1,13 +1,16 @@
-import { Meta, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Kanban from "./index";
-import styled from "@emotion/styled";
-import Story from "./Story";
+import { KanbanHeader } from "./components/KanbanHeader/KanbanHeader";
+import { KanbanFooter } from "./components/KanbanFooter/KanbanFooter";
+import { KanbanCard } from "./components/KanbanCard/KanbanCard";
+import Button from "../../General/Button";
+import IconButton from "../../General/IconButton";
 
 <Meta title="Data Display/Kanban" component={Kanban} />
 
-export const TemplateDefault = (args) => {
-  return <Story {...args} />;
+export const CustomContainerHeader = (props) => {
+  return <div>Custom Header</div>;
 };
 
 # Kanban
@@ -18,8 +21,274 @@ import { Kanban } from "@lnc-react-ui";
 
 <Canvas>
   <Story name="Default" args={{}}>
-    {TemplateDefault.bind({})}
+    {(args) => (
+      <Kanban
+        data={{
+          A: [
+            {
+              id: 1,
+              name: "Card 1",
+              content: <div>Card 1</div>,
+            },
+            {
+              id: 2,
+              name: "Card 2",
+              content: <div>Card 2</div>,
+            },
+            {
+              id: 3,
+              name: "Card 3",
+              content: <div>Card 3</div>,
+            },
+          ],
+          B: [
+            {
+              id: 4,
+              name: "Card 4",
+              content: <div>Card 4</div>,
+            },
+            {
+              id: 5,
+              name: "Card 5",
+              content: <div>Card 5</div>,
+            },
+            {
+              id: 6,
+              name: "Card 6",
+              content: <div>Card 6</div>,
+            },
+          ],
+          C: [
+            {
+              id: 7,
+              name: "Card 7",
+              content: <div>Card 7</div>,
+            },
+            {
+              id: 8,
+              name: "Card 8",
+              content: <div>Card 8</div>,
+            },
+            {
+              id: 9,
+              name: "Card 9",
+              content: <div>Card 9</div>,
+            },
+          ],
+        }}
+      ></Kanban>
+    )}
   </Story>
 </Canvas>
 
 <ArgsTable story="Default" />
+
+**_*For previous example properties `"A", "B", "C"` in `data` object represent unique keys (Ids) of column.*_**
+
+
+## Card Object properties
+
+| Property name |                                      Type                                       |                                                              Description |
+| ------------- | :-----------------------------------------------------------------------------: | -----------------------------------------------------------------------: |
+| id            |                                string \| number                                 |                                                               Unique key |
+| name          |                                     string                                      |                                                                          |
+| content       |                                     element                                     |                                                      Content of the card |
+| color         | "primary" \| "secondary" \| "danger" \| "warning" \| "information" \| "neutral" |                                                                          |
+| disabled      |                                     boolean                                     | Determines whether to disable card from sorting. By default it is false. |
+
+## Header and Footer Components
+
+By Default in `Kanban` component header it's unique key (id) will be shown, while footer component is not shown. To override it, it is necessary to use `KanbanHeader` \\ `KanbanFooter` component or any other custom component which will have property `__TYPE__="KANBAN_HEADER"` \\ `__TYPE__="KANBAN_FOOTER"`. This way Header \\ Footer for all columns can be defined.
+
+To have custom Header \\ Footer which is unique to only one column besides property `__TYPE__="KANBAN_HEADER"` \\ `__TYPE__="KANBAN_FOOTER"` it is necessary also to use property `id` whose value is equal to column's unique key (id).
+
+```jsx
+import { KanbanHeader, KanbanFooter } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Header and Footer Components" args={{}}>
+    {(args) => {
+      const CustomColumnHeader = (props) => {
+        return <div>{props.children}</div>;
+      };
+      return (
+        <Kanban
+          data={{
+            A: [
+              {
+                id: 1,
+                name: "Card 1",
+                content: <div>Card 1</div>,
+              },
+              {
+                id: 2,
+                name: "Card 2",
+                content: <div>Card 2</div>,
+              },
+            ],
+            B: [
+              {
+                id: 3,
+                name: "Card 3",
+                content: <div>Card 3</div>,
+              },
+            ],
+            C: [
+              {
+                id: 4,
+                name: "Card 4",
+                content: <div>Card 4</div>,
+              },
+            ],
+            D: [
+              {
+                id: 5,
+                name: "Card 5",
+                content: <div>Card 5</div>,
+              },
+            ],
+          }}
+        >
+          <KanbanHeader>All Columns Header</KanbanHeader>
+          <KanbanHeader id="A">Header unique to column "A"</KanbanHeader>
+          <CustomColumnHeader __TYPE__="KANBAN_HEADER" id="D">
+            Header unique to column "D"
+          </CustomColumnHeader>
+          <KanbanFooter>
+            <Button
+              text="Add New Card"
+              type="outline"
+              style={{ width: "100%" }}
+            />
+          </KanbanFooter>
+          <KanbanFooter id="B">
+            <IconButton
+              icon="chevron-circle-down"
+              type="outline"
+              style={{ maxWidth: "unset", width: "100%", marginBottom: "8px" }}
+            />
+            <Button
+              text="Add New Card"
+              type="outline"
+              style={{ width: "100%" }}
+            />
+          </KanbanFooter>
+        </Kanban>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Kanban Card
+
+To override default card in column it is necessary to use `KanbanCard` component or any other custom component which has property `__TYPE__="KANBAN_CARD"`.
+
+```jsx
+import { KanbanCard } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Kanban Card" args={{}}>
+    {(args) => {
+      const CustomColumnHeader = (props) => {
+        return <div>{props.children}</div>;
+      };
+      return (
+        <Kanban
+          data={{
+            A: [
+              {
+                id: 1,
+                name: "Card 1",
+                content: <div>Card 1</div>,
+              },
+              {
+                id: 2,
+                name: "Card 2",
+                content: <div>Card 2</div>,
+              },
+            ],
+            B: [
+              {
+                id: 3,
+                name: "Card 3",
+                content: <div>Card 3</div>,
+              },
+            ],
+            C: [
+              {
+                id: 4,
+                name: "Card 4",
+                content: <div>Card 4</div>,
+              },
+            ],
+            D: [
+              {
+                id: 5,
+                name: "Card 5",
+                content: <div>Card 5</div>,
+              },
+            ],
+          }}
+        >
+          <KanbanCard style={{ background: "lightgrey", color: "white" }}>
+            <h3>Card Title</h3>
+          </KanbanCard>
+        </Kanban>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Disable Card from Sorting
+
+Card 1 and Card 2 are unsortable.
+
+<Canvas>
+  <Story name="Disable Card from Sorting" args={{}}>
+    {(args) => {
+      const CustomColumnHeader = (props) => {
+        return <div>{props.children}</div>;
+      };
+      return (
+        <Kanban
+          data={{
+            A: [
+              {
+                id: 1,
+                name: "Card 1",
+                content: <div>Card 1</div>,
+                disabled: true,
+                color: "danger",
+              },
+              {
+                id: 2,
+                name: "Card 2",
+                content: <div>Card 2</div>,
+                disabled: true,
+                color: "danger",
+              },
+            ],
+            B: [
+              {
+                id: 3,
+                name: "Card 3",
+                content: <div>Card 3</div>,
+                color: "secondary",
+              },
+            ],
+            C: [
+              {
+                id: 4,
+                name: "Card 4",
+                content: <div>Card 4</div>,
+                color: "primary",
+              },
+            ],
+          }}
+        ></Kanban>
+      );
+    }}
+  </Story>
+</Canvas>

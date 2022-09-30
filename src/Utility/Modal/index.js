@@ -182,6 +182,7 @@ const Modal = React.forwardRef((props, ref) => {
 
   const open = () => {
     setShow(true);
+    onOpen(event);
   }
 
   const close = (event) => {
@@ -243,6 +244,7 @@ Modal.defaultProps = {
   isOpen: false,
   showCloseButton: true,
   overlay: true,
+  onOpen: () => { },
   onClose: () => { },
   className: "",
   zIndex: 1000,
@@ -259,6 +261,7 @@ Modal.propTypes = {
   footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   showCloseButton: PropTypes.bool,
   overlay: PropTypes.bool,
+  onOpen: PropTypes.func,
   onClose: PropTypes.func,
   zIndex: PropTypes.number,
   clickOutsideToClose: PropTypes.bool,

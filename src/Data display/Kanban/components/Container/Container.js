@@ -80,6 +80,8 @@ const Actions = styled.div`
 export const Container = forwardRef((props, ref) => {
   const {
     children,
+    containerId,
+    renderFooterContent,
     columns = 1,
     handleProps,
     horizontal,
@@ -125,6 +127,7 @@ export const Container = forwardRef((props, ref) => {
         </Header>
       ) : null}
       <ul>{children}</ul>
+      {renderFooterContent(containerId)}
     </StyledContainer>
   );
 

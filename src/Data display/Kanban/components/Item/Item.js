@@ -4,12 +4,18 @@ import classNames from "classnames";
 // import {Handle, Remove} from './components';
 
 import styles from "./Item.module.css";
+import { useTheme } from "@emotion/react";
+import styled from "@emotion/styled";
+
+const StyledItem = styled.div`
+  font-family: ${(props) => props.theme?.typography?.fontFamily};
+`;
 
 export const Item = React.memo(
   React.forwardRef(
     (
       {
-        item,
+        cardProps,
         color,
         dragOverlay,
         dragging,
@@ -23,15 +29,19 @@ export const Item = React.memo(
         onRemove,
         renderItem,
         sorting,
-        style,
         transition,
         transform,
         value,
         wrapperStyle,
+        className,
+        style,
+        children,
         ...props
       },
       ref
     ) => {
+      const theme = useTheme();
+
       useEffect(() => {
         if (!dragOverlay) {
           return;
@@ -84,29 +94,34 @@ export const Item = React.memo(
           }}
           ref={ref}
         >
-          <div
-            className={classNames(
-              styles.Item,
-              dragging && styles.dragging,
-              handle && styles.withHandle,
-              dragOverlay && styles.dragOverlay,
-              disabled && styles.disabled,
-              color && styles.color
-            )}
-            style={style}
+          <StyledItem
+            theme={theme}
+            className={
+              classNames(
+                styles.Item,
+                dragging && styles.dragging,
+                handle && styles.withHandle,
+                dragOverlay && styles.dragOverlay,
+                disabled && styles.disabled,
+                color && styles.color
+              ) +
+              " " +
+              className
+            }
+            style={cardProps?.style}
             data-cypress="draggable-item"
             {...(!handle ? listeners : undefined)}
             {...props}
             tabIndex={!handle ? 0 : undefined}
           >
-            {item?.name}
+            {children}
             <span className={styles.Actions}>
               {/* {onRemove ? (
                 <Remove className={styles.Remove} onClick={onRemove} />
               ) : null}
               {handle ? <Handle {...handleProps} {...listeners} /> : null} */}
             </span>
-          </div>
+          </StyledItem>
         </li>
       );
     }
