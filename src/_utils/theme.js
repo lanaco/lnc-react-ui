@@ -3300,6 +3300,54 @@ export const lanaco_light = {
         },
       },
     },
+    KanbanCard: {
+      default: {
+        palette: "gray",
+        enabled: {
+          highlight: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          highlight: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          highlight: 600,
+        },
+      },
+      red: {
+        enabled: {
+          highlight: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          background: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          highlight: 600,
+        },
+      },
+      green: {
+        enabled: {
+          highlight: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          highlight: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          highlight: 600,
+        },
+      },
+    },
     Danger: {
       default: {
         palette: "red",
