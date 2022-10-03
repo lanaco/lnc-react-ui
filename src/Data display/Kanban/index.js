@@ -171,7 +171,11 @@ const SortableItem = ({
   id,
   item,
   index,
+<<<<<<< HEAD
   // handle,
+=======
+  handle,
+>>>>>>> c1241c335ee8b2f3f04eee51823b1d4ad25d8939
   renderItem,
   style = {},
   containerId,
@@ -770,7 +774,11 @@ const Kanban = React.forwardRef((props, ref) => {
                         id={item.id}
                         item={item}
                         index={index}
+<<<<<<< HEAD
                         // handle={handle}
+=======
+                        handle={handle}
+>>>>>>> c1241c335ee8b2f3f04eee51823b1d4ad25d8939
                         style={getItemStyles}
                         wrapperStyle={wrapperStyle}
                         renderItem={renderItem}
