@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import classNames from "classnames";
+import { Handle } from "../Handle/Handle";
 
 // import {Handle, Remove} from './components';
 
@@ -9,6 +10,22 @@ import styled from "@emotion/styled";
 
 const StyledItem = styled.div`
   font-family: ${(props) => props.theme?.typography?.fontFamily};
+  
+  &:hover .Actions > * {
+    opacity: 1 !important;
+  }
+`;
+
+const Actions = styled.div`
+  display: flex;
+
+  & > *:first-child:not(:last-child) {
+    opacity: 0;
+  }
+
+  & > *:first-child:not(:last-child):focus-visible {
+    opacity: 1;
+  }
 `;
 
 export const Item = React.memo(
@@ -121,6 +138,9 @@ export const Item = React.memo(
               ) : null}
               {handle ? <Handle {...handleProps} {...listeners} /> : null} */}
             </span>
+            {handle && <Actions className={"Actions"}>
+              <Handle {...handleProps} />
+            </Actions>}
           </StyledItem>
         </li>
       );

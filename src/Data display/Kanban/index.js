@@ -171,7 +171,7 @@ const SortableItem = ({
   id,
   item,
   index,
-  handle,
+  // handle,
   renderItem,
   style = {},
   containerId,
@@ -191,6 +191,8 @@ const SortableItem = ({
     overIndex,
     transform,
     transition,
+
+    attributes,
   } = useSortable({
     id,
   });
@@ -205,8 +207,12 @@ const SortableItem = ({
       value={id}
       dragging={isDragging}
       sorting={isSorting}
-      handle={handle}
-      handleProps={handle ? { ref: setActivatorNodeRef } : undefined}
+      handle={cardProps?.handle === false ? false : true}
+      handleProps={{
+        ...attributes,
+        ...listeners,
+      }}
+
       index={index}
       wrapperStyle={wrapperStyle({ index })}
       style={{
@@ -764,7 +770,7 @@ const Kanban = React.forwardRef((props, ref) => {
                         id={item.id}
                         item={item}
                         index={index}
-                        handle={handle}
+                        // handle={handle}
                         style={getItemStyles}
                         wrapperStyle={wrapperStyle}
                         renderItem={renderItem}
