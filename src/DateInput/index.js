@@ -496,7 +496,7 @@ const DateInput = React.forwardRef((props, ref) => {
 
       {useCalendar && (
         <CalendarButton {...themeProps} onClick={toggleCalendar}>
-          <Icon {...themeProps} className="fas fa-calendar fa-fw" />
+          <Icon {...themeProps} className="fas fa-calendar-alt fa-fw" />
         </CalendarButton>
       )}
 
