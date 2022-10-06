@@ -1367,21 +1367,28 @@ const Grid = React.forwardRef((props, ref) => {
     )
       return false;
 
-    return (
-      <FlexItem>
-        <Button
-          tooltip={
-            state.Form.Mode === FormMode.READ
-              ? Localization.FormEditMode || "Edit mode"
-              : Localization.FormReadMode || "View mode"
-          }
-          onClick={changeToEditMode}
-          disabled={freezeLoading()}
-          icon={state.Form.Mode === FormMode.READ ? "edit" : "eye"}
-          inverted={true}
-        />
-      </FlexItem>
-    );
+    if (
+      state.Options.EnableSwitchReadOnlyMode &&
+      Form !== null &&
+      state.General.CurrentView === "FormView" &&
+      state.Form.Mode !== "ADD"
+    ) {
+      return (
+        <FlexItem>
+          <Button
+            tooltip={
+              state.Form.Mode === FormMode.READ
+                ? Localization.FormEditMode || "Edit mode"
+                : Localization.FormReadMode || "View mode"
+            }
+            onClick={changeToEditMode}
+            disabled={freezeLoading()}
+            icon={state.Form.Mode === FormMode.READ ? "edit" : "eye"}
+            inverted={true}
+          />
+        </FlexItem>
+      );
+    } else return <React.Fragment />;
   };
 
   const renderGoToAddButton = () => {

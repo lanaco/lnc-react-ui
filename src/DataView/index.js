@@ -428,20 +428,27 @@ const DataView = (props) => {
     )
       return false;
 
-    return (
-      <FlexItem>
-        <Button
-          tooltip={
-            Form.Mode === FormMode.READ
-              ? Localization.FormEditMode
-              : Localization.FormReadMode
-          }
-          onClick={freezeLoading() ? () => {} : ChangeToEditMode}
-          icon={Form.Mode === FormMode.READ ? "edit" : "eye"}
-          inverted={true}
-        />
-      </FlexItem>
-    );
+    if (
+      Options.EnableSwitchReadOnlyMode &&
+      Form !== null &&
+      General.CurrentView === "FormView" &&
+      Form.Mode !== "ADD"
+    ) {
+      return (
+        <FlexItem>
+          <Button
+            tooltip={
+              Form.Mode === FormMode.READ
+                ? Localization.FormEditMode
+                : Localization.FormReadMode
+            }
+            onClick={freezeLoading() ? () => {} : ChangeToEditMode}
+            icon={Form.Mode === FormMode.READ ? "edit" : "eye"}
+            inverted={true}
+          />
+        </FlexItem>
+      );
+    } else return <React.Fragment />;
   };
 
   const renderPagination = () => {
