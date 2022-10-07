@@ -15,7 +15,28 @@ export const getChildComponentByType = (type = "", children, props = {}) => {
   if (children && type) {
     var component = React.Children.toArray(children)
       .reverse()
-      .find((child) => child.props.__TYPE__ === type);
+      .find((child) => child.props?.__TYPE__ === type);
+
+    if (component) return component;
+  }
+
+  return null;
+};
+
+export const getCustomRenderById = (type, id, children) => {
+  var customElement = getChildComponentByTypeId(type, id, children);
+
+  if (customElement && React.isValidElement(customElement))
+    return { current: customElement };
+
+  return { current: null };
+};
+
+export const getChildComponentByTypeId = (type = "", id, children, props = {}) => {
+  if (children && type) {
+    var component = React.Children.toArray(children)
+      .reverse()
+      .find((child) =>  child.props?.__TYPE__ === type && (id ? child.props?.id === id : !child.props?.id));
 
     if (component) return component;
   }
@@ -42,11 +63,12 @@ export const useScreenSize = () => {
 export const renderCustomElement = (
   customRender,
   properties,
-  children = null
+  children = null,
+  combineChildren = false,
 ) => {
   if (customRender.current !== null) {
     properties.children =
-      children !== null ? children : customRender.current.props.children;
+      children !== null ? (combineChildren == true ? <>{customRender.current.props.children}{children}</> : children) : customRender.current.props.children;
 
     return React.cloneElement(customRender.current, properties);
   }

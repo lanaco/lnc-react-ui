@@ -1,0 +1,429 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import KanbanView from "./index";
+import { KanbanCard } from "../Kanban/components/KanbanCard/KanbanCard";
+import { KanbanFooter } from "../Kanban/components/KanbanFooter/KanbanFooter";
+import IconButton from "../../General/IconButton";
+import Button from "../../General/Button";
+import Kanban from "../Kanban";
+import KanbanActionsToolbar from "./KanbanActionsToolbar";
+import { useState } from "react";
+
+<Meta
+  title="Data Display/Kanban View"
+  component={KanbanView}
+  subcomponents={{ KanbanActionsToolbar }}
+/>
+
+export const CustomActionsToolbar = (props) => {
+  return (
+    <div className={props?.className}>
+      <Button text="Custom Action 1" type="outline" onClick={() => {}} />
+      &nbsp;
+      <Button text="Custom Action 2" type="outline" onClick={() => {}} />
+    </div>
+  );
+};
+
+export const CustomKanban = (props) => {
+  return (
+    <Kanban
+      horizontalDisplay={true}
+      data={{
+        A: [
+          {
+            id: 1,
+            name: "Card 1",
+            content: <div>Card 1</div>,
+          },
+          {
+            id: 2,
+            name: "Card 2",
+            content: <div>Card 2</div>,
+          },
+          {
+            id: 3,
+            name: "Card 3",
+            content: <div>Card 3</div>,
+          },
+        ],
+        B: [
+          {
+            id: 4,
+            name: "Card 4",
+            content: <div>Card 4</div>,
+          },
+          {
+            id: 5,
+            name: "Card 5",
+            content: <div>Card 5</div>,
+          },
+          {
+            id: 6,
+            name: "Card 6",
+            content: <div>Card 6</div>,
+          },
+        ],
+        C: [
+          {
+            id: 7,
+            name: "Card 7",
+            content: <div>Card 7</div>,
+          },
+          {
+            id: 8,
+            name: "Card 8",
+            content: <div>Card 8</div>,
+          },
+          {
+            id: 9,
+            name: "Card 9",
+            content: <div>Card 9</div>,
+          },
+        ],
+      }}
+      columns={[
+        { id: "A", header: "Column A" },
+        { id: "B", header: "Column B" },
+        { id: "C", header: "Column C" },
+      ]}
+    ></Kanban>
+  );
+};
+
+export const CustomFooter = (props) => {
+  return (
+    <div style={{ width: "100%" }}>
+      <IconButton
+        icon="plus-circle"
+        type="outline"
+        style={{ maxWidth: "unset", width: "100%", marginBottom: "8px" }}
+      />
+    </div>
+  );
+};
+
+# Kanban View
+
+```jsx
+import { KanbanView, KanbanActionsToolbar } from "@lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {
+      <KanbanView
+        toolbarActions={[
+          {
+            name: "Custom Action 1",
+            enable: true,
+            onAction: () => {},
+          },
+          {
+            name: "Custom Action 2",
+            icon: "cog",
+            enable: true,
+            onAction: () => {},
+          },
+        ]}
+        kanbanProps={{
+          data: {
+            A: [
+              {
+                id: 1,
+                name: "Card 1",
+                content: <div>Card 1</div>,
+              },
+              {
+                id: 2,
+                name: "Card 2",
+                content: <div>Card 2</div>,
+              },
+              {
+                id: 3,
+                name: "Card 3",
+                content: <div>Card 3</div>,
+              },
+            ],
+            B: [
+              {
+                id: 4,
+                name: "Card 4",
+                content: <div>Card 4</div>,
+              },
+              {
+                id: 5,
+                name: "Card 5",
+                content: <div>Card 5</div>,
+              },
+              {
+                id: 6,
+                name: "Card 6",
+                content: <div>Card 6</div>,
+              },
+            ],
+            C: [
+              {
+                id: 7,
+                name: "Card 7",
+                content: <div>Card 7</div>,
+              },
+              {
+                id: 8,
+                name: "Card 8",
+                content: <div>Card 8</div>,
+              },
+              {
+                id: 9,
+                name: "Card 9",
+                content: <div>Card 9</div>,
+              },
+            ],
+          },
+          columns: [
+            { id: "A", header: "Column A" },
+            { id: "B", header: "Column B" },
+            { id: "C", header: "Column C" },
+          ],
+        }}
+        showAddNewCard={true}
+        showLoadMoreCards={false}
+      >
+        <KanbanCard id={6}>Šta</KanbanCard>
+        <KanbanFooter
+          id="A"
+          showLoadMoreCards={true}
+          showAddNewCard={true}
+          onLoadMoreCards={(e, id) => {}}
+          onAddNewCard={(e, id) => {}}
+        ></KanbanFooter>
+      </KanbanView>
+    }
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Custom Kanban View Components
+
+Component in _KanbanView_ can be overriden with custom components. The component will receive the same props as the 'built-in' component.
+The custom component must have a `__TYPE__` property with one of the values: `KANBAN`, `KANBAN_VIEW_ACTIONS_TOOLBAR`, `KANBAN_VIEW_FOOTER`.
+If custom components are not provided, default components will be rendered (By default there is no KANBAN VIEW FOOTER).
+
+<Canvas>
+  <Story name="Custom Kanban View Components" args={{}}>
+    {
+      <KanbanView>
+        <CustomActionsToolbar __TYPE__="KANBAN_VIEW_ACTIONS_TOOLBAR" />
+        <CustomKanban __TYPE__="KANBAN" />
+        <CustomFooter __TYPE__="KANBAN_VIEW_FOOTER" />
+      </KanbanView>
+    }
+  </Story>
+</Canvas>
+
+## Custom Kanban Components
+
+When using _KanbanView_ without _Custom Kanban_ (Custom component that has property `__TYPE__="Kanban"`) it is possible to override components inside _Kanban_:
+
+- KanbanHeader (of all column or single column)
+- KanbanFooter (of all column or single column)
+- KanbanCard (all cards or single card)
+
+<Canvas>
+  <Story name="Custom Kanban Components" args={{}}>
+    {
+      <KanbanView
+        kanbanProps={{
+          data: {
+            A: [
+              {
+                id: 1,
+                name: "Card 1",
+                content: <div>Card 1</div>,
+              },
+              {
+                id: 2,
+                name: "Card 2",
+                content: <div>Card 2</div>,
+              },
+              {
+                id: 3,
+                name: "Card 3",
+                content: <div>Card 3</div>,
+              },
+            ],
+            B: [
+              {
+                id: 4,
+                name: "Card 4",
+                content: <div>Card 4</div>,
+              },
+              {
+                id: 5,
+                name: "Card 5",
+                content: <div>Card 5</div>,
+              },
+              {
+                id: 6,
+                name: "Card 6",
+                content: <div>Card 6</div>,
+              },
+            ],
+            C: [
+              {
+                id: 7,
+                name: "Card 7",
+                content: <div>Card 7</div>,
+              },
+              {
+                id: 8,
+                name: "Card 8",
+                content: <div>Card 8</div>,
+              },
+              {
+                id: 9,
+                name: "Card 9",
+                content: <div>Card 9</div>,
+              },
+            ],
+          },
+          columns: [
+            { id: "A", header: "Column A" },
+            { id: "B", header: "Column B" },
+            { id: "C", header: "Column C" },
+          ],
+        }}
+      >
+        <KanbanCard id={6}>This is overriden card</KanbanCard>
+        <KanbanFooter
+          id="A"
+          showLoadMoreCards={true}
+          showAddNewCard={true}
+          onLoadMoreCards={(e, id) => {}}
+          onAddNewCard={(e, id) => {}}
+        ></KanbanFooter>
+      </KanbanView>
+    }
+  </Story>
+</Canvas>
+
+## Actions
+
+Actions in _Kanban View Actions Toolbar_ are defined through property `toolbarActions`, type of _[{name: `<string>`, show: `<bool>`, enable: `<bool>`, onAction: `<func>`, customAction: `<element>`}, ...]_.
+Default _Column_ and _Card_ actions are _Edit_ and _Delete_, throught _KanbanView_ properties they can be modified disabled and unshown. Custom _Column_/_Card_ actions are definded through property `customColumnActions`/`customCardActions`.
+
+Footer Column Actions: _Load More Cards_ and _Add New Card_ are defined through props `showAddNewCard`, `showLoadMoreCards`, `onLoadMoreCards` and `onAddNewCard` for all columns.
+It is possible to define it for one single column with usage of `KanbanFooter` component with unique key `id`.
+
+<Canvas>
+  <Story name="Actions" args={{}}>
+    {(args) => {
+      const [data, setData] = useState({
+        A: [
+          {
+            id: 1,
+            name: "Card 1",
+            content: <div>Card 1</div>,
+          },
+          {
+            id: 2,
+            name: "Card 2",
+            content: <div>Card 2</div>,
+          },
+        ],
+        B: [
+          {
+            id: 3,
+            name: "Card 3",
+            content: <div>Card 3</div>,
+          },
+          {
+            id: 4,
+            name: "Card 4",
+            content: <div>Card 4</div>,
+          },
+        ],
+      });
+      const handleCreate = () => {
+        let newId = Math.random().toString(16).slice(2);
+        setData({ ...data, [newId]: [] });
+      };
+      const handleDeleteColumn = (e, item, column) => {
+        let state = { ...data };
+        delete state[column.id];
+        setData(state);
+      };
+      const handleDeleteCard = (e, item, columnId) => {
+        let cards = data[columnId];
+        setData({...data, [columnId]: cards.filter(card => card.id != item.id)});
+      };
+      const handleAddNewCard = (e, columnId) => {
+        let cards = data[columnId];
+        let newId = Math.random().toString(16).slice(2);
+        setData({...data, [columnId]: [...cards, { id: newId, name: "New Card", content: <div>New Card</div>}]});
+      }
+      return (
+        <KanbanView
+          toolbarActions={[
+            {
+              name: "Custom Action 1",
+              icon: "screwdriver",
+              enable: true,
+              onAction: () => {},
+            },
+            {
+              name: "Custom Action 2",
+              icon: "cog",
+              enable: true,
+              onAction: () => {},
+            },
+          ]}
+          customColumnActions={[
+            {
+              name: "Additional Column Action",
+              icon: "table",
+              enable: true,
+              onAction: (e, item, column) => {},
+            },
+          ]}
+          customCardActions={[
+            {
+              name: "Additional Card Action",
+              icon: "square",
+              enable: true,
+              onAction: (e, item, columnId) => {},
+            },
+          ]}
+          kanbanProps={{
+            data: data,
+            columns: [
+              { id: "A", header: "Column A" },
+              { id: "B", header: "Column B" },
+            ],
+            maxContainerHeight: "300px",
+          }}
+          showAddNewCard={true}
+          showLoadMoreCards={false}
+          onLoadMoreCards={(e) => {}}
+          enableEditCard={false}
+          enableEditColumn={false}
+          onCreate={handleCreate}
+          onDeleteColumn={handleDeleteColumn}
+          onDeleteCard={handleDeleteCard}
+          onAddNewCard={handleAddNewCard}
+          onCardDetails={(e, item, columnId) => alert("Card details!")}
+          onColumnDetails={(e, item, column) => alert("Column details!")}
+        >
+          <KanbanFooter
+            id="A"
+            showLoadMoreCards={true}
+            showAddNewCard={true}
+            onLoadMoreCards={(e, columnId) => alert("There is no more cards!")}
+            onAddNewCard={handleAddNewCard}
+          ></KanbanFooter>
+        </KanbanView>
+      );
+    }}
+  </Story>
+</Canvas>

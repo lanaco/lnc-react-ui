@@ -368,7 +368,7 @@ import { ActionsToolbar } from "@lnc-react-ui";
 
 ## Ordering
 
-Example with column `Name` sortable.
+Example with sortable columns.
 
 <Canvas>
   <Story name="Ordering" args={{}}>
@@ -380,10 +380,8 @@ Example with column `Name` sortable.
         ascending: false,
         descending: false,
       });
-      const sortAscending = () =>
-        [...data].sort((a, b) => (a.name > b.name ? 1 : -1));
-      const sortDescending = () =>
-        [...data].sort((a, b) => (a.name > b.name ? -1 : 1));
+      const sortAscending = (accessor) => [...data].sort((a, b) => (a[accessor] > b[accessor] ? 1 : -1))
+      const sortDescending = (accessor) => [...data].sort((a, b) => (a[accessor] > b[accessor] ? -1 : 1))
       return (
         <TableView
           tableProps={{
@@ -394,10 +392,10 @@ Example with column `Name` sortable.
             Ordering: ordering,
             onColumnClick: (e, Column, Ordering) => {
               setOrdering(Ordering);
-              if (ordering.ascending == true) {
-                setData(sortAscending);
-              } else if (ordering.descending == true) {
-                setData(sortDescending);
+              if (Ordering?.ascending == true && Column?.accessor) {
+                setData(sortAscending(Column.accessor));
+              } else if (Ordering?.descending == true && Column?.accessor) {
+                setData(sortDescending(Column.accessor));
               } else {
                 setData(Data);
               }
