@@ -5,7 +5,6 @@ import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue, getComponentTypographyCss } from "../../_utils/utils";
 
-
 const Span = styled.span`
   box-sizing: border-box;
   ${(props) => (props.sizeInUnits && props.sizeInUnits != "") ? `font-size: ${props.sizeInUnits}` : getComponentTypographyCss(props.theme, "Icon", props.size, "enabled")};
@@ -39,7 +38,7 @@ const Icon = React.forwardRef((props, ref) => {
 
   return (
     <Span ref={ref} {...themeProps} tooltip={tooltip} className={className} style={style} {...rest}>
-      <i className={getIconClass()} />
+      <i data-control={props["data-control"] ? true : false}  className={getIconClass()} />
     </Span>
   );
 });
@@ -50,7 +49,7 @@ Icon.defaultProps = {
   iconStyle: "solid",
   tooltip: "",
   className: "",
-  stlye: {},
+  style: {},
   size: "small",
   sizeInUnits: "",
 };
