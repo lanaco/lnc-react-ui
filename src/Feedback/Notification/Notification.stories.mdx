@@ -3,7 +3,7 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import { NotificationContainer, notification } from "./index";
 import { useState } from "react";
 import NotificationMessage from "./NotificationMessage";
-import logo from '../../_utils/images/Image.png';
+import logo from "../../_utils/images/Image.png";
 import Button from "../../General/Button";
 
 <Meta title="Feedback/Notification" component={NotificationContainer} />
@@ -12,8 +12,10 @@ export const TemplateDefault = (args) => {
   const notify = () => notification("Message");
   return (
     <div>
-      <Button onClick={notify} text="Notify!">Notify!</Button>
-      <NotificationContainer {...args}/>
+      <Button onClick={notify} text="Notify!">
+        Notify!
+      </Button>
+      <NotificationContainer {...args} />
     </div>
   );
 };
@@ -21,23 +23,158 @@ export const TemplateDefault = (args) => {
 export const TemplateCustom = (args) => {
   return (
     <div>
-      <Button onClick={() => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)} text="With Icon">With Icon</Button>
-      <br /><br />
-      <Button onClick={() => notification(<NotificationMessage avatar={true} avatarProps={{ image: logo }} title={"Title"} actions={<><Button text="Confirm">Confirm</Button><Button text="Dismiss">Dismiss</Button></>}>Message</NotificationMessage>)} text="With Action">With Action</Button>
-      <br /><br />
-      <Button onClick={() => notification(<NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>Message</NotificationMessage>)} text="With Inline Actions">With Inline Actions</Button>
-      <br /><br />
-      <Button onClick={() => notification(<NotificationMessage sideButtons={true} avatar={true} avatarProps={{ image: logo }}  title={"Title"} actions={<><Button type="outline" color="secondary" text="Confirm" borderRadius="none" style={{borderTopRightRadius: "8px"}}>Confirm</Button><Button text="Dismiss" type="outline" color="neutral" borderRadius="none" style={{borderBottomRightRadius: "8px"}}>Dismiss</Button></>}>Message</NotificationMessage>, {closeButton: false})} text="With Side Buttons">With Side Buttons</Button>
-      <br /><br />
-      <Button onClick={() => notification.success(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Success Notification">Success Notification</Button>
-      <br /><br />
-      <Button onClick={() => notification.warning(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Warning Notification">Warning Notification</Button>
-      <br /><br />
-      <Button onClick={() => notification.error(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Error Notification">Error Notification</Button>
-      <br /><br />
-      <Button onClick={() => notification.info(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Information Notification">Information Notification</Button>
-      <NotificationContainer {...args}/>
+      <Button
+        onClick={() =>
+          notification(
+            <NotificationMessage icon="user" title={"Title"}>
+              Message
+            </NotificationMessage>
+          )
+        }
+        text="With Icon"
+      >
+        With Icon
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification(
+            <NotificationMessage
+              avatar={true}
+              avatarProps={{ image: logo }}
+              title={"Title"}
+              actions={
+                <>
+                  <Button text="Confirm">Confirm</Button>
+                  <Button text="Dismiss">Dismiss</Button>
+                </>
+              }
+            >
+              Message
+            </NotificationMessage>
+          )
+        }
+        text="With Action"
+      >
+        With Action
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification(
+            <NotificationMessage
+              avatar={true}
+              inlineActions={true}
+              avatarProps={{ image: logo }}
+              title={"Title"}
+              actions={<a>Dismiss</a>}
+            >
+              Message
+            </NotificationMessage>
+          )
+        }
+        text="With Inline Actions"
+      >
+        With Inline Actions
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification(
+            <NotificationMessage
+              sideButtons={true}
+              avatar={true}
+              avatarProps={{ image: logo }}
+              title={"Title"}
+              actions={
+                <>
+                  <Button
+                    type="outline"
+                    color="secondary"
+                    text="Confirm"
+                    borderRadius="none"
+                    style={{ borderTopRightRadius: "8px" }}
+                  >
+                    Confirm
+                  </Button>
+                  <Button
+                    text="Dismiss"
+                    type="outline"
+                    color="neutral"
+                    borderRadius="none"
+                    style={{ borderBottomRightRadius: "8px" }}
+                  >
+                    Dismiss
+                  </Button>
+                </>
+              }
+            >
+              Message
+            </NotificationMessage>,
+            { closeButton: false }
+          )
+        }
+        text="With Side Buttons"
+      >
+        With Side Buttons
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification.success(
+            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
+            {}
+          )
+        }
+        text="Success Notification"
+      >
+        Success Notification
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification.warning(
+            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
+            {}
+          )
+        }
+        text="Warning Notification"
+      >
+        Warning Notification
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification.error(
+            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
+            {}
+          )
+        }
+        text="Error Notification"
+      >
+        Error Notification
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification.info(
+            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
+            {}
+          )
+        }
+        text="Information Notification"
+      >
+        Information Notification
+      </Button>
     </div>
+    //There is no <NotificationContainer /> here because there is one already in previous story, if there were two Notification Containers double notifications would be rendered in that case.
   );
 };
 
@@ -58,8 +195,10 @@ import {
   const notify = () => notification("Message");
   return (
     <div>
-      <Button onClick={notify} text="Notify!">Notify!</Button>
-      <NotificationContainer {...args}/>
+      <Button onClick={notify} text="Notify!">
+        Notify!
+      </Button>
+      <NotificationContainer {...args} />
     </div>
   );
 };
@@ -81,22 +220,157 @@ import {
 (args) => {
   return (
     <div>
-      <Button onClick={() => notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)} text="With Icon">With Icon</Button>
-      <br /><br />
-      <Button onClick={() => notification(<NotificationMessage avatar={true} avatarProps={{ image: logo }} title={"Title"} actions={<><Button text="Confirm">Confirm</Button><Button text="Dismiss">Dismiss</Button></>}>Message</NotificationMessage>)} text="With Action">With Action</Button>
-      <br /><br />
-      <Button onClick={() => notification(<NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>Message</NotificationMessage>)} text="With Inline Actions">With Inline Actions</Button>
-      <br /><br />
-      <Button onClick={() => notification(<NotificationMessage sideButtons={true} avatar={true} avatarProps={{ image: logo }}  title={"Title"} actions={<><Button type="outline" color="secondary" text="Confirm" borderRadius="none" style={{borderTopRightRadius: "8px"}}>Confirm</Button><Button text="Dismiss" type="outline" color="neutral" borderRadius="none" style={{borderBottomRightRadius: "8px"}}>Dismiss</Button></>}>Message</NotificationMessage>, {closeButton: false})} text="With Side Buttons">With Side Buttons</Button>
-      <br /><br />
-      <Button onClick={() => notification.success(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Success Notification">Success Notification</Button>
-      <br /><br />
-      <Button onClick={() => notification.warning(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Warning Notification">Warning Notification</Button>
-      <br /><br />
-      <Button onClick={() => notification.error(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Error Notification">Error Notification</Button>
-      <br /><br />
-      <Button onClick={() => notification.info(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})} text="Information Notification">Information Notification</Button>
-      <NotificationContainer {...args}/>
+      <Button
+        onClick={() =>
+          notification(
+            <NotificationMessage icon="user" title={"Title"}>
+              Message
+            </NotificationMessage>
+          )
+        }
+        text="With Icon"
+      >
+        With Icon
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification(
+            <NotificationMessage
+              avatar={true}
+              avatarProps={{ image: logo }}
+              title={"Title"}
+              actions={
+                <>
+                  <Button text="Confirm">Confirm</Button>
+                  <Button text="Dismiss">Dismiss</Button>
+                </>
+              }
+            >
+              Message
+            </NotificationMessage>
+          )
+        }
+        text="With Action"
+      >
+        With Action
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification(
+            <NotificationMessage
+              avatar={true}
+              inlineActions={true}
+              avatarProps={{ image: logo }}
+              title={"Title"}
+              actions={<a>Dismiss</a>}
+            >
+              Message
+            </NotificationMessage>
+          )
+        }
+        text="With Inline Actions"
+      >
+        With Inline Actions
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification(
+            <NotificationMessage
+              sideButtons={true}
+              avatar={true}
+              avatarProps={{ image: logo }}
+              title={"Title"}
+              actions={
+                <>
+                  <Button
+                    type="outline"
+                    color="secondary"
+                    text="Confirm"
+                    borderRadius="none"
+                    style={{ borderTopRightRadius: "8px" }}
+                  >
+                    Confirm
+                  </Button>
+                  <Button
+                    text="Dismiss"
+                    type="outline"
+                    color="neutral"
+                    borderRadius="none"
+                    style={{ borderBottomRightRadius: "8px" }}
+                  >
+                    Dismiss
+                  </Button>
+                </>
+              }
+            >
+              Message
+            </NotificationMessage>,
+            { closeButton: false }
+          )
+        }
+        text="With Side Buttons"
+      >
+        With Side Buttons
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification.success(
+            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
+            {}
+          )
+        }
+        text="Success Notification"
+      >
+        Success Notification
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification.warning(
+            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
+            {}
+          )
+        }
+        text="Warning Notification"
+      >
+        Warning Notification
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification.error(
+            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
+            {}
+          )
+        }
+        text="Error Notification"
+      >
+        Error Notification
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={() =>
+          notification.info(
+            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
+            {}
+          )
+        }
+        text="Information Notification"
+      >
+        Information Notification
+      </Button>
+      <NotificationContainer {...args} />
     </div>
   );
 };
