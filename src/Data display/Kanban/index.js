@@ -58,10 +58,11 @@ import { KanbanCard } from "./components/KanbanCard/KanbanCard";
 const ComponentContainer = styled.div``;
 
 const DragAndDropArea = styled.div`
-  display: inline-grid;
   box-sizing: border-box;
-  padding: 20px;
-  grid-auto-flow: ${(props) => (props.vertical ? "row" : "column")};
+  display: flex;
+  flex-direction: ${props => props.verticalDisplay ? "column" : "row"};
+  ${props => props.horizontalDisplay == false && "flex-wrap: wrap;"}
+  overflow: auto;
 `;
 
 //========================================================================
@@ -115,6 +116,7 @@ const DroppableContainer = ({
   items,
   className,
   renderFooterContent,
+  maxContainerHeight,
   style,
   ...props
 }) => {
@@ -159,6 +161,7 @@ const DroppableContainer = ({
       // columns={columns}
       containerId={containerId}
       renderFooterContent={renderFooterContent}
+      maxContainerHeight={maxContainerHeight}
       {...props}
     >
       {children}
@@ -206,6 +209,7 @@ const SortableItem = ({
       value={id}
       dragging={isDragging}
       sorting={isSorting}
+
       handle={cardProps?.handle === false ? false : true}
       handleProps={{
         ...attributes,
@@ -230,7 +234,7 @@ const SortableItem = ({
       listeners={listeners}
       renderItem={renderItem}
     >
-      {renderContent(item?.content)}
+      {renderContent(item?.content, id, { ...cardProps, handleProps: { ...attributes, ...listeners }, item, containerId })}
     </Item>
   );
 };
@@ -238,6 +242,8 @@ const SortableItem = ({
 const Kanban = React.forwardRef((props, ref) => {
   //================== PROPS =====================
   const {
+    horizontalDisplay,
+    verticalDisplay,
     adjustScale = false,
     itemCount = 5,
     cancelDrop,
@@ -251,11 +257,11 @@ const Kanban = React.forwardRef((props, ref) => {
     modifiers,
     renderItem,
     strategy = verticalListSortingStrategy,
-    vertical = false,
     scrollable,
-
+    maxContainerHeight,
     cardProps,
     headerProps,
+    footerProps,
     //---------------------------
     data = [],
     columnInfo = {},
@@ -263,6 +269,8 @@ const Kanban = React.forwardRef((props, ref) => {
     onCardMoved,
     onCardChangedColumns,
     //---------------------------
+    color, 
+    size,
     children,
     ...rest
   } = props;
@@ -619,7 +627,7 @@ const Kanban = React.forwardRef((props, ref) => {
         renderItem={renderItem}
         dragOverlay
       >
-        {renderKanbanCard(item?.content) || { name: id }}
+        {renderKanbanCard(item?.content, id, {...cardProps, item}) || { name: id }}
       </Item>
     );
   };
@@ -656,7 +664,7 @@ const Kanban = React.forwardRef((props, ref) => {
             wrapperStyle={wrapperStyle({ index })}
             renderItem={renderItem}
           >
-            {renderKanbanCard(item?.content)}
+            {renderKanbanCard(item?.content, item?.id, {...cardProps, item, containerId: containerId})}
           </Item>
         ))}
       </Container>
@@ -664,22 +672,25 @@ const Kanban = React.forwardRef((props, ref) => {
   };
 
   const renderKanbanHeader = (containerId) => {
+    let column = columns?.find(col => col.id == containerId?.toString());
     return (
       renderCustomElement(
         getCustomRenderById("KANBAN_HEADER", containerId, children),
         {
-          ...headerProps,
+          ...headerProps, item: {[containerId]: items[containerId]}, column: column
         },
-        null
+        column?.header,
+        true
       ) || renderCustomElement(
         getCustomRenderById("KANBAN_HEADER", null, children),
         {
-          ...headerProps,
+          ...headerProps, item: {[containerId]: items[containerId]}, column: column
         },
-        null
+        column?.header,
+        true
       ) || (
-        <KanbanHeader id={containerId} {...headerProps}>
-          {containerId}
+        <KanbanHeader id={containerId} color={color} size={size} item={{[containerId]: items[containerId]}} column={column} {...headerProps}>
+          {column?.header}
         </KanbanHeader>
       )
     );
@@ -690,34 +701,42 @@ const Kanban = React.forwardRef((props, ref) => {
       renderCustomElement(
         getCustomRenderById("KANBAN_FOOTER", containerId, children),
         {
-          ...headerProps,
+          ...footerProps, id: containerId,
         },
         null
       ) || renderCustomElement(
         getCustomRenderById("KANBAN_FOOTER", null, children),
         {
-          ...headerProps,
+          ...footerProps, id: containerId
         },
         null
-      ) 
+      )
     );
   };
 
-  const renderKanbanCard = (content) => {
+  const renderKanbanCard = (content, id, props) => {
     return (
       renderCustomElement(
-          getCustomRender("KANBAN_CARD", children),
-          {
-            ...cardProps
-          },
-          content,
-          true
-        ) || (
-          <KanbanCard {...cardProps}>
-            {content}
-          </KanbanCard>
-        )
-      );
+        getCustomRenderById("KANBAN_CARD", id, children),
+        {
+          ...props,
+        },
+        content,
+        true
+      ) ||
+      renderCustomElement(
+        getCustomRenderById("KANBAN_CARD", null, children),
+        {
+          ...props,
+        },
+        content,
+        true
+      ) || (
+        <KanbanCard color={color} size={size} {...props}>
+          {content}
+        </KanbanCard>
+      )
+    );
   };
 
   return (
@@ -737,11 +756,11 @@ const Kanban = React.forwardRef((props, ref) => {
         onDragOver={odDragOver}
         onDragEnd={onDragEnd}
       >
-        <DragAndDropArea vertical={vertical}>
+        <DragAndDropArea horizontalDisplay={horizontalDisplay} verticalDisplay={verticalDisplay}>
           <SortableContext
             items={[...containers]}
             strategy={
-              vertical
+              verticalDisplay
                 ? verticalListSortingStrategy
                 : horizontalListSortingStrategy
             }
@@ -758,6 +777,7 @@ const Kanban = React.forwardRef((props, ref) => {
                 unstyled={minimal}
                 containerId={containerId}
                 renderFooterContent={renderKanbanFooter}
+                maxContainerHeight={maxContainerHeight}
                 {...headerProps}
               >
                 <SortableContext items={items[containerId]} strategy={strategy}>
@@ -802,6 +822,8 @@ const Kanban = React.forwardRef((props, ref) => {
 });
 
 Kanban.defaultProps = {
+  horizontalDisplay: false,
+  verticalDisplay: false,
   getItemStyles: (s) => ({ ...s }),
   wrapperStyle: (s) => ({ ...s }),
   //---------------------
@@ -809,16 +831,23 @@ Kanban.defaultProps = {
   onColumnMoved: (e, columns) => { },
   onCardMoved: (e, items, column) => { },
   //-----------------------------------------
+  color: "primary",
+  size: "small",
   className: "",
   stlye: {},
 };
 
 Kanban.propTypes = {
+  horizontalDisplay: PropTypes.bool,
+  verticalDisplay: PropTypes.bool,
   adjustScale: PropTypes.bool,
   //Number of items in container
   itemCount: PropTypes.bool,
   cancelDrop: PropTypes.func,
-  // columns,
+  /**
+   * type of: [{id: `<string | number>`, content: `<string | element>`}, ...]
+   */
+  columns: PropTypes.array,
   handle: PropTypes.bool,
   // containerStyle,
   // coordinateGetter = multipleContainersCoordinateGetter,
@@ -828,10 +857,11 @@ Kanban.propTypes = {
   // modifiers,
   renderItem: PropTypes.func,
   // strategy = verticalListSortingStrategy,
-  vertical: PropTypes.bool,
+  //vertical: PropTypes.bool,
   scrollable: PropTypes.bool,
   cardProps: PropTypes.any,
   headerProps: PropTypes.any,
+  footerProps: PropTypes.any,
   //---------------------------
   /**
    * Type of:
@@ -846,9 +876,23 @@ Kanban.propTypes = {
   onColumnMoved: PropTypes.func,
   onCardMoved: PropTypes.func,
   onCardChangedColumns: PropTypes.func,
+  /**
+   * Max height of column container (cards list) before scroll appears.
+   */
+  maxContainerHeight: PropTypes.string,
   //----------------
   className: PropTypes.string,
   style: PropTypes.object,
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "warning",
+    "danger",
+    "information",
+    "neutral",
+  ]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
 export default Kanban;

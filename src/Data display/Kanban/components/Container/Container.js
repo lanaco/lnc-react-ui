@@ -9,6 +9,7 @@ import { useTheme } from "@emotion/react";
 
 const StyledContainer = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   grid-auto-rows: max-content;
   overflow: hidden;
@@ -37,6 +38,8 @@ const StyledContainer = styled.div`
     margin: 0;
     ${(props) => (props.scrollable ? "overflow-y: auto;" : "")}
     ${(props) => (props.horizontal ? "grid-auto-flow: column;" : "")}
+    ${(props) => props.maxContainerHeight && `max-height: ${props.maxContainerHeight};`}
+    overflow: auto;
   }
 
   ${(props) => (props.hover ? " background-color: #ebebeb;" : "")}
@@ -50,9 +53,9 @@ const StyledContainer = styled.div`
 const Header = styled.div`
   display: flex;
   padding: 5px 20px;
-  padding-right: 8px;
+  padding-left: 8px;
+  gap: 12px;
   align-items: center;
-  justify-content: space-between;
   background-color: #fff;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -90,6 +93,7 @@ export const Container = forwardRef((props, ref) => {
     onRemove,
     label,
     placeholder,
+    maxContainerHeight,
     style,
     scrollable,
     shadow,
@@ -117,13 +121,14 @@ export const Container = forwardRef((props, ref) => {
       shadow={shadow}
       onClick={onClick}
       tabIndex={onClick ? 0 : undefined}
+      maxContainerHeight={maxContainerHeight}
     >
       {label ? (
         <Header>
-          {label}
           <Actions className={"Actions"}>
             <Handle {...handleProps} />
           </Actions>
+          {label}
         </Header>
       ) : null}
       <ul>{children}</ul>

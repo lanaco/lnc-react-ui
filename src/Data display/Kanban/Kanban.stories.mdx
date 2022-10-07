@@ -76,6 +76,7 @@ import { Kanban } from "@lnc-react-ui";
             },
           ],
         }}
+        columns={[{ id: "A", header: "Column A"}, {id: "B", header: "Column B"}, {id: "C", header: "Column C"}]}
       ></Kanban>
     )}
   </Story>
@@ -84,7 +85,6 @@ import { Kanban } from "@lnc-react-ui";
 <ArgsTable story="Default" />
 
 **_*For previous example properties `"A", "B", "C"` in `data` object represent unique keys (Ids) of column.*_**
-
 
 ## Card Object properties
 
@@ -293,16 +293,16 @@ Card 1 and Card 2 are unsortable.
   </Story>
 </Canvas>
 
-
 ## Dragging Cards
 
-To disable Card handle for dragging it is necessary to set `handle=false` throught `cardProps`. In that case whole are of the card represents handle.
+To disable Card handle for dragging it is necessary to set `handle=false` throught `cardProps`. In that case whole are of the card represents handle. 
+It is not recommendable to use this feature when there are some clickable elements on the card.
 
 <Canvas>
   <Story name="Handle Card Drag" args={{}}>
     {(args) => (
       <Kanban
-        cardProps={{handle: false}}
+        cardProps={{ handle: false }}
         data={{
           A: [
             {
@@ -339,6 +339,139 @@ To disable Card handle for dragging it is necessary to set `handle=false` throug
             },
           ],
         }}
+      ></Kanban>
+    )}
+  </Story>
+</Canvas>
+
+
+## Horizontal Kanban
+
+<Canvas>
+  <Story name="Horizontal Kanban" args={{}}>
+    {(args) => (
+      <Kanban
+        horizontalDisplay={true}
+        data={{
+          A: [
+            {
+              id: 1,
+              name: "Card 1",
+              content: <div>Card 1</div>,
+            },
+            {
+              id: 2,
+              name: "Card 2",
+              content: <div>Card 2</div>,
+            },
+            {
+              id: 3,
+              name: "Card 3",
+              content: <div>Card 3</div>,
+            },
+          ],
+          B: [
+            {
+              id: 4,
+              name: "Card 4",
+              content: <div>Card 4</div>,
+            },
+            {
+              id: 5,
+              name: "Card 5",
+              content: <div>Card 5</div>,
+            },
+            {
+              id: 6,
+              name: "Card 6",
+              content: <div>Card 6</div>,
+            },
+          ],
+          C: [
+            {
+              id: 7,
+              name: "Card 7",
+              content: <div>Card 7</div>,
+            },
+            {
+              id: 8,
+              name: "Card 8",
+              content: <div>Card 8</div>,
+            },
+            {
+              id: 9,
+              name: "Card 9",
+              content: <div>Card 9</div>,
+            },
+          ],
+        }}
+        columns={[{ id: "A", header: "Column A"}, {id: "B", header: "Column B"}, {id: "C", header: "Column C"}]}
+      ></Kanban>
+    )}
+  </Story>
+</Canvas>
+
+## Vertical Kanban
+
+<Canvas>
+  <Story name="Vertical Kanban" args={{}}>
+    {(args) => (
+      <Kanban
+        verticalDisplay={true}
+        data={{
+          A: [
+            {
+              id: 1,
+              name: "Card 1",
+              content: <div>Card 1</div>,
+            },
+            {
+              id: 2,
+              name: "Card 2",
+              content: <div>Card 2</div>,
+            },
+            {
+              id: 3,
+              name: "Card 3",
+              content: <div>Card 3</div>,
+            },
+          ],
+          B: [
+            {
+              id: 4,
+              name: "Card 4",
+              content: <div>Card 4</div>,
+            },
+            {
+              id: 5,
+              name: "Card 5",
+              content: <div>Card 5</div>,
+            },
+            {
+              id: 6,
+              name: "Card 6",
+              content: <div>Card 6</div>,
+            },
+          ],
+          C: [
+            {
+              id: 7,
+              name: "Card 7",
+              content: <div>Card 7</div>,
+            },
+            {
+              id: 8,
+              name: "Card 8",
+              content: <div>Card 8</div>,
+            },
+            {
+              id: 9,
+              name: "Card 9",
+              content: <div>Card 9</div>,
+            },
+          ],
+        }}
+        columns={[{ id: "A", header: "Column A"}, {id: "B", header: "Column B"}, {id: "C", header: "Column C"}]}
       ></Kanban>
     )}
   </Story>

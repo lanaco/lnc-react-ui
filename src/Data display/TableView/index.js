@@ -20,6 +20,7 @@ const TableView = React.forwardRef((props, ref) => {
   const {
     tableProps,
     paginationProps,
+    actionsToolbarProps,
     rowsSingleSelect,
     rowsMultiSelect,
     loading,
@@ -53,6 +54,7 @@ const TableView = React.forwardRef((props, ref) => {
   } = props;
 
   const toolbarProps = {
+    ...actionsToolbarProps,
     showCreate,
     enableCreate,
     showCopy,
@@ -199,6 +201,7 @@ const TableView = React.forwardRef((props, ref) => {
 TableView.defaultProps = {
   tableProps: {},
   tableProps: {},
+  actionsToolbarProps: {},
   paginationProps: {},
   rowsSingleSelect: true,
   rowsMultiSelect: false,
@@ -229,6 +232,7 @@ TableView.defaultProps = {
 TableView.propTypes = {
   tableProps: PropTypes.object,
   toolbarProps: PropTypes.object,
+  actionsToolbarProps: PropTypes.object,
   paginationProps: PropTypes.object,
   rowsSingleSelect: PropTypes.bool,
   rowsMultiSelect: PropTypes.bool,
@@ -259,7 +263,7 @@ TableView.propTypes = {
   enableCopyOnSelection: PropTypes.bool,
   /**
    * Actions that will be shown in toolbar with existing actions
-   * customActions=[{name: `<string>`, show: `<bool>`, enable: `<bool>`, enableOnSelection: `<bool>`, onAction: `PropTypes.func`, customAction: `PropTypes.element`}, ...]
+   * type of [{name: `<string>`, show: `<bool>`, enable: `<bool>`, enableOnSelection: `<bool>`, onAction: `<func>`, customAction: `<elemet>`}, ...]
    */
   customActions: PropTypes.array,
   /**

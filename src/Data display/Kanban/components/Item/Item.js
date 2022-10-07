@@ -131,6 +131,9 @@ export const Item = React.memo(
             {...props}
             tabIndex={!handle ? 0 : undefined}
           >
+            {/* {handle && <Actions className={"Actions"}>
+              <Handle {...handleProps} />
+            </Actions>} */}
             {children}
             <span className={styles.Actions}>
               {/* {onRemove ? (
@@ -138,9 +141,6 @@ export const Item = React.memo(
               ) : null}
               {handle ? <Handle {...handleProps} {...listeners} /> : null} */}
             </span>
-            {handle && <Actions className={"Actions"}>
-              <Handle {...handleProps} />
-            </Actions>}
           </StyledItem>
         </li>
       );
