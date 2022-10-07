@@ -841,7 +841,7 @@ Table.propTypes = {
   onSelectAll: PropTypes.func,
   //----------------------------------------
   /**
-   * `wdith` applied to html table.
+   * `width` applied to html table.
    */
   tableWidth: PropTypes.string,
   /**
