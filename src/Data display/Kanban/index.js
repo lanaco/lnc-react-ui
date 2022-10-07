@@ -857,7 +857,6 @@ Kanban.propTypes = {
   // modifiers,
   renderItem: PropTypes.func,
   // strategy = verticalListSortingStrategy,
-  //vertical: PropTypes.bool,
   scrollable: PropTypes.bool,
   cardProps: PropTypes.any,
   headerProps: PropTypes.any,

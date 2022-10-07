@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import classNames from "classnames";
-import { Handle } from "../Handle/Handle";
 
 // import {Handle, Remove} from './components';
 
@@ -13,18 +12,6 @@ const StyledItem = styled.div`
   
   &:hover .Actions > * {
     opacity: 1 !important;
-  }
-`;
-
-const Actions = styled.div`
-  display: flex;
-
-  & > *:first-child:not(:last-child) {
-    opacity: 0;
-  }
-
-  & > *:first-child:not(:last-child):focus-visible {
-    opacity: 1;
   }
 `;
 
@@ -131,9 +118,6 @@ export const Item = React.memo(
             {...props}
             tabIndex={!handle ? 0 : undefined}
           >
-            {/* {handle && <Actions className={"Actions"}>
-              <Handle {...handleProps} />
-            </Actions>} */}
             {children}
             <span className={styles.Actions}>
               {/* {onRemove ? (
