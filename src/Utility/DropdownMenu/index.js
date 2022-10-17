@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import Button from "../../General/Button";
 import Popover from "../Popover";
 import OutsideClickHandler from "react-outside-click-handler";
+import { getColorRgbaValue } from "../../_utils/utils";
+import { useTheme } from "../../ThemeProvider";
 
 const StyledDropDown = styled.div``;
 
@@ -14,6 +16,13 @@ const PopoverContent = styled.div`
   flex-direction: column;
   ${(props) =>
     props.widthFitContent == false && "min-width: 12.5rem"};
+  background-color: ${props =>  getColorRgbaValue(
+      props.theme,
+      "Dropdown",
+      props.color,
+      "enabled",
+      "background"
+    )};
 `;
 
 const DropdownMenu = React.forwardRef((props, ref) => {
@@ -46,6 +55,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
 
   const menuContentRef = useRef();
   const [show, setShow] = useState(false);
+  const { theme } = useTheme();
 
   const controlRef = useRef();
   const firstItemRef = useRef();
@@ -164,6 +174,8 @@ const DropdownMenu = React.forwardRef((props, ref) => {
           <PopoverContent
             ref={menuContentRef}
             widthFitContent={widthFitContent}
+            color={color}
+            theme={theme}
           >
             {clonedChildren}
           </PopoverContent>

@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import { useTheme } from "@emotion/react";
+// import { useTheme } from "@emotion/react";
+import { useTheme } from "../../ThemeProvider";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
@@ -9,6 +10,7 @@ import {
   getComponentTypographyCss,
 } from "../../_utils/utils";
 import Icon from "../../General/Icon";
+import { useEffect } from "react";
 
 const Container = styled.div`
   min-height: 3rem;
@@ -112,7 +114,7 @@ const IconComponent = ({statusIcon, color}) => {
 
 const Alert = React.forwardRef((props, ref) => {
   const { className, size, color, title, actions, noIcon, statusIcon, children, ...rest } = props;
-  const theme = useTheme();
+  const { theme } = useTheme();
   const themeProps = { theme, size, color };
 
   return (

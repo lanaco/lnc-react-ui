@@ -16,6 +16,14 @@ const Container = styled.label`
   width: 100%;
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "enabled",
+      "background"
+    )};
   border-radius: 8px;
   ${(props) =>
     props.focused && props.readOnly == false ? getOutlineCss(props.theme) : ""}
@@ -86,6 +94,23 @@ const FileName = styled.input`
     )};
   border-radius: 0 8px 8px 0;
   border-left: transparent;
+  color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.focused ? "primary" : props.color,
+      "enabled",
+      "text"
+    )};
+
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "enabled",
+      "background"
+    )};
   color: ${(props) =>
     getColorRgbaValue(
       props.theme,

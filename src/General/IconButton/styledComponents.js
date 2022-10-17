@@ -248,7 +248,8 @@ export const BasicButton = styled.button`
         "ButtonBasic",
         "gray",
         "disabled",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
   }
 

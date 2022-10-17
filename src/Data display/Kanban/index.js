@@ -55,7 +55,8 @@ import { KanbanCard } from "./components/KanbanCard/KanbanCard";
 
 //============== STYLES ==================================================
 
-const ComponentContainer = styled.div``;
+const ComponentContainer = styled.div`
+`;
 
 const DragAndDropArea = styled.div`
   box-sizing: border-box;
@@ -182,6 +183,7 @@ const SortableItem = ({
   cardProps,
   theme,
   renderContent,
+  color,
 }) => {
   const {
     setNodeRef,
@@ -209,7 +211,6 @@ const SortableItem = ({
       value={id}
       dragging={isDragging}
       sorting={isSorting}
-
       handle={cardProps?.handle === false ? false : true}
       handleProps={{
         ...attributes,
@@ -772,6 +773,7 @@ const Kanban = React.forwardRef((props, ref) => {
                 label={minimal ? undefined : renderKanbanHeader(containerId)}
                 // columns={columns}
                 items={items[containerId]}
+                color={color}
                 scrollable={scrollable}
                 style={containerStyle}
                 unstyled={minimal}

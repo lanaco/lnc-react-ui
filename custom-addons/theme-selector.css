@@ -1,0 +1,17 @@
+.dark .tooltip-lnc {
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+}
+
+.light .tooltip-lnc{
+    background: rgba(255,255,255,0.95);
+    color: black;
+}
+
+.dark .tooltip-triangle-lnc {
+    border-bottom-color: rgba(0, 0, 0, 0.95);
+}
+
+.light .tooltip-triangle-lnc{
+    border-bottom-color: rgba(255,255,255,0.95);
+}

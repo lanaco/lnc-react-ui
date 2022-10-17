@@ -24,7 +24,7 @@ export const TemplateDefault = (args) => {
         }}
         onMouseLeave={(e) => setShow(false)}
       />
-      <Popover {...args} anchorElement={anchor} show={show}>
+      <Popover {...args} onMouseEnter={(e) => setShow(true)} onMouseLeave={(e) => setShow(false)} anchorElement={anchor} show={show}>
         Popover Content
       </Popover>
     </div>

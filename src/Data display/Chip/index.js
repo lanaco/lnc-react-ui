@@ -233,6 +233,7 @@ Chip.propTypes = {
     "warning",
     "danger",
     "information",
+    "neutral",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   avatarProps: PropTypes.any,

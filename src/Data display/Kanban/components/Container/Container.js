@@ -4,6 +4,7 @@ import { Handle } from "../Handle/Handle";
 import styles from "./Container.module.css";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
+import { getColorRgbaValue } from "../../../../_utils/utils";
 
 //============== STYLES ==================================================
 
@@ -48,6 +49,15 @@ const StyledContainer = styled.div`
     border-color: transparent;
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0), 0 0px 0px 2px #4c9ffe;
   }
+
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Kanban",
+      props.color,
+      "enabled",
+      "background"
+    )};
 `;
 
 const Header = styled.div`
@@ -60,7 +70,22 @@ const Header = styled.div`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "KanbanHeader",
+      props.color,
+      "enabled",
+      "background"
+    )};
+    color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "KanbanHeader",
+      props.color ? "primary" : props.color,
+      "enabled",
+      "text"
+    )};
   &:hover .Actions > * {
     opacity: 1 !important;
   }
@@ -122,9 +147,11 @@ export const Container = forwardRef((props, ref) => {
       onClick={onClick}
       tabIndex={onClick ? 0 : undefined}
       maxContainerHeight={maxContainerHeight}
+      color={color}
+      theme={theme}
     >
       {label ? (
-        <Header>
+        <Header theme={theme} color={color}>
           <Actions className={"Actions"}>
             <Handle {...handleProps} />
           </Actions>

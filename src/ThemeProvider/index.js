@@ -2,25 +2,106 @@ import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import { themes } from "../_utils/theme";
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
-import { getSizeValueWithUnits, hexToRgba } from "../_utils/utils";
+import {
+  getColorRgbaValue,
+  getSizeValueWithUnits,
+} from "../_utils/utils";
 import { getDisabledBg, getDisabledColor } from "./_themeutils";
+import { createGlobalStyle } from "styled-components";
+import { useContext } from "react";
 
-const Wrapper = styled.div`
+const GlobalStyle = createGlobalStyle`
+* {
   --size-small: ${(props) => getSizeValueWithUnits(props.theme, "small")};
   --size-medium: ${(props) => getSizeValueWithUnits(props.theme, "medium")};
   --size-large: ${(props) => getSizeValueWithUnits(props.theme, "large")};
-  --disabled-text: ${props => getDisabledColor(props.theme)};
-  --disabled-bg: ${props => getDisabledBg(props.theme)};
+  --disabled-text: ${(props) => getDisabledColor(props.theme)};
+  --disabled-bg: ${(props) => getDisabledBg(props.theme)};
 
-  & * {
-    box-sizing: border-box;
-    font-family: ${(props) => props.theme?.typography?.fontFamily};
-  }
+  box-sizing: border-box;
+  font-family: ${(props) => props.theme?.typography?.fontFamily};
+  
   & i {
     font-family: "Font Awesome 5 Free";
   }
+
+  & .lnc-doc {
+    & th {
+      background-color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "Background",
+          "default",
+          "enabled",
+          "background"
+        )} !important;
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Text",
+            "default",
+            "enabled",
+            "text"
+          )} !important;
+    }
+    & td {
+      background-color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "Background",
+          "default",
+          "enabled",
+          "background"
+        )} !important;
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Text",
+            "default",
+            "enabled",
+            "text"
+          )} !important;
+    }
+  }
+
+  & .sbdocs {
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Background",
+        "default",
+        "enabled",
+        "background"
+      )} !important;
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Text",
+        "default",
+        "enabled",
+        "text"
+      )} !important;
+  }
+}
+  body {
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Background",
+        "default",
+        "enabled",
+        "background"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Text", "default", "enabled", "text")};
+  }
 `;
+
+const ThemeContext = React.createContext();
+
+export const useTheme = () => {
+  return useContext(ThemeContext);
+};
 
 export const ThemeProvider = ({ theme, children }) => {
   const [currentTheme, setCurrentTheme] = useState(
@@ -31,12 +112,19 @@ export const ThemeProvider = ({ theme, children }) => {
     setCurrentTheme(themes?.find((item) => item.name == theme));
   }, [theme]);
 
+  const switchTheme = (name) => {
+    setCurrentTheme(themes?.find((item) => item.name == name));
+  };
+
   return (
-    <Wrapper theme={currentTheme}>
+    <ThemeContext.Provider
+      value={{ theme: currentTheme, switchTheme: switchTheme }}
+    >
       <EmotionThemeProvider theme={currentTheme}>
+        <GlobalStyle theme={currentTheme} />
         {children}
       </EmotionThemeProvider>
-    </Wrapper>
+    </ThemeContext.Provider>
   );
 };
 

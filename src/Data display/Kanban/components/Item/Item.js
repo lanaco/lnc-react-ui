@@ -6,10 +6,26 @@ import classNames from "classnames";
 import styles from "./Item.module.css";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
+import { getColorRgbaValue } from "../../../../_utils/utils";
 
 const StyledItem = styled.div`
   font-family: ${(props) => props.theme?.typography?.fontFamily};
-  
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "KanbanCard",
+      props.color ? "primary" : props.color,
+      "enabled",
+      "background"
+    )};
+  color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "KanbanCard",
+      props.color ? "primary" : props.color,
+      "enabled",
+      "text"
+    )};
   &:hover .Actions > * {
     opacity: 1 !important;
   }
@@ -100,6 +116,7 @@ export const Item = React.memo(
         >
           <StyledItem
             theme={theme}
+            color={color}
             className={
               classNames(
                 styles.Item,
