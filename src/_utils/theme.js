@@ -2397,6 +2397,7 @@ export const lanaco_light = {
         palette: "gray",
         enabled: {
           background: 0,
+          removeIcon: 400
         },
         hover: {
           background: 100,
@@ -2617,8 +2618,6 @@ export const lanaco_light = {
           border: 200,
           text: 500,
           icon: 500,
-          background: 0,
-          backgroundOpacity: 1000,
           fontWeight: 400,
         },
       },
@@ -5575,76 +5574,77 @@ export const lanaco_dark = {
         palette: "gray",
         enabled: {
           background: 800,
+          removeIcon: 400
         },
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 900,
         },
       },
       teal: {
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 800,
         },
       },
       blue: {
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 800,
         },
       },
       red: {
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 800,
         },
       },
       violet: {
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 800,
         },
       },
       yellow: {
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 800,
         },
       },
       green: {
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 800,
         },
       },
       gray: {
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 800,
         },
       },
       neutral: {
         hover: {
-          background: 100,
+          background: 700,
         },
         selected: {
-          background: 500,
+          background: 800,
         },
       },
     },
@@ -5795,8 +5795,6 @@ export const lanaco_dark = {
           border: 700,
           text: 400,
           icon: 400,
-          background: 0,
-          backgroundOpacity: 1000,
           fontWeight: 400,
         },
       },

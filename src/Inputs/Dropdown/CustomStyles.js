@@ -36,6 +36,16 @@ const customStyles = {
     minHeight: getSizeValueWithUnits(s.theme, s.selectProps.size),
     maxHeight: getSizeValueWithUnits(s.theme, s.selectProps.size),
   }),
+  input: (p, s) => ({
+    ...p,
+    color: getColorRgbaValue(
+      s.theme,
+      "Input",
+      s.focused ? "primary" : s.color,
+      "enabled",
+      "text"
+    ),
+  }),
   control: (p, s) => ({
     ...p,
     minHeight: getSizeValueWithUnits(s.theme, s.selectProps.size),
@@ -85,6 +95,20 @@ const customStyles = {
     boxShadow:
       "0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)",
     borderRadius: getBorderRadiusValueWithUnits(s.theme, "regular"),
+    backgroundColor: getColorRgbaValue(
+      s.theme,
+      "Dropdown",
+      s.selectProps.color,
+      "enabled",
+      "background"
+    ),
+    color: getColorRgbaValue(
+      s.theme,
+      "Dropdown",
+      s.selectProps.color,
+      "enabled",
+      "text"
+    ),
   }),
   menuPortal: (base) => ({ ...base, zIndex: 20 }),
   option: (p, s) => ({
@@ -172,13 +196,16 @@ const customStyles = {
       s.theme,
       "regular"
     )} ${getBorderRadiusValueWithUnits(s.theme, "regular")} 0`,
-    "&:active": {
-      backgroundColor: "blue",
-    },
+    color: getColorRgbaValue(
+      s.theme,
+      "Dropdown",
+      s.selectProps.color,
+      "enabled",
+      "removeIcon"
+    ),
     "&:hover": {
       backgroundColor: "transparent",
       color: getColorRgbaValue(s.theme, "Danger", "danger", "enabled", "text"),
-
       cursor: "pointer",
     },
   }),
