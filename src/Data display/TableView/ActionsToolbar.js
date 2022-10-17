@@ -6,6 +6,8 @@ import DropdownMenu from "../../Utility/DropdownMenu/index";
 import DropdownItem from "../../Utility/DropdownMenu/DropdownItem";
 import Separator from "../../Utility/DropdownMenu/Separator";
 import Button from "../../General/Button/index";
+import { getColorRgbaValue } from "../../_utils/utils";
+import { useTheme } from "../../ThemeProvider";
 
 const StyledToolbar = styled.div`
   display: flex;
@@ -16,8 +18,23 @@ const StyledToolbar = styled.div`
   font-weight: 700;
   font-size: 0.875rem;
   color: rgba(15, 23, 42, 100%);
-  background-color: rgba(248, 250, 252, 100%);
-  border: 1px solid rgba(203, 213, 225, 100%);
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Toolbar",
+      props.color,
+      "enabled",
+      "background",
+      "backgroundOpacity"
+    )};
+  border: ${props => `1px solid ${getColorRgbaValue(
+    props.theme,
+    "Toolbar",
+    props.color,
+    "enabled",
+    "border",
+    "borderOpacity"
+  )}`};
   gap: 6px;
   justify-content: space-between;
   & > div {
@@ -56,8 +73,10 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
     ...rest
   } = props;
 
+  const { theme } = useTheme();
+
   return (
-    <StyledToolbar ref={ref} className={className} style={style} {...rest}>
+    <StyledToolbar ref={ref} theme={theme} color={color} className={className} style={style} {...rest}>
       <div>
         {showCreate && (
           <Button

@@ -45,7 +45,7 @@ const Tab = styled.div`
       "text"
     )};
   background-color: ${(props) =>
-    props.type == "regular" || (props.type == "pill" && props.disabled)
+    props.type == "regular" || (props.type == "pill" && (props.disabled == true || props.active == false))
       ? "transparent"
       : !props.disabled &&
         getColorRgbaValue(
@@ -57,8 +57,8 @@ const Tab = styled.div`
           "backgroundOpacity"
         )};
   ${(props) =>
-    props.type == "underline" &&
-    "border: 1px solid " +
+    props.type == "underline" && props.last == false &&
+    "border-right: 1px solid " +
       getColorRgbaValue(
         props.theme,
         getTypeName(props.type),

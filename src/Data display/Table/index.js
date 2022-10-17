@@ -46,7 +46,13 @@ const LoaderContainerTransparent = styled.div`
   overflow: auto;
   z-index: 1000;
   opacity: 0.7;
-  background-color: white;
+  background-color: ${props => getColorRgbaValue(
+    props.theme,
+    "Background",
+    "primary",
+    "enabled",
+    "background"
+  )};
   filter: alpha(opacity=10);
   display: flex;
   align-items: center;
@@ -575,7 +581,7 @@ const Table = forwardRef((props, ref) => {
     if (EnableLoader === true && Loading === true) {
       return (
         <>
-          <LoaderContainerTransparent>
+          <LoaderContainerTransparent theme={theme}>
             {renderCustomElement(
               getCustomRender("TABLE_LOADER", props.children),
               {

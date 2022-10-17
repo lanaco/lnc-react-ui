@@ -4,6 +4,7 @@ import Alert from "./index";
 import { useState } from "react";
 import Button from "../../General/Button";
 import Icon from "../../General/Icon";
+import { useTheme } from "../../ThemeProvider";
 
 <Meta title="Feedback/Alert" component={Alert} />
 
@@ -118,7 +119,7 @@ export const TemplateCustom = (args) => {
         </Alert>
       )}
       <br />
-      <Button disabled={open} onClick={() => setOpen(!open)} text="Open">
+      <Button disabled={open} onClick={() => setOpen(!open)}>
         Open
       </Button>
     </>
@@ -148,7 +149,7 @@ export const TemplateCustomIcon = (args) => {
         </Alert>
       )}
       <br />
-      <Button disabled={open} onClick={() => setOpen(!open)} text="Open">
+      <Button disabled={open} onClick={() => setOpen(!open)}>
         Open
       </Button>
     </>

@@ -37,6 +37,7 @@ const Button = React.forwardRef((props, ref) => {
     className,
     style,
     color,
+    children,
     ...rest
   } = props;
 
@@ -70,6 +71,7 @@ const Button = React.forwardRef((props, ref) => {
         )}
 
         {text}
+        {children}
 
         {hasTrailingIcon && (
           <TrailingIconContainer size={size}>

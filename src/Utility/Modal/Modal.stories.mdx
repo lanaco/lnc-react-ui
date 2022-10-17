@@ -11,7 +11,7 @@ export const TemplateDefault = (args) => {
   const modalRef = useRef();
   return (
     <>
-      <Button onClick={() => modalRef.current.open()} text="Open Modal">Open Modal</Button>
+      <Button onClick={() => modalRef.current.open()}>Open Modal</Button>
       <Modal ref={modalRef} header={<h3>Title</h3>} {...args}>
         <span>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -33,13 +33,13 @@ export const TemplateSizes = (args) => {
   return (
     <>
       <div style={{ display: "flex", gap: "12px" }}>
-        <Button onClick={() => openModal("xs")} text="Open XS Modal">Open XS Modal</Button>
-        <Button onClick={() => openModal("s")} text="Open S Modal">Open S Modal</Button>
-        <Button onClick={() => openModal("m")} text="Open M Modal">Open M Modal</Button>
-        <Button onClick={() => openModal("l")} text="Open L Modal">Open L Modal</Button>
-        <Button onClick={() => openModal("xl")} text="Open XL Modal">Open XL Modal</Button>
-        <Button onClick={() => openModal("fluid")} text="Open Fluid Modal">Open Fluid Modal</Button>
-        <Button onClick={() => openModal("full")} text="Open Full Modal">Open Full Modal</Button>
+        <Button onClick={() => openModal("xs")}>Open XS Modal</Button>
+        <Button onClick={() => openModal("s")}>Open S Modal</Button>
+        <Button onClick={() => openModal("m")}>Open M Modal</Button>
+        <Button onClick={() => openModal("l")}>Open L Modal</Button>
+        <Button onClick={() => openModal("xl")}>Open XL Modal</Button>
+        <Button onClick={() => openModal("fluid")}>Open Fluid Modal</Button>
+        <Button onClick={() => openModal("full")}>Open Full Modal</Button>
       </div>
       <Modal ref={modalRef} size={size} clickOutsideToClose={true} header={<h3>Title</h3>} {...args}>
         <span>

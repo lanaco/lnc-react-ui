@@ -2,8 +2,7 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Chip from "./index";
 import Avatar from "../../General/Avatar";
-import logo from '../../_utils/images/Image.png'
-
+import logo from "../../_utils/images/Image.png";
 
 <Meta title="Data display/Chip" component={Chip} />
 
@@ -27,19 +26,14 @@ export const TemplateConfigurations = (args) => (
 
 export const TemplateAvatar = (args) => (
   <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Chip {...args} label={"Cat"} avatar={true} avatarProps={{ icon: "cat" }} />
     <Chip
       {...args}
-      label={"Cat"}
+      label={"User"}
       avatar={true}
-      avatarProps={{icon: "cat"}}
+      borderRadius="curved"
+      avatarProps={{ image: logo }}
     />
-    <Chip 
-    {...args}
-     label={"User"}
-     avatar={true}
-     borderRadius="curved" 
-     avatarProps={{image: logo}}
-     />
   </div>
 );
 
@@ -51,6 +45,7 @@ export const TemplateColors = (args) => (
     <Chip {...args} label={"Chip"} color="warning" />
     <Chip {...args} label={"Chip"} color="danger" />
     <Chip {...args} label={"Chip"} color="information" />
+    <Chip {...args} label={"Chip"} color="neutral" />
   </div>
 );
 

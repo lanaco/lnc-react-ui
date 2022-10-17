@@ -60,7 +60,7 @@ const ModalContainer = styled(motion.div)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background-color: ${props =>  getColorRgbaValue(props.theme, "Modal", "default", "enabled", "bg")};
   z-index: ${(props) => props.zIndex};
   width: ${props => ModalSizes[props.size.toUpperCase()]};
   max-width: ${props => getMaxWidth(props.size.toUpperCase())};
@@ -149,6 +149,7 @@ const Modal = React.forwardRef((props, ref) => {
     footer,
     overlay,
     showCloseButton,
+    onOpen,
     onClose,
     zIndex,
     size,

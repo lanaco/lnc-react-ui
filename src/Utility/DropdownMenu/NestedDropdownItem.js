@@ -13,7 +13,7 @@ const StyledNested = styled.div`
         "MenuItem",
         props.color,
         "focus",
-        "backgoround"
+        "background"
     )}`};
     border-radius: 2px;
 `;

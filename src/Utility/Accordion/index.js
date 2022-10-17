@@ -10,15 +10,7 @@ const StyledAccordion = styled.div`
   color: ${(props) =>
     !props.disabled &&
     getColorRgbaValue(props.theme, "Accordion", "primary", "enabled", "text")};
-  background-color: ${(props) => props.disabled == false &&
-    getColorRgbaValue(
-      props.theme,
-      "Accordion",
-      "primary",
-      "enabled",
-      "background",
-      "backgroundOpacity"
-    )};
+  background-color: transparent;
   ${(props) =>
     getComponentTypographyCss(
       props.theme,

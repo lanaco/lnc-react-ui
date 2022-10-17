@@ -143,7 +143,6 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
         } else {
             return (
                 <Button color={color} size={size} text={selectFileText} disabled={disabled} onClick={(e) => { e.preventDefault(); handleControlClick(e); }}>
-                    {selectFileText}
                 </Button>
             );
         }

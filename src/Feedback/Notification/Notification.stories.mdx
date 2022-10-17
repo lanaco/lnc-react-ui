@@ -9,10 +9,10 @@ import Button from "../../General/Button";
 <Meta title="Feedback/Notification" component={NotificationContainer} />
 
 export const TemplateDefault = (args) => {
-  const notify = () => notification("Message");
+  const notify = () => notification(<NotificationMessage>Message</NotificationMessage>);
   return (
     <div>
-      <Button onClick={notify} text="Notify!">
+      <Button onClick={notify}>
         Notify!
       </Button>
       <NotificationContainer {...args} />
@@ -31,7 +31,6 @@ export const TemplateCustom = (args) => {
             </NotificationMessage>
           )
         }
-        text="With Icon"
       >
         With Icon
       </Button>
@@ -46,8 +45,8 @@ export const TemplateCustom = (args) => {
               title={"Title"}
               actions={
                 <>
-                  <Button text="Confirm">Confirm</Button>
-                  <Button text="Dismiss">Dismiss</Button>
+                  <Button>Confirm</Button>
+                  <Button>Dismiss</Button>
                 </>
               }
             >
@@ -55,7 +54,6 @@ export const TemplateCustom = (args) => {
             </NotificationMessage>
           )
         }
-        text="With Action"
       >
         With Action
       </Button>
@@ -75,7 +73,6 @@ export const TemplateCustom = (args) => {
             </NotificationMessage>
           )
         }
-        text="With Inline Actions"
       >
         With Inline Actions
       </Button>
@@ -94,14 +91,12 @@ export const TemplateCustom = (args) => {
                   <Button
                     type="outline"
                     color="secondary"
-                    text="Confirm"
                     borderRadius="none"
                     style={{ borderTopRightRadius: "8px" }}
                   >
                     Confirm
                   </Button>
                   <Button
-                    text="Dismiss"
                     type="outline"
                     color="neutral"
                     borderRadius="none"
@@ -117,7 +112,6 @@ export const TemplateCustom = (args) => {
             { closeButton: false }
           )
         }
-        text="With Side Buttons"
       >
         With Side Buttons
       </Button>
@@ -130,7 +124,6 @@ export const TemplateCustom = (args) => {
             {}
           )
         }
-        text="Success Notification"
       >
         Success Notification
       </Button>
@@ -143,7 +136,6 @@ export const TemplateCustom = (args) => {
             {}
           )
         }
-        text="Warning Notification"
       >
         Warning Notification
       </Button>
@@ -156,7 +148,6 @@ export const TemplateCustom = (args) => {
             {}
           )
         }
-        text="Error Notification"
       >
         Error Notification
       </Button>
@@ -169,7 +160,6 @@ export const TemplateCustom = (args) => {
             {}
           )
         }
-        text="Information Notification"
       >
         Information Notification
       </Button>
@@ -195,7 +185,7 @@ import {
   const notify = () => notification("Message");
   return (
     <div>
-      <Button onClick={notify} text="Notify!">
+      <Button onClick={notify}>
         Notify!
       </Button>
       <NotificationContainer {...args} />
@@ -228,7 +218,6 @@ import {
             </NotificationMessage>
           )
         }
-        text="With Icon"
       >
         With Icon
       </Button>
@@ -243,8 +232,8 @@ import {
               title={"Title"}
               actions={
                 <>
-                  <Button text="Confirm">Confirm</Button>
-                  <Button text="Dismiss">Dismiss</Button>
+                  <Button>Confirm</Button>
+                  <Button>Dismiss</Buttontext=>
                 </>
               }
             >
@@ -252,7 +241,6 @@ import {
             </NotificationMessage>
           )
         }
-        text="With Action"
       >
         With Action
       </Button>
@@ -272,7 +260,6 @@ import {
             </NotificationMessage>
           )
         }
-        text="With Inline Actions"
       >
         With Inline Actions
       </Button>
@@ -291,14 +278,12 @@ import {
                   <Button
                     type="outline"
                     color="secondary"
-                    text="Confirm"
                     borderRadius="none"
                     style={{ borderTopRightRadius: "8px" }}
                   >
                     Confirm
                   </Button>
                   <Button
-                    text="Dismiss"
                     type="outline"
                     color="neutral"
                     borderRadius="none"
@@ -314,7 +299,6 @@ import {
             { closeButton: false }
           )
         }
-        text="With Side Buttons"
       >
         With Side Buttons
       </Button>
@@ -327,7 +311,6 @@ import {
             {}
           )
         }
-        text="Success Notification"
       >
         Success Notification
       </Button>
@@ -340,7 +323,6 @@ import {
             {}
           )
         }
-        text="Warning Notification"
       >
         Warning Notification
       </Button>
@@ -353,7 +335,6 @@ import {
             {}
           )
         }
-        text="Error Notification"
       >
         Error Notification
       </Button>
@@ -366,7 +347,6 @@ import {
             {}
           )
         }
-        text="Information Notification"
       >
         Information Notification
       </Button>

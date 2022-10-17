@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import { useTheme } from "@emotion/react";
+// import { useTheme } from "@emotion/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
 } from "../../_utils/utils";
+import { useTheme } from "../../ThemeProvider";
 
 const StyledNotification = styled.div`
   & .lnc-notification {
@@ -34,6 +35,17 @@ const StyledNotification = styled.div`
         )}`};
       border-radius: ${(props) =>
         getBorderRadiusValueWithUnits(props.theme, "regular")};
+    }
+    & .Toastify__close-button {
+      & svg {
+        fill: ${props => getColorRgbaValue(
+          props.theme,
+          "Notification",
+          "default",
+          "enabled",
+          "icon"
+        )};
+      }
     }
     & .Toastify__toast--success {
       & svg {
@@ -100,7 +112,7 @@ const NotificationContainer = React.forwardRef((props, ref) => {
     children,
     ...rest
   } = props;
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   const themeProps = { theme, className, style };
 
