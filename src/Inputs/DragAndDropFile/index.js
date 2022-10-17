@@ -30,14 +30,6 @@ const Container = styled.label`
   font-size: ${props => props.theme.typography.component[props.size].subTxtFontSize};
   padding: ${props => paddingBySize[props.size]};
 
-  background-color: ${props => getColorRgbaValue(
-    props.theme,
-    "DragDropFiles",
-    props.color,
-    "enabled",
-    "background",
-    "backgroundOpacity"
-  )};
   color: ${props => getColorRgbaValue(
     props.theme,
     "DragDropFiles",
