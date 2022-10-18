@@ -49,7 +49,7 @@ import { Container } from "./components/Container/Container";
 import { createRange } from "./utilities";
 import styled from "@emotion/styled";
 import { findIndex, cloneDeep } from "lodash";
-import { useEffectOnce, useUpdate, useUpdateEffect } from "react-use";
+import { useEffectOnce, useUpdateEffect } from "react-use";
 import { KanbanHeader } from "./components/KanbanHeader/KanbanHeader";
 import { KanbanCard } from "./components/KanbanCard/KanbanCard";
 

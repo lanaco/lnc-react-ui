@@ -1,9 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue, getComponentTypographyCss } from "../../_utils/utils";
-import { useState } from "react";
 
 const StlyedLink = styled.a`
   ${(props) =>
