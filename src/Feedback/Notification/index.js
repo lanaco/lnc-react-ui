@@ -9,6 +9,7 @@ import {
   getColorRgbaValue,
 } from "../../_utils/utils";
 import { useTheme } from "../../ThemeProvider";
+import NotificationMessage from "./NotificationMessage";
 
 const StyledNotification = styled.div`
   & .lnc-notification {
@@ -184,4 +185,4 @@ NotificationContainer.propTypes = {
   toastContainerProps: PropTypes.any,
 };
 
-export { NotificationContainer, toast as notification };
+export { NotificationContainer, toast as notification, NotificationMessage };
