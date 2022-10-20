@@ -27,20 +27,20 @@ Lnc React UI Web Components provide simple and complex components and layout.
 
 ---
 
-## Add @lnc-react-ui (kako ce se zvati vec) to an existing app
+## Add @lanaco/lnc-react-ui to an existing app
 
-First of all dependency `@lnc-react-ui` needs to be added to the project
+First of all dependency `@lanaco/lnc-react-ui` needs to be added to the project
 
 ```
-npm install @lnc-react-ui --save
+npm install @lanaco/lnc-react-ui --save
 ```
 
-In order to use @lnc-react-ui you have to wrap your application's root component into the ThemeProvider.
+In order to use @lanaco/lnc-react-ui you have to wrap your application's root component into the ThemeProvider.
 You will find this component most likely in src/App.js:
 
 ```jsx
 
-import { ThemeProvider } from '@lnc-react-ui';
+import { ThemeProvider } from '@lanaco/lnc-react-ui';
 ...
 render() {
   return (
@@ -55,7 +55,7 @@ render() {
 
 # Theming
 
-`ThemeProvider` has `theme` prop which accepts name of the theme. Available themes are `Main` and `Main copy`. (mozda ih malo prikazat)
+`ThemeProvider` has `theme` prop which accepts name of the theme. Available themes are `Lanaco Light` and `Lanaco Dark`.
 Default value is `Lanaco Light` theme.
 
 ```jsx
@@ -63,3 +63,16 @@ Default value is `Lanaco Light` theme.
   <MyApp />
 </ThemeProvider>
 ```
+
+Custom theme can be created following the set of rules used for theme definition. 
+Theme is an object where required fields are:
+* name
+* class
+* colorContext,
+* components
+* palette
+* sizes
+* borderRadius
+* boxShadow
+* typography
+* zIndex

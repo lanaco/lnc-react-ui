@@ -1144,25 +1144,25 @@ export const lanaco_light = {
         enabled: {
           background: 50,
           backgroundOpacity: 50,
-          text: 900,
+          text: 0,
           fontWeight: 700,
         },
         hover: {
           background: 100,
           backgroundOpacity: 100,
-          text: 900,
+          text: 0,
           fontWeight: 700,
         },
         focus: {
           background: 100,
           backgroundOpacity: 100,
-          text: 900,
+          text: 0,
           fontWeight: 700,
         },
         active: {
           background: 100,
           backgroundOpacity: 200,
-          text: 900,
+          text: 0,
           fontWeight: 700,
         },
         disabled: {
@@ -2478,6 +2478,7 @@ export const lanaco_light = {
           icon: 600,
           fontWeight: 600,
           separator: 100,
+          text: 900,
         },
         focus: {
           background: 500,
@@ -2486,6 +2487,11 @@ export const lanaco_light = {
         },
         active: {
           background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
+          background: 500,
           icon: 300,
           text: 0,
         },
@@ -2504,6 +2510,11 @@ export const lanaco_light = {
           icon: 300,
           text: 0,
         },
+        hover: {
+          background: 500,
+          icon: 300,
+          text: 0,
+        },
       },
       blue: {
         enabled: {
@@ -2516,6 +2527,11 @@ export const lanaco_light = {
         },
         active: {
           background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
+          background: 500,
           icon: 300,
           text: 0,
         },
@@ -2534,6 +2550,11 @@ export const lanaco_light = {
           icon: 300,
           text: 0,
         },
+        hover: {
+          background: 500,
+          icon: 300,
+          text: 0,
+        },
       },
       violet: {
         enabled: {
@@ -2546,6 +2567,11 @@ export const lanaco_light = {
         },
         active: {
           background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
+          background: 500,
           icon: 300,
           text: 0,
         },
@@ -2564,6 +2590,11 @@ export const lanaco_light = {
           icon: 300,
           text: 0,
         },
+        hover: {
+          background: 500,
+          icon: 300,
+          text: 0,
+        },
       },
       green: {
         enabled: {
@@ -2576,6 +2607,11 @@ export const lanaco_light = {
         },
         active: {
           background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
+          background: 500,
           icon: 300,
           text: 0,
         },
@@ -2594,6 +2630,11 @@ export const lanaco_light = {
           icon: 300,
           text: 0,
         },
+        hover: {
+          background: 500,
+          icon: 300,
+          text: 0,
+        },
       },
       neutral: {
         enabled: {
@@ -2606,6 +2647,11 @@ export const lanaco_light = {
         },
         active: {
           background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
+          background: 500,
           icon: 300,
           text: 0,
         },
@@ -3153,6 +3199,7 @@ export const lanaco_light = {
   borderRadius: {
     slight: "4px",
     regular: "8px",
+    edged: "12px",
     curved: "1000px",
     none: "0",
   },
@@ -4320,25 +4367,25 @@ export const lanaco_dark = {
         enabled: {
           background: 50,
           backgroundOpacity: 50,
-          text: 900,
+          text: 0,
           fontWeight: 700,
         },
         hover: {
           background: 100,
           backgroundOpacity: 100,
-          text: 900,
+          text: 0,
           fontWeight: 700,
         },
         focus: {
           background: 100,
           backgroundOpacity: 100,
-          text: 900,
+          text: 0,
           fontWeight: 700,
         },
         active: {
           background: 100,
           backgroundOpacity: 200,
-          text: 900,
+          text: 0,
           fontWeight: 700,
         },
         disabled: {
@@ -5655,6 +5702,7 @@ export const lanaco_dark = {
           icon: 400,
           fontWeight: 600,
           separator: 700,
+          text: 50,
         },
         focus: {
           background: 500,
@@ -5662,6 +5710,11 @@ export const lanaco_dark = {
           text: 0,
         },
         active: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
           background: 600,
           icon: 300,
           text: 0,
@@ -5681,6 +5734,11 @@ export const lanaco_dark = {
           icon: 300,
           text: 0,
         },
+        hover: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
       },
       blue: {
         enabled: {
@@ -5692,6 +5750,11 @@ export const lanaco_dark = {
           text: 0,
         },
         active: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
           background: 600,
           icon: 300,
           text: 0,
@@ -5711,6 +5774,11 @@ export const lanaco_dark = {
           icon: 300,
           text: 0,
         },
+        hover: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
       },
       violet: {
         enabled: {
@@ -5722,6 +5790,11 @@ export const lanaco_dark = {
           text: 0,
         },
         active: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
           background: 600,
           icon: 300,
           text: 0,
@@ -5741,6 +5814,11 @@ export const lanaco_dark = {
           icon: 300,
           text: 0,
         },
+        hover: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
       },
       green: {
         enabled: {
@@ -5752,6 +5830,11 @@ export const lanaco_dark = {
           text: 0,
         },
         active: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
           background: 600,
           icon: 300,
           text: 0,
@@ -5771,6 +5854,11 @@ export const lanaco_dark = {
           icon: 300,
           text: 0,
         },
+        hover: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
       },
       neutral: {
         enabled: {
@@ -5782,6 +5870,11 @@ export const lanaco_dark = {
           text: 0,
         },
         active: {
+          background: 600,
+          icon: 300,
+          text: 0,
+        },
+        hover: {
           background: 600,
           icon: 300,
           text: 0,
@@ -6330,6 +6423,7 @@ export const lanaco_dark = {
   borderRadius: {
     slight: "4px",
     regular: "8px",
+    edged: "12px",
     curved: "1000px",
     none: "0",
   },
@@ -6372,7 +6466,7 @@ export const lanaco_dark = {
 
 const themes = [
   lanaco_light,
-  lanaco_dark
+  lanaco_dark,
 ];
 
 export { themes };

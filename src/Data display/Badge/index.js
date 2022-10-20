@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
+  getBorderRadiusValueWithUnits,
   getColorRgbaValue,
   getComponentTypographyCss,
 } from "../../_utils/utils";
@@ -23,11 +24,13 @@ const StyledBadge = styled.div`
       "Badge",
       props.color,
       "enabled",
-      "background"
+      "background",
+      "backgroundOpacity"
     )};
   color: ${(props) =>
     getColorRgbaValue(props.theme, "Badge", props.color, "enabled", "text")};
-  border-radius: 100px;
+  border-radius: ${(props) =>
+    getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
   display: inline-flex;
   min-width: ${(props) => getSize(props.size)};
   min-height: ${(props) => getSize(props.size)};
@@ -37,16 +40,30 @@ const StyledBadge = styled.div`
   padding: 0.313rem;
 
   & i {
-    font-size: ${props => props.size == "small" ? "0.75rem" : (props.size=="medium" ? "0.875rem" : "1rem")}
+    font-size: ${(props) =>
+      props.size == "small"
+        ? "0.75rem"
+        : props.size == "medium"
+        ? "0.875rem"
+        : "1rem"};
   }
 `;
 
 const Badge = React.forwardRef((props, ref) => {
-  const { onClick, className, style, color, size, children, ...rest } = props;
+  const {
+    borderRadius,
+    onClick,
+    className,
+    style,
+    color,
+    size,
+    children,
+    ...rest
+  } = props;
 
   const theme = useTheme();
 
-  const themeProps = { theme, size, color, className, style };
+  const themeProps = { borderRadius, theme, size, color, className, style };
 
   return (
     <StyledBadge ref={ref} {...themeProps} onClick={onClick} {...rest}>
@@ -57,6 +74,7 @@ const Badge = React.forwardRef((props, ref) => {
 
 Badge.defaultProps = {
   onClick: () => {},
+  borderRadius: "curved",
   //-------------------------
   style: {},
   color: "primary",
@@ -65,6 +83,13 @@ Badge.defaultProps = {
 
 Badge.propTypes = {
   onClick: PropTypes.func,
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   //---------------------------
   className: PropTypes.string,
   style: PropTypes.object,

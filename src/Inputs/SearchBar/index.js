@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import theme from "../../_utils/theme";
 import PropTypes from "prop-types";
 import Chip from "../../Data display/Chip/index";
 import FadeIn from "../../FadeIn/FadeIn";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./animation.css";
+import { useTheme } from "../../ThemeProvider";
 
 const getIconFontSize = (props) => {
   if (props.size === "small") return props.theme.typography.medium.fontSize;
@@ -149,13 +149,13 @@ const SearchBar = (props) => {
     className,
     size,
     color,
-    theme,
   } = props;
 
   const [value, setValue] = useState("");
   const [openSuggestions, setOpenSuggestions] = useState(false);
   const [cursor, setCursor] = useState(0);
   let InputRef = React.createRef();
+  const { theme } = useTheme();
 
   let themeProps = { size, color, theme };
 
@@ -327,11 +327,9 @@ SearchBar.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 SearchBar.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.any,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,

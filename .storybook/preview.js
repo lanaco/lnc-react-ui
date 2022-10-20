@@ -11,15 +11,10 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  themes: {
-    default: 'Lanaco Light',
-    list: themes,
-  },
   docs:{
     source: {
       type: "code"
     },
-    // theme: storyBookThemes.dark,
   },
   globals: {
     themes: {}
