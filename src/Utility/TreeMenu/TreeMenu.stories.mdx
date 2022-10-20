@@ -12,7 +12,7 @@ import Avatar from "../../General/Avatar";
 # Tree Menu
 
 ```jsx
-import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lnc-react-ui";
+import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lanaco/lnc-react-ui";
 ```
 
 
@@ -92,7 +92,6 @@ import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lnc-react-ui";
 </Story>
 
 ```jsx
-<Story name="Nested Items" args={{}}>
   {(args) => (
     <TreeMenu {...args}>
       <MenuItem icon="pen" value="Edit">
@@ -135,7 +134,52 @@ import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lnc-react-ui";
       </MenuItem>
     </TreeMenu>
   )}
+```
+
+#### Without tucking in
+
+<Story name="Without Tucking In" args={{}}>
+  {(args) => (
+    <TreeMenu {...args}>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <NestedMenuItem
+        tuckIn={false}
+        item={
+          <MenuItem icon="archive" value="Arch">
+            Archive
+          </MenuItem>
+        }
+      >
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+      </NestedMenuItem>
+    </TreeMenu>
+  )}
 </Story>
+
+```jsx
+  {(args) => (
+    <TreeMenu {...args}>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <NestedMenuItem
+        tuckIn={false}
+        item={
+          <MenuItem icon="archive" value="Arch">
+            Archive
+          </MenuItem>
+        }
+      >
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+      </NestedMenuItem>
+    </TreeMenu>
+  )}
 ```
 
 ### Custom Menu Items

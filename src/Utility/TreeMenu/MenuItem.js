@@ -5,6 +5,7 @@ import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon";
 import {
   getColorRgbaValue,
+  getComponentPropValue,
   getComponentTypographyCss,
   getDisabledStateCss,
 } from "../../_utils/utils";
@@ -19,6 +20,13 @@ const Item = styled.div`
   min-height: 2.25rem;
   gap: 0.563rem;
   padding: 0.563rem;
+  color: ${props => getColorRgbaValue(
+    props.theme,
+    "MenuItem",
+    props.color,
+    "enabled",
+    "text"
+  )};
   ${(props) =>
     getComponentTypographyCss(props.theme, "MenuItem", props.size, "enabled")};
   & .menu-icon-lnc {
@@ -70,6 +78,25 @@ const Item = styled.div`
   outline: none;
 
   ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+  &:hover {
+    ${(props) =>
+      props.disabled == false &&
+      `background-color: ${getColorRgbaValue(
+        props.theme,
+        "MenuItem",
+        props.color,
+        "hover",
+        "background"
+      )};
+      color: ${getColorRgbaValue(
+        props.theme,
+        "MenuItem",
+        props.color,
+        "hover",
+        "text"
+      )};
+      `}
+  }
 `;
 
 const MenuItem = React.forwardRef((props, ref) => {
@@ -237,7 +264,7 @@ const MenuItem = React.forwardRef((props, ref) => {
     <>
       <Item
         ref={ref ? ref : itemRef}
-        className={`menu-item-lnc ` + className}
+        className={`menu-item-lnc ` + (isNested ? "nested-menu-item-lnc " : "") + (showNested ? "spread-nested-item-lnc " : "") +className}
         {...themeProps}
         disabled={disabled}
         tabIndex={0}
@@ -251,12 +278,7 @@ const MenuItem = React.forwardRef((props, ref) => {
       >
         {icon && <Icon icon={icon} className="menu-icon-lnc" {...iconProps} />}
         <div>{children}</div>
-        {isNested && (
-          <Icon
-            icon={"angle-down"}
-            className="sub-menu-icon-lnc"
-          />
-        )}
+        {isNested && <Icon icon={"angle-down"} className="sub-menu-icon-lnc" />}
       </Item>
     </>
   );

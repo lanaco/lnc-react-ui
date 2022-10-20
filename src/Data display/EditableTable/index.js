@@ -1,7 +1,6 @@
 import React, { useRef, useImperativeHandle, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
-import theme from "../../_utils/theme";
 import Table from "../Table/index";
 import EditableTableCell from "./components/EditableTableCell";
 import EditableTableRow from "./components/EditableTableRow";
@@ -219,7 +218,6 @@ EditableTable.defaultProps = {
   //--------------------
   size: "small",
   color: "primary",
-  theme: theme,
   className: "",
 };
 
@@ -338,10 +336,6 @@ EditableTable.propTypes = {
    */
   onSelectAll: PropTypes.func,
   //----------------------------------------
-  /**
-   * Theme object.
-   */
-  theme: PropTypes.object.isRequired,
   /**
    * `className` applied to the component container.
    */

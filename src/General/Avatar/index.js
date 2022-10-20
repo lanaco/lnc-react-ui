@@ -13,7 +13,7 @@ import Icon from "../Icon";
 
 const StyledAvatar = styled.div`
   border-radius: ${(props) =>
-    getBorderRadiusValueWithUnits(props.theme, "curved")};
+    getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
   color: white;
   display: inline-flex;
   justify-content: center;
@@ -50,6 +50,7 @@ const Avatar = React.forwardRef((props, ref) => {
     tabIndex,
     sizeInUnits,
     disabled,
+    borderRadius,
     //----------------
     onFocus,
     onBlur,
@@ -70,6 +71,7 @@ const Avatar = React.forwardRef((props, ref) => {
     <StyledAvatar
       ref={ref}
       {...themeProps}
+      borderRadius={borderRadius}
       onClick={onClick}
       onFocus={onFocus}
       onBlur={onBlur}
@@ -83,6 +85,7 @@ const Avatar = React.forwardRef((props, ref) => {
 Avatar.defaultProps = {
   icon: "user",
   disabled: false,
+  borderRadius: "curved",
   //-------------------------
   onBlur: () => {},
   onFocus: () => {},
@@ -105,6 +108,7 @@ Avatar.propTypes = {
    */
   sizeInUnits: PropTypes.string,
   disabled: PropTypes.bool,
+  borderRadius: PropTypes.oneOf(["slight", "regular", "edged", "curved", "none"]),
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,

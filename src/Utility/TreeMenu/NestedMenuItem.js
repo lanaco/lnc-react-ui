@@ -6,15 +6,15 @@ import { getColorRgbaValue } from "../../_utils/utils";
 
 
 const StyledNested = styled.div`
-    margin-left: 0.3rem;
-    padding-left: 0.3rem;
-    border-left: ${props => `2px solid ${getColorRgbaValue(
+    ${props => props.tuckIn == true && "margin-left: 0.3rem;"}
+    ${props => props.tuckIn == true && "padding-left: 0.3rem;"}
+    ${props => props.tuckIn == true && `border-left: 2px solid ${getColorRgbaValue(
         props.theme,
         "MenuItem",
         props.color,
         "focus",
         "background"
-    )}`};
+    )};`}
     border-radius: 2px;
 `;
 
@@ -24,6 +24,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
         //------------------
         onItemSelected,
         //--------------------
+        tuckIn,
         color,
         size,
         className,
@@ -58,11 +59,12 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
     <>
         {clonedItem}
     </>
-    {show && <StyledNested theme={theme} color={color} size={size} className={"nested-item-lnc "+className} style={style} ref={ref} {...rest}>{clonedChildren}</StyledNested>}
+    {show && <StyledNested theme={theme} tuckIn={tuckIn} color={color} size={size} className={"nested-item-lnc "+className} style={style} ref={ref} {...rest}>{clonedChildren}</StyledNested>}
     </> 
 })
 
 NestedMenuItem.defaultProps = {
+    tuckIn: true,
     size: "small",
     color: "primary",
     style: {},
@@ -73,6 +75,10 @@ NestedMenuItem.defaultProps = {
 NestedMenuItem.propTypes = {
     item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
     //--------------------------
+    /**
+     * Determines wether nested items will be tucked in to the right (using margin-right and padding-left).
+     */
+    tuckIn: PropTypes.bool,
     className: PropTypes.string,
     style: PropTypes.object,
     color: PropTypes.oneOf([

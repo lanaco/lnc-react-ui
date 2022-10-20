@@ -57,6 +57,14 @@ export const FilledButton = styled.button`
       "enabled",
       "background"
     )};
+  color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "ButtonFilled",
+      props.color,
+      "enabled",
+      "text"
+    )};
 
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
@@ -72,6 +80,14 @@ export const FilledButton = styled.button`
         "disabled",
         "background"
       )};
+      color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "ButtonFilled",
+          props.color,
+          "disabled",
+          "text"
+        )};
   }
 
   &:hover {
@@ -84,6 +100,14 @@ export const FilledButton = styled.button`
         "hover",
         "background"
       )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonFilled",
+        props.color,
+        "hover",
+        "text"
+      )};
   }
 
   &:focus {
@@ -95,6 +119,14 @@ export const FilledButton = styled.button`
         props.color,
         "focus",
         "background"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonFilled",
+        props.color,
+        "focus",
+        "text"
       )};
 
     ${(props) => !props.disabled && getOutlineCss(props.theme)};
@@ -110,6 +142,14 @@ export const FilledButton = styled.button`
         "active",
         "background"
       )};
+      color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "ButtonFilled",
+          props.color,
+          "active",
+          "text"
+        )};
   }
 `;
 
@@ -173,6 +213,15 @@ export const TintedButton = styled.button`
         "background",
         "backgroundOpacity"
       )};
+      color: ${(props) =>
+        !props.disabled &&
+        getColorRgbaValue(
+          props.theme,
+          "ButtonTinted",
+          props.color,
+          "hover",
+          "text"
+        )};
   }
 
   &:focus {
@@ -186,7 +235,15 @@ export const TintedButton = styled.button`
         "background",
         "backgroundOpacity"
       )};
-
+      color: ${(props) =>
+        !props.disabled &&
+        getColorRgbaValue(
+          props.theme,
+          "ButtonTinted",
+          props.color,
+          "focus",
+          "text"
+        )};
     ${(props) => !props.disabled && getOutlineCss(props.theme)};
   }
 
@@ -201,6 +258,15 @@ export const TintedButton = styled.button`
         "background",
         "backgroundOpacity"
       )};
+      color: ${(props) =>
+        !props.disabled &&
+        getColorRgbaValue(
+          props.theme,
+          "ButtonTinted",
+          props.color,
+          "active",
+          "text"
+        )};
   }
 `;
 
