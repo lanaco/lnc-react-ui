@@ -370,7 +370,6 @@ Popover.propTypes = {
    * Anchor element can be ref or HTML element.
    */
   anchorElement: PropTypes.object,
-  //show: PropTypes.bool,
   borderRadius: PropTypes.oneOf(["regular", "curved"]),
   horizontal: PropTypes.oneOf(["left", "right", "center"]),
   vertical: PropTypes.oneOf(["top", "bottom", null]),
