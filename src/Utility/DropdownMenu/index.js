@@ -53,8 +53,8 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     ...rest
   } = props;
 
+  const popoverRef = useRef();
   const menuContentRef = useRef();
-  const [show, setShow] = useState(false);
   const { theme } = useTheme();
 
   const controlRef = useRef();
@@ -62,7 +62,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
 
   const handleOnItemSelected = (e, children) => {
     onItemSelected(e, children);
-    if (closeOnItemSelect == true) setShow(false);
+    if (closeOnItemSelect == true) popoverRef?.current?.close();
   };
 
   const clonedChildren = React.Children.map(children, (child, index) => {
@@ -127,14 +127,14 @@ const DropdownMenu = React.forwardRef((props, ref) => {
 
   const handleOnClick = (e) => {
     if (openOnClick && !openOnHover) {
-      setShow(!show);
+      popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open();
     }
 
     onClick(e);
   };
   const handleOnMouseEnter = (e) => {
     if (openOnHover == true) {
-      setShow(!show);
+      popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open();
     }
 
     onMouseEnter(e);
@@ -153,21 +153,20 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     //ignore if click is on control
     if (e.target?.attributes?.["data-control"]) return;
 
-    setShow(false);
+    popoverRef?.current?.close();
   };
 
   return (
     <StyledDropDown ref={ref} {...rest}>
       {clonedControl()}
       <Popover
-        anchorElement={
-          control?.ref?.current ? control.ref.current : controlRef?.current
-        }
-        show={show}
+        anchorElement={control?.ref ? control.ref : controlRef}
+        ref={popoverRef}
         vertical={verticalAlignment}
         horizontal={horizontalAlignment}
         offset={offset}
         style={{ padding: 0, maxHeight: "unset" }}
+        closeOnClickOutside={false} //dropdown has it's own outside click handler which includes control (element that opens dropdown)
         {...popoverProps}
       >
         <OutsideClickHandler onOutsideClick={handleClickOutside}>
@@ -189,9 +188,9 @@ DropdownMenu.defaultProps = {
   openOnClick: true,
   openOnHover: false,
   offset: 8,
-  verticalAlignment: "bottom",
   widthFitContent: false,
   closeOnItemSelect: true,
+  verticalAlignment: null,
   //-------------------------
   onBlur: () => {},
   onFocus: () => {},
@@ -218,7 +217,7 @@ DropdownMenu.propTypes = {
   //Menu's horizontal alignment
   horizontalAlignment: PropTypes.oneOf(["left", "right", "center"]),
   //Menu's vertical alignment
-  verticalAlignment: PropTypes.oneOf(["top", "bottom"]),
+  verticalAlignment: PropTypes.oneOf(["top", "bottom", null]),
   /**
    * Adjust width of dropdown according to dropdown items content.
    */

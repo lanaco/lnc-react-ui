@@ -2,13 +2,13 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Popover from "./index";
 import Button from "../../General/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 <Meta title="Utility/Popover" component={Popover} />
 
 export const TemplateDefault = (args) => {
-  const [show, setShow] = useState(false);
+  const popoverRef = useRef();
   const [anchor, setAnchor] = useState();
   return (
     <div
@@ -20,11 +20,11 @@ export const TemplateDefault = (args) => {
         text="Open Popover On Hover"
         onMouseEnter={(e) => {
           setAnchor(e.currentTarget);
-          setShow(true);
+          popoverRef?.current?.open();
         }}
-        onMouseLeave={(e) => setShow(false)}
+        onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
       />
-      <Popover {...args} onMouseEnter={(e) => setShow(true)} onMouseLeave={(e) => setShow(false)} anchorElement={anchor} show={show}>
+      <Popover {...args} ref={popoverRef} anchorElement={anchor}>
         Popover Content
       </Popover>
     </div>
@@ -32,7 +32,7 @@ export const TemplateDefault = (args) => {
 };
 
 export const TemplateAlignment = (args) => {
-  const [show, setShow] = useState(false);
+  const popoverRef = useRef();
   const [anchor, setAnchor] = useState();
   const [alignment, setAlignment] = useState({ vertical: null, horizontal: null });
   return (
@@ -48,20 +48,20 @@ export const TemplateAlignment = (args) => {
           text="Bottom Left"
           onMouseEnter={(e) => {
             setAnchor(e.currentTarget);
-            setShow(true);
             setAlignment({ vertical: "bottom", horizontal: "left" });
+            popoverRef?.current?.open();
           }}
-          onMouseLeave={(e) => setShow(false)}
+          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
           style={{ width: "180px" }}
         />
         <Button
           text="Top Left"
           onMouseEnter={(e) => {
             setAnchor(e.currentTarget);
-            setShow(true);
             setAlignment({ vertical: "top", horizontal: "left" });
+            popoverRef?.current?.open();
           }}
-          onMouseLeave={(e) => setShow(false)}
+          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
           style={{ width: "180px" }}
         />
       </div>
@@ -70,20 +70,20 @@ export const TemplateAlignment = (args) => {
           text="Bottom Center"
           onMouseEnter={(e) => {
             setAnchor(e.currentTarget);
-            setShow(true);
             setAlignment({ vertical: "bottom", horizontal: "center" });
+            popoverRef?.current?.open();
           }}
-          onMouseLeave={(e) => setShow(false)}
+          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
           style={{ width: "180px" }}
         />
         <Button
           text="Top Center"
           onMouseEnter={(e) => {
             setAnchor(e.currentTarget);
-            setShow(true);
             setAlignment({ vertical: "top", horizontal: "center" });
+            popoverRef?.current?.open();
           }}
-          onMouseLeave={(e) => setShow(false)}
+          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
           style={{ width: "180px" }}
         />
       </div>
@@ -92,24 +92,24 @@ export const TemplateAlignment = (args) => {
           text="Bottom Right"
           onMouseEnter={(e) => {
             setAnchor(e.currentTarget);
-            setShow(true);
             setAlignment({ vertical: "bottom", horizontal: "right" });
+            popoverRef?.current?.open();
           }}
-          onMouseLeave={(e) => setShow(false)}
+          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
           style={{ width: "180px" }}
         />
         <Button
           text="Top Right"
           onMouseEnter={(e) => {
             setAnchor(e.currentTarget);
-            setShow(true);
             setAlignment({ vertical: "top", horizontal: "right" });
+            popoverRef?.current?.open();
           }}
-          onMouseLeave={(e) => setShow(false)}
+          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
           style={{ width: "180px" }}
         />
       </div>
-      <Popover {...args} anchorElement={anchor} show={show} vertical={alignment.vertical} horizontal={alignment.horizontal}>
+      <Popover {...args} anchorElement={anchor} ref={popoverRef} vertical={alignment.vertical} horizontal={alignment.horizontal}>
         Popover Content
       </Popover>
     </div>
@@ -117,17 +117,35 @@ export const TemplateAlignment = (args) => {
 };
 
 export const TemplateOffset = (args) => {
-  const [show, setShow] = useState(false);
-  const [anchor, setAnchor] = useState();
+const popoverRef = useRef();
+const [anchor, setAnchor] = useState();
   return (
     <div>
       <Button
-        text="Open Popover On Click"
+        text="Toggle Popover on click"
         onClick={(e) => {
           setAnchor(e.currentTarget);
-          setShow(!show);
+          popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open();
         }}/>
-      <Popover {...args} anchorElement={anchor} show={show} offset={15}>
+      <Popover {...args} ref={popoverRef} anchorElement={anchor} offset={15}>
+        Popover Content
+      </Popover>
+    </div>
+  );
+};
+
+export const TemplateOffsett = (args) => {
+const popoverRef = useRef();
+const [anchor, setAnchor] = useState();
+  return (
+    <div>
+      <Button
+        text="Toggle Popover on click"
+        onClick={(e) => {
+          setAnchor(e.currentTarget);
+          popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open();
+        }}/>
+      <Popover {...args} ref={popoverRef} anchorElement={anchor} offset={15} style={{height: "400px", width: "700px", background: "gray"}}>
         Popover Content
       </Popover>
     </div>
@@ -183,3 +201,5 @@ There might be need to increase value of prop `zIndex` when popover is in modal 
 Popover uses create [ReactDOM.createPortal](https://reactjs.org/docs/portals.html) in order to insert popover as child of `popoverContainer` location in the DOM (default value of `popoverContainer` is `document.body`), instead of mounting it into the DOM as a child of the nearest parent node, which would couse problems whene there are popover parents with `position: relative`. 
 
 ---
+
+`offset` from anchor element is defined in `px`.
