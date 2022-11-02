@@ -1,0 +1,64 @@
+import { Meta, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import DataView from "./index";
+import styled from "@emotion/styled";
+import { useRef } from "react";
+import Button from "../../General/Button";
+import Story from "./Story";
+
+<Meta title="Data Display/Data View" component={DataView} />
+
+export const TemplateDefault = (args) => {
+  const dw = useRef();
+  return <Story />;
+};
+
+# Data View
+
+```jsx
+import { DataView } from "@lanaco/lnc-react-ui";
+```
+
+Options:
+
+- `EnableCreate`
+- `EnableUpdate`
+- `EnableDelete`
+
+- `EnableDiscard`
+- `EnableFilter`
+- `EnableExport`
+- `EnablePagination`
+
+Events:
+
+- `onPageChanged`
+- `onPageSizeChanged`
+
+- `onCreateItem`
+- `onUpdateItem`
+- `onDeleteItems`
+
+- `onDiscard`
+
+- `onFilterItems`
+- `onExportAll`
+- `onExportAllFiltered`
+- `onExportCurrentPage`
+
+- `onChangeViewType`
+
+Params:
+
+- `itemShape`
+- `viewTypes`
+
+Components:
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />

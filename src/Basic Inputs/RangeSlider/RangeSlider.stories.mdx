@@ -1,0 +1,117 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import RangeSliderInput from "./index";
+
+<Meta title="Basic Inputs/Range Slider Input" component={RangeSliderInput} />
+
+export const TemplateDefault = (args) => <RangeSliderInput style={{display: "flex"}} {...args}/>;
+
+export const TemplateWiderRange = (args) => <RangeSliderInput value={-300} min={-500} max={500} style={{display: "flex"}} {...args}/>;
+
+export const TemplateNarrowRange = (args) => <RangeSliderInput value={2} min={1} max={10} style={{display: "flex"}} {...args}/>;
+
+export const TemplateDisabled = (args) => <RangeSliderInput value={50} disabled={true} style={{display: "flex"}} {...args}/>;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <RangeSliderInput {...args} size="small" />
+    <RangeSliderInput {...args} size="medium" />
+    <RangeSliderInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <RangeSliderInput {...args} color="primary" />
+    <RangeSliderInput {...args} color="secondary" />
+    <RangeSliderInput {...args} color="success" />
+    <RangeSliderInput {...args} color="warning" />
+    <RangeSliderInput {...args} color="danger" />
+    <RangeSliderInput {...args} color="information" />
+  </div>
+);
+
+# Range Slider Input
+```jsx
+import { RangeSliderInput } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Slider Range
+
+Default value for slider range is `1-100`, with props `min` and `max` it can be alternated.
+
+### Wide range
+
+<Canvas withSource="open">
+  <Story
+    name="Wide Range"
+    args={{}}
+  >
+    {TemplateWiderRange.bind({})}
+  </Story>
+</Canvas>
+
+### Narrow Range
+
+<Canvas withSource="open">
+  <Story
+    name="Narrow Range"
+    args={{
+      value: 2,
+      min: 1,
+      max: 10,
+    }}
+  >
+    {TemplateNarrowRange.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      value: 50,
+    }}
+  >
+    {TemplateDisabled.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      value: 50,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      value: 50,
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

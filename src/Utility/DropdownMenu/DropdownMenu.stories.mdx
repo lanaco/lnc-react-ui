@@ -1,0 +1,241 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import DropdownMenu from "./index";
+import DropdownItem from "./DropdownItem";
+import NestedDropdownItem from "./NestedDropdownItem";
+import Button from "../../General/Button";
+import Separator from "./Separator";
+
+<Meta title="Utility/Dropdown Menu" component={DropdownMenu} />
+
+# Drop Down Menu
+
+```jsx
+import {
+  DropdownMenu,
+  DropdownItem,
+  NestedDropdownItem,
+  Separator,
+} from "@lanaco/lnc-react-ui";
+```
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Default" args={{}}>
+    {(args) => (
+      <DropdownMenu control={"Options"} {...args}>
+        <DropdownItem icon="pen">Edit</DropdownItem>
+        <DropdownItem icon="clone">Duplicate</DropdownItem>
+        <Separator />
+        <DropdownItem icon="archive">Archive</DropdownItem>
+        <DropdownItem icon="arrow-right">Move</DropdownItem>
+        <Separator />
+        <DropdownItem icon="trash">Delete</DropdownItem>
+      </DropdownMenu>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+### Subcompnents
+
+<ArgsTable components={{ DropdownItem, NestedDropdownItem, Separator }} />
+
+## Custom control
+
+<Canvas>
+  <Story name="Custom Control" args={{}}>
+    {(args) => (
+      <DropdownMenu
+        control={
+          <Button
+            type={"outline"}
+            borderRadius={"curved"}
+            text="Options"
+            trailingIcon="angle-down"
+          />
+        }
+        {...args}
+      >
+        <DropdownItem icon="pen">Edit</DropdownItem>
+        <DropdownItem icon="clone">Duplicate</DropdownItem>
+        <Separator />
+        <DropdownItem icon="archive" disabled>
+          Archive
+        </DropdownItem>
+        <DropdownItem icon="arrow-right">Move</DropdownItem>
+        <Separator />
+        <DropdownItem icon="trash">Delete</DropdownItem>
+      </DropdownMenu>
+    )}
+  </Story>
+</Canvas>
+
+## Nested Items
+
+<Canvas>
+  <Story name="Nested Items" args={{}}>
+    {(args) => (
+      <DropdownMenu
+        control={<Button text="Options" trailingIcon="angle-down" />}
+        {...args}
+      >
+        <DropdownItem icon="pen">Edit</DropdownItem>
+        <DropdownItem icon="clone">Duplicate</DropdownItem>
+        <Separator />
+        <NestedDropdownItem
+          item={<DropdownItem icon="archive">Archive</DropdownItem>}
+        >
+          <DropdownItem icon="clock">History</DropdownItem>
+          <NestedDropdownItem
+            item={<DropdownItem icon="pen">Data</DropdownItem>}
+          >
+            <DropdownItem icon="users">Users</DropdownItem>
+            <DropdownItem icon="file">Documents</DropdownItem>
+          </NestedDropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+        </NestedDropdownItem>
+        <Separator />
+        <DropdownItem icon="trash">Delete</DropdownItem>
+      </DropdownMenu>
+    )}
+  </Story>
+</Canvas>
+
+## Width fit content
+
+`widthFitContent={true}`
+
+<Canvas>
+  <Story name="Width Fit Content" args={{}}>
+    {(args) => (
+      <DropdownMenu
+        widthFitContent={true}
+        control={
+          <Button
+            type={"outline"}
+            text="BAM"
+            borderRadius={"curved"}
+            trailingIcon="angle-down"
+          />
+        }
+        {...args}
+      >
+        <DropdownItem>USD</DropdownItem>
+        <DropdownItem>EUR</DropdownItem>
+      </DropdownMenu>
+    )}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {(args) => (
+      <div style={{ display: "flex", gap: "10px" }}>
+        <DropdownMenu {...args} control={"Options"} size="small">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+        <DropdownMenu {...args} control={"Options"} size="medium">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+        <DropdownMenu {...args} control={"Options"} size="large">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+      </div>
+    )}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Colors" args={{}}>
+    {(args) => (
+      <div style={{ display: "flex", gap: "10px" }}>
+        <DropdownMenu {...args} control={"Options"} color="primary">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+        <DropdownMenu {...args} control={"Options"} color="secondary">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+        <DropdownMenu {...args} control={"Options"} color="success">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+        <DropdownMenu {...args} control={"Options"} color="warning">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+        <DropdownMenu {...args} control={"Options"} color="danger">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+        <DropdownMenu {...args} control={"Options"} color="information">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+        <DropdownMenu {...args} control={"Options"} color="neutral">
+          <DropdownItem icon="pen">Edit</DropdownItem>
+          <DropdownItem icon="clone">Duplicate</DropdownItem>
+          <Separator />
+          <DropdownItem icon="archive">Archive</DropdownItem>
+          <DropdownItem icon="arrow-right">Move</DropdownItem>
+          <Separator />
+          <DropdownItem icon="trash">Delete</DropdownItem>
+        </DropdownMenu>
+      </div>
+    )}
+  </Story>
+</Canvas>

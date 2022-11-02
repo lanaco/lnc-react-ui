@@ -1,0 +1,128 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import UploadedFile from "./index";
+
+<Meta title="General/Uploaded File" component={UploadedFile} />
+
+export const TemplateDefault = (args) => (
+  <div
+    style={{
+      width: "300px",
+    }}
+  >
+    <UploadedFile {...args} />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div
+    style={{
+      width: "200px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "12px",
+    }}
+  >
+    <UploadedFile {...args} size="small" />
+    <UploadedFile {...args} size="medium" />
+    <UploadedFile {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div
+    style={{
+      width: "200px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "12px",
+    }}
+  >
+    <UploadedFile {...args} color="primary" />
+    <UploadedFile {...args} color="secondary" />
+    <UploadedFile {...args} color="success" />
+    <UploadedFile {...args} color="warning" />
+    <UploadedFile {...args} color="danger" />
+    <UploadedFile {...args} color="information" />
+    <UploadedFile {...args} color="neutral" />
+  </div>
+);
+
+# Uploaded File
+
+```jsx
+import { UploadedFile } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Uploading Progress
+
+<Canvas>
+  <Story
+    name="Uploading Progress"
+    args={{
+      progressPercentage: 10,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## With File Size
+
+Show file size with `showFileSize={true}`. File size is provided in Bytes and it will formatted accordingly.
+
+<Canvas withSource="open">
+  <Story
+    name="With File Size"
+    args={{
+      showFileSize: true,
+      fileSize: 20000000,
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Alternative Icons
+
+Alternative icons can be set for `fileIcon` and for `cancelIcon`.
+
+<Canvas withSource="open">
+  <Story
+    name="Alternative Icons"
+    args={{
+      fileIcon: "book",
+      cancelIcon: "trash",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

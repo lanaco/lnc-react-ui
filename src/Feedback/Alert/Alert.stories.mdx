@@ -1,0 +1,210 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Alert from "./index";
+import { useState } from "react";
+import Button from "../../General/Button";
+import Icon from "../../General/Icon";
+import { useTheme } from "../../ThemeProvider";
+
+<Meta title="Feedback/Alert" component={Alert} />
+
+export const TemplateDefault = (args) => <Alert {...args}></Alert>;
+
+export const TemplateContentActions = (args) => (
+  <Alert
+    color={"danger"}
+    title="No internet connection"
+    actions={<a onClick={() => alert("Connection failed")}>Reconnect</a>}
+    {...args}
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et sed.
+  </Alert>
+);
+
+export const TemplateSizes = (args) => (
+  <div>
+    <Alert color={"success"} title="Order completed" size="small" {...args}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert color={"success"} title="Order completed" size="medium" {...args}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert color={"success"} title="Order completed" size="large" {...args}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+  </div>
+);
+
+export const TemplateStatuses = (args) => (
+  <div>
+    <Alert
+      color={"information"}
+      title="A new software update is available. See what’s new in version 3.0.0."
+      {...args}
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert color={"success"} title="Order completed" {...args}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert color={"warning"} title="Attention needed" {...args}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert color={"danger"} title="No internet connection" {...args}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert
+      color={"primary"}
+      title="A new software update is available. See what’s new in version 3.0.0."
+      {...args}
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert
+      color={"secondary"}
+      title="A new software update is available. See what’s new in version 3.0.0."
+      {...args}
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+    <br />
+    <Alert
+      color={"neutral"}
+      title="A new software update is available. See what’s new in version 3.0.0."
+      {...args}
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et sed.
+    </Alert>
+  </div>
+);
+
+export const TemplateCustom = (args) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <>
+      {open && (
+        <Alert
+          open={open}
+          color={"secondary"}
+          statusIcon={"user-circle"}
+          title="Custom alert"
+          actions={
+            <>
+              <a onClick={() => alert("Connection failed")}>Connect</a>
+              <a onClick={() => setOpen(false)}>Dismiss</a>
+            </>
+          }
+          {...args}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et sed.
+        </Alert>
+      )}
+      <br />
+      <Button disabled={open} onClick={() => setOpen(!open)}>
+        Open
+      </Button>
+    </>
+  );
+};
+
+export const TemplateCustomIcon = (args) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <>
+      {open && (
+        <Alert
+          open={open}
+          color={"neutral"}
+          statusIcon={<Icon icon="file" />}
+          title="Custom alert"
+          actions={
+            <>
+              <a onClick={() => alert("Connection failed")}>Connect</a>
+              <a onClick={() => setOpen(false)}>Dismiss</a>
+            </>
+          }
+          {...args}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et sed.
+        </Alert>
+      )}
+      <br />
+      <Button disabled={open} onClick={() => setOpen(!open)}>
+        Open
+      </Button>
+    </>
+  );
+};
+
+# Alert
+
+```jsx
+import { Alert } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      color: "information",
+      title:
+        "A new software update is available. See what’s new in version 3.0.0.",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Actions
+
+<Canvas>
+  <Story name="Actions">{TemplateContentActions.bind({})}</Story>
+</Canvas>
+
+## Custom Alert
+
+Default statusIcon is shown with `statusIcon={true}`, or not shown with `statusIcon={false}`. Custom status icon can be defined by setting `statusIcon` as `String`, or as element.
+
+<Canvas withSource="open">
+  <Story name="Custom">{TemplateCustom.bind({})}</Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Custom Element as Status Icon">
+    {TemplateCustomIcon.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes">{TemplateSizes.bind({})}</Story>
+</Canvas>
+
+## Statuses
+
+<Canvas>
+  <Story name="Statuses">{TemplateStatuses.bind({})}</Story>
+</Canvas>

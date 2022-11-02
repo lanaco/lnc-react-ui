@@ -1,0 +1,145 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Toggle from "./index";
+import { useState } from "react";
+
+<Meta title="Inputs/Toggle" component={Toggle} />
+
+export const TemplateDefault = (props) => {
+  const [checked, setChecked] = useState(props.value || false);
+  return (
+    <Toggle {...props} value={checked} onChange={(value) => setChecked(!checked)} />
+  );
+};
+
+export const TemplateTrueFalse = (args) => (
+  <div>
+    <Toggle {...args} />
+    <Toggle value={true} {...args} />
+  </div>
+);
+
+export const TemplateLabel = (args) => (
+  <div style={{ width: "220px" }}>
+    <Toggle {...args} label={"Label as string"} />
+    <Toggle {...args} label={<span>Label as component</span>} value={true} />
+    <Toggle {...args} label={"Label as string"} labelPosition="left" />
+    <Toggle
+      {...args}
+      label={<span>Label as component</span>}
+      value={true}
+      labelPosition="left"
+    />
+    <Toggle {...args} label={"Label as string"} labelPosition="right" spaceBetween={true} />
+    <Toggle
+      {...args}
+      label={<span>Label as component</span>}
+      value={true}
+      labelPosition="left"
+      spaceBetween={true}
+    />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div>
+    <Toggle {...args} size="small" />
+    <Toggle {...args} size="medium" />
+    <Toggle {...args} size="large" />
+    <Toggle {...args} size="small" value={true} />
+    <Toggle {...args} size="medium" value={true} />
+    <Toggle {...args} size="large" value={true} />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "columns",
+    }}
+  >
+    <div>
+      <Toggle {...args} color="primary" />
+      <Toggle {...args} color="secondary" />
+      <Toggle {...args} color="warning" />
+      <Toggle {...args} color="danger" />
+      <Toggle {...args} color="information" />
+    </div>
+    <div style={{ paddingLeft: "12px" }}>
+      <Toggle {...args} value={true} color="primary" />
+      <Toggle {...args} value={true} color="secondary" />
+      <Toggle {...args} value={true} color="warning" />
+      <Toggle {...args} value={true} color="danger" />
+      <Toggle {...args} value={true} color="information" />
+    </div>
+    <div style={{ paddingLeft: "12px" }}>
+      <Toggle {...args} value={true} disabled={true} color="primary" />
+      <Toggle {...args} value={true} disabled={true} color="secondary" />
+      <Toggle {...args} value={true} disabled={true} color="warning" />
+      <Toggle {...args} value={true} disabled={true} color="danger" />
+      <Toggle {...args} value={true} disabled={true} color="information" />
+    </div>
+  </div>
+);
+
+# Toggle
+
+```jsx
+import { Toggle } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Disabled
+
+<Canvas>
+  <Story name="Disabled" args={{ disabled: true }}>
+    {TemplateTrueFalse.bind({})}
+  </Story>
+</Canvas>
+
+## With Label
+
+<Canvas>
+  <Story name="With Label" args={{}}>
+    {TemplateLabel.bind({})}
+  </Story>
+</Canvas>
+
+## With Icon
+
+Since the component uses the `content` css property, the icon is in unicode.
+
+<Canvas>
+  <Story
+    name="With Icon"
+    args={{
+      unicodeIcon: "f011",
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

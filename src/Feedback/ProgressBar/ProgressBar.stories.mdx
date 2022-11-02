@@ -1,0 +1,60 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import ProgressBar from "./index";
+
+<Meta title="Feedback/Progress Bar" component={ProgressBar} />
+
+export const TemplateDefault = (args) => <ProgressBar {...args} />;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <ProgressBar {...args} size="small" />
+    <ProgressBar {...args} size="medium" />
+    <ProgressBar {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <ProgressBar {...args} color="primary" />
+    <ProgressBar {...args} color="secondary" />
+    <ProgressBar {...args} color="success" />
+    <ProgressBar {...args} color="warning" />
+    <ProgressBar {...args} color="danger" />
+    <ProgressBar {...args} color="information" />
+  </div>
+);
+
+# Progress Bar
+```jsx
+import { ProgressBar } from "@lanaco/lnc-react-ui";
+```
+<Canvas>
+  <Story name="Default"  args={{ progressPercentage: 20 }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## With Label
+
+<Canvas>
+  <Story name="With Label" args={{ showLabel: true, progressPercentage: 20 }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes"  args={{ progressPercentage: 40 }}>{TemplateSizes.bind({})}</Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors"  args={{ progressPercentage: 40 }}>{TemplateColors.bind({})}</Story>
+</Canvas>

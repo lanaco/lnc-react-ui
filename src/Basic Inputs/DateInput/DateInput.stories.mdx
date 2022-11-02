@@ -1,0 +1,131 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import DateInput from "./index";
+
+<Meta title="Basic Inputs/Date Input" component={DateInput} />
+
+export const TemplateDefault = (args) => <DateInput {...args} />;
+
+export const TemplateDisabled = (args) => <DateInput disabled={true} placeholder={"Disabled"} style={{ width: "300px" }} {...args} />;
+
+export const TemplateReadOnly = (args) => <DateInput readOnly={true} style={{ width: "300px" }} value={"2022-01-01"} {...args} />;
+
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DateInput {...args} size="small" />
+    <DateInput {...args} size="medium" />
+    <DateInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <DateInput {...args} color="primary" />
+    <DateInput {...args} color="secondary" />
+    <DateInput {...args} color="success" />
+    <DateInput {...args} color="warning" />
+    <DateInput {...args} color="danger" />
+    <DateInput {...args} color="information" />
+    <DateInput {...args} color="neutral" />
+  </div>
+);
+
+# Date Input
+
+```jsx
+import { DateInput } from "@lanaco/lnc-react-ui";
+```
+
+<Story name="Default" args={{}}>
+  {TemplateDefault.bind({})}
+</Story>
+
+```jsx
+(args) => <DateInput {...args} />;
+```
+
+<ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas>
+  <Story
+    name="Read Only"
+    args={{}}
+  >
+    {TemplateReadOnly.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{}}>
+    {TemplateDisabled.bind({})}
+  </Story>
+</Canvas>
+
+## Range
+
+Range can be defined with `minDate` and `maxDate` props.
+
+<Story
+  name="Range"
+  args={{
+    value: "2022-01-05",
+    minDate: "2022-01-01",
+    maxDate: "2022-01-15",
+  }}
+>
+  {TemplateDefault.bind({})}
+</Story>
+
+```jsx
+(args) => (
+  <DateInput
+    value={"2022-01-05"}
+    minDate={"2022-01-01"}
+    maxDate={"2022-01-15"}
+    {...args}
+  />
+);
+```
+
+## Alternative Format
+
+<Story
+  name="Alternative Format"
+  args={{
+    value: "2022-01-05",
+    format: "YYYY-MM-dd",
+  }}
+>
+  {TemplateDefault.bind({})}
+</Story>
+
+```jsx
+(args) => <DateInput value={"2022-01-05"} format={"YYYY-MM-dd"} {...args} />;
+```
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

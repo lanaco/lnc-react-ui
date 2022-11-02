@@ -1,0 +1,78 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+<Meta title="Intro" />
+
+# LNC React UI Web Components for React
+
+#
+
+Lnc React UI Web Components can be used as if they were native React components.
+Lnc React UI Web Components provide simple and complex components and layout.
+
+<Story name="Intro">
+  <div></div>
+</Story>
+
+#
+
+## Requirements
+
+- [React](https://www.npmjs.com/package/react) and [React-Dom](https://www.npmjs.com/package/react-dom) (**17.0.2 or higher**)
+- [Node.js](https://nodejs.org/en/) (**16.13.0 or higher**)
+
+---
+
+# Getting Started
+
+---
+
+## Add @lanaco/lnc-react-ui to an existing app
+
+First of all dependency `@lanaco/lnc-react-ui` needs to be added to the project
+
+```
+npm install @lanaco/lnc-react-ui --save
+```
+
+In order to use @lanaco/lnc-react-ui you have to wrap your application's root component into the ThemeProvider.
+You will find this component most likely in src/App.js:
+
+```jsx
+
+import { ThemeProvider } from '@lanaco/lnc-react-ui';
+...
+render() {
+  return (
+    <div>
+      <ThemeProvider>
+        <MyApp />
+      </ThemeProvider>
+    </div>
+  );
+}
+```
+
+# Theming
+
+`ThemeProvider` has `theme` prop which accepts name of the theme. Available themes are `Lanaco Light` and `Lanaco Dark`.
+Default value is `Lanaco Light` theme.
+
+```jsx
+<ThemeProvider theme={"Lanaco Light"}>
+  <MyApp />
+</ThemeProvider>
+```
+
+Custom theme can be created following the set of rules used for theme definition. 
+Theme is an object where required fields are:
+* name
+* class
+* colorContext,
+* components
+* palette
+* sizes
+* borderRadius
+* boxShadow
+* typography
+* zIndex

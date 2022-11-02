@@ -1,0 +1,134 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Chip from "./index";
+import Avatar from "../../General/Avatar";
+import logo from "../../_utils/images/Image.png";
+
+<Meta title="Data display/Chip" component={Chip} />
+
+export const TemplateDefault = (args) => <Chip {...args} />;
+
+export const TemplateConfigurations = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Chip {...args} label={"Chip"} />
+    <Chip {...args} label={"Chip"} leadingIcon="square" />
+    <Chip {...args} label={"Chip"} leadingIcon="square" trailingIcon="times" />
+    <Chip {...args} label={"Chip"} avatar={true} borderRadius="curved" />
+    <Chip
+      {...args}
+      label={"Chip"}
+      avatar={true}
+      trailingIcon="times"
+      borderRadius="curved"
+    />
+  </div>
+);
+
+export const TemplateAvatar = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Chip {...args} label={"Cat"} avatar={true} avatarProps={{ icon: "cat" }} />
+    <Chip
+      {...args}
+      label={"User"}
+      avatar={true}
+      borderRadius="curved"
+      avatarProps={{ image: logo }}
+    />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Chip {...args} label={"Chip"} color="primary" />
+    <Chip {...args} label={"Chip"} color="secondary" />
+    <Chip {...args} label={"Chip"} color="success" />
+    <Chip {...args} label={"Chip"} color="warning" />
+    <Chip {...args} label={"Chip"} color="danger" />
+    <Chip {...args} label={"Chip"} color="information" />
+    <Chip {...args} label={"Chip"} color="neutral" />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "7px" }}>
+    <Chip {...args} label={"Chip"} size="small" />
+    <Chip {...args} label={"Chip"} size="medium" />
+    <Chip {...args} label={"Chip"} size="large" />
+  </div>
+);
+
+export const TemplateRounding = (args) => (
+  <div style={{ display: "flex", gap: "7px" }}>
+    <Chip {...args} label={"Chip"} borderRadius="regular" />
+    <Chip {...args} label={"Chip"} borderRadius="curved" />
+  </div>
+);
+
+# Chip
+
+```jsx
+import { Chip } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{ label: "Chip" }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Configurations
+
+Configuration for
+
+- Label only
+- Label & Trailing icon
+- Label & Leading icon
+- Label, Leading & Trailing Icon
+- Label & Avatar
+- Label, Avatar & Trailing icon
+
+<Canvas>
+  <Story name="Configurations" args={{}}>
+    {TemplateConfigurations.bind({})}
+  </Story>
+</Canvas>
+
+## With Avatar
+
+<Canvas>
+  <Story name="With Avatar" args={{}}>
+    {TemplateAvatar.bind({})}
+  </Story>
+</Canvas>
+
+### Avatar Props
+
+<ArgsTable components={{ Avatar }} />
+
+---
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Corner roundings
+
+<Canvas>
+  <Story name="Corner Roundings" args={{}}>
+    {TemplateRounding.bind({})}
+  </Story>
+</Canvas>

@@ -1,0 +1,79 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Link from "./index";
+
+<Meta title="General/Link" component={Link} />
+
+# Link
+
+```jsx
+import { Link } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Default" args={{}}>
+    {(args) => (
+      <Link href="#" {...args}>
+        Link
+      </Link>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Colors
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Colors" args={{}}>
+    {(args) => (
+      <>
+        <Link href="#" color="primary" {...args}>
+          Primary
+        </Link>
+        <br />
+        <Link href="#" color="secondary" {...args}>
+          Secondary
+        </Link>
+        <br />
+        <Link href="#" color="success" {...args}>
+          Success
+        </Link>
+        <br />
+        <Link href="#" color="warning" {...args}>
+          Warning
+        </Link>
+        <br />
+        <Link href="#" color="danger" {...args}>
+          Danger
+        </Link>
+        <br />
+        <Link href="#" color="neutral" {...args}>
+          Neutral
+        </Link>
+      </>
+    )}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Sizes" args={{}}>
+    {(args) => (
+      <>
+        <Link href="#" size="small" {...args}>
+          Small
+        </Link>
+        <br />
+        <Link href="#" size="medium" {...args}>
+          Medium
+        </Link>
+        <br />
+        <Link href="#" size="large" {...args}>
+          Large
+        </Link>
+      </>
+    )}
+  </Story>
+</Canvas>

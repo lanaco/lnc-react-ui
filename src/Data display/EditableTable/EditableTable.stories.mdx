@@ -1,0 +1,571 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import EditableTable from "./index";
+import { statusColor } from "./constants/constants";
+import { useState, useRef, useEffect } from "react";
+import { inputType } from "./constants/constants";
+import styled from "@emotion/styled";
+import CheckBoxInput from "../../Basic Inputs/CheckBoxInput";
+import Dropdown from "../../Inputs/Dropdown";
+import TableSpecialLastRow from "./components/TableSpecialLastRow";
+import Button from "../../General/Button/index";
+import { cloneDeep, isEmpty, isEqual } from "lodash";
+import { useStateWithCallbackLazy } from "use-state-with-callback";
+
+<Meta title="Data Display/Editable Table" component={EditableTable} />
+
+export var db_invoices = [
+  {
+    id: "db235f2c-2023-47fa-9932-99e25832d90f",
+    company_iban: "HR75 3509 8698 7394 1416 4",
+    company_name: "Feedfire",
+    amount: 8187.46,
+    date: "22.01.2022",
+    status: "Approved",
+    status_id: 1,
+    processed: true,
+  },
+  {
+    id: "67792659-ae00-46a2-9742-49f41d61997b",
+    company_iban: "SM97 K032 2583 391A UIAY MGMS QTM",
+    company_name: "Yodoo",
+    amount: 2617.95,
+    date: "10.05.2021",
+    status: "Rejected",
+    status_id: 2,
+    processed: false,
+  },
+  {
+    id: "7a4ce6b3-36a4-470f-8e93-7a5a1791968f",
+    company_iban: "VG18 UGXB 1371 0224 8507 7471",
+    company_name: "Twimbo",
+    amount: 8962.72,
+    date: "31.07.2021",
+    status: "Approved",
+    status_id: 1,
+    processed: false,
+  },
+  {
+    id: "c804cd2d-d92d-4324-8c37-a6664b4838cc",
+    company_iban: "NO09 5446 4416 582",
+    company_name: "Lago",
+    amount: 5219.39,
+    date: "25.12.2021",
+    status: "Rejected",
+    status_id: 2,
+    processed: true,
+  },
+  {
+    id: "8069a146-384c-41b2-b016-6b9a2f5c92db",
+    company_iban: "ME06 7363 2360 5431 5228 85",
+    company_name: "Lazzy",
+    amount: 3856.21,
+    date: "31.07.2022",
+    status: "Approved",
+    status_id: 1,
+    processed: true,
+  },
+];
+
+export const uuidv4 = () => {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
+};
+
+export const Container = styled.div``;
+
+export const Commands = styled.div`
+  padding: 10px 10px 0 10px;
+  display: flex;
+`;
+
+export const customRenderSelectedValue = React.forwardRef((props, ref) => {
+  var style = {};
+  if (props.rowData.status_id === 1) {
+    style = {
+      color: "#298c38",
+      fontWeight: "bold",
+    };
+  }
+  if (props.rowData.status_id === 2) {
+    style = {
+      color: "#b32d2d",
+      fontWeight: "bold",
+    };
+  }
+  return <span style={style}>{props.rowData.status}</span>;
+});
+
+export const customRenderCheckbox = React.forwardRef((props, ref) => {
+  return (
+    <CheckBoxInput
+      {...props}
+      onChange={() => {}}
+      tabIndex={-1}
+      disabled={true}
+      checked={props.value}
+      ref={ref}
+    />
+  );
+});
+
+export const TemplateDefault = (props) => {
+  var Columns = [
+    {
+      id: 1,
+      displayName: "Iban",
+      accessor: "company_iban",
+      width: 25,
+      sortable: true,
+      editable: true,
+      inputType: inputType.STRING,
+    },
+    {
+      id: 2,
+      displayName: "Name",
+      accessor: "company_name",
+      width: 15,
+      editable: true,
+      inputType: inputType.STRING,
+    },
+    {
+      id: 3,
+      displayName: "Amount ($)",
+      accessor: "amount",
+      editable: true,
+      width: 15,
+      inputType: inputType.DECIMAL,
+    },
+    {
+      id: 4,
+      displayName: "Date",
+      accessor: "date",
+      width: 15,
+      editable: true,
+      inputType: inputType.STRING,
+    },
+    {
+      id: 5,
+      displayName: "Processed",
+      accessor: "processed",
+      width: 10,
+      editable: true,
+      inputType: inputType.BOOLEAN,
+      readonlyComponent: customRenderCheckbox,
+    },
+    {
+      id: 6,
+      displayName: "Status",
+      accessor: "status_id",
+      width: 20,
+      editable: true,
+      inputType: inputType.SELECT,
+      readonlyComponent: customRenderSelectedValue,
+      inputProps: {
+        options: [
+          { value: 1, label: "Approved" },
+          { value: 2, label: "Rejected" },
+        ],
+      },
+    },
+  ];
+  var EmptyDataItem = {
+    id: "",
+    company_iban: "",
+    company_name: "",
+    amount: 0.0,
+    date: "09.03.2022",
+    status: "Approved",
+    status_id: 1,
+    processed: false,
+  };
+  const [loading, setLoading] = useStateWithCallbackLazy(false);
+  const [data, setData] = useState([]);
+  var tableRef = useRef();
+  useEffect(() => setLoading(props.Loading), [props.Loading]);
+  useEffect(() => loadData(), []);
+  const loadData = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setData(db_invoices);
+      setLoading(false);
+    }, 1200);
+  };
+  const commitData = () => {
+    var dataCopy = cloneDeep(data);
+    dataCopy.forEach((item) => {
+      if (isEmpty(item.id)) {
+        item.id = uuidv4();
+      }
+    });
+    db_invoices = dataCopy;
+    loadData();
+  };
+  const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
+    var dataCopy = cloneDeep(data);
+    var itemToUpdate = isEmpty(rowData.id)
+      ? dataCopy[rowIndex]
+      : dataCopy.find((x) => x.id === rowData.id);
+    if (column.accessor === "status_id") {
+      itemToUpdate[column.accessor] = parseInt(value.value);
+      itemToUpdate["status"] = column.inputProps.options.find(
+        (x) => x.value === parseInt(value.value)
+      ).label;
+    } else {
+      itemToUpdate[column.accessor] = value;
+    }
+    setData(dataCopy);
+  };
+  const validateEdit = (rowData) => {
+    return true;
+  };
+  const validateAdd = (rowData) => {
+    return true;
+  };
+  const showDialog = (rowIndex, edited) => {
+    if (
+      confirm(
+        "There are validation errors. Do you want to discard the edited data ?"
+      )
+    ) {
+      onDiscard(null, rowIndex, -1, edited);
+      setLoading(false);
+    } else if (tableRef.current) {
+      setLoading(false, () => {
+        tableRef.current.focusLastActiveCell();
+      });
+    }
+  };
+  const onSave = (rowIndex) => {
+    var original = db_invoices[rowIndex] || EmptyDataItem;
+    var edited = data[rowIndex];
+    if (!isEqual(original, edited) || isEmpty(edited.id)) {
+      setLoading(true);
+      setTimeout(() => {
+        if (isEmpty(data[rowIndex].id) && !validateAdd(edited)) {
+          showDialog(rowIndex, edited);
+          return;
+        }
+        if (!isEmpty(data[rowIndex].id) && !validateEdit(edited)) {
+          showDialog(rowIndex, edited);
+          return;
+        }
+        commitData();
+        setLoading(false);
+      }, 800);
+    }
+  };
+  const onDiscard = (e, rowIndex, cellIndex, rowData) => {
+    var dataCopy = cloneDeep(data);
+    var originalItem = db_invoices.find((x) => x.id === rowData.id);
+    var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
+    if (isEmpty(rowData.id)) {
+      dataCopy.splice(rowIndex, 1);
+    } else {
+      dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
+        ? originalItem
+        : EmptyDataItem;
+    }
+    setData(dataCopy);
+  };
+  const onCreateNewItem = (timeout) => {
+    if (timeout > 0) setLoading(true);
+    setData([...data, EmptyDataItem]);
+    setTimeout(() => {
+      if (timeout > 0) setLoading(false);
+    }, timeout);
+  };
+  const onSpecialRowClick = (isEnter) => {
+    onCreateNewItem(isEnter ? 300 : 0);
+    setTimeout(() => {
+      tableRef.current.focusFirstCellOfLastRow();
+    }, 300);
+  };
+  return (
+    <Container>
+      <Commands>
+        <Button
+          type="tinted"
+          leadingIcon="rotate"
+          text={"Reload"}
+          onClick={loadData}
+        />
+      </Commands>
+      <EditableTable
+        ref={tableRef}
+        {...props}
+        Columns={Columns}
+        EmptyDataItem={EmptyDataItem}
+        Data={data}
+        Loading={loading}
+        onCellFocusChange={() => {}}
+        onRowFocusChange={(e, rowIndex, nextRow) => {
+          if (rowIndex !== nextRow) {
+            onSave(rowIndex);
+          }
+        }}
+        onDiscard={onDiscard}
+        onInputChange={onFieldChanged}
+      >
+        <TableSpecialLastRow Loading={loading} onClick={onSpecialRowClick} />
+      </EditableTable>
+    </Container>
+  );
+};
+
+# Editable Table
+
+```jsx
+import { EditableTable } from "@lanaco/lnc-react-ui";
+```
+
+The `EditableTable` uses the standard `Table` component with an `TableCell`
+override and some internal logic to achieve excel-like cell editability features.
+
+Additional column props:
+
+- `editable` - should the column be editable or not
+- `readonlyComponent` - custom cell render when the cell is not in focus
+- `editComponent` - custom cell render when the cell is IN in focus
+- `inputProps` - props applied to the input component in focus
+
+Exposed methods (via ref):
+
+- `focusFirstCellOfLastRow`
+- `focusLastActiveCell`
+
+Supported column data types:
+
+- `BOOLEAN` - CheckBoxInput
+- `STRING` - TextInput
+- `INTEGER` - NumberInput
+- `DECIMAL` - DecimalInput
+- `DATE` - DateInput
+- `SELECT` - Dropdown
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      EnableLoader: true,
+    }}
+  >
+    {(props) => {
+      var Columns = [
+        {
+          id: 1,
+          displayName: "Iban",
+          accessor: "company_iban",
+          width: 25,
+          sortable: true,
+          editable: true,
+          inputType: inputType.STRING,
+        },
+        {
+          id: 2,
+          displayName: "Name",
+          accessor: "company_name",
+          width: 15,
+          editable: true,
+          inputType: inputType.STRING,
+        },
+        {
+          id: 3,
+          displayName: "Amount ($)",
+          accessor: "amount",
+          editable: true,
+          width: 15,
+          inputType: inputType.DECIMAL,
+        },
+        {
+          id: 4,
+          displayName: "Date",
+          accessor: "date",
+          width: 15,
+          editable: true,
+          inputType: inputType.STRING,
+        },
+        {
+          id: 5,
+          displayName: "Processed",
+          accessor: "processed",
+          width: 10,
+          editable: true,
+          inputType: inputType.BOOLEAN,
+          readonlyComponent: customRenderCheckbox,
+        },
+        {
+          id: 6,
+          displayName: "Status",
+          accessor: "status_id",
+          width: 20,
+          editable: true,
+          inputType: inputType.SELECT,
+          readonlyComponent: customRenderSelectedValue,
+          inputProps: {
+            options: [
+              { value: 1, label: "Approved" },
+              { value: 2, label: "Rejected" },
+            ],
+          },
+        },
+      ];
+      var EmptyDataItem = {
+        id: "",
+        company_iban: "",
+        company_name: "",
+        amount: 0.0,
+        date: "09.03.2022",
+        status: "Approved",
+        status_id: 1,
+        processed: false,
+      };
+      const [loading, setLoading] = useStateWithCallbackLazy(false);
+      const [data, setData] = useState([]);
+      var tableRef = useRef();
+      useEffect(() => setLoading(props.Loading), [props.Loading]);
+      useEffect(() => loadData(), []);
+      const loadData = () => {
+        setLoading(true);
+        setTimeout(() => {
+          setData(db_invoices);
+          setLoading(false);
+        }, 1200);
+      };
+      const commitData = () => {
+        var dataCopy = cloneDeep(data);
+        dataCopy.forEach((item) => {
+          if (isEmpty(item.id)) {
+            item.id = uuidv4();
+          }
+        });
+        db_invoices = dataCopy;
+        loadData();
+      };
+      const onFieldChanged = (
+        e,
+        value,
+        rowIndex,
+        cellIndex,
+        column,
+        rowData
+      ) => {
+        var dataCopy = cloneDeep(data);
+        var itemToUpdate = isEmpty(rowData.id)
+          ? dataCopy[rowIndex]
+          : dataCopy.find((x) => x.id === rowData.id);
+        if (column.accessor === "status_id") {
+          itemToUpdate[column.accessor] = parseInt(value.value);
+          itemToUpdate["status"] = column.inputProps.options.find(
+            (x) => x.value === parseInt(value.value)
+          ).label;
+        } else itemToUpdate[column.accessor] = value;
+        setData(dataCopy);
+      };
+      const validateEdit = (rowData) => {
+        return true;
+      };
+      const validateAdd = (rowData) => {
+        return true;
+      };
+      const showDialog = (rowIndex, edited) => {
+        if (
+          confirm(
+            "There are validation errors. Do you want to discard the edited data ?"
+          )
+        ) {
+          onDiscard(null, rowIndex, -1, edited);
+          setLoading(false);
+        } else if (tableRef.current) {
+          setLoading(false, () => {
+            tableRef.current.focusLastActiveCell();
+          });
+        }
+      };
+      const onSave = (rowIndex) => {
+        var original = db_invoices[rowIndex] || EmptyDataItem;
+        var edited = data[rowIndex];
+        if (!isEqual(original, edited) || isEmpty(edited.id)) {
+          setLoading(true);
+          setTimeout(() => {
+            if (isEmpty(data[rowIndex].id) && !validateAdd(edited)) {
+              showDialog(rowIndex, edited);
+              return;
+            }
+            if (!isEmpty(data[rowIndex].id) && !validateEdit(edited)) {
+              showDialog(rowIndex, edited);
+              return;
+            }
+            commitData();
+            setLoading(false);
+          }, 800);
+        }
+      };
+      const onDiscard = (e, rowIndex, cellIndex, rowData) => {
+        var dataCopy = cloneDeep(data);
+        var originalItem = db_invoices.find((x) => x.id === rowData.id);
+        var itemToUpdate = dataCopy.find((x) => x.id === rowData.id);
+        if (isEmpty(rowData.id)) {
+          dataCopy.splice(rowIndex, 1);
+        } else {
+          dataCopy[dataCopy.indexOf(itemToUpdate)] = originalItem
+            ? originalItem
+            : EmptyDataItem;
+        }
+        setData(dataCopy);
+      };
+      const onCreateNewItem = (timeout) => {
+        if (timeout > 0) setLoading(true);
+        setData([...data, EmptyDataItem]);
+        setTimeout(() => {
+          if (timeout > 0) setLoading(false);
+        }, timeout);
+      };
+      const onSpecialRowClick = (isEnter) => {
+        onCreateNewItem(isEnter ? 300 : 0);
+        setTimeout(() => {
+          tableRef.current.focusFirstCellOfLastRow();
+        }, 300);
+      };
+      return (
+        <Container>
+          <Commands>
+            <Button
+              type="tinted"
+              leadingIcon="rotate"
+              text={"Reload"}
+              onClick={loadData}
+            />
+          </Commands>
+          <EditableTable
+            ref={tableRef}
+            {...props}
+            Columns={Columns}
+            EmptyDataItem={EmptyDataItem}
+            Data={data}
+            Loading={loading}
+            onCellFocusChange={() => {}}
+            onRowFocusChange={(e, rowIndex, nextRow) => {
+              if (rowIndex !== nextRow) {
+                onSave(rowIndex);
+              }
+            }}
+            onDiscard={onDiscard}
+            onInputChange={onFieldChanged}
+          >
+            <TableSpecialLastRow
+              Loading={loading}
+              onClick={onSpecialRowClick}
+            />
+          </EditableTable>
+        </Container>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />

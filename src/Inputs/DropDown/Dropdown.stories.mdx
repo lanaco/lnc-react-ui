@@ -1,0 +1,285 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Dropdown from "./index";
+import Avatar from "../../General/Avatar";
+import { components } from "./index";
+import logo from "../../_utils/images/Image.png";
+import Icon from "../../General/Icon";
+import { useState, useRef } from "react";
+import Button from "../../General/Button";
+
+<Meta title="Inputs/Dropdown" component={Dropdown} />
+
+export const TemplateDefault = (args) => (
+  <div style={{ height: "130px" }}>
+    <Dropdown {...args} />
+  </div>
+);
+
+export const TemplateMethods = (args) => {
+  const dropDownRef = useRef();
+  return (
+    <div style={{ height: "130px" }}>
+      <Button text="Focus" onClick={() => dropDownRef.current.focus()} />
+      &nbsp;&nbsp;
+      <Button text="Blur" onClick={() => dropDownRef.current.blur()} />
+      <br />
+      <br />
+      <Dropdown ref={dropDownRef} {...args} />
+    </div>
+  );
+};
+
+export const CustomOption = ({ children, ...props }) => {
+  return (
+    <components.Option {...props}>
+      <span style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <Avatar image={props?.data?.logo} sizeInUnits="1.5rem" />
+          {children}
+        </span>
+        <Icon icon="check" color="primary" />
+      </span>
+    </components.Option>
+  );
+};
+
+export const CustomControl = ({ children, ...props }) => {
+  return (
+    <components.Control {...props}>
+      <span
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          width: "100%",
+          paddingLeft: "12px",
+        }}
+      >
+        <Avatar image={props?.selectProps?.value?.logo} sizeInUnits="1.5rem" />
+        {children}
+      </span>
+    </components.Control>
+  );
+};
+
+export const TemplateCustom = (args) => (
+  <div style={{ height: "130px" }}>
+    <Dropdown
+      {...args}
+      components={{ Option: CustomOption, Control: CustomControl }}
+    />
+  </div>
+);
+
+export const TemplateAlternativeLabel = (args) => (
+  <div style={{ height: "130px" }}>
+    <Dropdown {...args} getOptionLabel={(option) => option.alternativeLabel} />
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <Dropdown {...args} size="small" />
+    <Dropdown {...args} size="medium" />
+    <Dropdown {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <Dropdown {...args} color="primary" />
+    <Dropdown {...args} color="secondary" />
+    <Dropdown {...args} color="success" />
+    <Dropdown {...args} color="warning" />
+    <Dropdown {...args} color="danger" />
+    <Dropdown {...args} color="information" />
+    <Dropdown {...args} color="neutral" />
+  </div>
+);
+
+# Dropdown
+
+```jsx
+import { Dropdown } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      options: [
+        { value: "1", label: "option 1", tab: "ok" },
+        { value: "2", label: "option 2", tab: "asda" },
+        { value: "3", label: "option 3", tab: "asdfasdf" },
+      ],
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+#### See more about [React-Select props](https://react-select.com/props#select-props)
+
+---
+
+## Methods
+
+This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
+
+| Method | Args |
+| ------ | :--: |
+| focus  |  -   |
+| blur   |  -   |
+
+<Canvas>
+  <Story
+    name="Exposed Methods"
+    args={{
+      options: [
+        { value: "1", label: "option 1" },
+        { value: "2", label: "option 2" },
+        { value: "3", label: "option 3" },
+      ],
+    }}
+  >
+    {TemplateMethods.bind({})}
+  </Story>
+</Canvas>
+
+---
+
+#### Prop `styles` is used to style Dropdown components. [Stlyes usage](https://react-select.com/styles).
+
+---
+
+## Custom components
+
+React-Select library provides consumers with the building block necessary to create their component. [Documentation](https://react-select.com/components).
+
+<Story
+  name="Custom Components"
+  args={{
+    options: [
+      { value: "1", label: "User 1", logo: logo },
+      { value: "2", label: "User 2", logo: logo },
+      { value: "3", label: "User 3", logo: logo },
+    ],
+  }}
+>
+  {TemplateCustom.bind({})}
+</Story>
+
+```jsx
+import { Dropdown } from "@lanaco/lnc-react-ui";
+import { components } from "@lanaco/lnc-react-ui/Dropdown";
+
+const CustomOption = ({ children, ...props }) => {
+  return (
+    <components.Option {...props}>
+      <span style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <Avatar image={props?.data?.logo} sizeInUnits="1.5rem" />
+          {children}
+        </span>
+        <Icon icon="check" color="primary" />
+      </span>
+    </components.Option>
+  );
+};
+
+const CustomControl = ({ children, ...props }) => {
+  return (
+    <components.Control {...props}>
+      <span
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          width: "100%",
+          paddingLeft: "12px",
+        }}
+      >
+        <Avatar image={props?.selectProps?.value?.logo} sizeInUnits="1.5rem" />
+        {children}
+      </span>
+    </components.Control>
+  );
+};
+
+export const Template = (args) => (
+  <Dropdown
+    {...args}
+    components={{ Option: CustomOption, Control: CustomControl }}
+  />
+);
+```
+
+## Alternative Label
+
+For array of options
+
+```jsx
+[
+  { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+  { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+  { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+];
+```
+
+it is possible to set different label with `getOptionLabel={(option) => option.alternativeLabel}`
+
+<Canvas>
+  <Story
+    name="Alternative Label"
+    args={{
+      options: [
+        { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+        { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+        { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+      ],
+    }}
+  >
+    {TemplateAlternativeLabel.bind({})}
+  </Story>
+</Canvas>
+
+To set different value use `getOptionValue={(option) => option.alternativeValue}`.
+
+## Sizes
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      options: [
+        { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+        { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+        { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+      ],
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      options: [
+        { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
+        { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
+        { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
+      ],
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>
+
+This component is built on top of [React-Select](https://www.npmjs.com/package/react-select). React-Select [documentaion](https://react-select.com/home).

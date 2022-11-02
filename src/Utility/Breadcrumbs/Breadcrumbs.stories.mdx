@@ -1,0 +1,67 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Breadcrumbs from "./index";
+import Button from "../../General/Button";
+import ButtonGroup from "../../Layout/Button Group";
+import Link from "../../General/Link";
+
+<Meta title="Utility/Breadcrumbs" component={Breadcrumbs} />
+
+# Breadcrumbs
+
+```jsx
+import { Breadcrumbs } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Default" args={{}}>
+    {(args) => (
+      <>
+        <Breadcrumbs {...args}>
+          <Link href="#">Home</Link>
+          <Link href="#">Page 1</Link>
+          <Link href="#">Page 2</Link>
+        </Breadcrumbs>
+      </>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Buttons Breadcrums
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Buttons Breadcrumbs" args={{}}>
+    {(args) => (
+      <>
+        <Breadcrumbs color="primary" separator={<span>  |  </span>} {...args}>
+          <Button text="Left" type="basic" />
+          <Button text="Center" type="basic" />
+          <Button text="Right" type="basic" />
+        </Breadcrumbs>
+      </>
+    )}
+  </Story>
+</Canvas>
+
+## Collapse
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Collapse" args={{}}>
+    {(args) => (
+      <>
+        <Breadcrumbs color="primary" maxItems={7} itemsAfterCollapse={2} separator={<span>  |  </span>} {...args}>
+          <Link href="#">Home</Link>
+          <Link href="#">Page 1</Link>
+          <Link href="#">Page 2</Link>
+          <Link href="#">Page 3</Link>
+          <Link href="#">Page 4</Link>
+          <Link href="#">Page 5</Link>
+          <Link href="#">Page 6</Link>
+          <Link href="#">Page 7</Link>
+        </Breadcrumbs>
+      </>
+    )}
+  </Story>
+</Canvas>

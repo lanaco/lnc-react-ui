@@ -1,0 +1,65 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import MultiSelectDropdownLookup from "./index";
+
+<Meta title="Inputs/Multi Select Dropdown Lookup" component={MultiSelectDropdownLookup} />
+
+export const apiData = [
+  { value: "1", label: "Birch" },
+  { value: "2", label: "Oak" },
+  { value: "3", label: "Maple" },
+  { value: "4", label: "Pine" },
+];
+
+export const TemplateDefault = (args) => {
+  const filterOptions = (inputValue) => {
+    return apiData.filter((i) =>
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+  const loadOptions = (inputValue, callback) => {
+    setTimeout(() => {
+      callback(filterOptions(inputValue));
+    }, 1000);
+  };
+  return (
+    <div style={{ height: "130px" }}>
+      <MultiSelectDropdownLookup
+        loadOptions={loadOptions}
+        defaultOptions={true}
+        {...args}
+      />
+    </div>
+  );
+};
+
+# Multi Select Dropdown Lookup
+
+```jsx
+import { MultiSelectDropdownLookup } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+---
+
+#### To see usage of exposed methods, custom options, alternative label, sizes and colors see [Multi Select Dropdown documentation](http://localhost:6006/?path=/docs/inputs-multi-select-dropdown--default-story)
+
+----
+
+
+#### See more about [Async React-Select props](https://react-select.com/props#async-props)
+
+---
+
+## Load Options
+
+`loadOptions` prop allows either resolving from a callback, or rosolve from a returned promise:
+
+#### This component is built on top of [Async React-Select](https://react-select.com/async).

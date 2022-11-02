@@ -1,0 +1,181 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Surface from ".";
+import Button from "../../General/Button";
+
+<Meta title="General/Surface" component={Surface} />
+
+export const TemplateDefault = (args) => (
+  <Surface>
+    <Button type="tinted" text="Surface" />
+  </Surface>
+);
+
+export const TemplateBorderRadius = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <Surface {...args} borderRadius="slight">
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+        <Button type="tinted" text="Surface 3" />
+      </div>
+    </Surface>
+    <Surface {...args} borderRadius="regular">
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+        <Button type="tinted" text="Surface 3" />
+      </div>
+    </Surface>
+    <Surface {...args} borderRadius="none">
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+        <Button type="tinted" text="Surface 3" />
+      </div>
+    </Surface>
+  </div>
+);
+
+export const TemplateWidth = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <Surface {...args} fullWidth={true}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} fullWidth={false}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+  </div>
+);
+
+export const TemplateBoxShadow = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <Surface {...args} boxShadow={"xs"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} boxShadow={"s"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} boxShadow={"m"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} boxShadow={"l"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} boxShadow={"xl"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} boxShadow={"xxl"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+  </div>
+);
+
+export const TemplatePadding = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <Surface {...args} padding={"xs"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} padding={"s"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} padding={"m"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} padding={"l"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} padding={"xl"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+    <Surface {...args} padding={"xxl"}>
+      <div style={{ display: "flex", gap: "6px" }}>
+        <Button type="tinted" text="Surface 1" />
+        <Button type="tinted" text="Surface 2" />
+      </div>
+    </Surface>
+  </div>
+);
+
+# Surface
+
+```jsx
+import { Surface } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default">{TemplateDefault.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Border Radius
+
+`borderRadius:` `regular` / `slight` / `none`
+
+<Canvas>
+  <Story name="Border Radius">{TemplateBorderRadius.bind({})}</Story>
+</Canvas>
+
+## Width
+
+`100%` / `fit-content`
+
+<Canvas>
+  <Story name="Width">{TemplateWidth.bind({})}</Story>
+</Canvas>
+
+## Box Shadow
+
+`boxShadow`: `xs` / `s` / `m` / `l` / `xl` / `xxl` /
+
+<Canvas>
+  <Story name="Box Shadow">{TemplateBoxShadow.bind({})}</Story>
+</Canvas>
+
+## Padding
+
+`padding`: `xs` / `s` / `m` / `l` / `xl` / `xxl` /
+
+<Canvas>
+  <Story name="Padding">{TemplatePadding.bind({})}</Story>
+</Canvas>

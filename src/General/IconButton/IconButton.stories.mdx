@@ -1,0 +1,267 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import IconButton from "./index";
+
+<Meta title="General/Icon Button" component={IconButton} />
+
+export const TemplateDefault = (args) => <IconButton {...args} />;
+
+export const TemplateTypes = (args) => (
+  <div style={{ display: "flex", gap: "16px" }}>
+    <IconButton {...args} type={"filled"} />
+    <IconButton {...args} type={"tinted"} />
+    <IconButton {...args} type={"outline"} />
+    <IconButton {...args} type={"basic"} />
+  </div>
+);
+
+export const TemplateIconStyles = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <IconButton {...args} type={"filled"} iconStyle={"regular"} />
+      <IconButton {...args} type={"tinted"} iconStyle={"regular"} />
+      <IconButton {...args} type={"outline"} iconStyle={"regular"} />
+      <IconButton {...args} type={"basic"} iconStyle={"regular"} />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <IconButton {...args} type={"filled"} iconStyle={"solid"} />
+      <IconButton {...args} type={"tinted"} iconStyle={"solid"} />
+      <IconButton {...args} type={"outline"} iconStyle={"solid"} />
+      <IconButton {...args} type={"basic"} iconStyle={"solid"} />
+    </div>
+  </div>
+);
+
+export const TemplateBorderRadius = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <IconButton {...args} type={"filled"} borderRadius={"regular"} />
+      <IconButton {...args} type={"tinted"} borderRadius={"regular"} />
+      <IconButton {...args} type={"outline"} borderRadius={"regular"} />
+      <IconButton {...args} type={"basic"} borderRadius={"regular"} />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <IconButton {...args} type={"filled"} borderRadius={"curved"} />
+      <IconButton {...args} type={"tinted"} borderRadius={"curved"} />
+      <IconButton {...args} type={"outline"} borderRadius={"curved"} />
+      <IconButton {...args} type={"basic"} borderRadius={"curved"} />
+    </div>
+  </div>
+);
+
+export const TemplateDisabled = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <IconButton {...args} leadingIcon={"user"} type={"filled"} />
+      <IconButton {...args} leadingIcon={"user"} type={"tinted"} />
+      <IconButton {...args} leadingIcon={"user"} type={"outline"} />
+      <IconButton {...args} leadingIcon={"user"} type={"basic"} />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <IconButton {...args} trailingIcon={"clock"} type={"filled"} />
+      <IconButton {...args} trailingIcon={"clock"} type={"tinted"} />
+      <IconButton {...args} trailingIcon={"clock"} type={"outline"} />
+      <IconButton {...args} trailingIcon={"clock"} type={"basic"} />
+    </div>
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <IconButton {...args} size="small" />
+      <IconButton {...args} size="medium" />
+      <IconButton {...args} size="large" />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <IconButton {...args} size="small" borderRadius={"curved"} />
+      <IconButton {...args} size="medium" borderRadius={"curved"} />
+      <IconButton {...args} size="large" borderRadius={"curved"} />
+    </div>
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <IconButton
+        {...args}
+        type={"filled"}
+        color="primary"
+        leadingIcon={"user"}
+      />
+      <IconButton {...args} type={"filled"} color="secondary" />
+      <IconButton {...args} type={"filled"} color="success" />
+      <IconButton {...args} type={"filled"} color="warning" />
+      <IconButton {...args} type={"filled"} color="danger" />
+      <IconButton {...args} type={"filled"} color="information" />
+      <IconButton
+        {...args}
+        type={"filled"}
+        color="neutral"
+        trailingIcon={"clock"}
+      />
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <IconButton {...args} type={"tinted"} color="primary" />
+      <IconButton
+        {...args}
+        type={"tinted"}
+        color="secondary"
+        leadingIcon={"user"}
+      />
+      <IconButton {...args} type={"tinted"} color="success" />
+      <IconButton {...args} type={"tinted"} color="warning" />
+      <IconButton {...args} type={"tinted"} color="danger" />
+      <IconButton
+        {...args}
+        type={"tinted"}
+        color="information"
+        trailingIcon={"clock"}
+      />
+      <IconButton {...args} type={"tinted"} color="neutral" />
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <IconButton {...args} type={"basic"} color="primary" />
+      <IconButton {...args} type={"basic"} color="secondary" />
+      <IconButton
+        {...args}
+        type={"basic"}
+        color="success"
+        leadingIcon={"user"}
+      />
+      <IconButton {...args} type={"basic"} color="warning" />
+      <IconButton
+        {...args}
+        type={"basic"}
+        color="danger"
+        trailingIcon={"clock"}
+      />
+      <IconButton {...args} type={"basic"} color="information" />
+      <IconButton {...args} type={"basic"} color="neutral" />
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <IconButton {...args} type={"outline"} color="primary" />
+      <IconButton {...args} type={"outline"} color="secondary" />
+      <IconButton {...args} type={"outline"} color="success" />
+      <IconButton
+        {...args}
+        type={"outline"}
+        color="warning"
+        leadingIcon={"user"}
+        trailingIcon={"clock"}
+      />
+      <IconButton {...args} type={"outline"} color="danger" />
+      <IconButton {...args} type={"outline"} color="information" />
+      <IconButton {...args} type={"outline"} color="neutral" />
+    </div>
+  </div>
+);
+
+# Button
+
+```jsx
+import { IconButton } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    args={{
+      icon: "user",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Types
+
+`type:` `filled` / `tinted` / `outline` / `basic`
+
+<Canvas>
+  <Story
+    name="Types"
+    args={{
+      icon: "clock",
+    }}
+  >
+    {TemplateTypes.bind({})}
+  </Story>
+</Canvas>
+
+## Icon Styles
+
+`iconStyle:` `solid` / `regular`
+
+<Canvas>
+  <Story
+    name="Icon Styles"
+    args={{
+      icon: "clock",
+    }}
+  >
+    {TemplateIconStyles.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled state
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      icon: "calendar",
+    }}
+  >
+    {TemplateDisabled.bind({})}
+  </Story>
+</Canvas>
+
+## Border Radius
+
+`borderRadius:` `regular` / `curved`
+
+<Canvas>
+  <Story
+    name="Border Radius"
+    args={{
+      icon: "bell",
+    }}
+  >
+    {TemplateBorderRadius.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+`size:` `small` / `medium` / `large`
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      icon: "check-circle",
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+`color:` `primary` / `secondary` / `success` / `warning` / `danger` / `information` / `neutral`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      icon: "user-circle",
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

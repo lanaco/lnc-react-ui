@@ -1,0 +1,66 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Spinner from "./index";
+
+<Meta title="Feedback/Spinner" component={Spinner} />
+
+export const TemplateDefault = (args) => <Spinner {...args} />;
+
+export const TemplateLabel = (args) => <Spinner label={"70%"} {...args} />;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <Spinner {...args} size="small" />
+    <Spinner {...args} size="medium" />
+    <Spinner {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <Spinner {...args} color="primary" />
+    <Spinner {...args} color="secondary" />
+    <Spinner {...args} color="success" />
+    <Spinner {...args} color="warning" />
+    <Spinner {...args} color="danger" />
+    <Spinner {...args} color="information" />
+    <Spinner {...args} color="neutral" />
+  </div>
+);
+
+# Spinner
+```jsx
+import { Spinner } from "@lanaco/lnc-react-ui";
+```
+<Canvas>
+  <Story name="Default">{TemplateDefault.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## With label
+
+<Canvas withSource="open">
+  <Story
+    name="Label"
+    args={{}}
+  >
+    {TemplateLabel.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story name="Sizes">{TemplateSizes.bind({})}</Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors">{TemplateColors.bind({})}</Story>
+</Canvas>

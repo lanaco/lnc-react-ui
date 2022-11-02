@@ -1,0 +1,153 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import CheckBoxInput from "./index";
+import Icon from "../../General/Icon";
+import Button from "../../General/Button";
+import image from "../../_utils/images/testsvg.svg";
+
+<Meta title="Basic Inputs/Check Box Input" component={CheckBoxInput} />
+
+export const TemplateDefault = (args) => <CheckBoxInput {...args} />;
+
+export const TemplateIndeterminate = (args) => (
+  <CheckBoxInput {...args} indeterminate={true} label="Indeterminate" />
+);
+
+export const TemplateDisabled = (args) => (
+  <>
+    <CheckBoxInput
+      {...args}
+      disabled={true}
+      label="Disabled"
+      labelPosition="left"
+    />
+    <CheckBoxInput
+      {...args}
+      disabled={true}
+      checked={true}
+      label="Disabled"
+      labelPosition="left"
+    />
+  </>
+);
+
+export const TemplateReadOnly = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <CheckBoxInput {...args} readOnly={true} defaultValue={true} />
+    <CheckBoxInput {...args} readOnly={true} />
+  </div>
+);
+
+export const TemplateCustom = (args) => (
+  <CheckBoxInput
+    customCheckmark={<img src={image} alt="" />}
+    label="Custom"
+    defaultValue={true}
+  ></CheckBoxInput>
+);
+
+export const TemplateSpaceBetween = (args) => <>
+<CheckBoxInput label="Label" spaceBetween={true} defaultValue={true} {...args} />
+<CheckBoxInput label="Label" labelPosition="left" spaceBetween={true} defaultValue={true} {...args} />
+</>;
+
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <CheckBoxInput {...args} size="small" />
+    <CheckBoxInput {...args} size="medium" />
+    <CheckBoxInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", gap: "12px" }}>
+    <CheckBoxInput {...args} color="primary" />
+    <CheckBoxInput {...args} color="secondary" />
+    <CheckBoxInput {...args} color="success" />
+    <CheckBoxInput {...args} color="warning" />
+    <CheckBoxInput {...args} color="danger" />
+    <CheckBoxInput {...args} color="information" />
+  </div>
+);
+
+# Check Box Input
+
+```jsx
+import { CheckBoxInput } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    args={{
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Disabled state
+
+<Canvas>
+  <Story name="Disabled">{TemplateDisabled.bind({})}</Story>
+</Canvas>
+
+## Indeterminate state
+
+<Canvas>
+  <Story name="Indeterminate">{TemplateIndeterminate.bind({})}</Story>
+</Canvas>
+
+## Read only
+
+<Canvas>
+  <Story name="Read Only">{TemplateReadOnly.bind({})}</Story>
+</Canvas>
+
+## Custom checkmark
+
+It is possible to use custom SVG image as checkmark.
+
+<Canvas withSource="open">
+  <Story name="Icon">{TemplateCustom.bind({})}</Story>
+</Canvas>
+
+## Space Between
+
+<Canvas withSource="open">
+  <Story name="Space Betweeen">{TemplateSpaceBetween.bind({})}</Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story
+    name="Sizes"
+    args={{
+      defaultValue: true,
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story
+    name="Colors"
+    args={{
+      size: "small",
+      defaultValue: true,
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

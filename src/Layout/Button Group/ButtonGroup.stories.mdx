@@ -1,0 +1,142 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import IconButton from "../../General/IconButton/index";
+import Button from "../../General/Button/index";
+import ButtonGroup from ".";
+
+<Meta title="Layout/Button Group" component={ButtonGroup} />
+
+export const TemplateDefault = (args) => (
+  <ButtonGroup {...args}>
+    <Button text="Left" type="basic" />
+    <Button text="Center" type="basic" />
+    <Button text="Right" type="basic" />
+  </ButtonGroup>
+);
+
+export const TemplateBorderRadius = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <ButtonGroup {...args}>
+        <Button text="Left" type="basic" />
+        <Button text="Center" type="basic" />
+        <Button text="Right" type="basic" />
+      </ButtonGroup>
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <ButtonGroup {...args} borderRadius="curved">
+        <Button text="Left" type="basic" />
+        <Button text="Center" type="basic" />
+        <Button text="Right" type="basic" />
+      </ButtonGroup>
+    </div>
+  </div>
+);
+
+export const TemplateDisabled = (args) => (
+  <ButtonGroup {...args}>
+    <Button disabled={true} text="Left" type="basic" />
+    <Button disabled={true} text="Center" type="basic" />
+    <Button disabled={true} text="Right" type="basic" />
+  </ButtonGroup>
+);
+
+export const TemplateCombinations = (args) => (
+  <div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <ButtonGroup {...args}>
+        <Button text="Save" leadingIcon="save" type="tinted" />
+        <Button text="or" type="basic" disabled />
+        <Button
+          text="Discard"
+          leadingIcon="times"
+          type="tinted"
+          color="danger"
+        />
+      </ButtonGroup>
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <ButtonGroup {...args} borderRadius="curved">
+        <IconButton icon="align-left" type="basic" />
+        <IconButton icon="align-center" type="tinted" color="secondary" />
+        <IconButton icon="align-right" type="basic" />
+      </ButtonGroup>
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <ButtonGroup>
+        <IconButton
+          disabled={true}
+          type="basic"
+          icon="angle-double-left"
+          color="neutral"
+        />
+        <IconButton
+          disabled={true}
+          type="basic"
+          icon="angle-left"
+          color="neutral"
+        />
+        <Button type="tinted" text="1" color="primary" />
+        <Button type="basic" text="2" color="neutral" />
+        <Button type="basic" text="3" color="neutral" />
+        <IconButton type="basic" icon="angle-right" color="neutral" />
+        <IconButton type="basic" icon="angle-double-right" color="neutral" />
+      </ButtonGroup>
+    </div>
+    <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+      <ButtonGroup {...args}>
+        <Button
+          text="Apply"
+          leadingIcon="check-circle"
+          type="tinted"
+          color="secondary"
+        />
+        <Button
+          text="Cancel"
+          leadingIcon="times"
+          type="basic"
+          color="neutral"
+        />
+      </ButtonGroup>
+    </div>
+    <div style={{ display: "flex", gap: "16px" }}>
+      <ButtonGroup {...args} borderRadius="curved">
+        <Button text="Year" type="filled" color="primary" />
+        <Button text="Month" type="tinted" color="primary" />
+        <Button text="Day" type="basic" color="primary" />
+      </ButtonGroup>
+    </div>
+  </div>
+);
+
+# Button Group
+
+```jsx
+import { ButtonGroup } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default">{TemplateDefault.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Border Radius
+
+`borderRadius:` `regular` / `curved`
+
+<Canvas>
+  <Story name="Border Radius">{TemplateBorderRadius.bind({})}</Story>
+</Canvas>
+
+## Disabled State
+
+<Canvas>
+  <Story name="Disabled State">{TemplateDisabled.bind({})}</Story>
+</Canvas>
+
+## Combinations
+
+<Canvas>
+  <Story name="Combinations">{TemplateCombinations.bind({})}</Story>
+</Canvas>

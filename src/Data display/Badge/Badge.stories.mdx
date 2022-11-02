@@ -1,0 +1,57 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Badge from "./index";
+import Icon from "../../General/Icon";
+
+<Meta title="Data display/Badge" component={Badge} />
+
+export const TemplateDefault = (args) => <Badge {...args}>Badge</Badge>;
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <Badge {...args} color="primary">2</Badge>
+    <Badge {...args} color="secondary">2</Badge>
+    <Badge {...args} color="success">2</Badge>
+    <Badge {...args} color="warning">2</Badge>
+    <Badge {...args} color="danger">2</Badge>
+    <Badge {...args} color="information">2</Badge>
+  </div>
+);
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", gap: "7px" }}>
+    <Badge {...args} size="small"><Icon icon={"bell"}/></Badge>
+    <Badge {...args} size="medium"><Icon icon={"bell"}/></Badge>
+    <Badge {...args} size="large"><Icon icon={"bell"}/></Badge>
+  </div>
+);
+
+# Chip
+
+```jsx
+import { Badge } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{ }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{ }}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{ }}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

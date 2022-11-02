@@ -1,0 +1,102 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import FileInput from "./index";
+
+<Meta title="Basic Inputs/File Input" component={FileInput} />
+
+export const TemplateDefault = (args) => <FileInput {...args} accept="" />;
+
+export const TemplateSizes = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <FileInput {...args} size="small" />
+    <FileInput {...args} size="medium" />
+    <FileInput {...args} size="large" />
+  </div>
+);
+
+export const TemplateColors = (args) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <FileInput {...args} color="primary" />
+    <FileInput {...args} color="secondary" />
+    <FileInput {...args} color="success" />
+    <FileInput {...args} color="warning" />
+    <FileInput {...args} color="danger" />
+    <FileInput {...args} color="information" />
+  </div>
+);
+
+# File Input
+```jsx
+import { FileInput } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{id: "fildde1"}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas>
+  <Story
+    name="Read Only"
+    args={{
+      readOnly: true,
+      placeholder: "Type text here",
+      style: { width: "300px" },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas withSource="open">
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+      placeholder: "Disabled",
+      style: { width: "300px" },
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Alternative Label
+
+<Canvas withSource="open">
+  <Story
+    name="Alternative Label"
+    args={{
+      label: "Please Select File",
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+Defining `size` with `small`, `medium` and `large` values.
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+Defining `color`
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

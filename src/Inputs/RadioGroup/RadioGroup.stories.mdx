@@ -1,0 +1,189 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import RadioGroup from "./index";
+
+<Meta title="Inputs/Radio Group" component={RadioGroup} />
+
+export const TemplateDefault = (args) => (
+  <RadioGroup
+    items={[
+      { id: "1", value: "Option 1" },
+      { id: "2", value: "Option 2" },
+      { id: "3", value: "Option 3" },
+    ]}
+    {...args}
+    id={"rg"}
+  />
+);
+
+export const TemplateRadioProps = (args) => (
+  <RadioGroup
+    style={{width: "100px"}}
+    items={[
+      { id: "1", value: "Option 1" },
+      { id: "2", value: "Option 2" },
+      { id: "3", value: "Option 3" },
+    ]}
+    radioProps={{labelPosition: "left", label: "label", spaceBetween: true}}
+    {...args}
+    id={"rg"}
+  />
+);
+
+export const TemplateSizes = (args) => (
+  <>
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      size={"small"}
+      id={"rg1"}
+    />
+    <hr />
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      size={"medium"}
+      id={"rg2"}
+    />
+    <hr />
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      size={"large"}
+      id={"rg3"}
+    />
+  </>
+);
+
+export const TemplateColors = (args) => (
+  <>
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      color={"primary"}
+      id={"rg1"}
+    />
+    <hr />
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      color={"secondary"}
+      id={"rg2"}
+    />
+    <hr />
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      color={"success"}
+      id={"rg3"}
+    />
+    <hr />
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      color={"danger"}
+      id={"rg4"}
+    />
+    <hr />
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      color={"warning"}
+      id={"rg5"}
+    />
+    <hr />
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      color={"information"}
+      id={"rg6"}
+    />
+    <hr />
+    <RadioGroup
+      items={[
+        { id: "1", value: "Option 1" },
+        { id: "2", value: "Option 2" },
+        { id: "3", value: "Option 3" },
+      ]}
+      {...args}
+      color={"neutral"}
+      id={"rg7"}
+    />
+  </>
+);
+
+# Radio Group
+
+```jsx
+import { RadioGroup } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Radio props
+
+[Go to `radioProps`](http://localhost:6006/?path=/docs/basic-inputs-radio-input--default-story)
+
+<Canvas>
+  <Story name="Radio Props" args={{}}>
+    {TemplateRadioProps.bind({})}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas>
+  <Story name="Colors" args={{}}>
+    {TemplateColors.bind({})}
+  </Story>
+</Canvas>

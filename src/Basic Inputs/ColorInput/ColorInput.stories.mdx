@@ -1,0 +1,88 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import ColorInput from "./index";
+
+<Meta title="Basic Inputs/Color Input" component={ColorInput} />
+
+export const TemplateDefault = (args) => <ColorInput {...args} />;
+
+export const TemplateReadOnly = (args) => (
+  <ColorInput {...args} readOnly={true} value="#00537a" />
+);
+
+export const TemplateDisabled = (args) => (
+  <ColorInput {...args} disabled={true} value="#00537b" />
+);
+
+export const TemplateWithInput = (args) => (
+  <>
+    <ColorInput
+      {...args}
+      style={{ width: "200px" }}
+      withInput={true}
+      value="#00537b"
+    />
+    &nbsp;&nbsp;
+    <ColorInput
+      {...args}
+      style={{ width: "200px" }}
+      withInput={true}
+      disabled={true}
+      value="#00537b"
+    />
+  </>
+);
+
+export const TemplateSizes = (args) => (
+  <>
+    <ColorInput {...args} size="small" />
+    <br />
+    <ColorInput {...args} size="medium" />
+    <br />
+    <ColorInput {...args} size="large" />
+  </>
+);
+
+# Color Input
+
+```jsx
+import { ColorInput } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas withSource="open">
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Read Only
+
+<Canvas>
+  <Story name="Read Only">{TemplateReadOnly.bind({})}</Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story name="Disabled">{TemplateDisabled.bind({})}</Story>
+</Canvas>
+
+## With Input
+
+<Canvas>
+  <Story name="With Input">{TemplateWithInput.bind({})}</Story>
+</Canvas>
+
+Note that the control will **NOT** allow you to enter invalid HEX strings. If you try to do so, the value will be set to `defaultValue`.
+
+## Sizes
+
+Defining `size` with `regular` and `compact` values.
+
+<Canvas>
+  <Story name="Sizes" args={{}}>
+    {TemplateSizes.bind({})}
+  </Story>
+</Canvas>

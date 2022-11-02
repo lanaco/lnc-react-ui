@@ -1,0 +1,486 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import TreeMenu from "./index";
+import MenuItem from "./MenuItem";
+import NestedMenuItem from "./NestedMenuItem";
+import Separator from "./Separator";
+import logo from "../../_utils/images/Image.png";
+import Avatar from "../../General/Avatar";
+
+<Meta title="Utility/Tree Menu" component={TreeMenu}  subcomponents={{ MenuItem, NestedMenuItem, Separator }}/>
+
+# Tree Menu
+
+```jsx
+import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lanaco/lnc-react-ui";
+```
+
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Default" args={{}}>
+    {(args) => (
+      <TreeMenu {...args}>
+        <MenuItem icon="pen" value="Edit">
+          Edit
+        </MenuItem>
+        <MenuItem icon="clone" value="Dupl">
+          Duplicate
+        </MenuItem>
+        <Separator />
+        <MenuItem icon="archive" value="Arch">
+          Archive
+        </MenuItem>
+        <MenuItem icon="arrow-right" value="Move">
+          Move
+        </MenuItem>
+        <Separator />
+        <MenuItem icon="trash" value="Del">
+          Delete
+        </MenuItem>
+      </TreeMenu>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Nested Menu Items
+
+<Story name="Nested Items" args={{}}>
+  {(args) => (
+    <TreeMenu {...args}>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <MenuItem icon="clone" value="Dupl">
+        Duplicate
+      </MenuItem>
+      <NestedMenuItem
+        item={
+          <MenuItem icon="archive" value="Arch">
+            Archive
+          </MenuItem>
+        }
+      >
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+        <NestedMenuItem
+          item={
+            <MenuItem icon="pen" value="Data">
+              Data
+            </MenuItem>
+          }
+        >
+          <MenuItem icon="users" value="Users">
+            Users
+          </MenuItem>
+          <MenuItem icon="file" value="Docs">
+            Documents
+          </MenuItem>
+        </NestedMenuItem>
+        <MenuItem icon="arrow-right" value="Move">
+          Move
+        </MenuItem>
+      </NestedMenuItem>
+      <Separator />
+      <MenuItem icon="trash" value="Del">
+        Delete
+      </MenuItem>
+    </TreeMenu>
+  )}
+</Story>
+
+```jsx
+  {(args) => (
+    <TreeMenu {...args}>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <MenuItem icon="clone" value="Dupl">
+        Duplicate
+      </MenuItem>
+      <NestedMenuItem
+        item={
+          <MenuItem icon="archive" value="Arch">
+            Archive
+          </MenuItem>
+        }
+      >
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+        <NestedMenuItem
+          item={
+            <MenuItem icon="pen" value="Data">
+              Data
+            </MenuItem>
+          }
+        >
+          <MenuItem icon="users" value="Users">
+            Users
+          </MenuItem>
+          <MenuItem icon="file" value="Docs">
+            Documents
+          </MenuItem>
+        </NestedMenuItem>
+        <MenuItem icon="arrow-right" value="Move">
+          Move
+        </MenuItem>
+      </NestedMenuItem>
+      <Separator />
+      <MenuItem icon="trash" value="Del">
+        Delete
+      </MenuItem>
+    </TreeMenu>
+  )}
+```
+
+#### Without tucking in
+
+<Story name="Without Tucking In" args={{}}>
+  {(args) => (
+    <TreeMenu {...args}>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <NestedMenuItem
+        tuckIn={false}
+        item={
+          <MenuItem icon="archive" value="Arch">
+            Archive
+          </MenuItem>
+        }
+      >
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+      </NestedMenuItem>
+    </TreeMenu>
+  )}
+</Story>
+
+```jsx
+  {(args) => (
+    <TreeMenu {...args}>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <NestedMenuItem
+        tuckIn={false}
+        item={
+          <MenuItem icon="archive" value="Arch">
+            Archive
+          </MenuItem>
+        }
+      >
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+      </NestedMenuItem>
+    </TreeMenu>
+  )}
+```
+
+### Custom Menu Items
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Custom Items" args={{}}>
+    {(args) => (
+      <TreeMenu {...args}>
+        <MenuItem icon="pen" value="Edit">
+          Edit
+        </MenuItem>
+        <MenuItem icon="clone" value="Dupl">
+          Duplicate
+        </MenuItem>
+        <Separator />
+        <MenuItem icon="archive" value="Arch">
+          Archive
+        </MenuItem>
+        <MenuItem icon="arrow-right" value="Move">
+          Move
+        </MenuItem>
+        <Separator />
+        <MenuItem value="Avat">
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <Avatar image={logo} sizeInUnits="1.5rem" />
+              User
+            </div>
+            <br />
+            <div>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+          </div>
+        </MenuItem>
+      </TreeMenu>
+    )}
+  </Story>
+</Canvas>
+
+```jsx
+{
+  (args) => (
+    <TreeMenu {...args}>
+      <MenuItem icon="pen" value="Edit">
+        Edit
+      </MenuItem>
+      <MenuItem icon="clone" value="Dupl">
+        Duplicate
+      </MenuItem>
+      <Separator />
+      <MenuItem icon="archive" value="Arch">
+        Archive
+      </MenuItem>
+      <MenuItem icon="arrow-right" value="Move">
+        Move
+      </MenuItem>
+      <Separator />
+      <MenuItem value="Avat">
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <Avatar image={logo} sizeInUnits="1.5rem" />
+            User
+          </div>
+          <br />
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </div>
+        </div>
+      </MenuItem>
+    </TreeMenu>
+  );
+}
+```
+
+## Jusitfy Menu Items
+
+For Menu Items that need to be justifed to end it is necessary to set `justifyToEnd={true}`
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Justify Menu Items" args={{}}>
+    {(args) => (
+      <TreeMenu style={{ height: "450px" }} {...args}>
+        <MenuItem icon="home" value="Home">
+          Home
+        </MenuItem>
+        <MenuItem icon="clock" value="Hist">
+          History
+        </MenuItem>
+        <MenuItem icon="archive" value="Arch">
+          Archive
+        </MenuItem>
+        <MenuItem icon="users" value="Users" justifyToEnd={true}>
+          Users
+        </MenuItem>
+        <Separator justifyToEnd={true} />
+        <MenuItem icon="gears" value="Sett" justifyToEnd={true}>
+          Settings
+        </MenuItem>
+      </TreeMenu>
+    )}
+  </Story>
+</Canvas>
+
+## Sizes
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Sizes" args={{}}>
+    {(args) => (
+      <>
+        <h3>small</h3>
+        <TreeMenu size="small" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+        <br />
+        <h3>medium</h3>
+        <TreeMenu size="medium" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+        <br />
+        <h3>large</h3>
+        <TreeMenu size="large" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+      </>
+    )}
+  </Story>
+</Canvas>
+
+## Colors
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Colors" args={{}}>
+    {(args) => (
+      <>
+        <TreeMenu color="primary" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+        <br />
+        <hr />
+        <TreeMenu color="secondary" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+        <br />
+        <hr />
+        <TreeMenu color="success" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+        <br />
+        <hr />
+        <TreeMenu color="warning" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+        <br />
+        <hr />
+        <TreeMenu color="danger" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+        <br />
+        <hr />
+        <TreeMenu color="neutral" {...args}>
+          <MenuItem value="Edit" icon="pen">
+            Edit
+          </MenuItem>
+          <MenuItem value="Dupl" icon="clone">
+            Duplicate
+          </MenuItem>
+          <MenuItem value="Arch" icon="archive">
+            Archive
+          </MenuItem>
+          <MenuItem value="Move" icon="arrow-right">
+            Move
+          </MenuItem>
+          <MenuItem value="Del" icon="trash">
+            Delete
+          </MenuItem>
+        </TreeMenu>
+      </>
+    )}
+  </Story>
+</Canvas>

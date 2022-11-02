@@ -1,0 +1,245 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Drawer from "./index";
+import { useState, useRef } from "react";
+import Button from "../../General/Button";
+
+<Meta title="Utility/Drawer" component={Drawer} />
+
+# Drawer
+
+```jsx
+import { Drawer } from "@lanaco/lnc-react-ui";
+```
+
+<Story name="Default" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <Drawer ref={drawerRef} {...args}>
+          This is Drawer
+        </Drawer>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+{
+  (args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <Drawer ref={drawerRef} {...args}>
+          This is Drawer
+        </Drawer>
+      </>
+    );
+  };
+}
+```
+
+<ArgsTable story="Default" />
+
+## Direction
+
+<Story name="Direction" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const [direction, setDirection] = useState("right");
+    const openDrawer = (dir) => {
+      setDirection(dir);
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={() => openDrawer("right")}>Right</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("left")}>Left</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("top")}>Top</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
+        <Drawer ref={drawerRef} direction={direction} {...args}>
+          This is Drawer
+        </Drawer>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+(args) => {
+  const drawerRef = useRef();
+  const [direction, setDirection] = useState("right");
+  const openDrawer = (dir) => {
+    setDirection(dir);
+    drawerRef?.current?.open();
+  };
+  return (
+    <>
+      <Button onClick={() => openDrawer("right")}>Right</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("left")}>Left</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("top")}>Top</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
+      <Drawer ref={drawerRef} direction={direction} {...args}>
+        This is Drawer
+      </Drawer>
+    </>
+  );
+};
+```
+
+## Colors
+
+<Story name="Colors" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const [color, setColor] = useState("neutral");
+    const openDrawer = (col) => {
+      setColor(col);
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={() => openDrawer("neutral")} color="neutral">
+          Neutral
+        </Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("primary")} color="primary">
+          Primary
+        </Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("secondary")} color="secondary">
+          Secondary
+        </Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("success")} color="success">
+          Success
+        </Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("danger")} color="danger">
+          Danger
+        </Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("warning")} color="warning">
+          Warning
+        </Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("information")} color="information">
+          Information
+        </Button>
+        <Drawer ref={drawerRef} color={color} {...args}>
+          This is Drawer
+        </Drawer>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+(args) => {
+  const drawerRef = useRef();
+  const [color, setColor] = useState("neutral");
+  const openDrawer = (col) => {
+    setColor(col);
+    drawerRef?.current?.open();
+  };
+  return (
+    <>
+      <Button onClick={() => openDrawer("neutral")} color="neutral">
+        Neutral
+      </Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("primary")} color="primary">
+        Primary
+      </Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("secondary")} color="secondary">
+        Secondary
+      </Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("success")} color="success">
+        Success
+      </Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("danger")} color="danger">
+        Danger
+      </Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("warning")} color="warning">
+        Warning
+      </Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("information")} color="information">
+        Information
+      </Button>
+      <Drawer ref={drawerRef} color={color} {...args}>
+        This is Drawer
+      </Drawer>
+    </>
+  );
+};
+```
+
+## Sizes
+
+<Story name="Sizes" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const [size, setSize] = useState("small");
+    const openDrawer = (s) => {
+      setSize(s);
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={() => openDrawer("small")}>Small</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("medium")}>Medium</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("large")}>Large</Button>
+        <Drawer ref={drawerRef} size={size} {...args}>
+          This is Drawer
+        </Drawer>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+(args) => {
+  const drawerRef = useRef();
+  const [size, setSize] = useState("small");
+  const openDrawer = (s) => {
+    setSize(s);
+    drawerRef?.current?.open();
+  };
+  return (
+    <>
+      <Button onClick={() => openDrawer("small")}>Small</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("medium")}>Medium</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("large")}>Large</Button>
+      <Drawer ref={drawerRef} size={size} {...args}>
+        This is Drawer
+      </Drawer>
+    </>
+  );
+};
+```
+
+#### This component is built on top of [react-modern-drawer](https://www.npmjs.com/package/react-modern-drawer). [See more](https://github.com/Farzin-Firoozi/react-modern-drawer#readme).

@@ -1,0 +1,170 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Accordion from "./index";
+import AccordionSummary from "./AccordionSummary";
+import AccordionDetails from "./AccordionDetails";
+import { useState } from "react";
+
+<Meta
+  title="Utility/Accordion"
+  component={Accordion}
+  subcomponents={{ AccordionSummary, AccordionDetails }}
+/>
+
+# Accordion
+
+```jsx
+import { Accordion, AccordionSummary, AccordionSummary } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {(args) => (
+      <>
+        <Accordion {...args}>
+          <AccordionSummary>Accordion 1</AccordionSummary>
+          <AccordionDetails>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </AccordionDetails>
+        </Accordion>
+      </>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Multiple Accordions
+
+<Canvas>
+  <Story name="Multiple Accordions" args={{}}>
+    {(args) => (
+      <>
+        <Accordion {...args}>
+          <AccordionSummary>Accordion 1</AccordionSummary>
+          <AccordionDetails>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </AccordionDetails>
+        </Accordion>
+        <Accordion {...args}>
+          <AccordionSummary>Accordion 2</AccordionSummary>
+          <AccordionDetails>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </AccordionDetails>
+        </Accordion>
+        <Accordion {...args}>
+          <AccordionSummary>Accordion 3</AccordionSummary>
+          <AccordionDetails>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </AccordionDetails>
+        </Accordion>
+      </>
+    )}
+  </Story>
+</Canvas>
+
+## Controlled Accordion
+
+<Canvas>
+  <Story name="Controlled" args={{}}>
+    {(args) => {
+      const [expanded, setExpanded] = useState(false);
+      const handleChange = (accordion) => (isExpanded, event) => {
+        setExpanded(isExpanded ? accordion : false);
+      };
+      return (
+        <>
+          <Accordion
+            expanded={expanded == "accordion1"}
+            change={handleChange("accordion1")}
+            {...args}
+          >
+            <AccordionSummary>Accordion 1</AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded == "accordion2"}
+            change={handleChange("accordion2")}
+            {...args}
+          >
+            <AccordionSummary>Accordion 2</AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded == "accordion3"}
+            change={handleChange("accordion3")}
+            {...args}
+          >
+            <AccordionSummary>Accordion 3</AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </AccordionDetails>
+          </Accordion>
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story name="Disabled" args={{}}>
+    {(args) => (
+      <>
+        <Accordion {...args}>
+          <AccordionSummary>Accordion 1</AccordionSummary>
+          <AccordionDetails>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </AccordionDetails>
+        </Accordion>
+        <Accordion {...args}>
+          <AccordionSummary>Accordion 2</AccordionSummary>
+          <AccordionDetails>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </AccordionDetails>
+        </Accordion>
+        <Accordion disabled={true} {...args}>
+          <AccordionSummary>Accordion 3</AccordionSummary>
+          <AccordionDetails>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </AccordionDetails>
+        </Accordion>
+      </>
+    )}
+  </Story>
+</Canvas>
