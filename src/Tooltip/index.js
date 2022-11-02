@@ -28,24 +28,67 @@ const Tooltip = props => {
 
     const CalculateStyle = (mouseX, mouseY) => {
         if (mouseX <= window.innerWidth / 2 && mouseY <= window.innerHeight / 2) {
-            return "position: absolute; left: " + (mouseX - 10) + "px; top: " + (mouseY - 10) +
-                "px; width: auto; height: auto; box-shadow: 0 0 6px #bebebe; border-radius: 0.175rem; background-color: white; " +
-                "overflow: auto; + max-height: " + (window.innerHeight - 20) + "px; z-index: 999;";
+            return (
+                `position: absolute; 
+                left: ${(mouseX - 10)}px; 
+                top: ${(mouseY - 10)}px; 
+                width: auto; 
+                height: auto; 
+                box-shadow: 0 0 6px #bebebe; 
+                border-radius: 0.175rem; 
+                background-color: white; 
+                overflow: auto; 
+                max-height: ${(window.innerHeight - 20)}px; 
+                z-index: 999;`
+            );
         }
         else if (mouseX > window.innerWidth / 2 && mouseY <= window.innerHeight / 2) {
-            return "position: absolute; right: " + (window.innerWidth - mouseX - 10) + "px; top: " + (mouseY - 10) +
-                "px; width: auto; height: auto; box-shadow: 0 0 6px #bebebe; border-radius: 0.175rem; background-color: white; " +
-                "overflow: auto; + max-height: " + (window.innerHeight - 20) + "px; z-index: 999;";
+
+            return (
+                `position: absolute; 
+                right: ${(window.innerWidth - mouseX - 10)}px; 
+                top: ${(mouseY - 10)}px; 
+                width: auto; 
+                height: auto; 
+                box-shadow: 0 0 6px #bebebe; 
+                border-radius: 0.175rem; 
+                background-color: white; 
+                overflow: auto; 
+                max-height: ${(window.innerHeight - 20)}px; 
+                z-index: 999;`
+            );
         }
         else if (mouseX <= window.innerWidth / 2 && mouseY > window.innerHeight / 2) {
-            return "position: absolute; left: " + (mouseX - 10) + "px; bottom: " + (window.innerHeight - mouseY - 10) +
-                "px; width: auto; height: auto; box-shadow: 0 0 6px #bebebe; border-radius: 0.175rem; background-color: white; " +
-                "overflow: auto; + max-height: " + (window.innerHeight - 20) + "px; z-index: 999;";
+
+            return (
+                `position: absolute; 
+                left: ${(mouseX - 10)}px; 
+                bottom: ${(window.innerHeight - mouseY - 10)}px; 
+                width: auto; 
+                height: auto; 
+                box-shadow: 0 0 6px #bebebe; 
+                border-radius: 0.175rem; 
+                background-color: white; 
+                overflow: auto; 
+                max-height: ${(window.innerHeight - 20)}px; 
+                z-index: 999;`
+            );
         }
         else if (mouseX > window.innerWidth / 2 && mouseY > window.innerHeight / 2) {
-            return "position: absolute; right: " + (window.innerWidth - mouseX - 10) + "px; bottom: " + (window.innerHeight - mouseY - 10) +
-                "px; width: auto; height: auto; box-shadow: 0 0 6px #bebebe; border-radius: 0.175rem; background-color: white; " +
-                "overflow: auto; + max-height: " + (window.innerHeight - 20) + "px; z-index: 999;";
+
+            return (
+                `position: absolute; 
+                right: ${(window.innerWidth - mouseX - 10)}px; 
+                bottom: ${(window.innerHeight - mouseY - 10)}px; 
+                width: auto; 
+                height: auto; 
+                box-shadow: 0 0 6px #bebebe; 
+                border-radius: 0.175rem; 
+                background-color: white; 
+                overflow: auto; 
+                max-height: ${(window.innerHeight - 20)}px; 
+                z-index: 999;`
+            );
         }
     }
 
