@@ -3,7 +3,7 @@ name: "🚀 publish to NPM"
 on:
   push:
     branches:
-      - main
+      - v2.x
 
 jobs:
   release:
