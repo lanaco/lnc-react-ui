@@ -1,5 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
+  "type": "module",
   "version": "3.0.0-rc.0",
   "description": "component library",
   "main": "lib/index.js",

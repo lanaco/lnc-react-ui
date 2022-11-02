@@ -1,5 +1,3 @@
-export { default as theme } from "./_utils/theme";
-
 //============ BASIC INPUTS ===================================================================
 export * from "./Basic Inputs/CheckBoxInput";
 export { default as CheckBoxInput } from "./Basic Inputs/CheckBoxInput";
@@ -55,9 +53,9 @@ export { default as EditableTable } from "./Data display/EditableTable";
 export * from "./Data display/Kanban";
 export { default as Kanban } from "./Data display/Kanban";
 
-export { default as KanbanCard } from "./Data display/Kanban/components/KanbanCard";
-export { default as KanbanHeader } from "./Data display/Kanban/components/KanbanHeader";
-export { default as KanbanFooter } from "./Data display/Kanban/components/KanbanFooter";
+export { default as KanbanCard } from "./Data display/Kanban/components/KanbanCard/KanbanCard";
+export { default as KanbanHeader } from "./Data display/Kanban/components/KanbanHeader/KanbanHeader";
+export { default as KanbanFooter } from "./Data display/Kanban/components/KanbanFooter/KanbanFooter";
 
 export * from "./Data display/KanbanView";
 export { default as KanbanView, KanbanActionsToolbar } from "./Data display/KanbanView";
@@ -160,11 +158,11 @@ export { default as FlexBox } from "./Layout/FlexBox";
 export * from "./Layout/FlexGrid";
 export { default as FlexGrid } from "./Layout/FlexGrid";
 
-export * from "./Layout/FlexGridItem";
+export * from "./Layout/FlexGrid/FlexGridItem";
 export { default as FlexGridItem } from "./Layout/FlexGrid/FlexGridItem";
 
 export * from "./Layout/Footer";
-export { default as Footer } from "./Layout/FlexGrid/Footer";
+export { default as Footer } from "./Layout/Footer";
 
 export * from "./Layout/FormField";
 export { default as FormField } from "./Layout/FormField";
@@ -186,7 +184,7 @@ export { default as Sidebar } from "./Layout/Sidebar";
 
 export * from "./Layout/Tabs";
 export { default as Tabs } from "./Layout/Tabs";
-export { default as TabItem } from "./Layout/TabItem";
+export { default as TabItem } from "./Layout/Tabs/TabItem";
 
 //=============================================================================================
 
