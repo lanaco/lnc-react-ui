@@ -2,54 +2,33 @@ import React from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import Icon from "../../../../General/Icon";
 import DropdownMenu from "../../../../Utility/DropdownMenu/index";
 import DropdownItem from "../../../../Utility/DropdownMenu/DropdownItem";
-import { Handle } from "../Handle/Handle";
+import Icon from "../../../../General/Icon";
 
-const StyledCard = styled.div`
-  height: 100%;
-  width: 100%;
-  padding: ${(props) =>
-    `18px 20px 18px ${props.handle == true ? "10px" : "20px"}`};
+const StyledHeader = styled.div`
+  font-family: ${(props) => props.theme?.typography?.fontFamily};
   position: relative;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  word-break: break-word;
-  display: flex;
-  gap: 8px;
-  & .card-action-lnc {
+  width: 100%;
+  & .column-action-lnc {
     position: absolute;
-    right: 10px;
+    right: 0;
+    top: 0;
     cursor: pointer;
   }
 
-  & > .kanban-card-content {
+  & > span {
     ${(props) => props.clickable && "cursor: pointer;"}
   }
 `;
 
-const Actions = styled.div`
-  display: flex;
-
-  & > *:first-child:not(:last-child) {
-    opacity: 0;
-  }
-
-  & > *:first-child:not(:last-child):focus-visible {
-    opacity: 1;
-  }
-`;
-
-export const KanbanCard = React.memo(
+const KanbanHeader = React.memo(
   React.forwardRef(
     (
       {
         id,
-        containerId,
         item,
-        handle,
-        handleProps,
+        column,
         actionsMenu,
         actions,
         onDetails,
@@ -65,23 +44,18 @@ export const KanbanCard = React.memo(
       const theme = useTheme();
 
       return (
-        <StyledCard
+        <StyledHeader
           ref={ref}
-          handle={handle}
           theme={theme}
           className={className}
           style={style}
           clickable={onDetails ? true : false}
           {...rest}
         >
-          {handle && (
-            <Actions className={"Actions"}>
-              <Handle {...handleProps} />
-            </Actions>
-          )}
+          <span onClick={(e) => onDetails(e, item, column)}>{children}</span>
           {actionsMenu && (
             <DropdownMenu
-              className="card-action-lnc"
+              className="column-action-lnc"
               horizontalAlignment="right"
               verticalAlignment="bottom"
               color={color}
@@ -89,7 +63,7 @@ export const KanbanCard = React.memo(
               control={
                 <Icon
                   color="neutral"
-                  className="card-action-lnc"
+                  className="column-action-lnc"
                   icon="ellipsis-v"
                 />
               }
@@ -101,7 +75,10 @@ export const KanbanCard = React.memo(
                       key={index}
                       icon={action.icon}
                       disabled={action.enable == false}
-                      onClick={(e) => action.onAction(e, item, containerId)}
+                      onClick={(e) => {
+                        console.log("iiii", action);
+                        action.onAction(e, item, column);
+                      }}
                     >
                       {action.name}
                     </DropdownItem>
@@ -109,41 +86,27 @@ export const KanbanCard = React.memo(
               })}
             </DropdownMenu>
           )}
-          <div
-            className="kanban-card-content-lnc"
-            onClick={(e) => {
-              onDetails && onDetails(e, item, containerId);
-            }}
-          >
-            {children}
-          </div>
-        </StyledCard>
+        </StyledHeader>
       );
     }
   )
 );
 
-KanbanCard.defaultProps = {
-  __TYPE__: "KANBAN_CARD",
-  handle: true,
+KanbanHeader.defaultProps = {
+  __TYPE__: "KANBAN_HEADER",
   actionsMenu: false,
   actions: [],
   //-------------------------
-  // onDetails: (e, item, columnId) => { },
+  onDetails: (e, item, column) => {},
   //-------------------------
   style: {},
   color: "primary",
   size: "small",
 };
 
-KanbanCard.propTypes = {
+KanbanHeader.propTypes = {
   __TYPE__: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  containerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  className: PropTypes.string,
-  style: PropTypes.object,
-  handle: PropTypes.bool,
-  handleProps: PropTypes.any,
   /**
    * Show actions menu on Card
    */
@@ -153,12 +116,11 @@ KanbanCard.propTypes = {
    * show and enable are true by default
    */
   actions: PropTypes.array,
-  //-------------------------------------------------------------
-  /**
-   * (e, item, columnId) => { }
-   */
+  //---------------------------------
   onDetails: PropTypes.func,
-  //-------------------------------------------------------------
+  //---------------------------------
+  className: PropTypes.string,
+  style: PropTypes.object,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
@@ -170,3 +132,5 @@ KanbanCard.propTypes = {
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };
+
+export default KanbanHeader;

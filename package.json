@@ -7,7 +7,7 @@
   "module": "lib/index.esm.js",
   "scripts": {
     "test": "jest --env=jsdom",
-    "start": "start-storybook -p 6006",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
     "clean": "rimraf lib",
     "build-storybook": "build-storybook -o docs-build",
     "build": "npm run clean && rollup -c",
@@ -30,7 +30,6 @@
     "@rollup/plugin-eslint": "^8.0.1",
     "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-node-resolve": "^13.0.0",
-    "@rollup/plugin-replace": "^2.4.2",
     "@storybook/addon-actions": "^6.3.2",
     "@storybook/addon-cssresources": "^6.2.9",
     "@storybook/addon-essentials": "^6.3.2",

@@ -1,10 +1,4 @@
-import {
-  closestCorners,
-  getFirstCollision,
-  KeyboardCode,
-  DroppableContainer,
-  KeyboardCoordinateGetter,
-} from "@dnd-kit/core";
+import { closestCorners, getFirstCollision, KeyboardCode } from "@dnd-kit/core";
 
 const defaultInitializer = (index) => index;
 

@@ -1,68 +1,58 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { createPortal, unstable_batchedUpdates } from "react-dom";
+import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import {
   getColorRgbaValue,
-  getCustomRender,
   getCustomRenderById,
   renderCustomElement,
 } from "../../_utils/utils";
 import { useTheme } from "@emotion/react";
 
 import {
-  CancelDrop,
   closestCenter,
   pointerWithin,
   rectIntersection,
-  CollisionDetection,
   DndContext,
   DragOverlay,
-  DropAnimation,
   getFirstCollision,
   KeyboardSensor,
   MouseSensor,
   TouchSensor,
-  Modifiers,
-  useDroppable,
   useSensors,
   useSensor,
   MeasuringStrategy,
-  KeyboardCoordinateGetter,
   defaultDropAnimationSideEffects,
 } from "@dnd-kit/core";
 
 import {
-  AnimateLayoutChanges,
   SortableContext,
   useSortable,
   arrayMove,
   defaultAnimateLayoutChanges,
   verticalListSortingStrategy,
-  SortingStrategy,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
 import { CSS } from "@dnd-kit/utilities";
 import { coordinateGetter as multipleContainersCoordinateGetter } from "./utilities";
-import { Item } from "./components/Item/Item";
-import { Container } from "./components/Container/Container";
+import { Item } from "./components/Item";
+import { Container } from "./components/Container";
 import { createRange } from "./utilities";
 import styled from "@emotion/styled";
 import { findIndex, cloneDeep } from "lodash";
 import { useEffectOnce, useUpdateEffect } from "react-use";
-import { KanbanHeader } from "./components/KanbanHeader/KanbanHeader";
-import { KanbanCard } from "./components/KanbanCard/KanbanCard";
+import KanbanHeader from "./components/KanbanHeader";
+import KanbanCard from "./components/KanbanCard";
 
 //============== STYLES ==================================================
 
-const ComponentContainer = styled.div`
-`;
+const ComponentContainer = styled.div``;
 
 const DragAndDropArea = styled.div`
   box-sizing: border-box;
   display: flex;
-  flex-direction: ${props => props.verticalDisplay ? "column" : "row"};
-  ${props => props.horizontalDisplay == false && "flex-wrap: wrap;"}
+  flex-direction: ${(props) => (props.verticalDisplay ? "column" : "row")};
+  ${(props) => props.horizontalDisplay == false && "flex-wrap: wrap;"}
   overflow: auto;
 `;
 
@@ -141,7 +131,7 @@ const DroppableContainer = ({
 
   const isOverContainer = over
     ? (id === over.id && active?.data.current?.type !== "container") ||
-    items.includes(over.id)
+      items.includes(over.id)
     : false;
 
   return (
@@ -216,7 +206,6 @@ const SortableItem = ({
         ...attributes,
         ...listeners,
       }}
-
       index={index}
       wrapperStyle={wrapperStyle({ index })}
       style={{
@@ -235,7 +224,12 @@ const SortableItem = ({
       listeners={listeners}
       renderItem={renderItem}
     >
-      {renderContent(item?.content, id, { ...cardProps, handleProps: { ...attributes, ...listeners }, item, containerId })}
+      {renderContent(item?.content, id, {
+        ...cardProps,
+        handleProps: { ...attributes, ...listeners },
+        item,
+        containerId,
+      })}
     </Item>
   );
 };
@@ -270,7 +264,7 @@ const Kanban = React.forwardRef((props, ref) => {
     onCardMoved,
     onCardChangedColumns,
     //---------------------------
-    color, 
+    color,
     size,
     children,
     ...rest
@@ -320,7 +314,7 @@ const Kanban = React.forwardRef((props, ref) => {
       const intersections =
         pointerIntersections.length > 0
           ? // If there are droppables intersecting with the pointer, return those
-          pointerIntersections
+            pointerIntersections
           : rectIntersection(args);
       let overId = getFirstCollision(intersections, "id");
 
@@ -455,7 +449,7 @@ const Kanban = React.forwardRef((props, ref) => {
             over &&
             active.rect.current.translated &&
             active.rect.current.translated.top >
-            over.rect.top + over.rect.height;
+              over.rect.top + over.rect.height;
 
           const modifier = isBelowOverItem ? 1 : 0;
 
@@ -628,7 +622,9 @@ const Kanban = React.forwardRef((props, ref) => {
         renderItem={renderItem}
         dragOverlay
       >
-        {renderKanbanCard(item?.content, id, {...cardProps, item}) || { name: id }}
+        {renderKanbanCard(item?.content, id, { ...cardProps, item }) || {
+          name: id,
+        }}
       </Item>
     );
   };
@@ -665,7 +661,11 @@ const Kanban = React.forwardRef((props, ref) => {
             wrapperStyle={wrapperStyle({ index })}
             renderItem={renderItem}
           >
-            {renderKanbanCard(item?.content, item?.id, {...cardProps, item, containerId: containerId})}
+            {renderKanbanCard(item?.content, item?.id, {
+              ...cardProps,
+              item,
+              containerId: containerId,
+            })}
           </Item>
         ))}
       </Container>
@@ -673,24 +673,36 @@ const Kanban = React.forwardRef((props, ref) => {
   };
 
   const renderKanbanHeader = (containerId) => {
-    let column = columns?.find(col => col.id == containerId?.toString());
+    let column = columns?.find((col) => col.id == containerId?.toString());
     return (
       renderCustomElement(
         getCustomRenderById("KANBAN_HEADER", containerId, children),
         {
-          ...headerProps, item: {[containerId]: items[containerId]}, column: column
+          ...headerProps,
+          item: { [containerId]: items[containerId] },
+          column: column,
         },
         column?.header,
         true
-      ) || renderCustomElement(
+      ) ||
+      renderCustomElement(
         getCustomRenderById("KANBAN_HEADER", null, children),
         {
-          ...headerProps, item: {[containerId]: items[containerId]}, column: column
+          ...headerProps,
+          item: { [containerId]: items[containerId] },
+          column: column,
         },
         column?.header,
         true
       ) || (
-        <KanbanHeader id={containerId} color={color} size={size} item={{[containerId]: items[containerId]}} column={column} {...headerProps}>
+        <KanbanHeader
+          id={containerId}
+          color={color}
+          size={size}
+          item={{ [containerId]: items[containerId] }}
+          column={column}
+          {...headerProps}
+        >
           {column?.header}
         </KanbanHeader>
       )
@@ -702,13 +714,16 @@ const Kanban = React.forwardRef((props, ref) => {
       renderCustomElement(
         getCustomRenderById("KANBAN_FOOTER", containerId, children),
         {
-          ...footerProps, id: containerId,
+          ...footerProps,
+          id: containerId,
         },
         null
-      ) || renderCustomElement(
+      ) ||
+      renderCustomElement(
         getCustomRenderById("KANBAN_FOOTER", null, children),
         {
-          ...footerProps, id: containerId
+          ...footerProps,
+          id: containerId,
         },
         null
       )
@@ -757,7 +772,10 @@ const Kanban = React.forwardRef((props, ref) => {
         onDragOver={odDragOver}
         onDragEnd={onDragEnd}
       >
-        <DragAndDropArea horizontalDisplay={horizontalDisplay} verticalDisplay={verticalDisplay}>
+        <DragAndDropArea
+          horizontalDisplay={horizontalDisplay}
+          verticalDisplay={verticalDisplay}
+        >
           <SortableContext
             items={[...containers]}
             strategy={
@@ -829,9 +847,9 @@ Kanban.defaultProps = {
   getItemStyles: (s) => ({ ...s }),
   wrapperStyle: (s) => ({ ...s }),
   //---------------------
-  onCardChangedColumns: (event, cachedItems, column, previousColumn) => { },
-  onColumnMoved: (e, columns) => { },
-  onCardMoved: (e, items, column) => { },
+  onCardChangedColumns: (event, cachedItems, column, previousColumn) => {},
+  onColumnMoved: (e, columns) => {},
+  onCardMoved: (e, items, column) => {},
   //-----------------------------------------
   color: "primary",
   size: "small",
