@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 import classNames from "classnames";
-
-// import {Handle, Remove} from './components';
-
 import styles from "./Item.module.css";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";

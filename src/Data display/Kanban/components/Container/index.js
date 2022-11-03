@@ -1,7 +1,5 @@
 import React, { forwardRef } from "react";
-import classNames from "classnames";
-import { Handle } from "../Handle/Handle";
-import styles from "./Container.module.css";
+import { Handle } from "../Handle";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../../../_utils/utils";
@@ -39,7 +37,8 @@ const StyledContainer = styled.div`
     margin: 0;
     ${(props) => (props.scrollable ? "overflow-y: auto;" : "")}
     ${(props) => (props.horizontal ? "grid-auto-flow: column;" : "")}
-    ${(props) => props.maxContainerHeight && `max-height: ${props.maxContainerHeight};`}
+    ${(props) =>
+      props.maxContainerHeight && `max-height: ${props.maxContainerHeight};`}
     overflow: auto;
   }
 
@@ -78,7 +77,7 @@ const Header = styled.div`
       "enabled",
       "background"
     )};
-    color: ${(props) =>
+  color: ${(props) =>
     getColorRgbaValue(
       props.theme,
       "KanbanHeader",

@@ -1,9 +1,9 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Kanban from "./index";
-import { KanbanHeader } from "./components/KanbanHeader/KanbanHeader";
-import { KanbanFooter } from "./components/KanbanFooter/KanbanFooter";
-import { KanbanCard } from "./components/KanbanCard/KanbanCard";
+import { KanbanHeader } from "./components/KanbanHeader";
+import { KanbanFooter } from "./components/KanbanFooter";
+import { KanbanCard } from "./components/KanbanCard";
 import Button from "../../General/Button";
 import IconButton from "../../General/IconButton";
 
@@ -76,7 +76,11 @@ import { Kanban } from "@lanaco/lnc-react-ui";
             },
           ],
         }}
-        columns={[{ id: "A", header: "Column A"}, {id: "B", header: "Column B"}, {id: "C", header: "Column C"}]}
+        columns={[
+          { id: "A", header: "Column A" },
+          { id: "B", header: "Column B" },
+          { id: "C", header: "Column C" },
+        ]}
       ></Kanban>
     )}
   </Story>
@@ -295,7 +299,7 @@ Card 1 and Card 2 are unsortable.
 
 ## Dragging Cards
 
-To disable Card handle for dragging it is necessary to set `handle=false` throught `cardProps`. In that case whole are of the card represents handle. 
+To disable Card handle for dragging it is necessary to set `handle=false` throught `cardProps`. In that case whole are of the card represents handle.
 It is not recommendable to use this feature when there are some clickable elements on the card.
 
 <Canvas>
@@ -343,7 +347,6 @@ It is not recommendable to use this feature when there are some clickable elemen
     )}
   </Story>
 </Canvas>
-
 
 ## Horizontal Kanban
 
@@ -405,7 +408,11 @@ It is not recommendable to use this feature when there are some clickable elemen
             },
           ],
         }}
-        columns={[{ id: "A", header: "Column A"}, {id: "B", header: "Column B"}, {id: "C", header: "Column C"}]}
+        columns={[
+          { id: "A", header: "Column A" },
+          { id: "B", header: "Column B" },
+          { id: "C", header: "Column C" },
+        ]}
       ></Kanban>
     )}
   </Story>
@@ -471,7 +478,11 @@ It is not recommendable to use this feature when there are some clickable elemen
             },
           ],
         }}
-        columns={[{ id: "A", header: "Column A"}, {id: "B", header: "Column B"}, {id: "C", header: "Column C"}]}
+        columns={[
+          { id: "A", header: "Column A" },
+          { id: "B", header: "Column B" },
+          { id: "C", header: "Column C" },
+        ]}
       ></Kanban>
     )}
   </Story>

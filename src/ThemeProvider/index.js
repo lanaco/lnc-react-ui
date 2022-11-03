@@ -2,10 +2,7 @@ import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import { themes } from "../_utils/theme";
 import PropTypes from "prop-types";
-import {
-  getColorRgbaValue,
-  getSizeValueWithUnits,
-} from "../_utils/utils";
+import { getColorRgbaValue, getSizeValueWithUnits } from "../_utils/utils";
 import { getDisabledBg, getDisabledColor } from "./_themeutils";
 import { createGlobalStyle } from "styled-components";
 import { useContext } from "react";
@@ -103,7 +100,7 @@ export const useTheme = () => {
   return useContext(ThemeContext);
 };
 
-export const ThemeProvider = ({ theme, children }) => {
+const ThemeProvider = ({ theme, children }) => {
   const [currentTheme, setCurrentTheme] = useState(
     themes?.find((item) => item.name == theme)
   );
@@ -135,3 +132,5 @@ ThemeProvider.defaultProps = {
 ThemeProvider.propTypes = {
   theme: PropTypes.string,
 };
+
+export default ThemeProvider;
