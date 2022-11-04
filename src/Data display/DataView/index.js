@@ -50,7 +50,6 @@ const DataView = React.forwardRef((props, ref) => {
 
 const clonedChild = React.Children.map(children, (child, index) => {
   if (React.isValidElement(child)) {
-    console.log("type", child.props.__TYPE__, currentViewType)
     if (
       (child.props.__TYPE__ == "TABLE_VIEW" ||
       child.props.__TYPE__ == "DETAILS_VIEW" ||

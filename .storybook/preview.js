@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider } from "../src/ThemeProvider";
+import ThemeProvider from "../src/ThemeProvider";
 import { themes } from '../src/_utils/theme';
 import { themes as storyBookThemes } from '@storybook/theming';
 
