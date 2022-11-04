@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, createRef } from "react";
-import theme from "../_utils/theme";
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import { keyframes } from "@emotion/react";
+import React, { createRef, useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import FadeIn from "../FadeIn/FadeIn";
+import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.325rem 0.375rem";
@@ -11,10 +12,10 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.422375rem 0.375rem";
 };
 
-const heightBySize = (size) => {
-  if (size === "small") return `1.5rem`;
-  if (size === "medium") return `1.875rem`;
-  if (size === "large") return `2.25rem`;
+const heightBySize = (size, coefficient = 1) => {
+  if (size === "small") return `${coefficient * 1.5}rem`;
+  if (size === "medium") return `${coefficient * 1.875}rem`;
+  if (size === "large") return `${coefficient * 2.25}rem`;
 };
 
 const spin = keyframes`
@@ -35,9 +36,9 @@ const Container = styled.div`
   width: 100%;
   border-bottom: 0.125rem solid
     ${(props) =>
-      props.disabled
-        ? props.theme.palette.gray[900]
-        : props.theme.palette[props.color].main};
+    props.disabled
+      ? props.theme.palette.gray[900]
+      : props.theme.palette[props.color].main};
   min-height: ${(props) => heightBySize(props.size)};
   max-height: ${(props) => heightBySize(props.size)};
   transition: all 250ms ease;
@@ -308,25 +309,45 @@ const DropdownLookup = (props) => {
   };
 
   const renderSuggestions = () => {
+    const target = document.querySelector("#portal-root");
     if (options !== null && options.length > 0 && inFocus) {
+      const el = document.createElement("div");
+
+      const calculatedWidth = "" + document.querySelector(".ddl_container").getBoundingClientRect().width + "px";
+      el.style = `position: absolute;
+                  background-color: white;
+                  transform: translateY( ${heightBySize(size)});
+                  overflow: auto;
+                  width: ${calculatedWidth};
+                  min-height: ${options.length > 5 ? heightBySize(size, 5) : heightBySize(size, options.length + 1)}`;
+
+      if (target !== null) {
+        target.appendChild(el);
+      }
       return (
-        <FadeIn>
-          <Content {...themeProps}>
-            {options.map((item, i) => {
-              return (
-                <ContentItem
-                  {...themeProps}
-                  key={i}
-                  onMouseDown={() => suggestionSelected(item)}
-                  hover={i === cursor}
-                >
-                  {item.value}
-                </ContentItem>
-              );
-            })}
-          </Content>
-        </FadeIn>
+        ReactDOM.createPortal(
+          <FadeIn>
+            <Content {...themeProps}>
+              {options.map((item, i) => {
+                return (
+                  <ContentItem
+                    {...themeProps}
+                    key={i}
+                    onMouseDown={() => suggestionSelected(item)}
+                    hover={i === cursor}
+                  >
+                    {item.value}
+                  </ContentItem>
+                );
+              })}
+            </Content>
+          </FadeIn>, el)
       );
+    }
+    else {
+      if (target !== null) {
+        target.innerHTML = "";
+      }
     }
 
     let empty = options === null || (options !== null && options.length === 0);
@@ -350,7 +371,7 @@ const DropdownLookup = (props) => {
   };
 
   return (
-    <Container {...themeProps}>
+    <Container className="ddl_container"{...themeProps}>
       <Inner {...themeProps}>
         <InputContainer {...themeProps}>
           <Input
@@ -409,9 +430,9 @@ DropdownLookup.defaultProps = {
   id: "",
   theme: theme,
   disabled: false,
-  load: () => {},
-  onChange: () => {},
-  clear: () => {},
+  load: () => { },
+  onChange: () => { },
+  clear: () => { },
   className: "",
   size: "small",
   color: "primary",
