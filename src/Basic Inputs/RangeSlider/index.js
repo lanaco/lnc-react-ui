@@ -1,7 +1,8 @@
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
+import { useEffectOnce, useUpdateEffect } from "react-use";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
@@ -40,13 +41,10 @@ const InputSlider = styled.input`
   outline: none; /* Remove outline */
   -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
   background: ${(props) => props.rangeBackground};
-
   transition: background 450ms ease-in;
   -webkit-appearance: none;
-
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "regular")};
-
   &::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
@@ -65,13 +63,11 @@ const InputSlider = styled.input`
     cursor: pointer; /* Cursor on hover */
     border: none;
   }
-
   &::-moz-range-thumb {
     width: ${(props) =>
       ThumbSize[props.size]}; /* Set a specific slider handle width */
     height: ${(props) => ThumbSize[props.size]}; /* Slider handle height */
     border-radius: 50%;
-
     background-color: ${(props) =>
       getColorRgbaValue(
         props.theme,
@@ -138,6 +134,7 @@ const Popover = styled.div`
 
 const RangeSliderInput = React.forwardRef((props, ref) => {
   const {
+    defaultValue,
     value,
     min,
     max,
@@ -151,6 +148,8 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
     style,
     ...rest
   } = props;
+
+  const rangeRef = useRef();
 
   const theme = useTheme();
   const themeProps = { theme, size, color, className, style };
@@ -181,14 +180,14 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
     [min, max]
   );
 
-  const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState(value ? value : defaultValue);
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     setInputValue(value);
   }, [value]);
 
   useEffect(() => {
-    changeSliderColor(inputValue);
+    changeSliderColor(inputValue ? inputValue : 0);
   }, [inputValue, getPercent, disabled, color]);
 
   useEffect(() => {
@@ -220,7 +219,7 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
   const handleOnChange = (e) => {
     setInputValue(e.target.value);
 
-    if (onChange) onChange(e.target.value);
+    if (onChange) onChange(e);
   };
   return (
     <StyledRangeSlider {...themeProps}>
@@ -236,27 +235,51 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
           </Popover>
         </>
       )}
-      <InputSlider
-        ref={ref}
-        id="fader"
-        type="range"
-        min={min}
-        max={max}
-        value={inputValue | ""}
-        disabled={disabled}
-        tabIndex={tabIndex}
-        onMouseEnter={() => {
-          setShowPopover(true);
-        }}
-        onMouseLeave={() => {
-          setShowPopover(false);
-        }}
-        rangeBackground={rangeBackground}
-        onInput={handleOnInput}
-        onChange={handleOnChange}
-        {...themeProps}
-        {...rest}
-      />
+      {value == null || value == "undefined" ? (
+        <InputSlider
+          ref={ref ? ref : rangeRef}
+          id="fader"
+          type="range"
+          min={min}
+          max={max}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          tabIndex={tabIndex}
+          onMouseEnter={() => {
+            setShowPopover(true);
+          }}
+          onMouseLeave={() => {
+            setShowPopover(false);
+          }}
+          rangeBackground={rangeBackground}
+          onInput={handleOnInput}
+          onChange={handleOnChange}
+          {...themeProps}
+          {...rest}
+        />
+      ) : (
+        <InputSlider
+        ref={ref ? ref : rangeRef}
+          id="fader"
+          type="range"
+          min={min}
+          max={max}
+          value={inputValue}
+          disabled={disabled}
+          tabIndex={tabIndex}
+          onMouseEnter={() => {
+            setShowPopover(true);
+          }}
+          onMouseLeave={() => {
+            setShowPopover(false);
+          }}
+          rangeBackground={rangeBackground}
+          onInput={handleOnInput}
+          onChange={handleOnChange}
+          {...themeProps}
+          {...rest}
+        />
+      )}
     </StyledRangeSlider>
   );
 });
@@ -279,6 +302,7 @@ RangeSliderInput.defaultProps = {
 
 RangeSliderInput.propTypes = {
   value: PropTypes.number,
+  defaultValue: PropTypes.number,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   disabled: PropTypes.bool,

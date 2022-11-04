@@ -1,255 +1,89 @@
-import React, { useState, useImperativeHandle, useRef } from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import Button from "../../General/Button";
-import IconButton from "../../General/IconButton";
-import { getCustomRender, renderCustomElement } from "../../_utils/utils";
-import initialState from "./state/initialState";
-import { useUpdateEffect, useEffectOnce, useUnmount } from "react-use";
-import { useMethods } from "react-use";
-import { createActions } from "./state";
-import ButtonGroup from "../../Layout/Button Group";
-import JSONPretty from "react-json-pretty";
-import Spinner from "../../Feedback/Spinner/index";
-import Modal from "../../Utility/Modal";
+import { useUpdateEffect } from "react-use";
+import { useImperativeHandle } from "react";
+import { useRef } from "react";
 
-const Container = styled.div`
-  position: relative;
-  padding: 14px;
-  border-radius: 8px;
-  border: 1px solid #ededed;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const StateViewer = styled.div`
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: rgba(50, 132, 203, 20%);
-  overflow: hidden;
-
-  ${(props) => (props.collapsed ? "height: 20px" : "")}
-`;
-
-const LoaderContainer = styled.div`
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  z-index: 1000;
-  opacity: 0.7;
-  background-color: white;
-  filter: alpha(opacity=10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const TableViewContainer = styled.div`
-  padding: 10px;
-  border-radius: 8px;
-  background-color: rgba(50, 132, 203, 20%);
-`;
-
-const CalendarViewContainer = styled.div`
-  padding: 10px;
-  border-radius: 8px;
-  background-color: rgba(50, 132, 203, 30%);
-`;
-
-const KanbanViewContainer = styled.div`
-  padding: 10px;
-  border-radius: 8px;
-  background-color: rgba(50, 132, 203, 40%);
-`;
-
-const GanttViewContainer = styled.div`
-  padding: 10px;
-  border-radius: 8px;
-  background-color: rgba(50, 132, 203, 50%);
-`;
-
-const ControlsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  padding: 0 12px;
-`;
-
-const ViewContainer = styled.div`
-  padding: ${(props) => (props.FormActive ? "12px 12px" : "0 0")};
-`;
-
-const BackButtonWrapper = styled.div`
-  margin-left: auto;
-`;
-const CreateUpdateContainer = styled.div``;
+const StyledDataView = styled.div``;
 
 const DataView = React.forwardRef((props, ref) => {
-  //
-  //================ PROPS =================
-
   const {
+    defaultViewType,
+    activeViewType,
+    //------------------
+    className,
+    style,
     children,
-    Views = [],
-    DefaultCurrentView = null,
-    DataSource = [],
-    //----------------------------------------
+    ...rest
   } = props;
 
-  //================ STATE =================
-
-  const createUpdateModalRef = useRef();
-
-  const [collapsed, setCollapsed] = useState(true);
-
-  const [state, actions] = useMethods(createActions, initialState);
-
-  const { Options, View, General, Data, Form } = state;
-
-  //================ EXPOSED METHODS =================
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      toggleLoading: () => actions.toggleLoading(),
-    }),
-    [Options, View, General]
+  const [currentViewType, setCurrentViewType] = useState(
+    activeViewType ? activeViewType : defaultViewType
   );
+  const viewsHistory = useRef([defaultViewType]);
 
-  //================ LIFCYCLE =================
+  //Expose functions through ref
+  useImperativeHandle(ref, () => ({
+    changeView(nextViewType) {
+      changeView(nextViewType);
+    },
+    goToBackView() {
+      goToPreviousView();
+    },
+  }));
 
-  useEffectOnce(() => {
-    actions.setViews(Views, DefaultCurrentView);
-    actions.initialSetup({ DataSource });
-  }, []);
+  useUpdateEffect(() => {
+    setCurrentViewType(activeViewType);
+  }, [activeViewType]);
 
-  useUnmount(() => {});
-
-  //================ METHODS =================
-
-  const handleGoToUpdate = (rowData) => {
-    actions.setFormProperties({ DataRecord: rowData });
-
-    if (createUpdateModalRef.current) createUpdateModalRef.current.open();
-    actions.toggleFormActive();
+  const changeView = (nextViewType) => {
+    setCurrentViewType(nextViewType);
+    viewsHistory.current.push(nextViewType);
   };
 
-  const handleCreateUpdateClose = () => {
-    actions.toggleFormActive();
-    actions.setFormProperties({ DataRecord: {} });
-  };
+  const goToPreviousView = () => {
+    viewsHistory.current.pop();
+    if(viewsHistory.current?.length > 0) setCurrentViewType(viewsHistory.current[viewsHistory.current.length - 1]);
+  }
 
-  const backToView = () => {};
 
-  //================ RENDER =================
-
-  //================ RETURN =================
-
-  const renderView = () => {
-    if (View.CurrentView === null) return <></>;
-
-    return renderCustomElement(
-      getCustomRender(
-        View.Views.find((x) => x.id === View.CurrentView.id).type,
-        children
-      ),
-      {
-        Data: Data.DataSource,
-        goToUpdate: handleGoToUpdate,
-      }
-    );
-  };
-
-  const renderCreateUpdateContainer = () => {
-    return (
-      <CreateUpdateContainer>
-        {renderCustomElement(getCustomRender("FORM", children), {
-          DataRecord: Form.DataRecord,
-          InModal: Options.EnableFormInModal,
-        }) || <></>}
-      </CreateUpdateContainer>
-    );
-  };
-
-  const renderCreateUpdateModal = () => {
-    if (Options.EnableFormInModal)
-      return (
-        <Modal
-          ref={createUpdateModalRef}
-          isOpen={View.FormActive}
-          onClose={handleCreateUpdateClose}
-        >
-          {renderCreateUpdateContainer()}
-        </Modal>
-      );
-  };
-
-  //=========================================
+const clonedChild = React.Children.map(children, (child, index) => {
+  if (React.isValidElement(child)) {
+    console.log("type", child.props.__TYPE__, currentViewType)
+    if (
+      (child.props.__TYPE__ == "TABLE_VIEW" ||
+      child.props.__TYPE__ == "DETAILS_VIEW" ||
+      child.props.__TYPE__ == "FORM_VIEW" ||
+      child.props.__TYPE__ == "KANBAN_VIEW")
+      && child.props.__TYPE__ == currentViewType
+    ) {
+      return React.cloneElement(child, {
+        goToPreviousView: goToPreviousView,
+      });
+    }
+  }
+});
 
   return (
-    <Container>
-      {General.Loading && (
-        <LoaderContainer>
-          <Spinner />
-        </LoaderContainer>
-      )}
-      <ControlsContainer>
-        {View.FormActive && !Options.EnableFormInModal && (
-          <BackButtonWrapper>
-            <Button
-              key={0}
-              leadingIcon={"arrow-circle-left"}
-              text={`Back to ${View.CurrentView.name}`}
-              type={"outline"}
-              onClick={handleCreateUpdateClose}
-            />
-          </BackButtonWrapper>
-        )}
-        {/* Dont render the view switcher if the form is active and is rendered
-        inside the view container */}
-        {((!View.FormActive && !Options.EnableFormInModal) ||
-          Options.EnableFormInModal) && (
-          /* View Switcher */
-          <ButtonGroup
-            style={{
-              marginLeft: "auto",
-            }}
-          >
-            {View.Views.map((v) => (
-              <Button
-                key={v.id}
-                text={v.name}
-                leadingIcon={v.icon}
-                type={v.id === View.CurrentView.id ? "tinted" : "outline"}
-                onClick={() => {
-                  if (v.id !== View.CurrentView.id) actions.setCurrentView(v);
-                }}
-              />
-            ))}
-          </ButtonGroup>
-        )}
-      </ControlsContainer>
-
-      <ViewContainer FormActive={View.FormActive && !Options.EnableFormInModal}>
-        {View.FormActive && !Options.EnableFormInModal
-          ? renderCreateUpdateContainer()
-          : renderView()}
-      </ViewContainer>
-
-      {renderCreateUpdateModal()}
-
-      {/* <StateViewer
-        collapsed={collapsed}
-        onClick={() => setCollapsed(!collapsed)}
-      >
-        <JSONPretty data={state} />
-      </StateViewer> */}
-    </Container>
+    <StyledDataView {...rest}>
+      {clonedChild}
+    </StyledDataView>
   );
 });
+
+DataView.defaultProps = {
+  //-----------------------
+  style: {},
+  size: "small",
+};
+
+DataView.propTypes = {
+  defaultViewType: PropTypes.oneOf(["DETAILS_VIEW", "FORM_VIEW", "TABLE_VIEW", "KANBAN_VIEW"]).isRequired,
+  activeViewType: PropTypes.oneOf(["DETAILS_VIEW", "FORM_VIEW", "TABLE_VIEW", "KANBAN_VIEW"]),
+  //------------------------------------------------------------
+  className: PropTypes.string,
+  style: PropTypes.object,
+};
 
 export default DataView;

@@ -9,7 +9,6 @@ const HtmlCell = styled.th`
   text-align: left;
   width: ${(props) => props.width};
   padding-left: 1.25rem;
-
   background-color: ${(props) =>
     getColorRgbaValue(
       props.theme,
@@ -18,7 +17,6 @@ const HtmlCell = styled.th`
       "enabled",
       "background"
     )}};
-
   border-top: ${(props) =>
     "1px solid " +
     getColorRgbaValue(
@@ -74,7 +72,7 @@ const TableHeadSelectionCell = (props) => {
       {EnableSelectAll && (
         <Checkbox
           id={Index}
-          checked={IsSelected}
+          checked={IsSelected ? IsSelected : false}
           onChange={(e) => onSelectAll(e, IsSelected)}
         />
       )}

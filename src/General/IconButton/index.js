@@ -21,6 +21,7 @@ const Button = (props) => {
     type,
     disabled,
     tabIndex,
+    btnType,
     //----------------
     onFocus,
     onBlur,
@@ -63,6 +64,7 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
+        type={btnType}
         {...rest}
       >
         {renderIcon()}
@@ -79,6 +81,7 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
+        type={btnType}
         {...rest}
       >
         {renderIcon()}
@@ -95,6 +98,7 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
+        type={btnType}
         {...rest}
       >
         {renderIcon()}
@@ -111,6 +115,7 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
+        type={btnType}
         {...rest}
       >
         {renderIcon()}
@@ -127,6 +132,7 @@ const Button = (props) => {
       onBlur={onBlur}
       onClick={onClick}
       onKeyDown={onKeyDown}
+      type={btnType}
       {...rest}
     >
       {renderIcon()}
@@ -141,6 +147,7 @@ Button.defaultProps = {
   type: "filled",
   disalbed: false,
   tabIndex: 0,
+  btnType: "button",
   //-------------------------
   onBlur: () => {},
   onFocus: () => {},
@@ -162,6 +169,7 @@ Button.propTypes = {
   type: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
+  btnType: PropTypes.string,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,

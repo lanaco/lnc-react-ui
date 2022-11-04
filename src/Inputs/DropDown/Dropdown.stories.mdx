@@ -12,7 +12,15 @@ import Button from "../../General/Button";
 
 export const TemplateDefault = (args) => (
   <div style={{ height: "130px" }}>
-    <Dropdown {...args} />
+    <Dropdown
+     defaultInputValue="1"
+      options={[
+        { value: "1", label: "option 1" },
+        { value: "2", label: "option 2" },
+        { value: "3", label: "option 3" },
+      ]}
+      {...args}
+    />
   </div>
 );
 
@@ -105,16 +113,7 @@ import { Dropdown } from "@lanaco/lnc-react-ui";
 ```
 
 <Canvas>
-  <Story
-    name="Default"
-    args={{
-      options: [
-        { value: "1", label: "option 1", tab: "ok" },
-        { value: "2", label: "option 2", tab: "asda" },
-        { value: "3", label: "option 3", tab: "asdfasdf" },
-      ],
-    }}
-  >
+  <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>

@@ -6,7 +6,8 @@ import RadioInput from "../../Basic Inputs/RadioInput/index";
 
 const Container = styled.div`
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: ${props => props.inline ? "row" : "column"};
+  gap: 1.5rem;
   width: fit-content;
   box-sizing: border-box;
 `;
@@ -14,6 +15,7 @@ const Container = styled.div`
 const RadioGroup = React.forwardRef((props, ref) => {
   const {
     id,
+    name,
     value,
     disabled,
     readOnly,
@@ -21,6 +23,7 @@ const RadioGroup = React.forwardRef((props, ref) => {
     mapId,
     mapValue,
     radioProps,
+    inline,
     //----------------
     onChange,
     //----------------
@@ -35,7 +38,7 @@ const RadioGroup = React.forwardRef((props, ref) => {
   const [checkedId, setCheckedId] = useState(null);
 
   useEffect(() => {
-    if (value !== checkedId) setCheckedId(checkedId);
+    if (value !== checkedId) setCheckedId(value);
   }, [value]);
 
   var themeProps = {
@@ -47,22 +50,20 @@ const RadioGroup = React.forwardRef((props, ref) => {
   };
 
   const handleChange = (e, id) => {
-    var itemId = id.split("-")[1];
-    setCheckedId(itemId);
-    if (onChange) onChange(e, itemId);
+    if(onChange) onChange(e);
   };
 
   return (
-    <Container ref={ref} style={style} className={className} {...rest}>
+    <Container ref={ref} id={id} inline={inline} style={style} className={className} {...rest}>
       {items.map((item, i) => (
         <RadioInput
           key={i}
           {...themeProps}
-          id={`${id}-${item[mapId]}`}
-          label={item[mapValue]}
-          checked={checkedId == item[mapId]}
-          onChange={handleChange}
+          label={item.label}
+          value={item.value}
           {...radioProps}
+          onChange={handleChange}
+          name={name}
         />
       ))}
     </Container>
@@ -74,6 +75,7 @@ RadioGroup.defaultProps = {
   value: null,
   disabled: false,
   readOnly: false,
+  inline: true,
   items: [],
   mapId: "id",
   mapValue: "value",
@@ -87,13 +89,15 @@ RadioGroup.defaultProps = {
 };
 
 RadioGroup.propTypes = {
-  id: PropTypes.string.isRequired,
-  value: PropTypes.number,
+  id: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   mapId: PropTypes.string,
   mapValue: PropTypes.string,
+  inline: PropTypes.bool,
   //----------------
   onChange: PropTypes.func,
   //----------------

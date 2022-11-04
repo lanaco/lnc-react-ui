@@ -11,7 +11,7 @@ import ColorInput from "../../Basic Inputs/ColorInput";
 <Meta title="Layout/Form Field" component={FormField} />
 
 export const TemplateDefault = (args) => (
-  <FormField {...args}>
+  <FormField label="Label" text="Additional text" {...args}>
     <TextInput size={args.size} color={args.color} />
   </FormField>
 );
@@ -23,7 +23,7 @@ import { FormField } from "@lanaco/lnc-react-ui";
 ```
 
 <Canvas>
-  <Story name="Default" args={{ label: "Label", text: "Additional text." }}>
+  <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>

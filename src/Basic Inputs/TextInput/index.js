@@ -39,11 +39,10 @@ const TextInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(value);
   const [focused, setFocused] = useState(false);
 
   useUpdateEffect(() => setInputValue(value), [value]);
-  useEffectOnce(() => setInputValue(value === "" ? defaultValue : value));
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -55,7 +54,7 @@ const TextInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    setInputValue(e.target.value);
+   if(value) setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
@@ -90,6 +89,29 @@ const TextInput = React.forwardRef((props, ref) => {
           {prefix}
         </StyledPrefix>
       )}
+      {
+        // Controlled input and uncotrolled input must be differentiated because of usage of the value property
+        (value == null || value == "undefined") ?
+        <StyledInput
+        ref={ref}
+        type={type}
+        theme={theme}
+        color={color}
+        size={size}
+        placeholder={placeholder}
+        prefix={prefix}
+        suffix={suffix}
+        disabled={disabled}
+        readOnly={readOnly}
+        focused={focused}
+        defaultValue={defaultValue}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={onValueChange}
+        tabIndex={tabIndex}
+        {...rest}
+      />
+      :
       <StyledInput
         ref={ref}
         type={type}
@@ -102,13 +124,14 @@ const TextInput = React.forwardRef((props, ref) => {
         disabled={disabled}
         readOnly={readOnly}
         focused={focused}
-        value={inputValue}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onValueChange}
         tabIndex={tabIndex}
+        value={inputValue}
         {...rest}
       />
+      }
       {suffix && (
         <StyledSuffix
           theme={theme}
@@ -126,7 +149,6 @@ const TextInput = React.forwardRef((props, ref) => {
 TextInput.defaultProps = {
   id: "",
   defaultValue: "",
-  value: "",
   disabled: false,
   readOnly: false,
   debounceTime: 180,

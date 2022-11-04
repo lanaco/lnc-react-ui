@@ -26,6 +26,7 @@ const Button = React.forwardRef((props, ref) => {
     type,
     disabled,
     tabIndex,
+    btnType,
     //----------------
     onFocus,
     onBlur,
@@ -99,6 +100,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
+        type={btnType}
         {...rest}
       >
         {renderContent()}
@@ -119,6 +121,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
+        type={btnType}
         {...rest}
       >
         {renderContent()}
@@ -139,6 +142,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
+        type={btnType}
         {...rest}
       >
         {renderContent()}
@@ -159,6 +163,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
+        type={btnType}
         {...rest}
       >
         {renderContent()}
@@ -180,6 +185,7 @@ const Button = React.forwardRef((props, ref) => {
       onKeyDown={onKeyDown}
       hasText={hasText}
       tabIndex={tabIndex}
+      type={btnType}
       {...rest}
     >
       {renderContent()}
@@ -196,6 +202,7 @@ Button.defaultProps = {
   tabIndex: 0,
   leadingIcon: null,
   trailingIcon: null,
+  btnType: "button",
   //-------------------------
   onBlur: () => {},
   onFocus: () => {},
@@ -226,6 +233,7 @@ Button.propTypes = {
   type: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
+  btnType: PropTypes.string,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,

@@ -62,7 +62,6 @@ const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
         noOptionsMessage,
         menuIsOpen,
         components,
-        inputValue,
         defaultValue,
         defaultInputValue,
         defaultMenuIsOpen,
@@ -138,7 +137,6 @@ const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
             placeholder={placeholder}
             noOptionsMessage={noOptionsMessage}
             menuIsOpen={menuIsOpen}
-            inputValue={inputValue}
             defaultValue={defaultValue}
             defaultInputValue={defaultInputValue}
             defaultMenuIsOpen={defaultMenuIsOpen}
@@ -319,10 +317,6 @@ MultiSelectDropdownLookup.propTypes = {
      *  If you only wish to restyle a component, we recommend using the styles prop instead.
      */
     components: PropTypes.object,
-    /**
-     * control the value of the search input (changing this will update the available options)
-     */
-    inputValue: PropTypes.string,
     /**
      * initial value of the control
      */

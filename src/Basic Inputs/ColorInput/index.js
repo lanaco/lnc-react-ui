@@ -61,7 +61,6 @@ const StyledInput = styled.label`
     props.readOnly == false &&
     props.isFocused &&
     getOutlineCss(props.theme)};
-
   ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
   border: 1px solid ${(props) =>
     getColorRgbaValue(props.theme, "Input", props.color, "disabled", "border")};
@@ -90,7 +89,6 @@ const StyledColorInput = styled.div`
         props.readOnly == false &&
         getOutlineCss(props.theme)};
     }
-
     ${(props) =>
       props.disabled &&
       `opacity: ${
@@ -154,12 +152,11 @@ const ColorInput = React.forwardRef((props, ref) => {
   } = props;
   const theme = useTheme();
 
-  const [val, setVal] = useState("");
+  const [val, setVal] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
   const validHexRegex = new RegExp(/^#[0-9A-F]{6}$/i);
 
   useUpdateEffect(() => setVal(value), [value]);
-  useEffectOnce(() => setVal(value === "" ? defaultValue : value));
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -171,7 +168,7 @@ const ColorInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    setVal(e.target.value);
+    if (value) setVal(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
@@ -242,20 +239,37 @@ const ColorInput = React.forwardRef((props, ref) => {
         </StyledInput>
       ) : (
         <div>
-          <input
-            type="color"
-            ref={ref}
-            id={id}
-            name={name}
-            value={val}
-            disabled={disabled || readOnly}
-            onChange={onValueChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-            color={color}
-            tabIndex={tabIndex}
-            {...inputProps}
-          />
+          {value == null || value == "undefined" ? (
+            <input
+              type="color"
+              ref={ref}
+              id={id}
+              name={name}
+              defaultValue={defaultValue}
+              disabled={disabled || readOnly}
+              onChange={onValueChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              color={color}
+              tabIndex={tabIndex}
+              {...inputProps}
+            />
+          ) : (
+            <input
+              type="color"
+              ref={ref}
+              id={id}
+              name={name}
+              value={val}
+              disabled={disabled || readOnly}
+              onChange={onValueChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              color={color}
+              tabIndex={tabIndex}
+              {...inputProps}
+            />
+          )}
         </div>
       )}
     </StyledColorInput>
@@ -269,7 +283,6 @@ ColorInput.defaultProps = {
   tabIndex: 0,
   preventDefault: true,
   withInput: false,
-  value: "",
   defaultValue: "#000000",
   //-------------------------
   onChange: () => {},

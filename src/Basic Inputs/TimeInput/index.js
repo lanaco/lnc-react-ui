@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -11,14 +11,8 @@ import {
   getOutlineCss,
   getSizeValueWithUnits,
 } from "../../_utils/utils";
+import { useUpdateEffect } from "react-use";
 
-const paddingBySize = (size) => {
-  return {
-    small: "0.41875rem 0.5rem",
-    medium: "0.48125rem 0.6rem",
-    large: "0.65625rem 0.7rem",
-  }[size];
-};
 
 const standardCssFields = ({ theme, size }) => {
   var height = getSizeValueWithUnits(theme, size);
@@ -41,7 +35,6 @@ const SyledInput = styled.input`
   border-radius: 0.25rem;
   width: 100%;
   box-sizing: border-box;
-
   background-color: ${(props) =>
     getColorRgbaValue(
       props.theme,
@@ -63,12 +56,10 @@ const SyledInput = styled.input`
     getBorderRadiusValueWithUnits(props.theme, "regular")};
   color: ${(props) =>
     getColorRgbaValue(props.theme, "Input", props.color, "enabled", "text")};
-
   &:disabled {
     ${(props) => getDisabledStateCss(props.theme)};
     cursor: default;
   }
-
   &:focus:enabled {
     border: none;
     ${(props) => (props.readOnly == false ? getOutlineCss(props.theme) : "")};
@@ -91,6 +82,7 @@ const TimeInput = React.forwardRef((props, ref) => {
     id,
     disabled,
     readOnly,
+    defaultValue,
     value,
     debounceTime,
     type,
@@ -108,9 +100,9 @@ const TimeInput = React.forwardRef((props, ref) => {
   //
   const theme = useTheme();
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(value);
 
-  useEffect(() => setInputValue(value ? value : ""), [value]);
+  useUpdateEffect(() => setInputValue(value ? value : ""), [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -127,32 +119,53 @@ const TimeInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <SyledInput
-      type="time"
-      id={id}
-      ref={ref}
-      value={inputValue}
-      onChange={onValueChange}
-      disabled={disabled}
-      readOnly={readOnly}
-      theme={theme}
-      color={color}
-      size={size}
-      className={className}
-      style={style}
-      tabIndex={tabIndex}
-      {...rest}
-    />
+    <>
+      {value == null || value == "undefined" ? (
+        <SyledInput
+          type="time"
+          id={id}
+          ref={ref}
+          defaultValue={defaultValue}
+          onChange={onValueChange}
+          disabled={disabled}
+          readOnly={readOnly}
+          theme={theme}
+          color={color}
+          size={size}
+          className={className}
+          style={style}
+          tabIndex={tabIndex}
+          {...rest}
+        />
+      ) : (
+        <SyledInput
+          type="time"
+          id={id}
+          ref={ref}
+          value={inputValue}
+          onChange={onValueChange}
+          disabled={disabled}
+          readOnly={readOnly}
+          theme={theme}
+          color={color}
+          size={size}
+          className={className}
+          style={style}
+          tabIndex={tabIndex}
+          {...rest}
+        />
+      )}
+    </>
   );
 });
 
 TimeInput.defaultProps = {
   id: "",
-  value: "",
   disabled: false,
   readOnly: false,
   debounceTime: 180,
   tabIndex: 0,
+  defaultValue: "",
   //----------------
   onChange: () => {},
   //----------------
@@ -164,6 +177,7 @@ TimeInput.defaultProps = {
 
 TimeInput.propTypes = {
   id: PropTypes.string,
+  defaultValue: PropTypes.string,
   value: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
@@ -182,7 +196,7 @@ TimeInput.propTypes = {
     "danger",
     "warning",
     "information",
-    "neutral"
+    "neutral",
   ]),
 };
 

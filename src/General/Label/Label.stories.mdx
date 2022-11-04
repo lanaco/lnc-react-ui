@@ -1,0 +1,24 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Label from "./index";
+
+<Meta title="General/Label" component={Label} />
+
+export const TemplateDefault = (args) => <Label {...args} >Label</Label>;
+
+# Button
+
+```jsx
+import { IconButton } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{}}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />

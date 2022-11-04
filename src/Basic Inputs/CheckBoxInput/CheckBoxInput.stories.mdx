@@ -48,6 +48,7 @@ export const TemplateCustom = (args) => (
 
 export const TemplateSpaceBetween = (args) => <>
 <CheckBoxInput label="Label" spaceBetween={true} defaultValue={true} {...args} />
+<hr />
 <CheckBoxInput label="Label" labelPosition="left" spaceBetween={true} defaultValue={true} {...args} />
 </>;
 
@@ -95,11 +96,21 @@ import { CheckBoxInput } from "@lanaco/lnc-react-ui";
   <Story name="Disabled">{TemplateDisabled.bind({})}</Story>
 </Canvas>
 
-## Indeterminate state
+## Indeterminate
 
 <Canvas>
   <Story name="Indeterminate">{TemplateIndeterminate.bind({})}</Story>
 </Canvas>
+
+## Methods
+
+This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
+
+| Method       |    Args    |             Description |
+| ------------ | :--------: | ----------------------: |
+| setIndeterminate   |  |    set CheckboxInput to indeterminate state |
+
+
 
 ## Read only
 

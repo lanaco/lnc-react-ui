@@ -8,21 +8,13 @@ import {
   getOutlineCss,
   getSizeValueWithUnits,
 } from "../../_utils/utils";
+import { useUpdateEffect } from "react-use";
 
 const getLabelDirection = (direction) => {
   if (direction == "left") return "row-reverse";
 
   return "row";
 };
-
-const Input = styled.input`
-  cursor: pointer;
-  position: absolute;
-  opacity: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-`;
 
 const Container = styled.label`
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
@@ -40,53 +32,84 @@ const Container = styled.label`
   gap: 0.75rem;
   cursor: pointer;
   position: relative;
-`;
-
-const StyledRadio = styled.div`
-  box-sizing: border-box;
-  cursor: pointer;
-  min-height: ${(props) =>
-    props.theme.components.Radio.default.enabled.sizes[props.size]};
-  min-width: ${(props) =>
-    props.theme.components.Radio.default.enabled.sizes[props.size]};
-  height: ${(props) =>
-    props.theme.components.Radio.default.enabled.sizes[props.size]};
-  width: ${(props) =>
-    props.theme.components.Radio.default.enabled.sizes[props.size]};
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease;
-
-  & svg {
-    fill: ${(props) =>
-      props.checked || props.indeterminate
-        ? getColorRgbaValue(
+  & input {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  & .checkmark {
+    box-sizing: border-box;
+    cursor: pointer;
+    min-height: ${(props) =>
+      props.theme.components.Radio.default.enabled.sizes[props.size]};
+    min-width: ${(props) =>
+      props.theme.components.Radio.default.enabled.sizes[props.size]};
+    height: ${(props) =>
+      props.theme.components.Radio.default.enabled.sizes[props.size]};
+    width: ${(props) =>
+      props.theme.components.Radio.default.enabled.sizes[props.size]};
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    ${(props) =>
+      props.focused && !props.disabled && !props.readOnly
+        ? getOutlineCss(props.theme)
+        : ""};
+    & svg {
+      fill: transparent;
+      & .outer-circle {
+        stroke: ${(props) =>
+          getColorRgbaValue(
             props.theme,
             "Radio",
             props.color,
-            props.disabled ? "disabled" : "active",
-            "background",
-            "backgroundOpacity"
-          )
-        : "transparent"};
-    & .outer-circle {
-      stroke: ${(props) =>
+            "enabled",
+            "border"
+          )};
+      }
+      & .inner-circle {
+        stroke: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Radio",
+            props.color,
+            "enabled",
+            "border"
+          )};
+      }
+    }
+  }
+  & input:checked ~ .checkmark {
+    & svg {
+      fill: ${(props) =>
         getColorRgbaValue(
           props.theme,
           "Radio",
           props.color,
-          props.checked ? (props.disabled ? "disabled" : "active") : "enabled",
-          "border"
+          "active",
+          "background",
+          "backgroundOpacity"
         )};
+      & .outer-circle {
+        fill: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Radio",
+            props.color,
+            "active",
+            "border"
+          )};
+      }
+      & .inner-circle {
+        fill: white;
+      }
     }
   }
-
-  ${(props) =>
-    props.focused && !props.disabled && !props.readOnly
-      ? getOutlineCss(props.theme)
-      : ""}
 `;
 
 const Label = styled.label`
@@ -127,7 +150,7 @@ const RadioInput = React.forwardRef((props, ref) => {
   const theme = useTheme();
   const [isChecked, setIsChecked] = useState(checked);
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     setIsChecked(checked);
   }, [checked]);
 
@@ -138,31 +161,6 @@ const RadioInput = React.forwardRef((props, ref) => {
     disabled,
     labelPosition,
     spaceBetween,
-  };
-
-  const handleClick = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-
-    if (onClick && !disabled && !readOnly) onClick(e);
-
-    if (readOnly || disabled) return;
-
-    setIsChecked(true);
-    if (onChange) onChange(e, id);
-  };
-
-  const handleOnKeyDown = (e) => {
-    if (e.code === "Space") {
-      e.stopPropagation();
-      e.nativeEvent.stopImmediatePropagation();
-
-      if (readOnly || disabled) return;
-
-      if (onChange) onChange(e, id);
-    }
-
-    if (onKeyDown && !disabled && !readOnly) onKeyDown(e);
   };
 
   const handleOnBlur = (e) => {
@@ -182,31 +180,40 @@ const RadioInput = React.forwardRef((props, ref) => {
       className={className}
       style={style}
       tabIndex={-1}
-      {...rest}
+      readOnly={readOnly}
+      focused={focused}
+      onClick={onClick}
     >
-      <Input
-        disabled={disabled || readOnly}
-        type="radio"
-        id={id}
-        name={name}
-        checked={isChecked}
-        tabIndex={tabIndex}
-        onBlur={handleOnBlur}
-        onFocus={handleOnFocus}
-        onChange={handleClick}
-        {...inputProps}
-      />
-      <StyledRadio
-        {...themeProps}
-        onKeyDown={handleOnKeyDown}
-        // onBlur={handleOnBlur}
-        // onFocus={handleOnFocus}
-        // onClick={handleClick}
-        checked={isChecked}
-        readOnly={readOnly}
-        tabIndex={-1}
-        focused={focused}
-      >
+       {/* Controlled input and uncotrolled input must be differentiated because of usage of the value property */}
+      {isChecked == true || isChecked == false ? (
+        <input
+          disabled={disabled || readOnly}
+          type="radio"
+          checked={isChecked}
+          id={id}
+          name={name}
+          tabIndex={tabIndex}
+          onBlur={handleOnBlur}
+          onFocus={handleOnFocus}
+          onChange={onChange}
+          value={value}
+          {...rest}
+        />
+      ) : (
+        <input
+          disabled={disabled || readOnly}
+          type="radio"
+          id={id}
+          name={name}
+          tabIndex={tabIndex}
+          onBlur={handleOnBlur}
+          onFocus={handleOnFocus}
+          onChange={onChange}
+          value={value}
+          {...rest}
+        />
+      )}
+      <div className="checkmark">
         <svg
           id="eqw1eBsfm9l1"
           xmlns="http://www.w3.org/2000/svg"
@@ -222,20 +229,17 @@ const RadioInput = React.forwardRef((props, ref) => {
             fillRule="evenodd"
             stroke={"red"}
           />
-          {isChecked && (
-            <ellipse
-              rx="5"
-              ry="5"
-              transform="translate(10 10)"
-              fill={"white"}
-              strokeWidth="0"
-            />
-          )}
+          <ellipse
+            rx="5"
+            ry="5"
+            transform="translate(10 10)"
+            className="inner-circle"
+            strokeWidth="0"
+          />
         </svg>
-      </StyledRadio>
+      </div>
       <Label
         {...themeProps}
-        onClick={handleClick}
         disalbed={disabled}
         readOnly={readOnly}
         title={label}
@@ -249,7 +253,6 @@ const RadioInput = React.forwardRef((props, ref) => {
 
 RadioInput.defaultProps = {
   id: "",
-  checked: false,
   disabled: false,
   readOnly: false,
   label: "",

@@ -160,7 +160,8 @@ const DateInput = React.forwardRef((props, ref) => {
       if (InputChanged.current && onChange) {
         setText(isoToUserFormat(isoDate));
         setDate(new Date(isoDate));
-        onChange(null, isoDate, new Date(isoDate));
+        //onChange(null, isoDate, new Date(isoDate));
+        onChange(e);
       }
       //
     } else if (date !== null) {

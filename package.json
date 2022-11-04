@@ -7,7 +7,7 @@
   "module": "lib/index.esm.js",
   "scripts": {
     "test": "jest --env=jsdom",
-    "start": "start-storybook -p 6006",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
     "clean": "rimraf lib",
     "build-storybook": "build-storybook -o docs-build",
     "build": "npm run clean && rollup -c",
@@ -74,6 +74,7 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^17.0.2",
     "react-dropzone": "^14.2.1",
+    "react-hook-form": "^7.39.1",
     "react-json-pretty": "^2.2.0",
     "react-modern-drawer": "^1.1.2",
     "react-number-format": "^4.9.3",

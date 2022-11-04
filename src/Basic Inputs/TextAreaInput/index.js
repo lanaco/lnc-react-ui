@@ -36,7 +36,7 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(value);
   const [focused, setFocused] = useState(false);
   const [innerMinRows, setInnerMinRows] = useState(minRows);
   const [innerMaxRows, setInnerMaxRows] = useState(
@@ -44,7 +44,6 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   );
 
   useUpdateEffect(() => setInputValue(value), [value]);
-  useEffectOnce(() => setInputValue(value === "" ? defaultValue : value));
 
   useEffect(() => {
     setInnerMinRows(minRows);
@@ -66,7 +65,7 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    setInputValue(e.target.value);
+    if(value) setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
@@ -98,7 +97,24 @@ const TextAreaInput = React.forwardRef((props, ref) => {
       disabled={disabled}
       readOnly={readOnly}
       collapseOnBlur={collapseOnBlur}
-    >
+    > 
+    {
+      // Controlled input and uncotrolled input must be differentiated because of usage of the value property
+      (value == null || value == "undefined") ?
+      <ReactTextareaAutosize
+        placeholder={placeholder}
+        disabled={disabled}
+        defaultValue={defaultValue}
+        readOnly={readOnly}
+        tabIndex={tabIndex}
+        minRows={innerMinRows}
+        maxRows={innerMaxRows}
+        onChange={onValueChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        {...rest}
+      />
+      :
       <ReactTextareaAutosize
         placeholder={placeholder}
         disabled={disabled}
@@ -112,13 +128,14 @@ const TextAreaInput = React.forwardRef((props, ref) => {
         onBlur={handleBlur}
         {...rest}
       />
+    }
     </StyledTextareaWrapper>
   );
 });
 
 TextAreaInput.defaultProps = {
   id: "",
-  value: "",
+  defaultValue: "",
   placeholder: "",
   disabled: false,
   readOnly: false,

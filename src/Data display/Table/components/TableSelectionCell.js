@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import Checkbox from "../../../Basic Inputs/CheckBoxInput/index";
+import { useState } from "react";
 
 const HtmlCell = styled.td`
   padding: 0 0 0 1.25rem;

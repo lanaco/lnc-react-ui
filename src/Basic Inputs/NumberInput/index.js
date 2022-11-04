@@ -42,11 +42,10 @@ const NumberInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState(defaultValue);
+  const [inputValue, setInputValue] = useState(value);
   const [focused, setFocused] = useState(false);
 
   useUpdateEffect(() => setInputValue(value), [value]);
-  useEffectOnce(() => setInputValue(value === "" ? defaultValue : value));
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -76,7 +75,7 @@ const NumberInput = React.forwardRef((props, ref) => {
     if (min && (_value < min || _value === null)) _value = min;
     if (max && (_value > max || _value === null)) _value = max;
 
-    setInputValue(_value);
+    if (value) setInputValue(_value);
     debouncedOnChange(e, _value);
   };
 
@@ -111,27 +110,50 @@ const NumberInput = React.forwardRef((props, ref) => {
           {prefix}
         </StyledPrefix>
       )}
-
-      <StyledInput
-        ref={ref}
-        type="number"
-        theme={theme}
-        color={color}
-        size={size}
-        placeholder={placeholder}
-        prefix={prefix}
-        suffix={suffix}
-        disabled={disabled}
-        readOnly={readOnly}
-        step={step}
-        value={inputValue}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={onValueChange}
-        tabIndex={tabIndex}
-        {...rest}
-      />
-
+      {
+        // Controlled input and uncotrolled input must be differentiated because of usage of the value property
+        (value == null || value == "undefined") ? (
+          <StyledInput
+            ref={ref}
+            type="number"
+            theme={theme}
+            color={color}
+            size={size}
+            placeholder={placeholder}
+            prefix={prefix}
+            suffix={suffix}
+            disabled={disabled}
+            readOnly={readOnly}
+            step={step}
+            defaultValue={defaultValue}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={onValueChange}
+            tabIndex={tabIndex}
+            {...rest}
+          />
+        ) : (
+          <StyledInput
+            ref={ref}
+            type="number"
+            theme={theme}
+            color={color}
+            size={size}
+            placeholder={placeholder}
+            prefix={prefix}
+            suffix={suffix}
+            disabled={disabled}
+            readOnly={readOnly}
+            step={step}
+            value={inputValue}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={onValueChange}
+            tabIndex={tabIndex}
+            {...rest}
+          />
+        )
+      }
       {suffix && (
         <StyledSuffix
           theme={theme}
@@ -148,8 +170,6 @@ const NumberInput = React.forwardRef((props, ref) => {
 
 NumberInput.defaultProps = {
   id: "",
-  value: "",
-  defaultValue: "",
   disabled: false,
   readOnly: false,
   debounceTime: 180,

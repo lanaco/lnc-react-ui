@@ -51,7 +51,6 @@ const DropdownLookup = React.forwardRef((props, ref) => {
     noOptionsMessage,
     menuIsOpen,
     components,
-    inputValue,
     defaultValue,
     defaultInputValue,
     defaultMenuIsOpen,
@@ -72,16 +71,6 @@ const DropdownLookup = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
 
-  // const handleOnInput = useCallback(
-  //   debounce((inputValue, meta) => {
-
-  //     onInputChange(inputValue, meta);
-  //   }, debounceTime),
-  // )
-
-  const [val, setVal] = useState(value);
-  const [inputVal, setInputVal] = useState(inputValue);
-
   const inputChange = useCallback(
     debounce((inputValue, meta) => {
 
@@ -90,26 +79,12 @@ const DropdownLookup = React.forwardRef((props, ref) => {
   )
 
   const handleOnInput = (inputValue, meta) => {
-
-    if (meta?.action === "input-change") {
-      setInputVal(inputValue);
-    }
-
     inputChange(inputValue, meta);
-    onInputChange(inputValue, meta);
-  };
-
-  const handleOnChange = (option, meta) => {
-    setVal(option);
-    let label = (getOptionLabel && option) ? getOptionLabel(option) : (option ? option.label : "");
-    setInputVal(label);
-    onChange(option);
   };
 
   return (
     <AsyncReactSelect
       ref={ref}
-      //components={components}
       components={{
         Input, ...components
       }}
@@ -124,8 +99,7 @@ const DropdownLookup = React.forwardRef((props, ref) => {
       hideSelectedOptions={hideSelectedOptions}
       id={id}
       inputId={inputId}
-      // value={value}
-      value={val}
+      value={value}
       readOnly={readOnly}
       tabIndex={tabIndex}
       isSearchable={isSearchable}
@@ -156,14 +130,11 @@ const DropdownLookup = React.forwardRef((props, ref) => {
       placeholder={placeholder}
       noOptionsMessage={noOptionsMessage}
       menuIsOpen={menuIsOpen}
-      // inputValue={inputValue}
-      inputValue={inputVal}
       defaultValue={defaultValue}
       defaultInputValue={defaultInputValue}
       defaultMenuIsOpen={defaultMenuIsOpen}
       delimiter={delimiter}
-      // onChange={onChange}
-      onChange={handleOnChange}
+      onChange={onChange}
       onInputChange={handleOnInput}
       onMenuOpen={onMenuOpen}
       onMenuClose={onMenuClose}
@@ -337,10 +308,6 @@ DropdownLookup.propTypes = {
    *  If you only wish to restyle a component, we recommend using the styles prop instead.
    */
   components: PropTypes.object,
-  /**
-   * control the value of the search input (changing this will update the available options)
-   */
-  inputValue: PropTypes.string,
   /**
    * initial value of the control
    */
