@@ -4,9 +4,9 @@ import styled from "@emotion/styled";
 import KanbanActionsToolbar from "./KanbanActionsToolbar";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 import Kanban from "../Kanban";
-import { KanbanCard } from "../Kanban/components/KanbanCard/KanbanCard";
-import { KanbanHeader } from "../Kanban/components/KanbanHeader/KanbanHeader";
-import { KanbanFooter } from "../Kanban/components/KanbanFooter/KanbanFooter";
+import KanbanCard from "../Kanban/components/KanbanCard";
+import KanbanHeader from "../Kanban/components/KanbanHeader";
+import KanbanFooter from "../Kanban/components/KanbanFooter";
 
 const StyledView = styled.div`
   & .kanban-view-footer-lnc {
@@ -119,18 +119,54 @@ const KanbanView = React.forwardRef((props, ref) => {
           {...kanbanProps}
         >
           <KanbanHeader
-           onDetails={onColumnDetails}
-           actionsMenu={true} 
-           actions={[{ name: editColumnText, enable: enableEditColumn, show: showEditColumn, onAction: onEditColumn, icon: "pen" }, { name: deleteColumnText, enable: enableDeleteColumn, show: showDeleteColumn, onAction: onDeleteColumn, icon: "trash" }, ...customColumnActions]}
+            onDetails={onColumnDetails}
+            actionsMenu={true}
+            actions={[
+              {
+                name: editColumnText,
+                enable: enableEditColumn,
+                show: showEditColumn,
+                onAction: onEditColumn,
+                icon: "pen",
+              },
+              {
+                name: deleteColumnText,
+                enable: enableDeleteColumn,
+                show: showDeleteColumn,
+                onAction: onDeleteColumn,
+                icon: "trash",
+              },
+              ...customColumnActions,
+            ]}
           ></KanbanHeader>
           <KanbanCard
-          onDetails={onCardDetails} 
-          actionsMenu={true} 
-          actions={[{ name: editCardText, enable: enableEditCard, show: showEditCard, onAction: onEditCard, icon: "pen" }, { name: deleteCardText, enable: enableDeleteCard, show: showDeleteCard, onAction: onDeleteCard, icon: "trash" }, ...customCardActions]}>
-          </KanbanCard>
+            onDetails={onCardDetails}
+            actionsMenu={true}
+            actions={[
+              {
+                name: editCardText,
+                enable: enableEditCard,
+                show: showEditCard,
+                onAction: onEditCard,
+                icon: "pen",
+              },
+              {
+                name: deleteCardText,
+                enable: enableDeleteCard,
+                show: showDeleteCard,
+                onAction: onDeleteCard,
+                icon: "trash",
+              },
+              ...customCardActions,
+            ]}
+          ></KanbanCard>
           {children}
-          <KanbanFooter showAddNewCard={showAddNewCard} showLoadMoreCards={showLoadMoreCards} onAddNewCard={onAddNewCard} onLoadMoreCards={onLoadMoreCards}>
-          </KanbanFooter>
+          <KanbanFooter
+            showAddNewCard={showAddNewCard}
+            showLoadMoreCards={showLoadMoreCards}
+            onAddNewCard={onAddNewCard}
+            onLoadMoreCards={onLoadMoreCards}
+          ></KanbanFooter>
         </Kanban>
       )
     );
@@ -149,13 +185,15 @@ const KanbanView = React.forwardRef((props, ref) => {
         children
       ) || null
     );
-  }
+  };
 
-  return <StyledView ref={ref} className={className} style={style} {...rest}>
-    {renderToolbar()}
-    {renderKanban()}
-    {renderFooter()}
-  </StyledView>
+  return (
+    <StyledView ref={ref} className={className} style={style} {...rest}>
+      {renderToolbar()}
+      {renderKanban()}
+      {renderFooter()}
+    </StyledView>
+  );
 });
 
 KanbanView.defaultProps = {
@@ -186,15 +224,15 @@ KanbanView.defaultProps = {
   showAddNewCard: false,
   showLoadMoreCards: false,
   //-----------------------
-  onCreate: (e) => { },
-  onEditCard: (e, item, columnId) => { },
-  onDeleteCard: (e, item, columnId) => { },
-  onEditColumn: (e, item, column) => { },
-  onDeleteColumn: (e, item, column) => { },
-  onCardDetails: (e, item, columnId) => { },
-  onColumnDetails: (e, item, column) => { },
-  onLoadMoreCards: (e, columnId) => { },
-  onAddNewCard: (e, columnId) => { },
+  onCreate: (e) => {},
+  onEditCard: (e, item, columnId) => {},
+  onDeleteCard: (e, item, columnId) => {},
+  onEditColumn: (e, item, column) => {},
+  onDeleteColumn: (e, item, column) => {},
+  onCardDetails: (e, item, columnId) => {},
+  onColumnDetails: (e, item, column) => {},
+  onLoadMoreCards: (e, columnId) => {},
+  onAddNewCard: (e, columnId) => {},
   //-----------------------
   style: {},
   size: "small",
