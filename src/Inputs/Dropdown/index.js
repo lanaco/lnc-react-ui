@@ -6,8 +6,6 @@ import customStyles from "./CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 
-const Input = (props) => <components.Input {...props} isHidden={false} />;
-
 const Dropdown = React.forwardRef((props, ref) => {
   const {
     options,
@@ -83,10 +81,7 @@ const Dropdown = React.forwardRef((props, ref) => {
   return (
     <ReactSelect
       ref={ref}
-      components={{
-        Input,
-        ...components,
-      }}
+      components={components}
       options={options}
       styles={styles ? styles : customStyles}
       size={size}

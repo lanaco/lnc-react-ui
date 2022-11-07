@@ -6,7 +6,6 @@ import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 import { components } from "react-select";
 
-const Input = (props) => <components.Input {...props} isHidden={false} />;
 
 const DropdownLookup = React.forwardRef((props, ref) => {
   const {
@@ -85,9 +84,7 @@ const DropdownLookup = React.forwardRef((props, ref) => {
   return (
     <AsyncReactSelect
       ref={ref}
-      components={{
-        Input, ...components
-      }}
+      components={components}
       defaultOptions={defaultOptions}
       cacheOptions={cacheOptions}
       loadOptions={loadOptions}

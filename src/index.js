@@ -94,7 +94,7 @@ export { default as DragAndDropFile } from "./Inputs/DragAndDropFile";
 
 export { default as DragDropFiles } from "./Inputs/DragDropFiles";
 
-export { default as Dropdown } from "./Inputs/Dropdown";
+export { default as Dropdown, components } from "./Inputs/Dropdown";
 
 export { default as DropdownLookup } from "./Inputs/DropdownLookup";
 
