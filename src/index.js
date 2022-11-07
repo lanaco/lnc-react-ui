@@ -1,5 +1,3 @@
-export { default as theme } from "./_utils/theme";
-
 //============ BASIC INPUTS ===================================================================
 
 export { default as CheckBoxInput } from "./Basic Inputs/CheckBoxInput";

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Global, css } from "@emotion/react";
-import theme from "../../../_utils/theme";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
@@ -80,7 +78,6 @@ const CustomDatePicker = React.forwardRef((props, ref) => {
 });
 
 CustomDatePicker.defaultProps = {
-  theme: theme,
   id: "",
   disabled: false,
   onChange: () => {},
@@ -93,7 +90,6 @@ CustomDatePicker.defaultProps = {
 };
 
 CustomDatePicker.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,

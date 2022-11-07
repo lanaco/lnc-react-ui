@@ -1,7 +1,7 @@
+import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React from "react";
-import theme from "../../../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.3rem 0.375rem 0.3rem 0.0625rem";
@@ -58,7 +58,6 @@ const CustomSelectList = React.forwardRef((props, ref) => {
     disabled,
     size,
     color,
-    theme,
     value,
     tooltip,
     withoutEmpty,
@@ -67,6 +66,8 @@ const CustomSelectList = React.forwardRef((props, ref) => {
     onFocus,
     onBlur,
   } = props;
+
+  const theme = useTheme();
 
   const handleOnChange = (e) => {
     onChange(e, e.target.value, id);
@@ -130,7 +131,6 @@ CustomSelectList.defaultProps = {
   preventDefault: true,
   size: "small",
   color: "primary",
-  theme: theme,
   items: [],
   withoutEmpty: true,
   mapValueTo: "value",
@@ -138,7 +138,6 @@ CustomSelectList.defaultProps = {
 };
 
 CustomSelectList.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
   tooltip: PropTypes.string,

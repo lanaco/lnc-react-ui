@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
 import styled from "@emotion/styled";
+import { useTheme } from "@emotion/react";
 
 const CheckBox = styled.input`
   height: 16px;
@@ -81,6 +81,7 @@ const CustomCheckbox = React.forwardRef((props, ref) => {
   } = props;
 
   var [focused, setFocused] = useState(false);
+  const theme = useTheme();
 
   const handleChange = (e) => {
     e.stopPropagation();
@@ -108,9 +109,10 @@ const CustomCheckbox = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Label checked={checked} focused={focused}>
+    <Label checked={checked} focused={focused} theme={theme}>
       <Checkbox
         type="checkbox"
+        theme={theme}
         ref={ref}
         checked={checked}
         onClick={handleChange}
@@ -142,7 +144,6 @@ const CustomCheckbox = React.forwardRef((props, ref) => {
 });
 
 CustomCheckbox.defaultProps = {
-  theme: theme,
   id: "",
   disabled: false,
   onChange: () => {},
@@ -155,7 +156,6 @@ CustomCheckbox.defaultProps = {
 };
 
 CustomCheckbox.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
