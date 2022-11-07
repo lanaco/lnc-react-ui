@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "styled-components";
 
 const HtmlRow = styled.tr`
   border-bottom: 1px solid transparent;
@@ -42,9 +42,11 @@ const CustomTableRow = (props) => {
     Index,
     IsSelected,
   } = props;
+ 
+  const theme = useTheme();
 
   return (
-    <HtmlRow IsSelected={IsSelected} key={Index}>
+    <HtmlRow IsSelected={IsSelected} key={Index} theme={theme}>
       {props.children}
     </HtmlRow>
   );
@@ -57,7 +59,6 @@ CustomTableRow.defaultProps = {
   //--------------------
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 CustomTableRow.propTypes = {
@@ -74,7 +75,6 @@ CustomTableRow.propTypes = {
     "information",
     "neutral",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default CustomTableRow;

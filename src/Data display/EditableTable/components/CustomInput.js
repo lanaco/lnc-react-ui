@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React, { useEffect, useState, useRef } from "react";
-import theme from "../../../_utils/theme";
 import debounce from "lodash.debounce";
+import { useTheme } from "@emotion/react";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.325rem 0.375rem";
@@ -55,7 +55,6 @@ const StyledTextInput = styled.input((props) => {
 
 const CustomInput = React.forwardRef((props, ref) => {
   const {
-    theme,
     color,
     id,
     disabled,
@@ -70,6 +69,8 @@ const CustomInput = React.forwardRef((props, ref) => {
     onFocus,
     tabIndex,
   } = props;
+
+  const theme = useTheme();
 
   // useEffect(() => {
   //   return () => {
@@ -149,7 +150,6 @@ const CustomInput = React.forwardRef((props, ref) => {
 
 CustomInput.defaultProps = {
   id: "",
-  theme: theme,
   disabled: false,
   onChange: () => {},
   onKeyDown: () => {},
@@ -165,7 +165,6 @@ CustomInput.defaultProps = {
 };
 
 CustomInput.propTypes = {
-  theme: PropTypes.object.isRequired,
   id: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,

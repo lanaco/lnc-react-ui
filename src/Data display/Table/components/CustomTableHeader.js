@@ -22,9 +22,9 @@ const CustomTableHeader = (props) => {
 
   return (
     <Container>
-      <IconButton icon="sync-alt" type="tinted" />
-      <IconButton icon="archive" type="tinted" color="warning" />
-      <IconButton icon="ban" type="tinted" color="danger" />
+      <IconButton icon="sync-alt" btnType="tinted" />
+      <IconButton icon="archive" btnType="tinted" color="warning" />
+      <IconButton icon="ban" btnType="tinted" color="danger" />
     </Container>
   );
 };

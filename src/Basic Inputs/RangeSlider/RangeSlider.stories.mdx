@@ -4,7 +4,7 @@ import RangeSliderInput from "./index";
 
 <Meta title="Basic Inputs/Range Slider Input" component={RangeSliderInput} />
 
-export const TemplateDefault = (args) => <RangeSliderInput style={{display: "flex"}} {...args}/>;
+export const TemplateDefault = (args) => <RangeSliderInput style={{display: "flex"}} defaultValue={12} {...args}/>;
 
 export const TemplateWiderRange = (args) => <RangeSliderInput value={-300} min={-500} max={500} style={{display: "flex"}} {...args}/>;
 

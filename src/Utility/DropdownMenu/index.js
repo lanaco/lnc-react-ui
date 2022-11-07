@@ -101,7 +101,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
           onMouseLeave={handleOnMouseLeave}
           onBlur={onBlur}
           onFocus={onFocus}
-          ref={control?.ref ? control.ref : controlRef}
+          ref={controlRef}
           onKeyDown={handleOnControlKeyDown}
           trailingIcon="angle-down"
           color={color}
@@ -113,7 +113,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
       return React.cloneElement(control, {
         color: color,
         size: size,
-        ref: control?.ref ? control?.ref : controlRef,
+        ref: controlRef,
         onClick: handleOnClick,
         onMouseEnter: handleOnMouseEnter,
         onMouseLeave: handleOnMouseLeave,
@@ -160,7 +160,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     <StyledDropDown ref={ref} {...rest}>
       {clonedControl()}
       <Popover
-        anchorElement={control?.ref ? control.ref : controlRef}
+        anchorElement={controlRef}
         ref={popoverRef}
         vertical={verticalAlignment}
         horizontal={horizontalAlignment}

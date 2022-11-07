@@ -37,7 +37,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-cssresources",
     "@storybook/addon-docs",
-
     //useless addon doesen't change context gobals on switch
     // 'storybook-addon-themes',
     "storybook-dark-mode",

@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import DetailsView from "./index";
+import { useState, useRef } from "react";
+
+<Meta title="Data Display/Details View" component={DetailsView} />
+
+# Details View
+
+```jsx
+import { DetailsView } from "@lanaco/lnc-react-ui";
+```
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    <DetailsView
+      fields={[
+        {
+          label: "Name",
+          accessor: "name",
+          XS: 12,
+          S: 6,
+          inputProps: { type: "text" },
+        },
+        {
+          label: "Company",
+          accessor: "company",
+          XS: 12,
+          S: 6,
+          inputProps: { type: "text", disabled: true },
+        },
+        { label: "Address", accessor: "address", XS: 12, inputProps: { type: "text" }, },
+        { label: "Gender", accessor: "gender", XS: 12, S: 6 },
+        { label: "Balance", accessor: "balance", XS: 12, S: 6, inputProps: { type: "text" }, },
+      ]}
+      data={{name: "Katie Wilson", company: "QUAREX", address: "125 Oceanview Avenue, Moqiono, Mississippi, 418", gender: "female", balance: "$1,476.66"}}
+      disableNext={true}
+      disablePrevious={true}
+      disableEdit={true}
+      disableGoBack={true}
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+#### `DetailsView` is inteded for quick implementation of simple detail views. It utilizes `FlexGrid` to create layout.
+
+## fields
+
+`fields` is an array that accepts object of type {label: `<string>`, accessor: `<string>`, ...}, where the rest of this object props (aside from `label` and `accessor`) are props of component <u>[FlexGridItem](?path=/docs/layout-flex-grid--default-story).</u>

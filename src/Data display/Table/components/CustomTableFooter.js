@@ -22,8 +22,8 @@ const CustomTableFooter = () => {
   //--------------------------
   return (
     <Container>
-      <IconButton icon="save" type="tinted" color="secondary" />
-      <IconButton icon="info-circle" type="tinted" color="information" />
+      <IconButton icon="save" btnType="tinted" color="secondary" />
+      <IconButton icon="info-circle" btnType="tinted" color="information" />
     </Container>
   );
 };

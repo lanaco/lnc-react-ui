@@ -43,7 +43,6 @@ const Item = styled.div`
             "enabled",
             "icon"
           )};
-
     ${(props) => props.disabled && getDisabledStateCss(props.theme)};
     background: transparent;
   }
@@ -53,7 +52,6 @@ const Item = styled.div`
       props.showNested ? "rotate(180deg)" : "rotate(0)"};
     transition: transform 0.25s ease;
   }
-
   ${(props) =>
     props.isActive == true &&
     props.disabled == false &&
@@ -73,7 +71,6 @@ const Item = styled.div`
     )};
   `}
   outline: none;
-
   ${(props) => props.disabled && getDisabledStateCss(props.theme)};
 `;
 
@@ -118,8 +115,8 @@ const DropdownItem = React.forwardRef((props, ref) => {
       }
 
       onItemSelected(e, children);
+      onClick(e);
     }
-    onClick(onClick);
   };
   const handleOnFocus = (e) => {
     setIsActive(true);

@@ -8,9 +8,9 @@ import ButtonGroup from ".";
 
 export const TemplateDefault = (args) => (
   <ButtonGroup {...args}>
-    <Button text="Left" type="basic" />
-    <Button text="Center" type="basic" />
-    <Button text="Right" type="basic" />
+    <Button text="Left" btnType="basic" />
+    <Button text="Center" btnType="basic" />
+    <Button text="Right" btnType="basic" />
   </ButtonGroup>
 );
 
@@ -18,16 +18,16 @@ export const TemplateBorderRadius = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
       <ButtonGroup {...args}>
-        <Button text="Left" type="basic" />
-        <Button text="Center" type="basic" />
-        <Button text="Right" type="basic" />
+        <Button text="Left" btnType="basic" />
+        <Button text="Center" btnType="basic" />
+        <Button text="Right" btnType="basic" />
       </ButtonGroup>
     </div>
     <div style={{ display: "flex", gap: "16px" }}>
       <ButtonGroup {...args} borderRadius="curved">
-        <Button text="Left" type="basic" />
-        <Button text="Center" type="basic" />
-        <Button text="Right" type="basic" />
+        <Button text="Left" btnType="basic" />
+        <Button text="Center" btnType="basic" />
+        <Button text="Right" btnType="basic" />
       </ButtonGroup>
     </div>
   </div>
@@ -35,9 +35,9 @@ export const TemplateBorderRadius = (args) => (
 
 export const TemplateDisabled = (args) => (
   <ButtonGroup {...args}>
-    <Button disabled={true} text="Left" type="basic" />
-    <Button disabled={true} text="Center" type="basic" />
-    <Button disabled={true} text="Right" type="basic" />
+    <Button disabled={true} text="Left" btnType="basic" />
+    <Button disabled={true} text="Center" btnType="basic" />
+    <Button disabled={true} text="Right" btnType="basic" />
   </ButtonGroup>
 );
 
@@ -45,42 +45,42 @@ export const TemplateCombinations = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
       <ButtonGroup {...args}>
-        <Button text="Save" leadingIcon="save" type="tinted" />
+        <Button text="Save" leadingIcon="save" btnType="tinted" />
         <Button text="or" type="basic" disabled />
         <Button
           text="Discard"
           leadingIcon="times"
-          type="tinted"
+          btnType="tinted"
           color="danger"
         />
       </ButtonGroup>
     </div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
       <ButtonGroup {...args} borderRadius="curved">
-        <IconButton icon="align-left" type="basic" />
-        <IconButton icon="align-center" type="tinted" color="secondary" />
-        <IconButton icon="align-right" type="basic" />
+        <IconButton icon="align-left" btnType="basic" />
+        <IconButton icon="align-center" btnType="tinted" color="secondary" />
+        <IconButton icon="align-right" btnType="basic" />
       </ButtonGroup>
     </div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
       <ButtonGroup>
         <IconButton
           disabled={true}
-          type="basic"
+          btnType="basic"
           icon="angle-double-left"
           color="neutral"
         />
         <IconButton
           disabled={true}
-          type="basic"
+          btnType="basic"
           icon="angle-left"
           color="neutral"
         />
-        <Button type="tinted" text="1" color="primary" />
-        <Button type="basic" text="2" color="neutral" />
-        <Button type="basic" text="3" color="neutral" />
-        <IconButton type="basic" icon="angle-right" color="neutral" />
-        <IconButton type="basic" icon="angle-double-right" color="neutral" />
+        <Button btnType="tinted" text="1" color="primary" />
+        <Button btnType="basic" text="2" color="neutral" />
+        <Button btnType="basic" text="3" color="neutral" />
+        <IconButton btnType="basic" icon="angle-right" color="neutral" />
+        <IconButton btnType="basic" icon="angle-double-right" color="neutral" />
       </ButtonGroup>
     </div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
@@ -88,22 +88,22 @@ export const TemplateCombinations = (args) => (
         <Button
           text="Apply"
           leadingIcon="check-circle"
-          type="tinted"
+          btnType="tinted"
           color="secondary"
         />
         <Button
           text="Cancel"
           leadingIcon="times"
-          type="basic"
+          btnType="basic"
           color="neutral"
         />
       </ButtonGroup>
     </div>
     <div style={{ display: "flex", gap: "16px" }}>
       <ButtonGroup {...args} borderRadius="curved">
-        <Button text="Year" type="filled" color="primary" />
-        <Button text="Month" type="tinted" color="primary" />
-        <Button text="Day" type="basic" color="primary" />
+        <Button text="Year" btnType="filled" color="primary" />
+        <Button text="Month" btnType="tinted" color="primary" />
+        <Button text="Day" btnType="basic" color="primary" />
       </ButtonGroup>
     </div>
   </div>

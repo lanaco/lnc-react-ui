@@ -222,7 +222,7 @@ export const TemplateLoading = (args) => {
       <div style={{ padding: "4px 4px 4px 10px" }}>
         <Button
           text={`Loading: ${loading ? "ON" : "OFF"}`}
-          type={loading ? "filled" : "tinted"}
+          btnType={loading ? "filled" : "tinted"}
           onClick={() => setLoading(!loading)}
         />
       </div>
@@ -427,7 +427,7 @@ If the `NoDataComponent` is defined, it will be shown instead of the `NoDataText
           <Button
             size="small"
             color="warning"
-            type="basic"
+            btnType="basic"
             text="No data avaliable. Reload ?"
             onClick={() => alert("Reloading...")}
           />

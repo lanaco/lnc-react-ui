@@ -19,6 +19,8 @@ const StyledView = styled.div`
 
 const KanbanView = React.forwardRef((props, ref) => {
   const {
+    __TYPE__,
+    goToPreviousView,
     toolbarActions,
     kanbanProps,
     actionsToolbarProps,
@@ -195,6 +197,7 @@ const KanbanView = React.forwardRef((props, ref) => {
 });
 
 KanbanView.defaultProps = {
+  __TYPE__: "KANBAN_VIEW",
   kanbanProps: {},
   actionsToolbarProps: {},
   footerProps: {},
@@ -237,6 +240,7 @@ KanbanView.defaultProps = {
 };
 
 KanbanView.propTypes = {
+  __TYPE__: PropTypes.string,
   kanbanProps: PropTypes.object,
   actionsToolbarProps: PropTypes.object,
   footerProps: PropTypes.object,

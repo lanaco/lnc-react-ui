@@ -18,6 +18,8 @@ const StyledView = styled.div`
 
 const TableView = React.forwardRef((props, ref) => {
   const {
+    __TYPE__,
+    goToPreviousView,
     tableProps,
     paginationProps,
     actionsToolbarProps,
@@ -35,6 +37,7 @@ const TableView = React.forwardRef((props, ref) => {
     enableCopyOnSelection,
     customActions,
     pagination,
+    readOnly,
     //----------------
     onCreate,
     onEdit,
@@ -64,6 +67,7 @@ const TableView = React.forwardRef((props, ref) => {
     showDelete,
     enableDeleteOnSelection,
     customActions,
+    readOnly,
   };
 
   const [selectedRows, setSelectedRows] = useState([]);
@@ -83,13 +87,16 @@ const TableView = React.forwardRef((props, ref) => {
   };
 
   const handleRowClick = (e, rowData) => {
-    if (tableProps?.onRowClick) tableProps.onRowClick(e, rowData);
+    //QUICKFIX ignore when click is on checkbox (row selection checkbox)
+    if(e.target?.type !== "checkbox" && e.target?.className !== "checkmark") {
+      if (tableProps?.onRowClick) tableProps.onRowClick(e, rowData);
 
-    handleDetails(rowData, e);
+      handleDetails(rowData, e);
+    }
   };
 
-  const handleDetails = (e) => {
-    onDetails(selectedRows, e);
+  const handleDetails = (rowData, e) => {
+    onDetails(rowData, e);
   };
 
   const handleCreate = (e) => {
@@ -154,12 +161,12 @@ const TableView = React.forwardRef((props, ref) => {
         <Table
           size={tableProps?.size ? tableProps.size : size}
           color={tableProps?.color ? tableProps.color : color}
-          EnableSelection={rowsSingleSelect || rowsMultiSelect}
+          EnableSelection={(rowsSingleSelect || rowsMultiSelect) && readOnly == false}
           onSelectRow={(e, row, isSelected) =>
             handleSelectedRow(row, !isSelected)
           }
           SelectedData={selectedRows}
-          onRowClick={handleRowClick}
+          onRowClick={(e, rowData) => handleRowClick(e, rowData)}
           {...tableProps}
         />
       )
@@ -199,6 +206,7 @@ const TableView = React.forwardRef((props, ref) => {
 });
 
 TableView.defaultProps = {
+  __TYPE__: "TABLE_VIEW",
   tableProps: {},
   tableProps: {},
   actionsToolbarProps: {},
@@ -214,6 +222,7 @@ TableView.defaultProps = {
   showCopy: true,
   enableCopyOnSelection: true,
   pagination: true,
+  readOnly: false,
   //-----------------------
   onCreate: () => {},
   onEdit: (row) => {},
@@ -230,8 +239,8 @@ TableView.defaultProps = {
 };
 
 TableView.propTypes = {
+  __TYPE__: PropTypes.string,
   tableProps: PropTypes.object,
-  toolbarProps: PropTypes.object,
   actionsToolbarProps: PropTypes.object,
   paginationProps: PropTypes.object,
   rowsSingleSelect: PropTypes.bool,
@@ -270,6 +279,10 @@ TableView.propTypes = {
    * Determines whether will pagination be shown in view
    */
   pagination: PropTypes.bool,
+  /**
+   * If `readOnly={true}` actions Delete, Edit and Copy won't be shown. Row Selction will be disabled.
+   */
+  readOnly: PropTypes.bool,
   //-------------------------------------------------------------
   onCreate: PropTypes.func,
   onEdit: PropTypes.func,

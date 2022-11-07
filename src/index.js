@@ -32,7 +32,11 @@ export { default as Chip } from "./Data display/Chip";
 
 export { default as DataView } from "./Data display/DataView";
 
+export { default as DetailsView } from "./Data display/DetailsView";
+
 export { default as EditableTable } from "./Data display/EditableTable";
+
+export { default as FormView } from "./Data display/FormView";
 
 export { default as Kanban } from "./Data display/Kanban";
 
@@ -88,7 +92,7 @@ export { default as DragAndDropFile } from "./Inputs/DragAndDropFile";
 
 export { default as DragDropFiles } from "./Inputs/DragDropFiles";
 
-export { default as Dropdown } from "./Inputs/Dropdown";
+export { default as Dropdown, components } from "./Inputs/Dropdown";
 
 export { default as DropdownLookup } from "./Inputs/DropdownLookup";
 
@@ -155,3 +159,6 @@ export { default as TreeMenu } from "./Utility/TreeMenu";
 //======================== THEME ==============================================================
 
 export { default as ThemeProvider, useTheme } from "./ThemeProvider";
+
+//=============================================================================================
+

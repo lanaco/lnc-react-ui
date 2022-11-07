@@ -76,7 +76,6 @@ const KanbanHeader = React.memo(
                       icon={action.icon}
                       disabled={action.enable == false}
                       onClick={(e) => {
-                        console.log("iiii", action);
                         action.onAction(e, item, column);
                       }}
                     >

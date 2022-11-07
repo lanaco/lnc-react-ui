@@ -1,0 +1,195 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import FormView from "./index";
+import { useState, useRef, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import Dropdown from "../../Inputs/Dropdown";
+import MultiSelectDropdown from "../../Inputs/MultiSelectDropdown";
+import DateInput from "../../Basic Inputs/DateInput";
+
+<Meta title="Data Display/Form View" component={FormView} />
+
+# Form View
+
+```jsx
+import { FormView } from "@lanaco/lnc-react-ui";
+```
+
+##### Example of Form View that uses `react-hook-form`
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {() => {
+      const DEFAULT_VALUES = {
+        name: "Katie Wilson",
+        company: "QUAREX",
+        address: "125 Oceanview Avenue, Moqiono, Mississippi, 418",
+        isActive: true,
+        gender: "female",
+        balance: "$1,476.66",
+        age: 30,
+        role: { value: "customer", label: "Customer" },
+      };
+      const { handleSubmit, register, reset, control, setValue } = useForm();
+      const onSubmit = (data) => {
+        console.log("Submitted Data", data);
+      };
+      useEffect(() => {
+        reset(DEFAULT_VALUES);
+      }, []);
+      return (
+        <FormView
+          fields={[
+            {
+              label: "Name",
+              accessor: "name",
+              XS: 12,
+              S: 6,
+              type: "text",
+              inputProps: { ...register("name") },
+            },
+            {
+              label: "Company",
+              accessor: "company",
+              XS: 12,
+              S: 6,
+              type: "text",
+              inputProps: {
+                defaultValue: "Lanaco",
+                disabled: true,
+                ...register("company"),
+              },
+            },
+            {
+              label: "Address",
+              accessor: "address",
+              XS: 12,
+              M: 6,
+              type: "text",
+              inputProps: { ...register("address") },
+            },
+            {
+              label: "Balance",
+              accessor: "balance",
+              XS: 12,
+              S: 6,
+              type: "text",
+              inputProps: { ...register("balance") },
+            },
+            {
+              label: "Is Active",
+              accessor: "isActive",
+              XS: 12,
+              M: 6,
+              type: "checkbox",
+              inputProps: {
+                ...register("isActive"),
+              },
+            },
+            {
+              label: "Gender",
+              accessor: "gender",
+              XS: 12,
+              S: 6,
+              type: "radioGroup",
+              inputProps: {
+                radioProps: { ...register("gender") },
+                items: [
+                  { value: "male", label: "male" },
+                  { value: "female", label: "female" },
+                ],
+              },
+            },
+            {
+              label: "Age",
+              accessor: "age",
+              XS: 12,
+              S: 6,
+              type: "number",
+              inputProps: { ...register("age") },
+            },
+            {
+              label: "Role",
+              accessor: "role",
+              XS: 12,
+              S: 6,
+              type: "custom",
+              element: (
+                <Controller
+                  control={control}
+                  name="role"
+                  render={({ field }) => (
+                    <Dropdown
+                      {...field}
+                      options={[
+                        { value: "user", label: "User" },
+                        { value: "customer", label: "Customer" },
+                        { value: "admin", label: "Admin" },
+                      ]}
+                    />
+                  )}
+                />
+              ),
+            },
+          ]}
+          disableNext={true}
+          disablePrevious={true}
+          disableGoBack={true}
+          onSubmit={handleSubmit(onSubmit)}
+          onDiscard={() => {
+            reset(DEFAULT_VALUES);
+          }}
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+#### `FormView` is inteded for quick implementation of simple form views. It utilizes `FlexGrid` to create layout.
+
+## fields
+
+`fields` is an array that accepts object of type {label: `<string>`, accessor: `<string>`, type: `<string>`, inputProps: `<object>`, element: `<element>`, ...}, where the rest of this object props (aside from `label`, `accessor`, `type`, `inputProps` and `element`) are props of component <u>[FlexGridItem](?path=/docs/layout-flex-grid--default-story).</u>
+
+Supported field types:
+
+- text
+- textArea
+- number
+- password
+- checkbox
+- radioGroup
+- range
+- time
+- color
+- custom
+
+## Custom fields
+
+When type of the `field` is `custom`, it is necessary to provide value for property element.
+Example of usage of custom field with _ react-hook-form _ using `Controller`.
+
+```jsx
+import { Controller } from "react-hook-form";
+```
+
+```jsx
+{
+  label: "Roles",
+  accessor: "roles",
+  XS: 12,
+  type: "custom",
+  element: <Controller
+              control={control}
+              name="roles"
+              render={({field}) => (
+                    <MultiSelectDropdown
+                    {...field}
+                    options={[{ value: "user", label: "User" }, { value: "customer", label: "Customer" }, { value: "admin", label: "Admin" }]}
+                    />
+                )}
+            />
+},
+```

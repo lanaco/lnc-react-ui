@@ -227,7 +227,7 @@ const StoryTemplate = (props) => {
     <Container>
       <Commands>
         <Button
-          type="tinted"
+          btnType="tinted"
           leadingIcon="rotate"
           text={"Reload"}
           onClick={loadData}

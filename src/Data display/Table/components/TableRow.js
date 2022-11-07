@@ -41,15 +41,12 @@ ${(props) =>
       "enabled",
       "border"
     )};`}
-
   &:last-of-type > td:first-of-type {
     border-radius: 0 0 0 0.5rem;
   }
-
   &:last-of-type > td:last-of-type {
     border-radius: 0 0 0.5rem 0;
   }
-
   ${(props) => {
     if (props.IsSelected !== true)
       return `
@@ -66,7 +63,6 @@ ${(props) =>
       }`;
     else return "";
   }}
-
   ${(props) => {
     if (props.IsSelected === true) {
       return `
@@ -109,6 +105,7 @@ const TableRow = (props) => {
   const onClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
+
     if (onRowClick) onRowClick(e, RowData);
   };
 

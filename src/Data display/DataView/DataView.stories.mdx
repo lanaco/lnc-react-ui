@@ -1,16 +1,117 @@
-import { Meta, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import DataView from "./index";
-import styled from "@emotion/styled";
-import { useRef } from "react";
-import Button from "../../General/Button";
-import Story from "./Story";
+import { useState, useRef } from "react";
+import DetailsView from "../DetailsView";
+import TableView from "../TableView";
+import FormView from "../FormView";
+import { useForm } from "react-hook-form";
 
 <Meta title="Data Display/Data View" component={DataView} />
 
-export const TemplateDefault = (args) => {
-  const dw = useRef();
-  return <Story />;
+export const Columns = [
+  {
+    id: 1,
+    displayName: "Name",
+    accessor: "name",
+    width: 18,
+    sortable: true,
+  },
+  {
+    id: 2,
+    displayName: "Company",
+    accessor: "company",
+    width: 12,
+    sortable: false,
+  },
+  {
+    id: 3,
+    displayName: "Address",
+    accessor: "address",
+    width: 35,
+    sortable: true,
+  },
+  {
+    id: 4,
+    displayName: "Gender",
+    accessor: "gender",
+    width: 15,
+    sortable: true,
+  },
+  {
+    id: 5,
+    displayName: "Balance",
+    accessor: "balance",
+    width: 20,
+    sortable: true,
+  },
+];
+
+export const Data = [
+  {
+    id: "61f7b8ea2fe061cacbcdbfea",
+    isActive: true,
+    balance: "$1,476.66",
+    age: 21,
+    name: "Katie Wilson",
+    gender: "female",
+    company: "QUAREX",
+    address: "125 Oceanview Avenue, Moquino, Mississippi, 418",
+  },
+  {
+    id: "61f7b8ea63d0fc830f326350",
+    isActive: false,
+    balance: "$3,239.46",
+    age: 32,
+    name: "Delgado Lott",
+    gender: "male",
+    company: "XYMONK",
+    address: "402 Vernon Avenue, Draper, Florida, 6921",
+  },
+  {
+    id: "61f7b8eaf418ca604fcdffba",
+    isActive: false,
+    balance: "$3,804.94",
+    age: 21,
+    name: "Frankie Jacobson",
+    gender: "female",
+    company: "QUAREX",
+    address: "980 Rodney Street, Kansas, Marshall Islands, 6171",
+  },
+  {
+    id: "61f7b8ea066dfb5760224b71",
+    isActive: true,
+    balance: "$3,731.79",
+    age: 29,
+    name: "Lynch Sims",
+    gender: "male",
+    company: "EARTHPURE",
+    address: "620 Riverdale Avenue, Greenbush, New Mexico, 9605",
+  },
+  {
+    id: "61f7b8eadd6586c40491b91e",
+    isActive: true,
+    balance: "$2,116.41",
+    age: 30,
+    name: "Black William",
+    gender: "male",
+    company: "QUAREX",
+    address: "125 Kathleen Court, Bergoo, Michigan, 1206",
+  },
+];
+
+export const fetchNext = (id, data) => {
+  let currentItem = data.map((item) => item.id == id);
+  let currentIndex = data.indexOf(Data.find((item) => item.id == id));
+  if (currentIndex + 1 < data.length) return data[currentIndex + 1];
+  return null;
+};
+
+export const fetchPrevious = (id, data) => {
+  let currentItem = data.map((item) => item.id == id);
+  let currentIndex = data.indexOf(data.find((item) => item.id == id));
+  if (currentIndex > 0) return data[currentIndex - 1];
+  return null;
 };
 
 # Data View
@@ -19,46 +120,219 @@ export const TemplateDefault = (args) => {
 import { DataView } from "@lanaco/lnc-react-ui";
 ```
 
-Options:
-
-- `EnableCreate`
-- `EnableUpdate`
-- `EnableDelete`
-
-- `EnableDiscard`
-- `EnableFilter`
-- `EnableExport`
-- `EnablePagination`
-
-Events:
-
-- `onPageChanged`
-- `onPageSizeChanged`
-
-- `onCreateItem`
-- `onUpdateItem`
-- `onDeleteItems`
-
-- `onDiscard`
-
-- `onFilterItems`
-- `onExportAll`
-- `onExportAllFiltered`
-- `onExportCurrentPage`
-
-- `onChangeViewType`
-
-Params:
-
-- `itemShape`
-- `viewTypes`
-
-Components:
+##### Data View provides simplified interaction between different types of views. In one Data View can't be more than one View of the same type (`TABLE_VIEW`, `KANBAN_VIEW`, `DETAILS_VIEW`, `FORM_VIEW`).
 
 <Canvas>
   <Story name="Default" args={{}}>
-    {TemplateDefault.bind({})}
+    {() => {
+      const [Datas, setDatas] = useState(Data);
+      const [detailsData, setDetailsData] = useState({});
+      const [formData, setFormData] = useState({});
+      const dataViewRef = useRef();
+      const { handleSubmit, register, reset } = useForm();
+      const goToNext = (id) => {
+        let element = fetchNext(id, Datas);
+        if (element) setDetailsData(element);
+      };
+      const goToPrevious = (id) => {
+        let element = fetchPrevious(id, Datas);
+        if (element) setDetailsData(element);
+      };
+      const goToNextFormItem = (id) => {
+        let element = fetchNext(id, Datas);
+        reset(element);
+        if (element) setFormData(element);
+      };
+      const goToPreviousFormItem = (id) => {
+        let element = fetchPrevious(id, Datas);
+        reset(element);
+        if (element) setFormData(element);
+      };
+      const onSubmit = (data) => {
+        if (formData.new == true) setDatas([...Datas, data]);
+        else {
+          setDatas(Datas.map((d) => (d.id == data.id ? data : d)));
+        }
+        dataViewRef?.current?.changeView("TABLE_VIEW");
+      };
+      return (
+        <>
+          <DataView
+            ref={dataViewRef}
+            defaultViewType="TABLE_VIEW"
+          >
+            <DetailsView
+              fields={[
+                {
+                  label: "Name",
+                  accessor: "name",
+                  XS: 12,
+                  S: 6,
+                },
+                {
+                  label: "Company",
+                  accessor: "company",
+                  XS: 12,
+                  S: 6,
+                },
+                { label: "Address", accessor: "address", XS: 12 },
+                { label: "Gender", accessor: "gender", XS: 12, S: 6 },
+                { label: "Balance", accessor: "balance", XS: 12, S: 6 },
+              ]}
+              data={detailsData}
+              goToNext={(data, e) => goToNext(data?.id)}
+              goToPrevious={(data, e) => goToPrevious(data?.id)}
+              disableNext={detailsData?.id === Datas[Datas.length - 1].id}
+              disablePrevious={detailsData?.id == Datas[0].id}
+              onEdit={() => {
+                reset(detailsData);
+                setFormData(detailsData);
+                dataViewRef?.current?.changeView("FORM_VIEW");
+              }}
+            />
+            <TableView
+              showCopy={false}
+              showEdit={false}
+              tableProps={{
+                RowIdentifier: "id",
+                Columns: Columns,
+                Data: Datas,
+              }}
+              onDetails={(row) => {
+                setDetailsData(row);
+                dataViewRef?.current?.changeView("DETAILS_VIEW");
+              }}
+              onDelete={(selectedRows) => {
+                setDatas(Datas.filter((d) => d.id !== selectedRows[0].id));
+              }}
+              onEdit={(selectedRows) => {
+                reset(selectedRows[0]);
+                setFormData(selectedRows[0]);
+                dataViewRef?.current?.changeView("FORM_VIEW");
+              }}
+              pagination={false}
+              onCreate={() => {
+                reset({
+                  id: Datas[Datas.length - 1].id + "a",
+                  isActive: true,
+                  balance: "$",
+                  age: 0,
+                  name: "",
+                  gender: "male",
+                  company: "LANACO",
+                  address: "",
+                });
+                setFormData({
+                  id: Datas[Datas.length - 1].id + "a",
+                  isActive: true,
+                  balance: "$",
+                  age: 0,
+                  name: "",
+                  gender: "male",
+                  company: "LANACO",
+                  address: "",
+                  new: true,
+                });
+                dataViewRef?.current?.changeView("FORM_VIEW");
+              }}
+            ></TableView>
+            <FormView
+              fields={[
+                {
+                  label: "Name",
+                  accessor: "name",
+                  XS: 12,
+                  S: 6,
+                  type: "text",
+                  inputProps: { ...register("name") },
+                },
+                {
+                  label: "Company",
+                  accessor: "company",
+                  XS: 12,
+                  S: 6,
+                  type: "text",
+                  inputProps: {
+                    defaultValue: "Lanaco",
+                    disabled: true,
+                    ...register("company"),
+                  },
+                },
+                {
+                  label: "Address",
+                  accessor: "address",
+                  XS: 12,
+                  M: 6,
+                  type: "text",
+                  inputProps: { ...register("address") },
+                },
+                {
+                  label: "Balance",
+                  accessor: "balance",
+                  XS: 12,
+                  S: 6,
+                  type: "text",
+                  inputProps: { ...register("balance") },
+                },
+                {
+                  label: "Is Active",
+                  accessor: "isActive",
+                  XS: 12,
+                  M: 6,
+                  type: "checkbox",
+                  inputProps: {
+                    ...register("isActive"),
+                  },
+                },
+                {
+                  label: "Gender",
+                  accessor: "gender",
+                  XS: 12,
+                  S: 6,
+                  type: "radioGroup",
+                  inputProps: {
+                    radioProps: { ...register("gender") },
+                    items: [
+                      { value: "male", label: "male" },
+                      { value: "female", label: "female" },
+                    ],
+                  },
+                },
+                {
+                  label: "Age",
+                  accessor: "age",
+                  XS: 12,
+                  S: 6,
+                  type: "number",
+                  inputProps: { ...register("age") },
+                },
+              ]}
+              data={formData}
+              goToNext={(data, e) => goToNextFormItem(data?.id)}
+              goToPrevious={(data, e) => goToPreviousFormItem(data?.id)}
+              nextActive={!(formData.new == true)}
+              previousActive={!(formData.new == true)}
+              disableNext={formData?.id === Data[Data.length - 1].id}
+              disablePrevious={formData?.id == Data[0].id}
+              onSubmit={handleSubmit(onSubmit)}
+              onDiscard={() => dataViewRef.current?.goToBackView()}
+            />
+          </DataView>
+        </>
+      );
+    }}
   </Story>
 </Canvas>
 
 <ArgsTable story="Default" />
+
+## Methods
+
+This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
+
+| Method       |    Args    |             Description |
+| ------------ | :--------: | ----------------------: |
+| changeView   | nextViewType |    Switch to other view |
+| goToBackView |     -      | Switch to previous view |
+
+---

@@ -61,6 +61,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
     actionsText,
     customActions,
     selectedRowsLength,
+    readOnly,
     //----------------
     onCreate,
     onEdit,
@@ -78,10 +79,10 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
   return (
     <StyledToolbar ref={ref} theme={theme} color={color} className={className} style={style} {...rest}>
       <div>
-        {showCreate && (
+        {(showCreate && readOnly == false) && (
           <Button
             leadingIcon="plus"
-            type="outline"
+            btnType="outline"
             color={color}
             size={size}
             title={createText}
@@ -98,14 +99,14 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
           control={
             <Button
               text={actionsText}
-              type="outline"
+              btnType="outline"
               trailingIcon={"angle-down"}
               color={color}
               size={size}
             />
           }
         >
-          {showCopy && (
+          {(showCopy && readOnly == false) && (
             <DropdownItem
               icon="copy"
               disabled={!(enableCopyOnSelection && selectedRowsLength == 1)}
@@ -114,7 +115,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
               {copyText}
             </DropdownItem>
           )}
-          {showEdit && (
+          {(showEdit && readOnly == false) && (
             <DropdownItem
               icon="pen"
               disabled={!(enableEditOnSelection && selectedRowsLength == 1)}
@@ -123,7 +124,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
               {editText}
             </DropdownItem>
           )}
-          {showDelete && (
+          {(showDelete && readOnly == false) && (
             <DropdownItem
               icon="trash"
               disabled={!(enableDeleteOnSelection && selectedRowsLength == 1)}
@@ -175,6 +176,7 @@ ActionsToolbar.defaultProps = {
   copyText: "Copy",
   actionsText: "Actions",
   selectetedRowsLength: 0,
+  readOnly: false,
   //-----------------------
   onCreate: () => {},
   onEdit: () => {},
@@ -211,6 +213,10 @@ ActionsToolbar.propTypes = {
    */
   customActions: PropTypes.array,
   selectedRowsLength: PropTypes.number,
+  /**
+   * If `readOnly={true}` actions Delete, Edit and Copy won't be shown.
+   */
+   readOnly: PropTypes.bool,
   //-------------------------------------------------------------
   onCreate: PropTypes.func,
   onEdit: PropTypes.func,

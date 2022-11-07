@@ -8,43 +8,43 @@ export const TemplateDefault = (args) => <Button {...args} />;
 
 export const TemplateTypes = (args) => (
   <div style={{ display: "flex", gap: "16px" }}>
-    <Button {...args} type={"filled"} />
-    <Button {...args} type={"tinted"} />
-    <Button {...args} type={"outline"} />
-    <Button {...args} type={"basic"} />
+    <Button {...args} btnType={"filled"} />
+    <Button {...args} btnType={"tinted"} />
+    <Button {...args} btnType={"outline"} />
+    <Button {...args} btnType={"basic"} />
   </div>
 );
 
 export const TemplateBorderRadius = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
-      <Button {...args} type={"filled"} borderRadius={"regular"} />
-      <Button {...args} type={"tinted"} borderRadius={"regular"} />
-      <Button {...args} type={"outline"} borderRadius={"regular"} />
-      <Button {...args} type={"basic"} borderRadius={"regular"} />
+      <Button {...args} btnType={"filled"} borderRadius={"regular"} />
+      <Button {...args} btnType={"tinted"} borderRadius={"regular"} />
+      <Button {...args} btnType={"outline"} borderRadius={"regular"} />
+      <Button {...args} btnType={"basic"} borderRadius={"regular"} />
     </div>
     <div style={{ display: "flex", gap: "16px" }}>
       <Button
         {...args}
-        type={"filled"}
+        btnType={"filled"}
         borderRadius={"curved"}
         leadingIcon="user"
       />
       <Button
         {...args}
-        type={"tinted"}
+        btnType={"tinted"}
         borderRadius={"curved"}
         leadingIcon="user"
       />
       <Button
         {...args}
-        type={"outline"}
+        btnType={"outline"}
         borderRadius={"curved"}
         leadingIcon="user"
       />
       <Button
         {...args}
-        type={"basic"}
+        btnType={"basic"}
         borderRadius={"curved"}
         leadingIcon="user"
       />
@@ -55,16 +55,16 @@ export const TemplateBorderRadius = (args) => (
 export const TemplateDisabled = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "12px" }}>
-      <Button {...args} leadingIcon={"user"} type={"filled"} />
-      <Button {...args} leadingIcon={"user"} type={"tinted"} />
-      <Button {...args} leadingIcon={"user"} type={"outline"} />
-      <Button {...args} leadingIcon={"user"} type={"basic"} />
+      <Button {...args} leadingIcon={"user"} btnType={"filled"} />
+      <Button {...args} leadingIcon={"user"} btnType={"tinted"} />
+      <Button {...args} leadingIcon={"user"} btnType={"outline"} />
+      <Button {...args} leadingIcon={"user"} btnType={"basic"} />
     </div>
     <div style={{ display: "flex", gap: "16px" }}>
-      <Button {...args} trailingIcon={"clock"} type={"filled"} />
-      <Button {...args} trailingIcon={"clock"} type={"tinted"} />
-      <Button {...args} trailingIcon={"clock"} type={"outline"} />
-      <Button {...args} trailingIcon={"clock"} type={"basic"} />
+      <Button {...args} trailingIcon={"clock"} btnType={"filled"} />
+      <Button {...args} trailingIcon={"clock"} btnType={"tinted"} />
+      <Button {...args} trailingIcon={"clock"} btnType={"outline"} />
+      <Button {...args} trailingIcon={"clock"} btnType={"basic"} />
     </div>
   </div>
 );
@@ -72,34 +72,34 @@ export const TemplateDisabled = (args) => (
 export const TemplateIcons = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "12px" }}>
-      <Button {...args} leadingIcon={"user"} type={"filled"} />
-      <Button {...args} leadingIcon={"user"} type={"tinted"} />
-      <Button {...args} leadingIcon={"user"} type={"outline"} />
-      <Button {...args} leadingIcon={"user"} type={"basic"} />
+      <Button {...args} leadingIcon={"user"} btnType={"filled"} />
+      <Button {...args} leadingIcon={"user"} btnType={"tinted"} />
+      <Button {...args} leadingIcon={"user"} btnType={"outline"} />
+      <Button {...args} leadingIcon={"user"} btnType={"basic"} />
     </div>
     <div style={{ display: "flex", gap: "16px" }}>
       <Button
         {...args}
         trailingIcon={"clock"}
-        type={"filled"}
+        btnType={"filled"}
         iconStyle={"regular"}
       />
       <Button
         {...args}
         trailingIcon={"clock"}
-        type={"tinted"}
+        btnType={"tinted"}
         iconStyle={"regular"}
       />
       <Button
         {...args}
         trailingIcon={"clock"}
-        type={"outline"}
+        btnType={"outline"}
         iconStyle={"regular"}
       />
       <Button
         {...args}
         trailingIcon={"clock"}
-        type={"basic"}
+        btnType={"basic"}
         iconStyle={"regular"}
       />
     </div>
@@ -117,12 +117,12 @@ export const TemplateSizes = (args) => (
 export const TemplateColors = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
-      <Button {...args} type={"filled"} color="primary" leadingIcon={"user"} />
-      <Button {...args} type={"filled"} color="secondary" />
-      <Button {...args} type={"filled"} color="success" />
-      <Button {...args} type={"filled"} color="warning" />
-      <Button {...args} type={"filled"} color="danger" />
-      <Button {...args} type={"filled"} color="information" />
+      <Button {...args} btnType={"filled"} color="primary" leadingIcon={"user"} />
+      <Button {...args} btnType={"filled"} color="secondary" />
+      <Button {...args} btnType={"filled"} color="success" />
+      <Button {...args} btnType={"filled"} color="warning" />
+      <Button {...args} btnType={"filled"} color="danger" />
+      <Button {...args} btnType={"filled"} color="information" />
       <Button
         {...args}
         type={"filled"}
@@ -131,47 +131,47 @@ export const TemplateColors = (args) => (
       />
     </div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
-      <Button {...args} type={"tinted"} color="primary" />
+      <Button {...args} btnType={"tinted"} color="primary" />
       <Button
         {...args}
         type={"tinted"}
         color="secondary"
         leadingIcon={"user"}
       />
-      <Button {...args} type={"tinted"} color="success" />
-      <Button {...args} type={"tinted"} color="warning" />
-      <Button {...args} type={"tinted"} color="danger" />
+      <Button {...args} btnType={"tinted"} color="success" />
+      <Button {...args} btnType={"tinted"} color="warning" />
+      <Button {...args} btnType={"tinted"} color="danger" />
       <Button
         {...args}
-        type={"tinted"}
+        btnType={"tinted"}
         color="information"
         trailingIcon={"clock"}
       />
       <Button {...args} type={"tinted"} color="neutral" />
     </div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
-      <Button {...args} type={"basic"} color="primary" />
-      <Button {...args} type={"basic"} color="secondary" />
-      <Button {...args} type={"basic"} color="success" leadingIcon={"user"} />
-      <Button {...args} type={"basic"} color="warning" />
-      <Button {...args} type={"basic"} color="danger" trailingIcon={"clock"} />
-      <Button {...args} type={"basic"} color="information" />
-      <Button {...args} type={"basic"} color="neutral" />
+      <Button {...args} btnType={"basic"} color="primary" />
+      <Button {...args} btnType={"basic"} color="secondary" />
+      <Button {...args} btnType={"basic"} color="success" leadingIcon={"user"} />
+      <Button {...args} btnType={"basic"} color="warning" />
+      <Button {...args} btnType={"basic"} color="danger" trailingIcon={"clock"} />
+      <Button {...args} btnType={"basic"} color="information" />
+      <Button {...args} btnType={"basic"} color="neutral" />
     </div>
     <div style={{ display: "flex", gap: "16px" }}>
-      <Button {...args} type={"outline"} color="primary" />
-      <Button {...args} type={"outline"} color="secondary" />
-      <Button {...args} type={"outline"} color="success" />
+      <Button {...args} btnType={"outline"} color="primary" />
+      <Button {...args} btnType={"outline"} color="secondary" />
+      <Button {...args} btnType={"outline"} color="success" />
       <Button
         {...args}
-        type={"outline"}
+        btnType={"outline"}
         color="warning"
         leadingIcon={"user"}
         trailingIcon={"clock"}
       />
-      <Button {...args} type={"outline"} color="danger" />
-      <Button {...args} type={"outline"} color="information" />
-      <Button {...args} type={"outline"} color="neutral" />
+      <Button {...args} btnType={"outline"} color="danger" />
+      <Button {...args} btnType={"outline"} color="information" />
+      <Button {...args} btnType={"outline"} color="neutral" />
     </div>
   </div>
 );
@@ -182,7 +182,7 @@ export const TemplateColors = (args) => (
 import { Button } from "@lanaco/lnc-react-ui";
 ```
 
-<Canvas withSource="open">
+<Canvas>
   <Story
     name="Default"
     args={{
@@ -197,7 +197,7 @@ import { Button } from "@lanaco/lnc-react-ui";
 
 ## Types
 
-`type:` `filled` / `tinted` / `outline` / `basic`
+`btnType:` `filled` / `tinted` / `outline` / `basic`
 
 <Canvas>
   <Story

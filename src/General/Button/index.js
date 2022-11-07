@@ -23,7 +23,7 @@ const Button = React.forwardRef((props, ref) => {
     trailingIcon,
     size,
     borderRadius,
-    type,
+    btnType,
     disabled,
     tabIndex,
     //----------------
@@ -50,7 +50,7 @@ const Button = React.forwardRef((props, ref) => {
     className,
     disabled,
     borderRadius,
-    type,
+    btnType,
   };
 
   const hasLeadingIcon = !isEmpty(leadingIcon);
@@ -86,7 +86,7 @@ const Button = React.forwardRef((props, ref) => {
     );
   };
 
-  if (type === "filled") {
+  if (btnType === "filled") {
     return (
       <FilledButton
         ref={ref}
@@ -99,6 +99,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
+        type={btnType}
         {...rest}
       >
         {renderContent()}
@@ -106,7 +107,7 @@ const Button = React.forwardRef((props, ref) => {
     );
   }
 
-  if (type === "tinted") {
+  if (btnType === "tinted") {
     return (
       <TintedButton
         ref={ref}
@@ -119,6 +120,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
+        type={btnType}
         {...rest}
       >
         {renderContent()}
@@ -126,7 +128,7 @@ const Button = React.forwardRef((props, ref) => {
     );
   }
 
-  if (type === "outline") {
+  if (btnType === "outline") {
     return (
       <OutlineButton
         ref={ref}
@@ -139,6 +141,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
+        type={btnType}
         {...rest}
       >
         {renderContent()}
@@ -146,7 +149,7 @@ const Button = React.forwardRef((props, ref) => {
     );
   }
 
-  if (type === "basic") {
+  if (btnType === "basic") {
     return (
       <BasicButton
         ref={ref}
@@ -159,6 +162,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
+        type={btnType}
         {...rest}
       >
         {renderContent()}
@@ -180,6 +184,7 @@ const Button = React.forwardRef((props, ref) => {
       onKeyDown={onKeyDown}
       hasText={hasText}
       tabIndex={tabIndex}
+      type={btnType}
       {...rest}
     >
       {renderContent()}
@@ -191,7 +196,7 @@ Button.defaultProps = {
   text: "",
   iconStyle: "solid",
   borderRadius: "regular",
-  type: "filled",
+  btnType: "filled",
   disalbed: false,
   tabIndex: 0,
   leadingIcon: null,
@@ -223,7 +228,7 @@ Button.propTypes = {
   /**
    * Different styles
    */
-  type: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
+  btnType: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
   //---------------------------------------------------------------

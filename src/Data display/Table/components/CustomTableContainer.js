@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import theme from "../../../_utils/theme";
+import { useTheme } from "@emotion/react";
 
 const Container = styled.div`
   padding: 10px;
@@ -17,7 +17,8 @@ const Container = styled.div`
 
 const CustomTableContainer = (props) => {
   //--------------------------
-  const { className, size, color, theme } = props;
+  const { className, size, color } = props;
+  const theme = useTheme();
 
   const themeProps = {
     className,
@@ -35,7 +36,6 @@ CustomTableContainer.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-  theme: theme,
 };
 
 CustomTableContainer.propTypes = {
@@ -53,7 +53,6 @@ CustomTableContainer.propTypes = {
     "white",
     "black",
   ]),
-  theme: PropTypes.object.isRequired,
 };
 
 export default CustomTableContainer;

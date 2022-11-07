@@ -69,7 +69,7 @@ const KanbanActionsToolbar = React.forwardRef((props, ref) => {
         {showCreate && (
           <Button
             leadingIcon="plus"
-            type="outline"
+            btnType="outline"
             color={color}
             size={size}
             title={createText}
@@ -86,7 +86,7 @@ const KanbanActionsToolbar = React.forwardRef((props, ref) => {
           control={
             <Button
               text={actionsText}
-              type="outline"
+              btnType="outline"
               trailingIcon={"angle-down"}
               color={color}
               size={size}

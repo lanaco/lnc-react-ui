@@ -7,12 +7,12 @@ import RadioGroup from "./index";
 export const TemplateDefault = (args) => (
   <RadioGroup
     items={[
-      { id: "1", value: "Option 1" },
-      { id: "2", value: "Option 2" },
-      { id: "3", value: "Option 3" },
+      { value: "1", label: "Option 1" },
+      { value: "2", label: "Option 2" },
+      { value: "3", label: "Option 3" },
     ]}
     {...args}
-    id={"rg"}
+    name={"rg"}
   />
 );
 
@@ -20,9 +20,9 @@ export const TemplateRadioProps = (args) => (
   <RadioGroup
     style={{width: "100px"}}
     items={[
-      { id: "1", value: "Option 1" },
-      { id: "2", value: "Option 2" },
-      { id: "3", value: "Option 3" },
+      { value: "1", label: "Option 1" },
+      { value: "2", label: "Option 2" },
+      { value: "3", label: "Option 3" },
     ]}
     radioProps={{labelPosition: "left", label: "label", spaceBetween: true}}
     {...args}
@@ -34,35 +34,35 @@ export const TemplateSizes = (args) => (
   <>
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       size={"small"}
-      id={"rg1"}
+      name={"rg1"}
     />
     <hr />
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       size={"medium"}
-      id={"rg2"}
+      name={"rg2"}
     />
     <hr />
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       size={"large"}
-      id={"rg3"}
+      name={"rg3"}
     />
   </>
 );
@@ -71,79 +71,79 @@ export const TemplateColors = (args) => (
   <>
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       color={"primary"}
-      id={"rg1"}
+      name={"rg1"}
     />
     <hr />
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       color={"secondary"}
-      id={"rg2"}
+      name={"rg2"}
     />
     <hr />
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       color={"success"}
-      id={"rg3"}
+      name={"rg3"}
     />
     <hr />
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       color={"danger"}
-      id={"rg4"}
+      name={"rg4"}
     />
     <hr />
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       color={"warning"}
-      id={"rg5"}
+      name={"rg5"}
     />
     <hr />
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       color={"information"}
-      id={"rg6"}
+      name={"rg6"}
     />
     <hr />
     <RadioGroup
       items={[
-        { id: "1", value: "Option 1" },
-        { id: "2", value: "Option 2" },
-        { id: "3", value: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
       ]}
       {...args}
       color={"neutral"}
-      id={"rg7"}
+      name={"rg7"}
     />
   </>
 );
