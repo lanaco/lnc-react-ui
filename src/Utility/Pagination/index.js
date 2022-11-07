@@ -53,7 +53,7 @@ const Pagination = (props) => {
 
   const theme = useTheme();
 
-  const themeProps = { theme, size, color, type: buttonType };
+  const themeProps = { theme, size, color, btnType: buttonType };
 
   const [page, setPage] = useState(currentPage);
 
