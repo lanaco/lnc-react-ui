@@ -42,7 +42,7 @@ const KanbanFooter = React.memo(
             <IconButton
               onClick={(e) => onLoadMoreCards(e, id)}
               icon="chevron-circle-down"
-              type="outline"
+              btnType="outline"
               style={{ maxWidth: "unset", width: "100%", marginBottom: "8px" }}
             />
           )}
@@ -50,7 +50,7 @@ const KanbanFooter = React.memo(
             <IconButton
               onClick={(e) => onAddNewCard(e, id)}
               icon="plus-circle"
-              type="outline"
+              btnType="outline"
               style={{ maxWidth: "unset", width: "100%", marginBottom: "8px" }}
             />
           )}

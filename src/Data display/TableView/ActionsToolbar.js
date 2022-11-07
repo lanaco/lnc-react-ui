@@ -82,7 +82,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
         {(showCreate && readOnly == false) && (
           <Button
             leadingIcon="plus"
-            type="outline"
+            btnType="outline"
             color={color}
             size={size}
             title={createText}
@@ -99,7 +99,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
           control={
             <Button
               text={actionsText}
-              type="outline"
+              btnType="outline"
               trailingIcon={"angle-down"}
               color={color}
               size={size}

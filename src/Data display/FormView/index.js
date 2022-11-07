@@ -91,7 +91,7 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
     case "number":
       return (
         <NumberInput
-        color={color}
+          color={color}
           size={size}
           name={accessor}
           {...inputProps}
@@ -169,13 +169,15 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
     //     />
     //   );
     case "range":
-        return (<RangeSlider 
+      return (
+        <RangeSlider
           name={accessor}
           color={color}
           size={size}
           {...inputProps}
           defaultValue={value}
-        />);
+        />
+      );
     default:
       return value;
   }
@@ -239,7 +241,7 @@ const FormView = React.forwardRef((props, ref) => {
           key={0}
           leadingIcon={"arrow-circle-left"}
           text={goBackText}
-          type={"outline"}
+          btnType={"outline"}
           style={{ width: "fit-content" }}
           onClick={(e) => handleGoBack(e, data)}
           disabled={disableGoBack}
@@ -255,18 +257,16 @@ const FormView = React.forwardRef((props, ref) => {
               color={errors[item.accessor] ? "danger" : color}
               size={size}
             >
-              
-              {item.type == "custom" ?
-              item.element
-              :
-               getInput(
-                item.type,
-                item.inputProps,
-                item.accessor,
-                data[item.accessor],
-                errors[item.accessor] ? "danger" : color,
-                size
-              )}
+              {item.type == "custom"
+                ? item.element
+                : getInput(
+                    item.type,
+                    item.inputProps,
+                    item.accessor,
+                    data[item.accessor],
+                    errors[item.accessor] ? "danger" : color,
+                    size
+                  )}
             </FormField>
           </FlexGridItem>
         ))}
@@ -276,7 +276,7 @@ const FormView = React.forwardRef((props, ref) => {
           {nextActive && (
             <>
               <IconButton
-                type="outline"
+                btnType="outline"
                 icon="angle-left"
                 disabled={disablePrevious}
                 onClick={(e) => goToPrevious(data, e)}
@@ -286,7 +286,7 @@ const FormView = React.forwardRef((props, ref) => {
           )}
           {previousActive && (
             <IconButton
-              type="outline"
+              btnType="outline"
               icon="angle-right"
               disabled={disableNext}
               onClick={(e) => goToNext(data, e)}
@@ -296,7 +296,7 @@ const FormView = React.forwardRef((props, ref) => {
         <div>
           <Button
             leadingIcon="eraser"
-            type="outline"
+            btnType="outline"
             color="warning"
             text={discardText}
             disabled={disableDiscard}
@@ -305,7 +305,7 @@ const FormView = React.forwardRef((props, ref) => {
           &nbsp;&nbsp;
           <Button
             leadingIcon="floppy-disk"
-            type="tinted"
+            btnType="tinted"
             color="success"
             text={saveText}
             disabled={disableSave}

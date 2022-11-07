@@ -18,9 +18,9 @@ import { useState } from "react";
 export const CustomActionsToolbar = (props) => {
   return (
     <div className={props?.className}>
-      <Button text="Custom Action 1" type="outline" onClick={() => {}} />
+      <Button text="Custom Action 1" btnType="outline" onClick={() => {}} />
       &nbsp;
-      <Button text="Custom Action 2" type="outline" onClick={() => {}} />
+      <Button text="Custom Action 2" btnType="outline" onClick={() => {}} />
     </div>
   );
 };
@@ -96,7 +96,7 @@ export const CustomFooter = (props) => {
     <div style={{ width: "100%" }}>
       <IconButton
         icon="plus-circle"
-        type="outline"
+        btnType="outline"
         style={{ maxWidth: "unset", width: "100%", marginBottom: "8px" }}
       />
     </div>

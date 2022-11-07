@@ -18,10 +18,9 @@ const Button = (props) => {
     iconStyle,
     size,
     borderRadius,
-    type,
+    btnType,
     disabled,
     tabIndex,
-    btnType,
     //----------------
     onFocus,
     onBlur,
@@ -43,7 +42,7 @@ const Button = (props) => {
     className,
     disabled,
     borderRadius,
-    type,
+    btnType,
   };
 
   const getIconClass = () => {
@@ -55,7 +54,7 @@ const Button = (props) => {
     return <StyledIcon className={getIconClass()} />;
   };
 
-  if (type === "filled") {
+  if (btnType === "filled") {
     return (
       <FilledButton
         data-type="filled"
@@ -72,7 +71,7 @@ const Button = (props) => {
     );
   }
 
-  if (type === "tinted") {
+  if (btnType === "tinted") {
     return (
       <TintedButton
         data-type="tinted"
@@ -89,7 +88,7 @@ const Button = (props) => {
     );
   }
 
-  if (type === "outline") {
+  if (btnType === "outline") {
     return (
       <OutlineButton
         data-type="outline"
@@ -106,7 +105,7 @@ const Button = (props) => {
     );
   }
 
-  if (type === "basic") {
+  if (btnType === "basic") {
     return (
       <BasicButton
         data-type="basic"
@@ -144,10 +143,9 @@ Button.defaultProps = {
   icon: "",
   iconStyle: "solid",
   borderRadius: "regular",
-  type: "filled",
+  btnType: "filled",
   disalbed: false,
   tabIndex: 0,
-  btnType: "button",
   //-------------------------
   onBlur: () => {},
   onFocus: () => {},
@@ -166,10 +164,9 @@ Button.propTypes = {
   /**
    * Different styles
    */
-  type: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
+  btnType: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
-  btnType: PropTypes.string,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,

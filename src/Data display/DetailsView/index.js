@@ -89,7 +89,7 @@ const DetailsView = React.forwardRef((props, ref) => {
           key={0}
           leadingIcon={"arrow-circle-left"}
           text={goBackText}
-          type={"outline"}
+          btnType={"outline"}
           style={{ width: "fit-content" }}
           onClick={(e) => handleGoBack(e, data)}
           disabled={disableGoBack}
@@ -112,7 +112,7 @@ const DetailsView = React.forwardRef((props, ref) => {
           {showNext && (
             <>
               <IconButton
-                type="outline"
+                btnType="outline"
                 icon="angle-left"
                 disabled={disablePrevious}
                 onClick={(e) => goToPrevious(data, e)}
@@ -124,7 +124,7 @@ const DetailsView = React.forwardRef((props, ref) => {
           )}
           {showPrevious && (
             <IconButton
-              type="outline"
+              btnType="outline"
               icon="angle-right"
               disabled={disableNext}
               onClick={(e) => goToNext(data, e)}
@@ -135,7 +135,7 @@ const DetailsView = React.forwardRef((props, ref) => {
         </div>
         {showEdit && (
           <IconButton
-            type="outline"
+            btnType="outline"
             icon="pen"
             disabled={disableEdit}
             onClick={(e) => onEdit(data, e)}

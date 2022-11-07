@@ -93,7 +93,7 @@ const Pagination = (props) => {
           {...themeProps}
           borderRadius={borderRadius}
           onClick={(e) => handlePageClick(e, i)}
-          type={"basic"}
+          btnType={"basic"}
           text={i.toString()}
           disabled={disabled}
         />
@@ -106,7 +106,7 @@ const Pagination = (props) => {
         key={page}
         {...themeProps}
         borderRadius={borderRadius}
-        type={currentPageButtonType}
+        btnType={currentPageButtonType}
         text={page.toString()}
         disabled={disabled}
       />
@@ -124,7 +124,7 @@ const Pagination = (props) => {
           {...themeProps}
           borderRadius={borderRadius}
           onClick={(e) => handlePageClick(e, i)}
-          type={"basic"}
+          btnType={"basic"}
           text={i.toString()}
           disabled={disabled}
         />

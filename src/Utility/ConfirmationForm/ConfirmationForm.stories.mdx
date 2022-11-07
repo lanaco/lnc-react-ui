@@ -35,7 +35,7 @@ export const TemplateStatus = (args) => {
         <Button onClick={() => openModal("warning")} color="warning">Warning Status</Button>
         <Button onClick={() => openModal("information")} color="information">Information Status</Button>
       </div>
-      <ConfirmationForm ref={modalRef} color={status} actionsAlignment={"right"} actionsTrack={true} actions={<><Button type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} color={status} actionsAlignment={"right"} actionsTrack={true} actions={<><Button btnType="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button btnType="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -55,7 +55,7 @@ export const TemplateStatusIconString = (args) => {
       <div style={{display: 'flex', gap: '12px'}}>
         <Button onClick={() => openModal("secondary")} color="secondary">Open Modal</Button>
       </div>
-      <ConfirmationForm ref={modalRef} statusIcon="user" color={status} actionsAlignment={"right"} actions={<><Button type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} statusIcon="user" color={status} actionsAlignment={"right"} actions={<><Button btnType="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button btnType="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -76,7 +76,7 @@ export const TemplateStatusElement = (args) => {
       <div style={{display: 'flex', gap: '12px'}}>
         <Button onClick={() => openModal("secondary")} color="secondary">Open Modal</Button>
       </div>
-      <ConfirmationForm ref={modalRef} statusIcon={<Icon icon="user"/>} color={status} actionsAlignment={"right"} actions={<><Button type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} statusIcon={<Icon icon="user"/>} color={status} actionsAlignment={"right"} actions={<><Button btnType="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button btnType="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -89,7 +89,7 @@ export const TemplateCentered = (args) => {
   return (
     <>
       <Button onClick={() => modalRef.current.open()}>Open Modal</Button>
-      <ConfirmationForm ref={modalRef} type={"centered"} actions={<><Button type="tinted" color="secondary">Open</Button><Button type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} type={"centered"} actions={<><Button btnType="tinted" color="secondary">Open</Button><Button btnType="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -149,7 +149,7 @@ Default status icon is set wiht `statusIcon={true}`. Different statuses are defi
         <Button onClick={() => openModal("warning")} color="warning">Warning Status</Button>
         <Button onClick={() => openModal("information")} color="information">Information Status</Button>
       </div>
-      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><Button text="Dismiss" type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} status={status} actionsAlignment={"right"} actionsTrack={true} actions={<><Button text="Dismiss" btnType="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button text="Open" btnType="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -178,7 +178,7 @@ Default statusIcon is shown with `statusIcon={true}`, or not shown with `statusI
       <div style={{display: 'flex', gap: '12px'}}>
         <Button onClick={() => openModal("secondary")} color="secondary">Open Modal</Button>
       </div>
-      <ConfirmationForm ref={modalRef} statusIcon="user" color={status} actionsAlignment={"right"} actions={<><Button type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} statusIcon="user" color={status} actionsAlignment={"right"} actions={<><Button btnType="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button btnType="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -204,7 +204,7 @@ Default statusIcon is shown with `statusIcon={true}`, or not shown with `statusI
       <div style={{display: 'flex', gap: '12px'}}>
         <Button onClick={() => openModal("secondary")} color="secondary">Open Modal</Button>
       </div>
-      <ConfirmationForm ref={modalRef} statusIcon={<Icon icon="user"/>} color={status} actionsAlignment={"right"} actions={<><Button type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button type="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} statusIcon={<Icon icon="user"/>} color={status} actionsAlignment={"right"} actions={<><Button btnType="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button><Button btnType="tinted" color="secondary">Open</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
@@ -225,7 +225,7 @@ Default statusIcon is shown with `statusIcon={true}`, or not shown with `statusI
   return (
     <>
       <Button onClick={() => modalRef.current.open()}>Open Modal</Button>
-      <ConfirmationForm ref={modalRef} type={"centered"} actions={<><Button type="tinted" color="secondary">Open</Button><Button type="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button></>} title={"Payment successful"} {...args}>
+      <ConfirmationForm ref={modalRef} type={"centered"} actions={<><Button btnType="tinted" color="secondary">Open</Button><Button btnType="outline" color="neutral" onClick={() => modalRef.current.close()}>Dismiss</Button></>} title={"Payment successful"} {...args}>
         Your payment has been successfully submitted. We’ve sent you an email
         with all of the details of your order.
       </ConfirmationForm>
