@@ -133,7 +133,7 @@ const Input = styled.input`
 
 const Content = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   background-color: white;
   z-index: 1;
   margin-top: 0.0625rem;
@@ -186,6 +186,7 @@ const DropdownLookup = (props) => {
     theme,
     size,
     color,
+    targetID
   } = props;
 
   const [inFocus, setInFocus] = useState(false);
@@ -309,21 +310,46 @@ const DropdownLookup = (props) => {
   };
 
   const renderSuggestions = () => {
-    const target = document.querySelector("#portal-root");
-    if (options !== null && options.length > 0 && inFocus) {
-      const el = document.createElement("div");
+    const target = (targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID)
+    if (!inFocus) {
+      if (target !== null) {
+        target.innerHTML = "";
+      }
+      return;
+    }
+    const el = document.createElement("div");
 
-      const calculatedWidth = "" + document.querySelector(".ddl_container").getBoundingClientRect().width + "px";
+    const ddlContainerDOMRect = document.querySelector("#ddl_container" + id).getBoundingClientRect();
+    const calculatedWidth = "" + ddlContainerDOMRect.width + "px";
+    const calculatedLeft = "" + ddlContainerDOMRect.left + "px";
+    const calculatedTop = "" + ddlContainerDOMRect.top + "px";
+    el.style = `position: absolute;
+    background-color: white;
+    z-index: 2147483647 !important;
+    transform: translateY( ${heightBySize(size)});
+    left: ${calculatedLeft} !important;
+    top: ${calculatedTop} !important;
+    width: ${calculatedWidth};
+    min-height: ${heightBySize(size)}`;
+
+    if (options !== null && options.length > 0 && inFocus) {
+
+
+
       el.style = `position: absolute;
                   background-color: white;
+                  z-index: 2147483647 !important;
                   transform: translateY( ${heightBySize(size)});
                   overflow: auto;
+                  left: ${calculatedLeft} !important;
+                  top: ${calculatedTop} !important;
                   width: ${calculatedWidth};
                   min-height: ${options.length > 5 ? heightBySize(size, 5) : heightBySize(size, options.length + 1)}`;
 
       if (target !== null) {
         target.appendChild(el);
       }
+
       return (
         ReactDOM.createPortal(
           <FadeIn>
@@ -344,34 +370,33 @@ const DropdownLookup = (props) => {
           </FadeIn>, el)
       );
     }
-    else {
-      if (target !== null) {
-        target.innerHTML = "";
-      }
-    }
 
     let empty = options === null || (options !== null && options.length === 0);
 
     if (inFocus && empty && loading === false && value !== "") {
+      if (target !== null) {
+        target.appendChild(el);
+      };
       return (
-        <FadeIn>
-          <Content {...themeProps} key={0}>
-            <ContentItem
-              {...themeProps}
-              key={0}
-              hover={true}
-              onMouseDown={onBlur}
-            >
-              {notItemsFoundText}
-            </ContentItem>
-          </Content>
-        </FadeIn>
+        ReactDOM.createPortal(
+          <FadeIn>
+            <Content {...themeProps} key={0}>
+              <ContentItem
+                {...themeProps}
+                key={0}
+                hover={true}
+                onMouseDown={onBlur}
+              >
+                {notItemsFoundText}
+              </ContentItem>
+            </Content>
+          </FadeIn>, el)
       );
     }
   };
 
   return (
-    <Container className="ddl_container"{...themeProps}>
+    <Container id={"ddl_container" + id}{...themeProps}>
       <Inner {...themeProps}>
         <InputContainer {...themeProps}>
           <Input
@@ -438,6 +463,7 @@ DropdownLookup.defaultProps = {
   color: "primary",
   value: "",
   notItemsFoundText: "No items found...",
+  targetID: ""
 };
 
 DropdownLookup.propTypes = {
@@ -462,6 +488,7 @@ DropdownLookup.propTypes = {
     "warning",
     "gray",
   ]),
+  targetID: PropTypes.string
 };
 
 export default DropdownLookup;

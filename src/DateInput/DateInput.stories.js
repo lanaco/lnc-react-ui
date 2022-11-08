@@ -7,10 +7,15 @@ export default {
   component: DateInput,
 };
 
-const Template = (args) => <Story {...args} />;
+const Template = (args) => <>
+  <div id="portal-root"></div>
+  <Story {...args} />
+</>;
 
 export const Normal = Template.bind({});
 Normal.args = {
+  targetID: "portal-root",
+  id: "rwar",
   format: "dd.MM.yyyy",
   size: "small",
   color: "primary",

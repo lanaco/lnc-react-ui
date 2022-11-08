@@ -26,4 +26,5 @@ Default.args = {
     { id: 1, value: "prva opcija", key: "prva opcija" },
     { id: 2, value: "druga opcija", key: "druga opcija opcija" },
   ],
+  targetID: "portal-root"
 };
