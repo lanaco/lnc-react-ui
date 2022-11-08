@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import theme from "../_utils/theme";
+import { isEmpty, isNumber } from "lodash";
 import moment from "moment";
+import PropTypes from "prop-types";
+import React, { useEffect, useRef, useState } from "react";
 import Calendar from "react-calendar";
-import { isEmpty, isNumber, isArray } from "lodash";
+import ReactDOM from "react-dom";
+import theme from "../_utils/theme";
 import "./style.css";
 
 const validFormats = [
@@ -90,9 +91,9 @@ const Container = styled.div`
       : props.theme.palette[props.color].lighter};
   border-bottom: 0.125rem solid
     ${(props) =>
-      props.disabled
-        ? props.theme.palette.gray[900]
-        : props.theme.palette[props.color].main};
+    props.disabled
+      ? props.theme.palette.gray[900]
+      : props.theme.palette[props.color].main};
 
   min-height: ${(props) => heightBySize(props.size)};
   max-height: ${(props) => heightBySize(props.size)};
@@ -182,7 +183,7 @@ const Input = styled.input`
 
   &:focus {
     background-color: ${(props) =>
-      props.disabled ? "inherit" : props.theme.palette.common.white};
+    props.disabled ? "inherit" : props.theme.palette.common.white};
     color: ${(props) => props.theme.palette.common.black};
   }
 `;
@@ -226,6 +227,7 @@ const NavigationIcon = styled.i`
 
 const DateInput = React.forwardRef((props, ref) => {
   const {
+    id,
     size,
     color,
     theme,
@@ -239,6 +241,7 @@ const DateInput = React.forwardRef((props, ref) => {
     useCalendar,
     minDate,
     maxDate,
+    targetID
   } = props;
 
   const [date, setDate] = useState(null);
@@ -394,6 +397,12 @@ const DateInput = React.forwardRef((props, ref) => {
     if (openCalendar && inpRef && inpRef.current) {
       inpRef.current.focus();
     }
+    if (!openCalendar) {
+      const target = (targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID);
+      if (target !== null) {
+        target.innerHTML = "";
+      }
+    }
   }, [openCalendar]);
 
   const handleInputOnChange = (e) => {
@@ -481,26 +490,33 @@ const DateInput = React.forwardRef((props, ref) => {
     minMaxDate.maxDate = fromDateStringToJsDate(maxDate);
   }
 
-  return (
-    <Container {...themeProps} className={className}>
-      <Input
-        ref={ref}
-        {...themeProps}
-        type={"text"}
-        onChange={handleInputOnChange}
-        value={text || ""}
-        onBlur={handleInputOnBlur}
-        onFocus={onFocus}
-        placeholder={validateDateFormat() ? format : "yyyy-mm-dd"}
-      />
+  const renderDatePicker = () => {
 
-      {useCalendar && (
-        <CalendarButton {...themeProps} onClick={toggleCalendar}>
-          <Icon {...themeProps} className="fas fa-calendar-alt fa-fw" />
-        </CalendarButton>
-      )}
+    const target = (targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID);
 
-      {useCalendar && openCalendar && (
+    const dpContainerDOMRect = document.querySelector("#dp" + id).getBoundingClientRect();
+
+    const calculatedLeft = "" + dpContainerDOMRect.left + "px";
+    const calculatedTop = "" + dpContainerDOMRect.top + "px";
+    const calculatedWidth = "" + dpContainerDOMRect.width + "px";
+
+
+    const el = document.createElement("div");
+    el.style =
+      `position: absolute;
+    background-color: white;
+    z-index: 2147483647 !important;
+    left: ${calculatedLeft} !important;
+    top: ${calculatedTop} !important;
+    width: ${calculatedWidth} !important;
+    min-height: ${heightBySize(size)}`;
+
+    if (target !== null) {
+      target.appendChild(el);
+    }
+
+    return (
+      ReactDOM.createPortal(
         <CalendarContainer {...themeProps}>
           <HiddenInput ref={inpRef} onBlur={onHiddenInputBlur} />
           <Calendar
@@ -532,7 +548,31 @@ const DateInput = React.forwardRef((props, ref) => {
               />
             }
           />
-        </CalendarContainer>
+        </CalendarContainer>, el)
+    );
+  }
+
+  return (
+    <Container id={"dp" + id} {...themeProps} className={className}>
+      <Input
+        ref={ref}
+        {...themeProps}
+        type={"text"}
+        onChange={handleInputOnChange}
+        value={text || ""}
+        onBlur={handleInputOnBlur}
+        onFocus={onFocus}
+        placeholder={validateDateFormat() ? format : "yyyy-mm-dd"}
+      />
+
+      {useCalendar && (
+        <CalendarButton {...themeProps} onClick={toggleCalendar}>
+          <Icon {...themeProps} className="fas fa-calendar-alt fa-fw" />
+        </CalendarButton>
+      )}
+
+      {useCalendar && openCalendar && (
+        renderDatePicker()
       )}
     </Container>
   );
@@ -543,9 +583,9 @@ DateInput.defaultProps = {
   value: "",
   format: "yyyy-mm-dd",
   disabled: false,
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
+  onChange: () => { },
+  onFocus: () => { },
+  onBlur: () => { },
   useCalendar: true,
   minDate: "",
   maxDate: "",
@@ -554,6 +594,7 @@ DateInput.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
+  targetID: ""
 };
 
 DateInput.propTypes = {
@@ -578,6 +619,7 @@ DateInput.propTypes = {
     "warning",
     "gray",
   ]),
+  targetID: PropTypes.string
 };
 
 export default DateInput;
