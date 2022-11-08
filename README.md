@@ -1,5 +1,7 @@
 # Lanaco ReactJS UI components library
 
+[Deployment](https://lanaco.github.io/lnc-react-ui/?path=/docs/intro--intro)
+
 This library includes basic and advanced UI components used with ReactJS frontend framework
 
 - [Installing](#installing)
@@ -11,7 +13,7 @@ This library includes basic and advanced UI components used with ReactJS fronten
 ## Installing
 
 ```
-$ npm install --save-dev @lanaco/lnc-react-ui
+$ npm install @lanaco/lnc-react-ui
 ```
 
 
