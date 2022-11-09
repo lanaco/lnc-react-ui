@@ -3,7 +3,10 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { isFunction, isEmpty } from "lodash";
 import { useTheme } from "@emotion/react";
-import { getComponentTypographyCss } from "../../../_utils/utils";
+import {
+  getComponentTypographyCss,
+  getColorRgbaValue,
+} from "../../../_utils/utils";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
@@ -11,6 +14,10 @@ const HtmlCell = styled.td`
   text-overflow: ellipsis;
   width: ${(props) => props.width};
   padding: 0.875rem 1.5rem;
+
+  background-color: ${(props) =>
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "background")};
+
   ${(props) => props.bgColor}
 
   ${(props) =>

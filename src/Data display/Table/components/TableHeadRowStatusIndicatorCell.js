@@ -4,25 +4,9 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../../_utils/utils";
 
-const HtmlHeadCellOld = styled.th`
-  text-align: left;
-  transition: all 250ms ease;
-  font-weight: 900;
-  font-size: ${(props) => props.theme.typography[props.size].fontSize};
-  border-bottom: 1px solid ${(props) => props.theme.palette.transparent.light};
-  border-top: 1px solid ${(props) => props.theme.palette.transparent.light};
-
-  &:first-of-type {
-    border-radius: 8px 0 0 0;
-  }
-
-  &:last-of-type {
-    border-radius: 0 8px 0 0;
-  }
-`;
-
 const HtmlHeadCell = styled.th`
   padding: 0.125rem;
+  width: 8px;
 
   background-color: ${(props) =>
     getColorRgbaValue(

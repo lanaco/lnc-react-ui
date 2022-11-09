@@ -4,14 +4,19 @@ import CheckBoxInput from "./index";
 import Icon from "../../General/Icon";
 import Button from "../../General/Button";
 import image from "../../_utils/images/testsvg.svg";
+import { useRef, useState } from "react";
 
 <Meta title="Basic Inputs/Check Box Input" component={CheckBoxInput} />
 
 export const TemplateDefault = (args) => <CheckBoxInput {...args} />;
 
-export const TemplateIndeterminate = (args) => (
-  <CheckBoxInput {...args} indeterminate={true} label="Indeterminate" />
-);
+export const TemplateIndeterminate = (args) => {
+  const checkboxRef = useRef();
+  return <>
+  <CheckBoxInput ref={checkboxRef} {...args} indeterminate={true} label="Indeterminate" />
+  <Button onClick={(e) => { let checkbox = checkboxRef.current; checkbox.indeterminate = true; }}>Set Indeterminate</Button>
+  </>
+};
 
 export const TemplateDisabled = (args) => (
   <>
@@ -33,23 +38,25 @@ export const TemplateDisabled = (args) => (
 
 export const TemplateReadOnly = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
-    <CheckBoxInput {...args} readOnly={true} defaultValue={true} />
+    <CheckBoxInput {...args} readOnly={true} defaultChecked={true} />
     <CheckBoxInput {...args} readOnly={true} />
   </div>
 );
 
-export const TemplateCustom = (args) => (
-  <CheckBoxInput
+export const TemplateCustom = (args) => {
+ const [checked, setChecked] = useState(true);
+ return <CheckBoxInput
     customCheckmark={<img src={image} alt="" />}
     label="Custom"
-    defaultValue={true}
+    checked={checked}
+    onChange={(e) => setChecked(!checked)}
   ></CheckBoxInput>
-);
+};
 
 export const TemplateSpaceBetween = (args) => <>
-<CheckBoxInput label="Label" spaceBetween={true} defaultValue={true} {...args} />
+<CheckBoxInput label="Label" spaceBetween={true} defaultChecked={true} {...args} />
 <hr />
-<CheckBoxInput label="Label" labelPosition="left" spaceBetween={true} defaultValue={true} {...args} />
+<CheckBoxInput label="Label" labelPosition="left" spaceBetween={true} defaultChecked={true} {...args} />
 </>;
 
 
@@ -140,7 +147,7 @@ Defining `size` with `small`, `medium` and `large` values.
   <Story
     name="Sizes"
     args={{
-      defaultValue: true,
+      defaultChecked: true,
     }}
   >
     {TemplateSizes.bind({})}
@@ -156,7 +163,7 @@ Defining `color`
     name="Colors"
     args={{
       size: "small",
-      defaultValue: true,
+      defaultChecked: true,
     }}
   >
     {TemplateColors.bind({})}

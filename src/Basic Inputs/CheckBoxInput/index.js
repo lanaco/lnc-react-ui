@@ -54,8 +54,9 @@ const Container = styled.label`
     position: absolute;
     opacity: 0;
     cursor: pointer;
-    height: 0;
-    width: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
   }
   & .checkmark {
     min-height: ${(props) =>
@@ -95,10 +96,6 @@ const Container = styled.label`
         "disabled",
         "border"
       )}`};
-    ${(props) =>
-      props.focused && !props.disabled && !props.readOnly
-        ? getOutlineCss(props.theme)
-        : ""}
     & svg {
       height: 0;
       width: 0;
@@ -164,7 +161,9 @@ const Container = styled.label`
     }
   }
   & input:disabled ~ .checkmark {
-    ${props => props.readOnly == false && `background-color: ${getColorRgbaValue(
+    ${(props) =>
+      props.readOnly == false &&
+      `background-color: ${getColorRgbaValue(
         props.theme,
         "Checkbox",
         props.color,
@@ -172,13 +171,19 @@ const Container = styled.label`
         "border"
       )};
     border-color: ${getColorRgbaValue(
-        props.theme,
-        "Checkbox",
-        props.color,
-        "disabled",
-        "border"
-      )};
+      props.theme,
+      "Checkbox",
+      props.color,
+      "disabled",
+      "border"
+    )};
     `};
+  }
+  & input:focus ~ .checkmark {
+    ${(props) => getOutlineCss(props.theme)};
+  }
+  & input:active ~ .checkmark {
+    ${(props) => getOutlineCss(props.theme)};
   }
 `;
 
@@ -188,7 +193,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     id,
     name,
     checked,
-    defaultValue,
+    defaultChecked,
     indeterminate,
     disabled,
     readOnly,
@@ -211,45 +216,23 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     children,
     ...rest
   } = props;
-  
-  const checkboxRef = useRef();
 
-  const [focused, setFocused] = useState(false);
   const theme = useTheme();
-  var themeProps = { theme, size, color, disabled, readOnly, focused };
+  var themeProps = { theme, size, color, disabled, readOnly };
 
   const [checkBoxChecked, setCheckBoxChecked] = useState(
-    (checked == true || checked == false) ? checked : defaultValue
+    checked == true || checked == false ? checked : defaultChecked
   );
-
-  useEffectOnce(() => {
-    let checkbox = ref?.current ? ref.current : checkboxRef?.current;
-    if(checkbox && indeterminate == true) checkbox.indeterminate = true;
-  })
 
   useUpdateEffect(() => {
     setCheckBoxChecked(checked ? checked : false);
   }, [checked]);
 
-  //Expose functions through ref
-  useImperativeHandle(ref, () => ({
-    setIndeterminate() {
-        setIndeterminate();
-    },
-  }));
-
-  const setIndeterminate = () => {
-    let checkbox = ref?.current ? ref.current : checkboxRef?.current;
-    if(checkbox && indeterminate == true) checkbox.indeterminate = true;
-  };
-
   const handleOnBlur = (e) => {
-    setFocused(false);
     if (onBlur) onBlur(e);
   };
 
   const handleOnFocus = (e) => {
-    setFocused(true);
     if (onFocus) onFocus(e);
   };
 
@@ -269,10 +252,10 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       {...rest}
     >
       {/* Controlled input and uncotrolled input must be differentiated because of usage of the value property */}
-      {checkBoxChecked == true || checkBoxChecked == false ? (
+      {checked == true || checked == false ? (
         <input
           type="checkbox"
-          ref={ref ? ref : checkboxRef}
+          ref={ref}
           tabIndex={tabIndex}
           onBlur={handleOnBlur}
           onFocus={handleOnFocus}
@@ -284,17 +267,17 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       ) : (
         <input
           type="checkbox"
-          ref={ref ? ref : checkboxRef}
+          ref={ref}
           tabIndex={tabIndex}
           onBlur={handleOnBlur}
           onFocus={handleOnFocus}
-          defaultValue={defaultValue}
+          defaultChecked={defaultChecked}
           disabled={disabled || readOnly}
           onChange={onChange}
           {...inputProps}
         />
       )}
-      <div className="checkmark">
+      <div className="checkmark" tabIndex={-1}>
         {!customCheckmark && (
           <svg
             viewBox="0 0 8 6"
@@ -338,10 +321,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
         {customCheckmark && <>{customCheckmark}</>}
       </div>
       {label && (
-        <div
-          className="checkbox-label"
-          tabIndex={-1}
-        >
+        <div className="checkbox-label" tabIndex={-1}>
           {label}
         </div>
       )}
@@ -375,7 +355,7 @@ CheckBoxInput.propTypes = {
   containerRef: PropTypes.any,
   id: PropTypes.any,
   name: PropTypes.string,
-  defaultValue: PropTypes.bool,
+  defaultChecked: PropTypes.bool,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
