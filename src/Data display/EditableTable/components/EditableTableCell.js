@@ -149,7 +149,7 @@ const EditableTableCell = (props) => {
       debounceTime: 0,
       ...Column.inputProps,
       value: RowData[Column.accessor],
-      checked: RowData[Column.accessor],
+      defaultChecked: RowData[Column.accessor],
       focused: focused,
       onChange: standardOnChange,
       onBlur: (e) => onSetFocus(e, false),
