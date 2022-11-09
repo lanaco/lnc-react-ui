@@ -46,13 +46,14 @@ const LoaderContainerTransparent = styled.div`
   overflow: auto;
   z-index: 1000;
   opacity: 0.7;
-  background-color: ${props => getColorRgbaValue(
-    props.theme,
-    "Background",
-    "primary",
-    "enabled",
-    "background"
-  )};
+  background-color: ${(props) =>
+    getColorRgbaValue(
+      props.theme,
+      "Background",
+      "primary",
+      "enabled",
+      "background"
+    )};
   filter: alpha(opacity=10);
   display: flex;
   align-items: center;
@@ -67,7 +68,15 @@ const HtmlTable = styled.table`
   border-radius: 0.5rem;
   border-style: hidden;
   table-layout: fixed;
-  ${props => props.noBorder == false && `box-shadow: 0 0 0 0.0625rem ${getColorRgbaValue(props.theme, "Table", null, "enabled", "border")};`}
+  ${(props) =>
+    props.noBorder == false &&
+    `box-shadow: 0 0 0 0.0625rem ${getColorRgbaValue(
+      props.theme,
+      "Table",
+      null,
+      "enabled",
+      "border"
+    )};`}
 `;
 
 const NoDataRow = styled.span`
@@ -548,7 +557,9 @@ const Table = forwardRef((props, ref) => {
           {renderCustomElement(
             getCustomRender("TABLE_ROW_STATUS_INDICATOR_CELL", props.children),
             cellProps
-          ) || <TableRowStatusIndicatorCell {...cellProps} noBorder={noBorder}/>}
+          ) || (
+            <TableRowStatusIndicatorCell {...cellProps} noBorder={noBorder} />
+          )}
         </>
       );
 

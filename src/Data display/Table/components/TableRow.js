@@ -5,15 +5,6 @@ import { getColorRgbaValue } from "../../../_utils/utils";
 import { useTheme } from "@emotion/react";
 
 const HtmlRow = styled.tr`
-& > td {
-  background-color: ${props => getColorRgbaValue(
-    props.theme,
-    "TableRow",
-    null,
-    "enabled",
-    "background"
-  )};
-}
   ${(props) =>
     props.noBorder == false &&
     `border-bottom: 1px solid ${getColorRgbaValue(
@@ -93,7 +84,7 @@ const TableRow = (props) => {
     size,
     color,
   } = props;
-  
+
   const theme = useTheme();
   const themeProps = {
     className,
