@@ -109,6 +109,16 @@ const Tab = styled.div`
         "hover"
       )};
   }
+  &:active {
+    background: ${props => getColorRgbaValue(
+      props.theme,
+      getTypeName(props.type),
+      props.color,
+      "active",
+      "background",
+      "backgroundOpacity"
+    )};
+  }
 `;
 
 const getTypeName = (type) => {
