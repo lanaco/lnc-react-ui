@@ -22,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Font Awesome 5 Free";
   }
 
+  &:active {
+    background: unset;
+  }
+
   & .lnc-doc {
     & th {
       background-color: ${(props) =>

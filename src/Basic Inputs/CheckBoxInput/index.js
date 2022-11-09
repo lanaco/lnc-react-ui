@@ -58,6 +58,14 @@ const Container = styled.label`
     width: 100%;
     z-index: 3;
   }
+  & input:focus {
+    outline: none;
+    background: transparent;
+  }
+  & input:active {
+    outline: none;
+    background: transparent;
+  }
   & .checkmark {
     min-height: ${(props) =>
       props.theme.components.Checkbox.default.enabled.sizes[props.size]};

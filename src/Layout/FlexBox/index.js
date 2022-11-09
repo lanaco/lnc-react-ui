@@ -9,6 +9,8 @@ const StyledFlexbox = styled.div`
   flex-wrap: ${(props) => WrapMap[props.wrap]};
   justify-content: ${(props) => JustifyMap[props.justifyContent]};
   align-items: ${(props) => AlignMap[props.alignItems]};
+  column-gap: ${(props) => (props.columnGap ? props.columnGap : props.gap)};
+  row-gap: ${(props) => (props.rowGap ? props.rowGap : props.gap)};
 `;
 
 const FlexBox = React.forwardRef((props, ref) => {
@@ -33,9 +35,13 @@ FlexBox.defaultProps = {
   wrap: "NoWrap",
   justifyContent: "Start",
   alignItems: "Stretch",
+  gap: "0",
 };
 
 FlexBox.propTypes = {
+  rowGap: PropTypes.string,
+  columnGap: PropTypes.string,
+  gap: PropTypes.string,
   /**
    * Controls the direction of items in FlexBox.
    */
