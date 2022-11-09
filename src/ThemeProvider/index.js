@@ -17,13 +17,10 @@ const GlobalStyle = createGlobalStyle`
 
   box-sizing: border-box;
   font-family: ${(props) => props.theme?.typography?.fontFamily};
-  
+  -webkit-tap-highlight-color: transparent;
+
   & i {
     font-family: "Font Awesome 5 Free";
-  }
-
-  &:active {
-    background: unset;
   }
 
   & .lnc-doc {
