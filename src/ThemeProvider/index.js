@@ -102,16 +102,22 @@ export const useTheme = () => {
 };
 
 const ThemeProvider = ({ theme, children }) => {
-  const [currentTheme, setCurrentTheme] = useState(
-    themes?.find((item) => item.name == theme)
-  );
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    typeof theme == "string"
+      ? themes?.find((item) => item.name == theme)
+      : theme;
+  });
 
   useEffect(() => {
-    setCurrentTheme(themes?.find((item) => item.name == theme));
+    if (typeof theme == "string")
+      setCurrentTheme(themes?.find((item) => item.name == theme));
+    else setCurrentTheme(theme);
   }, [theme]);
 
   const switchTheme = (name) => {
-    setCurrentTheme(themes?.find((item) => item.name == name));
+    if (typeof theme == "string")
+      setCurrentTheme(themes?.find((item) => item.name == theme));
+    else setCurrentTheme(theme);
   };
 
   return (
@@ -131,7 +137,7 @@ ThemeProvider.defaultProps = {
 };
 
 ThemeProvider.propTypes = {
-  theme: PropTypes.string,
+  theme: PropTypes.oneOfType[(PropTypes.string, PropTypes.object)],
 };
 
 export default ThemeProvider;
