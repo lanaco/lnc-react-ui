@@ -114,10 +114,6 @@ const ThemeProvider = ({ theme, children }) => {
     else setCurrentTheme(theme);
   }, [theme]);
 
-  useEffect(() => {
-    console.log("current", currentTheme);
-  }, [currentTheme]);
-
   const switchTheme = (name) => {
     if (typeof theme == "string")
       setCurrentTheme(themes?.find((item) => item.name == theme));
