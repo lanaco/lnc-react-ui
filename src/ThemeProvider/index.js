@@ -103,7 +103,7 @@ export const useTheme = () => {
 
 const ThemeProvider = ({ theme, children }) => {
   const [currentTheme, setCurrentTheme] = useState(() => {
-    typeof theme == "string"
+    return typeof theme == "string"
       ? themes?.find((item) => item.name == theme)
       : theme;
   });
@@ -137,7 +137,7 @@ ThemeProvider.defaultProps = {
 };
 
 ThemeProvider.propTypes = {
-  theme: PropTypes.oneOfType[(PropTypes.string, PropTypes.object)],
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 export default ThemeProvider;
