@@ -99,7 +99,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
-        type={btnType}
+        btnType={btnType}
         {...rest}
       >
         {renderContent()}
@@ -120,7 +120,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
-        type={btnType}
+        btnType={btnType}
         {...rest}
       >
         {renderContent()}
@@ -141,7 +141,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
-        type={btnType}
+        btnType={btnType}
         {...rest}
       >
         {renderContent()}
@@ -162,7 +162,7 @@ const Button = React.forwardRef((props, ref) => {
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
-        type={btnType}
+        btnType={btnType}
         {...rest}
       >
         {renderContent()}
@@ -184,7 +184,7 @@ const Button = React.forwardRef((props, ref) => {
       onKeyDown={onKeyDown}
       hasText={hasText}
       tabIndex={tabIndex}
-      type={btnType}
+      btnType={btnType}
       {...rest}
     >
       {renderContent()}
