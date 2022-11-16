@@ -80,7 +80,6 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        type={btnType}
         {...rest}
       >
         {renderIcon()}
@@ -97,7 +96,6 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        type={btnType}
         {...rest}
       >
         {renderIcon()}
@@ -114,7 +112,6 @@ const Button = (props) => {
         onBlur={onBlur}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        type={btnType}
         {...rest}
       >
         {renderIcon()}
@@ -131,7 +128,6 @@ const Button = (props) => {
       onBlur={onBlur}
       onClick={onClick}
       onKeyDown={onKeyDown}
-      type={btnType}
       {...rest}
     >
       {renderIcon()}

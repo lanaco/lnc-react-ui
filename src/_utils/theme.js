@@ -7959,7 +7959,7 @@ export const lanaco_e_commerce = {
     },
     ButtonBasic: {
       default: {
-        palette: "gray",
+        palette: "turquoise",
         enabled: {
           border: 900,
           borderOpacity: 100,
@@ -7973,7 +7973,7 @@ export const lanaco_e_commerce = {
           borderOpacity: 100,
           background: 900,
           backgroundOpacity: 50,
-          text: 600,
+          text: 100,
           fontWeight: 700,
         },
         focus: {
@@ -7981,7 +7981,7 @@ export const lanaco_e_commerce = {
           borderOpacity: 100,
           background: 900,
           backgroundOpacity: 50,
-          text: 600,
+          text: 100,
           fontWeight: 700,
         },
         active: {
@@ -7989,7 +7989,7 @@ export const lanaco_e_commerce = {
           borderOpacity: 100,
           background: 900,
           backgroundOpacity: 100,
-          text: 600,
+          text: 100,
           fontWeight: 700,
         },
         disabled: {
@@ -8053,13 +8053,10 @@ export const lanaco_e_commerce = {
           text: 600,
         },
         hover: {
-          text: 600,
         },
         focus: {
-          text: 600,
         },
         active: {
-          text: 600,
         },
         disabled: {
           text: 400,

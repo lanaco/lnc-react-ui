@@ -1,0 +1,183 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import SwipeableDrawer from "./index";
+import { useState, useRef } from "react";
+import Button from "../../General/Button";
+import IconButton from "../../General/IconButton";
+
+<Meta title="Utility/Swipeable Drawer" component={SwipeableDrawer} />
+
+# Swipeable Drawer
+
+```jsx
+import { SwipeableDrawer } from "@lanaco/lnc-react-ui";
+```
+
+##### To close on swipe try it on phone.
+---
+
+<Story name="Default" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <SwipeableDrawer ref={drawerRef} {...args}>
+          This is Drawer
+        </SwipeableDrawer>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+{
+  (args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <SwipeableDrawer ref={drawerRef} {...args}>
+          This is Drawer
+        </SwipeableDrawer>
+      </>
+    );
+  };
+}
+```
+
+<ArgsTable story="Default" />
+
+## Direction
+
+<Story name="Direction" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const [direction, setDirection] = useState("right");
+    const openDrawer = (dir) => {
+      setDirection(dir);
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={() => openDrawer("right")}>Right</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("left")}>Left</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("top")}>Top</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
+        <SwipeableDrawer ref={drawerRef} direction={direction} {...args}>
+          Swipe{" "}
+          <strong>
+            {direction == "top"
+              ? "up"
+              : direction === "bottom"
+              ? "down"
+              : direction}
+          </strong>{" "}
+          to close
+        </SwipeableDrawer>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+(args) => {
+  const drawerRef = useRef();
+  const [direction, setDirection] = useState("right");
+  const openDrawer = (dir) => {
+    setDirection(dir);
+    drawerRef?.current?.open();
+  };
+  return (
+    <>
+      <Button onClick={() => openDrawer("right")}>Right</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("left")}>Left</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("top")}>Top</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
+      <SwipeableDrawer ref={drawerRef} direction={direction} {...args}>
+        Swipe{" "}
+        {direction == "top"
+          ? "up"
+          : direction === "bottom"
+          ? "down"
+          : direction}{" "}
+        to close
+      </SwipeableDrawer>
+    </>
+  );
+};
+```
+
+## Full Page Swipeable Drawer
+
+<Story name="Full Page" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <SwipeableDrawer
+          ref={drawerRef}
+          isFullPage={true}
+          direction={"bottom"}
+          {...args}
+        >
+          Swipe <strong>down</strong> to close
+          <IconButton
+            style={{ position: "absolute", right: "10px" }}
+            btnType="outline"
+            color="neutral"
+            icon="times"
+            onClick={() => drawerRef.current.close()}
+          />
+        </SwipeableDrawer>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+{
+  (args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <SwipeableDrawer
+          ref={drawerRef}
+          isFullPage={true}
+          direction={"bottom"}
+          {...args}
+        >
+          Swipe <strong>down</strong> to close
+          <IconButton
+            style={{ position: "absolute", right: "10px" }}
+            btnType="outline"
+            color="neutral"
+            icon="times"
+            onClick={() => drawerRef.current.close()}
+          />
+        </SwipeableDrawer>
+      </>
+    );
+  };
+}
+```

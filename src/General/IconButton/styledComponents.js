@@ -80,14 +80,14 @@ export const FilledButton = styled.button`
         "disabled",
         "background"
       )};
-      color: ${(props) =>
-        getColorRgbaValue(
-          props.theme,
-          "ButtonFilled",
-          props.color,
-          "disabled",
-          "text"
-        )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonFilled",
+        props.color,
+        "disabled",
+        "text"
+      )};
   }
 
   &:hover {
@@ -142,14 +142,14 @@ export const FilledButton = styled.button`
         "active",
         "background"
       )};
-      color: ${(props) =>
-        getColorRgbaValue(
-          props.theme,
-          "ButtonFilled",
-          props.color,
-          "active",
-          "text"
-        )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonFilled",
+        props.color,
+        "active",
+        "text"
+      )};
   }
 `;
 
@@ -330,6 +330,14 @@ export const BasicButton = styled.button`
         "background",
         "backgroundOpacity"
       )};
+      color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "ButtonBasic",
+          props.color,
+          "hover",
+          "text"
+        )};
   }
 
   &:focus {
@@ -343,7 +351,8 @@ export const BasicButton = styled.button`
         "background",
         "backgroundOpacity"
       )};
-
+color: ${(props) =>
+  getColorRgbaValue(props.theme, "ButtonBasic", props.color, "hover", "text")};
     ${(props) => !props.disabled && getOutlineCss(props.theme)};
   }
 
