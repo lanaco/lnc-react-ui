@@ -154,6 +154,8 @@ export { default as Pagination } from "./Utility/Pagination";
 
 export { default as Popover } from "./Utility/Popover";
 
+export { default as SwipeableDrawer } from "./Utility/SwipeableDrawer";
+
 export { default as TreeMenu } from "./Utility/TreeMenu";
 
 //======================== THEME ==============================================================
