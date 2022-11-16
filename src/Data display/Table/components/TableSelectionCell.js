@@ -4,10 +4,13 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import Checkbox from "../../../Basic Inputs/CheckBoxInput/index";
 import { useState } from "react";
+import { getColorRgbaValue } from "../../../_utils/utils";
 
 const HtmlCell = styled.td`
   padding: 0 0 0 1.25rem;
-  background-color: transparent;
+  background-color: ${(props) =>
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "background")};
+
   width: ${(props) => props.width}%;
   ${(props) => props.bgColor}
 `;
