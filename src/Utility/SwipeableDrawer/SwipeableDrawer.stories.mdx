@@ -1,16 +1,20 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Drawer2 from "./index";
+import SwipeableDrawer from "./index";
 import { useState, useRef } from "react";
 import Button from "../../General/Button";
+import IconButton from "../../General/IconButton";
 
-<Meta title="Utility/Drawer 2" component={Drawer2} />
+<Meta title="Utility/Swipeable Drawer" component={SwipeableDrawer} />
 
-# Drawer2
+# Swipeable Drawer
 
 ```jsx
-import { Drawer2 } from "@lanaco/lnc-react-ui";
+import { SwipeableDrawer } from "@lanaco/lnc-react-ui";
 ```
+
+##### To close on swipe try it on phone.
+---
 
 <Story name="Default" args={{}}>
   {(args) => {
@@ -21,41 +25,9 @@ import { Drawer2 } from "@lanaco/lnc-react-ui";
     return (
       <>
         <Button onClick={openDrawer}>Open Drawer</Button>
-        <Drawer2 ref={drawerRef} {...args}>
+        <SwipeableDrawer ref={drawerRef} {...args}>
           This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-          This is Drawer
-          <br />
-          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
-        </Drawer2>
+        </SwipeableDrawer>
       </>
     );
   }}
@@ -71,9 +43,9 @@ import { Drawer2 } from "@lanaco/lnc-react-ui";
     return (
       <>
         <Button onClick={openDrawer}>Open Drawer</Button>
-        <Drawer ref={drawerRef} {...args}>
+        <SwipeableDrawer ref={drawerRef} {...args}>
           This is Drawer
-        </Drawer>
+        </SwipeableDrawer>
       </>
     );
   };
@@ -101,9 +73,17 @@ import { Drawer2 } from "@lanaco/lnc-react-ui";
         <Button onClick={() => openDrawer("top")}>Top</Button>
         &nbsp;&nbsp;
         <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
-        <Drawer2 ref={drawerRef} direction={direction} {...args}>
-          This is Drawer
-        </Drawer2>
+        <SwipeableDrawer ref={drawerRef} direction={direction} {...args}>
+          Swipe{" "}
+          <strong>
+            {direction == "top"
+              ? "up"
+              : direction === "bottom"
+              ? "down"
+              : direction}
+          </strong>{" "}
+          to close
+        </SwipeableDrawer>
       </>
     );
   }}
@@ -126,10 +106,78 @@ import { Drawer2 } from "@lanaco/lnc-react-ui";
       <Button onClick={() => openDrawer("top")}>Top</Button>
       &nbsp;&nbsp;
       <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
-      <Drawer ref={drawerRef} direction={direction} {...args}>
-        This is Drawer
-      </Drawer>
+      <SwipeableDrawer ref={drawerRef} direction={direction} {...args}>
+        Swipe{" "}
+        {direction == "top"
+          ? "up"
+          : direction === "bottom"
+          ? "down"
+          : direction}{" "}
+        to close
+      </SwipeableDrawer>
     </>
   );
 };
+```
+
+## Full Page Swipeable Drawer
+
+<Story name="Full Page" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <SwipeableDrawer
+          ref={drawerRef}
+          isFullPage={true}
+          direction={"bottom"}
+          {...args}
+        >
+          Swipe <strong>down</strong> to close
+          <IconButton
+            style={{ position: "absolute", right: "10px" }}
+            btnType="outline"
+            color="neutral"
+            icon="times"
+            onClick={() => drawerRef.current.close()}
+          />
+        </SwipeableDrawer>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+{
+  (args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <SwipeableDrawer
+          ref={drawerRef}
+          isFullPage={true}
+          direction={"bottom"}
+          {...args}
+        >
+          Swipe <strong>down</strong> to close
+          <IconButton
+            style={{ position: "absolute", right: "10px" }}
+            btnType="outline"
+            color="neutral"
+            icon="times"
+            onClick={() => drawerRef.current.close()}
+          />
+        </SwipeableDrawer>
+      </>
+    );
+  };
+}
 ```

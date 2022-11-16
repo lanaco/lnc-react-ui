@@ -3,12 +3,6 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 
-// import component
-import ReactDrawer from "react-modern-drawer";
-
-//import styles
-import "react-modern-drawer/dist/index.css";
-import { useUpdateEffect } from "react-use";
 import { useImperativeHandle } from "react";
 import {
   getColorRgbaValue,
