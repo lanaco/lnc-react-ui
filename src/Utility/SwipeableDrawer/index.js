@@ -8,7 +8,7 @@ import {
   getColorRgbaValue,
   getComponentTypographyCss,
 } from "../../_utils/utils";
-import OutsideClickHandler from "react-outside-click-handler";
+import { useEffect } from "react";
 import { useRef } from "react";
 
 const getHeight = (direction, isOpen, isFullPage, drawerSize) => {
@@ -111,16 +111,14 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
   } = props;
   const theme = useTheme();
 
+  const drawerRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
 
   var xDown = null;
   var yDown = null;
 
   function getTouches(evt) {
-    return (
-      evt.touches || 
-      evt.originalEvent.touches
-    ); 
+    return evt.touches || evt.originalEvent.touches;
   }
 
   function handleTouchStart(evt) {
@@ -130,7 +128,6 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
   }
 
   function handleTouchMove(evt) {
-
     if (!xDown || !yDown) {
       return;
     }
@@ -188,6 +185,21 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
     if (closeOnClickOutside) closeDrawer();
   };
 
+  //Outside click handling
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (drawerRef?.current && !drawerRef?.current.contains(event.target)) {
+        if (closeOnClickOutside == true) closeDrawer();
+      }
+    };
+    //Fired on component mount
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      //Fired on component unmount
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
+
   return (
     <>
       <StyledOverlay
@@ -196,25 +208,24 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
         isOpen={isOpen}
         zIndex={zIndex}
       >
-        <OutsideClickHandler onOutsideClick={handleClickOutside}>
-          <StyledDrawer
-            zIndex={zIndex}
-            isOpen={isOpen}
-            direction={direction}
-            isFullPage={isFullPage}
-            duration={duration}
-            color={color}
-            theme={theme}
-            style={{ backgroundColor: "gray" }}
-            size={size}
-            drawerSize={drawerSize}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            {...rest}
-          >
-            {children}
-          </StyledDrawer>
-        </OutsideClickHandler>
+        <StyledDrawer
+          ref={drawerRef}
+          zIndex={zIndex}
+          isOpen={isOpen}
+          direction={direction}
+          isFullPage={isFullPage}
+          duration={duration}
+          color={color}
+          theme={theme}
+          style={{ backgroundColor: "gray" }}
+          size={size}
+          drawerSize={drawerSize}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          {...rest}
+        >
+          {children}
+        </StyledDrawer>
       </StyledOverlay>
     </>
   );

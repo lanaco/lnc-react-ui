@@ -148,6 +148,12 @@ export { default as Drawer } from "./Utility/Drawer";
 
 export { default as DropdownMenu } from "./Utility/DropdownMenu";
 
+export { default as DropdownItem } from "./Utility/DropdownMenu/DropdownItem";
+
+export { default as NestedDropdownItem } from "./Utility/DropdownMenu/NestedDropdownItem";
+
+export { default as Separator } from "./Utility/DropdownMenu/Separator";
+
 export { default as Modal } from "./Utility/Modal";
 
 export { default as Pagination } from "./Utility/Pagination";
@@ -157,6 +163,12 @@ export { default as Popover } from "./Utility/Popover";
 export { default as SwipeableDrawer } from "./Utility/SwipeableDrawer";
 
 export { default as TreeMenu } from "./Utility/TreeMenu";
+
+export { default as MenuItem } from "./Utility/TreeMenu/MenuItem";
+
+export { default as NestedMenuItem } from "./Utility/TreeMenu/NestedMenuItem";
+
+export { default as TreeMenuSeparator } from "./Utility/TreeMenu/Separator";
 
 //======================== THEME ==============================================================
 

@@ -9,7 +9,6 @@ import {
   getComponentPropValue,
 } from "../../_utils/utils";
 import { useImperativeHandle } from "react";
-import OutsideClickHandler from "react-outside-click-handler";
 
 const StyledPopover = styled.div`
   box-sizing: border-box;
@@ -328,12 +327,22 @@ const Popover = React.forwardRef((props, ref) => {
     return element.getBoundingClientRect();
   };
 
-  const handleClickOutside = (e) => {
-    if (closeOnClickOutside == true) close();
-  };
+  //Outside click handling
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef?.current && !popoverRef?.current.contains(event.target)) {
+        if (closeOnClickOutside == true) close();
+      }
+    };
+    //Fired on component mount
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      //Fired on component unmount
+       document.removeEventListener('click', handleClickOutside, true);
+    }
+  }, [])
 
   return createPortal(
-    <OutsideClickHandler onOutsideClick={handleClickOutside}>
       <StyledPopover
         theme={theme}
         ref={popoverRef}
@@ -347,8 +356,7 @@ const Popover = React.forwardRef((props, ref) => {
       >
         {children}
       </StyledPopover>
-    </OutsideClickHandler>,
-    popoverContainer
+    ,popoverContainer
   );
 });
 
@@ -391,4 +399,4 @@ Popover.propTypes = {
   style: PropTypes.object,
 };
 
-export default Popover;
+export default React.memo(Popover);
