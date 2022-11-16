@@ -1,0 +1,135 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Drawer2 from "./index";
+import { useState, useRef } from "react";
+import Button from "../../General/Button";
+
+<Meta title="Utility/Drawer 2" component={Drawer2} />
+
+# Drawer2
+
+```jsx
+import { Drawer2 } from "@lanaco/lnc-react-ui";
+```
+
+<Story name="Default" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <Drawer2 ref={drawerRef} {...args}>
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+          This is Drawer
+          <br />
+          Drawer <br /> Draer <br /> Hello <br /> What Drawer <br /> 
+        </Drawer2>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+{
+  (args) => {
+    const drawerRef = useRef();
+    const openDrawer = () => {
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={openDrawer}>Open Drawer</Button>
+        <Drawer ref={drawerRef} {...args}>
+          This is Drawer
+        </Drawer>
+      </>
+    );
+  };
+}
+```
+
+<ArgsTable story="Default" />
+
+## Direction
+
+<Story name="Direction" args={{}}>
+  {(args) => {
+    const drawerRef = useRef();
+    const [direction, setDirection] = useState("right");
+    const openDrawer = (dir) => {
+      setDirection(dir);
+      drawerRef?.current?.open();
+    };
+    return (
+      <>
+        <Button onClick={() => openDrawer("right")}>Right</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("left")}>Left</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("top")}>Top</Button>
+        &nbsp;&nbsp;
+        <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
+        <Drawer2 ref={drawerRef} direction={direction} {...args}>
+          This is Drawer
+        </Drawer2>
+      </>
+    );
+  }}
+</Story>
+
+```jsx
+(args) => {
+  const drawerRef = useRef();
+  const [direction, setDirection] = useState("right");
+  const openDrawer = (dir) => {
+    setDirection(dir);
+    drawerRef?.current?.open();
+  };
+  return (
+    <>
+      <Button onClick={() => openDrawer("right")}>Right</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("left")}>Left</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("top")}>Top</Button>
+      &nbsp;&nbsp;
+      <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
+      <Drawer ref={drawerRef} direction={direction} {...args}>
+        This is Drawer
+      </Drawer>
+    </>
+  );
+};
+```
