@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Button from "../../General/Button";
 import Popover from "../Popover";
-import OutsideClickHandler from "react-outside-click-handler";
 import { getColorRgbaValue } from "../../_utils/utils";
 import { useTheme } from "../../ThemeProvider";
+import { useEffect } from "react";
 
 const StyledDropDown = styled.div``;
 
@@ -14,9 +14,9 @@ const PopoverContent = styled.div`
   gap: 0.25rem;
   display: flex;
   flex-direction: column;
-  ${(props) =>
-    props.widthFitContent == false && "min-width: 12.5rem"};
-  background-color: ${props =>  getColorRgbaValue(
+  ${(props) => props.widthFitContent == false && "min-width: 12.5rem"};
+  background-color: ${(props) =>
+    getColorRgbaValue(
       props.theme,
       "Dropdown",
       props.color,
@@ -127,14 +127,18 @@ const DropdownMenu = React.forwardRef((props, ref) => {
 
   const handleOnClick = (e) => {
     if (openOnClick && !openOnHover) {
-      popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open();
+      popoverRef?.current?.isOpen()
+        ? popoverRef?.current?.close()
+        : popoverRef?.current?.open();
     }
 
     onClick(e);
   };
   const handleOnMouseEnter = (e) => {
     if (openOnHover == true) {
-      popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open();
+      popoverRef?.current?.isOpen()
+        ? popoverRef?.current?.close()
+        : popoverRef?.current?.open();
     }
 
     onMouseEnter(e);
@@ -149,12 +153,25 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     onKeyDown(e);
   };
 
-  const handleClickOutside = (e) => {
-    //ignore if click is on control
-    if (e.target?.attributes?.["data-control"]) return;
-
-    popoverRef?.current?.close();
-  };
+  //Outside click handling
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuContentRef?.current &&
+        !menuContentRef?.current?.contains(event.target)
+      ) {
+        //ignore if click is on control
+        if (!event.target?.attributes?.["data-control"])
+          popoverRef?.current?.close();
+      }
+    };
+    //Fired on component mount
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      //Fired on component unmount
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
 
   return (
     <StyledDropDown ref={ref} {...rest}>
@@ -169,16 +186,14 @@ const DropdownMenu = React.forwardRef((props, ref) => {
         closeOnClickOutside={false} //dropdown has it's own outside click handler which includes control (element that opens dropdown)
         {...popoverProps}
       >
-        <OutsideClickHandler onOutsideClick={handleClickOutside}>
-          <PopoverContent
-            ref={menuContentRef}
-            widthFitContent={widthFitContent}
-            color={color}
-            theme={theme}
-          >
-            {clonedChildren}
-          </PopoverContent>
-        </OutsideClickHandler>
+        <PopoverContent
+          ref={menuContentRef}
+          widthFitContent={widthFitContent}
+          color={color}
+          theme={theme}
+        >
+          {clonedChildren}
+        </PopoverContent>
       </Popover>
     </StyledDropDown>
   );

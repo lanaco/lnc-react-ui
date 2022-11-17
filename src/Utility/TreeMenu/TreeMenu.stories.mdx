@@ -3,16 +3,16 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import TreeMenu from "./index";
 import MenuItem from "./MenuItem";
 import NestedMenuItem from "./NestedMenuItem";
-import Separator from "./Separator";
+import TreeMenuSeparator from "./Separator";
 import logo from "../../_utils/images/Image.png";
 import Avatar from "../../General/Avatar";
 
-<Meta title="Utility/Tree Menu" component={TreeMenu}  subcomponents={{ MenuItem, NestedMenuItem, Separator }}/>
+<Meta title="Utility/Tree Menu" component={TreeMenu}  subcomponents={{ MenuItem, NestedMenuItem, TreeMenuSeparator }}/>
 
 # Tree Menu
 
 ```jsx
-import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lanaco/lnc-react-ui";
+import { TreeMenu, MenuItem, NestedMenuItem, TreeMenuSeparator } from "@lanaco/lnc-react-ui";
 ```
 
 
@@ -26,14 +26,14 @@ import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lanaco/lnc-react
         <MenuItem icon="clone" value="Dupl">
           Duplicate
         </MenuItem>
-        <Separator />
+        <TreeMenuSeparator />
         <MenuItem icon="archive" value="Arch">
           Archive
         </MenuItem>
         <MenuItem icon="arrow-right" value="Move">
           Move
         </MenuItem>
-        <Separator />
+        <TreeMenuSeparator />
         <MenuItem icon="trash" value="Del">
           Delete
         </MenuItem>
@@ -83,7 +83,7 @@ import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lanaco/lnc-react
           Move
         </MenuItem>
       </NestedMenuItem>
-      <Separator />
+      <TreeMenuSeparator />
       <MenuItem icon="trash" value="Del">
         Delete
       </MenuItem>
@@ -128,7 +128,7 @@ import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lanaco/lnc-react
           Move
         </MenuItem>
       </NestedMenuItem>
-      <Separator />
+      <TreeMenuSeparator />
       <MenuItem icon="trash" value="Del">
         Delete
       </MenuItem>
@@ -194,14 +194,14 @@ import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lanaco/lnc-react
         <MenuItem icon="clone" value="Dupl">
           Duplicate
         </MenuItem>
-        <Separator />
+        <TreeMenuSeparator />
         <MenuItem icon="archive" value="Arch">
           Archive
         </MenuItem>
         <MenuItem icon="arrow-right" value="Move">
           Move
         </MenuItem>
-        <Separator />
+        <TreeMenuSeparator />
         <MenuItem value="Avat">
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -235,14 +235,14 @@ import { TreeMenu, MenuItem, NestedMenuItem, Separator } from "@lanaco/lnc-react
       <MenuItem icon="clone" value="Dupl">
         Duplicate
       </MenuItem>
-      <Separator />
+      <TreeMenuSeparator />
       <MenuItem icon="archive" value="Arch">
         Archive
       </MenuItem>
       <MenuItem icon="arrow-right" value="Move">
         Move
       </MenuItem>
-      <Separator />
+      <TreeMenuSeparator />
       <MenuItem value="Avat">
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -286,7 +286,7 @@ For Menu Items that need to be justifed to end it is necessary to set `justifyTo
         <MenuItem icon="users" value="Users" justifyToEnd={true}>
           Users
         </MenuItem>
-        <Separator justifyToEnd={true} />
+        <TreeMenuSeparator justifyToEnd={true} />
         <MenuItem icon="gears" value="Sett" justifyToEnd={true}>
           Settings
         </MenuItem>
