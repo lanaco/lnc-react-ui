@@ -181,10 +181,6 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
     onClose(event);
   };
 
-  const handleClickOutside = (e) => {
-    if (closeOnClickOutside) closeDrawer();
-  };
-
   //Outside click handling
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -217,7 +213,8 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
           duration={duration}
           color={color}
           theme={theme}
-          style={{ backgroundColor: "gray" }}
+          className={className}
+          style={style}
           size={size}
           drawerSize={drawerSize}
           onTouchStart={handleTouchStart}
