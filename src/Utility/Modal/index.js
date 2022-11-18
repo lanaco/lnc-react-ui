@@ -159,14 +159,14 @@ const CloseButton = styled.div`
 `;
 
 //used for scrollOverlay = true, in that case regular overlay and modal must be inside relative div, so the SecondOverlay is used to cover the rest of the screen
-const SecondOverlay = styled.div`
+const SecondOverlay = styled(motion.div)`
   display: ${(props) => (props.scrollOverlay === true ? "block" : "none")};
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: ${props => props.overlayColor};
+  background-color: ${(props) => props.overlayColor};
   z-index: 3;
 `;
 
@@ -184,6 +184,8 @@ const Modal = React.forwardRef((props, ref) => {
     zIndex,
     size,
     clickOutsideToClose,
+    overlayAnimation,
+    modalAnimation,
     className,
     style,
     overlayProps,
@@ -210,7 +212,7 @@ const Modal = React.forwardRef((props, ref) => {
     },
     isOpen() {
       return show;
-    }
+    },
   }));
 
   const open = () => {
@@ -246,10 +248,7 @@ const Modal = React.forwardRef((props, ref) => {
         <ModalContainer
           ref={modalRef}
           {...themeProps}
-          initial={"initial"}
-          animate={"isOpen"}
-          exit={"exit"}
-          variants={containerVariant}
+          {...modalAnimation}
           header={header}
           footer={footer}
           scrollOverlay={scrollOverlay}
@@ -270,42 +269,53 @@ const Modal = React.forwardRef((props, ref) => {
 
   return (
     <>
-      {show &&
-        (overlay ? (
-          <>
-            <SecondOverlay scrollOverlay={scrollOverlay} onClick={onClickOutsideModal} overlayColor={overlayColor} {...overlayProps}/>
-            <Overlay
-              {...themeProps}
-              onClick={onClickOutsideModal}
-              scrollOverlay={scrollOverlay}
-              overlayColor={overlayColor}
-              {...overlayProps}
-            >
-              <ModalWrapper
-                modalRef={ref}
-                themeProps={themeProps}
-                containerVariant={containerVariant}
+      {show && (
+        <AnimatePresence>
+          {overlay ? (
+            <>
+              <SecondOverlay
                 scrollOverlay={scrollOverlay}
-                header={header}
-                footer={footer}
-                {...rest}
+                onClick={onClickOutsideModal}
+                overlayColor={overlayColor}
+                {...overlayProps}
+                {...overlayAnimation}
+              />
+              <Overlay
+                {...themeProps}
+                onClick={onClickOutsideModal}
+                scrollOverlay={scrollOverlay}
+                overlayColor={overlayColor}
+                isOpen={isOpen}
+                {...overlayProps}
+                {...overlayAnimation}
               >
-                {children}
-              </ModalWrapper>
-            </Overlay>
-          </>
-        ) : (
-          <ModalWrapper
-            modalRef={ref}
-            themeProps={themeProps}
-            containerVariant={containerVariant}
-            header={header}
-            footer={footer}
-            {...rest}
-          >
-            {children}
-          </ModalWrapper>
-        ))}
+                <ModalWrapper
+                  modalRef={ref}
+                  themeProps={themeProps}
+                  containerVariant={containerVariant}
+                  scrollOverlay={scrollOverlay}
+                  header={header}
+                  footer={footer}
+                  {...rest}
+                >
+                  {children}
+                </ModalWrapper>
+              </Overlay>
+            </>
+          ) : (
+            <ModalWrapper
+              modalRef={ref}
+              themeProps={themeProps}
+              containerVariant={containerVariant}
+              header={header}
+              footer={footer}
+              {...rest}
+            >
+              {children}
+            </ModalWrapper>
+          )}
+        </AnimatePresence>
+      )}
     </>
   );
 });
@@ -313,11 +323,27 @@ const Modal = React.forwardRef((props, ref) => {
 Modal.defaultProps = {
   isOpen: false,
   showCloseButton: true,
-  scrollOverlay: true,
+  scrollOverlay: false,
   overlay: true,
   overlayColor: "rgba(0, 0, 0, 0.3)",
   onOpen: () => {},
   onClose: () => {},
+  overlayAnimation: {
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    initial: {
+      opacity: 0,
+    },
+    transition: { type: "spring", duration: 1 },
+  },
+  modalAnimation: {
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    initial: {
+      opacity: 0,
+    },
+    transition: { type: "spring", duration: 1 },
+  },
   className: "",
   zIndex: 1000,
   size: "fluid",
@@ -345,6 +371,8 @@ Modal.propTypes = {
   zIndex: PropTypes.number,
   clickOutsideToClose: PropTypes.bool,
   overlayColor: PropTypes.string,
+  overlayAnimation: PropTypes.object,
+  modalAnimation: PropTypes.object,
   className: PropTypes.string,
   style: PropTypes.object,
   size: PropTypes.oneOf(["fluid", "xs", "s", "m", "l", "xl", "full"]),

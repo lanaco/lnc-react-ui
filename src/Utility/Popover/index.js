@@ -9,8 +9,9 @@ import {
   getComponentPropValue,
 } from "../../_utils/utils";
 import { useImperativeHandle } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
-const StyledPopover = styled.div`
+const StyledPopover = styled(motion.div)`
   box-sizing: border-box;
   font-family: ${(props) => props.theme?.typography?.fontFamily};
   display: ${(props) => (props.show ? "block" : "none")};
