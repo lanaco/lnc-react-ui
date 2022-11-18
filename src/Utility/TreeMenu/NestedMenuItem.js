@@ -85,7 +85,7 @@ const StyledNested = styled.div`
       opacity: 1;
     }
   }
-  webkit-animation: fadeInFromNone 0.5s ease-out;
+  -webkit-animation: fadeInFromNone 0.5s ease-out;
   -moz-animation: fadeInFromNone 0.5s ease-out;
   -o-animation: fadeInFromNone 0.5s ease-out;
   animation: fadeInFromNone 0.5s ease-out;
