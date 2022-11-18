@@ -169,6 +169,9 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
     close() {
       closeDrawer();
     },
+    isOpen() {
+      return isOpen;
+    }
   }));
 
   const openDrawer = (event) => {

@@ -10,7 +10,6 @@ const StyledMenu = styled.div`
   ${(props) => props.widthFitContent == false && "min-width: 12.5rem"};
   height: 100%;
   justify-content: space-between;
-
   & > .start-menu-items-lnc,
   > .end-menu-items-lnc {
     display: flex;
