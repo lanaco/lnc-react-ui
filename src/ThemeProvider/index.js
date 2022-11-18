@@ -82,6 +82,7 @@ const GlobalStyle = createGlobalStyle`
   }
 }
   body {
+    position: relative;
     background-color: ${(props) =>
       getColorRgbaValue(
         props.theme,

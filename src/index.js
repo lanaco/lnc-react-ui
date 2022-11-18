@@ -140,6 +140,10 @@ export { default as TabItem } from "./Layout/Tabs/TabItem";
 
 export { default as Accordion } from "./Utility/Accordion";
 
+export { default as AccordionSummary } from "./Utility/Accordion/AccordionSummary";
+
+export { default as AccordionDetails } from "./Utility/Accordion/AccordionDetails";
+
 export { default as Breadcrumbs } from "./Utility/Breadcrumbs";
 
 export { default as ConfirmationForm } from "./Utility/ConfirmationForm";
