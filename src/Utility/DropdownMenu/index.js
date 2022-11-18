@@ -6,10 +6,11 @@ import Popover from "../Popover";
 import { getColorRgbaValue } from "../../_utils/utils";
 import { useTheme } from "../../ThemeProvider";
 import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const StyledDropDown = styled.div``;
 
-const PopoverContent = styled.div`
+const PopoverContent = styled(motion.div)`
   padding: 0.25rem;
   gap: 0.25rem;
   display: flex;
@@ -44,6 +45,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     onMouseLeave,
     onItemSelected,
     //----------------
+    animation,
     className,
     style,
     color,
@@ -78,6 +80,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
             color: color,
             size: size,
             onItemSelected: handleOnItemSelected,
+            animation: animation
           });
         }
         return React.cloneElement(child, {
@@ -186,14 +189,14 @@ const DropdownMenu = React.forwardRef((props, ref) => {
         closeOnClickOutside={false} //dropdown has it's own outside click handler which includes control (element that opens dropdown)
         {...popoverProps}
       >
-        <PopoverContent
-          ref={menuContentRef}
-          widthFitContent={widthFitContent}
-          color={color}
-          theme={theme}
-        >
-          {clonedChildren}
-        </PopoverContent>
+          <PopoverContent
+            ref={menuContentRef}
+            widthFitContent={widthFitContent}
+            color={color}
+            theme={theme}
+          >
+            {clonedChildren}
+          </PopoverContent>
       </Popover>
     </StyledDropDown>
   );
@@ -215,6 +218,20 @@ DropdownMenu.defaultProps = {
   onMouseLeave: () => {},
   onItemSelected: (e, children) => {},
   //-------------------------
+  /**
+   * Animation use on nested items open/close
+   */
+  animation: {
+    animate: { opacity: 1, height: "auto" },
+    exit: { opacity: 0, height: 0 },
+    initial: { opacity: 0, height: 0 },
+    transition: {
+      type: "tween",
+      duration: 0.15,
+      opacity: { duration: 0.15, ease: "easeOut" },
+      height: { duration: 0.15 },
+    },
+  },
   style: {},
   color: "primary",
   size: "small",
@@ -250,6 +267,7 @@ DropdownMenu.propTypes = {
   onMouseLeave: PropTypes.func,
   onItemSelected: PropTypes.func,
   //---------------------------------------------------------------
+  animation: PropTypes.object,
   className: PropTypes.string,
   style: PropTypes.object,
   color: PropTypes.oneOf([

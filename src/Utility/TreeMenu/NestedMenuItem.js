@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../_utils/utils";
+import { AnimatePresence, motion } from "framer-motion";
 
-const StyledNested = styled.div`
+const StyledNested = styled(motion.div)`
   ${(props) => props.tuckIn == true && "margin-left: 0.3rem;"}
   ${(props) => props.tuckIn == true && "padding-left: 0.3rem;"}
     ${(props) =>
@@ -17,78 +18,6 @@ const StyledNested = styled.div`
       "background"
     )};`}
     border-radius: 2px;
-
-  @-webkit-keyframes fadeInFromNone {
-    0% {
-      display: none;
-      opacity: 0;
-    }
-
-    1% {
-      display: block;
-      opacity: 0;
-    }
-
-    100% {
-      display: block;
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes fadeInFromNone {
-    0% {
-      display: none;
-      opacity: 0;
-    }
-
-    1% {
-      display: block;
-      opacity: 0;
-    }
-
-    100% {
-      display: block;
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadeInFromNone {
-    0% {
-      display: none;
-      opacity: 0;
-    }
-
-    1% {
-      display: block;
-      opacity: 0;
-    }
-
-    100% {
-      display: block;
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeInFromNone {
-    0% {
-      display: none;
-      opacity: 0;
-    }
-
-    1% {
-      display: block;
-      opacity: 0;
-    }
-
-    100% {
-      display: block;
-      opacity: 1;
-    }
-  }
-  -webkit-animation: fadeInFromNone 0.5s ease-out;
-  -moz-animation: fadeInFromNone 0.5s ease-out;
-  -o-animation: fadeInFromNone 0.5s ease-out;
-  animation: fadeInFromNone 0.5s ease-out;
 `;
 
 const NestedMenuItem = React.forwardRef((props, ref) => {
@@ -98,6 +27,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
     onItemSelected,
     //--------------------
     tuckIn,
+    animation,
     color,
     size,
     className,
@@ -140,26 +70,44 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
   return (
     <>
       <>{clonedItem}</>
-      {show && (
-        <StyledNested
-          theme={theme}
-          tuckIn={tuckIn}
-          color={color}
-          size={size}
-          className={"nested-item-lnc " + className}
-          style={style}
-          ref={ref}
-          {...rest}
-        >
-          {clonedChildren}
-        </StyledNested>
-      )}
+      <AnimatePresence>
+        {show && (
+          <StyledNested
+            theme={theme}
+            tuckIn={tuckIn}
+            color={color}
+            size={size}
+            className={"nested-item-lnc " + className}
+            style={style}
+            ref={ref}
+            show={show}
+            {...animation}
+            {...rest}
+          >
+            {clonedChildren}
+          </StyledNested>
+        )}
+      </AnimatePresence>
     </>
   );
 });
 
 NestedMenuItem.defaultProps = {
   tuckIn: true,
+  /**
+   * Animation use on nested items open/close
+   */
+  animation: {
+    animate: { opacity: 1, height: "auto" },
+    exit: { opacity: 0, height: 0 },
+    initial: { opacity: 0, height: 0 },
+    transition: {
+      type: "tween",
+      duration: 0.15,
+      opacity: { duration: 0.15, ease: "easeOut" },
+      height: { duration: 0.15 },
+    },
+  },
   size: "small",
   color: "primary",
   style: {},
@@ -174,6 +122,7 @@ NestedMenuItem.propTypes = {
    * Determines wether nested items will be tucked in to the right (using margin-right and padding-left).
    */
   tuckIn: PropTypes.bool,
+  animation: PropTypes.object,
   className: PropTypes.string,
   style: PropTypes.object,
   color: PropTypes.oneOf([
