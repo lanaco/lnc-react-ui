@@ -6,8 +6,8 @@ import { getColorRgbaValue } from "../../_utils/utils";
 import { AnimatePresence, motion } from "framer-motion";
 
 const StyledNested = styled(motion.div)`
-  ${(props) => props.tuckIn == true && "margin-left: 0.3rem;"}
-  ${(props) => props.tuckIn == true && "padding-left: 0.3rem;"}
+  ${(props) => props.tuckIn == true && `margin-left: ${props.tuckInSize};`}
+  ${(props) => props.tuckIn == true && `padding-left: ${props.tuckInSize};`}
     ${(props) =>
     props.tuckIn == true &&
     `border-left: 2px solid ${getColorRgbaValue(
@@ -27,6 +27,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
     onItemSelected,
     //--------------------
     tuckIn,
+    tuckInSize,
     animation,
     color,
     size,
@@ -75,6 +76,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
           <StyledNested
             theme={theme}
             tuckIn={tuckIn}
+            tuckInSize={tuckInSize}
             color={color}
             size={size}
             className={"nested-item-lnc " + className}
@@ -94,6 +96,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
 
 NestedMenuItem.defaultProps = {
   tuckIn: true,
+  tuckInSize: "0.3rem",
   /**
    * Animation use on nested items open/close
    */
@@ -122,6 +125,7 @@ NestedMenuItem.propTypes = {
    * Determines wether nested items will be tucked in to the right (using margin-right and padding-left).
    */
   tuckIn: PropTypes.bool,
+  tuckInSize: PropTypes.string,
   animation: PropTypes.object,
   className: PropTypes.string,
   style: PropTypes.object,
