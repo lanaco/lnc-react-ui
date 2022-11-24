@@ -1,4 +1,4 @@
-import React, { useEffect, useImperativeHandle, useState } from "react";
+import React, { useImperativeHandle, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
@@ -341,7 +341,7 @@ Modal.defaultProps = {
     initial: {
       opacity: 0,
     },
-    transition: { type: "spring", duration: 1 },
+    transition: { type: "spring", duration: 0.6 },
   },
   modalAnimation: {
     animate: { opacity: 1 },
@@ -349,7 +349,7 @@ Modal.defaultProps = {
     initial: {
       opacity: 0,
     },
-    transition: { type: "spring", duration: 1 },
+    transition: { type: "spring", duration: 0.6 },
   },
   className: "",
   zIndex: 1000,
@@ -386,7 +386,7 @@ Modal.propTypes = {
   overlayProps: PropTypes.any,
 };
 
-export default React.memo(Modal);
+export default Modal;
 
 const ModalSizes = {
   FLUID: "max-content",
