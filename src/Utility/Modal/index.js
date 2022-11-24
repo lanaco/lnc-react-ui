@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon";
 import { getColorRgbaValue } from "../../_utils/utils.js";
+import { createPortal } from "react-dom";
 
 const FOOTER_HEIGHT = "5rem";
 const HEADER_HEIGHT = "3.8rem";
@@ -172,6 +173,7 @@ const SecondOverlay = styled(motion.div)`
 
 const Modal = React.forwardRef((props, ref) => {
   const {
+    portalElement,
     isOpen,
     header,
     footer,
@@ -237,44 +239,101 @@ const Modal = React.forwardRef((props, ref) => {
   return (
     <>
       {show && (
-        <AnimatePresence>
-          {overlay ? (
+        <>
+          {portalElement ? (
             <>
-              <SecondOverlay
-                scrollOverlay={scrollOverlay}
-                onClick={onClickOutsideModal}
-                overlayColor={overlayColor}
-                {...overlayProps}
-                {...overlayAnimation}
-              />
-              <Overlay
-                {...themeProps}
-                onClick={onClickOutsideModal}
-                scrollOverlay={scrollOverlay}
-                overlayColor={overlayColor}
-                isOpen={isOpen}
-                {...overlayProps}
-                {...overlayAnimation}
-              >
-                <ModalWrapper
+              {createPortal(
+                <ModalContent
                   modalRef={ref}
-                  themeProps={themeProps}
+                  overlay={overlay}
                   scrollOverlay={scrollOverlay}
+                  onClickOutsideModal={onClickOutsideModal}
+                  overlayColor={overlayColor}
+                  overlayProps={overlayProps}
+                  overlayAnimation={overlayAnimation}
                   modalAnimation={modalAnimation}
+                  themeProps={themeProps}
                   showCloseButton={showCloseButton}
                   close={close}
                   header={header}
                   footer={footer}
+                  isOpen={isOpen}
                   {...rest}
                 >
                   {children}
-                </ModalWrapper>
-              </Overlay>
+                </ModalContent>,
+                portalElement
+              )}
             </>
           ) : (
-            <ModalWrapper
+            <ModalContent
               modalRef={ref}
+              overlay={overlay}
+              scrollOverlay={scrollOverlay}
+              onClickOutsideModal={onClickOutsideModal}
+              overlayColor={overlayColor}
+              overlayProps={overlayProps}
+              overlayAnimation={overlayAnimation}
+              modalAnimation={modalAnimation}
               themeProps={themeProps}
+              showCloseButton={showCloseButton}
+              close={close}
+              header={header}
+              footer={footer}
+              isOpen={isOpen}
+              {...rest}
+            >
+              {children}
+            </ModalContent>
+          )}
+        </>
+      )}
+    </>
+  );
+});
+
+const ModalContent = ({
+  overlay,
+  scrollOverlay,
+  onClickOutsideModal,
+  overlayColor,
+  overlayProps,
+  overlayAnimation,
+  modalAnimation,
+  themeProps,
+  showCloseButton,
+  header,
+  footer,
+  close,
+  isOpen,
+  modalRef,
+  children,
+  ...rest
+}) => {
+  return (
+    <AnimatePresence>
+      {overlay ? (
+        <>
+          <SecondOverlay
+            scrollOverlay={scrollOverlay}
+            onClick={onClickOutsideModal}
+            overlayColor={overlayColor}
+            {...overlayProps}
+            {...overlayAnimation}
+          />
+          <Overlay
+            {...themeProps}
+            onClick={onClickOutsideModal}
+            scrollOverlay={scrollOverlay}
+            overlayColor={overlayColor}
+            isOpen={isOpen}
+            {...overlayProps}
+            {...overlayAnimation}
+          >
+            <ModalWrapper
+              modalRef={modalRef}
+              themeProps={themeProps}
+              scrollOverlay={scrollOverlay}
               modalAnimation={modalAnimation}
               showCloseButton={showCloseButton}
               close={close}
@@ -284,12 +343,25 @@ const Modal = React.forwardRef((props, ref) => {
             >
               {children}
             </ModalWrapper>
-          )}
-        </AnimatePresence>
+          </Overlay>
+        </>
+      ) : (
+        <ModalWrapper
+          modalRef={ref}
+          themeProps={themeProps}
+          modalAnimation={modalAnimation}
+          showCloseButton={showCloseButton}
+          close={close}
+          header={header}
+          footer={footer}
+          {...rest}
+        >
+          {children}
+        </ModalWrapper>
       )}
-    </>
+    </AnimatePresence>
   );
-});
+};
 
 const ModalWrapper = ({
   modalRef,
@@ -328,6 +400,7 @@ const ModalWrapper = ({
 };
 
 Modal.defaultProps = {
+  portalElement: document.body,
   isOpen: false,
   showCloseButton: true,
   scrollOverlay: false,
@@ -358,6 +431,10 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
+  /**
+   * If the value is given modal will use createPortal to be rendered in portalElement
+   */
+  portalElement: PropTypes.any,
   /**
    * Is modal open by default
    */
