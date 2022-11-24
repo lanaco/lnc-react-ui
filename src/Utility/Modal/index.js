@@ -234,39 +234,6 @@ const Modal = React.forwardRef((props, ref) => {
     exit: { opacity: 0 },
   };
 
-  const ModalWrapper = ({
-    modalRef,
-    themeProps,
-    scrollOverlay,
-    containerVariant,
-    header,
-    footer,
-    children,
-  }) => {
-    return (
-      <AnimatePresence>
-        <ModalContainer
-          ref={modalRef}
-          {...themeProps}
-          {...modalAnimation}
-          header={header}
-          footer={footer}
-          scrollOverlay={scrollOverlay}
-          {...rest}
-        >
-          {showCloseButton && (
-            <CloseButton {...themeProps} onClick={close}>
-              <Icon icon={"times"}></Icon>
-            </CloseButton>
-          )}
-          {header && <div className="lnc-modal-header">{header}</div>}
-          <div className="lnc-modal-content">{children}</div>
-          {footer && <div className="lnc-modal-footer">{footer}</div>}
-        </ModalContainer>
-      </AnimatePresence>
-    );
-  };
-
   return (
     <>
       {show && (
@@ -292,8 +259,10 @@ const Modal = React.forwardRef((props, ref) => {
                 <ModalWrapper
                   modalRef={ref}
                   themeProps={themeProps}
-                  containerVariant={containerVariant}
                   scrollOverlay={scrollOverlay}
+                  modalAnimation={modalAnimation}
+                  showCloseButton={showCloseButton}
+                  close={close}
                   header={header}
                   footer={footer}
                   {...rest}
@@ -306,7 +275,9 @@ const Modal = React.forwardRef((props, ref) => {
             <ModalWrapper
               modalRef={ref}
               themeProps={themeProps}
-              containerVariant={containerVariant}
+              modalAnimation={modalAnimation}
+              showCloseButton={showCloseButton}
+              close={close}
               header={header}
               footer={footer}
               {...rest}
@@ -319,6 +290,42 @@ const Modal = React.forwardRef((props, ref) => {
     </>
   );
 });
+
+const ModalWrapper = ({
+  modalRef,
+  themeProps,
+  scrollOverlay,
+  modalAnimation,
+  showCloseButton,
+  close,
+  header,
+  footer,
+  children,
+  ...rest
+}) => {
+  return (
+    <AnimatePresence>
+      <ModalContainer
+        ref={modalRef}
+        {...themeProps}
+        {...modalAnimation}
+        header={header}
+        footer={footer}
+        scrollOverlay={scrollOverlay}
+        {...rest}
+      >
+        {showCloseButton && (
+          <CloseButton {...themeProps} onClick={close}>
+            <Icon icon={"times"}></Icon>
+          </CloseButton>
+        )}
+        {header && <div className="lnc-modal-header">{header}</div>}
+        <div className="lnc-modal-content">{children}</div>
+        {footer && <div className="lnc-modal-footer">{footer}</div>}
+      </ModalContainer>
+    </AnimatePresence>
+  );
+};
 
 Modal.defaultProps = {
   isOpen: false,
@@ -334,7 +341,7 @@ Modal.defaultProps = {
     initial: {
       opacity: 0,
     },
-    transition: { type: "spring", duration: 1 },
+    transition: { type: "spring", duration: 0.6 },
   },
   modalAnimation: {
     animate: { opacity: 1 },
@@ -342,7 +349,7 @@ Modal.defaultProps = {
     initial: {
       opacity: 0,
     },
-    transition: { type: "spring", duration: 1 },
+    transition: { type: "spring", duration: 0.6 },
   },
   className: "",
   zIndex: 1000,
