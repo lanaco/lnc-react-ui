@@ -520,6 +520,7 @@ const DateInput = React.forwardRef((props, ref) => {
         <CalendarContainer {...themeProps}>
           <HiddenInput ref={inpRef} onBlur={onHiddenInputBlur} />
           <Calendar
+
             onChange={handleCalendarOnChange}
             value={date}
             {...minMaxDate}
