@@ -515,6 +515,9 @@ const DateInput = React.forwardRef((props, ref) => {
       target.appendChild(el);
     }
 
+
+    console.log("tema:", themeProps)
+
     return (
       ReactDOM.createPortal(
         <CalendarContainer {...themeProps}>

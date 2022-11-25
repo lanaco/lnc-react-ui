@@ -1,4 +1,5 @@
 import React from "react";
+import theme from "../_utils/theme";
 import DateInput from "./index";
 import Story from "./Story";
 
@@ -14,6 +15,7 @@ const Template = (args) => <>
 
 export const Normal = Template.bind({});
 Normal.args = {
+  theme: theme,
   targetID: "portal-root",
   id: "rwar",
   format: "dd.MM.yyyy",
