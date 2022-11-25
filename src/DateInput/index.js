@@ -515,14 +515,12 @@ const DateInput = React.forwardRef((props, ref) => {
       target.appendChild(el);
     }
 
-
-    console.log("tema:", themeProps)
-
     return (
       ReactDOM.createPortal(
         <CalendarContainer {...themeProps}>
           <HiddenInput ref={inpRef} onBlur={onHiddenInputBlur} />
           <Calendar
+
             onChange={handleCalendarOnChange}
             value={date}
             {...minMaxDate}
