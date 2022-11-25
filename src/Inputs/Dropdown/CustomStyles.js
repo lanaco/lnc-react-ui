@@ -110,7 +110,7 @@ const customStyles = {
       "text"
     ),
   }),
-  menuPortal: (base) => ({ ...base, zIndex: 20 }),
+  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
   option: (p, s) => ({
     ...p,
     fontWeight: s.theme.components["Input"].default["enabled"].fontWeight,
