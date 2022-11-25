@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, createRef } from "react";
-import theme from "../_utils/theme";
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import { keyframes } from "@emotion/react";
+import React, { createRef, useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import FadeIn from "../FadeIn/FadeIn";
+import theme from "../_utils/theme";
 
 const paddingBySize = (size) => {
   if (size === "small") return "0.325rem 0.375rem";
@@ -11,10 +12,10 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.422375rem 0.375rem";
 };
 
-const heightBySize = (size) => {
-  if (size === "small") return `1.5rem`;
-  if (size === "medium") return `1.875rem`;
-  if (size === "large") return `2.25rem`;
+const heightBySize = (size, coefficient = 1) => {
+  if (size === "small") return `${coefficient * 1.5}rem`;
+  if (size === "medium") return `${coefficient * 1.875}rem`;
+  if (size === "large") return `${coefficient * 2.25}rem`;
 };
 
 const spin = keyframes`
@@ -35,9 +36,9 @@ const Container = styled.div`
   width: 100%;
   border-bottom: 0.125rem solid
     ${(props) =>
-      props.disabled
-        ? props.theme.palette.gray[900]
-        : props.theme.palette[props.color].main};
+    props.disabled
+      ? props.theme.palette.gray[900]
+      : props.theme.palette[props.color].main};
   min-height: ${(props) => heightBySize(props.size)};
   max-height: ${(props) => heightBySize(props.size)};
   transition: all 250ms ease;
@@ -132,7 +133,7 @@ const Input = styled.input`
 
 const Content = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   background-color: white;
   z-index: 1;
   margin-top: 0.0625rem;
@@ -185,6 +186,7 @@ const DropdownLookup = (props) => {
     theme,
     size,
     color,
+    targetID
   } = props;
 
   const [inFocus, setInFocus] = useState(false);
@@ -308,49 +310,93 @@ const DropdownLookup = (props) => {
   };
 
   const renderSuggestions = () => {
+    const target = (targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID)
+    if (!inFocus) {
+      if (target !== null) {
+        target.innerHTML = "";
+      }
+      return;
+    }
+    const el = document.createElement("div");
+
+    const ddlContainerDOMRect = document.querySelector("#ddl_container" + id).getBoundingClientRect();
+    const calculatedWidth = "" + ddlContainerDOMRect.width + "px";
+    const calculatedLeft = "" + ddlContainerDOMRect.left + "px";
+    const calculatedTop = "" + ddlContainerDOMRect.top + "px";
+    el.style = `position: absolute;
+    background-color: white;
+    z-index: 2147483647 !important;
+    transform: translateY( ${heightBySize(size)});
+    left: ${calculatedLeft} !important;
+    top: ${calculatedTop} !important;
+    width: ${calculatedWidth};
+    min-height: ${heightBySize(size)}`;
+
     if (options !== null && options.length > 0 && inFocus) {
+
+
+
+      el.style = `position: absolute;
+                  background-color: white;
+                  z-index: 2147483647 !important;
+                  transform: translateY( ${heightBySize(size)});
+                  overflow: auto;
+                  left: ${calculatedLeft} !important;
+                  top: ${calculatedTop} !important;
+                  width: ${calculatedWidth};
+                  min-height: ${options.length > 5 ? heightBySize(size, 5) : heightBySize(size, options.length + 1)}`;
+
+      if (target !== null) {
+        target.appendChild(el);
+      }
+
       return (
-        <FadeIn>
-          <Content {...themeProps}>
-            {options.map((item, i) => {
-              return (
-                <ContentItem
-                  {...themeProps}
-                  key={i}
-                  onMouseDown={() => suggestionSelected(item)}
-                  hover={i === cursor}
-                >
-                  {item.value}
-                </ContentItem>
-              );
-            })}
-          </Content>
-        </FadeIn>
+        ReactDOM.createPortal(
+          <FadeIn>
+            <Content {...themeProps}>
+              {options.map((item, i) => {
+                return (
+                  <ContentItem
+                    {...themeProps}
+                    key={i}
+                    onMouseDown={() => suggestionSelected(item)}
+                    hover={i === cursor}
+                  >
+                    {item.value}
+                  </ContentItem>
+                );
+              })}
+            </Content>
+          </FadeIn>, el)
       );
     }
 
     let empty = options === null || (options !== null && options.length === 0);
 
     if (inFocus && empty && loading === false && value !== "") {
+      if (target !== null) {
+        target.appendChild(el);
+      };
       return (
-        <FadeIn>
-          <Content {...themeProps} key={0}>
-            <ContentItem
-              {...themeProps}
-              key={0}
-              hover={true}
-              onMouseDown={onBlur}
-            >
-              {notItemsFoundText}
-            </ContentItem>
-          </Content>
-        </FadeIn>
+        ReactDOM.createPortal(
+          <FadeIn>
+            <Content {...themeProps} key={0}>
+              <ContentItem
+                {...themeProps}
+                key={0}
+                hover={true}
+                onMouseDown={onBlur}
+              >
+                {notItemsFoundText}
+              </ContentItem>
+            </Content>
+          </FadeIn>, el)
       );
     }
   };
 
   return (
-    <Container {...themeProps}>
+    <Container id={"ddl_container" + id}{...themeProps}>
       <Inner {...themeProps}>
         <InputContainer {...themeProps}>
           <Input
@@ -409,14 +455,15 @@ DropdownLookup.defaultProps = {
   id: "",
   theme: theme,
   disabled: false,
-  load: () => {},
-  onChange: () => {},
-  clear: () => {},
+  load: () => { },
+  onChange: () => { },
+  clear: () => { },
   className: "",
   size: "small",
   color: "primary",
   value: "",
   notItemsFoundText: "No items found...",
+  targetID: ""
 };
 
 DropdownLookup.propTypes = {
@@ -441,6 +488,7 @@ DropdownLookup.propTypes = {
     "warning",
     "gray",
   ]),
+  targetID: PropTypes.string
 };
 
 export default DropdownLookup;

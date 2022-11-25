@@ -1,7 +1,7 @@
 import React from "react";
-import DropdownLookup from "./index";
-import Example from "./Example";
 import theme from "../_utils/theme";
+import Example from "./Example";
+import DropdownLookup from "./index";
 
 export default {
   title: "DropdownLookup",
@@ -11,6 +11,7 @@ export default {
 
 const Template = (args) => (
   <>
+    <div id="portal-root"></div>
     <Example args={args} />
   </>
 );
@@ -25,4 +26,5 @@ Default.args = {
     { id: 1, value: "prva opcija", key: "prva opcija" },
     { id: 2, value: "druga opcija", key: "druga opcija opcija" },
   ],
+  targetID: "portal-root"
 };
