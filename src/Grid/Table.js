@@ -1,9 +1,9 @@
+import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import CheckBox from "../CheckBox/index";
 import TableSelectionType from "../DataView/Constants/TableSelectionType";
-import PropTypes from "prop-types";
 import Icon from "../Icon/index";
-import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
 const Container = styled.div`
@@ -125,7 +125,7 @@ const Table = (props) => {
     Columns = [],
     Data = [],
     IsLoading = false,
-    OnRowClick = () => {},
+    OnRowClick = () => { },
     Localization = {},
   } = props;
 
@@ -133,15 +133,15 @@ const Table = (props) => {
     Accessor = "",
     Ascending = false,
     Descending = false,
-    OnOrder = () => {},
+    OnOrder = () => { },
   } = props.Ordering || {};
 
   const {
     SelectedData = [],
     SelectedEntirePage = false,
     SelectionIndicator = "",
-    OnSelection = () => {},
-    OnSelectAll = () => {},
+    OnSelection = () => { },
+    OnSelectAll = () => { },
   } = props.Selection || {};
 
   const {
@@ -268,7 +268,7 @@ const Table = (props) => {
     var isOrderByColumn = col.accessor === Accessor;
 
     let onClick =
-      IsLoading || hideOrdering ? () => {} : () => OnOrder(col.accessor);
+      IsLoading || hideOrdering ? () => { } : () => OnOrder(col.accessor);
     var orderingIconClass = "sort";
 
     if (isOrderByColumn && Ascending) orderingIconClass = "long-arrow-alt-up";
@@ -304,8 +304,6 @@ const Table = (props) => {
     )
       return <></>;
 
-    // console.log(dataItem, selected);
-
     return (
       <TableBodyCell selectionCell={true} key={-1}>
         <CheckBox
@@ -325,13 +323,13 @@ const Table = (props) => {
     return (
       <TableBodyCell
         key={tabIndex}
-        onClick={col.render ? () => {} : () => OnRowClick(dataItem, col)}
+        onClick={col.render ? () => { } : () => OnRowClick(dataItem, col)}
       >
         {col.render
           ? col.render(dataItem, col)
           : Array.isArray(dataItem[col.accessor])
-          ? ""
-          : dataItem[col.accessor]}
+            ? ""
+            : dataItem[col.accessor]}
       </TableBodyCell>
     );
   };
@@ -395,13 +393,13 @@ Table.defaultProps = {
   Accessor: "",
   Ascending: false,
   Descending: false,
-  OnOrder: () => {},
+  OnOrder: () => { },
   //----------------------
   SelectedData: [],
   SelectedEntirePage: false,
   SelectionIndicator: "id",
-  OnSelection: () => {},
-  OnSelectAll: () => {},
+  OnSelection: () => { },
+  OnSelectAll: () => { },
   //----------------------
   Columns: [],
   Data: [],
