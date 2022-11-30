@@ -18,7 +18,7 @@ Lnc React UI Web Components provide simple and complex components and layout.
 
 ## Requirements
 
-- [React](https://www.npmjs.com/package/react) and [React-Dom](https://www.npmjs.com/package/react-dom) (**17.0.2 or higher**)
+- [React](https://www.npmjs.com/package/react) and [React-Dom](https://www.npmjs.com/package/react-dom) (**17.0.2 or higher, lower than 18.0.0**)
 - [Node.js](https://nodejs.org/en/) (**18.12.0 or higher**)
 
 ---
@@ -52,6 +52,10 @@ render() {
   );
 }
 ```
+
+# Using with TypeScript
+
+Since there is no declaration file for @lanaco/ln-react-ui one solution is to add `"noImplicitAny": false` to `tsconfig.json` file in `compilerOptions`.
 
 # Theming
 
