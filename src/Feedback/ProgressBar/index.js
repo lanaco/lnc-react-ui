@@ -67,7 +67,7 @@ const ProgressBar = React.forwardRef((props, ref) => {
   const theme = useTheme();
 
   return (
-    <Bar style={style} theme={theme} size={size} showLabel={showLabel} {...rest}>
+    <Bar style={style} className={className} theme={theme} size={size} showLabel={showLabel} {...rest}>
       <Progressed
         progressPercentage={progressPercentage}
         theme={theme}
