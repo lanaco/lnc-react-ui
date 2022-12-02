@@ -398,7 +398,11 @@ const DateInput = React.forwardRef((props, ref) => {
       inpRef.current.focus();
     }
     if (!openCalendar) {
-      const target = (targetID === "#" || targetID === "") ? null : ((targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID));
+
+      const target = (targetID === undefined || targetID === null || targetID === "#" || targetID === "") ?
+        null :
+        ((targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID));
+
       if (target !== null) {
         target.innerHTML = "";
       }

@@ -10,7 +10,9 @@ const Tooltip = props => {
     const [show, setShow] = useState(false);
     const [style, setStyle] = useState("position: absolute;");
 
-    const target = (targetID === "#" || targetID === "") ? null : ((targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID));
+    const target = (targetID === undefined || targetID === null || targetID === "#" || targetID === "") ?
+        null :
+        ((targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID));
 
     const el = document.createElement('div');
     el.style = style;
