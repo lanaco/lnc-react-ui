@@ -1,7 +1,7 @@
+import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React from "react";
 import DateInput from "../DateInput/index";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
 import theme from "../_utils/theme";
 
 const Container = styled.div`
@@ -23,6 +23,7 @@ const PeriodSelector = (props) => {
     color,
     theme,
     className,
+    targetID
   } = props;
 
   var themeProps = { size, color, theme, disabled };
@@ -34,6 +35,7 @@ const PeriodSelector = (props) => {
         format={dateFormat}
         value={startDate}
         onChange={(_, date) => onStartDateChange(id, date)}
+        targetID={targetID}
       />
       <DateInput
         {...themeProps}
@@ -49,8 +51,8 @@ PeriodSelector.defaultProps = {
   id: "",
   theme: theme,
   disabled: false,
-  onStartDateChange: () => {},
-  onEndDateChange: () => {},
+  onStartDateChange: () => { },
+  onEndDateChange: () => { },
   className: "",
   preventDefault: true,
   size: "small",
