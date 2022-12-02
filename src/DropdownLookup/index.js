@@ -310,7 +310,7 @@ const DropdownLookup = (props) => {
   };
 
   const renderSuggestions = () => {
-    const target = (targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID)
+    const target = (targetID === "#" || targetID === "") ? null : ((targetID.startsWith('#')) ? document.querySelector(targetID) : document.querySelector("#" + targetID));
     if (!inFocus) {
       if (target !== null) {
         target.innerHTML = "";
