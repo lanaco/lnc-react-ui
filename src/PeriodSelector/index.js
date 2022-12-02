@@ -42,6 +42,7 @@ const PeriodSelector = (props) => {
         format={dateFormat}
         value={endDate}
         onChange={(_, date) => onEndDateChange(id, date)}
+        targetID={targetID}
       />
     </Container>
   );
