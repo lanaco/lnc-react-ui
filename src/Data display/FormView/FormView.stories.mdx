@@ -6,14 +6,16 @@ import { useForm, Controller } from "react-hook-form";
 import Dropdown from "../../Inputs/Dropdown";
 import MultiSelectDropdown from "../../Inputs/MultiSelectDropdown";
 import DateInput from "../../Basic Inputs/DateInput";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Data Display/Form View" component={FormView} />
 
 # Form View
 
-```jsx
-import { FormView } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+ {'import { FormView } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 ##### Example of Form View that uses `react-hook-form`
 
@@ -151,7 +153,7 @@ import { FormView } from "@lanaco/lnc-react-ui";
 
 ## fields
 
-`fields` is an array that accepts object of type {label: `<string>`, accessor: `<string>`, type: `<string>`, inputProps: `<object>`, element: `<element>`, ...}, where the rest of this object props (aside from `label`, `accessor`, `type`, `inputProps` and `element`) are props of component <u>[FlexGridItem](?path=/docs/layout-flex-grid--default-story).</u>
+`fields` is an array that accepts object of type `{ label: <string>, accessor: <string>, type: <string>, inputProps: <object>, element: <element>, ...}`, where the rest of this object props (aside from `label`, `accessor`, `type`, `inputProps` and `element`) are props of component <u>[FlexGridItem](?path=/docs/layout-flex-grid--default-story).</u>
 
 Supported field types:
 
@@ -171,25 +173,11 @@ Supported field types:
 When type of the `field` is `custom`, it is necessary to provide value for property element.
 Example of usage of custom field with _ react-hook-form _ using `Controller`.
 
-```jsx
-import { Controller } from "react-hook-form";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+ {'import { Controller } from "react-hook-form";'}
+</SyntaxHighlighter>
 
-```jsx
-{
-  label: "Roles",
-  accessor: "roles",
-  XS: 12,
-  type: "custom",
-  element: <Controller
-              control={control}
-              name="roles"
-              render={({field}) => (
-                    <MultiSelectDropdown
-                    {...field}
-                    options={[{ value: "user", label: "User" }, { value: "customer", label: "Customer" }, { value: "admin", label: "Admin" }]}
-                    />
-                )}
-            />
-},
-```
+<SyntaxHighlighter language="json" style={nord}>
+ {' { label: "Roles",\naccessor: "roles",\nXS: 12,\ntype: "custom",\nelement: <Controller\ncontrol={control}\nname="roles"\nrender={({field}) => (\n<MultiSelectDropdown {...field}\n options={[{ value: "user", label: "User" }, { value: "customer", label: "Customer" }, { value: "admin", label: "Admin" }]}\n/>)}\n/> } '}
+</SyntaxHighlighter>
+

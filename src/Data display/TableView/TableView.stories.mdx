@@ -11,6 +11,8 @@ import FlexGrid from "../../Layout/FlexGrid";
 import FlexGridItem from "../../Layout/FlexGrid/FlexGridItem";
 import TextInput from "../../Basic Inputs/TextInput";
 import NumberInput from "../../Basic Inputs/NumberInput";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta
   title="Data Display/Table View"
@@ -302,9 +304,9 @@ export const CustomPagination = (props) => {
 
 # Table View
 
-```jsx
-import { TableView } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+  {'import { TableView } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>
@@ -360,9 +362,9 @@ If custom components are not provided, default components will be rendered.
 
 If there is need for custom toolbar it is possible to use `ActionsToolbar` component.
 
-```jsx
-import { ActionsToolbar } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+  {'import { ActionsToolbar } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <br />
 

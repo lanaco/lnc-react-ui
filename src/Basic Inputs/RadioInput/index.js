@@ -106,7 +106,16 @@ const Container = styled.label`
           )};
       }
       & .inner-circle {
-        fill: white;
+        fill: ${(props) =>
+          props.innerColor === "white" || props.innerColor === "transparent"
+            ? props.innerColor
+            : getColorRgbaValue(
+                props.theme,
+                "Radio",
+                props.color,
+                "active",
+                "border"
+              )}};
       }
     }
   }
@@ -130,6 +139,7 @@ const RadioInput = React.forwardRef((props, ref) => {
     className,
     style,
     color,
+    innerColor,
     size,
     onChange,
     onFocus,
@@ -183,8 +193,9 @@ const RadioInput = React.forwardRef((props, ref) => {
       readOnly={readOnly}
       focused={focused}
       onClick={onClick}
+      innerColor={innerColor}
     >
-       {/* Controlled input and uncotrolled input must be differentiated because of usage of the value property */}
+      {/* Controlled input and uncotrolled input must be differentiated because of usage of the value property */}
       {isChecked == true || isChecked == false ? (
         <input
           disabled={disabled || readOnly}
@@ -259,6 +270,7 @@ RadioInput.defaultProps = {
   labelPosition: "right",
   tabIndex: 0,
   spaceBetween: false,
+  innerColor: "white",
   //------------------
   onChange: () => {},
   onFocus: () => {},
@@ -301,6 +313,17 @@ RadioInput.propTypes = {
     "warning",
     "information",
     "neutral",
+  ]),
+  innerColor: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "success",
+    "danger",
+    "warning",
+    "information",
+    "neutral",
+    "white",
+    "transparent",
   ]),
   inputProps: PropTypes.any,
 };

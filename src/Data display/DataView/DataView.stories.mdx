@@ -6,6 +6,9 @@ import DetailsView from "../DetailsView";
 import TableView from "../TableView";
 import FormView from "../FormView";
 import { useForm } from "react-hook-form";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Table } from "@storybook/components";
 
 <Meta title="Data Display/Data View" component={DataView} />
 
@@ -116,9 +119,9 @@ export const fetchPrevious = (id, data) => {
 
 # Data View
 
-```jsx
-import { DataView } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+  {'import { DataView } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 ##### Data View provides simplified interaction between different types of views. In one Data View can't be more than one View of the same type (`TABLE_VIEW`, `KANBAN_VIEW`, `DETAILS_VIEW`, `FORM_VIEW`).
 
@@ -157,10 +160,7 @@ import { DataView } from "@lanaco/lnc-react-ui";
       };
       return (
         <>
-          <DataView
-            ref={dataViewRef}
-            defaultViewType="TABLE_VIEW"
-          >
+          <DataView ref={dataViewRef} defaultViewType="TABLE_VIEW">
             <DetailsView
               fields={[
                 {
@@ -330,9 +330,22 @@ import { DataView } from "@lanaco/lnc-react-ui";
 
 This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
 
-| Method       |    Args    |             Description |
-| ------------ | :--------: | ----------------------: |
-| changeView   | nextViewType |    Switch to other view |
-| goToBackView |     -      | Switch to previous view |
+<Table>
+  <tr>
+    <th>Method</th>
+    <th>Args</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>changeView</td>
+    <td>nextViewType</td>
+    <td>Switch to other view</td>
+  </tr>
+  <tr>
+    <td>goToBackView</td>
+    <td>-</td>
+    <td>Switch to previous view</td>
+  </tr>
+</Table>
 
 ---

@@ -2,14 +2,16 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import DetailsView from "./index";
 import { useState, useRef } from "react";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Data Display/Details View" component={DetailsView} />
 
 # Details View
 
-```jsx
-import { DetailsView } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+  {'import { DetailsView } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>
@@ -48,4 +50,4 @@ import { DetailsView } from "@lanaco/lnc-react-ui";
 
 ## fields
 
-`fields` is an array that accepts object of type {label: `<string>`, accessor: `<string>`, ...}, where the rest of this object props (aside from `label` and `accessor`) are props of component <u>[FlexGridItem](?path=/docs/layout-flex-grid--default-story).</u>
+`fields` is an array that accepts object of type `{label: <string>, accessor: <string>, ...}`, where the rest of this object props (aside from `label` and `accessor`) are props of component <u>[FlexGridItem](?path=/docs/layout-flex-grid--default-story).</u>

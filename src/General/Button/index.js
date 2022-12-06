@@ -47,7 +47,6 @@ const Button = React.forwardRef((props, ref) => {
     color,
     size,
     style,
-    className,
     disabled,
     borderRadius,
     btnType,
@@ -92,6 +91,7 @@ const Button = React.forwardRef((props, ref) => {
         ref={ref}
         data-type="filled"
         {...themeProps}
+        className={`lnc-button ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
@@ -113,6 +113,7 @@ const Button = React.forwardRef((props, ref) => {
         ref={ref}
         data-type="tinted"
         {...themeProps}
+        className={`lnc-button ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
@@ -134,6 +135,7 @@ const Button = React.forwardRef((props, ref) => {
         ref={ref}
         data-type="outline"
         {...themeProps}
+        className={`lnc-button ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
@@ -155,6 +157,7 @@ const Button = React.forwardRef((props, ref) => {
         ref={ref}
         data-type="basic"
         {...themeProps}
+        className={`lnc-button ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
@@ -197,7 +200,7 @@ Button.defaultProps = {
   iconStyle: "solid",
   borderRadius: "regular",
   btnType: "filled",
-  disalbed: false,
+  disabled: false,
   tabIndex: 0,
   leadingIcon: null,
   trailingIcon: null,
