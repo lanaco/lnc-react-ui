@@ -265,6 +265,20 @@ const DateInput = React.forwardRef((props, ref) => {
     setText(fromJsDateToDateString(jsDate));
   }, [value]);
 
+  useEffect(() => {
+
+    const wheelListener = (e) => {
+      setOpenCalendar(false);
+    };
+
+    if (openCalendar) {
+      window.addEventListener("wheel", wheelListener);
+    }
+    else {
+      window.removeEventListener("wheel", wheelListener);
+    }
+  }, [openCalendar]);
+
   //=============== METHODS ============================================================
 
   const validateDateFormat = () => {
@@ -507,7 +521,7 @@ const DateInput = React.forwardRef((props, ref) => {
 
     const el = document.createElement("div");
     el.style =
-      `position: absolute;
+      `position: fixed;
     background-color: white;
     z-index: 2147483647 !important;
     left: ${calculatedLeft} !important;

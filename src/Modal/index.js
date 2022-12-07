@@ -1,9 +1,9 @@
+import styled from "@emotion/styled";
+import { AnimatePresence, motion } from "framer-motion";
+import PropTypes from "prop-types";
 import React from "react";
 import Button from "../Button/index.js";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
 import theme from "../_utils/theme";
-import { motion, AnimatePresence } from "framer-motion";
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -90,7 +90,10 @@ function Modal(props) {
 
   const onClickOutsideModal = (event) => {
     if (event.target !== event.currentTarget) return;
-    if (clickOutsideToClose || !showHeader) onClose(event);
+    if (clickOutsideToClose || !showHeader) {
+      document.body.style.overflow = "auto"
+      onClose(event);
+    }
   };
 
   const modalVariant = {
@@ -104,6 +107,10 @@ function Modal(props) {
     isOpen: { top: "50%" },
     exit: { top: "-50%" },
   };
+
+  if (open) {
+    document.body.style.overflow = "hidden";
+  }
 
   return (
     <>
@@ -124,8 +131,8 @@ function Modal(props) {
               {showHeader && (
                 <Header {...themeProps}>
                   {headerTitleComponent !== undefined &&
-                  headerTitleComponent !== null &&
-                  React.isValidElement(headerTitleComponent) ? (
+                    headerTitleComponent !== null &&
+                    React.isValidElement(headerTitleComponent) ? (
                     headerTitleComponent
                   ) : (
                     <Title {...themeProps}>{header}</Title>
@@ -135,7 +142,10 @@ function Modal(props) {
                       {...themeProps}
                       icon={"times"}
                       iconStyle={"solid"}
-                      onClick={(e) => onClose(e)}
+                      onClick={(e) => {
+                        document.body.style.overflow = "auto";
+                        onClose(e);
+                      }}
                       color={basic ? "transparent" : themeProps.color}
                     />
                   </CloseButton>
@@ -152,7 +162,7 @@ function Modal(props) {
 
 Modal.defaultProps = {
   open: false,
-  onClose: () => {},
+  onClose: () => { },
   className: "",
   header: "",
   zIndex: 1000,
