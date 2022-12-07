@@ -224,6 +224,20 @@ const DropdownLookup = (props) => {
     }
   }, [selectedOption]);
 
+  useEffect(() => {
+
+    const wheelListener = (e) => {
+      setInFocus(false);
+    };
+
+    if (inFocus) {
+      window.addEventListener("wheel", wheelListener);
+    }
+    else {
+      window.removeEventListener("wheel", wheelListener);
+    }
+  }, [inFocus]);
+
   const updateSelectedValue = (data, updateText = false) => {
     if (data && data.key) {
       setSelectedOption(data);
@@ -327,7 +341,7 @@ const DropdownLookup = (props) => {
     const calculatedWidth = "" + ddlContainerDOMRect.width + "px";
     const calculatedLeft = "" + ddlContainerDOMRect.left + "px";
     const calculatedTop = "" + ddlContainerDOMRect.top + "px";
-    el.style = `position: absolute;
+    el.style = `position: fixed;
     background-color: white;
     z-index: 2147483647 !important;
     transform: translateY( ${heightBySize(size)});
@@ -340,7 +354,7 @@ const DropdownLookup = (props) => {
 
 
 
-      el.style = `position: absolute;
+      el.style = `position: fixed;
                   background-color: white;
                   z-index: 2147483647 !important;
                   transform: translateY( ${heightBySize(size)});

@@ -8,7 +8,7 @@ const Tooltip = props => {
     const { targetID, renderContent } = props;
 
     const [show, setShow] = useState(false);
-    const [style, setStyle] = useState("position: absolute;");
+    const [style, setStyle] = useState("position: fixed;");
 
     const target = (targetID === undefined || targetID === null || targetID === "#" || targetID === "") ?
         null :
@@ -31,7 +31,7 @@ const Tooltip = props => {
     const CalculateStyle = (mouseX, mouseY) => {
         if (mouseX <= window.innerWidth / 2 && mouseY <= window.innerHeight / 2) {
             return (
-                `position: absolute; 
+                `position: fixed; 
                 left: ${(mouseX - 10)}px; 
                 top: ${(mouseY - 10)}px; 
                 width: auto; 
@@ -47,7 +47,7 @@ const Tooltip = props => {
         else if (mouseX > window.innerWidth / 2 && mouseY <= window.innerHeight / 2) {
 
             return (
-                `position: absolute; 
+                `position: fixed; 
                 right: ${(window.innerWidth - mouseX - 10)}px; 
                 top: ${(mouseY - 10)}px; 
                 width: auto; 
@@ -63,7 +63,7 @@ const Tooltip = props => {
         else if (mouseX <= window.innerWidth / 2 && mouseY > window.innerHeight / 2) {
 
             return (
-                `position: absolute; 
+                `position: fixed; 
                 left: ${(mouseX - 10)}px; 
                 bottom: ${(window.innerHeight - mouseY - 10)}px; 
                 width: auto; 
@@ -79,7 +79,7 @@ const Tooltip = props => {
         else if (mouseX > window.innerWidth / 2 && mouseY > window.innerHeight / 2) {
 
             return (
-                `position: absolute; 
+                `position: fixed; 
                 right: ${(window.innerWidth - mouseX - 10)}px; 
                 bottom: ${(window.innerHeight - mouseY - 10)}px; 
                 width: auto; 
@@ -99,7 +99,7 @@ const Tooltip = props => {
             <div onMouseLeave={event => {
                 event.stopPropagation();
                 target.innerHTML = "";
-                setStyle("position: absolute;");
+                setStyle("position: fixed;");
                 setShow(false);
             }}>
                 {renderContent()}
@@ -120,7 +120,7 @@ const Tooltip = props => {
                 onMouseLeave={event => {
                     event.stopPropagation();
                     target.innerHTML = "";
-                    setStyle("position: absolute;");
+                    setStyle("position: fixed;");
                     setShow(false);
                 }}>
                 {props.children}
