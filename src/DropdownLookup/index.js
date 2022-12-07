@@ -414,7 +414,11 @@ const DropdownLookup = (props) => {
   };
 
   return (
-    <Container id={"ddl_container" + id}{...themeProps}>
+    <Container
+      id={"ddl_container" + id}{...themeProps}
+      onWheel={event => {
+        event.stopPropagation();
+      }}>
       <Inner {...themeProps}>
         <InputContainer {...themeProps}>
           <Input
