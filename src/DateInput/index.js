@@ -572,7 +572,13 @@ const DateInput = React.forwardRef((props, ref) => {
   }
 
   return (
-    <Container id={"dp" + id} {...themeProps} className={className}>
+    <Container
+      id={"dp" + id}
+      {...themeProps}
+      className={className}
+      onWheel={event => {
+        event.stopPropagation();
+      }}>
       <Input
         ref={ref}
         {...themeProps}
