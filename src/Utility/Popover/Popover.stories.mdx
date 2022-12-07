@@ -4,6 +4,7 @@ import Popover from "./index";
 import Button from "../../General/Button";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { Table } from "@storybook/components";
 
 <Meta title="Utility/Popover" component={Popover} />
 
@@ -170,11 +171,28 @@ import { Popover } from "@lanaco/lnc-react-ui";
 
 This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
 
-| Method   |     Args    |  Description |
-|----------|:-----------:|-------------:|
-| open     |       -     | Opens  modal |
-| close    |       -     | Closes modal |
-| isOpen   |       -     | Determines whether Popover is open or not at the moment |
+<Table>
+    <tr>
+        <th>Method</th>
+        <th>Args</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>open</td>
+        <td>-</td>
+        <td>Opens  modal</td>
+    </tr>
+    <tr>
+        <td>close</td>
+        <td>-</td>
+        <td>Closes modal</td>
+    </tr>
+    <tr>
+        <td>isOpen</td>
+        <td>-</td>
+        <td>Determines whether Popover is open or not at the moment</td>
+    </tr>
+</Table>
 
 ---
 

@@ -5,6 +5,8 @@ import Icon from "../../General/Icon";
 import Button from "../../General/Button";
 import image from "../../_utils/images/testsvg.svg";
 import { useRef, useState } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Basic Inputs/Check Box Input" component={CheckBoxInput} />
 
@@ -12,10 +14,24 @@ export const TemplateDefault = (args) => <CheckBoxInput {...args} />;
 
 export const TemplateIndeterminate = (args) => {
   const checkboxRef = useRef();
-  return <>
-  <CheckBoxInput ref={checkboxRef} {...args} indeterminate={true} label="Indeterminate" />
-  <Button onClick={(e) => { let checkbox = checkboxRef.current; checkbox.indeterminate = true; }}>Set Indeterminate</Button>
-  </>
+  return (
+    <>
+      <CheckBoxInput
+        ref={checkboxRef}
+        {...args}
+        indeterminate={true}
+        label="Indeterminate"
+      />
+      <Button
+        onClick={(e) => {
+          let checkbox = checkboxRef.current;
+          checkbox.indeterminate = true;
+        }}
+      >
+        Set Indeterminate
+      </Button>
+    </>
+  );
 };
 
 export const TemplateDisabled = (args) => (
@@ -44,21 +60,35 @@ export const TemplateReadOnly = (args) => (
 );
 
 export const TemplateCustom = (args) => {
- const [checked, setChecked] = useState(true);
- return <CheckBoxInput
-    customCheckmark={<img src={image} alt="" />}
-    label="Custom"
-    checked={checked}
-    onChange={(e) => setChecked(!checked)}
-  ></CheckBoxInput>
+  const [checked, setChecked] = useState(true);
+  return (
+    <CheckBoxInput
+      customCheckmark={<img src={image} alt="" />}
+      label="Custom"
+      checked={checked}
+      onChange={(e) => setChecked(!checked)}
+    ></CheckBoxInput>
+  );
 };
 
-export const TemplateSpaceBetween = (args) => <>
-<CheckBoxInput label="Label" spaceBetween={true} defaultChecked={true} {...args} />
-<hr />
-<CheckBoxInput label="Label" labelPosition="left" spaceBetween={true} defaultChecked={true} {...args} />
-</>;
-
+export const TemplateSpaceBetween = (args) => (
+  <>
+    <CheckBoxInput
+      label="Label"
+      spaceBetween={true}
+      defaultChecked={true}
+      {...args}
+    />
+    <hr />
+    <CheckBoxInput
+      label="Label"
+      labelPosition="left"
+      spaceBetween={true}
+      defaultChecked={true}
+      {...args}
+    />
+  </>
+);
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
@@ -81,16 +111,12 @@ export const TemplateColors = (args) => (
 
 # Check Box Input
 
-```jsx
-import { CheckBoxInput } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+  {'import { CheckBoxInput } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas withSource="open">
-  <Story
-    name="Default"
-    args={{
-    }}
-  >
+  <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>

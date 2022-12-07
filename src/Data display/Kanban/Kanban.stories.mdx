@@ -1,11 +1,13 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Kanban from "./index";
-import KanbanHeade from "./components/KanbanHeader";
-import KanbanFoote from "./components/KanbanFooter";
+import KanbanHeader from "./components/KanbanHeader";
+import KanbanFooter from "./components/KanbanFooter";
 import KanbanCard from "./components/KanbanCard";
 import Button from "../../General/Button";
 import IconButton from "../../General/IconButton";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Data Display/Kanban" component={Kanban} />
 
@@ -15,9 +17,9 @@ export const CustomContainerHeader = (props) => {
 
 # Kanban
 
-```jsx
-import { Kanban } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+ {'import { Kanban } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>
@@ -106,9 +108,9 @@ By Default in `Kanban` component header it's unique key (id) will be shown, whil
 
 To have custom Header \\ Footer which is unique to only one column besides property `__TYPE__="KANBAN_HEADER"` \\ `__TYPE__="KANBAN_FOOTER"` it is necessary also to use property `id` whose value is equal to column's unique key (id).
 
-```jsx
-import { KanbanHeader, KanbanFooter } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+ {'import { KanbanHeader, KanbanFooter } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Header and Footer Components" args={{}}>
@@ -188,9 +190,9 @@ import { KanbanHeader, KanbanFooter } from "@lanaco/lnc-react-ui";
 
 To override default card in column it is necessary to use `KanbanCard` component or any other custom component which has property `__TYPE__="KANBAN_CARD"`.
 
-```jsx
-import { KanbanCard } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+ {'import { KanbanCard } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Kanban Card" args={{}}>

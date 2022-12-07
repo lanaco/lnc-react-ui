@@ -3,6 +3,8 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Chip from "./index";
 import Avatar from "../../General/Avatar";
 import logo from "../../_utils/images/Image.png";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Data display/Chip" component={Chip} />
 
@@ -66,9 +68,9 @@ export const TemplateRounding = (args) => (
 
 # Chip
 
-```jsx
-import { Chip } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+ {'import { Chip } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{ label: "Chip" }}>

@@ -8,6 +8,8 @@ import Button from "../../General/Button";
 import Kanban from "../Kanban";
 import KanbanActionsToolbar from "./KanbanActionsToolbar";
 import { useState } from "react";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta
   title="Data Display/Kanban View"
@@ -105,9 +107,9 @@ export const CustomFooter = (props) => {
 
 # Kanban View
 
-```jsx
-import { KanbanView, KanbanActionsToolbar } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+  {'import { KanbanView, KanbanActionsToolbar } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>
@@ -310,7 +312,7 @@ When using _KanbanView_ without _Custom Kanban_ (Custom component that has prope
 
 ## Actions
 
-Actions in _Kanban View Actions Toolbar_ are defined through property `toolbarActions`, type of _[{name: `<string>`, show: `<bool>`, enable: `<bool>`, onAction: `<func>`, customAction: `<element>`}, ...]_.
+Actions in _Kanban View Actions Toolbar_ are defined through property `toolbarActions`, type of _`[{name: <string>, show: <bool>, enable: <bool>, onAction: <func>, customAction: <element>}, ...]`_.
 Default _Column_ and _Card_ actions are _Edit_ and _Delete_, throught _KanbanView_ properties they can be modified disabled and unshown. Custom _Column_/_Card_ actions are definded through property `customColumnActions`/`customCardActions`.
 
 Footer Column Actions: _Load More Cards_ and _Add New Card_ are defined through props `showAddNewCard`, `showLoadMoreCards`, `onLoadMoreCards` and `onAddNewCard` for all columns.

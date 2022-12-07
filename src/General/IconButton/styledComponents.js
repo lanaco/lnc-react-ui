@@ -49,7 +49,6 @@ export const FilledButton = styled.button`
     )};
 
   background-color: ${(props) =>
-    !props.disabled &&
     getColorRgbaValue(
       props.theme,
       "ButtonFilled",
@@ -69,30 +68,8 @@ export const FilledButton = styled.button`
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
 
-  &:disabled {
-    ${(props) => props.disabled && getDisabledStateCss(props.theme)};
-    cursor: default;
-    background-color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "ButtonFilled",
-        "gray",
-        "disabled",
-        "background"
-      )};
-    color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "ButtonFilled",
-        props.color,
-        "disabled",
-        "text"
-      )};
-  }
-
   &:hover {
     background-color: ${(props) =>
-      !props.disabled &&
       getColorRgbaValue(
         props.theme,
         "ButtonFilled",
@@ -112,7 +89,6 @@ export const FilledButton = styled.button`
 
   &:focus {
     background-color: ${(props) =>
-      !props.disabled &&
       getColorRgbaValue(
         props.theme,
         "ButtonFilled",
@@ -129,12 +105,11 @@ export const FilledButton = styled.button`
         "text"
       )};
 
-    ${(props) => !props.disabled && getOutlineCss(props.theme)};
+    ${(props) => props.disabled === false && getOutlineCss(props.theme)};
   }
 
   &:active {
     background-color: ${(props) =>
-      !props.disabled &&
       getColorRgbaValue(
         props.theme,
         "ButtonFilled",
@@ -148,6 +123,27 @@ export const FilledButton = styled.button`
         "ButtonFilled",
         props.color,
         "active",
+        "text"
+      )};
+  }
+
+  &:disabled {
+    ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
+    cursor: default;
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonFilled",
+        "gray",
+        "disabled",
+        "background"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonFilled",
+        props.color,
+        "disabled",
         "text"
       )};
   }
@@ -166,17 +162,15 @@ export const TintedButton = styled.button`
 
   backdrop-filter: blur(48px);
   color: ${(props) =>
-    !props.disabled &&
     getColorRgbaValue(
       props.theme,
       "ButtonTinted",
       props.color,
       "enabled",
       "text"
-    )}};
+    )};
 
   background-color: ${(props) =>
-    !props.disabled &&
     getColorRgbaValue(
       props.theme,
       "ButtonTinted",
@@ -189,8 +183,69 @@ export const TintedButton = styled.button`
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
 
+  &:hover {
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonTinted",
+        props.color,
+        "hover",
+        "background",
+        "backgroundOpacity"
+      )};
+    color: ${(props) =>
+      !props.disabled &&
+      getColorRgbaValue(
+        props.theme,
+        "ButtonTinted",
+        props.color,
+        "hover",
+        "text"
+      )};
+  }
+
+  &:focus {
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonTinted",
+        props.color,
+        "focus",
+        "background",
+        "backgroundOpacity"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonTinted",
+        props.color,
+        "focus",
+        "text"
+      )};
+    ${(props) => props.disabled === false && getOutlineCss(props.theme)};
+  }
+
+  &:active {
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonTinted",
+        props.color,
+        "active",
+        "background",
+        "backgroundOpacity"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonTinted",
+        props.color,
+        "active",
+        "text"
+      )};
+  }
   &:disabled {
-    ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+    ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
     cursor: default;
     background-color: ${(props) =>
       getColorRgbaValue(
@@ -201,76 +256,9 @@ export const TintedButton = styled.button`
         "background"
       )};
   }
-
-  &:hover {
-    background-color: ${(props) =>
-      !props.disabled &&
-      getColorRgbaValue(
-        props.theme,
-        "ButtonTinted",
-        props.color,
-        "hover",
-        "background",
-        "backgroundOpacity"
-      )};
-      color: ${(props) =>
-        !props.disabled &&
-        getColorRgbaValue(
-          props.theme,
-          "ButtonTinted",
-          props.color,
-          "hover",
-          "text"
-        )};
-  }
-
-  &:focus {
-    background-color: ${(props) =>
-      !props.disabled &&
-      getColorRgbaValue(
-        props.theme,
-        "ButtonTinted",
-        props.color,
-        "focus",
-        "background",
-        "backgroundOpacity"
-      )};
-      color: ${(props) =>
-        !props.disabled &&
-        getColorRgbaValue(
-          props.theme,
-          "ButtonTinted",
-          props.color,
-          "focus",
-          "text"
-        )};
-    ${(props) => !props.disabled && getOutlineCss(props.theme)};
-  }
-
-  &:active {
-    background-color: ${(props) =>
-      !props.disabled &&
-      getColorRgbaValue(
-        props.theme,
-        "ButtonTinted",
-        props.color,
-        "active",
-        "background",
-        "backgroundOpacity"
-      )};
-      color: ${(props) =>
-        !props.disabled &&
-        getColorRgbaValue(
-          props.theme,
-          "ButtonTinted",
-          props.color,
-          "active",
-          "text"
-        )};
-  }
 `;
 
-export const BasicButton = styled.button` 
+export const BasicButton = styled.button`
   ${(props) => commonCss(props, "ButtonFilled")}
 
   ${(props) =>
@@ -282,17 +270,15 @@ export const BasicButton = styled.button`
     )};
 
   color: ${(props) =>
-    !props.disabled &&
     getColorRgbaValue(
       props.theme,
       "ButtonBasic",
       props.color,
       "enabled",
       "text"
-    )}};
+    )};
 
   background-color: ${(props) =>
-    !props.disabled &&
     getColorRgbaValue(
       props.theme,
       "ButtonBasic",
@@ -305,23 +291,8 @@ export const BasicButton = styled.button`
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
 
-  &:disabled {
-    ${(props) => props.disabled && getDisabledStateCss(props.theme)};
-    cursor: default;
-    background-color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "ButtonBasic",
-        "gray",
-        "disabled",
-        "background",
-        "backgroundOpacity"
-      )};
-  }
-
   &:hover {
     background-color: ${(props) =>
-      !props.disabled &&
       getColorRgbaValue(
         props.theme,
         "ButtonBasic",
@@ -330,19 +301,18 @@ export const BasicButton = styled.button`
         "background",
         "backgroundOpacity"
       )};
-      color: ${(props) =>
-        getColorRgbaValue(
-          props.theme,
-          "ButtonBasic",
-          props.color,
-          "hover",
-          "text"
-        )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonBasic",
+        props.color,
+        "hover",
+        "text"
+      )};
   }
 
   &:focus {
     background-color: ${(props) =>
-      !props.disabled &&
       getColorRgbaValue(
         props.theme,
         "ButtonBasic",
@@ -351,19 +321,46 @@ export const BasicButton = styled.button`
         "background",
         "backgroundOpacity"
       )};
-color: ${(props) =>
-  getColorRgbaValue(props.theme, "ButtonBasic", props.color, "hover", "text")};
-    ${(props) => !props.disabled && getOutlineCss(props.theme)};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonBasic",
+        props.color,
+        "hover",
+        "text"
+      )};
+    ${(props) => props.disabled === false && getOutlineCss(props.theme)};
   }
 
   &:active {
     background-color: ${(props) =>
-      !props.disabled &&
       getColorRgbaValue(
         props.theme,
         "ButtonBasic",
         props.color,
         "active",
+        "background",
+        "backgroundOpacity"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonBasic",
+        props.color,
+        "active",
+        "text"
+      )};
+  }
+
+  &:disabled {
+    ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
+    cursor: default;
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonBasic",
+        "gray",
+        "disabled",
         "background",
         "backgroundOpacity"
       )};

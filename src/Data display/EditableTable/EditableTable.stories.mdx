@@ -11,6 +11,8 @@ import TableSpecialLastRow from "./components/TableSpecialLastRow";
 import Button from "../../General/Button/index";
 import { cloneDeep, isEmpty, isEqual } from "lodash";
 import { useStateWithCallbackLazy } from "use-state-with-callback";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Data Display/Editable Table" component={EditableTable} />
 
@@ -319,9 +321,9 @@ export const TemplateDefault = (props) => {
 
 # Editable Table
 
-```jsx
-import { EditableTable } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+  {'import { EditableTable } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 The `EditableTable` uses the standard `Table` component with an `TableCell`
 override and some internal logic to achieve excel-like cell editability features.

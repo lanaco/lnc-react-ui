@@ -140,7 +140,7 @@ Button.defaultProps = {
   iconStyle: "solid",
   borderRadius: "regular",
   btnType: "filled",
-  disalbed: false,
+  disabled: false,
   tabIndex: 0,
   //-------------------------
   onBlur: () => {},
