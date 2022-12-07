@@ -1,6 +1,6 @@
 # Lanaco ReactJS UI components library
 
-[Deployment](https://lanaco.github.io/lnc-react-ui/?path=/docs/intro--intro)
+[Deployment](https://lanaco.github.io/lnc-react-ui/?path=/docs/intro--page)
 
 This library includes basic and advanced UI components used with ReactJS frontend framework
 
