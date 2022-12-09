@@ -40,7 +40,8 @@ const DragDropFiles = React.forwardRef((props, ref) => {
     id,
     disabled,
     preventDefault,
-    accept,
+    acceptDropzone,
+    acceptInput,
     multiple,
     selectFileText,
     dndFileText,
@@ -95,7 +96,8 @@ const DragDropFiles = React.forwardRef((props, ref) => {
             id={id}
             disabled={disabled}
             preventDefault={preventDefault}
-            accept={accept}
+            acceptDropzone={acceptDropzone}
+            acceptInput={acceptInput}
             multiple={multiple}
             selectFileText={selectFileText}
             dndFileText={dndFileText}
@@ -137,7 +139,7 @@ DragDropFiles.defaultProps = {
   id: "",
   disabled: false,
   preventDefault: false,
-  accept: {},
+  acceptDropzone: {},
   multiple: true,
   selectFileText: "Select file",
   dndFileText: "Drag and drop file here or",
@@ -173,7 +175,8 @@ DragDropFiles.propTypes = {
    *
    * }
    */
-  accept: PropTypes.object,
+  acceptDropzone: PropTypes.object,
+  acceptInput: PropTypes.string,
   multiple: PropTypes.bool,
   selectFileText: PropTypes.string,
   dndFileText: PropTypes.string,
