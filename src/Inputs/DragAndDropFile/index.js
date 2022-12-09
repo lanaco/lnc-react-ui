@@ -167,7 +167,7 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
                 ref={inputRef}
                 type="file"
                 action="bla.html"
-                accept={accept}
+                accept={acceptInput}
                 id={id}
                 onFocus={(e) => {
                     if (!disabled) setFocused(true);
