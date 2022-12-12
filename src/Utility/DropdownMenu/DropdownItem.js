@@ -81,6 +81,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
     disabled,
     isNested,
     showNested,
+    value,
     //----------------
     onFocus,
     onBlur,
@@ -114,7 +115,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
         toggleNested();
       }
 
-      onItemSelected(e, children);
+      onItemSelected(e, value, children);
       onClick(e);
     }
   };
@@ -139,7 +140,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
           toggleNested();
         }
 
-        onItemSelected(e, children);
+        onItemSelected(e, value, children);
       }
     }
 
@@ -290,6 +291,7 @@ DropdownItem.propTypes = {
   icon: PropTypes.string,
   disabled: PropTypes.bool,
   isNested: PropTypes.bool,
+  value: PropTypes.any,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
