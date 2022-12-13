@@ -195,7 +195,6 @@ DragAndDropFile.defaultProps = {
     id: "",
     disabled: false,
     acceptDropzone: {},
-    acceptInput: acceptInput,
     multiple: false,
     selectFileText: "Select file",
     dndFileText: "Drag and drop file here or",
