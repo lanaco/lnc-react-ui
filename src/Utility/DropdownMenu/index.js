@@ -62,8 +62,8 @@ const DropdownMenu = React.forwardRef((props, ref) => {
   const controlRef = useRef();
   const firstItemRef = useRef();
 
-  const handleOnItemSelected = (e, children) => {
-    onItemSelected(e, children);
+  const handleOnItemSelected = (e, value, children) => {
+    onItemSelected(e, value, children);
     if (closeOnItemSelect == true) popoverRef?.current?.close();
   };
 
@@ -216,7 +216,7 @@ DropdownMenu.defaultProps = {
   onKeyDown: () => {},
   onMouseEnter: () => {},
   onMouseLeave: () => {},
-  onItemSelected: (e, children) => {},
+  onItemSelected: (e, value, children) => {},
   //-------------------------
   /**
    * Animation use on nested items open/close

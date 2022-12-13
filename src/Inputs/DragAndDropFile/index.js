@@ -70,7 +70,8 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
         id,
         disabled,
         preventDefault,
-        accept,
+        acceptDropzone,
+        acceptInput,
         multiple,
         selectFileText,
         control,
@@ -142,7 +143,7 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
 
     const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
         onDrop: handleOnDrop,
-        accept: accept,
+        accept: acceptDropzone,
         onDropAccepted: handleOnDropAccepted,
         multiple: multiple,
         disabled: disabled,
@@ -166,6 +167,7 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
                 ref={inputRef}
                 type="file"
                 action="bla.html"
+                accept={acceptInput}
                 id={id}
                 onFocus={(e) => {
                     if (!disabled) setFocused(true);
@@ -192,7 +194,8 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
 DragAndDropFile.defaultProps = {
     id: "",
     disabled: false,
-    accept: {},
+    acceptDropzone: {},
+    acceptInput: acceptInput,
     multiple: false,
     selectFileText: "Select file",
     dndFileText: "Drag and drop file here or",

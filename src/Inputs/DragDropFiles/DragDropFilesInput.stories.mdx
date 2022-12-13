@@ -12,7 +12,8 @@ export const TemplateDefault = (args) => <DragDropFiles {...args} />;
 export const TemplateAcceptImages = (args) => (
   <DragDropFiles
     multiple={true}
-    accept={{ "image/jpeg": [], "image/jpg": [], "image/png": [".png"] }}
+    acceptDropzone={{ "image/jpeg": [], "image/jpg": [], "image/png": [".png"] }}
+    acceptInput={"image/*"}
     {...args}
   />
 );
