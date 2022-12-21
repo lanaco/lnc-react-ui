@@ -23,7 +23,11 @@ export const TemplateDefault = (args) => {
           setAnchor(e.currentTarget);
           popoverRef?.current?.open();
         }}
-        onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
+        onClick={(e) => {
+          popoverRef?.current?.isOpen()
+            ? popoverRef?.current?.close()
+            : popoverRef?.current?.open();
+        }}
       />
       <Popover {...args} ref={popoverRef} anchorElement={anchor}>
         Popover Content
@@ -35,7 +39,10 @@ export const TemplateDefault = (args) => {
 export const TemplateAlignment = (args) => {
   const popoverRef = useRef();
   const [anchor, setAnchor] = useState();
-  const [alignment, setAlignment] = useState({ vertical: null, horizontal: null });
+  const [alignment, setAlignment] = useState({
+    vertical: null,
+    horizontal: null,
+  });
   return (
     <div
       style={{
@@ -44,7 +51,13 @@ export const TemplateAlignment = (args) => {
         justifyContent: "space-between",
       }}
     >
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between"  }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <Button
           text="Bottom Left"
           onMouseEnter={(e) => {
@@ -52,8 +65,12 @@ export const TemplateAlignment = (args) => {
             setAlignment({ vertical: "bottom", horizontal: "left" });
             popoverRef?.current?.open();
           }}
-          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
-          style={{ width: "180px" }}
+          onClick={(e) => {
+            popoverRef?.current?.isOpen()
+              ? popoverRef?.current?.close()
+              : popoverRef?.current?.open();
+          }}
+          style={{ width: "180px", position: "relative" }}
         />
         <Button
           text="Top Left"
@@ -62,11 +79,21 @@ export const TemplateAlignment = (args) => {
             setAlignment({ vertical: "top", horizontal: "left" });
             popoverRef?.current?.open();
           }}
-          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
-          style={{ width: "180px" }}
+          onClick={(e) => {
+            popoverRef?.current?.isOpen()
+              ? popoverRef?.current?.close()
+              : popoverRef?.current?.open();
+          }}
+          style={{ width: "180px", position: "relative" }}
         />
       </div>
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between"  }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <Button
           text="Bottom Center"
           onMouseEnter={(e) => {
@@ -74,8 +101,12 @@ export const TemplateAlignment = (args) => {
             setAlignment({ vertical: "bottom", horizontal: "center" });
             popoverRef?.current?.open();
           }}
-          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
-          style={{ width: "180px" }}
+          onClick={(e) => {
+            popoverRef?.current?.isOpen()
+              ? popoverRef?.current?.close()
+              : popoverRef?.current?.open();
+          }}
+          style={{ width: "180px", position: "relative" }}
         />
         <Button
           text="Top Center"
@@ -84,11 +115,21 @@ export const TemplateAlignment = (args) => {
             setAlignment({ vertical: "top", horizontal: "center" });
             popoverRef?.current?.open();
           }}
-          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
-          style={{ width: "180px" }}
+          onClick={(e) => {
+            popoverRef?.current?.isOpen()
+              ? popoverRef?.current?.close()
+              : popoverRef?.current?.open();
+          }}
+          style={{ width: "180px", position: "relative" }}
         />
       </div>
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <Button
           text="Bottom Right"
           onMouseEnter={(e) => {
@@ -96,8 +137,12 @@ export const TemplateAlignment = (args) => {
             setAlignment({ vertical: "bottom", horizontal: "right" });
             popoverRef?.current?.open();
           }}
-          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
-          style={{ width: "180px" }}
+          onClick={(e) => {
+            popoverRef?.current?.isOpen()
+              ? popoverRef?.current?.close()
+              : popoverRef?.current?.open();
+          }}
+          style={{ width: "180px", position: "relative" }}
         />
         <Button
           text="Top Right"
@@ -106,11 +151,21 @@ export const TemplateAlignment = (args) => {
             setAlignment({ vertical: "top", horizontal: "right" });
             popoverRef?.current?.open();
           }}
-          onClick={(e) => { popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open() }}
-          style={{ width: "180px" }}
+          onClick={(e) => {
+            popoverRef?.current?.isOpen()
+              ? popoverRef?.current?.close()
+              : popoverRef?.current?.open();
+          }}
+          style={{ width: "180px", position: "relative" }}
         />
       </div>
-      <Popover {...args} anchorElement={anchor} ref={popoverRef} vertical={alignment.vertical} horizontal={alignment.horizontal}>
+      <Popover
+        {...args}
+        anchorElement={anchor}
+        ref={popoverRef}
+        vertical={alignment.vertical}
+        horizontal={alignment.horizontal}
+      >
         Popover Content
       </Popover>
     </div>
@@ -118,37 +173,104 @@ export const TemplateAlignment = (args) => {
 };
 
 export const TemplateOffset = (args) => {
-const popoverRef = useRef();
-const [anchor, setAnchor] = useState();
+  const popoverRef = useRef();
+  const [anchor, setAnchor] = useState();
+  return (
+    <div>
+        <Button
+          text="Toggle Popover on click"
+          onClick={(e) => {
+            setAnchor(e.currentTarget);
+            popoverRef?.current?.isOpen()
+              ? popoverRef?.current?.close()
+              : popoverRef?.current?.open();
+          }}
+        />
+        <Popover
+          {...args}
+          ref={popoverRef}
+          anchorElement={anchor}
+          offset={15}
+          portalTarget={document.body}
+        >
+          Popover Content
+        </Popover>
+      </div>
+  );
+};
+
+export const TemplateOffsett = (args) => {
+  const popoverRef = useRef();
+  const [anchor, setAnchor] = useState();
   return (
     <div>
       <Button
         text="Toggle Popover on click"
         onClick={(e) => {
           setAnchor(e.currentTarget);
-          popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open();
-        }}/>
-      <Popover {...args} ref={popoverRef} anchorElement={anchor} offset={15}>
+          popoverRef?.current?.isOpen()
+            ? popoverRef?.current?.close()
+            : popoverRef?.current?.open();
+        }}
+      />
+      <Popover
+        {...args}
+        ref={popoverRef}
+        anchorElement={anchor}
+        offset={15}
+        style={{ height: "400px", width: "700px", background: "gray" }}
+      >
         Popover Content
       </Popover>
     </div>
   );
 };
 
-export const TemplateOffsett = (args) => {
-const popoverRef = useRef();
-const [anchor, setAnchor] = useState();
+export const TemplatePortalTarget = (args) => {
+  const popoverRef = useRef();
+  const [anchor, setAnchor] = useState();
+  const containerRef = useRef();
   return (
-    <div>
-      <Button
-        text="Toggle Popover on click"
-        onClick={(e) => {
-          setAnchor(e.currentTarget);
-          popoverRef?.current?.isOpen() ? popoverRef?.current?.close() : popoverRef?.current?.open();
-        }}/>
-      <Popover {...args} ref={popoverRef} anchorElement={anchor} offset={15} style={{height: "400px", width: "700px", background: "gray"}}>
-        Popover Content
-      </Popover>
+    <div style={{ maxHeight: "70px" }}>
+      <div
+        ref={containerRef}
+        style={{
+          minHeight: "500px",
+          overflow: "auto",
+          position: "relative",
+        }}
+      >
+        <Button
+          text="Toggle Popover on click"
+          onClick={(e) => {
+            setAnchor(e.currentTarget);
+            popoverRef?.current?.isOpen()
+              ? popoverRef?.current?.close()
+              : popoverRef?.current?.open();
+          }}
+        />
+        <Popover
+          ref={popoverRef}
+          anchorElement={anchor}
+          offset={15}
+          portalTarget={containerRef}
+          {...args}
+        >
+          Popover Content
+          <br />
+          <br />
+          ...
+          <br />
+          ....
+          <br />
+          ...
+          <br />
+          ...
+          <br />
+          ...
+          <br />
+        </Popover>
+      </div>
     </div>
   );
 };
@@ -172,26 +294,26 @@ import { Popover } from "@lanaco/lnc-react-ui";
 This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
 
 <Table>
-    <tr>
-        <th>Method</th>
-        <th>Args</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>open</td>
-        <td>-</td>
-        <td>Opens  modal</td>
-    </tr>
-    <tr>
-        <td>close</td>
-        <td>-</td>
-        <td>Closes modal</td>
-    </tr>
-    <tr>
-        <td>isOpen</td>
-        <td>-</td>
-        <td>Determines whether Popover is open or not at the moment</td>
-    </tr>
+  <tr>
+    <th>Method</th>
+    <th>Args</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>open</td>
+    <td>-</td>
+    <td>Opens modal</td>
+  </tr>
+  <tr>
+    <td>close</td>
+    <td>-</td>
+    <td>Closes modal</td>
+  </tr>
+  <tr>
+    <td>isOpen</td>
+    <td>-</td>
+    <td>Determines whether Popover is open or not at the moment</td>
+  </tr>
 </Table>
 
 ---
@@ -201,10 +323,7 @@ This component exposes public methods. You can invoke them directly on the insta
 Props `vertical` and `horizontal` define alignment of popover. If alignment props are not set `horizontal` alignment will be `center`, `vertical` alignment will be determined depending on where there is more available space in document.
 
 <Canvas>
-  <Story
-    name="Alignment"
-    args={{}}
-  >
+  <Story name="Alignment" args={{}}>
     {TemplateAlignment.bind({})}
   </Story>
 </Canvas>
@@ -220,16 +339,23 @@ Props `vertical` and `horizontal` define alignment of popover. If alignment prop
 </Canvas>
 
 ---
+
 ### z-index
 
 There might be need to increase value of prop `zIndex` when popover is in modal or in other similar situations.
 
 ---
 
-### popoverContainer 
+## PortalTarget
 
-Popover uses create [ReactDOM.createPortal](https://reactjs.org/docs/portals.html) in order to insert popover as child of `popoverContainer` location in the DOM (default value of `popoverContainer` is `document.body`), instead of mounting it into the DOM as a child of the nearest parent node, which would couse problems whene there are popover parents with `position: relative`. 
+When using Popover in Modal it is recommended to use _portalTarget=document.body_ and _closeOnScroll=true_
 
----
+Example where Popover is inside another portalTarget.
 
-`offset` from anchor element is defined in `px`.
+When using portalTarget which is not _document.body_ make sure that it has _position=relative_
+
+<Canvas>
+  <Story name="Portal Target" args={{}}>
+    {TemplatePortalTarget.bind({})}
+  </Story>
+</Canvas>

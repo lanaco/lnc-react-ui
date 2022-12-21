@@ -36,6 +36,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     horizontalAlignment,
     widthFitContent,
     closeOnItemSelect,
+    portalTarget,
     //----------------
     onFocus,
     onBlur,
@@ -187,6 +188,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
         offset={offset}
         style={{ padding: 0, maxHeight: "unset" }}
         closeOnClickOutside={false} //dropdown has it's own outside click handler which includes control (element that opens dropdown)
+        portalTarget={portalTarget}
         {...popoverProps}
       >
           <PopoverContent
@@ -258,6 +260,10 @@ DropdownMenu.propTypes = {
    * Close menu when item is selected
    */
   closeOnItemSelect: PropTypes.bool,
+  /**
+   * portalTarget can be DOM element or a ref to an element, possible value is `document.body`
+   */
+  portalTarget: PropTypes.any,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,

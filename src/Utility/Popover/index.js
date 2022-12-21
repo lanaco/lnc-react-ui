@@ -12,6 +12,7 @@ import { useImperativeHandle } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const StyledPopover = styled(motion.div)`
+  color: black;
   box-sizing: border-box;
   font-family: ${(props) => props.theme?.typography?.fontFamily};
   display: ${(props) => (props.show ? "block" : "none")};
@@ -20,11 +21,16 @@ const StyledPopover = styled(motion.div)`
   animation: fadeIn 0.4s;
 
   position: absolute;
-  top: ${(props) =>
-    props.position ? `${props.position?.top + props.position?.height}` : "0"};
-  left: ${(props) => (props.position ? props.left : "")};
-  ${(props) => props.position?.horizontalPosition};
-  ${(props) => props.position?.verticalPosition};
+  max-height: ${(props) => props.position.maxHeight + "px"};
+  max-width: ${(props) => props.position.maxWidth + "px"};
+  ${(props) => props.position.top !== null && `top: ${props.position.top}px;`}
+  ${(props) =>
+    props.position.bottom !== null && `bottom: ${props.position.bottom}px;`}
+  ${(props) =>
+    props.position.left !== null && `left: ${props.position.left}px;`}
+  ${(props) =>
+    props.position.right !== null && `right: ${props.position.right}px;`}
+
   overflow: auto;
   box-shadow: ${(props) =>
     getComponentPropValue(
@@ -38,18 +44,6 @@ const StyledPopover = styled(motion.div)`
     getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
   border-top: 1px solid rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
-  max-width: ${(props) =>
-    props.position?.maxWidth
-      ? props.position.maxWidth != "100vw"
-        ? props.position.maxWidth + "px"
-        : "100vw"
-      : "100vw"};
-  max-height: ${(props) =>
-    props.position?.maxHeight
-      ? props.position.maxHeight != "100vh"
-        ? props.position.maxHeight + "px"
-        : "100vh"
-      : "100vh"};
   padding: 12px;
   background-color: ${(props) =>
     getColorRgbaValue(props.theme, "Popover", "default", "enabled", "bg")};
@@ -112,7 +106,9 @@ const Popover = React.forwardRef((props, ref) => {
     offset,
     zIndex,
     popoverContainer,
+    portalTarget,
     closeOnClickOutside,
+    closeOnScroll,
     onOpen,
     onClose,
     className,
@@ -120,13 +116,21 @@ const Popover = React.forwardRef((props, ref) => {
     children,
     ...rest
   } = props;
+  const [portal, setPortal] = useState(document.body);
 
   const theme = useTheme();
   const popoverRef = useRef(ref);
 
   const [show, setShow] = useState(false);
 
-  const [popoverPosition, setPopoverPosition] = useState();
+  const [popoverPosition, setPopoverPosition] = useState({
+    top: null,
+    bottom: null,
+    left: null,
+    right: null,
+    maxHeight: null,
+    width: null,
+  });
 
   //Expose functions through ref
   useImperativeHandle(ref, () => ({
@@ -151,181 +155,207 @@ const Popover = React.forwardRef((props, ref) => {
     onClose(event);
   };
 
+
+  useEffect(() => {
+    if (anchorElement && show === true) {
+      if(portalTarget) {
+        setPortal(portalTarget?.current ? portalTarget.current : portalTarget);
+      } else {
+        //todo set relative implicitly to anchor
+        if(anchorElement?.current) {
+          anchorElement.current.style.position = "relative";
+        } else {
+          anchorElement.style.position = "relative";
+        }
+        setPortal(anchorElement?.current ? anchorElement.current : anchorElement);
+      }
+    }
+  }, [anchorElement, show]);
+
   useEffect(() => {
     if (anchorElement && show == true) {
-      //Anchor element can be ref or HTML element
-      let anchorElPosition = getElementPosition(
-        anchorElement?.current ? anchorElement.current : anchorElement
+      
+      let anchorElPosition = getElementPositionInContainer(
+        anchorElement?.current ? anchorElement.current : anchorElement,
+        portalTarget
       );
-      let anchorViewPortPosition = getElementViewPortPosition(
-        anchorElement?.current ? anchorElement.current : anchorElement
+
+      let popoverMeasures = getElementMeasures(popoverRef.current);
+
+      const container = portalTarget
+        ? portalTarget.current
+          ? portalTarget.current
+          : portalTarget
+        : document.body;
+
+      let containerMeasures = getElementMeasures(container);
+
+      const resultPosition = getPopoverPosition(
+        anchorElPosition,
+        popoverMeasures,
+        containerMeasures,
+        offset,
+        portalTarget
       );
-      if (anchorElPosition && anchorViewPortPosition)
-        setPopoverPosition(
-          findPopoverPosition(anchorElPosition, anchorViewPortPosition)
-        );
+
+      setPopoverPosition(resultPosition);
     }
-  }, [anchorElement, vertical, horizontal, show]);
+  }, [anchorElement, vertical, horizontal, show, portal]);
 
-  const findPopoverPosition = (anchorElPosition, anchorViewPortPosition) => {
-    const { clientHeight: windowHeight, clientWidth: windowWidth } =
-      document.body;
-    const { innerHeight: windowInnerHeight, innerWidth: windowInnerWidth } =
-      window;
+  const getPopoverPosition = (
+    anchorPosition,
+    popoverMeasures,
+    containerMeasures,
+    offset,
+    portalTarget
+  ) => {
+    const freeSpaceTop = getFreeSpaceFromTheTop(anchorPosition, offset);
+    const freeSpaceBottom = getFreeSpaceFromTheBottom(
+      anchorPosition,
+      offset,
+      containerMeasures
+    );
+    const freeSpaceLeft = getFreeSpaceToTheLeft(anchorPosition);
 
-    let popoverMeasures = getElementPosition(popoverRef.current);
+    let position = {
+      top: null,
+      bottom: null,
+      left: null,
+      right: null,
+      maxHeight: null,
+      maxWidth: null,
+    };
 
-    if (popoverMeasures && anchorElPosition) {
-      let { horizontalPosition, maxWidth } = horizontal
-        ? findHorizontalPosition(
-            horizontal,
-            anchorElPosition,
-            popoverMeasures,
-            anchorViewPortPosition,
-            windowInnerWidth
-          )
-        : { horizontalPosition: "", maxWidth: "100vw" };
-      let { verticalPosition, maxHeight } = vertical
-        ? findVerticalPosition(
-            vertical,
-            anchorElPosition,
-            popoverMeasures,
-            anchorViewPortPosition,
-            windowInnerHeight
-          )
-        : { verticalPosition: "", maxHeight: "100vh" };
+    const anchMeas = getElementMeasures(portal);
 
-      if (!horizontal) {
-        maxWidth = "100vw";
-        //horizontal
-        if (
-          popoverMeasures.width / 2 <=
-            anchorElPosition.left + anchorElPosition.width / 2 &&
-          popoverMeasures.width / 2 <=
-            windowWidth - anchorElPosition.right + anchorElPosition.width / 2
-        ) {
-          horizontalPosition = `left: ${
-            anchorElPosition.left +
-            anchorElPosition.width / 2 -
-            popoverMeasures.width / 2
-          }px`;
-        } else if (
-          popoverMeasures.width / 2 >
-          anchorElPosition.left + anchorElPosition.width / 2
-        ) {
-          horizontalPosition = "left: 0";
+    // getting vertical position and max height boundaries
+    if (freeSpaceTop > freeSpaceBottom) {
+      if (portalTarget) {
+        position.top =
+          anchorPosition.top - offset - popoverMeasures.height > 0
+            ? anchorPosition.top - offset - popoverMeasures.height
+            : 0;
+      } else {
+        position.top =
+          anchorPosition.top - offset - popoverMeasures.height > 0
+            ? 0 - popoverMeasures.height
+            : 0 - freeSpaceTop - offset;
+      }
+
+      position.maxHeight = freeSpaceTop;
+    } else {
+      if (portalTarget) {
+        position.top = anchorPosition.bottom + offset;
+      } else {
+        position.top = anchMeas.height + offset;
+      }
+
+      position.maxHeight = freeSpaceBottom;
+    }
+
+    // getting horizontal positio and max width boundaries
+    if (horizontal === "left") {
+      position.maxWidth = containerMeasures.width - anchorPosition.left;
+
+      if (portalTarget) {
+        position.left = anchorPosition.left;
+      } else {
+        position.left = 0;
+      }
+    } else if (horizontal === "right") {
+      position.maxWidth = anchorPosition.right;
+
+      if (portalTarget) {
+        position.left =
+          anchorPosition.right - popoverMeasures.width > 0
+            ? anchorPosition.right - popoverMeasures.width
+            : 0;
+      } else {
+        position.right = 0;
+      }
+    } else {
+      position.maxWidth = containerMeasures.width;
+
+      if (anchorPosition.horizontalCenter >= popoverMeasures.width / 2) {
+        if (portalTarget) {
+          position.left =
+            anchorPosition.horizontalCenter - (popoverMeasures.width / 2);
         } else {
-          horizontalPosition = "right: 0";
+          position.left = (anchMeas.width / 2) - (popoverMeasures.width / 2);
+        }
+      } else {
+        if(portalTarget) {
+          position.left = 0;
+        } else {
+          position.left = 0 - freeSpaceLeft;
         }
       }
-      if (!vertical) {
-        //vertical
-        if (
-          anchorViewPortPosition.top >=
-          innerHeight - anchorViewPortPosition.bottom
-        ) {
-          //on top
-          maxHeight = `${anchorViewPortPosition.top - offset}`;
-          verticalPosition = `top: ${
-            anchorElPosition.top -
-            (popoverMeasures.height > maxHeight
-              ? +maxHeight + offset
-              : popoverMeasures.height + offset)
-          }px`;
-        } else {
-          //on bottom
-          maxHeight = `${
-            windowInnerHeight - anchorViewPortPosition.bottom - offset
-          }`;
-          verticalPosition = `top: ${anchorElPosition.bottom + offset}px`;
-        }
-      }
+    }
+
+    return position;
+  };
+
+  const getFreeSpaceToTheLeft = (anchorPosition) => {
+    return anchorPosition.left;
+  };
+
+  // Vertical offset can exist
+  const getFreeSpaceFromTheTop = (anchorPosition, offset) => {
+    if (vertical === "bottom") return 0;
+
+    return anchorPosition.top - offset;
+  };
+
+  // Vertical offset can exist
+  const getFreeSpaceFromTheBottom = (
+    anchorPosition,
+    offset,
+    containerMeasures
+  ) => {
+    if (vertical === "top") return 0;
+    return containerMeasures.height - anchorPosition.bottom - offset;
+  };
+
+  const getElementPositionInContainer = (element, portalTarget) => {
+    //if there is no portal target get position relative to document.body
+    if (!portalTarget || portalTarget == document.body) {
+      var clientRect = element.getBoundingClientRect();
+
+      var scrollLeft =
+        window.pageXOffset || document.documentElement.scrollLeft;
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
       return {
-        horizontalPosition: horizontalPosition,
-        verticalPosition: verticalPosition,
-        maxHeight: maxHeight,
-        maxWidth: maxWidth,
+        left: clientRect.left + scrollLeft,
+        top: clientRect.top + scrollTop,
+        right: clientRect.right + scrollLeft,
+        bottom: clientRect.bottom + scrollTop,
+        height: clientRect.height,
+        width: clientRect.width,
+        horizontalCenter: clientRect.left + scrollLeft + clientRect.width / 2,
       };
-    }
-    return null;
-  };
+    } 
 
-  const findHorizontalPosition = (
-    horizontalPosition,
-    anchorElPosition,
-    popoverMeasures,
-    anchorViewPortPosition,
-    windowInnerWidht
-  ) => {
-    let horizontalResult = "";
-    let maxWidth = "";
-    if (horizontalPosition == "right") {
-      maxWidth = `${anchorViewPortPosition.right}`;
-      horizontalResult = `left: ${
-        anchorElPosition.right -
-        (popoverMeasures.width > +maxWidth ? +maxWidth : popoverMeasures.width)
-      }px`;
-    } else if (horizontalPosition == "left") {
-      maxWidth = `${windowInnerWidht - anchorViewPortPosition.left}`;
-      horizontalResult = `left: ${anchorElPosition.left}px`;
-    } else if (horizontalPosition == "center") {
-      maxWidth = `100vw`;
-      horizontalResult = `left: ${
-        anchorElPosition.left +
-        anchorElPosition.width / 2 -
-        popoverMeasures.width / 2
-      }px`;
-    }
-
-    return { horizontalPosition: horizontalResult, maxWidth: maxWidth };
-  };
-  const findVerticalPosition = (
-    verticalPosition,
-    anchorElPosition,
-    popoverMeasures,
-    anchorViewPortPosition,
-    windowInnerHeight
-  ) => {
-    let verticalResult = "";
-    let maxHeight = "";
-
-    if (verticalPosition == "top") {
-      maxHeight = `${anchorViewPortPosition.top - offset}`;
-      verticalResult = `top: ${
-        anchorElPosition.top -
-        (popoverMeasures.height > maxHeight
-          ? +maxHeight + offset
-          : popoverMeasures.height + offset)
-      }px`;
-    } else if (verticalPosition == "bottom") {
-      maxHeight = `${
-        windowInnerHeight - anchorViewPortPosition.bottom - offset
-      }`;
-      verticalResult = `top: ${anchorElPosition.bottom + offset}px`;
-    }
-
-    return { verticalPosition: verticalResult, maxHeight: maxHeight };
-  };
-
-  const getElementPosition = (element) => {
-    var clientRect = element.getBoundingClientRect();
-
-    var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    //else find relative to portal target
+    scrollLeft = portalTarget.offsetLeft;
+    scrollTop = portalTarget.offsetTop;
 
     return {
-      left: clientRect.left + scrollLeft,
-      top: clientRect.top + scrollTop,
-      right: clientRect.right + scrollLeft,
-      bottom: clientRect.bottom + scrollTop,
-      height: clientRect.height,
-      width: clientRect.width,
+      left: element.offsetLeft,
+      top: element.offsetTop,
+      right: element.offsetLeft + element.offsetWidth,
+      bottom: element.offsetTop + element.offsetHeight,
+      height: element.offsetHeight,
+      width: element.offsetWidth,
+      horizontalCenter: element.offsetLeft + element.offsetWidth / 2,
     };
   };
 
-  const getElementViewPortPosition = (element) => {
-    return element.getBoundingClientRect();
+  const getElementMeasures = (element) => {
+    return {
+      height: element.offsetHeight,
+      width: element.offsetWidth,
+    };
   };
 
   //Outside click handling
@@ -335,29 +365,38 @@ const Popover = React.forwardRef((props, ref) => {
         if (closeOnClickOutside == true) close();
       }
     };
+    const handleScroll = (event) => {
+      if (popoverRef?.current && !popoverRef?.current.contains(event.target)) {
+        if (closeOnScroll == true) close();
+      }
+    }
     //Fired on component mount
-    document.addEventListener('click', handleClickOutside, true);
+    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener("scroll", handleScroll, true);
     return () => {
       //Fired on component unmount
-       document.removeEventListener('click', handleClickOutside, true);
-    }
-  }, [])
+      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("scroll", handleScroll, true);
+    };
+  }, []);
 
   return createPortal(
-      <StyledPopover
-        theme={theme}
-        ref={popoverRef}
-        zIndex={zIndex}
-        position={popoverPosition}
-        show={show}
-        borderRadius={borderRadius}
-        className={className}
-        style={style}
-        {...rest}
-      >
-        {children}
-      </StyledPopover>
-    ,popoverContainer
+    <StyledPopover
+      theme={theme}
+      ref={popoverRef}
+      zIndex={zIndex}
+      position={popoverPosition}
+      show={show}
+      borderRadius={borderRadius}
+      className={className}
+      style={style}
+      onBlur={close}
+      {...rest}
+    >
+      {children}
+    </StyledPopover>,
+    // parentContainer
+    portal
   );
 });
 
@@ -367,8 +406,8 @@ Popover.defaultProps = {
   borderRadius: "regular",
   horizontal: null,
   offset: 0,
-  popoverContainer: document.body,
-  closeOnClickOutside: true,
+  closeOnClickOutside: false,
+  closeOnScroll: false,
   onOpen: () => {},
   onClose: () => {},
 };
@@ -380,18 +419,23 @@ Popover.propTypes = {
    */
   anchorElement: PropTypes.object,
   borderRadius: PropTypes.oneOf(["regular", "curved"]),
-  horizontal: PropTypes.oneOf(["left", "right", "center"]),
+  horizontal: PropTypes.oneOf(["left", "right", "center", null]),
   vertical: PropTypes.oneOf(["top", "bottom", null]),
   /**
    * popoverContainer is DOM element, popover won't be mounted into the DOM as a child of the nearest parent node, it will be inserted as a child of popoverContainer location in the DOM
    */
   popoverContainer: PropTypes.any,
   /**
+   * portalTarget can be DOM element or a ref to an element, possible value is `document.body`
+   */
+  portalTarget: PropTypes.any,
+  /**
    * Offset from anchor element in pixels
    */
   offset: PropTypes.number,
   zIndex: PropTypes.number,
   closeOnClickOutside: PropTypes.bool,
+  closeOnScroll: PropTypes.bool,
   //--------------------------
   onOpen: PropTypes.func,
   onClose: PropTypes.func,
