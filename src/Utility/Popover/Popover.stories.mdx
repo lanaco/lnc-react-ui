@@ -37,10 +37,6 @@ export const TemplateDefault = (args) => {
 };
 
 export const TemplateAlignment = (args) => {
-  const [container, setContainer] = useState();
-  useEffect(() => {
-    setContainer(document.getElementById("ok3"));
-  }, []);
   const popoverRef = useRef();
   const [anchor, setAnchor] = useState();
   const [alignment, setAlignment] = useState({
@@ -49,12 +45,10 @@ export const TemplateAlignment = (args) => {
   });
   return (
     <div
-      id="ok3"
       style={{
         height: "200px",
         display: "flex",
         justifyContent: "space-between",
-        position: "relative",
       }}
     >
       <div
