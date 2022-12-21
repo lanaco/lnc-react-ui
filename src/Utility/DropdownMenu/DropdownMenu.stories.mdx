@@ -5,6 +5,7 @@ import DropdownItem from "./DropdownItem";
 import NestedDropdownItem from "./NestedDropdownItem";
 import Button from "../../General/Button";
 import Separator from "./Separator";
+import { useRef } from "react";
 
 <Meta title="Utility/Dropdown Menu" component={DropdownMenu} />
 
@@ -22,7 +23,7 @@ import {
 <Canvas style={{ width: "100%" }}>
   <Story name="Default" args={{}}>
     {(args) => (
-      <DropdownMenu control={"Options"} {...args}>
+      <DropdownMenu control={"Options"} portalTarget={document.body} {...args}>
         <DropdownItem icon="pen">Edit</DropdownItem>
         <DropdownItem icon="clone">Duplicate</DropdownItem>
         <Separator />
@@ -47,6 +48,7 @@ import {
   <Story name="Custom Control" args={{}}>
     {(args) => (
       <DropdownMenu
+        portalTarget={document.body}
         control={
           <Button
             btnType={"outline"}
@@ -75,30 +77,47 @@ import {
 
 <Canvas>
   <Story name="Nested Items" args={{}}>
-    {(args) => (
-      <DropdownMenu
-        control={<Button text="Options" trailingIcon="angle-down" />}
-        {...args}
-      >
-        <DropdownItem icon="pen">Edit</DropdownItem>
-        <DropdownItem icon="clone">Duplicate</DropdownItem>
-        <Separator />
-        <NestedDropdownItem
-          item={<DropdownItem icon="archive">Archive</DropdownItem>}
+    {(args) => {
+      const containerRef = useRef();
+      return (
+        <div
+          ref={containerRef}
+          style={{
+            height: "200px",
+            width: "100%",
+            position: "relative",
+            overflow: "auto",
+          }}
         >
-          <DropdownItem icon="clock">History</DropdownItem>
-          <NestedDropdownItem
-            item={<DropdownItem icon="pen">Data</DropdownItem>}
+          <DropdownMenu
+            portalTarget={containerRef}
+            control={<Button text="Options" trailingIcon="angle-down" />}
+            {...args}
           >
-            <DropdownItem icon="users">Users</DropdownItem>
-            <DropdownItem icon="file">Documents</DropdownItem>
-          </NestedDropdownItem>
-          <DropdownItem icon="arrow-right">Move</DropdownItem>
-        </NestedDropdownItem>
-        <Separator />
-        <DropdownItem icon="trash">Delete</DropdownItem>
-      </DropdownMenu>
-    )}
+            <DropdownItem icon="pen">Edit</DropdownItem>
+            <DropdownItem icon="clone">Duplicate</DropdownItem>
+            <Separator />
+            <NestedDropdownItem
+              item={<DropdownItem icon="archive">Archive</DropdownItem>}
+            >
+              <DropdownItem icon="clock">History</DropdownItem>
+              <NestedDropdownItem
+                item={<DropdownItem icon="pen">Data</DropdownItem>}
+              >
+                <DropdownItem icon="users">Users</DropdownItem>
+                <DropdownItem icon="file">Documents</DropdownItem>
+              </NestedDropdownItem>
+              <DropdownItem icon="arrow-right">Move</DropdownItem>
+            </NestedDropdownItem>
+            <Separator />
+            <DropdownItem icon="trash">Delete</DropdownItem>
+            <DropdownItem icon="pen">Edit</DropdownItem>
+            <DropdownItem icon="clone">Duplicate</DropdownItem>
+            <Separator />
+          </DropdownMenu>
+        </div>
+      );
+    }}
   </Story>
 </Canvas>
 
@@ -111,6 +130,7 @@ import {
     {(args) => (
       <DropdownMenu
         widthFitContent={true}
+        portalTarget={document.body}
         control={
           <Button
             btnType={"outline"}
@@ -134,7 +154,7 @@ import {
   <Story name="Sizes" args={{}}>
     {(args) => (
       <div style={{ display: "flex", gap: "10px" }}>
-        <DropdownMenu {...args} control={"Options"} size="small">
+        <DropdownMenu {...args} control={"Options"} size="small" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -143,7 +163,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} size="medium">
+        <DropdownMenu {...args} control={"Options"} size="medium" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -152,7 +172,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} size="large">
+        <DropdownMenu {...args} control={"Options"} size="large" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -172,7 +192,7 @@ import {
   <Story name="Colors" args={{}}>
     {(args) => (
       <div style={{ display: "flex", gap: "10px" }}>
-        <DropdownMenu {...args} control={"Options"} color="primary">
+        <DropdownMenu {...args} control={"Options"} color="primary" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -181,7 +201,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="secondary">
+        <DropdownMenu {...args} control={"Options"} color="secondary" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -190,7 +210,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="success">
+        <DropdownMenu {...args} control={"Options"} color="success" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -199,7 +219,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="warning">
+        <DropdownMenu {...args} control={"Options"} color="warning" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -208,7 +228,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="danger">
+        <DropdownMenu {...args} control={"Options"} color="danger" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -217,7 +237,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="information">
+        <DropdownMenu {...args} control={"Options"} color="information" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -226,7 +246,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="neutral">
+        <DropdownMenu {...args} control={"Options"} color="neutral" portalTarget={document.body}>
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -242,4 +262,4 @@ import {
 
 ## Animation
 
-For *DropdownMenu* animations <u> [framer-motion](https://www.npmjs.com/package/framer-motion) </u> is used, which is controller throught `animation` prop. <u>[framer-motion documentation](https://www.framer.com/docs/animation/)</u> 
+For _DropdownMenu_ animations <u> [framer-motion](https://www.npmjs.com/package/framer-motion) </u> is used, which is controller throught `animation` prop. <u>[framer-motion documentation](https://www.framer.com/docs/animation/)</u>
