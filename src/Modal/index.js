@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../Button/index.js";
 import theme from "../_utils/theme";
 
-const Overlay = styled(motion.div)`
+const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -13,6 +13,7 @@ const Overlay = styled(motion.div)`
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
   z-index: ${(props) => props.zIndex};
+  overflow: hidden;
 `;
 const ModalContainer = styled(motion.div)`
   width: 50%;
@@ -70,7 +71,6 @@ const Content = styled.div((props) => ({
 
 function Modal(props) {
   const {
-    onClose,
     open,
     zIndex,
     header,
@@ -86,12 +86,24 @@ function Modal(props) {
     headerTitleComponent,
   } = props;
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    }
+    else {
+      document.body.style.overflow = "auto";
+    }
+  }, [open]);
+
+  const onClose = event => {
+    props.onClose(event);
+  }
+
   let themeProps = { theme, size, color, zIndex, open, width, basic };
 
   const onClickOutsideModal = (event) => {
     if (event.target !== event.currentTarget) return;
     if (clickOutsideToClose || !showHeader) {
-      document.body.style.overflow = "auto"
       onClose(event);
     }
   };
@@ -107,10 +119,6 @@ function Modal(props) {
     isOpen: { top: "50%" },
     exit: { top: "-50%" },
   };
-
-  if (open) {
-    document.body.style.overflow = "hidden";
-  }
 
   return (
     <>
@@ -143,7 +151,6 @@ function Modal(props) {
                       icon={"times"}
                       iconStyle={"solid"}
                       onClick={(e) => {
-                        document.body.style.overflow = "auto";
                         onClose(e);
                       }}
                       color={basic ? "transparent" : themeProps.color}

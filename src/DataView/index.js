@@ -1,21 +1,21 @@
+import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
-import Modal from "../Modal/index";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
+import Button from "../Button/index.js";
 import ConfirmationForm from "../ConfirmationForm/index";
 import DropdownMenu from "../DropdownMenu/index";
-import Button from "../Button/index.js";
-import FormMode from "./Constants/FormMode";
-import ViewType from "./Constants/ViewType";
-import FormViewMovement from "./FormViewMovement";
 import { freeze } from "../Helper/helper";
-import styles from "./styles.module.css";
-import TableView from "./TableView";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
+import Modal from "../Modal/index";
 import { default as LncPagination } from "../Pagination/index";
 import Spinner from "../Spinner/index";
 import theme from "../_utils/theme";
-import { CSSTransition, SwitchTransition } from "react-transition-group";
 import "./animation.css";
+import FormMode from "./Constants/FormMode";
+import ViewType from "./Constants/ViewType";
+import FormViewMovement from "./FormViewMovement";
+import styles from "./styles.module.css";
+import TableView from "./TableView";
 
 const getBorderSyle = (borderStyle, read, theme, color) => {
   var css = "";
@@ -131,7 +131,7 @@ const FilteringContainer = styled.div`
 `;
 
 const DataView = (props) => {
-  const emptyFunc = () => {};
+  const emptyFunc = () => { };
   const [deleteConfirmationBoxOpen, setDeleteConfirmationBoxOpen] = useState(
     false
   );
@@ -157,7 +157,7 @@ const DataView = (props) => {
     GoToAddWithCopy = emptyFunc,
     DiscardEdited = emptyFunc,
     Localization = {},
-    Export = () => {},
+    Export = () => { },
     Icons = {
       Checkbox: "lnc-checkbox",
       DownDouble: "lnc-down-double",
@@ -244,7 +244,7 @@ const DataView = (props) => {
     ChangeToFormView: ChangeToFormView,
     //---------------------------
     IsLookup: General.IsLookup,
-    LookupTakeItem: Lookup.LookupTakeItem ? Lookup.LookupTakeItem : () => {},
+    LookupTakeItem: Lookup.LookupTakeItem ? Lookup.LookupTakeItem : () => { },
     //---------------------------
     EnableOrdering: Options.EnableOrdering,
     Column: Ordering.Column,
@@ -313,7 +313,7 @@ const DataView = (props) => {
       <FlexItem>
         <Button
           tooltip={Localization.Refresh}
-          onClick={freezeLoading() ? () => {} : OnRefresh}
+          onClick={freezeLoading() ? () => { } : OnRefresh}
           icon={"sync-alt"}
           inverted={true}
         />
@@ -335,7 +335,7 @@ const DataView = (props) => {
       <FlexItem>
         <Button
           onClick={
-            loading ? () => {} : () => setDeleteConfirmationBoxOpen(true)
+            loading ? () => { } : () => setDeleteConfirmationBoxOpen(true)
           }
           disabled={props.disabled || Table.SelectedData.length === 0}
           tooltip={Localization.DeleteSelected}
@@ -372,7 +372,7 @@ const DataView = (props) => {
         <FlexItem>
           <Button
             tooltip={Localization.Add}
-            onClick={freezeLoading() ? () => {} : GoToAdd}
+            onClick={freezeLoading() ? () => { } : GoToAdd}
             icon={"plus"}
             inverted={true}
             disabled={props.disabled}
@@ -393,7 +393,7 @@ const DataView = (props) => {
         <div className={styles.flexItem}>
           <Button
             tooltip={Localization.AddWithCopy}
-            onClick={freezeLoading() ? () => {} : GoToAddWithCopy}
+            onClick={freezeLoading() ? () => { } : GoToAddWithCopy}
             icon={"clone"}
             inverted={true}
           />
@@ -411,7 +411,7 @@ const DataView = (props) => {
       <FlexItem>
         <Button
           tooltip={Localization.ToTableView}
-          onClick={freezeLoading() ? () => {} : ChangeToTableView}
+          onClick={freezeLoading() ? () => { } : ChangeToTableView}
           icon={"table"}
           inverted={true}
         />
@@ -442,7 +442,7 @@ const DataView = (props) => {
                 ? Localization.FormEditMode
                 : Localization.FormReadMode
             }
-            onClick={freezeLoading() ? () => {} : ChangeToEditMode}
+            onClick={freezeLoading() ? () => { } : ChangeToEditMode}
             icon={Form.Mode === FormMode.READ ? "edit" : "eye"}
             inverted={true}
           />
@@ -511,10 +511,10 @@ const DataView = (props) => {
 
     var x2 =
       Options.ReadOnly ||
-      !Options.EnableDelete ||
-      General.CurrentView === "FormView" ||
-      General.IsLookup ||
-      OnDelete === null
+        !Options.EnableDelete ||
+        General.CurrentView === "FormView" ||
+        General.IsLookup ||
+        OnDelete === null
         ? false
         : true;
 
@@ -523,18 +523,18 @@ const DataView = (props) => {
 
     var x4 =
       Options.EnableFormViewMovement &&
-      Form !== null &&
-      General.CurrentView === "FormView" &&
-      Form.Mode !== "ADD"
+        Form !== null &&
+        General.CurrentView === "FormView" &&
+        Form.Mode !== "ADD"
         ? true
         : false;
 
     var x5 =
       Options.ReadOnly ||
-      !Options.EnableSwitchReadOnlyMode ||
-      Form === null ||
-      Form === undefined ||
-      General.CurrentView !== "FormView"
+        !Options.EnableSwitchReadOnlyMode ||
+        Form === null ||
+        Form === undefined ||
+        General.CurrentView !== "FormView"
         ? false
         : true;
 
@@ -613,12 +613,12 @@ const DataView = (props) => {
       return component;
     }
 
-    if (renderForm && !General.DataFromBackend) {
+    if (!General.DataFromBackend) {
       return (
         <Modal
           id={"FormViewInModal"}
           basic={true}
-          open={true}
+          open={renderForm}
           size={"medium"}
           header={props.modalLabel || ""}
           onClose={ChangeToTableView}
