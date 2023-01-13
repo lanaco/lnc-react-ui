@@ -6,24 +6,22 @@ import NestedDropdownItem from "./NestedDropdownItem";
 import Button from "../../General/Button";
 import Separator from "./Separator";
 import { useRef } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Utility/Dropdown Menu" component={DropdownMenu} />
 
 # Drop Down Menu
 
-```jsx
-import {
-  DropdownMenu,
-  DropdownItem,
-  NestedDropdownItem,
-  Separator,
-} from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="javascript" style={nord}>
+  {'import { DropdownMenu, DropdownItem, NestedDropdownItem, Separator } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
 
 <Canvas style={{ width: "100%" }}>
   <Story name="Default" args={{}}>
     {(args) => (
-      <DropdownMenu control={"Options"} portalTarget={document.body} {...args}>
+      <DropdownMenu control={"Options"} {...args}>
         <DropdownItem icon="pen">Edit</DropdownItem>
         <DropdownItem icon="clone">Duplicate</DropdownItem>
         <Separator />
@@ -48,7 +46,6 @@ import {
   <Story name="Custom Control" args={{}}>
     {(args) => (
       <DropdownMenu
-        portalTarget={document.body}
         control={
           <Button
             btnType={"outline"}
@@ -78,10 +75,8 @@ import {
 <Canvas>
   <Story name="Nested Items" args={{}}>
     {(args) => {
-      const containerRef = useRef();
       return (
         <div
-          ref={containerRef}
           style={{
             height: "200px",
             width: "100%",
@@ -90,7 +85,6 @@ import {
           }}
         >
           <DropdownMenu
-            portalTarget={containerRef}
             control={<Button text="Options" trailingIcon="angle-down" />}
             {...args}
           >
@@ -130,7 +124,6 @@ import {
     {(args) => (
       <DropdownMenu
         widthFitContent={true}
-        portalTarget={document.body}
         control={
           <Button
             btnType={"outline"}
@@ -154,7 +147,7 @@ import {
   <Story name="Sizes" args={{}}>
     {(args) => (
       <div style={{ display: "flex", gap: "10px" }}>
-        <DropdownMenu {...args} control={"Options"} size="small" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} size="small">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -163,7 +156,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} size="medium" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} size="medium">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -172,7 +165,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} size="large" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} size="large">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -192,7 +185,7 @@ import {
   <Story name="Colors" args={{}}>
     {(args) => (
       <div style={{ display: "flex", gap: "10px" }}>
-        <DropdownMenu {...args} control={"Options"} color="primary" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} color="primary">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -201,7 +194,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="secondary" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} color="secondary">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -210,7 +203,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="success" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} color="success">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -219,7 +212,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="warning" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} color="warning">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -228,7 +221,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="danger" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} color="danger">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -237,7 +230,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="information" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} color="information">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
@@ -246,7 +239,7 @@ import {
           <Separator />
           <DropdownItem icon="trash">Delete</DropdownItem>
         </DropdownMenu>
-        <DropdownMenu {...args} control={"Options"} color="neutral" portalTarget={document.body}>
+        <DropdownMenu {...args} control={"Options"} color="neutral">
           <DropdownItem icon="pen">Edit</DropdownItem>
           <DropdownItem icon="clone">Duplicate</DropdownItem>
           <Separator />
