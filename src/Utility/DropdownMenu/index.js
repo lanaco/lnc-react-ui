@@ -2,16 +2,18 @@ import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Button from "../../General/Button";
-import Popover from "../Popover";
 import { getColorRgbaValue } from "../../_utils/utils";
 import { useTheme } from "../../ThemeProvider";
-import { useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "../Popover";
 
 const StyledDropDown = styled.div``;
 
-const PopoverContent = styled(motion.div)`
-  padding: 0.25rem;
+const StyledContent = styled(motion.div)`
   gap: 0.25rem;
   display: flex;
   flex-direction: column;
@@ -29,14 +31,10 @@ const PopoverContent = styled(motion.div)`
 const DropdownMenu = React.forwardRef((props, ref) => {
   const {
     control,
-    openOnClick,
-    openOnHover,
-    offset,
-    verticalAlignment,
-    horizontalAlignment,
+    offsetValue,
+    placement,
     widthFitContent,
     closeOnItemSelect,
-    portalTarget,
     //----------------
     onFocus,
     onBlur,
@@ -63,9 +61,11 @@ const DropdownMenu = React.forwardRef((props, ref) => {
   const controlRef = useRef();
   const firstItemRef = useRef();
 
+  const [openPopover, setOpenPopover] = useState(false);
+
   const handleOnItemSelected = (e, value, children) => {
     onItemSelected(e, value, children);
-    if (closeOnItemSelect == true) popoverRef?.current?.close();
+    if (closeOnItemSelect == true) setOpenPopover(false);//popoverRef?.current?.close();
   };
 
   const clonedChildren = React.Children.map(children, (child, index) => {
@@ -81,7 +81,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
             color: color,
             size: size,
             onItemSelected: handleOnItemSelected,
-            animation: animation
+            animation: animation,
           });
         }
         return React.cloneElement(child, {
@@ -100,17 +100,16 @@ const DropdownMenu = React.forwardRef((props, ref) => {
       return (
         <Button
           text={control}
-          onClick={handleOnClick}
-          onMouseEnter={handleOnMouseEnter}
-          onMouseLeave={handleOnMouseLeave}
+          onClick={onClick}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
           onBlur={onBlur}
           onFocus={onFocus}
           ref={controlRef}
-          onKeyDown={handleOnControlKeyDown}
+          onKeyDown={onKeyDown}
           trailingIcon="angle-down"
           color={color}
           size={size}
-          data-control={true} //Used for when click on outside of menu to ignore control click (control is outside)
         />
       );
     } else {
@@ -118,99 +117,39 @@ const DropdownMenu = React.forwardRef((props, ref) => {
         color: color,
         size: size,
         ref: controlRef,
-        onClick: handleOnClick,
-        onMouseEnter: handleOnMouseEnter,
-        onMouseLeave: handleOnMouseLeave,
+        onClick: onClick,
+        onMouseEnter: onMouseEnter,
+        onMouseLeave: onMouseLeave,
         onBlur: onBlur,
         onFocus: onFocus,
-        onKeyDown: handleOnControlKeyDown,
-        ["data-control"]: true,
+        onKeyDown: onKeyDown,
       });
     }
   };
 
-  const handleOnClick = (e) => {
-    if (openOnClick && !openOnHover) {
-      popoverRef?.current?.isOpen()
-        ? popoverRef?.current?.close()
-        : popoverRef?.current?.open();
-    }
-
-    onClick(e);
-  };
-  const handleOnMouseEnter = (e) => {
-    if (openOnHover == true) {
-      popoverRef?.current?.isOpen()
-        ? popoverRef?.current?.close()
-        : popoverRef?.current?.open();
-    }
-
-    onMouseEnter(e);
-  };
-  const handleOnMouseLeave = (e) => {
-    onMouseLeave(e);
-  };
-
-  const handleOnControlKeyDown = (e) => {
-    e.preventDefault();
-    firstItemRef?.current?.focus();
-    onKeyDown(e);
-  };
-
-  //Outside click handling
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        menuContentRef?.current &&
-        !menuContentRef?.current?.contains(event.target)
-      ) {
-        //ignore if click is on control
-        if (!event.target?.attributes?.["data-control"])
-          popoverRef?.current?.close();
-      }
-    };
-    //Fired on component mount
-    document.addEventListener("click", handleClickOutside, true);
-    return () => {
-      //Fired on component unmount
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  }, []);
-
   return (
     <StyledDropDown ref={ref} {...rest}>
-      {clonedControl()}
-      <Popover
-        anchorElement={controlRef}
-        ref={popoverRef}
-        vertical={verticalAlignment}
-        horizontal={horizontalAlignment}
-        offset={offset}
-        style={{ padding: 0, maxHeight: "unset" }}
-        closeOnClickOutside={false} //dropdown has it's own outside click handler which includes control (element that opens dropdown)
-        portalTarget={portalTarget}
-        {...popoverProps}
-      >
-          <PopoverContent
+      <Popover open={openPopover} onOpenChange={setOpenPopover} placement={placement} offsetValue={offsetValue}>
+        <PopoverTrigger onClick={() => setOpenPopover((v) => !v)}>{clonedControl()}</PopoverTrigger>
+        <PopoverContent>
+        <StyledContent
             ref={menuContentRef}
             widthFitContent={widthFitContent}
             color={color}
             theme={theme}
           >
             {clonedChildren}
-          </PopoverContent>
+          </StyledContent>
+        </PopoverContent>
       </Popover>
     </StyledDropDown>
   );
 });
 
 DropdownMenu.defaultProps = {
-  openOnClick: true,
-  openOnHover: false,
-  offset: 8,
+  offsetValue: 8,
   widthFitContent: false,
   closeOnItemSelect: true,
-  verticalAlignment: null,
   //-------------------------
   onBlur: () => {},
   onFocus: () => {},
@@ -242,16 +181,25 @@ DropdownMenu.defaultProps = {
 DropdownMenu.propTypes = {
   control: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
     .isRequired,
-  openOnClick: PropTypes.bool,
-  openOnHover: PropTypes.bool,
   /**
    * Menu offset from the control
    */
-  offset: PropTypes.number,
-  //Menu's horizontal alignment
-  horizontalAlignment: PropTypes.oneOf(["left", "right", "center"]),
-  //Menu's vertical alignment
-  verticalAlignment: PropTypes.oneOf(["top", "bottom", null]),
+  offsetValue: PropTypes.number,
+  placement: PropTypes.oneOf([
+    "center",
+    "top",
+    "right",
+    "bottom",
+    "left",
+    "top-start",
+    "top-end",
+    "right-start",
+    "right-end",
+    "bottom-start",
+    "bottom-end",
+    "left-start",
+    "left-end",
+  ]),
   /**
    * Adjust width of dropdown according to dropdown items content.
    */
@@ -260,10 +208,6 @@ DropdownMenu.propTypes = {
    * Close menu when item is selected
    */
   closeOnItemSelect: PropTypes.bool,
-  /**
-   * portalTarget can be DOM element or a ref to an element, possible value is `document.body`
-   */
-  portalTarget: PropTypes.any,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,

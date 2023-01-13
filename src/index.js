@@ -162,7 +162,7 @@ export { default as Modal } from "./Utility/Modal";
 
 export { default as Pagination } from "./Utility/Pagination";
 
-export { default as Popover } from "./Utility/Popover";
+export { Popover, PopoverTrigger, PopoverContent, PopoverHeading, PopoverClose } from "./Utility/Popover";
 
 export { default as SwipeableDrawer } from "./Utility/SwipeableDrawer";
 
