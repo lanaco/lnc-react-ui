@@ -308,7 +308,7 @@ DateInput.defaultProps = {
   maxDate: "",
   tabIndex: 0,
   //------------------------------
-  onChange: () => {},
+  onChange: (event, isoDate, date) => {},
   onFocus: () => {},
   onBlur: () => {},
   //------------------------------
