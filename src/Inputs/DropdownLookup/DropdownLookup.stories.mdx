@@ -1,6 +1,8 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import DropdownLookup from "./index";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Inputs/Dropdown Lookup" component={DropdownLookup} />
 
@@ -35,9 +37,9 @@ export const TemplateDefault = (args) => {
 
 # Dropdown Lookup
 
-```jsx
-import { DropdownLookup } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { DropdownLookup } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>

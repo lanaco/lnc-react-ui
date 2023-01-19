@@ -1,14 +1,16 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Link from "./index";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="General/Link" component={Link} />
 
 # Link
 
-```jsx
-import { Link } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Link } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas style={{ width: "100%" }}>
   <Story name="Default" args={{}}>

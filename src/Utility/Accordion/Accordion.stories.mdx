@@ -4,6 +4,8 @@ import Accordion from "./index";
 import AccordionSummary from "./AccordionSummary";
 import AccordionDetails from "./AccordionDetails";
 import { useState } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta
   title="Utility/Accordion"
@@ -13,9 +15,11 @@ import { useState } from "react";
 
 # Accordion
 
-```jsx
-import { Accordion, AccordionSummary, AccordionSummary } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import { Accordion, AccordionSummary, AccordionSummary } from "@lanaco/lnc-react-ui";'
+  }
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>

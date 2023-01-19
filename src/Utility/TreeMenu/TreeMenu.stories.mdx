@@ -6,15 +6,22 @@ import NestedMenuItem from "./NestedMenuItem";
 import TreeMenuSeparator from "./Separator";
 import logo from "../../_utils/images/Image.png";
 import Avatar from "../../General/Avatar";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-<Meta title="Utility/Tree Menu" component={TreeMenu}  subcomponents={{ MenuItem, NestedMenuItem, TreeMenuSeparator }}/>
+<Meta
+  title="Utility/Tree Menu"
+  component={TreeMenu}
+  subcomponents={{ MenuItem, NestedMenuItem, TreeMenuSeparator }}
+/>
 
 # Tree Menu
 
-```jsx
-import { TreeMenu, MenuItem, NestedMenuItem, TreeMenuSeparator } from "@lanaco/lnc-react-ui";
-```
-
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import { TreeMenu, MenuItem, NestedMenuItem, TreeMenuSeparator } from "@lanaco/lnc-react-ui";'
+  }
+</SyntaxHighlighter>
 
 <Canvas style={{ width: "100%" }}>
   <Story name="Default" args={{}}>
@@ -91,50 +98,50 @@ import { TreeMenu, MenuItem, NestedMenuItem, TreeMenuSeparator } from "@lanaco/l
   )}
 </Story>
 
-```jsx
-  {(args) => (
-    <TreeMenu {...args}>
-      <MenuItem icon="pen" value="Edit">
-        Edit
-      </MenuItem>
-      <MenuItem icon="clone" value="Dupl">
-        Duplicate
-      </MenuItem>
-      <NestedMenuItem
-        item={
-          <MenuItem icon="archive" value="Arch">
-            Archive
-          </MenuItem>
-        }
-      >
-        <MenuItem icon="clock" value="Hist">
-          History
-        </MenuItem>
-        <NestedMenuItem
-          item={
-            <MenuItem icon="pen" value="Data">
-              Data
-            </MenuItem>
-          }
-        >
-          <MenuItem icon="users" value="Users">
-            Users
-          </MenuItem>
-          <MenuItem icon="file" value="Docs">
-            Documents
-          </MenuItem>
-        </NestedMenuItem>
-        <MenuItem icon="arrow-right" value="Move">
-          Move
-        </MenuItem>
-      </NestedMenuItem>
-      <TreeMenuSeparator />
-      <MenuItem icon="trash" value="Del">
-        Delete
-      </MenuItem>
-    </TreeMenu>
-  )}
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => (\n" +
+    " <TreeMenu {...args}>\n" +
+    '   <MenuItem icon="pen" value="Edit">\n' +
+    "     Edit\n" +
+    "   </MenuItem>\n" +
+    '   <MenuItem icon="clone" value="Dupl">\n' +
+    "     Duplicate\n" +
+    "   </MenuItem>\n" +
+    "   <NestedMenuItem\n" +
+    "     item={\n" +
+    '       <MenuItem icon="archive" value="Arch">\n' +
+    "         Archive\n" +
+    "       </MenuItem>\n" +
+    "      }\n" +
+    "   >\n" +
+    '     <MenuItem icon="clock" value="Hist">\n' +
+    "       History\n" +
+    "     </MenuItem>\n" +
+    "     <NestedMenuItem\n" +
+    "       item={\n" +
+    '         <MenuItem icon="pen" value="Data">\n' +
+    "           Data\n" +
+    "         </MenuItem>\n" +
+    "         }\n" +
+    "     >\n" +
+    '       <MenuItem icon="users" value="Users">\n' +
+    "         Users\n" +
+    "       </MenuItem>\n" +
+    '       <MenuItem icon="file" value="Docs">\n' +
+    "         Documents\n" +
+    "       </MenuItem>\n" +
+    "     </NestedMenuItem>\n" +
+    '     <MenuItem icon="arrow-right" value="Move">\n' +
+    "       Move\n" +
+    "     </MenuItem>\n" +
+    "   </NestedMenuItem>\n" +
+    "   <TreeMenuSeparator />\n" +
+    '   <MenuItem icon="trash" value="Del">\n' +
+    "     Delete\n" +
+    "   </MenuItem>\n" +
+    " </TreeMenu>\n" +
+    ")"}
+</SyntaxHighlighter>
 
 #### Without tucking in
 
@@ -160,27 +167,27 @@ import { TreeMenu, MenuItem, NestedMenuItem, TreeMenuSeparator } from "@lanaco/l
   )}
 </Story>
 
-```jsx
-  {(args) => (
-    <TreeMenu {...args}>
-      <MenuItem icon="pen" value="Edit">
-        Edit
-      </MenuItem>
-      <NestedMenuItem
-        tuckIn={false}
-        item={
-          <MenuItem icon="archive" value="Arch">
-            Archive
-          </MenuItem>
-        }
-      >
-        <MenuItem icon="clock" value="Hist">
-          History
-        </MenuItem>
-      </NestedMenuItem>
-    </TreeMenu>
-  )}
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => (\n" +
+    " <TreeMenu {...args}>\n" +
+    '   <MenuItem icon="pen" value="Edit">\n' +
+    "     Edit\n" +
+    "   </MenuItem>\n" +
+    "   <NestedMenuItem\n" +
+    "     tuckIn={false}\n" +
+    "     item={\n" +
+    '       <MenuItem icon="archive" value="Arch">\n' +
+    "          Archive\n" +
+    "       </MenuItem>\n" +
+    "       }\n" +
+    "   >\n" +
+    '     <MenuItem icon="clock" value="Hist">\n' +
+    "       History\n" +
+    "     </MenuItem>\n" +
+    "   </NestedMenuItem>\n" +
+    " </TreeMenu>\n" +
+    ")"}
+</SyntaxHighlighter>
 
 ### Custom Menu Items
 
@@ -225,46 +232,43 @@ import { TreeMenu, MenuItem, NestedMenuItem, TreeMenuSeparator } from "@lanaco/l
   </Story>
 </Canvas>
 
-```jsx
-{
-  (args) => (
-    <TreeMenu {...args}>
-      <MenuItem icon="pen" value="Edit">
-        Edit
-      </MenuItem>
-      <MenuItem icon="clone" value="Dupl">
-        Duplicate
-      </MenuItem>
-      <TreeMenuSeparator />
-      <MenuItem icon="archive" value="Arch">
-        Archive
-      </MenuItem>
-      <MenuItem icon="arrow-right" value="Move">
-        Move
-      </MenuItem>
-      <TreeMenuSeparator />
-      <MenuItem value="Avat">
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <Avatar image={logo} sizeInUnits="1.5rem" />
-            User
-          </div>
-          <br />
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </div>
-        </div>
-      </MenuItem>
-    </TreeMenu>
-  );
-}
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => (\n" +
+    " <TreeMenu {...args}>\n" +
+    '   <MenuItem icon="pen" value="Edit">\n' +
+    "     Edit\n" +
+    "   </MenuItem>\n" +
+    '   <MenuItem icon="clone" value="Dupl">\n' +
+    "     Duplicate\n" +
+    "   </MenuItem>\n" +
+    "   <TreeMenuSeparator />\n" +
+    '   <MenuItem icon="archive" value="Arch">\n' +
+    "     Archive\n" +
+    "   </MenuItem>\n" +
+    '   <MenuItem icon="arrow-right" value="Move">\n' +
+    "     Move\n" +
+    "   </MenuItem>\n" +
+    "   <TreeMenuSeparator />\n" +
+    '   <MenuItem value="Avat">\n' +
+    "     <div>\n" +
+    '       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>\n' +
+    '         <Avatar image={logo} sizeInUnits="1.5rem" />\n' +
+    "           User\n" +
+    "       </div><br />\n" +
+    "       <div>\n" +
+    "         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\n" +
+    "         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim\n" +
+    "         ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\n" +
+    "         aliquip ex ea commodo consequat. Duis aute irure dolor in\n" +
+    "         reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla\n" +
+    "         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in\n" +
+    "         culpa qui officia deserunt mollit anim id est laborum.\n" +
+    "       </div>\n" +
+    "     </div>\n" +
+    "   </MenuItem>\n" +
+    " </TreeMenu>\n" +
+    ");"}
+</SyntaxHighlighter>
 
 ## Jusitfy Menu Items
 
@@ -487,4 +491,4 @@ For Menu Items that need to be justifed to end it is necessary to set `justifyTo
 
 ## Animation
 
-For *TreeMenu* animations <u> [framer-motion](https://www.npmjs.com/package/framer-motion) </u> is used, which is controller throught `animation` prop. <u>[framer-motion documentation](https://www.framer.com/docs/animation/)</u> 
+For _TreeMenu_ animations <u> [framer-motion](https://www.npmjs.com/package/framer-motion) </u> is used, which is controller throught `animation` prop. <u>[framer-motion documentation](https://www.framer.com/docs/animation/)</u>

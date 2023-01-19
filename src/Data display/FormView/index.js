@@ -70,7 +70,7 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
           color={color}
           size={size}
           name={accessor}
-          inputProps={inputProps}
+          {...inputProps}
         />
       );
     case "radioGroup":

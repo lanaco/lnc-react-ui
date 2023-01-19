@@ -5,6 +5,8 @@ import { useState } from "react";
 import Button from "../../General/Button";
 import Icon from "../../General/Icon";
 import { useTheme } from "../../ThemeProvider";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Feedback/Alert" component={Alert} />
 
@@ -158,9 +160,9 @@ export const TemplateCustomIcon = (args) => {
 
 # Alert
 
-```jsx
-import { Alert } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Alert } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story

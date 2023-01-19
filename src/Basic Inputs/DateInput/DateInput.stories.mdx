@@ -1,15 +1,30 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import DateInput from "./index";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Basic Inputs/Date Input" component={DateInput} />
 
 export const TemplateDefault = (args) => <DateInput {...args} />;
 
-export const TemplateDisabled = (args) => <DateInput disabled={true} placeholder={"Disabled"} style={{ width: "300px" }} {...args} />;
+export const TemplateDisabled = (args) => (
+  <DateInput
+    disabled={true}
+    placeholder={"Disabled"}
+    style={{ width: "300px" }}
+    {...args}
+  />
+);
 
-export const TemplateReadOnly = (args) => <DateInput readOnly={true} style={{ width: "300px" }} value={"2022-01-01"} {...args} />;
-
+export const TemplateReadOnly = (args) => (
+  <DateInput
+    readOnly={true}
+    style={{ width: "300px" }}
+    value={"2022-01-01"}
+    {...args}
+  />
+);
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -33,27 +48,24 @@ export const TemplateColors = (args) => (
 
 # Date Input
 
-```jsx
-import { DateInput } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { DateInput } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Story name="Default" args={{}}>
   {TemplateDefault.bind({})}
 </Story>
 
-```jsx
-(args) => <DateInput {...args} />;
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => <DateInput {...args} />;"}
+</SyntaxHighlighter>
 
 <ArgsTable story="Default" />
 
 ## Read Only
 
 <Canvas>
-  <Story
-    name="Read Only"
-    args={{}}
-  >
+  <Story name="Read Only" args={{}}>
     {TemplateReadOnly.bind({})}
   </Story>
 </Canvas>
@@ -61,9 +73,7 @@ import { DateInput } from "@lanaco/lnc-react-ui";
 ## Disabled
 
 <Canvas>
-  <Story
-    name="Disabled"
-    args={{}}>
+  <Story name="Disabled" args={{}}>
     {TemplateDisabled.bind({})}
   </Story>
 </Canvas>
@@ -83,16 +93,11 @@ Range can be defined with `minDate` and `maxDate` props.
   {TemplateDefault.bind({})}
 </Story>
 
-```jsx
-(args) => (
-  <DateInput
-    value={"2022-01-05"}
-    minDate={"2022-01-01"}
-    maxDate={"2022-01-15"}
-    {...args}
-  />
-);
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    '(args) => <DateInput value={"2022-01-05"} minDate={"2022-01-01"} maxDate={"2022-01-15"} {...args} />;'
+  }
+</SyntaxHighlighter>
 
 ## Alternative Format
 
@@ -106,9 +111,11 @@ Range can be defined with `minDate` and `maxDate` props.
   {TemplateDefault.bind({})}
 </Story>
 
-```jsx
-(args) => <DateInput value={"2022-01-05"} format={"YYYY-MM-dd"} {...args} />;
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    '(args) => <DateInput value={"2022-01-05"} format={"YYYY-MM-dd"} {...args} />;'
+  }
+</SyntaxHighlighter>
 
 ## Sizes
 

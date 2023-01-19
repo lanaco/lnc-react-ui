@@ -2,6 +2,8 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Grid from ".";
 import GridItem from "../GridItem";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Layout/Grid" component={Grid} />
 
@@ -203,9 +205,9 @@ export const TemplateArea = (args) => (
 
 # Grid
 
-```jsx
-import { Grid, GridItem } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Grid, GridItem } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story
@@ -225,6 +227,7 @@ import { Grid, GridItem } from "@lanaco/lnc-react-ui";
 ### To know more about CSS Grid see [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
 
 ---
+
 ## Grid Item
 
 <ArgsTable components={{ GridItem }} />

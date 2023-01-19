@@ -235,7 +235,7 @@ DragAndDropFile.propTypes = {
      * Custom control which opens file explorer on click
      */
     control: PropTypes.element,
-    dndFileText: PropTypes.string,
+    dndFileText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     showFileSize: PropTypes.bool,
     /**
      * Determines whether Drag and Drop area or Add button will be shown

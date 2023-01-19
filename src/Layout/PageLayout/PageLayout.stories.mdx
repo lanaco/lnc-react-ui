@@ -7,14 +7,16 @@ import Content from "../Content/index";
 import TreeMenu from "../../Utility/TreeMenu/index";
 import MenuItem from "../../Utility/TreeMenu/MenuItem";
 import Separator from "../../Utility/TreeMenu/Separator";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Layout/Page Layout" component={PageLayout} />
 
 # Page Layout
 
-```jsx
-import { PageLayout, Sidebar, Header, Footer, Content } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { PageLayout, Sidebar, Header, Footer, Content } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 Used to structure the layout of your application, without styles. Considering that, you are in charge of styling all the pieces,
 or you can use the predefined components.

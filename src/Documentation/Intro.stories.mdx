@@ -28,15 +28,17 @@ Lnc React UI Web Components provide simple and complex components and layout.
 
 First of all dependency `@lanaco/lnc-react-ui` needs to be added to the project
 
-<SyntaxHighlighter language="javascript" style={nord}>
-  {'npm install @lanaco/lnc-react-ui --save'}
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"npm install @lanaco/lnc-react-ui --save"}
 </SyntaxHighlighter>
 
 In order to use @lanaco/lnc-react-ui you have to wrap your application's root component into ThemeProvider.
 You will find this component most likely in src/App.js:
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {'import { ThemeProvider } from "@lanaco/lnc-react-ui";\n...\nrender() {\n  return (\n    <ThemeProvider>\n       <MyApp />\n   </ThemeProvider>\n  );\n}'}
+  {
+    'import { ThemeProvider } from "@lanaco/lnc-react-ui";\n...\nrender() {\n  return (\n    <ThemeProvider>\n       <MyApp />\n   </ThemeProvider>\n  );\n}'
+  }
 </SyntaxHighlighter>
 
 # Theming
@@ -48,16 +50,62 @@ Default value is `Lanaco Light` theme.
   {'<ThemeProvider theme={"Lanaco Light"}>\n   <MyApp />\n</ThemeProvider>'}
 </SyntaxHighlighter>
 
-Custom theme can be created following the set of rules used for theme definition. 
+Custom theme can be created following the set of rules used for theme definition.
 Theme is an object where required fields are:
-* name
-* class
-* colorContext,
-* components
-* palette
-* sizes
-* borderRadius
-* boxShadow
-* typography
-* zIndex
+
+- name
+- class
+- colorContext,
+- components
+- palette
+- sizes
+- borderRadius
+- boxShadow
+- typography
+- zIndex
+
+## Basic Inputs
+
+When using basic inputs with some form hook, it is used as with native inputs.
+
+Example of usage with <u> [react-hook-form](https://react-hook-form.com/) </u>
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { useForm } from "react-hook-form";\n\n   .......\n\n' +
+    "(args) => {\n" +
+    "   const { handleSubmit, register } = useForm();\n" +
+    "   return (\n" +
+    "     <form>\n" +
+    '       <TextInput {...register("name1")}/>\n' +
+    '       <CheckBoxInput {...register("name2")} />\n' +
+    '       <ColorInput inputProps={{...register("name2")}} />\n' +
+    "       <Button onClick={handleSubmit((data) => {}))}>Submit</Button>\n" +
+    "     </form>\n" +
+    "   );\n" +
+    " };"}
+</SyntaxHighlighter>
+
+---
+
+#### When using Dropdown components it is necessary to use _Controller_ since Dropdown is controlled component. <u> [Read here how to use](https://react-hook-form.com/api/usecontroller/controller/) </u>.
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+  'import { useForm, Controller } from "react-hook-form";\n\n   .......\n\n'+
+  '(args) => {\n'+
+  '   const { handleSubmit, control } = useForm();\n'+
+  '   return (\n'+
+  '     <form>\n'+
+  '       <Controller\n'+
+  '         control={control}\n'+  
+  '         name={"name"}\n'+  
+  '         render={({field}) => (\n'+
+  '             <DropdownLookup {...field} />\n'+
+  '       />\n'+
+  '       <Button onClick={handleSubmit((data) => {}))}>Submit</Button>\n'+
+  '     </form>\n'+
+  '   );\n'+
+  ' };'
+  }
+</SyntaxHighlighter>
 </div>

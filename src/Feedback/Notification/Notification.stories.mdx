@@ -5,16 +5,17 @@ import { useState } from "react";
 import NotificationMessage from "./NotificationMessage";
 import logo from "../../_utils/images/Image.png";
 import Button from "../../General/Button";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Feedback/Notification" component={NotificationContainer} />
 
 export const TemplateDefault = (args) => {
-  const notify = () => notification(<NotificationMessage>Message</NotificationMessage>);
+  const notify = () =>
+    notification(<NotificationMessage>Message</NotificationMessage>);
   return (
     <div>
-      <Button onClick={notify}>
-        Notify!
-      </Button>
+      <Button onClick={notify}>Notify!</Button>
       <NotificationContainer {...args} />
     </div>
   );
@@ -170,29 +171,27 @@ export const TemplateCustom = (args) => {
 
 # Notification
 
-```jsx
-import {
-  NotificationContainer,
-  notification,
-  NotifcationMessage,
-} from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import { Notification, NotificationContainer, NotificationMessage } from "@lanaco/lnc-react-ui";'
+  }
+</SyntaxHighlighter>
 
 <Story name="Default">{TemplateDefault.bind({})}</Story>
 
-```jsx
-(args) => {
-  const notify = () => notification("Message");
-  return (
-    <div>
-      <Button onClick={notify}>
-        Notify!
-      </Button>
-      <NotificationContainer {...args} />
-    </div>
-  );
-};
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => {\n" +
+    ' const notify = () => notification("Message");\n' +
+    "   return (\n" +
+    "     <div>\n" +
+    "       <Button onClick={notify}>\n" +
+    "         Notify!\n" +
+    "       </Button>\n" +
+    "       <NotificationContainer {...args} />\n" +
+    "     </div>\n" +
+    " );\n" +
+    "};"}
+</SyntaxHighlighter>
 
 <ArgsTable story="Default" />
 
@@ -206,154 +205,125 @@ import {
 
 <Story name="Custom">{TemplateCustom.bind({})}</Story>
 
-```jsx
-(args) => {
-  return (
-    <div>
-      <Button
-        onClick={() =>
-          notification(
-            <NotificationMessage icon="user" title={"Title"}>
-              Message
-            </NotificationMessage>
-          )
-        }
-      >
-        With Icon
-      </Button>
-      <br />
-      <br />
-      <Button
-        onClick={() =>
-          notification(
-            <NotificationMessage
-              avatar={true}
-              avatarProps={{ image: logo }}
-              title={"Title"}
-              actions={
-                <>
-                  <Button>Confirm</Button>
-                  <Button>Dismiss</Buttontext=>
-                </>
-              }
-            >
-              Message
-            </NotificationMessage>
-          )
-        }
-      >
-        With Action
-      </Button>
-      <br />
-      <br />
-      <Button
-        onClick={() =>
-          notification(
-            <NotificationMessage
-              avatar={true}
-              inlineActions={true}
-              avatarProps={{ image: logo }}
-              title={"Title"}
-              actions={<a>Dismiss</a>}
-            >
-              Message
-            </NotificationMessage>
-          )
-        }
-      >
-        With Inline Actions
-      </Button>
-      <br />
-      <br />
-      <Button
-        onClick={() =>
-          notification(
-            <NotificationMessage
-              sideButtons={true}
-              avatar={true}
-              avatarProps={{ image: logo }}
-              title={"Title"}
-              actions={
-                <>
-                  <Button
-                    btnType="outline"
-                    color="secondary"
-                    borderRadius="none"
-                    style={{ borderTopRightRadius: "8px" }}
-                  >
-                    Confirm
-                  </Button>
-                  <Button
-                    btnType="outline"
-                    color="neutral"
-                    borderRadius="none"
-                    style={{ borderBottomRightRadius: "8px" }}
-                  >
-                    Dismiss
-                  </Button>
-                </>
-              }
-            >
-              Message
-            </NotificationMessage>,
-            { closeButton: false }
-          )
-        }
-      >
-        With Side Buttons
-      </Button>
-      <br />
-      <br />
-      <Button
-        onClick={() =>
-          notification.success(
-            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
-            {}
-          )
-        }
-      >
-        Success Notification
-      </Button>
-      <br />
-      <br />
-      <Button
-        onClick={() =>
-          notification.warning(
-            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
-            {}
-          )
-        }
-      >
-        Warning Notification
-      </Button>
-      <br />
-      <br />
-      <Button
-        onClick={() =>
-          notification.error(
-            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
-            {}
-          )
-        }
-      >
-        Error Notification
-      </Button>
-      <br />
-      <br />
-      <Button
-        onClick={() =>
-          notification.info(
-            <NotificationMessage title={"Title"}>Message</NotificationMessage>,
-            {}
-          )
-        }
-      >
-        Information Notification
-      </Button>
-      <NotificationContainer {...args} />
-    </div>
-  );
-};
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => {\n" +
+    " return (\n" +
+    "   <div>\n" +
+    "     <Button\n" +
+    "       onClick={() =>\n" +
+    '         notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)\n' +
+    "       }\n" +
+    "     >\n" +
+    "       With Icon\n" +
+    "     </Button>\n" +
+    "     <br /><br />\n" +
+    "     <Button\n" +
+    "       onClick={() =>\n" +
+    "         notification(\n" +
+    "           <NotificationMessage\n" +
+    "             avatar={true}\n" +
+    "             avatarProps={{ image: logo }}\n" +
+    '             title={"Title"}\n' +
+    "             actions={\n" +
+    "              <>\n" +
+    "               <Button>Confirm</Button>\n" +
+    "               <Button>Dismiss</Button>\n" +
+    "              </>\n" +
+    "             }\n" +
+    "           >\n" +
+    "             Message\n" +
+    "           </NotificationMessage>\n" +
+    "          )\n" +
+    "       }\n" +
+    "     >\n" +
+    "       With Action\n" +
+    "     </Button>\n" +
+    "     <br /><br />\n" +
+    "     <Button\n" +
+    "       onClick={() =>\n" +
+    "         notification(\n" +
+    '           <NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>\n' +
+    "             Message\n" +
+    "           </NotificationMessage>\n" +
+    "          )\n" +
+    "         }\n" +
+    "     >\n" +
+    "       With Inline Actions\n" +
+    "     </Button>\n" +
+    "     <br /><br />\n" +
+    "     <Button\n" +
+    "       onClick={() =>\n" +
+    "         notification(\n" +
+    "          <NotificationMessage\n" +
+    "             sideButtons={true}\n" +
+    "             avatar={true}\n" +
+    "             avatarProps={{ image: logo }}\n" +
+    '             title={"Title"}\n' +
+    "             actions={\n" +
+    "             <>\n" +
+    "               <Button\n" +
+    '                 btnType="outline"\n' +
+    '                 color="secondary"\n' +
+    '                 borderRadius="none"\n' +
+    '                 style={{ borderTopRightRadius: "8px" }}\n' +
+    "                >\n" +
+    "                 Confirm\n" +
+    "               </Button>\n" +
+    "               <Button\n" +
+    '                 btnType="outline"\n' +
+    '                 color="neutral"\n' +
+    '                 borderRadius="none"\n' +
+    '                 style={{ borderBottomRightRadius: "8px" }}\n' +
+    "               >\n" +
+    "                 Dismiss\n" +
+    "               </Button>\n" +
+    "             </>\n" +
+    "             }\n" +
+    "          >\n" +
+    "           Message\n" +
+    "          </NotificationMessage>,\n" +
+    "          { closeButton: false }\n" +
+    "         )\n" +
+    "       }\n" +
+    "     >\n" +
+    "       With Side Buttons\n" +
+    "     </Button>\n" +
+    "     <br /><br />\n" +
+    "     <Button\n" +
+    "       onClick={() =>\n" +
+    '         notification.success(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
+    "       }\n" +
+    "     >\n" +
+    "       Success Notification\n" +
+    "     </Button>\n" +
+    "     <br /><br />\n" +
+    "     <Button\n" +
+    "       onClick={() =>\n" +
+    '         notification.warning(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
+    "       }\n" +
+    "     >\n" +
+    "       Warning Notification\n" +
+    "     </Button>\n" +
+    "     <br /><br />\n" +
+    "     <Button\n" +
+    "       onClick={() =>\n" +
+    '         notification.error(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
+    "       }\n" +
+    "     >\n" +
+    "       Error Notification\n" +
+    "     </Button>\n" +
+    "     <br /><br />\n" +
+    "     <Button\n" +
+    "       onClick={() =>\n" +
+    '         notification.info(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
+    "       }\n" +
+    "     >\n" +
+    "       Information Notification\n" +
+    "     </Button>\n" +
+    "     <NotificationContainer {...args} />\n" +
+    "   </div>\n" +
+    " );\n" +
+    "};"}
+</SyntaxHighlighter>
 
 This component is built on top of [React-Toastify](https://www.npmjs.com/package/react-toastify). React-Toastify [documentaion](https://fkhadra.github.io/react-toastify/use-a-custom-close-button-or-remove-it/).

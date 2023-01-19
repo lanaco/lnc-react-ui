@@ -5,6 +5,8 @@ import Icon from "../../General/Icon";
 import { useState, useRef } from "react";
 import Button from "../../General/Button";
 import { Table } from "@storybook/components";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Utility/Modal" component={Modal} />
 
@@ -60,32 +62,29 @@ export const TemplateSizes = (args) => {
 
 # Modal
 
-```jsx
-import { Modal } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Modal } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Story name="Default" args={{}}>
   {TemplateDefault.bind({})}
 </Story>
 
-```jsx
-(args) => {
-  const modalRef = useRef();
-  return (
-    <>
-      <Button onClick={() => modalRef.current.open()}>Open Modal</Button>
-      <Modal ref={modalRef}>
-        <h1>Title</h1>
-        <span>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
-          <br />
-        </span>
-      </Modal>
-    </>
-  );
-};
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => { \n   const modalRef = useRef();\n    return (\n" +
+    "       <>\n" +
+    "         <Button onClick={() => modalRef.current.open()}>Open Modal</Button>\n" +
+    "         <Modal ref={modalRef}>\n" +
+    "         <h1>Title</h1>\n" +
+    "         <span>" +
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+    "<br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
+    "<br />" +
+    "</span>\n" +
+    "       </Modal>\n" +
+    "     </>\n" +
+    "   );\n  };"}
+</SyntaxHighlighter>
 
 <ArgsTable story="Default" />
 
@@ -94,26 +93,26 @@ import { Modal } from "@lanaco/lnc-react-ui";
 This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
 
 <Table>
-    <tr>
-        <th>Method</th>
-        <th>Args</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>open</td>
-        <td>-</td>
-        <td>Opens modal</td>
-    </tr>
-    <tr>
-        <td>close</td>
-        <td>-</td>
-        <td>Closes modal</td>
-    </tr>
-    <tr>
-        <td>isOpen</td>
-        <td>-</td>
-        <td>Determines whether Modal is open or not at the moment</td>
-    </tr>
+  <tr>
+    <th>Method</th>
+    <th>Args</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>open</td>
+    <td>-</td>
+    <td>Opens modal</td>
+  </tr>
+  <tr>
+    <td>close</td>
+    <td>-</td>
+    <td>Closes modal</td>
+  </tr>
+  <tr>
+    <td>isOpen</td>
+    <td>-</td>
+    <td>Determines whether Modal is open or not at the moment</td>
+  </tr>
 </Table>
 
 ---
@@ -124,38 +123,38 @@ This component exposes public methods. You can invoke them directly on the insta
   {TemplateSizes.bind({})}
 </Story>
 
-```jsx
-(args) => {
-  const modalRef = useRef();
-  const [size, setSize] = useState("fluid");
-  const openModal = (modalSize) => {
-    setSize(modalSize);
-    modalRef.current.open();
-  };
-  return (
-    <>
-      <div style={{ display: "flex", gap: "12px" }}>
-        <Button onClick={() => openModal("xs")}>Open XS Modal</Button>
-        <Button onClick={() => openModal("s")}>Open S Modal</Button>
-        <Button onClick={() => openModal("m")}>Open M Modal</Button>
-        <Button onClick={() => openModal("l")}>Open L Modal</Button>
-        <Button onClick={() => openModal("xl")}>Open XL Modal</Button>
-        <Button onClick={() => openModal("fluid")}>Open Fluid Modal</Button>
-        <Button onClick={() => openModal("full")}>Open Full Modal</Button>
-      </div>
-      <Modal
-        ref={modalRef}
-        size={size}
-        clickOutsideToClose={true}
-        header={<h3>Title</h3>}
-        {...args}
-      >
-        <span>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </span>
-      </Modal>
-    </>
-  );
-};
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => {\n" +
+    "   const modalRef = useRef();\n" +
+    '   const [size, setSize] = useState("fluid");\n' +
+    "   const openModal = (modalSize) => {\n" +
+    "     setSize(modalSize);\n" +
+    "     modalRef.current.open();\n" +
+    "   };\n" +
+    "   return (\n" +
+    "     <>\n" +
+    '       <div style={{ display: "flex", gap: "12px" }}>\n' +
+    '         <Button onClick={() => openModal("xs")}>Open XS Modal</Button>\n' +
+    '         <Button onClick={() => openModal("s")}>Open S Modal</Button>\n' +
+    '         <Button onClick={() => openModal("m")}>Open M Modal</Button>\n' +
+    '         <Button onClick={() => openModal("l")}>Open L Modal</Button>\n' +
+    '         <Button onClick={() => openModal("xl")}>Open XL Modal</Button>\n' +
+    '         <Button onClick={() => openModal("fluid")}>Open Fluid Modal</Button>\n' +
+    '         <Button onClick={() => openModal("full")}>Open Full Modal</Button>\n' +
+    "       </div>\n" +
+    "       <Modal\n" +
+    "         ref={modalRef}\n" +
+    "         size={size}\n" +
+    "         clickOutsideToClose={true}\n" +
+    "         header={<h3>Title</h3>}\n" +
+    "         {...args}\n" +
+    "       >\n" +
+    "         <span>\n" +
+    "           Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n" +
+    "           <br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n" +
+    "         </span>\n" +
+    "       </Modal>\n" +
+    "     </>\n" +
+    "   );\n" +
+    " };"}
+</SyntaxHighlighter>

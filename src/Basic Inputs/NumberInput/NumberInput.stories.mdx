@@ -2,6 +2,8 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import NumberInput from "./index";
 import Icon from "../../General/Icon/index";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Basic Inputs/Number Input" component={NumberInput} />
 
@@ -54,9 +56,9 @@ export const TemplateMinMax = (args) => (
 
 # Number Input
 
-```jsx
-import { NumberInput } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { NumberInput } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>

@@ -1,6 +1,8 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import ColorInput from "./index";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Basic Inputs/Color Input" component={ColorInput} />
 
@@ -45,9 +47,9 @@ export const TemplateSizes = (args) => (
 
 # Color Input
 
-```jsx
-import { ColorInput } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { ColorInput } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas withSource="open">
   <Story name="Default" args={{}}>
