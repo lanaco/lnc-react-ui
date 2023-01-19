@@ -1,6 +1,8 @@
 import { Meta, Story, Canvas, Props, ArgsTable } from "@storybook/addon-docs";
 import FlexGrid from "./index";
 import FlexGridItem from "./FlexGridItem";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta
   title="Layout/Flex Grid"
@@ -10,9 +12,9 @@ import FlexGridItem from "./FlexGridItem";
 
 # Flex Grid
 
-```jsx
-import { FlexGrid, FlexGridItem } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { FlexGrid, FlexGridItem } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 `Flex Grid` is a responsive, column based layout. It allows user to define the column breakpoints, ensuring consistency across different screen sizes.
 

@@ -1,6 +1,8 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import RadioInput from "./index";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Basic Inputs/Radio Input" component={RadioInput} />
 
@@ -46,9 +48,9 @@ export const TemplateColors = (args) => (
 
 # Radio Input
 
-```jsx
-import { RadioInput } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { RadioInput } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas withSource="open">
   <Story

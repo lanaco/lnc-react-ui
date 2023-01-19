@@ -1,6 +1,8 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import RadioGroup from "./index";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Inputs/Radio Group" component={RadioGroup} />
 
@@ -18,13 +20,13 @@ export const TemplateDefault = (args) => (
 
 export const TemplateRadioProps = (args) => (
   <RadioGroup
-    style={{width: "100px"}}
+    style={{ width: "100px" }}
     items={[
       { value: "1", label: "Option 1" },
       { value: "2", label: "Option 2" },
       { value: "3", label: "Option 3" },
     ]}
-    radioProps={{labelPosition: "left", label: "label", spaceBetween: true}}
+    radioProps={{ labelPosition: "left", label: "label", spaceBetween: true }}
     {...args}
     name={"rg"}
   />
@@ -150,9 +152,9 @@ export const TemplateColors = (args) => (
 
 # Radio Group
 
-```jsx
-import { RadioGroup } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { RadioGroup } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>

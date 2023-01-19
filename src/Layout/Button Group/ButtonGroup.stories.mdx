@@ -3,6 +3,8 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import IconButton from "../../General/IconButton/index";
 import Button from "../../General/Button/index";
 import ButtonGroup from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Layout/Button Group" component={ButtonGroup} />
 
@@ -111,9 +113,9 @@ export const TemplateCombinations = (args) => (
 
 # Button Group
 
-```jsx
-import { ButtonGroup } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { ButtonGroup } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default">{TemplateDefault.bind({})}</Story>

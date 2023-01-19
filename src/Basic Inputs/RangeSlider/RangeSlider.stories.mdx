@@ -1,6 +1,8 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import RangeSliderInput from "./index";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Basic Inputs/Range Slider Input" component={RangeSliderInput} />
 
@@ -32,9 +34,10 @@ export const TemplateColors = (args) => (
 );
 
 # Range Slider Input
-```jsx
-import { RangeSliderInput } from "@lanaco/lnc-react-ui";
-```
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { RangeSliderInput } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>

@@ -5,16 +5,19 @@ import { useState, useRef } from "react";
 import Button from "../../General/Button";
 import IconButton from "../../General/IconButton";
 import { Table } from "@storybook/components";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Utility/Swipeable Drawer" component={SwipeableDrawer} />
 
 # Swipeable Drawer
 
-```jsx
-import { SwipeableDrawer } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { SwipeableDrawer } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 ##### To close on swipe try it on phone.
+
 ---
 
 <Story name="Default" args={{}}>
@@ -34,24 +37,22 @@ import { SwipeableDrawer } from "@lanaco/lnc-react-ui";
   }}
 </Story>
 
-```jsx
-{
-  (args) => {
-    const drawerRef = useRef();
-    const openDrawer = () => {
-      drawerRef?.current?.open();
-    };
-    return (
-      <>
-        <Button onClick={openDrawer}>Open Drawer</Button>
-        <SwipeableDrawer ref={drawerRef} {...args}>
-          This is Drawer
-        </SwipeableDrawer>
-      </>
-    );
-  };
-}
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => {\n" +
+    " const drawerRef = useRef();\n" +
+    " const openDrawer = () => {\n" +
+    "   drawerRef?.current?.open();\n" +
+    " };\n" +
+    " return (\n" +
+    "   <>\n" +
+    "     <Button onClick={openDrawer}>Open Drawer</Button>\n" +
+    "     <SwipeableDrawer ref={drawerRef} {...args}>\n" +
+    "       This is Drawer\n" +
+    "     </SwipeableDrawer>\n" +
+    "   </>\n" +
+    " );\n" +
+    "};"}
+</SyntaxHighlighter>
 
 <ArgsTable story="Default" />
 
@@ -60,26 +61,26 @@ import { SwipeableDrawer } from "@lanaco/lnc-react-ui";
 This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
 
 <Table>
-    <tr>
-        <th>Method</th>
-        <th>Args</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>open</td>
-        <td>-</td>
-        <td>Opens  drawer</td>
-    </tr>
-    <tr>
-        <td>close</td>
-        <td>-</td>
-        <td>Closes drawer</td>
-    </tr>
-    <tr>
-        <td>isOpen</td>
-        <td>-</td>
-        <td>Determines whether Drawer is open or not at the moment</td>
-    </tr>
+  <tr>
+    <th>Method</th>
+    <th>Args</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>open</td>
+    <td>-</td>
+    <td>Opens drawer</td>
+  </tr>
+  <tr>
+    <td>close</td>
+    <td>-</td>
+    <td>Closes drawer</td>
+  </tr>
+  <tr>
+    <td>isOpen</td>
+    <td>-</td>
+    <td>Determines whether Drawer is open or not at the moment</td>
+  </tr>
 </Table>
 
 ## Direction
@@ -117,36 +118,33 @@ This component exposes public methods. You can invoke them directly on the insta
   }}
 </Story>
 
-```jsx
-(args) => {
-  const drawerRef = useRef();
-  const [direction, setDirection] = useState("right");
-  const openDrawer = (dir) => {
-    setDirection(dir);
-    drawerRef?.current?.open();
-  };
-  return (
-    <>
-      <Button onClick={() => openDrawer("right")}>Right</Button>
-      &nbsp;&nbsp;
-      <Button onClick={() => openDrawer("left")}>Left</Button>
-      &nbsp;&nbsp;
-      <Button onClick={() => openDrawer("top")}>Top</Button>
-      &nbsp;&nbsp;
-      <Button onClick={() => openDrawer("bottom")}>Bottom</Button>
-      <SwipeableDrawer ref={drawerRef} direction={direction} {...args}>
-        Swipe{" "}
-        {direction == "top"
-          ? "up"
-          : direction === "bottom"
-          ? "down"
-          : direction}{" "}
-        to close
-      </SwipeableDrawer>
-    </>
-  );
-};
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => {\n" +
+    " const drawerRef = useRef();\n" +
+    ' const [direction, setDirection] = useState("right");\n' +
+    " const openDrawer = (dir) => {\n" +
+    "   setDirection(dir);\n" +
+    "   drawerRef?.current?.open();\n" +
+    " };\n" +
+    " return (\n" +
+    "   <>\n" +
+    '     <Button onClick={() => openDrawer("right")}>Right</Button>\n' +
+    "     &nbsp;&nbsp;\n" +
+    '     <Button onClick={() => openDrawer("left")}>Left</Button>\n' +
+    "     &nbsp;&nbsp;\n" +
+    '     <Button onClick={() => openDrawer("top")}>Top</Button>\n' +
+    "     &nbsp;&nbsp;\n" +
+    '     <Button onClick={() => openDrawer("bottom")}>Bottom</Button>\n' +
+    "     <SwipeableDrawer ref={drawerRef} direction={direction} {...args}>\n" +
+    '       Swipe{" "}\n' +
+    '       {direction == "top" ? "up" : direction === "bottom" ? "down" : direction}\n' +
+    '       {" "}\n' +
+    "       to close\n" +
+    "     </SwipeableDrawer>\n" +
+    "   </>\n" +
+    " );\n" +
+    "};"}
+</SyntaxHighlighter>
 
 ## Full Page Swipeable Drawer
 
@@ -179,33 +177,31 @@ This component exposes public methods. You can invoke them directly on the insta
   }}
 </Story>
 
-```jsx
-{
-  (args) => {
-    const drawerRef = useRef();
-    const openDrawer = () => {
-      drawerRef?.current?.open();
-    };
-    return (
-      <>
-        <Button onClick={openDrawer}>Open Drawer</Button>
-        <SwipeableDrawer
-          ref={drawerRef}
-          isFullPage={true}
-          direction={"bottom"}
-          {...args}
-        >
-          Swipe <strong>down</strong> to close
-          <IconButton
-            style={{ position: "absolute", right: "10px" }}
-            btnType="outline"
-            color="neutral"
-            icon="times"
-            onClick={() => drawerRef.current.close()}
-          />
-        </SwipeableDrawer>
-      </>
-    );
-  };
-}
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"(args) => {\n" +
+    " const drawerRef = useRef();\n" +
+    " const openDrawer = () => {\n" +
+    "   drawerRef?.current?.open();\n" +
+    " };\n" +
+    " return (\n" +
+    "   <>\n" +
+    "     <Button onClick={openDrawer}>Open Drawer</Button>\n" +
+    "     <SwipeableDrawer\n" +
+    "       ref={drawerRef}\n" +
+    "       isFullPage={true}\n" +
+    '       direction={"bottom"}\n' +
+    "       {...args}\n" +
+    "      >\n" +
+    "       Swipe <strong>down</strong> to close\n" +
+    "       <IconButton\n" +
+    '          style={{ position: "absolute", right: "10px" }}\n' +
+    '          btnType="outline"\n' +
+    '          color="neutral"\n' +
+    '          icon="times"\n' +
+    "          onClick={() => drawerRef.current.close()}\n" +
+    "       />\n" +
+    "     </SwipeableDrawer>\n" +
+    "   </>\n" +
+    " );\n" +
+    "};"}
+</SyntaxHighlighter>

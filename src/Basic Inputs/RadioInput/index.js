@@ -129,7 +129,7 @@ const Label = styled.label`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-
+  
 const RadioInput = React.forwardRef((props, ref) => {
   const {
     id,
@@ -152,7 +152,6 @@ const RadioInput = React.forwardRef((props, ref) => {
     spaceBetween,
     disabled,
     readOnly,
-    inputProps,
     ...rest
   } = props;
   const [focused, setFocused] = useState(false);
@@ -282,7 +281,6 @@ RadioInput.defaultProps = {
   style: {},
   size: "small",
   color: "primary",
-  inputProps: {},
 };
 
 RadioInput.propTypes = {
@@ -291,7 +289,7 @@ RadioInput.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   labelPosition: PropTypes.oneOf(["right", "left"]),
   tabIndex: PropTypes.number,
   spaceBetween: PropTypes.bool,
@@ -325,7 +323,6 @@ RadioInput.propTypes = {
     "white",
     "transparent",
   ]),
-  inputProps: PropTypes.any,
 };
 
 export default RadioInput;

@@ -7,6 +7,8 @@ import TextInput from "../../Basic Inputs/TextInput";
 import TextAreaInput from "../../Basic Inputs/TextAreaInput";
 import NumberInput from "../../Basic Inputs/NumberInput";
 import ColorInput from "../../Basic Inputs/ColorInput";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Layout/Form Field" component={FormField} />
 
@@ -18,9 +20,9 @@ export const TemplateDefault = (args) => (
 
 # Form Field
 
-```jsx
-import { FormField } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { FormField } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{}}>

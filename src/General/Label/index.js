@@ -13,7 +13,7 @@ const StyledLabel = styled.label`
   ${(props) =>
     getComponentTypographyCss(props.theme, "FormField", props.size, "enabled")}
   color: ${(props) =>
-    getColorRgbaValue(props.theme, "FormField", "primary", "enabled", "label")};
+    getColorRgbaValue(props.theme, "FormField", props.color, "enabled", "text")};
 `;
 
 const Label = React.forwardRef((props, ref) => {
@@ -27,6 +27,7 @@ const Label = React.forwardRef((props, ref) => {
       size={size}
       className={className}
       style={style}
+      color={color}
       ref={ref}
     >
       {children}

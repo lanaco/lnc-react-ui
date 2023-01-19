@@ -4,14 +4,16 @@ import Breadcrumbs from "./index";
 import Button from "../../General/Button";
 import ButtonGroup from "../../Layout/Button Group";
 import Link from "../../General/Link";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Utility/Breadcrumbs" component={Breadcrumbs} />
 
 # Breadcrumbs
 
-```jsx
-import { Breadcrumbs } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Breadcrumbs } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas style={{ width: "100%" }}>
   <Story name="Default" args={{}}>
@@ -35,7 +37,7 @@ import { Breadcrumbs } from "@lanaco/lnc-react-ui";
   <Story name="Buttons Breadcrumbs" args={{}}>
     {(args) => (
       <>
-        <Breadcrumbs color="primary" separator={<span>  |  </span>} {...args}>
+        <Breadcrumbs color="primary" separator={<span> | </span>} {...args}>
           <Button text="Left" btnType="basic" />
           <Button text="Center" btnType="basic" />
           <Button text="Right" btnType="basic" />
@@ -51,7 +53,13 @@ import { Breadcrumbs } from "@lanaco/lnc-react-ui";
   <Story name="Collapse" args={{}}>
     {(args) => (
       <>
-        <Breadcrumbs color="primary" maxItems={7} itemsAfterCollapse={2} separator={<span>  |  </span>} {...args}>
+        <Breadcrumbs
+          color="primary"
+          maxItems={7}
+          itemsAfterCollapse={2}
+          separator={<span> | </span>}
+          {...args}
+        >
           <Link href="#">Home</Link>
           <Link href="#">Page 1</Link>
           <Link href="#">Page 2</Link>

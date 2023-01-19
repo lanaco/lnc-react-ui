@@ -2,13 +2,19 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import Toggle from "./index";
 import { useState } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Inputs/Toggle" component={Toggle} />
 
 export const TemplateDefault = (props) => {
   const [checked, setChecked] = useState(props.value || false);
   return (
-    <Toggle {...props} value={checked} onChange={(value) => setChecked(!checked)} />
+    <Toggle
+      {...props}
+      value={checked}
+      onChange={(value) => setChecked(!checked)}
+    />
   );
 };
 
@@ -30,7 +36,12 @@ export const TemplateLabel = (args) => (
       value={true}
       labelPosition="left"
     />
-    <Toggle {...args} label={"Label as string"} labelPosition="right" spaceBetween={true} />
+    <Toggle
+      {...args}
+      label={"Label as string"}
+      labelPosition="right"
+      spaceBetween={true}
+    />
     <Toggle
       {...args}
       label={<span>Label as component</span>}
@@ -85,9 +96,9 @@ export const TemplateColors = (args) => (
 
 # Toggle
 
-```jsx
-import { Toggle } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Toggle } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas withSource="open">
   <Story name="Default" args={{}}>

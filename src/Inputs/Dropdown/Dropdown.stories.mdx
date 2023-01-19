@@ -8,13 +8,15 @@ import Icon from "../../General/Icon";
 import { useState, useRef } from "react";
 import Button from "../../General/Button";
 import { Table } from "@storybook/components";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Inputs/Dropdown" component={Dropdown} />
 
 export const TemplateDefault = (args) => (
   <div style={{ height: "130px" }}>
     <Dropdown
-     defaultInputValue="1"
+      defaultInputValue="1"
       options={[
         { value: "1", label: "option 1" },
         { value: "2", label: "option 2" },
@@ -109,6 +111,10 @@ export const TemplateColors = (args) => (
 
 # Dropdown
 
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Dropdown } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
 <Canvas>
   <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
@@ -126,18 +132,18 @@ export const TemplateColors = (args) => (
 This component exposes public methods. You can invoke them directly on the instance of the component, e.g. by using React Refs.
 
 <Table>
-    <tr>
-        <th>Method</th>
-        <th>Args</th>
-    </tr>
-    <tr>
-        <td>focus</td>
-        <td>-</td>
-    </tr>
-    <tr>
-        <td>blur</td>
-        <td>-</td>
-    </tr>
+  <tr>
+    <th>Method</th>
+    <th>Args</th>
+  </tr>
+  <tr>
+    <td>focus</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>blur</td>
+    <td>-</td>
+  </tr>
 </Table>
 
 <Canvas>
@@ -178,6 +184,7 @@ React-Select library provides consumers with the building block necessary to cre
   {TemplateCustom.bind({})}
 </Story>
 
+<<<<<<< Updated upstream
 ```jsx
 import { Dropdown } from "@lanaco/lnc-react-ui";
 import { components } from "@lanaco/lnc-react-ui/Dropdown";
@@ -222,18 +229,52 @@ export const Template = (args) => (
   />
 );
 ```
+=======
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Dropdown, components } from "@lanaco/lnc-react-ui";\n\n' +
+    "const CustomOption = ({ children, ...props }) => {\n" +
+    " return (\n" +
+    "   <components.Option {...props}>\n" +
+    '     <span style={{ display: "flex", justifyContent: "space-between" }}>\n' +
+    '       <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>\n' +
+    '         <Avatar image={props?.data?.logo} sizeInUnits="1.5rem" />\n' +
+    "         {children}\n" +
+    "       </span>\n" +
+    '       <Icon icon="check" color="primary" />\n' +
+    "     </span>\n" +
+    "   </components.Option>\n" +
+    " );\n" +
+    "};\n\n" +
+    "const CustomControl = ({ children, ...props }) => {\n" +
+    " return (\n" +
+    "   <components.Control {...props}>\n" +
+    '     <span style={{ display: "flex", alignItems: "center", gap: "12px", width: "100%", paddingLeft: "12px" }}>\n' +
+    '       <Avatar image={props?.selectProps?.value?.logo} sizeInUnits="1.5rem" />\n' +
+    "       {children}\n" +
+    "     </span>\n" +
+    "   </components.Control>\n" +
+    " );\n" +
+    "};\n\n" +
+    "export const Template = (args) => (\n" +
+    " <Dropdown\n" +
+    "   {...args}\n" +
+    "   components={{ Option: CustomOption, Control: CustomControl }}\n" +
+    " />\n" +
+    ");"}
+</SyntaxHighlighter>
+>>>>>>> Stashed changes
 
 ## Alternative Label
 
 For array of options
 
-```jsx
-[
-  { value: "1", label: "option 1", alternativeLabel: "This is option 1" },
-  { value: "2", label: "option 2", alternativeLabel: "This is option 2" },
-  { value: "3", label: "option 3", alternativeLabel: "This is option 3" },
-];
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"[\n" +
+    ' { value: "1", label: "option 1", alternativeLabel: "This is option 1" },\n' +
+    ' { value: "2", label: "option 2", alternativeLabel: "This is option 2" },\n' +
+    ' { value: "3", label: "option 3", alternativeLabel: "This is option 3" },\n' +
+    "];"}
+</SyntaxHighlighter>
 
 it is possible to set different label with `getOptionLabel={(option) => option.alternativeLabel}`
 
@@ -288,4 +329,4 @@ To set different value use `getOptionValue={(option) => option.alternativeValue}
   </Story>
 </Canvas>
 
-This component is built on top of [React-Select](https://www.npmjs.com/package/react-select). React-Select [documentaion](https://react-select.com/home).
+This component is built on top of <u> [React-Select](https://www.npmjs.com/package/react-select) </u>. React-Select <u> [documentaion](https://react-select.com/home) </u>.

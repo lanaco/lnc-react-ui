@@ -1,6 +1,8 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import ProgressBar from "./index";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Feedback/Progress Bar" component={ProgressBar} />
 
@@ -26,9 +28,13 @@ export const TemplateColors = (args) => (
 );
 
 # Progress Bar
-```jsx
-import { ProgressBar } from "@lanaco/lnc-react-ui";
-```
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import { ProgressBar } from "@lanaco/lnc-react-ui";'
+  }
+</SyntaxHighlighter>
+
 <Canvas>
   <Story name="Default"  args={{ progressPercentage: 20 }}>
     {TemplateDefault.bind({})}

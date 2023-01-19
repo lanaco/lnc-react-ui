@@ -6,6 +6,8 @@ import DropdownMenu from "../../Utility/DropdownMenu";
 import DropdownItem from "../../Utility/DropdownMenu/DropdownItem";
 import { useState } from "react";
 import Button from "../../General/Button";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <Meta title="Basic Inputs/Text Input" component={TextInput} />
 
@@ -51,9 +53,9 @@ export const TemplateAddons = (args) => (
 
 # Text Input
 
-```jsx
-import { TextInput } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { TextInput } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default" args={{ placeholder: "Type text here." }}>

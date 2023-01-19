@@ -11,8 +11,8 @@ import FlexGrid from "../../Layout/FlexGrid";
 import FlexGridItem from "../../Layout/FlexGrid/FlexGridItem";
 import TextInput from "../../Basic Inputs/TextInput";
 import NumberInput from "../../Basic Inputs/NumberInput";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta
   title="Data Display/Table View"
@@ -304,7 +304,7 @@ export const CustomPagination = (props) => {
 
 # Table View
 
-<SyntaxHighlighter language="javascript" style={nord}>
+<SyntaxHighlighter language="jsx" style={nord}>
   {'import { TableView } from "@lanaco/lnc-react-ui";'}
 </SyntaxHighlighter>
 
@@ -362,7 +362,7 @@ If custom components are not provided, default components will be rendered.
 
 If there is need for custom toolbar it is possible to use `ActionsToolbar` component.
 
-<SyntaxHighlighter language="javascript" style={nord}>
+<SyntaxHighlighter language="jsx" style={nord}>
   {'import { ActionsToolbar } from "@lanaco/lnc-react-ui";'}
 </SyntaxHighlighter>
 
@@ -382,8 +382,10 @@ Example with sortable columns.
         ascending: false,
         descending: false,
       });
-      const sortAscending = (accessor) => [...data].sort((a, b) => (a[accessor] > b[accessor] ? 1 : -1))
-      const sortDescending = (accessor) => [...data].sort((a, b) => (a[accessor] > b[accessor] ? -1 : 1))
+      const sortAscending = (accessor) =>
+        [...data].sort((a, b) => (a[accessor] > b[accessor] ? 1 : -1));
+      const sortDescending = (accessor) =>
+        [...data].sort((a, b) => (a[accessor] > b[accessor] ? -1 : 1));
       return (
         <TableView
           tableProps={{
@@ -511,67 +513,64 @@ Handling of paginated data can be done with `onPageChange` prop.
   }}
 </Story>
 
-```jsx
-() => {
-  const modalRef = useRef();
-  const formValuesRef = useRef({
-    name: "",
-    address: "",
-  });
-  const [data, setData] = useState(Data);
-  return (
-    <>
-      <TableView
-        tableProps={{
-          RowIdentifier: "id",
-          Columns: Cols,
-          Data: data,
-        }}
-        pagination={false}
-        onCreate={() => {
-          modalRef.current?.open();
-        }}
-      ></TableView>
-      <Modal ref={modalRef} header={<div></div>}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setData([
-              ...data,
-              {
-                name: formValuesRef.current.name,
-                address: formValuesRef.current.address,
-              },
-            ]);
-            modalRef.current.close();
-          }}
-        >
-          <FlexGrid spacing={10}>
-            <FlexGridItem col={6}>
-              <FormField label="Name">
-                <TextInput
-                  name="Name"
-                  onChange={(e, value) => (formValuesRef.current.name = value)}
-                />
-              </FormField>
-            </FlexGridItem>
-            <FlexGridItem col={6}>
-              <FormField label="Address">
-                <TextInput
-                  name="Address"
-                  onChange={(e, value) =>
-                    (formValuesRef.current.address = value)
-                  }
-                />
-              </FormField>
-            </FlexGridItem>
-            <FlexGridItem col={6}>
-              <Button text="Save" />
-            </FlexGridItem>
-          </FlexGrid>
-        </form>
-      </Modal>
-    </>
-  );
-};
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"() => {\n" +
+    " const modalRef = useRef();\n" +
+    " const formValuesRef = useRef({\n" +
+    '   name: "",\n' +
+    '   address: "",\n' +
+    " });\n" +
+    " const [data, setData] = useState(Data);\n\n" +
+    " return (\n" +
+    "   <>\n" +
+    "     <TableView\n" +
+    "       tableProps={{\n" +
+    '         RowIdentifier: "id",\n' +
+    "         Columns: Cols,\n" +
+    "         Data: data,\n" +
+    "       }}\n" +
+    "       pagination={false}\n" +
+    "       onCreate={() => {\n" +
+    "         modalRef.current?.open();\n" +
+    "       }}\n" +
+    "     />\n" +
+    "     <Modal ref={modalRef} header={<div></div>}>\n" +
+    "       <form\n" +
+    "         onSubmit={(e) => {\n" +
+    "           e.preventDefault();\n" +
+    "           setData([...data,\n" +
+    "             {\n" +
+    "               name: formValuesRef.current.name,\n" +
+    "               address: formValuesRef.current.address,\n" +
+    "             },\n" +
+    "           ]);\n" +
+    "           modalRef.current.close();\n" +
+    "         }}\n" +
+    "       >\n" +
+    "       <FlexGrid spacing={10}>\n" +
+    "         <FlexGridItem col={6}>\n" +
+    '           <FormField label="Name">\n' +
+    "             <TextInput\n" +
+    '               name="Name"\n' +
+    "               onChange={(e, value) => (formValuesRef.current.name = value)}\n" +
+    "             />\n" +
+    "           </FormField>\n" +
+    "         </FlexGridItem>\n" +
+    "         <FlexGridItem col={6}>\n" +
+    '           <FormField label="Address">\n' +
+    "             <TextInput\n" +
+    '               name="Address"\n' +
+    "               onChange={(e, value) => (formValuesRef.current.address = value)}\n" +
+    "             />\n" +
+    "           </FormField>\n" +
+    "         </FlexGridItem>\n" +
+    "         <FlexGridItem col={6}>\n" +
+    '           <Button text="Save" />\n' +
+    "         </FlexGridItem>\n" +
+    "       </FlexGrid>\n" +
+    "     </form>\n" +
+    "    </Modal>\n" +
+    "  </>\n" +
+    " );\n" +
+    "};"}
+</SyntaxHighlighter>

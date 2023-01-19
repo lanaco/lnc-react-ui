@@ -220,7 +220,6 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     size,
     className,
     style,
-    inputProps,
     children,
     ...rest
   } = props;
@@ -257,7 +256,6 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       onClick={onClick}
       ref={containerRef}
       {...themeProps}
-      {...rest}
     >
       {/* Controlled input and uncotrolled input must be differentiated because of usage of the value property */}
       {checked == true || checked == false ? (
@@ -270,7 +268,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           checked={checkBoxChecked}
           onChange={onChange}
           disabled={disabled || readOnly}
-          {...inputProps}
+          {...rest}
         />
       ) : (
         <input
@@ -282,7 +280,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
           defaultChecked={defaultChecked}
           disabled={disabled || readOnly}
           onChange={onChange}
-          {...inputProps}
+          {...rest}
         />
       )}
       <div className="checkmark" tabIndex={-1}>
@@ -356,7 +354,6 @@ CheckBoxInput.defaultProps = {
   style: {},
   size: "small",
   color: "primary",
-  inputProps: {},
 };
 
 CheckBoxInput.propTypes = {
@@ -367,7 +364,7 @@ CheckBoxInput.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /**
    * Default state indeterminate
    */
@@ -394,7 +391,6 @@ CheckBoxInput.propTypes = {
     "information",
     "neutral",
   ]),
-  inputProps: PropTypes.object,
 };
 
 export default CheckBoxInput;

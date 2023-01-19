@@ -4,6 +4,8 @@ import DragDropFiles from ".";
 import DragAndDropFile from "../DragAndDropFile";
 import UploadedFile from "../../General/UploadedFile";
 import Chip from "../../Data display/Chip";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Inputs/Drag & Drop Files" component={DragDropFiles} />
 
@@ -12,7 +14,11 @@ export const TemplateDefault = (args) => <DragDropFiles {...args} />;
 export const TemplateAcceptImages = (args) => (
   <DragDropFiles
     multiple={true}
-    acceptDropzone={{ "image/jpeg": [], "image/jpg": [], "image/png": [".png"] }}
+    acceptDropzone={{
+      "image/jpeg": [],
+      "image/jpg": [],
+      "image/png": [".png"],
+    }}
     acceptInput={"image/*"}
     {...args}
   />
@@ -66,9 +72,9 @@ export const TemplateColors = (args) => (
 
 # Drag & Drop Files
 
-```jsx
-import { DragAndDropFiles } from "@lanaco/lnc-react-ui";
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { DragAndDropFiles } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
 
 <Canvas>
   <Story name="Default">{TemplateDefault.bind({})}</Story>
@@ -108,11 +114,11 @@ Show file size with `showFileSize={true}`. File size is provided in Bytes and it
 
 <Story name="Drag and Drop File">{TemplateDragAndDropFile.bind({})}</Story>
 
-```jsx
-import { DragAndDropFile } from "@lanaco/lnc-react-ui";
-
-const Component = (args) => <DragAndDropFile {...args} />;
-```
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { DragAndDropFile } from "@lanaco/lnc-react-ui";\n\n' +
+    "     .....\n\n" +
+    "const Component = (args) => <DragAndDropFile {...args} />;"}
+</SyntaxHighlighter>
 
 <ArgsTable story="Drag and Drop File" />
 
