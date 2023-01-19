@@ -184,52 +184,6 @@ React-Select library provides consumers with the building block necessary to cre
   {TemplateCustom.bind({})}
 </Story>
 
-<<<<<<< Updated upstream
-```jsx
-import { Dropdown } from "@lanaco/lnc-react-ui";
-import { components } from "@lanaco/lnc-react-ui/Dropdown";
-
-const CustomOption = ({ children, ...props }) => {
-  return (
-    <components.Option {...props}>
-      <span style={{ display: "flex", justifyContent: "space-between" }}>
-        <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Avatar image={props?.data?.logo} sizeInUnits="1.5rem" />
-          {children}
-        </span>
-        <Icon icon="check" color="primary" />
-      </span>
-    </components.Option>
-  );
-};
-
-const CustomControl = ({ children, ...props }) => {
-  return (
-    <components.Control {...props}>
-      <span
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          width: "100%",
-          paddingLeft: "12px",
-        }}
-      >
-        <Avatar image={props?.selectProps?.value?.logo} sizeInUnits="1.5rem" />
-        {children}
-      </span>
-    </components.Control>
-  );
-};
-
-export const Template = (args) => (
-  <Dropdown
-    {...args}
-    components={{ Option: CustomOption, Control: CustomControl }}
-  />
-);
-```
-=======
 <SyntaxHighlighter language="jsx" style={nord}>
   {'import { Dropdown, components } from "@lanaco/lnc-react-ui";\n\n' +
     "const CustomOption = ({ children, ...props }) => {\n" +
@@ -262,7 +216,6 @@ export const Template = (args) => (
     " />\n" +
     ");"}
 </SyntaxHighlighter>
->>>>>>> Stashed changes
 
 ## Alternative Label
 
