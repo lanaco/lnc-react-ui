@@ -179,7 +179,7 @@ DragDropFiles.propTypes = {
   acceptInput: PropTypes.string,
   multiple: PropTypes.bool,
   selectFileText: PropTypes.string,
-  dndFileText: PropTypes.string,
+  dndFileText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /**
    * Custom control which opens file explorer on click
    */
