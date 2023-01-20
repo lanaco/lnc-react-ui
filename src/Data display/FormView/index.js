@@ -65,7 +65,7 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
         />
       );
     case "checkbox":
-      return (
+    return (
         <CheckBoxInput
           color={color}
           size={size}
