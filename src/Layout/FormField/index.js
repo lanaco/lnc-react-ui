@@ -32,12 +32,12 @@ const StyledText = styled.span`
 `;
 
 const FormField = (props) => {
-  const { size, color, text, label, children } = props;
+  const { size, color, text, label, children, style, className, ...rest } = props;
 
   const theme = useTheme();
 
   return (
-    <div>
+    <div style={style} className={className}>
       {label && (
         <StyledLabel theme={theme} size={size}>
           {label}
@@ -58,6 +58,8 @@ FormField.defaultProps = {
   label: "",
   size: "small",
   color: "primary",
+  style: {},
+  className: "",
 };
 
 FormField.propTypes = {
@@ -78,6 +80,8 @@ FormField.propTypes = {
     "warning",
     "information",
   ]),
+  style: PropTypes.object,
+  className: PropTypes.string,
 };
 
 export default FormField;
