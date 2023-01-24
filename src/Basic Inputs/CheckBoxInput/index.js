@@ -199,7 +199,6 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
   const {
     containerRef,
     id,
-    name,
     checked,
     defaultChecked,
     indeterminate,
@@ -245,6 +244,7 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
 
   return (
     <Container
+      ref={containerRef}
       direction={labelPosition}
       className={className}
       style={style}
@@ -254,14 +254,13 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       tabIndex={-1}
       readOnly={readOnly}
       onClick={onClick}
-      ref={containerRef}
       {...themeProps}
     >
       {/* Controlled input and uncotrolled input must be differentiated because of usage of the value property */}
       {checked == true || checked == false ? (
         <input
-          type="checkbox"
           ref={ref}
+          type="checkbox"
           tabIndex={tabIndex}
           onBlur={handleOnBlur}
           onFocus={handleOnFocus}
@@ -272,8 +271,8 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
         />
       ) : (
         <input
-          type="checkbox"
           ref={ref}
+          type="checkbox"
           tabIndex={tabIndex}
           onBlur={handleOnBlur}
           onFocus={handleOnFocus}
@@ -359,7 +358,6 @@ CheckBoxInput.defaultProps = {
 CheckBoxInput.propTypes = {
   containerRef: PropTypes.any,
   id: PropTypes.any,
-  name: PropTypes.string,
   defaultChecked: PropTypes.bool,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
