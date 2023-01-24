@@ -25,6 +25,7 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
     //------------------
     onItemSelected,
     //--------------------
+    defaultOpen,
     animation,
     color,
     size,
@@ -36,7 +37,7 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(defaultOpen);
 
   const toggleNested = () => {
     setShow(!show);
@@ -89,6 +90,7 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
 });
 
 NestedDropdownItem.defaultProps = {
+  defaultOpen: false,
   /**
    * Animation use on nested items open/close
    */
@@ -113,6 +115,7 @@ NestedDropdownItem.defaultProps = {
 NestedDropdownItem.propTypes = {
   item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   //--------------------------
+  defaultOpen: PropTypes.bool,
   animation: PropTypes.object,
   className: PropTypes.string,
   style: PropTypes.object,
