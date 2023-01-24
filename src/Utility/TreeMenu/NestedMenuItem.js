@@ -26,6 +26,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
     //------------------
     onItemSelected,
     //--------------------
+    defaultOpen,
     tuckIn,
     tuckInSize,
     animation,
@@ -39,7 +40,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(defaultOpen);
 
   const toggleNested = () => {
     setShow(!show);
@@ -95,6 +96,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
 });
 
 NestedMenuItem.defaultProps = {
+  defaultOpen: false,
   tuckIn: true,
   tuckInSize: "0.3rem",
   /**
@@ -121,6 +123,7 @@ NestedMenuItem.defaultProps = {
 NestedMenuItem.propTypes = {
   item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   //--------------------------
+  defaultOpen: PropTypes.bool,
   /**
    * Determines wether nested items will be tucked in to the right (using margin-right and padding-left).
    */
