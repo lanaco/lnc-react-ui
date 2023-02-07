@@ -1,50 +1,185 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import DateInput from "./index";
+import DateInput, { registerLocale } from "./index";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useState } from "react";
+import el from "date-fns/locale/el"; // the locale you want
 
 <Meta title="Basic Inputs/Date Input" component={DateInput} />
 
-export const TemplateDefault = (args) => <DateInput {...args} />;
+export const TemplateDefault = (args) => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <DateInput
+      shouldCloseOnOpen={true}
+      selected={date}
+      onChange={(value) => setDate(value)}
+    />
+  );
+};
 
-export const TemplateDisabled = (args) => (
-  <DateInput
-    disabled={true}
-    placeholder={"Disabled"}
-    style={{ width: "300px" }}
-    {...args}
-  />
-);
+export const TemplateRange = (args) => {
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
+  return (
+    <DateInput
+      shouldCloseOnOpen={true}
+      startDate={startDate}
+      endDate={endDate}
+      onChange={onChange}
+      monthsShown={2}
+      selectsRange={true}
+    />
+  );
+};
 
-export const TemplateReadOnly = (args) => (
-  <DateInput
-    readOnly={true}
-    style={{ width: "300px" }}
-    value={"2022-01-01"}
-    {...args}
-  />
-);
+export const TemplateReadOnly = (args) => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <DateInput
+      readOnly={true}
+      selected={date}
+      onChange={(value) => setDate(value)}
+    />
+  );
+};
 
-export const TemplateSizes = (args) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-    <DateInput {...args} size="small" />
-    <DateInput {...args} size="medium" />
-    <DateInput {...args} size="large" />
-  </div>
-);
+export const TemplateDisabled = (args) => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <DateInput
+      disabled={true}
+      selected={date}
+      onChange={(value) => setDate(value)}
+    />
+  );
+};
 
-export const TemplateColors = (args) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-    <DateInput {...args} color="primary" />
-    <DateInput {...args} color="secondary" />
-    <DateInput {...args} color="success" />
-    <DateInput {...args} color="warning" />
-    <DateInput {...args} color="danger" />
-    <DateInput {...args} color="information" />
-    <DateInput {...args} color="neutral" />
-  </div>
-);
+export const TemplateFormat = (args) => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <DateInput
+      shouldCloseOnOpen={true}
+      selected={date}
+      onChange={(value) => setDate(value)}
+      dateFormat="yyyy/MM/dd"
+    />
+  );
+};
+
+export const TemplatePortal = (args) => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <DateInput
+      shouldCloseOnOpen={true}
+      selected={date}
+      onChange={(value) => setDate(value)}
+      withPortal={true}
+    />
+  );
+};
+
+export const TemplateLocale = (args) => {
+  const [date, setDate] = useState(new Date());
+  registerLocale("el", el);
+  return (
+    <DateInput
+      selected={date}
+      onChange={(value) => setDate(value)}
+      locale="el"
+    />
+  );
+};
+
+export const TemplateSizes = (args) => {
+  const [dateS, setDateS] = useState(new Date());
+  const [dateM, setDateM] = useState(new Date());
+  const [dateL, setDateL] = useState(new Date());
+  return (
+    <>
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={dateS}
+        onChange={(value) => setDateS(value)}
+        size={"small"}
+      />
+      <br />
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={dateM}
+        onChange={(value) => setDateM(value)}
+        size={"medium"}
+      />
+      <br />
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={dateL}
+        onChange={(value) => setDateL(value)}
+        size={"large"}
+      />
+    </>
+  );
+};
+
+export const TemplateColors = (args) => {
+  const [datePr, setDatePr] = useState(new Date());
+  const [dateSec, setDateSec] = useState(new Date());
+  const [dateSuc, setDateSuc] = useState(new Date());
+  const [dateW, setDateW] = useState(new Date());
+  const [dateD, setDateD] = useState(new Date());
+  const [dateI, setDateI] = useState(new Date());
+  return (
+    <>
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={datePr}
+        onChange={(value) => setDatePr(value)}
+        color={"primary"}
+      />
+      <br />
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={dateSec}
+        onChange={(value) => setDateSec(value)}
+        color={"secondary"}
+      />
+      <br />
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={dateSuc}
+        onChange={(value) => setDateSuc(value)}
+        color={"success"}
+      />
+      <br />
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={dateW}
+        onChange={(value) => setDateW(value)}
+        color={"warning"}
+      />
+      <br />
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={dateD}
+        onChange={(value) => setDateD(value)}
+        color={"danger"}
+      />
+      <br />
+      <DateInput
+        shouldCloseOnOpen={true}
+        selected={dateI}
+        onChange={(value) => setDateI(value)}
+        color={"information"}
+      />
+    </>
+  );
+};
 
 # Date Input
 
@@ -57,12 +192,45 @@ export const TemplateColors = (args) => (
 </Story>
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {"(args) => <DateInput {...args} />;"}
+  {"import { DateInput } from '@lanaco/lnc-react-ui';\n" +
+    "..........\n" +
+    "(args) => { \n    const [date, setDate] = useState(new Date());\n    return (\n" +
+    "       <DateInput\n" +
+    "         shouldCloseOnOpen={true}\n" +
+    "         selected={date}\n" +
+    "         onChange={(value) => setDate(value)}\n" +
+    "   );\n  };"}
 </SyntaxHighlighter>
 
-<ArgsTable story="Default" />
+## Range
 
-## Read Only
+Range Date Input with two months shown
+
+<Story name="Range" args={{}}>
+  {TemplateRange.bind({})}
+</Story>
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"import { DateInput, registerLocale } from '@lanaco/lnc-react-ui';\n" +
+    "..........\n" +
+    "(args) => { \n    const [startDate, setStartDate] = useState(null);\n    const [endDate, setEndDate] = useState(null);\n" +
+    "    const onChange = (dates) => {\n" +
+    "     const [start, end] = dates;\n" +
+    "     setStartDate(start);\n" +
+    "     setEndDate(end);\n" +
+    "    }" +
+    "    return (\n" +
+    "       <DateInput\n" +
+    "         startDate={startDate}\n" +
+    "         endDate={endDate}\n" +
+    "         monthsShown={2}\n" +
+    "         selectsRange={true}\n" +
+    "         shouldCloseOnOpen={true}\n" +
+    "         onChange={(value) => setDate(value)}\n" +
+    "   );\n  };"}
+</SyntaxHighlighter>
+
+## Read only
 
 <Canvas>
   <Story name="Read Only" args={{}}>
@@ -78,48 +246,70 @@ export const TemplateColors = (args) => (
   </Story>
 </Canvas>
 
-## Range
+## Date Format
 
-Range can be defined with `minDate` and `maxDate` props.
+Date format <b>yyyy/MM/dd</b>
 
-<Story
-  name="Range"
-  args={{
-    value: "2022-01-05",
-    minDate: "2022-01-01",
-    maxDate: "2022-01-15",
-  }}
->
-  {TemplateDefault.bind({})}
+<Story name="Date Format" args={{}}>
+  {TemplateFormat.bind({})}
 </Story>
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {
-    '(args) => <DateInput value={"2022-01-05"} minDate={"2022-01-01"} maxDate={"2022-01-15"} {...args} />;'
-  }
+  {"import { DateInput, registerLocale } from '@lanaco/lnc-react-ui';\n" +
+    "..........\n" +
+    "(args) => { \n    const [date, setDate] = useState(new Date());\n    return (\n" +
+    "       <DateInput\n" +
+    "         shouldCloseOnOpen={true}\n" +
+    "         selected={date}\n" +
+    "         onChange={(value) => setDate(value)}\n" +
+    "         dateFormat='yyyy/MM/dd'\n" +
+    "   );\n  };"}
 </SyntaxHighlighter>
 
-## Alternative Format
+## With Portal
 
-<Story
-  name="Alternative Format"
-  args={{
-    value: "2022-01-05",
-    format: "YYYY-MM-dd",
-  }}
->
-  {TemplateDefault.bind({})}
+<Story name="With Portal" args={{}}>
+  {TemplatePortal.bind({})}
 </Story>
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {
-    '(args) => <DateInput value={"2022-01-05"} format={"YYYY-MM-dd"} {...args} />;'
-  }
+  {"import { DateInput, registerLocale } from '@lanaco/lnc-react-ui';\n" +
+    "..........\n" +
+    "(args) => { \n    const [date, setDate] = useState(new Date());\n    return (\n" +
+    "       <DateInput\n" +
+    "         shouldCloseOnOpen={true}\n" +
+    "         selected={date}\n" +
+    "         onChange={(value) => setDate(value)}\n" +
+    "         withPortal={true}\n" +
+    "   );\n  };"}
+</SyntaxHighlighter>
+
+## Locale
+
+<Story name="Locale" args={{}}>
+  {TemplateLocale.bind({})}
+</Story>
+
+To use locales, first step would be to add _date-fns_
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"npm i date-fns"}
+</SyntaxHighlighter>
+
+Here is an example of Greek locale
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"import { DateInput, registerLocale } from '@lanaco/lnc-react-ui';\n" +
+    "import el from 'date-fns/locale/el'; // the locale you want\n..........\n" +
+    "(args) => { \n    const [date, setDate] = useState(new Date());\n    registerLocale('el', el);// register it with the name you want\n    return (\n" +
+    "       <DateInput\n" +
+    "         selected={date}\n" +
+    "         onChange={(value) => setDate(value)}\n" +
+    "         locale='el'\n" +
+    "   );\n  };"}
 </SyntaxHighlighter>
 
 ## Sizes
-
-Defining `size` with `small`, `medium` and `large` values.
 
 <Canvas>
   <Story name="Sizes" args={{}}>
@@ -129,10 +319,14 @@ Defining `size` with `small`, `medium` and `large` values.
 
 ## Colors
 
-Defining `color`
-
 <Canvas>
   <Story name="Colors" args={{}}>
     {TemplateColors.bind({})}
   </Story>
 </Canvas>
+
+<br />
+
+<hr />
+
+### This component is built on top of [react-datepicker](https://www.npmjs.com/package/react-datepicker). See [react-datepicker documentation](https://reactdatepicker.com/).

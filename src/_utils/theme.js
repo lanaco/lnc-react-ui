@@ -90,6 +90,171 @@ export const lanaco_light = {
         },
       },
     },
+    DateInput: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          border: 200,
+          placeholder: 500,
+          text: 900,
+          textWeekDays: 400,
+          fontWeight: 200,
+          todayColor: 600,
+        },
+        hover: {
+          text: 600,
+          background: 600,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 600,
+          backgroundDayOpacity: 200,
+        },
+        disabled: {
+          border: 200,
+        },
+      },
+      teal: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      blue: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      red: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      violet: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      yellow: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      green: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      gray: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      neutral: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+    },
     Chip: {
       default: {
         palette: "gray",
@@ -3330,6 +3495,171 @@ export const lanaco_dark = {
         },
       },
     },
+    DateInput: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 700,
+          border: 200,
+          placeholder: 500,
+          text: 0,
+          textWeekDays: 400,
+          fontWeight: 200,
+          todayColor: 600,
+        },
+        hover: {
+          text: 600,
+          background: 600,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 600,
+          backgroundDayOpacity: 200,
+        },
+        disabled: {
+          border: 200,
+        },
+      },
+      teal: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      blue: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      red: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      violet: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      yellow: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      green: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      gray: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      neutral: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+    },
     Chip: {
       default: {
         palette: "gray",
@@ -6551,6 +6881,171 @@ export const lanaco_e_commerce = {
           text: 900,
           prefix: 600,
           suffix: 600,
+        },
+      },
+    },
+    DateInput: {
+      default: {
+        palette: "gray",
+        enabled: {
+          background: 0,
+          border: 200,
+          placeholder: 500,
+          text: 900,
+          textWeekDays: 400,
+          fontWeight: 200,
+          todayColor: 600,
+        },
+        hover: {
+          text: 600,
+          background: 600,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 600,
+          backgroundDayOpacity: 200,
+        },
+        disabled: {
+          border: 200,
+        },
+      },
+      teal: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      blue: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      red: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      violet: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      yellow: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      green: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      gray: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
+        },
+      },
+      neutral: {
+        enabled: {
+          today: 600,
+        },
+        hover: {
+          text: 600,
+          background: 500,
+          backgroundOpacity: 200,
+        },
+        active: {
+          background: 500,
+          text: 0,
+          textDay: 600,
+          backgroundDay: 500,
+          backgroundDayOpacity: 200,
         },
       },
     },
