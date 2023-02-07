@@ -4,7 +4,7 @@ export { default as CheckBoxInput } from "./Basic Inputs/CheckBoxInput";
 
 export { default as ColorInput } from "./Basic Inputs/ColorInput";
 
-export { default as DateInput } from "./Basic Inputs/DateInput";
+export { default as DateInput, registerLocale } from "./Basic Inputs/DateInput";
 
 export { default as DecimalInput } from "./Basic Inputs/DecimalInput";
 
