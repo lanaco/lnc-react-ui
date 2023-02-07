@@ -33,7 +33,7 @@ export const TemplateRange = (args) => {
       startDate={startDate}
       endDate={endDate}
       onChange={onChange}
-      monthsShown={3}
+      monthsShown={2}
       selectsRange={true}
     />
   );
@@ -187,21 +187,48 @@ export const TemplateColors = (args) => {
   {'import { DateInput } from "@lanaco/lnc-react-ui";'}
 </SyntaxHighlighter>
 
-<Canvas>
-  <Story name="Default" args={{}}>
-    {TemplateDefault.bind({})}
-  </Story>
-</Canvas>
+<Story name="Default" args={{}}>
+  {TemplateDefault.bind({})}
+</Story>
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"import { DateInput } from '@lanaco/lnc-react-ui';\n" +
+    "..........\n" +
+    "(args) => { \n    const [date, setDate] = useState(new Date());\n    return (\n" +
+    "       <DateInput\n" +
+    "         shouldCloseOnOpen={true}\n" +
+    "         selected={date}\n" +
+    "         onChange={(value) => setDate(value)}\n" +
+    "   );\n  };"}
+</SyntaxHighlighter>
 
 ## Range
 
 Range Date Input with two months shown
 
-<Canvas>
-  <Story name="Range" args={{}}>
-    {TemplateRange.bind({})}
-  </Story>
-</Canvas>
+<Story name="Range" args={{}}>
+  {TemplateRange.bind({})}
+</Story>
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"import { DateInput, registerLocale } from '@lanaco/lnc-react-ui';\n" +
+    "..........\n" +
+    "(args) => { \n    const [startDate, setStartDate] = useState(null);\n    const [endDate, setEndDate] = useState(null);\n" +
+    "    const onChange = (dates) => {\n" +
+    "     const [start, end] = dates;\n" +
+    "     setStartDate(start);\n" +
+    "     setEndDate(end);\n" +
+    "    }" +
+    "    return (\n" +
+    "       <DateInput\n" +
+    "         startDate={startDate}\n" +
+    "         endDate={endDate}\n" +
+    "         monthsShown={2}\n" +
+    "         selectsRange={true}\n" +
+    "         shouldCloseOnOpen={true}\n" +
+    "         onChange={(value) => setDate(value)}\n" +
+    "   );\n  };"}
+</SyntaxHighlighter>
 
 ## Read only
 
@@ -211,7 +238,7 @@ Range Date Input with two months shown
   </Story>
 </Canvas>
 
-## Disalbed
+## Disabled
 
 <Canvas>
   <Story name="Disabled" args={{}}>
@@ -223,11 +250,21 @@ Range Date Input with two months shown
 
 Date format <b>yyyy/MM/dd</b>
 
-<Canvas>
-  <Story name="Date Format" args={{}}>
-    {TemplateFormat.bind({})}
-  </Story>
-</Canvas>
+<Story name="Date Format" args={{}}>
+  {TemplateFormat.bind({})}
+</Story>
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {"import { DateInput, registerLocale } from '@lanaco/lnc-react-ui';\n" +
+    "..........\n" +
+    "(args) => { \n    const [date, setDate] = useState(new Date());\n    return (\n" +
+    "       <DateInput\n" +
+    "         shouldCloseOnOpen={true}\n" +
+    "         selected={date}\n" +
+    "         onChange={(value) => setDate(value)}\n" +
+    "         dateFormat='yyyy/MM/dd'\n" +
+    "   );\n  };"}
+</SyntaxHighlighter>
 
 ## With Portal
 
@@ -240,7 +277,7 @@ Date format <b>yyyy/MM/dd</b>
     "..........\n" +
     "(args) => { \n    const [date, setDate] = useState(new Date());\n    return (\n" +
     "       <DateInput\n" +
-    "         shouldCloseOnOpen={true}\n"+
+    "         shouldCloseOnOpen={true}\n" +
     "         selected={date}\n" +
     "         onChange={(value) => setDate(value)}\n" +
     "         withPortal={true}\n" +
