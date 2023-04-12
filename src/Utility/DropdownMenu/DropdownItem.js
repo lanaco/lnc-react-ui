@@ -60,7 +60,8 @@ const Item = styled.div`
       "MenuItem",
       props.color,
       "focus",
-      "background"
+      "background",
+      "backgroundOpacity"
     )};
     color: ${getColorRgbaValue(
       props.theme,
