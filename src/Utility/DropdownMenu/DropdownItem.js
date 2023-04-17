@@ -19,13 +19,31 @@ const Item = styled.div`
   min-height: 2.25rem;
   gap: 0.563rem;
   padding: 0.563rem;
+  &:hover {
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "MenuItem",
+        props.color,
+        "hover",
+        "background",
+        "backgroundOpacity"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "MenuItem", props.color, "hover", "text")};
+    & .drop-down-icon-lnc {
+      color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "MenuItem",
+          props.color,
+          "hover",
+          "icon"
+        )};
+    }
+  }
   ${(props) =>
-    getComponentTypographyCss(
-      props.theme,
-      "MenuItem",
-      props.size,
-      "enabled"
-    )};
+    getComponentTypographyCss(props.theme, "MenuItem", props.size, "enabled")};
   & .drop-down-icon-lnc {
     color: ${(props) =>
       props.isActive && props.disabled == false
@@ -256,12 +274,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
           <Icon icon={icon} className="drop-down-icon-lnc" {...iconProps} />
         )}
         <div>{children}</div>
-        {isNested && (
-          <Icon
-            icon={"angle-down"}
-            className="sub-menu-icon-lnc"
-          />
-        )}
+        {isNested && <Icon icon={"angle-down"} className="sub-menu-icon-lnc" />}
       </Item>
     </>
   );
