@@ -15,7 +15,8 @@ const StyledNested = styled(motion.div)`
       "MenuItem",
       props.color,
       "focus",
-      "background"
+      "background",
+      "backgroundOpacity"
     )};`}
     border-radius: 2px;
 `;
