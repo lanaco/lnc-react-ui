@@ -12,7 +12,7 @@ import {
 
 //=================================================
 
-const Button = (props) => {
+const Button = React.forwardRef((props, ref) => {
   const {
     icon,
     iconStyle,
@@ -133,7 +133,7 @@ const Button = (props) => {
       {renderIcon()}
     </FilledButton>
   );
-};
+});
 
 Button.defaultProps = {
   icon: "",

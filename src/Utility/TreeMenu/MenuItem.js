@@ -132,7 +132,7 @@ const MenuItem = React.forwardRef((props, ref) => {
   const themeProps = { theme, color, style };
   const itemRef = useRef();
 
-  const [isActive, setIsActive] = useState(active);
+  const [isActive, setIsActive] = useState(active == null ? false : active);
   useEffect(() => {
     setIsActive(active);
   }, [active]);
@@ -152,7 +152,8 @@ const MenuItem = React.forwardRef((props, ref) => {
     onFocus(e);
   };
   const handleOnBlur = (e) => {
-    setIsActive(false);
+    // TODO : 
+    if(active == null) setIsActive(false);
     onBlur(e);
   };
   const handleOnKeyDown = (e) => {
@@ -287,7 +288,7 @@ const MenuItem = React.forwardRef((props, ref) => {
 });
 
 MenuItem.defaultProps = {
-  active: false,
+  active: null,
   disabled: false,
   isNested: false,
   justifyToEnd: false,
