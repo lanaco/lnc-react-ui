@@ -9,8 +9,7 @@ import {
   getOutlineCss,
   getSizeValueWithUnits,
 } from "../../_utils/utils";
-import { useEffectOnce, useUpdateEffect } from "react-use";
-import { useImperativeHandle } from "react";
+import { useUpdateEffect } from "react-use";
 
 const getLabelDirection = (direction) => {
   if (direction == "left") return "row-reverse";
@@ -49,6 +48,13 @@ const Container = styled.label`
     min-height: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: ${getColorRgbaValue(
+      props.theme,
+      "Checkbox",
+      props.color,
+      "enabled",
+      "text"
+    )};
   }
   & input {
     position: absolute;

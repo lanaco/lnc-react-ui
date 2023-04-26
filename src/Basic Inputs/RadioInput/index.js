@@ -32,6 +32,13 @@ const Container = styled.label`
   gap: 0.75rem;
   cursor: pointer;
   position: relative;
+  color: ${getColorRgbaValue(
+    props.theme,
+    "Radio",
+    props.color,
+    "enabled",
+    "text"
+  )};
   & input {
     cursor: pointer;
     position: absolute;

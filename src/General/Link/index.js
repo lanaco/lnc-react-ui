@@ -21,6 +21,14 @@ const StlyedLink = styled.a`
       "text"
     )};
     text-decoration: none;
+    font-weight: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Link",
+        props.color,
+        "enabled",
+        "fontWeight"
+      )};
 
     &:hover {
         color: ${(props) =>
