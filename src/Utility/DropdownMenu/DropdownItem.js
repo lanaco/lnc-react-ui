@@ -295,7 +295,6 @@ DropdownItem.defaultProps = {
   //-------------------------
   style: {},
   className: "",
-  color: "primary",
   size: "small",
   __TYPE__: "MENU_ITEM",
 };

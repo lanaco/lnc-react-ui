@@ -76,13 +76,13 @@ const TreeMenu = React.forwardRef((props, ref) => {
           if (child.props.ref) firstItemRef.current = ref;
           return React.cloneElement(child, {
             ref: ref ? ref : firstItemRef, //needed to focus on navigation
-            color: color,
+            color: child.props.color ? child.props.color : color,
             size: size,
             onItemSelected: onItemSelected,
           });
         }
         return React.cloneElement(child, {
-          color: color,
+          color: child.props.color ? child.props.color : color,
           size: size,
           onItemSelected: onItemSelected,
         });

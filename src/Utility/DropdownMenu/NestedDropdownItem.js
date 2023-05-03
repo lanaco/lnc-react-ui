@@ -58,7 +58,7 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
         child.props.__TYPE__ == "NESTED_ITEM"
       ) {
         return React.cloneElement(child, {
-          color: color,
+          color: child.props.color ? child.props.color : color,
           size: size,
           onItemSelected: onItemSelected,
         });

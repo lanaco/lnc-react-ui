@@ -201,7 +201,7 @@ PopoverTrigger.propTypes = {
 };
 
 export const PopoverContent = React.forwardRef(function PopoverContent(
-  { borderRadius, className, style, ...props },
+  { borderRadius, className, zIndex, style, ...props },
   propRef
 ) {
   const state = usePopoverState();
@@ -219,6 +219,7 @@ export const PopoverContent = React.forwardRef(function PopoverContent(
               top: state.y ?? 0,
               left: state.x ?? 0,
               width: "max-content",
+              zIndex: zIndex,
             }}
             aria-labelledby={state.labelId}
             aria-describedby={state.descriptionId}
@@ -243,6 +244,7 @@ PopoverContent.defaultProps = {
 PopoverContent.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
+  zIndex: PropTypes.number,
 };
 
 export const PopoverHeading = React.forwardRef(function PopoverHeading(
