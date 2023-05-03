@@ -35,6 +35,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     placement,
     widthFitContent,
     closeOnItemSelect,
+    zIndex,
     //----------------
     onFocus,
     onBlur,
@@ -131,7 +132,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     <StyledDropDown ref={ref} {...rest}>
       <Popover open={openPopover} onOpenChange={setOpenPopover} placement={placement} offsetValue={offsetValue}>
         <PopoverTrigger onClick={() => setOpenPopover((v) => !v)}>{clonedControl()}</PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent zIndex={zIndex}>
         <StyledContent
             ref={menuContentRef}
             widthFitContent={widthFitContent}
@@ -208,6 +209,10 @@ DropdownMenu.propTypes = {
    * Close menu when item is selected
    */
   closeOnItemSelect: PropTypes.bool,
+  /**
+   * zIndex of dropdown popup
+   */
+  zIndex: PropTypes.number,
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
