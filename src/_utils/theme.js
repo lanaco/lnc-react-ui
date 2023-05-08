@@ -516,11 +516,13 @@ export const lanaco_light = {
           text: 500,
           line: 300,
           fontWeight: 700,
+          lineHeight: "2px",
         },
         hover: {
           text: 500,
           line: 300,
           fontWeight: 700,
+          lineHeight: "1px",
         },
         active: {
           text: 500,
@@ -753,6 +755,7 @@ export const lanaco_light = {
           text: 500,
           line: 200,
           fontWeight: 700,
+          lineHeight: "2px",
         },
         hover: {
           background: 0,
@@ -760,6 +763,7 @@ export const lanaco_light = {
           text: 500,
           line: 200,
           fontWeight: 700,
+          lineHeight: "1px",
         },
         active: {
           background: 0,
@@ -3921,11 +3925,13 @@ export const lanaco_dark = {
           text: 400,
           line: 700,
           fontWeight: 700,
+          lineHeight: "2px",
         },
         hover: {
           text: 400,
           line: 700,
           fontWeight: 700,
+          lineHeight: "1px",
         },
         active: {
           text: 400,
@@ -4156,6 +4162,7 @@ export const lanaco_dark = {
           text: 300,
           line: 700,
           fontWeight: 700,
+          lineHeight: "2px",
         },
         hover: {
           background: 700,
@@ -4163,6 +4170,7 @@ export const lanaco_dark = {
           text: 300,
           line: 200,
           fontWeight: 700,
+          lineHeight: "1px",
         },
         active: {
           background: 800,
@@ -7309,11 +7317,14 @@ export const lanaco_e_commerce = {
         enabled: {
           text: 500,
           line: 300,
+          lineHeight: "2px",
+          lineRadius: "0",
           fontWeight: 700,
         },
         hover: {
           text: 500,
           line: 300,
+          lineHeight: "1px",
           fontWeight: 700,
         },
         active: {
@@ -7547,6 +7558,7 @@ export const lanaco_e_commerce = {
           text: 500,
           line: 200,
           fontWeight: 700,
+          lineHeight: "2px",
         },
         hover: {
           background: 0,
@@ -7554,6 +7566,7 @@ export const lanaco_e_commerce = {
           text: 500,
           line: 200,
           fontWeight: 700,
+          lineHeight: "1px",
         },
         active: {
           background: 0,
