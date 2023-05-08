@@ -11,11 +11,11 @@ import {
 import { useUpdateEffect } from "react-use";
 
 const getHeight = (size) => {
-  if(size == "small") return "3.125rem";
-  if(size == "medium") return "3.375rem";
+  if (size == "small") return "3.125rem";
+  if (size == "medium") return "3.375rem";
 
   return "3.625rem";
-}
+};
 
 const Tab = styled.div`
   box-sizing: border-box;
@@ -26,7 +26,7 @@ const Tab = styled.div`
   justify-content: center;
   align-items: center;
 
-  height: ${props => getHeight(props.size)};
+  height: ${(props) => getHeight(props.size)};
   ${(props) =>
     getComponentTypographyCss(
       props.theme,
@@ -45,7 +45,8 @@ const Tab = styled.div`
       "text"
     )};
   background-color: ${(props) =>
-    props.type == "regular" || (props.type == "pill" && (props.disabled == true || props.active == false))
+    props.type == "regular" ||
+    (props.type == "pill" && (props.disabled == true || props.active == false))
       ? "transparent"
       : !props.disabled &&
         getColorRgbaValue(
@@ -57,7 +58,8 @@ const Tab = styled.div`
           "backgroundOpacity"
         )};
   ${(props) =>
-    props.type == "underline" && props.last == false &&
+    props.type == "underline" &&
+    props.last == false &&
     "border-right: 1px solid " +
       getColorRgbaValue(
         props.theme,
@@ -110,14 +112,15 @@ const Tab = styled.div`
       )};
   }
   &:active {
-    background: ${props => getColorRgbaValue(
-      props.theme,
-      getTypeName(props.type),
-      props.color,
-      "active",
-      "background",
-      "backgroundOpacity"
-    )};
+    background: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        getTypeName(props.type),
+        props.color,
+        "active",
+        "background",
+        "backgroundOpacity"
+      )};
   }
 `;
 
@@ -149,7 +152,11 @@ const getBottomLine = (theme, type, active, disabled, color, state) => {
   if (type == "pill") return;
 
   return `border-bottom: ${
-    !disabled && (active || state == "hover") ? "2px" : "1px"
+    !disabled && (active || state == "hover")
+      ? theme.components[(type === "regular" ? "TabRegular" : "TabUnderline")]
+          .default.enabled.lineHeight + ""
+      : theme.components[(type === "regular" ? "TabRegular" : "TabUnderline")]
+          .default.hover.lineHeight + ""
   } solid ${getColorRgbaValue(
     theme,
     getTypeName(type),

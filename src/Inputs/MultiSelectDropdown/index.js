@@ -279,7 +279,7 @@ MultiSelectDropdown.propTypes = {
   openMenuOnClick: PropTypes.bool,
   //----
   autoFocus: PropTypes.bool,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.any,
   noOptionsMessage: PropTypes.string,
   menuIsOpen: PropTypes.bool,
   /**
