@@ -3223,7 +3223,83 @@ export const lanaco_light = {
           text: 600,
         },
       },
-    }
+    },
+    Steps: {
+      default: {
+        palette: "gray",
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          lightBackground: 400,
+          fontWeight: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      red: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      green: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+    },
   },
 
   palette: {
@@ -6616,7 +6692,83 @@ export const lanaco_dark = {
           text: 300,
         },
       },
-    }
+    },
+    Steps: {
+      default: {
+        palette: "gray",
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          lightBackground: 400,
+          fontWeight: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      red: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      green: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+    },
   },
 
   palette: {
@@ -9877,7 +10029,83 @@ export const lanaco_e_commerce = {
           text: 600,
         },
       },
-    }
+    },
+    Steps: {
+      default: {
+        palette: "gray",
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          lightBackground: 400,
+          fontWeight: 600,
+        },
+      },
+      teal: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      blue: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      red: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      violet: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      yellow: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      green: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      gray: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+      neutral: {
+        enabled: {
+          text: 0,
+          background: 600,
+          activeBackground: 800,
+          fontWeight: 600,
+        },
+      },
+    },
   },
 
   palette: {

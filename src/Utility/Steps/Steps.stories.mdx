@@ -1,0 +1,188 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import Steps from "./index";
+import Step from "./Step";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta title="Utility/Steps" component={Steps} subcomponents={{ Step }} />
+
+# Steps
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { Steps, Step } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Default" args={{}}>
+    {(args) => (
+      <>
+        <Steps {...args}>
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+      </>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Vertical
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Vertical" args={{}}>
+    {(args) => (
+      <div style={{ display: "flex", gap: "16px" }}>
+        <Steps {...args} size="small" vertical>
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} size="medium" vertical>
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} size="large" vertical>
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+      </div>
+    )}
+  </Story>
+</Canvas>
+
+## Border Radius
+
+`borderRadius:` `regular` / `curved`
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Border Radius" args={{}}>
+    {(args) => (
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <Steps {...args} borderRadius="regular">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} borderRadius="curved">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+      </div>
+    )}
+  </Story>
+</Canvas>
+
+## With Symbols
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="With Symbols" args={{}}>
+    {(args) => (
+      <>
+        <Steps {...args} color="success">
+          <Step content={"✓"} title="Address" done />
+          <Step content={"✓"} title="Shipping" done />
+          <Step content={"?"} title="Payment" active />
+          <Step content={"✕"} title="Summary" />
+        </Steps>
+      </>
+    )}
+  </Story>
+</Canvas>
+
+## Sizes
+
+`size:` `small` / `medium` / `large`
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Sizes" args={{}}>
+    {(args) => (
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <Steps {...args} size="small">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} size="medium">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} size="large">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+      </div>
+    )}
+  </Story>
+</Canvas>
+
+## Colors
+
+`color:` `primary` / `secondary` / `success` / `warning` / `danger` / `information` / `neutral`
+
+<Canvas style={{ width: "100%" }}>
+  <Story name="Colors" args={{}}>
+    {(args) => (
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <Steps {...args} color="primary">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} color="secondary">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} color="success">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} color="warning">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} color="danger">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} color="information">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+        <Steps {...args} color="neutral">
+          <Step content="A" title="Step 1" done />
+          <Step content="B" title="Step 2" done />
+          <Step content="C" title="Step 3" active />
+          <Step content="D" title="Step 4" />
+        </Steps>
+      </div>
+    )}
+  </Story>
+</Canvas>

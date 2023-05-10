@@ -164,6 +164,8 @@ export { default as Pagination } from "./Utility/Pagination";
 
 export { Popover, PopoverTrigger, PopoverContent, PopoverHeading, PopoverClose } from "./Utility/Popover";
 
+export { Steps, Step } from "./Utility/Steps";
+
 export { default as SwipeableDrawer } from "./Utility/SwipeableDrawer";
 
 export { default as TreeMenu } from "./Utility/TreeMenu";
