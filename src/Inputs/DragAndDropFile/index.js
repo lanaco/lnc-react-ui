@@ -88,6 +88,7 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
         color,
         size,
         inputProps,
+        alwaysShowDropzone,
         ...rest
     } = props;
     const theme = useTheme();
@@ -180,8 +181,8 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
                 onChange={handleOnChange}
                 {...inputProps}
             />
-            {(!isDragActive && !displayDnD) && <PlusLabel><Icon icon={"plus"} size={size} /></PlusLabel>}
-            {(isDragActive || displayDnD) &&
+            {(!isDragActive && !displayDnD && !alwaysShowDropzone) && <PlusLabel><Icon icon={"plus"} size={size} /></PlusLabel>}
+            {(isDragActive || displayDnD || alwaysShowDropzone) &&
                 <>
                     <Icon icon={"upload"} size={size} className={"dnd-icon-lnc"} />
                     {dndFileText}
@@ -200,6 +201,7 @@ DragAndDropFile.defaultProps = {
     dndFileText: "Drag and drop file here or",
     showFileSize: false,
     showDnD: true,
+    alwaysShowDropzone: false,
     //------------------
     onChange: () => { },
     onFocus: () => { },
@@ -243,6 +245,7 @@ DragAndDropFile.propTypes = {
      * }
     */
     showDnD: PropTypes.bool,
+    alwaysShowDropzone: PropTypes.bool,
     //-------------------------
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
