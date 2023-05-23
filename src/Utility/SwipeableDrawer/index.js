@@ -11,41 +11,45 @@ import {
 import { useEffect } from "react";
 import { useRef } from "react";
 
-const getHeight = (direction, isOpen, isFullPage, drawerSize) => {
-  if (direction === "right" || direction === "left") return "100%";
-  if (isOpen && isFullPage) return "100%";
-  if (isOpen) return drawerSize;
+const getHeight = (direction, isOpen, isFullPage, drawerSize, unsetHeight) => {
+  if (direction === "right" || direction === "left") return "height: 100%;";
+  if (isOpen && isFullPage) return "height: 100%;";
+  if (isOpen && unsetHeight === true) return;
+  if (isOpen) return "height: " + drawerSize + ";";
 
-  return 0;
+  return "height: 0;";
 };
 
-const getWidth = (direction, isOpen, isFullPage, drawerSize) => {
-  if (direction === "top" || direction === "bottom") return "100%";
-  if (isOpen && isFullPage) return "100%";
-  if (isOpen) return drawerSize;
+const getWidth = (direction, isOpen, isFullPage, drawerSize, unsetWidth) => {
+  if (direction === "top" || direction === "bottom") return "width: 100%;";
+  if (isOpen && isFullPage) return "width: 100%;";
+  if (isOpen && unsetWidth === true) return;
+  if (isOpen) return "width: " + drawerSize + ";";
 
-  return 0;
+  return "width: 0;";
 };
 
 const StyledDrawer = styled.div`
   touch-action: none;
   overflow: auto;
   max-height: "100vh";
-  height: ${(props) =>
+  ${(props) =>
     getHeight(
       props.direction,
       props.isOpen,
       props.isFullPage,
-      props.drawerSize
-    )};
+      props.drawerSize,
+      props.unsetHeight
+    )}
   max-width: "100vw";
-  width: ${(props) =>
+  ${(props) =>
     getWidth(
       props.direction,
       props.isOpen,
       props.isFullPage,
-      props.drawerSize
-    )};
+      props.drawerSize,
+      props.unsetWidth
+    )}
   position: fixed;
   z-index: ${(props) => props.zIndex};
   ${(props) => (props.direction === "bottom" ? "bottom: 0" : "top: 0")};
@@ -96,6 +100,8 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
     closeOnClickOutside,
     closeOnSwipe,
     isFullPage,
+    unsetHeight,
+    unsetWidth,
     //----------------
     onClose,
     onOpen,
@@ -171,7 +177,7 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
     },
     isOpen() {
       return isOpen;
-    }
+    },
   }));
 
   const openDrawer = (event) => {
@@ -213,6 +219,8 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
           isOpen={isOpen}
           direction={direction}
           isFullPage={isFullPage}
+          unsetHeight={unsetHeight}
+          unsetWidth={unsetWidth}
           duration={duration}
           color={color}
           theme={theme}
@@ -225,6 +233,8 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
           {...rest}
         >
           {children}
+          askldjflkasjdflkasj ajdklfjals<div>jsldfjlaskdjf</div>
+          <div>asdjkfaklsdjfkl</div>
         </StyledDrawer>
       </StyledOverlay>
     </>
@@ -243,6 +253,8 @@ SwipeableDrawer.defaultProps = {
   isFullPage: false,
   drawerSize: "12.5rem",
   size: "small",
+  unsetHeight: false,
+  unsetWidth: false,
   //-------------------------
   onClose: () => {},
   onOpen: () => {},
@@ -272,6 +284,8 @@ SwipeableDrawer.propTypes = {
    * Determines whether drawer takes up the whole page
    */
   isFullPage: PropTypes.bool,
+  unsetHeight: PropTypes.bool,
+  unsetWidth: PropTypes.bool,
   //---------------------------------------------------------------
   onClose: PropTypes.func,
   onOpen: PropTypes.func,
