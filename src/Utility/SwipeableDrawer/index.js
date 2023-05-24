@@ -32,7 +32,7 @@ const getWidth = (direction, isOpen, isFullPage, drawerSize, unsetWidth) => {
 const StyledDrawer = styled.div`
   touch-action: none;
   overflow: auto;
-  max-height: "100vh";
+  max-height: ${(p) => (p.isOpen || p.unsetHeight === false ? "100vh" : 0)};
   ${(props) =>
     getHeight(
       props.direction,
@@ -41,7 +41,7 @@ const StyledDrawer = styled.div`
       props.drawerSize,
       props.unsetHeight
     )}
-  max-width: "100vw";
+  max-width: ${(p) => (p.isOpen || p.unsetWidth === false ? "100vw" : 0)};
   ${(props) =>
     getWidth(
       props.direction,
@@ -251,7 +251,15 @@ SwipeableDrawer.defaultProps = {
   isFullPage: false,
   drawerSize: "12.5rem",
   size: "small",
+  /**
+   * used to fit size of the drawer to the size of its child
+   * when position is top or bottom
+   */
   unsetHeight: false,
+  /**
+   * used to fit size of the drawer to the size of its child
+   * when position is right or left
+   */
   unsetWidth: false,
   //-------------------------
   onClose: () => {},
