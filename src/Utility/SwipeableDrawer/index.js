@@ -17,7 +17,6 @@ const getHeight = (direction, isOpen, isFullPage, drawerSize, unsetHeight) => {
   if (isOpen && unsetHeight === true) return;
   if (isOpen) return "height: " + drawerSize + ";";
 
-  // if(!isOpen) return "height: 0";
   return "height: 0;";
 };
 
