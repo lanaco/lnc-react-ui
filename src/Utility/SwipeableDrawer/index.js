@@ -233,8 +233,6 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
           {...rest}
         >
           {children}
-          askldjflkasjdflkasj ajdklfjals<div>jsldfjlaskdjf</div>
-          <div>asdjkfaklsdjfkl</div>
         </StyledDrawer>
       </StyledOverlay>
     </>
