@@ -32,7 +32,7 @@ const getWidth = (direction, isOpen, isFullPage, drawerSize, unsetWidth) => {
 const StyledDrawer = styled.div`
   touch-action: none;
   overflow: auto;
-  max-height: ${(p) => (p.isOpen || p.unsetHeight === false ? "100vh" : 0)};
+  max-height: ${(p) => (p.isOpen || p.unsetHeight === false ? "100dvh" : 0)};
   ${(props) =>
     getHeight(
       props.direction,
@@ -84,7 +84,7 @@ const StyledOverlay = styled.div`
   left: 0;
 
   height: ${(props) =>
-    props.isOpen === true && props.enableOverlay === true ? "100vh" : 0};
+    props.isOpen === true && props.enableOverlay === true ? "100dvh" : 0};
   width: ${(props) =>
     props.isOpen === true && props.enableOverlay === true ? "100vw" : 0};
   background-color: ${(props) => props.overlayColor};

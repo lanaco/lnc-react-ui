@@ -7,7 +7,7 @@ const StyledPageLayout = styled.section`
   display: flex;
   flex: auto;
   flex-direction: ${(props) => (props.hasSidebar ? "row" : "column")};
-  height: ${(props) => (props.isChild ? "100%" : "100vh")};
+  height: ${(props) => (props.isChild ? "100%" : "100dvh")};
 
   * {
     box-sizing: border-box;

@@ -14,22 +14,22 @@ const MODAL_PADDING = "1.5rem";
 const getMaxHeight = (size, header, footer) => {
   if (header && footer) {
     if (size == "FULL")
-      return `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT})`;
+      return `calc(100dvh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT})`;
 
-    return `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - ${MODAL_PADDING})`;
+    return `calc(100dvh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - ${MODAL_PADDING})`;
   } else if (header) {
-    if (size == "FULL") return `calc(100vh - ${HEADER_HEIGHT})`;
+    if (size == "FULL") return `calc(100dvh - ${HEADER_HEIGHT})`;
 
-    return `calc(100vh - ${HEADER_HEIGHT} - ${MODAL_PADDING})`;
+    return `calc(100dvh - ${HEADER_HEIGHT} - ${MODAL_PADDING})`;
   } else if (footer) {
-    if (size == "FULL") return `calc(100vh - ${FOOTER_HEIGHT})`;
+    if (size == "FULL") return `calc(100dvh - ${FOOTER_HEIGHT})`;
 
-    return `calc(100vh - ${FOOTER_HEIGHT} - ${MODAL_PADDING})`;
+    return `calc(100dvh - ${FOOTER_HEIGHT} - ${MODAL_PADDING})`;
   }
 
-  if (size == "FULL") return `100vh`;
+  if (size == "FULL") return `100dvh`;
 
-  return `calc(100vh - ${MODAL_PADDING})`;
+  return `calc(100dvh - ${MODAL_PADDING})`;
 };
 
 const getMaxWidth = (size) => {
@@ -92,7 +92,7 @@ const ModalContainer = styled(motion.div)`
     overflow: hidden;
     padding-top: 1rem;
   }
-  ${(props) => props.size.toUpperCase() == "FULL" && "height: 100vh"};
+  ${(props) => props.size.toUpperCase() == "FULL" && "height: 100dvh"};
 
   & .lnc-modal-content {
     display: flex;
