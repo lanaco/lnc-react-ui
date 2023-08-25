@@ -124,7 +124,13 @@ ButtonGroup.defaultProps = {
 };
 
 ButtonGroup.propTypes = {
-  borderRadius: PropTypes.oneOf(["regular", "curved"]),
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   className: PropTypes.string,
   style: PropTypes.object,
 };

@@ -14,14 +14,14 @@ const Container = styled.div`
   flex-wrap: wrap;
   width: 100%;
   gap: 0.375rem;
-  justify-content: ${props => props.horizontalAlignment};
+  justify-content: ${(props) => props.horizontalAlignment};
 `;
 
 const PaginationContainer = styled.div`
- & > .button-group-pagination-lnc {
-  width: 100%;
-  justify-content: ${props => props.horizontalAlignment};
- }
+  & > .button-group-pagination-lnc {
+    width: 100%;
+    justify-content: ${(props) => props.horizontalAlignment};
+  }
 `;
 
 //========================================================================
@@ -196,7 +196,11 @@ const Pagination = (props) => {
     );
 
   return (
-    <Container horizontalAlignment={horizontalAlignment} className={className} style={style}>
+    <Container
+      horizontalAlignment={horizontalAlignment}
+      className={className}
+      style={style}
+    >
       {renderButtons(borderRadius)}
     </Container>
   );
@@ -231,7 +235,13 @@ Pagination.propTypes = {
    *  Applies to the movement buttons and to the page number buttons
    */
   disabled: PropTypes.bool,
-  borderRadius: PropTypes.oneOf(["regular", "curved"]),
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   /**
    * Sets the button `type`
    */

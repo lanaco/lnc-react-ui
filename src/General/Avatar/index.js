@@ -77,7 +77,15 @@ const Avatar = React.forwardRef((props, ref) => {
       onBlur={onBlur}
       {...rest}
     >
-      {image ? <img src={image} /> : <Icon icon={icon} size={size} sizeInUnits={sizeInUnits ? `calc(${sizeInUnits} / 2)` : null}/>}
+      {image ? (
+        <img src={image} />
+      ) : (
+        <Icon
+          icon={icon}
+          size={size}
+          sizeInUnits={sizeInUnits ? `calc(${sizeInUnits} / 2)` : null}
+        />
+      )}
     </StyledAvatar>
   );
 });
@@ -108,7 +116,13 @@ Avatar.propTypes = {
    */
   sizeInUnits: PropTypes.string,
   disabled: PropTypes.bool,
-  borderRadius: PropTypes.oneOf(["slight", "regular", "edged", "curved", "none"]),
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   //---------------------------------------------------------------
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
@@ -124,7 +138,7 @@ Avatar.propTypes = {
     "warning",
     "danger",
     "information",
-    "neutral"
+    "neutral",
   ]),
 };
 
