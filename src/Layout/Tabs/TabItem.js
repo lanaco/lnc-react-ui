@@ -181,7 +181,7 @@ const TabItem = React.forwardRef((props, ref) => {
     onBlur,
     onClick,
     onKeyDown,
-    onItemClick,
+    itemClick,
     //----------------
     className,
     style,
@@ -196,8 +196,8 @@ const TabItem = React.forwardRef((props, ref) => {
   const themeProps = { theme, color, size, style, className };
 
   const handleClick = (e) => {
-    if (onItemClick && !disabled) onItemClick(index);
-    if (onClick) onClick(e);
+    if (itemClick && !disabled) itemClick(index);
+    if (onClick && !disabled) onClick(e);
   };
 
   useUpdateEffect(() => {
