@@ -163,6 +163,7 @@ Alert.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

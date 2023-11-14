@@ -43,6 +43,7 @@ TableHead.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

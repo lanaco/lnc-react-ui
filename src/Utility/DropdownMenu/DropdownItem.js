@@ -323,6 +323,7 @@ DropdownItem.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
   iconProps: PropTypes.any,
   size: PropTypes.oneOf(["small", "medium", "large"]),

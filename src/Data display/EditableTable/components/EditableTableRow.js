@@ -121,6 +121,7 @@ EditableTableRow.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

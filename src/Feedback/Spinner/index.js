@@ -136,6 +136,7 @@ Spinner.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

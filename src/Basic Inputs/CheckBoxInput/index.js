@@ -388,6 +388,7 @@ CheckBoxInput.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

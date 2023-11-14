@@ -6,8 +6,8 @@ import DropdownMenu from "../../Utility/DropdownMenu";
 import DropdownItem from "../../Utility/DropdownMenu/DropdownItem";
 import { useState } from "react";
 import Button from "../../General/Button";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Basic Inputs/Text Input" component={TextInput} />
 
@@ -124,20 +124,34 @@ Defining `size` with `small`, `medium` and `large` values.
 <Canvas>
   <Story name="Dropdown sufix" args={{}}>
     {(args) => {
-    const [currency, setCurrency] = useState("EUR");
-     return <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-        <TextInput
-          {...args}
-          style={{width: "250px"}}
-          prefix={
-            <DropdownMenu control={<div style={{cursor: "pointer", display: "flex", gap: "3px"}}>{currency}<Icon icon="angle-down"/></div>} widthFitContent={true} closeOnItemSelect={true} onItemSelected={(e, children) => setCurrency(children)}>
-              <DropdownItem>DOL</DropdownItem>
-              <DropdownItem>EUR</DropdownItem>
-            </DropdownMenu>
-          }
-          placeholder="Enter value"
-        />
-      </div>
+      const [currency, setCurrency] = useState("EUR");
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <TextInput
+            {...args}
+            style={{ width: "250px" }}
+            prefix={
+              <DropdownMenu
+                control={
+                  <div
+                    style={{ cursor: "pointer", display: "flex", gap: "3px" }}
+                  >
+                    {currency}
+                    <Icon icon="angle-down" />
+                  </div>
+                }
+                widthFitContent={true}
+                closeOnItemSelect={true}
+                onItemSelected={(e, children) => setCurrency(children)}
+              >
+                <DropdownItem>DOL</DropdownItem>
+                <DropdownItem>EUR</DropdownItem>
+              </DropdownMenu>
+            }
+            placeholder="Enter value"
+          />
+        </div>
+      );
     }}
   </Story>
 </Canvas>

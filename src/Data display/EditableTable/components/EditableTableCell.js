@@ -308,6 +308,7 @@ EditableTableCell.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

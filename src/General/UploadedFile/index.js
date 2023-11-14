@@ -220,6 +220,7 @@ UploadedFile.propTypes = {
     "disabled",
     "neutral",
     "information",
+    "gray"
   ]),
   fileIcon: PropTypes.string,
   cancelIcon: PropTypes.string,

@@ -359,6 +359,8 @@ DoubleRangeSlider.propTypes = {
     "warning",
     "disabled",
     "information",
+    "neutral",
+    "gray"
   ]),
 };
 

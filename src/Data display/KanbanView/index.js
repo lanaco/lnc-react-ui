@@ -299,6 +299,7 @@ KanbanView.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

@@ -32,11 +32,11 @@ const StyledCard = styled.div`
 const Actions = styled.div`
   display: flex;
 
-  & > *:first-child:not(:last-child) {
+  & > *:first-of-type:not(:last-of-type) {
     opacity: 0;
   }
 
-  & > *:first-child:not(:last-child):focus-visible {
+  & > *:first-of-type:not(:last-of-type):focus-visible {
     opacity: 1;
   }
 `;
@@ -167,6 +167,7 @@ KanbanCard.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };

@@ -170,6 +170,7 @@ CustomCheckbox.propTypes = {
     "success",
     "error",
     "warning",
+    "neutral",
     "gray",
   ]),
 };

@@ -137,6 +137,7 @@ TableSpecialLastRow.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

@@ -206,6 +206,7 @@ DragDropFiles.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
   dragAndDropFileProps: PropTypes.any,
   uploadedFileProps: PropTypes.any,

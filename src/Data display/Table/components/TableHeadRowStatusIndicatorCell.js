@@ -73,6 +73,7 @@ TableHeadRowStatusIndicatorCell.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

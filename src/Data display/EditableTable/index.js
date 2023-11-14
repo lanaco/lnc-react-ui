@@ -355,7 +355,7 @@ EditableTable.propTypes = {
     "warning",
     "gray",
     "white",
-    "black",
+    "neutral",
   ]),
 };
 

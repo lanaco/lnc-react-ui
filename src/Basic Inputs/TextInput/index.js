@@ -1,6 +1,6 @@
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import { debounce } from "lodash";
 import {
   StyledInput,
@@ -8,14 +8,13 @@ import {
   StyledSuffix,
   StyledWrapper,
 } from "./styledComponents";
-import { useEffectOnce, useUpdateEffect } from "react-use";
+import { useUpdateEffect } from "react-use";
 
 //===================================================
 
 const TextInput = React.forwardRef((props, ref) => {
   //
   const {
-    id,
     disabled,
     readOnly,
     defaultValue,
@@ -54,18 +53,18 @@ const TextInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-   if(value) setInputValue(e.target.value);
+    if (value || value === "") setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
   const handleFocus = (e) => {
     setFocused(true);
-    onFocus(e);
+    onFocus?.(e);
   };
 
   const handleBlur = (e) => {
     setFocused(false);
-    onBlur(e);
+    onBlur?.(e);
   };
 
   return (
@@ -91,46 +90,47 @@ const TextInput = React.forwardRef((props, ref) => {
       )}
       {
         // Controlled input and uncotrolled input must be differentiated because of usage of the value property
-        (value == null || value == "undefined") ?
-        <StyledInput
-        ref={ref}
-        type={type}
-        theme={theme}
-        color={color}
-        size={size}
-        placeholder={placeholder}
-        prefix={prefix}
-        suffix={suffix}
-        disabled={disabled}
-        readOnly={readOnly}
-        focused={focused}
-        defaultValue={defaultValue}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={onValueChange}
-        tabIndex={tabIndex}
-        {...rest}
-      />
-      :
-      <StyledInput
-        ref={ref}
-        type={type}
-        theme={theme}
-        color={color}
-        size={size}
-        placeholder={placeholder}
-        prefix={prefix}
-        suffix={suffix}
-        disabled={disabled}
-        readOnly={readOnly}
-        focused={focused}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={onValueChange}
-        tabIndex={tabIndex}
-        value={inputValue}
-        {...rest}
-      />
+        value == null || value == "undefined" ? (
+          <StyledInput
+            ref={ref}
+            type={type}
+            theme={theme}
+            color={color}
+            size={size}
+            placeholder={placeholder}
+            prefix={prefix}
+            suffix={suffix}
+            disabled={disabled}
+            readOnly={readOnly}
+            focused={focused}
+            defaultValue={defaultValue}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={onValueChange}
+            tabIndex={tabIndex}
+            {...rest}
+          />
+        ) : (
+          <StyledInput
+            ref={ref}
+            type={type}
+            theme={theme}
+            color={color}
+            size={size}
+            placeholder={placeholder}
+            prefix={prefix}
+            suffix={suffix}
+            disabled={disabled}
+            readOnly={readOnly}
+            focused={focused}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={onValueChange}
+            tabIndex={tabIndex}
+            value={inputValue}
+            {...rest}
+          />
+        )
       }
       {suffix && (
         <StyledSuffix
@@ -147,7 +147,6 @@ const TextInput = React.forwardRef((props, ref) => {
 });
 
 TextInput.defaultProps = {
-  id: "",
   defaultValue: "",
   disabled: false,
   readOnly: false,
@@ -209,6 +208,8 @@ TextInput.propTypes = {
     "danger",
     "warning",
     "information",
+    "neutral",
+    "gray",
   ]),
 };
 

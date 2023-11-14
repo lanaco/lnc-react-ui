@@ -264,6 +264,7 @@ DragAndDropFile.propTypes = {
         "warning",
         "information",
         "neutral",
+        "gray"
     ]),
     inputProps: PropTypes.any,
 };
