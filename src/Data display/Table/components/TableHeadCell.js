@@ -303,6 +303,7 @@ TableHeadCell.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

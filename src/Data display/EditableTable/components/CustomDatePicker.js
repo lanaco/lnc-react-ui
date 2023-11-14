@@ -104,6 +104,7 @@ CustomDatePicker.propTypes = {
     "success",
     "error",
     "warning",
+    "neutral",
     "gray",
   ]),
 };

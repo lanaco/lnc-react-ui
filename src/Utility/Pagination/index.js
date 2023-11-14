@@ -294,6 +294,7 @@ Pagination.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

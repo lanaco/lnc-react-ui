@@ -40,7 +40,7 @@ const Container = styled.div`
     outline: none;
   }
 
-  & button:not(:first-of-type):not(:last-child) {
+  & button:not(:first-of-type):not(:last-of-type) {
     border-radius: 0;
   }
 
@@ -63,7 +63,7 @@ const Container = styled.div`
       )};
   }
 
-  & button:last-child {
+  & button:last-of-type {
     border-radius: ${(props) =>
       `0 ${props.borderRadius} ${props.borderRadius} 0`};
     border-right: ${(props) =>
@@ -89,7 +89,7 @@ const Container = styled.div`
       )};
   }
 
-  & button:not(:first-of-type):not(:last-child):not([data-type="filled"]) {
+  & button:not(:first-of-type):not(:last-of-type):not([data-type="filled"]) {
     border-right: ${(props) =>
       "0.0625rem solid " +
       getColorRgbaValue(

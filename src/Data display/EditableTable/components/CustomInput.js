@@ -183,6 +183,7 @@ CustomInput.propTypes = {
     "success",
     "error",
     "warning",
+    "neutral",
     "gray",
   ]),
 };

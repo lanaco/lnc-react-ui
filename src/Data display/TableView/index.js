@@ -304,6 +304,7 @@ TableView.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

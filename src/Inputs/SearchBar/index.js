@@ -346,6 +346,7 @@ SearchBar.propTypes = {
     "gray",
     "background",
     "transparent",
+    "neutral",
   ]),
 };
 

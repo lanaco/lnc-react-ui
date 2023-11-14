@@ -880,6 +880,7 @@ Table.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

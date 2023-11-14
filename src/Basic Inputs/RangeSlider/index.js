@@ -323,6 +323,7 @@ RangeSliderInput.propTypes = {
     "disabled",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

@@ -258,6 +258,8 @@ FileInput.propTypes = {
     "danger",
     "warning",
     "information",
+    "neutral",
+    "gray"
   ]),
 };
 

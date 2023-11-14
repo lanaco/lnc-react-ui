@@ -58,6 +58,7 @@ TableHeadRow.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

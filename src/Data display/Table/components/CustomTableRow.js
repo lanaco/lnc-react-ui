@@ -74,6 +74,7 @@ CustomTableRow.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

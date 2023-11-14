@@ -46,6 +46,7 @@ TableBody.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

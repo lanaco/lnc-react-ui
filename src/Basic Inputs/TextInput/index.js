@@ -15,7 +15,7 @@ import { useEffectOnce, useUpdateEffect } from "react-use";
 const TextInput = React.forwardRef((props, ref) => {
   //
   const {
-    id,
+    // id,
     disabled,
     readOnly,
     defaultValue,
@@ -42,7 +42,9 @@ const TextInput = React.forwardRef((props, ref) => {
   const [inputValue, setInputValue] = useState(value);
   const [focused, setFocused] = useState(false);
 
-  useUpdateEffect(() => setInputValue(value), [value]);
+  useUpdateEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -50,22 +52,22 @@ const TextInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    if (onChange) onChange(e, value);
+    if (onChange) onChange?.(e, value);
   };
 
   const onValueChange = (e) => {
-   if(value) setInputValue(e.target.value);
+    if (value || value === "") setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
   const handleFocus = (e) => {
     setFocused(true);
-    onFocus(e);
+    onFocus?.(e);
   };
 
   const handleBlur = (e) => {
     setFocused(false);
-    onBlur(e);
+    onBlur?.(e);
   };
 
   return (
@@ -89,49 +91,50 @@ const TextInput = React.forwardRef((props, ref) => {
           {prefix}
         </StyledPrefix>
       )}
-      {
+      {/* {
         // Controlled input and uncotrolled input must be differentiated because of usage of the value property
-        (value == null || value == "undefined") ?
-        <StyledInput
-        ref={ref}
-        type={type}
-        theme={theme}
-        color={color}
-        size={size}
-        placeholder={placeholder}
-        prefix={prefix}
-        suffix={suffix}
-        disabled={disabled}
-        readOnly={readOnly}
-        focused={focused}
-        defaultValue={defaultValue}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={onValueChange}
-        tabIndex={tabIndex}
-        {...rest}
-      />
-      :
-      <StyledInput
-        ref={ref}
-        type={type}
-        theme={theme}
-        color={color}
-        size={size}
-        placeholder={placeholder}
-        prefix={prefix}
-        suffix={suffix}
-        disabled={disabled}
-        readOnly={readOnly}
-        focused={focused}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={onValueChange}
-        tabIndex={tabIndex}
-        value={inputValue}
-        {...rest}
-      />
-      }
+        value == null || value == "undefined" ? (
+          <StyledInput
+            ref={ref}
+            type={type}
+            theme={theme}
+            color={color}
+            size={size}
+            placeholder={placeholder}
+            prefix={prefix}
+            suffix={suffix}
+            disabled={disabled}
+            readOnly={readOnly}
+            focused={focused}
+            defaultValue={defaultValue}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={onValueChange}
+            tabIndex={tabIndex}
+            {...rest}
+          />
+        ) : ( */}
+          <StyledInput
+            ref={ref}
+            type={type}
+            theme={theme}
+            color={color}
+            size={size}
+            placeholder={placeholder}
+            prefix={prefix}
+            suffix={suffix}
+            disabled={disabled}
+            readOnly={readOnly}
+            focused={focused}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={onValueChange}
+            tabIndex={tabIndex}
+            value={inputValue}
+            {...rest}
+          />
+        {/* ) */}
+      {/* } */}
       {suffix && (
         <StyledSuffix
           theme={theme}
@@ -147,18 +150,18 @@ const TextInput = React.forwardRef((props, ref) => {
 });
 
 TextInput.defaultProps = {
-  id: "",
-  defaultValue: "",
-  disabled: false,
-  readOnly: false,
+  // id: "",
+  // defaultValue: "",
+  // disabled: false,
+  // readOnly: false,
   debounceTime: 180,
-  placeholder: "",
-  type: "text",
-  tabIndex: 0,
-  //----------------
-  onChange: () => {},
-  onBlur: () => {},
-  onFocus: () => {},
+  // placeholder: "",
+  // type: "text",
+  // tabIndex: 0,
+  // //----------------
+  // onChange: () => {},
+  // onBlur: () => {},
+  // onFocus: () => {},
   //----------------
   className: "",
   style: {},
@@ -209,6 +212,8 @@ TextInput.propTypes = {
     "danger",
     "warning",
     "information",
+    "neutral",
+    "gray",
   ]),
 };
 

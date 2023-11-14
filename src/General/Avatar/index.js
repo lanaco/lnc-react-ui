@@ -124,7 +124,8 @@ Avatar.propTypes = {
     "warning",
     "danger",
     "information",
-    "neutral"
+    "neutral",
+    "gray"
   ]),
 };
 

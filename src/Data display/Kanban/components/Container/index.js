@@ -93,11 +93,11 @@ const Header = styled.div`
 const Actions = styled.div`
   display: flex;
 
-  & > *:first-child:not(:last-child) {
+  & > *:first-of-type:not(:last-of-type) {
     opacity: 0;
   }
 
-  & > *:first-child:not(:last-child):focus-visible {
+  & > *:first-of-type:not(:last-of-type):focus-visible {
     opacity: 1;
   }
 `;

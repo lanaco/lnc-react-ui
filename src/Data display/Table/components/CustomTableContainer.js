@@ -52,6 +52,7 @@ CustomTableContainer.propTypes = {
     "gray",
     "white",
     "black",
+    "gray"
   ]),
 };
 

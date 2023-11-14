@@ -65,7 +65,7 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    if(value) setInputValue(e.target.value);
+    if (value || value === "") setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
@@ -197,6 +197,8 @@ TextAreaInput.propTypes = {
     "danger",
     "warning",
     "information",
+    "neutral",
+    "gray"
   ]),
 };
 

@@ -104,6 +104,7 @@ TableRowStatusIndicatorCell.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

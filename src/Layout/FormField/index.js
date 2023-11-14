@@ -79,6 +79,8 @@ FormField.propTypes = {
     "danger",
     "warning",
     "information",
+    "neutral",
+    "gray"
   ]),
   style: PropTypes.object,
   className: PropTypes.string,
