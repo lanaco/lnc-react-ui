@@ -61,7 +61,13 @@ Surface.defaultProps = {
 };
 
 Surface.propTypes = {
-  borderRadius: PropTypes.oneOf(["regular", "slight", "none"]),
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   boxShadow: PropTypes.oneOf(["xs", "s", "m", "l", "xl", "xxl"]),
   paddign: PropTypes.oneOf(["xs", "s", "m", "l", "xl", "xxl"]),
   fullWidth: PropTypes.bool,

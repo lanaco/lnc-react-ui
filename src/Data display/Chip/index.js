@@ -177,8 +177,8 @@ const Chip = React.forwardRef((props, ref) => {
         <i className={getIconClass(leadingIcon)} onClick={onLeadingIconClick} />
       )}
       <>
-      {label}
-      {children}
+        {label}
+        {children}
       </>
       {trailingIcon && (
         <i
@@ -213,7 +213,13 @@ Chip.propTypes = {
   leadingIcon: PropTypes.string,
   trailingIcon: PropTypes.string,
   avatar: PropTypes.bool,
-  borderRadius: PropTypes.oneOf(["regular", "curved"]),
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
   //---------------------------------------------------------------

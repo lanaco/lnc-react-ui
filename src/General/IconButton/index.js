@@ -156,7 +156,13 @@ Button.defaultProps = {
 Button.propTypes = {
   icon: PropTypes.string,
   iconStyle: PropTypes.oneOf(["regular", "solid"]),
-  borderRadius: PropTypes.oneOf(["regular", "curved"]),
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   /**
    * Different styles
    */

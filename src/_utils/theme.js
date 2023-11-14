@@ -2566,7 +2566,7 @@ export const lanaco_light = {
         palette: "gray",
         enabled: {
           background: 0,
-          removeIcon: 400
+          removeIcon: 400,
         },
         hover: {
           background: 100,
@@ -3036,7 +3036,7 @@ export const lanaco_light = {
           border: 900,
           borderOpacity: 100,
         },
-      }
+      },
     },
     Kanban: {
       default: {
@@ -3044,7 +3044,7 @@ export const lanaco_light = {
         enabled: {
           background: 100,
         },
-      }
+      },
     },
     KanbanHeader: {
       default: {
@@ -3223,7 +3223,7 @@ export const lanaco_light = {
           text: 600,
         },
       },
-    }
+    },
   },
 
   palette: {
@@ -5959,7 +5959,7 @@ export const lanaco_dark = {
         palette: "gray",
         enabled: {
           background: 800,
-          removeIcon: 400
+          removeIcon: 400,
         },
         hover: {
           background: 700,
@@ -6429,7 +6429,7 @@ export const lanaco_dark = {
           border: 0,
           borderOpacity: 100,
         },
-      }
+      },
     },
     Kanban: {
       default: {
@@ -6437,7 +6437,7 @@ export const lanaco_dark = {
         enabled: {
           background: 700,
         },
-      }
+      },
     },
     KanbanHeader: {
       default: {
@@ -6616,7 +6616,7 @@ export const lanaco_dark = {
           text: 300,
         },
       },
-    }
+    },
   },
 
   palette: {
@@ -8560,12 +8560,9 @@ export const lanaco_e_commerce = {
         enabled: {
           text: 600,
         },
-        hover: {
-        },
-        focus: {
-        },
-        active: {
-        },
+        hover: {},
+        focus: {},
+        active: {},
         disabled: {
           text: 400,
         },
@@ -9358,7 +9355,7 @@ export const lanaco_e_commerce = {
         palette: "gray",
         enabled: {
           background: 0,
-          removeIcon: 400
+          removeIcon: 400,
         },
         hover: {
           background: 100,
@@ -9690,7 +9687,7 @@ export const lanaco_e_commerce = {
           border: 900,
           borderOpacity: 100,
         },
-      }
+      },
     },
     Kanban: {
       default: {
@@ -9698,7 +9695,7 @@ export const lanaco_e_commerce = {
         enabled: {
           background: 100,
         },
-      }
+      },
     },
     KanbanHeader: {
       default: {
@@ -9877,7 +9874,7 @@ export const lanaco_e_commerce = {
           text: 600,
         },
       },
-    }
+    },
   },
 
   palette: {
@@ -9972,7 +9969,7 @@ export const lanaco_e_commerce = {
     },
     turquoise: {
       0: "#FFFFFF",
-      100: "#2EE8B6"
+      100: "#2EE8B6",
     },
     yellow: {
       0: "#FFFFFF",
@@ -10065,10 +10062,6 @@ export const lanaco_e_commerce = {
   },
 };
 
-const themes = [
-  lanaco_light,
-  lanaco_dark,
-  lanaco_e_commerce
-];
+const themes = [lanaco_light, lanaco_dark, lanaco_e_commerce];
 
 export { themes };
