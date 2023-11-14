@@ -6,8 +6,8 @@ import { useTheme } from "@emotion/react";
 const TabsStyled = styled.div`
   background: transparent;
   display: flex;
-  justify-content: ${props => props.fullWidth ? 'space-evenly' : 'none'};
-  gap: ${props => props.type == "pill" ? '10px' : '0'};
+  justify-content: ${(props) => (props.fullWidth ? "space-evenly" : "none")};
+  gap: ${(props) => (props.type == "pill" ? "10px" : "0")};
   box-sizing: border-box;
 `;
 
@@ -31,12 +31,25 @@ const Tabs = React.forwardRef((props, ref) => {
 
   const themeProps = { theme, color, size, style, className };
 
-  const onItemClick = (index) => {
-     setActiveIndex(index);
-  }
+  const handleItemClick = (index) => {
+    setActiveIndex(index);
+  };
 
-  const childrenWithAdjustedProps = React.Children.map(children, (child, index) =>
-    React.cloneElement(child, { type: type, first: index == 0, last: index == React.Children.toArray(children).length - 1, fullWidth: fullWidth, index: index, onItemClick: onItemClick, activeIndex: activeIndex, color: color, size: size, fullWidth: fullWidth })
+  const childrenWithAdjustedProps = React.Children.map(
+    children,
+    (child, index) =>
+      React.cloneElement(child, {
+        type: type,
+        first: index == 0,
+        last: index == React.Children.toArray(children).length - 1,
+        fullWidth: fullWidth,
+        index: index,
+        itemClick: handleItemClick,
+        activeIndex: activeIndex,
+        color: color,
+        size: size,
+        fullWidth: fullWidth,
+      })
   );
 
   return (
@@ -76,7 +89,7 @@ Tabs.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };
