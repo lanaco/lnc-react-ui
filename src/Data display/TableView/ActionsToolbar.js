@@ -233,7 +233,8 @@ ActionsToolbar.propTypes = {
     "danger",
     "warning",
     "information",
-    "neutral"
+    "neutral",
+    "gray"
   ]),
 };
 

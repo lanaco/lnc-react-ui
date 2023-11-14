@@ -66,7 +66,7 @@ const PasswordInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    if(value) setInputValue(e.target.value);
+    if (value || value === "") setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
@@ -216,6 +216,7 @@ PasswordInput.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

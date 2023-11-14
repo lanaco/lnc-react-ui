@@ -132,6 +132,7 @@ DateInput.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

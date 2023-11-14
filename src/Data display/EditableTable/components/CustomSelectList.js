@@ -154,6 +154,7 @@ CustomSelectList.propTypes = {
     "success",
     "error",
     "warning",
+    "neutral",
     "gray",
   ]),
 };

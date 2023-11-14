@@ -197,6 +197,7 @@ TimeInput.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

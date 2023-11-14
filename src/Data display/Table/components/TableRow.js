@@ -146,6 +146,7 @@ TableRow.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

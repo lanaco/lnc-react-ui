@@ -355,6 +355,7 @@ MultiSelectDropdownLookup.propTypes = {
         "danger",
         "information",
         "neutral",
+        "gray"
     ]),
     size: PropTypes.oneOf(["small", "medium", "large"]),
 };

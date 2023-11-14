@@ -291,7 +291,7 @@ Dropdown.propTypes = {
   /**
    * initial value of the control
    */
-  defaultValue: PropTypes.string,
+  defaultValue: PropTypes.any,
   /**
    * initial value of the search input
    */
@@ -325,6 +325,7 @@ Dropdown.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };

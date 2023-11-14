@@ -159,6 +159,7 @@ TableCell.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

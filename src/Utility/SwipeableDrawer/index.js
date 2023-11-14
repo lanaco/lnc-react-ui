@@ -315,6 +315,7 @@ SwipeableDrawer.propTypes = {
     "danger",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

@@ -112,6 +112,7 @@ RadioGroup.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
   radioProps: PropTypes.any,
 };

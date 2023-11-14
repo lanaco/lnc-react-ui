@@ -109,6 +109,7 @@ TableHeadSelectionCell.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
 };
 

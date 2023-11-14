@@ -311,6 +311,7 @@ RadioInput.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray"
   ]),
   innerColor: PropTypes.oneOf([
     "primary",
@@ -320,6 +321,7 @@ RadioInput.propTypes = {
     "warning",
     "information",
     "neutral",
+    "gray",
     "white",
     "transparent",
   ]),
