@@ -1,6 +1,6 @@
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import { debounce } from "lodash";
 import {
   StyledInput,
@@ -41,9 +41,7 @@ const TextInput = React.forwardRef((props, ref) => {
   const [inputValue, setInputValue] = useState(value);
   const [focused, setFocused] = useState(false);
 
-  useUpdateEffect(() => {
-    setInputValue(value);
-  }, [value]);
+  useUpdateEffect(() => setInputValue(value), [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -51,7 +49,7 @@ const TextInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    if (onChange) onChange?.(e, value);
+    if (onChange) onChange(e, value);
   };
 
   const onValueChange = (e) => {
@@ -149,7 +147,17 @@ const TextInput = React.forwardRef((props, ref) => {
 });
 
 TextInput.defaultProps = {
+  defaultValue: "",
+  disabled: false,
+  readOnly: false,
   debounceTime: 180,
+  placeholder: "",
+  type: "text",
+  tabIndex: 0,
+  //----------------
+  onChange: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
   //----------------
   className: "",
   style: {},
