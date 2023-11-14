@@ -8,14 +8,13 @@ import {
   StyledSuffix,
   StyledWrapper,
 } from "./styledComponents";
-import { useEffectOnce, useUpdateEffect } from "react-use";
+import { useUpdateEffect } from "react-use";
 
 //===================================================
 
 const TextInput = React.forwardRef((props, ref) => {
   //
   const {
-    // id,
     disabled,
     readOnly,
     defaultValue,
@@ -91,7 +90,7 @@ const TextInput = React.forwardRef((props, ref) => {
           {prefix}
         </StyledPrefix>
       )}
-      {/* {
+      {
         // Controlled input and uncotrolled input must be differentiated because of usage of the value property
         value == null || value == "undefined" ? (
           <StyledInput
@@ -113,7 +112,7 @@ const TextInput = React.forwardRef((props, ref) => {
             tabIndex={tabIndex}
             {...rest}
           />
-        ) : ( */}
+        ) : (
           <StyledInput
             ref={ref}
             type={type}
@@ -133,8 +132,8 @@ const TextInput = React.forwardRef((props, ref) => {
             value={inputValue}
             {...rest}
           />
-        {/* ) */}
-      {/* } */}
+        )
+      }
       {suffix && (
         <StyledSuffix
           theme={theme}
@@ -150,18 +149,7 @@ const TextInput = React.forwardRef((props, ref) => {
 });
 
 TextInput.defaultProps = {
-  // id: "",
-  // defaultValue: "",
-  // disabled: false,
-  // readOnly: false,
   debounceTime: 180,
-  // placeholder: "",
-  // type: "text",
-  // tabIndex: 0,
-  // //----------------
-  // onChange: () => {},
-  // onBlur: () => {},
-  // onFocus: () => {},
   //----------------
   className: "",
   style: {},
