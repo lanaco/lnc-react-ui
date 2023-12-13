@@ -1,7 +1,7 @@
 {
   "name": "@lanaco/lnc-react-ui",
   "type": "module",
-  "version": "3.11.3",
+  "version": "3.11.4",
   "description": "component library",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -43,6 +43,7 @@
     "@storybook/react": "^6.5.9",
     "@storybook/theming": "^6.5.9",
     "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
     "eslint-plugin-react": "^7.24.0",
     "jest": "^27.5.1",
