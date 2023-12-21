@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import ActionsToolbar from './ActionsToolbar';
-import { useState } from 'react';
-import Pagination from '../../Utility/Pagination/index';
-import { getCustomRender, renderCustomElement } from '../../_utils/utils';
-import Table from '../Table';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import ActionsToolbar from "./ActionsToolbar";
+import { useState } from "react";
+import Pagination from "../../Utility/Pagination/index";
+import { getCustomRender, renderCustomElement } from "../../_utils/utils";
+import Table from "../Table";
 
 const StyledView = styled.div`
   & .table-view-pagination-lnc {
@@ -88,7 +88,7 @@ const TableView = React.forwardRef((props, ref) => {
 
   const handleRowClick = (e, rowData) => {
     //QUICKFIX ignore when click is on checkbox (row selection checkbox)
-    if (e.target?.type !== 'checkbox' && e.target?.className !== 'checkmark') {
+    if(e.target?.type !== "checkbox" && e.target?.className !== "checkmark") {
       if (tableProps?.onRowClick) tableProps.onRowClick(e, rowData);
 
       handleDetails(rowData, e);
@@ -122,18 +122,18 @@ const TableView = React.forwardRef((props, ref) => {
   const renderToolbar = () => {
     return (
       renderCustomElement(
-        getCustomRender('ACTIONS_TOOLBAR', children),
+        getCustomRender("ACTIONS_TOOLBAR", children),
         {
           ...toolbarProps,
           size: toolbarProps?.size ? toolbarProps.size : size,
           color: toolbarProps?.color ? toolbarProps.color : color,
-          className: 'table-view-toolbar-lnc ' + toolbarProps?.className,
+          className: "table-view-toolbar-lnc " + toolbarProps?.className,
         },
         children
       ) || (
         <ActionsToolbar
           {...toolbarProps}
-          className={'table-view-toolbar-lnc ' + toolbarProps?.className}
+          className={"table-view-toolbar-lnc " + toolbarProps?.className}
           size={toolbarProps?.size ? toolbarProps.size : size}
           color={toolbarProps?.color ? toolbarProps.color : color}
           selectedRowsLength={selectedRows?.length ? selectedRows.length : 0}
@@ -149,12 +149,12 @@ const TableView = React.forwardRef((props, ref) => {
   const renderTable = () => {
     return (
       renderCustomElement(
-        getCustomRender('TABLE', children),
+        getCustomRender("TABLE", children),
         {
           ...tableProps,
           size: tableProps?.size ? tableProps.size : size,
           color: tableProps?.color ? tableProps.color : color,
-          className: 'table-view-pagination-lnc ' + tableProps?.className,
+          className: "table-view-pagination-lnc " + tableProps?.className,
         },
         children
       ) || (
@@ -162,7 +162,9 @@ const TableView = React.forwardRef((props, ref) => {
           size={tableProps?.size ? tableProps.size : size}
           color={tableProps?.color ? tableProps.color : color}
           EnableSelection={(rowsSingleSelect || rowsMultiSelect) && readOnly == false}
-          onSelectRow={(e, row, isSelected) => handleSelectedRow(row, !isSelected)}
+          onSelectRow={(e, row, isSelected) =>
+            handleSelectedRow(row, !isSelected)
+          }
           SelectedData={selectedRows}
           onRowClick={(e, rowData) => handleRowClick(e, rowData)}
           {...tableProps}
@@ -174,12 +176,12 @@ const TableView = React.forwardRef((props, ref) => {
   const renderPagination = () => {
     return (
       renderCustomElement(
-        getCustomRender('PAGINATION', children),
+        getCustomRender("PAGINATION", children),
         {
           ...paginationProps,
           size: paginationProps?.size ? paginationProps.size : size,
           color: paginationProps?.color ? paginationProps.color : color,
-          className: 'table-view-pagination-lnc ' + paginationProps?.className,
+          className: "table-view-pagination-lnc " + paginationProps?.className,
         },
         children
       ) || (
@@ -187,7 +189,7 @@ const TableView = React.forwardRef((props, ref) => {
           {...paginationProps}
           size={paginationProps?.size ? paginationProps.size : size}
           color={paginationProps?.color ? paginationProps.color : color}
-          className={'table-view-pagination-lnc ' + paginationProps?.className}
+          className={"table-view-pagination-lnc " + paginationProps?.className}
           onPageChange={handlePageChange}
         />
       )
@@ -204,7 +206,7 @@ const TableView = React.forwardRef((props, ref) => {
 });
 
 TableView.defaultProps = {
-  __TYPE__: 'TABLE_VIEW',
+  __TYPE__: "TABLE_VIEW",
   tableProps: {},
   tableProps: {},
   actionsToolbarProps: {},
@@ -232,8 +234,8 @@ TableView.defaultProps = {
   onPageChange: (page) => {},
   //-----------------------
   style: {},
-  size: 'small',
-  color: 'primary',
+  size: "small",
+  color: "primary",
 };
 
 TableView.propTypes = {
@@ -293,16 +295,16 @@ TableView.propTypes = {
   //------------------------------------------------------------
   className: PropTypes.string,
   style: PropTypes.object,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'success',
-    'danger',
-    'warning',
-    'information',
-    'neutral',
-    'gray',
+    "primary",
+    "secondary",
+    "success",
+    "danger",
+    "warning",
+    "information",
+    "neutral",
+    "gray"
   ]),
 };
 

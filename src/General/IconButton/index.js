@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useTheme } from '@emotion/react';
-import '../../Base/fontawesome/css/fontawesome.css';
+import React from "react";
+import PropTypes from "prop-types";
+import { useTheme } from "@emotion/react";
+import "../../Base/fontawesome/css/fontawesome.css";
 import {
   FilledButton,
   TintedButton,
   OutlineButton,
   BasicButton,
   StyledIcon,
-} from './styledComponents';
+} from "./styledComponents";
 
 //=================================================
 
@@ -46,17 +46,16 @@ const Button = React.forwardRef((props, ref) => {
   };
 
   const getIconClass = () => {
-    var style = iconStyle === 'solid' ? 'fas' : 'far';
+    var style = iconStyle === "solid" ? "fas" : "far";
     return `${style} fa-${icon} fa-fw`;
   };
 
-  const renderIcon = () =>
-    React.isValidElement(icon) ? icon : <StyledIcon className={getIconClass()} />;
+  const renderIcon = () => React.isValidElement(icon) ? icon : <StyledIcon className={getIconClass()} />;
 
-  if (btnType === 'filled') {
+  if (btnType === "filled") {
     return (
       <FilledButton
-        data-type='filled'
+        data-type="filled"
         {...themeProps}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -70,10 +69,10 @@ const Button = React.forwardRef((props, ref) => {
     );
   }
 
-  if (btnType === 'tinted') {
+  if (btnType === "tinted") {
     return (
       <TintedButton
-        data-type='tinted'
+        data-type="tinted"
         {...themeProps}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -86,10 +85,10 @@ const Button = React.forwardRef((props, ref) => {
     );
   }
 
-  if (btnType === 'outline') {
+  if (btnType === "outline") {
     return (
       <OutlineButton
-        data-type='outline'
+        data-type="outline"
         {...themeProps}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -102,10 +101,10 @@ const Button = React.forwardRef((props, ref) => {
     );
   }
 
-  if (btnType === 'basic') {
+  if (btnType === "basic") {
     return (
       <BasicButton
-        data-type='basic'
+        data-type="basic"
         {...themeProps}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -120,7 +119,7 @@ const Button = React.forwardRef((props, ref) => {
 
   return (
     <FilledButton
-      data-type='filled'
+      data-type="filled"
       size={size}
       {...themeProps}
       onFocus={onFocus}
@@ -136,9 +135,9 @@ const Button = React.forwardRef((props, ref) => {
 
 Button.defaultProps = {
   icon: null,
-  iconStyle: 'solid',
-  borderRadius: 'regular',
-  btnType: 'filled',
+  iconStyle: "solid",
+  borderRadius: "regular",
+  btnType: "filled",
   disabled: false,
   tabIndex: 0,
   //-------------------------
@@ -148,18 +147,24 @@ Button.defaultProps = {
   onKeyDown: () => {},
   //-------------------------
   style: {},
-  color: 'primary',
-  size: 'small',
+  color: "primary",
+  size: "small",
 };
 
 Button.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  iconStyle: PropTypes.oneOf(['regular', 'solid']),
-  borderRadius: PropTypes.oneOf(['slight', 'regular', 'edged', 'curved', 'none']),
+  iconStyle: PropTypes.oneOf(["regular", "solid"]),
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   /**
    * Different styles
    */
-  btnType: PropTypes.oneOf(['filled', 'tinted', 'outline', 'basic']),
+  btnType: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
   //---------------------------------------------------------------
@@ -171,16 +176,16 @@ Button.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'success',
-    'warning',
-    'danger',
-    'information',
-    'neutral',
-    'gray',
+    "primary",
+    "secondary",
+    "success",
+    "warning",
+    "danger",
+    "information",
+    "neutral",
+    "gray"
   ]),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
 export default Button;

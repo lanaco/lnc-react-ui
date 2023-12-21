@@ -1,18 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { useTheme } from '@emotion/react';
-import Icon from '../../General/Icon';
+import React, { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import { useTheme } from "@emotion/react";
+import Icon from "../../General/Icon";
 import {
   getColorRgbaValue,
   getComponentPropValue,
   getComponentTypographyCss,
   getDisabledStateCss,
-} from '../../_utils/utils';
+} from "../../_utils/utils";
 
 const Item = styled.div`
   box-sizing: border-box;
-  cursor: ${(props) => (props.disabled == false ? 'pointer' : 'context-menu')};
+  cursor: ${(props) => (props.disabled == false ? "pointer" : "context-menu")};
   width: 100%;
   border-radius: 6px;
   display: flex;
@@ -20,20 +20,40 @@ const Item = styled.div`
   min-height: 2.25rem;
   gap: 0.563rem;
   padding: 0.563rem;
-  color: ${(props) => getColorRgbaValue(props.theme, 'MenuItem', props.color, 'enabled', 'text')};
-  ${(props) => getComponentTypographyCss(props.theme, 'MenuItem', props.size, 'enabled')};
+  color: ${props => getColorRgbaValue(
+    props.theme,
+    "MenuItem",
+    props.color,
+    "enabled",
+    "text"
+  )};
+  ${(props) =>
+    getComponentTypographyCss(props.theme, "MenuItem", props.size, "enabled")};
   & .menu-icon-lnc {
     color: ${(props) =>
       props.isActive && props.disabled == false
-        ? getColorRgbaValue(props.theme, 'MenuItem', props.color, 'focus', 'icon')
-        : getColorRgbaValue(props.theme, 'MenuItem', props.color, 'enabled', 'icon')};
+        ? getColorRgbaValue(
+            props.theme,
+            "MenuItem",
+            props.color,
+            "focus",
+            "icon"
+          )
+        : getColorRgbaValue(
+            props.theme,
+            "MenuItem",
+            props.color,
+            "enabled",
+            "icon"
+          )};
 
     ${(props) => props.disabled && getDisabledStateCss(props.theme)};
     background: transparent;
   }
   & .sub-menu-icon-lnc {
     margin-left: auto;
-    transform: ${(props) => (props.showNested ? 'rotate(180deg)' : 'rotate(0)')};
+    transform: ${(props) =>
+      props.showNested ? "rotate(180deg)" : "rotate(0)"};
     transition: transform 0.25s ease;
   }
 
@@ -42,13 +62,19 @@ const Item = styled.div`
     props.disabled == false &&
     `background-color: ${getColorRgbaValue(
       props.theme,
-      'MenuItem',
+      "MenuItem",
       props.color,
-      'focus',
-      'background',
-      'backgroundOpacity'
+      "focus",
+      "background",
+      "backgroundOpacity"
     )};
-    color: ${getColorRgbaValue(props.theme, 'MenuItem', props.color, 'focus', 'text')};
+    color: ${getColorRgbaValue(
+      props.theme,
+      "MenuItem",
+      props.color,
+      "focus",
+      "text"
+    )};
   `}
   outline: none;
 
@@ -58,13 +84,19 @@ const Item = styled.div`
       props.disabled == false &&
       `background-color: ${getColorRgbaValue(
         props.theme,
-        'MenuItem',
+        "MenuItem",
         props.color,
-        'hover',
-        'background',
-        'backgroundOpacity'
+        "hover",
+        "background",
+        "backgroundOpacity"
       )};
-      color: ${getColorRgbaValue(props.theme, 'MenuItem', props.color, 'hover', 'text')};
+      color: ${getColorRgbaValue(
+        props.theme,
+        "MenuItem",
+        props.color,
+        "hover",
+        "text"
+      )};
       `}
   }
 `;
@@ -120,18 +152,18 @@ const MenuItem = React.forwardRef((props, ref) => {
     onFocus(e);
   };
   const handleOnBlur = (e) => {
-    // TODO :
-    if (active == null) setIsActive(false);
+    // TODO : 
+    if(active == null) setIsActive(false);
     onBlur(e);
   };
   const handleOnKeyDown = (e) => {
     e.preventDefault(); // prevents scroll
 
-    if (e.key == 'ArrowDown') {
+    if (e.key == "ArrowDown") {
       focusNextItem(ref ? ref.current : itemRef.current);
-    } else if (e.key == 'ArrowUp') {
+    } else if (e.key == "ArrowUp") {
       focusPreviousItem(ref ? ref.current : itemRef.current);
-    } else if (e.key == 'Enter' || e.keyCode == 32) {
+    } else if (e.key == "Enter" || e.keyCode == 32) {
       if (disabled == false) {
         if (isNested && toggleNested) {
           toggleNested();
@@ -146,21 +178,24 @@ const MenuItem = React.forwardRef((props, ref) => {
   const focusNextItem = (currentItem) => {
     if (currentItem?.nextSibling) {
       let next = findNextItem(currentItem);
-      if (next?.node && next?.type == 'item') {
+      if (next?.node && next?.type == "item") {
         next.node.focus();
-      } else if (next?.node && next?.type == 'nested') {
+      } else if (next?.node && next?.type == "nested") {
         //next is nested container, find first child item in nested container to focus
         let firstChildItem = findFirstChildItem(next.node);
         if (firstChildItem) firstChildItem.focus();
       } else if (
         currentItem?.parentElement &&
-        hasClass(currentItem.parentElement, 'nested-item-lnc')
+        hasClass(currentItem.parentElement, "nested-item-lnc")
       ) {
         focusNextItem(currentItem.parentElement);
       }
     }
     //if item is in nested container
-    else if (currentItem?.parentElement && hasClass(currentItem.parentElement, 'nested-item-lnc')) {
+    else if (
+      currentItem?.parentElement &&
+      hasClass(currentItem.parentElement, "nested-item-lnc")
+    ) {
       //item is in nested contaiener, focus next item
       focusNextItem(currentItem.parentElement);
     }
@@ -169,21 +204,24 @@ const MenuItem = React.forwardRef((props, ref) => {
   const focusPreviousItem = (currentItem) => {
     if (currentItem?.previousSibling) {
       let previous = findPrevItem(currentItem);
-      if (previous?.node && previous?.type == 'item') {
+      if (previous?.node && previous?.type == "item") {
         previous.node.focus();
-      } else if (previous?.node && previous?.type == 'nested') {
+      } else if (previous?.node && previous?.type == "nested") {
         //previous is nested container, find last child item in nested container to focus
         let lastChildItem = findLastChildItem(previous.node);
         if (lastChildItem) lastChildItem.focus();
       } else if (
         currentItem?.parentElement &&
-        hasClass(currentItem.parentElement, 'nested-item-lnc')
+        hasClass(currentItem.parentElement, "nested-item-lnc")
       ) {
         focusPreviousItem(currentItem.parentElement);
       }
     }
     //if item is in nested container
-    else if (currentItem?.parentElement && hasClass(currentItem.parentElement, 'nested-item-lnc')) {
+    else if (
+      currentItem?.parentElement &&
+      hasClass(currentItem.parentElement, "nested-item-lnc")
+    ) {
       //item is in nested contaiener, focus previous item
       focusPreviousItem(currentItem.parentElement);
     }
@@ -191,10 +229,10 @@ const MenuItem = React.forwardRef((props, ref) => {
 
   const findNextItem = (node) => {
     while ((node = node.nextSibling)) {
-      if (hasClass(node, 'menu-item-lnc')) {
-        return { node: node, type: 'item' };
-      } else if (hasClass(node, 'nested-item-lnc')) {
-        return { node: node, type: 'nested' };
+      if (hasClass(node, "menu-item-lnc")) {
+        return { node: node, type: "item" };
+      } else if (hasClass(node, "nested-item-lnc")) {
+        return { node: node, type: "nested" };
       }
     }
     return null;
@@ -202,26 +240,26 @@ const MenuItem = React.forwardRef((props, ref) => {
 
   const findPrevItem = (node) => {
     while ((node = node.previousSibling)) {
-      if (hasClass(node, 'menu-item-lnc')) {
-        return { node: node, type: 'item' };
-      } else if (hasClass(node, 'nested-item-lnc')) {
-        return { node: node, type: 'nested' };
+      if (hasClass(node, "menu-item-lnc")) {
+        return { node: node, type: "item" };
+      } else if (hasClass(node, "nested-item-lnc")) {
+        return { node: node, type: "nested" };
       }
     }
     return null;
   };
 
   const findFirstChildItem = (node) => {
-    return Array.from(node.querySelectorAll('.menu-item-lnc'))?.[0];
+    return Array.from(node.querySelectorAll(".menu-item-lnc"))?.[0];
   };
 
   const findLastChildItem = (node) => {
-    return Array.from(node.querySelectorAll('.menu-item-lnc'))?.pop();
+    return Array.from(node.querySelectorAll(".menu-item-lnc"))?.pop();
   };
 
   const hasClass = (elem, cls) => {
-    var str = ' ' + elem.className + ' ';
-    var testCls = ' ' + cls + ' ';
+    var str = " " + elem.className + " ";
+    var testCls = " " + cls + " ";
     return str.indexOf(testCls) != -1;
   };
 
@@ -229,12 +267,7 @@ const MenuItem = React.forwardRef((props, ref) => {
     <>
       <Item
         ref={ref ? ref : itemRef}
-        className={
-          `menu-item-lnc ` +
-          (isNested ? 'nested-menu-item-lnc ' : '') +
-          (showNested ? 'spread-nested-item-lnc ' : '') +
-          className
-        }
+        className={`menu-item-lnc ` + (isNested ? "nested-menu-item-lnc " : "") + (showNested ? "spread-nested-item-lnc " : "") +className}
         {...themeProps}
         disabled={disabled}
         tabIndex={0}
@@ -246,9 +279,9 @@ const MenuItem = React.forwardRef((props, ref) => {
         showNested={showNested}
         {...rest}
       >
-        {icon && <Icon icon={icon} className='menu-icon-lnc' {...iconProps} />}
+        {icon && <Icon icon={icon} className="menu-icon-lnc" {...iconProps} />}
         <div>{children}</div>
-        {isNested && <Icon icon={'angle-down'} className='sub-menu-icon-lnc' />}
+        {isNested && <Icon icon={"angle-down"} className="sub-menu-icon-lnc" />}
       </Item>
     </>
   );
@@ -269,9 +302,9 @@ MenuItem.defaultProps = {
   onItemSelected: () => {},
   //-------------------------
   style: {},
-  className: '',
-  size: 'small',
-  __TYPE__: 'MENU_ITEM',
+  className: "",
+  size: "small",
+  __TYPE__: "MENU_ITEM",
 };
 
 MenuItem.propTypes = {
@@ -292,17 +325,17 @@ MenuItem.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'success',
-    'warning',
-    'danger',
-    'information',
-    'neutral',
-    'gray',
+    "primary",
+    "secondary",
+    "success",
+    "warning",
+    "danger",
+    "information",
+    "neutral",
+    "gray"
   ]),
   iconProps: PropTypes.any,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   __TYPE__: PropTypes.string,
 };
 

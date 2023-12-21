@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useTheme } from '@emotion/react';
-import Button from '../../General/Button/index';
-import IconButton from '../../General/IconButton/index';
-import ButtonGroup from '../../Layout/Button Group/index';
-import styled from '@emotion/styled';
-import { useUpdateEffect } from 'react-use';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { useTheme } from "@emotion/react";
+import Button from "../../General/Button/index";
+import IconButton from "../../General/IconButton/index";
+import ButtonGroup from "../../Layout/Button Group/index";
+import styled from "@emotion/styled";
+import { useUpdateEffect } from "react-use";
 
 //========================================================================
 
@@ -69,10 +69,11 @@ const Pagination = (props) => {
   //======================== METHODS ==========================================
 
   const handlePageClick = (e, p) => {
-    if (p == 'next' && page < totalNumberOfPages) setPage(page + 1);
-    else if (p == 'previous' && page > 1) setPage(page - 1);
-    else if (p == 'last' && page != totalNumberOfPages) setPage(totalNumberOfPages);
-    else if (p == 'first' && page != 1) setPage(1);
+    if (p == "next" && page < totalNumberOfPages) setPage(page + 1);
+    else if (p == "previous" && page > 1) setPage(page - 1);
+    else if (p == "last" && page != totalNumberOfPages)
+      setPage(totalNumberOfPages);
+    else if (p == "first" && page != 1) setPage(1);
     else if (!isNaN(+p)) setPage(p);
   };
 
@@ -82,14 +83,18 @@ const Pagination = (props) => {
     let pagesButtons = [];
 
     //before offset
-    for (let i = page - pagesOffset > 0 ? page - pagesOffset : 1; i < page && i > 0; i++) {
+    for (
+      let i = page - pagesOffset > 0 ? page - pagesOffset : 1;
+      i < page && i > 0;
+      i++
+    ) {
       pagesButtons.push(
         <Button
           key={i}
           {...themeProps}
           borderRadius={borderRadius}
           onClick={(e) => handlePageClick(e, i)}
-          btnType={'basic'}
+          btnType={"basic"}
           text={i.toString()}
           disabled={disabled}
         />
@@ -109,14 +114,18 @@ const Pagination = (props) => {
     );
 
     //after offset
-    for (let i = page + 1; i <= page + pagesOffset && i <= totalNumberOfPages; i++) {
+    for (
+      let i = page + 1;
+      i <= page + pagesOffset && i <= totalNumberOfPages;
+      i++
+    ) {
       pagesButtons.push(
         <Button
           key={i}
           {...themeProps}
           borderRadius={borderRadius}
           onClick={(e) => handlePageClick(e, i)}
-          btnType={'basic'}
+          btnType={"basic"}
           text={i.toString()}
           disabled={disabled}
         />
@@ -136,18 +145,18 @@ const Pagination = (props) => {
         {withFirstLast && (
           <IconButton
             {...themeProps}
-            icon={icons.doubleLeft || 'angle-double-left'}
+            icon={icons.doubleLeft || "angle-double-left"}
             disabled={disabledFirst || disabled}
-            onClick={(e) => handlePageClick(e, 'first')}
+            onClick={(e) => handlePageClick(e, "first")}
             {...br}
           />
         )}
 
         <IconButton
           {...themeProps}
-          icon={icons.left || 'angle-left'}
+          icon={icons.left || "angle-left"} 
           disabled={disabledPrevious || disabled}
-          onClick={(e) => handlePageClick(e, 'previous')}
+          onClick={(e) => handlePageClick(e, "previous")}
           {...br}
         />
 
@@ -155,18 +164,18 @@ const Pagination = (props) => {
 
         <IconButton
           {...themeProps}
-          icon={icons.right || 'angle-right'}
+          icon={icons.right || "angle-right"}
           disabled={disabledNext || disabled}
-          onClick={(e) => handlePageClick(e, 'next')}
+          onClick={(e) => handlePageClick(e, "next")}
           {...br}
         />
 
         {withFirstLast && (
           <IconButton
             {...themeProps}
-            icon={icons.doubleRight || 'angle-double-right'}
+            icon={icons.doubleRight || "angle-double-right"}
             disabled={disabledLast || disabled}
-            onClick={(e) => handlePageClick(e, 'last')}
+            onClick={(e) => handlePageClick(e, "last")}
             {...br}
           />
         )}
@@ -178,7 +187,7 @@ const Pagination = (props) => {
     return (
       <PaginationContainer horizontalAlignment={horizontalAlignment}>
         <ButtonGroup
-          className={'button-group-pagination-lnc ' + className}
+          className={"button-group-pagination-lnc " + className}
           style={style}
           borderRadius={borderRadius}
         >
@@ -188,7 +197,11 @@ const Pagination = (props) => {
     );
 
   return (
-    <Container horizontalAlignment={horizontalAlignment} className={className} style={style}>
+    <Container
+      horizontalAlignment={horizontalAlignment}
+      className={className}
+      style={style}
+    >
       {renderButtons(borderRadius)}
     </Container>
   );
@@ -197,10 +210,10 @@ const Pagination = (props) => {
 Pagination.defaultProps = {
   icons: {},
   disabled: false,
-  borderRadius: 'regular',
+  borderRadius: "regular",
   currentPage: 1,
-  buttonType: 'outline',
-  currentPageButtonType: 'tinted',
+  buttonType: "outline",
+  currentPageButtonType: "tinted",
   withFirstLast: true,
   withButtonGroup: true,
   disabledNext: false,
@@ -209,14 +222,14 @@ Pagination.defaultProps = {
   disabledLast: false,
   totalNumberOfPages: 1,
   pagesOffset: 0,
-  horizontalAlignment: 'left',
+  horizontalAlignment: "left",
   //-------------------------------
   onPageChange: () => {},
   //-------------------------------
   style: {},
-  className: '',
-  color: 'primary',
-  size: 'small',
+  className: "",
+  color: "primary",
+  size: "small",
 };
 
 Pagination.propTypes = {
@@ -230,16 +243,27 @@ Pagination.propTypes = {
    *  Applies to the movement buttons and to the page number buttons
    */
   disabled: PropTypes.bool,
-  borderRadius: PropTypes.oneOf(['slight', 'regular', 'edged', 'curved', 'none']),
+  borderRadius: PropTypes.oneOf([
+    "slight",
+    "regular",
+    "edged",
+    "curved",
+    "none",
+  ]),
   /**
    * Sets the button `type`
    */
-  buttonType: PropTypes.oneOf(['filled', 'tinted', 'outline', 'basic']),
+  buttonType: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
 
   /**
    * Set button `type` of the current page button
    */
-  currentPageButtonType: PropTypes.oneOf(['filled', 'tinted', 'outline', 'basic']),
+  currentPageButtonType: PropTypes.oneOf([
+    "filled",
+    "tinted",
+    "outline",
+    "basic",
+  ]),
   /**
    * Show the First and Last buttons
    */
@@ -273,22 +297,22 @@ Pagination.propTypes = {
    *  Applies to the Last button
    */
   disabledLast: PropTypes.bool,
-  horizontalAlignment: PropTypes.oneOf(['left', 'center', 'right']),
+  horizontalAlignment: PropTypes.oneOf(["left", "center", "right"]),
   //-------------------------------
   onPageChange: PropTypes.func,
   //-------------------------------
   className: PropTypes.string,
   style: PropTypes.object,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'success',
-    'warning',
-    'danger',
-    'information',
-    'neutral',
-    'gray',
+    "primary",
+    "secondary",
+    "success",
+    "warning",
+    "danger",
+    "information",
+    "neutral",
+    "gray"
   ]),
 };
 
