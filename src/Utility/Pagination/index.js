@@ -28,6 +28,7 @@ const PaginationContainer = styled.div`
 
 const Pagination = (props) => {
   const {
+    icons,
     borderRadius,
     currentPage,
     buttonType,
@@ -144,7 +145,7 @@ const Pagination = (props) => {
         {withFirstLast && (
           <IconButton
             {...themeProps}
-            icon="angle-double-left"
+            icon={icons.doubleLeft || "angle-double-left"}
             disabled={disabledFirst || disabled}
             onClick={(e) => handlePageClick(e, "first")}
             {...br}
@@ -153,7 +154,7 @@ const Pagination = (props) => {
 
         <IconButton
           {...themeProps}
-          icon="angle-left"
+          icon={icons.left || "angle-left"} 
           disabled={disabledPrevious || disabled}
           onClick={(e) => handlePageClick(e, "previous")}
           {...br}
@@ -163,7 +164,7 @@ const Pagination = (props) => {
 
         <IconButton
           {...themeProps}
-          icon="angle-right"
+          icon={icons.right || "angle-right"}
           disabled={disabledNext || disabled}
           onClick={(e) => handlePageClick(e, "next")}
           {...br}
@@ -172,7 +173,7 @@ const Pagination = (props) => {
         {withFirstLast && (
           <IconButton
             {...themeProps}
-            icon="angle-double-right"
+            icon={icons.doubleRight || "angle-double-right"}
             disabled={disabledLast || disabled}
             onClick={(e) => handlePageClick(e, "last")}
             {...br}
@@ -207,6 +208,7 @@ const Pagination = (props) => {
 };
 
 Pagination.defaultProps = {
+  icons: {},
   disabled: false,
   borderRadius: "regular",
   currentPage: 1,
@@ -231,6 +233,12 @@ Pagination.defaultProps = {
 };
 
 Pagination.propTypes = {
+  icons: PropTypes.shape({
+    left: PropTypes.element,
+    right: PropTypes.element,
+    doubleLeft: PropTypes.element,
+    doubleRight: PropTypes.element,
+  }),
   /**
    *  Applies to the movement buttons and to the page number buttons
    */

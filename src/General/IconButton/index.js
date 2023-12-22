@@ -50,9 +50,7 @@ const Button = React.forwardRef((props, ref) => {
     return `${style} fa-${icon} fa-fw`;
   };
 
-  const renderIcon = () => {
-    return <StyledIcon className={getIconClass()} />;
-  };
+  const renderIcon = () => React.isValidElement(icon) ? icon : <StyledIcon className={getIconClass()} />;
 
   if (btnType === "filled") {
     return (
@@ -136,7 +134,7 @@ const Button = React.forwardRef((props, ref) => {
 });
 
 Button.defaultProps = {
-  icon: "",
+  icon: null,
   iconStyle: "solid",
   borderRadius: "regular",
   btnType: "filled",
@@ -154,7 +152,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  icon: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   iconStyle: PropTypes.oneOf(["regular", "solid"]),
   borderRadius: PropTypes.oneOf([
     "slight",

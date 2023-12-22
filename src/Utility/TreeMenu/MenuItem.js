@@ -157,8 +157,7 @@ const MenuItem = React.forwardRef((props, ref) => {
     onBlur(e);
   };
   const handleOnKeyDown = (e) => {
-    if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.code) > -1)
-      e.preventDefault(); // prevents scroll
+    e.preventDefault(); // prevents scroll
 
     if (e.key == "ArrowDown") {
       focusNextItem(ref ? ref.current : itemRef.current);
