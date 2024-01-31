@@ -112,7 +112,7 @@ const NumberInput = React.forwardRef((props, ref) => {
       )}
       {
         // Controlled input and uncotrolled input must be differentiated because of usage of the value property
-        (value == null || value == "undefined") ? (
+        value == null || value == "undefined" ? (
           <StyledInput
             ref={ref}
             type="number"
@@ -125,6 +125,8 @@ const NumberInput = React.forwardRef((props, ref) => {
             disabled={disabled}
             readOnly={readOnly}
             step={step}
+            min={min}
+            max={max}
             defaultValue={defaultValue}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -145,6 +147,8 @@ const NumberInput = React.forwardRef((props, ref) => {
             disabled={disabled}
             readOnly={readOnly}
             step={step}
+            min={min}
+            max={max}
             value={inputValue}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -245,7 +249,7 @@ NumberInput.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
