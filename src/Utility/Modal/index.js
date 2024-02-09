@@ -385,9 +385,10 @@ const ModalWrapper = ({
         footer={footer}
         scrollOverlay={scrollOverlay}
         {...rest}
+        className={`modal-lnc-container ${themeProps?.className}`}
       >
         {showCloseButton && (
-          <CloseButton {...themeProps} onClick={close}>
+          <CloseButton {...themeProps} className="modal-lnc-times" onClick={close}>
             <Icon icon={"times"}></Icon>
           </CloseButton>
         )}
