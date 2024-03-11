@@ -12,12 +12,11 @@ export const Styled_DatePickerWrapper = styled.div`
     z-index: 30;
     width: ${(props) =>
       props.monthsShown > 2 ? 3 * 100 + "%" : props.monthsShown * 100 + "%"};
-      
+
     top: 1.3rem;
     font-size: 1rem;
     @media (max-width: 725px) {
-      width: ${(props) =>
-        props.monthsShown > 1 ? "200%" : "100%"};
+      width: ${(props) => (props.monthsShown > 1 ? "200%" : "100%")};
     }
     @media (max-width: 550px) {
       width: 100%;
@@ -471,5 +470,43 @@ export const Styled_DatePickerWrapper = styled.div`
 
   & .react-datepicker__day--keyboard-selected {
     background-color: transparent;
+  }
+
+  & .react-datepicker__day--disabled {
+    background-color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "DateInput",
+        props.color,
+        "disabled",
+        "background"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "DateInput",
+        props.color,
+        "disabled",
+        "text"
+      )};
+
+    &:hover {
+      background-color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "DateInput",
+          props.color,
+          "disabled",
+          "background"
+        )};
+      color: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "DateInput",
+          props.color,
+          "disabled",
+          "text"
+        )};
+    }
   }
 `;

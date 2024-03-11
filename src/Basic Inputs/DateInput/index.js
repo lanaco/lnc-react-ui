@@ -65,6 +65,7 @@ const DateInput = React.forwardRef((props, ref) => {
         withPortal={withPortal}
         onFocus={onFocus}
         onBlur={onBlur}
+        minDate={new Date()}
       />
     </Styled_DatePickerWrapper>
   );
