@@ -20,8 +20,6 @@ const DateInput = React.forwardRef((props, ref) => {
     value,
     dateFormat,
     tabIndex,
-    minDate,
-    maxDate,
     monthsShown,
     selectsRange,
     withPortal,
@@ -101,8 +99,6 @@ DateInput.propTypes = {
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   dateFormat: PropTypes.string,
-  minDate: PropTypes.any,
-  maxDate: PropTypes.any,
   tabIndex: PropTypes.number,
 
   monthsShown: PropTypes.number,
