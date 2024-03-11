@@ -116,6 +116,8 @@ export const lanaco_light = {
         },
         disabled: {
           border: 200,
+          text: 400,
+          background: 0,
         },
       },
       teal: {
