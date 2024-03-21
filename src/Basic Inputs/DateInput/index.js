@@ -42,6 +42,7 @@ const DateInput = React.forwardRef((props, ref) => {
       className={className}
       style={style}
       monthsShown={monthsShown}
+      withPortal={withPortal}
     >
       <ReactDatePicker
         {...rest}
