@@ -19,6 +19,8 @@ const Item = styled.div`
   min-height: 2.25rem;
   gap: 0.563rem;
   padding: 0.563rem;
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "MenuItem", props.color, props.isActive === true ? "active" : "enabled", "text")};
   &:hover {
     background-color: ${(props) =>
       getColorRgbaValue(
@@ -273,7 +275,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
         {icon && (
           <Icon icon={icon} className="drop-down-icon-lnc" {...iconProps} />
         )}
-        <div>{children}</div>
+        <div className="menu-item-text-lnc">{children}</div>
         {isNested && <Icon icon={"angle-down"} className="sub-menu-icon-lnc" />}
       </Item>
     </>

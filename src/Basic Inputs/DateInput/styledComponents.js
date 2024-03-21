@@ -58,7 +58,8 @@ export const Styled_DatePickerWrapper = styled.div`
   }
   & .react-datepicker__day {
     min-width: 2rem;
-    padding: 0.375rem;
+    width: ${p => p.withPortal === true ? "2.75rem" : "2.25rem"};
+    height: ${p => p.withPortal === true ? "2.75rem" : "2.25rem"};
   }
   & .react-datepicker__month-read-view--down-arrow,
   .react-datepicker__year-read-view--down-arrow {
@@ -123,7 +124,7 @@ export const Styled_DatePickerWrapper = styled.div`
     color: var(--primary);
     font-size: 1rem;
     min-width: 2rem;
-    padding: 0.375rem 0.375rem 0.375rem 0.375rem;
+    padding: ${p => p.withPortal === true ? "0" : "0.3rem"};
   }
   & .react-datepicker__day-name {
     line-height: 0;
