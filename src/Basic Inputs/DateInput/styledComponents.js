@@ -8,8 +8,17 @@ export const Styled_DatePickerWrapper = styled.div`
   ${(props) =>
     getComponentTypographyCss(props.theme, "DateInput", props.size, "enabled")}
   & .react-datepicker__header__dropdown {
+    position: absolute !important;
     z-index: 30;
-    display: none;
+    top: 1.3rem;
+    font-size: 1rem;
+    width: 100%;
+    @media (max-width: 725px) {
+      width: ${(props) => (props.monthsShown > 1 ? "200%" : "100%")};
+    }
+    @media (max-width: 550px) {
+      width: 100%;
+    }
   }
   & input {
     border: none;
@@ -253,7 +262,7 @@ export const Styled_DatePickerWrapper = styled.div`
   & .react-datepicker__year-read-view,
   & .react-datepicker__month-read-view,
   & .react-datepicker__month-year-read-view {
-    visibility: visible !important;
+    color: transparent;
   }
 
   &
