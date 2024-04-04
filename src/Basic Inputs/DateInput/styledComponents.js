@@ -10,11 +10,9 @@ export const Styled_DatePickerWrapper = styled.div`
   & .react-datepicker__header__dropdown {
     position: absolute !important;
     z-index: 30;
-    width: ${(props) =>
-      props.monthsShown > 2 ? 3 * 100 + "%" : props.monthsShown * 100 + "%"};
-
     top: 1.3rem;
     font-size: 1rem;
+    width: 100%;
     @media (max-width: 725px) {
       width: ${(props) => (props.monthsShown > 1 ? "200%" : "100%")};
     }
@@ -58,8 +56,8 @@ export const Styled_DatePickerWrapper = styled.div`
   }
   & .react-datepicker__day {
     min-width: 2rem;
-    width: ${p => p.withPortal === true ? "2.75rem" : "2.25rem"};
-    height: ${p => p.withPortal === true ? "2.75rem" : "2.25rem"};
+    width: ${(p) => (p.withPortal === true ? "2.75rem" : "2.25rem")};
+    height: ${(p) => (p.withPortal === true ? "2.75rem" : "2.25rem")};
   }
   & .react-datepicker__month-read-view--down-arrow,
   .react-datepicker__year-read-view--down-arrow {
@@ -88,7 +86,9 @@ export const Styled_DatePickerWrapper = styled.div`
   & .react-datepicker__current-month,
   & .react-datepicker-time__header,
   & .react-datepicker-year-header {
-    display: none;
+    padding: 0.875rem 0 0 0;
+    font-size: 1rem;
+    font-weight: 400;
   }
   & .react-datepicker__day--outside-month {
     color: ${(props) =>
@@ -124,7 +124,7 @@ export const Styled_DatePickerWrapper = styled.div`
     color: var(--primary);
     font-size: 1rem;
     min-width: 2rem;
-    padding: ${p => p.withPortal === true ? "0" : "0.3rem"};
+    padding: ${(p) => (p.withPortal === true ? "0" : "0.3rem")};
   }
   & .react-datepicker__day-name {
     line-height: 0;
@@ -262,7 +262,7 @@ export const Styled_DatePickerWrapper = styled.div`
   & .react-datepicker__year-read-view,
   & .react-datepicker__month-read-view,
   & .react-datepicker__month-year-read-view {
-    visibility: visible !important;
+    color: transparent;
   }
 
   &

@@ -49,6 +49,14 @@ const Container = styled.label`
     min-height: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Checkbox",
+        props.color,
+        "enabled",
+        "text"
+      )};
   }
   & input {
     position: absolute;
@@ -148,6 +156,16 @@ const Container = styled.label`
       max-width: ${(props) => getCheckSize(props.theme, props.size)};
     }
   }
+  & input:checked ~ .checkbox-label {
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Checkbox",
+        props.color,
+        "active",
+        "text"
+      )};
+  }
   & input:indeterminate ~ .checkmark {
     & .checked {
       height: 0;
@@ -168,6 +186,16 @@ const Container = styled.label`
       stroke: white;
     }
   }
+  & input:indeterminate ~ .checkbox-label {
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Checkbox",
+        props.color,
+        "enabled",
+        "text"
+      )};
+  }
   & input:disabled ~ .checkmark {
     ${(props) =>
       props.readOnly == false &&
@@ -186,6 +214,16 @@ const Container = styled.label`
       "border"
     )};
     `};
+  }
+  & input:disabled ~ .checkbox-label {
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "Checkbox",
+        props.color,
+        "disabled",
+        "text"
+      )};
   }
   & input:focus ~ .checkmark {
     ${(props) => getOutlineCss(props.theme)};
@@ -388,7 +426,7 @@ CheckBoxInput.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
