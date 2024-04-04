@@ -469,10 +469,6 @@ export const Styled_DatePickerWrapper = styled.div`
       )};
   }
 
-  & .react-datepicker__day--keyboard-selected {
-    background-color: transparent;
-  }
-
   & .react-datepicker__day--disabled {
     background-color: ${(props) =>
       getColorRgbaValue(
@@ -509,5 +505,9 @@ export const Styled_DatePickerWrapper = styled.div`
           "text"
         )};
     }
+  }
+
+  & .react-datepicker__week {
+    display: flex;
   }
 `;
