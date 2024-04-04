@@ -84,6 +84,16 @@ const Container = styled.label`
       }
     }
   }
+  & input:hover ~ .lnc-radio-input-label {
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Radio", props.color, "hover", "text")};
+  }
+
+  
+  & input:checked ~ .lnc-radio-input-label {
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Radio", props.color, "active", "text")};
+  }
   & input:checked ~ .checkmark {
     & svg {
       fill: ${(props) =>
@@ -119,6 +129,121 @@ const Container = styled.label`
       }
     }
   }
+
+  & input:disabled ~ .lnc-radio-input-label {
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Radio", props.color, "disabled", "text")};
+  }
+  
+  & input[disabled]:checked ~ .checkmark {
+    & svg {
+      fill: ${(props) =>
+        getColorRgbaValue(
+          props.theme,
+          "Radio",
+          props.color,
+          "disabled",
+          "background",
+          "backgroundOpacity"
+        )};
+      & .outer-circle {
+        fill: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Radio",
+            props.color,
+            "disabled",
+            "border"
+          )};
+      }
+      & .inner-circle {
+        fill: ${(props) =>
+          props.innerColor === "white" || props.innerColor === "transparent"
+            ? props.innerColor
+            : getColorRgbaValue(
+                props.theme,
+                "Radio",
+                props.color,
+                "disabled",
+                "border"
+              )}
+            };
+      }
+    }
+
+
+    & input[disabled] ~ .checkmark {
+      & svg {
+        fill: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Radio",
+            props.color,
+            "disabled",
+            "background",
+            "backgroundOpacity"
+          )};
+        & .outer-circle {
+          fill: ${(props) =>
+            getColorRgbaValue(
+              props.theme,
+              "Radio",
+              props.color,
+              "disabled",
+              "border"
+            )};
+        }
+        & .inner-circle {
+          fill: ${(props) =>
+            getColorRgbaValue(
+              props.theme,
+              "Radio",
+              props.color,
+              "disabled",
+              "border"
+            )}
+              };
+        }
+      }
+
+    & input:hover ~ .lnc-radio-input-label {
+      color: ${(props) =>
+        getColorRgbaValue(props.theme, "Radio", props.color, "hover", "text")};
+    }
+    & input[hover]:checked ~ .checkmark {
+      & svg {
+        fill: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Radio",
+            props.color,
+            "hover",
+            "background",
+            "backgroundOpacity"
+          )};
+        & .outer-circle {
+          fill: ${(props) =>
+            getColorRgbaValue(
+              props.theme,
+              "Radio",
+              props.color,
+              "disabled",
+              "border"
+            )};
+        }
+        & .inner-circle {
+          fill: ${(props) =>
+            props.innerColor === "white" || props.innerColor === "transparent"
+              ? props.innerColor
+              : getColorRgbaValue(
+                  props.theme,
+                  "Radio",
+                  props.color,
+                  "disabled",
+                  "border"
+                )}};
+        }
+      }
 `;
 
 const Label = styled.label`
@@ -128,8 +253,10 @@ const Label = styled.label`
   min-height: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "Radio", props.color, "enabled", "text")};
 `;
-  
+
 const RadioInput = React.forwardRef((props, ref) => {
   const {
     id,
@@ -250,6 +377,7 @@ const RadioInput = React.forwardRef((props, ref) => {
       </div>
       <Label
         {...themeProps}
+        className={`lnc-radio-input-label`}
         disalbed={disabled}
         readOnly={readOnly}
         title={label}
@@ -311,7 +439,7 @@ RadioInput.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   innerColor: PropTypes.oneOf([
     "primary",
