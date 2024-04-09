@@ -131,7 +131,7 @@ export const FilledButton = styled.button`
         "background"
       )};
     color: ${(props) =>
-      getColorRgbaValue(
+      props.disabled === false && getColorRgbaValue(
         props.theme,
         "ButtonFilled",
         props.color,
@@ -151,7 +151,7 @@ export const FilledButton = styled.button`
         "background"
       )};
     color: ${(props) =>
-      getColorRgbaValue(
+      props.disabled === false && getColorRgbaValue(
         props.theme,
         "ButtonFilled",
         props.color,
@@ -172,7 +172,7 @@ export const FilledButton = styled.button`
         "background"
       )};
     color: ${(props) =>
-      getColorRgbaValue(
+      props.disabled === false && getColorRgbaValue(
         props.theme,
         "ButtonFilled",
         props.color,
