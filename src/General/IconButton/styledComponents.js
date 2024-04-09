@@ -162,6 +162,7 @@ export const TintedButton = styled.button`
 
   backdrop-filter: blur(48px);
   color: ${(props) =>
+    props.disabled !== true &&
     getColorRgbaValue(
       props.theme,
       "ButtonTinted",
@@ -171,6 +172,7 @@ export const TintedButton = styled.button`
     )};
 
   background-color: ${(props) =>
+    props.disabled !== true &&
     getColorRgbaValue(
       props.theme,
       "ButtonTinted",
@@ -185,6 +187,7 @@ export const TintedButton = styled.button`
 
   &:hover {
     background-color: ${(props) =>
+      props.disabled !== true &&
       getColorRgbaValue(
         props.theme,
         "ButtonTinted",
@@ -194,7 +197,7 @@ export const TintedButton = styled.button`
         "backgroundOpacity"
       )};
     color: ${(props) =>
-      !props.disabled &&
+      props.disabled !== true &&
       getColorRgbaValue(
         props.theme,
         "ButtonTinted",
@@ -206,6 +209,7 @@ export const TintedButton = styled.button`
 
   &:focus {
     background-color: ${(props) =>
+      props.disabled !== true &&
       getColorRgbaValue(
         props.theme,
         "ButtonTinted",
@@ -215,6 +219,7 @@ export const TintedButton = styled.button`
         "backgroundOpacity"
       )};
     color: ${(props) =>
+      props.disabled !== true &&
       getColorRgbaValue(
         props.theme,
         "ButtonTinted",
@@ -227,6 +232,7 @@ export const TintedButton = styled.button`
 
   &:active {
     background-color: ${(props) =>
+      props.disabled !== true &&
       getColorRgbaValue(
         props.theme,
         "ButtonTinted",
@@ -236,6 +242,7 @@ export const TintedButton = styled.button`
         "backgroundOpacity"
       )};
     color: ${(props) =>
+      props.disabled !== true &&
       getColorRgbaValue(
         props.theme,
         "ButtonTinted",
@@ -253,7 +260,16 @@ export const TintedButton = styled.button`
         "ButtonTinted",
         "gray",
         "disabled",
-        "background"
+        "background",
+        "backgroundOpacity"
+      )};
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonTinted",
+        "gray",
+        "disabled",
+        "text"
       )};
   }
 `;
