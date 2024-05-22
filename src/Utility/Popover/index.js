@@ -37,7 +37,7 @@ const StyledContent = styled(motion.div)`
       "boxShadow"
     )};
   border-radius: ${(props) =>
-    getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
+    getBorderRadiusValueWithUnits(props.theme, props.$borderRadius)};
   border-top: 1px solid rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   padding: 0.25rem;
@@ -225,7 +225,7 @@ export const PopoverContent = React.forwardRef(function PopoverContent(
             aria-describedby={state.descriptionId}
             {...state.getFloatingProps(props)}
           >
-            <StyledContent theme={theme} borderRadius={borderRadius} className={className} style={style}>
+            <StyledContent theme={theme} $borderRadius={borderRadius} className={className} style={style}>
               {props.children}
             </StyledContent>
           </div>
