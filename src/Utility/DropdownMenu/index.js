@@ -17,7 +17,7 @@ const StyledContent = styled(motion.div)`
   gap: 0.25rem;
   display: flex;
   flex-direction: column;
-  ${(props) => props.$widthFitContent == false && "min-width: 12.5rem"};
+  ${(props) => props.widthfitcontent == false && "min-width: 12.5rem"};
   background-color: ${(props) =>
     getColorRgbaValue(
       props.theme,
@@ -135,7 +135,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
         <PopoverContent zIndex={zIndex}>
         <StyledContent
             ref={menuContentRef}
-            $widthFitContent={widthFitContent}
+            widthfitcontent={widthFitContent}
             color={color}
             theme={theme}
           >
