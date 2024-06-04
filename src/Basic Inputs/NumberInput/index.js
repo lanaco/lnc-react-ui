@@ -49,7 +49,7 @@ const NumberInput = React.forwardRef((props, ref) => {
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
-    []
+    [onChange]
   );
 
   const handleChange = (e, value) => {
