@@ -50,11 +50,17 @@ const Button = React.forwardRef((props, ref) => {
     return `${style} fa-${icon} fa-fw`;
   };
 
-  const renderIcon = () => React.isValidElement(icon) ? icon : <StyledIcon className={getIconClass()} />;
+  const renderIcon = () =>
+    React.isValidElement(icon) ? (
+      icon
+    ) : (
+      <StyledIcon className={getIconClass()} />
+    );
 
   if (btnType === "filled") {
     return (
       <FilledButton
+        ref={ref}
         data-type="filled"
         {...themeProps}
         onFocus={onFocus}
@@ -72,6 +78,7 @@ const Button = React.forwardRef((props, ref) => {
   if (btnType === "tinted") {
     return (
       <TintedButton
+        ref={ref}
         data-type="tinted"
         {...themeProps}
         onFocus={onFocus}
@@ -88,6 +95,7 @@ const Button = React.forwardRef((props, ref) => {
   if (btnType === "outline") {
     return (
       <OutlineButton
+        ref={ref}
         data-type="outline"
         {...themeProps}
         onFocus={onFocus}
@@ -104,6 +112,7 @@ const Button = React.forwardRef((props, ref) => {
   if (btnType === "basic") {
     return (
       <BasicButton
+        ref={ref}
         data-type="basic"
         {...themeProps}
         onFocus={onFocus}
@@ -119,6 +128,7 @@ const Button = React.forwardRef((props, ref) => {
 
   return (
     <FilledButton
+      ref={ref}
       data-type="filled"
       size={size}
       {...themeProps}
@@ -183,7 +193,7 @@ Button.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };
