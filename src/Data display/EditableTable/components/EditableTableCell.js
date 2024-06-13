@@ -266,6 +266,7 @@ const EditableTableCell = (props) => {
                   ? RowData[Column.accessor][Column?.objectAccessor]
                   : RowData[Column.accessor]
               }
+              fullValue={RowData[Column.accessor]}
               disabled={true}
             />
           ) : Column?.objectAccessor ? (
