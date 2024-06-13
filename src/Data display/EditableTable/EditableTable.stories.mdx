@@ -11,8 +11,8 @@ import TableSpecialLastRow from "./components/TableSpecialLastRow";
 import Button from "../../General/Button/index";
 import { cloneDeep, isEmpty, isEqual } from "lodash";
 import { useStateWithCallbackLazy } from "use-state-with-callback";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Data Display/Editable Table" component={EditableTable} />
 
@@ -26,6 +26,7 @@ export var db_invoices = [
     status: "Approved",
     status_id: 1,
     processed: true,
+    brand: { value: "brand1", errorMessage: "error" },
   },
   {
     id: "67792659-ae00-46a2-9742-49f41d61997b",
@@ -36,6 +37,7 @@ export var db_invoices = [
     status: "Rejected",
     status_id: 2,
     processed: false,
+    brand: { value: "brand2", errorMessage: "error" },
   },
   {
     id: "7a4ce6b3-36a4-470f-8e93-7a5a1791968f",
@@ -46,6 +48,7 @@ export var db_invoices = [
     status: "Approved",
     status_id: 1,
     processed: false,
+    brand: { value: "brand3", errorMessage: "error" },
   },
   {
     id: "c804cd2d-d92d-4324-8c37-a6664b4838cc",
@@ -56,6 +59,7 @@ export var db_invoices = [
     status: "Rejected",
     status_id: 2,
     processed: true,
+    brand: { value: "brand4", errorMessage: "error" },
   },
   {
     id: "8069a146-384c-41b2-b016-6b9a2f5c92db",
@@ -66,6 +70,7 @@ export var db_invoices = [
     status: "Approved",
     status_id: 1,
     processed: true,
+    brand: { value: "brand5", errorMessage: "error" },
   },
 ];
 
@@ -161,6 +166,14 @@ export const TemplateDefault = (props) => {
     },
     {
       id: 6,
+      displayName: "Brand",
+      accessor: "brand",
+      width: 10,
+      editable: true,
+      inputType: inputType.STRING,
+    },
+    {
+      id: 7,
       displayName: "Status",
       accessor: "status_id",
       width: 20,
@@ -218,7 +231,11 @@ export const TemplateDefault = (props) => {
         (x) => x.value === parseInt(value.value)
       ).label;
     } else {
-      itemToUpdate[column.accessor] = value;
+      if (column.objectAccessor) {
+        itemToUpdate[column.accessor][column.objectAccessor] = value;
+      } else {
+        itemToUpdate[column.accessor] = value;
+      }
     }
     setData(dataCopy);
   };
@@ -415,6 +432,15 @@ Supported column data types:
             ],
           },
         },
+        {
+          id: 7,
+          displayName: "Brand",
+          accessor: "brand",
+          objectAccessor: "value",
+          width: 10,
+          editable: true,
+          inputType: inputType.STRING,
+        },
       ];
       var EmptyDataItem = {
         id: "",
@@ -465,7 +491,13 @@ Supported column data types:
           itemToUpdate["status"] = column.inputProps.options.find(
             (x) => x.value === parseInt(value.value)
           ).label;
-        } else itemToUpdate[column.accessor] = value;
+        } else {
+          if(column.objectAccessor) {
+            itemToUpdate[column.accessor][column.objectAccessor] = value;
+          } else {
+          itemToUpdate[column.accessor] = value;
+          }
+          }
         setData(dataCopy);
       };
       const validateEdit = (rowData) => {
@@ -567,6 +599,7 @@ Supported column data types:
         </Container>
       );
     }}
+
   </Story>
 </Canvas>
 

@@ -137,7 +137,8 @@ const EditableTableCell = (props) => {
     var inputComponent = null;
 
     var standardOnChange = (e, value) => {
-      onChange(e, value, RowIndex, Index, Column, RowData);
+
+     onChange(e, value, RowIndex, Index, Column, RowData);
     };
 
     var dropdownOnChange = (value) => {
@@ -148,8 +149,12 @@ const EditableTableCell = (props) => {
       ...themeProps,
       debounceTime: 0,
       ...Column.inputProps,
-      value: RowData[Column.accessor],
-      defaultChecked: RowData[Column.accessor],
+      value: Column?.objectAccessor
+        ? RowData[Column.accessor][Column?.objectAccessor]
+        : RowData[Column.accessor],
+      defaultChecked: Column?.objectAccessor
+        ? RowData[Column.accessor][Column?.objectAccessor]
+        : RowData[Column.accessor],
       focused: focused,
       onChange: standardOnChange,
       onBlur: (e) => onSetFocus(e, false),
@@ -183,8 +188,10 @@ const EditableTableCell = (props) => {
         inputComponent = (
           <Dropdown
             {...inputProps}
-            value={Column.inputProps.options.find(
-              (x) => x.value === RowData[Column.accessor]
+            value={Column.inputProps.options.find((x) =>
+              x.value === Column?.objectAccessor
+                ? RowData[Column.accessor][Column?.objectAccessor]
+                : RowData[Column.accessor]
             )}
             onChange={dropdownOnChange}
             ref={inputRef}
@@ -223,10 +230,14 @@ const EditableTableCell = (props) => {
         <Column.editComponent
           ref={inputRef}
           tabIndex={calculateTabIndex()}
-          value={RowData[Column.accessor]}
-          onChange={(event, value, id) =>
-            onChange(event, value, RowIndex, Index, Column, RowData, id)
+          value={
+            Column?.objectAccessor
+              ? RowData[Column.accessor][Column?.objectAccessor]
+              : RowData[Column.accessor]
           }
+          onChange={(event, value, id) => {
+            onChange(event, value, RowIndex, Index, Column, RowData, id);
+          }}
           focused={focused}
           onBlur={handleBlur}
           onFocus={(e) => onSetFocus(e, true)}
@@ -258,6 +269,8 @@ const EditableTableCell = (props) => {
               fullValue={RowData[Column.accessor]}
               disabled={true}
             />
+          ) : Column?.objectAccessor ? (
+            RowData[Column.accessor][Column?.objectAccessor]
           ) : (
             RowData[Column.accessor]
           )}
@@ -313,7 +326,7 @@ EditableTableCell.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

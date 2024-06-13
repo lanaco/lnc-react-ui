@@ -133,8 +133,12 @@ const StoryTemplate = (props) => {
         (x) => x.id === parseInt(value)
       ).name;
       //
-    } else itemToUpdate[column.accessor] = value;
-
+    } else if (column.objectAccessor) {
+      itemToUpdate[column.accessor][column.objectAccessor] = value;
+    } else {
+      itemToUpdate[column.accessor] = value;
+    } 
+    
     setData(dataCopy);
   };
 
