@@ -250,7 +250,12 @@ const EditableTableCell = (props) => {
           {Column.readonlyComponent ? (
             <Column.readonlyComponent
               rowData={RowData}
-              value={RowData[Column.accessor]}
+              value={
+                Column?.objectAccessor
+                  ? RowData[Column.accessor][Column?.objectAccessor]
+                  : RowData[Column.accessor]
+              }
+              fullValue={RowData[Column.accessor]}
               disabled={true}
             />
           ) : (
