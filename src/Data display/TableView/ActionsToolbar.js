@@ -83,6 +83,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
           <Button
             leadingIcon="plus"
             btnType="outline"
+            type="button"
             color={color}
             size={size}
             title={createText}
@@ -103,6 +104,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
               trailingIcon={"angle-down"}
               color={color}
               size={size}
+              type="button"
             />
           }
         >
