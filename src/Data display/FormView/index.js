@@ -65,7 +65,7 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
         />
       );
     case "checkbox":
-    return (
+      return (
         <CheckBoxInput
           color={color}
           size={size}
@@ -227,6 +227,39 @@ const FormView = React.forwardRef((props, ref) => {
     goBack(e, data);
   };
 
+  const renderChildren = () => {
+    return (
+      <>
+        {children || (
+          <FlexGrid spacing={10} {...flexGridProps}>
+            {fields.map((item, i) => (
+              <FlexGridItem key={i} {...item}>
+                <FormField
+                  key={i}
+                  label={item.label}
+                  text={errors[item.accessor]}
+                  color={errors[item.accessor] ? "danger" : color}
+                  size={size}
+                >
+                  {item.type == "custom"
+                    ? item.element
+                    : getInput(
+                        item.type,
+                        item.inputProps,
+                        item.accessor,
+                        data[item.accessor],
+                        errors[item.accessor] ? "danger" : color,
+                        size
+                      )}
+                </FormField>
+              </FlexGridItem>
+            ))}
+          </FlexGrid>
+        )}
+      </>
+    );
+  };
+
   return (
     <StyledFormView
       ref={ref}
@@ -247,30 +280,7 @@ const FormView = React.forwardRef((props, ref) => {
           disabled={disableGoBack}
         />
       )}
-      <FlexGrid spacing={10} {...flexGridProps}>
-        {fields.map((item, i) => (
-          <FlexGridItem key={i} {...item}>
-            <FormField
-              key={i}
-              label={item.label}
-              text={errors[item.accessor]}
-              color={errors[item.accessor] ? "danger" : color}
-              size={size}
-            >
-              {item.type == "custom"
-                ? item.element
-                : getInput(
-                    item.type,
-                    item.inputProps,
-                    item.accessor,
-                    data[item.accessor],
-                    errors[item.accessor] ? "danger" : color,
-                    size
-                  )}
-            </FormField>
-          </FlexGridItem>
-        ))}
-      </FlexGrid>
+      {renderChildren()}
       <StyledToolbar>
         <div>
           {nextActive && (
@@ -381,7 +391,7 @@ FormView.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };

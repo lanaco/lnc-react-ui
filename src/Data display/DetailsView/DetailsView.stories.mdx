@@ -2,8 +2,8 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import DetailsView from "./index";
 import { useState, useRef } from "react";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Data Display/Details View" component={DetailsView} />
 
@@ -31,11 +31,28 @@ import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
           S: 6,
           inputProps: { type: "text", disabled: true },
         },
-        { label: "Address", accessor: "address", XS: 12, inputProps: { type: "text" }, },
+        {
+          label: "Address",
+          accessor: "address",
+          XS: 12,
+          inputProps: { type: "text" },
+        },
         { label: "Gender", accessor: "gender", XS: 12, S: 6 },
-        { label: "Balance", accessor: "balance", XS: 12, S: 6, inputProps: { type: "text" }, },
+        {
+          label: "Balance",
+          accessor: "balance",
+          XS: 12,
+          S: 6,
+          inputProps: { type: "text" },
+        },
       ]}
-      data={{name: "Katie Wilson", company: "QUAREX", address: "125 Oceanview Avenue, Moqiono, Mississippi, 418", gender: "female", balance: "$1,476.66"}}
+      data={{
+        name: "Katie Wilson",
+        company: "QUAREX",
+        address: "125 Oceanview Avenue, Moqiono, Mississippi, 418",
+        gender: "female",
+        balance: "$1,476.66",
+      }}
       disableNext={true}
       disablePrevious={true}
       disableEdit={true}
@@ -45,6 +62,21 @@ import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 </Canvas>
 
 <ArgsTable story="Default" />
+
+## Custom `DetailsView` component.
+
+<Canvas>
+  <Story name="Custom form view" args={{}}>
+    <DetailsView
+      disableNext={true}
+      disablePrevious={true}
+      disableEdit={true}
+      disableGoBack={true}
+    >
+      <div>Custom component</div>
+    </DetailsView>
+  </Story>
+</Canvas>
 
 #### `DetailsView` is inteded for quick implementation of simple detail views. It utilizes `FlexGrid` to create layout.
 

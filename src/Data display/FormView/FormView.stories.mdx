@@ -6,15 +6,15 @@ import { useForm, Controller } from "react-hook-form";
 import Dropdown from "../../Inputs/Dropdown";
 import MultiSelectDropdown from "../../Inputs/MultiSelectDropdown";
 import DateInput from "../../Basic Inputs/DateInput";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Data Display/Form View" component={FormView} />
 
 # Form View
 
 <SyntaxHighlighter language="jsx" style={nord}>
- {'import { FormView } from "@lanaco/lnc-react-ui";'}
+  {'import { FormView } from "@lanaco/lnc-react-ui";'}
 </SyntaxHighlighter>
 
 ##### Example of Form View that uses `react-hook-form`
@@ -149,6 +149,21 @@ import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 <ArgsTable story="Default" />
 
+## Custom `FormView` component.
+
+<Canvas>
+  <Story name="Custom form view" args={{}}>
+    <FormView
+      disableNext={true}
+      disablePrevious={true}
+      disableEdit={true}
+      disableGoBack={true}
+    >
+      <div>Custom component</div>
+    </FormView>
+  </Story>
+</Canvas>
+
 #### `FormView` is inteded for quick implementation of simple form views. It utilizes `FlexGrid` to create layout.
 
 ## fields
@@ -174,10 +189,11 @@ When type of the `field` is `custom`, it is necessary to provide value for prope
 Example of usage of custom field with _ react-hook-form _ using `Controller`.
 
 <SyntaxHighlighter language="jsx" style={nord}>
- {'import { Controller } from "react-hook-form";'}
+  {'import { Controller } from "react-hook-form";'}
 </SyntaxHighlighter>
 
 <SyntaxHighlighter language="json" style={nord}>
- {' { label: "Roles",\naccessor: "roles",\nXS: 12,\ntype: "custom",\nelement: <Controller\ncontrol={control}\nname="roles"\nrender={({field}) => (\n<MultiSelectDropdown {...field}\n options={[{ value: "user", label: "User" }, { value: "customer", label: "Customer" }, { value: "admin", label: "Admin" }]}\n/>)}\n/> } '}
+  {
+    ' { label: "Roles",\naccessor: "roles",\nXS: 12,\ntype: "custom",\nelement: <Controller\ncontrol={control}\nname="roles"\nrender={({field}) => (\n<MultiSelectDropdown {...field}\n options={[{ value: "user", label: "User" }, { value: "customer", label: "Customer" }, { value: "admin", label: "Admin" }]}\n/>)}\n/> } '
+  }
 </SyntaxHighlighter>
-
