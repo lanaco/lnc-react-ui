@@ -76,6 +76,25 @@ const DetailsView = React.forwardRef((props, ref) => {
     goBack(e, data);
   };
 
+  const renderChildren = () => {
+    return (
+      <>
+        {children || (
+          <FlexGrid spacing={10} {...flexGridProps}>
+            {fields.map((item, i) => (
+              <FlexGridItem key={i} {...item}>
+                <Label key={i} color={color} size={size}>
+                  {item.label}:
+                </Label>
+                {data[item.accessor]}
+              </FlexGridItem>
+            ))}
+          </FlexGrid>
+        )}
+      </>
+    );
+  };
+
   return (
     <StyledDetailsView
       ref={ref}
@@ -97,16 +116,7 @@ const DetailsView = React.forwardRef((props, ref) => {
           size={size}
         />
       )}
-      <FlexGrid spacing={10} {...flexGridProps}>
-        {fields.map((item, i) => (
-          <FlexGridItem key={i} {...item}>
-            <Label key={i} color={color} size={size}>
-              {item.label}:
-            </Label>
-            {data[item.accessor]}
-          </FlexGridItem>
-        ))}
-      </FlexGrid>
+      {renderChildren()}
       <StyledToolbar>
         <div>
           {showNext && (
@@ -202,7 +212,7 @@ DetailsView.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };
