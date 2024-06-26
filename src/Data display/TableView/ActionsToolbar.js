@@ -62,6 +62,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
     customActions,
     selectedRowsLength,
     readOnly,
+    actionDropdownProps,
     actionsDropdownZIndex,
     //----------------
     onCreate,
