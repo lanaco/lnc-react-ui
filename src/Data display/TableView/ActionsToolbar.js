@@ -27,14 +27,15 @@ const StyledToolbar = styled.div`
       "background",
       "backgroundOpacity"
     )};
-  border: ${props => `1px solid ${getColorRgbaValue(
-    props.theme,
-    "Toolbar",
-    props.color,
-    "enabled",
-    "border",
-    "borderOpacity"
-  )}`};
+  border: ${(props) =>
+    `1px solid ${getColorRgbaValue(
+      props.theme,
+      "Toolbar",
+      props.color,
+      "enabled",
+      "border",
+      "borderOpacity"
+    )}`};
   gap: 6px;
   justify-content: space-between;
   & > div {
@@ -79,9 +80,16 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
   const { theme } = useTheme();
 
   return (
-    <StyledToolbar ref={ref} theme={theme} color={color} className={className} style={style} {...rest}>
+    <StyledToolbar
+      ref={ref}
+      theme={theme}
+      color={color}
+      className={`lnc-table-view-actions-toolbar ${className}`}
+      style={style}
+      {...rest}
+    >
       <div>
-        {(showCreate && readOnly == false) && (
+        {showCreate && readOnly == false && (
           <Button
             leadingIcon="plus"
             btnType="outline"
@@ -97,6 +105,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
       </div>
       <div>
         <DropdownMenu
+          className="lnc-table-view-actions-toolbar-dropdown"
           color={color}
           size={size}
           actionsDropdownZIndex={actionsDropdownZIndex}
@@ -112,7 +121,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
             />
           }
         >
-          {(showCopy && readOnly == false) && (
+          {showCopy && readOnly == false && (
             <DropdownItem
               icon="copy"
               disabled={!(enableCopyOnSelection && selectedRowsLength > 1)}
@@ -121,7 +130,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
               {copyText}
             </DropdownItem>
           )}
-          {(showEdit && readOnly == false) && (
+          {showEdit && readOnly == false && (
             <DropdownItem
               icon="pen"
               disabled={!(enableEditOnSelection && selectedRowsLength > 1)}
@@ -130,7 +139,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
               {editText}
             </DropdownItem>
           )}
-          {(showDelete && readOnly == false) && (
+          {showDelete && readOnly == false && (
             <DropdownItem
               icon="trash"
               disabled={!(enableDeleteOnSelection && selectedRowsLength > 1)}
@@ -191,7 +200,7 @@ ActionsToolbar.defaultProps = {
   //-----------------------
   style: {},
   color: "primary",
-  size: "small"
+  size: "small",
 };
 
 ActionsToolbar.propTypes = {
@@ -222,7 +231,7 @@ ActionsToolbar.propTypes = {
   /**
    * If `readOnly={true}` actions Delete, Edit and Copy won't be shown.
    */
-   readOnly: PropTypes.bool,
+  readOnly: PropTypes.bool,
   //-------------------------------------------------------------
   onCreate: PropTypes.func,
   onEdit: PropTypes.func,
@@ -240,7 +249,7 @@ ActionsToolbar.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

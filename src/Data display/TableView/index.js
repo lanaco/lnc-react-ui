@@ -39,6 +39,7 @@ const TableView = React.forwardRef((props, ref) => {
     pagination,
     readOnly,
     actionsDropdownZIndex,
+    actionDropdownProps,
     //----------------
     onCreate,
     onEdit,
@@ -146,6 +147,7 @@ const TableView = React.forwardRef((props, ref) => {
           onEdit={handleEdit}
           onDelete={handleDelete}
           actionsDropdownZIndex={actionsDropdownZIndex}
+          actionDropdownProps={actionDropdownProps}
         />
       )
     );
