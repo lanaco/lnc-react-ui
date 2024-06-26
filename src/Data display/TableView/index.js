@@ -38,6 +38,8 @@ const TableView = React.forwardRef((props, ref) => {
     customActions,
     pagination,
     readOnly,
+    actionsDropdownZIndex,
+    actionDropdownProps,
     //----------------
     onCreate,
     onEdit,
@@ -47,6 +49,7 @@ const TableView = React.forwardRef((props, ref) => {
     onFilter,
     onSort,
     onPageChange,
+    onEmptyRowsSelection,
     //------------------
     className,
     style,
@@ -109,10 +112,12 @@ const TableView = React.forwardRef((props, ref) => {
 
   const handleEdit = (e) => {
     onEdit(selectedRows, e);
+    setSelectedRows([]);
   };
 
   const handleDelete = (e) => {
     onDelete(selectedRows, e);
+    setSelectedRows([]);
   };
 
   const handlePageChange = (page) => {
@@ -141,6 +146,8 @@ const TableView = React.forwardRef((props, ref) => {
           onCopy={handleCopy}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          actionsDropdownZIndex={actionsDropdownZIndex}
+          actionDropdownProps={actionDropdownProps}
         />
       )
     );
