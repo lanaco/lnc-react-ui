@@ -65,6 +65,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
     readOnly,
     actionDropdownProps,
     actionsDropdownZIndex,
+    actionsDropdownPlacement,
     //----------------
     onCreate,
     onEdit,
@@ -108,7 +109,8 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
           className="lnc-table-view-actions-toolbar-dropdown"
           color={color}
           size={size}
-          actionsDropdownZIndex={actionsDropdownZIndex}
+          zIndex={actionsDropdownZIndex}
+          placement={actionsDropdownPlacement}
           {...actionDropdownProps}
           control={
             <Button

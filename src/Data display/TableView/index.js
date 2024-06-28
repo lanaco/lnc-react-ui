@@ -39,6 +39,7 @@ const TableView = React.forwardRef((props, ref) => {
     pagination,
     readOnly,
     actionsDropdownZIndex,
+    actionsDropdownPlacement,
     actionDropdownProps,
     //----------------
     onCreate,
@@ -91,7 +92,7 @@ const TableView = React.forwardRef((props, ref) => {
 
   const handleRowClick = (e, rowData) => {
     //QUICKFIX ignore when click is on checkbox (row selection checkbox)
-    if(e.target?.type !== "checkbox" && e.target?.className !== "checkmark") {
+    if (e.target?.type !== "checkbox" && e.target?.className !== "checkmark") {
       if (tableProps?.onRowClick) tableProps.onRowClick(e, rowData);
 
       handleDetails(rowData, e);
@@ -148,6 +149,7 @@ const TableView = React.forwardRef((props, ref) => {
           onDelete={handleDelete}
           actionsDropdownZIndex={actionsDropdownZIndex}
           actionDropdownProps={actionDropdownProps}
+          actionsDropdownPlacement={actionsDropdownPlacement}
         />
       )
     );
@@ -168,7 +170,9 @@ const TableView = React.forwardRef((props, ref) => {
         <Table
           size={tableProps?.size ? tableProps.size : size}
           color={tableProps?.color ? tableProps.color : color}
-          EnableSelection={(rowsSingleSelect || rowsMultiSelect) && readOnly == false}
+          EnableSelection={
+            (rowsSingleSelect || rowsMultiSelect) && readOnly == false
+          }
           onSelectRow={(e, row, isSelected) =>
             handleSelectedRow(row, !isSelected)
           }
@@ -217,6 +221,8 @@ TableView.defaultProps = {
   tableProps: {},
   tableProps: {},
   actionsToolbarProps: {},
+  actionsDropdownZIndex: null,
+  actionsDropdownPlacement: null,
   paginationProps: {},
   rowsSingleSelect: true,
   rowsMultiSelect: false,
@@ -254,6 +260,8 @@ TableView.propTypes = {
   rowsMultiSelect: PropTypes.bool,
   loading: PropTypes.bool,
   showCreate: PropTypes.bool,
+  actionsDropdownZIndex: PropTypes.any,
+  actionsDropdownPlacement: PropTypes.any,
   /**
    * Enable create
    */
@@ -311,7 +319,7 @@ TableView.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
