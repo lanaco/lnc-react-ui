@@ -124,7 +124,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
           {showCopy && readOnly == false && (
             <DropdownItem
               icon="copy"
-              disabled={!(enableCopyOnSelection && selectedRowsLength > 1)}
+              disabled={!(enableCopyOnSelection && selectedRowsLength > 0)}
               onClick={onCopy}
             >
               {copyText}
@@ -133,7 +133,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
           {showEdit && readOnly == false && (
             <DropdownItem
               icon="pen"
-              disabled={!(enableEditOnSelection && selectedRowsLength > 1)}
+              disabled={!(enableEditOnSelection && selectedRowsLength > 0)}
               onClick={onEdit}
             >
               {editText}
@@ -142,7 +142,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
           {showDelete && readOnly == false && (
             <DropdownItem
               icon="trash"
-              disabled={!(enableDeleteOnSelection && selectedRowsLength > 1)}
+              disabled={!(enableDeleteOnSelection && selectedRowsLength > 0)}
               onClick={onDelete}
             >
               {deleteText}
@@ -158,7 +158,7 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
                   disabled={
                     !(
                       (action.enableOnSelection == true &&
-                        selectedRowsLength > 1) ||
+                        selectedRowsLength > 0) ||
                       (action.enable == true &&
                         action.enableOnSelection == false)
                     )
