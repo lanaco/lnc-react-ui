@@ -278,6 +278,7 @@ const FormView = React.forwardRef((props, ref) => {
           style={{ width: "fit-content" }}
           onClick={(e) => handleGoBack(e, data)}
           disabled={disableGoBack}
+          type="button"
         />
       )}
       {renderChildren()}
@@ -290,6 +291,7 @@ const FormView = React.forwardRef((props, ref) => {
                 icon="angle-left"
                 disabled={disablePrevious}
                 onClick={(e) => goToPrevious(data, e)}
+                type="button"
               />
               &nbsp;&nbsp;
             </>
@@ -300,6 +302,7 @@ const FormView = React.forwardRef((props, ref) => {
               icon="angle-right"
               disabled={disableNext}
               onClick={(e) => goToNext(data, e)}
+              type="button"
             />
           )}
         </div>
@@ -311,6 +314,7 @@ const FormView = React.forwardRef((props, ref) => {
             text={discardText}
             disabled={disableDiscard}
             onClick={onDiscard}
+            type="button"
           />
           &nbsp;&nbsp;
           <Button
