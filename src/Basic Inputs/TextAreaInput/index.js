@@ -87,7 +87,6 @@ const TextAreaInput = React.forwardRef((props, ref) => {
 
   return (
     <StyledTextareaWrapper
-      ref={ref}
       style={style}
       className={className}
       theme={theme}
@@ -97,38 +96,41 @@ const TextAreaInput = React.forwardRef((props, ref) => {
       disabled={disabled}
       readOnly={readOnly}
       collapseOnBlur={collapseOnBlur}
-    > 
-    {
-      // Controlled input and uncotrolled input must be differentiated because of usage of the value property
-      (value == null || value == "undefined") ?
-      <ReactTextareaAutosize
-        placeholder={placeholder}
-        disabled={disabled}
-        defaultValue={defaultValue}
-        readOnly={readOnly}
-        tabIndex={tabIndex}
-        minRows={innerMinRows}
-        maxRows={innerMaxRows}
-        onChange={onValueChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        {...rest}
-      />
-      :
-      <ReactTextareaAutosize
-        placeholder={placeholder}
-        disabled={disabled}
-        value={inputValue}
-        readOnly={readOnly}
-        tabIndex={tabIndex}
-        minRows={innerMinRows}
-        maxRows={innerMaxRows}
-        onChange={onValueChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        {...rest}
-      />
-    }
+    >
+      {
+        // Controlled input and uncotrolled input must be differentiated because of usage of the value property
+        value == null || value == "undefined" ? (
+          <ReactTextareaAutosize
+            ref={ref}
+            placeholder={placeholder}
+            disabled={disabled}
+            defaultValue={defaultValue}
+            readOnly={readOnly}
+            tabIndex={tabIndex}
+            minRows={innerMinRows}
+            maxRows={innerMaxRows}
+            onChange={onValueChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            {...rest}
+          />
+        ) : (
+          <ReactTextareaAutosize
+            ref={ref}
+            placeholder={placeholder}
+            disabled={disabled}
+            value={inputValue}
+            readOnly={readOnly}
+            tabIndex={tabIndex}
+            minRows={innerMinRows}
+            maxRows={innerMaxRows}
+            onChange={onValueChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            {...rest}
+          />
+        )
+      }
     </StyledTextareaWrapper>
   );
 });
@@ -198,7 +200,7 @@ TextAreaInput.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
