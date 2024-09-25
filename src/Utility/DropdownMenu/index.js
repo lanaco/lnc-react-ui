@@ -47,6 +47,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     //----------------
     animation,
     className,
+    contentClassName,
     color,
     size,
     popoverProps,
