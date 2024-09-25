@@ -47,7 +47,6 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     //----------------
     animation,
     className,
-    style,
     color,
     size,
     popoverProps,
@@ -129,7 +128,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
   };
 
   return (
-    <StyledDropDown ref={ref} {...rest}>
+    <StyledDropDown ref={ref} className={className} {...rest}>
       <Popover open={openPopover} onOpenChange={setOpenPopover} placement={placement} offsetValue={offsetValue}>
         <PopoverTrigger onClick={() => setOpenPopover((v) => !v)}>{clonedControl()}</PopoverTrigger>
         <PopoverContent zIndex={zIndex}>
@@ -138,6 +137,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
             widthfitcontent={widthFitContent}
             color={color}
             theme={theme}
+            className={contentClassName}
           >
             {clonedChildren}
           </StyledContent>
@@ -174,9 +174,10 @@ DropdownMenu.defaultProps = {
       height: { duration: 0.15 },
     },
   },
-  style: {},
   color: "primary",
   size: "small",
+  className: "",
+  contentClassName: "",
 };
 
 DropdownMenu.propTypes = {
@@ -224,7 +225,6 @@ DropdownMenu.propTypes = {
   //---------------------------------------------------------------
   animation: PropTypes.object,
   className: PropTypes.string,
-  style: PropTypes.object,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
