@@ -104,29 +104,31 @@ const DetailsView = React.forwardRef((props, ref) => {
       borderRadius="regular"
       {...rest}
     >
-      {showBack && (
-        <Button
-          key={0}
-          leadingIcon={"arrow-circle-left"}
-          text={goBackText}
-          btnType={"outline"}
-          style={{ width: "fit-content" }}
-          onClick={(e) => handleGoBack(e, data)}
-          disabled={disableGoBack}
-          color={color}
-          size={size}
-        />
-      )}
-      {showEdit && editOnTop && (
-        <IconButton
-          btnType="outline"
-          icon="pen"
-          disabled={disableEdit}
-          onClick={(e) => onEdit(data, e)}
-          color={color}
-          size={size}
-        />
-      )}
+      <StyledToolbar>
+        {showBack && (
+          <Button
+            key={0}
+            leadingIcon={"arrow-circle-left"}
+            text={goBackText}
+            btnType={"outline"}
+            style={{ width: "fit-content" }}
+            onClick={(e) => handleGoBack(e, data)}
+            disabled={disableGoBack}
+            color={color}
+            size={size}
+          />
+        )}
+        {showEdit && editOnTop && (
+          <IconButton
+            btnType="outline"
+            icon="pen"
+            disabled={disableEdit}
+            onClick={(e) => onEdit(data, e)}
+            color={color}
+            size={size}
+          />
+        )}
+      </StyledToolbar>
       {renderChildren()}
       <StyledToolbar>
         <div>
