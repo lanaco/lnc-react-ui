@@ -54,6 +54,7 @@ const DetailsView = React.forwardRef((props, ref) => {
     disableNext,
     disablePrevious,
     disableEdit,
+    showEditOnTop,
     //------------------
     goToNext,
     goToPrevious,
@@ -116,6 +117,16 @@ const DetailsView = React.forwardRef((props, ref) => {
           size={size}
         />
       )}
+      {showEdit && showEditOnTop && (
+        <IconButton
+          btnType="outline"
+          icon="pen"
+          disabled={disableEdit}
+          onClick={(e) => onEdit(data, e)}
+          color={color}
+          size={size}
+        />
+      )}
       {renderChildren()}
       <StyledToolbar>
         <div>
@@ -143,7 +154,7 @@ const DetailsView = React.forwardRef((props, ref) => {
             />
           )}
         </div>
-        {showEdit && (
+        {showEdit && !showEditOnTop && (
           <IconButton
             btnType="outline"
             icon="pen"
@@ -171,6 +182,7 @@ DetailsView.defaultProps = {
   disableEdit: false,
   fields: {},
   data: {},
+  showEditOnTop: false,
   //-----------------------
   goToNext: () => {},
   goToPrevious: () => {},
@@ -196,6 +208,7 @@ DetailsView.propTypes = {
   disablePrevious: PropTypes.bool,
   disableEdit: PropTypes.bool,
   flexGridProps: PropTypes.any,
+  showEditOnTop: PropTypes.bool,
   //-----------------------------------------------------------
   goToNext: PropTypes.func,
   goToPrevious: PropTypes.func,
