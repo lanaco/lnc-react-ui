@@ -12,7 +12,6 @@ import {
   getComponentPropValue,
 } from "../../_utils/utils";
 import { useTheme } from "@emotion/react";
-import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 
 const StyledToolbar = styled.div`
   display: flex;
@@ -41,7 +40,6 @@ const StyledDetailsView = styled.div`
 
 const DetailsView = React.forwardRef((props, ref) => {
   const {
-    actionsToolbarProps,
     goToPreviousView,
     id,
     data,
@@ -97,15 +95,15 @@ const DetailsView = React.forwardRef((props, ref) => {
     );
   };
 
-  const renderToolbar = () => {
-    renderCustomElement(
-      getCustomRender("ACTIONS_TOOLBAR", children),
-      {
-        ...actionsToolbarProps,
-      },
-      children
-    ) ||
-      (showBack && (
+  return (
+    <StyledDetailsView
+      ref={ref}
+      theme={theme}
+      color={color}
+      borderRadius="regular"
+      {...rest}
+    >
+      {showBack && (
         <Button
           key={0}
           leadingIcon={"arrow-circle-left"}
@@ -117,18 +115,7 @@ const DetailsView = React.forwardRef((props, ref) => {
           color={color}
           size={size}
         />
-      ));
-  };
-
-  return (
-    <StyledDetailsView
-      ref={ref}
-      theme={theme}
-      color={color}
-      borderRadius="regular"
-      {...rest}
-    >
-      {renderToolbar()}
+      )}
       {renderChildren()}
       <StyledToolbar>
         <div>
