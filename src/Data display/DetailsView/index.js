@@ -54,7 +54,7 @@ const DetailsView = React.forwardRef((props, ref) => {
     disableNext,
     disablePrevious,
     disableEdit,
-    showEditOnTop,
+    editOnTop,
     //------------------
     goToNext,
     goToPrevious,
@@ -117,7 +117,7 @@ const DetailsView = React.forwardRef((props, ref) => {
           size={size}
         />
       )}
-      {showEdit && showEditOnTop && (
+      {showEdit && editOnTop && (
         <IconButton
           btnType="outline"
           icon="pen"
@@ -154,7 +154,7 @@ const DetailsView = React.forwardRef((props, ref) => {
             />
           )}
         </div>
-        {showEdit && !showEditOnTop && (
+        {showEdit && !editOnTop && (
           <IconButton
             btnType="outline"
             icon="pen"
@@ -182,7 +182,7 @@ DetailsView.defaultProps = {
   disableEdit: false,
   fields: {},
   data: {},
-  showEditOnTop: false,
+  editOnTop: false,
   //-----------------------
   goToNext: () => {},
   goToPrevious: () => {},
@@ -208,7 +208,7 @@ DetailsView.propTypes = {
   disablePrevious: PropTypes.bool,
   disableEdit: PropTypes.bool,
   flexGridProps: PropTypes.any,
-  showEditOnTop: PropTypes.bool,
+  editOnTop: PropTypes.bool,
   //-----------------------------------------------------------
   goToNext: PropTypes.func,
   goToPrevious: PropTypes.func,
