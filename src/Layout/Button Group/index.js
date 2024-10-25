@@ -102,7 +102,7 @@ const Container = styled.div`
   }
 `;
 
-const ButtonGroup = ({ children, borderRadius, style, className }) => {
+const ButtonGroup = ({ children, borderRadius = "regular", style = {}, className = "" }) => {
   const theme = useTheme();
 
   return (
@@ -110,18 +110,18 @@ const ButtonGroup = ({ children, borderRadius, style, className }) => {
       borderRadius={getBorderRadiusValueWithUnits(theme, borderRadius)}
       theme={theme}
       style={style}
-      className={className}
+      className={"lnc-ui-button-group " + className}
     >
       {children}
     </Container>
   );
 };
 
-ButtonGroup.defaultProps = {
-  borderRadius: "regular",
-  className: "",
-  style: {},
-};
+// ButtonGroup.defaultProps = {
+//   borderRadius: "regular",
+//   className: "",
+//   style: {},
+// };
 
 ButtonGroup.propTypes = {
   borderRadius: PropTypes.oneOf([

@@ -7,7 +7,13 @@ import EditableTableRow from "./components/EditableTableRow";
 
 const EditableTable = forwardRef((props, ref) => {
   //
-  var { Data, onRowFocusChange, onDiscard, onInputChange } = props;
+  var {
+    __TYPE__ = "EDITABLE_TABLE",
+    Data = [],
+    onRowFocusChange = () => {},
+    onDiscard = () => {},
+    onInputChange = () => {},
+  } = props;
 
   //================ STATE =================================================================
 
@@ -188,38 +194,39 @@ const EditableTable = forwardRef((props, ref) => {
   );
 });
 
-EditableTable.defaultProps = {
-  __TYPE__: "EDITABLE_TABLE",
-  //--------------------
-  Loading: false,
-  Columns: [],
-  Data: [],
-  //--------------------
-  EnableSelection: false,
-  EnableOrdering: false,
-  EnableLoader: false,
-  EnableSelectAll: false,
-  //--------------------
-  NoDataText: "No data to show",
-  SelectedData: [],
-  SelectedEntirePage: false,
-  RowIdentifier: "id",
-  VisibilityPattern: {},
-  Ordering: {},
-  //--------------------
-  onColumnClick: () => {},
-  onRowClick: () => {},
-  onSelectRow: () => {},
-  onSelectAll: () => {},
-  //--------------------
-  onRowFocusChange: () => {},
-  onDiscard: () => {},
-  onInputChange: () => {},
-  //--------------------
-  size: "small",
-  color: "primary",
-  className: "",
-};
+// TODO : type
+// EditableTable.defaultProps = {
+//   __TYPE__: "EDITABLE_TABLE",
+//   //--------------------
+//   Loading: false,
+//   Columns: [],
+//   Data: [],
+//   //--------------------
+//   EnableSelection: false,
+//   EnableOrdering: false,
+//   EnableLoader: false,
+//   EnableSelectAll: false,
+//   //--------------------
+//   NoDataText: "No data to show",
+//   SelectedData: [],
+//   SelectedEntirePage: false,
+//   RowIdentifier: "id",
+//   VisibilityPattern: {},
+//   Ordering: {},
+//   //--------------------
+//   onColumnClick: () => {},
+//   onRowClick: () => {},
+//   onSelectRow: () => {},
+//   onSelectAll: () => {},
+//   //--------------------
+//   onRowFocusChange: () => {},
+//   onDiscard: () => {},
+//   onInputChange: () => {},
+//   //--------------------
+//   size: "small",
+//   color: "primary",
+//   className: "",
+// };
 
 EditableTable.propTypes = {
   /**
@@ -264,11 +271,11 @@ EditableTable.propTypes = {
    * @param sortable - Can be sorted
    *
    */
-  Columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  Columns: PropTypes.arrayOf(PropTypes.object),
   /**
    * Defines the data displayed in each row.
    */
-  Data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  Data: PropTypes.arrayOf(PropTypes.object),
   /**
    * Define the selected data.
    * @param id - Column identifier (mandatory field)
@@ -360,3 +367,5 @@ EditableTable.propTypes = {
 };
 
 export default EditableTable;
+
+EditableTable.displayName = "EDITABLE_TABLE";

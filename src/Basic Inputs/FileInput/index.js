@@ -26,7 +26,7 @@ const Container = styled.label`
     )};
   border-radius: 8px;
   ${(props) =>
-    props.focused && props.readOnly == false ? getOutlineCss(props.theme) : ""}
+    props.focused === true && props.readOnly !== true ? getOutlineCss(props.theme) : ""}
 `;
 
 const Input = styled.input`
@@ -49,11 +49,11 @@ const Label = styled.div`
     getColorRgbaValue(
       props.theme,
       "Input",
-      props.focused ? "primary" : props.color,
+      props.focused === true ? "primary" : props.color,
       "enabled",
       "prefix"
     )};
-  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+  cursor: ${(props) => (props.disabled === true ? "default" : "pointer")};
   background-color: ${(props) =>
     getColorRgbaValue(
       props.theme,
@@ -67,13 +67,13 @@ const Label = styled.div`
       getColorRgbaValue(
         props.theme,
         "Input",
-        props.focused ? "primary" : props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.focused === true ? "primary" : props.color,
+        props.disabled === true ? "disabled" : "enabled",
         "border"
       )};
   border-radius: 8px 0 0 8px;
 
-  ${(props) => (props.disabled ? getDisabledStateCss(props.theme) : "")}
+  ${(props) => (props.disabled === true ? getDisabledStateCss(props.theme) : "")}
 `;
 
 const FileName = styled.input`
@@ -88,8 +88,8 @@ const FileName = styled.input`
     getColorRgbaValue(
       props.theme,
       "Input",
-      props.focused ? "primary" : props.color,
-      props.disabled ? "disabled" : "enabled",
+      props.focused === true ? "primary" : props.color,
+      props.disabled === true ? "disabled" : "enabled",
       "border"
     )};
   border-radius: 0 8px 8px 0;
@@ -98,7 +98,7 @@ const FileName = styled.input`
     getColorRgbaValue(
       props.theme,
       "Input",
-      props.focused ? "primary" : props.color,
+      props.focused === true ? "primary" : props.color,
       "enabled",
       "text"
     )};
@@ -115,30 +115,28 @@ const FileName = styled.input`
     getColorRgbaValue(
       props.theme,
       "Input",
-      props.focused ? "primary" : props.color,
+      props.focused === true ? "primary" : props.color,
       "enabled",
       "text"
     )};
 
-  ${(props) => (props.disabled ? getDisabledStateCss(props.theme) : "")}
+  ${(props) => (props.disabled === true ? getDisabledStateCss(props.theme) : "")}
 `;
 
 const FileInput = React.forwardRef((props, ref) => {
   const {
-    id,
-    className,
-    style,
+    className = "",
+    style = {},
     onChange,
     onFocus,
     onBlur,
     disabled,
     readOnly,
-    multiple,
-    accept,
-    label,
-    tabIndex,
-    color,
-    size,
+    multiple = false,
+    accept = "",
+    label = "Choose File",
+    color = "primary",
+    size = "small",
     ...rest
   } = props;
 
@@ -176,7 +174,7 @@ const FileInput = React.forwardRef((props, ref) => {
     } else files = [];
 
     setFiles(files);
-    if (onChange) onChange(e, files);
+    if (onChange) onChange?.(e, files);
   };
 
   return (
@@ -194,15 +192,13 @@ const FileInput = React.forwardRef((props, ref) => {
         ref={ref}
         onChange={disabled || readOnly ? () => {} : handleOnChange}
         type="file"
-        id={id}
-        tabIndex={tabIndex}
         onFocus={(e) => {
           if (!disabled) setFocused(true);
-          if (onFocus && !disabled) onFocus(e);
+          if (onFocus && !disabled) onFocus?.(e);
         }}
         onBlur={(e) => {
           if (!disabled) setFocused(false);
-          if (onBlur && !disabled) onBlur(e);
+          if (onBlur && !disabled) onBlur?.(e);
         }}
         {...rest}
       />
@@ -217,26 +213,27 @@ const FileInput = React.forwardRef((props, ref) => {
   );
 });
 
-FileInput.defaultProps = {
-  id: "",
-  disabled: false,
-  readOnly: false,
-  multiple: false,
-  accept: "",
-  label: "Choose File",
-  tabIndex: 0,
-  //------------------
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
-  //------------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// FileInput.defaultProps = {
+//   id: "",
+//   disabled: false,
+//   readOnly: false,
+//   multiple: false,
+//   accept: "",
+//   label: "Choose File",
+//   tabIndex: 0,
+//   //------------------
+//   onChange: () => {},
+//   onFocus: () => {},
+//   onBlur: () => {},
+//   //------------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
+
 FileInput.propTypes = {
-  id: PropTypes.any.isRequired,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   multiple: PropTypes.bool,

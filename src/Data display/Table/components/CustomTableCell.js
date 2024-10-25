@@ -28,16 +28,17 @@ const Text = styled.span`
 const TableCell = (props) => {
   //--------------------------
   const {
-    Column,
-    RowData,
-    Index,
-    EnableSelection,
-    EnableRowHighlight,
-    GetRowHighlightColor,
+    __TYPE__ = "TABLE_CELL",
+    Column = {},
+    RowData = {},
+    Index = 0,
+    EnableSelection = false,
+    EnableRowHighlight = false,
+    GetRowHighlightColor = () => "",
     //----------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -124,27 +125,28 @@ const TableCell = (props) => {
   );
 };
 
-TableCell.defaultProps = {
-  __TYPE__: "TABLE_CELL",
-  //--------------------
-  Column: {},
-  RowData: {},
-  Index: 0,
-  EnableSelection: false,
-  EnableRowHighlight: false,
-  GetRowHighlightColor: () => "",
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableCell.defaultProps = {
+//   __TYPE__: "TABLE_CELL",
+//   //--------------------
+//   Column: {},
+//   RowData: {},
+//   Index: 0,
+//   EnableSelection: false,
+//   EnableRowHighlight: false,
+//   GetRowHighlightColor: () => "",
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Column: PropTypes.object.isRequired,
-  RowData: PropTypes.object.isRequired,
-  Index: PropTypes.number.isRequired,
+  Column: PropTypes.object,
+  RowData: PropTypes.object,
+  Index: PropTypes.number,
   EnableSelection: PropTypes.bool,
   EnableRowHighlight: PropTypes.bool,
   GetRowHighlightColor: PropTypes.func,
@@ -164,3 +166,5 @@ TableCell.propTypes = {
 };
 
 export default TableCell;
+
+TableCell.displayName = 'TABLE_CELL';

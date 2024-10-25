@@ -25,17 +25,27 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
   const {
     item,
     //------------------
-    onItemSelected,
+    onItemSelected = () => {},
     //--------------------
-    defaultOpen,
-    tuckIn,
-    tuckInSize,
-    animation,
-    color,
-    size,
-    className,
-    style,
-    __TYPE__,
+    defaultOpen = false,
+    tuckIn = true,
+    tuckInSize = "0.3rem",
+    animation = {
+      animate: { opacity: 1, height: "auto" },
+      exit: { opacity: 0, height: 0 },
+      initial: { opacity: 0, height: 0 },
+      transition: {
+        type: "tween",
+        duration: 0.15,
+        opacity: { duration: 0.15, ease: "easeOut" },
+        height: { duration: 0.15 },
+      },
+    },
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
+    __TYPE__ = "NESTED_ITEM",
     children,
     ...rest
   } = props;
@@ -59,7 +69,9 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
     if (React.isValidElement(child)) {
       if (
         child.props.__TYPE__ == "MENU_ITEM" ||
-        child.props.__TYPE__ == "NESTED_ITEM"
+        child?.type?.displayName === "MENU_ITEM" ||
+        child.props.__TYPE__ == "NESTED_ITEM" ||
+        child?.type?.displayName === "NESTED_ITEM"
       ) {
         return React.cloneElement(child, {
           color: child.props.color ? child.props.color : color,
@@ -96,33 +108,34 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
   );
 });
 
-NestedMenuItem.defaultProps = {
-  defaultOpen: false,
-  tuckIn: true,
-  tuckInSize: "0.3rem",
-  /**
-   * Animation use on nested items open/close
-   */
-  animation: {
-    animate: { opacity: 1, height: "auto" },
-    exit: { opacity: 0, height: 0 },
-    initial: { opacity: 0, height: 0 },
-    transition: {
-      type: "tween",
-      duration: 0.15,
-      opacity: { duration: 0.15, ease: "easeOut" },
-      height: { duration: 0.15 },
-    },
-  },
-  size: "small",
-  color: "primary",
-  style: {},
-  className: "",
-  __TYPE__: "NESTED_ITEM",
-};
+// TODO : type
+// NestedMenuItem.defaultProps = {
+//   defaultOpen: false,
+//   tuckIn: true,
+//   tuckInSize: "0.3rem",
+//   /**
+//    * Animation use on nested items open/close
+//    */
+//   animation: {
+//     animate: { opacity: 1, height: "auto" },
+//     exit: { opacity: 0, height: 0 },
+//     initial: { opacity: 0, height: 0 },
+//     transition: {
+//       type: "tween",
+//       duration: 0.15,
+//       opacity: { duration: 0.15, ease: "easeOut" },
+//       height: { duration: 0.15 },
+//     },
+//   },
+//   size: "small",
+//   color: "primary",
+//   style: {},
+//   className: "",
+//   __TYPE__: "NESTED_ITEM",
+// };
 
 NestedMenuItem.propTypes = {
-  item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+  item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   //--------------------------
   defaultOpen: PropTypes.bool,
   /**
@@ -141,10 +154,12 @@ NestedMenuItem.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   __TYPE__: PropTypes.string,
 };
 
 export default NestedMenuItem;
+
+NestedMenuItem.displayName = 'NESTED_ITEM';

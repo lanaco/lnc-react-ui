@@ -91,18 +91,18 @@ const FileName = styled.span`
 const UploadedFile = React.forwardRef((props, ref) => {
   const {
     id,
-    fileName,
-    fileSize,
-    showFileSize,
+    fileName = "file",
+    fileSize = null,
+    showFileSize = false,
     progressPercentage,
-    className,
-    style,
-    onFileClick,
-    onCancel,
-    size,
-    color,
-    fileIcon,
-    cancelIcon,
+    onFileClick = () => {},
+    onCancel = () => {},
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
+    fileIcon = "file",
+    cancelIcon = "times",
     ...rest
   } = props;
   const theme = useTheme();
@@ -140,7 +140,14 @@ const UploadedFile = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Container ref={ref} id={id} {...themeProps} className={className} style={style} {...rest}>
+    <Container
+      ref={ref}
+      id={id}
+      {...themeProps}
+      className={"lnc-ui-uploaded-file " + className}
+      style={style}
+      {...rest}
+    >
       <Icon
         {...themeProps}
         icon={fileIcon}
@@ -182,23 +189,23 @@ const UploadedFile = React.forwardRef((props, ref) => {
   );
 });
 
-UploadedFile.defaultProps = {
-  fileName: "file",
-  fileSize: null,
-  showFileSize: false,
-  // progressPercentage: 20,
-  //------------------
-  className: "",
-  style: {},
-  //------------------
-  onFileClick: () => {},
-  onCancel: () => {},
-  //------------------
-  size: "small",
-  color: "primary",
-  fileIcon: "file",
-  cancelIcon: "times",
-};
+// UploadedFile.defaultProps = {
+//   fileName: "file",
+//   fileSize: null,
+//   showFileSize: false,
+//   // progressPercentage: 20,
+//   //------------------
+//   className: "",
+//   style: {},
+//   //------------------
+//   onFileClick: () => {},
+//   onCancel: () => {},
+//   //------------------
+//   size: "small",
+//   color: "primary",
+//   fileIcon: "file",
+//   cancelIcon: "times",
+// };
 
 UploadedFile.propTypes = {
   id: PropTypes.any,
@@ -220,7 +227,7 @@ UploadedFile.propTypes = {
     "disabled",
     "neutral",
     "information",
-    "gray"
+    "gray",
   ]),
   fileIcon: PropTypes.string,
   cancelIcon: PropTypes.string,

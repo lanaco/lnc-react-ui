@@ -57,17 +57,17 @@ const StyledInput = styled.label`
   padding: 0.625rem 0.75rem;
   width: 100%;
   ${(props) =>
-    !props.disabled &&
-    props.readOnly == false &&
-    props.isFocused &&
+    !props.disabled === true &&
+    props.readOnly !== true &&
+    props.isFocused === true &&
     getOutlineCss(props.theme)};
-  ${(props) => props.disabled && getDisabledBackgroundCss(props.theme)}
+  ${(props) => props.disabled === true && getDisabledBackgroundCss(props.theme)}
   border: 1px solid ${(props) =>
     getColorRgbaValue(props.theme, "Input", props.color, "disabled", "border")};
 `;
 
 const StyledColorInput = styled.div`
-  ${(props) => !props.disabled && props.readOnly == false && "cursor: pointer;"}
+  ${(props) => !props.disabled === true && props.readOnly !== true && "cursor: pointer;"}
   min-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
   display: inline-flex;
@@ -77,20 +77,20 @@ const StyledColorInput = styled.div`
   & div {
     &:focus {
       ${(props) =>
-        !props.disabled &&
-        !props.withInput &&
-        props.readOnly == false &&
+        props.disabled !== true &&
+        props.withInput !== true &&
+        props.readOnly !== true &&
         getOutlineCss(props.theme)};
     }
     &:hover {
       ${(props) =>
-        !props.disabled &&
+        !props.disabled === true &&
         !props.withInput &&
-        props.readOnly == false &&
+        props.readOnly !== true &&
         getOutlineCss(props.theme)};
     }
     ${(props) =>
-      props.disabled &&
+      props.disabled === true &&
       `opacity: ${
         props.theme.palette.opacity[props.theme.palette.disabled.opacity]
       };`}
@@ -107,7 +107,7 @@ const StyledColorInput = styled.div`
       height: 200%;
       cursor: pointer;
       transform: translate(-25%, -25%);
-      ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+      ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
     }
   }
 `;
@@ -129,23 +129,22 @@ const ColorInput = React.forwardRef((props, ref) => {
   const {
     id,
     name,
-    defaultValue,
+    defaultValue = "#000000",
     value,
-    size,
+    size = "small",
     tabIndex,
-    withInput,
-    className,
-    style,
-    color,
-    debounceTime,
+    withInput = false,
+    className = "",
+    style = {},
+    color = "primary",
+    debounceTime = 180,
     readOnly,
     disabled,
-    onChange,
-    onFocus,
-    onBlur,
-    onInput,
-    onKeyDown,
-    preventDefault,
+    onChange = () => {},
+    onFocus = () => {},
+    onBlur = () => {},
+    onInput = () => {},
+    onKeyDown = () => {},
     labelRef,
     inputProps,
     ...rest
@@ -276,26 +275,26 @@ const ColorInput = React.forwardRef((props, ref) => {
   );
 });
 
-ColorInput.defaultProps = {
-  debounceTime: 180,
-  disabled: false,
-  readOnly: false,
-  tabIndex: 0,
-  preventDefault: true,
-  withInput: false,
-  defaultValue: "#000000",
-  //-------------------------
-  onChange: () => {},
-  onBlur: () => {},
-  onFocus: () => {},
-  onInput: () => {},
-  onKeyDown: () => {},
-  //-------------------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// ColorInput.defaultProps = {
+//   debounceTime: 180,
+//   disabled: false,
+//   readOnly: false,
+//   tabIndex: 0,
+//   preventDefault: true,
+//   withInput: false,
+//   defaultValue: "#000000",
+//   //-------------------------
+//   onChange: () => {},
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   onInput: () => {},
+//   onKeyDown: () => {},
+//   //-------------------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 ColorInput.propTypes = {
   id: PropTypes.any,

@@ -20,13 +20,8 @@ const Item = styled.div`
   min-height: 2.25rem;
   gap: 0.563rem;
   padding: 0.563rem;
-  color: ${props => getColorRgbaValue(
-    props.theme,
-    "MenuItem",
-    props.color,
-    "enabled",
-    "text"
-  )};
+  color: ${(props) =>
+    getColorRgbaValue(props.theme, "MenuItem", props.color, "enabled", "text")};
   ${(props) =>
     getComponentTypographyCss(props.theme, "MenuItem", props.size, "enabled")};
   & .menu-icon-lnc {
@@ -47,7 +42,7 @@ const Item = styled.div`
             "icon"
           )};
 
-    ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+    ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
     background: transparent;
   }
   & .sub-menu-icon-lnc {
@@ -78,7 +73,7 @@ const Item = styled.div`
   `}
   outline: none;
 
-  ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+  ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
   &:hover {
     ${(props) =>
       props.disabled == false &&
@@ -104,27 +99,27 @@ const Item = styled.div`
 const MenuItem = React.forwardRef((props, ref) => {
   const {
     value,
-    active,
+    active = null,
     icon,
-    disabled,
-    isNested,
+    disabled = false,
+    isNested = false,
     showNested,
-    justifyToEnd,
+    justifyToEnd = false,
     //----------------
-    onFocus,
-    onBlur,
-    onClick,
-    onKeyDown,
-    onMouseEnter,
-    onMouseLeave,
-    toggleNested,
-    onItemSelected,
+    onFocus = () => {},
+    onBlur = () => {},
+    onClick = () => {},
+    onKeyDown = () => {},
+    onMouseEnter = () => {},
+    onMouseLeave = () => {},
+    toggleNested = () => {},
+    onItemSelected = () => {},
     //----------------
-    className,
-    style,
-    color,
+    className = "",
+    style = {},
+    color = "primary",
     iconProps,
-    __TYPE__,
+    __TYPE__ = "MENU_ITEM",
     children,
     ...rest
   } = props;
@@ -152,8 +147,8 @@ const MenuItem = React.forwardRef((props, ref) => {
     onFocus(e);
   };
   const handleOnBlur = (e) => {
-    // TODO : 
-    if(active == null) setIsActive(false);
+    // TODO :
+    if (active == null) setIsActive(false);
     onBlur(e);
   };
   const handleOnKeyDown = (e) => {
@@ -267,7 +262,12 @@ const MenuItem = React.forwardRef((props, ref) => {
     <>
       <Item
         ref={ref ? ref : itemRef}
-        className={`menu-item-lnc ` + (isNested ? "nested-menu-item-lnc " : "") + (showNested ? "spread-nested-item-lnc " : "") +className}
+        className={
+          `menu-item-lnc ` +
+          (isNested ? "nested-menu-item-lnc " : "") +
+          (showNested ? "spread-nested-item-lnc " : "") +
+          className
+        }
         {...themeProps}
         disabled={disabled}
         tabIndex={0}
@@ -287,25 +287,26 @@ const MenuItem = React.forwardRef((props, ref) => {
   );
 });
 
-MenuItem.defaultProps = {
-  active: null,
-  disabled: false,
-  isNested: false,
-  justifyToEnd: false,
-  //-------------------------
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  onKeyDown: () => {},
-  onMouseEnter: () => {},
-  onMouseLeave: () => {},
-  onItemSelected: () => {},
-  //-------------------------
-  style: {},
-  className: "",
-  size: "small",
-  __TYPE__: "MENU_ITEM",
-};
+// TODO : type
+// MenuItem.defaultProps = {
+//   active: null,
+//   disabled: false,
+//   isNested: false,
+//   justifyToEnd: false,
+//   //-------------------------
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   onClick: () => {},
+//   onKeyDown: () => {},
+//   onMouseEnter: () => {},
+//   onMouseLeave: () => {},
+//   onItemSelected: () => {},
+//   //-------------------------
+//   style: {},
+//   className: "",
+//   size: "small",
+//   __TYPE__: "MENU_ITEM",
+// };
 
 MenuItem.propTypes = {
   value: PropTypes.any,
@@ -332,7 +333,7 @@ MenuItem.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   iconProps: PropTypes.any,
   size: PropTypes.oneOf(["small", "medium", "large"]),
@@ -340,3 +341,5 @@ MenuItem.propTypes = {
 };
 
 export default MenuItem;
+
+MenuItem.displayName = 'MENU_ITEM';

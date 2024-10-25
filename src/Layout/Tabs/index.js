@@ -15,13 +15,13 @@ const TabsStyled = styled.div`
 
 const Tabs = React.forwardRef((props, ref) => {
   const {
-    type,
-    fullWidth,
+    type = "regular",
+    fullWidth = false,
     //----------------
-    className,
-    style,
-    color,
-    size,
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     children,
     ...rest
   } = props;
@@ -29,7 +29,7 @@ const Tabs = React.forwardRef((props, ref) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState();
 
-  const themeProps = { theme, color, size, style, className };
+  const themeProps = { theme, color, size, style, className: "lnc-ui-tabs " + className };
 
   const handleItemClick = (index) => {
     setActiveIndex(index);
@@ -65,15 +65,15 @@ const Tabs = React.forwardRef((props, ref) => {
   );
 });
 
-Tabs.defaultProps = {
-  type: "regular",
-  fullWidth: false,
-  //---------------------------------------------------------------
-  style: {},
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// Tabs.defaultProps = {
+//   type: "regular",
+//   fullWidth: false,
+//   //---------------------------------------------------------------
+//   style: {},
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 Tabs.propTypes = {
   type: PropTypes.oneOf(["regular", "pill", "underline"]),

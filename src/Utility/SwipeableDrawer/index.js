@@ -92,26 +92,26 @@ const StyledOverlay = styled.div`
 
 const SwipeableDrawer = React.forwardRef((props, ref) => {
   const {
-    direction,
-    open,
-    duration,
-    enableOverlay,
-    zIndex,
-    closeOnClickOutside,
-    closeOnSwipe,
-    isFullPage,
-    unsetHeight,
-    unsetWidth,
+    direction = "right",
+    open = false,
+    duration = 0.8,
+    enableOverlay = true,
+    zIndex = 100,
+    closeOnClickOutside = true,
+    closeOnSwipe = true,
+    isFullPage = false,
+    unsetHeight = false,
+    unsetWidth = false,
     //----------------
-    onClose,
-    onOpen,
+    onClose = () => {},
+    onOpen = () => {},
     //----------------
-    className,
-    style,
-    color,
-    overlayColor,
-    size,
-    drawerSize,
+    className = "",
+    style = {},
+    color = "neutral",
+    overlayColor = "rgba(123, 123, 123, 0.5)",
+    size = "small",
+    drawerSize = "12.5rem",
     children,
     ...rest
   } = props;
@@ -239,35 +239,35 @@ const SwipeableDrawer = React.forwardRef((props, ref) => {
   );
 });
 
-SwipeableDrawer.defaultProps = {
-  direction: "right",
-  open: false,
-  duration: 0.8,
-  overlayColor: "rgba(123, 123, 123, 0.5)",
-  enableOverlay: true,
-  zIndex: 100,
-  closeOnClickOutside: true,
-  closeOnSwipe: true,
-  isFullPage: false,
-  drawerSize: "12.5rem",
-  size: "small",
-  /**
-   * used to fit size of the drawer to the size of its child
-   * when position is top or bottom
-   */
-  unsetHeight: false,
-  /**
-   * used to fit size of the drawer to the size of its child
-   * when position is right or left
-   */
-  unsetWidth: false,
-  //-------------------------
-  onClose: () => {},
-  onOpen: () => {},
-  //-------------------------
-  style: {},
-  color: "neutral",
-};
+// SwipeableDrawer.defaultProps = {
+//   direction: "right",
+//   open: false,
+//   duration: 0.8,
+//   overlayColor: "rgba(123, 123, 123, 0.5)",
+//   enableOverlay: true,
+//   zIndex: 100,
+//   closeOnClickOutside: true,
+//   closeOnSwipe: true,
+//   isFullPage: false,
+//   drawerSize: "12.5rem",
+//   size: "small",
+//   /**
+//    * used to fit size of the drawer to the size of its child
+//    * when position is top or bottom
+//    */
+//   unsetHeight: false,
+//   /**
+//    * used to fit size of the drawer to the size of its child
+//    * when position is right or left
+//    */
+//   unsetWidth: false,
+//   //-------------------------
+//   onClose: () => {},
+//   onOpen: () => {},
+//   //-------------------------
+//   style: {},
+//   color: "neutral",
+// };
 
 SwipeableDrawer.propTypes = {
   direction: PropTypes.oneOf(["top", "right", "left", "bottom"]),

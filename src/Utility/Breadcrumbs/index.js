@@ -34,22 +34,22 @@ const BreadcrumbItem = styled.span``;
 
 const Breadcrumbs = React.forwardRef((props, ref) => {
   const {
-    separator,
-    maxItems,
-    itemsAfterCollapse,
-    itemsBeforeCollapse,
+    separator = "/",
+    maxItems = 8,
+    itemsAfterCollapse = 1,
+    itemsBeforeCollapse = 1,
     //----------------
-    className,
-    style,
-    color,
-    size,
+    className = "",
+    style = {},
+    color = "neutral",
+    size = "small",
     children,
     ...rest
   } = props;
 
   const theme = useTheme();
 
-  const themeProps = { theme, size, color, className, style };
+  const themeProps = { theme, size, color, className: "lnc-ui-breadcrumbs " + className, style };
 
   const [collapse, setCollapse] = useState(true);
 
@@ -122,16 +122,16 @@ const Breadcrumbs = React.forwardRef((props, ref) => {
   );
 });
 
-Breadcrumbs.defaultProps = {
-  maxItems: 8,
-  itemsAfterCollapse: 1,
-  itemsBeforeCollapse: 1,
-  separator: "/",
-  //-------------------------
-  style: {},
-  color: "neutral",
-  size: "small",
-};
+// Breadcrumbs.defaultProps = {
+//   maxItems: 8,
+//   itemsAfterCollapse: 1,
+//   itemsBeforeCollapse: 1,
+//   separator: "/",
+//   //-------------------------
+//   style: {},
+//   color: "neutral",
+//   size: "small",
+// };
 
 Breadcrumbs.propTypes = {
   separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),

@@ -21,13 +21,14 @@ const Indicator = styled.div`
 const TableRowStatusIndicatorCell = (props) => {
   //--------------------------
   const {
-    RowData,
+    __TYPE__ = "TABLE_ROW_STATUS_INDICATOR_CELL",
+    RowData = {},
     Index,
     GetRowStatusIndicatorColor,
     //----------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "Primary",
   } = props;
 
   const theme = useTheme();
@@ -77,22 +78,23 @@ const TableRowStatusIndicatorCell = (props) => {
   );
 };
 
-TableRowStatusIndicatorCell.defaultProps = {
-  __TYPE__: "TABLE_ROW_STATUS_INDICATOR_CELL",
-  //--------------------
-  Column: {},
-  RowData: {},
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableRowStatusIndicatorCell.defaultProps = {
+//   __TYPE__: "TABLE_ROW_STATUS_INDICATOR_CELL",
+//   //--------------------
+//   Column: {},
+//   RowData: {},
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableRowStatusIndicatorCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Column: PropTypes.object.isRequired,
-  RowData: PropTypes.object.isRequired,
+  Column: PropTypes.object,
+  RowData: PropTypes.object,
   //----------------------------------------
   className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
@@ -109,3 +111,5 @@ TableRowStatusIndicatorCell.propTypes = {
 };
 
 export default TableRowStatusIndicatorCell;
+
+TableRowStatusIndicatorCell.displayName = 'TABLE_ROW_STATUS_INDICATOR_CELL';

@@ -47,34 +47,35 @@ const StyledToolbar = styled.div`
 
 const ActionsToolbar = React.forwardRef((props, ref) => {
   const {
-    showCreate,
-    enableCreate,
-    createText,
-    showEdit,
-    enableEditOnSelection,
-    editText,
-    showDelete,
-    enableDeleteOnSelection,
-    deleteText,
-    showCopy,
-    enableCopyOnSelection,
-    copyText,
-    actionsText,
+    __TYPE__ = "ACTIONS_TOOLBAR",
+    showCreate = true,
+    enableCreate = true,
+    createText = "Create new item",
+    showEdit = true,
+    enableEditOnSelection = true,
+    editText = "Edit",
+    showDelete = true,
+    enableDeleteOnSelection = true,
+    deleteText = "Delete",
+    showCopy = true,
+    enableCopyOnSelection = true,
+    copyText = "Copy",
+    actionsText = "Actions",
     customActions,
-    selectedRowsLength,
-    readOnly,
+    selectedRowsLength = 0,
+    readOnly = false,
     actionDropdownProps,
     actionsDropdownZIndex,
     actionsDropdownPlacement,
     //----------------
-    onCreate,
-    onEdit,
-    onDelete,
-    onCopy,
-    className,
-    style,
-    color,
-    size,
+    onCreate = () => {},
+    onEdit = () => {},
+    onDelete = () => {},
+    onCopy = () => {},
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     ...rest
   } = props;
 
@@ -177,33 +178,34 @@ const ActionsToolbar = React.forwardRef((props, ref) => {
   );
 });
 
-ActionsToolbar.defaultProps = {
-  __TYPE__: "ACTIONS_TOOLBAR",
-  showCreate: true,
-  enableCreate: true,
-  createText: "Create New item",
-  showEdit: true,
-  enableEditOnSelection: true,
-  editText: "Edit",
-  showDelete: true,
-  enableDeleteOnSelection: true,
-  deleteText: "Delete",
-  showCopy: true,
-  enableCopyOnSelection: true,
-  copyText: "Copy",
-  actionsText: "Actions",
-  selectetedRowsLength: 0,
-  readOnly: false,
-  //-----------------------
-  onCreate: () => {},
-  onEdit: () => {},
-  onDelete: () => {},
-  onCopy: () => {},
-  //-----------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
+// TODO : type
+// ActionsToolbar.defaultProps = {
+//   __TYPE__: "ACTIONS_TOOLBAR",
+//   showCreate: true,
+//   enableCreate: true,
+//   createText: "Create New item",
+//   showEdit: true,
+//   enableEditOnSelection: true,
+//   editText: "Edit",
+//   showDelete: true,
+//   enableDeleteOnSelection: true,
+//   deleteText: "Delete",
+//   showCopy: true,
+//   enableCopyOnSelection: true,
+//   copyText: "Copy",
+//   actionsText: "Actions",
+//   selectetedRowsLength: 0,
+//   readOnly: false,
+//   //-----------------------
+//   onCreate: () => {},
+//   onEdit: () => {},
+//   onDelete: () => {},
+//   onCopy: () => {},
+//   //-----------------------
+//   style: {},
+//   color: "primary",
+//   size: "small",
+// };
 
 ActionsToolbar.propTypes = {
   /**
@@ -256,3 +258,5 @@ ActionsToolbar.propTypes = {
 };
 
 export default ActionsToolbar;
+
+ActionsToolbar.displayName = 'ACTIONS_TOOLBAR';

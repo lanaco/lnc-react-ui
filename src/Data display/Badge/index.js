@@ -51,19 +51,19 @@ const StyledBadge = styled.div`
 
 const Badge = React.forwardRef((props, ref) => {
   const {
-    borderRadius,
-    onClick,
-    className,
-    style,
-    color,
-    size,
+    borderRadius = "curved",
+    onClick = () => {},
+    className = "",
+    style  = {},
+    color = "primary",
+    size = "small",
     children,
     ...rest
   } = props;
 
   const theme = useTheme();
 
-  const themeProps = { borderRadius, theme, size, color, className, style };
+  const themeProps = { borderRadius, theme, size, color, className: "lnc-ui-badge " + className, style };
 
   return (
     <StyledBadge ref={ref} {...themeProps} onClick={onClick} {...rest}>
@@ -71,15 +71,6 @@ const Badge = React.forwardRef((props, ref) => {
     </StyledBadge>
   );
 });
-
-Badge.defaultProps = {
-  onClick: () => {},
-  borderRadius: "curved",
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
 
 Badge.propTypes = {
   onClick: PropTypes.func,

@@ -20,15 +20,15 @@ const StyledMenu = styled.div`
 
 const TreeMenu = React.forwardRef((props, ref) => {
   const {
-    widthFitContent,
-    itemsGap,
+    widthFitContent = false,
+    itemsGap = "0.25rem",
     //----------------
-    onItemSelected,
+    onItemSelected = () => {},
     //----------------
-    className,
-    style,
-    color,
-    size,
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     children,
     ...rest
   } = props;
@@ -40,9 +40,11 @@ const TreeMenu = React.forwardRef((props, ref) => {
     if (React.isValidElement(child)) {
       if (
         child.props.__TYPE__ == "MENU_ITEM" ||
-        child.props.__TYPE__ == "NESTED_ITEM"
+        child?.type?.displayName === "MENU_ITEM" ||
+        child.props.__TYPE__ == "NESTED_ITEM" ||
+        child?.type?.displayName === "NESTED_ITEM"
       ) {
-        if (index == 0 && child.props.justifyToEnd == false) {
+        if (index == 0 && child.props.justifyToEnd !== true) {
           if (child.props.ref) firstItemRef.current = ref;
           return React.cloneElement(child, {
             ref: ref ? ref : firstItemRef, //needed to focus on navigation
@@ -50,7 +52,11 @@ const TreeMenu = React.forwardRef((props, ref) => {
             size: size,
             onItemSelected: onItemSelected,
           });
-        } else if (child.props.justifyToEnd == false || child.props.__TYPE__ == "NESTED_ITEM") {
+        } else if (
+          child.props.justifyToEnd !== true ||
+          child.props.__TYPE__ == "NESTED_ITEM" ||
+          child?.type?.displayName === "NESTED_ITEM"
+        ) {
           return React.cloneElement(child, {
             color: color,
             size: size,
@@ -61,7 +67,8 @@ const TreeMenu = React.forwardRef((props, ref) => {
       }
     }
 
-    if(child.props?.justifyToEnd == false || !child.props?.justifyToEnd) return child;
+    if (child.props?.justifyToEnd == false || !child.props?.justifyToEnd)
+      return child;
   });
 
   //justify-content: end -> menu items
@@ -69,7 +76,9 @@ const TreeMenu = React.forwardRef((props, ref) => {
     if (React.isValidElement(child)) {
       if (
         (child.props.__TYPE__ == "MENU_ITEM" ||
-        child.props.__TYPE__ == "NESTED_ITEM") &&
+          child?.type?.displayName === "MENU_ITEM" ||
+          child.props.__TYPE__ == "NESTED_ITEM" ||
+          child?.type?.displayName === "NESTED_ITEM") &&
         child.props.justifyToEnd == true
       ) {
         if (index == 0) {
@@ -89,7 +98,7 @@ const TreeMenu = React.forwardRef((props, ref) => {
       }
     }
 
-    if(child.props?.justifyToEnd == true) return child;
+    if (child.props?.justifyToEnd == true) return child;
   });
 
   return (
@@ -99,7 +108,7 @@ const TreeMenu = React.forwardRef((props, ref) => {
       itemsGap={itemsGap}
       size={size}
       color={color}
-      className={className}
+      className={"lnc-ui-treemenu " + className}
       style={style}
       {...rest}
     >
@@ -113,16 +122,16 @@ const TreeMenu = React.forwardRef((props, ref) => {
   );
 });
 
-TreeMenu.defaultProps = {
-  widthFitContent: false,
-  itemsGap: "0.25rem",
-  //-------------------------
-  onItemSelected: () => {},
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
+// TreeMenu.defaultProps = {
+//   widthFitContent: false,
+//   itemsGap: "0.25rem",
+//   //-------------------------
+//   onItemSelected: () => {},
+//   //-------------------------
+//   style: {},
+//   color: "primary",
+//   size: "small",
+// };
 
 TreeMenu.propTypes = {
   widthFitContent: PropTypes.bool,
@@ -143,7 +152,7 @@ TreeMenu.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };

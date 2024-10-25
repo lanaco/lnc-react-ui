@@ -26,9 +26,9 @@ const StyledAvatar = styled.div`
     props.sizeInUnits
       ? props.sizeInUnits
       : getSizeValueWithUnits(props.theme, props.size)};
-  ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+  ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
   background-color: ${(props) =>
-    !props.disabled &&
+    !props.disabled === true &&
     getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "text")};
   overflow: hidden;
   & img {
@@ -46,26 +46,33 @@ const StyledAvatar = styled.div`
 const Avatar = React.forwardRef((props, ref) => {
   const {
     image,
-    icon,
+    icon = "user",
     tabIndex,
     sizeInUnits,
-    disabled,
-    borderRadius,
+    disabled = false,
+    borderRadius = "curved",
     //----------------
-    onFocus,
-    onBlur,
-    onClick,
+    onFocus = () => {},
+    onBlur = () => {},
+    onClick = () => {},
     //----------------
-    className,
-    style,
-    color,
-    size,
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
     ...rest
   } = props;
 
   const theme = useTheme();
 
-  const themeProps = { theme, color, style, size, sizeInUnits, className };
+  const themeProps = {
+    theme,
+    color,
+    style,
+    size,
+    sizeInUnits,
+    className: "lnc-ui-avatar " + className,
+  };
 
   return (
     <StyledAvatar
@@ -90,19 +97,19 @@ const Avatar = React.forwardRef((props, ref) => {
   );
 });
 
-Avatar.defaultProps = {
-  icon: "user",
-  disabled: false,
-  borderRadius: "curved",
-  //-------------------------
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
+// Avatar.defaultProps = {
+//   icon: "user",
+//   disabled: false,
+//   borderRadius: "curved",
+//   //-------------------------
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   onClick: () => {},
+//   //-------------------------
+//   style: {},
+//   color: "primary",
+//   size: "small",
+// };
 
 Avatar.propTypes = {
   image: PropTypes.string,
@@ -139,7 +146,7 @@ Avatar.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

@@ -13,7 +13,6 @@ import {
 } from "../../_utils/utils";
 import { useUpdateEffect } from "react-use";
 
-
 const standardCssFields = ({ theme, size }) => {
   var height = getSizeValueWithUnits(theme, size);
 
@@ -49,7 +48,7 @@ const SyledInput = styled.input`
         props.theme,
         "Input",
         props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.disabled === true ? "disabled" : "enabled",
         "border"
       )};
   border-radius: ${(props) =>
@@ -62,7 +61,7 @@ const SyledInput = styled.input`
   }
   &:focus:enabled {
     border: none;
-    ${(props) => (props.readOnly == false ? getOutlineCss(props.theme) : "")};
+    ${(props) => (props.readOnly !== true ? getOutlineCss(props.theme) : "")};
     color: ${(props) =>
       getColorRgbaValue(props.theme, "Input", "primary", "enabled", "text")};
     border: 1px solid
@@ -71,7 +70,7 @@ const SyledInput = styled.input`
           props.theme,
           "Input",
           "primary",
-          props.disabled ? "disabled" : "enabled",
+          props.disabled === true ? "disabled" : "enabled",
           "border"
         )};
   }
@@ -79,30 +78,24 @@ const SyledInput = styled.input`
 
 const TimeInput = React.forwardRef((props, ref) => {
   const {
-    id,
+    // id,
     disabled,
     readOnly,
-    defaultValue,
-    value,
-    debounceTime,
-    type,
-    tabIndex,
+    // defaultValue,
+    // value,
+    debounceTime = 180,
+    // tabIndex,
     //----------------
     onChange,
     //----------------
-    className,
-    style,
-    size,
-    color,
+    className = "",
+    style = {},
+    size = "small",
+    color = "primary",
     ...rest
   } = props;
 
-  //
   const theme = useTheme();
-
-  const [inputValue, setInputValue] = useState(value);
-
-  useUpdateEffect(() => setInputValue(value ? value : ""), [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -110,70 +103,47 @@ const TimeInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    if (onChange) onChange(e, value);
+    if (onChange) onChange?.(e, value);
   };
 
   const onValueChange = (e) => {
-    setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
   return (
     <>
-      {value == null || value == "undefined" ? (
-        <SyledInput
-          type="time"
-          id={id}
-          ref={ref}
-          defaultValue={defaultValue}
-          onChange={onValueChange}
-          disabled={disabled}
-          readOnly={readOnly}
-          theme={theme}
-          color={color}
-          size={size}
-          className={className}
-          style={style}
-          tabIndex={tabIndex}
-          {...rest}
-        />
-      ) : (
-        <SyledInput
-          type="time"
-          id={id}
-          ref={ref}
-          value={inputValue}
-          onChange={onValueChange}
-          disabled={disabled}
-          readOnly={readOnly}
-          theme={theme}
-          color={color}
-          size={size}
-          className={className}
-          style={style}
-          tabIndex={tabIndex}
-          {...rest}
-        />
-      )}
+      <SyledInput
+        type="time"
+        ref={ref}
+        onChange={onValueChange}
+        disabled={disabled}
+        readOnly={readOnly}
+        theme={theme}
+        color={color}
+        size={size}
+        className={className}
+        style={style}
+        {...rest}
+      />
     </>
   );
 });
 
-TimeInput.defaultProps = {
-  id: "",
-  disabled: false,
-  readOnly: false,
-  debounceTime: 180,
-  tabIndex: 0,
-  defaultValue: "",
-  //----------------
-  onChange: () => {},
-  //----------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// TimeInput.defaultProps = {
+//   id: "",
+//   disabled: false,
+//   readOnly: false,
+//   debounceTime: 180,
+//   tabIndex: 0,
+//   defaultValue: "",
+//   //----------------
+//   onChange: () => {},
+//   //----------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 TimeInput.propTypes = {
   id: PropTypes.string,
@@ -197,7 +167,7 @@ TimeInput.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

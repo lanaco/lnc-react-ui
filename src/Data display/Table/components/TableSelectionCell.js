@@ -18,16 +18,17 @@ const HtmlCell = styled.td`
 const TableSelectionCell = (props) => {
   //--------------------------
   const {
-    RowData,
-    onSelectRow,
-    IsSelected,
-    Index,
-    EnableRowHighlight,
-    GetRowHighlightColor,
+    __TYPE__ = "TABLE_SELECTION_CELL",
+    RowData = {},
+    onSelectRow = () => {},
+    IsSelected = null,
+    Index = 0,
+    EnableRowHighlight = false,
+    GetRowHighlightColor = () => "",
     //----------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -72,29 +73,30 @@ const TableSelectionCell = (props) => {
   );
 };
 
-TableSelectionCell.defaultProps = {
-  __TYPE__: "TABLE_SELECTION_CELL",
-  //--------------------
-  Column: {},
-  RowData: {},
-  onSelectRow: () => {},
-  Index: 0,
-  IsSelected: null,
-  EnableRowHighlight: false,
-  GetRowHighlightColor: () => "",
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableSelectionCell.defaultProps = {
+//   __TYPE__: "TABLE_SELECTION_CELL",
+//   //--------------------
+//   Column: {},
+//   RowData: {},
+//   onSelectRow: () => {},
+//   Index: 0,
+//   IsSelected: null,
+//   EnableRowHighlight: false,
+//   GetRowHighlightColor: () => "",
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableSelectionCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Column: PropTypes.object.isRequired,
-  RowData: PropTypes.object.isRequired,
+  Column: PropTypes.object,
+  RowData: PropTypes.object,
   onSelectRow: PropTypes.func,
-  Index: PropTypes.number.isRequired,
+  Index: PropTypes.number,
   SelectedData: PropTypes.array,
   IsSelected: PropTypes.bool,
   EnableRowHighlight: PropTypes.bool,
@@ -115,3 +117,5 @@ TableSelectionCell.propTypes = {
 };
 
 export default TableSelectionCell;
+
+TableSelectionCell.displayName = 'TABLE_SELECTION_CELL';

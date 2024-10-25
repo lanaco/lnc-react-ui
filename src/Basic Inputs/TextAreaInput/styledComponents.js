@@ -26,8 +26,8 @@ export const StyledTextareaWrapper = styled.div`
         getColorRgbaValue(
           props.theme,
           "Input",
-          props.focused ? "primary" : props.color,
-          props.disabled ? "disabled" : "enabled",
+          props.focused === true ? "primary" : props.color,
+          props.disabled === true ? "disabled" : "enabled",
           "border"
         )};
     border-radius: ${(props) =>
@@ -36,14 +36,14 @@ export const StyledTextareaWrapper = styled.div`
       getColorRgbaValue(
         props.theme,
         "Input",
-        props.focused ? "primary" : props.color,
+        props.focused === true ? "primary" : props.color,
         "enabled",
         "text"
       )};
     caret-color: ${(props) =>
       getColorRgbaValue(props.theme, "Input", props.color, "enabled", "caret")};
     overflow: ${(props) =>
-      props.collapseOnBlur && !props.focused ? "hidden" : "auto"};
+      props.collapseOnBlur && props.focused === false ? "hidden" : "auto"};
     transition: height 0.2s ease-out;
     padding: 0.563rem 0.75rem;
     min-width: 100%;
@@ -67,7 +67,7 @@ export const StyledTextareaWrapper = styled.div`
 
   & textarea:focus {
     ${(props) =>
-      props.readOnly == false ? getOutlineCss(props.theme) : "outline: none"}
+      props.readOnly !== true ? getOutlineCss(props.theme) : "outline: none"}
   }
 
   & textarea:disabled {

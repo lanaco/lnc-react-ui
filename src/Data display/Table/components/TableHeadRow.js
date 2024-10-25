@@ -10,11 +10,12 @@ const HtmlRow = styled.tr`
 const TableHeadRow = (props) => {
   //--------------------------
   const {
-    Index,
+    __TYPE__ = "TABLE_HEAD_ROW",
+    Index = 0,
     //-------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -33,15 +34,16 @@ const TableHeadRow = (props) => {
   );
 };
 
-TableHeadRow.defaultProps = {
-  __TYPE__: "TABLE_HEAD_ROW",
-  //--------------------
-  Index: 0,
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableHeadRow.defaultProps = {
+//   __TYPE__: "TABLE_HEAD_ROW",
+//   //--------------------
+//   Index: 0,
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableHeadRow.propTypes = {
   __TYPE__: PropTypes.string,
@@ -63,3 +65,5 @@ TableHeadRow.propTypes = {
 };
 
 export default TableHeadRow;
+
+TableHeadRow.displayName = 'TABLE_HEAD_ROW';

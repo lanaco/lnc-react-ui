@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Content = React.forwardRef((props, ref) => {
-  const { children, __TYPE__, ...rest } = props;
+  const { children, __TYPE__ = "Content", ...rest } = props;
 
   return (
     <main ref={ref} {...rest}>
@@ -11,9 +11,10 @@ const Content = React.forwardRef((props, ref) => {
   );
 });
 
-Content.defaultProps = {
-  __TYPE__: "Content",
-};
+// TODO : type
+// Content.defaultProps = {
+//   __TYPE__: "Content",
+// };
 
 Content.propTypes = {
   /**
@@ -24,3 +25,5 @@ Content.propTypes = {
 };
 
 export default Content;
+
+Content.displayName = "Content";

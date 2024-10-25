@@ -27,7 +27,7 @@ export const StyledWrapper = styled.div`
       getColorRgbaValue(
         props.theme,
         "Input",
-        props.focused ? "primary" : props.color,
+        props.focused === true ? "primary" : props.color,
         "enabled",
         "border"
       )};
@@ -35,12 +35,12 @@ export const StyledWrapper = styled.div`
     getBorderRadiusValueWithUnits(props.theme, "regular")};
 
   ${(props) =>
-    props.focused && props.readOnly == false
+    props.focused === true && props.readOnly !== true
       ? getOutlineCss(props.theme)
       : ""}
-  ${(props) => (props.isDisabled ? getDisabledStateCss(props.theme) : "")}
+  ${(props) => (props.isDisabled === true ? getDisabledStateCss(props.theme) : "")}
   ${(props) =>
-    props.isDisabled
+    props.isDisabled === true
       ? "border: 1px solid " +
         getColorRgbaValue(
           props.theme,
@@ -67,7 +67,7 @@ export const StyledWrapper = styled.div`
       getColorRgbaValue(
         props.theme,
         "Input",
-        props.focused ? "primary" : props.color,
+        props.focused === true ? "primary" : props.color,
         "enabled",
         "text"
       )};
@@ -104,7 +104,7 @@ export const StyledPrefix = styled.span`
     getColorRgbaValue(
       props.theme,
       "Input",
-      props.focused ? "primary" : props.color,
+      props.focused === true ? "primary" : props.color,
       "enabled",
       "prefix"
     )};

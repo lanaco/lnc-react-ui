@@ -14,22 +14,22 @@ import {
 
 const Button = React.forwardRef((props, ref) => {
   const {
-    icon,
-    iconStyle,
-    size,
-    borderRadius,
-    btnType,
-    disabled,
-    tabIndex,
+    icon = null,
+    iconStyle = "solid",
+    borderRadius = "regular",
+    btnType = "filled",
+    disabled = false,
+    tabIndex = 0,
     //----------------
-    onFocus,
-    onBlur,
-    onClick,
-    onKeyDown,
+    onFocus = () => {},
+    onBlur = () => {},
+    onClick = () => {},
+    onKeyDown = () => {},
     //----------------
-    className,
-    style,
-    color,
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
     ...rest
   } = props;
 
@@ -39,7 +39,7 @@ const Button = React.forwardRef((props, ref) => {
     color,
     size,
     style,
-    className,
+    className: "lnc-ui-icon-button " + className,
     disabled,
     borderRadius,
     btnType,
@@ -143,23 +143,23 @@ const Button = React.forwardRef((props, ref) => {
   );
 });
 
-Button.defaultProps = {
-  icon: null,
-  iconStyle: "solid",
-  borderRadius: "regular",
-  btnType: "filled",
-  disabled: false,
-  tabIndex: 0,
-  //-------------------------
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  onKeyDown: () => {},
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
+// Button.defaultProps = {
+//   icon: null,
+//   iconStyle: "solid",
+//   borderRadius: "regular",
+//   btnType: "filled",
+//   disabled: false,
+//   tabIndex: 0,
+//   //-------------------------
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   onClick: () => {},
+//   onKeyDown: () => {},
+//   //-------------------------
+//   style: {},
+//   color: "primary",
+//   size: "small",
+// };
 
 Button.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),

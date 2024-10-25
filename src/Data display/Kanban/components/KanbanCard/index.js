@@ -45,18 +45,19 @@ const KanbanCard = React.memo(
   React.forwardRef(
     (
       {
+        __TYPE__ = "KANBAN_CARD",
         id,
         containerId,
         item,
-        handle,
+        handle = true,
         handleProps,
-        actionsMenu,
-        actions,
+        actionsMenu = false,
+        actions = [],
         onDetails,
-        color,
-        size,
-        className,
-        style,
+        color = "primary",
+        size = "small",
+        className = "",
+        style = {},
         children,
         ...rest
       },
@@ -123,18 +124,20 @@ const KanbanCard = React.memo(
   )
 );
 
-KanbanCard.defaultProps = {
-  __TYPE__: "KANBAN_CARD",
-  handle: true,
-  actionsMenu: false,
-  actions: [],
-  //-------------------------
-  // onDetails: (e, item, columnId) => { },
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
+
+// TODO : type
+// KanbanCard.defaultProps = {
+//   __TYPE__: "KANBAN_CARD",
+//   handle: true,
+//   actionsMenu: false,
+//   actions: [],
+//   //-------------------------
+//   // onDetails: (e, item, columnId) => { },
+//   //-------------------------
+//   style: {},
+//   color: "primary",
+//   size: "small",
+// };
 
 KanbanCard.propTypes = {
   __TYPE__: PropTypes.string,
@@ -173,3 +176,5 @@ KanbanCard.propTypes = {
 };
 
 export default KanbanCard;
+
+KanbanCard.displayName = 'KANBAN_CARD';

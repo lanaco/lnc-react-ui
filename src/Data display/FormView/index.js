@@ -185,37 +185,38 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
 
 const FormView = React.forwardRef((props, ref) => {
   const {
+    __TYPE__ = "FORM_VIEW",
     goToPreviousView,
     id,
     data,
-    fields,
-    errors,
+    fields = [],
+    errors = {},
     flexGridProps,
-    goBackText,
-    backActive,
-    nextActive,
-    previousActive,
+    goBackText = "Go back",
+    backActive = true,
+    nextActive = true,
+    previousActive = true,
     editActive,
-    disableGoBack,
-    disableNext,
-    disablePrevious,
+    disableGoBack = false,
+    disableNext = false,
+    disablePrevious = false,
     disableEdit,
-    disableDiscard,
-    disableSave,
-    discardText,
-    saveText,
+    disableDiscard = false,
+    disableSave = false,
+    discardText = "Discard",
+    saveText = "Save",
     //------------------
-    goToNext,
-    goToPrevious,
-    onEdit,
-    goBack,
-    onSubmit,
-    onDiscard,
+    goToNext = () => {},
+    goToPrevious = () => {},
+    onEdit = () => {},
+    goBack = () => {},
+    onSubmit = () => {},
+    onDiscard = () => {},
     //------------------
-    className,
-    style,
-    color,
-    size,
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     children,
     ...rest
   } = props;
@@ -331,34 +332,35 @@ const FormView = React.forwardRef((props, ref) => {
   );
 });
 
-FormView.defaultProps = {
-  __TYPE__: "FORM_VIEW",
-  goBackText: "Go Back",
-  backActive: true,
-  nextActive: true,
-  previousActive: true,
-  disableGoBack: false,
-  disableNext: false,
-  disablePrevious: false,
-  disableDiscard: false,
-  disableSave: false,
-  discardText: "Discard",
-  saveText: "Save",
-  fields: [],
-  data: {},
-  errors: {},
-  //-----------------------
-  goToNext: () => {},
-  goToPrevious: () => {},
-  goBack: () => {},
-  onEdit: () => {},
-  onSubmit: () => {},
-  onDiscard: () => {},
-  //-----------------------
-  color: "primary",
-  style: {},
-  size: "small",
-};
+// TODO : type
+// FormView.defaultProps = {
+//   __TYPE__: "FORM_VIEW",
+//   goBackText: "Go Back",
+//   backActive: true,
+//   nextActive: true,
+//   previousActive: true,
+//   disableGoBack: false,
+//   disableNext: false,
+//   disablePrevious: false,
+//   disableDiscard: false,
+//   disableSave: false,
+//   discardText: "Discard",
+//   saveText: "Save",
+//   fields: [],
+//   data: {},
+//   errors: {},
+//   //-----------------------
+//   goToNext: () => {},
+//   goToPrevious: () => {},
+//   goBack: () => {},
+//   onEdit: () => {},
+//   onSubmit: () => {},
+//   onDiscard: () => {},
+//   //-----------------------
+//   color: "primary",
+//   style: {},
+//   size: "small",
+// };
 
 FormView.propTypes = {
   __TYPE__: PropTypes.string,
@@ -401,3 +403,5 @@ FormView.propTypes = {
 };
 
 export default FormView;
+
+FormView.displayName = 'FORM_VIEW';

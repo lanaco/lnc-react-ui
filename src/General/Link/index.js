@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
-import { getColorRgbaValue, getComponentTypographyCss } from "../../_utils/utils";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+} from "../../_utils/utils";
 
 const StlyedLink = styled.a`
   ${(props) =>
@@ -13,61 +16,43 @@ const StlyedLink = styled.a`
       "enabled"
     )};
   color: ${(props) =>
-    getColorRgbaValue(
-      props.theme,
-      "Link",
-      props.color,
-      "enabled",
-      "text"
-    )};
-    text-decoration: none;
+    getColorRgbaValue(props.theme, "Link", props.color, "enabled", "text")};
+  text-decoration: none;
 
-    &:hover {
-        color: ${(props) =>
-            getColorRgbaValue(
-              props.theme,
-              "Link",
-              props.color,
-              "hover",
-              "text"
-            )};
-    }
-    &:active {
-        color: ${(props) =>
-            getColorRgbaValue(
-              props.theme,
-              "Link",
-              props.color,
-              "active",
-              "text"
-            )};
-    }
-    &:visited {
-        color: ${(props) =>
-            getColorRgbaValue(
-              props.theme,
-              "Link",
-              props.color,
-              "visited",
-              "text"
-            )};
-    }
+  &:hover {
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Link", props.color, "hover", "text")};
+  }
+  &:active {
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Link", props.color, "active", "text")};
+  }
+  &:visited {
+    color: ${(props) =>
+      getColorRgbaValue(props.theme, "Link", props.color, "visited", "text")};
+  }
 `;
 
 const Link = React.forwardRef((props, ref) => {
   const {
     //----------------
-    className,
-    style,
-    color,
-    size,
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     children,
     ...rest
   } = props;
 
   const theme = useTheme();
 
-  const themeProps = { theme, size, color, className, style };
+  const themeProps = {
+    theme,
+    size,
+    color,
+    className: "lnc-ui-link " + className,
+    style,
+  };
 
   return (
     <StlyedLink ref={ref} {...themeProps} {...rest}>
@@ -76,12 +61,12 @@ const Link = React.forwardRef((props, ref) => {
   );
 });
 
-Link.defaultProps = {
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
+// Link.defaultProps = {
+//   //-------------------------
+//   style: {},
+//   color: "primary",
+//   size: "small",
+// };
 
 Link.propTypes = {
   //---------------------------------------------------------------
@@ -95,7 +80,7 @@ Link.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };

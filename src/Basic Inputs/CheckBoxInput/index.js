@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -9,8 +9,6 @@ import {
   getOutlineCss,
   getSizeValueWithUnits,
 } from "../../_utils/utils";
-import { useEffectOnce, useUpdateEffect } from "react-use";
-import { useImperativeHandle } from "react";
 
 const getLabelDirection = (direction) => {
   if (direction == "left") return "row-reverse";
@@ -36,14 +34,14 @@ const Container = styled.label`
   flex-direction: ${(props) => getLabelDirection(props.labelPosition)};
   ${(props) => props.spaceBetween == true && "justify-content: space-between;"}
   width: 100%;
-  ${(props) => props.disabled && "pointer-events: none;"}
+  ${(props) => props.disabled === true && "pointer-events: none;"}
   ${(props) =>
     getComponentTypographyCss(props.theme, "Checkbox", props.size, "enabled")};
   gap: 0.75rem;
   position: relative;
   & .checkbox-label {
     ${(props) =>
-      !props.disabled && props.readOnly == false && "cursor: pointer;"}
+      !props.disabled === true && props.readOnly !== true && "cursor: pointer;"}
     min-width: 0;
     flex-shrink: 1;
     min-height: 0;
@@ -104,7 +102,7 @@ const Container = styled.label`
     border-radius: ${(props) =>
       getBorderRadiusValueWithUnits(props.theme, "slight")};
     ${(props) =>
-      props.disabled &&
+      props.disabled === true &&
       `background-color: ${getColorRgbaValue(
         props.theme,
         "Checkbox",
@@ -198,7 +196,7 @@ const Container = styled.label`
   }
   & input:disabled ~ .checkmark {
     ${(props) =>
-      props.readOnly == false &&
+      props.readOnly !== true &&
       `background-color: ${getColorRgbaValue(
         props.theme,
         "Checkbox",
@@ -237,14 +235,11 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
   const {
     containerRef,
     id,
-    checked,
-    defaultChecked,
     indeterminate,
     disabled,
     readOnly,
     label,
-    labelPosition,
-    tabIndex,
+    labelPosition = "right",
     spaceBetween,
     customCheckmark,
     //----------------
@@ -253,10 +248,10 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     onBlur,
     onClick,
     //----------------
-    color,
-    size,
-    className,
-    style,
+    color = "primary",
+    size = "small",
+    className = "",
+    style = {},
     children,
     ...rest
   } = props;
@@ -264,20 +259,13 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
   const theme = useTheme();
   var themeProps = { theme, size, color, disabled, readOnly };
 
-  const [checkBoxChecked, setCheckBoxChecked] = useState(
-    checked == true || checked == false ? checked : defaultChecked
-  );
-
-  useUpdateEffect(() => {
-    setCheckBoxChecked(checked ? checked : false);
-  }, [checked]);
 
   const handleOnBlur = (e) => {
-    if (onBlur) onBlur(e);
+    if (onBlur) onBlur?.(e);
   };
 
   const handleOnFocus = (e) => {
-    if (onFocus) onFocus(e);
+    if (onFocus) onFocus?.(e);
   };
 
   return (
@@ -294,32 +282,15 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       onClick={onClick}
       {...themeProps}
     >
-      {/* Controlled input and uncotrolled input must be differentiated because of usage of the value property */}
-      {checked == true || checked == false ? (
-        <input
+       <input
           ref={ref}
           type="checkbox"
-          tabIndex={tabIndex}
           onBlur={handleOnBlur}
           onFocus={handleOnFocus}
-          checked={checkBoxChecked}
-          onChange={onChange}
           disabled={disabled || readOnly}
+          onChange={(e) => onChange?.(e)}
           {...rest}
         />
-      ) : (
-        <input
-          ref={ref}
-          type="checkbox"
-          tabIndex={tabIndex}
-          onBlur={handleOnBlur}
-          onFocus={handleOnFocus}
-          defaultChecked={defaultChecked}
-          disabled={disabled || readOnly}
-          onChange={onChange}
-          {...rest}
-        />
-      )}
       <div className="checkmark" tabIndex={-1}>
         {!customCheckmark && (
           <svg
@@ -371,27 +342,6 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
     </Container>
   );
 });
-
-CheckBoxInput.defaultProps = {
-  id: "",
-  disabled: false,
-  readOnly: false,
-  label: "",
-  indeterminate: false,
-  labelPosition: "right",
-  tabIndex: 0,
-  spaceBetween: false,
-  //-------------------------
-  onChange: (e, value) => {},
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  //-------------------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
 
 CheckBoxInput.propTypes = {
   containerRef: PropTypes.any,

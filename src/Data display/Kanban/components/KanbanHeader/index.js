@@ -26,16 +26,17 @@ const KanbanHeader = React.memo(
   React.forwardRef(
     (
       {
+        __TYPE__ = "KANBAN_HEADER",
         id,
         item,
         column,
-        actionsMenu,
-        actions,
-        onDetails,
-        color,
-        size,
-        className,
-        style,
+        actionsMenu = false,
+        actions = [],
+        onDetails = () => {},
+        color = "primary",
+        size = "small",
+        className = "",
+        style = {},
         children,
         ...rest
       },
@@ -91,17 +92,18 @@ const KanbanHeader = React.memo(
   )
 );
 
-KanbanHeader.defaultProps = {
-  __TYPE__: "KANBAN_HEADER",
-  actionsMenu: false,
-  actions: [],
-  //-------------------------
-  onDetails: (e, item, column) => {},
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
+// // TODO : type
+// KanbanHeader.defaultProps = {
+//   __TYPE__: "KANBAN_HEADER",
+//   actionsMenu: false,
+//   actions: [],
+//   //-------------------------
+//   onDetails: (e, item, column) => {},
+//   //-------------------------
+//   style: {},
+//   color: "primary",
+//   size: "small",
+// };
 
 KanbanHeader.propTypes = {
   __TYPE__: PropTypes.string,
@@ -134,3 +136,5 @@ KanbanHeader.propTypes = {
 };
 
 export default KanbanHeader;
+
+KanbanHeader.displayName = 'KANBAN_HEADER';

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
-const getPadding = (isExpanded, size) => {
+export const getPadding = (isExpanded, size) => {
   if(size == "medium")
     return `${isExpanded ? "0.4rem" : "0"} 1.25rem ${isExpanded ? "0.8rem" : "0"} 1.25rem`;
   if(size == "large")
@@ -21,8 +21,9 @@ const StyledDetails = styled.div`
 
 const AccordionDetails = React.forwardRef((props, ref) => {
   const {
+    __TYPE__ = "ACCORDION_DETAILS",
     isExpanded,
-    size,
+    size = "small",
     children,
     ...rest
   } = props;
@@ -34,12 +35,12 @@ const AccordionDetails = React.forwardRef((props, ref) => {
   );
 });
 
-AccordionDetails.defaultProps = {
-  __TYPE__: "ACCORDION_DETAILS",
-  //-------------------------
-  style: {},
-  size: "small",
-};
+// AccordionDetails.defaultProps = {
+//   __TYPE__: "ACCORDION_DETAILS",
+//   //-------------------------
+//   style: {},
+//   size: "small",
+// };
 
 AccordionDetails.propTypes = {
   __TYPE__: PropTypes.string,
@@ -50,3 +51,5 @@ AccordionDetails.propTypes = {
 };
 
 export default AccordionDetails;
+
+AccordionDetails.displayName = 'ACCORDION_DETAILS';

@@ -72,26 +72,26 @@ const getActionsAlignment = (actionsAlignment) => {
 const ConfirmationForm = React.forwardRef((props, ref) => {
   const {
     color,
-    statusIcon,
+    statusIcon = true,
     title,
-    type,
+    type = "regular",
     actions,
-    actionsAlignment,
-    actionsTrack,
-    overlay,
-    showCloseButton,
-    onClose,
-    zIndex,
-    size,
-    clickOutsideToClose,
-    className,
-    style,
+    actionsAlignment = "right",
+    actionsTrack = false,
+    overlay = true,
+    showCloseButton = true,
+    onClose = () => {},
+    zIndex = 1000,
+    size = "fluid",
+    clickOutsideToClose = false,
+    className = "",
+    style = {},
     overlayProps,
     children,
     rest,
   } = props;
   const theme = useTheme();
-  let themeProps = { theme, size, zIndex, className, style };
+  let themeProps = { theme, size, zIndex, className: "lnc-ui-confirmation-form " + className, style };
 
   const getIcon = (color) => {
     if (color == "danger") return "times-circle";
@@ -173,7 +173,8 @@ const ConfirmationForm = React.forwardRef((props, ref) => {
       overlayProps={overlayProps}
       {...rest}
     >
-      <Content statusIcon={statusIcon} color={color} type={type}>
+      <div>okej</div>
+      {/* <Content statusIcon={statusIcon} color={color} type={type}>
         {type == "centered" && (
           <Title
             statusIcon={statusIcon}
@@ -193,24 +194,24 @@ const ConfirmationForm = React.forwardRef((props, ref) => {
             themeProps={themeProps}
           />
         )}
-      </Content>
+      </Content> */}
     </Modal>
   );
 });
 
-ConfirmationForm.defaultProps = {
-  statusIcon: true,
-  type: "regular",
-  actionsAlignment: "left",
-  actionsTrack: false,
-  showCloseButton: true,
-  overlay: true,
-  onClose: () => {},
-  className: "",
-  zIndex: 1000,
-  size: "fluid",
-  clickOutsideToClose: false,
-};
+// ConfirmationForm.defaultProps = {
+//   statusIcon: true,
+//   type: "regular",
+//   actionsAlignment: "left",
+//   actionsTrack: false,
+//   showCloseButton: true,
+//   overlay: true,
+//   onClose: () => {},
+//   className: "",
+//   zIndex: 1000,
+//   size: "fluid",
+//   clickOutsideToClose: false,
+// };
 
 ConfirmationForm.propTypes = {
   color: PropTypes.oneOf([

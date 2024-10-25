@@ -63,7 +63,7 @@ const Item = styled.div`
             "enabled",
             "icon"
           )};
-    ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+    ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
     background: transparent;
   }
   & .sub-menu-icon-lnc {
@@ -92,37 +92,38 @@ const Item = styled.div`
     )};
   `}
   outline: none;
-  ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+  ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
 `;
 
 const DropdownItem = React.forwardRef((props, ref) => {
   const {
-    active,
+    __TYPE__ = "MENU_ITEM",
+    active = false,
     icon,
-    disabled,
-    isNested,
+    disabled = false,
+    isNested = false,
     showNested,
     value,
     //----------------
-    onFocus,
-    onBlur,
-    onClick,
-    onKeyDown,
-    onMouseEnter,
-    onMouseLeave,
-    toggleNested,
-    onItemSelected,
+    onFocus = () => {},
+    onBlur = () => {},
+    onClick = () => {},
+    onKeyDown = () => {},
+    onMouseEnter = () => {},
+    onMouseLeave = () => {},
+    toggleNested = () => {},
+    onItemSelected = () => {},
     //----------------
-    className,
-    style,
     color,
+    className = "",
+    style = {},
+    size = "small",
     iconProps,
-    __TYPE__,
     children,
     ...rest
   } = props;
   const theme = useTheme();
-  const themeProps = { theme, color, style };
+  const themeProps = { theme, color, style, size };
   const itemRef = useRef();
 
   const [isActive, setIsActive] = useState(active);
@@ -261,7 +262,6 @@ const DropdownItem = React.forwardRef((props, ref) => {
       <Item
         ref={ref ? ref : itemRef}
         className={`menu-item-lnc ` + className}
-        {...themeProps}
         disabled={disabled}
         tabIndex={0}
         onKeyDown={handleOnKeyDown}
@@ -270,6 +270,7 @@ const DropdownItem = React.forwardRef((props, ref) => {
         onClick={handleOnClick}
         isActive={isActive}
         showNested={showNested}
+        {...themeProps}
         {...rest}
       >
         {icon && (
@@ -282,24 +283,25 @@ const DropdownItem = React.forwardRef((props, ref) => {
   );
 });
 
-DropdownItem.defaultProps = {
-  active: false,
-  disabled: false,
-  isNested: false,
-  //-------------------------
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  onKeyDown: () => {},
-  onMouseEnter: () => {},
-  onMouseLeave: () => {},
-  onItemSelected: () => {},
-  //-------------------------
-  style: {},
-  className: "",
-  size: "small",
-  __TYPE__: "MENU_ITEM",
-};
+// TODO : type
+// DropdownItem.defaultProps = {
+//   active: false,
+//   disabled: false,
+//   isNested: false,
+//   //-------------------------
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   onClick: () => {},
+//   onKeyDown: () => {},
+//   onMouseEnter: () => {},
+//   onMouseLeave: () => {},
+//   onItemSelected: () => {},
+//   //-------------------------
+//   style: {},
+//   className: "",
+//   size: "small",
+//   __TYPE__: "MENU_ITEM",
+// };
 
 DropdownItem.propTypes = {
   active: PropTypes.bool,
@@ -333,3 +335,5 @@ DropdownItem.propTypes = {
 };
 
 export default DropdownItem;
+
+DropdownItem.displayName = 'MENU_ITEM';

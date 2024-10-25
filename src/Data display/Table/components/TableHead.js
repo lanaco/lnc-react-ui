@@ -9,7 +9,12 @@ const HtmlHead = styled.thead`
 
 const TableHead = (props) => {
   //--------------------------
-  const { className, size, color } = props;
+  const {
+    __TYPE__ = "TABLE_HEAD",
+    className = "",
+    size = "small",
+    color = "primary",
+  } = props;
   const theme = useTheme();
 
   const themeProps = {
@@ -22,13 +27,14 @@ const TableHead = (props) => {
   return <HtmlHead {...themeProps}>{props.children}</HtmlHead>;
 };
 
-TableHead.defaultProps = {
-  __TYPE__: "TABLE_HEAD",
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableHead.defaultProps = {
+//   __TYPE__: "TABLE_HEAD",
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableHead.propTypes = {
   __TYPE__: PropTypes.string,
@@ -43,8 +49,10 @@ TableHead.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default TableHead;
+
+TableHead.displayName = 'TABLE_HEAD';

@@ -9,62 +9,62 @@ import { components } from "react-select";
 
 const DropdownLookup = React.forwardRef((props, ref) => {
   const {
-    defaultOptions,
-    cacheOptions,
-    loadOptions,
+    // defaultOptions,
+    // cacheOptions,
+    // loadOptions,
     styles,
-    debounceTime,
-    name,
-    hideSelectedOptions,
-    id,
-    inputId,
-    value,
-    readOnly,
-    tabIndex,
-    isSearchable,
-    isClearable,
-    isLoading,
-    isRtl,
-    isDisabled,
-    closeMenuOnSelect,
-    closeMenuOnScroll,
-    escapeClearsValue,
-    filterOption,
-    formatGroupLabel,
-    formatOptionLabel,
-    getOptionLabel,
-    getOptionValue,
-    isOptionDisabled,
-    isOptionSelected,
-    loadingMessage,
-    minMenuHeight,
-    maxMenuHeight,
-    menuPlacement,
-    menuPosition,
-    menuShouldBlockScroll,
-    menuShouldScrollIntoView,
-    openMenuOnFocus,
-    openMenuOnClick,
-    autoFocus,
-    placeholder,
-    noOptionsMessage,
-    menuIsOpen,
-    components,
-    defaultValue,
-    defaultInputValue,
-    defaultMenuIsOpen,
-    delimiter,
-    onChange,
+    debounceTime = 180,
+    // name,
+    // hideSelectedOptions,
+    // id,
+    // inputId,
+    // value,
+    // readOnly,
+    // tabIndex,
+    isSearchable = true,
+    isClearable = true,
+    // isLoading,
+    // isRtl,
+    // isDisabled,
+    // closeMenuOnSelect,
+    // closeMenuOnScroll,
+    // escapeClearsValue,
+    // filterOption,
+    // formatGroupLabel,
+    // formatOptionLabel,
+    // getOptionLabel,
+    // getOptionValue,
+    // isOptionDisabled,
+    // isOptionSelected,
+    // loadingMessage,
+    // minMenuHeight,
+    // maxMenuHeight,
+    // menuPlacement,
+    // menuPosition,
+    // menuShouldBlockScroll,
+    // menuShouldScrollIntoView,
+    // openMenuOnFocus,
+    // openMenuOnClick,
+    // autoFocus,
+    // placeholder,
+    // noOptionsMessage,
+    // menuIsOpen,
+    // components,
+    // defaultValue,
+    // defaultInputValue,
+    // defaultMenuIsOpen,
+    // delimiter,
+    // onChange,
     onInputChange,
-    onMenuOpen,
-    onMenuClose,
-    onBlur,
-    onFocus,
-    size,
-    color,
-    className,
-    style,
-    children,
+    // onMenuOpen,
+    // onMenuClose,
+    // onBlur,
+    // onFocus,
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
+    // children,
     ...rest
   } = props;
 
@@ -73,7 +73,7 @@ const DropdownLookup = React.forwardRef((props, ref) => {
   const inputChange = useCallback(
     debounce((inputValue, meta) => {
 
-      onInputChange(inputValue, meta);
+      onInputChange?.(inputValue, meta);
     }, debounceTime),
   )
 
@@ -84,59 +84,59 @@ const DropdownLookup = React.forwardRef((props, ref) => {
   return (
     <AsyncReactSelect
       ref={ref}
-      components={components}
-      defaultOptions={defaultOptions}
-      cacheOptions={cacheOptions}
-      loadOptions={loadOptions}
+      // components={components}
+      // defaultOptions={defaultOptions}
+      // cacheOptions={cacheOptions}
+      // loadOptions={loadOptions}
       styles={styles ? styles : customStyles}
       size={size}
       color={color}
       theme={theme}
-      name={name}
-      hideSelectedOptions={hideSelectedOptions}
-      id={id}
-      inputId={inputId}
-      value={value}
-      readOnly={readOnly}
-      tabIndex={tabIndex}
+      // name={name}
+      // hideSelectedOptions={hideSelectedOptions}
+      // id={id}
+      // inputId={inputId}
+      // value={value}
+      // readOnly={readOnly}
+      // tabIndex={tabIndex}
       isSearchable={isSearchable}
       isClearable={isClearable}
-      isLoading={isLoading}
-      isRtl={isRtl}
-      isDisabled={isDisabled}
-      closeMenuOnSelect={closeMenuOnSelect}
-      closeMenuOnScroll={closeMenuOnScroll}
-      escapeClearsValue={escapeClearsValue}
-      filterOption={filterOption}
-      formatGroupLabel={formatGroupLabel}
-      formatOptionLabel={formatOptionLabel}
-      getOptionLabel={getOptionLabel}
-      getOptionValue={getOptionValue}
-      isOptionDisabled={isOptionDisabled}
-      isOptionSelected={isOptionSelected}
-      loadingMessage={loadingMessage}
-      minMenuHeight={minMenuHeight}
-      maxMenuHeight={maxMenuHeight}
-      menuPlacement={menuPlacement}
-      menuPosition={menuPosition}
-      menuShouldBlockScroll={menuShouldBlockScroll}
-      menuShouldScrollIntoView={menuShouldScrollIntoView}
-      openMenuOnFocus={openMenuOnFocus}
-      openMenuOnClick={openMenuOnClick}
-      autoFocus={autoFocus}
-      placeholder={placeholder}
-      noOptionsMessage={noOptionsMessage}
-      menuIsOpen={menuIsOpen}
-      defaultValue={defaultValue}
-      defaultInputValue={defaultInputValue}
-      defaultMenuIsOpen={defaultMenuIsOpen}
-      delimiter={delimiter}
-      onChange={onChange}
+      // isLoading={isLoading}
+      // isRtl={isRtl}
+      // isDisabled={isDisabled}
+      // closeMenuOnSelect={closeMenuOnSelect}
+      // closeMenuOnScroll={closeMenuOnScroll}
+      // escapeClearsValue={escapeClearsValue}
+      // filterOption={filterOption}
+      // formatGroupLabel={formatGroupLabel}
+      // formatOptionLabel={formatOptionLabel}
+      // getOptionLabel={getOptionLabel}
+      // getOptionValue={getOptionValue}
+      // isOptionDisabled={isOptionDisabled}
+      // isOptionSelected={isOptionSelected}
+      // loadingMessage={loadingMessage}
+      // minMenuHeight={minMenuHeight}
+      // maxMenuHeight={maxMenuHeight}
+      // menuPlacement={menuPlacement}
+      // menuPosition={menuPosition}
+      // menuShouldBlockScroll={menuShouldBlockScroll}
+      // menuShouldScrollIntoView={menuShouldScrollIntoView}
+      // openMenuOnFocus={openMenuOnFocus}
+      // openMenuOnClick={openMenuOnClick}
+      // autoFocus={autoFocus}
+      // placeholder={placeholder}
+      // noOptionsMessage={noOptionsMessage}
+      // menuIsOpen={menuIsOpen}
+      // defaultValue={defaultValue}
+      // defaultInputValue={defaultInputValue}
+      // defaultMenuIsOpen={defaultMenuIsOpen}
+      // delimiter={delimiter}
+      // onChange={onChange}
       onInputChange={handleOnInput}
-      onMenuOpen={onMenuOpen}
-      onMenuClose={onMenuClose}
-      onBlur={onBlur}
-      onFocus={onFocus}
+      // onMenuOpen={onMenuOpen}
+      // onMenuClose={onMenuClose}
+      // onBlur={onBlur}
+      // onFocus={onFocus}
       className={className}
       style={style}
       {...rest}
@@ -144,27 +144,27 @@ const DropdownLookup = React.forwardRef((props, ref) => {
   );
 });
 
-DropdownLookup.defaultProps = {
-  readOnly: false,
-  isDisabled: false,
-  isSearchable: true,
-  isClearable: true,
-  autoFocus: false,
-  components: {},
-  debounceTime: 180,
-  //-------------------------
-  onChange: () => { },
-  onInputChange: () => { },
-  onMenuOpen: () => { },
-  onMenuClose: () => { },
-  onFocus: () => { },
-  onBlur: () => { },
-  //-------------------------
-  style: {},
-  className: "",
-  color: "primary",
-  size: "small",
-};
+// DropdownLookup.defaultProps = {
+//   readOnly: false,
+//   isDisabled: false,
+//   isSearchable: true,
+//   isClearable: true,
+//   autoFocus: false,
+//   components: {},
+//   debounceTime: 180,
+//   //-------------------------
+//   onChange: () => { },
+//   onInputChange: () => { },
+//   onMenuOpen: () => { },
+//   onMenuClose: () => { },
+//   onFocus: () => { },
+//   onBlur: () => { },
+//   //-------------------------
+//   style: {},
+//   className: "",
+//   color: "primary",
+//   size: "small",
+// };
 
 DropdownLookup.propTypes = {
   /**

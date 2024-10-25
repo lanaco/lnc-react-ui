@@ -98,7 +98,7 @@ const StyledSpinner = styled.div`
 `;
 
 const Spinner = (props) => {
-  const { label, className, style, size, color } = props;
+  const { label, className = "", style = {}, size = "small", color = "primary" } = props;
   const theme = useTheme();
 
   const themeProps = { theme, size, color };
@@ -106,7 +106,7 @@ const Spinner = (props) => {
   return (
     <SpinnerWrapper
       {...themeProps}
-      className={className}
+      className={"lnc-ui-spinner " + className}
       style={style}
       label={label}
     >
@@ -116,12 +116,12 @@ const Spinner = (props) => {
   );
 };
 
-Spinner.defaultProps = {
-  className: "",
-  stlye: {},
-  size: "small",
-  color: "primary",
-};
+// Spinner.defaultProps = {
+//   className: "",
+//   stlye: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 Spinner.propTypes = {
   label: PropTypes.string,

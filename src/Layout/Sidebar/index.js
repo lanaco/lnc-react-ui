@@ -30,7 +30,8 @@ const ToggleSidebarButton = styled.div`
   align-items: center;
   width: 2rem;
   height: 2rem;
-  background-color: ${(props) => props.theme.palette[props.theme.colorContext.neutral][900]};
+  background-color: ${(props) =>
+    props.theme.palette[props.theme.colorContext.neutral][900]};
   opacity: 0.7;
   border-radius: ${(props) =>
     props.placement == "left" ? "0 5px 5px 0" : "5px 0 0 5px"};
@@ -55,12 +56,12 @@ const ToggleSidebarButton = styled.div`
 const Sidebar = React.forwardRef((props, ref) => {
   const {
     placement,
-    collapsed,
-    hideCollapseButton,
-    size,
+    collapsed = undefined,
+    hideCollapseButton = false,
+    size = "15rem",
     children,
     className,
-    __TYPE__,
+    __TYPE__ = "Sidebar",
     ...rest
   } = props;
 
@@ -114,12 +115,13 @@ const Sidebar = React.forwardRef((props, ref) => {
   );
 });
 
-Sidebar.defaultProps = {
-  collapsed: undefined,
-  hideCollapseButton: false,
-  size: "15rem",
-  __TYPE__: "Sidebar",
-};
+// TODO : type
+// Sidebar.defaultProps = {
+//   collapsed: undefined,
+//   hideCollapseButton: false,
+//   size: "15rem",
+//   __TYPE__: "Sidebar",
+// };
 
 Sidebar.propTypes = {
   /**
@@ -143,3 +145,5 @@ Sidebar.propTypes = {
 };
 
 export default Sidebar;
+
+Sidebar.displayName = 'Sidebar';

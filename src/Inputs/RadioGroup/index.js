@@ -6,7 +6,7 @@ import RadioInput from "../../Basic Inputs/RadioInput/index";
 
 const Container = styled.div`
   display: inline-flex;
-  flex-direction: ${props => props.inline ? "row" : "column"};
+  flex-direction: ${(props) => (props.inline === true ? "row" : "column")};
   gap: 1.5rem;
   width: fit-content;
   box-sizing: border-box;
@@ -14,23 +14,23 @@ const Container = styled.div`
 
 const RadioGroup = React.forwardRef((props, ref) => {
   const {
-    id,
+    id = "",
     name,
-    value,
-    disabled,
-    readOnly,
-    items,
-    mapId,
-    mapValue,
+    value = null,
+    disabled = false,
+    readOnly = false,
+    items = [],
+    mapId = "id",
+    mapValue = "value",
     radioProps,
-    inline,
+    inline = true,
     //----------------
-    onChange,
+    onChange = () => {},
     //----------------
-    className,
-    style,
-    size,
-    color,
+    className = "",
+    style = {},
+    size = "small",
+    color = "primary",
     ...rest
   } = props;
 
@@ -50,11 +50,18 @@ const RadioGroup = React.forwardRef((props, ref) => {
   };
 
   const handleChange = (e, id) => {
-    if(onChange) onChange(e);
+    if (onChange) onChange(e);
   };
 
   return (
-    <Container ref={ref} id={id} inline={inline} style={style} className={className} {...rest}>
+    <Container
+      ref={ref}
+      id={id}
+      inline={inline}
+      style={style}
+      className={className}
+      {...rest}
+    >
       {items.map((item, i) => (
         <RadioInput
           key={i}
@@ -70,31 +77,31 @@ const RadioGroup = React.forwardRef((props, ref) => {
   );
 });
 
-RadioGroup.defaultProps = {
-  id: "",
-  value: null,
-  disabled: false,
-  readOnly: false,
-  inline: true,
-  items: [],
-  mapId: "id",
-  mapValue: "value",
-  //----------------
-  onChange: () => {},
-  //----------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// RadioGroup.defaultProps = {
+//   id: "",
+//   value: null,
+//   disabled: false,
+//   readOnly: false,
+//   inline: true,
+//   items: [],
+//   mapId: "id",
+//   mapValue: "value",
+//   //----------------
+//   onChange: () => {},
+//   //----------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 RadioGroup.propTypes = {
   id: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   value: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object),
   mapId: PropTypes.string,
   mapValue: PropTypes.string,
   inline: PropTypes.bool,
@@ -112,7 +119,7 @@ RadioGroup.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   radioProps: PropTypes.any,
 };

@@ -43,14 +43,15 @@ const HtmlCell = styled.th`
 const TableHeadSelectionCell = (props) => {
   //--------------------------
   const {
+    __TYPE__ = "TABLE_HEAD_SELECTION_CELL",
     EnableSelectAll,
-    IsSelected,
-    Index,
+    IsSelected = null,
+    Index = 0,
     onSelectAll,
     //----------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -80,22 +81,23 @@ const TableHeadSelectionCell = (props) => {
   );
 };
 
-TableHeadSelectionCell.defaultProps = {
-  __TYPE__: "TABLE_HEAD_SELECTION_CELL",
-  //--------------------
-  Index: 0,
-  IsSelected: null,
-  GetRowHighlightColor: () => "",
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableHeadSelectionCell.defaultProps = {
+//   __TYPE__: "TABLE_HEAD_SELECTION_CELL",
+//   //--------------------
+//   Index: 0,
+//   IsSelected: null,
+//   GetRowHighlightColor: () => "",
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableHeadSelectionCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Index: PropTypes.number.isRequired,
+  Index: PropTypes.number,
   IsSelected: PropTypes.bool,
   EnableSelectAll: PropTypes.bool,
   //----------------------------------------
@@ -114,3 +116,5 @@ TableHeadSelectionCell.propTypes = {
 };
 
 export default TableHeadSelectionCell;
+
+TableHeadSelectionCell.displayName = 'TABLE_HEAD_SELECTION_CELL';

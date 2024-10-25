@@ -18,22 +18,22 @@ import {
 
 const Drawer = React.forwardRef((props, ref) => {
   const {
-    direction,
-    open,
-    duration,
-    overlayOpacity,
-    enableOverlay,
-    zIndex,
+    direction = "right",
+    open = false,
+    duration = 300,
+    overlayOpacity = 0.4,
+    enableOverlay = true,
+    zIndex = 100,
     //----------------
-    onClose,
-    onOpen,
+    onClose = () => {},
+    onOpen = () => {},
     //----------------
-    className,
-    style,
-    color,
+    className = "",
+    style = {},
+    color = "neutral",
+    size = "small",
     overlayColor,
-    size,
-    width,
+    width = "unset",
     children,
     ...rest
   } = props;
@@ -111,22 +111,22 @@ const Drawer = React.forwardRef((props, ref) => {
   );
 });
 
-Drawer.defaultProps = {
-  direction: "right",
-  open: false,
-  duration: 300,
-  overlayOpacity: 0.4,
-  enableOverlay: true,
-  zIndex: 100,
-  //-------------------------
-  onClose: () => {},
-  onOpen: () => {},
-  //-------------------------
-  style: {},
-  color: "neutral",
-  width: "unset",
-  size: "small",
-};
+// Drawer.defaultProps = {
+//   direction: "right",
+//   open: false,
+//   duration: 300,
+//   overlayOpacity: 0.4,
+//   enableOverlay: true,
+//   zIndex: 100,
+//   //-------------------------
+//   onClose: () => {},
+//   onOpen: () => {},
+//   //-------------------------
+//   style: {},
+//   color: "neutral",
+//   width: "unset",
+//   size: "small",
+// };
 
 Drawer.propTypes = {
   direction: PropTypes.oneOf(["top", "right", "left", "bottom"]),

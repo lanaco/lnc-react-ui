@@ -31,7 +31,7 @@ const Label = styled.label`
     transition-duration: 0.3s;
     background-color: transparent;
     cursor: pointer;
-    z-index: ${(props) => (props.focused ? "2" : "auto")};
+    z-index: ${(props) => (props.focused === true ? "2" : "auto")};
   }
 
   & > input:checked + span::before {
@@ -68,15 +68,15 @@ const Checkbox = styled.input`
 
 const CustomCheckbox = React.forwardRef((props, ref) => {
   const {
-    onChange,
-    preventDefault,
-    id,
-    disabled,
-    className,
-    checked,
-    label,
-    onFocus,
-    onBlur,
+    onChange = () => {},
+    preventDefault = true,
+    id = "",
+    disabled = false,
+    className = "",
+    checked = false,
+    label = "",
+    onFocus = () => {},
+    onBlur = () => {},
     tabIndex,
   } = props;
 
@@ -127,36 +127,24 @@ const CustomCheckbox = React.forwardRef((props, ref) => {
     </Label>
   );
 
-  return (
-    <CheckBox
-      ref={ref}
-      type="checkbox"
-      checked={checked}
-      onClick={handleChange}
-      onChange={() => {}}
-      onKeyDown={onKeyDown}
-      tabIndex={tabIndex}
-      onFocus={handleOnFocus}
-      onBlur={handleOnBlur}
-      disabled={disabled}
-    />
-  );
+  // return (
+  //   <CheckBox
+  //     ref={ref}
+  //     type="checkbox"
+  //     checked={checked}
+  //     onClick={handleChange}
+  //     onChange={() => {}}
+  //     onKeyDown={onKeyDown}
+  //     tabIndex={tabIndex}
+  //     onFocus={handleOnFocus}
+  //     onBlur={handleOnBlur}
+  //     disabled={disabled}
+  //   />
+  // );
 });
 
-CustomCheckbox.defaultProps = {
-  id: "",
-  disabled: false,
-  onChange: () => {},
-  className: "",
-  checked: false,
-  preventDefault: true,
-  size: "small",
-  label: "",
-  color: "primary",
-};
-
 CustomCheckbox.propTypes = {
-  id: PropTypes.any.isRequired,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,

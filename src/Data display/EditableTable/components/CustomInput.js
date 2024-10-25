@@ -55,19 +55,19 @@ const StyledTextInput = styled.input((props) => {
 
 const CustomInput = React.forwardRef((props, ref) => {
   const {
-    color,
-    id,
-    disabled,
-    preventDefault,
-    className,
-    size,
-    value,
-    onChange,
-    onKeyDown,
-    onInput,
-    onBlur,
-    onFocus,
-    tabIndex,
+    color = "primary",
+    id = "",
+    disabled = false,
+    preventDefault = false,
+    className = "",
+    size = "small",
+    value = "",
+    onChange = () => {},
+    onKeyDown = () => {},
+    onInput = () => {},
+    onBlur = () => {},
+    onFocus = () => {},
+    tabIndex = -1,
   } = props;
 
   const theme = useTheme();

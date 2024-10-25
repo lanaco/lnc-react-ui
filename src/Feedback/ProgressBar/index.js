@@ -53,21 +53,21 @@ const Label = styled.label`
 
 const ProgressBar = React.forwardRef((props, ref) => {
   const {
-    id,
-    showLabel,
-    progressPercentage,
-    className,
-    style,
-    onChange,
-    size,
-    color,
+    id = "",
+    showLabel = false,
+    progressPercentage = 0,
+    className = "",
+    style = {},
+    onChange = () => {},
+    size = "small",
+    color = "primary",
     ...rest
   } = props;
 
   const theme = useTheme();
 
   return (
-    <Bar style={style} className={className} theme={theme} size={size} showLabel={showLabel} {...rest}>
+    <Bar style={style} className={"lnc-ui-progress " + className} theme={theme} size={size} showLabel={showLabel} {...rest}>
       <Progressed
         progressPercentage={progressPercentage}
         theme={theme}
@@ -82,22 +82,22 @@ const ProgressBar = React.forwardRef((props, ref) => {
   );
 });
 
-ProgressBar.defaultProps = {
-  id: "",
-  showLabel: false,
-  progressPercentage: 0,
-  //------------------
-  onChange: () => {},
-  //------------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-  //-------------------
-};
+// ProgressBar.defaultProps = {
+//   id: "",
+//   showLabel: false,
+//   progressPercentage: 0,
+//   //------------------
+//   onChange: () => {},
+//   //------------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+//   //-------------------
+// };
 
 ProgressBar.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   showLabel: PropTypes.bool,
   progressPercentage: PropTypes.number,
   //-------------------------

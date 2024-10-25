@@ -28,28 +28,28 @@ const PaginationContainer = styled.div`
 
 const Pagination = (props) => {
   const {
-    icons,
-    borderRadius,
-    currentPage,
-    buttonType,
-    currentPageButtonType,
-    withFirstLast,
-    withButtonGroup,
-    disabledNext,
-    disabledPrevious,
-    disabledFirst,
-    disabledLast,
-    disabled,
-    totalNumberOfPages,
-    pagesOffset,
-    horizontalAlignment,
+    icons = {},
+    borderRadius = "regular",
+    currentPage = 1,
+    buttonType = "outline",
+    currentPageButtonType = "tinted",
+    withFirstLast = true,
+    withButtonGroup = true,
+    disabledNext = false,
+    disabledPrevious = false,
+    disabledFirst = false,
+    disabledLast = false,
+    disabled = false,
+    totalNumberOfPages = 1,
+    pagesOffset = 0,
+    horizontalAlignment = "left",
     //------------------
-    onPageChange,
+    onPageChange = () => {},
     //------------------
-    className,
-    style,
-    size,
-    color,
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
   } = props;
 
   const theme = useTheme();
@@ -207,30 +207,30 @@ const Pagination = (props) => {
   );
 };
 
-Pagination.defaultProps = {
-  icons: {},
-  disabled: false,
-  borderRadius: "regular",
-  currentPage: 1,
-  buttonType: "outline",
-  currentPageButtonType: "tinted",
-  withFirstLast: true,
-  withButtonGroup: true,
-  disabledNext: false,
-  disabledPrevious: false,
-  disabledFirst: false,
-  disabledLast: false,
-  totalNumberOfPages: 1,
-  pagesOffset: 0,
-  horizontalAlignment: "left",
-  //-------------------------------
-  onPageChange: () => {},
-  //-------------------------------
-  style: {},
-  className: "",
-  color: "primary",
-  size: "small",
-};
+// Pagination.defaultProps = {
+//   icons: {},
+//   disabled: false,
+//   borderRadius: "regular",
+//   currentPage: 1,
+//   buttonType: "outline",
+//   currentPageButtonType: "tinted",
+//   withFirstLast: true,
+//   withButtonGroup: true,
+//   disabledNext: false,
+//   disabledPrevious: false,
+//   disabledFirst: false,
+//   disabledLast: false,
+//   totalNumberOfPages: 1,
+//   pagesOffset: 0,
+//   horizontalAlignment: "left",
+//   //-------------------------------
+//   onPageChange: () => {},
+//   //-------------------------------
+//   style: {},
+//   className: "",
+//   color: "primary",
+//   size: "small",
+// };
 
 Pagination.propTypes = {
   icons: PropTypes.shape({

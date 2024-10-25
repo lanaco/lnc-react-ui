@@ -14,14 +14,16 @@ const KanbanFooter = React.memo(
   React.forwardRef(
     (
       {
+        __TYPE__ = "KANBAN_FOOTER",
         id,
-        showAddNewCard,
-        showLoadMoreCards,
-        addNewCardText,
-        onAddNewCard,
-        onLoadMoreCards,
-        className,
-        style,
+        showAddNewCard = false,
+        showLoadMoreCards = false,
+        addNewCardText = "Add New Card",
+        onAddNewCard = () => {},
+        onLoadMoreCards = () => {},
+        className = "",
+        style = {},
+        color = "primary",
         children,
         ...rest
       },
@@ -60,20 +62,21 @@ const KanbanFooter = React.memo(
   )
 );
 
-KanbanFooter.defaultProps = {
-  __TYPE__: "KANBAN_FOOTER",
-  //-------------------------
-  showLoadMoreCards: false,
-  showAddNewCard: false,
-  addNewCardText: "Add New Card",
-  //-------------------------
-  onAddNewCard: (e, columnId) => {},
-  onLoadMoreCards: (e, columnId) => {},
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
+// TODO : type
+// KanbanFooter.defaultProps = {
+//   __TYPE__: "KANBAN_FOOTER",
+//   //-------------------------
+//   showLoadMoreCards: false,
+//   showAddNewCard: false,
+//   addNewCardText: "Add New Card",
+//   //-------------------------
+//   onAddNewCard: (e, columnId) => {},
+//   onLoadMoreCards: (e, columnId) => {},
+//   //-------------------------
+//   style: {},
+//   color: "primary",
+//   size: "small",
+// };
 
 KanbanFooter.propTypes = {
   __TYPE__: PropTypes.string,
@@ -91,3 +94,5 @@ KanbanFooter.propTypes = {
 };
 
 export default KanbanFooter;
+
+KanbanFooter.displayName = 'KANBAN_FOOTER';
