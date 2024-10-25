@@ -97,25 +97,25 @@ const StyledNotification = styled.div`
 
 const NotificationContainer = React.forwardRef((props, ref) => {
   const {
-    position,
-    autoClose,
-    hideProgressBar,
-    newestOnTop,
-    closeOnClick,
-    rtl,
-    pauseOnFocusLoss,
-    draggable,
-    pauseOnHover,
-    closeButton,
-    className,
-    style,
+    position = "top-right",
+    autoClose = 500000,
+    hideProgressBar = true,
+    newestOnTop = true,
+    closeOnClick = true,
+    rtl = false,
+    pauseOnFocusLoss = false,
+    draggable = false,
+    pauseOnHover = false,
+    closeButton = true,
+    className = "",
+    style = {},
     toastContainerProps,
     children,
     ...rest
   } = props;
   const { theme } = useTheme();
 
-  const themeProps = { theme, className, style };
+  const themeProps = { theme, className: "lnc-ui-notification " + className, style };
 
   return (
     <StyledNotification ref={ref} {...themeProps} {...rest}>
@@ -137,20 +137,20 @@ const NotificationContainer = React.forwardRef((props, ref) => {
   );
 });
 
-NotificationContainer.defaultProps = {
-  position: "top-right",
-  autoClose: 500000,
-  hideProgressBar: true,
-  newestOnTop: true,
-  closeOnClick: true,
-  rtl: false,
-  pauseOnFocusLoss: false,
-  draggable: false,
-  pauseOnHover: false,
-  closeButton: true,
-  //----------------------------
-  style: {},
-};
+// NotificationContainer.defaultProps = {
+//   position: "top-right",
+//   autoClose: 500000,
+//   hideProgressBar: true,
+//   newestOnTop: true,
+//   closeOnClick: true,
+//   rtl: false,
+//   pauseOnFocusLoss: false,
+//   draggable: false,
+//   pauseOnHover: false,
+//   closeButton: true,
+//   //----------------------------
+//   style: {},
+// };
 
 NotificationContainer.propTypes = {
   position: PropTypes.oneOf([

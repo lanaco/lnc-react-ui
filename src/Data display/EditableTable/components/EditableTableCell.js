@@ -54,13 +54,14 @@ const EditableTableCell = (props) => {
 
   //--------------------------
   const {
-    Column,
+    __TYPE__ = "TABLE_CELL",
+    Column = {},
     ColumnsToRender,
-    RowData,
-    Index,
+    RowData = {},
+    Index = 0,
     RowIndex,
-    EnableSelection,
-    TabIndexOffset,
+    EnableSelection = false,
+    TabIndexOffset = 100,
     onFocusChanged,
     RowIdentifier,
     onDiscard,
@@ -68,9 +69,9 @@ const EditableTableCell = (props) => {
     //----------------
     onChange,
     //----------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -293,26 +294,27 @@ const EditableTableCell = (props) => {
   );
 };
 
-EditableTableCell.defaultProps = {
-  __TYPE__: "TABLE_CELL",
-  //--------------------
-  Column: {},
-  RowData: {},
-  Index: 0,
-  EnableSelection: false,
-  TabIndexOffset: 100,
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// EditableTableCell.defaultProps = {
+//   __TYPE__: "TABLE_CELL",
+//   //--------------------
+//   Column: {},
+//   RowData: {},
+//   Index: 0,
+//   EnableSelection: false,
+//   TabIndexOffset: 100,
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 EditableTableCell.propTypes = {
   __TYPE__: PropTypes.string,
   //----------------------------------------
-  Column: PropTypes.object.isRequired,
-  RowData: PropTypes.object.isRequired,
-  Index: PropTypes.number.isRequired,
+  Column: PropTypes.object,
+  RowData: PropTypes.object,
+  Index: PropTypes.number,
   EnableSelection: PropTypes.bool,
   TabIndexOffset: PropTypes.number,
   //----------------------------------------
@@ -331,3 +333,5 @@ EditableTableCell.propTypes = {
 };
 
 export default EditableTableCell;
+
+EditableTableCell.displayName = 'TABLE_CELL';

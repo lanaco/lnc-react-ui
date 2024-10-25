@@ -33,11 +33,12 @@ const HtmlHeadCell = styled.th`
 const TableHeadRowStatusIndicatorCell = (props) => {
   //--------------------------
   const {
+    __TYPE__ = "TABLE_HEAD_ROW_STATUS_INDICATOR_CELL",
     Index,
     //-----------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -52,13 +53,14 @@ const TableHeadRowStatusIndicatorCell = (props) => {
   return <HtmlHeadCell {...themeProps} key={Index}></HtmlHeadCell>;
 };
 
-TableHeadRowStatusIndicatorCell.defaultProps = {
-  __TYPE__: "TABLE_HEAD_ROW_STATUS_INDICATOR_CELL",
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableHeadRowStatusIndicatorCell.defaultProps = {
+//   __TYPE__: "TABLE_HEAD_ROW_STATUS_INDICATOR_CELL",
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableHeadRowStatusIndicatorCell.propTypes = {
   __TYPE__: PropTypes.string,
@@ -78,3 +80,5 @@ TableHeadRowStatusIndicatorCell.propTypes = {
 };
 
 export default TableHeadRowStatusIndicatorCell;
+
+TableHeadRowStatusIndicatorCell.displayName = 'TABLE_HEAD_ROW_STATUS_INDICATOR_CELL';

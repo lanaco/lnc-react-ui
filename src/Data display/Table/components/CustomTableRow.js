@@ -33,6 +33,7 @@ const HtmlRow = styled.tr`
 const CustomTableRow = (props) => {
   //--------------------------
   const {
+    __TYPE__ = "TABLE_ROW",
     onRowClick,
     onSelectRow,
     RowData,
@@ -52,14 +53,11 @@ const CustomTableRow = (props) => {
   );
 };
 
-CustomTableRow.defaultProps = {
-  __TYPE__: "TABLE_ROW",
-  //--------------------
-
-  //--------------------
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// CustomTableRow.defaultProps = {
+//   __TYPE__: "TABLE_ROW",
+//   //--------------------
+// };
 
 CustomTableRow.propTypes = {
   __TYPE__: PropTypes.string,
@@ -79,3 +77,5 @@ CustomTableRow.propTypes = {
 };
 
 export default CustomTableRow;
+
+CustomTableRow.displayName = 'TABLE_ROW';

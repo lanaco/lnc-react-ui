@@ -10,49 +10,44 @@ import { useEffectOnce, useUpdateEffect } from "react-use";
 
 const TextAreaInput = React.forwardRef((props, ref) => {
   const {
-    id,
     disabled,
     readOnly,
-    value,
-    defaultValue,
-    debounceTime,
-    type,
-    placeholder,
-    tabIndex,
-    collapseOnBlur,
-    minRows,
+    // value,
+    // defaultValue,
+    debounceTime = 180,
+    type = "textarea",
+    // placeholder,
+    // tabIndex,
+    collapseOnBlur = false,
+    minRows = 0,
     maxRows,
     //----------------
     onChange,
-    onKeyDown,
     onBlur,
     onFocus,
     //----------------
-    className,
-    style,
-    size,
-    color,
+    className = "",
+    style = {},
+    size = "small",
+    color = "primary",
     ...rest
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState(value);
   const [focused, setFocused] = useState(false);
   const [innerMinRows, setInnerMinRows] = useState(minRows);
   const [innerMaxRows, setInnerMaxRows] = useState(
     collapseOnBlur ? minRows : maxRows
   );
 
-  useUpdateEffect(() => setInputValue(value), [value]);
-
   useEffect(() => {
     setInnerMinRows(minRows);
-    if (collapseOnBlur && !focused) setInnerMaxRows(minRows);
+    if (collapseOnBlur && focused === false) setInnerMaxRows(minRows);
   }, [minRows, maxRows]);
 
   useEffect(() => {
     if (!collapseOnBlur) setInnerMaxRows(maxRows);
-    else setInnerMaxRows(focused ? maxRows : minRows);
+    else setInnerMaxRows(focused === true ? maxRows : minRows);
   }, [collapseOnBlur]);
 
   const debouncedOnChange = useCallback(
@@ -61,11 +56,10 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    if (onChange) onChange(e, value);
+    if (onChange) onChange?.(e, value);
   };
 
   const onValueChange = (e) => {
-    if (value || value === "") setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
@@ -74,7 +68,7 @@ const TextAreaInput = React.forwardRef((props, ref) => {
     if (collapseOnBlur) {
       setInnerMaxRows(maxRows);
     }
-    onFocus(e);
+    onFocus?.(e);
   };
 
   const handleBlur = (e) => {
@@ -82,7 +76,7 @@ const TextAreaInput = React.forwardRef((props, ref) => {
     if (collapseOnBlur) {
       setInnerMaxRows(minRows);
     }
-    onBlur(e);
+    onBlur?.(e);
   };
 
   return (
@@ -97,67 +91,45 @@ const TextAreaInput = React.forwardRef((props, ref) => {
       readOnly={readOnly}
       collapseOnBlur={collapseOnBlur}
     >
-      {
-        // Controlled input and uncotrolled input must be differentiated because of usage of the value property
-        value == null || value == "undefined" ? (
-          <ReactTextareaAutosize
-            ref={ref}
-            placeholder={placeholder}
-            disabled={disabled}
-            defaultValue={defaultValue}
-            readOnly={readOnly}
-            tabIndex={tabIndex}
-            minRows={innerMinRows}
-            maxRows={innerMaxRows}
-            onChange={onValueChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            {...rest}
-          />
-        ) : (
-          <ReactTextareaAutosize
-            ref={ref}
-            placeholder={placeholder}
-            disabled={disabled}
-            value={inputValue}
-            readOnly={readOnly}
-            tabIndex={tabIndex}
-            minRows={innerMinRows}
-            maxRows={innerMaxRows}
-            onChange={onValueChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            {...rest}
-          />
-        )
-      }
+      <ReactTextareaAutosize
+        ref={ref}
+        disabled={disabled}
+        // value={inputValue}
+        readOnly={readOnly}
+        minRows={innerMinRows}
+        maxRows={innerMaxRows}
+        onChange={onValueChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        {...rest}
+      />
     </StyledTextareaWrapper>
   );
 });
 
-TextAreaInput.defaultProps = {
-  id: "",
-  defaultValue: "",
-  placeholder: "",
-  disabled: false,
-  readOnly: false,
-  debounceTime: 180,
-  tabIndex: 0,
-  collapseOnBlur: false,
-  minRows: 1,
-  //----------------
-  onChange: () => {},
-  onBlur: () => {},
-  onFocus: () => {},
-  //----------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// TextAreaInput.defaultProps = {
+//   // defaultValue: "",
+//   placeholder: "",
+//   disabled: false,
+//   readOnly: false,
+//   debounceTime: 180,
+//   tabIndex: 0,
+//   collapseOnBlur: false,
+//   minRows: 1,
+//   //----------------
+//   onChange: () => {},
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   //----------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 TextAreaInput.propTypes = {
   id: PropTypes.string,
+  defaultValue: PropTypes.string,
   value: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,

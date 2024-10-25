@@ -29,8 +29,8 @@ const GridItem = React.forwardRef((props, ref) => {
         justifySelf,
         alignSelf,
         area,
-        className,
-        style,
+        className = "",
+        style = {},
         children,
         ...rest
     } = props;
@@ -44,10 +44,10 @@ const GridItem = React.forwardRef((props, ref) => {
     )
 });
 
-GridItem.defaultProps = {
-    style: {},
-    className: "",
-};
+// GridItem.defaultProps = {
+//     style: {},
+//     className: "",
+// };
 
 GridItem.propTypes = {
     /**

@@ -237,8 +237,8 @@ const SortableItem = ({
 const Kanban = React.forwardRef((props, ref) => {
   //================== PROPS =====================
   const {
-    horizontalDisplay,
-    verticalDisplay,
+    horizontalDisplay = false,
+    verticalDisplay = false,
     adjustScale = false,
     itemCount = 5,
     cancelDrop,
@@ -260,12 +260,12 @@ const Kanban = React.forwardRef((props, ref) => {
     //---------------------------
     data = [],
     columnInfo = {},
-    onColumnMoved,
-    onCardMoved,
-    onCardChangedColumns,
+    onColumnMoved = () => {},
+    onCardMoved = () => {},
+    onCardChangedColumns = () => {},
     //---------------------------
-    color,
-    size,
+    color = "primary",
+    size = "small",
     children,
     ...rest
   } = props;
@@ -841,21 +841,21 @@ const Kanban = React.forwardRef((props, ref) => {
   );
 });
 
-Kanban.defaultProps = {
-  horizontalDisplay: false,
-  verticalDisplay: false,
-  getItemStyles: (s) => ({ ...s }),
-  wrapperStyle: (s) => ({ ...s }),
-  //---------------------
-  onCardChangedColumns: (event, cachedItems, column, previousColumn) => {},
-  onColumnMoved: (e, columns) => {},
-  onCardMoved: (e, items, column) => {},
-  //-----------------------------------------
-  color: "primary",
-  size: "small",
-  className: "",
-  stlye: {},
-};
+// Kanban.defaultProps = {
+//   horizontalDisplay: false,
+//   verticalDisplay: false,
+//   getItemStyles: (s) => ({ ...s }),
+//   wrapperStyle: (s) => ({ ...s }),
+//   //---------------------
+//   onCardChangedColumns: (event, cachedItems, column, previousColumn) => {},
+//   onColumnMoved: (e, columns) => {},
+//   onCardMoved: (e, items, column) => {},
+//   //-----------------------------------------
+//   color: "primary",
+//   size: "small",
+//   className: "",
+//   stlye: {},
+// };
 
 Kanban.propTypes = {
   horizontalDisplay: PropTypes.bool,

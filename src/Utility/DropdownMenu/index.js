@@ -31,25 +31,36 @@ const StyledContent = styled(motion.div)`
 const DropdownMenu = React.forwardRef((props, ref) => {
   const {
     control,
-    offsetValue,
+    offsetValue = 9,
     placement,
-    widthFitContent,
-    closeOnItemSelect,
+    widthFitContent = false,
+    closeOnItemSelect = true,
     zIndex,
     //----------------
-    onFocus,
-    onBlur,
-    onClick,
-    onKeyDown,
-    onMouseEnter,
-    onMouseLeave,
-    onItemSelected,
+    onFocus = () => {},
+    onBlur = () => {},
+    onClick = () => {},
+    onKeyDown = () => {},
+    onMouseEnter = () => {},
+    onMouseLeave = () => {},
+    onItemSelected = () => {},
     //----------------
-    animation,
-    className,
-    contentClassName,
-    color,
-    size,
+    animation = {
+      animate: { opacity: 1, height: "auto" },
+      exit: { opacity: 0, height: 0 },
+      initial: { opacity: 0, height: 0 },
+      transition: {
+        type: "tween",
+        duration: 0.15,
+        opacity: { duration: 0.15, ease: "easeOut" },
+        height: { duration: 0.15 },
+      },
+    },
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
+    contentClassName = "",
     popoverProps,
     children,
     ...rest
@@ -73,7 +84,9 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     if (React.isValidElement(child)) {
       if (
         child.props.__TYPE__ == "MENU_ITEM" ||
-        child.props.__TYPE__ == "NESTED_ITEM"
+        child?.type?.displayName === "MENU_ITEM" ||
+        child.props.__TYPE__ == "NESTED_ITEM" ||
+        child?.type?.displayName === "NESTED_ITEM"
       ) {
         if (index == 0) {
           if (child.props.ref) firstItemRef.current = ref;
@@ -148,42 +161,41 @@ const DropdownMenu = React.forwardRef((props, ref) => {
   );
 });
 
-DropdownMenu.defaultProps = {
-  offsetValue: 8,
-  widthFitContent: false,
-  closeOnItemSelect: true,
-  //-------------------------
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  onKeyDown: () => {},
-  onMouseEnter: () => {},
-  onMouseLeave: () => {},
-  onItemSelected: (e, value, children) => {},
-  //-------------------------
-  /**
-   * Animation use on nested items open/close
-   */
-  animation: {
-    animate: { opacity: 1, height: "auto" },
-    exit: { opacity: 0, height: 0 },
-    initial: { opacity: 0, height: 0 },
-    transition: {
-      type: "tween",
-      duration: 0.15,
-      opacity: { duration: 0.15, ease: "easeOut" },
-      height: { duration: 0.15 },
-    },
-  },
-  color: "primary",
-  size: "small",
-  className: "",
-  contentClassName: "",
-};
+// DropdownMenu.defaultProps = {
+//   offsetValue: 8,
+//   widthFitContent: false,
+//   closeOnItemSelect: true,
+//   //-------------------------
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   onClick: () => {},
+//   onKeyDown: () => {},
+//   onMouseEnter: () => {},
+//   onMouseLeave: () => {},
+//   onItemSelected: (e, value, children) => {},
+//   //-------------------------
+//   /**
+//    * Animation use on nested items open/close
+//    */
+//   animation: {
+//     animate: { opacity: 1, height: "auto" },
+//     exit: { opacity: 0, height: 0 },
+//     initial: { opacity: 0, height: 0 },
+//     transition: {
+//       type: "tween",
+//       duration: 0.15,
+//       opacity: { duration: 0.15, ease: "easeOut" },
+//       height: { duration: 0.15 },
+//     },
+//   },
+//   color: "primary",
+//   size: "small",
+//   className: "",
+//   contentClassName: "",
+// };
 
 DropdownMenu.propTypes = {
-  control: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-    .isRequired,
+  control: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /**
    * Menu offset from the control
    */

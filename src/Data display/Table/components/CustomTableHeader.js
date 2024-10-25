@@ -29,11 +29,14 @@ const CustomTableHeader = (props) => {
   );
 };
 
-CustomTableHeader.defaultProps = {
-  __TYPE__: "TABLE_HEADER",
-};
+// TODO : type
+// CustomTableHeader.defaultProps = {
+//   __TYPE__: "TABLE_HEADER",
+// };
 CustomTableHeader.propTypes = {
   __TYPE__: PropTypes.string,
 };
 
 export default CustomTableHeader;
+
+CustomTableHeader.displayName = 'TABLE_HEADER';

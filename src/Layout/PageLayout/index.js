@@ -31,7 +31,7 @@ const StyledPageLayout = styled.section`
 `;
 
 const PageLayout = React.forwardRef((props, ref) => {
-  const { children, isChild, __TYPE__, ...rest } = props;
+  const { children, isChild, __TYPE__ = "PageLayout", ...rest } = props;
   const theme = useTheme();
 
   const hasSidebar = React.Children.toArray(children).some(
@@ -42,15 +42,24 @@ const PageLayout = React.forwardRef((props, ref) => {
 
     // We shift indexes by 1 just to avoid having 0 index, so its easier when making comparison for return statement.
     React.Children.forEach(children, (component, index) => {
-      if (component.props.__TYPE__ == "Sidebar") {
+      if (
+        component.props.__TYPE__ == "Sidebar" ||
+        component?.type?.displayName === "Sidebar"
+      ) {
         if (sidebarIndex)
           throw "Found multiple ocurrences of Sidebar component on the same level in the component tree.";
         sidebarIndex = index + 1;
-      } else if (component.props.__TYPE__ == "PageLayout") {
+      } else if (
+        component.props.__TYPE__ == "PageLayout" ||
+        component?.type?.displayName === "PageLayout"
+      ) {
         if (layoutIndex)
           throw "Found multiple ocurrences of PageLayout component on the same level in the component tree.";
         layoutIndex = index + 1;
-      } else if (component.props.__TYPE__ == "Content") {
+      } else if (
+        component.props.__TYPE__ == "Content" ||
+        component?.type?.displayName === "Content"
+      ) {
         if (contentIndex)
           throw "Found multiple ocurrences of Content component on the same level in the component tree.";
         contentIndex = index + 1;
@@ -65,12 +74,19 @@ const PageLayout = React.forwardRef((props, ref) => {
 
   const clonedChildren = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      if (child.props.__TYPE__ == "Sidebar")
+      if (
+        child.props.__TYPE__ == "Sidebar" ||
+        child.type?.displayName === "Sidebar"
+      ) {
         return React.cloneElement(child, {
           placement: getSidebarPlacement(children),
         });
-      else if (child.props.__TYPE__ == "PageLayout")
+      } else if (
+        child.props.__TYPE__ == "PageLayout" ||
+        child.type?.displayName === "PageLayout"
+      ) {
         return React.cloneElement(child, { isChild: true });
+      }
     }
 
     return child;
@@ -89,9 +105,10 @@ const PageLayout = React.forwardRef((props, ref) => {
   );
 });
 
-PageLayout.defaultProps = {
-  __TYPE__: "PageLayout",
-};
+// TODO : type
+// PageLayout.defaultProps = {
+//   __TYPE__: "PageLayout",
+// };
 
 PageLayout.propTypes = {
   /**
@@ -102,3 +119,5 @@ PageLayout.propTypes = {
 };
 
 export default PageLayout;
+
+PageLayout.displayName = "PageLayout";

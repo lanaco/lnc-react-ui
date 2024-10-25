@@ -113,41 +113,43 @@ const Table = forwardRef((props, ref) => {
   //================== PROPS ===========================================
 
   var {
-    EnableSelection,
-    EnableOrdering,
-    EnableSelectAll,
-    EnableLoader,
+    __TYPE__ = "TABLE",
+    EnableSelection = false,
+    EnableOrdering = false,
+    EnableSelectAll = false,
+    EnableLoader = false,
     PreRenderedTableBody = false,
     PreRenderedTableHead = false,
-    noBorder,
+    noBorder = true,
     //--------------------
-    EnableRowStatusIndicator,
-    EnableRowHighlight,
-    GetRowStatusIndicatorColor,
-    GetRowHighlightColor,
+    EnableRowStatusIndicator = false,
+    EnableRowHighlight = false,
+    GetRowStatusIndicatorColor = () => {},
+    GetRowHighlightColor = () => {},
     //--------------------
-    NoDataText,
-    NoDataComponent,
+    NoDataText = "No data to show",
+    NoDataComponent = null,
     //--------------------
-    Loading,
+    Loading = false,
     // TODO: add alignText prop to Column object
-    Columns,
-    Data,
-    SelectedData,
-    SelectedEntirePage,
-    RowIdentifier,
-    VisibilityPattern,
-    Ordering,
+    Columns= [],
+    Data = [],
+    SelectedData = [],
+    SelectedEntirePage = false,
+    RowIdentifier = "id",
+    VisibilityPattern = null,
+    Ordering = {},
     //--------------------
-    onColumnClick,
-    onRowClick,
-    onSelectRow,
-    onSelectAll,
+    onColumnClick = () => {},
+    onRowClick = () => {},
+    onSelectRow = () => {},
+    onSelectAll = () => {},
     //--------------------
-    tableWidth,
-    color,
-    size,
-    className,
+    tableWidth = "100%",
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
   } = props;
 
   const theme = useTheme();
@@ -690,43 +692,44 @@ const Table = forwardRef((props, ref) => {
   return renderTable();
 });
 
-Table.defaultProps = {
-  __TYPE__: "TABLE",
-  ID: "",
-  //--------------------
-  Loading: false,
-  Columns: [],
-  Data: [],
-  //--------------------
-  noBorder: false,
-  EnableSelection: false,
-  EnableOrdering: false,
-  EnableLoader: false,
-  EnableSelectAll: false,
-  EnableRowStatusIndicator: false,
-  EnableRowHighlight: false,
-  GetRowStatusIndicatorColor: () => {},
-  GetRowHighlightColor: () => {},
-  //--------------------
-  NoDataText: "No data to show",
-  NoDataComponet: null,
-  //--------------------
-  SelectedData: [],
-  SelectedEntirePage: false,
-  RowIdentifier: "id",
-  VisibilityPattern: null,
-  Ordering: {},
-  //--------------------
-  onColumnClick: () => {},
-  onRowClick: () => {},
-  onSelectRow: () => {},
-  onSelectAll: () => {},
-  //--------------------
-  tableWidth: "100%",
-  size: "small",
-  color: "primary",
-  className: "",
-};
+// TODO : type
+// Table.defaultProps = {
+//   __TYPE__: "TABLE",
+//   ID: "",
+//   //--------------------
+//   Loading: false,
+//   Columns: [],
+//   Data: [],
+//   //--------------------
+//   noBorder: false,
+//   EnableSelection: false,
+//   EnableOrdering: false,
+//   EnableLoader: false,
+//   EnableSelectAll: false,
+//   EnableRowStatusIndicator: false,
+//   EnableRowHighlight: false,
+//   GetRowStatusIndicatorColor: () => {},
+//   GetRowHighlightColor: () => {},
+//   //--------------------
+//   NoDataText: "No data to show",
+//   NoDataComponet: null,
+//   //--------------------
+//   SelectedData: [],
+//   SelectedEntirePage: false,
+//   RowIdentifier: "id",
+//   VisibilityPattern: null,
+//   Ordering: {},
+//   //--------------------
+//   onColumnClick: () => {},
+//   onRowClick: () => {},
+//   onSelectRow: () => {},
+//   onSelectAll: () => {},
+//   //--------------------
+//   tableWidth: "100%",
+//   size: "small",
+//   color: "primary",
+//   className: "",
+// };
 
 Table.propTypes = {
   /**
@@ -737,7 +740,7 @@ Table.propTypes = {
   /**
    *
    */
-  ID: PropTypes.string.isRequired,
+  ID: PropTypes.string,
   //----------------------------------------
   noBorder: PropTypes.bool,
   /**
@@ -797,11 +800,11 @@ Table.propTypes = {
    * @param sortable - Can be sorted
    *
    */
-  Columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  Columns: PropTypes.arrayOf(PropTypes.object),
   /**
    * Defines the data displayed in each row.
    */
-  Data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  Data: PropTypes.arrayOf(PropTypes.object),
   /**
    * Define the selected data.
    * @param id - Column identifier (mandatory field)
@@ -885,3 +888,5 @@ Table.propTypes = {
 };
 
 export default Table;
+
+Table.displayName = 'TABLE';

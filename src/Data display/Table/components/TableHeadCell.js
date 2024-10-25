@@ -157,16 +157,17 @@ const HeaderCellIcon = styled.span`
 const TableHeadCell = (props) => {
   //--------------------------
   const {
-    Column,
-    Ordering,
-    Index,
-    onColumnClick,
-    EnableSelectAll,
-    EnableOrdering,
+    __TYPE__ = "TABLE_HEAD_CELL",
+    Column = {},
+    Ordering = {},
+    Index = 0,
+    onColumnClick = () => {},
+    EnableSelectAll = false,
+    EnableOrdering = false,
     //-----------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -268,20 +269,21 @@ const TableHeadCell = (props) => {
   );
 };
 
-TableHeadCell.defaultProps = {
-  __TYPE__: "TABLE_HEAD_CELL",
-  //--------------------
-  Column: {},
-  Ordering: {},
-  Index: 0,
-  EnableSelectAll: false,
-  EnableOrdering: false,
-  onColumnClick: () => {},
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableHeadCell.defaultProps = {
+//   __TYPE__: "TABLE_HEAD_CELL",
+//   //--------------------
+//   Column: {},
+//   Ordering: {},
+//   Index: 0,
+//   EnableSelectAll: false,
+//   EnableOrdering: false,
+//   onColumnClick: () => {},
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableHeadCell.propTypes = {
   __TYPE__: PropTypes.string,
@@ -308,3 +310,5 @@ TableHeadCell.propTypes = {
 };
 
 export default TableHeadCell;
+
+TableHeadCell.displayName = 'TABLE_HEAD_CELL';

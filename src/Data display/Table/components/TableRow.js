@@ -74,15 +74,16 @@ ${(props) =>
 const TableRow = (props) => {
   //--------------------------
   const {
-    onRowClick,
-    RowData,
+    __TYPE__ = "TABLE_ROW",
+    onRowClick = () => {},
+    RowData = {},
     Index,
-    IsSelected,
-    noBorder,
+    IsSelected = null,
+    noBorder = false,
     //----------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -113,19 +114,20 @@ const TableRow = (props) => {
   );
 };
 
-TableRow.defaultProps = {
-  __TYPE__: "TABLE_ROW",
-  //--------------------
-  onRowClick: () => {},
-  RowData: {},
-  noBorder: false,
-  //--------------------
-  IsSelected: null,
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableRow.defaultProps = {
+//   __TYPE__: "TABLE_ROW",
+//   //--------------------
+//   onRowClick: () => {},
+//   RowData: {},
+//   noBorder: false,
+//   //--------------------
+//   IsSelected: null,
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableRow.propTypes = {
   __TYPE__: PropTypes.string,
@@ -151,3 +153,5 @@ TableRow.propTypes = {
 };
 
 export default TableRow;
+
+TableRow.displayName = 'TABLE_ROW';

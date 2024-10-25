@@ -9,24 +9,24 @@ import TextInput from "../TextInput";
 
 const DateInput = React.forwardRef((props, ref) => {
   const {
-    size,
-    color,
-    className,
-    style,
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
     disabled,
     readOnly,
     onFocus,
     onBlur,
-    value,
-    dateFormat,
+    // value,
+    dateFormat = "yyyy-MM-dd",
     tabIndex,
-    monthsShown,
-    selectsRange,
-    withPortal,
+    monthsShown = 1,
+    selectsRange = false,
+    withPortal = false,
     shouldCloseOnOpen,
-    showTimeInput,
-    showTimeSelect,
-    onChange,
+    showTimeInput = false,
+    showTimeSelect = false,
+    onChange = () => {},
     ...rest
   } = props;
 
@@ -64,36 +64,36 @@ const DateInput = React.forwardRef((props, ref) => {
         }
         monthsShown={monthsShown}
         withPortal={withPortal}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={(e) => onFocus?.(e)}
+        onBlur={(e) => onBlur?.()}
       />
     </Styled_DatePickerWrapper>
   );
 });
 
-DateInput.defaultProps = {
-  value: "",
-  disabled: false,
-  readOnly: false,
-  dateFormat: "yyyy-MM-dd",
-  tabIndex: 0,
-  monthsShown: 1,
-  withPortal: false,
-  disabled: false,
-  selectsRange: false,
-  shouldCloseOnOpen: false,
-  showTimeInput: false,
-  showTimeSelect: false,
-  //------------------------------
-  onChange: (date) => {},
-  onFocus: () => {},
-  onBlur: () => {},
-  //------------------------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// DateInput.defaultProps = {
+//   value: "",
+//   disabled: false,
+//   readOnly: false,
+//   dateFormat: "yyyy-MM-dd",
+//   tabIndex: 0,
+//   monthsShown: 1,
+//   withPortal: false,
+//   disabled: false,
+//   selectsRange: false,
+//   shouldCloseOnOpen: false,
+//   showTimeInput: false,
+//   showTimeSelect: false,
+//   //------------------------------
+//   onChange: (date) => {},
+//   onFocus: () => {},
+//   onBlur: () => {},
+//   //------------------------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 DateInput.propTypes = {
   value: PropTypes.string,

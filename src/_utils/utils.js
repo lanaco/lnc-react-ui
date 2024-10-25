@@ -15,7 +15,10 @@ export const getChildComponentByType = (type = "", children, props = {}) => {
   if (children && type) {
     var component = React.Children.toArray(children)
       .reverse()
-      .find((child) => child.props?.__TYPE__ === type);
+      .find(
+        (child) =>
+          child.props?.__TYPE__ === type || child.type?.displayName === type
+      );
 
     if (component) return component;
   }
@@ -32,11 +35,21 @@ export const getCustomRenderById = (type, id, children) => {
   return { current: null };
 };
 
-export const getChildComponentByTypeId = (type = "", id, children, props = {}) => {
+export const getChildComponentByTypeId = (
+  type = "",
+  id,
+  children,
+  props = {}
+) => {
   if (children && type) {
     var component = React.Children.toArray(children)
       .reverse()
-      .find((child) =>  child.props?.__TYPE__ === type && (id ? child.props?.id === id : !child.props?.id));
+      .find(
+        (child) =>
+          (child.props?.__TYPE__ === type ||
+            child.type?.displayName === type) &&
+          (id ? child.props?.id === id : !child.props?.id)
+      );
 
     if (component) return component;
   }
@@ -64,11 +77,22 @@ export const renderCustomElement = (
   customRender,
   properties,
   children = null,
-  combineChildren = false,
+  combineChildren = false
 ) => {
   if (customRender.current !== null) {
     properties.children =
-      children !== null ? (combineChildren == true ? <>{customRender.current.props.children}{children}</> : children) : customRender.current.props.children;
+      children !== null ? (
+        combineChildren == true ? (
+          <>
+            {customRender.current.props.children}
+            {children}
+          </>
+        ) : (
+          children
+        )
+      ) : (
+        customRender.current.props.children
+      );
 
     return React.cloneElement(customRender.current, properties);
   }
@@ -106,12 +130,14 @@ export const getColorRgbaValue = (
   const opacityWeight = componentState?.[opacityProp];
   const defaultOpacityWeight = componentDefault[stateProp][opacityProp];
 
-  const hexColorValue = (colorWeight || colorWeight == 0)
-    ? theme.palette[palette][colorWeight]
-    : theme.palette[componentDefault.palette][defaultColorWeight];
-  const opacityValue = (opacityWeight || opacityWeight == 0)
-    ? theme.palette.opacity[opacityWeight]
-    : theme.palette.opacity[defaultOpacityWeight];
+  const hexColorValue =
+    colorWeight || colorWeight == 0
+      ? theme.palette[palette][colorWeight]
+      : theme.palette[componentDefault.palette][defaultColorWeight];
+  const opacityValue =
+    opacityWeight || opacityWeight == 0
+      ? theme.palette.opacity[opacityWeight]
+      : theme.palette.opacity[defaultOpacityWeight];
 
   return hexToRgba(hexColorValue, opacityValue ?? "100%");
 };
@@ -129,7 +155,7 @@ export const getComponentPropValue = (
   const value = componentState?.[prop];
   const defaultValue = componentDefault[stateProp][prop];
 
-  return (value || value == 0) ? value : defaultValue;
+  return value || value == 0 ? value : defaultValue;
 };
 
 export const getSizeValueWithUnits = (theme, size) => {

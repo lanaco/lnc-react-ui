@@ -97,12 +97,12 @@ const NotificationMessage = React.forwardRef((props, ref) => {
     title,
     icon,
     className,
-    style,
-    size,
-    avatar,
+    style = {},
+    size = "small",
+    avatar = false,
     actions,
-    inlineActions,
-    sideButtons,
+    inlineActions = false,
+    sideButtons = false,
     iconProps,
     avatarProps,
     children,
@@ -144,14 +144,14 @@ const NotificationMessage = React.forwardRef((props, ref) => {
   );
 });
 
-NotificationMessage.defaultProps = {
-  avatar: false,
-  inlineActions: false,
-  sideButtons: false,
-  //----------------------------
-  style: {},
-  size: "small",
-};
+// NotificationMessage.defaultProps = {
+//   avatar: false,
+//   inlineActions: false,
+//   sideButtons: false,
+//   //----------------------------
+//   style: {},
+//   size: "small",
+// };
 
 NotificationMessage.propTypes = {
   avatar: PropTypes.bool,

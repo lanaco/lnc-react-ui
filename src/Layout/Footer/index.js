@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Footer = React.forwardRef((props, ref) => {
-  const { children, __TYPE__, ...rest } = props;
+  const { children, __TYPE__ = "Footer", ...rest } = props;
 
   return (
     <footer ref={ref} {...rest}>
@@ -11,9 +11,10 @@ const Footer = React.forwardRef((props, ref) => {
   );
 });
 
-Footer.defaultProps = {
-  __TYPE__: "Footer",
-};
+// TODO : type
+// Footer.defaultProps = {
+//   __TYPE__: "Footer",
+// };
 
 Footer.propTypes = {
   /**
@@ -24,3 +25,5 @@ Footer.propTypes = {
 };
 
 export default Footer;
+
+Footer.displayName = 'Footer';

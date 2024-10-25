@@ -66,7 +66,7 @@ const StyledDoubleRangeSlider = styled.div`
         props.theme,
         "Range",
         props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.disabled === true ? "disabled" : "enabled",
         "background"
       )};
     cursor: pointer; /* Cursor on hover */
@@ -85,7 +85,7 @@ const StyledDoubleRangeSlider = styled.div`
         props.theme,
         "Range",
         props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.disabled === true ? "disabled" : "enabled",
         "background"
       )};
     cursor: pointer; /* Cursor on hover */
@@ -130,7 +130,7 @@ const Slider = styled.div`
         props.theme,
         "Range",
         props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.disabled === true ? "disabled" : "enabled",
         "background"
       )};
     z-index: 2;
@@ -155,7 +155,7 @@ const Popover = styled.div`
         props.theme,
         "Range",
         props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.disabled === true ? "disabled" : "enabled",
         "background"
       )};
     border-radius: 3px;
@@ -174,7 +174,7 @@ const Popover = styled.div`
             props.theme,
             "Range",
             props.color,
-            props.disabled ? "disabled" : "enabled",
+            props.disabled === true ? "disabled" : "enabled",
             "background"
           )};
         transform: rotate(45deg);
@@ -190,14 +190,14 @@ const Popover = styled.div`
 
 const DoubleRangeSlider = React.forwardRef((props, ref) => {
   const {
-    minValue,
-    maxValue,
-    min,
-    max,
-    disabled,
-    onChange,
-    color,
-    size,
+    minValue = null,
+    maxValue = null,
+    min = 0,
+    max = 100,
+    disabled = false,
+    onChange = () => {},
+    color = "primary",
+    size = "small",
     ...rest
   } = props;
   const theme = useTheme();
@@ -324,29 +324,29 @@ const DoubleRangeSlider = React.forwardRef((props, ref) => {
   );
 });
 
-DoubleRangeSlider.defaultProps = {
-  minValue: null,
-  maxValue: null,
-  min: 0,
-  max: 100,
-  disabled: false,
-  //------------------
-  onChange: () => {},
-  //------------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// DoubleRangeSlider.defaultProps = {
+//   minValue: null,
+//   maxValue: null,
+//   min: 0,
+//   max: 100,
+//   disabled: false,
+//   //------------------
+//   onChange: () => {},
+//   //------------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 DoubleRangeSlider.propTypes = {
   minValue: PropTypes.number,
   maxValue: PropTypes.number,
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
+  min: PropTypes.number,
+  max: PropTypes.number,
   disabled: PropTypes.bool,
   //-----------------------------
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   //-------------------------
   className: PropTypes.string,
   style: PropTypes.object,

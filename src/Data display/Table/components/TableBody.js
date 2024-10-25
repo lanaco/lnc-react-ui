@@ -7,7 +7,12 @@ const HtmlBody = styled.tbody``;
 
 const TableBody = (props) => {
   //--------------------------
-  const { className, size, color } = props;
+  const {
+    __TYPE__ = "TABLE_BODY",
+    className = "",
+    size = "small",
+    color = "primary",
+  } = props;
 
   const theme = useTheme();
 
@@ -25,13 +30,14 @@ const TableBody = (props) => {
   );
 };
 
-TableBody.defaultProps = {
-  __TYPE__: "TABLE_BODY",
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableBody.defaultProps = {
+//   __TYPE__: "TABLE_BODY",
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableBody.propTypes = {
   __TYPE__: PropTypes.string,
@@ -46,8 +52,10 @@ TableBody.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default TableBody;
+
+TableBody.displayName = 'TABLE_BODY';

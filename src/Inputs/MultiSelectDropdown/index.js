@@ -7,61 +7,61 @@ import Dropdown from "../Dropdown";
 
 const MultiSelectDropdown = React.forwardRef((props, ref) => {
   const {
-    options,
+    // options,
     styles,
-    debounceTime,
-    name,
-    hideSelectedOptions,
-    id,
-    inputId,
-    value,
-    readOnly,
-    tabIndex,
-    isSearchable,
-    isClearable,
-    isLoading,
-    isRtl,
-    isDisabled,
-    closeMenuOnSelect,
-    closeMenuOnScroll,
-    escapeClearsValue,
-    filterOption,
-    formatGroupLabel,
-    formatOptionLabel,
-    getOptionLabel,
-    getOptionValue,
-    isOptionDisabled,
-    isOptionSelected,
-    loadingMessage,
-    minMenuHeight,
-    maxMenuHeight,
-    menuPlacement,
-    menuPosition,
-    menuShouldBlockScroll,
-    menuShouldScrollIntoView,
-    openMenuOnFocus,
-    openMenuOnClick,
-    autoFocus,
-    placeholder,
-    noOptionsMessage,
-    menuIsOpen,
-    components,
-    defaultValue,
-    defaultInputValue,
-    defaultMenuIsOpen,
-    delimiter,
-    onChange,
+    debounceTime = 180,
+    // name,
+    // hideSelectedOptions,
+    // id,
+    // inputId,
+    // value,
+    // readOnly,
+    // tabIndex,
+    isSearchable = true,
+    isClearable = true,
+    // isLoading,
+    // isRtl,
+    // isDisabled,
+    // closeMenuOnSelect,
+    // closeMenuOnScroll,
+    // escapeClearsValue,
+    // filterOption,
+    // formatGroupLabel,
+    // formatOptionLabel,
+    // getOptionLabel,
+    // getOptionValue,
+    // isOptionDisabled,
+    // isOptionSelected,
+    // loadingMessage,
+    // minMenuHeight,
+    // maxMenuHeight,
+    // menuPlacement,
+    // menuPosition,
+    // menuShouldBlockScroll,
+    // menuShouldScrollIntoView,
+    // openMenuOnFocus,
+    // openMenuOnClick,
+    // autoFocus,
+    // placeholder,
+    // noOptionsMessage,
+    // menuIsOpen,
+    // components,
+    // defaultValue,
+    // defaultInputValue,
+    // defaultMenuIsOpen,
+    // delimiter,
+    // onChange,
     onInputChange,
-    onMenuOpen,
-    onMenuClose,
-    onBlur,
-    onFocus,
-    onKeyDown,
-    size,
-    color,
-    className,
-    style,
-    children,
+    // onMenuOpen,
+    // onMenuClose,
+    // onBlur,
+    // onFocus,
+    // onKeyDown,
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
+    // children,
     ...rest
   } = props;
 
@@ -69,7 +69,7 @@ const MultiSelectDropdown = React.forwardRef((props, ref) => {
 
   const handleOnInput = useCallback(
     debounce((inputValue, meta) => {
-      onInputChange(inputValue, meta);
+      onInputChange?.(inputValue, meta);
     }, debounceTime)
   );
 
@@ -77,87 +77,87 @@ const MultiSelectDropdown = React.forwardRef((props, ref) => {
     <Dropdown
       isMulti={true}
       ref={ref}
-      components={components}
-      options={options}
+      // components={components}
+      // options={options}
       styles={styles ? styles : customStyles}
       size={size}
       color={color}
       theme={theme}
-      name={name}
-      hideSelectedOptions={hideSelectedOptions}
-      id={id}
-      inputId={inputId}
-      value={value}
-      readOnly={readOnly}
-      tabIndex={tabIndex}
+      // name={name}
+      // hideSelectedOptions={hideSelectedOptions}
+      // id={id}
+      // inputId={inputId}
+      // value={value}
+      // readOnly={readOnly}
+      // tabIndex={tabIndex}
       isSearchable={isSearchable}
       isClearable={isClearable}
-      isLoading={isLoading}
-      isRtl={isRtl}
-      isDisabled={isDisabled}
-      closeMenuOnSelect={closeMenuOnSelect}
-      closeMenuOnScroll={closeMenuOnScroll}
-      escapeClearsValue={escapeClearsValue}
-      filterOption={filterOption}
-      formatGroupLabel={formatGroupLabel}
-      formatOptionLabel={formatOptionLabel}
-      getOptionLabel={getOptionLabel}
-      getOptionValue={getOptionValue}
-      isOptionDisabled={isOptionDisabled}
-      isOptionSelected={isOptionSelected}
-      loadingMessage={loadingMessage}
-      minMenuHeight={minMenuHeight}
-      maxMenuHeight={maxMenuHeight}
-      menuPlacement={menuPlacement}
-      menuPosition={menuPosition}
-      menuShouldBlockScroll={menuShouldBlockScroll}
-      menuShouldScrollIntoView={menuShouldScrollIntoView}
-      openMenuOnFocus={openMenuOnFocus}
-      openMenuOnClick={openMenuOnClick}
-      autoFocus={autoFocus}
-      placeholder={placeholder}
-      noOptionsMessage={noOptionsMessage}
-      menuIsOpen={menuIsOpen}
-      defaultValue={defaultValue}
-      defaultInputValue={defaultInputValue}
-      defaultMenuIsOpen={defaultMenuIsOpen}
-      delimiter={delimiter}
-      onChange={onChange}
+      // isLoading={isLoading}
+      // isRtl={isRtl}
+      // isDisabled={isDisabled}
+      // closeMenuOnSelect={closeMenuOnSelect}
+      // closeMenuOnScroll={closeMenuOnScroll}
+      // escapeClearsValue={escapeClearsValue}
+      // filterOption={filterOption}
+      // formatGroupLabel={formatGroupLabel}
+      // formatOptionLabel={formatOptionLabel}
+      // getOptionLabel={getOptionLabel}
+      // getOptionValue={getOptionValue}
+      // isOptionDisabled={isOptionDisabled}
+      // isOptionSelected={isOptionSelected}
+      // loadingMessage={loadingMessage}
+      // minMenuHeight={minMenuHeight}
+      // maxMenuHeight={maxMenuHeight}
+      // menuPlacement={menuPlacement}
+      // menuPosition={menuPosition}
+      // menuShouldBlockScroll={menuShouldBlockScroll}
+      // menuShouldScrollIntoView={menuShouldScrollIntoView}
+      // openMenuOnFocus={openMenuOnFocus}
+      // openMenuOnClick={openMenuOnClick}
+      // autoFocus={autoFocus}
+      // placeholder={placeholder}
+      // noOptionsMessage={noOptionsMessage}
+      // menuIsOpen={menuIsOpen}
+      // defaultValue={defaultValue}
+      // defaultInputValue={defaultInputValue}
+      // defaultMenuIsOpen={defaultMenuIsOpen}
+      // delimiter={delimiter}
+      // onChange={onChange}
       onInputChange={handleOnInput}
-      onMenuOpen={onMenuOpen}
-      onMenuClose={onMenuClose}
-      onBlur={onBlur}
-      onFocus={onFocus}
+      // onMenuOpen={onMenuOpen}
+      // onMenuClose={onMenuClose}
+      // onBlur={onBlur}
+      // onFocus={onFocus}
       className={className}
       style={style}
-      onKeyDown={onKeyDown}
+      // onKeyDown={onKeyDown}
       {...rest}
     />
   );
 });
 
-MultiSelectDropdown.defaultProps = {
-  readOnly: false,
-  isDisabled: false,
-  isSearchable: true,
-  isClearable: true,
-  autoFocus: false,
-  components: {},
-  debounceTime: 180,
-  //-------------------------
-  onChange: () => {},
-  onInputChange: () => {},
-  onMenuOpen: () => {},
-  onMenuClose: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
-  onKeyDown: () => {},
-  //-------------------------
-  style: {},
-  className: "",
-  color: "primary",
-  size: "small",
-};
+// MultiSelectDropdown.defaultProps = {
+//   readOnly: false,
+//   isDisabled: false,
+//   isSearchable: true,
+//   isClearable: true,
+//   autoFocus: false,
+//   components: {},
+//   debounceTime: 180,
+//   //-------------------------
+//   onChange: () => {},
+//   onInputChange: () => {},
+//   onMenuOpen: () => {},
+//   onMenuClose: () => {},
+//   onFocus: () => {},
+//   onBlur: () => {},
+//   onKeyDown: () => {},
+//   //-------------------------
+//   style: {},
+//   className: "",
+//   color: "primary",
+//   size: "small",
+// };
 
 MultiSelectDropdown.propTypes = {
   options: PropTypes.array,

@@ -41,9 +41,9 @@ const StyledChip = styled.span`
   cursor: pointer;
   display: inline-flex;
   height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
-  ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+  ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
   background-color: ${(props) =>
-    !props.disabled &&
+    !props.disabled === true &&
     getColorRgbaValue(
       props.theme,
       "Chip",
@@ -53,7 +53,7 @@ const StyledChip = styled.span`
       "backgroundOpacity"
     )};
   color: ${(props) =>
-    !props.disabled &&
+    !props.disabled === true &&
     getColorRgbaValue(props.theme, "Chip", props.color, "enabled", "text")};
   font-weight: ${(props) => props.theme.typography.fontWeightBold};
   ${(props) =>
@@ -76,7 +76,7 @@ const StyledChip = styled.span`
 
   &:hover {
     background-color: ${(props) =>
-      !props.disabled &&
+      !props.disabled === true &&
       getColorRgbaValue(
         props.theme,
         "Chip",
@@ -88,7 +88,7 @@ const StyledChip = styled.span`
   }
   &:focus {
     background-color: ${(props) =>
-      !props.disabled &&
+      !props.disabled === true &&
       getColorRgbaValue(
         props.theme,
         "Chip",
@@ -97,11 +97,11 @@ const StyledChip = styled.span`
         "background",
         "backgroundOpacity"
       )};
-    ${(props) => !props.disabled && getOutlineCss(props.theme)};
+    ${(props) => !props.disabled === true && getOutlineCss(props.theme)};
   }
   &:active {
     background-color: ${(props) =>
-      !props.disabled &&
+      !props.disabled === true &&
       getColorRgbaValue(
         props.theme,
         "Chip",
@@ -117,27 +117,28 @@ const getAvatarSize = (theme, size) => {
   return `calc(${getSizeValueWithUnits(theme, size)} - 8px)`;
 };
 
+
 const Chip = React.forwardRef((props, ref) => {
   const {
     label,
     leadingIcon,
     trailingIcon,
-    avatar,
-    size,
-    borderRadius,
-    disabled,
-    tabIndex,
+    avatar = false,
+    size = "small",
+    borderRadius = "regular",
+    disabled = false,
+    tabIndex = 0,
     //----------------
-    onFocus,
-    onBlur,
-    onClick,
-    onKeyDown,
-    onLeadingIconClick,
-    onTrailingIconClick,
+    onFocus = () =>  {},
+    onBlur = () =>  {},
+    onClick = () =>  {},
+    onKeyDown = () =>  {},
+    onLeadingIconClick = () =>  {},
+    onTrailingIconClick = () =>  {},
     //----------------
-    className,
-    style,
-    color,
+    className = "",
+    style = {},
+    color = "primary",
     avatarProps,
     children,
     ...rest
@@ -145,7 +146,7 @@ const Chip = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
 
-  const themeProps = { theme, color, style, className };
+  const themeProps = { theme, color, style, className: "lnc-ui-chip " + className };
 
   return (
     <StyledChip
@@ -189,24 +190,6 @@ const Chip = React.forwardRef((props, ref) => {
     </StyledChip>
   );
 });
-
-Chip.defaultProps = {
-  avatar: false,
-  borderRadius: "regular",
-  disalbed: false,
-  tabIndex: 0,
-  //-------------------------
-  onBlur: () => {},
-  onFocus: () => {},
-  onClick: () => {},
-  onKeyDown: () => {},
-  onLeadingIconClick: () => {},
-  onTrailingIconClick: () => {},
-  //-------------------------
-  style: {},
-  color: "primary",
-  size: "small",
-};
 
 Chip.propTypes = {
   label: PropTypes.string,

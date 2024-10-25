@@ -18,23 +18,23 @@ const StyledSeparator = styled.div`
 `;
 
 const Separator = React.forwardRef((props, ref) => {
-    const { className, style, ...rest } = props;
+    const { className = "", style = {}, ...rest } = props;
     const theme = useTheme();
 
     return (
         <StyledSeparator
             ref={ref}
             theme={theme}
-            className={className}
+            className={"lnc-ui-dropdown-separator " + className}
             style={style}
             {...rest}
         ></StyledSeparator>
     );
 });
 
-Separator.defaultProps = {
-    style: {},
-};
+// Separator.defaultProps = {
+//     style: {},
+// };
 
 Separator.propTypes = {
     className: PropTypes.string,

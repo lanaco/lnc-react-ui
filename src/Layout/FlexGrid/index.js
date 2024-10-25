@@ -6,12 +6,12 @@ import FlexGridItem from "./FlexGridItem";
 const FlexGrid = React.forwardRef((props, ref) => {
   //============================================== PROPS ===============================================
   const {
-    columns,
+    columns = 12,
     spacing,
     rowSpacing,
     columnSpacing,
-    justifyContent,
-    alignItems,
+    justifyContent = "Start",
+    alignItems = "Stretch",
     children,
     rest
   } = props;
@@ -44,11 +44,11 @@ const FlexGrid = React.forwardRef((props, ref) => {
 });
 
 //====================================== PROP TYPES / DEFAULT PROPS ====================================
-FlexGrid.defaultProps = {
-  columns: 12,
-  justifyContent: "Start",
-  alignItems: "Stretch",
-};
+// FlexGrid.defaultProps = {
+//   columns: 12,
+//   justifyContent: "Start",
+//   alignItems: "Stretch",
+// };
 
 FlexGrid.propTypes = {
   /**

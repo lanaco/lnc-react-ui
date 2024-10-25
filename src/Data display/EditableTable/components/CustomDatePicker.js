@@ -33,13 +33,13 @@ const Input = styled.input`
 
 const CustomDatePicker = React.forwardRef((props, ref) => {
   const {
-    onChange,
-    preventDefault,
-    id,
-    disabled,
+    onChange = () => {},
+    preventDefault = true,
+    id = "",
+    disabled = false,
     className,
-    checked,
-    label,
+    checked = false,
+    label = "",
     onFocus,
     onBlur,
     tabIndex,
@@ -77,20 +77,8 @@ const CustomDatePicker = React.forwardRef((props, ref) => {
   );
 });
 
-CustomDatePicker.defaultProps = {
-  id: "",
-  disabled: false,
-  onChange: () => {},
-  className: "",
-  checked: false,
-  preventDefault: true,
-  size: "small",
-  label: "",
-  color: "primary",
-};
-
 CustomDatePicker.propTypes = {
-  id: PropTypes.any.isRequired,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,

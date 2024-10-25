@@ -40,31 +40,32 @@ const StyledDetailsView = styled.div`
 
 const DetailsView = React.forwardRef((props, ref) => {
   const {
+    __TYPE__ = "DETAILS_VIEW",
     goToPreviousView,
     id,
-    data,
-    fields,
+    data = {},
+    fields = {},
     flexGridProps,
-    goBackText,
-    showBack,
-    showNext,
-    showPrevious,
-    showEdit,
-    disableGoBack,
-    disableNext,
-    disablePrevious,
-    disableEdit,
-    editOnTop,
+    goBackText = "Go back",
+    showBack = true,
+    showNext = true,
+    showPrevious = true,
+    showEdit = true,
+    disableGoBack = false,
+    disableNext = false,
+    disablePrevious = false,
+    disableEdit = false,
+    editOnTop = false,
     //------------------
-    goToNext,
-    goToPrevious,
-    onEdit,
-    goBack,
+    goToNext = () => {},
+    goToPrevious = () => {},
+    onEdit = () => {},
+    goBack = () => {},
     //------------------
-    className,
-    style,
-    color,
-    size,
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     children,
     ...rest
   } = props;
@@ -171,30 +172,31 @@ const DetailsView = React.forwardRef((props, ref) => {
   );
 });
 
-DetailsView.defaultProps = {
-  __TYPE__: "DETAILS_VIEW",
-  goBackText: "Go Back",
-  showBack: true,
-  showNext: true,
-  showPrevious: true,
-  showEdit: true,
-  disableGoBack: false,
-  disableNext: false,
-  disablePrevious: false,
-  disableEdit: false,
-  fields: {},
-  data: {},
-  editOnTop: false,
-  //-----------------------
-  goToNext: () => {},
-  goToPrevious: () => {},
-  goBack: () => {},
-  onEdit: () => {},
-  //-----------------------
-  color: "primary",
-  style: {},
-  size: "small",
-};
+// TODO : TYPE
+// DetailsView.defaultProps = {
+//   __TYPE__: "DETAILS_VIEW",
+//   goBackText: "Go Back",
+//   showBack: true,
+//   showNext: true,
+//   showPrevious: true,
+//   showEdit: true,
+//   disableGoBack: false,
+//   disableNext: false,
+//   disablePrevious: false,
+//   disableEdit: false,
+//   fields: {},
+//   data: {},
+//   editOnTop: false,
+//   //-----------------------
+//   goToNext: () => {},
+//   goToPrevious: () => {},
+//   goBack: () => {},
+//   onEdit: () => {},
+//   //-----------------------
+//   color: "primary",
+//   style: {},
+//   size: "small",
+// };
 
 DetailsView.propTypes = {
   __TYPE__: PropTypes.string,
@@ -233,3 +235,5 @@ DetailsView.propTypes = {
 };
 
 export default DetailsView;
+
+DetailsView.displayName = "DETAILS_VIEW";

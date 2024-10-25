@@ -125,7 +125,7 @@ const Container = styled.label`
   max-height: ${(props) => props.theme.sizes[props.size]};
 
   & input:focus:enabled ~ span.toggle-slider {
-    ${(props) => !props.disabled && getOutlineCss(props.theme)};
+    ${(props) => !props.disabled === true && getOutlineCss(props.theme)};
   }
 
   & input:hover:enabled ~ span.toggle-slider {
@@ -162,7 +162,7 @@ const Container = styled.label`
 
   & input:checked ~ span.toggle-slider {
     background-color: ${(props) =>
-    !props.disabled
+    props.disabled !== true
       ? getColorRgbaValue(
         props.theme,
         "Toggle",
@@ -192,7 +192,7 @@ const Container = styled.label`
     border-radius: 100px;
     box-shadow: 1px 1px 0.25rem rgba(15, 23, 42, 0.16);
     background-color: ${(props) =>
-    props.disabled
+    props.disabled === true
       ? getColorRgbaValue(
         props.theme,
         "ToggleSlider",
@@ -296,7 +296,7 @@ const Container = styled.label`
     width: ${(props) => sizes.containerWidth[props.size]};
     height: ${(props) => sizes.containerHeight[props.size]};
     background-color: ${(props) =>
-    !props.disabled
+    props.disabled !== true
       ? getColorRgbaValue(
         props.theme,
         "Toggle",
@@ -323,7 +323,7 @@ const Container = styled.label`
     opacity: 1;
     flex-shrink: 0;
     background-color: ${(props) =>
-    props.disabled
+    props.disabled === true
       ? getColorRgbaValue(
         props.theme,
         "ToggleSlider",
@@ -367,25 +367,25 @@ const Label = styled.span`
 
 const Toggle = (props) => {
   const {
-    id,
+    // id,
     disabled,
     readOnly,
     value,
     label,
-    labelPosition,
+    labelPosition = "right",
     spaceBetween,
     unicodeIcon,
-    tabIndex,
+    // tabIndex,
     //----------------
     onChange,
     change,
     onFocus,
     onBlur,
     //----------------
-    className,
-    style,
-    size,
-    color,
+    className = "",
+    style = {},
+    size = "medium",
+    color = "primary",
     ...rest
   } = props;
 
@@ -424,13 +424,13 @@ const Toggle = (props) => {
         onChange={handleChange}
         onFocus={(e) => {
           setFocused(true);
-          if (onFocus) onFocus(e);
+          if (onFocus) onFocus?.(e);
         }}
         onBlur={(e) => {
           setFocused(false);
-          if (onBlur) onBlur(e);
+          if (onBlur) onBlur?.(e);
         }}
-        tabIndex={tabIndex}
+        // tabIndex={tabIndex}
         {...rest}
       />
       <span tabIndex={-1} className={"toggle-slider"} />
@@ -440,26 +440,26 @@ const Toggle = (props) => {
   );
 };
 
-Toggle.defaultProps = {
-  id: "",
-  disabled: false,
-  readOnly: false,
-  label: "",
-  unicodeIcon: "",
-  labelPosition: "right",
-  spaceBetween: false,
-  tabIndex: 0,
-  //-------------------------------
-  onChange: () => { },
-  change: () => { },
-  onFocus: () => { },
-  onBlur: () => { },
-  //-------------------------------
-  style: {},
-  className: "",
-  size: "medium",
-  color: "primary",
-};
+// Toggle.defaultProps = {
+//   id: "",
+//   disabled: false,
+//   readOnly: false,
+//   label: "",
+//   unicodeIcon: "",
+//   labelPosition: "right",
+//   spaceBetween: false,
+//   tabIndex: 0,
+//   //-------------------------------
+//   onChange: () => { },
+//   change: () => { },
+//   onFocus: () => { },
+//   onBlur: () => { },
+//   //-------------------------------
+//   style: {},
+//   className: "",
+//   size: "medium",
+//   color: "primary",
+// };
 
 Toggle.propTypes = {
   id: PropTypes.any,

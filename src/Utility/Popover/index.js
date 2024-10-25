@@ -112,7 +112,7 @@ export const usePopoverState = () => {
   return context;
 };
 
-export function Popover({ children, modal, ...restOptions }) {
+export function Popover({ children, modal = false, ...restOptions }) {
   // This can accept any props as options, e.g. `placement`,
   // or other positioning options.
   const popover = usePopover({ modal, ...restOptions });
@@ -123,13 +123,13 @@ export function Popover({ children, modal, ...restOptions }) {
   );
 }
 
-Popover.defaultProps = {
-  initialOpen: false,
-  modal: false,
-  offsetValue: 5,
-//   placement: "bottom"
-  // onOpenChange: (open) => {}
-};
+// Popover.defaultProps = {
+//   initialOpen: false,
+//   modal: false,
+//   offsetValue: 5,
+// //   placement: "bottom"
+//   // onOpenChange: (open) => {}
+// };
 
 Popover.propTypes = {
   initialOpen: PropTypes.bool,
@@ -201,7 +201,7 @@ PopoverTrigger.propTypes = {
 };
 
 export const PopoverContent = React.forwardRef(function PopoverContent(
-  { borderRadius, className, zIndex, style, ...props },
+  { borderRadius = "regular", className = "", zIndex, style = {}, ...props },
   propRef
 ) {
   const state = usePopoverState();
@@ -221,11 +221,12 @@ export const PopoverContent = React.forwardRef(function PopoverContent(
               width: "max-content",
               zIndex: zIndex,
             }}
+            className="lnc-ui-floating-manager"
             aria-labelledby={state.labelId}
             aria-describedby={state.descriptionId}
             {...state.getFloatingProps(props)}
           >
-            <StyledContent theme={theme} borderradius={borderRadius} className={className} style={style}>
+            <StyledContent theme={theme} borderRadius={borderRadius} className={"lnc-ui-popover-content " + className} style={style}>
               {props.children}
             </StyledContent>
           </div>
@@ -235,11 +236,11 @@ export const PopoverContent = React.forwardRef(function PopoverContent(
   );
 });
 
-PopoverContent.defaultProps = {
-  className: "",
-  borderRadius: "regular",
-  style: {},
-};
+// PopoverContent.defaultProps = {
+//   className: "",
+//   borderRadius: "regular",
+//   style: {},
+// };
 
 PopoverContent.propTypes = {
   className: PropTypes.string,

@@ -18,12 +18,12 @@ const Container = styled.div`
 
 const Surface = ({
   children,
-  style,
-  className,
-  boxShadow,
-  borderRadius,
-  padding,
-  fullWidth,
+  style = {},
+  className = "",
+  boxShadow = "s",
+  borderRadius = "regular",
+  padding = "s",
+  fullWidth = false,
 }) => {
   const theme = useTheme();
 
@@ -40,7 +40,7 @@ const Surface = ({
     <Container
       theme={theme}
       style={style}
-      className={className}
+      className={"lnc-ui-surface " + className}
       borderRadius={borderRadius}
       boxShadow={boxShadow}
       padding={paddingMap[padding]}
@@ -51,14 +51,14 @@ const Surface = ({
   );
 };
 
-Surface.defaultProps = {
-  borderRadius: "regular",
-  boxShadow: "s",
-  padding: "s",
-  fullWidth: false,
-  className: "",
-  style: {},
-};
+// Surface.defaultProps = {
+//   borderRadius: "regular",
+//   boxShadow: "s",
+//   padding: "s",
+//   fullWidth: false,
+//   className: "",
+//   style: {},
+// };
 
 Surface.propTypes = {
   borderRadius: PropTypes.oneOf([

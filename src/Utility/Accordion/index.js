@@ -2,46 +2,46 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
-import { getColorRgbaValue, getComponentTypographyCss, getDisabledStateCss } from "../../_utils/utils";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+  getDisabledStateCss,
+} from "../../_utils/utils";
 import { useState } from "react";
 import { useUpdateEffect } from "react-use";
 
 const StyledAccordion = styled.div`
   color: ${(props) =>
-    !props.disabled &&
+    !props.disabled === true &&
     getColorRgbaValue(props.theme, "Accordion", "primary", "enabled", "text")};
   background-color: transparent;
   ${(props) =>
-    getComponentTypographyCss(
-      props.theme,
-      "Accordion",
-      props.size,
-      "enabled"
-    )};
-    ${(props) => (props.disabled ? getDisabledStateCss(props.theme) : "")}
+    getComponentTypographyCss(props.theme, "Accordion", props.size, "enabled")};
+  ${(props) =>
+    props.disabled === true ? getDisabledStateCss(props.theme) : ""}
 `;
 
 const Accordion = React.forwardRef((props, ref) => {
   const {
-    expanded,
-    disabled,
-    change,
-    size,
-    className,
-    style,
+    expanded = false,
+    disabled = false,
+    change = () => {},
+    size = "small",
+    className = "",
+    style = {},
     children,
     ...rest
   } = props;
 
   const theme = useTheme();
 
-  const themeProps = { theme, size, style, className };
+  const themeProps = { theme, size, style, className: "lnc-ui-accordion " + className };
 
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   useUpdateEffect(() => {
     setIsExpanded(expanded);
-  }, [expanded])
+  }, [expanded]);
 
   const onExpand = (e) => {
     change(!isExpanded, e);
@@ -51,9 +51,13 @@ const Accordion = React.forwardRef((props, ref) => {
 
   const clonedSummary = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      if (child.props.__TYPE__ == "ACCORDION_SUMMARY") {
+      if (
+        child.props.__TYPE__ == "ACCORDION_SUMMARY" ||
+        child?.type?.displayName === "ACCORDION_SUMMARY"
+      ) {
         return React.cloneElement(child, {
           size: size,
+          onClick: onExpand,
           onExpand: onExpand,
           isExpanded: isExpanded,
           disabled: disabled,
@@ -64,7 +68,10 @@ const Accordion = React.forwardRef((props, ref) => {
 
   const clonedDetails = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      if (child.props.__TYPE__ == "ACCORDION_DETAILS") {
+      if (
+        child.props.__TYPE__ == "ACCORDION_DETAILS" ||
+        child?.type?.displayName === "ACCORDION_DETAILS"
+      ) {
         return React.cloneElement(child, {
           size: size,
           isExpanded: isExpanded,
@@ -81,15 +88,15 @@ const Accordion = React.forwardRef((props, ref) => {
   );
 });
 
-Accordion.defaultProps = {
-  expanded: false,
-  disabled: false,
-  change: () => {},
-  //-------------------------
-  //-------------------------
-  style: {},
-  size: "small",
-};
+// Accordion.defaultProps = {
+//   expanded: false,
+//   disabled: false,
+//   change: () => {},
+//   //-------------------------
+//   //-------------------------
+//   style: {},
+//   size: "small",
+// };
 
 Accordion.propTypes = {
   expanded: PropTypes.bool,

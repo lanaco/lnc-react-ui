@@ -16,15 +16,15 @@ const Span = styled.span`
 
 const Icon = React.forwardRef((props, ref) => {
   const {
-    id,
-    icon,
-    iconStyle,
-    tooltip,
-    className,
-    style,
-    size,
-    sizeInUnits,
+    id = "",
+    icon = "",
+    iconStyle = "solid",
+    tooltip = "",
+    sizeInUnits = "",
+    size = "small",
     color,
+    className = "",
+    style = {},
     ...rest } = props;
 
   const theme = useTheme();
@@ -43,19 +43,19 @@ const Icon = React.forwardRef((props, ref) => {
   );
 });
 
-Icon.defaultProps = {
-  id: "",
-  icon: "",
-  iconStyle: "solid",
-  tooltip: "",
-  className: "",
-  style: {},
-  size: "small",
-  sizeInUnits: "",
-};
+// Icon.defaultProps = {
+//   id: "",
+//   icon: "",
+//   iconStyle: "solid",
+//   tooltip: "",
+//   className: "",
+//   style: {},
+//   size: "small",
+//   sizeInUnits: "",
+// };
 
 Icon.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   icon: PropTypes.string,
   iconStyle: PropTypes.oneOf(["solid", "regular"]),
   tooltip: PropTypes.string,

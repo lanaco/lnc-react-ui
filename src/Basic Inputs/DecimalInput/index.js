@@ -11,40 +11,35 @@ import { useEffectOnce, useUpdateEffect } from "react-use";
 const DecimalInput = React.forwardRef((props, ref) => {
   //
   const {
-    id,
+    // id,
     disabled,
     readOnly,
-    preventDefault,
-    value,
-    defaultValue,
-    debounceTime,
+    // value,
+    // defaultValue,
+    debounceTime = 180,
     prefix,
     suffix,
-    thousandSeparator,
-    decimalSeparator,
-    decimalScale,
-    fixedDecimalScale,
-    allowNegative,
+    thousandSeparator = ".",
+    decimalSeparator = ",",
+    decimalScale = 2,
+    fixedDecimalScale = true,
+    allowNegative = true,
     //----------------
     onChange,
     onKeyDown,
     onBlur,
     onFocus,
     //----------------
-    className,
-    style,
-    size,
-    color,
+    className = "",
+    style = {},
+    size = "small",
+    color = "primary",
     ...rest
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState("");
-  const [refresh, setRefresh] = useState(true);
   const [focused, setFocused] = useState(false);
 
-  useUpdateEffect(() => setInputValue(value), [value]);
-  useEffectOnce(() => setInputValue(value === "" ? defaultValue : value));
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -52,45 +47,11 @@ const DecimalInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    if (onChange) onChange(e, value);
+    if (onChange) onChange?.(e, value);
   };
 
-  const forceRefresh = () => setRefresh(!refresh);
-
   const onValueChange = (valueObject, eventObject) => {
-    var triggerRefresh = false;
-    var _value = valueObject.floatValue || 0;
-
-    if (defaultValue === "" && valueObject.floatValue === undefined) {
-      triggerRefresh = true;
-      _value = defaultValue === "" ? "" : 0;
-    }
-
-    if (_value === -0) {
-      triggerRefresh = true;
-      _value = defaultValue === "" ? "" : 0;
-    }
-
-    if (_value === undefined) {
-      triggerRefresh = true;
-      _value = defaultValue === "" ? "" : 0;
-    }
-
-    if (_value > Number.MAX_SAFE_INTEGER) {
-      _value = Number.MAX_SAFE_INTEGER;
-      triggerRefresh = true;
-    }
-
-    if (_value < Number.MIN_SAFE_INTEGER) {
-      _value = Number.MIN_SAFE_INTEGER;
-      triggerRefresh = true;
-    }
-
-    setInputValue(_value);
-
-    if (_value !== inputValue) debouncedOnChange(eventObject.event, _value);
-
-    if (triggerRefresh) forceRefresh();
+    debouncedOnChange(eventObject.event, _value);
   };
 
   const getDecimalScale = () => {
@@ -102,13 +63,12 @@ const DecimalInput = React.forwardRef((props, ref) => {
 
   const handleFocus = (e) => {
     setFocused(true);
-    onFocus(e);
+    onFocus?.(e);
   };
 
   const handleBlur = (e) => {
-    if (inputValue === 0 && e.target.value.includes("-")) forceRefresh();
     setFocused(false);
-    onBlur(e);
+    onBlur?.(e);
   };
 
   return (
@@ -145,8 +105,6 @@ const DecimalInput = React.forwardRef((props, ref) => {
         decimalScale={getDecimalScale()}
         fixedDecimalScale={fixedDecimalScale}
         allowNegative={allowNegative}
-        value={inputValue}
-        defaultValue={defaultValue}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onValueChange={onValueChange}
@@ -167,28 +125,28 @@ const DecimalInput = React.forwardRef((props, ref) => {
   );
 });
 
-DecimalInput.defaultProps = {
-  id: "",
-  value: "",
-  defaultValue: "",
-  disabled: false,
-  readOnly: false,
-  debounceTime: 180,
-  thousandSeparator: ".",
-  decimalSeparator: ",",
-  decimalScale: 2,
-  fixedDecimalScale: true,
-  allowNegative: true,
-  //----------------
-  onChange: () => {},
-  onBlur: () => {},
-  onFocus: () => {},
-  //----------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// DecimalInput.defaultProps = {
+//   id: "",
+//   value: "",
+//   defaultValue: "",
+//   disabled: false,
+//   readOnly: false,
+//   debounceTime: 180,
+//   thousandSeparator: ".",
+//   decimalSeparator: ",",
+//   decimalScale: 2,
+//   fixedDecimalScale: true,
+//   allowNegative: true,
+//   //----------------
+//   onChange: () => {},
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   //----------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 DecimalInput.propTypes = {
   id: PropTypes.string,

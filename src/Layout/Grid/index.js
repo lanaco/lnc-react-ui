@@ -18,7 +18,7 @@ const StyledGrid = styled.div`
 
 const Grid = React.forwardRef((props, ref) => {
   const {
-    inline,
+    inline = false,
     template,
     templateColumns,
     templateRows,
@@ -30,8 +30,8 @@ const Grid = React.forwardRef((props, ref) => {
     justifyContent,
     templateAreas,
     children,
-    className,
-    style,
+    className = "",
+    style = {},
     ...rest
    } = props;
 

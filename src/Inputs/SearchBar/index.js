@@ -104,7 +104,7 @@ const ClearIcon = styled.div`
   font-size: ${(props) => getIconFontSize(props)};
   background-color: whitesmoke;
   transition: all 250ms ease;
-  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+  cursor: ${(props) => (props.disabled === true ? "default" : "pointer")};
   margin-right: 0;
   margin-left: auto;
 `;

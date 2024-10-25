@@ -28,11 +28,14 @@ const CustomTableFooter = () => {
   );
 };
 
-CustomTableFooter.defaultProps = {
-  __TYPE__: "TABLE_FOOTER",
-};
+// TODO : TYPE
+// CustomTableFooter.defaultProps = {
+//   __TYPE__: "TABLE_FOOTER",
+// };
 CustomTableFooter.propTypes = {
   __TYPE__: PropTypes.string,
 };
 
 export default CustomTableFooter;
+
+CustomTableFooter.displayName = 'TABLE_FOOTER';

@@ -17,7 +17,12 @@ const Container = styled.div`
 
 const CustomTableContainer = (props) => {
   //--------------------------
-  const { className, size, color } = props;
+  const {
+    __TYPE__ = "TABLE_CONTAINER",
+    className = "",
+    size = "small",
+    color = "primary",
+  } = props;
   const theme = useTheme();
 
   const themeProps = {
@@ -30,13 +35,14 @@ const CustomTableContainer = (props) => {
   return <Container {...themeProps}>{props.children}</Container>;
 };
 
-CustomTableContainer.defaultProps = {
-  __TYPE__: "TABLE_CONTAINER",
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// CustomTableContainer.defaultProps = {
+//   __TYPE__: "TABLE_CONTAINER",
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 CustomTableContainer.propTypes = {
   __TYPE__: PropTypes.string,
@@ -52,8 +58,10 @@ CustomTableContainer.propTypes = {
     "gray",
     "white",
     "black",
-    "gray"
+    "gray",
   ]),
 };
 
 export default CustomTableContainer;
+
+CustomTableContainer.displayName = 'TABLE_CONTAINER';

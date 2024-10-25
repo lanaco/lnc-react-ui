@@ -35,30 +35,33 @@ const StyledDragDropFiles = styled.div`
   }
 `;
 
+
 const DragDropFiles = React.forwardRef((props, ref) => {
   const {
-    id,
-    disabled,
-    preventDefault,
-    acceptDropzone,
+    id = "",
+    disabled = false,
+    preventDefault = false,
+    acceptDropzone = {},
     acceptInput,
-    multiple,
-    selectFileText,
-    dndFileText,
+    multiple = true,
+    selectFileText = "Select file",
+    dndFileText = "Drag and drop file here or",
     control,
-    showFileSize,
-    files,
-    onChange,
-    onFocus,
-    onBlur,
-    onDropAccepted,
-    onDrop,
-    fileClick,
-    onCancel,
-    className,
-    style,
-    color,
-    size,
+    showFileSize = true,
+    files = [],
+    // ----------------------------------------
+    onChange = () => {},
+    onFocus = () => {},
+    onBlur = () => {},
+    onDropAccepted = () =>  {},
+    onDrop = () => {},
+    fileClick = () => {},
+    onCancel = () => {},
+        // ----------------------------------------
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     dragAndDropFileProps,
     uploadedFileProps,
     ...rest
@@ -135,33 +138,33 @@ const DragDropFiles = React.forwardRef((props, ref) => {
   );
 });
 
-DragDropFiles.defaultProps = {
-  id: "",
-  disabled: false,
-  preventDefault: false,
-  acceptDropzone: {},
-  multiple: true,
-  selectFileText: "Select file",
-  dndFileText: "Drag and drop file here or",
-  showFileSize: true,
-  files: [],
-  //------------------
-  onChange: () => { },
-  onFocus: () => { },
-  onBlur: () => { },
-  onDropAccepted: () => { },
-  onDrop: () => { },
-  // onFileClick: () => {},
-  onCancel: () => { },
-  //------------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// DragDropFiles.defaultProps = {
+//   id: "",
+//   disabled: false,
+//   preventDefault: false,
+//   acceptDropzone: {},
+//   multiple: true,
+//   selectFileText: "Select file",
+//   dndFileText: "Drag and drop file here or",
+//   showFileSize: true,
+//   files: [],
+//   //------------------
+//   onChange: () => { },
+//   onFocus: () => { },
+//   onBlur: () => { },
+//   onDropAccepted: () => { },
+//   onDrop: () => { },
+//   // onFileClick: () => {},
+//   onCancel: () => { },
+//   //------------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 DragDropFiles.propTypes = {
-  id: PropTypes.any.isRequired,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   preventDefault: PropTypes.bool,
   /**

@@ -13,11 +13,23 @@ const StyledLabel = styled.label`
   ${(props) =>
     getComponentTypographyCss(props.theme, "FormField", props.size, "enabled")}
   color: ${(props) =>
-    getColorRgbaValue(props.theme, "FormField", props.color, "enabled", "text")};
+    getColorRgbaValue(
+      props.theme,
+      "FormField",
+      props.color,
+      "enabled",
+      "text"
+    )};
 `;
 
 const Label = React.forwardRef((props, ref) => {
-  const { size, color, className, style, children } = props;
+  const {
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
+    children,
+  } = props;
 
   const theme = useTheme();
 
@@ -25,7 +37,7 @@ const Label = React.forwardRef((props, ref) => {
     <StyledLabel
       theme={theme}
       size={size}
-      className={className}
+      className={"lnc-ui-label " + className}
       style={style}
       color={color}
       ref={ref}
@@ -53,7 +65,7 @@ Label.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

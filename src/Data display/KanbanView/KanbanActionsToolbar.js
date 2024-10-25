@@ -46,18 +46,19 @@ const StyledToolbar = styled.div`
 
 const KanbanActionsToolbar = React.forwardRef((props, ref) => {
   const {
-    showCreate,
-    enableCreate,
-    createText,
-    actionsText,
-    actions,
+    __TYPE__ = "KANBAN_VIEW_ACTIONS_TOOLBAR",
+    showCreate = true,
+    enableCreate = true,
+    createText = "Create New item",
+    actionsText = "Actions",
+    actions = [],
     //----------------
-    onCreate,
+    onCreate = () => {},
     //-------------------
-    className,
-    style,
-    color,
-    size,
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     ...rest
   } = props;
 
@@ -112,20 +113,21 @@ const KanbanActionsToolbar = React.forwardRef((props, ref) => {
   );
 });
 
-KanbanActionsToolbar.defaultProps = {
-  __TYPE__: "KANBAN_VIEW_ACTIONS_TOOLBAR",
-  showCreate: true,
-  enableCreate: true,
-  createText: "Create New item",
-  actionsText: "Actions",
-  actions: [],
-  //-----------------------
-  onCreate: () => { },
-   //-----------------------
-  style: {},
-  color: "primary",
-  size: "small"
-};
+// TODO : type
+// KanbanActionsToolbar.defaultProps = {
+//   __TYPE__: "KANBAN_VIEW_ACTIONS_TOOLBAR",
+//   showCreate: true,
+//   enableCreate: true,
+//   createText: "Create New item",
+//   actionsText: "Actions",
+//   actions: [],
+//   //-----------------------
+//   onCreate: () => { },
+//    //-----------------------
+//   style: {},
+//   color: "primary",
+//   size: "small"
+// };
 
 KanbanActionsToolbar.propTypes = {
   /**
@@ -161,3 +163,5 @@ KanbanActionsToolbar.propTypes = {
 };
 
 export default KanbanActionsToolbar;
+
+KanbanActionsToolbar.displayName = 'KANBAN_VIEW_ACTIONS_TOOLBAR';

@@ -49,24 +49,23 @@ const Option = styled.option((props) => ({
 
 const CustomSelectList = React.forwardRef((props, ref) => {
   const {
-    mapNameTo,
-    mapValueTo,
-    id,
-    preventDefault,
-    onChange,
-    items,
-    disabled,
-    size,
-    color,
+    mapNameTo = "name",
+    mapValueTo = "value",
+    id = "",
+    preventDefault = true,
+    onChange = () => {},
+    items = [],
+    disabled = false,
+    size = "small",
+    color = "primary",
     value,
-    tooltip,
-    withoutEmpty,
-    className,
+    tooltip = "",
+    withoutEmpty = true,
+    className = "",
     tabIndex,
     onFocus,
     onBlur,
   } = props;
-
   const theme = useTheme();
 
   const handleOnChange = (e) => {
@@ -121,21 +120,6 @@ const CustomSelectList = React.forwardRef((props, ref) => {
     </Select>
   );
 });
-
-CustomSelectList.defaultProps = {
-  id: "",
-  disabled: false,
-  tooltip: "",
-  onChange: () => {},
-  className: "",
-  preventDefault: true,
-  size: "small",
-  color: "primary",
-  items: [],
-  withoutEmpty: true,
-  mapValueTo: "value",
-  mapNameTo: "name",
-};
 
 CustomSelectList.propTypes = {
   id: PropTypes.string,

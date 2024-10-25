@@ -10,20 +10,16 @@ import {
   StyledSuffix,
   StyledWrapper,
 } from "./styledComponents";
-import { useEffectOnce, useUpdateEffect } from "react-use";
 
 //===================================================
 
 const PasswordInput = React.forwardRef((props, ref) => {
   const {
-    id,
+    wrapperRef,
     disabled,
     readOnly,
-    value,
-    defaultValue,
-    debounceTime,
+    debounceTime = 180,
     placeholder,
-    tabIndex,
     prefix,
     suffix,
     //----------------
@@ -31,30 +27,33 @@ const PasswordInput = React.forwardRef((props, ref) => {
     onBlur,
     onFocus,
     //----------------
-    className,
-    style,
-    size,
-    color,
+    className = "",
+    style = {},
+    size = "small",
+    color = "primary",
     ...rest
   } = props;
-  //
-  const theme = useTheme();
+
   const inputRef = useRef();
+
+  const theme = useTheme();
 
   const [locked, setLocked] = useState(true);
   const [focused, setFocused] = useState(false);
-  const [inputValue, setInputValue] = useState(value ? value : defaultValue);
+
+  useEffect(() => {
+    const inputValue = inputRef?.current?.value || "";
+
+    inputRef.current.selectionStart = inputValue?.length
+      ? inputValue.length
+      : 0;
+    inputRef.current.selectionEnd = inputValue?.length ? inputValue.length : 0;
+  }, [locked]);
 
   useEffect(() => {
     if (ref !== null && ref !== undefined) ref.current = inputRef.current;
   }, [ref, inputRef]);
 
-  useEffect(() => {
-    inputRef.current.selectionStart = inputValue?.length ? inputValue.length : 0;
-    inputRef.current.selectionEnd = inputValue?.length ? inputValue.length : 0;
-  }, [locked]);
-
-  useUpdateEffect(() => setInputValue(value), [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -62,11 +61,10 @@ const PasswordInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    if (onChange) onChange(e, value);
+    if (onChange) onChange?.(e, value);
   };
 
   const onValueChange = (e) => {
-    if (value || value === "") setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
@@ -77,17 +75,17 @@ const PasswordInput = React.forwardRef((props, ref) => {
 
   const handleFocus = (e) => {
     setFocused(true);
-    onFocus(e);
+    onFocus?.(e);
   };
 
   const handleBlur = (e) => {
     setFocused(false);
-    onBlur(e);
+    onBlur?.(e);
   };
 
   return (
     <StyledWrapper
-      ref={ref}
+      ref={wrapperRef}
       style={style}
       className={className}
       theme={theme}
@@ -107,29 +105,6 @@ const PasswordInput = React.forwardRef((props, ref) => {
           {prefix}
         </StyledPrefix>
       )}
-      {
-        // Controlled input and uncotrolled input must be differentiated because of usage of the value property
-        (value == null || value == "undefined") ?
-        <StyledInput
-        ref={inputRef}
-        type={locked ? "password" : "text"}
-        theme={theme}
-        color={color}
-        size={size}
-        placeholder={placeholder}
-        prefix={prefix}
-        suffix={suffix}
-        disabled={disabled}
-        readOnly={readOnly}
-        focused={focused}
-        defaultValue={defaultValue}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={onValueChange}
-        tabIndex={tabIndex}
-        {...rest}
-      />
-      :
       <StyledInput
         ref={inputRef}
         type={locked ? "password" : "text"}
@@ -142,14 +117,11 @@ const PasswordInput = React.forwardRef((props, ref) => {
         disabled={disabled}
         readOnly={readOnly}
         focused={focused}
-        value={inputValue}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onValueChange}
-        tabIndex={tabIndex}
         {...rest}
       />
-      }
       <StyledLockIcon
         theme={theme}
         color={color}
@@ -172,24 +144,24 @@ const PasswordInput = React.forwardRef((props, ref) => {
   );
 });
 
-PasswordInput.defaultProps = {
-  id: "",
-  disabled: false,
-  readOnly: false,
-  debounceTime: 180,
-  defaultValue: "",
-  placeholder: "",
-  tabIndex: 0,
-  //----------------
-  onChange: () => {},
-  onBlur: () => {},
-  onFocus: () => {},
-  //----------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// PasswordInput.defaultProps = {
+//   id: "",
+//   disabled: false,
+//   readOnly: false,
+//   debounceTime: 180,
+//   defaultValue: "",
+//   placeholder: "",
+//   tabIndex: 0,
+//   //----------------
+//   onChange: () => {},
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   //----------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 PasswordInput.propTypes = {
   id: PropTypes.string,
@@ -216,7 +188,7 @@ PasswordInput.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

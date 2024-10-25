@@ -66,7 +66,8 @@ const SpecialRow = styled.div`
 const TableSpecialLastRow = (props) => {
   //--------------------------
   const {
-    Loading,
+    __TYPE__ = "TABLE_SPECIAL_LAST_ROW",
+    Loading = false,
     Columns,
     Disabled,
     Data,
@@ -74,9 +75,9 @@ const TableSpecialLastRow = (props) => {
     onClick,
     TabIndexOffset,
     //----------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -108,20 +109,21 @@ const TableSpecialLastRow = (props) => {
   );
 };
 
-TableSpecialLastRow.defaultProps = {
-  __TYPE__: "TABLE_SPECIAL_LAST_ROW",
-  //--------------------
-  Loading: false,
-  onRowClick: () => {},
-  onSelectRow: () => {},
-  RowData: {},
-  //--------------------
-  IsSelected: null,
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// TableSpecialLastRow.defaultProps = {
+//   __TYPE__: "TABLE_SPECIAL_LAST_ROW",
+//   //--------------------
+//   Loading: false,
+//   onRowClick: () => {},
+//   onSelectRow: () => {},
+//   RowData: {},
+//   //--------------------
+//   IsSelected: null,
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TableSpecialLastRow.propTypes = {
   __TYPE__: PropTypes.string,
@@ -137,8 +139,10 @@ TableSpecialLastRow.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default TableSpecialLastRow;
+
+TableSpecialLastRow.displayName = 'TABLE_SPECIAL_LAST_ROW';

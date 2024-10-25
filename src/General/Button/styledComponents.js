@@ -39,7 +39,7 @@ const commonCss = (props) => {
         border: none;
         transition: all 50  ms ease-in;
         cursor: pointer;
-        color: ${!props.disabled && "white"};
+        color: ${!props.disabled === true && "white"};
 
         border-radius: ${getBorderRadiusValueWithUnits(
           props.theme,
@@ -79,7 +79,7 @@ export const FilledButton = styled.button`
     )};
 
   background-color: ${(props) =>
-    !props.disabled &&
+    !props.disabled === true &&
     getColorRgbaValue(
       props.theme,
       "ButtonFilled",
@@ -100,7 +100,7 @@ export const FilledButton = styled.button`
   max-height: ${(props) => getSizeValueWithUnits(props.theme, props.size)};
 
   &:disabled {
-    ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+    ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
     cursor: default;
     background-color: ${(props) =>
       getColorRgbaValue(
@@ -142,7 +142,7 @@ export const FilledButton = styled.button`
 
   &:focus {
     background-color: ${(props) =>
-      !props.disabled &&
+      !props.disabled === true &&
       getColorRgbaValue(
         props.theme,
         "ButtonFilled",
@@ -158,7 +158,7 @@ export const FilledButton = styled.button`
         "focus",
         "text"
       )};
-    ${(props) => !props.disabled && getOutlineCss(props.theme)};
+    ${(props) => !props.disabled === true && getOutlineCss(props.theme)};
   }
 
   &:active {
@@ -368,7 +368,7 @@ export const BasicButton = styled.button`
         "text"
       )};
 
-    ${(props) => !props.disabled && getOutlineCss(props.theme)};
+    ${(props) => !props.disabled === true && getOutlineCss(props.theme)};
   }
 
   &:active {

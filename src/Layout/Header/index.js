@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Header = React.forwardRef((props, ref) => {
-  const { children, __TYPE__, ...rest } = props;
+  const { children, __TYPE__ = "Header", ...rest } = props;
 
   return (
     <header ref={ref} {...rest}>
@@ -11,9 +11,10 @@ const Header = React.forwardRef((props, ref) => {
   );
 });
 
-Header.defaultProps = {
-  __TYPE__: "Header",
-};
+// TODO : type
+// Header.defaultProps = {
+//   __TYPE__: "Header",
+// };
 
 Header.propTypes = {
   /**
@@ -24,3 +25,5 @@ Header.propTypes = {
 };
 
 export default Header;
+
+Header.displayName = 'Header';

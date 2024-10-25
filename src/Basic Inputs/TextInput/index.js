@@ -17,10 +17,10 @@ const TextInput = React.forwardRef((props, ref) => {
   const {
     disabled,
     readOnly,
-    defaultValue,
-    value,
-    debounceTime,
-    type,
+    // defaultValue,
+    // value,
+    debounceTime = 180,
+    type = "text",
     placeholder,
     tabIndex,
     prefix,
@@ -30,18 +30,18 @@ const TextInput = React.forwardRef((props, ref) => {
     onBlur,
     onFocus,
     //----------------
-    className,
-    style,
-    size,
-    color,
+    className = "",
+    style = {},
+    size = "small",
+    color = "primary",
     ...rest
   } = props;
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState(value);
+  // const [inputValue, setInputValue] = useState(value);
   const [focused, setFocused] = useState(false);
 
-  useUpdateEffect(() => setInputValue(value), [value]);
+  // useUpdateEffect(() => setInputValue(value), [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -49,15 +49,16 @@ const TextInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    if (onChange) onChange(e, value);
+    if (onChange) onChange?.(e, value);
   };
 
   const onValueChange = (e) => {
-    if (value || value === "") setInputValue(e.target.value);
+    // if (value || value === "") setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
   const handleFocus = (e) => {
+    console.log("focus", e)
     setFocused(true);
     onFocus?.(e);
   };
@@ -88,7 +89,27 @@ const TextInput = React.forwardRef((props, ref) => {
           {prefix}
         </StyledPrefix>
       )}
-      {
+      <StyledInput
+            ref={ref}
+            type={type}
+            theme={theme}
+            color={color}
+            size={size}
+            placeholder={placeholder}
+            prefix={prefix}
+            suffix={suffix}
+            disabled={disabled}
+            readOnly={readOnly}
+            focused={focused}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={onValueChange}
+            tabIndex={tabIndex}
+            // value={inputValue}
+            {...rest}
+          />
+
+      {/* {
         // Controlled input and uncotrolled input must be differentiated because of usage of the value property
         value == null || value == "undefined" ? (
           <StyledInput
@@ -131,7 +152,7 @@ const TextInput = React.forwardRef((props, ref) => {
             {...rest}
           />
         )
-      }
+      } */}
       {suffix && (
         <StyledSuffix
           theme={theme}
@@ -146,24 +167,24 @@ const TextInput = React.forwardRef((props, ref) => {
   );
 });
 
-TextInput.defaultProps = {
-  defaultValue: "",
-  disabled: false,
-  readOnly: false,
-  debounceTime: 180,
-  placeholder: "",
-  type: "text",
-  tabIndex: 0,
-  //----------------
-  onChange: () => {},
-  onBlur: () => {},
-  onFocus: () => {},
-  //----------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// TextInput.defaultProps = {
+//   defaultValue: "",
+//   disabled: false,
+//   readOnly: false,
+//   debounceTime: 180,
+//   placeholder: "",
+//   type: "text",
+//   tabIndex: 0,
+//   //----------------
+//   onChange: () => {},
+//   onBlur: () => {},
+//   onFocus: () => {},
+//   //----------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 TextInput.propTypes = {
   id: PropTypes.string,

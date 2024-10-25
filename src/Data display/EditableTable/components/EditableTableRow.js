@@ -69,13 +69,14 @@ const HtmlRow = styled.tr`
 const EditableTableRow = (props) => {
   //--------------------------
   const {
-    RowData,
+    __TYPE__ = "TABLE_ROW",
+    RowData = {},
     Index,
-    IsSelected,
+    IsSelected = null,
     //----------------
-    className,
-    size,
-    color,
+    className = "",
+    size = "small",
+    color = "primary",
   } = props;
 
   const theme = useTheme();
@@ -94,16 +95,17 @@ const EditableTableRow = (props) => {
   );
 };
 
-EditableTableRow.defaultProps = {
-  __TYPE__: "TABLE_ROW",
-  //--------------------
-  RowData: {},
-  IsSelected: null,
-  //--------------------
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TODO : type
+// EditableTableRow.defaultProps = {
+//   __TYPE__: "TABLE_ROW",
+//   //--------------------
+//   RowData: {},
+//   IsSelected: null,
+//   //--------------------
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 EditableTableRow.propTypes = {
   __TYPE__: PropTypes.string,
@@ -126,3 +128,5 @@ EditableTableRow.propTypes = {
 };
 
 export default EditableTableRow;
+
+EditableTableRow.displayName = 'TABLE_ROW';

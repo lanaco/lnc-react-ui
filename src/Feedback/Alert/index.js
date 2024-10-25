@@ -87,57 +87,67 @@ const Container = styled.div`
 `;
 
 const getIcon = (color) => {
-  if(color == "danger") return "times-circle";
-  if(color == "warning") return "exclamation-triangle";
-  if(color == "success") return "check-circle";
+  if (color == "danger") return "times-circle";
+  if (color == "warning") return "exclamation-triangle";
+  if (color == "success") return "check-circle";
 
   return "exclamation-circle";
-}
+};
 
-const IconComponent = ({statusIcon, color}) => {
+const IconComponent = ({ statusIcon, color }) => {
   if (typeof statusIcon == "boolean" && statusIcon == true) {
-    return <Icon
-      className={"alert-icon"}
-      icon={getIcon(color)}
-    />
+    return <Icon className={"alert-icon"} icon={getIcon(color)} />;
   }
-  if(typeof statusIcon == "string" && statusIcon !== "") {
-    return <Icon
-      className={"alert-icon"}
-      icon={statusIcon}
-    />
+  if (typeof statusIcon == "string" && statusIcon !== "") {
+    return <Icon className={"alert-icon"} icon={statusIcon} />;
   }
   return React.cloneElement(statusIcon, {
-    className: "alert-icon "+statusIcon?.className,
+    className: "alert-icon " + statusIcon?.className,
   });
-}
+};
 
 const Alert = React.forwardRef((props, ref) => {
-  const { className, size, color, title, actions, noIcon, statusIcon, children, ...rest } = props;
+  const {
+    className = "",
+    size = "small",
+    color = "primary",
+    title,
+    actions,
+    noIcon = false,
+    statusIcon = true,
+    children,
+    ...rest
+  } = props;
   const { theme } = useTheme();
   const themeProps = { theme, size, color };
 
   return (
-    <Container ref={ref} {...themeProps} className={className} actions={actions} {...rest}>
-      {(noIcon == false && (statusIcon)) && <IconComponent color={color} statusIcon={statusIcon} />}
+    <Container
+      ref={ref}
+      {...themeProps}
+      className={"lnc-ui-alert " + className}
+      actions={actions}
+      {...rest}
+    >
+      {noIcon == false && statusIcon && (
+        <IconComponent color={color} statusIcon={statusIcon} />
+      )}
       <div className="alert-content">
         <div className="alert-title">{title}</div>
         {children}
-        <div className="alert-actions">
-          {actions}
-        </div>
+        <div className="alert-actions">{actions}</div>
       </div>
     </Container>
   );
 });
 
-Alert.defaultProps = {
-  statusIcon: true,
-  noIcon: false,
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// Alert.defaultProps = {
+//   statusIcon: true,
+//   noIcon: false,
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 Alert.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -145,7 +155,11 @@ Alert.propTypes = {
   /**
    * Can be boolean (true - display default icon, false - don't display icon at all), string (display custom icon), element (display custom element as icon)
    */
-  statusIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.bool]),
+  statusIcon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.bool,
+  ]),
   /**
    * Disable display of status icon
    */
@@ -163,7 +177,7 @@ Alert.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

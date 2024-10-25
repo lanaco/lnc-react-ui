@@ -19,7 +19,7 @@ const getHeight = (size) => {
 
 const Tab = styled.div`
   box-sizing: border-box;
-  ${(props) => props.disabled && getDisabledStateCss(props.theme)};
+  ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
   min-width: 5.25rem;
   ${(props) => props.fullWidth && "width: 100%"};
   display: flex;
@@ -34,9 +34,9 @@ const Tab = styled.div`
       props.size,
       "enabled"
     )};
-  ${(props) => !props.disabled && "cursor: pointer"};
+  ${(props) => !props.disabled === true && "cursor: pointer"};
   color: ${(props) =>
-    !props.disabled &&
+    !props.disabled === true &&
     getColorRgbaValue(
       props.theme,
       getTypeName(props.type),
@@ -48,7 +48,7 @@ const Tab = styled.div`
     props.type == "regular" ||
     (props.type == "pill" && (props.disabled == true || props.active == false))
       ? "transparent"
-      : !props.disabled &&
+      : !props.disabled === true &&
         getColorRgbaValue(
           props.theme,
           getTypeName(props.type),
@@ -81,7 +81,7 @@ const Tab = styled.div`
     getBorderRadius(props.theme, props.type, props.first, props.last)};
   &:hover {
     color: ${(props) =>
-      !props.disabled &&
+      !props.disabled === true &&
       getColorRgbaValue(
         props.theme,
         getTypeName(props.type),
@@ -92,7 +92,7 @@ const Tab = styled.div`
     background-color: ${(props) =>
       props.type == "regular"
         ? "transparent"
-        : !props.disabled &&
+        : !props.disabled === true &&
           getColorRgbaValue(
             props.theme,
             getTypeName(props.type),
@@ -153,9 +153,9 @@ const getBottomLine = (theme, type, active, disabled, color, state) => {
 
   return `border-bottom: ${
     !disabled && (active || state == "hover")
-      ? theme.components[(type === "regular" ? "TabRegular" : "TabUnderline")]
+      ? theme.components[type === "regular" ? "TabRegular" : "TabUnderline"]
           .default.enabled.lineHeight + ""
-      : theme.components[(type === "regular" ? "TabRegular" : "TabUnderline")]
+      : theme.components[type === "regular" ? "TabRegular" : "TabUnderline"]
           .default.hover.lineHeight + ""
   } solid ${getColorRgbaValue(
     theme,
@@ -168,32 +168,38 @@ const getBottomLine = (theme, type, active, disabled, color, state) => {
 
 const TabItem = React.forwardRef((props, ref) => {
   const {
-    type,
+    type = "underline",
     disabled,
-    first,
-    last,
-    fullWidth,
-    active,
+    first = false,
+    last = false,
+    fullWidth = false,
+    active = false,
     activeIndex,
     index,
     //----------------
-    onFocus,
-    onBlur,
-    onClick,
-    onKeyDown,
-    itemClick,
+    onFocus = () => {},
+    onBlur = () => {},
+    onClick = () => {},
+    onKeyDown = () => {},
+    itemClick = () => {},
     //----------------
-    className,
-    style,
-    color,
-    size,
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
     children,
     ...rest
   } = props;
   const theme = useTheme();
   const [isActive, setIsActive] = useState(active);
 
-  const themeProps = { theme, color, size, style, className };
+  const themeProps = {
+    theme,
+    color,
+    size,
+    style,
+    className: "lnc-ui-tabitem " + className,
+  };
 
   const handleClick = (e) => {
     if (itemClick && !disabled) itemClick(index);
@@ -231,23 +237,23 @@ const TabItem = React.forwardRef((props, ref) => {
 
 //====================================== PROP TYPES / DEFAULT PROPS ====================================
 
-TabItem.defaultProps = {
-  type: "underline",
-  first: false,
-  last: false,
-  fullWidth: false,
-  active: false,
-  //---------------------------------------------------------------
-  onClick: () => {},
-  onBlur: () => {},
-  onKeyDown: () => {},
-  onFocus: () => {},
-  //---------------------------------------------------------------
-  style: {},
-  className: "",
-  size: "small",
-  color: "primary",
-};
+// TabItem.defaultProps = {
+//   type: "underline",
+//   first: false,
+//   last: false,
+//   fullWidth: false,
+//   active: false,
+//   //---------------------------------------------------------------
+//   onClick: () => {},
+//   onBlur: () => {},
+//   onKeyDown: () => {},
+//   onFocus: () => {},
+//   //---------------------------------------------------------------
+//   style: {},
+//   className: "",
+//   size: "small",
+//   color: "primary",
+// };
 
 TabItem.propTypes = {
   type: PropTypes.oneOf(["regular", "pill", "underline"]),
@@ -279,7 +285,7 @@ TabItem.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };

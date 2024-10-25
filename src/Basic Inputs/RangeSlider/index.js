@@ -57,7 +57,7 @@ const InputSlider = styled.input`
         props.theme,
         "Range",
         props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.disabled === true ? "disabled" : "enabled",
         "background"
       )};
     cursor: pointer; /* Cursor on hover */
@@ -73,7 +73,7 @@ const InputSlider = styled.input`
         props.theme,
         "Range",
         props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.disabled === true ? "disabled" : "enabled",
         "background"
       )};
     cursor: pointer; /* Cursor on hover */
@@ -99,7 +99,7 @@ const Popover = styled.div`
         props.theme,
         "Range",
         props.color,
-        props.disabled ? "disabled" : "enabled",
+        props.disabled === true ? "disabled" : "enabled",
         "background"
       )};
     border-radius: 3px;
@@ -118,7 +118,7 @@ const Popover = styled.div`
             props.theme,
             "Range",
             props.color,
-            props.disabled ? "disabled" : "enabled",
+            props.disabled === true ? "disabled" : "enabled",
             "background"
           )};
         transform: rotate(45deg);
@@ -135,17 +135,17 @@ const Popover = styled.div`
 const RangeSliderInput = React.forwardRef((props, ref) => {
   const {
     defaultValue,
-    value,
-    min,
-    max,
+    value = null,
+    min = 0,
+    max = 100,
     disabled,
-    tabIndex,
-    onChange,
-    onInput,
-    color,
-    size,
-    className,
-    style,
+    tabIndex = 0,
+    onChange = () => {},
+    onInput = () => {},
+    color = "primary",
+    size = "small",
+    className = "",
+    style = {},
     ...rest
   } = props;
 
@@ -284,27 +284,27 @@ const RangeSliderInput = React.forwardRef((props, ref) => {
   );
 });
 
-RangeSliderInput.defaultProps = {
-  value: null,
-  min: 0,
-  max: 100,
-  disabled: false,
-  tabIndex: 0,
-  //------------------
-  onChange: (value) => {},
-  onInput: (e) => {},
-  //------------------
-  className: "",
-  style: {},
-  size: "small",
-  color: "primary",
-};
+// RangeSliderInput.defaultProps = {
+//   value: null,
+//   min: 0,
+//   max: 100,
+//   disabled: false,
+//   tabIndex: 0,
+//   //------------------
+//   onChange: (value) => {},
+//   onInput: (e) => {},
+//   //------------------
+//   className: "",
+//   style: {},
+//   size: "small",
+//   color: "primary",
+// };
 
 RangeSliderInput.propTypes = {
   value: PropTypes.number,
   defaultValue: PropTypes.number,
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
+  min: PropTypes.number,
+  max: PropTypes.number,
   disabled: PropTypes.bool,
   tabIndex: PropTypes.number,
   //-------------------------

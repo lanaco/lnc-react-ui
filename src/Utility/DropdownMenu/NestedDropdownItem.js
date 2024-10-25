@@ -21,17 +21,27 @@ const StyledNested = styled(motion.div)`
 
 const NestedDropdownItem = React.forwardRef((props, ref) => {
   const {
+    __TYPE__ = "NESTED_ITEM",
     item,
     //------------------
-    onItemSelected,
+    onItemSelected = () => {},
     //--------------------
-    defaultOpen,
-    animation,
-    color,
-    size,
-    className,
-    style,
-    __TYPE__,
+    defaultOpen = false,
+    animation = {
+      animate: { opacity: 1, height: "auto" },
+      exit: { opacity: 0, height: 0 },
+      initial: { opacity: 0, height: 0 },
+      transition: {
+        type: "tween",
+        duration: 0.15,
+        opacity: { duration: 0.15, ease: "easeOut" },
+        height: { duration: 0.15 },
+      },
+    },
+    className = "",
+    style = {},
+    color = "primary",
+    size = "small",
     children,
     ...rest
   } = props;
@@ -55,7 +65,9 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
     if (React.isValidElement(child)) {
       if (
         child.props.__TYPE__ == "MENU_ITEM" ||
-        child.props.__TYPE__ == "NESTED_ITEM"
+        child?.type?.displayName === "MENU_ITEM" ||
+        child.props.__TYPE__ == "NESTED_ITEM" ||
+        child?.type?.displayName === "NESTED_ITEM"
       ) {
         return React.cloneElement(child, {
           color: child.props.color ? child.props.color : color,
@@ -89,31 +101,32 @@ const NestedDropdownItem = React.forwardRef((props, ref) => {
   );
 });
 
-NestedDropdownItem.defaultProps = {
-  defaultOpen: false,
-  /**
-   * Animation use on nested items open/close
-   */
-   animation: {
-    animate: { opacity: 1, height: "auto" },
-    exit: { opacity: 0, height: 0 },
-    initial: { opacity: 0, height: 0 },
-    transition: {
-      type: "tween",
-      duration: 0.15,
-      opacity: { duration: 0.15, ease: "easeOut" },
-      height: { duration: 0.15 },
-    },
-  },
-  size: "small",
-  color: "primary",
-  style: {},
-  className: "",
-  __TYPE__: "NESTED_ITEM",
-};
+// TODO : type
+// NestedDropdownItem.defaultProps = {
+//   defaultOpen: false,
+//   /**
+//    * Animation use on nested items open/close
+//    */
+//    animation: {
+//     animate: { opacity: 1, height: "auto" },
+//     exit: { opacity: 0, height: 0 },
+//     initial: { opacity: 0, height: 0 },
+//     transition: {
+//       type: "tween",
+//       duration: 0.15,
+//       opacity: { duration: 0.15, ease: "easeOut" },
+//       height: { duration: 0.15 },
+//     },
+//   },
+//   size: "small",
+//   color: "primary",
+//   style: {},
+//   className: "",
+//   __TYPE__: "NESTED_ITEM",
+// };
 
 NestedDropdownItem.propTypes = {
-  item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+  item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   //--------------------------
   defaultOpen: PropTypes.bool,
   animation: PropTypes.object,
@@ -127,10 +140,12 @@ NestedDropdownItem.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   __TYPE__: PropTypes.string,
 };
 
 export default NestedDropdownItem;
+
+NestedDropdownItem.displayName = "NESTED_ITEM";

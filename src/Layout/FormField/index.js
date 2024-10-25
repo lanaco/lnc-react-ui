@@ -32,12 +32,21 @@ const StyledText = styled.span`
 `;
 
 const FormField = (props) => {
-  const { size, color, text, label, children, style, className, ...rest } = props;
+  const {
+    size = "small",
+    color = "primary",
+    className = "",
+    style = {},
+    text = "",
+    label = "",
+    children,
+    ...rest
+  } = props;
 
   const theme = useTheme();
 
   return (
-    <div style={style} className={className}>
+    <div style={style} className={"lnc-ui-form-field " + className}>
       {label && (
         <StyledLabel theme={theme} size={size}>
           {label}
@@ -53,14 +62,14 @@ const FormField = (props) => {
   );
 };
 
-FormField.defaultProps = {
-  text: "",
-  label: "",
-  size: "small",
-  color: "primary",
-  style: {},
-  className: "",
-};
+// FormField.defaultProps = {
+//   text: "",
+//   label: "",
+//   size: "small",
+//   color: "primary",
+//   style: {},
+//   className: "",
+// };
 
 FormField.propTypes = {
   /**
@@ -80,7 +89,7 @@ FormField.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   style: PropTypes.object,
   className: PropTypes.string,

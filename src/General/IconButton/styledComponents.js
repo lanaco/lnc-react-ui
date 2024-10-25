@@ -21,7 +21,7 @@ const commonCss = (props) => {
         border: none;
         transition: all 50  ms ease-in;
         cursor: pointer;
-        color: ${!props.disabled && "white"};
+        color: ${!props.disabled === true && "white"};
 
         border-radius: ${getBorderRadiusValueWithUnits(
           props.theme,

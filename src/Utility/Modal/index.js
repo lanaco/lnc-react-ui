@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useState } from "react";
+import React, { useImperativeHandle, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
@@ -173,27 +173,43 @@ const SecondOverlay = styled(motion.div)`
 
 const Modal = React.forwardRef((props, ref) => {
   const {
-    portalElement,
-    isOpen,
+    portalElement = document.body,
+    isOpen = false,
     header,
     footer,
-    scrollOverlay,
-    overlay,
-    overlayColor,
-    showCloseButton,
-    onOpen,
-    onClose,
-    zIndex,
-    size,
-    clickOutsideToClose,
-    overlayAnimation,
-    modalAnimation,
-    className,
-    style,
+    scrollOverlay = false,
+    overlay = true,
+    overlayColor = "rgba(0, 0, 0, 0.3)",
+    showCloseButton = true,
+    onOpen = () => {},
+    onClose = () => {},
+    zIndex = 1000,
+    size = "fluid",
+    clickOutsideToClose = true,
+    className = "",
+    style = {},
     overlayProps,
+    overlayAnimation = {
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+      initial: {
+        opacity: 0,
+      },
+      transition: { type: "spring", duration: 0.6 },
+    },
+    modalAnimation = {
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+      initial: {
+        opacity: 0,
+      },
+      transition: { type: "spring", duration: 0.6 },
+    },
     children,
     rest,
   } = props;
+
+  const mRef = useRef();
   const [show, setShow] = useState(isOpen);
 
   const theme = useTheme();
@@ -217,9 +233,9 @@ const Modal = React.forwardRef((props, ref) => {
     },
   }));
 
-  const open = () => {
+  const open = (e) => {
     setShow(true);
-    onOpen(event);
+    onOpen(e);
   };
 
   const close = (event) => {
@@ -244,7 +260,7 @@ const Modal = React.forwardRef((props, ref) => {
             <>
               {createPortal(
                 <ModalContent
-                  modalRef={ref}
+                  ref={mRef}
                   overlay={overlay}
                   scrollOverlay={scrollOverlay}
                   onClickOutsideModal={onClickOutsideModal}
@@ -267,7 +283,7 @@ const Modal = React.forwardRef((props, ref) => {
             </>
           ) : (
             <ModalContent
-              modalRef={ref}
+              ref={mRef}
               overlay={overlay}
               scrollOverlay={scrollOverlay}
               onClickOutsideModal={onClickOutsideModal}
@@ -292,7 +308,7 @@ const Modal = React.forwardRef((props, ref) => {
   );
 });
 
-const ModalContent = ({
+const ModalContent = React.forwardRef(({
   overlay,
   scrollOverlay,
   onClickOutsideModal,
@@ -306,10 +322,9 @@ const ModalContent = ({
   footer,
   close,
   isOpen,
-  modalRef,
   children,
   ...rest
-}) => {
+}, ref) => {
   return (
     <AnimatePresence>
       {overlay ? (
@@ -331,7 +346,7 @@ const ModalContent = ({
             {...overlayAnimation}
           >
             <ModalWrapper
-              modalRef={modalRef}
+              ref={ref}
               themeProps={themeProps}
               scrollOverlay={scrollOverlay}
               modalAnimation={modalAnimation}
@@ -347,7 +362,7 @@ const ModalContent = ({
         </>
       ) : (
         <ModalWrapper
-          modalRef={ref}
+          ref={ref}
           themeProps={themeProps}
           modalAnimation={modalAnimation}
           showCloseButton={showCloseButton}
@@ -361,10 +376,9 @@ const ModalContent = ({
       )}
     </AnimatePresence>
   );
-};
+});
 
-const ModalWrapper = ({
-  modalRef,
+const ModalWrapper = React.forwardRef(({
   themeProps,
   scrollOverlay,
   modalAnimation,
@@ -374,11 +388,11 @@ const ModalWrapper = ({
   footer,
   children,
   ...rest
-}) => {
+}, ref) => {
   return (
     <AnimatePresence>
       <ModalContainer
-        ref={modalRef}
+        ref={ref}
         {...themeProps}
         {...modalAnimation}
         header={header}
@@ -388,7 +402,11 @@ const ModalWrapper = ({
         className={`modal-lnc-container ${themeProps?.className}`}
       >
         {showCloseButton && (
-          <CloseButton {...themeProps} className="modal-lnc-times" onClick={close}>
+          <CloseButton
+            {...themeProps}
+            className="modal-lnc-times"
+            onClick={close}
+          >
             <Icon icon={"times"}></Icon>
           </CloseButton>
         )}
@@ -398,38 +416,38 @@ const ModalWrapper = ({
       </ModalContainer>
     </AnimatePresence>
   );
-};
+});
 
-Modal.defaultProps = {
-  portalElement: document.body,
-  isOpen: false,
-  showCloseButton: true,
-  scrollOverlay: false,
-  overlay: true,
-  overlayColor: "rgba(0, 0, 0, 0.3)",
-  onOpen: () => {},
-  onClose: () => {},
-  overlayAnimation: {
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    initial: {
-      opacity: 0,
-    },
-    transition: { type: "spring", duration: 0.6 },
-  },
-  modalAnimation: {
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    initial: {
-      opacity: 0,
-    },
-    transition: { type: "spring", duration: 0.6 },
-  },
-  className: "",
-  zIndex: 1000,
-  size: "fluid",
-  clickOutsideToClose: true,
-};
+// Modal.defaultProps = {
+//   portalElement: document.body,
+//   isOpen: false,
+//   showCloseButton: true,
+//   scrollOverlay: false,
+//   overlay: true,
+//   overlayColor: "rgba(0, 0, 0, 0.3)",
+//   onOpen: () => {},
+//   onClose: () => {},
+//   overlayAnimation: {
+//     animate: { opacity: 1 },
+//     exit: { opacity: 0 },
+//     initial: {
+//       opacity: 0,
+//     },
+//     transition: { type: "spring", duration: 0.6 },
+//   },
+//   modalAnimation: {
+//     animate: { opacity: 1 },
+//     exit: { opacity: 0 },
+//     initial: {
+//       opacity: 0,
+//     },
+//     transition: { type: "spring", duration: 0.6 },
+//   },
+//   className: "",
+//   zIndex: 1000,
+//   size: "fluid",
+//   clickOutsideToClose: true,
+// };
 
 Modal.propTypes = {
   /**

@@ -15,13 +15,27 @@ const StyledFlexbox = styled.div`
 
 const FlexBox = React.forwardRef((props, ref) => {
   //============================================== PROPS ===============================================
-  const { className, children, ...rest } = props;
+  const {
+    className = "",
+    children,
+    direction = "Row",
+    wrap = "NoWrap",
+    justifyContent = "Start",
+    alignItems = "Stretch",
+    gap = "0",
+    ...rest
+  } = props;
 
   //============================================== RENDER ==============================================
   return (
     <StyledFlexbox
       className={"lnc-flexbox-container " + (className ? className : "")}
       ref={ref}
+      wrap={wrap}
+      gap={gap}
+      alignItems={alignItems}
+      direction={direction}
+      justifyContent={justifyContent}
       {...rest}
     >
       {children}
@@ -30,13 +44,13 @@ const FlexBox = React.forwardRef((props, ref) => {
 });
 
 //====================================== PROP TYPES / DEFAULT PROPS ====================================
-FlexBox.defaultProps = {
-  direction: "Row",
-  wrap: "NoWrap",
-  justifyContent: "Start",
-  alignItems: "Stretch",
-  gap: "0",
-};
+// FlexBox.defaultProps = {
+//   direction: "Row",
+//   wrap: "NoWrap",
+//   justifyContent: "Start",
+//   alignItems: "Stretch",
+//   gap: "0",
+// };
 
 FlexBox.propTypes = {
   rowGap: PropTypes.string,
