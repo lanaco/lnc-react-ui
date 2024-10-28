@@ -35,7 +35,7 @@ const PageLayout = React.forwardRef((props, ref) => {
   const theme = useTheme();
 
   const hasSidebar = React.Children.toArray(children).some(
-    (component) => component.props.__TYPE__ == "Sidebar"
+    (component) => component.props.__TYPE__ || component?.type?.displayName == "Sidebar"
   );
   const getSidebarPlacement = (children) => {
     let layoutIndex, sidebarIndex, contentIndex;
