@@ -120,7 +120,7 @@ const Table = forwardRef((props, ref) => {
     EnableLoader = false,
     PreRenderedTableBody = false,
     PreRenderedTableHead = false,
-    noBorder = true,
+    noBorder = false,
     //--------------------
     EnableRowStatusIndicator = false,
     EnableRowHighlight = false,
@@ -132,7 +132,7 @@ const Table = forwardRef((props, ref) => {
     //--------------------
     Loading = false,
     // TODO: add alignText prop to Column object
-    Columns= [],
+    Columns = [],
     Data = [],
     SelectedData = [],
     SelectedEntirePage = false,
@@ -883,10 +883,10 @@ Table.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default Table;
 
-Table.displayName = 'TABLE';
+Table.displayName = "TABLE";
