@@ -102,7 +102,7 @@ export const useTheme = () => {
   return useContext(ThemeContext);
 };
 
-const ThemeProvider = ({ theme, children }) => {
+const ThemeProvider = ({ theme = "Lanaco Light", children }) => {
   const [currentTheme, setCurrentTheme] = useState(() => {
     return typeof theme == "string"
       ? themes?.find((item) => item.name == theme)
@@ -131,10 +131,6 @@ const ThemeProvider = ({ theme, children }) => {
       </EmotionThemeProvider>
     </ThemeContext.Provider>
   );
-};
-
-ThemeProvider.defaultProps = {
-  theme: "Lanaco Light",
 };
 
 ThemeProvider.propTypes = {
