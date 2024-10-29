@@ -110,11 +110,11 @@ const TimeInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    setInputValue(e.target.value);
     if (onChange) onChange?.(e, value);
   };
 
   const onValueChange = (e) => {
+    setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 

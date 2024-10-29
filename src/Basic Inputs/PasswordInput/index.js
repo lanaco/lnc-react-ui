@@ -23,6 +23,7 @@ const PasswordInput = React.forwardRef((props, ref) => {
     prefix,
     suffix,
     value,
+    defaultValue,
     //----------------
     onChange,
     onBlur,
@@ -38,8 +39,12 @@ const PasswordInput = React.forwardRef((props, ref) => {
   const inputRef = useRef();
 
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState(value || "");
-  useUpdateEffect(() => setInputValue(value), [value]);
+  const [inputValue, setInputValue] = useState(value || defaultValue || "");
+  useEffect(() => {
+    if (value !== null && value !== undefined) {
+      setInputValue(value);
+    }
+  }, [value]);
 
 
   const [locked, setLocked] = useState(true);
@@ -65,11 +70,11 @@ const PasswordInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    setInputValue(value);
     if (onChange) onChange?.(e, value);
   };
 
   const onValueChange = (e) => {
+    setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
