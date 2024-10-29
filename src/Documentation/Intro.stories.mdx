@@ -76,7 +76,6 @@ Example of usage with <u> [react-hook-form](https://react-hook-form.com/) </u>
     "   const { handleSubmit, register } = useForm();\n" +
     "   return (\n" +
     "     <form>\n" +
-    '       <TextInput {...register("name1")}/>\n' +
     '       <CheckBoxInput {...register("name2")} />\n' +
     '       <ColorInput inputProps={{...register("name2")}} />\n' +
     "       <Button onClick={handleSubmit((data) => {}))}>Submit</Button>\n" +
@@ -84,6 +83,31 @@ Example of usage with <u> [react-hook-form](https://react-hook-form.com/) </u>
     "   );\n" +
     " };"}
 </SyntaxHighlighter>
+
+---
+
+TextInput, TextAreaInput, TimeInput, NumberInput behave as controlled inputs.
+
+Usasge example with react-hook-form:
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { useForm } from "react-hook-form";\n\n   .......\n\n' +
+    "(args) => {\n" +
+    "   const { handleSubmit, register } = useForm();\n" +
+    "   return (\n" +
+    "     <form onSubmit={handleSubmit((data) => {})}>\n" +
+      '   <Controller\n'+
+      '         control={control}\n'+  
+      '         name={"name"}\n'+  
+      '         render={({field}) => (\n'+
+      '             <TextInput {...register("name")}/>\n'+
+      '       />\n'+
+    '       <Button type="submit">Submit</Button>\n' +
+    "     </form>\n" +
+    "   );\n" +
+    " };"}
+</SyntaxHighlighter>
+
 
 ---
 
