@@ -63,11 +63,11 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
-    setInputValue(value);
     if (onChange) onChange?.(e, value);
   };
 
   const onValueChange = (e) => {
+    setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
