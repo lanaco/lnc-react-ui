@@ -1,6 +1,6 @@
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import {
   StyledInput,
@@ -17,8 +17,8 @@ const TextInput = React.forwardRef((props, ref) => {
   const {
     disabled,
     readOnly,
-    // defaultValue,
-    // value,
+    defaultValue,
+    value,
     debounceTime = 180,
     type = "text",
     placeholder,
@@ -38,10 +38,13 @@ const TextInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
-  // const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState(value || defaultValue || "");
   const [focused, setFocused] = useState(false);
-
-  // useUpdateEffect(() => setInputValue(value), [value]);
+  useEffect(() => {
+    if (value !== null && value !== undefined) {
+      setInputValue(value);
+    }
+  }, [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -53,12 +56,12 @@ const TextInput = React.forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    // if (value || value === "") setInputValue(e.target.value);
+    // if (value || value === "") 
+    setInputValue(e.target.value);
     debouncedOnChange(e, e.target.value);
   };
 
   const handleFocus = (e) => {
-    console.log("focus", e)
     setFocused(true);
     onFocus?.(e);
   };
@@ -90,24 +93,24 @@ const TextInput = React.forwardRef((props, ref) => {
         </StyledPrefix>
       )}
       <StyledInput
-            ref={ref}
-            type={type}
-            theme={theme}
-            color={color}
-            size={size}
-            placeholder={placeholder}
-            prefix={prefix}
-            suffix={suffix}
-            disabled={disabled}
-            readOnly={readOnly}
-            focused={focused}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onChange={onValueChange}
-            tabIndex={tabIndex}
-            // value={inputValue}
-            {...rest}
-          />
+        ref={ref}
+        type={type}
+        theme={theme}
+        color={color}
+        size={size}
+        placeholder={placeholder}
+        prefix={prefix}
+        suffix={suffix}
+        disabled={disabled}
+        readOnly={readOnly}
+        focused={focused}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={onValueChange}
+        tabIndex={tabIndex}
+        value={inputValue}
+        {...rest}
+      />
 
       {/* {
         // Controlled input and uncotrolled input must be differentiated because of usage of the value property

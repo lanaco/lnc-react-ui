@@ -81,8 +81,8 @@ const TimeInput = React.forwardRef((props, ref) => {
     // id,
     disabled,
     readOnly,
-    // defaultValue,
-    // value,
+    defaultValue,
+    value,
     debounceTime = 180,
     // tabIndex,
     //----------------
@@ -96,6 +96,13 @@ const TimeInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
+  const [inputValue, setInputValue] = useState(value || defaultValue || "");
+  
+  useEffect(() => {
+    if (value !== null && value !== undefined) {
+      setInputValue(value);
+    }
+  }, [value]);
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -103,6 +110,7 @@ const TimeInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
+    setInputValue(e.target.value);
     if (onChange) onChange?.(e, value);
   };
 
@@ -123,6 +131,7 @@ const TimeInput = React.forwardRef((props, ref) => {
         size={size}
         className={className}
         style={style}
+        value={inputValue}
         {...rest}
       />
     </>

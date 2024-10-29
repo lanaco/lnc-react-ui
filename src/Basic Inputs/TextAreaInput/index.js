@@ -12,8 +12,8 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   const {
     disabled,
     readOnly,
-    // value,
-    // defaultValue,
+    value,
+    defaultValue,
     debounceTime = 180,
     type = "textarea",
     // placeholder,
@@ -32,6 +32,7 @@ const TextAreaInput = React.forwardRef((props, ref) => {
     color = "primary",
     ...rest
   } = props;
+  const [inputValue, setInputValue] = useState(value || defaultValue || "");
 
   const theme = useTheme();
   const [focused, setFocused] = useState(false);
@@ -39,6 +40,12 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   const [innerMaxRows, setInnerMaxRows] = useState(
     collapseOnBlur ? minRows : maxRows
   );
+
+  useEffect(() => {
+    if (value !== null && value !== undefined) {
+      setInputValue(value);
+    }
+  }, [value]);
 
   useEffect(() => {
     setInnerMinRows(minRows);
@@ -56,6 +63,7 @@ const TextAreaInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
+    setInputValue(value);
     if (onChange) onChange?.(e, value);
   };
 
@@ -94,7 +102,7 @@ const TextAreaInput = React.forwardRef((props, ref) => {
       <ReactTextareaAutosize
         ref={ref}
         disabled={disabled}
-        // value={inputValue}
+        value={inputValue}
         readOnly={readOnly}
         minRows={innerMinRows}
         maxRows={innerMaxRows}

@@ -22,6 +22,7 @@ const PasswordInput = React.forwardRef((props, ref) => {
     placeholder,
     prefix,
     suffix,
+    value,
     //----------------
     onChange,
     onBlur,
@@ -37,6 +38,9 @@ const PasswordInput = React.forwardRef((props, ref) => {
   const inputRef = useRef();
 
   const theme = useTheme();
+  const [inputValue, setInputValue] = useState(value || "");
+  useUpdateEffect(() => setInputValue(value), [value]);
+
 
   const [locked, setLocked] = useState(true);
   const [focused, setFocused] = useState(false);
@@ -61,6 +65,7 @@ const PasswordInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
+    setInputValue(value);
     if (onChange) onChange?.(e, value);
   };
 
@@ -120,6 +125,7 @@ const PasswordInput = React.forwardRef((props, ref) => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onValueChange}
+        value={inputValue}
         {...rest}
       />
       <StyledLockIcon

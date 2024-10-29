@@ -24,6 +24,8 @@ const NumberInput = React.forwardRef((props, ref) => {
     prefix,
     suffix,
     placeholder,
+    value,
+    defaultValue,
     //----------------
     onChange,
     onBlur,
@@ -37,7 +39,15 @@ const NumberInput = React.forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
+  const [inputValue, setInputValue] = useState(value || defaultValue || "");
   const [focused, setFocused] = useState(false);
+
+  useEffect(() => {
+    if (value !== null && value !== undefined) {
+      setInputValue(value);
+    }
+  }, [value]);
+
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
@@ -45,6 +55,7 @@ const NumberInput = React.forwardRef((props, ref) => {
   );
 
   const handleChange = (e, value) => {
+    setInputValue(value);
     if (onChange) onChange?.(e, value);
   };
 
@@ -97,7 +108,7 @@ const NumberInput = React.forwardRef((props, ref) => {
         step={step}
         min={min}
         max={max}
-        // value={inputValue}
+        value={inputValue}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onValueChange}
