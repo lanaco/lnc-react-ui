@@ -28,19 +28,26 @@ const Item = styled.div`
       "text"
     )};
   &:hover {
-    background-color: ${(props) =>
-      props?.disabled === false
-        ? getColorRgbaValue(
-            props.theme,
-            "MenuItem",
-            props.color,
-            "hover",
-            "background",
-            "backgroundOpacity"
-          )
-        : "inherit"};
-    color: ${(props) =>
-      getColorRgbaValue(props.theme, "MenuItem", props.color, "hover", "text")};
+    ${(props) =>
+      props.disabled === false &&
+      `background-color: ${getColorRgbaValue(
+        props.theme,
+        "MenuItem",
+        props.color,
+        "hover",
+        "background",
+        "backgroundOpacity"
+      )};`}
+
+    ${(props) =>
+      props.disabled === false &&
+      `color: ${getColorRgbaValue(
+        props.theme,
+        "MenuItem",
+        props.color,
+        "hover",
+        "text"
+      )};`}
     & .drop-down-icon-lnc {
       color: ${(props) =>
         props?.disabled === false
