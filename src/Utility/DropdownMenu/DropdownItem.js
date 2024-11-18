@@ -20,28 +20,38 @@ const Item = styled.div`
   gap: 0.563rem;
   padding: 0.563rem;
   color: ${(props) =>
-    getColorRgbaValue(props.theme, "MenuItem", props.color, props.isActive === true ? "active" : "enabled", "text")};
+    getColorRgbaValue(
+      props.theme,
+      "MenuItem",
+      props.color,
+      props.isActive === true ? "active" : "enabled",
+      "text"
+    )};
   &:hover {
     background-color: ${(props) =>
-      getColorRgbaValue(
-        props.theme,
-        "MenuItem",
-        props.color,
-        "hover",
-        "background",
-        "backgroundOpacity"
-      )};
+      props?.disabled === false
+        ? getColorRgbaValue(
+            props.theme,
+            "MenuItem",
+            props.color,
+            "hover",
+            "background",
+            "backgroundOpacity"
+          )
+        : "inherit"};
     color: ${(props) =>
       getColorRgbaValue(props.theme, "MenuItem", props.color, "hover", "text")};
     & .drop-down-icon-lnc {
       color: ${(props) =>
-        getColorRgbaValue(
-          props.theme,
-          "MenuItem",
-          props.color,
-          "hover",
-          "icon"
-        )};
+        props?.disabled === false
+          ? getColorRgbaValue(
+              props.theme,
+              "MenuItem",
+              props.color,
+              "hover",
+              "icon"
+            )
+          : "inherit"};
     }
   }
   ${(props) =>
@@ -327,7 +337,7 @@ DropdownItem.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   iconProps: PropTypes.any,
   size: PropTypes.oneOf(["small", "medium", "large"]),
@@ -336,4 +346,4 @@ DropdownItem.propTypes = {
 
 export default DropdownItem;
 
-DropdownItem.displayName = 'MENU_ITEM';
+DropdownItem.displayName = "MENU_ITEM";
