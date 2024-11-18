@@ -50,15 +50,13 @@ const Item = styled.div`
       )};`}
     & .drop-down-icon-lnc {
       color: ${(props) =>
-        props?.disabled === false
-          ? getColorRgbaValue(
-              props.theme,
-              "MenuItem",
-              props.color,
-              "hover",
-              "icon"
-            )
-          : "inherit"};
+        getColorRgbaValue(
+          props.theme,
+          "MenuItem",
+          props.color,
+          "hover",
+          "icon"
+        )};
     }
   }
   ${(props) =>
