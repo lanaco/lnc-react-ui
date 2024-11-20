@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
-import { debounce } from "lodash";
+import debounce from "lodash.debounce";
 import { StyledTextareaWrapper } from "./styledComponents";
 import ReactTextareaAutosize from "react-textarea-autosize";
 

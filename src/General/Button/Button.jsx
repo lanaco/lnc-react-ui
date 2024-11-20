@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash.isempty";
 import {
   FilledButton,
   TintedButton,

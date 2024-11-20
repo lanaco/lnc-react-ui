@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
 import React, { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
-import { debounce } from "lodash";
+import debounce from "lodash.debounce";
 import { StyledPrefix, StyledSuffix, StyledWrapper } from "./styledComponents";
 
 //===================================================

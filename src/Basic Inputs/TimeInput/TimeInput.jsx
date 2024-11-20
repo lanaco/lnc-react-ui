@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import { debounce } from "lodash";
+import debounce from "lodash.debounce";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,

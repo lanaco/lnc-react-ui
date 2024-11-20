@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import { isFunction, isEmpty } from "lodash";
+import isFunction from "lodash.isfunction";
+import isEmpty from "lodash.isempty";
 import { useTheme } from "@emotion/react";
 
 const HtmlCell = styled.td`
@@ -161,10 +162,10 @@ TableCell.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default TableCell;
 
-TableCell.displayName = 'TABLE_CELL';
+TableCell.displayName = "TABLE_CELL";

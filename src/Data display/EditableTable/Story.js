@@ -3,7 +3,9 @@ import EditableTable from ".";
 import styled from "@emotion/styled";
 import TableSpecialLastRow from "./components/TableSpecialLastRow";
 import Button from "../../General/Button/index";
-import { cloneDeep, isEmpty, isEqual } from "lodash";
+import cloneDeep from "lodash.clonedeep";
+import isEmpty from "lodash.isempty";
+import isEqual from "lodash.isequal";
 import { useStateWithCallbackLazy } from "use-state-with-callback";
 
 const uuidv4 = () => {
@@ -137,8 +139,8 @@ const StoryTemplate = (props) => {
       itemToUpdate[column.accessor][column.objectAccessor] = value;
     } else {
       itemToUpdate[column.accessor] = value;
-    } 
-    
+    }
+
     setData(dataCopy);
   };
 

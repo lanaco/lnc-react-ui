@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
-import { debounce } from "lodash";
+import debounce from "lodash.debounce";
 import {
   StyledInput,
   StyledPrefix,

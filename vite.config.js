@@ -120,8 +120,9 @@ export default defineConfig({
         resolve(__dirname, "src/Utility/TreeMenu/TreeMenuSeparator.jsx"),
         //--------------------------------------------------------------------
         resolve(__dirname, "src/ThemeProvider/ThemeProvider.jsx"),
+        //--------------------------------------------------------------------
       ],
-      name: "@lanaco/lnc-react-ui-test",
+      name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {
         if (format === "es") {
           return `${name}.js`;
