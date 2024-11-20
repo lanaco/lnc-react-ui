@@ -1,36 +1,58 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import RadioInput from "./index";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import RadioInput from "./RadioInput";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Basic Inputs/Radio Input" component={RadioInput} />
 
 export const TemplateDefault = (args) => <RadioInput {...args} />;
 
-export const TemplateReadOnly = (args) => <><RadioInput readOnly={true} checked={true} {...args}/><RadioInput readOnly={true} {...args}/></>;
+export const TemplateReadOnly = (args) => (
+  <>
+    <RadioInput readOnly={true} checked={true} {...args} />
+    <RadioInput readOnly={true} {...args} />
+  </>
+);
 
-export const TemplateDisabled = (args) => <><RadioInput disabled={true} checked={true} {...args}/><RadioInput disabled={true} {...args}/></>;
+export const TemplateDisabled = (args) => (
+  <>
+    <RadioInput disabled={true} checked={true} {...args} />
+    <RadioInput disabled={true} {...args} />
+  </>
+);
 
 export const TemplateLabel = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
-    <RadioInput {...args} labelPosition="left" label={"label"} checked={true}/>
-    <RadioInput {...args} labelPosition="right" label={"label"}/>
+    <RadioInput {...args} labelPosition="left" label={"label"} checked={true} />
+    <RadioInput {...args} labelPosition="right" label={"label"} />
   </div>
 );
 
 export const TemplateSpaceBetween = (args) => (
   <>
-    <RadioInput labelPosition="left" label={"label"} checked={true} spaceBetween={true} {...args}/>
+    <RadioInput
+      labelPosition="left"
+      label={"label"}
+      checked={true}
+      spaceBetween={true}
+      {...args}
+    />
     <br />
-    <RadioInput labelPosition="right" label={"label"} checked={true} spaceBetween={true} {...args}/>
+    <RadioInput
+      labelPosition="right"
+      label={"label"}
+      checked={true}
+      spaceBetween={true}
+      {...args}
+    />
   </>
 );
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
-    <RadioInput size="small" name="size" {...args}/>
-    <RadioInput size="medium" name="size" {...args}/>
-    <RadioInput size="large" name="size" {...args}/>
+    <RadioInput size="small" name="size" {...args} />
+    <RadioInput size="medium" name="size" {...args} />
+    <RadioInput size="large" name="size" {...args} />
   </div>
 );
 
@@ -53,10 +75,7 @@ export const TemplateColors = (args) => (
 </SyntaxHighlighter>
 
 <Canvas withSource="open">
-  <Story
-    name="Default">
-    {TemplateDefault.bind({})}
-  </Story>
+  <Story name="Default">{TemplateDefault.bind({})}</Story>
 </Canvas>
 
 <ArgsTable story="Default" />
@@ -64,37 +83,25 @@ export const TemplateColors = (args) => (
 ## Label
 
 <Canvas>
-  <Story
-    name="Label">
-    {TemplateLabel.bind({})}
-  </Story>
+  <Story name="Label">{TemplateLabel.bind({})}</Story>
 </Canvas>
 
 ## Read Only
 
 <Canvas>
-  <Story
-    name="Read Only">
-    {TemplateReadOnly.bind({})}
-  </Story>
+  <Story name="Read Only">{TemplateReadOnly.bind({})}</Story>
 </Canvas>
 
 ## Disabled state
 
 <Canvas>
-  <Story
-    name="Disabled">
-    {TemplateDisabled.bind({})}
-  </Story>
+  <Story name="Disabled">{TemplateDisabled.bind({})}</Story>
 </Canvas>
 
 ## Space Between
 
 <Canvas>
-  <Story
-    name="Space Between">
-    {TemplateSpaceBetween.bind({})}
-  </Story>
+  <Story name="Space Between">{TemplateSpaceBetween.bind({})}</Story>
 </Canvas>
 
 ## Sizes
@@ -102,10 +109,7 @@ export const TemplateColors = (args) => (
 Defining `size` with `small`, `medium` and `large` values.
 
 <Canvas>
-  <Story
-    name="Sizes">
-    {TemplateSizes.bind({})}
-  </Story>
+  <Story name="Sizes">{TemplateSizes.bind({})}</Story>
 </Canvas>
 
 ## Colors

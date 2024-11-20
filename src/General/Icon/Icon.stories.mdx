@@ -1,12 +1,12 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Icon from "./index";
+import Icon from "./Icon";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="General/Icon" component={Icon} />
 
-export const TemplateDefault = (args) => <Icon {...args} />
+export const TemplateDefault = (args) => <Icon {...args} />;
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", gap: "12px" }}>
@@ -49,26 +49,37 @@ export const TemplateSizeInUnits = (args) => (
 </SyntaxHighlighter>
 
 <Canvas>
-  <Story name="Default" args={{
+  <Story
+    name="Default"
+    args={{
       icon: "heart",
-    }}>{TemplateDefault.bind({})}</Story>
+    }}
+  >
+    {TemplateDefault.bind({})}
+  </Story>
 </Canvas>
 
 <ArgsTable story="Default" />
 
 ---
+
 ### [Free Font Awesome version 5.15.3](https://fontawesome.com/v5/search?m=free) icons are used.
 
---- 
+---
 
 ## Sizes
 
 Defining `size` with `small`, `medium` and `large` values.
 
 <Canvas>
-  <Story name="Sizes" args={{
+  <Story
+    name="Sizes"
+    args={{
       icon: "cat",
-    }}>{TemplateSizes.bind({})}</Story>
+    }}
+  >
+    {TemplateSizes.bind({})}
+  </Story>
 </Canvas>
 
 ## Colors
@@ -76,9 +87,14 @@ Defining `size` with `small`, `medium` and `large` values.
 Defining `color`
 
 <Canvas>
-  <Story name="Colors" args={{
+  <Story
+    name="Colors"
+    args={{
       icon: "ankh",
-    }}>{TemplateColors.bind({})}</Story>
+    }}
+  >
+    {TemplateColors.bind({})}
+  </Story>
 </Canvas>
 
 ## Icon style
@@ -86,15 +102,25 @@ Defining `color`
 Available values: `solid` and `regular`
 
 <Canvas>
-  <Story name="Icon Style" args={{
+  <Story
+    name="Icon Style"
+    args={{
       icon: "clock",
-    }}>{TemplateIconStyle.bind({})}</Story>
+    }}
+  >
+    {TemplateIconStyle.bind({})}
+  </Story>
 </Canvas>
 
 ## Size in units
 
-<Canvas withSource="open" >
-  <Story name="Size in Units" args={{
+<Canvas withSource="open">
+  <Story
+    name="Size in Units"
+    args={{
       icon: "ankh",
-    }}>{TemplateSizeInUnits.bind({})}</Story>
+    }}
+  >
+    {TemplateSizeInUnits.bind({})}
+  </Story>
 </Canvas>

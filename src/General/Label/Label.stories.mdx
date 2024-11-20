@@ -1,12 +1,12 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Label from "./index";
+import Label from "./Label";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="General/Label" component={Label} />
 
-export const TemplateDefault = (args) => <Label {...args} >Label</Label>;
+export const TemplateDefault = (args) => <Label {...args}>Label</Label>;
 
 # Label
 
@@ -15,10 +15,7 @@ export const TemplateDefault = (args) => <Label {...args} >Label</Label>;
 </SyntaxHighlighter>
 
 <Canvas>
-  <Story
-    name="Default"
-    args={{}}
-  >
+  <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>

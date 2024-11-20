@@ -1,8 +1,6 @@
-import React from "react";
-import SearchBar from ".";
+import SearchBar from "./SearchBar";
 
 export default {
   title: "Inputs/SearchBar",
   component: SearchBar,
 };
-

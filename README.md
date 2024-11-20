@@ -9,13 +9,11 @@ This library includes basic and advanced UI components used with ReactJS fronten
 - [Contributing](#contributing)
 - [License](#license)
 
-
 ## Installing
 
 ```
 $ npm install @lanaco/lnc-react-ui
 ```
-
 
 ## Developing Locally
 
@@ -34,7 +32,6 @@ $ npm start
 3. Make some changes
 4. Test your changes by [running your local version](#requirements)
 5. Push your branch and open a Pull Request
-
 
 ## License
 

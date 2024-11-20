@@ -1,9 +1,9 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import DropdownMenu from "./index";
+import DropdownMenu from "./DropdownMenu";
 import DropdownItem from "./DropdownItem";
 import NestedDropdownItem from "./NestedDropdownItem";
-import Button from "../../General/Button";
+import Button from "../../General/Button/Button";
 import Separator from "./Separator";
 import { useRef } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -29,7 +29,9 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
         <DropdownItem icon="archive">Archive</DropdownItem>
         <DropdownItem icon="arrow-right">Move</DropdownItem>
         <Separator />
-        <DropdownItem color="danger" icon="trash">Delete</DropdownItem>
+        <DropdownItem color="danger" icon="trash">
+          Delete
+        </DropdownItem>
       </DropdownMenu>
     )}
   </Story>

@@ -1,16 +1,20 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import TimeInput from "./index";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import TimeInput from "./TimeInput";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Basic Inputs/Time Input" component={TimeInput} />
 
 export const TemplateDefault = (args) => <TimeInput {...args} />;
 
-export const TemplateReadOnly = (args) => <TimeInput readOnly={true} {...args} />;
+export const TemplateReadOnly = (args) => (
+  <TimeInput readOnly={true} {...args} />
+);
 
-export const TemplateDisabled = (args) => <TimeInput disabled={true} {...args} />;
+export const TemplateDisabled = (args) => (
+  <TimeInput disabled={true} {...args} />
+);
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
