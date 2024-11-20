@@ -143,15 +143,6 @@ const NotificationMessage = React.forwardRef((props, ref) => {
   );
 });
 
-// NotificationMessage.defaultProps = {
-//   avatar: false,
-//   inlineActions: false,
-//   sideButtons: false,
-//   //----------------------------
-//   style: {},
-//   size: "small",
-// };
-
 NotificationMessage.propTypes = {
   avatar: PropTypes.bool,
   title: PropTypes.string,

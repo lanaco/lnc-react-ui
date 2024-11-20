@@ -27,7 +27,7 @@
     "./ColorInput": "./dist/ColorInput.js",
     "./DateInput": "./dist/DateInput.js",
     "./DecimalInput": "./dist/DecimalInput.js",
-    "./FileInputon": "./dist/FileInput.js",
+    "./FileInput": "./dist/FileInput.js",
     "./NumberInput": "./dist/NumberInput.js",
     "./PasswordInput": "./dist/PasswordInput.js",
     "./RadioInput": "./dist/RadioInput.js",
@@ -51,6 +51,7 @@
     "./TableView": "./dist/TableView.js",
     "./ActionsToolbar": "./dist/ActionsToolbar.js",
     "./Alert": "./dist/Alert.js",
+    "./Notification": "./dist/Notification.js",
     "./NotificationContainer": "./dist/NotificationContainer.js",
     "./NotificationMessage": "./dist/NotificationMessage.js",
     "./ProgressBar": "./dist/ProgressBar.js",
@@ -120,6 +121,8 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@floating-ui/react": "^0.17.0",
+    "@mdx-js/preact": "^2.1.5",
+    "@mdx-js/react": "^2.1.5",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "framer-motion": "^4.1.17",
@@ -144,9 +147,7 @@
     "react-transition-group": "^4.4.5",
     "react-use": "^17.3.2",
     "styled-components": "^5.3.6",
-    "use-state-with-callback": "^2.0.3",
-    "@mdx-js/preact": "^2.1.5",
-    "@mdx-js/react": "^2.1.5"
+    "use-state-with-callback": "^2.0.3"
   },
   "peerDependencies": {
     "react": "^18.2.0",

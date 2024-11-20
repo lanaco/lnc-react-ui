@@ -63,10 +63,9 @@ export { default as ActionsToolbar } from "./Data display/TableView/ActionsToolb
 
 export { default as Alert } from "./Feedback/Alert/Alert";
 
-export {
-  NotificationContainer,
-  notification,
-} from "./Feedback/Notification/Notification";
+export { default as Notification } from "./Feedback/Notification/Notification";
+
+export { default as NotificationContainer } from "./Feedback/Notification/NotificationContainer";
 
 export { default as NotificationMessage } from "./Feedback/Notification/NotificationMessage";
 
