@@ -1,14 +1,14 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Table from "./index";
+import Table from "./Table";
 import { statusColor } from "./constants/constants";
-import Button from "../../General/Button/index";
+import Button from "../../General/Button/Button";
 import { useState } from "react";
 import CustomTableCell from "./components/CustomTableCell";
 import CustomTableHeader from "./components/CustomTableHeader";
 import CustomTableFooter from "./components/CustomTableFooter";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Data Display/Table" component={Table} />
 
@@ -703,8 +703,7 @@ implementing the `render` function in the `Columns` definition.
   </Story>
 </Canvas>
 
-
-## No Borders 
+## No Borders
 
 <Canvas>
   <Story

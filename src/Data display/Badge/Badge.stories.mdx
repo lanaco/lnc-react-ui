@@ -1,9 +1,9 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Badge from "./index";
-import Icon from "../../General/Icon";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Badge from "./Badge";
+import Icon from "../../General/Icon/Icon";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Data display/Badge" component={Badge} />
 
@@ -11,31 +11,49 @@ export const TemplateDefault = (args) => <Badge {...args}>Badge</Badge>;
 
 export const TemplateColors = (args) => (
   <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-    <Badge {...args} color="primary">2</Badge>
-    <Badge {...args} color="secondary">2</Badge>
-    <Badge {...args} color="success">2</Badge>
-    <Badge {...args} color="warning">2</Badge>
-    <Badge {...args} color="danger">2</Badge>
-    <Badge {...args} color="information">2</Badge>
+    <Badge {...args} color="primary">
+      2
+    </Badge>
+    <Badge {...args} color="secondary">
+      2
+    </Badge>
+    <Badge {...args} color="success">
+      2
+    </Badge>
+    <Badge {...args} color="warning">
+      2
+    </Badge>
+    <Badge {...args} color="danger">
+      2
+    </Badge>
+    <Badge {...args} color="information">
+      2
+    </Badge>
   </div>
 );
 
 export const TemplateSizes = (args) => (
   <div style={{ display: "flex", gap: "7px" }}>
-    <Badge {...args} size="small"><Icon icon={"bell"}/></Badge>
-    <Badge {...args} size="medium"><Icon icon={"bell"}/></Badge>
-    <Badge {...args} size="large"><Icon icon={"bell"}/></Badge>
+    <Badge {...args} size="small">
+      <Icon icon={"bell"} />
+    </Badge>
+    <Badge {...args} size="medium">
+      <Icon icon={"bell"} />
+    </Badge>
+    <Badge {...args} size="large">
+      <Icon icon={"bell"} />
+    </Badge>
   </div>
 );
 
 # Chip
 
 <SyntaxHighlighter language="jsx" style={nord}>
- {'import { Badge } from "@lanaco/lnc-react-ui";'}
+  {'import { Badge } from "@lanaco/lnc-react-ui";'}
 </SyntaxHighlighter>
 
 <Canvas>
-  <Story name="Default" args={{ }}>
+  <Story name="Default" args={{}}>
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
@@ -45,7 +63,7 @@ export const TemplateSizes = (args) => (
 ## Sizes
 
 <Canvas>
-  <Story name="Sizes" args={{ }}>
+  <Story name="Sizes" args={{}}>
     {TemplateSizes.bind({})}
   </Story>
 </Canvas>
@@ -53,7 +71,7 @@ export const TemplateSizes = (args) => (
 ## Colors
 
 <Canvas>
-  <Story name="Colors" args={{ }}>
+  <Story name="Colors" args={{}}>
     {TemplateColors.bind({})}
   </Story>
 </Canvas>

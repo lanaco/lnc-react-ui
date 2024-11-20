@@ -1,5 +1,3 @@
-const path = require("path");
-
 module.exports = {
   webpackFinal: async (config, { configType }) => {
     // Remove the existing css rule
@@ -37,10 +35,7 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-cssresources",
     "@storybook/addon-docs",
-    //useless addon doesen't change context gobals on switch
-    // 'storybook-addon-themes',
-    // "storybook-dark-mode",
-    "../custom-addons/register.js", //addon for themes
+    "../custom-addons/register.js",
   ],
   features: {
     previewMdx2: true,

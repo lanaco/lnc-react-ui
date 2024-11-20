@@ -1,14 +1,14 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Kanban from "./index";
-import KanbanHeader from "./components/KanbanHeader";
-import KanbanFooter from "./components/KanbanFooter";
-import KanbanCard from "./components/KanbanCard";
-import Button from "../../General/Button";
-import IconButton from "../../General/IconButton";
+import Kanban from "./Kanban";
+import KanbanHeader from "./components/KanbanHeader/KanbanHeader";
+import KanbanFooter from "./components/KanbanFooter/KanbanFooter";
+import KanbanCard from "./components/KanbanCard/KanbanCard";
+import Button from "../../General/Button/Button";
+import IconButton from "../../General/IconButton/IconButton";
 import { Table } from "@storybook/components";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta title="Data Display/Kanban" component={Kanban} />
 
@@ -19,7 +19,7 @@ export const CustomContainerHeader = (props) => {
 # Kanban
 
 <SyntaxHighlighter language="jsx" style={nord}>
- {'import { Kanban } from "@lanaco/lnc-react-ui";'}
+  {'import { Kanban } from "@lanaco/lnc-react-ui";'}
 </SyntaxHighlighter>
 
 <Canvas>
@@ -118,13 +118,18 @@ export const CustomContainerHeader = (props) => {
   </tr>
   <tr>
     <td>color</td>
-    <td>"primary" \| "secondary" \| "danger" \| "warning" \| "information" \| "neutral"</td>
+    <td>
+      "primary" \| "secondary" \| "danger" \| "warning" \| "information" \|
+      "neutral"
+    </td>
     <td></td>
   </tr>
   <tr>
     <td>disabled</td>
     <td>boolean</td>
-    <td>Determines whether to disable card from sorting. By default it is false.</td>
+    <td>
+      Determines whether to disable card from sorting. By default it is false.
+    </td>
   </tr>
 </Table>
 
@@ -135,7 +140,7 @@ By Default in `Kanban` component header it's unique key (id) will be shown, whil
 To have custom Header \\ Footer which is unique to only one column besides property `__TYPE__="KANBAN_HEADER"` \\ `__TYPE__="KANBAN_FOOTER"` it is necessary also to use property `id` whose value is equal to column's unique key (id).
 
 <SyntaxHighlighter language="jsx" style={nord}>
- {'import { KanbanHeader, KanbanFooter } from "@lanaco/lnc-react-ui";'}
+  {'import { KanbanHeader, KanbanFooter } from "@lanaco/lnc-react-ui";'}
 </SyntaxHighlighter>
 
 <Canvas>
@@ -217,7 +222,7 @@ To have custom Header \\ Footer which is unique to only one column besides prope
 To override default card in column it is necessary to use `KanbanCard` component or any other custom component which has property `__TYPE__="KANBAN_CARD"`.
 
 <SyntaxHighlighter language="jsx" style={nord}>
- {'import { KanbanCard } from "@lanaco/lnc-react-ui";'}
+  {'import { KanbanCard } from "@lanaco/lnc-react-ui";'}
 </SyntaxHighlighter>
 
 <Canvas>

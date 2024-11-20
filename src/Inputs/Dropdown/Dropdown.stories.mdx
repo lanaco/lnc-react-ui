@@ -1,12 +1,12 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Dropdown from "./index";
-import Avatar from "../../General/Avatar";
-import { components } from "./index";
+import Dropdown from "./Dropdown";
+import Avatar from "../../General/Avatar/Avatar";
+import { components } from "./Dropdown";
 import logo from "../../_utils/images/Image.png";
-import Icon from "../../General/Icon";
+import Icon from "../../General/Icon/Icon";
 import { useState, useRef } from "react";
-import Button from "../../General/Button";
+import Button from "../../General/Button/Button";
 import { Table } from "@storybook/components";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -16,7 +16,7 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 export const TemplateDefault = (args) => (
   <div style={{ height: "130px" }}>
     <Dropdown
-      defaultValue={{value: "2", label: "option 2"}}
+      defaultValue={{ value: "2", label: "option 2" }}
       options={[
         { value: "1", label: "option 1" },
         { value: "2", label: "option 2" },

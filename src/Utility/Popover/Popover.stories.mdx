@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Button from "../../General/Button";
+import Button from "../../General/Button/Button";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Table } from "@storybook/components";
@@ -10,18 +10,24 @@ import {
   PopoverContent,
   PopoverDescription,
   PopoverHeading,
-  PopoverClose
-} from "./index";
+  PopoverClose,
+} from "./Popover";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-<Meta title="Utility/Popover" component={Popover}  subcomponents={{ PopoverTrigger, PopoverContent }} />
+<Meta
+  title="Utility/Popover"
+  component={Popover}
+  subcomponents={{ PopoverTrigger, PopoverContent }}
+/>
 
 export const TemplateDefault = (args) => {
- return (
+  return (
     <div>
-      <Popover  placement="bottom">
-        <PopoverTrigger><Button>Popover Trigger</Button></PopoverTrigger>
+      <Popover placement="bottom">
+        <PopoverTrigger>
+          <Button>Popover Trigger</Button>
+        </PopoverTrigger>
         <PopoverContent style={{ padding: "0.75rem" }}>
           This is Popover!
         </PopoverContent>
@@ -31,14 +37,18 @@ export const TemplateDefault = (args) => {
 };
 
 export const TemplateUncotrolled = (args) => {
- return (
+  return (
     <div>
-      <Popover  placement="bottom">
-        <PopoverTrigger><Button>Popover Trigger</Button></PopoverTrigger>
-         <PopoverContent>
+      <Popover placement="bottom">
+        <PopoverTrigger>
+          <Button>Popover Trigger</Button>
+        </PopoverTrigger>
+        <PopoverContent>
           <PopoverHeading>Popover heading</PopoverHeading>
           <PopoverDescription>Popover description</PopoverDescription>
-          <PopoverClose><Button>Close</Button></PopoverClose>
+          <PopoverClose>
+            <Button>Close</Button>
+          </PopoverClose>
         </PopoverContent>
       </Popover>
     </div>
@@ -46,7 +56,7 @@ export const TemplateUncotrolled = (args) => {
 };
 
 export const TemplateControlled = (args) => {
- const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <div>
       <Popover open={open} onOpenChange={setOpen} placement="left-start">
@@ -56,7 +66,9 @@ export const TemplateControlled = (args) => {
         <PopoverContent>
           <PopoverHeading>Popover heading</PopoverHeading>
           <PopoverDescription>Popover description</PopoverDescription>
-          <PopoverClose><Button>Close</Button></PopoverClose>
+          <PopoverClose>
+            <Button>Close</Button>
+          </PopoverClose>
         </PopoverContent>
       </Popover>
     </div>
@@ -64,14 +76,18 @@ export const TemplateControlled = (args) => {
 };
 
 export const TemplatePlacement = (args) => {
- return (
+  return (
     <div>
-      <Popover  placement="top-end">
-        <PopoverTrigger><Button>Popover Trigger</Button></PopoverTrigger>
-         <PopoverContent>
+      <Popover placement="top-end">
+        <PopoverTrigger>
+          <Button>Popover Trigger</Button>
+        </PopoverTrigger>
+        <PopoverContent>
           <PopoverHeading>Popover heading</PopoverHeading>
           <PopoverDescription>Popover description</PopoverDescription>
-          <PopoverClose><Button>Close</Button></PopoverClose>
+          <PopoverClose>
+            <Button>Close</Button>
+          </PopoverClose>
         </PopoverContent>
       </Popover>
     </div>
@@ -79,10 +95,12 @@ export const TemplatePlacement = (args) => {
 };
 
 export const TemplateOffset = (args) => {
- return (
+  return (
     <div>
-      <Popover  offsetValue={15}>
-        <PopoverTrigger><Button>Popover Trigger</Button></PopoverTrigger>
+      <Popover offsetValue={15}>
+        <PopoverTrigger>
+          <Button>Popover Trigger</Button>
+        </PopoverTrigger>
         <PopoverContent style={{ padding: "0.75rem" }}>
           This is Popover!
         </PopoverContent>
@@ -94,7 +112,9 @@ export const TemplateOffset = (args) => {
 # Popover
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {'import { Popover, PopoverTrigger, PopoverContent, PopoverHeading, PopoverClose } from "@lanaco/lnc-react-ui";'}
+  {
+    'import { Popover, PopoverTrigger, PopoverContent, PopoverHeading, PopoverClose } from "@lanaco/lnc-react-ui";'
+  }
 </SyntaxHighlighter>
 
 <Canvas>
@@ -123,7 +143,7 @@ export const TemplateOffset = (args) => {
 
 ## Placement
 
-Example with *top-end* placement
+Example with _top-end_ placement
 
 <Canvas>
   <Story name="Placement" args={{}}>
@@ -138,7 +158,5 @@ Example with *top-end* placement
     {TemplateOffset.bind({})}
   </Story>
 </Canvas>
-
-
 
 ### This component is built on top of <u> [Floating-UI Popover](https://floating-ui.com/docs/react) </u>

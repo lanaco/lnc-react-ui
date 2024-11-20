@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Pagination from "./index";
+import Pagination from "./Pagination";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -27,7 +27,12 @@ export const TemplateWithoutFirstAndLast = (args) => (
 export const TemplateMultiplePageNumbers = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px" }}>
-      <Pagination totalNumberOfPages={10} currentPage={2} pagesOffset={3} {...args} />
+      <Pagination
+        totalNumberOfPages={10}
+        currentPage={2}
+        pagesOffset={3}
+        {...args}
+      />
     </div>
   </div>
 );
@@ -151,10 +156,7 @@ export const TemplateSizes = (args) => (
 ## Pages offset
 
 <Canvas>
-  <Story
-    name="Multiple Page Numbers"
-    args={{}}
-  >
+  <Story name="Multiple Page Numbers" args={{}}>
     {TemplateMultiplePageNumbers.bind({})}
   </Story>
 </Canvas>
@@ -198,7 +200,6 @@ export const TemplateSizes = (args) => (
     {TemplateColors.bind({})}
   </Story>
 </Canvas>
-
 
 ## Sizes
 

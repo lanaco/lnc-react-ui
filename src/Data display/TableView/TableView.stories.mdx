@@ -1,16 +1,16 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Table from "../Table";
+import Table from "../Table/Table";
 import { useState, useRef } from "react";
-import TableView from "./index";
-import Button from "../../General/Button/index";
+import TableView from "./TableView";
+import Button from "../../General/Button/Button";
 import ActionsToolbar from "./ActionsToolbar";
-import Modal from "../../Utility/Modal";
-import FormField from "../../Layout/FormField";
-import FlexGrid from "../../Layout/FlexGrid";
+import Modal from "../../Utility/Modal/Modal";
+import FormField from "../../Layout/FormField/FormField";
+import FlexGrid from "../../Layout/FlexGrid/FlexGrid";
 import FlexGridItem from "../../Layout/FlexGrid/FlexGridItem";
-import TextInput from "../../Basic Inputs/TextInput";
-import NumberInput from "../../Basic Inputs/NumberInput";
+import TextInput from "../../Basic Inputs/TextInput/TextInput";
+import NumberInput from "../../Basic Inputs/NumberInput/NumberInput";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 

@@ -1,12 +1,12 @@
 import { Meta, Story, Canvas, Props, ArgsTable } from "@storybook/addon-docs";
-import PageLayout from "./index";
-import Sidebar from "../Sidebar/index";
-import Header from "../Header/index";
-import Footer from "../Footer/index";
-import Content from "../Content/index";
-import TreeMenu from "../../Utility/TreeMenu/index";
+import PageLayout from "./PageLayout";
+import Sidebar from "../Sidebar/Sidebar";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import Content from "../Content/Content";
+import TreeMenu from "../../Utility/TreeMenu/TreeMenu";
 import MenuItem from "../../Utility/TreeMenu/MenuItem";
-import Separator from "../../Utility/TreeMenu/Separator";
+import TreeMenuSeparator from "../../Utility/TreeMenu/TreeMenuSeparator";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -15,7 +15,9 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 # Page Layout
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {'import { PageLayout, Sidebar, Header, Footer, Content } from "@lanaco/lnc-react-ui";'}
+  {
+    'import { PageLayout, Sidebar, Header, Footer, Content } from "@lanaco/lnc-react-ui";'
+  }
 </SyntaxHighlighter>
 
 Used to structure the layout of your application, without styles. Considering that, you are in charge of styling all the pieces,
@@ -264,15 +266,25 @@ Having `Sidebar` positioned next to a nested `PageLayout` makes the rest of the 
         </Header>
         <PageLayout>
           <Sidebar style={{ backgroundColor: "rgb(235, 249, 255)" }}>
-              <TreeMenu color="secondary" itemsGap="0.3rem">
-                <MenuItem icon="home" value="Home">Home</MenuItem>
-                <MenuItem icon="clock" value="Hist">History</MenuItem>
-                <Separator />
-                <MenuItem icon="archive" value="Arch">Archive</MenuItem>
-                <MenuItem icon="users" value="Users" justifyToEnd={true}>Users</MenuItem>
-                <Separator />
-                <MenuItem icon="gears" value="Sett" justifyToEnd={true}>Settings</MenuItem>
-              </TreeMenu>
+            <TreeMenu color="secondary" itemsGap="0.3rem">
+              <MenuItem icon="home" value="Home">
+                Home
+              </MenuItem>
+              <MenuItem icon="clock" value="Hist">
+                History
+              </MenuItem>
+              <TreeMenuSeparator />
+              <MenuItem icon="archive" value="Arch">
+                Archive
+              </MenuItem>
+              <MenuItem icon="users" value="Users" justifyToEnd={true}>
+                Users
+              </MenuItem>
+              <TreeMenuSeparator />
+              <MenuItem icon="gears" value="Sett" justifyToEnd={true}>
+                Settings
+              </MenuItem>
+            </TreeMenu>
           </Sidebar>
           <Content>
             <div

@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeProvider from "../src/ThemeProvider";
+import ThemeProvider from "../src/ThemeProvider/ThemeProvider";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,20 +9,22 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  docs:{
+  docs: {
     source: {
-      type: "code"
+      type: "code",
     },
   },
   globals: {
-    themes: {}
-  }
+    themes: {},
+  },
 };
 
 export const decorators = [
   (Story, context) => {
-    return <ThemeProvider theme={context?.globals?.theme}>
-      <Story />
-    </ThemeProvider>
+    return (
+      <ThemeProvider theme={context?.globals?.theme}>
+        <Story />
+      </ThemeProvider>
+    );
   },
 ];

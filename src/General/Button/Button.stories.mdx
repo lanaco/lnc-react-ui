@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import Button from "./index";
+import Button from "./Button";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -119,7 +119,12 @@ export const TemplateSizes = (args) => (
 export const TemplateColors = (args) => (
   <div>
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
-      <Button {...args} btnType={"filled"} color="primary" leadingIcon={"user"} />
+      <Button
+        {...args}
+        btnType={"filled"}
+        color="primary"
+        leadingIcon={"user"}
+      />
       <Button {...args} btnType={"filled"} color="secondary" />
       <Button {...args} btnType={"filled"} color="success" />
       <Button {...args} btnType={"filled"} color="warning" />
@@ -154,9 +159,19 @@ export const TemplateColors = (args) => (
     <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
       <Button {...args} btnType={"basic"} color="primary" />
       <Button {...args} btnType={"basic"} color="secondary" />
-      <Button {...args} btnType={"basic"} color="success" leadingIcon={"user"} />
+      <Button
+        {...args}
+        btnType={"basic"}
+        color="success"
+        leadingIcon={"user"}
+      />
       <Button {...args} btnType={"basic"} color="warning" />
-      <Button {...args} btnType={"basic"} color="danger" trailingIcon={"clock"} />
+      <Button
+        {...args}
+        btnType={"basic"}
+        color="danger"
+        trailingIcon={"clock"}
+      />
       <Button {...args} btnType={"basic"} color="information" />
       <Button {...args} btnType={"basic"} color="neutral" />
     </div>
