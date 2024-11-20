@@ -168,13 +168,12 @@ export { default as Modal } from "./Utility/Modal/Modal";
 
 export { default as Pagination } from "./Utility/Pagination/Pagination";
 
-export {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeading,
-  PopoverClose,
-} from "./Utility/Popover/Popover";
+export { default as Popover } from "./Utility/Popover/Popover";
+export { default as PopoverClose } from "./Utility/Popover/PopoverClose";
+export { default as PopoverHeading } from "./Utility/Popover/PopoverHeading";
+export { default as PopoverContent } from "./Utility/Popover/PopoverContent";
+export { default as PopoverTrigger } from "./Utility/Popover/PopoverTrigger";
+export { default as PopoverDescription } from "./Utility/Popover/PopoverDescription";
 
 export { default as SwipeableDrawer } from "./Utility/SwipeableDrawer/SwipeableDrawer";
 

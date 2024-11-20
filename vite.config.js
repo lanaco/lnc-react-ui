@@ -118,6 +118,14 @@ export default defineConfig({
         resolve(__dirname, "src/Utility/TreeMenu/MenuItem.jsx"),
         resolve(__dirname, "src/Utility/TreeMenu/NestedMenuItem.jsx"),
         resolve(__dirname, "src/Utility/TreeMenu/TreeMenuSeparator.jsx"),
+        resolve(__dirname, "src/Utility/Popover/Popover.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverClose.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverContent.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverContext.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverDescription.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverHeading.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverTrigger.jsx"),
+        resolve(__dirname, "src/Utility/Popover/usePopover.jsx"),
         //--------------------------------------------------------------------
         resolve(__dirname, "src/ThemeProvider/ThemeProvider.jsx"),
         //--------------------------------------------------------------------
