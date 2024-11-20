@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.0",
+  "version": "4.0.2",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -27,7 +27,7 @@
     "./ColorInput": "./dist/ColorInput.js",
     "./DateInput": "./dist/DateInput.js",
     "./DecimalInput": "./dist/DecimalInput.js",
-    "./ButtFileInputon": "./dist/FileInput.js",
+    "./FileInputon": "./dist/FileInput.js",
     "./NumberInput": "./dist/NumberInput.js",
     "./PasswordInput": "./dist/PasswordInput.js",
     "./RadioInput": "./dist/RadioInput.js",
