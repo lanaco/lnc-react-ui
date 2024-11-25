@@ -1,4 +1,4 @@
-import React from "react";
+import { memo, forwardRef } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -41,8 +41,8 @@ const Actions = styled.div`
   }
 `;
 
-const KanbanCard = React.memo(
-  React.forwardRef(
+const KanbanCard = memo(
+  forwardRef(
     (
       {
         __TYPE__ = "KANBAN_CARD",

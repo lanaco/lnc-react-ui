@@ -1,4 +1,4 @@
-import React from "react";
+import { memo, forwardRef } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -10,8 +10,8 @@ const StyledFooter = styled.div`
   margin-top: auto;
 `;
 
-const KanbanFooter = React.memo(
-  React.forwardRef(
+const KanbanFooter = memo(
+  forwardRef(
     (
       {
         __TYPE__ = "KANBAN_FOOTER",

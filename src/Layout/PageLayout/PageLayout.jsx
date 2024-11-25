@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, Children, isValidElement, cloneElement } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -30,18 +31,19 @@ const StyledPageLayout = styled.section`
   }
 `;
 
-const PageLayout = React.forwardRef((props, ref) => {
+const PageLayout = forwardRef((props, ref) => {
   const { children, isChild, __TYPE__ = "PageLayout", ...rest } = props;
   const theme = useTheme();
 
-  const hasSidebar = React.Children.toArray(children).some(
-    (component) => component.props.__TYPE__ || component?.type?.displayName == "Sidebar"
+  const hasSidebar = Children.toArray(children).some(
+    (component) =>
+      component.props.__TYPE__ || component?.type?.displayName == "Sidebar"
   );
   const getSidebarPlacement = (children) => {
     let layoutIndex, sidebarIndex, contentIndex;
 
     // We shift indexes by 1 just to avoid having 0 index, so its easier when making comparison for return statement.
-    React.Children.forEach(children, (component, index) => {
+    Children.forEach(children, (component, index) => {
       if (
         component.props.__TYPE__ == "Sidebar" ||
         component?.type?.displayName === "Sidebar"
@@ -72,13 +74,13 @@ const PageLayout = React.forwardRef((props, ref) => {
       return sidebarIndex < contentIndex ? "left" : "right";
   };
 
-  const clonedChildren = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
+  const clonedChildren = Children.map(children, (child) => {
+    if (isValidElement(child)) {
       if (
         child.props.__TYPE__ == "Sidebar" ||
         child.type?.displayName === "Sidebar"
       ) {
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           placement: getSidebarPlacement(children),
         });
       } else if (

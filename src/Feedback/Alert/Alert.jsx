@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, cloneElement } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "../../ThemeProvider/ThemeProvider";
@@ -99,12 +100,12 @@ const IconComponent = ({ statusIcon, color }) => {
   if (typeof statusIcon == "string" && statusIcon !== "") {
     return <Icon className={"alert-icon"} icon={statusIcon} />;
   }
-  return React.cloneElement(statusIcon, {
+  return cloneElement(statusIcon, {
     className: "alert-icon " + statusIcon?.className,
   });
 };
 
-const Alert = React.forwardRef((props, ref) => {
+const Alert = forwardRef((props, ref) => {
   const {
     className = "",
     size = "small",

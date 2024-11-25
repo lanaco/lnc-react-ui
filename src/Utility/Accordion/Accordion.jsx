@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, isValidElement, Children, cloneElement } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -21,7 +22,7 @@ const StyledAccordion = styled.div`
     props.disabled === true ? getDisabledStateCss(props.theme) : ""}
 `;
 
-const Accordion = React.forwardRef((props, ref) => {
+const Accordion = forwardRef((props, ref) => {
   const {
     expanded = false,
     disabled = false,
@@ -35,7 +36,12 @@ const Accordion = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
 
-  const themeProps = { theme, size, style, className: "lnc-ui-accordion " + className };
+  const themeProps = {
+    theme,
+    size,
+    style,
+    className: "lnc-ui-accordion " + className,
+  };
 
   const [isExpanded, setIsExpanded] = useState(expanded);
 
@@ -49,13 +55,13 @@ const Accordion = React.forwardRef((props, ref) => {
     setIsExpanded(!isExpanded);
   };
 
-  const clonedSummary = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
+  const clonedSummary = Children.map(children, (child) => {
+    if (isValidElement(child)) {
       if (
         child.props.__TYPE__ == "ACCORDION_SUMMARY" ||
         child?.type?.displayName === "ACCORDION_SUMMARY"
       ) {
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           size: size,
           onClick: onExpand,
           onExpand: onExpand,
@@ -66,13 +72,13 @@ const Accordion = React.forwardRef((props, ref) => {
     }
   });
 
-  const clonedDetails = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
+  const clonedDetails = Children.map(children, (child) => {
+    if (isValidElement(child)) {
       if (
         child.props.__TYPE__ == "ACCORDION_DETAILS" ||
         child?.type?.displayName === "ACCORDION_DETAILS"
       ) {
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           size: size,
           isExpanded: isExpanded,
         });

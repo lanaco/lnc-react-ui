@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
@@ -102,7 +102,12 @@ const Container = styled.div`
   }
 `;
 
-const ButtonGroup = ({ children, borderRadius = "regular", style = {}, className = "" }) => {
+const ButtonGroup = ({
+  children,
+  borderRadius = "regular",
+  style = {},
+  className = "",
+}) => {
   const theme = useTheme();
 
   return (

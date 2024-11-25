@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -18,7 +19,8 @@ const Bar = styled.div`
       "enabled",
       "unfilled"
     )};
-  height: ${(props) => props.theme.components.Progress.default.enabled.sizes[props.size]};
+  height: ${(props) =>
+    props.theme.components.Progress.default.enabled.sizes[props.size]};
   border-radius: 5px;
   animation: progres 4s infinite linear;
 `;
@@ -51,7 +53,7 @@ const Label = styled.label`
     getColorRgbaValue(props.theme, "Progress", props.color, "enabled", "text")};
 `;
 
-const ProgressBar = React.forwardRef((props, ref) => {
+const ProgressBar = forwardRef((props, ref) => {
   const {
     id = "",
     showLabel = false,
@@ -67,7 +69,14 @@ const ProgressBar = React.forwardRef((props, ref) => {
   const theme = useTheme();
 
   return (
-    <Bar style={style} className={"lnc-ui-progress " + className} theme={theme} size={size} showLabel={showLabel} {...rest}>
+    <Bar
+      style={style}
+      className={"lnc-ui-progress " + className}
+      theme={theme}
+      size={size}
+      showLabel={showLabel}
+      {...rest}
+    >
       <Progressed
         progressPercentage={progressPercentage}
         theme={theme}
@@ -115,7 +124,7 @@ ProgressBar.propTypes = {
     "disabled",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

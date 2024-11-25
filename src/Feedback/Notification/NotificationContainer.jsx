@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { ToastContainer } from "react-toastify";
@@ -98,7 +99,7 @@ const StyledNotification = styled.div`
   }
 `;
 
-const NotificationContainer = React.forwardRef((props, ref) => {
+const NotificationContainer = forwardRef((props, ref) => {
   const {
     position = "top-right",
     autoClose = 500000,

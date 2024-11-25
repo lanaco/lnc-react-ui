@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -43,13 +44,11 @@ const StyledAvatar = styled.div`
   }
 `;
 
-const Avatar = React.forwardRef((props, ref) => {
+const Avatar = forwardRef((props, ref) => {
   const {
     image,
     icon = "user",
-    tabIndex,
     sizeInUnits,
-    disabled = false,
     borderRadius = "curved",
     //----------------
     onFocus = () => {},

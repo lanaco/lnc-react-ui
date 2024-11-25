@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { DirectionMap, WrapMap, JustifyMap, AlignMap } from "./mappings";
@@ -13,7 +14,7 @@ const StyledFlexbox = styled.div`
   row-gap: ${(props) => (props.rowGap ? props.rowGap : props.gap)};
 `;
 
-const FlexBox = React.forwardRef((props, ref) => {
+const FlexBox = forwardRef((props, ref) => {
   //============================================== PROPS ===============================================
   const {
     className = "",

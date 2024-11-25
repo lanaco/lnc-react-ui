@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
@@ -55,4 +54,4 @@ TableHead.propTypes = {
 
 export default TableHead;
 
-TableHead.displayName = 'TABLE_HEAD';
+TableHead.displayName = "TABLE_HEAD";

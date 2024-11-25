@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Icon from "../../General/Icon/Icon";
@@ -32,7 +32,7 @@ const StyledSummary = styled.div`
   }
 `;
 
-const AccordionSummary = React.forwardRef((props, ref) => {
+const AccordionSummary = forwardRef((props, ref) => {
   const {
     __TYPE__ = "ACCORDION_SUMMARY",
     disabled,

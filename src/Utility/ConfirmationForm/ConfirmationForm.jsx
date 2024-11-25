@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -60,7 +61,7 @@ const getActionsAlignment = (actionsAlignment) => {
   return "center";
 };
 
-const ConfirmationForm = React.forwardRef((props, ref) => {
+const ConfirmationForm = forwardRef((props, ref) => {
   const {
     color,
     statusIcon = true,

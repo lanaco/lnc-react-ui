@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { keyframes, useTheme } from "@emotion/react";
@@ -7,11 +6,10 @@ import {
   getComponentTypographyCss,
 } from "../../_utils/utils";
 
-
 const FontSize = {
   small: "0.6rem",
   medium: "0.7rem",
-  large: "0.8rem"
+  large: "0.8rem",
 };
 
 const heightBySize = (size, theme) => {
@@ -98,7 +96,13 @@ const StyledSpinner = styled.div`
 `;
 
 const Spinner = (props) => {
-  const { label, className = "", style = {}, size = "small", color = "primary" } = props;
+  const {
+    label,
+    className = "",
+    style = {},
+    size = "small",
+    color = "primary",
+  } = props;
   const theme = useTheme();
 
   const themeProps = { theme, size, color };
@@ -136,7 +140,7 @@ Spinner.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

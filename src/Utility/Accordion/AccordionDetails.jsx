@@ -1,25 +1,31 @@
-import React from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
 export const getPadding = (isExpanded, size) => {
-  if(size == "medium")
-    return `${isExpanded ? "0.4rem" : "0"} 1.25rem ${isExpanded ? "0.8rem" : "0"} 1.25rem`;
-  if(size == "large")
-    return `${isExpanded ? "0.6rem" : "0"} 1.5rem ${isExpanded ? "1rem" : "0"} 1.5rem`;
-  
-  return  `${isExpanded ? "0.2rem" : "0"} 1rem ${isExpanded ? "0.6rem" : "0"} 1rem`;
-}
+  if (size == "medium")
+    return `${isExpanded ? "0.4rem" : "0"} 1.25rem ${
+      isExpanded ? "0.8rem" : "0"
+    } 1.25rem`;
+  if (size == "large")
+    return `${isExpanded ? "0.6rem" : "0"} 1.5rem ${
+      isExpanded ? "1rem" : "0"
+    } 1.5rem`;
+
+  return `${isExpanded ? "0.2rem" : "0"} 1rem ${
+    isExpanded ? "0.6rem" : "0"
+  } 1rem`;
+};
 
 const StyledDetails = styled.div`
   transform: ${(props) => (props.isExpanded ? "scaleY(1)" : "scaleY(0)")};
   transform-origin: top;
   transition: transform 0.25s ease;
-  max-height: ${props => props.isExpanded ? "auto" : "0"};
-  padding: ${props => getPadding(props.isExpanded, props.size)};
+  max-height: ${(props) => (props.isExpanded ? "auto" : "0")};
+  padding: ${(props) => getPadding(props.isExpanded, props.size)};
 `;
 
-const AccordionDetails = React.forwardRef((props, ref) => {
+const AccordionDetails = forwardRef((props, ref) => {
   const {
     __TYPE__ = "ACCORDION_DETAILS",
     isExpanded,
@@ -52,4 +58,4 @@ AccordionDetails.propTypes = {
 
 export default AccordionDetails;
 
-AccordionDetails.displayName = 'ACCORDION_DETAILS';
+AccordionDetails.displayName = "ACCORDION_DETAILS";
