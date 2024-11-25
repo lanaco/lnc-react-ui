@@ -1,4 +1,4 @@
-import React from "react";
+import { isValidElement } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import isFunction from "lodash.isfunction";
@@ -80,7 +80,7 @@ const TableCell = (props) => {
     if (Column.render && isFunction(Column.render)) {
       var element = Column.render(RowData);
 
-      if (React.isValidElement(element)) return element;
+      if (isValidElement(element)) return element;
       else
         console.error(
           `${Column.id}/${Column.accessor}: invalid render function.`

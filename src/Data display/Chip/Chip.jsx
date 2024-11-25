@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -117,7 +119,7 @@ const getAvatarSize = (theme, size) => {
   return `calc(${getSizeValueWithUnits(theme, size)} - 8px)`;
 };
 
-const Chip = React.forwardRef((props, ref) => {
+const Chip = forwardRef((props, ref) => {
   const {
     label,
     leadingIcon,

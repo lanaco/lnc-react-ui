@@ -1,19 +1,19 @@
-import React from "react";
+import { isValidElement, Children, cloneElement } from "react";
 import { useMedia } from "react-use";
 import { screenSizes } from "../Data display/Table/constants/constants";
 
 export const getCustomRender = (type, children) => {
   var customElement = getChildComponentByType(type, children);
 
-  if (customElement && React.isValidElement(customElement))
+  if (customElement && isValidElement(customElement))
     return { current: customElement };
 
   return { current: null };
 };
 
-export const getChildComponentByType = (type = "", children, props = {}) => {
+export const getChildComponentByType = (type = "", children) => {
   if (children && type) {
-    var component = React.Children.toArray(children)
+    var component = Children.toArray(children)
       .reverse()
       .find(
         (child) =>
@@ -29,20 +29,15 @@ export const getChildComponentByType = (type = "", children, props = {}) => {
 export const getCustomRenderById = (type, id, children) => {
   var customElement = getChildComponentByTypeId(type, id, children);
 
-  if (customElement && React.isValidElement(customElement))
+  if (customElement && isValidElement(customElement))
     return { current: customElement };
 
   return { current: null };
 };
 
-export const getChildComponentByTypeId = (
-  type = "",
-  id,
-  children,
-  props = {}
-) => {
+export const getChildComponentByTypeId = (type = "", id, children) => {
   if (children && type) {
-    var component = React.Children.toArray(children)
+    var component = Children.toArray(children)
       .reverse()
       .find(
         (child) =>
@@ -94,7 +89,7 @@ export const renderCustomElement = (
         customRender.current.props.children
       );
 
-    return React.cloneElement(customRender.current, properties);
+    return cloneElement(customRender.current, properties);
   }
 
   return null;

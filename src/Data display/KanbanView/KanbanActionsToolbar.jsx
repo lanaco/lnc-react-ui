@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import DropdownMenu from "../../Utility/DropdownMenu/DropdownMenu";
@@ -43,7 +43,7 @@ const StyledToolbar = styled.div`
 }
 `;
 
-const KanbanActionsToolbar = React.forwardRef((props, ref) => {
+const KanbanActionsToolbar = forwardRef((props, ref) => {
   const {
     __TYPE__ = "KANBAN_VIEW_ACTIONS_TOOLBAR",
     showCreate = true,

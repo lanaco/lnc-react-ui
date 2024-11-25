@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "styled-components";
@@ -43,7 +42,7 @@ const CustomTableRow = (props) => {
     Index,
     IsSelected,
   } = props;
- 
+
   const theme = useTheme();
 
   return (
@@ -72,10 +71,10 @@ CustomTableRow.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default CustomTableRow;
 
-CustomTableRow.displayName = 'TABLE_ROW';
+CustomTableRow.displayName = "TABLE_ROW";

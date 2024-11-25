@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
@@ -75,10 +74,11 @@ TableHeadRowStatusIndicatorCell.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default TableHeadRowStatusIndicatorCell;
 
-TableHeadRowStatusIndicatorCell.displayName = 'TABLE_HEAD_ROW_STATUS_INDICATOR_CELL';
+TableHeadRowStatusIndicatorCell.displayName =
+  "TABLE_HEAD_ROW_STATUS_INDICATOR_CELL";

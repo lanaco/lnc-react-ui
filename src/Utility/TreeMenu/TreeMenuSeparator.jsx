@@ -1,8 +1,10 @@
-import React from "react";
+/* eslint-disable react/display-name */
+/* eslint-disable no-undef */
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../_utils/utils";
+import { forwardRef } from "react";
 
 const StyledSeparator = styled.div`
   height: 1px;
@@ -18,7 +20,7 @@ const StyledSeparator = styled.div`
   margin-right: -0.25rem;
 `;
 
-const TreeMenuSeparator = React.forwardRef((props, ref) => {
+const TreeMenuSeparator = forwardRef((props, ref) => {
   const { className = "", style = {}, ...rest } = props;
   const theme = useTheme();
 

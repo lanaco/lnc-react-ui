@@ -1,4 +1,7 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+/* eslint-disable no-undef */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -49,12 +52,12 @@ const StyledBadge = styled.div`
   }
 `;
 
-const Badge = React.forwardRef((props, ref) => {
+const Badge = forwardRef((props, ref) => {
   const {
     borderRadius = "curved",
     onClick = () => {},
     className = "",
-    style  = {},
+    style = {},
     color = "primary",
     size = "small",
     children,
@@ -63,7 +66,14 @@ const Badge = React.forwardRef((props, ref) => {
 
   const theme = useTheme();
 
-  const themeProps = { borderRadius, theme, size, color, className: "lnc-ui-badge " + className, style };
+  const themeProps = {
+    borderRadius,
+    theme,
+    size,
+    color,
+    className: "lnc-ui-badge " + className,
+    style,
+  };
 
   return (
     <StyledBadge ref={ref} {...themeProps} onClick={onClick} {...rest}>
@@ -92,7 +102,7 @@ Badge.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };

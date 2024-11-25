@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -27,7 +27,7 @@
     "./ColorInput": "./dist/ColorInput.js",
     "./DateInput": "./dist/DateInput.js",
     "./DecimalInput": "./dist/DecimalInput.js",
-    "./FileInputon": "./dist/FileInput.js",
+    "./FileInput": "./dist/FileInput.js",
     "./NumberInput": "./dist/NumberInput.js",
     "./PasswordInput": "./dist/PasswordInput.js",
     "./RadioInput": "./dist/RadioInput.js",
@@ -51,6 +51,7 @@
     "./TableView": "./dist/TableView.js",
     "./ActionsToolbar": "./dist/ActionsToolbar.js",
     "./Alert": "./dist/Alert.js",
+    "./Notification": "./dist/Notification.js",
     "./NotificationContainer": "./dist/NotificationContainer.js",
     "./NotificationMessage": "./dist/NotificationMessage.js",
     "./ProgressBar": "./dist/ProgressBar.js",
@@ -99,6 +100,13 @@
     "./Modal": "./dist/Modal.js",
     "./Pagination": "./dist/Pagination.js",
     "./Popover": "./dist/Popover.js",
+    "./usePopover": "./dist/usePopover.js",
+    "./PopoverClose": "./dist/PopoverClose.js",
+    "./PopoverContent": "./dist/PopoverContent.js",
+    "./PopoverContext": "./dist/PopoverContext.js",
+    "./PopoverDescription": "./dist/PopoverDescription.js",
+    "./PopoverHeading": "./dist/PopoverHeading.js",
+    "./PopoverTrigger": "./dist/PopoverTrigger.js",
     "./SwipeableDrawer": "./dist/SwipeableDrawer.js",
     "./TreeMenu": "./dist/TreeMenu.js",
     "./MenuItem": "./dist/MenuItem.js",
@@ -113,6 +121,8 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@floating-ui/react": "^0.17.0",
+    "@mdx-js/preact": "^2.1.5",
+    "@mdx-js/react": "^2.1.5",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "framer-motion": "^4.1.17",
@@ -137,15 +147,16 @@
     "react-transition-group": "^4.4.5",
     "react-use": "^17.3.2",
     "styled-components": "^5.3.6",
-    "use-state-with-callback": "^2.0.3",
-    "@mdx-js/preact": "^2.1.5",
-    "@mdx-js/react": "^2.1.5"
+    "use-state-with-callback": "^2.0.3"
   },
   "peerDependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.13.5",
     "@eslint/js": "^9.13.0",
     "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.3.2",
@@ -167,6 +178,7 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
     "rimraf": "^3.0.2",
+    "rollup-plugin-visualizer": "^5.12.0",
     "storybook-dark-mode": "^1.1.0",
     "vite": "^5.4.10"
   }

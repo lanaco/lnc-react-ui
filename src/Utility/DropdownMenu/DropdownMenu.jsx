@@ -5,7 +5,9 @@ import Button from "../../General/Button/Button";
 import { getColorRgbaValue } from "../../_utils/utils";
 import { useTheme } from "../../ThemeProvider/ThemeProvider";
 import { motion } from "framer-motion";
-import { Popover, PopoverTrigger, PopoverContent } from "../Popover/Popover";
+import Popover from "../Popover/Popover";
+import PopoverTrigger from "../Popover/PopoverTrigger";
+import PopoverContent from "../Popover/PopoverContent";
 
 const StyledDropDown = styled.div``;
 

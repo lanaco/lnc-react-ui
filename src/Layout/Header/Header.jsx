@@ -1,7 +1,8 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
-const Header = React.forwardRef((props, ref) => {
+const Header = forwardRef((props, ref) => {
   const { children, __TYPE__ = "Header", ...rest } = props;
 
   return (
@@ -26,4 +27,4 @@ Header.propTypes = {
 
 export default Header;
 
-Header.displayName = 'Header';
+Header.displayName = "Header";

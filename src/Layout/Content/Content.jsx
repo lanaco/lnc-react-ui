@@ -1,7 +1,8 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
-const Content = React.forwardRef((props, ref) => {
+const Content = forwardRef((props, ref) => {
   const { children, __TYPE__ = "Content", ...rest } = props;
 
   return (

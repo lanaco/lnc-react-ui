@@ -1,7 +1,8 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
-const Footer = React.forwardRef((props, ref) => {
+const Footer = forwardRef((props, ref) => {
   const { children, __TYPE__ = "Footer", ...rest } = props;
 
   return (
@@ -26,4 +27,4 @@ Footer.propTypes = {
 
 export default Footer;
 
-Footer.displayName = 'Footer';
+Footer.displayName = "Footer";

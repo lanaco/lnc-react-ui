@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -88,7 +89,7 @@ const FileName = styled.span`
     )};
 `;
 
-const UploadedFile = React.forwardRef((props, ref) => {
+const UploadedFile = forwardRef((props, ref) => {
   const {
     id,
     fileName = "file",

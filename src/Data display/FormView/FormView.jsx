@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import FlexGrid from "../../Layout/FlexGrid/FlexGrid";
@@ -181,7 +181,7 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
   }
 };
 
-const FormView = React.forwardRef((props, ref) => {
+const FormView = forwardRef((props, ref) => {
   const {
     __TYPE__ = "FORM_VIEW",
     goToPreviousView,

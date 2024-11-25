@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useEffect, useState, useRef } from "react";
+import { memo, useEffect, forwardRef, useState, useRef } from "react";
 import debounce from "lodash.debounce";
 import { useTheme } from "@emotion/react";
 
@@ -53,7 +53,7 @@ const StyledTextInput = styled.input((props) => {
 
 //===================================================
 
-const CustomInput = React.forwardRef((props, ref) => {
+const CustomInput = forwardRef((props, ref) => {
   const {
     color = "primary",
     id = "",
@@ -190,9 +190,8 @@ CustomInput.propTypes = {
 
 // export default CustomInput;
 
-export default React.memo(CustomInput);
+export default memo(CustomInput);
 
-// import React from "react";
 // import styled from "@emotion/styled";
 // import theme from "../../_utils/theme";
 

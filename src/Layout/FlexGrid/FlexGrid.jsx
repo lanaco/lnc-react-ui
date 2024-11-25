@@ -1,9 +1,10 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, Children, isValidElement, cloneElement } from "react";
 import PropTypes from "prop-types";
 import FlexBox from "../FlexBox/FlexBox";
 import FlexGridItem from "./FlexGridItem";
 
-const FlexGrid = React.forwardRef((props, ref) => {
+const FlexGrid = forwardRef((props, ref) => {
   //============================================== PROPS ===============================================
   const {
     columns = 12,
@@ -16,12 +17,12 @@ const FlexGrid = React.forwardRef((props, ref) => {
     rest,
   } = props;
 
-  const clonedChildren = React.Children.map(children, (child) => {
-    if (!React.isValidElement(child) || child.type != FlexGridItem) {
+  const clonedChildren = Children.map(children, (child) => {
+    if (!isValidElement(child) || child.type != FlexGridItem) {
       return;
     }
 
-    return React.cloneElement(child, {
+    return cloneElement(child, {
       columns,
       spacing,
       rowSpacing,

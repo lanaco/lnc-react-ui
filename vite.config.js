@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
@@ -57,6 +58,11 @@ export default defineConfig({
         //--------------------------------------------------------------------
         resolve(__dirname, "src/Feedback/Alert/Alert.jsx"),
         resolve(__dirname, "src/Feedback/Notification/Notification.jsx"),
+        resolve(
+          __dirname,
+          "src/Feedback/Notification/NotificationContainer.jsx"
+        ),
+        resolve(__dirname, "src/Feedback/Notification/NotificationMessage.jsx"),
         resolve(__dirname, "src/Feedback/ProgressBar/ProgressBar.jsx"),
         resolve(__dirname, "src/Feedback/Spinner/Spinner.jsx"),
         //--------------------------------------------------------------------
@@ -101,6 +107,7 @@ export default defineConfig({
         resolve(__dirname, "src/Layout/PageLayout/PageLayout.jsx"),
         resolve(__dirname, "src/Layout/Sidebar/Sidebar.jsx"),
         resolve(__dirname, "src/Layout/Tabs/Tabs.jsx"),
+        resolve(__dirname, "src/Layout/Tabs/TabItem.jsx"),
         //-------------------------------------------------------------------
         resolve(__dirname, "src/Utility/Accordion/Accordion.jsx"),
         resolve(__dirname, "src/Utility/Accordion/AccordionSummary.jsx"),
@@ -118,6 +125,15 @@ export default defineConfig({
         resolve(__dirname, "src/Utility/TreeMenu/MenuItem.jsx"),
         resolve(__dirname, "src/Utility/TreeMenu/NestedMenuItem.jsx"),
         resolve(__dirname, "src/Utility/TreeMenu/TreeMenuSeparator.jsx"),
+        resolve(__dirname, "src/Utility/Popover/Popover.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverClose.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverContent.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverContext.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverDescription.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverHeading.jsx"),
+        resolve(__dirname, "src/Utility/Popover/PopoverTrigger.jsx"),
+        resolve(__dirname, "src/Utility/Popover/usePopover.jsx"),
+        resolve(__dirname, "src/Utility/Pagination/Pagination.jsx"),
         //--------------------------------------------------------------------
         resolve(__dirname, "src/ThemeProvider/ThemeProvider.jsx"),
         //--------------------------------------------------------------------

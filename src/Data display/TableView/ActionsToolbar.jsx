@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import DropdownMenu from "../../Utility/DropdownMenu/DropdownMenu";
@@ -44,7 +44,7 @@ const StyledToolbar = styled.div`
 }
 `;
 
-const ActionsToolbar = React.forwardRef((props, ref) => {
+const ActionsToolbar = forwardRef((props, ref) => {
   const {
     __TYPE__ = "ACTIONS_TOOLBAR",
     showCreate = true,

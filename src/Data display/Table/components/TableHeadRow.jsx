@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
@@ -60,10 +59,10 @@ TableHeadRow.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default TableHeadRow;
 
-TableHeadRow.displayName = 'TABLE_HEAD_ROW';
+TableHeadRow.displayName = "TABLE_HEAD_ROW";

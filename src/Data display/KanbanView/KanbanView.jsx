@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import KanbanActionsToolbar from "./KanbanActionsToolbar";
@@ -17,7 +17,7 @@ const StyledView = styled.div`
   }
 `;
 
-const KanbanView = React.forwardRef((props, ref) => {
+const KanbanView = forwardRef((props, ref) => {
   const {
     __TYPE__ = "KANBAN_VIEW",
     goToPreviousView,

@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { getColorRgbaValue } from "../../../_utils/utils";
@@ -148,10 +147,10 @@ TableRow.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
 export default TableRow;
 
-TableRow.displayName = 'TABLE_ROW';
+TableRow.displayName = "TABLE_ROW";

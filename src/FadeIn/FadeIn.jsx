@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 

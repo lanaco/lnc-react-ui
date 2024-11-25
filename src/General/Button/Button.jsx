@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
@@ -15,7 +16,7 @@ import Icon from "../Icon/Icon";
 
 //=================================================
 
-const Button = React.forwardRef((props, ref) => {
+const Button = forwardRef((props, ref) => {
   const {
     text = "",
     iconStyle = "solid",

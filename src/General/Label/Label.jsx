@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -22,7 +23,7 @@ const StyledLabel = styled.label`
     )};
 `;
 
-const Label = React.forwardRef((props, ref) => {
+const Label = forwardRef((props, ref) => {
   const {
     size = "small",
     color = "primary",
