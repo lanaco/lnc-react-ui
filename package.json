@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -150,10 +150,13 @@
     "use-state-with-callback": "^2.0.3"
   },
   "peerDependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.13.5",
     "@eslint/js": "^9.13.0",
     "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.3.2",
