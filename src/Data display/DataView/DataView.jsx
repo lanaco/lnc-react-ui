@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import {
+  useState,
+  forwardRef,
+  Children,
+  cloneElement,
+  isValidElement,
+} from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useUpdateEffect } from "react-use";
@@ -7,7 +14,7 @@ import { useRef } from "react";
 
 const StyledDataView = styled.div``;
 
-const DataView = React.forwardRef((props, ref) => {
+const DataView = forwardRef((props, ref) => {
   const {
     defaultViewType,
     activeViewType,
@@ -49,8 +56,8 @@ const DataView = React.forwardRef((props, ref) => {
       setCurrentViewType(viewsHistory.current[viewsHistory.current.length - 1]);
   };
 
-  const clonedChild = React.Children.map(children, (child, index) => {
-    if (React.isValidElement(child)) {
+  const clonedChild = Children.map(children, (child) => {
+    if (isValidElement(child)) {
       if (
         (child.props.__TYPE__ == "TABLE_VIEW" ||
           child?.type?.displayName === "TABLE_VIEW" ||
@@ -63,7 +70,7 @@ const DataView = React.forwardRef((props, ref) => {
         (child.props.__TYPE__ == currentViewType ||
           child?.type?.displayName === currentViewType)
       ) {
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           goToPreviousView: goToPreviousView,
         });
       }

@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useCallback, useState } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -126,7 +127,7 @@ const LabelText = styled.span`
   }
 `;
 
-const ColorInput = React.forwardRef((props, ref) => {
+const ColorInput = forwardRef((props, ref) => {
   const {
     id,
     name,

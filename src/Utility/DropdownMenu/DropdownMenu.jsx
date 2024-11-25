@@ -1,4 +1,12 @@
-import React, { useRef, useState } from "react";
+/* eslint-disable react/display-name */
+import {
+  forwardRef,
+  useRef,
+  useState,
+  Children,
+  isValidElement,
+  cloneElement,
+} from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Button from "../../General/Button/Button";
@@ -26,7 +34,7 @@ const StyledContent = styled(motion.div)`
     )};
 `;
 
-const DropdownMenu = React.forwardRef((props, ref) => {
+const DropdownMenu = forwardRef((props, ref) => {
   const {
     control,
     offsetValue = 9,
@@ -78,8 +86,8 @@ const DropdownMenu = React.forwardRef((props, ref) => {
     if (closeOnItemSelect == true) setOpenPopover(false); //popoverRef?.current?.close();
   };
 
-  const clonedChildren = React.Children.map(children, (child, index) => {
-    if (React.isValidElement(child)) {
+  const clonedChildren = Children.map(children, (child, index) => {
+    if (isValidElement(child)) {
       if (
         child.props.__TYPE__ == "MENU_ITEM" ||
         child?.type?.displayName === "MENU_ITEM" ||
@@ -88,7 +96,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
       ) {
         if (index == 0) {
           if (child.props.ref) firstItemRef.current = ref;
-          return React.cloneElement(child, {
+          return cloneElement(child, {
             ref: ref ? ref : firstItemRef, //needed to focus on navigation
             color: child.props.color ? child.props.color : color,
             size: size,
@@ -96,7 +104,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
             animation: animation,
           });
         }
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           color: child.props.color ? child.props.color : color,
           size: size,
           onItemSelected: handleOnItemSelected,
@@ -125,7 +133,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
         />
       );
     } else {
-      return React.cloneElement(control, {
+      return cloneElement(control, {
         color: color,
         size: size,
         ref: controlRef,

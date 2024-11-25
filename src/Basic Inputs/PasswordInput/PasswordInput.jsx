@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+/* eslint-disable react/display-name */
+import { useEffect, useState, useCallback, useRef, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
@@ -13,7 +14,7 @@ import {
 
 //===================================================
 
-const PasswordInput = React.forwardRef((props, ref) => {
+const PasswordInput = forwardRef((props, ref) => {
   const {
     wrapperRef,
     disabled,

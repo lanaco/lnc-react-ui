@@ -1,12 +1,13 @@
+/* eslint-disable react/display-name */
 import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import { forwardRef, useCallback } from "react";
 import ReactSelect from "react-select";
 import { components } from "react-select";
 import customStyles from "./CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 
-const Dropdown = React.forwardRef((props, ref) => {
+const Dropdown = forwardRef((props, ref) => {
   const {
     // options,
     styles,

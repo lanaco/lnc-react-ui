@@ -1,6 +1,7 @@
+/* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, forwardRef } from "react";
 import debounce from "lodash.debounce";
 import {
   StyledInput,
@@ -11,7 +12,7 @@ import {
 
 //===================================================
 
-const TextInput = React.forwardRef((props, ref) => {
+const TextInput = forwardRef((props, ref) => {
   //
   const {
     disabled,

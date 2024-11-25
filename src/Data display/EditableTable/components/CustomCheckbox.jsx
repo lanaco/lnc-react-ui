@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -56,7 +57,7 @@ const Checkbox = styled.input`
   margin: 2px;
 `;
 
-const CustomCheckbox = React.forwardRef((props, ref) => {
+const CustomCheckbox = forwardRef((props, ref) => {
   const {
     onChange = () => {},
     id = "",
