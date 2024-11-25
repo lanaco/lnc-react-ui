@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
@@ -58,4 +57,4 @@ TableBody.propTypes = {
 
 export default TableBody;
 
-TableBody.displayName = 'TABLE_BODY';
+TableBody.displayName = "TABLE_BODY";

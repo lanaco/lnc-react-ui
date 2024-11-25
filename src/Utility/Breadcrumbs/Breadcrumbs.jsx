@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -35,7 +36,7 @@ const StyledCollapse = styled.div`
 
 const BreadcrumbItem = styled.span``;
 
-const Breadcrumbs = React.forwardRef((props, ref) => {
+const Breadcrumbs = forwardRef((props, ref) => {
   const {
     separator = "/",
     maxItems = 8,

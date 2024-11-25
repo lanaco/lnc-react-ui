@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import FlexGrid from "../../Layout/FlexGrid/FlexGrid";
@@ -38,11 +39,11 @@ const StyledDetailsView = styled.div`
     getColorRgbaValue(props.theme, "Popover", "default", "enabled", "bg")};
 `;
 
-const DetailsView = React.forwardRef((props, ref) => {
+const DetailsView = forwardRef((props, ref) => {
   const {
+    // eslint-disable-next-line no-unused-vars
     __TYPE__ = "DETAILS_VIEW",
     goToPreviousView,
-    id,
     data = {},
     fields = {},
     flexGridProps,
@@ -63,7 +64,6 @@ const DetailsView = React.forwardRef((props, ref) => {
     goBack = () => {},
     //------------------
     className = "",
-    style = {},
     color = "primary",
     size = "small",
     children,
@@ -103,6 +103,7 @@ const DetailsView = React.forwardRef((props, ref) => {
       theme={theme}
       color={color}
       borderRadius="regular"
+      className={className}
       {...rest}
     >
       <StyledToolbar>

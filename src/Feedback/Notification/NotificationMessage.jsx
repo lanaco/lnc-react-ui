@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -91,7 +92,7 @@ const StyledMessage = styled.div`
   }
 `;
 
-const NotificationMessage = React.forwardRef((props, ref) => {
+const NotificationMessage = forwardRef((props, ref) => {
   const {
     title,
     icon,
@@ -142,15 +143,6 @@ const NotificationMessage = React.forwardRef((props, ref) => {
     </StyledMessage>
   );
 });
-
-// NotificationMessage.defaultProps = {
-//   avatar: false,
-//   inlineActions: false,
-//   sideButtons: false,
-//   //----------------------------
-//   style: {},
-//   size: "small",
-// };
 
 NotificationMessage.propTypes = {
   avatar: PropTypes.bool,

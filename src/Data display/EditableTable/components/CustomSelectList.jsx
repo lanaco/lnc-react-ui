@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React from "react";
+import { forwardRef } from "react";
 
-const heightBySize = (size, hasText) => {
+const heightBySize = (size) => {
   if (size === "small") return `1.625rem`;
   if (size === "medium") return `2rem`;
   if (size === "large") return `2.375rem`;
@@ -41,12 +43,11 @@ const Option = styled.option((props) => ({
   fontFamily: props.theme.typography.fontFamily,
 }));
 
-const CustomSelectList = React.forwardRef((props, ref) => {
+const CustomSelectList = forwardRef((props, ref) => {
   const {
     mapNameTo = "name",
     mapValueTo = "value",
     id = "",
-    preventDefault = true,
     onChange = () => {},
     items = [],
     disabled = false,

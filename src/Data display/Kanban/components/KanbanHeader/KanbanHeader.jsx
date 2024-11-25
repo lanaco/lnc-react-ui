@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef, memo } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -22,8 +22,8 @@ const StyledHeader = styled.div`
   }
 `;
 
-const KanbanHeader = React.memo(
-  React.forwardRef(
+const KanbanHeader = memo(
+  forwardRef(
     (
       {
         __TYPE__ = "KANBAN_HEADER",

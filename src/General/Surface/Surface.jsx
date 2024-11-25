@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";

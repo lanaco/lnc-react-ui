@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
@@ -10,8 +10,8 @@ const Container = styled.div`
   border-radius: 2px;
   overflow-x: auto;
   white-space: nowrap;
-  font-size: ${theme.typography.small.fontSize};
-  font-family: ${theme.typography.fontFamily};
+  font-size: ${(p) => p.theme.typography.small.fontSize};
+  font-family: ${(p) => p.theme.typography.fontFamily};
   position: relative;
 `;
 
@@ -64,4 +64,4 @@ CustomTableContainer.propTypes = {
 
 export default CustomTableContainer;
 
-CustomTableContainer.displayName = 'TABLE_CONTAINER';
+CustomTableContainer.displayName = "TABLE_CONTAINER";

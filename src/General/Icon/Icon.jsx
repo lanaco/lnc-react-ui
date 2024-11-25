@@ -1,20 +1,35 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import "../../Base/fontawesome/css/fontawesome.css";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
-import { getColorRgbaValue, getComponentTypographyCss } from "../../_utils/utils";
+import {
+  getColorRgbaValue,
+  getComponentTypographyCss,
+} from "../../_utils/utils";
 
 const Span = styled.span`
   box-sizing: border-box;
-  ${(props) => (props.sizeInUnits && props.sizeInUnits != "") ? `font-size: ${props.sizeInUnits}` : getComponentTypographyCss(props.theme, "Icon", props.size, "enabled")};
-  ${(props) => props.color && `color: ${getColorRgbaValue(props.theme, "Icon", props.color, "enabled", "icon")}`};
+  ${(props) =>
+    props.sizeInUnits && props.sizeInUnits != ""
+      ? `font-size: ${props.sizeInUnits}`
+      : getComponentTypographyCss(props.theme, "Icon", props.size, "enabled")};
+  ${(props) =>
+    props.color &&
+    `color: ${getColorRgbaValue(
+      props.theme,
+      "Icon",
+      props.color,
+      "enabled",
+      "icon"
+    )}`};
   display: inline-flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Icon = React.forwardRef((props, ref) => {
+const Icon = forwardRef((props, ref) => {
   const {
     id = "",
     icon = "",
@@ -25,7 +40,8 @@ const Icon = React.forwardRef((props, ref) => {
     color,
     className = "",
     style = {},
-    ...rest } = props;
+    ...rest
+  } = props;
 
   const theme = useTheme();
 
@@ -37,8 +53,18 @@ const Icon = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Span ref={ref} {...themeProps} tooltip={tooltip} className={className} style={style} {...rest}>
-      <i data-control={props["data-control"] ? true : false}  className={getIconClass()} />
+    <Span
+      ref={ref}
+      {...themeProps}
+      tooltip={tooltip}
+      className={className}
+      style={style}
+      {...rest}
+    >
+      <i
+        data-control={props["data-control"] ? true : false}
+        className={getIconClass()}
+      />
     </Span>
   );
 });
@@ -75,7 +101,7 @@ Icon.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

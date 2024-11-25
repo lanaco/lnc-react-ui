@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import ActionsToolbar from "./ActionsToolbar";
@@ -16,7 +16,7 @@ const StyledView = styled.div`
   }
 `;
 
-const TableView = React.forwardRef((props, ref) => {
+const TableView = forwardRef((props, ref) => {
   const {
     __TYPE__ = "TABLE_VIEW",
     goToPreviousView,

@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon/Icon";
@@ -7,7 +8,7 @@ import ReactDatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TextInput from "../TextInput/TextInput";
 
-const DateInput = React.forwardRef((props, ref) => {
+const DateInput = forwardRef((props) => {
   const {
     size = "small",
     color = "primary",
@@ -19,7 +20,6 @@ const DateInput = React.forwardRef((props, ref) => {
     onBlur,
     // value,
     dateFormat = "yyyy-MM-dd",
-    tabIndex,
     monthsShown = 1,
     selectsRange = false,
     withPortal = false,
@@ -65,7 +65,7 @@ const DateInput = React.forwardRef((props, ref) => {
         monthsShown={monthsShown}
         withPortal={withPortal}
         onFocus={(e) => onFocus?.(e)}
-        onBlur={(e) => onBlur?.()}
+        onBlur={() => onBlur?.()}
       />
     </Styled_DatePickerWrapper>
   );
