@@ -21,3 +21,4 @@ rollup.config.js
 .babelrc
 .github
 .storybook
+custom-addons

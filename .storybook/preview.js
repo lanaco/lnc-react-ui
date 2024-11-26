@@ -1,5 +1,5 @@
-import React from "react";
 import ThemeProvider from "../src/ThemeProvider/ThemeProvider";
+import "./fontawesome/css/fontawesome.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
