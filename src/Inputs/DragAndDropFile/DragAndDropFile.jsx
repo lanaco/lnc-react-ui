@@ -1,4 +1,12 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+/* eslint-disable react/display-name */
+import {
+  forwardRef,
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  cloneElement,
+} from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -91,7 +99,7 @@ const PlusLabel = styled.span`
 //     color: "primary",
 // };
 
-const DragAndDropFile = React.forwardRef((props, ref) => {
+const DragAndDropFile = forwardRef((props, ref) => {
   const {
     inputRef,
     id = "",
@@ -156,7 +164,7 @@ const DragAndDropFile = React.forwardRef((props, ref) => {
 
   const clonedControl = () => {
     if (control) {
-      return React.cloneElement(control, {
+      return cloneElement(control, {
         onClick: (e) => {
           handleControlClick(e);
           if (control.onClick) control.onClick(e);

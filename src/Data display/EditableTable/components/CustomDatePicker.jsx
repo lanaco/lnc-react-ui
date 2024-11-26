@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
@@ -26,7 +27,7 @@ const Input = styled.input`
   }
 `;
 
-const CustomDatePicker = React.forwardRef((props, ref) => {
+const CustomDatePicker = forwardRef((props, ref) => {
   const {
     onChange = () => {},
     id = "",

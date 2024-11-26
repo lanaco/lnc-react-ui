@@ -87,7 +87,7 @@ const PageLayout = forwardRef((props, ref) => {
         child.props.__TYPE__ == "PageLayout" ||
         child.type?.displayName === "PageLayout"
       ) {
-        return React.cloneElement(child, { isChild: true });
+        return cloneElement(child, { isChild: true });
       }
     }
 

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
@@ -12,7 +13,7 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const RadioGroup = React.forwardRef((props, ref) => {
+const RadioGroup = forwardRef((props, ref) => {
   const {
     id = "",
     name,

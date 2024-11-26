@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -231,7 +232,7 @@ const Container = styled.label`
   }
 `;
 
-const CheckBoxInput = React.forwardRef((props, ref) => {
+const CheckBoxInput = forwardRef((props, ref) => {
   const {
     containerRef,
     id,
@@ -259,7 +260,6 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
   const theme = useTheme();
   var themeProps = { theme, size, color, disabled, readOnly };
 
-
   const handleOnBlur = (e) => {
     if (onBlur) onBlur?.(e);
   };
@@ -282,15 +282,15 @@ const CheckBoxInput = React.forwardRef((props, ref) => {
       onClick={onClick}
       {...themeProps}
     >
-       <input
-          ref={ref}
-          type="checkbox"
-          onBlur={handleOnBlur}
-          onFocus={handleOnFocus}
-          disabled={disabled || readOnly}
-          onChange={(e) => onChange?.(e)}
-          {...rest}
-        />
+      <input
+        ref={ref}
+        type="checkbox"
+        onBlur={handleOnBlur}
+        onFocus={handleOnFocus}
+        disabled={disabled || readOnly}
+        onChange={(e) => onChange?.(e)}
+        {...rest}
+      />
       <div className="checkmark" tabIndex={-1}>
         {!customCheckmark && (
           <svg

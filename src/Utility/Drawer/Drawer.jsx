@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
 import { ClassNames, useTheme } from "@emotion/react";
 
@@ -14,7 +15,7 @@ import {
   getComponentTypographyCss,
 } from "../../_utils/utils";
 
-const Drawer = React.forwardRef((props, ref) => {
+const Drawer = forwardRef((props, ref) => {
   const {
     direction = "right",
     open = false,

@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { forwardRef } from "react";
+import { forwardRef, isValidElement } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import "../../Base/fontawesome/css/fontawesome.css";
@@ -52,11 +52,7 @@ const Button = forwardRef((props, ref) => {
   };
 
   const renderIcon = () =>
-    React.isValidElement(icon) ? (
-      icon
-    ) : (
-      <StyledIcon className={getIconClass()} />
-    );
+    isValidElement(icon) ? icon : <StyledIcon className={getIconClass()} />;
 
   if (btnType === "filled") {
     return (

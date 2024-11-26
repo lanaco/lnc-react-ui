@@ -1,5 +1,5 @@
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { themes } from "../_utils/theme";
 import PropTypes from "prop-types";
 import { getColorRgbaValue, getSizeValueWithUnits } from "../_utils/utils";
@@ -96,7 +96,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const ThemeContext = React.createContext();
+const ThemeContext = createContext();
 
 export const useTheme = () => {
   return useContext(ThemeContext);

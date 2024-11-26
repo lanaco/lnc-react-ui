@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
@@ -26,7 +27,9 @@ const Container = styled.label`
     )};
   border-radius: 8px;
   ${(props) =>
-    props.focused === true && props.readOnly !== true ? getOutlineCss(props.theme) : ""}
+    props.focused === true && props.readOnly !== true
+      ? getOutlineCss(props.theme)
+      : ""}
 `;
 
 const Input = styled.input`
@@ -73,7 +76,8 @@ const Label = styled.div`
       )};
   border-radius: 8px 0 0 8px;
 
-  ${(props) => (props.disabled === true ? getDisabledStateCss(props.theme) : "")}
+  ${(props) =>
+    props.disabled === true ? getDisabledStateCss(props.theme) : ""}
 `;
 
 const FileName = styled.input`
@@ -120,10 +124,11 @@ const FileName = styled.input`
       "text"
     )};
 
-  ${(props) => (props.disabled === true ? getDisabledStateCss(props.theme) : "")}
+  ${(props) =>
+    props.disabled === true ? getDisabledStateCss(props.theme) : ""}
 `;
 
-const FileInput = React.forwardRef((props, ref) => {
+const FileInput = forwardRef((props, ref) => {
   const {
     className = "",
     style = {},
@@ -256,7 +261,7 @@ FileInput.propTypes = {
     "warning",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 
