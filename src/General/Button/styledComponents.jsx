@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import "../../Base/fontawesome/css/fontawesome.css";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
@@ -131,7 +130,8 @@ export const FilledButton = styled.button`
         "background"
       )};
     color: ${(props) =>
-      props.disabled === false && getColorRgbaValue(
+      props.disabled === false &&
+      getColorRgbaValue(
         props.theme,
         "ButtonFilled",
         props.color,
@@ -151,7 +151,8 @@ export const FilledButton = styled.button`
         "background"
       )};
     color: ${(props) =>
-      props.disabled === false && getColorRgbaValue(
+      props.disabled === false &&
+      getColorRgbaValue(
         props.theme,
         "ButtonFilled",
         props.color,
@@ -172,7 +173,8 @@ export const FilledButton = styled.button`
         "background"
       )};
     color: ${(props) =>
-      props.disabled === false && getColorRgbaValue(
+      props.disabled === false &&
+      getColorRgbaValue(
         props.theme,
         "ButtonFilled",
         props.color,

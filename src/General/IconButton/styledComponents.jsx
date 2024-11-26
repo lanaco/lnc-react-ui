@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import "../../Base/fontawesome/css/fontawesome.css";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
