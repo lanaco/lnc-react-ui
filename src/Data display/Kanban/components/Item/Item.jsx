@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+import { useEffect, memo, forwardRef } from "react";
 import classNames from "classnames";
 import styles from "./Item.module.css";
 import { useTheme } from "@emotion/react";
@@ -28,8 +30,8 @@ const StyledItem = styled.div`
   }
 `;
 
-export const Item = React.memo(
-  React.forwardRef(
+export const Item = memo(
+  forwardRef(
     (
       {
         cardProps,

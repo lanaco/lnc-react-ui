@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Icon from "../../General/Icon/Icon";
@@ -53,7 +54,7 @@ const ToggleSidebarButton = styled.div`
   }
 `;
 
-const Sidebar = React.forwardRef((props, ref) => {
+const Sidebar = forwardRef((props, ref) => {
   const {
     placement,
     collapsed = undefined,

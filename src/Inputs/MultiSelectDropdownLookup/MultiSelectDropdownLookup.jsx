@@ -1,5 +1,6 @@
+/* eslint-disable react/display-name */
 import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import { forwardRef, useCallback } from "react";
 import customStyles from "../Dropdown/CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
@@ -25,7 +26,7 @@ import DropdownLookup from "../DropdownLookup/DropdownLookup";
 //     className: "",
 //     color: "primary",
 //     size: "small",
-const MultiSelectDropdownLookup = React.forwardRef((props, ref) => {
+const MultiSelectDropdownLookup = forwardRef((props, ref) => {
   const {
     // defaultOptions,
     // cacheOptions,

@@ -1,4 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
+/* eslint-disable react/display-name */
+import { useState, useCallback, useEffect, forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import DragAndDropFile from "../DragAndDropFile/DragAndDropFile";
@@ -34,7 +35,7 @@ const StyledDragDropFiles = styled.div`
   }
 `;
 
-const DragDropFiles = React.forwardRef((props, ref) => {
+const DragDropFiles = forwardRef((props, ref) => {
   const {
     id = "",
     disabled = false,

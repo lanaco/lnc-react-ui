@@ -1,5 +1,6 @@
+/* eslint-disable react/display-name */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, forwardRef } from "react";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 import { StyledTextareaWrapper } from "./styledComponents";
@@ -7,7 +8,7 @@ import ReactTextareaAutosize from "react-textarea-autosize";
 
 //===================================================
 
-const TextAreaInput = React.forwardRef((props, ref) => {
+const TextAreaInput = forwardRef((props, ref) => {
   const {
     disabled,
     readOnly,

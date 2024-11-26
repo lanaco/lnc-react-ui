@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { forwardRef } from "react";
+import { forwardRef, cloneElement } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -106,7 +106,7 @@ const ConfirmationForm = forwardRef((props, ref) => {
     if (typeof statusIcon == "string" && statusIcon !== "") {
       return <Icon className={"alert-icon"} icon={statusIcon} />;
     }
-    return React.cloneElement(statusIcon, {
+    return cloneElement(statusIcon, {
       className: "alert-icon " + statusIcon?.className,
     });
   };

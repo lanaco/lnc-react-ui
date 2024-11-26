@@ -1,4 +1,5 @@
-import React, { useImperativeHandle, useRef, useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
@@ -171,7 +172,7 @@ const SecondOverlay = styled(motion.div)`
   z-index: 3;
 `;
 
-const Modal = React.forwardRef((props, ref) => {
+const Modal = forwardRef((props, ref) => {
   const {
     portalElement = document.body,
     isOpen = false,
@@ -308,7 +309,7 @@ const Modal = React.forwardRef((props, ref) => {
   );
 });
 
-const ModalContent = React.forwardRef(
+const ModalContent = forwardRef(
   (
     {
       overlay,
@@ -383,7 +384,7 @@ const ModalContent = React.forwardRef(
   }
 );
 
-const ModalWrapper = React.forwardRef(
+const ModalWrapper = forwardRef(
   (
     {
       themeProps,

@@ -1,5 +1,6 @@
+/* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
-import React, { useState } from "react";
+import { useState, forwardRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import {
@@ -259,7 +260,7 @@ const Label = styled.label`
     getColorRgbaValue(props.theme, "Radio", props.color, "enabled", "text")};
 `;
 
-const RadioInput = React.forwardRef((props, ref) => {
+const RadioInput = forwardRef((props, ref) => {
   const {
     wrapperRef,
     className = "",

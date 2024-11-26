@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+/* eslint-disable react/display-name */
+import { useCallback, useEffect, useRef, useState, forwardRef } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import {
@@ -235,7 +236,7 @@ const SortableItem = ({
   );
 };
 
-const Kanban = React.forwardRef((props, ref) => {
+const Kanban = forwardRef((props, ref) => {
   //================== PROPS =====================
   const {
     horizontalDisplay = false,

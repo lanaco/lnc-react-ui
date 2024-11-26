@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import { useState, createRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import Chip from "../../Data display/Chip/Chip";
@@ -146,7 +147,7 @@ const SearchBar = (props) => {
   const [value, setValue] = useState("");
   const [openSuggestions, setOpenSuggestions] = useState(false);
   const [cursor, setCursor] = useState(0);
-  let InputRef = React.createRef();
+  let InputRef = createRef();
   const { theme } = useTheme();
 
   let themeProps = { size, color, theme };

@@ -1,4 +1,11 @@
-import React, { useRef } from "react";
+/* eslint-disable react/display-name */
+import {
+  useRef,
+  forwardRef,
+  Children,
+  cloneElement,
+  isValidElement,
+} from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
@@ -18,7 +25,7 @@ const StyledMenu = styled.div`
   }
 `;
 
-const TreeMenu = React.forwardRef((props, ref) => {
+const TreeMenu = forwardRef((props, ref) => {
   const {
     widthFitContent = false,
     itemsGap = "0.25rem",
@@ -36,8 +43,8 @@ const TreeMenu = React.forwardRef((props, ref) => {
   const firstItemRef = useRef();
 
   //justify-content: start -> menu items
-  const clonedChildrenStart = React.Children.map(children, (child, index) => {
-    if (React.isValidElement(child)) {
+  const clonedChildrenStart = Children.map(children, (child, index) => {
+    if (isValidElement(child)) {
       if (
         child.props.__TYPE__ == "MENU_ITEM" ||
         child?.type?.displayName === "MENU_ITEM" ||
@@ -46,7 +53,7 @@ const TreeMenu = React.forwardRef((props, ref) => {
       ) {
         if (index == 0 && child.props.justifyToEnd !== true) {
           if (child.props.ref) firstItemRef.current = ref;
-          return React.cloneElement(child, {
+          return cloneElement(child, {
             ref: ref ? ref : firstItemRef, //needed to focus on navigation
             color: color,
             size: size,
@@ -57,7 +64,7 @@ const TreeMenu = React.forwardRef((props, ref) => {
           child.props.__TYPE__ == "NESTED_ITEM" ||
           child?.type?.displayName === "NESTED_ITEM"
         ) {
-          return React.cloneElement(child, {
+          return cloneElement(child, {
             color: color,
             size: size,
             onItemSelected: onItemSelected,
@@ -72,8 +79,8 @@ const TreeMenu = React.forwardRef((props, ref) => {
   });
 
   //justify-content: end -> menu items
-  const clonedChildrenEnd = React.Children.map(children, (child, index) => {
-    if (React.isValidElement(child)) {
+  const clonedChildrenEnd = Children.map(children, (child, index) => {
+    if (isValidElement(child)) {
       if (
         (child.props.__TYPE__ == "MENU_ITEM" ||
           child?.type?.displayName === "MENU_ITEM" ||
@@ -83,14 +90,14 @@ const TreeMenu = React.forwardRef((props, ref) => {
       ) {
         if (index == 0) {
           if (child.props.ref) firstItemRef.current = ref;
-          return React.cloneElement(child, {
+          return cloneElement(child, {
             ref: ref ? ref : firstItemRef, //needed to focus on navigation
             color: child.props.color ? child.props.color : color,
             size: size,
             onItemSelected: onItemSelected,
           });
         }
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           color: child.props.color ? child.props.color : color,
           size: size,
           onItemSelected: onItemSelected,

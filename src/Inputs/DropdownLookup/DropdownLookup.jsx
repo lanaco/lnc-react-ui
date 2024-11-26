@@ -1,11 +1,12 @@
+/* eslint-disable react/display-name */
 import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import { useCallback, forwardRef } from "react";
 import AsyncReactSelect from "react-select/async";
 import customStyles from "../Dropdown/CustomStyles";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 
-const DropdownLookup = React.forwardRef((props, ref) => {
+const DropdownLookup = forwardRef((props, ref) => {
   const {
     // defaultOptions,
     // cacheOptions,

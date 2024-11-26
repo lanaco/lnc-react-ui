@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+/* eslint-disable react/display-name */
+import { useCallback, useEffect, useRef, useState, forwardRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
@@ -188,7 +189,7 @@ const Popover = styled.div`
   }
 `;
 
-const DoubleRangeSlider = React.forwardRef((props, ref) => {
+const DoubleRangeSlider = forwardRef((props, ref) => {
   const {
     minValue = null,
     maxValue = null,
@@ -360,7 +361,7 @@ DoubleRangeSlider.propTypes = {
     "disabled",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

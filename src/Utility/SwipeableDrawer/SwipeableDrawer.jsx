@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -90,7 +91,7 @@ const StyledOverlay = styled.div`
   background-color: ${(props) => props.overlayColor};
 `;
 
-const SwipeableDrawer = React.forwardRef((props, ref) => {
+const SwipeableDrawer = forwardRef((props, ref) => {
   const {
     direction = "right",
     open = false,
@@ -315,7 +316,7 @@ SwipeableDrawer.propTypes = {
     "danger",
     "information",
     "neutral",
-    "gray"
+    "gray",
   ]),
 };
 

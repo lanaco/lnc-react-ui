@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useEffect } from "react";
+/* eslint-disable react/display-name */
+import { useCallback, useState, useEffect, forwardRef } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -75,7 +76,7 @@ const SyledInput = styled.input`
   }
 `;
 
-const TimeInput = React.forwardRef((props, ref) => {
+const TimeInput = forwardRef((props, ref) => {
   const {
     // id,
     disabled,

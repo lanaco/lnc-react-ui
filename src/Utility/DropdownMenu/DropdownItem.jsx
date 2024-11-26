@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -111,7 +112,7 @@ const Item = styled.div`
   ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
 `;
 
-const DropdownItem = React.forwardRef((props, ref) => {
+const DropdownItem = forwardRef((props, ref) => {
   const {
     __TYPE__ = "MENU_ITEM",
     active = false,

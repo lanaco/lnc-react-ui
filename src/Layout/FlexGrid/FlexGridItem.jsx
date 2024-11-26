@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/display-name */
+import { useEffect, useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useScreenSize } from "../../_utils/utils";
@@ -11,7 +12,7 @@ const StyledFlexGridItem = styled.div`
   overflow-wrap: break-word;
 `;
 
-const FlexGridItem = React.forwardRef((props, ref) => {
+const FlexGridItem = forwardRef((props, ref) => {
   //============================================== PROPS ===============================================
   const {
     XS,

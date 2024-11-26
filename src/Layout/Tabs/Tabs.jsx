@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef, useState, Children, cloneElement } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -13,7 +14,7 @@ const TabsStyled = styled.div`
 
 //====================================== PROP TYPES / DEFAULT PROPS ====================================
 
-const Tabs = React.forwardRef((props, ref) => {
+const Tabs = forwardRef((props, ref) => {
   const {
     type = "regular",
     fullWidth = false,
@@ -29,27 +30,31 @@ const Tabs = React.forwardRef((props, ref) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState();
 
-  const themeProps = { theme, color, size, style, className: "lnc-ui-tabs " + className };
+  const themeProps = {
+    theme,
+    color,
+    size,
+    style,
+    className: "lnc-ui-tabs " + className,
+  };
 
   const handleItemClick = (index) => {
     setActiveIndex(index);
   };
 
-  const childrenWithAdjustedProps = React.Children.map(
-    children,
-    (child, index) =>
-      React.cloneElement(child, {
-        type: type,
-        first: index == 0,
-        last: index == React.Children.toArray(children).length - 1,
-        fullWidth: fullWidth,
-        index: index,
-        itemClick: handleItemClick,
-        activeIndex: activeIndex,
-        color: color,
-        size: size,
-        fullWidth: fullWidth,
-      })
+  const childrenWithAdjustedProps = Children.map(children, (child, index) =>
+    cloneElement(child, {
+      type: type,
+      first: index == 0,
+      last: index == Children.toArray(children).length - 1,
+      fullWidth: fullWidth,
+      index: index,
+      itemClick: handleItemClick,
+      activeIndex: activeIndex,
+      color: color,
+      size: size,
+      fullWidth: fullWidth,
+    })
   );
 
   return (

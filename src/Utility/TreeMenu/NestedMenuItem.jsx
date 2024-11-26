@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import {
+  forwardRef,
+  useState,
+  Children,
+  isValidElement,
+  cloneElement,
+} from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -21,7 +28,7 @@ const StyledNested = styled(motion.div)`
     border-radius: 2px;
 `;
 
-const NestedMenuItem = React.forwardRef((props, ref) => {
+const NestedMenuItem = forwardRef((props, ref) => {
   const {
     item,
     //------------------
@@ -57,7 +64,7 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
     setShow(!show);
   };
 
-  const clonedItem = React.cloneElement(item, {
+  const clonedItem = cloneElement(item, {
     isNested: true,
     showNested: show,
     toggleNested: toggleNested,
@@ -65,15 +72,15 @@ const NestedMenuItem = React.forwardRef((props, ref) => {
     size: size,
   });
 
-  const clonedChildren = React.Children.map(children, (child, index) => {
-    if (React.isValidElement(child)) {
+  const clonedChildren = Children.map(children, (child, index) => {
+    if (isValidElement(child)) {
       if (
         child.props.__TYPE__ == "MENU_ITEM" ||
         child?.type?.displayName === "MENU_ITEM" ||
         child.props.__TYPE__ == "NESTED_ITEM" ||
         child?.type?.displayName === "NESTED_ITEM"
       ) {
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           color: child.props.color ? child.props.color : color,
           size: size,
           onItemSelected: onItemSelected,
@@ -162,4 +169,4 @@ NestedMenuItem.propTypes = {
 
 export default NestedMenuItem;
 
-NestedMenuItem.displayName = 'NESTED_ITEM';
+NestedMenuItem.displayName = "NESTED_ITEM";

@@ -1,7 +1,8 @@
+/* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef, forwardRef } from "react";
 import { useUpdateEffect } from "react-use";
 import {
   getBorderRadiusValueWithUnits,
@@ -132,7 +133,7 @@ const Popover = styled.div`
   }
 `;
 
-const RangeSliderInput = React.forwardRef((props, ref) => {
+const RangeSliderInput = forwardRef((props, ref) => {
   const {
     defaultValue,
     value = null,
