@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   useFloating,
   autoUpdate,
@@ -50,7 +50,7 @@ function usePopover({
 
   const interactions = useInteractions([click, dismiss, role]);
 
-  return React.useMemo(
+  return useMemo(
     () => ({
       open,
       setOpen,

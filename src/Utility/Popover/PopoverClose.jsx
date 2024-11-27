@@ -1,4 +1,5 @@
-import { useContext } from "react";
+/* eslint-disable react/prop-types */
+import { useContext, forwardRef } from "react";
 import PopoverContext from "./PopoverContext";
 
 const usePopoverState = () => {
@@ -11,7 +12,7 @@ const usePopoverState = () => {
   return context;
 };
 
-const PopoverClose = React.forwardRef(function PopoverClose(
+const PopoverClose = forwardRef(function PopoverClose(
   { children, ...props },
   ref
 ) {
