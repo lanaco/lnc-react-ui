@@ -1,5 +1,5 @@
 import { useId } from "@floating-ui/react";
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useLayoutEffect, forwardRef } from "react";
 import PopoverContext from "./PopoverContext";
 
 const usePopoverState = () => {
