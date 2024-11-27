@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { forwardRef, useContext } from "react";
 import {
   useMergeRefs,
@@ -8,6 +9,12 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import PopoverContext from "./PopoverContext";
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+  getComponentPropValue,
+} from "../../_utils/utils";
 
 const StyledContent = styled(motion.div)`
   font-family: ${(props) => props.theme?.typography?.fontFamily};
