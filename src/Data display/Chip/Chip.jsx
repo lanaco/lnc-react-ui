@@ -151,6 +151,7 @@ const Chip = forwardRef((props, ref) => {
     theme,
     color,
     style,
+    size,
     className: "lnc-ui-chip " + className,
   };
 

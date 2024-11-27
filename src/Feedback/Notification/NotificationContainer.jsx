@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
@@ -113,8 +114,8 @@ const NotificationContainer = forwardRef((props, ref) => {
     closeButton = true,
     className = "",
     style = {},
+    size = "small",
     toastContainerProps,
-    children,
     ...rest
   } = props;
   const { theme } = useTheme();
@@ -123,6 +124,7 @@ const NotificationContainer = forwardRef((props, ref) => {
     theme,
     className: "lnc-ui-notification " + className,
     style,
+    size,
   };
 
   return (

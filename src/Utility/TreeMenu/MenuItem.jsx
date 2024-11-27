@@ -118,13 +118,14 @@ const MenuItem = forwardRef((props, ref) => {
     className = "",
     style = {},
     color = "primary",
+    size = "small",
     iconProps,
     __TYPE__ = "MENU_ITEM",
     children,
     ...rest
   } = props;
   const theme = useTheme();
-  const themeProps = { theme, color, style };
+  const themeProps = { theme, color, style, size };
   const itemRef = useRef();
 
   const [isActive, setIsActive] = useState(active == null ? false : active);
