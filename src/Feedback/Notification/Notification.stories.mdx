@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import { NotificationContainer, notification } from "./Notification";
+import NotificationContainer from "./NotificationContainer";
+import Notification from "./Notification";
 import { useState } from "react";
 import NotificationMessage from "./NotificationMessage";
 import logo from "../../_utils/images/Image.png";
@@ -12,7 +13,7 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export const TemplateDefault = (args) => {
   const notify = () =>
-    notification(<NotificationMessage>Message</NotificationMessage>);
+    Notification(<NotificationMessage>Message</NotificationMessage>);
   return (
     <div>
       <Button onClick={notify}>Notify!</Button>
@@ -26,7 +27,7 @@ export const TemplateCustom = (args) => {
     <div>
       <Button
         onClick={() =>
-          notification(
+          Notification(
             <NotificationMessage icon="user" title={"Title"}>
               Message
             </NotificationMessage>
@@ -39,7 +40,7 @@ export const TemplateCustom = (args) => {
       <br />
       <Button
         onClick={() =>
-          notification(
+          Notification(
             <NotificationMessage
               avatar={true}
               avatarProps={{ image: logo }}
@@ -62,7 +63,7 @@ export const TemplateCustom = (args) => {
       <br />
       <Button
         onClick={() =>
-          notification(
+          Notification(
             <NotificationMessage
               avatar={true}
               inlineActions={true}
@@ -81,7 +82,7 @@ export const TemplateCustom = (args) => {
       <br />
       <Button
         onClick={() =>
-          notification(
+          Notification(
             <NotificationMessage
               sideButtons={true}
               avatar={true}
@@ -120,7 +121,7 @@ export const TemplateCustom = (args) => {
       <br />
       <Button
         onClick={() =>
-          notification.success(
+          Notification.success(
             <NotificationMessage title={"Title"}>Message</NotificationMessage>,
             {}
           )
@@ -132,7 +133,7 @@ export const TemplateCustom = (args) => {
       <br />
       <Button
         onClick={() =>
-          notification.warning(
+          Notification.warning(
             <NotificationMessage title={"Title"}>Message</NotificationMessage>,
             {}
           )
@@ -144,7 +145,7 @@ export const TemplateCustom = (args) => {
       <br />
       <Button
         onClick={() =>
-          notification.error(
+          Notification.error(
             <NotificationMessage title={"Title"}>Message</NotificationMessage>,
             {}
           )
@@ -156,7 +157,7 @@ export const TemplateCustom = (args) => {
       <br />
       <Button
         onClick={() =>
-          notification.info(
+          Notification.info(
             <NotificationMessage title={"Title"}>Message</NotificationMessage>,
             {}
           )
@@ -211,7 +212,7 @@ export const TemplateCustom = (args) => {
     "   <div>\n" +
     "     <Button\n" +
     "       onClick={() =>\n" +
-    '         notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)\n' +
+    '         Notification(<NotificationMessage icon="user" title={"Title"}>Message</NotificationMessage>)\n' +
     "       }\n" +
     "     >\n" +
     "       With Icon\n" +
@@ -219,7 +220,7 @@ export const TemplateCustom = (args) => {
     "     <br /><br />\n" +
     "     <Button\n" +
     "       onClick={() =>\n" +
-    "         notification(\n" +
+    "         Notification(\n" +
     "           <NotificationMessage\n" +
     "             avatar={true}\n" +
     "             avatarProps={{ image: logo }}\n" +
@@ -241,7 +242,7 @@ export const TemplateCustom = (args) => {
     "     <br /><br />\n" +
     "     <Button\n" +
     "       onClick={() =>\n" +
-    "         notification(\n" +
+    "         Notification(\n" +
     '           <NotificationMessage avatar={true} inlineActions={true} avatarProps={{ image: logo }} title={"Title"} actions={<a>Dismiss</a>}>\n' +
     "             Message\n" +
     "           </NotificationMessage>\n" +
@@ -253,7 +254,7 @@ export const TemplateCustom = (args) => {
     "     <br /><br />\n" +
     "     <Button\n" +
     "       onClick={() =>\n" +
-    "         notification(\n" +
+    "         Notification(\n" +
     "          <NotificationMessage\n" +
     "             sideButtons={true}\n" +
     "             avatar={true}\n" +
@@ -291,7 +292,7 @@ export const TemplateCustom = (args) => {
     "     <br /><br />\n" +
     "     <Button\n" +
     "       onClick={() =>\n" +
-    '         notification.success(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
+    '         Notification.success(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
     "       }\n" +
     "     >\n" +
     "       Success Notification\n" +
@@ -299,7 +300,7 @@ export const TemplateCustom = (args) => {
     "     <br /><br />\n" +
     "     <Button\n" +
     "       onClick={() =>\n" +
-    '         notification.warning(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
+    '         Notification.warning(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
     "       }\n" +
     "     >\n" +
     "       Warning Notification\n" +
@@ -307,7 +308,7 @@ export const TemplateCustom = (args) => {
     "     <br /><br />\n" +
     "     <Button\n" +
     "       onClick={() =>\n" +
-    '         notification.error(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
+    '         Notification.error(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
     "       }\n" +
     "     >\n" +
     "       Error Notification\n" +
@@ -315,7 +316,7 @@ export const TemplateCustom = (args) => {
     "     <br /><br />\n" +
     "     <Button\n" +
     "       onClick={() =>\n" +
-    '         notification.info(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
+    '         Notification.info(<NotificationMessage title={"Title"}>Message</NotificationMessage>, {})\n' +
     "       }\n" +
     "     >\n" +
     "       Information Notification\n" +
