@@ -1,5 +1,7 @@
 import ThemeProvider from "../src/ThemeProvider/ThemeProvider";
 import "./fontawesome/css/fontawesome.css";
+import "react-datepicker/dist/react-datepicker.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

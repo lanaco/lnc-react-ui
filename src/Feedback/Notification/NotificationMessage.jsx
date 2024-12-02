@@ -3,7 +3,6 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
-import "react-toastify/dist/ReactToastify.css";
 import Icon from "../../General/Icon/Icon";
 import {
   getColorRgbaValue,

@@ -2,7 +2,7 @@ import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 import EditableTable from "./EditableTable";
 import { statusColor } from "./constants/constants";
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, forwardRef } from "react";
 import { inputType } from "./constants/constants";
 import styled from "@emotion/styled";
 import CheckBoxInput from "../../Basic Inputs/CheckBoxInput/CheckBoxInput";

@@ -4,7 +4,6 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,

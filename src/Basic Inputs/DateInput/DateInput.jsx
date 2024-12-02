@@ -5,10 +5,9 @@ import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon/Icon";
 import { Styled_DatePickerWrapper } from "./styledComponents";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import TextInput from "../TextInput/TextInput";
 
-const DateInput = forwardRef((props) => {
+const DateInput = forwardRef((props, ref) => {
   const {
     size = "small",
     color = "primary",
