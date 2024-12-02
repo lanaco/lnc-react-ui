@@ -231,28 +231,30 @@ const FormView = forwardRef((props, ref) => {
       <>
         {children || (
           <FlexGrid spacing={10} {...flexGridProps}>
-            {fields.map((item, i) => (
-              <FlexGridItem key={i} {...item}>
-                <FormField
-                  key={i}
-                  label={item.label}
-                  text={errors[item.accessor]}
-                  color={errors[item.accessor] ? "danger" : color}
-                  size={size}
-                >
-                  {item.type == "custom"
-                    ? item.element
-                    : getInput(
-                        item.type,
-                        item.inputProps,
-                        item.accessor,
-                        data[item.accessor],
-                        errors[item.accessor] ? "danger" : color,
-                        size
-                      )}
-                </FormField>
-              </FlexGridItem>
-            ))}
+            {fields.map((item, i) => {
+              return (
+                <FlexGridItem key={i} {...item}>
+                  <FormField
+                    key={i}
+                    label={item.label}
+                    text={errors[item.accessor]}
+                    color={errors[item.accessor] ? "danger" : color}
+                    size={size}
+                  >
+                    {item.type == "custom"
+                      ? item.element
+                      : getInput(
+                          item.type,
+                          item.inputProps,
+                          item.accessor,
+                          data ? data[item.accessor] : "",
+                          errors[item.accessor] ? "danger" : color,
+                          size
+                        )}
+                  </FormField>
+                </FlexGridItem>
+              );
+            })}
           </FlexGrid>
         )}
       </>
