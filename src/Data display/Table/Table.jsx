@@ -2,7 +2,7 @@ import React, { useEffect, forwardRef, useImperativeHandle } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
-import cloneDeep from "lodash.clonedeep";
+import clone from "lodash.clone";
 import isFinite from "lodash.isfinite";
 import isObject from "lodash.isobject";
 import { useScreenSize } from "../../_utils/utils";
@@ -613,7 +613,7 @@ const Table = forwardRef((props, ref) => {
   };
 
   const renderTableBody = () => {
-    var bodyProps = cloneDeep(props);
+    var bodyProps = clone(props);
     delete bodyProps.__TYPE__;
 
     var children = (
@@ -633,7 +633,7 @@ const Table = forwardRef((props, ref) => {
   };
 
   const renderTableHead = () => {
-    var headProps = cloneDeep(props);
+    var headProps = clone(props);
     delete headProps.__TYPE__;
 
     var children = <>{renderHeadRow()}</>;
