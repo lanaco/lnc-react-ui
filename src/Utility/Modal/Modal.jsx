@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
@@ -206,6 +206,7 @@ const Modal = forwardRef((props, ref) => {
       },
       transition: { type: "spring", duration: 0.6 },
     },
+    onFinishOpen = () => {},
     children,
     rest,
   } = props;
@@ -252,6 +253,12 @@ const Modal = forwardRef((props, ref) => {
     isOpen: { opacity: 1 },
     exit: { opacity: 0 },
   };
+
+  useEffect(() => {
+    if(show === true) {
+      onFinishOpen();
+    }
+  }, [show])
 
   return (
     <>
