@@ -47,7 +47,7 @@ const DecimalInput = forwardRef((props, ref) => {
   };
 
   const onValueChange = (valueObject, eventObject) => {
-    debouncedOnChange(eventObject.event, _value);
+    debouncedOnChange(eventObject.event, valueObject?.floatValue);
   };
 
   const getDecimalScale = () => {
