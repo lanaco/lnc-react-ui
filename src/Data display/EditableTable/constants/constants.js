@@ -3,6 +3,7 @@ export const inputType = {
   STRING: "STRING",
   INTEGER: "INTEGER",
   DECIMAL: "DECIMAL",
+  DECIMAL2: "DECIMAL2",
   DATE: "DATE",
   SELECT: "SELECT",
 };

@@ -32,7 +32,7 @@ const MultiSelectDropdownLookup = forwardRef((props, ref) => {
     // cacheOptions,
     // loadOptions,
     styles,
-    debounceTime = 180,
+    debounceTime = 0,
     // name,
     // hideSelectedOptions,
     // id,

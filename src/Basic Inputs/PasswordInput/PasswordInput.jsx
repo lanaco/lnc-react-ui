@@ -19,7 +19,7 @@ const PasswordInput = forwardRef((props, ref) => {
     wrapperRef,
     disabled,
     readOnly,
-    debounceTime = 180,
+    debounceTime = 0,
     placeholder,
     prefix,
     suffix,

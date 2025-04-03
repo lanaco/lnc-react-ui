@@ -9,6 +9,7 @@ import NumberInput from "../../../Basic Inputs/NumberInput/NumberInput";
 import DecimalInput from "../../../Basic Inputs/DecimalInput/DecimalInput";
 import CheckBoxInput from "../../../Basic Inputs/CheckBoxInput/CheckBoxInput";
 import Dropdown from "../../../Inputs/Dropdown/Dropdown";
+import DecimalInputV2 from "../../../Basic Inputs/DecimalInputV2/DecimalInputV2";
 
 const HtmlCell = styled.td`
   white-space: nowrap;
@@ -174,6 +175,10 @@ const EditableTableCell = (props) => {
 
       case inputType.DECIMAL:
         inputComponent = <DecimalInput {...inputProps} ref={inputRef} />;
+        break;
+
+      case inputType.DECIMAL2:
+        inputComponent = <DecimalInputV2 {...inputProps} ref={inputRef} />;
         break;
 
       case inputType.DATE:

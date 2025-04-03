@@ -19,6 +19,7 @@ export default defineConfig({
         resolve(__dirname, "src/Basic Inputs/ColorInput/ColorInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/DateInput/DateInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/DecimalInput/DecimalInput.jsx"),
+        resolve(__dirname, "src/Basic Inputs/DecimalInputV2/DecimalInputV2.jsx"),
         resolve(__dirname, "src/Basic Inputs/FileInput/FileInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/NumberInput/NumberInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/PasswordInput/PasswordInput.jsx"),
