@@ -192,6 +192,13 @@ const DecimalInputV2 = forwardRef((props, ref) => {
     onKeyDown(e);
   };
 
+  const handleChange = (e) => {
+    e.target.value = valRef.current;
+
+    onInputChange(e, valRef?.current)
+    onChange(e, valRef?.current);
+  };
+
   return (
     <StyledWrapper
       style={style}
@@ -226,10 +233,7 @@ const DecimalInputV2 = forwardRef((props, ref) => {
         className="lnc-ui-decimal-v2-input"
         onFocus={handleFocus}
         disabled={disabled || readOnly}
-        onChange={(e) => {
-          onInputChange(e);
-          onChange(e);
-        }}
+        onChange={handleChange}
       />
 
       {suffix && (
