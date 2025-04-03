@@ -193,10 +193,15 @@ const DecimalInputV2 = forwardRef((props, ref) => {
   };
 
   const handleChange = (e) => {
-    e.target.value = valRef.current;
+    let numbersArray = valRef?.current?.split(decimalSeparator);
+    let afterScale = +numbersArray?.at(0);
+    let beforeScale = numbersArray?.at(1)?.length > 0 ? `0.${numbersArray?.at(1)}` : 0;
 
-    onInputChange(e, valRef?.current)
-    onChange(e, valRef?.current);
+    let resValue = afterScale + (+beforeScale);
+
+    e.target.value = resValue;
+    onInputChange(e, resValue);
+    onChange(e, resValue);
   };
 
   return (
