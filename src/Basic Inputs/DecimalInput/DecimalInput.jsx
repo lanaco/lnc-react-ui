@@ -13,7 +13,7 @@ const DecimalInput = forwardRef((props, ref) => {
   const {
     disabled,
     readOnly,
-    debounceTime = 180,
+    debounceTime = 0,
     prefix,
     suffix,
     thousandSeparator = ".",
@@ -23,9 +23,9 @@ const DecimalInput = forwardRef((props, ref) => {
     allowNegative = true,
     //----------------
     onChange,
-    onKeyDown,
     onBlur,
     onFocus,
+    onInputChange,
     //----------------
     className = "",
     style = {},
@@ -44,6 +44,7 @@ const DecimalInput = forwardRef((props, ref) => {
 
   const handleChange = (e, value) => {
     if (onChange) onChange?.(e, value);
+    onInputChange?.(e, value);
   };
 
   const onValueChange = (valueObject, eventObject) => {
@@ -169,6 +170,10 @@ DecimalInput.propTypes = {
    * `(event, value) => void`
    */
   onChange: PropTypes.func,
+  /**
+   * `(event, value) => void`
+   */
+  onInputChange: PropTypes.func,
   /**
    * `(event) => void`
    */

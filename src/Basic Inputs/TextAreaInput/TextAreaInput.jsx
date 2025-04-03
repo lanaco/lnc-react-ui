@@ -14,7 +14,7 @@ const TextAreaInput = forwardRef((props, ref) => {
     readOnly,
     value,
     defaultValue,
-    debounceTime = 180,
+    debounceTime = 0,
     type = "textarea",
     collapseOnBlur = false,
     minRows = 0,

@@ -11,7 +11,7 @@ const Dropdown = forwardRef((props, ref) => {
   const {
     // options,
     styles,
-    debounceTime = 180,
+    debounceTime = 0,
     name,
     // hideSelectedOptions,
     // id,

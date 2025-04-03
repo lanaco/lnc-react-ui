@@ -83,7 +83,7 @@ const TimeInput = forwardRef((props, ref) => {
     readOnly,
     defaultValue,
     value,
-    debounceTime = 180,
+    debounceTime = 0,
     // tabIndex,
     //----------------
     onChange,

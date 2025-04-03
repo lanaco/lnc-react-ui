@@ -223,6 +223,8 @@ export const TemplateDefault = (props) => {
     loadData();
   };
   const onFieldChanged = (e, value, rowIndex, cellIndex, column, rowData) => {
+        console.log("datacopdaaay", data);
+
     var dataCopy = cloneDeep(data);
     var itemToUpdate = isEmpty(rowData.id)
       ? dataCopy[rowIndex]
@@ -239,6 +241,8 @@ export const TemplateDefault = (props) => {
         itemToUpdate[column.accessor] = value;
       }
     }
+    
+    console.log("datacopy", dataCopy);
     setData(dataCopy);
   };
   const validateEdit = (rowData) => {
@@ -365,6 +369,7 @@ Supported column data types:
 - `STRING` - TextInput
 - `INTEGER` - NumberInput
 - `DECIMAL` - DecimalInput
+- `DECIMAL2` - DecimalInputV2
 - `DATE` - DateInput
 - `SELECT` - Dropdown
 

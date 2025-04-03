@@ -139,7 +139,7 @@ const ColorInput = forwardRef((props, ref) => {
     className = "",
     style = {},
     color = "primary",
-    debounceTime = 180,
+    debounceTime = 0,
     readOnly,
     disabled,
     onChange = () => {},

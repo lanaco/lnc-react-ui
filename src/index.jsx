@@ -11,6 +11,8 @@ export {
 
 export { default as DecimalInput } from "./Basic Inputs/DecimalInput/DecimalInput";
 
+export { default as DecimalInputV2 } from "./Basic Inputs/DecimalInputV2/DecimalInputV2";
+
 export { default as FileInput } from "./Basic Inputs/FileInput/FileInput";
 
 export { default as NumberInput } from "./Basic Inputs/NumberInput/NumberInput";
