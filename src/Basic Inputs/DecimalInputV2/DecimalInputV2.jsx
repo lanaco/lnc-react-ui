@@ -29,6 +29,7 @@ const DecimalInputV2 = forwardRef((props, ref) => {
     size = "small",
     color = "primary",
     onInputChange = () => {},
+    allowNull = true,
     ...rest
   } = props;
   const theme = useTheme();
@@ -69,6 +70,11 @@ const DecimalInputV2 = forwardRef((props, ref) => {
           );
         }
       }
+    } else if (
+      allowNull === true &&
+      (value === null || value === undefined || value === "")
+    ) {
+      return "";
     }
 
     return "0" + decimalSeparator + new Array(decimalScale + 1).join("0");
@@ -156,6 +162,11 @@ const DecimalInputV2 = forwardRef((props, ref) => {
         valRef.current = output;
 
         setVal(valRef.current);
+      } else if (+fullStr === 0 && allowNull === true && valRef?.current !== "") {
+        valRef.current = "";
+        setVal(valRef.current);
+
+        handleChange(e);
       }
     } else if (e.key === "-" && allowNegative === true && +fullStr !== 0) {
       if (valRef?.current?.slice(1) === "-") {
@@ -165,7 +176,11 @@ const DecimalInputV2 = forwardRef((props, ref) => {
       }
       setVal(valRef.current);
     } else if (!isNaN(e.key)) {
-      fullStr = fullStr + e.key;
+      if (fullStr?.length === 0) {
+        fullStr = "0" + new Array(decimalScale).join("0") + e.key;
+      } else {
+        fullStr = fullStr + e.key;
+      }
 
       let afterDecimalScale = fullStr.slice(0, fullStr?.length - decimalScale);
       let beforeDecimalScale = fullStr.slice(fullStr?.length - decimalScale);
@@ -193,13 +208,23 @@ const DecimalInputV2 = forwardRef((props, ref) => {
   };
 
   const handleChange = (e) => {
+    if (valRef?.current === "") {
+
+      e.target.value = "";
+      onInputChange(e, null);
+
+      onChange(e, null);
+      return;
+    }
+
     let numbersArray = valRef?.current?.split(decimalSeparator);
     let afterScale = +numbersArray?.at(0);
-    let beforeScale = numbersArray?.at(1)?.length > 0 ? `0.${numbersArray?.at(1)}` : 0;
+    let beforeScale =
+      numbersArray?.at(1)?.length > 0 ? `0.${numbersArray?.at(1)}` : 0;
 
-    let resValue = afterScale + (+beforeScale);
-
+    let resValue = afterScale + +beforeScale;
     e.target.value = resValue;
+
     onInputChange(e, resValue);
     onChange(e, resValue);
   };
@@ -238,7 +263,10 @@ const DecimalInputV2 = forwardRef((props, ref) => {
         className="lnc-ui-decimal-v2-input"
         onFocus={handleFocus}
         disabled={disabled || readOnly}
-        onChange={handleChange}
+        onChange={(e) => {
+          console.log("CHG", e)
+          handleChange(e);
+        }}
       />
 
       {suffix && (
