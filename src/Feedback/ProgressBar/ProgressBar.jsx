@@ -71,7 +71,6 @@ const ProgressBar = forwardRef((props, ref) => {
     onChange = () => {},
     size = "small",
     color = "primary",
-    // progressBarEndComponent = null,
     progressBarEndComponent,
     ...rest
   } = props;
@@ -80,7 +79,6 @@ const ProgressBar = forwardRef((props, ref) => {
 
   const clonedProgress = () => {
     if (isValidElement(progressBarEndComponent)) {
-      console.log("is valid")
       return cloneElement(progressBarEndComponent, {
         className: `progress-icon ${progressBarEndComponent?.props?.className}`
       });
