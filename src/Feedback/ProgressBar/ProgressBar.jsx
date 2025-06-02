@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { forwardRef } from "react";
+import { cloneElement, forwardRef, isValidElement } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -26,6 +26,7 @@ const Bar = styled.div`
 `;
 
 const Progressed = styled.div`
+  position: relative;
   height: 100%;
   width: ${(props) => props.progressPercentage + "%"};
   background-color: ${(props) =>
@@ -36,10 +37,17 @@ const Progressed = styled.div`
       "enabled",
       "background"
     )};
-  position absolute;
+  position: absolute;
   border-radius: ${(props) =>
     props.progressPercentage == 100 ? "5px" : "5px 0px 0px 5px"};
   transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+  & .progress-icon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(50%, -50%);
+  }
 `;
 
 const Label = styled.label`
@@ -63,10 +71,22 @@ const ProgressBar = forwardRef((props, ref) => {
     onChange = () => {},
     size = "small",
     color = "primary",
+    // progressBarEndComponent = null,
+    progressBarEndComponent,
     ...rest
   } = props;
 
   const theme = useTheme();
+
+  const clonedProgress = () => {
+    if (isValidElement(progressBarEndComponent)) {
+      console.log("is valid")
+      return cloneElement(progressBarEndComponent, {
+        className: `progress-icon ${progressBarEndComponent?.props?.className}`
+      });
+    }
+  };
+
 
   return (
     <Bar
@@ -75,13 +95,17 @@ const ProgressBar = forwardRef((props, ref) => {
       theme={theme}
       size={size}
       showLabel={showLabel}
+      progressPercentage={progressPercentage}
       {...rest}
     >
       <Progressed
         progressPercentage={progressPercentage}
         theme={theme}
         color={color}
-      />
+      >
+        
+        {progressBarEndComponent !== null && clonedProgress()}
+      </Progressed>
       {showLabel && (
         <Label theme={theme} size={size}>
           {progressPercentage}%
@@ -126,6 +150,7 @@ ProgressBar.propTypes = {
     "neutral",
     "gray",
   ]),
+  progressBarEndComponent: PropTypes.any
 };
 
 export default ProgressBar;

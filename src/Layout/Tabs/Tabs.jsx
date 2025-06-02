@@ -53,7 +53,6 @@ const Tabs = forwardRef((props, ref) => {
       activeIndex: activeIndex,
       color: color,
       size: size,
-      fullWidth: fullWidth,
     })
   );
 

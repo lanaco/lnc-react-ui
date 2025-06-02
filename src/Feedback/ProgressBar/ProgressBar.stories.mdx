@@ -3,6 +3,7 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import ProgressBar from "./ProgressBar";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Icon from "../../General/Icon/Icon";
 
 <Meta title="Feedback/Progress Bar" component={ProgressBar} />
 
@@ -44,7 +45,22 @@ export const TemplateColors = (args) => (
 ## With Label
 
 <Canvas>
-  <Story name="With Label" args={{ showLabel: true, progressPercentage: 20 }}>
+  <Story name="With Label" args={{ showLabel: false, progressPercentage: 20 }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
+
+## With Icon
+
+<Canvas>
+  <Story
+    name="With Icon"
+    args={{
+      showLabel: false,
+      progressPercentage: 20,
+      progressBarEndComponent: <div style={{padding: "5px", borderRadius: "50%", backgroundColor: "white"}}><Icon icon="user" color="primary" /></div>,
+    }}
+  >
     {TemplateDefault.bind({})}
   </Story>
 </Canvas>
