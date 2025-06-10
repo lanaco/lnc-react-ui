@@ -1,0 +1,1 @@
+export const MOBILE_SIZE_PX = 800;

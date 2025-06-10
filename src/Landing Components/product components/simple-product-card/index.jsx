@@ -1,0 +1,46 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-empty-pattern */
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
+import { Wrapper } from "./style";
+import {
+  formatPrice,
+  GetCurrencySymbol,
+  isDefined,
+} from "../../../_utils/utils";
+
+const SimpleProductCard = forwardRef((props, ref) => {
+  const {
+    uuid,
+    title,
+    price,
+    currency,
+    isNegotiable,
+    isFree,
+    image,
+    sellerUuid,
+    onSelectCard = () => {},
+    imageComponent,
+    negotiableText = "Negotiable",
+    freeText = "Free",
+  } = props;
+
+  return (
+    <Wrapper className="simple-product-card" onClick={onSelectCard}>
+      {isDefined(imageComponent) ? imageComponent : <img src={image} />}
+      <div className="text-block">
+        <div className="title-simple-product-card">{title}</div>
+        <div className="price-chip">
+          {price &&
+            currency &&
+            `${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
+          {isNegotiable && negotiableText}
+          {isFree && freeText}
+        </div>
+      </div>
+    </Wrapper>
+  );
+});
+
+export default SimpleProductCard;

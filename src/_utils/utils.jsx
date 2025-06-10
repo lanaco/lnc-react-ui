@@ -218,3 +218,130 @@ export const getDisabledBackgroundCss = (theme) => {
     background-color: ${bgColorRgba};
   `;
 };
+
+export const truncateText = () => {
+  return `
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `;
+};
+
+export const truncateTextInRows = (rowCount) => {
+  if (
+    rowCount === null ||
+    rowCount === undefined ||
+    rowCount == 0 ||
+    rowCount == 1
+  ) {
+    return truncateText();
+  }
+
+  return `
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+
+    @supports (-webkit-line-clamp: ${rowCount}) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: initial;
+      display: -webkit-box;
+      -webkit-line-clamp: ${rowCount};
+      -webkit-box-orient: vertical;    
+    }
+  `;
+};
+
+export const linearGradientAnimation = (
+  deg = "-45deg",
+  bgSizePercent = "500% 500%",
+  firstColor = "#b3b9c4",
+  secondColor = "#e5e9f1"
+) => {
+  return `
+    @keyframes gradient {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 0% 100%;
+      }
+
+      500% {
+        background-position: 0% 0%;
+      }
+    }
+
+    background: linear-gradient(${deg}, ${firstColor}, ${secondColor});
+    background-size: ${bgSizePercent};
+    animation: gradient 1s linear infinite alternate;
+  `;
+};
+
+export const isDefinedNotEmptyString = (data) =>
+  data !== null && data !== undefined && data !== "";
+
+export const isDefined = (data) => data !== null && data !== undefined;
+
+export const formatPrice = (price) => {
+  // Use 'de-DE' locale (Germany) to format the price with comma as decimal separator.
+  return Number.isInteger(Number(price))
+    ? new Intl.NumberFormat("de-DE").format(price)
+    : new Intl.NumberFormat("de-DE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(price);
+};
+
+
+export const CurrencySymbolMap = {
+  EUR: "€",
+  BAM: "KM",
+  USD: "$",
+  GBP: "£",
+  CHF: "CHF",
+  HRK: "kn",
+  RSD: "RSD",
+  BGN: "лв",
+  MKD: "ден",
+  PLN: "zł",
+  CZK: "Kč",
+  HUF: "Ft",
+  RON: "lei",
+  TRY: "₺",
+  SEK: "kr",
+  DKK: "kr",
+  NOK: "kr",
+  ISK: "kr",
+  CAD: "C$",
+  AUD: "A$",
+  NZD: "NZ$",
+  JPY: "¥",
+  CNY: "¥",
+  KRW: "₩",
+  INR: "₹",
+  PKR: "₨",
+  AED: "د.إ",
+  SAR: "ر.س",
+  QAR: "ر.ق",
+  KWD: "د.ك",
+  OMR: "ر.ع.",
+  BHD: "د.ب",
+  JOD: "د.ا",
+  LBP: "ل.ل",
+  EGP: "E£",
+  ZAR: "R",
+  NGN: "₦",
+  GHS: "₵",
+  KES: "KSh",
+  TZS: "TSh",
+};
+
+export const GetCurrencySymbol = (currency) => {
+  return CurrencySymbolMap[currency] || "";
+};

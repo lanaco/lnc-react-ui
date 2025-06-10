@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import ActionsToolbar from "./ActionsToolbar";
@@ -57,6 +57,7 @@ const TableView = forwardRef((props, ref) => {
     color = "primary",
     size = "small",
     children,
+    onChangeRowsSelection = () => {},
     ...rest
   } = props;
 
@@ -75,18 +76,24 @@ const TableView = forwardRef((props, ref) => {
   };
 
   const [selectedRows, setSelectedRows] = useState([]);
+  const selectedRowsRef = useRef([]);
 
   const handleSelectedRow = (row, isSelected) => {
     if (isSelected) {
-      rowsMultiSelect
-        ? setSelectedRows([...selectedRows, row])
-        : rowsSingleSelect
-        ? setSelectedRows([row])
-        : null;
+      if (rowsMultiSelect || rowsSingleSelect) {
+        selectedRowsRef.current = rowsMultiSelect
+          ? [...selectedRowsRef.current, row]
+          : [row];
+        onChangeRowsSelection(selectedRowsRef?.current);
+        setSelectedRows(selectedRowsRef?.current);
+      }
     } else {
-      rowsMultiSelect
-        ? setSelectedRows((rows) => rows.filter((r) => r != row))
-        : setSelectedRows([]);
+      selectedRowsRef.current = rowsMultiSelect
+        ? selectedRowsRef?.current?.filter((r) => r != row)
+        : [];
+      onChangeRowsSelection?.(selectedRowsRef?.current);
+
+      setSelectedRows(selectedRowsRef?.current);
     }
   };
 
@@ -113,12 +120,16 @@ const TableView = forwardRef((props, ref) => {
 
   const handleEdit = (e) => {
     onEdit(selectedRows, e);
+    selectedRowsRef.current = [];
     setSelectedRows([]);
+    onChangeRowsSelection([]);
   };
 
   const handleDelete = (e) => {
     onDelete(selectedRows, e);
+    selectedRowsRef.current = [];
     setSelectedRows([]);
+    onChangeRowsSelection([]);
   };
 
   const handlePageChange = (page) => {
@@ -150,6 +161,7 @@ const TableView = forwardRef((props, ref) => {
           actionsDropdownZIndex={actionsDropdownZIndex}
           actionDropdownProps={actionDropdownProps}
           actionsDropdownPlacement={actionsDropdownPlacement}
+          selectedRows={selectedRowsRef?.current}
         />
       )
     );
