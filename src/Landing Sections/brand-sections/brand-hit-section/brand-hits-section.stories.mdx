@@ -1,0 +1,53 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import BrandHitsSection from ".";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Brand Hits Section"
+  component={BrandHitsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <BrandHitsSection
+    title="The biggest Mungos hits"
+    onSelectCard={(uuid) => {}}
+    items={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/300",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/300",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/300",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/300",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/300",
+      }
+    ]}
+  />
+);
+
+## Brand hits section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BrandHitsSection } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
