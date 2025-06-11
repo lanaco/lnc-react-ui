@@ -15,7 +15,7 @@ export const TemplateDefault = (args) => (
           title={"Lorem ipsum dolor sit amet"}
           subtitle={"Lorem ipsum dolor"}
           buttonText={"Lorem ipsum dolor"}
-          buttonLink={"https://www.google.com/"}
+          onBannerClick={() => window.open("https://www.google.com/", "_blank")}
           image={"https://picsum.photos/200/300"}
           noBorder={true}
         />
@@ -25,7 +25,7 @@ export const TemplateDefault = (args) => (
           title={"Lorem ipsum dolor sit amet"}
           subtitle={"Lorem ipsum dolor"}
           buttonText={"Lorem ipsum dolor"}
-          buttonLink={"https://www.google.com/"}
+          onBannerClick={() => window.open("https://www.google.com/", "_blank")}
           image={"https://picsum.photos/200/300"}
           imagePosition="left"
           noBorder={false}
