@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
