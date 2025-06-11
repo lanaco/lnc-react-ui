@@ -406,6 +406,19 @@ Example with sortable columns.
             },
           }}
           pagination={false}
+          customActions={[
+            {
+              name: "Action 1",
+              enableOnSelection: true,
+              onAction: () => {},
+            },
+            {
+              name: "Action 2",
+              icon: "cog",
+              enableOnSelection: true,
+              onAction: () => {},
+            },
+          ]}
         ></TableView>
       );
     }}

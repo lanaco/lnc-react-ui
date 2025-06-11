@@ -75,6 +75,7 @@ const ActionsToolbar = forwardRef((props, ref) => {
     style = {},
     color = "primary",
     size = "small",
+    selectedRows,
     ...rest
   } = props;
 
@@ -165,7 +166,9 @@ const ActionsToolbar = forwardRef((props, ref) => {
                         action.enableOnSelection == false)
                     )
                   }
-                  onClick={action.onAction}
+                  onClick={() => {
+                    action.onAction(selectedRows);
+                  }}
                 >
                   {action.name}
                 </DropdownItem>
