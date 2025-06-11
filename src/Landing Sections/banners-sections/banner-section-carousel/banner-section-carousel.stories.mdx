@@ -1,0 +1,56 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import BannerSectionCarousel from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Banner Sections"
+  component={BannerSectionCarousel}
+/>
+
+export const TemplateDefault = (args) => (
+  <BannerSectionCarousel
+    items={[
+      {
+        id: "1",
+        title: "Da nas ljeto ne uhvati nespremne!",
+        shopUuid: 1,
+        actionText: "Shop now",
+        description:
+          "Iskoristi first minute cijene na montažne bazene! -15% na sve modele",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        id: "2",
+        title: "Automobili na Mungosu!",
+        shopUuid: 1,
+        actionText: "Shop now",
+        description:
+          "Ne želiš da ti stari stane na pola puta dok ideš na more? Nabavi novi!",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        id: "3",
+        title: "Tražiš nekretninu?",
+        shopUuid: 1,
+        actionText: "Shop now",
+        description:
+          "Mungos te vodi do tvog novog doma! Stanovi od 30 do 100 kvadrata na sjajnim lokacijama.",
+        image: "https://picsum.photos/200/300",
+      },
+    ]}
+  />
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BannerSectionCarousel } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
