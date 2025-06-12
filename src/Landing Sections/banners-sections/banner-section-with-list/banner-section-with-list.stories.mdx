@@ -1,0 +1,36 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import BannerSectionWithList from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Banner Section With List"
+  component={BannerSectionWithList}
+/>
+
+export const TemplateDefault = (args) => (
+  <BannerSectionWithList
+    title={"Lorem ipsum dolor sit amet"}
+    subtitle={"Lorem ipsum dolor"}
+    buttonText={"Lorem ipsum dolor"}
+    onBannerClick={() => window.open("https://www.google.com/", "_blank")}
+    list={[
+      "Ovdje može pisati zašto je bitno da znamo kolika nam je dnevna kalorijska potreba.",
+      "Ovdje može pisati zašto je bitno da znamo kolika nam je dnevna kalorijska potreba.",
+      "From certified dealers from all over Europe",
+    ]}
+  />
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BannerSectionWithList } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
