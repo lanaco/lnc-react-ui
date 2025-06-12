@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   max-width: 76rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 1.5rem;
 
   & .wrapper__heading {
     display: flex;
@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
     text-align: center;
 
     & .wrapper__title {
-      color: var(--gray-950);
+      color: var(--gray-950, #14161a);
       text-align: center;
       font-size: 1.5rem;
       font-style: normal;
@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
     }
 
     & .wrapper__subtitle {
-      color: var(---gray-600);
+      color: var(---gray-600, #676e79);
       font-size: 0.875rem;
       font-style: normal;
       font-weight: 400;
@@ -35,27 +35,26 @@ export const Wrapper = styled.div`
     }
   }
 
-  & .wrapper__content {
+  & .wrapper__tags {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 0.75rem;
     align-self: stretch;
+  }
 
-    & .wrapper__item {
-      max-width: 7.5rem;
-    }
+  & .wrapper__cards {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 76rem;
+    align-items: flex-start;
+    gap: 1.5rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    & .wrapper__content {
-      align-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-
-      & .wrapper__item {
-        max-width: 4 0.5rem;
-      }
+    & .wrapper__tags {
+      overflow-x: scroll;
+      justify-content: flex-start;
     }
   }
 `;

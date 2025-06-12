@@ -27,12 +27,11 @@ export const Wrapper = styled.div`
 
 export const SkeletonWrapper = styled.div`
   width: 7.5rem;
-  height: auto;
-  max-height: 7.5rem;
+  height: 7.5rem;
+  background: ${linearGradientAnimation("-90deg")};
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     width: 4.5rem;
     height: 4.5rem;
-    background-color: ${linearGradientAnimation("-90deg")};
   }
 `;

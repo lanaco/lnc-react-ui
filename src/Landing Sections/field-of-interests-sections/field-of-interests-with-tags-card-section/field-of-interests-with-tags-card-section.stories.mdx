@@ -1,0 +1,62 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import FieldOfInterestsWithTagsCardSection from ".";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Field of Interests With Tags Card Section"
+  component={FieldOfInterestsWithTagsCardSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <FieldOfInterestsWithTagsCardSection
+    title="Find equipment for every activity"
+    onSelectCard={(uuid) => {}}
+    cards={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Footbal boots and jersey",
+        description: "Venenatis netus tortor ipsum laoreet neque.",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Footbal boots and jersey",
+        description: "Venenatis netus tortor ipsum laoreet neque.",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Footbal boots and jersey",
+        description: "Venenatis netus tortor ipsum laoreet neque.",
+      },
+    ]}
+    tags={[
+      { text: "Football", icon: " mng-lnc-football" },
+      { text: "Basketball", icon: " mng-lnc-basketball" },
+      { text: "Running", icon: " mng-lnc-run" },
+      { text: "Fitness", icon: " mng-lnc-sport" },
+      { text: "Outdoor", icon: " mng-lnc-campfire" },
+      { text: "Ski", icon: " mng-lnc-ski" },
+      { text: "Other", icon: " mng-lnc-sport-1" },
+    ]}
+  />
+);
+
+## Brand hits section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import { FieldOfInterestsWithTagsCardSection } from "@lanaco/lnc-react-ui";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
