@@ -1,6 +1,8 @@
-import styled from "styled-components";
-import { getBorderRadiusValueWithUnits, getColorRgbaValue } from "../_utils/utils";
-
+import styled from "@emotion/styled";
+import {
+  getBorderRadiusValueWithUnits,
+  getColorRgbaValue,
+} from "../_utils/utils";
 
 export const color = (p, field, opacity = null) => {
   if (opacity !== null) {
