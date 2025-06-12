@@ -4,11 +4,11 @@ import { isDefined } from "../../../_utils/utils";
 import { AvatarWrapper } from "./style";
 
 const FieldOfInterestsWithAvatarsCardAvatar = forwardRef(
-  ({ isActive, image, imageComponent, onCardSelect = () => {} }, ref) => {
+  ({ isActive, image, imageComponent, onSelectCard = () => {} }, ref) => {
     return (
       <AvatarWrapper
         className={isActive ? "active" : ""}
-        onClick={onCardSelect}
+        onClick={onSelectCard}
       >
         {isDefined(imageComponent) ? (
           imageComponent

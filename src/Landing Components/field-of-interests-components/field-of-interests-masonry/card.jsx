@@ -5,15 +5,22 @@ import { useTheme } from "@emotion/react";
 import { isDefined } from "../../../_utils/utils";
 import { Wrapper } from "./style";
 
-const FieldOfInterestsWithTagsCard = forwardRef(
+const FieldOfInterestsMasonryCard = forwardRef(
   (
-    { image, imageComponent, title, description, onSelectCard = () => {} },
+    {
+      image,
+      imageComponent,
+      title,
+      description,
+      className,
+      onSelectCard = () => {},
+    },
     ref
   ) => {
     const { theme } = useTheme();
 
     return (
-      <Wrapper theme={theme} onClick={onSelectCard}>
+      <Wrapper theme={theme} className={className} onClick={onSelectCard}>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
@@ -30,4 +37,4 @@ const FieldOfInterestsWithTagsCard = forwardRef(
   }
 );
 
-export default FieldOfInterestsWithTagsCard;
+export default FieldOfInterestsMasonryCard;

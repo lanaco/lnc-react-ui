@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import Icon from "../../../General/Icon/Icon";
 import { TagWrapper } from "./style";
 
-const FieldOfInterestsWithTagsCardTag = forwardRef(
+const FieldOfInterestsMasonryTag = forwardRef(
   ({ text, isActive, icon, onSelectCard = () => {} }, ref) => {
     return (
       <TagWrapper className={isActive ? "active" : ""} onClick={onSelectCard}>
@@ -14,4 +14,4 @@ const FieldOfInterestsWithTagsCardTag = forwardRef(
   }
 );
 
-export default FieldOfInterestsWithTagsCardTag;
+export default FieldOfInterestsMasonryTag;

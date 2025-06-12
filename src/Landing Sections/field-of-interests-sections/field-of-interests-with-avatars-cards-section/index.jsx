@@ -38,7 +38,7 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
                   image={avatar?.image}
                   imageComponent={avatar?.imageComponent}
                   // isActive={tag?.uuid === active}
-                  onCardSelect={() => handleSelectAvatar?.(avatar)}
+                  onSelectCard={() => handleSelectAvatar?.(avatar)}
                 />
               ))
             : Array.from("12345")?.map((_, idx) => (

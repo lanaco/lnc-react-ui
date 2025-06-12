@@ -1,12 +1,13 @@
 import { forwardRef, useState } from "react";
 
-import FieldOfInterestsWithTagsCardTagSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/tag-skeleton";
-import FieldOfInterestsWithTagsCardTag from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/tag";
-import FieldOfInterestsWithTagsCard from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/card";
-import FieldOfInterestsWithTagsCardSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/card-skeleton";
+import FieldOfInterestsMasonryTagSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag-skeleton";
+import FieldOfInterestsMasonryTag from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag";
+import FieldOfInterestsMasonry from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/card";
+import FieldOfInterestsMasonrySkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/card-skeleton";
 import { Wrapper } from "./style";
+import { useEffectOnce } from "react-use";
 
-const FieldOfInterestsWithTagsCardsSection = forwardRef(
+const FieldOfInterestsMasonrySection = forwardRef(
   (
     { title, subtitle, tags = [], cards = [], onSelectCard = () => {} },
     ref
@@ -22,6 +23,26 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       onSelectCard?.(tag?.uuid);
     };
 
+    useEffectOnce(() => {
+      const applyMasonry = () => {
+        const grid = document.querySelector(".wrapper__cards");
+        const items = grid.querySelectorAll(".wrapper__card");
+
+        items.forEach((item) => {
+          const itemHeight = item.getBoundingClientRect().height;
+          const rowSpan = Math.ceil((itemHeight + 10) / (10 + 10));
+          item.style.gridRowEnd = `span ${rowSpan}`;
+        });
+      };
+
+      applyMasonry();
+      window.addEventListener("resize", applyMasonry);
+
+      return () => {
+        window.removeEventListener("resize", applyMasonry);
+      };
+    });
+
     return (
       <Wrapper>
         <div className="wrapper__heading">
@@ -31,8 +52,8 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
         <div className="wrapper__tags">
           {tags && tags?.length > 0
             ? tags?.map((tag, idx) => (
-                <FieldOfInterestsWithTagsCardTag
-                  key={`field-of-interests-with-tags-card-tag__${idx + 1}`}
+                <FieldOfInterestsMasonryTag
+                  key={`field-of-interests-masonry-tag__${idx + 1}`}
                   icon={tag?.icon}
                   text={tag?.text}
                   // isActive={tag?.uuid === active}
@@ -40,27 +61,26 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                 />
               ))
             : Array.from("12345")?.map((_, idx) => (
-                <FieldOfInterestsWithTagsCardTagSkeleton
-                  key={`field-of-interests-with-tags-card-tag-skeleton__${
-                    idx + 1
-                  }`}
+                <FieldOfInterestsMasonryTagSkeleton
+                  key={`field-of-interests-masonry-tag-skeleton__${idx + 1}`}
                 />
               ))}
         </div>
         <div className="wrapper__cards">
           {cards && cards?.length > 0
             ? cards?.map((card, idx) => (
-                <FieldOfInterestsWithTagsCard
+                <FieldOfInterestsMasonry
                   key={`field-of-interests-with-tags-card__${idx + 1}`}
                   image={card?.image}
                   imageComponent={card?.imageComponent}
                   title={card?.title}
                   description={card?.description}
                   onSelectCard={() => handleSelectCard?.(card?.uuid)}
+                  className="wrapper__card"
                 />
               ))
             : Array.from("12345")?.map((_, idx) => (
-                <FieldOfInterestsWithTagsCardSkeleton
+                <FieldOfInterestsMasonrySkeleton
                   key={`field-of-interests-with-tags-card-skeleton__${idx + 1}`}
                 />
               ))}
@@ -70,4 +90,4 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
   }
 );
 
-export default FieldOfInterestsWithTagsCardsSection;
+export default FieldOfInterestsMasonrySection;
