@@ -52,7 +52,7 @@ export const Wrapper = styled.div`
     }
 
     & .text__tag {
-      background-color: var(---warning-600, #d97706);
+      background-color: var(--warning-600, #d97706);
       color: var(--white, #ffffff);
       font-size: 0.875rem;
       font-style: normal;

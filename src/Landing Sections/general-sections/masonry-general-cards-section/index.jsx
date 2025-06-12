@@ -20,7 +20,6 @@ const MasonryGeneralCardsSection = forwardRef(
             items?.map((item, index) => (
               <LandingPageMasonryGeneralCard
                 key={`landing-page-masonry-general-card__${index + 1}`}
-                title="Lorem ipsum dolor"
                 {...item}
               />
             ))}

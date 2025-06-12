@@ -34,7 +34,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
         >
           <img src={image} className="wrapper__image" />
           <div className="wrapper__text">
-            {tag && <tag className="text__tag">{tag}</tag>}
+            {tag && <div className="text__tag">{tag}</div>}
             <div className="text__title">{title}</div>
             {isDefinedNotEmptyString(description) && (
               <div className="text__description">{description}</div>
