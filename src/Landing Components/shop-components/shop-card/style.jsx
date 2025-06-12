@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
-import { BorderPanel } from "src/ui/styles";
-import { linearGradientAnimation } from "src/ui/styles";
+import { BorderPanel } from "../../style";
+import { linearGradientAnimation } from "../../../_utils/utils";
 
 export const Wrapper = styled(BorderPanel)`
   display: flex;

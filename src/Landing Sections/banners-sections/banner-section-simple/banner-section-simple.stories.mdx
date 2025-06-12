@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import BannerSectionSimple from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Banner Section Simple"
+  component={BannerSectionSimple}
+/>
+
+export const TemplateDefault = (args) => (
+  <>
+        <BannerSectionSimple
+          title={"Lorem ipsum dolor sit amet"}
+          subtitle={"Lorem ipsum dolor"}
+          buttonText={"Lorem ipsum dolor"}
+          onBannerClick={() => window.open("https://www.google.com/", "_blank")}
+          image={"https://picsum.photos/500/700"}
+          noBorder={true}
+        />
+        <br />
+        <br />
+        <BannerSectionSimple
+          title={"Lorem ipsum dolor sit amet"}
+          subtitle={"Lorem ipsum dolor"}
+          buttonText={"Lorem ipsum dolor"}
+          onBannerClick={() => window.open("https://www.google.com/", "_blank")}
+          image={"https://picsum.photos/600/400"}
+          imagePosition="left"
+          noBorder={false}
+          smallPadding={true}
+          isHorizontalContent={true}
+          hasBorder={true}
+          height={"11.25rem"}
+          noImageForMobile={true}
+        />
+
+  </>
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BannerSectionSimple } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

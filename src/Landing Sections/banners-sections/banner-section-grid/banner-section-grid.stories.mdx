@@ -1,0 +1,43 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import BannerSectionGrid from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Banner Section Grid"
+  component={BannerSectionGrid}
+/>
+
+export const TemplateDefault = (args) => (
+  <BannerSectionGrid
+    image1={"https://picsum.photos/400/300"}
+    image2={"https://picsum.photos/400/300"}
+    title1={"Lorem ipsum dolor sit amet"}
+    title2={"Lorem ipsum dolor sit amet"}
+    text1={
+      "Lorem ipsum dolor sit amet consectetur. Pellentesque vulputate ultrices etiam auctor"
+    }
+    text2={
+      "Lorem ipsum dolor sit amet consectetur. Pellentesque vulputate ultrices etiam auctor"
+    }
+    subtitle1={"Lorem ipsum dolor"}
+    subtitle2={"Lorem ipsum dolor"}
+    buttonText1={"Lorem ipsum dolor"}
+    buttonText2={"Lorem ipsum dolor"}
+    buttonLink1={"https://www.google.com/"}
+    buttonLink2={"https://www.google.com/"}
+  />
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BannerSectionGrid } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

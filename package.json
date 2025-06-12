@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.21",
+  "version": "4.0.23",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -142,6 +142,7 @@
     "react-hook-form": "^7.39.1",
     "react-modern-drawer": "^1.1.2",
     "react-number-format": "^4.9.3",
+    "react-responsive-carousel": "^3.2.23",
     "react-select": "^5.4.0",
     "react-syntax-highlighter": "^15.5.0",
     "react-textarea-autosize": "^8.3.4",
