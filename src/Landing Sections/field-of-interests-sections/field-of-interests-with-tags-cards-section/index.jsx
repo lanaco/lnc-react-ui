@@ -6,15 +6,19 @@ import FieldOfInterestsWithTagsCard from "../../../Landing Components/field-of-i
 import FieldOfInterestsWithTagsCardSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/card-skeleton";
 import { Wrapper } from "./style";
 
-const FieldOfInterestsWithTagsCardSection = forwardRef(
+const FieldOfInterestsWithTagsCardsSection = forwardRef(
   (
     { title, subtitle, tags = [], cards = [], onSelectCard = () => {} },
     ref
   ) => {
     // const [active, setActive] = useState();
 
-    const handleSelectCard = (tag) => {
+    const handleSelectTag = (tag) => {
       // setActive(tag?.uuid);
+      onSelectCard?.(tag?.uuid);
+    };
+
+    const handleSelectCard = (tag) => {
       onSelectCard?.(tag?.uuid);
     };
 
@@ -32,7 +36,7 @@ const FieldOfInterestsWithTagsCardSection = forwardRef(
                   icon={tag?.icon}
                   text={tag?.text}
                   // isActive={tag?.uuid === active}
-                  onSelectCard={() => handleSelectCard?.(tag)}
+                  onCardSelect={() => handleSelectTag?.(tag)}
                 />
               ))
             : Array.from("12345")?.map((_, idx) => (
@@ -52,7 +56,7 @@ const FieldOfInterestsWithTagsCardSection = forwardRef(
                   imageComponent={card?.imageComponent}
                   title={card?.title}
                   description={card?.description}
-                  onSelectCard={() => onSelectCard?.(card?.uuid)}
+                  onSelectCard={() => handleSelectCard?.(card?.uuid)}
                 />
               ))
             : Array.from("12345")?.map((_, idx) => (
@@ -66,4 +70,4 @@ const FieldOfInterestsWithTagsCardSection = forwardRef(
   }
 );
 
-export default FieldOfInterestsWithTagsCardSection;
+export default FieldOfInterestsWithTagsCardsSection;

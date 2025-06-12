@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   max-width: 76rem;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.5rem;
 
   & .wrapper__heading {

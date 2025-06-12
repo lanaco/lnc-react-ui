@@ -1,18 +1,18 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 
-import FieldOfInterestsWithTagsCardSection from ".";
+import FieldOfInterestsWithTagsCardsSection from ".";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta
-  title="Landing sections/Field of Interests With Tags Card Section"
-  component={FieldOfInterestsWithTagsCardSection}
+  title="Landing sections/Field of Interests With Tags Cards Section"
+  component={FieldOfInterestsWithTagsCardsSection}
 />
 
 export const TemplateDefault = (args) => (
-  <FieldOfInterestsWithTagsCardSection
+  <FieldOfInterestsWithTagsCardsSection
     title="Find equipment for every activity"
     onSelectCard={(uuid) => {}}
     cards={[
@@ -47,11 +47,11 @@ export const TemplateDefault = (args) => (
   />
 );
 
-## Brand hits section
+## Field of interests with tags cards section
 
 <SyntaxHighlighter language="jsx" style={nord}>
   {
-    'import { FieldOfInterestsWithTagsCardSection } from "@lanaco/lnc-react-ui";'
+    'import { FieldOfInterestsWithTagsCardsSection } from "@lanaco/lnc-react-ui";'
   }
 </SyntaxHighlighter>
 
