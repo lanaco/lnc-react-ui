@@ -22,14 +22,18 @@ const ShopCard = forwardRef(
     },
     ref
   ) => {
-    const { theme } = useTheme();
+    const theme = useTheme();
 
     return (
       <>
         {/* <LandingPageShopCardSkeleton /> */}
         <Wrapper theme={theme} onClick={onSelectCard}>
           <div className="wrapper__tile">
-             {isDefined(shopImageComponent) ? shopImageComponent : <img src={image} />}
+            {isDefined(shopImageComponent) ? (
+              shopImageComponent
+            ) : (
+              <img src={image} />
+            )}
             <div className="wrapper__info">
               <div className="info__title">{title}</div>
               <div className="info__subtitle">{subtitle}</div>

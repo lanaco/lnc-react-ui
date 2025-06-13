@@ -19,7 +19,10 @@ export default defineConfig({
         resolve(__dirname, "src/Basic Inputs/ColorInput/ColorInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/DateInput/DateInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/DecimalInput/DecimalInput.jsx"),
-        resolve(__dirname, "src/Basic Inputs/DecimalInputV2/DecimalInputV2.jsx"),
+        resolve(
+          __dirname,
+          "src/Basic Inputs/DecimalInputV2/DecimalInputV2.jsx"
+        ),
         resolve(__dirname, "src/Basic Inputs/FileInput/FileInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/NumberInput/NumberInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/PasswordInput/PasswordInput.jsx"),
@@ -138,6 +141,46 @@ export default defineConfig({
         //--------------------------------------------------------------------
         resolve(__dirname, "src/ThemeProvider/ThemeProvider.jsx"),
         //--------------------------------------------------------------------
+        resolve(
+          __dirname,
+          "src/Landing Sections/general-sections/masonry-general-cards-section/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/products-sections/detailed-products-section/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/products-sections/products-with-banner-section/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/products-sections/simple-products-section/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/products-sections/urgent-sale-products-section/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/banners-sections/banner-section-carousel/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/banners-sections/banner-section-grid/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/banners-sections/banner-section-simple/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/banners-sections/banner-section-with-list/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/banners-sections/banner-section-with-list-image/index.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {
