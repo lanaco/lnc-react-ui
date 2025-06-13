@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.23",
+  "version": "4.0.25",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -113,7 +113,17 @@
     "./MenuItem": "./dist/MenuItem.js",
     "./NestedMenuItem": "./dist/NestedMenuItem.js",
     "./TreeMenuSeparator": "./dist/TreeMenuSeparator.js",
-    "./ThemeProvider": "./dist/ThemeProvider.js"
+    "./ThemeProvider": "./dist/ThemeProvider.js",
+    "./MasonryGeneralCardsSection": "./dist/MasonryGeneralCardsSection.js",
+    "./DetailedProductsSection": "./dist/DetailedProductsSection.js",
+    "./ProductsWithBannerSection": "./dist/ProductsWithBannerSection.js",
+    "./SimpleProductsSection": "./dist/SimpleProductsSection.js",
+    "./UrgentSaleProductsSection": "./dist/UrgentSaleProductsSection.js",
+    "./BannerSectionCarousel": "./dist/BannerSectionCarousel.js",
+    "./BannerSectionGrid": "./dist/BannerSectionGrid.js",
+    "./BannerSectionSimple": "./dist/BannerSectionSimple.js",
+    "./BannerSectionWithList": "./dist/BannerSectionWithList.js",
+    "./BannerSectionWithListImage": "./dist/BannerSectionWithListImage.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",
