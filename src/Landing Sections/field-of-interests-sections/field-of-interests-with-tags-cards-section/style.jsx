@@ -4,7 +4,6 @@ import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
   display: flex;
-  max-width: 76rem;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
@@ -46,7 +45,6 @@ export const Wrapper = styled.div`
   & .wrapper__cards {
     display: flex;
     flex-wrap: wrap;
-    max-width: 76rem;
     align-items: flex-start;
     gap: 1.5rem;
   }

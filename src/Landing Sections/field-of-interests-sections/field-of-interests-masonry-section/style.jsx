@@ -4,7 +4,6 @@ import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
   display: flex;
-  max-width: 76rem;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
@@ -45,7 +44,7 @@ export const Wrapper = styled.div`
 
   & .wrapper__cards {
     display: grid;
-    grid-template-columns: repeat(3, minmax(24rem, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-auto-rows: 0.625rem;
     gap: 0.625rem;
 
@@ -61,7 +60,7 @@ export const Wrapper = styled.div`
     }
 
     & .wrapper__cards {
-      grid-template-columns: repeat(2, minmax(10rem, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 `;

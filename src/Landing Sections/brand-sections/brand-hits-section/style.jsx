@@ -4,7 +4,6 @@ import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
   display: flex;
-  max-width: 76rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
