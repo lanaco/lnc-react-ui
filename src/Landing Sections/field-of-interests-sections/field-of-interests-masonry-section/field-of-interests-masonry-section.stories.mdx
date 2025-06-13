@@ -1,0 +1,120 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import FieldOfInterestsMasonrySection from ".";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Field of Interests Masonry Section"
+  component={FieldOfInterestsMasonrySection}
+/>
+
+export const TemplateDefault = (args) => (
+  <FieldOfInterestsMasonrySection
+    title="Gifts for everyone"
+    onSelectCard={(uuid) => {}}
+    cards={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/900",
+        title: "Romantic gesture",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Birthday diva",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/900",
+        title: "Survive period",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Teen queen",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/900",
+        title: "Tech gifts",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Boss lady",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/900",
+        title: "Good idea for every woman",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Beauty guru",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Practical and versatile",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/900",
+        title: "Art doul",
+        description: "Underwear, pajamas, jewelry, scented candles, toys... ",
+      },
+    ]}
+    tags={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Recommended",
+        icon: " mng-lnc-gift",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Gifts for her",
+        icon: " mng-lnc-gift",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Gifts for him ",
+        icon: " mng-lnc-gift",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Gifts for kids",
+        icon: " mng-lnc-gift",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Last minute gifts",
+        icon: " mng-lnc-gift",
+      },
+    ]}
+  />
+);
+
+## Field of interests masonry section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { FieldOfInterestsMasonrySection } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
