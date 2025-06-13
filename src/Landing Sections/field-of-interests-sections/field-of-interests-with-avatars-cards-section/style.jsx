@@ -46,7 +46,6 @@ export const Wrapper = styled.div`
 
   & .wrapper__cards {
     display: flex;
-    max-width: 76rem;
     height: auto;
     align-items: center;
     gap: 1.25rem;
