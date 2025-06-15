@@ -1,0 +1,95 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import FieldOfInterestsWithTagsCardsSection from ".";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Field of Interests With Tags Cards Section"
+  component={FieldOfInterestsWithTagsCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <FieldOfInterestsWithTagsCardsSection
+    title="Find equipment for every activity"
+    limitTags={7}
+    limitTagsForMobile={7}
+    limitCards={3}
+    limitCardsMobile={2}
+    onSelectTag={(uuid) => {}}
+    onSelectCard={(uuid) => {}}
+    cards={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Footbal boots and jersey",
+        description: "Venenatis netus tortor ipsum laoreet neque.",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Footbal boots and jersey",
+        description: "Venenatis netus tortor ipsum laoreet neque.",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/700/300",
+        title: "Footbal boots and jersey",
+        description: "Venenatis netus tortor ipsum laoreet neque.",
+      },
+    ]}
+    tags={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Football",
+        icon: " mng-lnc-football",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Basketball",
+        icon: " mng-lnc-basketball",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Running",
+        icon: " mng-lnc-run",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Fitness",
+        icon: " mng-lnc-sport",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Outdoor",
+        icon: " mng-lnc-campfire",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Ski",
+        icon: " mng-lnc-ski",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Other",
+        icon: " mng-lnc-sport-1",
+      },
+    ]}
+  />
+);
+
+## Field of interests with tags cards section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import { FieldOfInterestsWithTagsCardsSection } from "@lanaco/lnc-react-ui";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
