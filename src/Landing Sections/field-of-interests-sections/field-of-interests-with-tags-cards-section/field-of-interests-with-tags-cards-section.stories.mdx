@@ -14,6 +14,10 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 export const TemplateDefault = (args) => (
   <FieldOfInterestsWithTagsCardsSection
     title="Find equipment for every activity"
+    limitTags={7}
+    limitTagsForMobile={7}
+    limitCards={3}
+    limitCardsMobile={2}
     onSelectCard={(uuid) => {}}
     cards={[
       {

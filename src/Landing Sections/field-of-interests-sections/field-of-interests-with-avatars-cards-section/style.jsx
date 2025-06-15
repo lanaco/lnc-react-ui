@@ -35,40 +35,34 @@ export const Wrapper = styled.div`
   }
 
   & .wrapper__avatars {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    display: grid;
+    grid-template-columns: ${(p) =>
+      `repeat(${p?.limitAvatars}, minmax(0, 1fr))`};
     gap: 2rem;
-    align-self: stretch;
-    flex-wrap: wrap;
+    justify-items: center;
+    align-items: center;
   }
 
   & .wrapper__cards {
-    display: flex;
-    height: auto;
-    align-items: center;
+    display: grid;
+    grid-template-columns: ${(p) => `repeat(${p?.limitCards}, minmax(0, 1fr))`};
     gap: 1.25rem;
-    flex-shrink: 0;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & .wrapper__avatars {
-      justify-content: space-between;
-      gap: 1rem;
+      grid-template-columns: ${(p) =>
+        `repeat(${p?.limitAvatarsForMobile}, minmax(0, 1fr))`};
+      gap: auto;
     }
 
     & .wrapper__cards {
-      justify-content: center;
-      align-content: center;
+      grid-template-columns: ${(p) =>
+        `repeat(${p?.limitCardsForMobile}, minmax(0, 1fr))`};
       gap: 1rem;
-      align-self: stretch;
-      flex-wrap: wrap;
-
-      & > div {
-        max-width: 10rem;
-        max-height: 10rem;
-      }
     }
   }
 `;

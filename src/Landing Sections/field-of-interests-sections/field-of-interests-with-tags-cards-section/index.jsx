@@ -8,22 +8,38 @@ import { Wrapper } from "./style";
 
 const FieldOfInterestsWithTagsCardsSection = forwardRef(
   (
-    { title, subtitle, tags = [], cards = [], onSelectCard = () => {} },
+    {
+      title,
+      subtitle,
+      tags = [],
+      limitTags = 7,
+      limitTagsForMobile = 7,
+      limitCards = 3,
+      limitCardsForMobile = 2,
+      cards = [],
+      onSelectTag = () => {},
+      onSelectCard = () => {},
+    },
     ref
   ) => {
     // const [active, setActive] = useState();
 
     const handleSelectTag = (tag) => {
       // setActive(tag?.uuid);
-      onSelectCard?.(tag?.uuid);
+      onSelectTag?.(tag?.uuid);
     };
 
-    const handleSelectCard = (tag) => {
-      onSelectCard?.(tag?.uuid);
+    const handleSelectCard = (card) => {
+      onSelectCard?.(card?.uuid);
     };
 
     return (
-      <Wrapper>
+      <Wrapper
+        limitTags={limitTags}
+        limitTagsForMobile={limitTagsForMobile}
+        limitCards={limitCards}
+        limitCardsForMobile={limitCardsForMobile}
+      >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
@@ -39,7 +55,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                   onSelectCard={() => handleSelectTag?.(tag)}
                 />
               ))
-            : Array.from("12345")?.map((_, idx) => (
+            : Array.from("123")?.map((_, idx) => (
                 <FieldOfInterestsWithTagsCardTagSkeleton
                   key={`field-of-interests-with-tags-card-tag-skeleton__${
                     idx + 1
@@ -59,7 +75,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                   onSelectCard={() => handleSelectCard?.(card?.uuid)}
                 />
               ))
-            : Array.from("12345")?.map((_, idx) => (
+            : Array.from("123")?.map((_, idx) => (
                 <FieldOfInterestsWithTagsCardSkeleton
                   key={`field-of-interests-with-tags-card-skeleton__${idx + 1}`}
                 />

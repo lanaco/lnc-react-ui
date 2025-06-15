@@ -7,13 +7,11 @@ import {
 
 export const Wrapper = styled.div`
   display: flex;
-  max-width: 24rem;
-  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   flex-shrink: 0;
   align-self: stretch;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
   background: var(--Lanaco-Gray-white, #fff);
 
@@ -21,8 +19,9 @@ export const Wrapper = styled.div`
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 
   & .wrapper__image {
-    max-width: 24rem;
     width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     height: auto;
     border-radius: 0.75rem 0.75rem 0 0;
   }
@@ -57,42 +56,10 @@ export const Wrapper = styled.div`
 `;
 
 export const SkeletonWrapper = styled.div`
-  display: flex;
-  max-width: 24rem;
   width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-  flex-shrink: 0;
-  align-self: stretch;
-
-  & .wrapper__image {
-    max-width: 24rem;
-    width: 100%;
-    height: auto;
-    border-radius: 0.75rem 0.75rem 0 0;
-    background: ${linearGradientAnimation("-90deg")};
-  }
-
-  & .wrapper__content {
-    display: flex;
-    padding: 0.75rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-    align-self: stretch;
-
-    & .wrapper__title {
-      width: 4rem;
-      height: 1.5rem;
-      background: ${linearGradientAnimation("-90deg")};
-    }
-
-    & .wrapper__description {
-      width: 7rem;
-      height: 1.5rem;
-      background: ${linearGradientAnimation("-90deg")};
-    }
-  }
+  height: 11.625rem;
+  border-radius: 0.75rem;
+  background: ${linearGradientAnimation("-90deg")};
 `;
 
 export const TagWrapper = styled.div`
@@ -138,7 +105,7 @@ export const TagWrapper = styled.div`
 `;
 
 export const TagSkeletonWrapper = styled.div`
-  width: 7.5rem;
+  width: 7rem;
   height: 3rem;
   border-radius: 999px;
   background: ${linearGradientAnimation("-90deg")};

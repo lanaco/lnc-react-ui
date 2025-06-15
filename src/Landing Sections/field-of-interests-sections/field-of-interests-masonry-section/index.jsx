@@ -9,18 +9,29 @@ import { useEffectOnce } from "react-use";
 
 const FieldOfInterestsMasonrySection = forwardRef(
   (
-    { title, subtitle, tags = [], cards = [], onSelectCard = () => {} },
+    {
+      title,
+      subtitle,
+      tags = [],
+      cards = [],
+      limitTags = 5,
+      limitTagsForMobile = 5,
+      limitCards = 3,
+      limitCardsForMobile = 2,
+      onSelectTag = () => {},
+      onSelectCard = () => {},
+    },
     ref
   ) => {
     // const [active, setActive] = useState();
 
     const handleSelectTag = (tag) => {
       // setActive(tag?.uuid);
-      onSelectCard?.(tag?.uuid);
+      onSelectTag?.(tag?.uuid);
     };
 
-    const handleSelectCard = (tag) => {
-      onSelectCard?.(tag?.uuid);
+    const handleSelectCard = (card) => {
+      onSelectCard?.(card?.uuid);
     };
 
     useEffectOnce(() => {
@@ -44,7 +55,12 @@ const FieldOfInterestsMasonrySection = forwardRef(
     });
 
     return (
-      <Wrapper>
+      <Wrapper
+        limitTags={limitTags}
+        limitTagsForMobile={limitTagsForMobile}
+        limitCards={limitCards}
+        limitCardsForMobile={limitCardsForMobile}
+      >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}

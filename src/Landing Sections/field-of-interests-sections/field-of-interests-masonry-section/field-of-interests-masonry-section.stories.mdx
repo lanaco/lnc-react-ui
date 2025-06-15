@@ -14,6 +14,11 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 export const TemplateDefault = (args) => (
   <FieldOfInterestsMasonrySection
     title="Gifts for everyone"
+    limitTags={5}
+    limitTagsForMobile={5}
+    limitCards={3}
+    limitCardsForMobile={2}
+    onSelectTag={(uuid) => {}}
     onSelectCard={(uuid) => {}}
     cards={[
       {

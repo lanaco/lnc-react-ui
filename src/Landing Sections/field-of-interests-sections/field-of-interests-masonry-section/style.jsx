@@ -35,18 +35,19 @@ export const Wrapper = styled.div`
   }
 
   & .wrapper__tags {
-    display: flex;
+    display: grid;
+    grid-template-columns: ${(p) => `repeat(${p?.limitTags}, minmax(0, 1fr))`};
     justify-content: center;
     align-items: center;
     gap: 0.75rem;
-    align-self: stretch;
   }
 
   & .wrapper__cards {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: ${(p) => `repeat(${p?.limitCards}, minmax(0, 1fr))`};
     grid-auto-rows: 0.625rem;
     gap: 0.625rem;
+    width: 100%;
 
     & .wrapper__card {
       overflow: hidden;
@@ -55,12 +56,15 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & .wrapper__tags {
+      display: flex;
       overflow-x: scroll;
       justify-content: flex-start;
+      width: 100%;
     }
 
     & .wrapper__cards {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: ${(p) =>
+        `repeat(${p?.limitCardsForMobile}, minmax(0, 1fr))`};
     }
   }
 `;

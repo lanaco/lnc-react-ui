@@ -3,27 +3,43 @@ import { forwardRef, useState } from "react";
 import FieldOfInterestsWithAvatarsCardAvatarSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/avatar-skeleton";
 import FieldOfInterestsWithAvatarsCardAvatar from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/avatar";
 import FieldOfInterestsWithAvatarsCard from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/card";
-import FieldOfInterestsWithAvatarsCardSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/card-skeleton";
+import FieldOfInterestsWithAvatarsCardSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/card-skeleton";
 import { Wrapper } from "./style";
 
 const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
   (
-    { title, subtitle, avatars = [], cards = [], onSelectCard = () => {} },
+    {
+      title,
+      subtitle,
+      avatars = [],
+      limitAvatars = 4,
+      limitCards = 6,
+      limitAvatarsForMobile = 4,
+      limitCardsForMobile = 2,
+      cards = [],
+      onSelectAvatar = () => {},
+      onSelectCard = () => {},
+    },
     ref
   ) => {
     // const [active, setActive] = useState();
 
     const handleSelectAvatar = (avatar) => {
       // setActive(tag?.uuid);
-      onSelectCard?.(avatar?.uuid);
+      onSelectAvatar?.(avatar?.uuid);
     };
 
     const handleSelectCard = (card) => {
-      onSelectCard?.(tag?.uuid);
+      onSelectCard?.(card?.uuid);
     };
 
     return (
-      <Wrapper>
+      <Wrapper
+        limitAvatars={limitAvatars}
+        limitAvatarsForMobile={limitAvatarsForMobile}
+        limitCards={limitCards}
+        limitCardsForMobile={limitCardsForMobile}
+      >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
@@ -41,7 +57,7 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
                   onSelectCard={() => handleSelectAvatar?.(avatar)}
                 />
               ))
-            : Array.from("12345")?.map((_, idx) => (
+            : Array.from("1234")?.map((_, idx) => (
                 <FieldOfInterestsWithAvatarsCardAvatarSkeleton
                   key={`field-of-interests-with-avatars-card-avatar-skeleton__${
                     idx + 1
@@ -68,7 +84,7 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
                   onSelectCard={() => handleSelectCard?.(card)}
                 />
               ))
-            : Array.from("12345")?.map((_, idx) => (
+            : Array.from("123456")?.map((_, idx) => (
                 <FieldOfInterestsWithAvatarsCardSkeleton
                   key={`field-of-interests-with-avatars-card-skeleton__${
                     idx + 1
