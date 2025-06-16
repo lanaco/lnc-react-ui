@@ -1,0 +1,63 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import GiftCardsSection from ".";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Gift Cards Section"
+  component={GiftCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <GiftCardsSection
+    title="Affordable gifts for any occasion"
+    limitCards={4}
+    limitCardsForMobile={1}
+    onSelectCard={(uuid) => {}}
+    cards={[
+      {
+        text: "Gifts up to 20 KM",
+        price: 20,
+        currency: "BAM",
+        image: "https://picsum.photos/500/300",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        text: "Gifts up to 20 KM",
+        price: 20,
+        currency: "BAM",
+        image: "https://picsum.photos/500/300",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        text: "Gifts up to 20 KM",
+        price: 20,
+        currency: "BAM",
+        image: "https://picsum.photos/500/300",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        text: "Gifts up to 20 KM",
+        price: 20,
+        currency: "BAM",
+        image: "https://picsum.photos/500/300",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+    ]}
+  />
+);
+
+## Gift cards section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { GiftCardsSection } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

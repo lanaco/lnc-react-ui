@@ -181,6 +181,10 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/banners-sections/banner-section-with-list-image/index.jsx"
         ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/gift-sections/gift-cards-section/index.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {

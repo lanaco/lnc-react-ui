@@ -198,6 +198,7 @@ export { default as BannerSectionGrid } from "./Landing Sections/banners-section
 export { default as BannerSectionSimple } from "./Landing Sections/banners-sections/banner-section-simple";
 export { default as BannerSectionWithList } from "./Landing Sections/banners-sections/banner-section-with-list";
 export { default as BannerSectionWithListImage } from "./Landing Sections/banners-sections/banner-section-with-list-image";
+export { default as GiftCardsSection } from "./Landing Sections/gift-sections/gift-cards-section";
 
 //======================== THEME ==============================================================
 
