@@ -198,6 +198,10 @@ export { default as BannerSectionGrid } from "./Landing Sections/banners-section
 export { default as BannerSectionSimple } from "./Landing Sections/banners-sections/banner-section-simple";
 export { default as BannerSectionWithList } from "./Landing Sections/banners-sections/banner-section-with-list";
 export { default as BannerSectionWithListImage } from "./Landing Sections/banners-sections/banner-section-with-list-image";
+export { default as BrandHitsSection } from "./Landing Sections/brand-sections/brand-hits-section";
+export { default as FieldOfInterestsMasonrySection } from "./Landing Sections/field-of-interests-sections/field-of-interests-masonry-section";
+export { default as FieldOfInterestsWithAvatarsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section";
+export { default as FieldOfInterestsWithTagsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section";
 
 //======================== THEME ==============================================================
 
