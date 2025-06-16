@@ -1,0 +1,100 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import FieldOfInterestsWithAvatarsCardsSection from ".";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Field of Interests With Avatars Cards Section"
+  component={FieldOfInterestsWithAvatarsCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <FieldOfInterestsWithAvatarsCardsSection
+    title="What is your favorite sport?"
+    onSelectAvatar={(uuid) => {}}
+    onSelectCard={(uuid) => {}}
+    limitAvatars={4}
+    limitCards={6}
+    limitAvatarsForMobile={4}
+    limitCardsForMobile={2}
+    cards={[
+      {
+        title: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        title: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        title: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        title: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        title: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        title: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+    ]}
+    avatars={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/500",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/500",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/500",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/500/500",
+      },
+    ]}
+  />
+);
+
+## Field of interests with avatars cards section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import { FieldOfInterestsWithAvatarsCardsSection } from "@lanaco/lnc-react-ui";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

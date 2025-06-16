@@ -123,7 +123,11 @@
     "./BannerSectionGrid": "./dist/BannerSectionGrid.js",
     "./BannerSectionSimple": "./dist/BannerSectionSimple.js",
     "./BannerSectionWithList": "./dist/BannerSectionWithList.js",
-    "./BannerSectionWithListImage": "./dist/BannerSectionWithListImage.js"
+    "./BannerSectionWithListImage": "./dist/BannerSectionWithListImage.js",
+    "./BrandHitsSection": "./dist/BrandHitsSection.js",
+    "./FieldOfInterestsMasonrySection": "./dist/FieldOfInterestsMasonrySection.js",
+    "./FieldOfInterestsWithAvatarsCardsSection": "./dist/FieldOfInterestsWithAvatarsCardsSection.js",
+    "./FieldOfInterestsWithTagsCardsSection": "./dist/FieldOfInterestsWithTagsCardsSection.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",
