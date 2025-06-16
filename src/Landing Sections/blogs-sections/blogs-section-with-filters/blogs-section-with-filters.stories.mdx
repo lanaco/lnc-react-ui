@@ -1,0 +1,56 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import BlogsSectionWithFilters from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Blogs Section With Filters"
+  component={BlogsSectionWithFilters}
+/>
+
+export const TemplateDefault = (args) => (
+  <BlogsSectionWithFilters
+    title="Lorem ipsum"
+    items={[
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        image: "https://picsum.photos/200/300",
+        buttonText: "Lorem ipsum",
+      },
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        image: "https://picsum.photos/200/300",
+        buttonText: "Lorem ipsum",
+      },
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        image: "https://picsum.photos/200/300",
+        buttonText: "Lorem ipsum",
+      },
+    ]}
+    options={[
+      { name: "Buying", code: "buying" },
+      { name: "Renting", code: "renting" },
+      { name: "Selling", code: "Selling" },
+    ]}
+  />
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BlogsSectionWithFilters } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

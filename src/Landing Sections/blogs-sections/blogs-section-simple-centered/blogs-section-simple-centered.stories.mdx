@@ -1,0 +1,50 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import BlogsSectionSimpleCentered from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Blogs Section Simple Centered"
+  component={BlogsSectionSimpleCentered}
+/>
+
+export const TemplateDefault = (args) => (
+  <BlogsSectionSimpleCentered
+    items={[
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        buttonText: "Read moreeee",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        buttonText: "Read moreeee",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        buttonText: "Read moreeee",
+        image: "https://picsum.photos/200/300",
+      },
+    ]}
+  />
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BlogsSectionSimpleCentered } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

@@ -185,6 +185,22 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/gift-sections/gift-cards-section/index.jsx"
         ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/brand-sections/brand-hits-section/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-masonry-section/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section/index.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/index.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {

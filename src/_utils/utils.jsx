@@ -298,7 +298,6 @@ export const formatPrice = (price) => {
       }).format(price);
 };
 
-
 export const CurrencySymbolMap = {
   EUR: "€",
   BAM: "KM",
@@ -344,4 +343,89 @@ export const CurrencySymbolMap = {
 
 export const GetCurrencySymbol = (currency) => {
   return CurrencySymbolMap[currency] || "";
+};
+
+function caloriesToMacros(
+  totalCalories,
+  ratios = { carbs: 0.5, protein: 0.25, fat: 0.25 }
+) {
+  // Validate ratios sum to 1 (or very close)
+  const totalRatio = ratios.carbs + ratios.protein + ratios.fat;
+  if (Math.abs(totalRatio - 1) > 0.01) {
+    throw new Error("Ratios must add up to 1.");
+  }
+
+  // Calories per gram constants
+  const calPerGram = { carbs: 4, protein: 4, fat: 9 };
+
+  // Calculate grams for each macro
+  const grams = {
+    carbs: Math.round((totalCalories * ratios.carbs) / calPerGram.carbs),
+    protein: Math.round((totalCalories * ratios.protein) / calPerGram.protein),
+    fat: Math.round((totalCalories * ratios.fat) / calPerGram.fat),
+  };
+
+  return grams;
+}
+
+export const calculateCalories = ({
+  gender,
+  age,
+  heightCm,
+  weightKg,
+  activityLevel,
+  goal,
+}) => {
+  // BMR calculation using Mifflin-St Jeor Equation
+  let bmr;
+  if (gender === "male") {
+    bmr = 10 * +weightKg + 6.25 * +heightCm - 5 * +age + 5;
+  } else if (gender === "female") {
+    bmr = 10 * +weightKg + 6.25 * +heightCm - 5 * +age - 161;
+  } else {
+    throw new Error("Invalid gender. Use 'male' or 'female'.");
+  }
+
+  // Activity factor
+  const activityFactors = {
+    // sedentary: 1.2,
+    // light: 1.375,
+    // moderate: 1.55,
+    // active: 1.725,
+    // 'very active': 1.9
+    verylow: 1.2,
+    moderate: 1.55,
+    veryactive: 1.9,
+  };
+
+  const activityMultiplier = activityFactors[activityLevel.toLowerCase()];
+  if (!activityMultiplier) {
+    throw new Error("Invalid activity level");
+  }
+
+  // Total Daily Energy Expenditure (TDEE)
+  const tdee = bmr * activityMultiplier;
+
+  // Adjust based on goal
+  let dailyCalories;
+  switch (goal.toLowerCase()) {
+    case "loseweight":
+      dailyCalories = tdee - 500;
+      break;
+    case "maintaining":
+      dailyCalories = tdee;
+      break;
+    case "gainmuscle":
+      dailyCalories = tdee + 500;
+      break;
+    default:
+      throw new Error("Invalid goal. Use: 'lose', 'maintain', or 'gain'.");
+  }
+
+  const macrosResults = caloriesToMacros(dailyCalories);
+
+  return {
+    calories: Math.round(dailyCalories),
+    ...macrosResults,
+  };
 };
