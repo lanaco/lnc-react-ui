@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import BlogsSectionLarge from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Blogs Section Large"
+  component={BlogsSectionLarge}
+/>
+
+export const TemplateDefault = (args) => (
+  <BlogsSectionLarge
+    onButtonClick={(card) => window.open(`/blog/${card.titleSlug}`, "_blank")}
+    items={[
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        image: "https://picsum.photos/200/300",
+        buttonText: "Lorem ipsum",
+      },
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        image: "https://picsum.photos/200/300",
+        buttonText: "Lorem ipsum",
+      },
+      {
+        title: "Lorem ipsum dolor sit amet",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt volutpat volutpat sed rhoncus fames. Semper felis et vel aenean. Sit at fermentum. Agsdfsdfsdfsdfsdfsdfsdf sdfsdfsdf",
+        titleSlug: "lorem-ipsum",
+        image: "https://picsum.photos/200/300",
+        buttonText: "Lorem ipsum",
+      },
+    ]}
+  />
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BlogsSectionLarge } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

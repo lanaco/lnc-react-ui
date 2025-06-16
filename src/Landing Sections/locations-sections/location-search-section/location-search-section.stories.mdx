@@ -1,0 +1,109 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import LocationSearchSection from ".";
+
+<Meta
+  title="Landing sections/Location Search Section"
+  component={LocationSearchSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <LocationSearchSection
+    title="Search for property by muncipality"
+    options={[
+      { name: "stanovi", code: "apartments", icon: "mng-lnc-building" },
+      {
+        name: "iznajmljivanje na dan",
+        code: "ccc",
+        icon: "mng-lnc-home",
+      },
+      { name: "kuće", code: "hhh", icon: "mng-lnc-building" },
+      { name: "stanovi", code: "apartments", icon: "mng-lnc-building" },
+      {
+        name: "iznajmljivanje na dan",
+        code: "ccc",
+        icon: "mng-lnc-home",
+      },
+      { name: "kuće", code: "hhh", icon: "mng-lnc-building" },
+      { name: "stanovi", code: "apartments", icon: "mng-lnc-building" },
+      {
+        name: "iznajmljivanje na dan",
+        code: "ccc",
+        icon: "mng-lnc-home",
+      },
+      { name: "kuće", code: "hhh", icon: "mng-lnc-building" },
+      { name: "stanovi", code: "apartments", icon: "mng-lnc-building" },
+      {
+        name: "iznajmljivanje na dan",
+        code: "ccc",
+        icon: "mng-lnc-home",
+      },
+      { name: "kuće", code: "hhh", icon: "mng-lnc-building" },
+    ]}
+    items={[
+      {
+        name: "Banjalučka regija",
+        code: "bl",
+        cities: [
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+        ],
+      },
+      {
+        name: "Banjalučka regija",
+        code: "bl",
+        cities: [
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+        ],
+      },
+      {
+        name: "Banjalučka regija",
+        code: "bl",
+        cities: [
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+        ],
+      },
+      {
+        name: "Banjalučka regija",
+        code: "bl",
+        cities: [
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+        ],
+      },
+      {
+        name: "Banjalučka regija",
+        code: "bl",
+        cities: [
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+          { name: "Banja luka", code: "Bll", count: 256 },
+        ],
+      },
+    ]}
+  />
+);
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { LocationSearchSection } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
