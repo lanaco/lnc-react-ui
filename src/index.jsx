@@ -189,11 +189,11 @@ export { default as TreeMenuSeparator } from "./Utility/TreeMenu/TreeMenuSeparat
 //======================== Landing Sections ==============================================================
 
 export { default as MasonryGeneralCardsSection } from "./Landing Sections/general-sections/masonry-general-cards-section";
-export { default as DetailedProductsSection } from "./Landing Sections/products-sections/detailed-products-section";
-export { default as ProductsWithBannerSection } from "./Landing Sections/products-sections/products-with-banner-section";
-export { default as SimpleProductsSection } from "./Landing Sections/products-sections/simple-products-section";
-export { default as UrgentSaleProductsSection } from "./Landing Sections/products-sections/urgent-sale-products-section";
-export { default as BannerSectionBasic } from "./Landing Sections/banners-sections/banner-section-basic";
+export { default as DetailedProductsSection } from "./Landing Sections/products-sections/detailed-products-section/DetailedProductsSection";
+export { default as ProductsWithBannerSection } from "./Landing Sections/products-sections/products-with-banner-section/ProductsWithBannerSection";
+export { default as SimpleProductsSection } from "./Landing Sections/products-sections/simple-products-section/SimpleProductsSection";
+export { default as UrgentSaleProductsSection } from "./Landing Sections/products-sections/urgent-sale-products-section/UrgentSaleProductsSection";
+export { default as BannerSectionBasic } from "./Landing Sections/banners-sections/banner-section-basic/BannerSectionBasic";
 export { default as BannerSectionCarousel } from "./Landing Sections/banners-sections/banner-section-carousel";
 export { default as BannerSectionGrid } from "./Landing Sections/banners-sections/banner-section-grid";
 export { default as BannerSectionSimple } from "./Landing Sections/banners-sections/banner-section-simple";
