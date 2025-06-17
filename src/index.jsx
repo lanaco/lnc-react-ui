@@ -188,21 +188,21 @@ export { default as TreeMenuSeparator } from "./Utility/TreeMenu/TreeMenuSeparat
 
 //======================== Landing Sections ==============================================================
 
-export { default as MasonryGeneralCardsSection } from "./Landing Sections/general-sections/masonry-general-cards-section";
+export { default as MasonryGeneralCardsSection } from "./Landing Sections/general-sections/masonry-general-cards-section/MasonryGeneralCardsSection";
 export { default as DetailedProductsSection } from "./Landing Sections/products-sections/detailed-products-section/DetailedProductsSection";
 export { default as ProductsWithBannerSection } from "./Landing Sections/products-sections/products-with-banner-section/ProductsWithBannerSection";
 export { default as SimpleProductsSection } from "./Landing Sections/products-sections/simple-products-section/SimpleProductsSection";
 export { default as UrgentSaleProductsSection } from "./Landing Sections/products-sections/urgent-sale-products-section/UrgentSaleProductsSection";
-export { default as BannerSectionCarousel } from "./Landing Sections/banners-sections/banner-section-carousel";
-export { default as BannerSectionGrid } from "./Landing Sections/banners-sections/banner-section-grid";
-export { default as BannerSectionSimple } from "./Landing Sections/banners-sections/banner-section-simple";
-export { default as BannerSectionWithList } from "./Landing Sections/banners-sections/banner-section-with-list";
-export { default as BannerSectionWithListImage } from "./Landing Sections/banners-sections/banner-section-with-list-image";
-export { default as GiftCardsSection } from "./Landing Sections/gift-sections/gift-cards-section";
-export { default as BrandHitsSection } from "./Landing Sections/brand-sections/brand-hits-section";
-export { default as FieldOfInterestsMasonrySection } from "./Landing Sections/field-of-interests-sections/field-of-interests-masonry-section";
-export { default as FieldOfInterestsWithAvatarsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section";
-export { default as FieldOfInterestsWithTagsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section";
+export { default as BannerSectionCarousel } from "./Landing Sections/banners-sections/banner-section-carousel/BannerSectionCarousel";
+export { default as BannerSectionGrid } from "./Landing Sections/banners-sections/banner-section-grid/BannerSectionGrid";
+export { default as BannerSectionSimple } from "./Landing Sections/banners-sections/banner-section-simple/BannerSectionSimple";
+export { default as BannerSectionWithList } from "./Landing Sections/banners-sections/banner-section-with-list/BannerSectionWithList";
+export { default as BannerSectionWithListImage } from "./Landing Sections/banners-sections/banner-section-with-list-image/BannerSectionWithListImage";
+export { default as GiftCardsSection } from "./Landing Sections/gift-sections/gift-cards-section/GiftCardsSection";
+export { default as BrandHitsSection } from "./Landing Sections/brand-sections/brand-hits-section/BrandHitsSection";
+export { default as FieldOfInterestsMasonrySection } from "./Landing Sections/field-of-interests-sections/field-of-interests-masonry-section/FieldOfInterestsMasonrySection";
+export { default as FieldOfInterestsWithAvatarsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section/FieldOfInterestsWithAvatarsCardsSection";
+export { default as FieldOfInterestsWithTagsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/FieldOfInterestsWithTagsCardsSection";
 
 //======================== THEME ==============================================================
 

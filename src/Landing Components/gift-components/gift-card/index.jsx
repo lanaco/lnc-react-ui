@@ -18,11 +18,7 @@ const GiftCard = forwardRef(
           {isDefined(imageComponent) ? (
             imageComponent
           ) : (
-            <img
-              src={image}
-              className="wrapper__image"
-              onSelectCard={onSelectCard}
-            />
+            <img src={image} className="wrapper__image" />
           )}
           <div className="wrapper__tag">{`${formatPrice(
             price
