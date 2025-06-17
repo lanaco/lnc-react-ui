@@ -143,59 +143,63 @@ export default defineConfig({
         //--------------------------------------------------------------------
         resolve(
           __dirname,
-          "src/Landing Sections/general-sections/masonry-general-cards-section/index.jsx"
+          "src/Landing Sections/general-sections/masonry-general-cards-section/MasonryGeneralCardsSection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/detailed-products-section/index.jsx"
+          "src/Landing Sections/products-sections/detailed-products-section/DetailedProductsSection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/products-with-banner-section/index.jsx"
+          "src/Landing Sections/products-sections/products-with-banner-section/ProductsWithBannerSection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/simple-products-section/index.jsx"
+          "src/Landing Sections/products-sections/simple-products-section/SimpleProductsSection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/urgent-sale-products-section/index.jsx"
+          "src/Landing Sections/products-sections/urgent-sale-products-section/UrgentSaleProductsSection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-carousel/index.jsx"
+          "src/Landing Sections/banners-sections/banner-section-carousel/BannerSectionCarousel.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-grid/index.jsx"
+          "src/Landing Sections/banners-sections/banner-section-grid/BannerSectionGrid.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-simple/index.jsx"
+          "src/Landing Sections/banners-sections/banner-section-simple/BannerSectionSimple.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-with-list/index.jsx"
+          "src/Landing Sections/banners-sections/banner-section-with-list/BannerSectionWithList.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-with-list-image/index.jsx"
+          "src/Landing Sections/banners-sections/banner-section-with-list-image/BannerSectionWithListImage.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/brand-sections/brand-hits-section/index.jsx"
+          "src/Landing Sections/gift-sections/gift-cards-section/GiftCardsSection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/field-of-interests-sections/field-of-interests-masonry-section/index.jsx"
+          "src/Landing Sections/brand-sections/brand-hits-section/BrandHitsSection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section/index.jsx"
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-masonry-section/FieldOfInterestsMasonrySection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/index.jsx"
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section/FieldOfInterestsWithAvatarsCardsSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/FieldOfInterestsWithTagsCardsSection.jsx"
         ),
       ],
       name: "@lanaco/lnc-react-ui",

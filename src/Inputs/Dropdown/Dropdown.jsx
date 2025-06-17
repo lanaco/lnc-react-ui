@@ -53,7 +53,7 @@ const Dropdown = forwardRef((props, ref) => {
     // defaultMenuIsOpen,
     // delimiter,
     // onChange,
-    onInputChange,
+    // onInputChange,
     // onMenuOpen,
     // onMenuClose,
     // onBlur,
