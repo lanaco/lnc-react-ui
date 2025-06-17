@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import OverlayGeneralCardsSection from "./OverlayGeneralCardsSection.jsx";
+
+<Meta
+  title="Landing sections/Overlay General Cards Section"
+  component={OverlayGeneralCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <OverlayGeneralCardsSection
+    title="Are you looking for something else?"
+    items={[
+      {
+        title: "AT HOME",
+        image: "https://placehold.co/700x500/orange/white",
+        description: "Lorem ipsum dolor sit amet consectetur.",
+        handleClick: () => window.open("/"),
+        actionText: "Explore",
+        overlay: `linear-gradient(180deg, rgba(0, 0, 0, 0.45) 13.09%, rgba(0, 0, 0, 0.00) 100%), linear-gradient(0deg, rgba(124, 58, 237, 0.45) 0%, rgba(124, 58, 237, 0.45) 100%);`,
+      },
+      {
+        title: "ELECTRONICS",
+        image: "https://placehold.co/700x500/black/white",
+        description: "Lorem ipsum dolor sit amet consectetur.",
+        handleClick: () => window.open("/"),
+        actionText: "Explore",
+        overlay: `linear-gradient(180deg, rgba(0, 0, 0, 0.45) 13.09%, rgba(0, 0, 0, 0.00) 100%), linear-gradient(0deg, rgba(78, 85, 95, 0.45) 0%, rgba(78, 85, 95, 0.45) 100%);`,
+      },
+    ]}
+  />
+);
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { OverlayGeneralCardsSection } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
