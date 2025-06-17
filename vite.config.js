@@ -163,6 +163,10 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
+          "src/Landing Sections/banners-sections/banner-section-basic/BannerSectionBasic.jsx"
+        ),
+        resolve(
+          __dirname,
           "src/Landing Sections/banners-sections/banner-section-carousel/BannerSectionCarousel.jsx"
         ),
         resolve(
@@ -200,6 +204,10 @@ export default defineConfig({
         resolve(
           __dirname,
           "src/Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/FieldOfInterestsWithTagsCardsSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/shop-sections/shop-cards-section/ShopCardsSection.jsx"
         ),
       ],
       name: "@lanaco/lnc-react-ui",

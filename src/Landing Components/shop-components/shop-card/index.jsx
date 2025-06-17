@@ -1,5 +1,6 @@
 import { forwardRef, Fragment } from "react";
 
+import Icon from "../../../General/Icon/Icon";
 import { isDefined } from "../../../_utils/utils";
 import { Wrapper } from "./style";
 
@@ -33,13 +34,20 @@ const ShopCard = forwardRef(
             {rating && reviewCount && (
               <div className="wrapper__rating">
                 <div className="wrapper_stars">
-                  {new Array(rating)?.map((_, idx) => (
+                  {[...Array(5).keys()]?.map((star, idx) => (
                     <Icon
                       key={`shop-card-rating-star__${idx + 1}`}
-                      icon="mng-lnc-star"
+                      icon={
+                        star < rating
+                          ? " mng-lnc-star--filled"
+                          : " mng-lnc-star"
+                      }
                       className="wrapper__star"
                     />
                   ))}
+                </div>
+                <div className="wrapper__review-count">
+                  ({reviewCount?.toLocaleString()})
                 </div>
               </div>
             )}

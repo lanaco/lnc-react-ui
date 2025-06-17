@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 
+import Button from "../../../General/Button/Button";
 import ShopCard from "../../../Landing Components/shop-components/shop-card";
 import ShopCardSkeleton from "../../../Landing Components/shop-components/shop-card/skeleton";
 import { Wrapper } from "./style";
@@ -12,10 +13,16 @@ const ShopCardsSection = forwardRef(
       cards,
       limitCards = 4,
       limitCardsForMobile = 2,
+      actionText,
       onSelectCard = () => {},
+      onShowMore,
     },
     ref
   ) => {
+    const handleShowMore = () => {
+      onShowMore?.();
+    };
+
     const handleSelectCard = (card) => {
       onSelectCard?.(card?.uuid);
     };
@@ -26,7 +33,18 @@ const ShopCardsSection = forwardRef(
         limitCardsForMobile={limitCardsForMobile}
       >
         <div className="wrapper__heading">
-          {title && <div className="wrapper__title">{title}</div>}
+          <div className="wrapper__title">
+            {title && <div className="title__text">{title}</div>}
+            {actionText && onShowMore && (
+              <Button
+                text={actionText}
+                borderRadius="curved"
+                btnType="tinted"
+                className="title__action"
+                onClick={handleShowMore}
+              />
+            )}
+          </div>
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
         <div className="wrapper__cards">
@@ -38,6 +56,8 @@ const ShopCardsSection = forwardRef(
                   title={card?.title}
                   subtitle={card?.subtitle}
                   image={card?.image}
+                  rating={card?.rating}
+                  reviewCount={card?.reviewCount}
                   products={card?.products}
                   imageComponent={card?.imageComponent}
                   onSelectCard={() => handleSelectCard?.(card)}

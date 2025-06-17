@@ -204,6 +204,7 @@ export { default as FieldOfInterestsMasonrySection } from "./Landing Sections/fi
 export { default as FieldOfInterestsWithAvatarsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section/FieldOfInterestsWithAvatarsCardsSection";
 export { default as FieldOfInterestsWithTagsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/FieldOfInterestsWithTagsCardsSection";
 export { default as BannerSectionBasic } from "./Landing Sections/banners-sections/banner-section-basic/BannerSectionBasic";
+export { default as ShopCardsSection } from "./Landing Sections/shop-sections/shop-cards-section/ShopCardsSection";
 
 //======================== THEME ==============================================================
 

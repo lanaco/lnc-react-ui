@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 
-import { linearGradientAnimation } from "../../../_utils/utils";
+import {
+  linearGradientAnimation,
+  truncateTextInRows,
+} from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -46,6 +49,7 @@ export const Wrapper = styled.div`
       font-weight: 500;
       line-height: 1.5rem;
       letter-spacing: -0.0112rem;
+      ${truncateTextInRows(2)}
     }
 
     & .wrapper__subtitle {
@@ -56,12 +60,29 @@ export const Wrapper = styled.div`
       font-weight: 400;
       line-height: 1.25rem;
       letter-spacing: -0.0056rem;
+      ${truncateTextInRows(2)}
     }
 
     & .wrapper__badges {
     }
 
     & .wrapper__rating {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      & .wrapper__star {
+        color: var(--gray-950, #14161a);
+      }
+
+      & .wrapper__review-count {
+        color: var(--gray-600, #676e79);
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1rem;
+        letter-spacing: 0.01px;
+      }
     }
   }
 
@@ -74,20 +95,22 @@ export const Wrapper = styled.div`
     & .wrapper__product {
       overflow: hidden;
       cursor: pointer;
-      max-width: ${`${100 / 3}%`};
-      min-width: ${`${100 / 3}%`};
+      width: 100%;
+      max-height: 5.75rem;
 
-      &:nth-of-type(1) {
+      &:first-child {
         border-radius: 0 0 0 1.25rem;
       }
 
-      &:nth-of-type(3) {
+      &:last-child {
         border-radius: 0 0 1.25rem 0;
       }
 
       & .product__image {
         width: 100%;
         aspect-ratio: 1 / 1;
+        height: calc(100% / 3);
+        max-height: 5.75rem;
         object-fit: cover;
       }
     }
