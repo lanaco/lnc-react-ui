@@ -1,0 +1,32 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import BannerSectionBasic from ".";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Banner Section Basic"
+  component={BannerSectionBasic}
+/>
+
+export const TemplateDefault = (args) => (
+  <>
+    <BannerSectionBasic
+      title={"Lorem ipsum dolor sit amet"}
+      subtitle={"Lorem ipsum dolor"}
+      buttonText={"Lorem ipsum dolor"}
+    />
+  </>
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { BannerSectionBasic } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

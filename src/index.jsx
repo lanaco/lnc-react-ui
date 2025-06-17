@@ -193,6 +193,7 @@ export { default as DetailedProductsSection } from "./Landing Sections/products-
 export { default as ProductsWithBannerSection } from "./Landing Sections/products-sections/products-with-banner-section";
 export { default as SimpleProductsSection } from "./Landing Sections/products-sections/simple-products-section";
 export { default as UrgentSaleProductsSection } from "./Landing Sections/products-sections/urgent-sale-products-section";
+export { default as BannerSectionBasic } from "./Landing Sections/banners-sections/banner-section-basic";
 export { default as BannerSectionCarousel } from "./Landing Sections/banners-sections/banner-section-carousel";
 export { default as BannerSectionGrid } from "./Landing Sections/banners-sections/banner-section-grid";
 export { default as BannerSectionSimple } from "./Landing Sections/banners-sections/banner-section-simple";
