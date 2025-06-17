@@ -1,0 +1,104 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import SimpleCategoriesSection from "./SimpleCategoriesSection.jsx";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Simple Categories Section"
+  component={SimpleCategoriesSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <SimpleCategoriesSection
+    title="shop by category"
+    handleOnClick={() => window.open("/")}
+    buttonText={"Open"}
+    items={[
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories asdfasd asd fasdf asdlf asdf lasdf as dfl asldf asdfl aslf",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        uuid: "",
+        onSelectCard: () => {},
+        name: "Mobile phones & Accessories",
+        image: "https://picsum.photos/200/300",
+      },
+    ]}
+  />
+);
+
+## Urgent sale products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { SimpleCategoriesSection } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
