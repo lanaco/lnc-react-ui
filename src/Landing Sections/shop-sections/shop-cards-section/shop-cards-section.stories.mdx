@@ -1,0 +1,123 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import ShopCardsSection from "./ShopCardsSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Shop Cards Section"
+  component={ShopCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <ShopCardsSection
+    title="Highlighted shops"
+    limitCards={4}
+    limitCardsForMobile={2}
+    onSelectCard={(uuid) => {}}
+    cards={[
+      {
+        title: "Lanaco Shop",
+        subtitle: "Banja Luka, Bosnia and Herzegovina",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        rating: 5,
+        reviewCount: 1000,
+        products: [
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+        ],
+      },
+      {
+        title: "Lanaco Shop",
+        subtitle: "Banja Luka, Bosnia and Herzegovina",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        rating: 5,
+        reviewCount: 1000,
+        products: [
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+        ],
+      },
+      {
+        title: "Lanaco Shop",
+        subtitle: "Banja Luka, Bosnia and Herzegovina",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        rating: 5,
+        reviewCount: 1000,
+        products: [
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+        ],
+      },
+      {
+        title: "Lanaco Shop",
+        subtitle: "Banja Luka, Bosnia and Herzegovina",
+        image: "https://picsum.photos/500/500",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        rating: 5,
+        reviewCount: 1000,
+        products: [
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+          {
+            image: "https://picsum.photos/500/500",
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+          },
+        ],
+      },
+    ]}
+  />
+);
+
+## Gift cards section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import { ShopCardsSection } from "@lanaco/lnc-react-ui";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

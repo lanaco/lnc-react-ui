@@ -1,16 +1,19 @@
 import styled from "@emotion/styled";
 
-import { BorderPanel } from "../../style";
 import { linearGradientAnimation } from "../../../_utils/utils";
 
-export const Wrapper = styled(BorderPanel)`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1 0 0;
   border-radius: 1.25rem;
+  border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
+  background: var(--Lanaco-Gray-white, #fff);
 
-  & .wrapper__tile {
+  /* drop-shadow-sm */
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+
+  & .wrapper__content {
     display: flex;
     padding: 1.25rem;
     flex-direction: column;
@@ -18,33 +21,16 @@ export const Wrapper = styled(BorderPanel)`
     gap: 0.75rem;
     align-self: strech;
 
-    & img {
-      width: 4rem;
-      height: 4rem;
-      border-radius: 999px;
+    & .wrapper__image {
       object-fit: cover;
+      aspect-ratio: 1 / 1;
+      max-height: 4rem;
+      border-radius: 999px;
 
       &:hover {
         cursor: pointer;
       }
     }
-  }
-
-  & .wrapper__image {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 999px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  & .wrapper__image--skeleton {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 999px;
-    background-color: ${linearGradientAnimation("-90deg")};
   }
 
   & .wrapper__info {
@@ -53,8 +39,8 @@ export const Wrapper = styled(BorderPanel)`
     align-items: center;
     gap: 0.375rem;
 
-    & .info__title {
-      color: var(--gray-950);
+    & .wrapper__title {
+      color: var(--gray-950, #14161a);
       font-size: 1rem;
       font-style: normal;
       font-weight: 500;
@@ -62,8 +48,8 @@ export const Wrapper = styled(BorderPanel)`
       letter-spacing: -0.0112rem;
     }
 
-    & .info__subtitle {
-      color: var(--gray-600);
+    & .wrapper__subtitle {
+      color: var(--gray-600, #676e79);
       text-align: center;
       font-size: 0.875rem;
       font-style: normal;
@@ -72,53 +58,25 @@ export const Wrapper = styled(BorderPanel)`
       letter-spacing: -0.0056rem;
     }
 
-    & .info-badges {
+    & .wrapper__badges {
     }
 
-    & .info__rating {
-    }
-
-    & .info__title--skeleton {
-      background-color: ${linearGradientAnimation("-90deg")};
-      height: 1rem;
-      width: 100px;
-    }
-
-    & .info__subtitle--skeleton {
-      background-color: ${linearGradientAnimation("-90deg")};
-      height: 1rem;
-      width: 200px;
-    }
-
-    & .info__badges--skeleton {
-      background-color: ${linearGradientAnimation("-90deg")};
-      height: 1rem;
-      width: 100px;
-    }
-
-    & .info__rating--skeleton {
-      background-color: ${linearGradientAnimation("-90deg")};
-      height: 1rem;
-      width: 100px;
+    & .wrapper__rating {
     }
   }
 
   & .wrapper__products {
     display: flex;
     align-items: flex-start;
-    gap: 1px;
-    height: 5.8rem;
+    column-gap: 1px;
     width: 100%;
 
     & .wrapper__product {
+      overflow: hidden;
+      cursor: pointer;
       max-width: ${`${100 / 3}%`};
       min-width: ${`${100 / 3}%`};
 
-      height: 5.8rem;
-      object-fit: cover;
-      overflow: hidden;
-      cursor: pointer;
-
       &:nth-of-type(1) {
         border-radius: 0 0 0 1.25rem;
       }
@@ -126,26 +84,57 @@ export const Wrapper = styled(BorderPanel)`
       &:nth-of-type(3) {
         border-radius: 0 0 1.25rem 0;
       }
-    }
 
-    & img {
-      width: 100%;
-      height: 5.8rem;
-      object-fit: cover;
+      & .product__image {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+      }
     }
+  }
+`;
 
-    & .wrapper__product--skeleton {
+export const SkeletonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 0;
+  border-radius: 1.25rem;
+  border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
+  background: var(--Lanaco-Gray-white, #fff);
+  width: 100%;
+
+  /* drop-shadow-sm */
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+
+  & .wrapper__content {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    align-self: strech;
+    width: 100%;
+
+    & .wrapper__image {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 999px;
       background-color: ${linearGradientAnimation("-90deg")};
+    }
+  }
+
+  & .wrapper__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    width: 100%;
+
+    & .wrapper__info-item {
+      background-color: ${linearGradientAnimation("-90deg")};
+      height: 1rem;
       width: 100%;
-      height: 5.8rem;
-
-      &:nth-of-type(1) {
-        border-radius: 0 0 0 1.25rem;
-      }
-
-      &:nth-of-type(3) {
-        border-radius: 0 0 1.25rem 0;
-      }
     }
   }
 `;
