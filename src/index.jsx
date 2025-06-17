@@ -203,6 +203,7 @@ export { default as BrandHitsSection } from "./Landing Sections/brand-sections/b
 export { default as FieldOfInterestsMasonrySection } from "./Landing Sections/field-of-interests-sections/field-of-interests-masonry-section/FieldOfInterestsMasonrySection";
 export { default as FieldOfInterestsWithAvatarsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section/FieldOfInterestsWithAvatarsCardsSection";
 export { default as FieldOfInterestsWithTagsCardsSection } from "./Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/FieldOfInterestsWithTagsCardsSection";
+export { default as BannerSectionBasic } from "./Landing Sections/banners-sections/banner-section-basic/BannerSectionBasic";
 
 //======================== THEME ==============================================================
 

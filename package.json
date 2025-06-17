@@ -119,6 +119,7 @@
     "./ProductsWithBannerSection": "./dist/ProductsWithBannerSection.js",
     "./SimpleProductsSection": "./dist/SimpleProductsSection.js",
     "./UrgentSaleProductsSection": "./dist/UrgentSaleProductsSection.js",
+    "./BannerSectionBasic": "./dist/BannerSectionBasic.js",
     "./BannerSectionCarousel": "./dist/BannerSectionCarousel.js",
     "./BannerSectionGrid": "./dist/BannerSectionGrid.js",
     "./BannerSectionSimple": "./dist/BannerSectionSimple.js",

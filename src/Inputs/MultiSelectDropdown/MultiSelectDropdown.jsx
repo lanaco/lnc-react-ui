@@ -124,7 +124,6 @@ const MultiSelectDropdown = forwardRef((props, ref) => {
       // defaultMenuIsOpen={defaultMenuIsOpen}
       // delimiter={delimiter}
       // onChange={onChange}
-      onInputChange={handleOnInput}
       // onMenuOpen={onMenuOpen}
       // onMenuClose={onMenuClose}
       // onBlur={onBlur}
@@ -133,6 +132,7 @@ const MultiSelectDropdown = forwardRef((props, ref) => {
       style={style}
       // onKeyDown={onKeyDown}
       {...rest}
+      onInputChange={handleOnInput}
     />
   );
 });
