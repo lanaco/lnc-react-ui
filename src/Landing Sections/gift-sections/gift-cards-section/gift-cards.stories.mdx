@@ -14,10 +14,10 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 export const TemplateDefault = (args) => (
   <GiftCardsSection
     title="Affordable gifts for any occasion"
-    limitCards={4}
-    limitCardsForMobile={1}
+    limit={4}
+    limitForMobile={1}
     onSelectCard={(uuid) => {}}
-    cards={[
+    items={[
       {
         text: "Gifts up to 20 KM",
         price: 20,

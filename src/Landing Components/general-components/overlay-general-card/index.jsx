@@ -7,7 +7,15 @@ import { Wrapper } from "./style";
 
 const LandingPageOverlayGeneralCard = forwardRef(
   (
-    { title, image, overlay, description, actionText, actionLink, handleClick },
+    {
+      title,
+      image,
+      overlay,
+      description,
+      actionText,
+      actionLink,
+      handleClick = () => {},
+    },
     ref
   ) => {
     const { theme } = useTheme();

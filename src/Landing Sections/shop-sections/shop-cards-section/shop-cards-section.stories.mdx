@@ -14,12 +14,12 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 export const TemplateDefault = (args) => (
   <ShopCardsSection
     title="Highlighted shops"
-    limitCards={4}
-    limitCardsForMobile={2}
+    limit={4}
+    limitForMobile={2}
     actionText="View all"
     onSelectCard={(uuid) => {}}
     onShowMore={() => {}}
-    cards={[
+    items={[
       {
         title: "Lanaco Shop",
         subtitle: "Banja Luka, Bosnia and Herzegovina",
