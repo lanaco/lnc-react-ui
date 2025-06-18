@@ -7,7 +7,7 @@ import { GridWrapper } from "./style";
 import { RegularTitleSectionWrapper } from "./style";
 
 const MasonryGeneralCardsSection = forwardRef(
-  ({ title, items, limit = 3 }, ref) => {
+  ({ title, items, limit = 3, onSelectCard = () => {} }, ref) => {
     return (
       <RegularTitleSectionWrapper>
         <div className="regular-title">
@@ -21,6 +21,7 @@ const MasonryGeneralCardsSection = forwardRef(
               <LandingPageMasonryGeneralCard
                 key={`landing-page-masonry-general-card__${index + 1}`}
                 {...item}
+                onSelectCard={() => onSelectCard(item?.uuid)}
               />
             ))}
         </GridWrapper>

@@ -4,7 +4,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 import BlogCardLarge from "../../../Landing Components/blog-components/blog-card-large";
 
 const BlogsSectionLarge = forwardRef((props, ref) => {
-  const { items, onButtonClick, limit = 2 } = props;
+  const { items, onSelectCard = () => {}, limit = 2 } = props;
 
   const isMobile = useDetectMobile();
 
@@ -19,7 +19,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
               text={x?.text}
               titleSlug={x?.titleSlug}
               buttonText={x?.buttonText}
-              onCardClick={() => onButtonClick(x)}
+              onCardClick={() => onSelectCard(x)}
             />
           ))
         : items
@@ -32,7 +32,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
                 text={x?.text}
                 titleSlug={x?.titleSlug}
                 buttonText={x?.buttonText}
-                onCardClick={() => onButtonClick(x)}
+                onCardClick={() => onSelectCard(x)}
               />
             ))}
     </GridWrapper>

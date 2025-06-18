@@ -4,7 +4,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 import SimpleBlogCardCentered from "../../../Landing Components/blog-components/simple-blog-card-centered";
 
 const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
-  const { items, limit = 3 } = props;
+  const { items, limit = 3, onSelectCard = () => {} } = props;
 
   const isMobile = useDetectMobile();
 
@@ -19,6 +19,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
               text={x?.text}
               titleSlug={x?.titleSlug}
               buttonText={x?.buttonText}
+              onCardClick={() => onSelectCard(x?.uuid)}
             />
           ))
         : items
@@ -31,6 +32,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                 text={x?.text}
                 titleSlug={x?.titleSlug}
                 buttonText={x?.buttonText}
+                onCardClick={() => onSelectCard(x?.uuid)}
               />
             ))}
     </GridWrapper>

@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
@@ -7,7 +9,16 @@ import Button from "../../../General/Button/Button";
 import SimpleBlogCard from "../../../Landing Components/blog-components/simple-blog-card";
 
 const BlogsSectionSimple = forwardRef((props, ref) => {
-  const { icon, title, onSectionClick, items, buttonText, limit = 3 } = props;
+  const {
+    icon,
+    title,
+    onButtonAction = () => {},
+    onSelectCard = () => {},
+    buttonLink,
+    items,
+    buttonText,
+    limit = 3,
+  } = props;
 
   const isMobile = useDetectMobile();
 
@@ -18,12 +29,12 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(onSectionClick) && (
+        {isDefinedNotEmptyString(buttonLink) && (
           <Button
             type="button"
             btnType="tinted"
             color="gray"
-            onClick={onSectionClick}
+            onClick={() => onButtonAction(buttonLink)}
             borderRadius="curved"
           >
             {buttonText}
@@ -39,6 +50,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                 image={x?.image}
                 text={x?.text}
                 titleSlug={x?.titleSlug}
+                onCardClick={() => onSelectCard(x?.uuid)}
               />
             ))
           : items
@@ -50,6 +62,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                   image={x?.image}
                   text={x?.text}
                   titleSlug={x?.titleSlug}
+                  onCardClick={() => onSelectCard(x?.uuid)}
                 />
               ))}
       </GridWrapper>

@@ -1,4 +1,6 @@
-import { forwardRef, useState } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 
 import FieldOfInterestsMasonryTagSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag-skeleton";
 import FieldOfInterestsMasonryTag from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag";
@@ -16,8 +18,8 @@ const FieldOfInterestsMasonrySection = forwardRef(
       cards = [],
       limitTags = 5,
       limitTagsForMobile = 5,
-      limitCards = 3,
-      limitCardsForMobile = 2,
+      limit = 3,
+      limitForMobile = 2,
       onSelectTag = () => {},
       onSelectCard = () => {},
     },
@@ -58,8 +60,8 @@ const FieldOfInterestsMasonrySection = forwardRef(
       <Wrapper
         limitTags={limitTags}
         limitTagsForMobile={limitTagsForMobile}
-        limitCards={limitCards}
-        limitCardsForMobile={limitCardsForMobile}
+        limitCards={limit}
+        limitCardsForMobile={limitForMobile}
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}

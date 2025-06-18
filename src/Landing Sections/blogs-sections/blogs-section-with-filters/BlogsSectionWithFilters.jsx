@@ -15,7 +15,8 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     buttonText,
     limit = 3,
     options,
-    onSectionClick,
+    onActionClick = () => {},
+    onSelectOption = () => {},
   } = props;
   const isMobile = useDetectMobile();
 
@@ -31,7 +32,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
             type="button"
             btnType="tinted"
             color="gray"
-            onClick={onSectionClick}
+            onClick={onActionClick}
             borderRadius="curved"
           >
             {buttonText}
@@ -46,11 +47,13 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
           items={options}
           // selectedIds={selectedExploreCategoriesIds}
           onRemove={(id) => {
+            onSelectOption(id);
             // setSelectedExploreCategoriesIds([
             //   ...selectedExploreCategoriesIds.filter((x) => x != id),
             // ])
           }}
           onSelect={(id) => {
+            onSelectOption(id);
             // setSelectedExploreCategoriesIds([id]);
           }}
           // onSelectAll={() => setSelectedExploreCategoriesIds([])}
@@ -69,6 +72,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                 text={x?.text}
                 titleSlug={x?.titleSlug}
                 buttonText={x?.buttonText}
+                onCardClick={() => onSelectCard(x?.uuid)}
               />
             ))
           : items
@@ -81,6 +85,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                   text={x?.text}
                   titleSlug={x?.titleSlug}
                   buttonText={x?.buttonText}
+                  onCardClick={() => onSelectCard(x?.uuid)}
                 />
               ))}
       </GridWrapper>
