@@ -4,7 +4,7 @@ import useDetectMobile from "../../_utils/useDetectMobile";
 import { isDefinedNotEmptyString } from "../../_utils/utils";
 import { RegulatTitleSectionWrapper } from "../style";
 import Button from "../../General/Button/Button";
-import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card";
+import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card/CategorySimpleCard";
 
 const SimpleCategoriesSection = forwardRef((props, ref) => {
   const {

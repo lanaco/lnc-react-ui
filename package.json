@@ -153,6 +153,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.isfinite": "^3.3.2",
     "lodash.isfunction": "^3.0.9",
+    "lodash.isnumber": "^3.0.3",
     "lodash.isobject": "^3.0.2",
     "npm": "^9.2.0",
     "react-datepicker": "^4.10.0",
