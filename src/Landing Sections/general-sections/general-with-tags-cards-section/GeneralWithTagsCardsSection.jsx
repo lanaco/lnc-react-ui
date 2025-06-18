@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import GeneralWithTagsCardTagSkeleton from "../../../Landing Components/general-components/general-with-tags-card/tag-skeleton";
@@ -14,9 +16,9 @@ const GeneralWithTagsCardsSection = forwardRef(
       tags = [],
       limitTags = 7,
       limitTagsForMobile = 2,
-      limitCards = 3,
-      limitCardsForMobile = 3,
-      cards = [],
+      limit = 3,
+      limitForMobile = 3,
+      items = [],
       onSelectTag = () => {},
       onSelectCard = () => {},
     },
@@ -34,16 +36,16 @@ const GeneralWithTagsCardsSection = forwardRef(
       <Wrapper
         limitTags={limitTags}
         limitTagsForMobile={limitTagsForMobile}
-        limitCards={limitCards}
-        limitCardsForMobile={limitCardsForMobile}
+        limitCards={limit}
+        limitCardsForMobile={limitForMobile}
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
         <div className="wrapper__cards">
-          {cards && cards?.length > 0
-            ? cards?.map((card, idx) => (
+          {items && items?.length > 0
+            ? items?.map((card, idx) => (
                 <GeneralWithTagsCard
                   key={`general-with-tags-card__${idx + 1}`}
                   image={card?.image}

@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
 import LandingPageOverlayGeneralCard from "../../../Landing Components/general-components/overlay-general-card/index";
@@ -6,7 +8,7 @@ import { GridWrapper } from "./style";
 import { RegulatTitleSectionWrapper } from "../../style";
 
 const OverlayGeneralCardsSection = forwardRef(
-  ({ title, items, limit = 2 }, ref) => {
+  ({ title, items, limit = 2, onSelectCard = () => {} }, ref) => {
     return (
       <RegulatTitleSectionWrapper>
         <div className="regular-title center">
@@ -22,9 +24,9 @@ const OverlayGeneralCardsSection = forwardRef(
                 title={item?.title}
                 image={item?.image}
                 description={item?.description}
-                handleClick={item?.handleClick}
                 actionText={item?.actionText}
                 overlay={item?.overlay}
+                handleClick={() => onSelectCard(item?.uuid)}
               />
             ))}
         </GridWrapper>

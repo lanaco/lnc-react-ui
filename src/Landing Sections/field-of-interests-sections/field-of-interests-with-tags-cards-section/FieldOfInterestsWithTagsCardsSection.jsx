@@ -1,4 +1,6 @@
-import { forwardRef, useState } from "react";
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
+import { forwardRef } from "react";
 
 import FieldOfInterestsWithTagsCardTagSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/tag-skeleton";
 import FieldOfInterestsWithTagsCardTag from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/tag";
@@ -14,9 +16,9 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       tags = [],
       limitTags = 7,
       limitTagsForMobile = 7,
-      limitCards = 3,
-      limitCardsForMobile = 2,
-      cards = [],
+      limit = 3,
+      limitForMobile = 2,
+      items = [],
       onSelectTag = () => {},
       onSelectCard = () => {},
     },
@@ -37,8 +39,8 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       <Wrapper
         limitTags={limitTags}
         limitTagsForMobile={limitTagsForMobile}
-        limitCards={limitCards}
-        limitCardsForMobile={limitCardsForMobile}
+        limitCards={limit}
+        limitCardsForMobile={limitForMobile}
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
@@ -64,8 +66,8 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
               ))}
         </div>
         <div className="wrapper__cards">
-          {cards && cards?.length > 0
-            ? cards?.map((card, idx) => (
+          {items && items?.length > 0
+            ? items?.map((card, idx) => (
                 <FieldOfInterestsWithTagsCard
                   key={`field-of-interests-with-tags-card__${idx + 1}`}
                   image={card?.image}
