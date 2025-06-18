@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { getColorRgbaValue, getComponentPropValue } from "../../_utils/utils";
 
 const prop = (props, field) => {
-  console.log("props", props, field);
   return getComponentPropValue(
     props.theme,
     "StarRating",
@@ -31,14 +30,7 @@ export const Container = styled.div`
     font-weight: 400;
     font-size: 0.75rem;
     line-height: 1.5rem;
-    color: ${(p) =>
-      getColorRgbaValue(
-        p.theme,
-        "StarRating",
-        p.color,
-        p.disabled === true ? "disabled" : "enabled",
-        "textColor"
-      )};
+    color: ${(p) => p.color};
   }
 `;
 
@@ -65,12 +57,5 @@ export const EmptyStars = styled.span`
   padding: 0;
   display: block;
   z-index: 0;
-  color: ${(p) =>
-    getColorRgbaValue(
-      p.theme,
-      "StarRating",
-      p.color,
-      p.disabled === true ? "disabled" : "enabled",
-      "emptyColor"
-    )};
+  color: ${(p) => p.color};
 `;
