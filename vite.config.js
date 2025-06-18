@@ -201,6 +201,10 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/FieldOfInterestsWithTagsCardsSection.jsx"
         ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/general-sections/general-with-tags-cards-section/GeneralWithTagsCardsSection.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {

@@ -8,6 +8,10 @@ export const Wrapper = styled.div`
   height: auto;
   max-height: 7.5rem;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   & .wrapper__image {
     width: 7.5rem;
     height: auto;

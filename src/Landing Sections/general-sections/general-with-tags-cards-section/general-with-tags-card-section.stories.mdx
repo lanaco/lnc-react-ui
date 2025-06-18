@@ -1,0 +1,97 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import GeneralWithTagsCardsSection from "./GeneralWithTagsCardsSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/General With Tags Cards Section"
+  component={GeneralWithTagsCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <GeneralWithTagsCardsSection
+    title="Find popular real estates"
+    limitTags={5}
+    limitTagsForMobile={2}
+    limitCards={3}
+    limitCardsMobile={3}
+    onSelectTag={(uuid) => {}}
+    onSelectCard={(uuid) => {}}
+    cards={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/300/350",
+        title: "For Young Married Couples",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/300/350",
+        title: "For Students",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        image: "https://picsum.photos/300/350",
+        title: "For Tourists",
+      },
+    ]}
+    tags={[
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Stanovi Banja Luka",
+        icon: "mng-lnc-search",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Stanovi Sarajevo",
+        icon: "mng-lnc-search",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Stanovi stanovi prvi sprat",
+        icon: "mng-lnc-search",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Stanovi drugi sprat",
+        icon: "mng-lnc-search",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Stanovi sa parkingom",
+        icon: "mng-lnc-search",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Stanovi pogodni za kućne ljubimce",
+        icon: "mng-lnc-search",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Kuće sa bazenom",
+        icon: "mng-lnc-search",
+      },
+      {
+        uuid: "6aadfaf1-c376-4df4-bc2e-b38ce1e6f7d2",
+        text: "Kuće za proslave",
+        icon: "mng-lnc-search",
+      },
+    ]}
+  />
+);
+
+## General with tags cards section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import GeneralWithTagsCardsSection from "@lanaco/lnc-react-ui/GeneralWithTagsCardsSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
