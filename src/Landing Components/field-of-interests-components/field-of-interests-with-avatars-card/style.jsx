@@ -15,6 +15,10 @@ export const AvatarWrapper = styled.div`
   height: auto;
   border-radius: 999px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   & .wrapper__image {
     width: 100%;
     aspect-ratio: 1 / 1;

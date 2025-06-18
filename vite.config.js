@@ -207,6 +207,10 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
+          "src/Landing Sections/general-sections/general-with-tags-cards-section/GeneralWithTagsCardsSection.jsx"
+        ),
+        resolve(
+          __dirname,
           "src/Landing Sections/shop-sections/shop-cards-section/ShopCardsSection.jsx"
         ),
       ],

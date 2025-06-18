@@ -130,6 +130,7 @@
     "./FieldOfInterestsMasonrySection": "./dist/FieldOfInterestsMasonrySection.js",
     "./FieldOfInterestsWithAvatarsCardsSection": "./dist/FieldOfInterestsWithAvatarsCardsSection.js",
     "./FieldOfInterestsWithTagsCardsSection": "./dist/FieldOfInterestsWithTagsCardsSection.js",
+    "./GeneralWithTagsCardsSection": "./dist/GeneralWithTagsCardsSection.js",
     "./ShopCardsSection": "./dist/ShopCardsSection.jsx"
   },
   "dependencies": {

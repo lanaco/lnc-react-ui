@@ -15,6 +15,10 @@ export const Wrapper = styled.div`
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
   background: var(--Lanaco-Gray-white, #fff);
 
+  &:hover {
+    cursor: pointer;
+  }
+
   /* drop-shadow-sm */
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 
@@ -35,7 +39,7 @@ export const Wrapper = styled.div`
     align-self: stretch;
 
     & .wrapper__title {
-      color: var(--gray-950);
+      color: var(--gray-950, #14161a);
       font-size: 1rem;
       font-style: normal;
       font-weight: 500;
@@ -44,7 +48,7 @@ export const Wrapper = styled.div`
     }
 
     & .wrapper__description {
-      color: var(--gray-600);
+      color: var(--gray-600, #676e79);
       font-size: 0.75rem;
       font-style: normal;
       font-weight: 400;
@@ -64,15 +68,19 @@ export const SkeletonWrapper = styled.div`
 
 export const TagWrapper = styled.div`
   display: flex;
-  padding: 0 0.75rem 0 0;
+  padding: 0 0.5rem 0 0;
   align-items: center;
+  justify-content: center;
   background: var(--neutral-9504, rgba(20, 22, 26, 0.04));
   border-radius: 999px;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   & .wrapper__icon {
     font-size: 1.75rem;
     color: var(--gray-950, #14161a);
-    background: var(--gray-200);
     border-radius: 999px;
     width: 2.75rem;
     height: 2.75rem;

@@ -36,7 +36,8 @@ export const Wrapper = styled.div`
 
   & .wrapper__tags {
     display: flex;
-    justify-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     gap: 0.75rem;
   }
@@ -52,6 +53,8 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & .wrapper__tags {
+      display: flex;
+      flex-wrap: nowrap;
       overflow-x: scroll;
       justify-content: flex-start;
       width: 100%;
