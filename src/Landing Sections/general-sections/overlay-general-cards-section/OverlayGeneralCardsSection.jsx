@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
 
-import LandingPageOverlayGeneralCard from "../../Landing Components/general-components/overlay-general-card/index";
-import { RegulatTitleSectionWrapper } from "../style";
+import LandingPageOverlayGeneralCard from "../../../Landing Components/general-components/overlay-general-card/index";
 
 import { GridWrapper } from "./style";
+import { RegulatTitleSectionWrapper } from "../../style";
 
 const OverlayGeneralCardsSection = forwardRef(
   ({ title, items, limit = 2 }, ref) => {
