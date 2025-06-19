@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import ReviewsSection from "./ReviewsSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta title="Landing sections/Reviews Section" component={ReviewsSection} />
+
+export const TemplateDefault = (args) => (
+  <ReviewsSection
+    title="Electronics reviews"
+    items={[
+      {
+        title:
+          "Lorem ipsum dolor asf sadfasdfsd s fssdf  sdfssd sdfsdfsdfsdfsdffds",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt amet volutpat volutpat. sd fasdf asldflkasdjfalsdflasfsadfaskd sdfasdf dasfasdf asdfasdf asdfasdf",
+        ratingArithmeticMean: 4.5,
+        onSelectCard: () => {},
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        title: "Lorem ipsum dolor",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt amet volutpat volutpat.",
+        ratingArithmeticMean: 4.5,
+        onSelectCard: () => {},
+        image: "https://picsum.photos/200/300",
+      },
+      {
+        title: "Lorem ipsum dolor",
+        text: "Lorem ipsum dolor sit amet consectetur. Orci tincidunt amet volutpat volutpat.",
+        ratingArithmeticMean: 4.5,
+        onSelectCard: () => {},
+        image: "https://picsum.photos/200/300",
+      },
+    ]}
+  />
+);
+
+## Gift cards section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import ReviewsSection from "@lanaco/lnc-react-ui/ReviewsSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

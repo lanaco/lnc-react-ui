@@ -511,6 +511,29 @@ export const lanaco_light = {
         },
       },
     },
+    StarRating: {
+      default: {
+        palette: "gray",
+        enabled: {
+          fontSize: "1rem",
+          lineHeight: "1.25rem",
+          filledColor: 900,
+          emptyColor: 300,
+          textColor: 500,
+        },
+        disabled: { filledColor: 500, emptyColor: 300, textColor: 500 },
+      },
+      neutral: {
+        enabled: {
+          fontSize: "1rem",
+          lineHeight: "1.25rem",
+          filledColor: 900,
+          emptyColor: 300,
+          textColor: 500,
+        },
+      },
+      yellow: { enabled: { filledColor: 500 } },
+    },
     TabRegular: {
       default: {
         palette: "gray",
@@ -3920,6 +3943,29 @@ export const lanaco_dark = {
         },
       },
     },
+    StarRating: {
+      default: {
+        palette: "gray",
+        enabled: {
+          fontSize: "1rem",
+          lineHeight: "1.25rem",
+          filledColor: 900,
+          emptyColor: 300,
+          textColor: 500,
+        },
+        disabled: { filledColor: 500, emptyColor: 300, textColor: 500 },
+      },
+      neutral: {
+        enabled: {
+          fontSize: "1rem",
+          lineHeight: "1.25rem",
+          filledColor: 900,
+          emptyColor: 300,
+          textColor: 500,
+        },
+      },
+      yellow: { enabled: { filledColor: 500 } },
+    },
     TabRegular: {
       default: {
         palette: "gray",
@@ -7312,6 +7358,29 @@ export const lanaco_e_commerce = {
           icon: 600,
         },
       },
+    },
+    StarRating: {
+      default: {
+        palette: "gray",
+        enabled: {
+          fontSize: "1rem",
+          lineHeight: "1.25rem",
+          filledColor: 900,
+          emptyColor: 300,
+          textColor: 500,
+        },
+        disabled: { filledColor: 500, emptyColor: 300, textColor: 500 },
+      },
+      neutral: {
+        enabled: {
+          fontSize: "1rem",
+          lineHeight: "1.25rem",
+          filledColor: 900,
+          emptyColor: 300,
+          textColor: 500,
+        },
+      },
+      yellow: { enabled: { filledColor: 500 } },
     },
     TabRegular: {
       default: {

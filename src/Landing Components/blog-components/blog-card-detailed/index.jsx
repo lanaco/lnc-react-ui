@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
-import useDetectMobile from "../../../_utils/useDetectMobile";
 import { BlogTag } from "../../../Landing Sections/style";
 
 const BlogCardDetailed = forwardRef((props, ref) => {
