@@ -64,7 +64,7 @@ const QuizSection = forwardRef(
     };
 
     const handleNext = () => {
-      let isCorrect = selectedAnswer?.uuid === question?.correntAnswer;
+      let isCorrect = selectedAnswer?.uuid === question?.correctAnswer;
 
       if (isCorrect) {
         setStep(QuizContent.CORRECT_ANSWER);
