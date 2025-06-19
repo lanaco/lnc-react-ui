@@ -163,6 +163,34 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
+          "src/Landing Sections/blogs-sections/blogs-section-detailed/BlogsSectionDetailed.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/blogs-sections/blogs-section-large/BlogsSectionLarge.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/blogs-sections/blogs-section-simple/BlogsSectionSimple.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/blogs-sections/blogs-section-simple-centered/BlogsSectionSimpleCentered.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/blogs-sections/blogs-section-with-filters/BlogsSectionWithFilters.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/custom-sections/custom-loan-map-section/CustomLoanMapSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/simple-categories-section/SimpleCategoriesSection.jsx"
+        ),
+        resolve(
+          __dirname,
           "src/Landing Sections/banners-sections/banner-section-basic/BannerSectionBasic.jsx"
         ),
         resolve(
@@ -208,6 +236,10 @@ export default defineConfig({
         resolve(
           __dirname,
           "src/Landing Sections/general-sections/general-with-tags-cards-section/GeneralWithTagsCardsSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/general-sections/overlay-general-cards-section/OverlayGeneralCardsSection.jsx"
         ),
         resolve(
           __dirname,

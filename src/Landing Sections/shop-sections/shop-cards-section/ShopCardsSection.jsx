@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import Button from "../../../General/Button/Button";
@@ -10,9 +12,9 @@ const ShopCardsSection = forwardRef(
     {
       title,
       subtitle,
-      cards,
-      limitCards = 4,
-      limitCardsForMobile = 2,
+      items,
+      limit = 4,
+      limitForMobile = 2,
       actionText,
       onSelectCard = () => {},
       onShowMore,
@@ -29,8 +31,8 @@ const ShopCardsSection = forwardRef(
 
     return (
       <Wrapper
-        limitCards={limitCards}
-        limitCardsForMobile={limitCardsForMobile}
+        limitCards={limit}
+        limitCardsForMobile={limitForMobile}
       >
         <div className="wrapper__heading">
           <div className="wrapper__title">
@@ -48,8 +50,8 @@ const ShopCardsSection = forwardRef(
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
         <div className="wrapper__cards">
-          {cards && cards?.length > 0
-            ? cards?.map((card, idx) => (
+          {items && items?.length > 0
+            ? items?.map((card, idx) => (
                 <ShopCard
                   key={`shop-card__${idx + 1}`}
                   uuid={card?.uuid}

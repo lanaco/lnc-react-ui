@@ -8,7 +8,15 @@ import Button from "../../../General/Button/Button";
 import BlogCardDetailed from "../../../Landing Components/blog-components/blog-card-detailed";
 
 const BlogsSectionDetailed = forwardRef((props, ref) => {
-  const { icon, title, onSectionClick, items, buttonText, limit = 3 } = props;
+  const {
+    icon,
+    title,
+    onButtonAction,
+    items,
+    buttonText,
+    limit = 3,
+    onSelectCard = () => {},
+  } = props;
 
   const isMobile = useDetectMobile();
 
@@ -24,7 +32,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
             type="button"
             btnType="tinted"
             color="gray"
-            onClick={() => onSectionClick()}
+            onClick={() => onButtonAction(buttonLink)}
             borderRadius="curved"
           >
             {buttonText}
@@ -45,6 +53,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                 datePublished={x?.date}
                 readDuration={x?.readDuration}
                 tags={x?.tags}
+                onCardClick={() => onSelectCard(x?.uuid)}
               />
             ))
           : items
@@ -61,6 +70,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                   numberOfComments={x?.numberOfComments}
                   datePublished={x?.date}
                   readDuration={x?.readDuration}
+                  onCardClick={() => onSelectCard(x?.uuid)}
                 />
               ))}
       </GridWrapper>

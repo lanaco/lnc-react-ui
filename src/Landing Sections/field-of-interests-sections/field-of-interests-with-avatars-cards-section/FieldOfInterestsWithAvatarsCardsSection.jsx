@@ -1,4 +1,6 @@
-import { forwardRef, useState } from "react";
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
+import { forwardRef } from "react";
 
 import FieldOfInterestsWithAvatarsCardAvatarSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/avatar-skeleton";
 import FieldOfInterestsWithAvatarsCardAvatar from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/avatar";
@@ -13,10 +15,10 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
       subtitle,
       avatars = [],
       limitAvatars = 4,
-      limitCards = 6,
+      limit = 6,
       limitAvatarsForMobile = 4,
-      limitCardsForMobile = 2,
-      cards = [],
+      limitForMobile = 2,
+      items = [],
       onSelectAvatar = () => {},
       onSelectCard = () => {},
     },
@@ -37,8 +39,8 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
       <Wrapper
         limitAvatars={limitAvatars}
         limitAvatarsForMobile={limitAvatarsForMobile}
-        limitCards={limitCards}
-        limitCardsForMobile={limitCardsForMobile}
+        limitCards={limit}
+        limitCardsForMobile={limitForMobile}
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
@@ -66,8 +68,8 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
               ))}
         </div>
         <div className="wrapper__cards">
-          {cards && cards?.length > 0
-            ? cards?.map((card, idx) => (
+          {items && items?.length > 0
+            ? items?.map((card, idx) => (
                 <FieldOfInterestsWithAvatarsCard
                   key={`field-of-interests-with-avatars-card__${idx + 1}`}
                   uuid={card?.uuid}
