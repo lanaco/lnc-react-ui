@@ -1,11 +1,11 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 
 import Button from "../../../General/Button/Button";
+import Icon from "../../../General/Icon/Icon";
 import ProgressBar from "../../../Feedback/ProgressBar/ProgressBar";
 import { CIRCLE_CIRCUMFERENCE, CIRCLE_RADIUS } from "../../../_utils/consts";
 import { formatTimerText } from "../../../_utils/utils";
 import { QuestionWrapper } from "./style";
-import Icon from "../../../General/Icon/Icon";
 
 const QuizQuestion = forwardRef(
   (

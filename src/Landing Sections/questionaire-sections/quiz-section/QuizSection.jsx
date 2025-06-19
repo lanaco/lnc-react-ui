@@ -1,6 +1,6 @@
 import { forwardRef, useRef, useState } from "react";
 
-import { isDefined } from "../../../_utils/utils";
+import { formatString, isDefined } from "../../../_utils/utils";
 import QuizWelcome from "../../../Landing Components/questionaire-components/quiz/welcome";
 import QuizQuestion from "../../../Landing Components/questionaire-components/quiz/question";
 import QuizResult from "../../../Landing Components/questionaire-components/quiz/result";
@@ -18,6 +18,7 @@ const QuizSection = forwardRef(
       imageComponent,
       questions,
       secondsPerQuestion,
+      numOfCredits,
       startQuizText = "Start quiz",
       nextText = "Next",
       giveUpText = "Give up",
@@ -39,6 +40,7 @@ const QuizSection = forwardRef(
     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
     const results = useRef([]);
+    const wonCredits = useRef(0);
 
     const handleStartQuiz = () => {
       setStep(QuizContent.QUIZ);
@@ -57,22 +59,17 @@ const QuizSection = forwardRef(
       setStep(QuizContent.START_QUIZ);
       setQuestionNo(1);
       setSelectedAnswer(null);
+
       onGiveUp?.();
     };
 
     const handleNext = () => {
-      if (questionNo === questions?.length) {
-        setStep(QuizContent.END_QUIZ);
-      } else {
-        results.current = [
-          ...results.current,
-          {
-            question,
-            selectedAnswer,
-            isCorrect: selectedAnswer?.uuid === question?.correntAnswer,
-          },
-        ];
+      let isCorrect = selectedAnswer?.uuid === question?.correntAnswer;
 
+      if (isCorrect) {
+        setStep(QuizContent.CORRECT_ANSWER);
+        wonCredits.current += numOfCredits || question?.numOfCredits;
+      } else {
         setQuestionNo(questionNo + 1);
         setQuestion(
           questions?.find((question) => question?.questionNo === questionNo + 1)
@@ -80,14 +77,40 @@ const QuizSection = forwardRef(
         setSelectedAnswer(null);
       }
 
+      results.current = [
+        ...results.current,
+        {
+          question,
+          selectedAnswer,
+          isCorrect,
+        },
+      ];
+
       onNext?.();
     };
 
     const handleContinue = () => {
+      if (questionNo === questions?.length) {
+        setStep(QuizContent.START_QUIZ);
+        setQuestionNo(1);
+      } else {
+        setStep(QuizContent.QUIZ);
+        setQuestionNo(questionNo + 1);
+        setQuestion(
+          questions?.find((question) => question?.questionNo === questionNo + 1)
+        );
+      }
+
+      setSelectedAnswer(null);
+
       onContinue?.();
     };
 
     const handleEndQuiz = () => {
+      setStep(QuizContent.START_QUIZ);
+      setQuestionNo(1);
+      setSelectedAnswer(null);
+
       onEndQuiz?.();
     };
 
@@ -122,10 +145,13 @@ const QuizSection = forwardRef(
               onNext={handleNext}
             />
           )}
-          {step === QuizContent.END_QUIZ && (
+          {step === QuizContent.CORRECT_ANSWER && (
             <QuizResult
               title={endTitle}
-              description={endDescription}
+              description={formatString(
+                endDescription,
+                numOfCredits || question?.numOfCredits
+              )}
               continueText={continueText}
               endQuizText={endQuizText}
               onContinue={handleContinue}

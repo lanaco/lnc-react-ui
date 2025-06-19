@@ -435,3 +435,9 @@ export const formatTimerText = (seconds) => {
   const s = String(seconds % 60).padStart(2, "0");
   return `${m}:${s}`;
 };
+
+export const formatString = (text, ...args) => {
+  return text.replace(/{(\d+)}/g, function (match, number) {
+    return typeof args[number] != "undefined" ? args[number] : match;
+  });
+};
