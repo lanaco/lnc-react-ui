@@ -69,6 +69,10 @@ const QuizSection = forwardRef(
       if (isCorrect) {
         setStep(QuizContent.CORRECT_ANSWER);
         wonCredits.current += numOfCredits || question?.numOfCredits;
+      } else if (questionNo === questions?.length) {
+        setStep(QuizContent.START_QUIZ);
+        setQuestionNo(1);
+        setSelectedAnswer(null);
       } else {
         setQuestionNo(questionNo + 1);
         setQuestion(
