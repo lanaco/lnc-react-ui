@@ -17,7 +17,6 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
   } = props;
   const isMobile = useDetectMobile();
 
-  console.log("handleOnClick", handleOnClick);
   return (
     <RegulatTitleSectionWrapper>
       <div className="regular-title">

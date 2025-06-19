@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-import { truncateText, truncateTextInRows, linearGradientAnimation } from "../../../_utils/utils";
+import {
+  truncateText,
+  truncateTextInRows,
+  linearGradientAnimation,
+} from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
   display: flex;

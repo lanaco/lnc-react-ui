@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef } from "react";
-import { GridWrapper } from "./style";
+import { forwardRef, memo, useMemo } from "react";
+import { GridWrapper, SuspenseWrapper } from "./style";
 import Button from "../../../General/Button/Button";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { RegulatTitleSectionWrapper } from "../../style";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
+import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/suspense-product-card-detailed";
+
+const MemoizedProductCard = memo(DetailedProductCard);
 
 const DetailedProductsSection = forwardRef((props, ref) => {
   const {
@@ -17,10 +20,49 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     buttonText,
     limit = 4,
     onSelectCard = () => {},
-    onButtonAction = () => {}
+    onButtonAction = () => {},
+    isLoading = false,
   } = props;
 
   const isMobile = useDetectMobile();
+  const memoizedProducts = useMemo(() => {
+    return (
+      <>
+        {isMobile === true
+          ? items?.map((x, index) => (
+              <MemoizedProductCard
+                key={index}
+                title={x?.title}
+                price={x?.price}
+                currency={x?.currency}
+                image={x?.image}
+                sellerUuid={x?.sellerUuid}
+                uuid={x?.uuid}
+                isSponsored={x?.isSponsored}
+                imageComponent={x?.imageComponent}
+                onSelectCard={() => onSelectCard(x?.uuid)}
+              />
+            ))
+          : items
+              ?.slice(0, limit)
+              .map((x, index) => (
+                <MemoizedProductCard
+                  key={index}
+                  title={x?.title}
+                  price={x?.price}
+                  currency={x?.currency}
+                  image={x?.image}
+                  sellerUuid={x?.sellerUuid}
+                  uuid={x?.uuid}
+                  location={x?.location}
+                  isSponsored={x?.isSponsored}
+                  imageComponent={x?.imageComponent}
+                  onSelectCard={() => onSelectCard(x?.uuid)}
+                />
+              ))}
+      </>
+    );
+  }, [items]);
 
   return (
     <RegulatTitleSectionWrapper ref={ref}>
@@ -42,38 +84,13 @@ const DetailedProductsSection = forwardRef((props, ref) => {
         )}
       </div>
       <GridWrapper limit={limit}>
-        {isMobile === true
-          ? items?.map((x, index) => (
-              <DetailedProductCard
-                key={index}
-                title={x?.title}
-                price={x?.price}
-                currency={x?.currency}
-                image={x?.image}
-                sellerUuid={x?.sellerUuid}
-                uuid={x?.uuid}
-                isSponsored={x?.isSponsored}
-                imageComponent={x?.imageComponent}
-                onSelectCard={() => onSelectCard(x?.uuid)}
-              />
-            ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <DetailedProductCard
-                  key={index}
-                  title={x?.title}
-                  price={x?.price}
-                  currency={x?.currency}
-                  image={x?.image}
-                  sellerUuid={x?.sellerUuid}
-                  uuid={x?.uuid}
-                  location={x?.location}
-                  isSponsored={x?.isSponsored}
-                  imageComponent={x?.imageComponent}
-                  onSelectCard={() => onSelectCard(x?.uuid)}
-                />
-              ))}
+        <SuspenseDetailedProductCard
+          isLoading={isLoading}
+          itemsCount={limit}
+          keyPrefix={"explore-landing"}
+        >
+          {memoizedProducts}
+        </SuspenseDetailedProductCard>
       </GridWrapper>
     </RegulatTitleSectionWrapper>
   );
