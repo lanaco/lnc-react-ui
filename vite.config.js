@@ -245,6 +245,10 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/shop-sections/shop-cards-section/ShopCardsSection.jsx"
         ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/questionaire-sections/quiz-section/QuizSection.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {

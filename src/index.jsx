@@ -206,6 +206,7 @@ export { default as FieldOfInterestsWithTagsCardsSection } from "./Landing Secti
 export { default as BannerSectionBasic } from "./Landing Sections/banners-sections/banner-section-basic/BannerSectionBasic";
 export { default as GeneralWithTagsCardsSection } from "./Landing Sections/general-sections/general-with-tags-cards-section/GeneralWithTagsCardsSection";
 export { default as ShopCardsSection } from "./Landing Sections/shop-sections/shop-cards-section/ShopCardsSection";
+export { default as QuizSection } from "./Landing Sections/questionaire-sections/quiz-section/QuizSection";
 
 //======================== THEME ==============================================================
 
