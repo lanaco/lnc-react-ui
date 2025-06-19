@@ -131,7 +131,8 @@
     "./FieldOfInterestsWithAvatarsCardsSection": "./dist/FieldOfInterestsWithAvatarsCardsSection.js",
     "./FieldOfInterestsWithTagsCardsSection": "./dist/FieldOfInterestsWithTagsCardsSection.js",
     "./GeneralWithTagsCardsSection": "./dist/GeneralWithTagsCardsSection.js",
-    "./ShopCardsSection": "./dist/ShopCardsSection.jsx"
+    "./ShopCardsSection": "./dist/ShopCardsSection.jsx",
+    "./QuizSection": "./dist/QuizSection.jsx"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",

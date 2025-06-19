@@ -1,0 +1,100 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import QuizSection from "./QuizSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta title="Landing sections/Quiz Section" component={QuizSection} />
+
+export const TemplateDefault = (args) => (
+  <QuizSection
+    welcomeTitle="Lorem ipsum dolor sit amet consectetur."
+    welcomeDescription="Lorem ipsum dolor sit amet consectetur. Vulputate at erat ullamcorper aenean a suscipit odio cursus."
+    endTitle="Correct!"
+    endDescription="You won 1 credit."
+    continueText="Collect credit and continue"
+    endQuizText="End quiz"
+    image="https://picsum.photos/500/500"
+    questions={[
+      {
+        questionNo: 1,
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        secondsPerQuestion: 60,
+        text: "Lorem ipsum dolor sit amet consectetur. Commodo vitae sed nisl suscipit?",
+        correntAnswer: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        answers: [
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+            label: "Vitae",
+          },
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403025",
+            label: "Lorem",
+          },
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403026",
+            label: "Eget",
+          },
+        ],
+      },
+      {
+        questionNo: 2,
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        secondsPerQuestion: 60,
+        text: "Lorem ipsum dolor sit amet consectetur. Commodo vitae sed nisl suscipit?",
+        correntAnswer: "9e32f86d-9f21-4776-9b44-ea40d3403025",
+        answers: [
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+            label: "Vitae",
+          },
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403025",
+            label: "Lorem",
+          },
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403026",
+            label: "Eget",
+          },
+        ],
+      },
+      {
+        questionNo: 3,
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        secondsPerQuestion: 60,
+        text: "Lorem ipsum dolor sit amet consectetur. Commodo vitae sed nisl suscipit?",
+        correntAnswer: "9e32f86d-9f21-4776-9b44-ea40d3403026",
+        answers: [
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+            label: "Vitae",
+          },
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403025",
+            label: "Lorem",
+          },
+          {
+            uuid: "9e32f86d-9f21-4776-9b44-ea40d3403026",
+            label: "Eget",
+          },
+        ],
+      },
+    ]}
+    onStartQuiz={() => {}}
+
+/>
+);
+
+## Quiz section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import QuizSection from "@lanaco/lnc-react-ui/QuizSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
