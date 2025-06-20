@@ -6,7 +6,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 import { Wrapper, Banner, BannerOverlay } from "./style";
 
 const BannerSectionCarousel = forwardRef(
-  ({ items = [], handleClick = () => {} }, ref) => {
+  ({ items = [], onSelectItem = () => {} }, ref) => {
     const isMobile = useDetectMobile();
 
     return (
@@ -20,7 +20,7 @@ const BannerSectionCarousel = forwardRef(
           transitionTime={500}
           onClickItem={(idx) => {
             if (!isMobile) {
-              handleClick?.(idx);
+              onSelectItem?.(items?.at(index), idx);
             }
           }}
         >

@@ -1,8 +1,10 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useRef, useState } from "react";
 import { ExternalGridWrapper, GridWrapper } from "./style";
 import Button from "../../../General/Button/Button";
 import GenderRadioToggle from "../gender-radio-toggle";
-import RangeSlider from "../../../Basic Inputs/RangeSlider";
+import RangeSlider from "../../../Basic Inputs/RangeSlider/RangeSlider";
 
 const CalorieCalculating = forwardRef((props, ref) => {
   const {

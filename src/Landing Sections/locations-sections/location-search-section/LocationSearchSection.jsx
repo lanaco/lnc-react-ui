@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, Fragment } from "react";
 import { Content, Group, Wrapper } from "./style";
 import SelectBar from "../../../Inputs/SelectBar";
@@ -12,7 +14,7 @@ const LocationSearchSection = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Wrapper>
+    <Wrapper ref={ref}>
       <div className="wrapper-title">{title}</div>
       {options?.length > 0 && (
         <SelectBar

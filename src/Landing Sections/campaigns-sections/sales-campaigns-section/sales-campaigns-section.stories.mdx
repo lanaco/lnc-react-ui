@@ -1,0 +1,120 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import SalesCampaignsSection from "./SalesCampaignsSection.jsx";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Sales Campaigns Section"
+  component={SalesCampaignsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <SalesCampaignsSection
+    title={"Lorem ipsum"}
+    salesCampaignsTypes={[
+    {
+       value: "AddDiscount",
+       label: "salesCampaignTypes.addDiscount",
+       icon: "percentage",
+       color: "#F44462",
+       disableForService: false,
+     },
+     {
+       value: "FreeShipping",
+       label: "salesCampaignTypes.freeShipping",
+       color: "#1ABC86",
+       icon: "shipping-fast",
+       disableForService: true,
+     },
+     {
+       value: "FreeQuantity",
+       label: "salesCampaignTypes.freeQuantity",
+       icon: "cube",
+       color: "#2691D9",
+       disableForService: true,
+     },
+     {
+       value: "IncludeGifts",
+       label: "salesCampaignTypes.includeGifts",
+       icon: "gift",
+       color: "#8B5CF6",
+       disableForService: false,
+     },
+     ]}
+    items={[
+      {
+        campaignUuid: "4fa20bd0-92ce-4d36-8425-63470860068a",
+        shopUuid: "562627ca-e187-449d-b901-ea5510cce7e8",
+        shopName: "Waterdrop",
+        profileImage:
+          "WaterdropIndustryBusiness_8c6e7d25-7ab2-49fe-b0cb-da3d012bf6c0",
+        name: "Ljetno osvježenje",
+        coverPhoto: "Ljetnoosvježenje_939b9410-d257-4164-b7d4-e9e17baeaf84",
+        description: null,
+        startDate: "2025-06-11T06:59:23",
+        endDate: "2025-06-21T21:59:00",
+        salesPackages: ["AddDiscount"],
+      },
+      {
+        campaignUuid: "d7b8a42a-4cf6-4fb1-a17a-6369983c6050",
+        shopUuid: "a7aeccb7-78a5-40f1-bf09-d83049357df2",
+        shopName: "Mungos",
+        profileImage:
+          "MungosElectronicsTechnology_4f683464-8b99-4c31-9bf5-87ec898d7988",
+        name: "Struja sniženja: Q6 SUV e-tron performance -30%",
+        coverPhoto:
+          "StrujasniženjaQ6SUVetronperformance30_eee573dd-0e47-4650-998a-f47a8acb86ef",
+        description:
+          "Q6 SUV e-tron performance sada je snižen 30%! Električni pogon, sportski duh i premium oprema – sve to po cijeni koja se ne viđa često. Moć, stil i ušteda u jednom. Ovo nije obična ponuda, ovo je trenutak za pametnu odluku.",
+        startDate: "2025-06-06T09:09:19",
+        endDate: "2025-09-06T09:09:19",
+        salesPackages: ["AddDiscount"],
+      },
+      {
+        campaignUuid: "538339d0-f102-41eb-b9e8-612d0362d08e",
+        shopUuid: "a7aeccb7-78a5-40f1-bf09-d83049357df2",
+        shopName: "Mungos",
+        profileImage:
+          "MungosElectronicsTechnology_4f683464-8b99-4c31-9bf5-87ec898d7988",
+        name: "Pametan poklon uz pametnu kupovinu",
+        coverPhoto:
+          "Pametanpoklonuzpametnukupovinu_f438814f-1627-4709-8cfc-a2e411248d8b",
+        description:
+          "Kupuješ laptop, računar ili televizor? Imamo nešto za tebe – pametan sat ide gratis! Nema kvaka, nema sitnih slova. Samo ubaci jedan od ovih uređaja u korpu, i sat ti stiže uz njega. Jer kad već uzimaš pametnu stvar – red je da dobiješ još jednu.",
+        startDate: "2025-06-06T09:09:18",
+        endDate: "2025-09-06T09:09:18",
+        salesPackages: ["IncludeGifts"],
+      },
+      {
+        campaignUuid: "90c68a67-4272-4789-9a9d-29f1b565704a",
+        shopUuid: "765abc83-64dc-4935-a05e-0bc788783a4d",
+        shopName: "Alverde",
+        profileImage:
+          "AlverdeBeautyHealth_a52d1a85-8a43-4b24-963c-c1f3859751cd",
+        name: "Proljetno čišćenje kože by alverde",
+        coverPhoto:
+          "Proljetnočišćenjekožebyalverde_018fd131-7833-4c76-8d5e-0bdbd891947f",
+        description:
+          "Proljetno čišćenje kože počinje uz 1+1 gratis! Izaberi svoje omiljene proizvode za njegu lica i mi ti drugi poklanjamo. Uživaj i u besplatnoj dostavi. Vrijeme je za svježu kožu!",
+        startDate: "2025-06-06T09:09:08",
+        endDate: "2025-09-06T09:09:08",
+        salesPackages: ["FreeShipping", "FreeQuantity"],
+      },
+    ]}
+  />
+);
+
+## Calorie calculator section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import SalesCampaignsSection from "@lanaco/lnc-react-ui/SalesCampaignsSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
