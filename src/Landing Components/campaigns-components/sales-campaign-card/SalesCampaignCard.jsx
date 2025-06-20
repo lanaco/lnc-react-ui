@@ -49,6 +49,7 @@ const SalesCampaignCard = (props) => {
     startsinSufixTextPlural,
     startsInPrefixTextSingular,
     startsinSufixTextSingular,
+    themeData,
     ...rest
   } = props;
 
@@ -131,6 +132,7 @@ const SalesCampaignCard = (props) => {
               className={`${shopImage ? "" : "no-image"}`}
             />
           }
+          themeData={themeData}
           isActive={true}
           isUser={false}
           name={shopName}

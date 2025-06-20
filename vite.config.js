@@ -245,11 +245,9 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/shop-sections/shop-cards-section/ShopCardsSection.jsx"
         ),
-<<<<<<< Updated upstream
         resolve(
           __dirname,
-          "src/Landing Sections/questionaire-sections/quiz-section/QuizSection.jsx"
-=======
+          "src/Landing Sections/questionaire-sections/quiz-section/QuizSection.jsx"),
          resolve(
           __dirname,
           "src/Landing Sections/locations-sections/locations-search-section/LocationSearchSection.jsx"
@@ -261,7 +259,6 @@ export default defineConfig({
          resolve(
           __dirname,
           "src/Landing Sections/custom-sections/calorie-calculator-section/CalorieCalculatorSection.jsx"
->>>>>>> Stashed changes
         ),
       ],
       name: "@lanaco/lnc-react-ui",

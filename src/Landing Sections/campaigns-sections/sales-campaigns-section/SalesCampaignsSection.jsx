@@ -58,6 +58,7 @@ const SalesCampaignsSection = forwardRef(
           startsinSufixTextPlural={startsinSufixTextPlural}
           startsInPrefixTextSingular={startsInPrefixTextSingular}
           startsinSufixTextSingular={startsinSufixTextSingular}
+          themeData={item?.themeData}
         />
       ));
     }, [items]);
