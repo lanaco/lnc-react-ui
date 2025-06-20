@@ -5,7 +5,6 @@ import { useTheme } from "../../ThemeProvider/ThemeProvider";
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import isFinite from "lodash.isfinite";
-import isNumber from "lodash.isnumber";
 
 const StarRating = forwardRef((props, ref) => {
   const {
@@ -48,7 +47,7 @@ const StarRating = forwardRef((props, ref) => {
         </FilledStars>
         <EmptyStars {...themeProps}>★★★★★</EmptyStars>
       </div>
-      {isNumber(reviewCount) && isFinite(reviewCount) && (
+      {!isNaN(reviewCount) && Number.isFinite(reviewCount) && (
         <div className="review-count">{`(${reviewCount.toLocaleString()})`}</div>
       )}
     </Container>

@@ -250,11 +250,11 @@ export default defineConfig({
           "src/Landing Sections/questionaire-sections/quiz-section/QuizSection.jsx"),
          resolve(
           __dirname,
-          "src/Landing Sections/locations-sections/locations-search-section/LocationSearchSection.jsx"
+          "src/Landing Sections/locations-sections/location-search-section/LocationSearchSection.jsx"
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/campaigns-sections/sales-campaign-section/SalesCampaignSection.jsx"
+          "src/Landing Sections/campaigns-sections/sales-campaigns-section/SalesCampaignsSection.jsx"
         ),
          resolve(
           __dirname,
