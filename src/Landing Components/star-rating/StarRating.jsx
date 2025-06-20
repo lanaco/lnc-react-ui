@@ -1,10 +1,10 @@
+/* eslint-disable react/display-name */
 // TODO: add simpler view with just 1 star and rating number displayed
 // also, title for hover effect..
 import { Container, FilledStars, EmptyStars } from "./style";
 import { useTheme } from "../../ThemeProvider/ThemeProvider";
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
-import isFinite from "lodash.isfinite";
 
 const StarRating = forwardRef((props, ref) => {
   const {

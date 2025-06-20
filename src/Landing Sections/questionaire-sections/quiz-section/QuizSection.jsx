@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useRef, useState } from "react";
 
 import { formatString, isDefined } from "../../../_utils/utils";
@@ -119,7 +121,7 @@ const QuizSection = forwardRef(
     };
 
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         <div className="wrapper__outlet">
           {step === QuizContent.START_QUIZ && (
             <QuizWelcome

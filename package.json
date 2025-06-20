@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.37",
+  "version": "4.0.38",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -139,7 +139,7 @@
     "./FieldOfInterestsWithAvatarsCardsSection": "./dist/FieldOfInterestsWithAvatarsCardsSection.js",
     "./FieldOfInterestsWithTagsCardsSection": "./dist/FieldOfInterestsWithTagsCardsSection.js",
     "./GeneralWithTagsCardsSection": "./dist/GeneralWithTagsCardsSection.js",
-    "./QuizSection": "./dist/QuizSection.jsx",
+    "./QuizSection": "./dist/QuizSection.js",
     "./OverlayGeneralCardsSection": "./dist/OverlayGeneralCardsSection.js",
     "./ShopCardsSection": "./dist/ShopCardsSection.js",
     "./LocationSearchSection": "./dist/LocationSearchSection.js",
