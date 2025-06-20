@@ -46,9 +46,9 @@ const SalesCampaignCard = (props) => {
     campaignSingleText,
     salesCampaignTypes = [],
     startsInPrefixTextPlural,
-    startsinSufixTextPlural,
+    startsinSuffixTextPlural,
     startsInPrefixTextSingular,
-    startsinSufixTextSingular,
+    startsinSuffixTextSingular,
     themeData,
     ...rest
   } = props;
@@ -82,7 +82,7 @@ const SalesCampaignCard = (props) => {
           {salesPackages?.map((item, index) => (
             <StatusBadge
               key={`package__${index}`}
-              exactColor={
+              color={
                 salesCampaignTypes?.find((x) => x.value === item)?.color
               }
               theme={theme}
@@ -107,8 +107,8 @@ const SalesCampaignCard = (props) => {
               {hasStarted
                 ? ""
                 : startsInDays === 1 ?
-                `${startsInPrefixTextSingular} ${startsInDays} ${startsinSufixTextSingular}`
-                : `${startsInPrefixTextPlural} ${startsInDays} ${startsinSufixTextPlural}`
+                `${startsInPrefixTextSingular} ${startsInDays} ${startsinSuffixTextSingular}`
+                : `${startsInPrefixTextPlural} ${startsInDays} ${startsinSuffixTextPlural}`
                 // ? t("dateTime.startsInSingle", { days: startsInDays })
                 // : t("dateTime.startsInPlural", { days: startsInDays })
                 }

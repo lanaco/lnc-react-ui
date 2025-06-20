@@ -24,9 +24,9 @@ const SalesCampaignsSection = forwardRef(
       campaignSingleText,
       salesCampaignTypes = [],
       startsInPrefixTextPlural,
-      startsinSufixTextPlural,
+      startsinSuffixTextPlural,
       startsInPrefixTextSingular,
-      startsinSufixTextSingular,
+      startsinSuffixTextSingular,
     },
     ref
   ) => {
@@ -55,9 +55,9 @@ const SalesCampaignsSection = forwardRef(
           campaignSingleText={campaignSingleText}
           salesCampaignTypes={salesCampaignTypes}
           startsInPrefixTextPlural={startsInPrefixTextPlural}
-          startsinSufixTextPlural={startsinSufixTextPlural}
+          startsinSuffixTextPlural={startsinSuffixTextPlural}
           startsInPrefixTextSingular={startsInPrefixTextSingular}
-          startsinSufixTextSingular={startsinSufixTextSingular}
+          startsinSuffixTextSingular={startsinSuffixTextSingular}
           themeData={item?.themeData}
         />
       ));

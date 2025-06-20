@@ -57,7 +57,7 @@ const SuspenseCampaignCard = ({
   keyPrefix,
 }) => {
   return (
-    <Suspense fallbackComponent={fallbackComponent}>
+    <Suspense fallback={fallbackComponent}>
       {isLoading === true ? (
         <SkeletonCampaigns itemsCount={itemsCount} keyPrefix={keyPrefix} />
       ) : (

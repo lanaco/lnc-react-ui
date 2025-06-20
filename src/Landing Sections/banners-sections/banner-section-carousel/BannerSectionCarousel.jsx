@@ -20,7 +20,7 @@ const BannerSectionCarousel = forwardRef(
           transitionTime={500}
           onClickItem={(idx) => {
             if (!isMobile) {
-              onSelectItem?.(items?.at(index), idx);
+              onSelectItem?.(items?.at(idx), idx);
             }
           }}
         >
