@@ -15,7 +15,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
       title,
       subtitle,
       tags = [],
-      cards = [],
+      items = [],
       limitTags = 5,
       limitTagsForMobile = 5,
       limit = 3,
@@ -58,6 +58,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
 
     return (
       <Wrapper
+        ref={ref}
         limitTags={limitTags}
         limitTagsForMobile={limitTagsForMobile}
         limitCards={limit}
@@ -85,8 +86,8 @@ const FieldOfInterestsMasonrySection = forwardRef(
               ))}
         </div>
         <div className="wrapper__cards">
-          {cards && cards?.length > 0
-            ? cards?.map((card, idx) => (
+          {items && items?.length > 0
+            ? items?.map((card, idx) => (
                 <FieldOfInterestsMasonry
                   key={`field-of-interests-with-tags-card__${idx + 1}`}
                   image={card?.image}

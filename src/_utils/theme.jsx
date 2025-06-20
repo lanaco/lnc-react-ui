@@ -13,6 +13,38 @@ export const lanaco_light = {
     neutral: "neutral",
   },
   components: {
+    MainMenu: {
+      default: {
+        palette: "neutral",
+        enabled: {
+          color: 900,
+          mediumColor: 600,
+          lightColor: 500,
+          lightestColor: 100,
+          dividerOpacity: 80,
+          headerBackgroundColor: 50,
+          notificationBackgroundColor: 900,
+          notificationOpacity: 80,
+        },
+        hover: { backgroundColor: 900, backgroundOpacity: 80 },
+      },
+      teal: {
+        enabled: {
+          textColor: 700,
+          descriptionOpacity: 800,
+          backgroundColor: 600,
+          backgroundOpacity: 80,
+        },
+      },
+      gray: {
+        enabled: {
+          color: 600,
+          descriptionOpacity: 800,
+          backgroundColor: 600,
+          backgroundOpacity: 80,
+        },
+      },
+    },
     Input: {
       default: {
         palette: "gray",
@@ -3424,6 +3456,38 @@ export const lanaco_dark = {
     neutral: "gray",
   },
   components: {
+    MainMenu: {
+      default: {
+        palette: "neutral",
+        enabled: {
+          color: 900,
+          mediumColor: 600,
+          lightColor: 500,
+          lightestColor: 100,
+          dividerOpacity: 80,
+          headerBackgroundColor: 50,
+          notificationBackgroundColor: 900,
+          notificationOpacity: 80,
+        },
+        hover: { backgroundColor: 900, backgroundOpacity: 80 },
+      },
+      teal: {
+        enabled: {
+          textColor: 700,
+          descriptionOpacity: 800,
+          backgroundColor: 600,
+          backgroundOpacity: 80,
+        },
+      },
+      gray: {
+        enabled: {
+          color: 600,
+          descriptionOpacity: 800,
+          backgroundColor: 600,
+          backgroundOpacity: 80,
+        },
+      },
+    },
     Input: {
       default: {
         palette: "gray",
@@ -6817,6 +6881,38 @@ export const lanaco_e_commerce = {
     neutral: "neutral",
   },
   components: {
+    MainMenu: {
+      default: {
+        palette: "neutral",
+        enabled: {
+          color: 900,
+          mediumColor: 600,
+          lightColor: 500,
+          lightestColor: 100,
+          dividerOpacity: 80,
+          headerBackgroundColor: 50,
+          notificationBackgroundColor: 900,
+          notificationOpacity: 80,
+        },
+        hover: { backgroundColor: 900, backgroundOpacity: 80 },
+      },
+      teal: {
+        enabled: {
+          textColor: 700,
+          descriptionOpacity: 800,
+          backgroundColor: 600,
+          backgroundOpacity: 80,
+        },
+      },
+      gray: {
+        enabled: {
+          color: 600,
+          descriptionOpacity: 800,
+          backgroundColor: 600,
+          backgroundOpacity: 80,
+        },
+      },
+    },
     Input: {
       default: {
         palette: "gray",

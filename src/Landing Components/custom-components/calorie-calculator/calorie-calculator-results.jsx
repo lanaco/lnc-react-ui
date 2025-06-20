@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import { ResultItem, ResultsExternalWrapper, ResultsWrapper } from "./style";
-import DropdownItem from "../../../../Utility/DropdownMenu/DropdownItem";
-import DropdownMenu from "../../../../Utility/DropdownMenu/DropdownMenu";
-import IconButton from "../../General/IconButton/IconButton";
+import DropdownItem from "../../../Utility/DropdownMenu/DropdownItem";
+import DropdownMenu from "../../../Utility/DropdownMenu/DropdownMenu";
+import IconButton from "../../../General/IconButton/IconButton";
 
 const CalorieCalculatorResults = forwardRef((props, ref) => {
   const {

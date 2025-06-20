@@ -1,0 +1,26 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import CalorieCalculatorSection from "./CalorieCalculatorSection.jsx";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Calorie Calculator Section"
+  component={CalorieCalculatorSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <CalorieCalculatorSection  />
+);
+
+## Calorie calculator section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import CalorieCalculatorSection from "@lanaco/lnc-react-ui/CalorieCalculatorSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
