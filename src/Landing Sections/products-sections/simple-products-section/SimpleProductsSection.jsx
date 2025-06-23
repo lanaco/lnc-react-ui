@@ -5,7 +5,7 @@ import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import SimpleProductCard from "../../../Landing Components/product components/simple-product-card";
 import TextBlockV1 from "../../../Landing Components/text-block-v1/index";
-import SuspenseSimpleProductCard from "../../../Landing Components/skeleton-components/suspense-product-card-simple";
+import SuspenseSimpleProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-simple";
 
 const MemoizedProductCard = memo(SimpleProductCard);
 

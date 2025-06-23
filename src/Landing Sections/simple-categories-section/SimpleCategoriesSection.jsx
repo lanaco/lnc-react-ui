@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef } from "react";
+import { forwardRef, memo, useMemo } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../_utils/useDetectMobile";
 import { isDefinedNotEmptyString } from "../../_utils/utils";
 import { RegulatTitleSectionWrapper } from "../style";
 import Button from "../../General/Button/Button";
 import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card/CategorySimpleCard";
+import SuspenseSimpleCategoryCard from "../../Landing Components/skeleton-components/categories-skeletons/suspense-categories-card-simple";
+
+const MemoizedCategoryCard = memo(CategorySimpleCard);
 
 const SimpleCategoriesSection = forwardRef((props, ref) => {
   const {
@@ -18,8 +21,38 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
     limit = 12,
     onButtonAction = () => {},
     onSelectCard = () => {},
+    isLoading = false,
   } = props;
+
   const isMobile = useDetectMobile();
+
+  const memoizedProducts = useMemo(() => {
+    return (
+      <>
+        {isMobile === true
+          ? items?.map((x, index) => (
+              <MemoizedCategoryCard
+                key={index}
+                uuid={x?.uuid}
+                image={x?.image}
+                name={x?.name}
+                onSelectCard={() => onSelectCard?.(x?.uuid)}
+              />
+            ))
+          : items
+              ?.slice(0, limit)
+              .map((x, index) => (
+                <MemoizedCategoryCard
+                  key={index}
+                  uuid={x?.uuid}
+                  image={x?.image}
+                  name={x?.name}
+                  onSelectCard={() => onSelectCard?.(x?.uuid)}
+                />
+              ))}
+      </>
+    );
+  }, [items]);
 
   return (
     <RegulatTitleSectionWrapper ref={ref}>
@@ -41,27 +74,13 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
         )}
       </div>
       <GridWrapper limit={limit}>
-        {isMobile === true
-          ? items?.map((x, index) => (
-              <CategorySimpleCard
-                key={index}
-                uuid={x?.uuid}
-                image={x?.image}
-                name={x?.name}
-                onSelectCard={() => onSelectCard?.(x?.uuid)}
-              />
-            ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <CategorySimpleCard
-                  key={index}
-                  uuid={x?.uuid}
-                  image={x?.image}
-                  name={x?.name}
-                  onSelectCard={() => onSelectCard?.(x?.uuid)}
-                />
-              ))}
+        <SuspenseSimpleCategoryCard
+          isLoading={isLoading}
+          itemsCount={limit}
+          keyPrefix={"explore-landing"}
+        >
+          {memoizedProducts}
+        </SuspenseSimpleCategoryCard>
       </GridWrapper>
     </RegulatTitleSectionWrapper>
   );

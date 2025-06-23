@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 
-import DetailedProductCardSkeleton from "../product components/detailed-product-card/skeleton";
+import SimpleProductCardSkeleton from "../../product components/simple-product-card/skeleton";
 
 const SkeletonProducts = ({ itemsCount = 6, isLoading = false, keyPrefix }) => {
   return (
     <>
       {Array.from({ length: itemsCount }, (_, index) => (
-        <DetailedProductCardSkeleton
+        <SimpleProductCardSkeleton
           key={`${keyPrefix}-skeleton-product-card-${index}`}
           isLoading={isLoading}
         />
@@ -15,7 +15,7 @@ const SkeletonProducts = ({ itemsCount = 6, isLoading = false, keyPrefix }) => {
   );
 };
 
-const SuspenseDetailedProductCard = ({
+const SuspenseSimpleProductCard = ({
   children,
   fallbackComponent = <></>,
   isLoading = false,
@@ -38,4 +38,4 @@ const SuspenseDetailedProductCard = ({
   );
 };
 
-export default SuspenseDetailedProductCard;
+export default SuspenseSimpleProductCard;

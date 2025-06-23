@@ -7,7 +7,7 @@ import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { RegulatTitleSectionWrapper } from "../../style";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
-import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/suspense-product-card-detailed";
+import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-detailed";
 
 const MemoizedProductCard = memo(DetailedProductCard);
 
