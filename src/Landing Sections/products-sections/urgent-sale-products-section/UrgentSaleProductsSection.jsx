@@ -72,7 +72,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
       </div>
       <SuspenseDetailedProductCard
         isLoading={isLoading}
-        itemsCount={limit}
+        limit={limit}
         keyPrefix={"explore-landing"}
       >
         {memoizedProducts}

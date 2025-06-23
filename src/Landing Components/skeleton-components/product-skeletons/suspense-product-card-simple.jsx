@@ -2,10 +2,10 @@ import { Suspense } from "react";
 
 import SimpleProductCardSkeleton from "../../product components/simple-product-card/skeleton";
 
-const SkeletonProducts = ({ itemsCount = 6, isLoading = false, keyPrefix }) => {
+const SkeletonProducts = ({ limit = 6, isLoading = false, keyPrefix }) => {
   return (
     <>
-      {Array.from({ length: itemsCount }, (_, index) => (
+      {Array.from({ length: limit }, (_, index) => (
         <SimpleProductCardSkeleton
           key={`${keyPrefix}-skeleton-product-card-${index}`}
           isLoading={isLoading}
@@ -19,7 +19,7 @@ const SuspenseSimpleProductCard = ({
   children,
   fallbackComponent = <></>,
   isLoading = false,
-  itemsCount = 5,
+  limit,
   keyPrefix,
 }) => {
   return (
@@ -28,7 +28,7 @@ const SuspenseSimpleProductCard = ({
       {isLoading === true ? (
         <SkeletonProducts
           isLoading={isLoading}
-          itemsCount={itemsCount}
+          limit={limit}
           keyPrefix={keyPrefix}
         />
       ) : (

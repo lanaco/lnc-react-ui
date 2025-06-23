@@ -77,7 +77,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
       <GridWrapper limit={limit}>
         <SuspenseBlogSimple
           isLoading={isLoading}
-          itemsCount={limit}
+          limit={limit}
           keyPrefix={"explore-landing"}
         >
           {memoizedProducts}

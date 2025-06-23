@@ -71,7 +71,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
       />
       <SuspenseSimpleProductCard
         isLoading={isLoading}
-        itemsCount={limit}
+        limit={limit}
         keyPrefix={"explore-landing"}
       >
         {memoizedProducts}

@@ -2,10 +2,10 @@ import { Suspense } from "react";
 
 import SimpleBlogCardCenteredSkeleton from "../../blog-components/simple-blog-card-centered/skeleton";
 
-const SkeletonProducts = ({ itemsCount = 6, isLoading = false, keyPrefix }) => {
+const SkeletonProducts = ({ limit = 3, isLoading = false, keyPrefix }) => {
   return (
     <>
-      {Array.from({ length: itemsCount }, (_, index) => (
+      {Array.from({ length: limit }, (_, index) => (
         <SimpleBlogCardCenteredSkeleton
           key={`${keyPrefix}-skeleton-product-card-${index}`}
           isLoading={isLoading}
@@ -19,7 +19,7 @@ const SuspenseBlogSimpleCentered = ({
   children,
   fallbackComponent = <></>,
   isLoading = false,
-  itemsCount = 5,
+  limit,
   keyPrefix,
 }) => {
   return (
@@ -28,7 +28,7 @@ const SuspenseBlogSimpleCentered = ({
       {isLoading === true ? (
         <SkeletonProducts
           isLoading={isLoading}
-          itemsCount={itemsCount}
+          limit={limit}
           keyPrefix={keyPrefix}
         />
       ) : (

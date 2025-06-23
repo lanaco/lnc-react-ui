@@ -76,7 +76,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
       <GridWrapper limit={limit}>
         <SuspenseSimpleCategoryCard
           isLoading={isLoading}
-          itemsCount={limit}
+          limit={limit}
           keyPrefix={"explore-landing"}
         >
           {memoizedProducts}

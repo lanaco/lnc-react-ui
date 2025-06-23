@@ -57,7 +57,7 @@ const ReviewsSection = forwardRef((props, ref) => {
       <GridWrapper limit={limit}>
         <SuspenseReviewCard
           isLoading={isLoading}
-          itemsCount={limit}
+          limit={limit}
           keyPrefix={"explore-landing"}
         >
           {memoizedProducts}

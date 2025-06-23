@@ -2,10 +2,10 @@ import { Suspense } from "react";
 
 import ReviewCardSkeleton from "../../category-components/category-simple-card/skeleton";
 
-const SkeletonProducts = ({ itemsCount = 6, isLoading = false, keyPrefix }) => {
+const SkeletonProducts = ({ limit = 12, isLoading = false, keyPrefix }) => {
   return (
     <>
-      {Array.from({ length: itemsCount }, (_, index) => (
+      {Array.from({ length: limit }, (_, index) => (
         <ReviewCardSkeleton
           key={`${keyPrefix}-skeleton-category-card-${index}`}
           isLoading={isLoading}
@@ -19,7 +19,7 @@ const SuspenseSimpleCategoryCard = ({
   children,
   fallbackComponent = <></>,
   isLoading = false,
-  itemsCount = 5,
+  limit,
   keyPrefix,
 }) => {
   return (
@@ -28,7 +28,7 @@ const SuspenseSimpleCategoryCard = ({
       {isLoading === true ? (
         <SkeletonProducts
           isLoading={isLoading}
-          itemsCount={itemsCount}
+          limit={limit}
           keyPrefix={keyPrefix}
         />
       ) : (

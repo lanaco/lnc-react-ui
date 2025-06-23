@@ -102,7 +102,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
       <GridWrapper limit={limit}>
         <SuspenseBlogWithFilters
           isLoading={isLoading}
-          itemsCount={limit}
+          limit={limit}
           keyPrefix={"explore-landing"}
         >
           {memoizedProducts}

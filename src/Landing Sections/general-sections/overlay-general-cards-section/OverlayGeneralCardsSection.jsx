@@ -43,7 +43,7 @@ const OverlayGeneralCardsSection = forwardRef(
         <GridWrapper limit={limit}>
           <SuspenseOverlayCard
             isLoading={isLoading}
-            itemsCount={limit}
+            limit={limit}
             keyPrefix={"explore-landing"}
           >
             {memoizedProducts}

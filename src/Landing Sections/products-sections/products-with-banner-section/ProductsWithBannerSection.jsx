@@ -66,7 +66,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
       <GridWrapper limit={limit}>
         <SuspenseClearProductCard
           isLoading={isLoading}
-          itemsCount={limit}
+          limit={limit}
           keyPrefix={"explore-landing"}
         >
           {memoizedProducts}
