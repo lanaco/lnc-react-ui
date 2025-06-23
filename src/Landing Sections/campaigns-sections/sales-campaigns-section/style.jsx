@@ -69,7 +69,7 @@ export const ImgWrapper = styled.div`
 
 export const CampaignCardContainer = styled.div`
   background: var(--white, #fff);
-  border-radius: ${(p) => getBorderRadiusValueWithUnits(p.theme, "edged")};
+  border-radius:  ${(p) => getBorderRadiusValueWithUnits(p.theme, "edged")};
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--gray-95012, #14161a1f);
 

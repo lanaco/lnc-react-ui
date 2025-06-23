@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, Fragment } from "react";
 import { Container, ContainerHeader, ListWrapper } from "./style";
 import Button from "../../../General/Button/Button";
@@ -9,12 +11,12 @@ const BannerSectionWithList = forwardRef((props, ref) => {
     subtitle,
     buttonText,
     list,
-    fallback = () => {},
-    onBannerClick,
+    buttonLink,
+    onButtonAction = () => {},
   } = props;
 
   return (
-    <Container>
+    <Container ref={ref}>
       {(isDefined(title) || isDefined(subtitle)) && (
         <ContainerHeader>
           {isDefined(title) && <div className="header-title">{title}</div>}
@@ -38,7 +40,7 @@ const BannerSectionWithList = forwardRef((props, ref) => {
         color="neutral"
         type="button"
         onClick={() =>
-          isDefined(onBannerClick) ? onBannerClick() : fallback()
+          onButtonAction(buttonLink)
         }
       >
         {buttonText}

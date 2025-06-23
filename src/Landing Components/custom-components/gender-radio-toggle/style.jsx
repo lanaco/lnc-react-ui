@@ -5,9 +5,8 @@ export const SwitchWrapper = styled.label`
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  background: var(--white);
+  background: var(--white, #fff);
   border-radius: 30px;
-  padding: 0.25em 0.5em;
   user-select: none;
   font-family: Arial, sans-serif;
   font-weight: bold;
@@ -36,7 +35,7 @@ export const SwitchWrapper = styled.label`
     top: 0;
     bottom: 0;
     left: ${(props) => (props.checked ? "3rem" : "3px")};
-    background: var(--success-600);
+    background: var(--success-600, #059669);
     border-radius: 30px;
     transition: left 0.3s;
     width: fit-content;
@@ -46,11 +45,11 @@ export const SwitchWrapper = styled.label`
     pointer-events: none;
     font-weight: normal;
     font-size: 0.9rem;
-    color: var(--white);
+    color: var(--white, #fff);
     padding: 0 0.75rem;
     min-height: 2.5rem;
     max-height: 2.5rem;
-    border: 1px solid var(--success-600);
+    border: 1px solid var(--success-600, #059669);
   }
 
   .text {
@@ -60,7 +59,7 @@ export const SwitchWrapper = styled.label`
     display: flex;
     gap: 0.5rem;
     padding: 0.75rem;
-    border: 1px solid var(--gray-95012);
+    border: 1px solid var(--gray-95012, #14161a1f);
     border-radius: 30px;
     min-height: 2.5rem;
     max-height: 2.5rem;

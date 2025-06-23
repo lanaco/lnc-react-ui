@@ -11,9 +11,8 @@ export const Wrapper = styled.div`
   display: flex;
   gap: 1rem;
   padding: 1.25rem;
-  border-radius: ${(p) =>
-    getBorderRadiusValueWithUnits(p.theme, "slightCurve")};
-  border: 1px solid var(--gray-95080, #14161acc);
+  border-radius: 20px;
+  border: 1px solid var(--gray-95008, #14161a14);
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     flex-direction: column;

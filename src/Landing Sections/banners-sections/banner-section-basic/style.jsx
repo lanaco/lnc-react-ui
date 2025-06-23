@@ -11,8 +11,8 @@ export const Container = styled.div`
 
   & button {
     width: fit-content;
-    background-color: var(--gray-100, #14161a);
-    color: black;
+    background-color: var(--gray-100, #f3f4f6);
+    color: var(--gray-950, #14161a);
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
@@ -52,7 +52,7 @@ export const ContainerHeader = styled.div`
   & .header-title {
     font-size: 1.75rem;
     font-weight: 600;
-    color: black;
+    color: var(--gray-950, #14161a);
   }
 
   & .header-subtitle {

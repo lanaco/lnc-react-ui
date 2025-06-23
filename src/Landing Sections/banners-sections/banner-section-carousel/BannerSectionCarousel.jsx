@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import { Carousel } from "react-responsive-carousel";
 import PropTypes from "prop-types";
@@ -10,7 +12,7 @@ const BannerSectionCarousel = forwardRef(
     const isMobile = useDetectMobile();
 
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         <Carousel
           autoPlay={true}
           infiniteLoop={true}
@@ -27,7 +29,7 @@ const BannerSectionCarousel = forwardRef(
           {items &&
             items?.map((b, idx) => (
               <Banner key={`banner-${idx + 1}`}>
-                <img loading="lazy" src={b.image} />
+                <img loading="lazy" src={b.imageUrl} />
                 <BannerOverlay>
                   <div className="banner-content">
                     <div className="banner-text">

@@ -15,7 +15,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
     icon,
     items,
     limit = 4,
-    bannerImage,
+    imageUrl,
     onSelectCard = () => {},
     title = "Season inspiration",
     isLoading = false,
@@ -61,7 +61,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
         </div>
       </div>
       <ProductsBannerWrapper className="products-banner">
-        <img src={bannerImage} />
+        <img src={imageUrl} />
       </ProductsBannerWrapper>
       <GridWrapper limit={limit}>
         <SuspenseClearProductCard

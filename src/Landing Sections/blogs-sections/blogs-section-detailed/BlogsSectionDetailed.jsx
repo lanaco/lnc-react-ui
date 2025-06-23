@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, memo, useMemo } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
@@ -20,7 +22,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
     limit = 3,
     onSelectCard = () => {},
     isLoading = false,
-    onSectionClick = () => {},
+    buttonLink,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -63,16 +65,16 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items]);
+  }, [items, isMobile, limit, onSelectCard]);
 
   return (
-    <RegulatTitleSectionWrapper>
+    <RegulatTitleSectionWrapper ref={ref}>
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(onSectionClick) && (
+        {isDefinedNotEmptyString(onButtonAction) && (
           <Button
             type="button"
             btnType="tinted"

@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 import { Wrapper } from "./style";
 import LocationFinder from "../../../Landing Components/custom-components/location-finder";
@@ -22,7 +24,7 @@ const CustomLoanMapSection = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Wrapper>
+    <Wrapper ref={ref}>
       {hasLocationFinder === true && (
         <LocationFinder
           title={locationFinderTitle}

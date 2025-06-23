@@ -31,10 +31,10 @@ const OverlayGeneralCardsSection = forwardRef(
             ))}
         </>
       );
-    }, [items]);
+    }, [items, onSelectCard]);
 
     return (
-      <RegulatTitleSectionWrapper>
+      <RegulatTitleSectionWrapper ref={ref}>
         <div className="regular-title center">
           <div className="regular-title-text">
             <span>{title}</span>

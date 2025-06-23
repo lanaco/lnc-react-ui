@@ -10,9 +10,9 @@ export const Wrapper = styled.div`
   width: 100%;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
     0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-  background-color: var(--white);
+  background-color: var(--white, #fff);
   border-radius: 0.75rem;
-  border: 1px solid var(--gray-95008);
+  border: 1px solid var(--gray-95008, #14161a14);
   overflow: hidden;
   max-height: 21.5625rem;
   min-height: 21.5625rem;
@@ -55,7 +55,7 @@ export const TextWrapper = styled.div`
   flex-direction: column;
   gap: 0;
   color: var(--gray-950, #14161a);
-  border-top: 1px solid var(--gray-95008);
+  border-top: 1px solid var(--gray-95008, #14161a14);
 
   & .text-wr-title {
     font-weight: 600;
@@ -93,7 +93,7 @@ export const TextWrapper = styled.div`
 
     & .mng {
       font-size: 0.875rem;
-      color: var(--gray-300);
+      color: var(--gray-300, #c4c8cf);
     }
   }
 

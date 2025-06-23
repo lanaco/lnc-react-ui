@@ -71,7 +71,7 @@ const CalorieCalculator = forwardRef((props, ref) => {
           //   title={"Daily calorie calculator"}
           //   subtitle={"Lorem ipsum dolor"}
           buttonText={buttonText}
-          onBannerClick={() => {
+          onButtonAction={() => {
             setActiveStep(2);
           }}
           list={list}

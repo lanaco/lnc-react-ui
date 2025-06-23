@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 import { Container, ContainerHeader, Wrapper } from "./style";
 import Button from "../../../General/Button/Button";
@@ -8,32 +10,34 @@ const BannerSectionSimple = forwardRef((props, ref) => {
     title,
     subtitle,
     buttonText,
-    image,
+    buttonLink,
+    onButtonAction = () => {},
+    imageUrl,
     imagePosition = "right",
-    noImageForMobile = false,
-    height,
+    hideImageForMobile = false,
+    sectionHeight = "12.65625rem",
     imageWidth,
-    imageHeightMob,
+    imageHeightMobile,
     smallPadding = false,
     isHorizontalContent = false,
     backgroundColor,
     hasBorder = false,
-    onBannerClick,
   } = props;
 
   const isMobile = useDetectMobile();
 
   return (
     <Container
+      ref={ref}
       bgcolor={backgroundColor}
-      height={height}
+      height={sectionHeight}
       imgW={imageWidth}
-      imgHMob={imageHeightMob}
+      imgHMob={imageHeightMobile}
       hasBorder={hasBorder}
     >
       {imagePosition !== "right" &&
-        !(noImageForMobile === true && isMobile === true) && (
-          <img src={image} />
+        !(hideImageForMobile === true && isMobile === true) && (
+          <img src={imageUrl} />
         )}
       <Wrapper
         isHorizontalContent={isHorizontalContent}
@@ -47,14 +51,14 @@ const BannerSectionSimple = forwardRef((props, ref) => {
           size="medium"
           color="neutral"
           type="button"
-          onClick={onBannerClick}
+          onClick={() => onButtonAction(buttonLink)}
         >
           {buttonText}
         </Button>
       </Wrapper>
       {imagePosition === "right" &&
-        !(noImageForMobile === true && isMobile === true) && (
-          <img src={image} />
+        !(hideImageForMobile === true && isMobile === true) && (
+          <img src={imageUrl} />
         )}
     </Container>
   );

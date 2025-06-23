@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import {
@@ -13,7 +15,7 @@ const GiftCard = forwardRef(
     ref
   ) => {
     return (
-      <Wrapper onClick={onSelectCard}>
+      <Wrapper ref={ref} onClick={onSelectCard}>
         <div className="wrapper__card">
           {isDefined(imageComponent) ? (
             imageComponent
