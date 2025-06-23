@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, useState } from "react";
 import { ContainerHeader, Wrapper } from "./style";
 import CalorieCalculating from "./calorie-caluclating";
 import CalorieCalculatorResults from "./calorie-calculator-results";
-import BannerSectionWithList from "../../../landing-page-presentation-sections/banners-sections/banner-section-with-list";
+import BannerSectionWithList from "../../../Landing Sections/banners-sections/banner-section-with-list/BannerSectionWithList";
 import { calculateCalories } from "../../../_utils/utils";
 
 const CalorieCalculator = forwardRef((props, ref) => {
@@ -59,7 +61,7 @@ const CalorieCalculator = forwardRef((props, ref) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper ref={ref}>
       <ContainerHeader>
         <div className="header-title">{title}</div>
         <div className="header-subtitle">{subtitle}</div>
@@ -69,7 +71,9 @@ const CalorieCalculator = forwardRef((props, ref) => {
           //   title={"Daily calorie calculator"}
           //   subtitle={"Lorem ipsum dolor"}
           buttonText={buttonText}
-          onNavigate={() => setActiveStep(2)}
+          onBannerClick={() => {
+            setActiveStep(2);
+          }}
           list={list}
         />
       )}

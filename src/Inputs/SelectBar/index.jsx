@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import ScrollableSection from "../../Utility/ScrollableSection";

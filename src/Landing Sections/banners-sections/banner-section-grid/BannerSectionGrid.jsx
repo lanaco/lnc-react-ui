@@ -18,6 +18,7 @@ const BannerSectionGrid = forwardRef((props, ref) => {
     buttonLink1,
     buttonLink2,
     rowHeight = "12.65625rem",
+    onButtonAction = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -31,6 +32,7 @@ const BannerSectionGrid = forwardRef((props, ref) => {
         description={text1}
         buttonText={buttonText1}
         buttonLink={buttonLink1}
+        onButtonAction={onButtonAction}
       />
       <img className="img-item img-1" src={image1} />
 
@@ -42,6 +44,7 @@ const BannerSectionGrid = forwardRef((props, ref) => {
         description={text2}
         buttonText={buttonText2}
         buttonLink={buttonLink2}
+        onButtonAction={onButtonAction}
       />
       {isMobile === true && <img className="img-item img-2" src={image2} />}
     </GridWrapper>

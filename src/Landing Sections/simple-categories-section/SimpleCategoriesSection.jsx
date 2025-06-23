@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../_utils/useDetectMobile";
 import { isDefinedNotEmptyString } from "../../_utils/utils";
 import { RegulatTitleSectionWrapper } from "../style";
 import Button from "../../General/Button/Button";
-import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card";
+import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card/CategorySimpleCard";
 
 const SimpleCategoriesSection = forwardRef((props, ref) => {
   const {
@@ -12,24 +14,26 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
     title = "Shop by category",
     items,
     buttonText,
+    buttonLink,
     limit = 12,
-    handleOnClick,
+    onButtonAction = () => {},
+    onSelectCard = () => {},
   } = props;
   const isMobile = useDetectMobile();
 
   return (
-    <RegulatTitleSectionWrapper>
+    <RegulatTitleSectionWrapper ref={ref}>
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {!!handleOnClick && (
+        {isDefinedNotEmptyString(buttonLink) && (
           <Button
             type="button"
             btnType="tinted"
             color="gray"
-            onClick={handleOnClick}
+            onClick={() => onButtonAction(buttonLink)}
             borderRadius="curved"
           >
             {buttonText}
@@ -44,7 +48,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
                 uuid={x?.uuid}
                 image={x?.image}
                 name={x?.name}
-                onSelectCard={() => onSelectCard?.(y?.uuid)}
+                onSelectCard={() => onSelectCard?.(x?.uuid)}
               />
             ))
           : items
@@ -55,7 +59,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
                   uuid={x?.uuid}
                   image={x?.image}
                   name={x?.name}
-                  onSelectCard={() => onSelectCard?.(y?.uuid)}
+                  onSelectCard={() => onSelectCard?.(x?.uuid)}
                 />
               ))}
       </GridWrapper>
