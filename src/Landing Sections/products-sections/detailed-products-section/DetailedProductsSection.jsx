@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
-import { GridWrapper, SuspenseWrapper } from "./style";
+import { GridWrapper } from "./style";
 import Button from "../../../General/Button/Button";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
