@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef } from "react";
+import { forwardRef, useMemo, memo } from "react";
 import { GridWrapper, ProductsBannerWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { RegulatTitleSectionWrapper } from "../../style";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import ClearProductCard from "../../../Landing Components/product components/clear-product-card";
+import SuspenseClearProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-clear";
+
+const MemoizedProductCard = memo(ClearProductCard);
 
 const ProductsWithBannerSection = forwardRef((props, ref) => {
   const {
@@ -15,8 +18,39 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
     bannerImage,
     onSelectCard = () => {},
     title = "Season inspiration",
+    isLoading = false,
   } = props;
+
   const isMobile = useDetectMobile();
+  const memoizedProducts = useMemo(() => {
+    return (
+      <>
+        {isMobile === true
+          ? items?.map((x, index) => (
+              <MemoizedProductCard
+                key={index}
+                title={x?.title}
+                image={x?.image}
+                sellerUuid={x?.sellerUuid}
+                uuid={x?.uuid}
+                onSelectCard={() => onSelectCard?.(x?.uuid)}
+              />
+            ))
+          : items
+              ?.slice(0, limit)
+              .map((x, index) => (
+                <MemoizedProductCard
+                  key={index}
+                  title={x?.title}
+                  image={x?.image}
+                  sellerUuid={x?.sellerUuid}
+                  uuid={x?.uuid}
+                  onSelectCard={() => onSelectCard?.(x?.uuid)}
+                />
+              ))}
+      </>
+    );
+  }, [items]);
 
   return (
     <RegulatTitleSectionWrapper ref={ref}>
@@ -30,29 +64,13 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
         <img src={bannerImage} />
       </ProductsBannerWrapper>
       <GridWrapper limit={limit}>
-        {isMobile === true
-          ? items?.map((x, index) => (
-              <ClearProductCard
-                key={index}
-                title={x?.title}
-                image={x?.image}
-                sellerUuid={x?.sellerUuid}
-                uuid={x?.uuid}
-                onSelectCard={() => onSelectCard?.(x?.uuid)}
-              />
-            ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <ClearProductCard
-                  key={index}
-                  title={x?.title}
-                  image={x?.image}
-                  sellerUuid={x?.sellerUuid}
-                  uuid={x?.uuid}
-                  onSelectCard={() => onSelectCard?.(x?.uuid)}
-                />
-              ))}
+        <SuspenseClearProductCard
+          isLoading={isLoading}
+          limit={limit}
+          keyPrefix={"explore-landing"}
+        >
+          {memoizedProducts}
+        </SuspenseClearProductCard>
       </GridWrapper>
     </RegulatTitleSectionWrapper>
   );

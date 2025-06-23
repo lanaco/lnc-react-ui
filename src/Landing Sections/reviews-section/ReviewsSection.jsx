@@ -1,7 +1,10 @@
-import { forwardRef } from "react";
+import { forwardRef, memo, useMemo } from "react";
 import { Container, GridWrapper } from "./style";
 import useDetectMobile from "../../_utils/useDetectMobile";
 import ReviewCard from "../../Landing Components/reviews-components/review-card/ReviewCard";
+import SuspenseReviewCard from "../../Landing Components/skeleton-components/review-skeletons/suspense-reviews-card";
+
+const MemoizedReviewCard = memo(ReviewCard);
 
 const ReviewsSection = forwardRef((props, ref) => {
   const {
@@ -9,16 +12,17 @@ const ReviewsSection = forwardRef((props, ref) => {
     items,
     limit = 3,
     onSelectCard = () => {},
+    isLoading = false,
   } = props;
+
   const isMobile = useDetectMobile();
 
-  return (
-    <Container>
-      <div className="container-title">{title}</div>
-      <GridWrapper limit={limit}>
+  const memoizedProducts = useMemo(() => {
+    return (
+      <>
         {isMobile === true
           ? items?.map((x, index) => (
-              <ReviewCard
+              <MemoizedReviewCard
                 key={index}
                 text={x?.text}
                 title={x?.title}
@@ -32,7 +36,7 @@ const ReviewsSection = forwardRef((props, ref) => {
           : items
               ?.slice(0, limit)
               .map((x, index) => (
-                <ReviewCard
+                <MemoizedReviewCard
                   key={index}
                   text={x?.text}
                   title={x?.title}
@@ -43,6 +47,21 @@ const ReviewsSection = forwardRef((props, ref) => {
                   onSelectReview={(uuid) => onSelectCard(uuid)}
                 />
               ))}
+      </>
+    );
+  }, [items]);
+
+  return (
+    <Container>
+      <div className="container-title">{title}</div>
+      <GridWrapper limit={limit}>
+        <SuspenseReviewCard
+          isLoading={isLoading}
+          limit={limit}
+          keyPrefix={"explore-landing"}
+        >
+          {memoizedProducts}
+        </SuspenseReviewCard>
       </GridWrapper>
     </Container>
   );

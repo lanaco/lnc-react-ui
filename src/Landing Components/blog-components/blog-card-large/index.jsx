@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
-import BlogCardLargeSkeleton from "./skeleton";
 import Button from "../../../General/Button/Button";
 
 const BlogCardLarge = forwardRef((props, ref) => {
@@ -9,7 +8,6 @@ const BlogCardLarge = forwardRef((props, ref) => {
   const isMobile = useDetectMobile();
 
   return (
-    // <BlogCardLargeSkeleton />
     <Wrapper className="blog-card" onClick={onCardClick}>
       <img src={image} />
       <TextWrapper>

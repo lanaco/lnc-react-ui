@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import { useTheme } from "../../ThemeProvider/ThemeProvider";
+import { useTheme } from "../../../ThemeProvider/ThemeProvider";
 
 import { Wrapper } from "./style";
 

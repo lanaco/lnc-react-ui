@@ -4,7 +4,7 @@
 import { forwardRef } from "react";
 import { Wrapper } from "./style";
 
-const LandingPageClearProductCardSkeleton = forwardRef(({}, ref) => {
+const ClearProductCardSkeleton = forwardRef(({}, ref) => {
   return (
     <Wrapper className="product-card">
       <img className="skeleton-img" />
@@ -13,4 +13,4 @@ const LandingPageClearProductCardSkeleton = forwardRef(({}, ref) => {
   );
 });
 
-export default LandingPageClearProductCardSkeleton;
+export default ClearProductCardSkeleton;
