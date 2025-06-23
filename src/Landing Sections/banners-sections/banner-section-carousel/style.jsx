@@ -64,7 +64,7 @@ export const Block = styled.div`
     & .title {
       font-weight: 700;
       font-size: 2rem;
-      color: var(--white);
+      color: var(--white, #fff);
     }
   }
 
@@ -77,10 +77,18 @@ export const Banner = styled.div`
   position: relative;
   border-radius: 0.75rem;
 
+  background: linear-gradient(
+    178deg,
+    rgba(0, 0, 0, 0) 1.5%,
+    rgba(0, 0, 0, 0.16) 8.95%,
+    #000 98.39%
+  );
+
   & img {
     object-fit: cover;
     max-height: 20.625rem;
     border-radius: 0.75rem;
+    mix-blend-mode: multiply;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
@@ -124,12 +132,12 @@ export const BannerOverlay = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    color: var(--white);
+    color: var(--white, #fff);
 
     & .banner-title {
       font-weight: 700;
       font-size: 2rem;
-      color: var(--white);
+      color: var(--white, #fff);
     }
   }
 

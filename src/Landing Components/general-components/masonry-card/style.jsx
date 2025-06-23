@@ -12,17 +12,26 @@ export const Wrapper = styled.div`
   border-radius: 0.75rem;
   position: relative;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
 
   grid-column: ${(p) => p.position?.columnStart || "1"} /
     ${(p) => p.position?.columnEnd || "6"};
   grid-row: ${(p) => p.position?.rowStart || "1"} /
     ${(p) => p.position?.rowEnd || "1"};
 
+  background: linear-gradient(
+    178deg,
+    rgba(0, 0, 0, 0) 1.5%,
+    rgba(0, 0, 0, 0.16) 8.95%,
+    #000 98.39%
+  );
+
   & .wrapper__image {
     height: 100%;
     width: 100%;
     object-fit: cover;
     border-radius: 0.75rem;
+    mix-blend-mode: multiply;
   }
 
   & .wrapper__image--skeleton {
@@ -43,6 +52,7 @@ export const Wrapper = styled.div`
     gap: 0.75rem;
 
     & .text__title {
+      transition: var(--transiton, all 0.2s ease);
       color: var(--white, #ffffff);
       font-size: 1rem;
       font-style: normal;
@@ -99,6 +109,16 @@ export const Wrapper = styled.div`
       background-color: ${linearGradientAnimation("-90deg")};
       height: 2rem;
       width: 9rem;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    & .wrapper__text {
+      & .text__title {
+        color: var(--primary-500, #e87722);
+      }
     }
   }
 `;

@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
 import BrandHitCard from "../../../Landing Components/brand-components/brand-hit-card";

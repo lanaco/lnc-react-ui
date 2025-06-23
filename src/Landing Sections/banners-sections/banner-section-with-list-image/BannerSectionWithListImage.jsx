@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, Fragment } from "react";
 import { Container, ContainerHeader, ListWrapper, Wrapper } from "./style";
 import Button from "../../../General/Button/Button";
@@ -8,20 +10,22 @@ const BannerSectionWithListImage = forwardRef((props, ref) => {
     subtitle,
     buttonText,
     list,
-    image,
+    imageUrl,
     imageHeight,
     imageWidth,
-    imageHeightMob,
+    imageHeightMobile,
     hasBorder = true,
     backgroundColor = "transparent",
-    onBannerClick,
+    onButtonAction = () => {},
+    buttonLink,
   } = props;
 
   return (
     <Container
+      ref={ref}
       imgH={imageHeight}
       imgW={imageWidth}
-      imgHMob={imageHeightMob}
+      imgHMob={imageHeightMobile}
       hasBorder={hasBorder}
       bgColor={backgroundColor}
     >
@@ -45,12 +49,12 @@ const BannerSectionWithListImage = forwardRef((props, ref) => {
           color="gray"
           type="button"
           btnType="outline"
-          onClick={onBannerClick}
+          onClick={() => onButtonAction(buttonLink)}
         >
           {buttonText}
         </Button>
       </Wrapper>
-      <img src={image} />
+      <img src={imageUrl} />
     </Container>
   );
 });

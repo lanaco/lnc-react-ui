@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
@@ -18,10 +20,11 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     buttonText,
     limit = 3,
     options,
-    onActionClick = () => {},
+    onButtonAction = () => {},
+    buttonLink,
     onSelectOption = () => {},
     isLoading = false,
-    onSectionClick = () => {},
+    onSelectCard = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -37,7 +40,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                 text={x?.text}
                 titleSlug={x?.titleSlug}
                 buttonText={x?.buttonText}
-                onCardClick={() => onSelectCard(x?.uuid)}
+                onCardClick={() => onSelectCard(x)}
               />
             ))
           : items
@@ -50,26 +53,26 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                   text={x?.text}
                   titleSlug={x?.titleSlug}
                   buttonText={x?.buttonText}
-                  onCardClick={() => onSelectCard(x?.uuid)}
+                  onCardClick={() => onSelectCard(x)}
                 />
               ))}
       </>
     );
-  }, [items]);
+  }, [items, isMobile, limit, onSelectCard]);
 
   return (
-    <TitleWithOptionsSectionWrapper>
+    <TitleWithOptionsSectionWrapper ref={ref}>
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(onSectionClick) && (
+        {isDefinedNotEmptyString(onButtonAction) && (
           <Button
             type="button"
             btnType="tinted"
             color="gray"
-            onClick={onActionClick}
+            onClick={() => onButtonAction(buttonLink)}
             borderRadius="curved"
           >
             {buttonText}
@@ -83,14 +86,14 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
           // }))}
           items={options}
           // selectedIds={selectedExploreCategoriesIds}
-          onRemove={(id) => {
-            onSelectOption(id);
+          onRemove={(item) => {
+            onSelectOption(item);
             // setSelectedExploreCategoriesIds([
             //   ...selectedExploreCategoriesIds.filter((x) => x != id),
             // ])
           }}
-          onSelect={(id) => {
-            onSelectOption(id);
+          onSelect={(item) => {
+            onSelectOption(item);
             // setSelectedExploreCategoriesIds([id]);
           }}
           // onSelectAll={() => setSelectedExploreCategoriesIds([])}

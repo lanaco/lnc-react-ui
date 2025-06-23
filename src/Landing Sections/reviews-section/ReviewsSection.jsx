@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 import { Container, GridWrapper } from "./style";
 import useDetectMobile from "../../_utils/useDetectMobile";
@@ -49,10 +51,10 @@ const ReviewsSection = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items]);
+  }, [items, isMobile, onSelectCard, limit]);
 
   return (
-    <Container>
+    <Container ref={ref}>
       <div className="container-title">{title}</div>
       <GridWrapper limit={limit}>
         <SuspenseReviewCard

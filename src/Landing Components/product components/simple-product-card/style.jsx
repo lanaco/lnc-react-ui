@@ -54,6 +54,7 @@ export const Wrapper = styled.div`
     aspect-ratio: 1 / 1; /* defining the aspect ratio of the image */
     object-fit: cover; /* making sure the image isn't distorted */
     border-radius: 0.75rem;
+    mix-blend-mode: multiply;
   }
 
   & .fallback-image {
@@ -75,7 +76,7 @@ export const Wrapper = styled.div`
     border-radius: 62.4375rem;
     z-index: 1;
     background-color: var(--white, #fff);
-    color: var(--gray-950, #14161A);
+    color: var(--gray-950, #14161a);
   }
   & .title-simple-product-card {
     z-index: 1;
@@ -86,7 +87,7 @@ export const Wrapper = styled.div`
   &:hover {
     & .title-simple-product-card {
       z-index: 1;
-      color: var(--primary-500, #F59E0B);
+      color: var(--primary-500, #f59e0b);
     }
   }
 `;

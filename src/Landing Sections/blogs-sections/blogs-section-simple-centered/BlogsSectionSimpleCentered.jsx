@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
@@ -46,10 +48,10 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items]);
+  }, [items, isMobile, limit, onSelectCard]);
 
   return (
-    <GridWrapper limit={limit}>
+    <GridWrapper ref={ref} limit={limit}>
       <SuspenseBlogSimpleCentered
         isLoading={isLoading}
         limit={limit}

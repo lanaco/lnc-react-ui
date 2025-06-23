@@ -46,8 +46,20 @@ export const Wrapper = styled.div`
       font-weight: 500;
       line-height: 1.5rem;
       ${truncateTextInRows(2)}
+      transition: var(--transition, all 0.2s ease);
     }
   }
+
+  &:hover {
+    cursor: pointer;
+
+    & .wrapper__content {
+      & .wrapper__title {
+        color: var(--primary-500, #e87722);
+      }
+    }
+  }
+
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     background: transparent;
     border: none;

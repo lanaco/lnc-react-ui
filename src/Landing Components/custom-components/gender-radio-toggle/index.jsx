@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
 import { SwitchWrapper } from "./style";
@@ -35,7 +37,7 @@ const GenderRadioToggle = forwardRef((props, ref) => {
   };
 
   return (
-    <SwitchWrapper checked={checked} {...rest}>
+    <SwitchWrapper ref={ref} checked={checked} {...rest}>
       <input type="checkbox" checked={checked} onChange={handleChange} />
       <span className="knob">{checked ? knobContentOn : knobContentOff}</span>
       <span className="text">

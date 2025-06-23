@@ -37,6 +37,7 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
 
     return (
       <Wrapper
+        ref={ref}
         limitAvatars={limitAvatars}
         limitAvatarsForMobile={limitAvatarsForMobile}
         limitCards={limit}

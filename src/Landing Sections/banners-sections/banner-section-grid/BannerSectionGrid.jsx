@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
@@ -5,8 +7,8 @@ import TextBlockV1 from "../../../Landing Components/text-block-v1/index";
 
 const BannerSectionGrid = forwardRef((props, ref) => {
   const {
-    image1,
-    image2,
+    image1Url,
+    image2Url,
     title1,
     title2,
     text1,
@@ -34,9 +36,9 @@ const BannerSectionGrid = forwardRef((props, ref) => {
         buttonLink={buttonLink1}
         onButtonAction={onButtonAction}
       />
-      <img className="img-item img-1" src={image1} />
+      <img className="img-item img-1" src={image1Url} />
 
-      {isMobile !== true && <img className="img-item img-2" src={image2} />}
+      {isMobile !== true && <img className="img-item img-2" src={image2Url} />}
       <TextBlockV1
         className="text-item"
         title={title2}
@@ -46,7 +48,7 @@ const BannerSectionGrid = forwardRef((props, ref) => {
         buttonLink={buttonLink2}
         onButtonAction={onButtonAction}
       />
-      {isMobile === true && <img className="img-item img-2" src={image2} />}
+      {isMobile === true && <img className="img-item img-2" src={image2Url} />}
     </GridWrapper>
   );
 });

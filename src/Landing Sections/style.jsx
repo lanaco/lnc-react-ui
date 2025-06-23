@@ -21,7 +21,7 @@ export const RegulatTitleSectionWrapper = styled.div`
 
     & i {
       font-size: 1.5rem;
-      color: var(--primary-500, #F59E0B);
+      color: var(--primary-500, #f59e0b);
     }
   }
 
@@ -59,7 +59,7 @@ export const TitleWithOptionsSectionWrapper = styled.div`
 
     & i {
       font-size: 1.5rem;
-      color: var(--primary-500, #F59E0B);
+      color: var(--primary-500, #f59e0b);
     }
   }
 
@@ -72,26 +72,26 @@ export const TitleWithOptionsSectionWrapper = styled.div`
 
 const getColor = (color) => {
   if (color?.toLowerCase() == "success") {
-    return `color: var(--success-700); border: 1px solid var(--success-600); background-color: var(--sucess-60008);`;
+    return `color: var(--success-700, #047857); border: 1px solid var(--success-600, #059669); background-color: var(--sucess-60008, #05966914);`;
   }
 
   if (color?.toLowerCase() == "warning") {
-    return `color: var(--warning-600); border: 1px solid var(--warning-500); background-color: var(--warning-50012);`;
+    return `color: var(--warning-600, #d97706); border: 1px solid var(--warning-500, #f59e0b); background-color: var(--warning-50012, #f59e0b1f);`;
   }
 
   if (color?.toLowerCase() == "info") {
-    return `color: var(--info-700); border: 1px solid var(--info-600); background-color: var(--sucess-60012);`;
+    return `color: var(--info-700, #6d28d9); border: 1px solid var(--info-600, #7c3aed); background-color: var(--info-60012, #7c3aed1f);`;
   }
 
   if (color?.toLowerCase() == "danger") {
-    return `color: var(--danger-600); border: 1px solid var(--danger-500); background-color: var(--danger-5008);`;
+    return `color: var(--danger-600, #e11d48); border: 1px solid var(--danger-500, #f43f5e); background-color: var(--danger-5008, #f43f5e14);`;
   }
 
-  if (color?.toLowerCase() == "gray") {
-    return `color: var(--info-700); border: 1px solid var(--info-600); background-color: var(--sucess-60012);`;
+  if (color?.toLowerCase() == "secondary") {
+    return `color: var(--secondary-700, #2667a0); border: 1px solid var(--secondary-600, #3284cb); background-color: var(--secondary-60012, #3284cb1f);`;
   }
 
-  return `color: var(--gray-950, #14161A); border: 1px solid var(--gray-200); background-color: var(--white);`;
+  return `color: var(--gray-950, #14161A); border: 1px solid var(--gray-200, #dddfe4); background-color: var(--white, #fff);`;
 };
 
 export const BlogTag = styled.div`

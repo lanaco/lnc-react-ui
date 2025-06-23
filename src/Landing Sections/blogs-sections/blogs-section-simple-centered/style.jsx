@@ -6,7 +6,7 @@ export const GridWrapper = styled.div`
   grid-template-columns: ${(p) => `repeat(${p.limit},  minmax(0, 1fr))`};
   gap: 1.25rem;
   margin: auto;
-
+  width: fit-content;
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     grid-template-columns: repeat(1, 1fr);
   }

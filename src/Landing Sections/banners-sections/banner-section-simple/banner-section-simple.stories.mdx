@@ -11,22 +11,24 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export const TemplateDefault = (args) => (
   <>
+  Example 1;
         <BannerSectionSimple
           title={"Lorem ipsum dolor sit amet"}
           subtitle={"Lorem ipsum dolor"}
           buttonText={"Lorem ipsum dolor"}
           onBannerClick={() => window.open("https://www.google.com/", "_blank")}
-          image={"https://picsum.photos/500/700"}
+          imageUrl={"https://picsum.photos/500/700"}
           noBorder={true}
         />
         <br />
+        Example 2:
         <br />
         <BannerSectionSimple
           title={"Lorem ipsum dolor sit amet"}
           subtitle={"Lorem ipsum dolor"}
           buttonText={"Lorem ipsum dolor"}
           onBannerClick={() => window.open("https://www.google.com/", "_blank")}
-          image={"https://picsum.photos/600/400"}
+          imageUrl={"https://picsum.photos/600/400"}
           imagePosition="left"
           noBorder={false}
           smallPadding={true}

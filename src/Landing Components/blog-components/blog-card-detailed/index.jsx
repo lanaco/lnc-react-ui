@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import { BlogTag } from "../../../Landing Sections/style";
@@ -18,7 +20,7 @@ const BlogCardDetailed = forwardRef((props, ref) => {
 
   return (
     // <BlogCardDetailedSkeleton />
-    <Wrapper className="blog-card" onClick={onCardClick}>
+    <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
       <img src={image} />
       <TextWrapper>
         <div className="info-wr">

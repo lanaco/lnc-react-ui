@@ -26,16 +26,17 @@ const SelectBar = forwardRef((props, ref) => {
     ...rest
   } = props;
 
-  const handleClick = (value, label, code, unique, type) => {
+  const handleClick = (item, value) => {
     if (selectedIds?.includes(value)) {
-      onRemove(value, label, code, unique, type);
+      onRemove(item, value);
     } else {
-      onSelect(value, label, code, unique, type);
+      onSelect(item, value);
     }
   };
 
   return (
     <ScrollableSection
+      ref={ref}
       arrowsVisibleOnHover={false}
       className={className}
       columnGap="0.75rem"
@@ -62,15 +63,7 @@ const SelectBar = forwardRef((props, ref) => {
           btnType={selectedIds.includes(item.uuid) ? "filled" : "tinted"}
           className="badge-button"
           color="neutral"
-          onClick={() =>
-            handleClick(
-              item[valueKey],
-              item[labelKey],
-              item[codeKey],
-              uniqueKey ? item[uniqueKey] : null,
-              typeKey ? item[typeKey] : null
-            )
-          }
+          onClick={() => handleClick(item, item[valueKey])}
         >
           {isDefined(item?.icon) && (
             <>

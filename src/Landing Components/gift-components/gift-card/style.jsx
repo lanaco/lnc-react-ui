@@ -10,10 +10,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 0.75rem;
-
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 
   & .wrapper__card {
     width: 100%;
@@ -64,6 +61,13 @@ export const Wrapper = styled.div`
     line-height: 1.5rem;
     width: 100%;
     ${truncateTextInRows(2)}
+    transition: var(--transition, all 0.2s ease);
+  }
+
+  &:hover {
+    & .wrapper__text {
+      color: var(--primary-500, #f59e0b);
+    }
   }
 `;
 

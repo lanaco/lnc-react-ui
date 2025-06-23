@@ -8,11 +8,16 @@ export const Wrapper = styled.div`
   align-items: flex-start;
   gap: 2rem;
 
+  & img {
+    border-radius: 0.75rem;
+  }
+
   & .wrapper__heading {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    width: 100%;
 
     & .wrapper__title {
       color: var(--gray-950, #14161a);

@@ -26,6 +26,15 @@ export const Wrapper = styled.div`
         font-weight: 600;
         line-height: 2rem;
         letter-spacing: -0.47px;
+
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        & i {
+          font-size: 1.5rem;
+          color: var(--primary-500, #f59e0b);
+        }
       }
 
       & .title__action {

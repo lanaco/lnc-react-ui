@@ -5,6 +5,8 @@ import { forwardRef } from "react";
 import Button from "../../../General/Button/Button";
 import ShopCard from "../../../Landing Components/shop-components/shop-card";
 import ShopCardSkeleton from "../../../Landing Components/shop-components/shop-card/skeleton";
+import { isDefinedNotEmptyString } from "../../../_utils/utils";
+
 import { Wrapper } from "./style";
 
 const ShopCardsSection = forwardRef(
@@ -15,35 +17,38 @@ const ShopCardsSection = forwardRef(
       items,
       limit = 4,
       limitForMobile = 2,
-      actionText,
+      buttonText = "Show More",
       onSelectCard = () => {},
-      onShowMore,
+      onButtonAction = () => {},
+      icon,
     },
     ref
   ) => {
-    const handleShowMore = () => {
-      onShowMore?.();
-    };
-
     const handleSelectCard = (card) => {
       onSelectCard?.(card?.uuid);
     };
 
     return (
       <Wrapper
+        ref={ref}
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
       >
         <div className="wrapper__heading">
           <div className="wrapper__title">
-            {title && <div className="title__text">{title}</div>}
-            {actionText && onShowMore && (
+            {title && (
+              <div className="title__text">
+                {isDefinedNotEmptyString(icon) && <i className={icon} />}
+                <span>{title}</span>
+              </div>
+            )}
+            {onButtonAction && (
               <Button
-                text={actionText}
+                text={buttonText}
                 borderRadius="curved"
                 btnType="tinted"
                 className="title__action"
-                onClick={handleShowMore}
+                onClick={onButtonAction}
               />
             )}
           </div>

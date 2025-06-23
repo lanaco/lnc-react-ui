@@ -15,10 +15,6 @@ export const Wrapper = styled.div`
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
   background: var(--Lanaco-Gray-white, #fff);
 
-  &:hover {
-    cursor: pointer;
-  }
-
   /* drop-shadow-sm */
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 
@@ -37,8 +33,10 @@ export const Wrapper = styled.div`
     align-items: flex-start;
     gap: 0.25rem;
     align-self: stretch;
+    transition: var(--transition, all 0.2s ease);
 
     & .wrapper__title {
+      transition: var(--transition, all 0.2s ease);
       color: var(--gray-950, #14161a);
       font-size: 1rem;
       font-style: normal;
@@ -55,6 +53,16 @@ export const Wrapper = styled.div`
       line-height: 1rem;
       letter-spacing: 0.025rem;
       ${truncateTextInRows(2)}
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    & .wrapper__content {
+      & .wrapper__title {
+        color: var(--primary-500, #e87722);
+      }
     }
   }
 `;
