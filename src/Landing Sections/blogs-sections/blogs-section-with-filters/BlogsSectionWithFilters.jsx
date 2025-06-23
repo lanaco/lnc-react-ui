@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, memo, useMemo } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
@@ -6,6 +6,9 @@ import { TitleWithOptionsSectionWrapper } from "../../style";
 import Button from "../../../General/Button/Button";
 import SimpleBlogCardHorizontal from "../../../Landing Components/blog-components/simple-blog-card-horizontal";
 import SelectBar from "../../../Inputs/SelectBar";
+import SuspenseBlogWithFilters from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-with-filters";
+
+const MemoizedProductCard = memo(SimpleBlogCardHorizontal);
 
 const BlogsSectionWithFilters = forwardRef((props, ref) => {
   const {
@@ -17,8 +20,42 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     options,
     onActionClick = () => {},
     onSelectOption = () => {},
+    isLoading = false,
+    onSectionClick = () => {},
   } = props;
+
   const isMobile = useDetectMobile();
+  const memoizedProducts = useMemo(() => {
+    return (
+      <>
+        {isMobile === true
+          ? items?.map((x, index) => (
+              <MemoizedProductCard
+                key={index}
+                title={x?.title}
+                image={x?.image}
+                text={x?.text}
+                titleSlug={x?.titleSlug}
+                buttonText={x?.buttonText}
+                onCardClick={() => onSelectCard(x?.uuid)}
+              />
+            ))
+          : items
+              ?.slice(0, limit)
+              .map((x, index) => (
+                <MemoizedProductCard
+                  key={index}
+                  title={x?.title}
+                  image={x?.image}
+                  text={x?.text}
+                  titleSlug={x?.titleSlug}
+                  buttonText={x?.buttonText}
+                  onCardClick={() => onSelectCard(x?.uuid)}
+                />
+              ))}
+      </>
+    );
+  }, [items]);
 
   return (
     <TitleWithOptionsSectionWrapper>
@@ -63,31 +100,13 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
         />
       )}
       <GridWrapper limit={limit}>
-        {isMobile === true
-          ? items?.map((x, index) => (
-              <SimpleBlogCardHorizontal
-                key={index}
-                title={x?.title}
-                image={x?.image}
-                text={x?.text}
-                titleSlug={x?.titleSlug}
-                buttonText={x?.buttonText}
-                onCardClick={() => onSelectCard(x?.uuid)}
-              />
-            ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <SimpleBlogCardHorizontal
-                  key={index}
-                  title={x?.title}
-                  image={x?.image}
-                  text={x?.text}
-                  titleSlug={x?.titleSlug}
-                  buttonText={x?.buttonText}
-                  onCardClick={() => onSelectCard(x?.uuid)}
-                />
-              ))}
+        <SuspenseBlogWithFilters
+          isLoading={isLoading}
+          itemsCount={limit}
+          keyPrefix={"explore-landing"}
+        >
+          {memoizedProducts}
+        </SuspenseBlogWithFilters>
       </GridWrapper>
     </TitleWithOptionsSectionWrapper>
   );
