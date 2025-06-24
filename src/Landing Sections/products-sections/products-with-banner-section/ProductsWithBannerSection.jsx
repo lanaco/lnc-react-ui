@@ -19,6 +19,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
     onSelectCard = () => {},
     title = "Season inspiration",
     isLoading = false,
+    getImage = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -29,11 +30,11 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
           ? items?.map((x, index) => (
               <MemoizedProductCard
                 key={index}
-                title={x?.title}
-                image={x?.image}
+                title={x?.name}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
                 onSelectCard={() => onSelectCard?.(x?.uuid)}
+                image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
               />
             ))
           : items
@@ -41,16 +42,16 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
               .map((x, index) => (
                 <MemoizedProductCard
                   key={index}
-                  title={x?.title}
-                  image={x?.image}
+                  title={x?.name}
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
                   onSelectCard={() => onSelectCard?.(x?.uuid)}
+                  image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 />
               ))}
       </>
     );
-  }, [items]);
+  }, [items, isMobile, onSelectCard, getImage, limit]);
 
   return (
     <RegulatTitleSectionWrapper ref={ref}>

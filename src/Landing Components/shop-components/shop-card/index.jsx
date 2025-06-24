@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, Fragment } from "react";
 
 import Icon from "../../../General/Icon/Icon";
@@ -20,7 +22,7 @@ const ShopCard = forwardRef(
     ref
   ) => {
     return (
-      <Wrapper onClick={onSelectCard}>
+      <Wrapper ref={ref} onClick={onSelectCard}>
         <div className="wrapper__content">
           {isDefined(imageComponent) ? (
             imageComponent

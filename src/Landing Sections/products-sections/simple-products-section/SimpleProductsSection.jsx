@@ -21,6 +21,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
     onSelectCard = () => {},
     isLoading = false,
     limit = 6,
+    getImage = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -33,25 +34,29 @@ const SimpleProductsSection = forwardRef((props, ref) => {
               ?.map((x, index) => (
                 <MemoizedProductCard
                   key={index}
-                  title={x?.title}
+                  title={x?.name}
                   price={x?.price}
+                  isFree={x?.isFree}
+                  isNegotiable={x?.isNegotiable}
                   currency={x?.currency}
-                  image={x?.image}
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
                   onSelectCard={() => onSelectCard?.(x?.uuid)}
+                  image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 />
               ))
           : items?.map((x, index) => (
               <MemoizedProductCard
                 key={index}
-                title={x?.title}
+                title={x?.name}
                 price={x?.price}
+                isFree={x?.isFree}
+                isNegotiable={x?.isNegotiable}
                 currency={x?.currency}
-                image={x?.image}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
                 onSelectCard={() => onSelectCard?.(x?.uuid)}
+                image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
               />
             ))}
       </>

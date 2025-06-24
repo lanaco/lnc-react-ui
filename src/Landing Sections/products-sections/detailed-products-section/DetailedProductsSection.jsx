@@ -22,6 +22,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     onSelectCard = () => {},
     onButtonAction = () => {},
     isLoading = false,
+    getImage = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -32,7 +33,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
           ? items?.map((x, index) => (
               <MemoizedProductCard
                 key={index}
-                title={x?.title}
+                title={x?.name}
                 price={x?.price}
                 currency={x?.currency}
                 image={x?.image}
@@ -41,6 +42,9 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 isSponsored={x?.isSponsored}
                 imageComponent={x?.imageComponent}
                 onSelectCard={() => onSelectCard(x?.uuid)}
+                imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                isFree={x?.isFree}
+                isNegotiable={x?.isNegotiable}
               />
             ))
           : items
@@ -48,7 +52,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
               .map((x, index) => (
                 <MemoizedProductCard
                   key={index}
-                  title={x?.title}
+                  title={x?.name}
                   price={x?.price}
                   currency={x?.currency}
                   image={x?.image}
@@ -58,11 +62,14 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                   isSponsored={x?.isSponsored}
                   imageComponent={x?.imageComponent}
                   onSelectCard={() => onSelectCard(x?.uuid)}
+                  imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                  isFree={x?.isFree}
+                  isNegotiable={x?.isNegotiable}
                 />
               ))}
       </>
     );
-  }, [items]);
+  }, [items, isMobile, limit, onSelectCard, getImage]);
 
   return (
     <RegulatTitleSectionWrapper ref={ref}>
