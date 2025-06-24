@@ -21,6 +21,7 @@ const ShopCardsSection = forwardRef(
       onSelectCard = () => {},
       onButtonAction = () => {},
       icon,
+      getImage = () => {},
     },
     ref
   ) => {
@@ -62,12 +63,12 @@ const ShopCardsSection = forwardRef(
                   uuid={card?.uuid}
                   title={card?.title}
                   subtitle={card?.subtitle}
-                  image={card?.image}
                   rating={card?.rating}
                   reviewCount={card?.reviewCount}
                   products={card?.products}
                   imageComponent={card?.imageComponent}
                   onSelectCard={() => handleSelectCard?.(card)}
+                  image={getImage(card?.image, card?.uuid) || null}
                 />
               ))
             : Array.from("1234")?.map((_, idx) => (
