@@ -51,7 +51,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items, isMobile, onSelectCard, getImage, limit]);
+  }, [items, isMobile, limit]);
 
   return (
     <RegulatTitleSectionWrapper ref={ref}>

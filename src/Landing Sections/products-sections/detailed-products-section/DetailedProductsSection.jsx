@@ -69,7 +69,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items, isMobile, limit, onSelectCard, getImage]);
+  }, [items, isMobile, limit]);
 
   return (
     <RegulatTitleSectionWrapper ref={ref}>

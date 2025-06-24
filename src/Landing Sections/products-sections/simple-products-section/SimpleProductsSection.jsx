@@ -61,7 +61,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
             ))}
       </>
     );
-  }, [items]);
+  }, [items, isMobile, limit]);
 
   return (
     <GridWrapper ref={ref} limit={limit}>
