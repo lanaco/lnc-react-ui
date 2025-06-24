@@ -260,6 +260,10 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/custom-sections/calorie-calculator-section/CalorieCalculatorSection.jsx"
         ),
+          resolve(
+          __dirname,
+          "src/Landing Sections/reviews-section/ReviewsSection.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {

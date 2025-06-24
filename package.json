@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.40",
+  "version": "4.0.41",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -144,7 +144,8 @@
     "./ShopCardsSection": "./dist/ShopCardsSection.js",
     "./LocationSearchSection": "./dist/LocationSearchSection.js",
     "./SalesCampaignsSection": "./dist/SalesCampaignsSection.js",
-    "./CalorieCalculatorSection": "./dist/CalorieCalculatorSection.js"
+    "./CalorieCalculatorSection": "./dist/CalorieCalculatorSection.js",
+    "./ReviewsSection": "./dist/ReviewsSection.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",
