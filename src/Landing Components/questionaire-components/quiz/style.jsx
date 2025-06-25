@@ -185,6 +185,13 @@ export const QuestionWrapper = styled.div`
             border: 2px solid var(--yellow-600, #d97706);
           }
 
+          &.incorrect {
+            border: 2px solid var(--danger-700, #be123c);
+          }
+          & .wrapper__icon__incorrect {
+            color: var(--danger-700, #be123c);
+          }
+
           & .wrapper__icon {
             color: var(--yellow-600, #d97706);
           }

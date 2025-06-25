@@ -1,10 +1,15 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, useEffect, useRef, useState } from "react";
 
 import Button from "../../../General/Button/Button";
 import Icon from "../../../General/Icon/Icon";
 import ProgressBar from "../../../Feedback/ProgressBar/ProgressBar";
 import { CIRCLE_CIRCUMFERENCE, CIRCLE_RADIUS } from "../../../_utils/consts";
-import { formatTimerText } from "../../../_utils/utils";
+import {
+  formatTimerText,
+  isDefinedNotEmptyString,
+} from "../../../_utils/utils";
 import { QuestionWrapper } from "./style";
 
 const QuizQuestion = forwardRef(
@@ -14,7 +19,8 @@ const QuizQuestion = forwardRef(
       questionNo,
       totalQuestions,
       text,
-      answers,
+      options,
+      correctAnswer,
       selectedAnswer,
       secondsPerQuestion,
       nextText = "Next",
@@ -44,10 +50,8 @@ const QuizQuestion = forwardRef(
     const progress =
       timeLeft > 0 ? (timeLeft / secondsPerQuestion) * CIRCLE_CIRCUMFERENCE : 0;
 
-    const active = (answerUuid) => selectedAnswer?.uuid === answerUuid;
-
     return (
-      <QuestionWrapper>
+      <QuestionWrapper ref={ref}>
         <div className="wrapper__headline">
           <div className="wrapper__question-no">
             <div className="question-no__text">{`${questionNoText} ${questionNo} / ${totalQuestions}`}</div>
@@ -90,7 +94,43 @@ const QuizQuestion = forwardRef(
           <div className="wrapper__item">
             <div className="wrapper__text">{text}</div>
             <div className="wrapper__answers">
-              {answers &&
+              {options?.map((answer, idx) => (
+                <div
+                  key={`quiz-answer__${idx + 1}`}
+                  className={`wrapper__answer ${
+                    correctAnswer === answer && correctAnswer === selectedAnswer
+                      ? "active"
+                      : isDefinedNotEmptyString(selectedAnswer) &&
+                        correctAnswer !== selectedAnswer &&
+                        selectedAnswer === answer
+                      ? "incorrect"
+                      : ""
+                  }`}
+                  onClick={() => onSelectAnswer(answer)}
+                >
+                  {`${String.fromCharCode(65 + idx)}: ${answer}`}
+                  {correctAnswer === answer &&
+                    correctAnswer === selectedAnswer && (
+                      <Icon
+                        icon=" mng-lnc-checkmark--filled"
+                        sizeInUnits="1.25rem"
+                        className="wrapper__icon"
+                      />
+                    )}
+
+                  {isDefinedNotEmptyString(selectedAnswer) &&
+                    correctAnswer !== selectedAnswer &&
+                    selectedAnswer === answer && (
+                      <Icon
+                        icon=" mng-lnc-close--filled"
+                        sizeInUnits="1.25rem"
+                        className="wrapper__icon__incorrect"
+                      />
+                    )}
+                </div>
+              ))}
+
+              {/* {answers &&
                 answers?.map((answer, idx) => (
                   <div
                     key={`quiz-answer__${idx + 1}`}
@@ -108,7 +148,7 @@ const QuizQuestion = forwardRef(
                       />
                     )}
                   </div>
-                ))}
+                ))} */}
             </div>
           </div>
           <div className="wrapper__actions">
