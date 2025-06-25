@@ -9,6 +9,7 @@ import { Wrapper } from "./style";
 const ShopCard = forwardRef(
   (
     {
+      uuid,
       image,
       imageComponent,
       title,
@@ -18,6 +19,8 @@ const ShopCard = forwardRef(
       reviewCount,
       products,
       onSelectCard = () => {},
+      getProductImage = () => {},
+      canAcceptPayments,
     },
     ref
   ) => {
@@ -30,7 +33,12 @@ const ShopCard = forwardRef(
             <img src={image} className="wrapper__image" />
           )}
           <div className="wrapper__info">
-            <div className="wrapper__title">{title}</div>
+            <div className="wrapper__title">
+              {title}&nbsp;
+              {canAcceptPayments && (
+                <Icon color={"secondary"} icon="credit-card" className="card" />
+              )}
+            </div>
             <div className="wrapper__subtitle">{subtitle}</div>
             {badges && <div className="wrapper__badges"></div>}
             {rating && reviewCount && (
@@ -66,7 +74,10 @@ const ShopCard = forwardRef(
                   {isDefined(product?.imageComponent) ? (
                     product?.imageComponent
                   ) : (
-                    <img src={product?.image} className="product__image" />
+                    <img
+                      src={getProductImage(product?.image, product?.uuid, uuid)}
+                      className="product__image"
+                    />
                   )}
                 </div>
               </Fragment>

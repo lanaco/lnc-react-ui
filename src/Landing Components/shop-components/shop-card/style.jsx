@@ -44,6 +44,9 @@ export const Wrapper = styled.div`
     gap: 0.375rem;
 
     & .wrapper__title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
       color: var(--gray-950, #14161a);
       font-size: 1rem;
       font-style: normal;
