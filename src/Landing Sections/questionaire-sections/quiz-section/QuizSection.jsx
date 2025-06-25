@@ -16,7 +16,7 @@ const QuizSection = forwardRef(
       welcomeDescription,
       endTitle,
       endDescription,
-      image,
+      imageUrl,
       imageComponent,
       questions,
       secondsPerQuestion,
@@ -66,7 +66,7 @@ const QuizSection = forwardRef(
     };
 
     const handleNext = () => {
-      let isCorrect = selectedAnswer?.uuid === question?.correctAnswer;
+      let isCorrect = selectedAnswer === question?.correctAnswer;
 
       if (isCorrect) {
         setStep(QuizContent.CORRECT_ANSWER);
@@ -137,11 +137,12 @@ const QuizSection = forwardRef(
               questionNoText={questionNoText}
               questionNo={questionNo}
               totalQuestions={questions?.length || 0}
-              text={question?.text}
-              answers={question?.answers}
+              text={question?.questionText}
+              options={question?.options}
               secondsPerQuestion={
                 secondsPerQuestion || question?.secondsPerQuestion
               }
+              correctAnswer={question?.correctAnswer}
               selectedAnswer={selectedAnswer}
               nextText={nextText}
               giveUpText={giveUpText}
@@ -168,7 +169,7 @@ const QuizSection = forwardRef(
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
-          <img src={image} className="wrapper__image" />
+          <img src={imageUrl} className="wrapper__image" />
         )}
       </Wrapper>
     );
