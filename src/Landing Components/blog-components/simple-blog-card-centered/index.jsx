@@ -3,13 +3,14 @@
 import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import Button from "../../../General/Button/Button";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const SimpleBlogCardCentered = forwardRef((props, ref) => {
   const { title, imageUrl, text, buttonText, onCardClick } = props;
 
   return (
     <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
-      <img src={imageUrl} />
+      <ProductImageWrapper src={imageUrl} />
       <TextWrapper>
         <div className="text-wr-title">{title}</div>
         <div className="text-wr">{text}</div>

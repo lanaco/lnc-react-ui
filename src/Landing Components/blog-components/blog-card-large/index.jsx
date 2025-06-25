@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import Button from "../../../General/Button/Button";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const BlogCardLarge = forwardRef((props, ref) => {
   const {
@@ -17,7 +18,7 @@ const BlogCardLarge = forwardRef((props, ref) => {
 
   return (
     <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
-      <img src={imageUrl} />
+      <ProductImageWrapper src={imageUrl} />
       <TextWrapper>
         <div className="text-wr-title">{title}</div>
         <div className="text-wr">{text}</div>
