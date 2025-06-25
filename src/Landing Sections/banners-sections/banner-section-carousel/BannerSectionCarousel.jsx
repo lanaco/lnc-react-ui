@@ -8,7 +8,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 import { Wrapper, Banner, BannerOverlay } from "./style";
 
 const BannerSectionCarousel = forwardRef(
-  ({ items = [], onSelectItem = () => {} }, ref) => {
+  ({ carouselItems = [], onSelectItem = () => {} }, ref) => {
     const isMobile = useDetectMobile();
 
     return (
@@ -22,12 +22,12 @@ const BannerSectionCarousel = forwardRef(
           transitionTime={500}
           onClickItem={(idx) => {
             if (!isMobile) {
-              onSelectItem?.(items?.at(idx), idx);
+              onSelectItem?.(carouselItems?.at(idx), idx);
             }
           }}
         >
-          {items &&
-            items?.map((b, idx) => (
+          {carouselItems &&
+            carouselItems?.map((b, idx) => (
               <Banner key={`banner-${idx + 1}`}>
                 <img loading="lazy" src={b.imageUrl} />
                 <BannerOverlay>

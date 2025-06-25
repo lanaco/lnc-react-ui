@@ -14,6 +14,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
     onSelectCard = () => {},
     limit = 2,
     isLoading = false,
+    getImage = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -26,11 +27,11 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
               <MemoizedProductCard
                 key={index}
                 title={x?.title}
-                image={x?.image}
+                imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                 text={x?.text}
                 titleSlug={x?.titleSlug}
                 buttonText={x?.buttonText}
-                onCardClick={() => onSelectCard(x)}
+                onCardClick={() => onSelectCard(x?.titleSlug)}
               />
             ))
           : items
@@ -39,11 +40,11 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
                 <MemoizedProductCard
                   key={index}
                   title={x?.title}
-                  image={x?.image}
+                  imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                   text={x?.text}
                   titleSlug={x?.titleSlug}
                   buttonText={x?.buttonText}
-                  onCardClick={() => onSelectCard(x)}
+                  onCardClick={() => onSelectCard(x?.titleSlug)}
                 />
               ))}
       </>

@@ -15,7 +15,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     currency,
     isNegotiable,
     isFree,
-    image,
+    imageUrl,
     sellerUuid,
     location,
     isSponsored,
@@ -28,7 +28,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
   return (
     // <LandingPageProductCardSkeleton />
     <Wrapper className="product-card" onClick={onSelectCard}>
-      {isDefined(imageComponent) ? imageComponent : <img src={image} />}
+      {isDefined(imageComponent) ? imageComponent : <img src={imageUrl} />}
       <div className="wrapper-card-1">
         <div className="card-title">{title}</div>
       </div>

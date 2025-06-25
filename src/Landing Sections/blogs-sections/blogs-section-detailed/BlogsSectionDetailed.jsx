@@ -23,6 +23,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
     onSelectCard = () => {},
     isLoading = false,
     buttonLink,
+    getImage = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -35,15 +36,15 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
               <MemoizedProductCard
                 key={index}
                 title={x?.title}
-                image={x?.image}
                 text={x?.text}
                 titleSlug={x?.titleSlug}
                 numberOfLikes={x?.numberOfLikes}
                 numberOfComments={x?.numberOfComments}
-                datePublished={x?.date}
-                readDuration={x?.readDuration}
+                datePublished={x?.createdAt}
+                readDuration={x?.timeToRead}
                 tags={x?.tags}
-                onCardClick={() => onSelectCard(x?.uuid)}
+                onCardClick={() => onSelectCard(x?.titleSlug)}
+                imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
               />
             ))
           : items
@@ -52,15 +53,15 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                 <MemoizedProductCard
                   key={index}
                   title={x?.title}
-                  image={x?.image}
+                  imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                   text={x?.text}
                   titleSlug={x?.titleSlug}
                   tags={x?.tags}
                   numberOfLikes={x?.numberOfLikes}
                   numberOfComments={x?.numberOfComments}
-                  datePublished={x?.date}
-                  readDuration={x?.readDuration}
-                  onCardClick={() => onSelectCard(x?.uuid)}
+                  datePublished={x?.createdAt}
+                  readDuration={x?.timeToRead}
+                  onCardClick={() => onSelectCard(x?.titleSlug)}
                 />
               ))}
       </>

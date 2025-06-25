@@ -7,7 +7,7 @@ import { BlogTag } from "../../../Landing Sections/style";
 const BlogCardDetailed = forwardRef((props, ref) => {
   const {
     title,
-    image,
+    imageUrl,
     text,
     numberOfLikes,
     numberOfComments,
@@ -21,7 +21,7 @@ const BlogCardDetailed = forwardRef((props, ref) => {
   return (
     // <BlogCardDetailedSkeleton />
     <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
-      <img src={image} />
+      <img src={imageUrl} />
       <TextWrapper>
         <div className="info-wr">
           <div className="info-wr-1">

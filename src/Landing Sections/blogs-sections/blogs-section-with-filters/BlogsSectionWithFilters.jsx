@@ -25,6 +25,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     onSelectOption = () => {},
     isLoading = false,
     onSelectCard = () => {},
+    getImage = () => {}
   } = props;
 
   const isMobile = useDetectMobile();
@@ -36,7 +37,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
               <MemoizedProductCard
                 key={index}
                 title={x?.title}
-                image={x?.image}
+                imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                 text={x?.text}
                 titleSlug={x?.titleSlug}
                 buttonText={x?.buttonText}
@@ -49,7 +50,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                 <MemoizedProductCard
                   key={index}
                   title={x?.title}
-                  image={x?.image}
+                  imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                   text={x?.text}
                   titleSlug={x?.titleSlug}
                   buttonText={x?.buttonText}
