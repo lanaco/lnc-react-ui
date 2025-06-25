@@ -16,8 +16,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
     icon,
     title = "Shop by category",
     items,
-    buttonText,
-    buttonLink,
+    actionText = "Shop now",
     limit = 12,
     onButtonAction = () => {},
     onSelectCard = () => {},
@@ -61,15 +60,15 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(buttonLink) && (
+        {isDefinedNotEmptyString(onButtonAction) && (
           <Button
             type="button"
             btnType="tinted"
             color="gray"
-            onClick={() => onButtonAction(buttonLink)}
+            onClick={onButtonAction}
             borderRadius="curved"
           >
-            {buttonText}
+            {actionText}
           </Button>
         )}
       </div>
