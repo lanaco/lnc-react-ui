@@ -19,7 +19,6 @@ const QuizQuestion = forwardRef(
       questionNo,
       totalQuestions,
       text,
-      answers,
       options,
       correctAnswer,
       selectedAnswer,
@@ -50,8 +49,6 @@ const QuizQuestion = forwardRef(
 
     const progress =
       timeLeft > 0 ? (timeLeft / secondsPerQuestion) * CIRCLE_CIRCUMFERENCE : 0;
-
-    const active = (answerUuid) => selectedAnswer?.uuid === answerUuid;
 
     return (
       <QuestionWrapper ref={ref}>
