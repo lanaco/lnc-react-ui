@@ -6,6 +6,7 @@ import { forwardRef } from "react";
 import { Wrapper } from "./style";
 import { formatPrice, GetCurrencySymbol, isDefined } from "../../../_utils/utils";
 import SponsoredLine from "../../sponsored-line";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const DetailedProductCard = forwardRef((props, ref) => {
   const {
@@ -28,7 +29,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
   return (
     // <LandingPageProductCardSkeleton />
     <Wrapper className="product-card" onClick={onSelectCard}>
-      {isDefined(imageComponent) ? imageComponent : <img src={imageUrl} />}
+      {isDefined(imageComponent) ? imageComponent : <ProductImageWrapper src={imageUrl} />}
       <div className="wrapper-card-1">
         <div className="card-title">{title}</div>
       </div>

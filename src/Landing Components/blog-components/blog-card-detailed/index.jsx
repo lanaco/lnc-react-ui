@@ -3,6 +3,7 @@
 import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import { BlogTag } from "../../../Landing Sections/style";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const BlogCardDetailed = forwardRef((props, ref) => {
   const {
@@ -21,7 +22,7 @@ const BlogCardDetailed = forwardRef((props, ref) => {
   return (
     // <BlogCardDetailedSkeleton />
     <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
-      <img src={imageUrl} />
+      <ProductImageWrapper src={imageUrl} />
       <TextWrapper>
         <div className="info-wr">
           <div className="info-wr-1">

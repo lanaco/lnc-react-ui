@@ -44,7 +44,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   uuid={x?.uuid}
                   isSponsored={x?.isSponsored}
                   onSelectCard={() => onSelectCard?.(x?.uuid)}
-                  image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                  imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 />
               ))
           : items
@@ -62,7 +62,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   location={x?.location}
                   isSponsored={x?.isSponsored}
                   onSelectCard={() => onSelectCard?.(x?.uuid)}
-                  image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                  imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 />
               ))}
       </>

@@ -9,6 +9,7 @@ import {
   GetCurrencySymbol,
   isDefined,
 } from "../../../_utils/utils";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const SimpleProductCard = forwardRef((props, ref) => {
   const {
@@ -28,7 +29,7 @@ const SimpleProductCard = forwardRef((props, ref) => {
 
   return (
     <Wrapper className="simple-product-card" onClick={onSelectCard}>
-      {isDefined(imageComponent) ? imageComponent : <img src={image} />}
+      {isDefined(imageComponent) ? imageComponent : <ProductImageWrapper src={image} />}
       <div className="text-block">
         <div className="title-simple-product-card">{title}</div>
         <div className="price-chip">

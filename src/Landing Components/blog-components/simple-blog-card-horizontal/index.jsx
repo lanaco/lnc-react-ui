@@ -3,6 +3,7 @@
 import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import Link from "../../../General/Link/Link";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
   const { title, imageUrl, text, buttonText, onCardClick } = props;
@@ -16,7 +17,7 @@ const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
           {buttonText}
         </Link>
       </TextWrapper>
-      <img src={imageUrl} />
+      <ProductImageWrapper src={imageUrl} />
     </Wrapper>
   );
 });
