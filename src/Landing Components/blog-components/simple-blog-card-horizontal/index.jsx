@@ -1,14 +1,15 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
-import SimpleBlogCardHorizontalSkeleton from "./skeleton";
 import Link from "../../../General/Link/Link";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
-  const { title, image, text, buttonText, onCardClick } = props;
+  const { title, imageUrl, text, buttonText, onCardClick } = props;
 
   return (
-    // <SimpleBlogCardHorizontalSkeleton />
-    <Wrapper className="blog-card" onClick={onCardClick}>
+    <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
       <TextWrapper>
         <div className="text-wr-title">{title}</div>
         <div className="text-wr">{text}</div>
@@ -16,7 +17,7 @@ const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
           {buttonText}
         </Link>
       </TextWrapper>
-      <img src={image} />
+      <ProductImageWrapper src={imageUrl} />
     </Wrapper>
   );
 });

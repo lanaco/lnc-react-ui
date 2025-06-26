@@ -1,14 +1,17 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
-import { forwardRef, Fragment } from "react";
+import { forwardRef, Fragment, useEffect, useRef } from "react";
 
 import Icon from "../../../General/Icon/Icon";
 import { isDefined } from "../../../_utils/utils";
 import { Wrapper } from "./style";
+import DefaultShopImage from "../../../assets/images/ShopAvatar.svg";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const ShopCard = forwardRef(
   (
     {
+      uuid,
       image,
       imageComponent,
       title,
@@ -18,19 +21,45 @@ const ShopCard = forwardRef(
       reviewCount,
       products,
       onSelectCard = () => {},
+      getProductImage = () => {},
+      canAcceptPayments,
     },
     ref
   ) => {
+    const shopImgRef = useRef();
+
+    useEffect(() => {
+      // const img = document.getElementById("image");
+
+      const onErrorImage = (event) => {
+        event.target.src = DefaultShopImage;
+        event.onerror = null;
+      };
+
+      shopImgRef?.current?.addEventListener("error", onErrorImage);
+
+      return () => {
+        shopImgRef?.current?.removeEventListener("error", onErrorImage);
+      };
+    }, []);
+
     return (
       <Wrapper ref={ref} onClick={onSelectCard}>
         <div className="wrapper__content">
           {isDefined(imageComponent) ? (
             imageComponent
+          ) : image ? (
+            <img ref={shopImgRef} src={image} className="wrapper__image" />
           ) : (
-            <img src={image} className="wrapper__image" />
+            <img src={DefaultShopImage} />
           )}
           <div className="wrapper__info">
-            <div className="wrapper__title">{title}</div>
+            <div className="wrapper__title">
+              {title}&nbsp;
+              {canAcceptPayments && (
+                <Icon color={"secondary"} icon="credit-card" className="card" />
+              )}
+            </div>
             <div className="wrapper__subtitle">{subtitle}</div>
             {badges && <div className="wrapper__badges"></div>}
             {rating && reviewCount && (
@@ -66,7 +95,10 @@ const ShopCard = forwardRef(
                   {isDefined(product?.imageComponent) ? (
                     product?.imageComponent
                   ) : (
-                    <img src={product?.image} className="product__image" />
+                    <ProductImageWrapper
+                      src={getProductImage(product?.image, product?.uuid, uuid)}
+                      className="product__image"
+                    />
                   )}
                 </div>
               </Fragment>

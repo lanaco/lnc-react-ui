@@ -14,6 +14,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
     limit = 3,
     onSelectCard = () => {},
     isLoading = false,
+    getImage = () => {}
   } = props;
 
   const isMobile = useDetectMobile();
@@ -26,7 +27,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
               <MemoizedProductCard
                 key={index}
                 title={x?.title}
-                image={x?.image}
+                imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                 text={x?.text}
                 titleSlug={x?.titleSlug}
                 buttonText={x?.buttonText}
@@ -39,7 +40,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                 <MemoizedProductCard
                   key={index}
                   title={x?.title}
-                  image={x?.image}
+                  imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                   text={x?.text}
                   titleSlug={x?.titleSlug}
                   buttonText={x?.buttonText}

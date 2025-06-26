@@ -5,6 +5,7 @@
 import { forwardRef } from "react";
 import { Wrapper } from "./style";
 import { isDefined } from "../../../_utils/utils";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const ClearProductCard = forwardRef((props, ref) => {
   const {
@@ -18,7 +19,7 @@ const ClearProductCard = forwardRef((props, ref) => {
 
   return (
     <Wrapper className="product-card" onClick={onSelectCard}>
-      {isDefined(imageComponent) ? imageComponent : <img src={image} />}
+      {isDefined(imageComponent) ? imageComponent : <ProductImageWrapper src={image} />}
       <div className="card-title">{title}</div>
     </Wrapper>
   );

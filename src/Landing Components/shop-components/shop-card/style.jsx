@@ -13,7 +13,8 @@ export const Wrapper = styled.div`
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
   background: var(--Lanaco-Gray-white, #fff);
   width: 100%;
-
+  height: 100%;
+  justify-content: space-between;
   /* drop-shadow-sm */
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 
@@ -44,6 +45,9 @@ export const Wrapper = styled.div`
     gap: 0.375rem;
 
     & .wrapper__title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
       color: var(--gray-950, #14161a);
       font-size: 1rem;
       font-style: normal;
@@ -51,6 +55,7 @@ export const Wrapper = styled.div`
       line-height: 1.5rem;
       letter-spacing: -0.0112rem;
       ${truncateTextInRows(2)}
+      text-align: center;
     }
 
     & .wrapper__subtitle {

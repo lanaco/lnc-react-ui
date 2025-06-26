@@ -1,15 +1,16 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
-import SimpleBlogCardCenteredSkeleton from "./skeleton";
 import Button from "../../../General/Button/Button";
+import ProductImageWrapper from "../../product-img-wrapper";
 
 const SimpleBlogCardCentered = forwardRef((props, ref) => {
-  const { title, image, text, buttonText, onCardClick } = props;
+  const { title, imageUrl, text, buttonText, onCardClick } = props;
 
   return (
-    // <SimpleBlogCardCenteredSkeleton />
-    <Wrapper className="blog-card" onClick={onCardClick}>
-      <img src={image} />
+    <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
+      <ProductImageWrapper src={imageUrl} />
       <TextWrapper>
         <div className="text-wr-title">{title}</div>
         <div className="text-wr">{text}</div>
