@@ -23,14 +23,13 @@ const ShopCard = forwardRef(
       onSelectCard = () => {},
       getProductImage = () => {},
       canAcceptPayments,
+      hideProducts = false,
     },
     ref
   ) => {
     const shopImgRef = useRef();
 
     useEffect(() => {
-      // const img = document.getElementById("image");
-
       const onErrorImage = (event) => {
         event.target.src = DefaultShopImage;
         event.onerror = null;
@@ -62,48 +61,51 @@ const ShopCard = forwardRef(
             </div>
             <div className="wrapper__subtitle">{subtitle}</div>
             {badges && <div className="wrapper__badges"></div>}
-            {rating && reviewCount && (
-              <div className="wrapper__rating">
-                <div className="wrapper_stars">
-                  {[...Array(5).keys()]?.map((star, idx) => (
-                    <Icon
-                      key={`shop-card-rating-star__${idx + 1}`}
-                      icon={
-                        star < rating
-                          ? " mng-lnc-star--filled"
-                          : " mng-lnc-star"
-                      }
-                      className="wrapper__star"
-                    />
-                  ))}
-                </div>
-                <div className="wrapper__review-count">
-                  ({reviewCount?.toLocaleString()})
-                </div>
+
+            <div className="wrapper__rating">
+              <div className="wrapper_stars">
+                {[...Array(5).keys()]?.map((star, idx) => (
+                  <Icon
+                    key={`shop-card-rating-star__${idx + 1}`}
+                    icon={
+                      star < rating ? " mng-lnc-star--filled" : " mng-lnc-star"
+                    }
+                    className="wrapper__star"
+                  />
+                ))}
               </div>
-            )}
+              <div className="wrapper__review-count">
+                ({reviewCount?.toLocaleString()})
+              </div>
+            </div>
           </div>
         </div>
-        <div className="wrapper__products">
-          {products &&
-            products?.map((product, index) => (
-              <Fragment key={index}>
-                <div
-                  className="wrapper__product"
-                  onClick={() => product?.onSelectProduct?.(product?.uuid)}
-                >
-                  {isDefined(product?.imageComponent) ? (
-                    product?.imageComponent
-                  ) : (
-                    <ProductImageWrapper
-                      src={getProductImage(product?.image, product?.uuid, uuid)}
-                      className="product__image"
-                    />
-                  )}
-                </div>
-              </Fragment>
-            ))}
-        </div>
+        {hideProducts !== true && (
+          <div className="wrapper__products">
+            {products &&
+              products?.map((product, index) => (
+                <Fragment key={index}>
+                  <div
+                    className="wrapper__product"
+                    onClick={() => product?.onSelectProduct?.(product?.uuid)}
+                  >
+                    {isDefined(product?.imageComponent) ? (
+                      product?.imageComponent
+                    ) : (
+                      <ProductImageWrapper
+                        src={getProductImage(
+                          product?.image,
+                          product?.uuid,
+                          uuid
+                        )}
+                        className="product__image"
+                      />
+                    )}
+                  </div>
+                </Fragment>
+              ))}
+          </div>
+        )}
       </Wrapper>
     );
   }
