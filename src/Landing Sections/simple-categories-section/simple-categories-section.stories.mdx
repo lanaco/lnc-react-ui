@@ -12,8 +12,9 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 export const TemplateDefault = (args) => (
   <SimpleCategoriesSection
     title="shop by category"
-    onButtonAction={() => window.open("/")}
-    actionText={"Open"}
+    onButtonAction={(link) => window.open(link)}
+    buttonLink={"/"}
+    buttonText={"Open"}
     items={[
       {
         uuid: "",
@@ -88,7 +89,8 @@ export const TemplateDefault = (args) => (
         image: "https://picsum.photos/200/300",
       },
     ]}
-  />
+
+/>
 );
 
 ## Urgent sale products section

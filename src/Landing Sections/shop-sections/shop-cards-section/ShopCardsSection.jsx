@@ -17,7 +17,7 @@ const ShopCardsSection = forwardRef(
       items,
       limit = 4,
       limitForMobile = 2,
-      actionText = "Show More",
+      buttonText = "Show More",
       onSelectCard = () => {},
       onButtonAction = () => {},
       icon,
@@ -46,7 +46,7 @@ const ShopCardsSection = forwardRef(
             )}
             {onButtonAction && (
               <Button
-                text={actionText}
+                text={buttonText}
                 borderRadius="curved"
                 btnType="tinted"
                 className="title__action"
