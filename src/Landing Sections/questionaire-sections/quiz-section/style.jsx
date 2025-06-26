@@ -23,6 +23,7 @@ export const Wrapper = styled.div`
     height: auto;
     aspect-ratio: 1 / 1;
     max-width: 22.5rem;
+    border-radius: 0.75rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

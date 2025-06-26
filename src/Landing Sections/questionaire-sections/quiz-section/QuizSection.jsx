@@ -12,15 +12,15 @@ import { Wrapper } from "./style";
 const QuizSection = forwardRef(
   (
     {
-      welcomeTitle,
-      welcomeDescription,
+      title,
+      subtitle,
       endTitle,
       endDescription,
       imageUrl,
       imageComponent,
       questions,
       secondsPerQuestion,
-      numOfCredits,
+      numberOfCredits,
       startQuizText = "Start quiz",
       nextText = "Next",
       giveUpText = "Give up",
@@ -47,7 +47,8 @@ const QuizSection = forwardRef(
     const handleStartQuiz = () => {
       setStep(QuizContent.QUIZ);
       setQuestion(
-        questions?.find((question) => question?.questionNo === questionNo)
+        // questions?.find((question) => question?.questionNo === questionNo)
+        question?.at?.(+questionNo)
       );
       onStartQuiz?.();
     };
@@ -70,7 +71,7 @@ const QuizSection = forwardRef(
 
       if (isCorrect) {
         setStep(QuizContent.CORRECT_ANSWER);
-        wonCredits.current += numOfCredits || question?.numOfCredits;
+        wonCredits.current += numberOfCredits || question?.numberOfCredits;
       } else if (questionNo === questions?.length) {
         setStep(QuizContent.START_QUIZ);
         setQuestionNo(1);
@@ -78,7 +79,8 @@ const QuizSection = forwardRef(
       } else {
         setQuestionNo(questionNo + 1);
         setQuestion(
-          questions?.find((question) => question?.questionNo === questionNo + 1)
+          // questions?.find((question) => question?.questionNo === questionNo + 1)
+          questions?.at?.(+questionNo + 1)
         );
         setSelectedAnswer(null);
       }
@@ -103,13 +105,14 @@ const QuizSection = forwardRef(
         setStep(QuizContent.QUIZ);
         setQuestionNo(questionNo + 1);
         setQuestion(
-          questions?.find((question) => question?.questionNo === questionNo + 1)
+          // questions?.find((question) => question?.questionNo === questionNo + 1)
+           questions?.at?.(+questionNo + 1)
         );
       }
 
       setSelectedAnswer(null);
 
-      onContinue?.();
+      onContinue?.(wonCredits?.current);
     };
 
     const handleEndQuiz = () => {
@@ -125,8 +128,8 @@ const QuizSection = forwardRef(
         <div className="wrapper__outlet">
           {step === QuizContent.START_QUIZ && (
             <QuizWelcome
-              title={welcomeTitle}
-              description={welcomeDescription}
+              title={title}
+              description={subtitle}
               startQuizText={startQuizText}
               onStartQuiz={handleStartQuiz}
             />
@@ -157,7 +160,7 @@ const QuizSection = forwardRef(
               title={endTitle}
               description={formatString(
                 endDescription,
-                numOfCredits || question?.numOfCredits
+                numberOfCredits || question?.numberOfCredits
               )}
               continueText={continueText}
               endQuizText={endQuizText}

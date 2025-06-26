@@ -23,6 +23,7 @@ const ShopCardsSection = forwardRef(
       icon,
       getImage = () => {},
       getProductImage = () => {},
+      hideProducts = false
     },
     ref
   ) => {
@@ -72,6 +73,7 @@ const ShopCardsSection = forwardRef(
                   image={getImage(card?.profileImage, card?.uuid) || null}
                   getProductImage={getProductImage}
                   canAcceptPayments={card?.canAcceptPayments}
+                  hideProducts={hideProducts}
                 />
               ))
             : Array.from("1234")?.map((_, idx) => (
