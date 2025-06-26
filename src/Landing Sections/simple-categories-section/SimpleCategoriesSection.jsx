@@ -16,7 +16,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
     icon,
     title = "Shop by category",
     items,
-    buttonText,
+    buttonText = "Shop now",
     buttonLink,
     limit = 12,
     onButtonAction = () => {},
