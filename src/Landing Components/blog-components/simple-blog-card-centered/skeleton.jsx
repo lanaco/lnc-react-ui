@@ -7,7 +7,7 @@ const SimpleBlogCardCenteredSkeleton = forwardRef((props, ref) => {
   return (
     // <SimpleBlogCardSkeleton />
     <Wrapper className="product-card" onClick={onCardClick}>
-      <div skeleton-img />
+      <div className="skeleton-img" />
       <TextWrapper>
         <div className="skeleton-title"></div>
       </TextWrapper>
