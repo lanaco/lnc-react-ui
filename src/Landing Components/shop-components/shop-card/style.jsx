@@ -6,8 +6,6 @@ import {
 } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
-
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +78,15 @@ export const Wrapper = styled.div`
       gap: 0.25rem;
 
       & .wrapper__star {
-        color: var(--gray-950, #14161a);
+        & i {
+          color: var(--warning-500);
+        }
+
+        & .gold-star {
+          & i {
+            color: var(--gray-500);
+          }
+        }
       }
 
       & .wrapper__review-count {

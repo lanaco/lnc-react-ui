@@ -1,54 +1,75 @@
-/* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
-
+import useDetectMobile from "../../../_utils/useDetectMobile";
+import { RegulatTitleSectionWrapper } from "../../style";
+import { isDefinedNotEmptyString } from "../../../_utils/utils";
+import Button from "../../../General/Button/Button";
+import { GridWrapper } from "./style";
 import GiftCard from "../../../Landing Components/gift-components/gift-card";
-import GiftCardSkeleton from "../../../Landing Components/gift-components/gift-card/skeleton";
-import { Wrapper } from "./style";
 
-const GiftCardsSection = forwardRef(
-  ({
+const GiftsSection = forwardRef((props, ref) => {
+  const {
+    icon,
     title,
-    subtitle,
+    buttonLink,
     items,
+    buttonText,
     limit = 4,
-    limitForMobile = 1,
     onSelectCard = () => {},
-  }) => {
-    const handleSelectCard = (card) => {
-      onSelectCard?.(card?.uuid);
-    };
+    onButtonAction = () => {},
+  } = props;
 
-    return (
-      <Wrapper
-        limitCards={limit}
-        limitCardsForMobile={limitForMobile}
-      >
-        <div className="wrapper__heading">
-          {title && <div className="wrapper__title">{title}</div>}
-          {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
+  const isMobile = useDetectMobile();
+
+  return (
+    <RegulatTitleSectionWrapper ref={ref}>
+      <div className="regular-title">
+        <div className="regular-title-text">
+          {isDefinedNotEmptyString(icon) && <i className={icon} />}
+          <span>{title}</span>
         </div>
-        <div className="wrapper__cards">
-          {items && items?.length > 0
-            ? items?.map((card, idx) => (
+        {isDefinedNotEmptyString(buttonLink) && (
+          <Button
+            type="button"
+            btnType="tinted"
+            color="gray"
+            onClick={() => onButtonAction(buttonLink)}
+            borderRadius="curved"
+          >
+            {buttonText}
+          </Button>
+        )}
+      </div>
+      <GridWrapper limit={limit}>
+        {isMobile === true
+          ? items?.map((x, index) => (
+              <GiftCard
+                key={index}
+                text={x?.text}
+                price={x?.priceTo}
+                currency={x?.currency}
+                image={x?.imageUrl}
+                uuid={x?.uuid}
+                onSelectGiftCard={(uuid) => onSelectCard(uuid)}
+              />
+            ))
+          : items
+              ?.slice(0, limit)
+              .map((x, index) => (
                 <GiftCard
-                  key={`gift-card__${idx + 1}`}
-                  uuid={card?.uuid}
-                  text={card?.text}
-                  price={card?.price}
-                  currency={card?.currency}
-                  image={card?.image}
-                  imageComponent={card?.imageComponent}
-                  onSelectCard={() => handleSelectCard?.(card)}
+                  key={index}
+                  text={x?.text}
+                  price={x?.priceTo}
+                  currency={x?.currency}
+                  image={x?.imageUrl}
+                  uuid={x?.uuid}
+                  onSelectGiftCard={(uuid) => onSelectCard(uuid)}
                 />
-              ))
-            : Array.from("1234")?.map((_, idx) => (
-                <GiftCardSkeleton key={`gift-card-skeleton__${idx + 1}`} />
               ))}
-        </div>
-      </Wrapper>
-    );
-  }
-);
+      </GridWrapper>
+    </RegulatTitleSectionWrapper>
+  );
+});
 
-export default GiftCardsSection;
+export default GiftsSection;
