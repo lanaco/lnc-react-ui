@@ -1,35 +1,35 @@
-/* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
+import { CardWrapper, ExternalWrapper } from "./style";
+import { formatPrice, GetCurrencySymbol } from "../../../_utils/utils";
 
-import {
-  formatPrice,
-  GetCurrencySymbol,
-  isDefined,
-} from "../../../_utils/utils";
-import { Wrapper } from "./style";
+const GiftCard = forwardRef((props, ref) => {
+  const {
+    image,
+    text,
+    price,
+    currency,
+    onSelectGiftCard = () => {},
+  } = props;
 
-const GiftCard = forwardRef(
-  (
-    { image, imageComponent, text, price, currency, onSelectCard = () => {} },
-    ref
-  ) => {
-    return (
-      <Wrapper ref={ref} onClick={onSelectCard}>
-        <div className="wrapper__card">
-          {isDefined(imageComponent) ? (
-            imageComponent
-          ) : (
-            <img src={image} className="wrapper__image" />
-          )}
-          <div className="wrapper__tag">{`${formatPrice(
-            price
-          )} ${GetCurrencySymbol(currency)}`}</div>
+  return (
+    <ExternalWrapper
+      ref={ref}
+      className="simple-gift-card"
+      onClick={() => onSelectGiftCard(price)}
+    >
+      <CardWrapper>
+        <div className="price-tag">
+          {price &&
+            currency &&
+            `${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
         </div>
-        <div className="wrapper__text">{text}</div>
-      </Wrapper>
-    );
-  }
-);
+        <img src={image} />
+      </CardWrapper>
+      <div className="text-wrap">{text}</div>
+    </ExternalWrapper>
+  );
+});
 
 export default GiftCard;

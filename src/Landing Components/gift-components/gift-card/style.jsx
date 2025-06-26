@@ -1,73 +1,70 @@
 import styled from "@emotion/styled";
+import { linearGradientAnimation } from "../../../_utils/utils";
 
-import {
-  linearGradientAnimation,
-  truncateTextInRows,
-} from "../../../_utils/utils";
-
-export const Wrapper = styled.div`
+export const ExternalWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-
-  & .wrapper__card {
-    width: 100%;
-    height: auto;
-    border-radius: 0.75rem;
-    position: relative;
-    overflow: hidden;
-
-    & .wrapper__image {
-      width: 100%;
-      object-fit: cover;
-      height: auto;
-      border-radius: 0.75rem;
-      border: 1px solid var(--yellow-600, #d97706);
-
-      /* drop-shadow-sm */
-      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-    }
-
-    & .wrapper__tag {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      left: -40%;
-      top: 10%;
-      filter: drop-shadow(1px 1px 0px #d97706);
-      background: var(--yellow-500, #f59e0b);
-      color: var(--white, #fff);
-      width: 100%;
-      height: 2rem;
-      font-weight: 600;
-      font-size: 0.875rem;
-
-      -moz-transform: rotate(-45deg);
-      -o-transform: rotate(-45deg);
-      -webkit-transform: rotate(-45deg);
-      transform: rotate(-45deg);
-    }
-  }
-
-  & .wrapper__text {
-    color: var(--gray-950, #14161a);
-    text-align: center;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.5rem;
-    width: 100%;
-    ${truncateTextInRows(2)}
-    transition: var(--transition, all 0.2s ease);
-  }
-
+  transition: var(--transition);
   &:hover {
-    & .wrapper__text {
-      color: var(--primary-500, #f59e0b);
-    }
+    color: var(--primary-500, #f59e0b);
+  }
+
+  & .text-wrap {
+    text-align: center;
+  }
+`;
+
+export const CardWrapper = styled.div`
+  width: 100%;
+  min-height: 11rem;
+  max-height: 11rem;
+  position: relative;
+  border-radius: 0.75rem;
+  border: 1px solid var(--warning-500);
+  overflow: hidden;
+
+  & .skeleton__card {
+    height: 100%;
+    width: 100%;
+    ${linearGradientAnimation("-90deg")}
+
+    background: linear-gradient(
+      178deg,
+      rgba(0, 0, 0, 0) 1.5%,
+      rgba(0, 0, 0, 0.16) 8.95%,
+      #000 98.39%
+    );
+  }
+  & img {
+    min-height: 11rem;
+    max-height: 11rem;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  & .price-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(1px 1px 0px #b45309);
+    background-color: var(--warning-500, #f59e0b);
+    color: var(--white, #fff);
+    width: 75.35525%;
+    height: 2.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    position: absolute;
+    left: -5.5rem;
+    top: 1rem;
+
+    -moz-transform: rotate(315deg);
+    -o-transform: rotate(315deg);
+    -webkit-transform: rotate(315deg);
+    transform: rotate(315deg);
   }
 `;
 

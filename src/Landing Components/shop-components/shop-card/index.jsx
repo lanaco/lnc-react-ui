@@ -70,7 +70,7 @@ const ShopCard = forwardRef(
                     icon={
                       star < rating ? " mng-lnc-star--filled" : " mng-lnc-star"
                     }
-                    className="wrapper__star"
+                    className={`wrapper__star ${star < rating ? "gold-star" : ""}`}
                   />
                 ))}
               </div>
