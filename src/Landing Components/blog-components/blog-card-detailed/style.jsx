@@ -90,7 +90,7 @@ export const TextWrapper = styled.div`
     color: var(--gray-600, #676e79);
     font-size: 0.75rem;
     font-weight: 400;
-
+    padding-bottom: 0.75rem;
     & .mng {
       font-size: 0.875rem;
       color: var(--gray-300, #c4c8cf);

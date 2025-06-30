@@ -40,6 +40,7 @@ const QuizSection = forwardRef(
     const [questionNo, setQuestionNo] = useState(1);
     const [question, setQuestion] = useState(null);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
 
     const results = useRef([]);
     const wonCredits = useRef(0);
@@ -53,7 +54,9 @@ const QuizSection = forwardRef(
       onStartQuiz?.();
     };
 
-    const handleSelectAnswer = (answer) => {
+    const handleSelectAnswer = (answer, index) => {
+      selectedAnswerIndex.current = index;
+
       setSelectedAnswer(answer);
       onSelectAnswer?.();
     };
@@ -62,12 +65,14 @@ const QuizSection = forwardRef(
       setStep(QuizContent.START_QUIZ);
       setQuestionNo(1);
       setSelectedAnswer(null);
+      setSelectedAnswerIndex(null);
 
       onGiveUp?.();
     };
 
     const handleNext = () => {
-      let isCorrect = selectedAnswer === question?.correctAnswer;
+      // let isCorrect = selectedAnswer === question?.correctAnswer;
+      const isCorrect = selectedAnswerIndex === question?.correctAnswerIndex;
 
       if (isCorrect) {
         setStep(QuizContent.CORRECT_ANSWER);
@@ -76,6 +81,7 @@ const QuizSection = forwardRef(
         setStep(QuizContent.START_QUIZ);
         setQuestionNo(1);
         setSelectedAnswer(null);
+        setSelectedAnswerIndex(null);
       } else {
         setQuestionNo(questionNo + 1);
         setQuestion(
@@ -83,6 +89,7 @@ const QuizSection = forwardRef(
           questions?.at?.(+questionNo + 1)
         );
         setSelectedAnswer(null);
+        setSelectedAnswerIndex(null);
       }
 
       results.current = [
@@ -106,11 +113,12 @@ const QuizSection = forwardRef(
         setQuestionNo(questionNo + 1);
         setQuestion(
           // questions?.find((question) => question?.questionNo === questionNo + 1)
-           questions?.at?.(+questionNo + 1)
+          questions?.at?.(+questionNo + 1)
         );
       }
 
       setSelectedAnswer(null);
+      setSelectedAnswerIndex(null);
 
       onContinue?.(wonCredits?.current);
     };
@@ -119,6 +127,7 @@ const QuizSection = forwardRef(
       setStep(QuizContent.START_QUIZ);
       setQuestionNo(1);
       setSelectedAnswer(null);
+      setSelectedAnswerIndex(null);
 
       onEndQuiz?.();
     };
@@ -145,7 +154,7 @@ const QuizSection = forwardRef(
               secondsPerQuestion={
                 secondsPerQuestion || question?.secondsPerQuestion
               }
-              correctAnswer={question?.correctAnswer}
+              correctAnswerIndex={question?.correctAnswerIndex}
               selectedAnswer={selectedAnswer}
               nextText={nextText}
               giveUpText={giveUpText}
@@ -153,6 +162,7 @@ const QuizSection = forwardRef(
               onSelectAnswer={handleSelectAnswer}
               onGiveUp={handleGiveUp}
               onNext={handleNext}
+              selectedAnswerIndex={selectedAnswerIndex}
             />
           )}
           {step === QuizContent.CORRECT_ANSWER && (

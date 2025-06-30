@@ -28,7 +28,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
                 key={index}
                 title={x?.title}
                 imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
-                text={x?.text}
+                text={x?.description}
                 titleSlug={x?.titleSlug}
                 buttonText={x?.buttonText}
                 onCardClick={() => onSelectCard(x?.titleSlug)}
@@ -41,7 +41,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
                   key={index}
                   title={x?.title}
                   imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
-                  text={x?.text}
+                  text={x?.description}
                   titleSlug={x?.titleSlug}
                   buttonText={x?.buttonText}
                   onCardClick={() => onSelectCard(x?.titleSlug)}

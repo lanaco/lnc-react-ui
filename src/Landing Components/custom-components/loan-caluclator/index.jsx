@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, useState } from "react";
 import { ContentWrapper, Wrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
@@ -18,7 +20,7 @@ const LoanCalculator = forwardRef((props, ref) => {
   return (
     <Wrapper className="loan-calculator">
       <ContentWrapper>
-        <img src={CalculatorImage?.src} />
+        <img src={CalculatorImage} />
         {isMobile === true && (
           <div className="cont">
             <span className="content-title">{title}</span>
