@@ -49,13 +49,13 @@ const QuizSection = forwardRef(
       setStep(QuizContent.QUIZ);
       setQuestion(
         // questions?.find((question) => question?.questionNo === questionNo)
-        question?.at?.(+questionNo)
+        questions?.at?.(+questionNo)
       );
       onStartQuiz?.();
     };
 
     const handleSelectAnswer = (answer, index) => {
-      selectedAnswerIndex.current = index;
+      setSelectedAnswerIndex(index);
 
       setSelectedAnswer(answer);
       onSelectAnswer?.();
