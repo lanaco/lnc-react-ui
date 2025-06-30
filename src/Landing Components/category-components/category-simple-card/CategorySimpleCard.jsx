@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { CardWrapper } from "./style";
 
-const ReviewCard = forwardRef((props, ref) => {
+const CategorySimpleCard = forwardRef((props, ref) => {
   const { uuid, image, name, onSelectCard = () => {} } = props;
 
   return (
@@ -17,4 +17,4 @@ const ReviewCard = forwardRef((props, ref) => {
   );
 });
 
-export default ReviewCard;
+export default CategorySimpleCard;
