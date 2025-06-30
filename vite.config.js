@@ -247,8 +247,9 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/questionaire-sections/quiz-section/QuizSection.jsx"),
-         resolve(
+          "src/Landing Sections/questionaire-sections/quiz-section/QuizSection.jsx"
+        ),
+        resolve(
           __dirname,
           "src/Landing Sections/locations-sections/location-search-section/LocationSearchSection.jsx"
         ),
@@ -256,13 +257,25 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/campaigns-sections/sales-campaigns-section/SalesCampaignsSection.jsx"
         ),
-         resolve(
+        resolve(
           __dirname,
           "src/Landing Sections/custom-sections/calorie-calculator-section/CalorieCalculatorSection.jsx"
         ),
-          resolve(
+        resolve(
           __dirname,
           "src/Landing Sections/reviews-section/ReviewsSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Blog Sections/blog-category-cards-section/BlogCategoryCardsSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Blog Sections/blog-product-cards-section/BlogProductCardsSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Blog Sections/blog-shop-cards-section/BlogShopCardsSection.jsx"
         ),
       ],
       name: "@lanaco/lnc-react-ui",

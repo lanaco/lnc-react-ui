@@ -209,6 +209,9 @@ export { default as ShopCardsSection } from "./Landing Sections/shop-sections/sh
 export { default as QuizSection } from "./Landing Sections/questionaire-sections/quiz-section/QuizSection";
 export { default as SalesCampaignsSection } from "./Landing Sections/campaigns-sections/sales-campaigns-section/SalesCampaignsSection";
 export { default as CalorieCalculatorSection } from "./Landing Sections/custom-sections/calorie-calculator-section/CalorieCalculatorSection";
+export { default as BlogCategoryCardsSection } from "./Blog Sections/blog-category-cards-section/BlogCategoryCardsSection";
+export { default as BlogProductCardsSection } from "./Blog Sections/blog-product-cards-section/BlogProductCardsSection";
+export { default as BlogShopCardsSection } from "./Blog Sections/blog-shop-cards-section/BlogShopCardsSection";
 
 //======================== THEME ==============================================================
 
