@@ -6,7 +6,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   padding: 1.25rem;
   gap: 1.25rem;
-
+  background-color: var(--white, #fff);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--gray-95008, #14161a14);
+  border-radius: 0.75rem;
   & .wrapper-title {
     font-weight: 600;
     font-size: 1rem;
