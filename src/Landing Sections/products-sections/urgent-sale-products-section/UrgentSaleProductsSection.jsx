@@ -20,6 +20,8 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
     showMoreText = "Show more",
     isLoading = false,
     getImage = () => {},
+    negotiableText,
+    freeText,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -45,6 +47,8 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   isSponsored={x?.isSponsored}
                   onSelectCard={() => onSelectCard?.(x?.uuid)}
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                  negotiableText={negotiableText}
+                  freeText={freeText}
                 />
               ))
           : items
@@ -63,6 +67,8 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   isSponsored={x?.isSponsored}
                   onSelectCard={() => onSelectCard?.(x?.uuid)}
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                  negotiableText={negotiableText}
+                  freeText={freeText}
                 />
               ))}
       </>

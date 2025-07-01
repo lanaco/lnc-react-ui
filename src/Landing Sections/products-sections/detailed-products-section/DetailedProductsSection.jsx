@@ -23,6 +23,8 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     onButtonAction = () => {},
     isLoading = false,
     getImage = () => {},
+    negotiableText,
+    freeText,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -45,6 +47,8 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 isFree={x?.isFree}
                 isNegotiable={x?.isNegotiable}
+                negotiableText={negotiableText}
+                freeText={freeText}
               />
             ))
           : items
@@ -65,6 +69,8 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   isFree={x?.isFree}
                   isNegotiable={x?.isNegotiable}
+                  negotiableText={negotiableText}
+                  freeText={freeText}
                 />
               ))}
       </>
