@@ -48,10 +48,10 @@ const GiftsSection = forwardRef((props, ref) => {
                 key={index}
                 text={x?.text}
                 price={x?.priceTo}
-                currency={x?.currency}
+                currency={x?.currencyIsoCode}
                 image={x?.imageUrl}
                 uuid={x?.uuid}
-                onSelectGiftCard={(uuid) => onSelectCard(uuid)}
+                onSelectGiftCard={(uuid) => onSelectCard(x)}
               />
             ))
           : items
@@ -61,10 +61,10 @@ const GiftsSection = forwardRef((props, ref) => {
                   key={index}
                   text={x?.text}
                   price={x?.priceTo}
-                  currency={x?.currency}
+                  currency={x?.currencyIsoCode}
                   image={x?.imageUrl}
                   uuid={x?.uuid}
-                  onSelectGiftCard={(uuid) => onSelectCard(uuid)}
+                  onSelectGiftCard={(uuid) => onSelectCard(x)}
                 />
               ))}
       </GridWrapper>

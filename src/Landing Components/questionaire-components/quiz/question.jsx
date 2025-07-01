@@ -20,7 +20,7 @@ const QuizQuestion = forwardRef(
       totalQuestions,
       text,
       options,
-      correctAnswer,
+      correctAnswerIndex,
       selectedAnswer,
       secondsPerQuestion,
       nextText = "Next",
@@ -29,6 +29,7 @@ const QuizQuestion = forwardRef(
       onSelectAnswer = () => {},
       onGiveUp = () => {},
       onNext = () => {},
+      selectedAnswerIndex,
     },
     ref
   ) => {
@@ -98,19 +99,19 @@ const QuizQuestion = forwardRef(
                 <div
                   key={`quiz-answer__${idx + 1}`}
                   className={`wrapper__answer ${
-                    correctAnswer === answer && correctAnswer === selectedAnswer
+                    correctAnswerIndex === idx && correctAnswerIndex === selectedAnswerIndex
                       ? "active"
                       : isDefinedNotEmptyString(selectedAnswer) &&
-                        correctAnswer !== selectedAnswer &&
-                        selectedAnswer === answer
+                        correctAnswerIndex !== selectedAnswerIndex &&
+                        selectedAnswerIndex === idx
                       ? "incorrect"
                       : ""
                   }`}
-                  onClick={() => onSelectAnswer(answer)}
+                  onClick={() => onSelectAnswer(answer, idx)}
                 >
                   {`${String.fromCharCode(65 + idx)}: ${answer}`}
-                  {correctAnswer === answer &&
-                    correctAnswer === selectedAnswer && (
+                  {correctAnswerIndex === idx &&
+                    correctAnswerIndex === selectedAnswerIndex && (
                       <Icon
                         icon=" mng-lnc-checkmark--filled"
                         sizeInUnits="1.25rem"
@@ -118,9 +119,9 @@ const QuizQuestion = forwardRef(
                       />
                     )}
 
-                  {isDefinedNotEmptyString(selectedAnswer) &&
-                    correctAnswer !== selectedAnswer &&
-                    selectedAnswer === answer && (
+                  {selectedAnswerIndex >= 0 &&
+                    correctAnswerIndex !== selectedAnswerIndex &&
+                    selectedAnswerIndex === idx && (
                       <Icon
                         icon=" mng-lnc-close--filled"
                         sizeInUnits="1.25rem"

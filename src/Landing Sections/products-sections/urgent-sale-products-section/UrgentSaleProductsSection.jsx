@@ -35,7 +35,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
               ?.map((x, index) => (
                 <MemoizedProductCard
                   key={index}
-                  title={x?.title}
+                  title={x?.name}
                   price={x?.price}
                   isFree={x?.isFree}
                   isNegotiable={x?.isNegotiable}
@@ -52,7 +52,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
               .map((x, index) => (
                 <MemoizedProductCard
                   key={index}
-                  title={x?.title}
+                  title={x?.name}
                   price={x?.price}
                   isFree={x?.isFree}
                   isNegotiable={x?.isNegotiable}
