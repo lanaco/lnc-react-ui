@@ -29,12 +29,18 @@ const SimpleProductCard = forwardRef((props, ref) => {
 
   return (
     <Wrapper className="simple-product-card" onClick={onSelectCard}>
-      {isDefined(imageComponent) ? imageComponent : <ProductImageWrapper src={image} />}
+      {isDefined(imageComponent) ? (
+        imageComponent
+      ) : (
+        <ProductImageWrapper src={image} />
+      )}
       <div className="text-block">
         <div className="title-simple-product-card">{title}</div>
         <div className="price-chip">
           {price &&
             currency &&
+            isNegotiable !== true &&
+            isFree !== true &&
             `${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
           {isNegotiable && negotiableText}
           {isFree && freeText}
