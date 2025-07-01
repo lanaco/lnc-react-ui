@@ -134,35 +134,6 @@ const DetailedProductsSection = forwardRef((props, ref) => {
         </SuspenseDetailedProductCard>
       </GridWrapper>
     </TitleWithOptionsSectionWrapper>
-
-    // <RegulatTitleSectionWrapper ref={ref}>
-    //   <div className="regular-title">
-    //     <div className="regular-title-text">
-    //       {isDefinedNotEmptyString(icon) && <i className={icon} />}
-    //       <span>{title}</span>
-    //     </div>
-    //     {isDefinedNotEmptyString(buttonLink) && (
-    //       <Button
-    //         type="button"
-    //         btnType="tinted"
-    //         color="gray"
-    //         onClick={() => onButtonAction(buttonLink)}
-    //         borderRadius="curved"
-    //       >
-    //         {buttonText}
-    //       </Button>
-    //     )}
-    //   </div>
-    //   <GridWrapper limit={limit}>
-    //     <SuspenseDetailedProductCard
-    //       isLoading={isLoading}
-    //       itemsCount={limit}
-    //       keyPrefix={"explore-landing"}
-    //     >
-    //       {memoizedProducts}
-    //     </SuspenseDetailedProductCard>
-    //   </GridWrapper>
-    // </RegulatTitleSectionWrapper>
   );
 });
 
