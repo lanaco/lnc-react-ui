@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useState } from "react";
 import { ContentWrapper, OptionItem, OptionsWrapper, Wrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
@@ -41,7 +43,7 @@ const LocationFinder = forwardRef((props, ref) => {
   return (
     <Wrapper className="location-finder">
       <ContentWrapper>
-        <img src={MapImage?.src} />
+        <img src={MapImage} />
         {isMobile === true && (
           <div className="cont">
             <span className="content-title">{title}</span>

@@ -36,7 +36,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
               <MemoizedProductCard
                 key={index}
                 title={x?.title}
-                text={x?.text}
+                text={x?.description}
                 titleSlug={x?.titleSlug}
                 numberOfLikes={x?.numberOfLikes}
                 numberOfComments={x?.numberOfComments}
@@ -54,7 +54,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                   key={index}
                   title={x?.title}
                   imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
-                  text={x?.text}
+                  text={x?.description}
                   titleSlug={x?.titleSlug}
                   tags={x?.tags}
                   numberOfLikes={x?.numberOfLikes}
@@ -75,7 +75,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(onButtonAction) && (
+        {isDefinedNotEmptyString(buttonText) && isDefinedNotEmptyString(buttonLink) && (
           <Button
             type="button"
             btnType="tinted"

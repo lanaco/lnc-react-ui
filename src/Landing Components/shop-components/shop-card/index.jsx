@@ -67,10 +67,9 @@ const ShopCard = forwardRef(
                 {[...Array(5).keys()]?.map((star, idx) => (
                   <Icon
                     key={`shop-card-rating-star__${idx + 1}`}
-                    icon={
-                      star < rating ? " mng-lnc-star--filled" : " mng-lnc-star"
+                    icon={" mng-lnc-star--filled"
                     }
-                    className={`wrapper__star ${star < rating ? "gold-star" : ""}`}
+                    className={`wrapper__star ${star >= rating ? "gold-star" : ""}`}
                   />
                 ))}
               </div>

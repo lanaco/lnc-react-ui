@@ -63,6 +63,7 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   overflow: hidden;
+  padding-left: 2px;
 
   & .content-title {
     font-weight: 600;
