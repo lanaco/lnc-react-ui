@@ -36,7 +36,7 @@ const BlogShopCardsSection = forwardRef(
             rating={x?.rating}
             reviewCount={x?.reviewCount}
             onSelectCard={() => onSelectCard?.(x?.uuid)}
-            image={getImage(x?.image, x?.uuid) || null}
+            image={getImage(x?.profileImage, x?.uuid) || null}
             hideProducts={true}
           />
         ));
