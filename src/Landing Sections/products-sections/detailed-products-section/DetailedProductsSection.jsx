@@ -5,9 +5,12 @@ import { GridWrapper } from "./style";
 import Button from "../../../General/Button/Button";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
-import { RegulatTitleSectionWrapper } from "../../style";
+import {
+  TitleWithOptionsSectionWrapper,
+} from "../../style";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
 import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-detailed";
+import SelectBar from "../../../Inputs/SelectBar";
 
 const MemoizedProductCard = memo(DetailedProductCard);
 
@@ -25,6 +28,8 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     getImage = () => {},
     negotiableText,
     freeText,
+    options,
+    onSelectOption = () => {}
   } = props;
 
   const isMobile = useDetectMobile();
@@ -78,7 +83,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
   }, [items, isMobile, limit]);
 
   return (
-    <RegulatTitleSectionWrapper ref={ref}>
+    <TitleWithOptionsSectionWrapper ref={ref}>
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
@@ -96,6 +101,29 @@ const DetailedProductsSection = forwardRef((props, ref) => {
           </Button>
         )}
       </div>
+      {options?.length > 0 && (
+        <SelectBar
+          // items={dataExplore?.map((item) => ({
+          //   ...item,
+          // }))}
+          items={options}
+          // selectedIds={selectedExploreCategoriesIds}
+          onRemove={(item) => {
+            onSelectOption(item);
+            // setSelectedExploreCategoriesIds([
+            //   ...selectedExploreCategoriesIds.filter((x) => x != id),
+            // ])
+          }}
+          onSelect={(item) => {
+            onSelectOption(item);
+            // setSelectedExploreCategoriesIds([id]);
+          }}
+          // onSelectAll={() => setSelectedExploreCategoriesIds([])}
+          labelKey={"name"}
+          valueKey={"code"}
+          noMargin={true}
+        />
+      )}
       <GridWrapper limit={limit}>
         <SuspenseDetailedProductCard
           isLoading={isLoading}
@@ -105,7 +133,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
           {memoizedProducts}
         </SuspenseDetailedProductCard>
       </GridWrapper>
-    </RegulatTitleSectionWrapper>
+    </TitleWithOptionsSectionWrapper>
   );
 });
 
