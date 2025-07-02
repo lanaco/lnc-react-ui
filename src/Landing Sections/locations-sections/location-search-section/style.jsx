@@ -18,6 +18,9 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
   }
 `;
 
