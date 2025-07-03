@@ -14,13 +14,6 @@ export const Container = styled.div`
     width: fit-content;
   }
 
-  ${(p) =>
-    p.hasBorder === true &&
-    `border: 1px solid var(--gray-95008, rgba(20, 22, 26, 0.08));
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-
-`}
-
   & img {
     object-fit: cover;
     max-width: ${(p) => p.imgW || "22.5rem"};
@@ -41,6 +34,7 @@ export const Container = styled.div`
     flex-direction: column;
     min-height: unset;
     max-height: unset;
+    border: none;
 
     & button {
       width: fit-content;

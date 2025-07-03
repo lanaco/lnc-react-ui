@@ -13,10 +13,11 @@ const LandingPageMasonryGeneralCard = forwardRef(
       title,
       image,
       description,
-      actionText,
+      buttonText,
       onSelectCard = () => {},
       className,
       position,
+      selectAction,
       tag,
     },
     ref
@@ -39,10 +40,10 @@ const LandingPageMasonryGeneralCard = forwardRef(
             {isDefinedNotEmptyString(description) && (
               <div className="text__description">{description}</div>
             )}
-            {isDefinedNotEmptyString(actionText) && (
+            {isDefinedNotEmptyString(buttonText) && (
               <Button
-                text={actionText}
-                onClick={onSelectCard}
+                text={buttonText}
+                onClick={() => onSelectCard(selectAction)}
                 className="text__action"
               />
             )}

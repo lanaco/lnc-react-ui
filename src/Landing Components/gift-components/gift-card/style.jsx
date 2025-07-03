@@ -58,7 +58,7 @@ export const CardWrapper = styled.div`
     font-weight: 600;
     font-size: 0.875rem;
     position: absolute;
-    left: -5.5rem;
+    left: -4.5rem;
     top: 1rem;
 
     -moz-transform: rotate(315deg);
