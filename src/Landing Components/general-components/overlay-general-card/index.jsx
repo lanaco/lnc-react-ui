@@ -6,11 +6,19 @@ import Button from "../../../General/Button/Button";
 import { useTheme } from "../../../ThemeProvider/ThemeProvider";
 
 import { Wrapper } from "./style";
-import LandingPageOverlayGeneralCardSkeleton from "./skeleton";
+import { isDefinedNotEmptyString } from "../../../_utils/utils";
 
 const LandingPageOverlayGeneralCard = forwardRef(
   (
-    { title, image, overlay, description, actionText, handleClick = () => {} },
+    {
+      title,
+      image,
+      backgroundColor,
+      description,
+      buttonText,
+      handleClick = () => {},
+      onButtonAction = () => {}
+    },
     ref
   ) => {
     const { theme } = useTheme();
@@ -21,7 +29,7 @@ const LandingPageOverlayGeneralCard = forwardRef(
         <Wrapper
           ref={ref}
           theme={theme}
-          overlay={overlay}
+          overlay={backgroundColor}
           onClick={handleClick}
         >
           <img src={image} />
@@ -30,13 +38,15 @@ const LandingPageOverlayGeneralCard = forwardRef(
               <div>{title}</div>
               <div className="content-text-title">{description}</div>
             </div>
-            <Button
-              text={actionText}
-              onClick={handleClick}
-              className="text__action"
-              size="medium"
-              color="gray"
-            />
+            {isDefinedNotEmptyString(buttonText) && (
+              <Button
+                text={buttonText}
+                onClick={onButtonAction}
+                className="text__action"
+                size="medium"
+                color="gray"
+              />
+            )}
           </div>
           {/* <div className="wrapper__overlay">
             <img src={image} className="wrapper__image" />

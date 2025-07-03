@@ -40,7 +40,8 @@ export const RegularTitleSectionWrapper = styled.div`
 
 export const GridWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: ${(p) => `repeat(12,  minmax(0, 1fr))`};
+
   grid-template-rows: 15rem 15rem;
   grid-column-gap: 1.25rem;
   grid-row-gap: 1.25rem;
