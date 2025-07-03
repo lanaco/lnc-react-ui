@@ -28,6 +28,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
       <>
         {/* <LandingPageMasonryGeneralCardSkeleton /> */}
         <Wrapper
+          ref={ref}
           theme={theme}
           className={className}
           onClick={onSelectCard}
