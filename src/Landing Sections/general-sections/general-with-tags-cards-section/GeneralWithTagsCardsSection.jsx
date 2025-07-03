@@ -13,7 +13,7 @@ const GeneralWithTagsCardsSection = forwardRef(
     {
       title,
       subtitle,
-      tags = [],
+      options = [],
       limitTags = 7,
       limitTagsForMobile = 2,
       limit = 3,
@@ -21,6 +21,7 @@ const GeneralWithTagsCardsSection = forwardRef(
       items = [],
       onSelectTag = () => {},
       onSelectCard = () => {},
+      isLoading,
     },
     ref
   ) => {
@@ -61,22 +62,28 @@ const GeneralWithTagsCardsSection = forwardRef(
                 />
               ))}
         </div>
-        <div className="wrapper__tags">
-          {tags && tags?.length > 0
-            ? tags?.map((tag, idx) => (
-                <GeneralWithTagsCardTag
-                  key={`general-with-tags-card-tag__${idx + 1}`}
-                  icon={tag?.icon}
-                  text={tag?.text}
-                  onSelectCard={() => handleSelectTag?.(tag)}
-                />
-              ))
-            : Array.from("123")?.map((_, idx) => (
-                <GeneralWithTagsCardTagSkeleton
-                  key={`general-with-tags-card-tag-skeleton__${idx + 1}`}
-                />
-              ))}
-        </div>
+        {options?.length > 0 && (
+          <div className="wrapper__tags">
+            {options?.map((tag, idx) => (
+              <GeneralWithTagsCardTag
+                key={`general-with-tags-card-tag__${idx + 1}`}
+                icon={tag?.icon}
+                text={tag?.text}
+                onSelectCard={() => handleSelectTag?.(tag)}
+              />
+            ))}
+          </div>
+        )}
+
+        {isLoading === true && !(options?.length > 0) && (
+          <div className="wrapper__tags">
+            {Array.from("123")?.map((_, idx) => (
+              <GeneralWithTagsCardTagSkeleton
+                key={`general-with-tags-card-tag-skeleton__${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </Wrapper>
     );
   }

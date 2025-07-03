@@ -11,7 +11,7 @@ const MemoizedProductCard = memo(LandingPageOverlayGeneralCard);
 
 const OverlayGeneralCardsSection = forwardRef(
   (
-    { title, items, limit = 2, onSelectCard = () => {}, isLoading = false },
+    { title, items, limit = 2, onSelectCard = () => {}, isLoading = false, onButtonAction = () => {} },
     ref
   ) => {
     const memoizedProducts = useMemo(() => {
@@ -22,11 +22,12 @@ const OverlayGeneralCardsSection = forwardRef(
               <MemoizedProductCard
                 key={`landing-page-overlay-general-card__${index + 1}`}
                 title={item?.title}
-                image={item?.image}
+                image={item?.imageUrl}
                 description={item?.description}
-                actionText={item?.actionText}
-                overlay={item?.overlay}
-                handleClick={() => onSelectCard(item?.uuid)}
+                buttonText={item?.buttonText}
+                backgroundColor={item?.backgroundColor}
+                handleClick={() => onSelectCard(item?.selectAction, item)}
+                onButtonAction={() => onButtonAction(item?.buttonLink, item)}
               />
             ))}
         </>
