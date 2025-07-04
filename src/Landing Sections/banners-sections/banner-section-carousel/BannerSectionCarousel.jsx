@@ -6,9 +6,19 @@ import PropTypes from "prop-types";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { Wrapper, Banner, BannerOverlay } from "./style";
+import Button from "../../../General/Button/Button";
+import { isDefined } from "../../../_utils/utils";
 
 const BannerSectionCarousel = forwardRef(
-  ({ carouselItems = [], onSelectItem = () => {} }, ref) => {
+  (
+    {
+      carouselItems = [],
+      onSelectItem = () => {},
+      buttonText,
+      onButtonAction = () => {},
+    },
+    ref
+  ) => {
     const isMobile = useDetectMobile();
 
     return (
@@ -36,13 +46,15 @@ const BannerSectionCarousel = forwardRef(
                       <div className="banner-title">{b.title}</div>
                       {b.description}
                     </div>
-                    {/*<Button
-                  color="neutral"
-                  trailingIcon="arrow-right"
-                  onClick={() => handleClick(b)}
-                >
-                  {b.actionText}
-                </Button>*/}
+                    {isDefined(buttonText) && (
+                      <Button
+                        color="neutral"
+                        trailingIcon="arrow-right"
+                        onClick={() => onButtonAction(b)}
+                      >
+                        {b.buttonText}
+                      </Button>
+                    )}
                   </div>
                 </BannerOverlay>
               </Banner>
