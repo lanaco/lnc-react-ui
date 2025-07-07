@@ -1,0 +1,26 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+import LoanCalculatorSection from "./LoanCalculatorSection.jsx";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Loan Calculator Section"
+  component={LoanCalculatorSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <LoanCalculatorSection />
+);
+
+## Detailed products section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import LoanCalculatorSection from "@lanaco/lnc-react-ui/LoanCalculatorSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
