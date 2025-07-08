@@ -212,6 +212,8 @@ export { default as CalorieCalculatorSection } from "./Landing Sections/custom-s
 export { default as BlogCategoryCardsSection } from "./Blog Sections/blog-category-cards-section/BlogCategoryCardsSection";
 export { default as BlogProductCardsSection } from "./Blog Sections/blog-product-cards-section/BlogProductCardsSection";
 export { default as BlogShopCardsSection } from "./Blog Sections/blog-shop-cards-section/BlogShopCardsSection";
+export { default as BlogCardsSponsoredSection } from "./Landing Sections/blogs-sections/blog-cards-sponsored-section/BlogCardsSponsoredSection";
+export { default as BlogListSection } from "./Landing Sections/blogs-sections/blog-list-section/BlogListSection";
 
 //======================== THEME ==============================================================
 

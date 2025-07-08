@@ -297,6 +297,14 @@ export default defineConfig({
           __dirname,
           "src/Blog Sections/blog-shop-cards-section/BlogShopCardsSection.jsx"
         ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/blogs-sections/blog-cards-sponsored-section/BlogCardsSponsoredSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/blogs-sections/blog-list-section/BlogListSection.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {
