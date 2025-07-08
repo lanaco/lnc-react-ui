@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import BlogCardLargeSkeleton from "../../blog-components/blog-card-large/skeleton";
 
-const SkeletonBlogs = ({ limit = 2, isLoading = false, keyPrefix }) => {
+const SkeletonBlogs = ({ limit = 1, isLoading = false, keyPrefix }) => {
   return (
     <>
       {Array.from({ length: limit }, (_, index) => (
@@ -15,7 +15,7 @@ const SkeletonBlogs = ({ limit = 2, isLoading = false, keyPrefix }) => {
   );
 };
 
-const SuspenseBlogLarge = ({
+const SuspenseBlogSingle = ({
   children,
   fallbackComponent = <></>,
   isLoading = false,
@@ -38,4 +38,4 @@ const SuspenseBlogLarge = ({
   );
 };
 
-export default SuspenseBlogLarge;
+export default SuspenseBlogSingle;

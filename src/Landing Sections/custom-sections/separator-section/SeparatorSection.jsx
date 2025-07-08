@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 import { Wrapper } from "./style";
 
 const SeparatorSection = forwardRef(({}, ref) => {
-  return <Wrapper ref={ref}></Wrapper>;
+  return <Wrapper ref={ref} className="separator-section-lnc"></Wrapper>;
 });
 
 export default SeparatorSection;
