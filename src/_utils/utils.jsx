@@ -444,8 +444,9 @@ export const formatString = (text, ...args) => {
 
 export const getRoundedNumber = (num) => {
   num = num || 0;
+
   if (num > 999) {
-    return Math.trunc(Math.round(num / 1000)).toLocaleString() + "K";
+    return Math.round(num / 1000).toLocaleString() + "K";
   }
 
   return num.toLocaleString();

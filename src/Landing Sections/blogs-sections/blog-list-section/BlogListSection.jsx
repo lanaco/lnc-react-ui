@@ -12,7 +12,7 @@ const BlogListSection = forwardRef(
       timeToReadText = "{0} min read",
       items,
       onSelectCard = () => {},
-      onSelectTag = () => {},
+      onSelectOption = () => {},
       onShare = () => {},
       onBookmark = () => {},
       isLoading = false,
@@ -27,7 +27,7 @@ const BlogListSection = forwardRef(
           key={`blog-card-item__${idx + 1}`}
           title={x?.title}
           titleSlug={x?.titleSlug}
-          tags={x?.tags}
+          options={x?.options}
           publishedAt={x?.publishedAt}
           timeToReadText={timeToReadText}
           timeToRead={x?.timeToRead}
@@ -35,7 +35,7 @@ const BlogListSection = forwardRef(
           numberOfComments={x?.numberOfComments}
           isSponsored={x?.isSponsored}
           onSelectCard={() => onSelectCard?.(x?.uuid, x?.titleSlug)}
-          onSelectTag={(code) => onSelectTag?.(code)}
+          onSelectOption={(code) => onSelectOption?.(code)}
           onShare={() => onShare?.(x?.uuid)}
           onBookmark={() => onBookmark?.(x?.uuid)}
           imageUrl={getImage(x?.imageUrl, x?.uuid) || null}

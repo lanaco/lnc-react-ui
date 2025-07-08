@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,9 +21,5 @@ export const Wrapper = styled.div`
       left: 0;
       bottom: -0.75rem;
     }
-  }
-
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    //
   }
 `;

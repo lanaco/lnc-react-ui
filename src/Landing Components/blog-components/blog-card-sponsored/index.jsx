@@ -15,7 +15,7 @@ const BlogCardSponsored = forwardRef(
     {
       title,
       imageUrl,
-      tags,
+      options,
       publishedAt,
       timeToReadText = "{0} min read",
       timeToRead = 0,
@@ -23,7 +23,7 @@ const BlogCardSponsored = forwardRef(
       numberOfComments = 0,
       isSponsored = false,
       onSelectCard = () => {},
-      onSelectTag = () => {},
+      onSelectOption = () => {},
     },
     ref
   ) => {
@@ -39,17 +39,17 @@ const BlogCardSponsored = forwardRef(
           <div className="wrapper__subcontent">
             <div className="wrapper__title">{title}</div>
             <div className="wrapper__tags">
-              {tags &&
-                tags?.map((tag, idx) => (
+              {options &&
+                options?.map((option, idx) => (
                   <Chip
-                    key={`blog-card-sponsored-tag__${idx + 1}`}
-                    label={tag?.name}
-                    color={tag?.color}
+                    key={`blog-card-sponsored-option__${idx + 1}`}
+                    label={option?.name}
+                    color={option?.color}
                     className="wrapper__tag"
                     onClick={(e) => {
                       e?.stopPropagation();
 
-                      onSelectTag(tag?.code);
+                      onSelectOption(option?.code);
                     }}
                   />
                 ))}

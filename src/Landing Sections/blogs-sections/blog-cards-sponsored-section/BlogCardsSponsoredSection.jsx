@@ -20,7 +20,7 @@ const BlogCardsSponsoredSection = forwardRef(
       items,
       onButtonAction = () => {},
       onSelectCard = () => {},
-      onSelectTag = () => {},
+      onSelectOption = () => {},
       isLoading = false,
       getImage = () => {},
       limitCards = 2,
@@ -36,7 +36,7 @@ const BlogCardsSponsoredSection = forwardRef(
             key={`blog-card-sponsored__${idx + 1}`}
             title={x?.title}
             titleSlug={x?.titleSlug}
-            tags={x?.tags}
+            options={x?.options}
             publishedAt={x?.publishedAt}
             timeToReadText={timeToReadText}
             timeToRead={x?.timeToRead}
@@ -44,7 +44,7 @@ const BlogCardsSponsoredSection = forwardRef(
             numberOfComments={x?.numberOfComments}
             isSponsored={x?.isSponsored}
             onSelectCard={() => onSelectCard?.(x?.uuid, x?.titleSlug)}
-            onSelectTag={(code) => onSelectTag?.(code)}
+            onSelectOption={(code) => onSelectOption?.(code)}
             imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
           />
         ));

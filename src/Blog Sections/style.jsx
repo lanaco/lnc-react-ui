@@ -28,8 +28,8 @@ export const Wrapper = styled.div`
 
   &.highlight {
     border-radius: 1rem;
-    border: 2px solid var(--yellow-500, #f59e0b);
-    background: var(--yellow-50, #fffbeb);
+    border: 2px solid var(--warning-500, #f59e0b);
+    background: var(--warning-50, #fffbeb);
     padding: 0.75rem;
     width: fit-content;
 
