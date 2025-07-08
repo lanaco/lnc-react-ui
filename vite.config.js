@@ -171,7 +171,7 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blogs-section-large/BlogSingleSection.jsx"
+          "src/Landing Sections/blogs-sections/blog-single-section/BlogSingleSection.jsx"
         ),
         resolve(
           __dirname,
