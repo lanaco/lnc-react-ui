@@ -1,0 +1,136 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import BlogCardsSponsoredSection from "./BlogCardsSponsoredSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Blog Cards Sponsored Section"
+  component={BlogCardsSponsoredSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <BlogCardsSponsoredSection
+    title="Mungos highlights"
+    buttonLink="/"
+    onButtonAction={() => {}}
+    onSelectCard={(uuid, titleSlug) => {}}
+    onSelectTag={(code) => {}}
+    buttonText="View all"
+    timeToReadText="{0} min read"
+    items={[
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        image: "https://picsum.photos/200/300",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        tags: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: true,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        image: "https://picsum.photos/200/300",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        tags: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: false,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        image: "https://picsum.photos/200/300",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        tags: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: false,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        image: "https://picsum.photos/200/300",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        tags: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: true,
+      },
+    ]}
+  />
+);
+
+## Blog cards sponsored section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import BlogCardsSponsoredSection from "@lanaco/lnc-react-ui/BlogCardsSponsoredSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

@@ -441,3 +441,20 @@ export const formatString = (text, ...args) => {
     return typeof args[number] != "undefined" ? args[number] : match;
   });
 };
+
+export const getRoundedNumber = (num) => {
+  num = num || 0;
+  if (num > 999) {
+    return Math.trunc(Math.round(num / 1000)).toLocaleString() + "K";
+  }
+
+  return num.toLocaleString();
+};
+
+export const formatLocaleDateString = (isoDate) => {
+  const date = new Date(isoDate);
+
+  const options = { month: "long", day: "numeric", year: "numeric" };
+
+  return date.toLocaleDateString("en-US", options)?.replace(",", "");
+};

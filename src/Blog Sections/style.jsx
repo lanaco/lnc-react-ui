@@ -26,6 +26,18 @@ export const Wrapper = styled.div`
     letter-spacing: -0.09px;
   }
 
+  &.highlight {
+    border-radius: 1rem;
+    border: 2px solid var(--yellow-500, #f59e0b);
+    background: var(--yellow-50, #fffbeb);
+    padding: 0.75rem;
+    width: fit-content;
+
+    & .wrapper__action {
+      border: none;
+    }
+  }
+
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & .wrapper__grid {
       grid-template-columns: repeat(2, 1fr);
