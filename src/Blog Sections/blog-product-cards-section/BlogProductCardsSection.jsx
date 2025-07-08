@@ -19,6 +19,7 @@ const BlogProductCardsSection = forwardRef(
       isLoading = false,
       limit = 4,
       getImage = () => {},
+      isHighlight = true,
     },
     ref
   ) => {
@@ -44,7 +45,7 @@ const BlogProductCardsSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper>
+      <Wrapper className={isHighlight ? "highlight" : ""}>
         <div className="wrapper__grid">
           <SuspenseSimpleProductCard
             isLoading={isLoading}

@@ -7,7 +7,16 @@ import { Wrapper } from "../style";
 const MemoizedCategorySimpleCard = memo(CategorySimpleCard);
 
 const BlogCategoryCardsSection = forwardRef(
-  ({ items, onSelectCard = () => {}, isLoading = false, limit = 4 }, ref) => {
+  (
+    {
+      items,
+      onSelectCard = () => {},
+      isLoading = false,
+      limit = 4,
+      isHighlight = false,
+    },
+    ref
+  ) => {
     const memoizedCategories = useMemo(() => {
       return items
         ?.slice(0, 4)
@@ -23,7 +32,7 @@ const BlogCategoryCardsSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper>
+      <Wrapper className={isHighlight ? "highlight" : ""}>
         <div className="wrapper__grid">
           <SuspenseSimpleCategoryCard
             isLoading={isLoading}
