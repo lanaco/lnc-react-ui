@@ -171,6 +171,10 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
+          "src/Landing Sections/blogs-sections/blogs-section-large/BlogSingleSection.jsx"
+        ),
+        resolve(
+          __dirname,
           "src/Landing Sections/blogs-sections/blogs-section-simple/BlogsSectionSimple.jsx"
         ),
         resolve(
@@ -184,6 +188,22 @@ export default defineConfig({
         resolve(
           __dirname,
           "src/Landing Sections/custom-sections/custom-loan-map-section/CustomLoanMapSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/blogs-sections/blog-single-section/BlogSingleSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/custom-sections/location-finder-section/LocationFinderSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/custom-sections/loan-calculator-section/LoanCalculatorSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/custom-sections/separator-section/SeparatorSection.jsx"
         ),
         resolve(
           __dirname,

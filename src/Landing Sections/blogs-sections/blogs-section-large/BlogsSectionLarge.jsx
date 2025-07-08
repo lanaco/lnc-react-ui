@@ -6,7 +6,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 import BlogCardLarge from "../../../Landing Components/blog-components/blog-card-large";
 import SuspenseBlogLarge from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-large";
 
-const MemoizedProductCard = memo(BlogCardLarge);
+const MemoizedBlogCard = memo(BlogCardLarge);
 
 const BlogsSectionLarge = forwardRef((props, ref) => {
   const {
@@ -24,7 +24,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
       <>
         {isMobile === true
           ? items?.map((x, index) => (
-              <MemoizedProductCard
+              <MemoizedBlogCard
                 key={index}
                 title={x?.title}
                 imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
@@ -37,7 +37,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
           : items
               ?.slice(0, limit)
               .map((x, index) => (
-                <MemoizedProductCard
+                <MemoizedBlogCard
                   key={index}
                   title={x?.title}
                   imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
