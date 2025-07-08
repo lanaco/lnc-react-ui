@@ -23,8 +23,6 @@ const BlogCardsSponsoredSection = forwardRef(
       onSelectOption = () => {},
       isLoading = false,
       getImage = () => {},
-      limitCards = 2,
-      limitCardsForMobile = 1,
     },
     ref
   ) => {
@@ -51,10 +49,7 @@ const BlogCardsSponsoredSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper
-        limitCards={limitCards}
-        limitCardsForMobile={limitCardsForMobile}
-      >
+      <Wrapper>
         <div className="wrapper__heading">
           <div className="wrapper__title">
             {title && (

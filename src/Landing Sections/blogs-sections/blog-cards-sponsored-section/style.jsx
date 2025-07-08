@@ -63,7 +63,7 @@ export const Wrapper = styled.div`
 
   & .wrapper__cards {
     display: grid;
-    grid-template-columns: ${(p) => `repeat(${p?.limitCards}, minmax(0, 1fr))`};
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
     justify-items: center;
     align-items: center;
@@ -80,8 +80,7 @@ export const Wrapper = styled.div`
     }
 
     & .wrapper__cards {
-      grid-template-columns: ${(p) =>
-        `repeat(${p?.limitCardsForMobile}, minmax(0, 1fr))`};
+      grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 1rem;
     }
   }
