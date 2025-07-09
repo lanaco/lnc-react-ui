@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
   background: var(--white, #fff);
   min-height: 10.5rem;
   position: relative;
+  width: 100%;
 
   &:hover {
     cursor: pointer;
