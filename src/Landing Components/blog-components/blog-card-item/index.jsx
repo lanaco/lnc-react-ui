@@ -41,7 +41,7 @@ const BlogCardItem = forwardRef(
                   <Chip
                     key={`blog-card-sponsored-option__${idx + 1}`}
                     label={option?.name}
-                    color={option?.color}
+                    color={option?.color?.toLowerCase()}
                     className="wrapper__tag"
                     onClick={(e) => {
                       e?.stopPropagation();
