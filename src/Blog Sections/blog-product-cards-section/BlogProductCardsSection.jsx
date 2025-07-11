@@ -19,7 +19,7 @@ const BlogProductCardsSection = forwardRef(
       isLoading = false,
       limit = 4,
       getImage = () => {},
-      isHighlight = true,
+      isHighlight = false,
     },
     ref
   ) => {

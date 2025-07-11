@@ -19,6 +19,7 @@ const BlogShopCardsSection = forwardRef(
       isLoading = false,
       limit = 4,
       getImage = () => {},
+      isHighlight = false,
     },
     ref
   ) => {
@@ -43,7 +44,7 @@ const BlogShopCardsSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper>
+      <Wrapper className={isHighlight ? "highlight" : ""}>
         <div className="wrapper__grid">
           <SuspenseShopCards
             isLoading={isLoading}
