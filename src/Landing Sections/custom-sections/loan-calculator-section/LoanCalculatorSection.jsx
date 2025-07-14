@@ -3,7 +3,7 @@
 import { forwardRef } from "react";
 import LoanCalculator from "../../../Landing Components/custom-components/loan-caluclator";
 
-const CustomLoanMapSection = forwardRef((props, ref) => {
+const LoanCalculatorSection = forwardRef((props, ref) => {
   const {
     loanCalculatorTitle,
     loanCalculatorText,
@@ -24,4 +24,4 @@ const CustomLoanMapSection = forwardRef((props, ref) => {
   );
 });
 
-export default CustomLoanMapSection;
+export default LoanCalculatorSection;
