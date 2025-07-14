@@ -3,7 +3,7 @@
 import { forwardRef } from "react";
 import LocationFinder from "../../../Landing Components/custom-components/location-finder";
 
-const CustomLoanMapSection = forwardRef((props, ref) => {
+const LocationFinderSection = forwardRef((props, ref) => {
   const {
     locationFinderTitle,
     locationFinderPlaceholder,
@@ -24,4 +24,4 @@ const CustomLoanMapSection = forwardRef((props, ref) => {
   );
 });
 
-export default CustomLoanMapSection;
+export default LocationFinderSection;

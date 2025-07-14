@@ -199,7 +199,7 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/custom-sections/loan-calculator-section/LoanCalculatorSection.jsx"
+          "src/Landing Sections/custom-sections/loan-finder-section/LocationFinderSection.jsx"
         ),
         resolve(
           __dirname,
