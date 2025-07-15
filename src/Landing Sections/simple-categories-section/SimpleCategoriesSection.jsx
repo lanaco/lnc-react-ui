@@ -22,6 +22,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
     onButtonAction = () => {},
     onSelectCard = () => {},
     isLoading = false,
+    getImage = () => {}
   } = props;
 
   const isMobile = useDetectMobile();
@@ -34,7 +35,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
               <MemoizedCategoryCard
                 key={index}
                 uuid={x?.uuid}
-                image={x?.image}
+                image={getImage(x?.image) || null}
                 name={x?.name}
                 onSelectCard={() => onSelectCard?.(x?.uuid)}
               />
@@ -45,7 +46,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
                 <MemoizedCategoryCard
                   key={index}
                   uuid={x?.uuid}
-                  image={x?.image}
+                  image={getImage(x?.image) || null}
                   name={x?.name}
                   onSelectCard={() => onSelectCard?.(x)}
                 />
