@@ -47,7 +47,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
                   uuid={x?.uuid}
                   image={x?.image}
                   name={x?.name}
-                  onSelectCard={() => onSelectCard?.(x?.uuid)}
+                  onSelectCard={() => onSelectCard?.(x)}
                 />
               ))}
       </>

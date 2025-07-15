@@ -14,7 +14,6 @@ const BannerSectionCarousel = forwardRef(
     {
       carouselItems = [],
       onSelectItem = () => {},
-      buttonText,
       onButtonAction = () => {},
     },
     ref
@@ -46,7 +45,7 @@ const BannerSectionCarousel = forwardRef(
                       <div className="banner-title">{b.title}</div>
                       {b.description}
                     </div>
-                    {isDefined(buttonText) && (
+                    {isDefined(b?.buttonText) && (
                       <Button
                         color="neutral"
                         trailingIcon="arrow-right"
