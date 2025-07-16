@@ -50,7 +50,7 @@ const GeneralWithTagsCardsSection = forwardRef(
             ? items?.map((card, idx) => (
                 <GeneralWithTagsCard
                   key={`general-with-tags-card__${idx + 1}`}
-                  image={card?.image}
+                  image={card?.imageUrl}
                   imageComponent={card?.imageComponent}
                   title={card?.title}
                   onSelectCard={() => handleSelectCard?.(card?.uuid)}
