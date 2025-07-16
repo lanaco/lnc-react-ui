@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, useEffect } from "react";
+import { forwardRef } from "react";
 
 import Button from "../../../General/Button/Button";
 import { Wrapper } from "./style.jsx";
@@ -11,7 +11,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
   (
     {
       title,
-      image,
+      imageUrl,
       description,
       buttonText,
       onSelectCard = () => {},
@@ -34,7 +34,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
           onClick={onSelectCard}
           position={position}
         >
-          <img src={image} className="wrapper__image" />
+          <img src={imageUrl} className="wrapper__image" />
           <div className="wrapper__text">
             {tag && <div className="text__tag">{tag}</div>}
             <div className="text__title">{title}</div>
