@@ -7,7 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { Wrapper, Banner, BannerOverlay } from "./style";
 import Button from "../../../General/Button/Button";
-import { isDefined } from "../../../_utils/utils";
+import { isDefined, isDefinedNotEmptyString } from "../../../_utils/utils";
 
 const BannerSectionCarousel = forwardRef(
   (
@@ -44,10 +44,10 @@ const BannerSectionCarousel = forwardRef(
                       <div className="banner-title">{b.title}</div>
                       {b.description}
                     </div>
-                    {isDefined(b?.buttonText) && (
+                    {isDefinedNotEmptyString(b?.buttonText) && (
                       <Button
                         color="neutral"
-                        trailingIcon="arrow-right"
+                        // trailingIcon="arrow-right"
                         onClick={() => onButtonAction(b)}
                       >
                         {b.buttonText}
