@@ -11,11 +11,7 @@ import { isDefined } from "../../../_utils/utils";
 
 const BannerSectionCarousel = forwardRef(
   (
-    {
-      carouselItems = [],
-      onSelectItem = () => {},
-      onButtonAction = () => {},
-    },
+    { carouselItems = [], onSelectItem = () => {}, onButtonAction = () => {} },
     ref
   ) => {
     const isMobile = useDetectMobile();
@@ -37,9 +33,12 @@ const BannerSectionCarousel = forwardRef(
         >
           {carouselItems &&
             carouselItems?.map((b, idx) => (
-              <Banner key={`banner-${idx + 1}`}>
+              <Banner
+                key={`banner-${idx + 1}`}
+                backgroundColor={b?.backgroundColor}
+              >
                 <img loading="lazy" src={b.imageUrl} />
-                <BannerOverlay>
+                <BannerOverlay backgroundColor={b?.backgroundColor}>
                   <div className="banner-content">
                     <div className="banner-text">
                       <div className="banner-title">{b.title}</div>

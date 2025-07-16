@@ -49,7 +49,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
                   freeText={freeText}
                 />
               ))
-          : items?.map((x, index) => (
+          : items?.slice(0, 9)?.map((x, index) => (
               <MemoizedProductCard
                 key={index}
                 title={x?.name}

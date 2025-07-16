@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { isDefinedNotEmptyString } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -33,11 +34,15 @@ export const Block = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
+  background: ${(p) =>
+    isDefinedNotEmptyString(p?.backgroundColor)
+      ? p?.backgroundColor
+      : `linear-gradient(
+    to top left,
+    rgba(0, 0, 0, 0) 85%,
     rgba(0, 0, 0, 1) 100%
-  );
+  )`};
+
   border-radius: 0%.75rem;
 
   width: 100%;
@@ -77,12 +82,14 @@ export const Banner = styled.div`
   position: relative;
   border-radius: 0.75rem;
 
-  background: linear-gradient(
-    178deg,
-    rgba(0, 0, 0, 0) 1.5%,
-    rgba(0, 0, 0, 0.16) 8.95%,
-    #000 98.39%
-  );
+  background: ${(p) =>
+    isDefinedNotEmptyString(p?.backgroundColor)
+      ? p?.backgroundColor
+      : `linear-gradient(
+    to top left,
+    rgba(0, 0, 0, 0) 85%,
+    rgba(0, 0, 0, 1) 100%
+  )`};
 
   & img {
     object-fit: cover;
@@ -109,11 +116,14 @@ export const BannerOverlay = styled.div`
   width: 100%;
   padding: 3rem 0 3rem 3rem;
 
-  background: linear-gradient(
+  background: ${(p) =>
+    isDefinedNotEmptyString(p?.backgroundColor)
+      ? p?.backgroundColor
+      : `linear-gradient(
     to top left,
     rgba(0, 0, 0, 0) 85%,
     rgba(0, 0, 0, 1) 100%
-  );
+  )`};
 
   & .banner-content {
     display: flex;
