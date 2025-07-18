@@ -6,50 +6,16 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 import SimpleBlogCardCentered from "../../../Landing Components/blog-components/simple-blog-card-centered";
 import SuspenseBlogSimpleCentered from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-simple-centered";
 
-const MemoizedProductCard = memo(SimpleBlogCardCentered);
-
 const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
   const {
     items,
     limit = 3,
     onSelectCard = () => {},
     isLoading = false,
-    getImage = () => {}
+    getImage = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
-
-  const memoizedProducts = useMemo(() => {
-    return (
-      <>
-        {isMobile === true
-          ? items?.map((x, index) => (
-              <MemoizedProductCard
-                key={index}
-                title={x?.title}
-                imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
-                text={x?.description}
-                titleSlug={x?.titleSlug}
-                buttonText={x?.buttonText}
-                onCardClick={() => onSelectCard(x?.uuid)}
-              />
-            ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <MemoizedProductCard
-                  key={index}
-                  title={x?.title}
-                  imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
-                  text={x?.description}
-                  titleSlug={x?.titleSlug}
-                  buttonText={x?.buttonText}
-                  onCardClick={() => onSelectCard(x?.uuid)}
-                />
-              ))}
-      </>
-    );
-  }, [items, isMobile, limit, onSelectCard]);
 
   return (
     <GridWrapper ref={ref} limit={limit}>
@@ -58,7 +24,35 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
         limit={limit}
         keyPrefix={"explore-landing"}
       >
-        {memoizedProducts}
+        {
+          <>
+            {isMobile === true
+              ? items?.map((x, index) => (
+                  <SimpleBlogCardCentered
+                    key={index}
+                    title={x?.title}
+                    imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
+                    text={x?.description}
+                    titleSlug={x?.titleSlug}
+                    buttonText={x?.buttonText}
+                    onCardClick={() => onSelectCard(x?.uuid)}
+                  />
+                ))
+              : items
+                  ?.slice(0, limit)
+                  .map((x, index) => (
+                    <SimpleBlogCardCentered
+                      key={index}
+                      title={x?.title}
+                      imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
+                      text={x?.description}
+                      titleSlug={x?.titleSlug}
+                      buttonText={x?.buttonText}
+                      onCardClick={() => onSelectCard(x?.uuid)}
+                    />
+                  ))}
+          </>
+        }
       </SuspenseBlogSimpleCentered>
     </GridWrapper>
   );
