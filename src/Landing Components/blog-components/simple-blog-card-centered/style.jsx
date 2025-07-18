@@ -18,7 +18,6 @@ export const Wrapper = styled.div`
   gap: 1.5rem;
   padding: 2rem 1.25rem;
   min-height: 22.5rem;
-  max-height: 22.5rem;
   align-items: center;
 
   & button {
