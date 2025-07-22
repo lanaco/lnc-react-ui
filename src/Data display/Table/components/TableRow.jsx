@@ -31,6 +31,8 @@ ${(props) =>
       "enabled",
       "border"
     )};`}
+
+  ${(props) => props.rowCss || ""}
   &:last-of-type > td:first-of-type {
     border-radius: 0 0 0 0.5rem;
   }
@@ -79,6 +81,7 @@ const TableRow = (props) => {
     Index,
     IsSelected = null,
     noBorder = false,
+    rowCss = "",
     //----------------
     className = "",
     size = "small",
@@ -107,6 +110,7 @@ const TableRow = (props) => {
       key={Index}
       onClick={onClick}
       noBorder={noBorder}
+      rowCss={rowCss}
     >
       {props.children}
     </HtmlRow>
