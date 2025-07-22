@@ -128,6 +128,7 @@ const Table = forwardRef((props, ref) => {
     EnableRowHighlight = false,
     GetRowStatusIndicatorColor = () => {},
     GetRowHighlightColor = () => {},
+    GetRowHighlightCss = () => {},
     //--------------------
     NoDataText = "No data to show",
     NoDataComponent = null,
@@ -320,6 +321,7 @@ const Table = forwardRef((props, ref) => {
   const renderRow = (rowData = {}, index) => {
     let rowSelection = {};
     var columnsToRender = filterColumns();
+    var rowCss = GetRowHighlightCss?.(rowData) || "";
 
     checkColumnsWidthSum(columnsToRender, index);
 
@@ -336,6 +338,7 @@ const Table = forwardRef((props, ref) => {
       ColumnsToRender: columnsToRender,
       Index: index,
       key: index,
+      rowCss,
       ...themeProps,
       ...rowSelection,
     };
