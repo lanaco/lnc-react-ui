@@ -145,6 +145,7 @@ const YearCalculting = forwardRef((props, ref) => {
                   ? e?.target?.value?.replace(/^0+/, "")
                   : e?.target?.value
               );
+              onChange?.(e?.target?.value);
             }
           }}
           value={years?.toString()}
@@ -190,6 +191,7 @@ const HeightCalulating = forwardRef((props, ref) => {
                   ? e?.target?.value?.replace(/^0+/, "")
                   : e?.target?.value
               );
+              onChange?.(e?.target?.value);
             }
           }}
           value={height?.toString()}
@@ -234,6 +236,7 @@ const WeightCalculating = forwardRef((props, ref) => {
                   ? e?.target?.value?.replace(/^0+/, "")
                   : e?.target?.value
               );
+              onChange?.(e?.target?.value);
             }
           }}
           value={weight?.toString()}
