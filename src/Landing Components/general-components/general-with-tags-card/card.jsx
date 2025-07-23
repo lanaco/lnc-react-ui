@@ -8,7 +8,7 @@ import { Wrapper } from "./style";
 
 const GeneralWithTagsCard = forwardRef(
   // eslint-disable-next-line react/prop-types
-  ({ image, imageComponent, title, onSelectCard = () => {} }, ref) => {
+  ({ imageUrl, imageComponent, title, onSelectCard = () => {} }, ref) => {
     const { theme } = useTheme();
 
     return (
@@ -16,7 +16,7 @@ const GeneralWithTagsCard = forwardRef(
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
-          <img src={image} className="wrapper__image" />
+          <img src={imageUrl} className="wrapper__image" />
         )}
         <div className="wrapper__content">
           <div className="wrapper__title">{title}</div>
