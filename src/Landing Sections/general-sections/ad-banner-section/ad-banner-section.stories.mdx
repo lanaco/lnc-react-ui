@@ -1,0 +1,29 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import AdBannerSection from "./AdBannerSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta title="Landing sections/Ad Banner Section" component={AdBannerSection} />
+
+export const TemplateDefault = (args) => (
+  <AdBannerSection
+    onSelectCard={(link) => {}}
+    image="https://placehold.co/1000x100/darkblue/white?text=Desktop"
+    imageForMobile="https://placehold.co/500x500/darkred/white?text=Mobile"
+  />
+);
+
+## Brand hits section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import AdBannerSection from "@lanaco/lnc-react-ui/AdBannerSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

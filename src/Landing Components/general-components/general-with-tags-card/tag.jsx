@@ -4,11 +4,11 @@ import Icon from "../../../General/Icon/Icon";
 import { TagWrapper } from "./style";
 
 const GeneralWithTagsCardTag = forwardRef(
-  ({ text, icon, onSelectCard = () => {} }, ref) => {
+  ({ title, icon, onSelectCard = () => {} }, ref) => {
     return (
       <TagWrapper onClick={onSelectCard}>
         <Icon icon={` ${icon}`} className="wrapper__icon" />
-        <div className="wrapper__text">{text}</div>
+        <div className="wrapper__text">{title}</div>
       </TagWrapper>
     );
   }

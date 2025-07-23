@@ -50,7 +50,7 @@ const GeneralWithTagsCardsSection = forwardRef(
             ? items?.map((card, idx) => (
                 <GeneralWithTagsCard
                   key={`general-with-tags-card__${idx + 1}`}
-                  image={card?.imageUrl}
+                  imageUrl={card?.imageUrl}
                   imageComponent={card?.imageComponent}
                   title={card?.title}
                   onSelectCard={() => handleSelectCard?.(card?.uuid)}
@@ -68,7 +68,7 @@ const GeneralWithTagsCardsSection = forwardRef(
               <GeneralWithTagsCardTag
                 key={`general-with-tags-card-tag__${idx + 1}`}
                 icon={tag?.icon}
-                text={tag?.text}
+                title={tag?.title}
                 onSelectCard={() => handleSelectTag?.(tag)}
               />
             ))}

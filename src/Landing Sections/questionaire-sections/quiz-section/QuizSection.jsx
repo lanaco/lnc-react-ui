@@ -37,7 +37,7 @@ const QuizSection = forwardRef(
     ref
   ) => {
     const [step, setStep] = useState(QuizContent.START_QUIZ);
-    const [questionNo, setQuestionNo] = useState(1);
+    const [questionNo, setQuestionNo] = useState(0);
     const [question, setQuestion] = useState(null);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
@@ -49,7 +49,7 @@ const QuizSection = forwardRef(
       setStep(QuizContent.QUIZ);
       setQuestion(
         // questions?.find((question) => question?.questionNo === questionNo)
-        questions?.at?.(+questionNo)
+        questions?.at?.(questionNo)
       );
       onStartQuiz?.();
     };
@@ -63,7 +63,7 @@ const QuizSection = forwardRef(
 
     const handleGiveUp = () => {
       setStep(QuizContent.START_QUIZ);
-      setQuestionNo(1);
+      setQuestionNo(0);
       setSelectedAnswer(null);
       setSelectedAnswerIndex(null);
 
@@ -77,16 +77,16 @@ const QuizSection = forwardRef(
       if (isCorrect) {
         setStep(QuizContent.CORRECT_ANSWER);
         wonCredits.current += numberOfCredits || question?.numberOfCredits;
-      } else if (questionNo === questions?.length) {
+      } else if (questionNo === questions?.length - 1) {
         setStep(QuizContent.START_QUIZ);
-        setQuestionNo(1);
+        setQuestionNo(0);
         setSelectedAnswer(null);
         setSelectedAnswerIndex(null);
       } else {
         setQuestionNo(questionNo + 1);
         setQuestion(
           // questions?.find((question) => question?.questionNo === questionNo + 1)
-          questions?.at?.(+questionNo + 1)
+          questions?.at?.(questionNo + 1)
         );
         setSelectedAnswer(null);
         setSelectedAnswerIndex(null);
@@ -105,15 +105,15 @@ const QuizSection = forwardRef(
     };
 
     const handleContinue = () => {
-      if (questionNo === questions?.length) {
+      if (questionNo === questions?.length - 1) {
         setStep(QuizContent.START_QUIZ);
-        setQuestionNo(1);
+        setQuestionNo(0);
       } else {
         setStep(QuizContent.QUIZ);
         setQuestionNo(questionNo + 1);
         setQuestion(
           // questions?.find((question) => question?.questionNo === questionNo + 1)
-          questions?.at?.(+questionNo + 1)
+          questions?.at?.(questionNo + 1)
         );
       }
 
@@ -125,7 +125,7 @@ const QuizSection = forwardRef(
 
     const handleEndQuiz = () => {
       setStep(QuizContent.START_QUIZ);
-      setQuestionNo(1);
+      setQuestionNo(0);
       setSelectedAnswer(null);
       setSelectedAnswerIndex(null);
 
