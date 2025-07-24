@@ -11,6 +11,7 @@ const LocationSearchSection = forwardRef((props, ref) => {
     options,
     onSelectRegion = () => {},
     onSelectCity = () => {},
+    onSelectOption = () => {},
   } = props;
 
   return (
@@ -28,8 +29,9 @@ const LocationSearchSection = forwardRef((props, ref) => {
             //   ...selectedExploreCategoriesIds.filter((x) => x != id),
             // ])
           }}
-          onSelect={(id) => {
+          onSelect={(x, y) => {
             // setSelectedExploreCategoriesIds([id]);
+            onSelectOption(x, y);
           }}
           // onSelectAll={() => setSelectedExploreCategoriesIds([])}
           labelKey={"name"}
@@ -40,16 +42,13 @@ const LocationSearchSection = forwardRef((props, ref) => {
       <Content>
         {items?.map((x, index) => (
           <Group key={index}>
-            <div className="region" onClick={() => onSelectRegion(x?.code)}>
+            <div className="region" onClick={() => onSelectRegion(x)}>
               {x?.name}
             </div>
             <div className="group-items">
               {x?.cities?.map((city, i) => (
                 <Fragment key={index + i}>
-                  <div
-                    className="city"
-                    onClick={() => onSelectCity(city?.code)}
-                  >
+                  <div className="city" onClick={() => onSelectCity(city)}>
                     <span>{city?.name}</span>
                     <span className="count-txt">
                       {"("}
