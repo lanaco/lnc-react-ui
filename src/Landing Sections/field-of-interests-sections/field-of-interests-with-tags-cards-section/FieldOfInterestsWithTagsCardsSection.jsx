@@ -71,9 +71,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
             ? items?.map((card, idx) => (
                 <FieldOfInterestsWithTagsCard
                   key={`field-of-interests-with-tags-card__${idx + 1}`}
-                  image={() =>
-                    getImage(card?.image, card?.uuid, card?.sellerUuid)
-                  }
+                  image={getImage(card?.image, card?.uuid, card?.sellerUuid)}
                   imageComponent={card?.imageComponent}
                   name={card?.name}
                   description={card?.shortDescription || card?.description}
