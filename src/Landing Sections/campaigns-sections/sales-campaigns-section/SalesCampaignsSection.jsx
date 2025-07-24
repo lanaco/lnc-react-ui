@@ -38,9 +38,10 @@ const SalesCampaignsSection = forwardRef(
         <MemoizedCampaignItemRecommended
           key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
           className="campaign-item"
-          coverPhoto={() =>
-            getImage(item?.coverPhoto, item?.uuid || item?.campaignUuid)
-          }
+          coverPhoto={getImage(
+            item?.coverPhoto,
+            item?.uuid || item?.campaignUuid
+          )}
           description={item?.description}
           endDate={item?.endDate}
           salesPackages={item?.salesPackages}
