@@ -35,7 +35,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                     text={x?.description}
                     titleSlug={x?.titleSlug}
                     buttonText={x?.buttonText}
-                    onCardClick={() => onSelectCard(x?.uuid)}
+                    onCardClick={() => onSelectCard(x?.titleSlug)}
                   />
                 ))
               : items
@@ -48,7 +48,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                       text={x?.description}
                       titleSlug={x?.titleSlug}
                       buttonText={x?.buttonText}
-                      onCardClick={() => onSelectCard(x?.uuid)}
+                      onCardClick={() => onSelectCard(x?.titleSlug)}
                     />
                   ))}
           </>

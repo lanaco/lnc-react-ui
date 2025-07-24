@@ -4,6 +4,11 @@ import { forwardRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import { BlogTag } from "../../../Landing Sections/style";
 import ProductImageWrapper from "../../product-img-wrapper";
+import {
+  formatLocaleDateString,
+  formatString,
+  getRoundedNumber,
+} from "../../../_utils/utils";
 
 const BlogCardDetailed = forwardRef((props, ref) => {
   const {
@@ -26,20 +31,20 @@ const BlogCardDetailed = forwardRef((props, ref) => {
       <TextWrapper>
         <div className="info-wr">
           <div className="info-wr-1">
-            <span>{datePublished}</span>
+            <span>{formatLocaleDateString(datePublished)} </span>
             <span className="small-dot">●</span>
             {readDuration && timeToReadText
-              ? `${readDuration} ${timeToReadText}`
+              ? `${formatString(timeToReadText, readDuration)}`
               : "N/A"}
           </div>
           <div className="info-wr-2">
             <span className="info-wr-1">
               <i className="mng mng-lnc-thumbs-up--filled" />
-              <span>{numberOfLikes}</span>
+              <span>{getRoundedNumber(numberOfLikes)}</span>
             </span>
             <span className="info-wr-1">
               <i className="mng mng-lnc-messages-filled" />
-              <span>{numberOfComments}</span>
+              <span>{getRoundedNumber(numberOfComments)}</span>
             </span>
           </div>
         </div>

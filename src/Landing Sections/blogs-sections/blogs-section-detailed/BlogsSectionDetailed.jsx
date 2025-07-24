@@ -75,17 +75,18 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(buttonText) && isDefinedNotEmptyString(buttonLink) && (
-          <Button
-            type="button"
-            btnType="tinted"
-            color="gray"
-            onClick={() => onButtonAction(buttonLink)}
-            borderRadius="curved"
-          >
-            {buttonText}
-          </Button>
-        )}
+        {isDefinedNotEmptyString(buttonText) &&
+          isDefinedNotEmptyString(buttonLink) && (
+            <Button
+              type="button"
+              btnType="tinted"
+              color="gray"
+              onClick={() => onButtonAction(buttonLink)}
+              borderRadius="curved"
+            >
+              {buttonText}
+            </Button>
+          )}
       </div>
       <GridWrapper limit={limit}>
         <SuspenseBlogDetailed
