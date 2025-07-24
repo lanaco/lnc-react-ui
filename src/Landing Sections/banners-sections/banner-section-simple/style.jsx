@@ -6,8 +6,8 @@ export const Container = styled.div`
   border-radius: 0.75rem;
   background-color: ${(p) => p.bgcolor || "transparent"};
   overflow: hidden;
-  max-height: ${(p) => p.height || "22.5rem"};
-  min-height: ${(p) => p.height || "22.5rem"};
+  max-height: ${(p) => `${p.height}px` || "22.5rem"};
+  min-height: ${(p) => `${p.height}px` || "22.5rem"};
   background-color: ${(p) => p.bgcolor || "transparent"};
 
   & button {
@@ -16,10 +16,10 @@ export const Container = styled.div`
 
   & img {
     object-fit: cover;
-    max-width: ${(p) => p.imgW || "22.5rem"};
-    min-width: ${(p) => p.imgW || "22.5rem"};
-    max-height: ${(p) => p.height || "22.5rem"};
-    min-height: ${(p) => p.height || "22.5rem"};
+    max-width: ${(p) => `${p.imgW}px` || "22.5rem"};
+    min-width: ${(p) => `${p.imgW}px` || "22.5rem"};
+    max-height: ${(p) => `${p.height}px` || "22.5rem"};
+    min-height: ${(p) => `${p.height}px` || "22.5rem"};
   }
 
   ${(p) =>
@@ -43,8 +43,8 @@ export const Container = styled.div`
     & img {
       max-width: 100%;
       min-width: 100%;
-      max-height: ${(p) => p.imgHMob || "12.1rem"};
-      min-height: ${(p) => p.imgHMob || "12.1rem"};
+      max-height: ${(p) => `${p.imgHMob}px` || "12.1rem"};
+      min-height: ${(p) => `${p.imgHMob}px` || "12.1rem"};
     }
   }
 `;

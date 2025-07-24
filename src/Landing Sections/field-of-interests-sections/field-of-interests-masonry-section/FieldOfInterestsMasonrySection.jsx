@@ -29,11 +29,11 @@ const FieldOfInterestsMasonrySection = forwardRef(
 
     const handleSelectTag = (tag) => {
       // setActive(tag?.uuid);
-      onSelectTag?.(tag?.uuid);
+      onSelectTag?.(tag);
     };
 
     const handleSelectCard = (card) => {
-      onSelectCard?.(card?.uuid);
+      onSelectCard?.(card);
     };
 
     useEffectOnce(() => {

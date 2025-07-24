@@ -21,6 +21,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       items = [],
       onSelectTag = () => {},
       onSelectCard = () => {},
+      getImage = () => {},
     },
     ref
   ) => {
@@ -28,11 +29,11 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
 
     const handleSelectTag = (tag) => {
       // setActive(tag?.uuid);
-      onSelectTag?.(tag?.uuid);
+      onSelectTag?.(tag);
     };
 
     const handleSelectCard = (card) => {
-      onSelectCard?.(card?.uuid);
+      onSelectCard?.(card);
     };
 
     return (
@@ -52,7 +53,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                 <FieldOfInterestsWithTagsCardTag
                   key={`field-of-interests-with-tags-card-tag__${idx + 1}`}
                   icon={tag?.icon}
-                  text={tag?.text}
+                  name={tag?.name}
                   // isActive={tag?.uuid === active}
                   onSelectCard={() => handleSelectTag?.(tag)}
                 />
@@ -70,11 +71,13 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
             ? items?.map((card, idx) => (
                 <FieldOfInterestsWithTagsCard
                   key={`field-of-interests-with-tags-card__${idx + 1}`}
-                  image={card?.image}
+                  image={() =>
+                    getImage(card?.image, card?.uuid, card?.sellerUuid)
+                  }
                   imageComponent={card?.imageComponent}
-                  title={card?.title}
-                  description={card?.description}
-                  onSelectCard={() => handleSelectCard?.(card?.uuid)}
+                  name={card?.name}
+                  description={card?.shortDescription || card?.description}
+                  onSelectCard={() => handleSelectCard?.(card)}
                 />
               ))
             : Array.from("123")?.map((_, idx) => (

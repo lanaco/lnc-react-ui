@@ -7,7 +7,7 @@ import { Wrapper } from "./style";
 
 const FieldOfInterestsWithTagsCard = forwardRef(
   (
-    { image, imageComponent, title, description, onSelectCard = () => {} },
+    { image, imageComponent, name, description, onSelectCard = () => {} },
     ref
   ) => {
     const { theme } = useTheme();
@@ -20,7 +20,7 @@ const FieldOfInterestsWithTagsCard = forwardRef(
           <img src={image} className="wrapper__image" />
         )}
         <div className="wrapper__content">
-          {title && <div className="wrapper__title">{title}</div>}
+          {name && <div className="wrapper__title">{name}</div>}
           {description && (
             <div className="wrapper__description">{description}</div>
           )}
