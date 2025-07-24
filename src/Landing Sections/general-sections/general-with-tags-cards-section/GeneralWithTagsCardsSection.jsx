@@ -25,14 +25,6 @@ const GeneralWithTagsCardsSection = forwardRef(
     },
     ref
   ) => {
-    const handleSelectTag = (tag) => {
-      onSelectTag?.(tag?.uuid);
-    };
-
-    const handleSelectCard = (card) => {
-      onSelectCard?.(card?.uuid);
-    };
-
     return (
       <Wrapper
         ref={ref}
@@ -53,7 +45,9 @@ const GeneralWithTagsCardsSection = forwardRef(
                   imageUrl={card?.imageUrl}
                   imageComponent={card?.imageComponent}
                   title={card?.title}
-                  onSelectCard={() => handleSelectCard?.(card?.uuid)}
+                  onSelectCard={() => {
+                    onSelectCard?.(card);
+                  }}
                 />
               ))
             : Array.from("123")?.map((_, idx) => (
@@ -69,7 +63,7 @@ const GeneralWithTagsCardsSection = forwardRef(
                 key={`general-with-tags-card-tag__${idx + 1}`}
                 icon={tag?.icon}
                 title={tag?.title}
-                onSelectCard={() => handleSelectTag?.(tag)}
+                onSelectCard={() => onSelectTag?.(tag)}
               />
             ))}
           </div>

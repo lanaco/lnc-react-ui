@@ -18,7 +18,7 @@ const SalesCampaignsSection = forwardRef(
       isLoading,
       onSelectCard = () => {},
       onSelectShop = () => {},
-
+      getImage = () => {},
       // new
       customScrollSize,
       campaignSingleText,
@@ -38,7 +38,9 @@ const SalesCampaignsSection = forwardRef(
         <MemoizedCampaignItemRecommended
           key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
           className="campaign-item"
-          coverPhoto={item?.coverPhoto}
+          coverPhoto={() =>
+            getImage(item?.coverPhoto, item?.uuid || item?.campaignUuid)
+          }
           description={item?.description}
           endDate={item?.endDate}
           salesPackages={item?.salesPackages}

@@ -20,7 +20,7 @@ const BrandHitsSection = forwardRef(
                     key={`brand-hit-card__${idx + 1}`}
                     image={item?.image}
                     imageComponent={item?.imageComponent}
-                    onSelectCard={() => onSelectCard?.(item?.uuid)}
+                    onSelectCard={() => onSelectCard?.(item)}
                     className="wrapper__item"
                   />
                 ))

@@ -28,11 +28,11 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
 
     const handleSelectAvatar = (avatar) => {
       // setActive(tag?.uuid);
-      onSelectAvatar?.(avatar?.uuid);
+      onSelectAvatar?.(avatar);
     };
 
     const handleSelectCard = (card) => {
-      onSelectCard?.(card?.uuid);
+      onSelectCard?.(card);
     };
 
     return (
