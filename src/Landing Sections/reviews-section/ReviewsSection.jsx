@@ -29,10 +29,9 @@ const ReviewsSection = forwardRef((props, ref) => {
                 text={x?.text}
                 title={x?.title}
                 image={x?.image}
-                uuid={x?.uuid}
+                link={x?.link}
                 rating={x?.ratingArithmeticMean}
-                productUuid={x?.productUuid}
-                onSelectReview={(uuid) => onSelectCard(uuid)}
+                onSelectCard={() => onSelectCard(x)}
               />
             ))
           : items
@@ -43,10 +42,9 @@ const ReviewsSection = forwardRef((props, ref) => {
                   text={x?.text}
                   title={x?.title}
                   image={x?.image}
-                  uuid={x?.uuid}
+                  link={x?.link}
                   rating={x?.ratingArithmeticMean}
-                  productUuid={x?.productUuid}
-                  onSelectReview={(uuid) => onSelectCard(uuid)}
+                  onSelectCard={() => onSelectCard(x)}
                 />
               ))}
       </>
