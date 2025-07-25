@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, memo, useMemo } from "react";
+import { forwardRef } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import SimpleBlogCardCentered from "../../../Landing Components/blog-components/simple-blog-card-centered";
@@ -12,7 +12,6 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
     limit = 3,
     onSelectCard = () => {},
     isLoading = false,
-    getImage = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -31,11 +30,10 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                   <SimpleBlogCardCentered
                     key={index}
                     title={x?.title}
-                    imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
-                    text={x?.description}
-                    titleSlug={x?.titleSlug}
+                    image={x?.image || null}
+                    text={x?.text}
                     buttonText={x?.buttonText}
-                    onCardClick={() => onSelectCard(x?.titleSlug)}
+                    onCardClick={() => onSelectCard(x)}
                   />
                 ))
               : items
@@ -44,11 +42,10 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                     <SimpleBlogCardCentered
                       key={index}
                       title={x?.title}
-                      imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
-                      text={x?.description}
-                      titleSlug={x?.titleSlug}
+                      image={x?.image || null}
+                      text={x?.text}
                       buttonText={x?.buttonText}
-                      onCardClick={() => onSelectCard(x?.titleSlug)}
+                      onCardClick={() => onSelectCard(x)}
                     />
                   ))}
           </>
