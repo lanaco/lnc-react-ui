@@ -12,7 +12,7 @@ const LoanCalculator = forwardRef((props, ref) => {
     text = "Lorem ipsum dolor sit amet consectetur, Nunc nibh at.",
     placeholderText = "Enter the loan amount",
     openCalculatorText = "Open calculator",
-    onOpenCalculator = () => {},
+    onOpenCalculator = (amount) => {},
   } = props;
   const isMobile = useDetectMobile();
   const [amount, setAmount] = useState(null);

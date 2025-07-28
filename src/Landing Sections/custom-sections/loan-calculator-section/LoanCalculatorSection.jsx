@@ -11,7 +11,7 @@ const LoanCalculatorSection = forwardRef((props, ref) => {
     loanCalculatorText,
     loanCalculatorPlaceholder,
     openCalculatorText,
-    onOpenCalculator = () => {},
+    onOpenCalculator = (amount) => {},
     defaultLoanAmount,
     defaultInterestRate,
     defaultLoanPeriod,
@@ -44,10 +44,10 @@ const LoanCalculatorSection = forwardRef((props, ref) => {
 
   const modalRef = useRef();
 
-  const handleOpenCalculator = () => {
+  const handleOpenCalculator = (amount) => {
     modalRef?.current?.open();
 
-    onOpenCalculator();
+    onOpenCalculator(amount);
   };
 
   return (
