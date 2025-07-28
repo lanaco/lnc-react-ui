@@ -55,7 +55,7 @@ const LoanCalculator = forwardRef((props, ref) => {
             type="button"
             size="medium"
             color="neutral"
-            onClick={onOpenCalculator}
+            onClick={() => onOpenCalculator(amount)}
           >
             {openCalculatorText}
           </Button>
