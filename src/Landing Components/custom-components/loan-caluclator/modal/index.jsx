@@ -62,6 +62,7 @@ const LoanCalculatorModal = forwardRef(
           />
         }
         showCloseButton={false}
+        className="loan-calculator__modal"
       >
         <LoanCalculatorModalContentWrapper
           defaultLoanAmount={defaultLoanAmount}

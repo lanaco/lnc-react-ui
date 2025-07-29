@@ -63,7 +63,7 @@ const LoanCalculatorModalContent = forwardRef(
     };
 
     return (
-      <Container>
+      <Container className="loan-calculator__modal-content">
         <div className="loan-calculator__left">
           <div className="loan-calculator__range-inputs">
             <div className="loan-calculator__range-input">
