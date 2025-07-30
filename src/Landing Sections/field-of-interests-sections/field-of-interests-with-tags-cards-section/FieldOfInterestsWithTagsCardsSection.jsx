@@ -19,6 +19,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       limit = 3,
       limitForMobile = 2,
       items = [],
+      selectedTag,
       onSelectTag = () => {},
       onSelectCard = () => {},
       getImage = () => {},
@@ -54,7 +55,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                   key={`field-of-interests-with-tags-card-tag__${idx + 1}`}
                   icon={tag?.icon}
                   name={tag?.name}
-                  // isActive={tag?.uuid === active}
+                  isActive={tag?.uuid === selectedTag?.uuid}
                   onSelectCard={() => handleSelectTag?.(tag)}
                 />
               ))
