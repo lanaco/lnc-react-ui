@@ -9,14 +9,14 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
   component={LocationFinderSection}
 />
 
-export const TemplateDefault = (args) => (
-  <LocationFinderSection />
-);
+export const TemplateDefault = (args) => <LocationFinderSection />;
 
 ## Detailed products section
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {'import LocationFinderSection from "@lanaco/lnc-react-ui/LocationFinderSection";'}
+  {
+    'import LocationFinderSection from "@lanaco/lnc-react-ui/LocationFinderSection";'
+  }
 </SyntaxHighlighter>
 
 <Canvas>

@@ -10,6 +10,7 @@ const LocationFinderSection = forwardRef((props, ref) => {
     openMapText,
     onOpenMap = () => {},
     mapFilters,
+    inputComponent,
   } = props;
 
   return (
@@ -20,6 +21,7 @@ const LocationFinderSection = forwardRef((props, ref) => {
       onOpenMap={onOpenMap}
       openMapText={openMapText}
       mapFilters={mapFilters}
+      inputComponent={inputComponent}
     />
   );
 });
