@@ -23,14 +23,10 @@ const ShopCardsSection = forwardRef(
       icon,
       getImage = () => {},
       getProductImage = () => {},
-      hideProducts = false
+      hideProducts = false,
     },
     ref
   ) => {
-    const handleSelectCard = (card) => {
-      onSelectCard?.(card?.uuid);
-    };
-
     return (
       <Wrapper
         ref={ref}
@@ -69,7 +65,7 @@ const ShopCardsSection = forwardRef(
                   reviewCount={card?.reviewCount}
                   products={card?.products}
                   imageComponent={card?.imageComponent}
-                  onSelectCard={() => handleSelectCard?.(card?.uuid)}
+                  onSelectCard={() => onSelectCard(card?.uuid)}
                   image={getImage(card?.profileImage, card?.uuid) || null}
                   getProductImage={getProductImage}
                   canAcceptPayments={card?.canAcceptPayments}

@@ -20,6 +20,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
       limitTagsForMobile = 5,
       limit = 3,
       limitForMobile = 2,
+      selectedTag,
       onSelectTag = () => {},
       onSelectCard = () => {},
     },
@@ -75,7 +76,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
                   key={`field-of-interests-masonry-tag__${idx + 1}`}
                   icon={tag?.icon}
                   text={tag?.text}
-                  // isActive={tag?.uuid === active}
+                  isActive={tag?.uuid === selectedTag?.uuid}
                   onSelectCard={() => handleSelectTag?.(tag)}
                 />
               ))

@@ -10,11 +10,7 @@ const BrandHitCard = forwardRef(
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
-          <img
-            src={image}
-            className="wrapper__image"
-            onSelectCard={onSelectCard}
-          />
+          <img src={image} className="wrapper__image" onClick={onSelectCard} />
         )}
       </Wrapper>
     );

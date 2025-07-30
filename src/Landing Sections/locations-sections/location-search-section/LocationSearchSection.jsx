@@ -9,6 +9,7 @@ const LocationSearchSection = forwardRef((props, ref) => {
     title,
     items,
     options,
+    selectedOption = [],
     onSelectRegion = () => {},
     onSelectCity = () => {},
     onSelectOption = () => {},
@@ -19,21 +20,11 @@ const LocationSearchSection = forwardRef((props, ref) => {
       <div className="wrapper-title">{title}</div>
       {options?.length > 0 && (
         <SelectBar
-          // items={dataExplore?.map((item) => ({
-          //   ...item,
-          // }))}
           items={options}
-          // selectedIds={selectedExploreCategoriesIds}
-          onRemove={(id) => {
-            // setSelectedExploreCategoriesIds([
-            //   ...selectedExploreCategoriesIds.filter((x) => x != id),
-            // ])
-          }}
+          selectedIds={selectedOption}
           onSelect={(x, y) => {
-            // setSelectedExploreCategoriesIds([id]);
             onSelectOption(x, y);
           }}
-          // onSelectAll={() => setSelectedExploreCategoriesIds([])}
           labelKey={"name"}
           valueKey={"code"}
           noMargin={true}

@@ -20,6 +20,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     buttonText,
     limit = 3,
     options,
+    selectedOption = [],
     onButtonAction = () => {},
     buttonLink,
     onSelectOption = () => {},
@@ -79,22 +80,14 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
       </div>
       {options?.length > 0 && (
         <SelectBar
-          // items={dataExplore?.map((item) => ({
-          //   ...item,
-          // }))}
           items={options}
-          // selectedIds={selectedExploreCategoriesIds}
+          selectedIds={selectedOption}
           onRemove={(item) => {
             onSelectOption(item);
-            // setSelectedExploreCategoriesIds([
-            //   ...selectedExploreCategoriesIds.filter((x) => x != id),
-            // ])
           }}
           onSelect={(item) => {
             onSelectOption(item);
-            // setSelectedExploreCategoriesIds([id]);
           }}
-          // onSelectAll={() => setSelectedExploreCategoriesIds([])}
           labelKey={"name"}
           valueKey={"code"}
           noMargin={true}
