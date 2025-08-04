@@ -21,9 +21,7 @@ const MasonryGeneralCardsSection = forwardRef(
               <LandingPageMasonryGeneralCard
                 key={`landing-page-masonry-general-card__${index + 1}`}
                 {...item}
-                onSelectCard={(selectAction) =>
-                  onSelectCard(selectAction, item)
-                }
+                onSelectCard={() => onSelectCard(item)}
               />
             ))}
         </GridWrapper>
