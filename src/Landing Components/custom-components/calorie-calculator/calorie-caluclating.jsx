@@ -202,7 +202,7 @@ const HeightCalulating = forwardRef((props, ref) => {
 });
 
 const WeightCalculating = forwardRef((props, ref) => {
-  const { text = "Weight", unitText = "cm", onChange = () => {} } = props;
+  const { text = "Weight", unitText = "kg", onChange = () => {} } = props;
 
   const [weight, setWeight] = useState(1);
 

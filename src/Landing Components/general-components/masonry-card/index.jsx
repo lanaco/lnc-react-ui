@@ -17,9 +17,8 @@ const LandingPageMasonryGeneralCard = forwardRef(
       onSelectCard = () => {},
       className,
       position,
-      selectAction,
       tag,
-      backgroundColor
+      backgroundColor,
     },
     ref
   ) => {
@@ -32,7 +31,6 @@ const LandingPageMasonryGeneralCard = forwardRef(
           ref={ref}
           theme={theme}
           className={className}
-          onClick={onSelectCard}
           position={position}
           backgroundColor={backgroundColor}
         >
@@ -46,7 +44,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
             {isDefinedNotEmptyString(buttonText) && (
               <Button
                 text={buttonText}
-                onClick={() => onSelectCard(selectAction)}
+                onClick={onSelectCard}
                 className="text__action"
               />
             )}

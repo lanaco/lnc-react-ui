@@ -76,11 +76,13 @@ export const SkeletonWrapper = styled.div`
 
 export const TagWrapper = styled.div`
   display: flex;
-  padding: 0 0.5rem 0 0;
+  padding: 0 0.75rem 0 0.75rem;
   align-items: center;
   justify-content: center;
-  background: var(--neutral-9504, rgba(20, 22, 26, 0.04));
+  background: var(--neutral-95004, rgba(20, 22, 26, 0.04));
   border-radius: 999px;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
 
   &:hover {
     cursor: pointer;
@@ -90,11 +92,14 @@ export const TagWrapper = styled.div`
     font-size: 1.75rem;
     color: var(--gray-950, #14161a);
     border-radius: 999px;
-    width: 2.75rem;
-    height: 2.75rem;
+    margin-left: -0.5rem;
 
     & i {
       width: auto;
+
+      &::after {
+        margin-left: 0;
+      }
     }
   }
 

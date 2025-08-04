@@ -17,11 +17,11 @@ const BlogCardDetailed = forwardRef((props, ref) => {
     text,
     numberOfLikes,
     numberOfComments,
-    readDuration,
-    datePublished,
+    timeToRead,
+    publishedAt,
     tags,
     onCardClick,
-    timeToReadText = "read",
+    timeToReadText = "{0} min read",
   } = props;
 
   return (
@@ -31,10 +31,10 @@ const BlogCardDetailed = forwardRef((props, ref) => {
       <TextWrapper>
         <div className="info-wr">
           <div className="info-wr-1">
-            <span>{formatLocaleDateString(datePublished)} </span>
+            <span>{formatLocaleDateString(publishedAt)} </span>
             <span className="small-dot">●</span>
-            {readDuration && timeToReadText
-              ? `${formatString(timeToReadText, readDuration)}`
+            {timeToRead && timeToReadText
+              ? `${formatString(timeToReadText, timeToRead)}`
               : "N/A"}
           </div>
           <div className="info-wr-2">

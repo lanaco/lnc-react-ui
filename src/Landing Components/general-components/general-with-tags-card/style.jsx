@@ -99,7 +99,7 @@ export const SkeletonWrapper = styled.div`
 
 export const TagWrapper = styled.div`
   display: flex;
-  padding: 0 0.5rem 0 0;
+  padding: 0 0.5rem 0 0.5rem;
   align-items: center;
   justify-content: center;
   background: var(--white, #fff);
@@ -117,9 +117,14 @@ export const TagWrapper = styled.div`
     border-radius: 999px;
     width: 2.5rem;
     height: 2.5rem;
+    margin-left: -0.5rem;
 
     & i {
       width: auto;
+
+      &::after {
+        margin-left: 0;
+      }
     }
   }
 

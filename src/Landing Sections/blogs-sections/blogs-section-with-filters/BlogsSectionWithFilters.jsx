@@ -24,6 +24,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     onButtonAction = () => {},
     buttonLink,
     onSelectOption = () => {},
+    onSelectAll = () => {},
     isLoading = false,
     onSelectCard = () => {},
   } = props;
@@ -88,6 +89,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
           onSelect={(item) => {
             onSelectOption(item);
           }}
+          onSelectAll={onSelectAll}
           labelKey={"name"}
           valueKey={"code"}
           noMargin={true}

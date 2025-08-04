@@ -31,9 +31,11 @@ export const Wrapper = styled.div`
   & button {
     width: fit-content;
     color: var(--gray-950, #14161a);
+    background: var(--white, #fff);
 
     &:hover {
       color: var(--gray-700, #4e555f);
+      background: var(--white, #fff);
     }
   }
 

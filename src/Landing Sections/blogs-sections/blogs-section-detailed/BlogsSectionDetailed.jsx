@@ -19,6 +19,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
     onButtonAction,
     items,
     buttonText,
+    timeToReadText,
     limit = 3,
     onSelectCard = () => {},
     isLoading = false,
@@ -40,8 +41,9 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                 titleSlug={x?.titleSlug}
                 numberOfLikes={x?.numberOfLikes}
                 numberOfComments={x?.numberOfComments}
-                datePublished={x?.createdAt}
-                readDuration={x?.timeToRead}
+                publishedAt={x?.publishedAt}
+                timeToRead={x?.timeToRead}
+                timeToReadText={timeToReadText}
                 tags={x?.tags}
                 onCardClick={() => onSelectCard(x?.titleSlug)}
                 imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
@@ -59,8 +61,9 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                   tags={x?.tags}
                   numberOfLikes={x?.numberOfLikes}
                   numberOfComments={x?.numberOfComments}
-                  datePublished={x?.createdAt}
-                  readDuration={x?.timeToRead}
+                  publishedAt={x?.publishedAt}
+                  timeToRead={x?.timeToRead}
+                  timeToReadText={timeToReadText}
                   onCardClick={() => onSelectCard(x?.titleSlug)}
                 />
               ))}
