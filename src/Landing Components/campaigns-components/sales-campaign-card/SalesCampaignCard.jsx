@@ -39,7 +39,7 @@ const SalesCampaignCard = (props) => {
     salesPackages,
     shopName,
     shopImage,
-
+    className,
     onSelectCard = () => {},
     onSelectShop = () => {},
 
@@ -67,6 +67,7 @@ const SalesCampaignCard = (props) => {
     <Wrapper
       theme={theme}
       //   onClick={() => navigate(`/shop/${shopUuid}/campaign/${uuid}`)}
+      className={className}
       onClick={onSelectCard}
       {...rest}
     >
@@ -82,9 +83,7 @@ const SalesCampaignCard = (props) => {
           {salesPackages?.map((item, index) => (
             <StatusBadge
               key={`package__${index}`}
-              color={
-                salesCampaignTypes?.find((x) => x.value === item)?.color
-              }
+              color={salesCampaignTypes?.find((x) => x.value === item)?.color}
               theme={theme}
             >
               <Icon
@@ -97,21 +96,18 @@ const SalesCampaignCard = (props) => {
       <ContentWrapper theme={theme}>
         <div className="text-block-wrapper">
           <div className="title-block-wrapper">
-            <div className="campaign-title">
-              {
-                campaignSingleText
-              }
-            </div>
+            <div className="campaign-title">{campaignSingleText}</div>
             <div className="campaign-title-text">{title}</div>
             <div className="timestamp-text">
-              {hasStarted
-                ? ""
-                : startsInDays === 1 ?
-                `${startsInPrefixTextSingular} ${startsInDays} ${startsinSuffixTextSingular}`
-                : `${startsInPrefixTextPlural} ${startsInDays} ${startsinSuffixTextPlural}`
+              {
+                hasStarted
+                  ? ""
+                  : startsInDays === 1
+                  ? `${startsInPrefixTextSingular} ${startsInDays} ${startsinSuffixTextSingular}`
+                  : `${startsInPrefixTextPlural} ${startsInDays} ${startsinSuffixTextPlural}`
                 // ? t("dateTime.startsInSingle", { days: startsInDays })
                 // : t("dateTime.startsInPlural", { days: startsInDays })
-                }
+              }
             </div>
           </div>
           <div>{description}</div>

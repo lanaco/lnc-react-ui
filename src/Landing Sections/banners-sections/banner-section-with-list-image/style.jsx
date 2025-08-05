@@ -4,7 +4,7 @@ import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 export const Container = styled.div`
   display: flex;
   border-radius: 0.75rem;
-  background-color: ${(p) => p.bgcolor || "transparent"};
+  background-color: ${(p) => p?.bgColor || "transparent"};
   overflow: hidden;
 
   & button {

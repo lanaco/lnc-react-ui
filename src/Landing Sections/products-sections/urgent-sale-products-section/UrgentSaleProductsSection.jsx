@@ -13,7 +13,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
   const {
     items,
     limit = 5,
-    limitMobile = 6,
+    limitMobile = 4,
     onSelectCard = () => {},
     title = "Urgent sale",
     showLessText = "Show less",

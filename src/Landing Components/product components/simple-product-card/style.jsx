@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
-import { linearGradientAnimation } from "../../../_utils/utils";
+import {
+  linearGradientAnimation,
+  truncateTextInRows,
+} from "../../../_utils/utils";
 
 export const SkeletonWrapper = styled.div`
   background-color: var(--gray-200, #dddfe4);
@@ -82,6 +85,7 @@ export const Wrapper = styled.div`
     z-index: 1;
     color: var(--white, #fff);
     transition: all 0.2s ease;
+    ${truncateTextInRows(2)}
   }
 
   &:hover {

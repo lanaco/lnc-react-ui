@@ -17,6 +17,10 @@ export const Wrapper = styled.div`
   min-height: 10.375rem;
   max-height: 10.375rem;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   & img {
     max-width: 3.3125rem;
     min-width: 3.3125rem;

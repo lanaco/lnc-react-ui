@@ -6,6 +6,10 @@ export const GridWrapper = styled.div`
   grid-template-columns: ${(p) => `repeat(${p.limit},  minmax(0, 1fr))`};
   gap: 1.25rem;
 
+  & .button-link {
+    white-space: pre;
+  }
+
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     display: flex;
     gap: 1rem;
