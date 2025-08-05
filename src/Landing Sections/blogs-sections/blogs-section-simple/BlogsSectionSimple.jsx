@@ -22,7 +22,8 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
     buttonText,
     limit = 3,
     isLoading = false,
-    getImage = () => {}
+    getImage = () => {},
+    readMoreText = "Read more",
   } = props;
 
   const isMobile = useDetectMobile();
@@ -37,6 +38,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                 imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                 text={x?.description}
                 titleSlug={x?.titleSlug}
+                readMoreText={readMoreText}
                 onCardClick={() => onSelectCard(x?.titleSlug)}
               />
             ))
@@ -49,6 +51,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                   imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
                   text={x?.description}
                   titleSlug={x?.titleSlug}
+                  readMoreText={readMoreText}
                   onCardClick={() => onSelectCard(x?.titleSlug)}
                 />
               ))}

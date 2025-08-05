@@ -5,9 +5,7 @@ import { GridWrapper } from "./style";
 import Button from "../../../General/Button/Button";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
-import {
-  TitleWithOptionsSectionWrapper,
-} from "../../style";
+import { TitleWithOptionsSectionWrapper } from "../../style";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
 import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-detailed";
 import SelectBar from "../../../Inputs/SelectBar";
@@ -29,7 +27,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     negotiableText,
     freeText,
     options,
-    onSelectOption = () => {}
+    onSelectOption = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -96,6 +94,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
             color="gray"
             onClick={() => onButtonAction(buttonLink)}
             borderRadius="curved"
+            className="button-link"
           >
             {buttonText}
           </Button>

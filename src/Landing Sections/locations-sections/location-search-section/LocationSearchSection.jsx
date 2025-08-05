@@ -13,6 +13,7 @@ const LocationSearchSection = forwardRef((props, ref) => {
     onSelectRegion = () => {},
     onSelectCity = () => {},
     onSelectOption = () => {},
+    onSelectAll = () => {},
   } = props;
 
   return (
@@ -25,6 +26,7 @@ const LocationSearchSection = forwardRef((props, ref) => {
           onSelect={(x, y) => {
             onSelectOption(x, y);
           }}
+          onSelectAll={onSelectAll}
           labelKey={"name"}
           valueKey={"code"}
           noMargin={true}

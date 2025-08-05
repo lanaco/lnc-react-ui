@@ -241,7 +241,7 @@ export const truncateTextInRows = (rowCount) => {
     overflow: hidden;
     text-overflow: ellipsis;
     overflow-wrap: anywhere;
-    word-break: break-all;
+    word-break: break-word;
 
     @supports (-webkit-line-clamp: ${rowCount}) {
       overflow: hidden;
