@@ -27,6 +27,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     onSelectAll = () => {},
     isLoading = false,
     onSelectCard = () => {},
+    productsToolbarName = "All",
   } = props;
 
   const isMobile = useDetectMobile();
@@ -93,6 +94,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
           labelKey={"name"}
           valueKey={"code"}
           noMargin={true}
+          productsToolbarName={productsToolbarName}
         />
       )}
       <GridWrapper limit={limit}>

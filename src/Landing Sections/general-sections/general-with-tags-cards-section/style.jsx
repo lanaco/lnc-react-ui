@@ -48,7 +48,6 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    width: 100%;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

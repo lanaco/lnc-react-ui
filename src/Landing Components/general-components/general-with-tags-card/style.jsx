@@ -10,8 +10,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex-shrink: 0;
-  align-self: stretch;
+  width: fit-content;
   border-radius: 0.75rem;
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
   background: var(--Lanaco-Gray-white, #fff);
@@ -25,9 +24,9 @@ export const Wrapper = styled.div`
 
   & .wrapper__image {
     width: 100%;
+    max-width: 18rem;
     object-fit: cover;
     height: auto;
-    max-height: 19.5rem;
     border-radius: 0.75rem 0.75rem 0 0;
   }
 
