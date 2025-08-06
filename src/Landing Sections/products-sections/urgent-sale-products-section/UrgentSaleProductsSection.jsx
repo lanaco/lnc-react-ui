@@ -73,7 +73,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items, isMobile, limit, limitMobile]);
+  }, [items, isMobile, limit, limitMobile, showAll]);
 
   return (
     <GridWrapper ref={ref} limit={limit}>

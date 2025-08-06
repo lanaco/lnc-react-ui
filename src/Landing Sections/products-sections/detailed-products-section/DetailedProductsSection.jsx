@@ -28,6 +28,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     freeText,
     options,
     onSelectOption = () => {},
+    productsToolbarName = "All",
   } = props;
 
   const isMobile = useDetectMobile();
@@ -121,6 +122,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
           labelKey={"name"}
           valueKey={"code"}
           noMargin={true}
+          productsToolbarName={productsToolbarName}
         />
       )}
       <GridWrapper limit={limit}>

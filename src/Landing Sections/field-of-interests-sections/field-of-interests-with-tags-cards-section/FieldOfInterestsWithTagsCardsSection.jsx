@@ -20,6 +20,8 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       limitForMobile = 2,
       items = [],
       selectedTag,
+      isLoadingTags = false,
+      isLoadingItems = false,
       onSelectTag = () => {},
       onSelectCard = () => {},
       getImage = () => {},
@@ -49,7 +51,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
         <div className="wrapper__tags">
-          {tags && tags?.length > 0
+          {!isLoadingTags
             ? tags?.map((tag, idx) => (
                 <FieldOfInterestsWithTagsCardTag
                   key={`field-of-interests-with-tags-card-tag__${idx + 1}`}
@@ -68,7 +70,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
               ))}
         </div>
         <div className="wrapper__cards">
-          {items && items?.length > 0
+          {!isLoadingItems
             ? items?.map((card, idx) => (
                 <FieldOfInterestsWithTagsCard
                   key={`field-of-interests-with-tags-card__${idx + 1}`}

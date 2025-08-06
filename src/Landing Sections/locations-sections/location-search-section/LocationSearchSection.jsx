@@ -14,6 +14,7 @@ const LocationSearchSection = forwardRef((props, ref) => {
     onSelectCity = () => {},
     onSelectOption = () => {},
     onSelectAll = () => {},
+    productsToolbarName = "All",
   } = props;
 
   return (
@@ -30,6 +31,7 @@ const LocationSearchSection = forwardRef((props, ref) => {
           labelKey={"name"}
           valueKey={"code"}
           noMargin={true}
+          productsToolbarName={productsToolbarName}
         />
       )}
       <Content>

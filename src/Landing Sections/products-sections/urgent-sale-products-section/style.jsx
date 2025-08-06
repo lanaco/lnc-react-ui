@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { SMALL_MOBILE_SIZE_PX, MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const GridWrapper = styled.div`
   padding: 1.75rem 3rem;
@@ -64,11 +64,17 @@ export const GridWrapper = styled.div`
     grid-template-columns: repeat(2, 1fr);
     padding: 2rem 1.25rem;
     gap: 1.19rem;
+  }
 
-    & .urgent-tag {
-    }
+  @media (max-width: ${SMALL_MOBILE_SIZE_PX + "px"}) {
+    display: flex;
+    flex-direction: column;
 
-    & .img-wrapper {
+    & .product-card {
+      & img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 `;
