@@ -4,7 +4,7 @@ import Icon from "../../../General/Icon/Icon";
 import { TagWrapper } from "./style";
 
 const FieldOfInterestsMasonryTag = forwardRef(
-  ({ text, isActive, icon, onSelectCard = () => {} }, ref) => {
+  ({ text, isActive = false, icon, onSelectCard = () => {} }, ref) => {
     return (
       <TagWrapper className={isActive ? "active" : ""} onClick={onSelectCard}>
         <Icon icon={icon} className="wrapper__icon" />

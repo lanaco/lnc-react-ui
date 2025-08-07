@@ -39,9 +39,10 @@ const BannerSectionWithList = forwardRef((props, ref) => {
         size="medium"
         color="neutral"
         type="button"
-        onClick={() =>
-          onButtonAction(buttonLink)
-        }
+        onClick={(e) => {
+          e?.target?.blur();
+          onButtonAction(buttonLink);
+        }}
       >
         {buttonText}
       </Button>

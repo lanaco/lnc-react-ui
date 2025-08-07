@@ -71,7 +71,10 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
             type="button"
             btnType="tinted"
             color="gray"
-            onClick={() => onButtonAction(buttonLink)}
+            onClick={(e) => {
+              e?.target?.blur();
+              onButtonAction(buttonLink);
+            }}
             borderRadius="curved"
           >
             {buttonText}

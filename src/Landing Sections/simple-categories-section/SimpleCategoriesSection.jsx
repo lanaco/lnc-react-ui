@@ -22,7 +22,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
     onButtonAction = () => {},
     onSelectCard = () => {},
     isLoading = false,
-    getImage = () => {}
+    getImage = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -67,7 +67,10 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
             type="button"
             btnType="tinted"
             color="gray"
-            onClick={() => onButtonAction(buttonLink)}
+            onClick={(e) => {
+              e?.target?.blur();
+              onButtonAction(buttonLink);
+            }}
             borderRadius="curved"
           >
             {buttonText}

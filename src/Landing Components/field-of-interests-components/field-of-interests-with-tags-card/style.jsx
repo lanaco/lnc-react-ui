@@ -86,6 +86,7 @@ export const TagWrapper = styled.div`
 
   &:hover {
     cursor: pointer;
+    background: var(--neutral-95008, rgba(20, 22, 26, 0.08));
   }
 
   & .wrapper__icon {
