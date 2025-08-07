@@ -48,7 +48,10 @@ const BannerSectionCarousel = forwardRef(
                       <Button
                         color="neutral"
                         // trailingIcon="arrow-right"
-                        onClick={() => onButtonAction(b)}
+                        onClick={(e) => {
+                          e?.target?.blur();
+                          onButtonAction(b);
+                        }}
                       >
                         {b.buttonText}
                       </Button>

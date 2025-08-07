@@ -94,7 +94,10 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
           btnType="basic"
           type="button"
           color="gray"
-          onClick={() => setShowAll(!showAll)}
+          onClick={(e) => {
+            e?.target?.blur();
+            setShowAll(!showAll);
+          }}
         >
           {showAll === true ? showLessText : showMoreText}
         </Button>

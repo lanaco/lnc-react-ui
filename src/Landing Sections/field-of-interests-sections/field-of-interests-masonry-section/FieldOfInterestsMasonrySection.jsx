@@ -26,17 +26,6 @@ const FieldOfInterestsMasonrySection = forwardRef(
     },
     ref
   ) => {
-    // const [active, setActive] = useState();
-
-    const handleSelectTag = (tag) => {
-      // setActive(tag?.uuid);
-      onSelectTag?.(tag);
-    };
-
-    const handleSelectCard = (card) => {
-      onSelectCard?.(card);
-    };
-
     useEffectOnce(() => {
       const applyMasonry = () => {
         const grid = document.querySelector(".wrapper__cards");
@@ -75,9 +64,9 @@ const FieldOfInterestsMasonrySection = forwardRef(
                 <FieldOfInterestsMasonryTag
                   key={`field-of-interests-masonry-tag__${idx + 1}`}
                   icon={tag?.icon}
-                  text={tag?.text}
-                  isActive={tag?.uuid === selectedTag?.uuid}
-                  onSelectCard={() => handleSelectTag?.(tag)}
+                  text={tag?.title}
+                  isActive={tag?.code === selectedTag}
+                  onSelectCard={() => onSelectTag?.(tag)}
                 />
               ))
             : Array.from("12345")?.map((_, idx) => (
@@ -95,7 +84,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
                   imageComponent={card?.imageComponent}
                   title={card?.title}
                   description={card?.description}
-                  onSelectCard={() => handleSelectCard?.(card?.uuid)}
+                  onSelectCard={() => onSelectCard?.(card)}
                   className="wrapper__card"
                 />
               ))

@@ -64,7 +64,10 @@ const BlogCardsSponsoredSection = forwardRef(
                 borderRadius="curved"
                 btnType="tinted"
                 className="title__action"
-                onClick={() => onButtonAction?.(buttonLink)}
+                onClick={(e) => {
+                  e?.target?.blur();
+                  onButtonAction?.(buttonLink);
+                }}
               />
             )}
           </div>
