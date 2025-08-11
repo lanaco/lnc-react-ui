@@ -5,7 +5,7 @@ import { ContentWrapper, OptionItem, OptionsWrapper, Wrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import Button from "../../../General/Button/Button";
 import MapImage from "../../../assets/images/map-image.png";
-import { isDefined, isDefinedNotEmptyString } from "../../../_utils/utils";
+import { isDefined } from "../../../_utils/utils";
 
 const LocationFinder = forwardRef(
   (
@@ -42,17 +42,7 @@ const LocationFinder = forwardRef(
     const [selectedFilter, setSelectedFilter] = useState(null);
 
     const handleSearchMap = () => {
-      let path = "/search-page/products?v=map&type=Product";
-
-      if (isDefinedNotEmptyString(selectedFilter)) {
-        path += `&categoryCode=${selectedFilter}`;
-      }
-
-      if (isDefinedNotEmptyString(location)) {
-        path += `&queryText=${location}`;
-      }
-
-      onOpenMap(path);
+      onOpenMap({ selectedFilter, location });
     };
 
     return (
