@@ -28,6 +28,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     isLoading = false,
     onSelectCard = () => {},
     productsToolbarName = "All",
+    allButton = false,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -47,7 +48,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
             ))
           : items
               ?.slice(0, limit)
-              .map((x, index) => (
+              ?.map((x, index) => (
                 <MemoizedProductCard
                   key={index}
                   title={x?.title}
@@ -98,6 +99,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
           valueKey={"code"}
           noMargin={true}
           productsToolbarName={productsToolbarName}
+          allButton={allButton}
         />
       )}
       <GridWrapper limit={limit}>

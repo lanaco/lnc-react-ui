@@ -7,7 +7,7 @@ export const GridWrapper = styled.div`
   gap: 1.25rem;
 
   & .button-link {
-    white-space: pre;
+    white-space: nowrap;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

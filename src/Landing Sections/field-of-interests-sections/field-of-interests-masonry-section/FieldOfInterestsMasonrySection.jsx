@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef } from "react";
+import { forwardRef, useLayoutEffect } from "react";
 
 import FieldOfInterestsMasonryTagSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag-skeleton";
 import FieldOfInterestsMasonryTag from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag";
 import FieldOfInterestsMasonry from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/card";
 import FieldOfInterestsMasonrySkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/card-skeleton";
 import { Wrapper } from "./style";
-import { useEffectOnce } from "react-use";
 
 const FieldOfInterestsMasonrySection = forwardRef(
   (
@@ -26,7 +25,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
     },
     ref
   ) => {
-    useEffectOnce(() => {
+    useLayoutEffect(() => {
       const applyMasonry = () => {
         const grid = document.querySelector(".wrapper__cards");
         const items = grid.querySelectorAll(".wrapper__card");
@@ -38,13 +37,39 @@ const FieldOfInterestsMasonrySection = forwardRef(
         });
       };
 
-      applyMasonry();
+      const grid = document.querySelector(".wrapper__cards");
+      const imgs = grid.querySelectorAll(".wrapper__image");
+
+      let imgsLoaded = 0;
+
+      if (imgs.length === 0) {
+        applyMasonry();
+      } else {
+        imgs.forEach((img) => {
+          if (img.complete) {
+            imgsLoaded++;
+          } else {
+            img.addEventListener("load", () => {
+              imgsLoaded++;
+
+              if (imgsLoaded === imgs.length) {
+                applyMasonry();
+              }
+            });
+          }
+        });
+
+        if (imgsLoaded === imgs.length) {
+          applyMasonry();
+        }
+      }
+
       window.addEventListener("resize", applyMasonry);
 
       return () => {
         window.removeEventListener("resize", applyMasonry);
       };
-    });
+    }, []);
 
     return (
       <Wrapper

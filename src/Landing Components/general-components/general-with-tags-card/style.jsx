@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: fit-content;
   border-radius: 0.75rem;
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
   background: var(--Lanaco-Gray-white, #fff);

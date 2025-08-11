@@ -15,10 +15,22 @@ const LocationFinder = forwardRef(
       openMapText = "Open map",
       onOpenMap = () => {},
       mapFilters = [
-        { icon: "mng-lnc-house", code: "RealEstates_Houses" },
-        { icon: "mng-lnc-building", code: "RealEstates_Apartments" },
-        { icon: "mng-lnc-vacation", code: "RealEstates_Land" },
-        { icon: "mng-lnc-garage", code: "RealEstates_Garages" },
+        {
+          icon: "mng-lnc-house",
+          code: "RealEstates_Houses",
+          tooltip: "Houses",
+        },
+        {
+          icon: "mng-lnc-building",
+          code: "RealEstates_Apartments",
+          tooltip: "Aparments",
+        },
+        { icon: "mng-lnc-vacation", code: "RealEstates_Land", tooltip: "Land" },
+        {
+          icon: "mng-lnc-garage",
+          code: "RealEstates_Garages",
+          tooltip: "Garages",
+        },
       ],
       inputComponent,
     },
@@ -85,13 +97,16 @@ const LocationFinder = forwardRef(
           {isMobile !== true && (
             <OptionsWrapper>
               {mapFilters?.map((x, index) => (
-                <OptionItem
-                  key={index}
-                  selected={selectedFilter === x?.code}
-                  onClick={() => setSelectedFilter(x?.code)}
-                >
-                  <i className={x?.icon} />
-                </OptionItem>
+                <div className="tooltip">
+                  <OptionItem
+                    key={index}
+                    selected={selectedFilter === x?.code}
+                    onClick={() => setSelectedFilter(x?.code)}
+                  >
+                    <i className={x?.icon} />
+                    <span className="tooltip-text">{x?.tooltip}</span>
+                  </OptionItem>
+                </div>
               ))}
             </OptionsWrapper>
           )}

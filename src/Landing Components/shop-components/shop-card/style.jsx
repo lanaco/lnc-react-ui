@@ -18,6 +18,10 @@ export const Wrapper = styled.div`
   /* drop-shadow-sm */
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 
+  &:hover {
+    cursor: pointer;
+  }
+
   & .wrapper__content {
     display: flex;
     padding: 1.25rem;
@@ -31,10 +35,6 @@ export const Wrapper = styled.div`
       aspect-ratio: 1 / 1;
       max-height: 4rem;
       border-radius: 999px;
-
-      &:hover {
-        cursor: pointer;
-      }
     }
   }
 
