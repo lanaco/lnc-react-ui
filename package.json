@@ -154,7 +154,10 @@
     "./BlogProductCardsSection": "./dist/BlogProductCardsSection.js",
     "./BlogShopCardsSection": "./dist/BlogShopCardsSection.js",
     "./BlogCardsSponsoredSection": "./dist/BlogCardsSponsoredSection.js",
-    "./BlogListSection": "./dist/BlogListSection.js"
+    "./BlogListSection": "./dist/BlogListSection.js",
+    "./AdBannerSection": "./dist/AdBannerSection.js",
+    "./QuattroCardsSection": "./dist/QuattroCardsSection.js",
+    "./FeedbackSection": "./dist/FeedbackSection.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",

@@ -305,6 +305,18 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/blogs-sections/blog-list-section/BlogListSection.jsx"
         ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/general-sections/ad-banner-section/AdBannerSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/general-sections/quattro-cards-section/QuattroCardsSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/general-sections/feedback-section/FeedbackSection.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {
