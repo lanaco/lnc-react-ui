@@ -34,10 +34,10 @@ const BlogListSection = forwardRef(
           numberOfLikes={x?.numberOfLikes}
           numberOfComments={x?.numberOfComments}
           isSponsored={x?.isSponsored}
-          onSelectCard={() => onSelectCard?.(x?.uuid, x?.titleSlug)}
+          onSelectCard={() => onSelectCard?.(x)}
           onSelectOption={(code) => onSelectOption?.(code)}
-          onShare={() => onShare?.(x?.uuid)}
-          onBookmark={() => onBookmark?.(x?.uuid)}
+          onShare={() => onShare?.(x)}
+          onBookmark={() => onBookmark?.(x)}
           imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
         />
       ));

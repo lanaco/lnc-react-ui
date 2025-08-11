@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../_utils/consts";
+import { truncateText } from "../_utils/utils";
 
 export const RegulatTitleSectionWrapper = styled.div`
   display: flex;
@@ -51,10 +52,16 @@ export const TitleWithOptionsSectionWrapper = styled.div`
     font-size: 1.5rem;
     font-weight: 600;
     padding-bottom: 0.75rem;
+
     & .regular-title-text {
       display: flex;
       gap: 0.5rem;
       align-items: center;
+      ${truncateText()}
+
+      & span {
+        ${truncateText()}
+      }
     }
 
     & i {

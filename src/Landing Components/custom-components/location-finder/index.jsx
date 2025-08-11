@@ -5,7 +5,7 @@ import { ContentWrapper, OptionItem, OptionsWrapper, Wrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import Button from "../../../General/Button/Button";
 import MapImage from "../../../assets/images/map-image.png";
-import { isDefined, isDefinedNotEmptyString } from "../../../_utils/utils";
+import { isDefined } from "../../../_utils/utils";
 
 const LocationFinder = forwardRef(
   (
@@ -15,10 +15,22 @@ const LocationFinder = forwardRef(
       openMapText = "Open map",
       onOpenMap = () => {},
       mapFilters = [
-        { icon: "mng-lnc-house", code: "RealEstates_Houses" },
-        { icon: "mng-lnc-building", code: "RealEstates_Apartments" },
-        { icon: "mng-lnc-vacation", code: "RealEstates_Land" },
-        { icon: "mng-lnc-garage", code: "RealEstates_Garages" },
+        {
+          icon: "mng-lnc-house",
+          code: "RealEstates_Houses",
+          tooltip: "Houses",
+        },
+        {
+          icon: "mng-lnc-building",
+          code: "RealEstates_Apartments",
+          tooltip: "Aparments",
+        },
+        { icon: "mng-lnc-vacation", code: "RealEstates_Land", tooltip: "Land" },
+        {
+          icon: "mng-lnc-garage",
+          code: "RealEstates_Garages",
+          tooltip: "Garages",
+        },
       ],
       inputComponent,
     },
@@ -30,17 +42,7 @@ const LocationFinder = forwardRef(
     const [selectedFilter, setSelectedFilter] = useState(null);
 
     const handleSearchMap = () => {
-      let path = "/search-page/products?v=map&type=Product";
-
-      if (isDefinedNotEmptyString(selectedFilter)) {
-        path += `&categoryCode=${selectedFilter}`;
-      }
-
-      if (isDefinedNotEmptyString(location)) {
-        path += `&queryText=${location}`;
-      }
-
-      onOpenMap(path);
+      onOpenMap({ selectedFilter, location });
     };
 
     return (
@@ -85,13 +87,16 @@ const LocationFinder = forwardRef(
           {isMobile !== true && (
             <OptionsWrapper>
               {mapFilters?.map((x, index) => (
-                <OptionItem
-                  key={index}
-                  selected={selectedFilter === x?.code}
-                  onClick={() => setSelectedFilter(x?.code)}
-                >
-                  <i className={x?.icon} />
-                </OptionItem>
+                <div className="tooltip">
+                  <OptionItem
+                    key={index}
+                    selected={selectedFilter === x?.code}
+                    onClick={() => setSelectedFilter(x?.code)}
+                  >
+                    <i className={x?.icon} />
+                    <span className="tooltip-text">{x?.tooltip}</span>
+                  </OptionItem>
+                </div>
               ))}
             </OptionsWrapper>
           )}
