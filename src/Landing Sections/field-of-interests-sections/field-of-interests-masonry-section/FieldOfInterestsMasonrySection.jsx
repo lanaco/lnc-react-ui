@@ -32,9 +32,15 @@ const FieldOfInterestsMasonrySection = forwardRef(
 
         items.forEach((item) => {
           const itemHeight = item.getBoundingClientRect().height;
-          const rowSpan = Math.ceil((itemHeight + 10) / (10 + 10));
+          const rowSpan = Math.ceil((itemHeight + 10) / 20);
           item.style.gridRowEnd = `span ${rowSpan}`;
         });
+
+        const lastItem = items?.[items.length - 1];
+        if (lastItem) {
+          const bottom = lastItem.offsetTop + lastItem.offsetHeight;
+          grid.style.height = `${bottom}px`;
+        }
       };
 
       const grid = document.querySelector(".wrapper__cards");
