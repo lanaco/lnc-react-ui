@@ -1,0 +1,57 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import QuattroCardsSection from "./QuattroCardsSection.jsx";
+
+<Meta
+  title="Landing sections/Quattro Cards Section"
+  component={QuattroCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <QuattroCardsSection
+    title="Are you looking for something else?"
+    items={[
+      {
+        title: "Sport",
+        imageUrl: "https://picsum.photos/500/500",
+        description: "Oprema, savjeti i inspiracija za tvoj tempo",
+        onSelectCard: () => {},
+      },
+      {
+        title: "Pokloni",
+        imageUrl: "https://picsum.photos/500/500",
+        description: "Za svaku priliku i svaki budžet",
+        onSelectCard: () => {},
+      },
+      {
+        title: "Kod kuće",
+        imageUrl: "https://picsum.photos/500/500",
+        description: "Gdje počinje udobnost i završava stres",
+        onSelectCard: () => {},
+      },
+      {
+        title: "Zdrav život",
+        imageUrl: "https://picsum.photos/500/500",
+        description: "Male navike za velike promjene",
+        onSelectCard: () => {},
+      },
+    ]}
+  />
+);
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import QuattroCardsSection from "@lanaco/lnc-react-ui/QuattroCardsSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

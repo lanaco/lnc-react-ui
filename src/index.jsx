@@ -214,6 +214,9 @@ export { default as BlogProductCardsSection } from "./Blog Sections/blog-product
 export { default as BlogShopCardsSection } from "./Blog Sections/blog-shop-cards-section/BlogShopCardsSection";
 export { default as BlogCardsSponsoredSection } from "./Landing Sections/blogs-sections/blog-cards-sponsored-section/BlogCardsSponsoredSection";
 export { default as BlogListSection } from "./Landing Sections/blogs-sections/blog-list-section/BlogListSection";
+export { default as AdBannerSection } from "./Landing Sections/general-sections/ad-banner-section/AdBannerSection";
+export { default as QuattroCardsSection } from "./Landing Sections/general-sections/quattro-cards-section/QuattroCardsSection";
+export { default as FeedbackSection } from "./Landing Sections/general-sections/feedback-section/FeedbackSection";
 
 //======================== THEME ==============================================================
 

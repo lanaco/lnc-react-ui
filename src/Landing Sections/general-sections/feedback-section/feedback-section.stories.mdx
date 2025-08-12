@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import FeedbackSection from "./FeedbackSection.jsx";
+
+<Meta title="Landing sections/Feedback Section" component={FeedbackSection} />
+
+export const TemplateDefault = (args) => (
+  <FeedbackSection
+    title="Didn’t find any interesting?"
+    description="Lorem ipsum dolor sit amet consectetur. Vel nisl ut ac at."
+    buttonText="Write your suggestion"
+  />
+);
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import FeedbackSection from "@lanaco/lnc-react-ui/FeedbackSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

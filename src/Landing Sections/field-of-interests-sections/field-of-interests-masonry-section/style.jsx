@@ -44,10 +44,12 @@ export const Wrapper = styled.div`
 
   & .wrapper__cards {
     display: grid;
-    grid-template-columns: ${(p) => `repeat(${p?.limitCards}, minmax(0, 1fr))`};
+    grid-template-columns: ${(p) =>
+      `repeat(${p?.limitCards}, minmax(12.5rem, 1fr))`};
     grid-auto-rows: 0.625rem;
     gap: 0.625rem;
     width: 100%;
+    position: relative;
 
     & .wrapper__card {
       overflow: hidden;
