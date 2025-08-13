@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, useLayoutEffect } from "react";
+import { forwardRef, useEffect } from "react";
 
+import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import FieldOfInterestsMasonryTagSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag-skeleton";
 import FieldOfInterestsMasonryTag from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag";
 import FieldOfInterestsMasonry from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/card";
@@ -22,12 +23,17 @@ const FieldOfInterestsMasonrySection = forwardRef(
       selectedTag,
       onSelectTag = () => {},
       onSelectCard = () => {},
+      className,
     },
     ref
   ) => {
-    useLayoutEffect(() => {
+    useEffect(() => {
+      if (!isDefinedNotEmptyString(className)) {
+        return;
+      }
+
       const applyMasonry = () => {
-        const grid = document.querySelector(".wrapper__cards");
+        const grid = document.querySelector(`.${className} .wrapper__cards`);
         const items = grid.querySelectorAll(".wrapper__card");
 
         items.forEach((item) => {
@@ -43,7 +49,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
         }
       };
 
-      const grid = document.querySelector(".wrapper__cards");
+      const grid = document.querySelector(`.${className} .wrapper__cards`);
       const imgs = grid.querySelectorAll(".wrapper__image");
 
       let imgsLoaded = 0;
@@ -75,7 +81,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
       return () => {
         window.removeEventListener("resize", applyMasonry);
       };
-    }, []);
+    }, [className, items]);
 
     return (
       <Wrapper
@@ -84,6 +90,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
         limitTagsForMobile={limitTagsForMobile}
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
+        className={className}
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
