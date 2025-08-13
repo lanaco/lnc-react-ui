@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, useEffect } from "react";
+import { forwardRef, useLayoutEffect } from "react";
 
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import FieldOfInterestsMasonryTagSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag-skeleton";
@@ -27,7 +27,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
     },
     ref
   ) => {
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (!isDefinedNotEmptyString(className)) {
         return;
       }
