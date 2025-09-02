@@ -78,6 +78,7 @@ const SalesCampaignsSection = forwardRef(
               noArrows={true}
               padding={"0.25rem 0"}
               rightAlignArrows={true}
+              elementsCount={items?.length}
               scrollBySize={
                 isMobile
                   ? window.innerWidth

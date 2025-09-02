@@ -1,13 +1,21 @@
 /* eslint-disable react/display-name */
 import PropTypes from "prop-types";
-import { useRef, useState, useEffect, useImperativeHandle, forwardRef } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import useDetectMobile from "../../_utils/useDetectMobile";
 import { useTheme } from "@emotion/react";
 import { HeaderWrapper, Styled_Section, Wrapper } from "./style";
 import FlexBox from "../../Layout/FlexBox/FlexBox";
 import InfiniteScrollEndElement from "../InfiniteScrollEndElement";
 import IconButton from "../../General/IconButton/IconButton";
-import useSwipeDirection, { SwipeDirection } from "../../_utils/useSwipeDirection";
+import useSwipeDirection, {
+  SwipeDirection,
+} from "../../_utils/useSwipeDirection";
 
 const ScrollableSectionV2 = forwardRef(
   (
@@ -27,6 +35,8 @@ const ScrollableSectionV2 = forwardRef(
       noArrows,
       onShowEnd,
       arrowsZIndex,
+      elementsCount,
+      minElementsCount = 2,
       ...rest
     },
     ref
@@ -35,7 +45,9 @@ const ScrollableSectionV2 = forwardRef(
 
     const theme = useTheme();
 
-    const [scrollRightDisabled, setScrollRightDisabled] = useState(false);
+    const [scrollRightDisabled, setScrollRightDisabled] = useState(
+      elementsCount < minElementsCount
+    );
     const [scrollLeftDisabled, setScrollLeftDisabled] = useState(false);
     const [showGradient, setShowGradient] = useState(true);
     const wrapperRef = useRef();
