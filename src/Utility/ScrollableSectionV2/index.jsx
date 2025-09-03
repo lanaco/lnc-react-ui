@@ -35,6 +35,7 @@ const ScrollableSectionV2 = forwardRef(
       noArrows,
       onShowEnd,
       arrowsZIndex,
+      showArrows,
       elementsCount,
       minElementsCount = 2,
       ...rest
