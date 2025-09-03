@@ -12,36 +12,37 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 export const TemplateDefault = (args) => (
   <SalesCampaignsSection
     title={"Lorem ipsum"}
+    getImage={() => "https://placehold.co/700x700"}
     salesCampaignsTypes={[
-    {
-       value: "AddDiscount",
-       label: "salesCampaignTypes.addDiscount",
-       icon: "percentage",
-       color: "#F44462",
-       disableForService: false,
-     },
-     {
-       value: "FreeShipping",
-       label: "salesCampaignTypes.freeShipping",
-       color: "#1ABC86",
-       icon: "shipping-fast",
-       disableForService: true,
-     },
-     {
-       value: "FreeQuantity",
-       label: "salesCampaignTypes.freeQuantity",
-       icon: "cube",
-       color: "#2691D9",
-       disableForService: true,
-     },
-     {
-       value: "IncludeGifts",
-       label: "salesCampaignTypes.includeGifts",
-       icon: "gift",
-       color: "#8B5CF6",
-       disableForService: false,
-     },
-     ]}
+      {
+        value: "AddDiscount",
+        label: "salesCampaignTypes.addDiscount",
+        icon: "percentage",
+        color: "#F44462",
+        disableForService: false,
+      },
+      {
+        value: "FreeShipping",
+        label: "salesCampaignTypes.freeShipping",
+        color: "#1ABC86",
+        icon: "shipping-fast",
+        disableForService: true,
+      },
+      {
+        value: "FreeQuantity",
+        label: "salesCampaignTypes.freeQuantity",
+        icon: "cube",
+        color: "#2691D9",
+        disableForService: true,
+      },
+      {
+        value: "IncludeGifts",
+        label: "salesCampaignTypes.includeGifts",
+        icon: "gift",
+        color: "#8B5CF6",
+        disableForService: false,
+      },
+    ]}
     items={[
       {
         campaignUuid: "4fa20bd0-92ce-4d36-8425-63470860068a",
@@ -55,6 +56,7 @@ export const TemplateDefault = (args) => (
         startDate: "2025-06-11T06:59:23",
         endDate: "2025-06-21T21:59:00",
         salesPackages: ["AddDiscount"],
+        profileImage: "https://placehold.co/100x100/red/white",
       },
       {
         campaignUuid: "d7b8a42a-4cf6-4fb1-a17a-6369983c6050",
@@ -70,6 +72,7 @@ export const TemplateDefault = (args) => (
         startDate: "2025-06-06T09:09:19",
         endDate: "2025-09-06T09:09:19",
         salesPackages: ["AddDiscount"],
+        profileImage: "https://placehold.co/100x100/red/white",
       },
       {
         campaignUuid: "538339d0-f102-41eb-b9e8-612d0362d08e",
@@ -85,6 +88,7 @@ export const TemplateDefault = (args) => (
         startDate: "2025-06-06T09:09:18",
         endDate: "2025-09-06T09:09:18",
         salesPackages: ["IncludeGifts"],
+        profileImage: "https://placehold.co/100x100/red/white",
       },
       {
         campaignUuid: "90c68a67-4272-4789-9a9d-29f1b565704a",
@@ -100,9 +104,11 @@ export const TemplateDefault = (args) => (
         startDate: "2025-06-06T09:09:08",
         endDate: "2025-09-06T09:09:08",
         salesPackages: ["FreeShipping", "FreeQuantity"],
+        profileImage: "https://placehold.co/100x100/red/white",
       },
     ]}
-  />
+
+/>
 );
 
 ## Calorie calculator section

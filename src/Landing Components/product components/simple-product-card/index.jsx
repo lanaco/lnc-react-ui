@@ -15,7 +15,7 @@ const SimpleProductCard = forwardRef((props, ref) => {
   const {
     uuid,
     title,
-    price,
+    price = 0,
     currency,
     isNegotiable,
     isFree,
@@ -37,7 +37,7 @@ const SimpleProductCard = forwardRef((props, ref) => {
       <div className="text-block">
         <div className="title-simple-product-card">{title}</div>
         <div className="price-chip">
-          {price &&
+          {price > 0 &&
             currency &&
             isNegotiable !== true &&
             isFree !== true &&

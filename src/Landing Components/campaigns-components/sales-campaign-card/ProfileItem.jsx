@@ -4,7 +4,6 @@ import Badge from "../../../Data display/Badge/Badge";
 import PropTypes from "prop-types";
 import { StyledProfileItem } from "./style";
 
-
 const ProfileItem = (props) => {
   const {
     uuid,
@@ -17,7 +16,7 @@ const ProfileItem = (props) => {
     size = "large",
     style,
     disabled,
-    onSelect = () => {},
+    onClick = () => {},
     isActive,
     className,
 
@@ -27,7 +26,7 @@ const ProfileItem = (props) => {
 
   const theme = useTheme();
 
-//   const { data: themeData } = useShopTheme(isUser !== true ? uuid : null);
+  //   const { data: themeData } = useShopTheme(isUser !== true ? uuid : null);
 
   const themeProps = {
     theme,
@@ -42,7 +41,7 @@ const ProfileItem = (props) => {
       onClick={(e) => {
         e.stopPropagation();
 
-        if (hasPermission === true) onSelect?.();
+        if (hasPermission === true) onClick?.();
       }}
       {...themeProps}
       key={name}

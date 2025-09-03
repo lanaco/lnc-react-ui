@@ -35,8 +35,7 @@ export const Wrapper = styled.div`
   }
 
   & .wrapper__tags {
-    display: grid;
-    grid-template-columns: ${(p) => `repeat(${p?.limitTags}, minmax(0, 1fr))`};
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.75rem;
@@ -58,10 +57,23 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & .wrapper__tags {
-      display: flex;
       overflow-x: scroll;
       justify-content: flex-start;
       width: 100%;
+
+      -webkit-overflow-scrolling: touch;
+      ::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+      -ms-overflow-style: none;
+      /* Internet Explorer 10+ */
+      scrollbar-width: none;
+      /* Firefox */
+
+      &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+      }
     }
 
     & .wrapper__cards {

@@ -13,13 +13,14 @@ export const TemplateDefault = (args) => (
   <DetailedProductsSection
      subtitle="LOREM IPSUM DOLOR"
           title="Lore ipsum dolor sit amet"
-          actionText="Lore ipsum dolor"
-          actionHref={`/`}
+          buttonText="Lore ipsum dolor"
+          buttonLink={`/`}
           limit={6}
           items={[
             {
               title: "Minimalist Stuiod | Urbal Core | Studio",
-              price: 22000,
+              price: 0,
+              isFree: true,
               currency: "BAM",
               image:
                 "https://picsum.photos/200/300",
@@ -51,6 +52,7 @@ export const TemplateDefault = (args) => (
             {
               title: "Minimalist Stuiod | Urbal Core | Studio",
               price: 22000,
+              isNegotiable: true,
               currency: "BAM",
               image:
                 "https://picsum.photos/200/300",

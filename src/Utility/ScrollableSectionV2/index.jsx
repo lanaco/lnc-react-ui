@@ -35,6 +35,7 @@ const ScrollableSectionV2 = forwardRef(
       noArrows,
       onShowEnd,
       arrowsZIndex,
+      showArrows,
       elementsCount,
       minElementsCount = 2,
       ...rest
@@ -105,11 +106,35 @@ const ScrollableSectionV2 = forwardRef(
       <Wrapper arrowsZIndex={arrowsZIndex}>
         <HeaderWrapper>
           <div>{title}</div>
-          <div className="btns-group">
+          {showArrows && (
+            <div className="btns-group">
+              <IconButton
+                borderRadius="curved"
+                btnType="tinted"
+                className={"scroll-arrow-left"}
+                color="neutral"
+                disabled={scrollLeftDisabled}
+                icon="angle-left"
+                onClick={scrollLeft}
+              />
+              <IconButton
+                borderRadius="curved"
+                btnType="tinted"
+                className={"scroll-arrow-right"}
+                color="neutral"
+                disabled={scrollRightDisabled}
+                icon="angle-right"
+                onClick={scrollRight}
+              />
+            </div>
+          )}
+        </HeaderWrapper>
+        {showArrows && (
+          <>
             <IconButton
               borderRadius="curved"
               btnType="tinted"
-              className={"scroll-arrow-left"}
+              className={"hover-left-arrow scroll-arrow-left"}
               color="neutral"
               disabled={scrollLeftDisabled}
               icon="angle-left"
@@ -118,32 +143,14 @@ const ScrollableSectionV2 = forwardRef(
             <IconButton
               borderRadius="curved"
               btnType="tinted"
-              className={"scroll-arrow-right"}
+              className={"hover-right-arrow scroll-arrow-right"}
               color="neutral"
               disabled={scrollRightDisabled}
               icon="angle-right"
               onClick={scrollRight}
             />
-          </div>
-        </HeaderWrapper>
-        <IconButton
-          borderRadius="curved"
-          btnType="tinted"
-          className={"hover-left-arrow scroll-arrow-left"}
-          color="neutral"
-          disabled={scrollLeftDisabled}
-          icon="angle-left"
-          onClick={scrollLeft}
-        />
-        <IconButton
-          borderRadius="curved"
-          btnType="tinted"
-          className={"hover-right-arrow scroll-arrow-right"}
-          color="neutral"
-          disabled={scrollRightDisabled}
-          icon="angle-right"
-          onClick={scrollRight}
-        />
+          </>
+        )}
         <Styled_Section
           ref={ref}
           arrowsVisibleOnHover={arrowsVisibleOnHover}

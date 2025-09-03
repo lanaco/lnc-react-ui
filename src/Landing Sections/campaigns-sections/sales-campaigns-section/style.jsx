@@ -24,13 +24,17 @@ export const SectionBlock = styled.div`
   }
 
   & .gradient {
-    background: transparent;
+    background: transparent !important;
   }
 
   & .campaign-item {
     min-width: calc(50% - 0.87rem);
     width: calc(50% - 0.87rem);
-    margin-right: 1.25rem;
+    margin-right: 1rem;
+
+    &:nth-child(${(p) => p?.lastItemIdx}) {
+      margin-right: 0;
+    }
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

@@ -122,6 +122,18 @@ export const TagWrapper = styled.div`
     background: var(--neutral-95004, rgba(20, 22, 26, 0.04));
     padding: 0 0.75rem;
 
+    &.active {
+      background: var(--gray-950, #14161a);
+
+      & .wrapper__icon {
+        background: transparent;
+      }
+
+      & .wrapper__text {
+        color: var(--white, #fff);
+      }
+    }
+
     & .wrapper__icon {
       display: flex;
       width: 1.25rem;

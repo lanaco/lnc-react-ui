@@ -10,6 +10,7 @@ import {
 import PropTypes from "prop-types";
 import Icon from "../../../General/Icon/Icon";
 import ProfileItem from "./ProfileItem";
+import { forwardRef } from "react";
 
 const calcDaysDifference = (date1, date2) => {
   if (!date1 || !date2) return null;
@@ -22,7 +23,7 @@ const calcDaysDifference = (date1, date2) => {
   return days;
 };
 
-const SalesCampaignCard = (props) => {
+const SalesCampaignCard = forwardRef((props, ref) => {
   const theme = useTheme();
 
   const {
@@ -65,6 +66,7 @@ const SalesCampaignCard = (props) => {
 
   return (
     <Wrapper
+      ref={ref}
       theme={theme}
       //   onClick={() => navigate(`/shop/${shopUuid}/campaign/${uuid}`)}
       className={className}
@@ -138,7 +140,7 @@ const SalesCampaignCard = (props) => {
       </ContentWrapper>
     </Wrapper>
   );
-};
+});
 
 SalesCampaignCard.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),

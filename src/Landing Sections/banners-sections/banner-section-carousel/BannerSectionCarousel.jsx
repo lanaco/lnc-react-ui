@@ -48,6 +48,7 @@ const BannerSectionCarousel = forwardRef(
                       <Button
                         color="neutral"
                         // trailingIcon="arrow-right"
+                        className="banner-action"
                         onClick={(e) => {
                           e?.target?.blur();
                           onButtonAction(b);

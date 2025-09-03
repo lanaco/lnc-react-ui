@@ -98,6 +98,20 @@ export const Banner = styled.div`
     mix-blend-mode: multiply;
   }
 
+  & .banner-action {
+    background: var(--white, #fff);
+    color: var(--gray-950, #14161a);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+
+    &:hover {
+      background: var(--gray-200, #dddfe4);
+      color: var(--gray-950, #14161a);
+    }
+  }
+
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     border-radius: unset;
 
