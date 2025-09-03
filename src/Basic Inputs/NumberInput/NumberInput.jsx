@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
 import PropTypes from "prop-types";
-import { forwardRef, useCallback, useEffect, useState } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import {
   StyledInput,
@@ -39,12 +39,15 @@ const NumberInput = forwardRef((props, ref) => {
   } = props;
 
   const theme = useTheme();
+
+  const inputValueRef = useRef(value || defaultValue || "");
   const [inputValue, setInputValue] = useState(value || defaultValue || "");
   const [focused, setFocused] = useState(false);
 
   useEffect(() => {
     if (value !== null && value !== undefined) {
-      setInputValue(value);
+      inputValueRef.current = value;
+      setInputValue(inputValueRef.current);
     }
   }, [value]);
 
@@ -58,7 +61,8 @@ const NumberInput = forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    setInputValue(e.target.value);
+    inputValueRef.current = e.target.value;
+    setInputValue(inputValueRef.current);
     debouncedOnChange(e, e.target.value);
   };
 
