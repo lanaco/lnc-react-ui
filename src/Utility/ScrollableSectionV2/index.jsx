@@ -35,7 +35,8 @@ const ScrollableSectionV2 = forwardRef(
       noArrows,
       onShowEnd,
       arrowsZIndex,
-      showArrows = true,
+      elementsCount,
+      minElementsCount = 2,
       ...rest
     },
     ref
@@ -44,7 +45,9 @@ const ScrollableSectionV2 = forwardRef(
 
     const theme = useTheme();
 
-    const [scrollRightDisabled, setScrollRightDisabled] = useState(false);
+    const [scrollRightDisabled, setScrollRightDisabled] = useState(
+      elementsCount < minElementsCount
+    );
     const [scrollLeftDisabled, setScrollLeftDisabled] = useState(false);
     const [showGradient, setShowGradient] = useState(true);
     const wrapperRef = useRef();
