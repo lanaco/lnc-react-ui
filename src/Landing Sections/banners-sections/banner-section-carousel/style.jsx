@@ -108,6 +108,7 @@ export const Banner = styled.div`
 
     &:hover {
       background: var(--gray-200, #dddfe4);
+      color: var(--gray-950, #14161a);
     }
   }
 
