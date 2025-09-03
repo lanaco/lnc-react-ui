@@ -96,23 +96,23 @@ export const Container = styled.div`
       line-height: 1.25rem;
       ${truncateTextInRows(2)}
     }
-
-    @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-      width: 100%;
-
-      & .quattro-card__title {
-        font-size: 1rem;
-        font-weight: 700;
-        width: 100%;
-      }
-
-      & .quattro-card__description {
-        display: block;
-      }
-    }
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     width: 100%;
+
+    img {
+      object-fit: fill;
+    }
+
+    & .quattro-card__title {
+      font-size: 1rem;
+      font-weight: 700;
+      width: 100%;
+    }
+
+    & .quattro-card__description {
+      display: block;
+    }
   }
 `;

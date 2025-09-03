@@ -7,6 +7,10 @@ export const RegulatTitleSectionWrapper = styled.div`
   flex-direction: column;
   gap: 1.5rem;
 
+  & .button-link {
+    white-space: nowrap;
+  }
+
   & .regular-title {
     display: flex;
     gap: 0.5rem;

@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, memo, useMemo, useRef } from "react";
+import { forwardRef, memo, useEffect, useMemo, useRef, useState } from "react";
 import SalesCampaignCard from "../../../Landing Components/campaigns-components/sales-campaign-card/SalesCampaignCard";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import ScrollableSectionV2 from "../../../Utility/ScrollableSectionV2";
 import { SectionBlock } from "./style";
 import SuspenseCampaignCard from "./skeleton";
+import { createBreakpoint } from "react-use";
+
+const useBreakpoint = createBreakpoint();
 
 const MemoizedCampaignItemRecommended = memo(SalesCampaignCard);
 
@@ -31,13 +34,20 @@ const SalesCampaignsSection = forwardRef(
     ref
   ) => {
     const scrollableSectionRef = useRef();
+    const campaignItemRef = useRef();
+
+    const breakpoint = useBreakpoint();
+
     const isMobile = useDetectMobile();
 
+    const [scrollSize, setScrollSize] = useState(0);
+
     const memoizedItems = useMemo(() => {
-      return items?.map((item, index) => (
+      return items?.slice(0, 6)?.map((item, index) => (
         <MemoizedCampaignItemRecommended
-          key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
+          key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}__${breakpoint}`}
           className="campaign-item"
+          ref={index === 0 ? campaignItemRef : null}
           coverPhoto={getImage(
             item?.coverPhoto,
             item?.uuid || item?.campaignUuid
@@ -64,13 +74,26 @@ const SalesCampaignsSection = forwardRef(
           themeData={item?.themeData}
         />
       ));
-    }, [items]);
+    }, [breakpoint, items]);
+
+    useEffect(() => {
+      setScrollSize(customScrollSize ?? campaignItemRef?.current?.offsetWidth);
+    }, [memoizedItems, breakpoint]);
+
+    const showArrows = isMobile
+      ? memoizedItems?.length > 1
+      : memoizedItems?.length > 2;
 
     return (
       <>
-        {items?.length > 0 && (
-          <SectionBlock ref={ref} className="row-section-scroll">
+        {memoizedItems?.length > 0 && (
+          <SectionBlock
+            ref={ref}
+            className="row-section-scroll"
+            lastItemIdx={memoizedItems?.length + 1}
+          >
             <ScrollableSectionV2
+              key={`scroll-${breakpoint}`}
               arrowsVisibleOnHover={false}
               columnGap="0"
               methodsRef={scrollableSectionRef}
@@ -79,11 +102,7 @@ const SalesCampaignsSection = forwardRef(
               padding={"0.25rem 0"}
               rightAlignArrows={true}
               scrollBySize={
-                isMobile
-                  ? window.innerWidth
-                  : customScrollSize > 0
-                  ? customScrollSize
-                  : window.innerWidth
+                isMobile ? scrollSize : scrollSize * 2 + 24
                 //document.getElementById("home-page-container")?.offsetWidth
               }
               showTimesBtn={false}
@@ -91,6 +110,7 @@ const SalesCampaignsSection = forwardRef(
               title={title}
               onShowEnd={() => {}}
               arrowsZIndex={11}
+              showArrows={showArrows}
             >
               <SuspenseCampaignCard
                 isLoading={isLoading}

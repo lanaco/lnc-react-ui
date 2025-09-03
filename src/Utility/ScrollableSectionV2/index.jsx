@@ -1,13 +1,21 @@
 /* eslint-disable react/display-name */
 import PropTypes from "prop-types";
-import { useRef, useState, useEffect, useImperativeHandle, forwardRef } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import useDetectMobile from "../../_utils/useDetectMobile";
 import { useTheme } from "@emotion/react";
 import { HeaderWrapper, Styled_Section, Wrapper } from "./style";
 import FlexBox from "../../Layout/FlexBox/FlexBox";
 import InfiniteScrollEndElement from "../InfiniteScrollEndElement";
 import IconButton from "../../General/IconButton/IconButton";
-import useSwipeDirection, { SwipeDirection } from "../../_utils/useSwipeDirection";
+import useSwipeDirection, {
+  SwipeDirection,
+} from "../../_utils/useSwipeDirection";
 
 const ScrollableSectionV2 = forwardRef(
   (
@@ -27,6 +35,7 @@ const ScrollableSectionV2 = forwardRef(
       noArrows,
       onShowEnd,
       arrowsZIndex,
+      showArrows = true,
       ...rest
     },
     ref
@@ -93,11 +102,35 @@ const ScrollableSectionV2 = forwardRef(
       <Wrapper arrowsZIndex={arrowsZIndex}>
         <HeaderWrapper>
           <div>{title}</div>
-          <div className="btns-group">
+          {showArrows && (
+            <div className="btns-group">
+              <IconButton
+                borderRadius="curved"
+                btnType="tinted"
+                className={"scroll-arrow-left"}
+                color="neutral"
+                disabled={scrollLeftDisabled}
+                icon="angle-left"
+                onClick={scrollLeft}
+              />
+              <IconButton
+                borderRadius="curved"
+                btnType="tinted"
+                className={"scroll-arrow-right"}
+                color="neutral"
+                disabled={scrollRightDisabled}
+                icon="angle-right"
+                onClick={scrollRight}
+              />
+            </div>
+          )}
+        </HeaderWrapper>
+        {showArrows && (
+          <>
             <IconButton
               borderRadius="curved"
               btnType="tinted"
-              className={"scroll-arrow-left"}
+              className={"hover-left-arrow scroll-arrow-left"}
               color="neutral"
               disabled={scrollLeftDisabled}
               icon="angle-left"
@@ -106,32 +139,14 @@ const ScrollableSectionV2 = forwardRef(
             <IconButton
               borderRadius="curved"
               btnType="tinted"
-              className={"scroll-arrow-right"}
+              className={"hover-right-arrow scroll-arrow-right"}
               color="neutral"
               disabled={scrollRightDisabled}
               icon="angle-right"
               onClick={scrollRight}
             />
-          </div>
-        </HeaderWrapper>
-        <IconButton
-          borderRadius="curved"
-          btnType="tinted"
-          className={"hover-left-arrow scroll-arrow-left"}
-          color="neutral"
-          disabled={scrollLeftDisabled}
-          icon="angle-left"
-          onClick={scrollLeft}
-        />
-        <IconButton
-          borderRadius="curved"
-          btnType="tinted"
-          className={"hover-right-arrow scroll-arrow-right"}
-          color="neutral"
-          disabled={scrollRightDisabled}
-          icon="angle-right"
-          onClick={scrollRight}
-        />
+          </>
+        )}
         <Styled_Section
           ref={ref}
           arrowsVisibleOnHover={arrowsVisibleOnHover}

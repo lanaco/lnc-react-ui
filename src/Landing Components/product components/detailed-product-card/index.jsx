@@ -16,7 +16,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
   const {
     uuid,
     title,
-    price,
+    price = 0,
     currency,
     isNegotiable,
     isFree,
@@ -44,13 +44,13 @@ const DetailedProductCard = forwardRef((props, ref) => {
 
       <div className="wrapper-card-2">
         <div className="price-text">
-          {price &&
+          {price > 0 &&
             currency &&
             isNegotiable !== true &&
             isFree !== true &&
             `${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
           {isNegotiable && negotiableText}
-          {isFree && freeText }
+          {isFree && freeText}
         </div>
         <div className="location-text">{location}</div>
       </div>

@@ -89,6 +89,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                 onButtonAction(buttonLink);
               }}
               borderRadius="curved"
+              className="button-link"
             >
               {buttonText}
             </Button>
