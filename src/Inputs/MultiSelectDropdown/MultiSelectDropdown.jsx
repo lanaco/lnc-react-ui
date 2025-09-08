@@ -229,11 +229,11 @@ MultiSelectDropdown.propTypes = {
   /**
    * The id to set on the SelectContainer component
    */
-  id: PropTypes.string,
+  id: PropTypes.any,
   /**
    * The id of the search input
    */
-  inputId: PropTypes.string,
+  inputid: PropTypes.any,
   /**
    * Override the built-in logic to detect whether an option is disabled. `(...) => boolean`
    */

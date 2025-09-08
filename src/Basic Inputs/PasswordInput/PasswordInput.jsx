@@ -174,7 +174,7 @@ const PasswordInput = forwardRef((props, ref) => {
 // };
 
 PasswordInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   value: PropTypes.string,
   defaultValue: PropTypes.string,
   disabled: PropTypes.bool,

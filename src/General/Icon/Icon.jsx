@@ -80,7 +80,7 @@ const Icon = forwardRef((props, ref) => {
 // };
 
 Icon.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   icon: PropTypes.string,
   iconStyle: PropTypes.oneOf(["solid", "regular"]),
   tooltip: PropTypes.string,

@@ -165,7 +165,7 @@ CustomInput.defaultProps = {
 };
 
 CustomInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,

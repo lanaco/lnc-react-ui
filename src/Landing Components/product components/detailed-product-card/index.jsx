@@ -17,6 +17,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     uuid,
     title,
     price = 0,
+    sellingPrice,
     currency,
     isNegotiable,
     isFree,
@@ -44,11 +45,22 @@ const DetailedProductCard = forwardRef((props, ref) => {
 
       <div className="wrapper-card-2">
         <div className="price-text">
+          <div>
+            {sellingPrice > 0 &&
+              currency &&
+              isNegotiable !== true &&
+              isFree !== true &&
+              `${formatPrice(sellingPrice)} ${GetCurrencySymbol(currency)}`}
+          </div>
           {price > 0 &&
             currency &&
             isNegotiable !== true &&
             isFree !== true &&
-            `${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
+            price !== sellingPrice && (
+              <div className="full-price">
+                {`${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
+              </div>
+            )}
           {isNegotiable && negotiableText}
           {isFree && freeText}
         </div>

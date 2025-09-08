@@ -134,7 +134,7 @@ const TextAreaInput = forwardRef((props, ref) => {
 // };
 
 TextAreaInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   defaultValue: PropTypes.string,
   value: PropTypes.string,
   disabled: PropTypes.bool,

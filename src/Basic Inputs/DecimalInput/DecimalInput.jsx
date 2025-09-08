@@ -146,7 +146,7 @@ const DecimalInput = forwardRef((props, ref) => {
 // };
 
 DecimalInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   value: PropTypes.any,
   defaultValue: PropTypes.any,
   disabled: PropTypes.bool,

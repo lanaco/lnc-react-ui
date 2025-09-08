@@ -117,7 +117,7 @@ const CustomSelectList = forwardRef((props, ref) => {
 });
 
 CustomSelectList.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   tooltip: PropTypes.string,
   onChange: PropTypes.func,

@@ -266,7 +266,7 @@ const DragAndDropFile = forwardRef((props, ref) => {
 
 DragAndDropFile.propTypes = {
   inputRef: PropTypes.any,
-  id: PropTypes.string,
+  id: PropTypes.any,
   disabled: PropTypes.bool,
   /**
    * Type of: { \[key: string]: string[] }

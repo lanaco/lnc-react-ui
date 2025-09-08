@@ -41,6 +41,16 @@ export const Wrapper = styled.div`
     font-size: 1rem;
     font-weight: 600;
     ${truncateText(2)}
+    display: flex;
+    align-items: end;
+    gap: 0.5rem;
+    & .full-price {
+      text-decoration: line-through;
+      font-size: 0.75rem;
+      font-weight: 400;
+      padding-bottom: 0.125rem;
+      color: var(--gray-600, #676e79);
+    }
   }
 
   & .location-text {

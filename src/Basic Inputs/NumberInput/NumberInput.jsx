@@ -153,7 +153,7 @@ const NumberInput = forwardRef((props, ref) => {
 // };
 
 NumberInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   value: PropTypes.any,
   defaultValue: PropTypes.any,
   disabled: PropTypes.bool,

@@ -41,6 +41,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 key={index}
                 title={x?.name}
                 price={x?.price}
+                sellingPrice={x?.sellingPrice}
                 currency={x?.currency}
                 image={x?.image}
                 sellerUuid={x?.sellerUuid}
@@ -62,6 +63,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                   key={index}
                   title={x?.name}
                   price={x?.price}
+                  sellingPrice={x?.sellingPrice}
                   currency={x?.currency}
                   image={x?.image}
                   sellerUuid={x?.sellerUuid}
