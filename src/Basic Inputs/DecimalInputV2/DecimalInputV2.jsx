@@ -267,7 +267,6 @@ const DecimalInputV2 = forwardRef((props, ref) => {
         onFocus={handleFocus}
         disabled={disabled || readOnly}
         onChange={(e) => {
-          console.log("CHG", e);
           handleChange(e);
         }}
       />
