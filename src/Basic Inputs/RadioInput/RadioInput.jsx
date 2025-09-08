@@ -386,7 +386,7 @@ const RadioInput = forwardRef((props, ref) => {
 // };
 
 RadioInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   name: PropTypes.string,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,

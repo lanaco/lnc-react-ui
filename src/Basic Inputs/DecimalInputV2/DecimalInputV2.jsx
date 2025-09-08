@@ -162,7 +162,11 @@ const DecimalInputV2 = forwardRef((props, ref) => {
         valRef.current = output;
 
         setVal(valRef.current);
-      } else if (+fullStr === 0 && allowNull === true && valRef?.current !== "") {
+      } else if (
+        +fullStr === 0 &&
+        allowNull === true &&
+        valRef?.current !== ""
+      ) {
         valRef.current = "";
         setVal(valRef.current);
 
@@ -209,7 +213,6 @@ const DecimalInputV2 = forwardRef((props, ref) => {
 
   const handleChange = (e) => {
     if (valRef?.current === "") {
-
       e.target.value = "";
       onInputChange(e, null);
 
@@ -264,7 +267,6 @@ const DecimalInputV2 = forwardRef((props, ref) => {
         onFocus={handleFocus}
         disabled={disabled || readOnly}
         onChange={(e) => {
-          console.log("CHG", e)
           handleChange(e);
         }}
       />
@@ -284,7 +286,7 @@ const DecimalInputV2 = forwardRef((props, ref) => {
 });
 
 DecimalInputV2.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   value: PropTypes.any,
   defaultValue: PropTypes.any,
   disabled: PropTypes.bool,

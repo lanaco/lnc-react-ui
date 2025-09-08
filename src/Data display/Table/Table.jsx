@@ -745,7 +745,7 @@ Table.propTypes = {
   /**
    *
    */
-  ID: PropTypes.string,
+  id: PropTypes.any,
   //----------------------------------------
   noBorder: PropTypes.bool,
   /**

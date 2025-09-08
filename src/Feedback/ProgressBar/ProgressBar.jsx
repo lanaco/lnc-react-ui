@@ -80,11 +80,10 @@ const ProgressBar = forwardRef((props, ref) => {
   const clonedProgress = () => {
     if (isValidElement(progressBarEndComponent)) {
       return cloneElement(progressBarEndComponent, {
-        className: `progress-icon ${progressBarEndComponent?.props?.className}`
+        className: `progress-icon ${progressBarEndComponent?.props?.className}`,
       });
     }
   };
-
 
   return (
     <Bar
@@ -101,7 +100,6 @@ const ProgressBar = forwardRef((props, ref) => {
         theme={theme}
         color={color}
       >
-        
         {progressBarEndComponent !== null && clonedProgress()}
       </Progressed>
       {showLabel && (
@@ -128,7 +126,7 @@ const ProgressBar = forwardRef((props, ref) => {
 // };
 
 ProgressBar.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   showLabel: PropTypes.bool,
   progressPercentage: PropTypes.number,
   //-------------------------
@@ -148,7 +146,7 @@ ProgressBar.propTypes = {
     "neutral",
     "gray",
   ]),
-  progressBarEndComponent: PropTypes.any
+  progressBarEndComponent: PropTypes.any,
 };
 
 export default ProgressBar;

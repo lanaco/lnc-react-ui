@@ -155,7 +155,7 @@ const TimeInput = forwardRef((props, ref) => {
 // };
 
 TimeInput.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   defaultValue: PropTypes.string,
   value: PropTypes.string,
   disabled: PropTypes.bool,

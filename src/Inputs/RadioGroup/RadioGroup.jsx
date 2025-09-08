@@ -97,13 +97,13 @@ const RadioGroup = forwardRef((props, ref) => {
 // };
 
 RadioGroup.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.any,
   name: PropTypes.string,
   value: PropTypes.any,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.object),
-  mapId: PropTypes.string,
+  mapid: PropTypes.any,
   mapValue: PropTypes.string,
   inline: PropTypes.bool,
   //----------------
