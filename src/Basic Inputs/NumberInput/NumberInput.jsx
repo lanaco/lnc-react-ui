@@ -30,6 +30,7 @@ const NumberInput = forwardRef((props, ref) => {
     onChange,
     onBlur,
     onFocus,
+    onKeyDown,
     //----------------
     className = "",
     style = {},
@@ -76,6 +77,18 @@ const NumberInput = forwardRef((props, ref) => {
     onBlur?.(e);
   };
 
+  const handleKeyDown = (event) => {
+    // / Prevent default for '+' and '-' keys
+    if (
+      event?.target?.value?.length > 0 &&
+      (event.key === "+" || event.key === "-")
+    ) {
+      event.preventDefault();
+    }
+
+    onKeyDown?.(event);
+  };
+
   return (
     <StyledWrapper
       style={style}
@@ -115,8 +128,10 @@ const NumberInput = forwardRef((props, ref) => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onValueChange}
+        onKeyDown={handleKeyDown}
         {...rest}
       />
+
       {suffix && (
         <StyledSuffix
           theme={theme}
