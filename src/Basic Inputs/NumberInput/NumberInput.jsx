@@ -62,8 +62,6 @@ const NumberInput = forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
-    console.log("test");
-    console.log(inputValue, e.target.value === undefined);
     inputValueRef.current = e.target.value;
     setInputValue(inputValueRef.current);
     debouncedOnChange(e, e.target.value);
