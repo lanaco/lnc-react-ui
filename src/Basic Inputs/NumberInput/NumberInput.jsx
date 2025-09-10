@@ -30,6 +30,7 @@ const NumberInput = forwardRef((props, ref) => {
     onChange,
     onBlur,
     onFocus,
+    onKeyDown,
     //----------------
     className = "",
     style = {},
@@ -61,6 +62,8 @@ const NumberInput = forwardRef((props, ref) => {
   };
 
   const onValueChange = (e) => {
+    console.log("test");
+    console.log(inputValue, e.target.value === undefined);
     inputValueRef.current = e.target.value;
     setInputValue(inputValueRef.current);
     debouncedOnChange(e, e.target.value);
@@ -74,6 +77,18 @@ const NumberInput = forwardRef((props, ref) => {
   const handleBlur = (e) => {
     setFocused(false);
     onBlur?.(e);
+  };
+
+  const handleKeyDown = (event) => {
+    // / Prevent default for '+' and '-' keys
+    if (
+      event?.target?.value?.length > 0 &&
+      (event.key === "+" || event.key === "-")
+    ) {
+      event.preventDefault();
+    }
+
+    onKeyDown?.(event);
   };
 
   return (
@@ -115,8 +130,10 @@ const NumberInput = forwardRef((props, ref) => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onValueChange}
+        onKeyDown={handleKeyDown}
         {...rest}
       />
+
       {suffix && (
         <StyledSuffix
           theme={theme}
