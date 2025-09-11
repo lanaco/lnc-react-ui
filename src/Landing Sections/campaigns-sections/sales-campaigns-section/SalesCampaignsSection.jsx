@@ -103,7 +103,7 @@ const SalesCampaignsSection = forwardRef(
               rightAlignArrows={true}
               elementsCount={items?.length}
               scrollBySize={
-                isMobile ? scrollSize : scrollSize * 2 + 24
+                isMobile ? scrollSize + 1 : scrollSize * 2 + 24
                 //document.getElementById("home-page-container")?.offsetWidth
               }
               showTimesBtn={false}
