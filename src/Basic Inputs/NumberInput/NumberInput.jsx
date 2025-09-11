@@ -79,13 +79,19 @@ const NumberInput = forwardRef((props, ref) => {
 
   const handleKeyDown = (event) => {
     // / Prevent default for '+' and '-' keys
+
     if (
       event?.target?.value?.length > 0 &&
       (event.key === "+" || event.key === "-")
     ) {
       event.preventDefault();
     }
-
+    if (
+      event?.target?.value === "" &&
+      (event.key === "+" || event.key === "-")
+    ) {
+      event.target.value = event.key;
+    }
     onKeyDown?.(event);
   };
 
