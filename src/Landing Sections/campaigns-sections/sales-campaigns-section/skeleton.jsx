@@ -2,10 +2,16 @@
 /* eslint-disable react/prop-types */
 import { forwardRef, Suspense } from "react";
 import { useTheme } from "@emotion/react";
-import { CampaignCardContainer, ContentWrapper, FilledPlaceholder, ImgWrapper } from "./style";
+import {
+  CampaignCardContainer,
+  ContentWrapper,
+  FilledPlaceholder,
+  ImgWrapper,
+  SkeletonContainer,
+} from "./style";
 
 const CampaignCardSkeleton = forwardRef(({}, ref) => {
-  const theme  = useTheme();
+  const theme = useTheme();
 
   return (
     <CampaignCardContainer ref={ref} theme={theme}>
@@ -39,13 +45,13 @@ const CampaignCardSkeleton = forwardRef(({}, ref) => {
 
 const SkeletonCampaigns = ({ itemsCount = 5, keyPrefix }) => {
   return (
-    <>
+    <SkeletonContainer>
       {Array.from({ length: itemsCount }, (_, index) => (
         <CampaignCardSkeleton
           key={`${keyPrefix}-skeleton-campaign-card-${index}`}
         />
       ))}
-    </>
+    </SkeletonContainer>
   );
 };
 
@@ -68,4 +74,3 @@ const SuspenseCampaignCard = ({
 };
 
 export default SuspenseCampaignCard;
-

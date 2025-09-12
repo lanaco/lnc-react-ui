@@ -45,19 +45,19 @@ const ProfileItem = (props) => {
       }}
       {...themeProps}
       key={name}
-      animate={{
-        y: 0,
-        opacity: 1,
-      }}
+      // animate={{
+      //   y: 0,
+      //   opacity: 1,
+      // }}
       className={`profile-item ${className}`}
-      exit={{
-        opacity: 0,
-      }}
+      // exit={{
+      //   opacity: 0,
+      // }}
       hasPermission={hasPermission}
-      initial={{
-        y: -10,
-        opacity: 0,
-      }}
+      // initial={{
+      //   y: -10,
+      //   opacity: 0,
+      // }}
       isActive={isActive}
       themeColor={themeData?.code || "transparent"}
     >

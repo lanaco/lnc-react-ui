@@ -103,4 +103,17 @@ export const CampaignCardContainer = styled.div`
     align-items: center;
     gap: 0.5rem;
   }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    flex-direction: column;
+
+    & .campaign__user {
+      margin-top: 1rem;
+    }
+  }
+`;
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  gap: 1.5rem;
 `;
