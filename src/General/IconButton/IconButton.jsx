@@ -39,7 +39,7 @@ const Button = forwardRef((props, ref) => {
     color,
     size,
     style,
-    className: "lnc-ui-icon-button " + className,
+    className: "lnc-ui-icon-button",
     disabled,
     borderRadius,
     btnType,
@@ -59,6 +59,7 @@ const Button = forwardRef((props, ref) => {
         ref={ref}
         data-type="filled"
         {...themeProps}
+        className={`${themeProps?.className} ${color}-${btnType}-lnc-btn ${className}`}
         onFocus={onFocus}
         onBlur={onBlur}
         onClick={onClick}
