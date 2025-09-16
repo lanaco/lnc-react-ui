@@ -92,7 +92,7 @@ const Button = forwardRef((props, ref) => {
         ref={ref}
         data-type="filled"
         {...themeProps}
-        className={`${themeProps?.className} ${className} ${color}-${btnType}-lnc-btn`}
+        className={`${themeProps?.className} ${color}-${btnType}-lnc-btn ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
