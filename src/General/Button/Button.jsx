@@ -50,7 +50,7 @@ const Button = forwardRef((props, ref) => {
     disabled,
     borderRadius,
     btnType,
-    className: "lnc-ui-button " + className,
+    className: "lnc-ui-button ",
   };
 
   const hasLeadingIcon = !isEmpty(leadingIcon);
@@ -92,7 +92,7 @@ const Button = forwardRef((props, ref) => {
         ref={ref}
         data-type="filled"
         {...themeProps}
-        className={`${themeProps?.className} ${color}-${btnType}-lnc-btn`}
+        className={`${themeProps?.className} ${className} ${color}-${btnType}-lnc-btn`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
