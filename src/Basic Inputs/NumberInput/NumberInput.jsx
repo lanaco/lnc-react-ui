@@ -31,6 +31,7 @@ const NumberInput = forwardRef((props, ref) => {
     onBlur,
     onFocus,
     onKeyDown,
+    maxDecimalPlaces,
     //----------------
     className = "",
     style = {},
@@ -91,6 +92,12 @@ const NumberInput = forwardRef((props, ref) => {
       (event.key === "+" || event.key === "-")
     ) {
       event.target.value = event.key;
+    }
+    if (event?.target?.value.includes(".") && maxDecimalPlaces) {
+      const decimals = event?.target?.value.split(".")[1];
+      if (decimals?.length >= maxDecimalPlaces) {
+        event.preventDefault();
+      }
     }
     onKeyDown?.(event);
   };
