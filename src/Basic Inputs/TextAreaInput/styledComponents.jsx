@@ -71,6 +71,23 @@ export const StyledTextareaWrapper = styled.div`
   }
 
   & textarea:disabled {
-    ${(props) => getDisabledStateCss(props.theme)}
+    /* ${(props) => getDisabledStateCss(props.theme)}
+     */
+    ${(props) => `background-color: ${getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "disabled",
+      "background",
+      "backgroundOpacity"
+    )};
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Input",
+            props.color,
+            "disabled",
+            "text"
+          )};`}
   }
 `;

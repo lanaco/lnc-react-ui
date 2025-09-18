@@ -58,6 +58,9 @@ export const lanaco_light = {
         },
         disabled: {
           border: 200,
+          background: 0,
+          backgroundOpacity: 50,
+          text: 500,
         },
       },
       teal: {
@@ -1361,6 +1364,9 @@ export const lanaco_light = {
         },
         disabled: {
           background: 200,
+          text: 500,
+          // background: 0,
+          // opacity: 50,
         },
       },
       teal: {
@@ -1508,6 +1514,9 @@ export const lanaco_light = {
         },
         disabled: {
           background: 200,
+          text: 500,
+          // background: 0,
+          // opacity: 50,
         },
       },
       teal: {
@@ -1728,6 +1737,7 @@ export const lanaco_light = {
         disabled: {
           background: 0,
           backgroundOpacity: 50,
+          text: 500,
         },
       },
       teal: {
@@ -3524,6 +3534,9 @@ export const lanaco_dark = {
         },
         disabled: {
           border: 700,
+          text: 500,
+          background: 0,
+          opacity: 50,
         },
       },
       teal: {
@@ -3582,6 +3595,9 @@ export const lanaco_dark = {
         },
         disabled: {
           border: 200,
+          background: 0,
+          backgroundOpacity: 50,
+          text: 500,
         },
       },
       teal: {
@@ -4807,7 +4823,11 @@ export const lanaco_dark = {
           fontWeight: 700,
         },
         disabled: {
-          background: 700,
+          // background: 700,
+          background: 200,
+          text: 500,
+          // background: 0,
+          // opacity: 50,
         },
       },
       teal: {
@@ -5176,6 +5196,7 @@ export const lanaco_dark = {
         disabled: {
           background: 0,
           backgroundOpacity: 50,
+          text: 500,
         },
       },
       teal: {
@@ -6895,7 +6916,7 @@ export const lanaco_e_commerce = {
     neutral: "neutral",
   },
   components: {
-     MainMenu: {
+    MainMenu: {
       default: {
         palette: "neutral",
         enabled: {
@@ -6972,6 +6993,9 @@ export const lanaco_e_commerce = {
         },
         disabled: {
           border: 200,
+          background: 0,
+          backgroundOpacity: 50,
+          text: 500,
         },
       },
       teal: {
@@ -7030,6 +7054,9 @@ export const lanaco_e_commerce = {
         },
         disabled: {
           border: 200,
+          background: 0,
+          backgroundOpacity: 50,
+          text: 500,
         },
       },
       teal: {
@@ -8274,6 +8301,10 @@ export const lanaco_e_commerce = {
         },
         disabled: {
           background: 200,
+          // background: 200,
+          text: 500,
+          // background: 0,
+          // opacity: 50,
         },
       },
       teal: {
@@ -8420,7 +8451,11 @@ export const lanaco_e_commerce = {
           fontWeight: 700,
         },
         disabled: {
-          background: 200,
+          // background: 200,
+          color: "gray",
+          text: 500,
+          background: 0,
+          opacity: 50,
         },
       },
       teal: {
@@ -8638,6 +8673,9 @@ export const lanaco_e_commerce = {
         disabled: {
           background: 0,
           backgroundOpacity: 50,
+          text: 500,
+          // background: 0,
+          // opacity: 50,
         },
       },
       teal: {
