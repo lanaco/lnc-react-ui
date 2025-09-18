@@ -56,7 +56,23 @@ const SyledInput = styled.input`
   color: ${(props) =>
     getColorRgbaValue(props.theme, "Input", props.color, "enabled", "text")};
   &:disabled {
-    ${(props) => getDisabledStateCss(props.theme)};
+    /* ${(props) => getDisabledStateCss(props.theme)}; */
+    ${(props) => `background-color: ${getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "disabled",
+      "background",
+      "backgroundOpacity"
+    )};
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Input",
+            props.color,
+            "disabled",
+            "text"
+          )};`}
     cursor: default;
   }
   &:focus:enabled {

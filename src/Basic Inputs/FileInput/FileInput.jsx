@@ -76,8 +76,26 @@ const Label = styled.div`
       )};
   border-radius: 8px 0 0 8px;
 
+  /* ${(props) =>
+    props.disabled === true ? getDisabledStateCss(props.theme) : ""} */
   ${(props) =>
-    props.disabled === true ? getDisabledStateCss(props.theme) : ""}
+    props.disabled === true &&
+    `background-color: ${getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "disabled",
+      "background",
+      "backgroundOpacity"
+    )};
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Input",
+            props.color,
+            "disabled",
+            "text"
+          )};`}
 `;
 
 const FileName = styled.input`
@@ -124,8 +142,27 @@ const FileName = styled.input`
       "text"
     )};
 
+  /* ${(props) =>
+    props.disabled === true ? getDisabledStateCss(props.theme) : ""} */
+
   ${(props) =>
-    props.disabled === true ? getDisabledStateCss(props.theme) : ""}
+    props.disabled === true &&
+    `background-color: ${getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "disabled",
+      "background",
+      "backgroundOpacity"
+    )};
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Input",
+            props.color,
+            "disabled",
+            "text"
+          )};`}
 `;
 
 const FileInput = forwardRef((props, ref) => {

@@ -59,7 +59,8 @@ const InputSlider = styled.input`
         "Range",
         props.color,
         props.disabled === true ? "disabled" : "enabled",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
     cursor: pointer; /* Cursor on hover */
     border: none;
@@ -75,7 +76,8 @@ const InputSlider = styled.input`
         "Range",
         props.color,
         props.disabled === true ? "disabled" : "enabled",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
     cursor: pointer; /* Cursor on hover */
     border: none;

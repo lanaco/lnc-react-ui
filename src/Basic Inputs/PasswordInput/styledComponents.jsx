@@ -36,7 +36,26 @@ export const StyledWrapper = styled.div`
 
   ${(props) =>
     props.focused && props.readOnly !== true ? getOutlineCss(props.theme) : ""}
-  ${(props) => (props.disabled === true ? getDisabledStateCss(props.theme) : "")}
+  /* ${(props) =>
+    props.disabled === true ? getDisabledStateCss(props.theme) : ""} */
+  ${(props) =>
+    props.disabled === true &&
+    `background-color: ${getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "disabled",
+      "background",
+      "backgroundOpacity"
+    )};
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Input",
+            props.color,
+            "disabled",
+            "text"
+          )};`}
 `;
 
 export const StyledPrefix = styled.span`
@@ -97,7 +116,23 @@ export const StyledInput = styled.input`
   }
 
   &:disabled {
-    ${(props) => getDisabledStateCss(props.theme)}
+    /* ${(props) => getDisabledStateCss(props.theme)} */
+    ${(props) => `background-color: ${getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "disabled",
+      "background",
+      "backgroundOpacity"
+    )};
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Input",
+            props.color,
+            "disabled",
+            "text"
+          )};`}
     background: none;
   }
 `;

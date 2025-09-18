@@ -62,7 +62,26 @@ const StyledInput = styled.label`
     props.readOnly !== true &&
     props.isFocused === true &&
     getOutlineCss(props.theme)};
-  ${(props) => props.disabled === true && getDisabledBackgroundCss(props.theme)}
+  /* ${(props) =>
+    props.disabled === true && getDisabledBackgroundCss(props.theme)} */
+  ${(props) =>
+    props.disabled === true &&
+    `background-color: ${getColorRgbaValue(
+      props.theme,
+      "Input",
+      props.color,
+      "disabled",
+      "background",
+      "backgroundOpacity"
+    )};
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Input",
+            props.color,
+            "disabled",
+            "text"
+          )};`}
   border: 1px solid ${(props) =>
     getColorRgbaValue(props.theme, "Input", props.color, "disabled", "border")};
 `;
@@ -109,7 +128,26 @@ const StyledColorInput = styled.div`
       height: 200%;
       cursor: pointer;
       transform: translate(-25%, -25%);
-      ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
+      /* ${(props) =>
+        props.disabled === true && getDisabledStateCss(props.theme)}; */
+      ${(props) =>
+        props.disabled === true &&
+        `background-color: ${getColorRgbaValue(
+          props.theme,
+          "Input",
+          props.color,
+          "disabled",
+          "background",
+          "backgroundOpacity"
+        )};
+        color: ${(props) =>
+          getColorRgbaValue(
+            props.theme,
+            "Input",
+            props.color,
+            "disabled",
+            "text"
+          )};`}
     }
   }
 `;
