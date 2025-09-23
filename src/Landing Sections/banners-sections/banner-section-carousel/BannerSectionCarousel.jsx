@@ -7,7 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { Wrapper, Banner, BannerOverlay } from "./style";
 import Button from "../../../General/Button/Button";
-import { isDefined, isDefinedNotEmptyString } from "../../../_utils/utils";
+import { isDefinedNotEmptyString } from "../../../_utils/utils";
 
 const BannerSectionCarousel = forwardRef(
   (
@@ -26,8 +26,8 @@ const BannerSectionCarousel = forwardRef(
           showThumbs={false}
           transitionTime={500}
           onClickItem={(idx) => {
-            if (!isMobile) {
-              onSelectItem?.(carouselItems?.at(idx), idx);
+            if (isMobile) {
+              onSelectItem(carouselItems?.[idx]);
             }
           }}
         >

@@ -20,6 +20,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     items,
     buttonText,
     limit = 4,
+    gap,
     onSelectCard = () => {},
     onButtonAction = () => {},
     isLoading = false,
@@ -130,7 +131,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
           productsToolbarName={productsToolbarName}
         />
       )}
-      <GridWrapper limit={limit}>
+      <GridWrapper limit={limit} gap={gap}>
         <SuspenseDetailedProductCard
           isLoading={isLoading}
           itemsCount={limit}
