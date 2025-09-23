@@ -50,7 +50,7 @@ const Button = forwardRef((props, ref) => {
     disabled,
     borderRadius,
     btnType,
-    className: "lnc-ui-button " + className,
+    className: "lnc-ui-button ",
   };
 
   const hasLeadingIcon = !isEmpty(leadingIcon);
@@ -92,6 +92,7 @@ const Button = forwardRef((props, ref) => {
         ref={ref}
         data-type="filled"
         {...themeProps}
+        className={`${themeProps?.className} ${color}-${btnType}-lnc-btn ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
@@ -113,6 +114,7 @@ const Button = forwardRef((props, ref) => {
         ref={ref}
         data-type="tinted"
         {...themeProps}
+        className={`${themeProps?.className} ${color}-${btnType}-lnc-btn ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
@@ -134,6 +136,7 @@ const Button = forwardRef((props, ref) => {
         ref={ref}
         data-type="outline"
         {...themeProps}
+        className={`${themeProps?.className} ${color}-${btnType}-lnc-btn ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
@@ -155,6 +158,7 @@ const Button = forwardRef((props, ref) => {
         ref={ref}
         data-type="basic"
         {...themeProps}
+        className={`${themeProps?.className} ${color}-${btnType}-lnc-btn ${className}`}
         hasLeadingIcon={hasLeadingIcon}
         hasTrailingIcon={hasTrailingIcon}
         onFocus={onFocus}
@@ -176,6 +180,7 @@ const Button = forwardRef((props, ref) => {
       data-type="filled"
       size={size}
       {...themeProps}
+      className={`${themeProps?.className} ${color}-${btnType}-lnc-btn ${className}`}
       hasLeadingIcon={hasLeadingIcon}
       hasTrailingIcon={hasTrailingIcon}
       onFocus={onFocus}

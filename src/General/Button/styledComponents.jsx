@@ -282,7 +282,17 @@ export const TintedButton = styled.button`
   }
 
   &:disabled {
-    ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
+    /* ${(props) =>
+      props.disabled === true && getDisabledStateCss(props.theme)};
+     */
+    color: ${(props) =>
+      getColorRgbaValue(
+        props.theme,
+        "ButtonTinted",
+        props.color,
+        "disabled",
+        "text"
+      )};
     cursor: default;
     background-color: ${(props) =>
       getColorRgbaValue(
@@ -290,7 +300,8 @@ export const TintedButton = styled.button`
         "ButtonTinted",
         "gray",
         "disabled",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
   }
 `;
