@@ -114,6 +114,7 @@ export const Banner = styled.div`
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     border-radius: unset;
+    cursor: pointer;
 
     & img {
       border-radius: unset;
