@@ -34,11 +34,19 @@ export const Wrapper = styled.div`
     }
   }
 
+  & .wrapper__tags__external {
+    width: 100%;
+  }
+
   & .wrapper__tags {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.75rem;
+
+    grid-template-columns: ${p => `repeat(${p.numberOfTags || 0}, minmax(0, 7rem))`};
+    justify-content: center;
+    display: grid;
   }
 
   & .wrapper__cards {

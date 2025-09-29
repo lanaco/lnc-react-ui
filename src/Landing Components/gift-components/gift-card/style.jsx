@@ -9,12 +9,18 @@ export const ExternalWrapper = styled.div`
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
-  &:hover {
-    color: var(--primary-500, #f59e0b);
-  }
 
   & .text-wrap {
     text-align: center;
+  }
+  & img {
+    transition: var(--transition, all 0.3s ease);
+    overflow: hidden;
+  }
+  &:hover {
+    & img {
+      transform: scale(1.1);
+    }
   }
 `;
 
@@ -60,6 +66,7 @@ export const CardWrapper = styled.div`
     position: absolute;
     left: -4.5rem;
     top: 1rem;
+    z-index: 2;
 
     -moz-transform: rotate(315deg);
     -o-transform: rotate(315deg);

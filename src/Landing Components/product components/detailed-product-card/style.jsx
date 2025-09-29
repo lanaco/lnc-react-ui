@@ -65,12 +65,6 @@ export const Wrapper = styled.div`
     gap: 0.5rem;
   }
 
-  &:hover {
-    & .card-title {
-      color: var(--primary-500, #f59e0b);
-    }
-  }
-
   & .skeleton-img {
     background-color: ${linearGradientAnimation("-90deg")};
     border-radius: 0.75rem;
