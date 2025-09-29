@@ -34,7 +34,6 @@ const LandingPageMasonryGeneralCard = forwardRef(
           position={position}
           backgroundColor={backgroundColor}
           onClick={onSelectCard}
-          href={`google.com`}
         >
           <img src={imageUrl} className="wrapper__image" />
           <div className="wrapper__text">
