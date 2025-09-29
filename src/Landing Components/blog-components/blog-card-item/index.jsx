@@ -22,6 +22,7 @@ const BlogCardItem = forwardRef(
       timeToRead = 0,
       numberOfLikes = 0,
       numberOfComments = 0,
+      isBookmarked = false,
       onSelectCard = () => {},
       onSelectOption = () => {},
       onBookmark = () => {},
@@ -69,7 +70,11 @@ const BlogCardItem = forwardRef(
             </div>
             <div className="info__content">
               <IconButton
-                icon=" mng-lnc-bookmark"
+                icon={
+                  isBookmarked
+                    ? " mng-lnc-bookmark--filled"
+                    : " mng-lnc-bookmark"
+                }
                 borderRadius="curved"
                 btnType="basic"
                 color="neutral"

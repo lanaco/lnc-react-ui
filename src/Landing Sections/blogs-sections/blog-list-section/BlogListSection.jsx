@@ -34,6 +34,7 @@ const BlogListSection = forwardRef(
           numberOfLikes={x?.numberOfLikes}
           numberOfComments={x?.numberOfComments}
           isSponsored={x?.isSponsored}
+          isBookmarked={x?.isBookmarked}
           onSelectCard={() => onSelectCard?.(x)}
           onSelectOption={(code) => onSelectOption?.(code)}
           onShare={() => onShare?.(x)}
