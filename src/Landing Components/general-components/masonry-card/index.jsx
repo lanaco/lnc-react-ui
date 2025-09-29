@@ -33,6 +33,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
           className={className}
           position={position}
           backgroundColor={backgroundColor}
+          onClick={onSelectCard}
         >
           <img src={imageUrl} className="wrapper__image" />
           <div className="wrapper__text">
@@ -44,7 +45,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
             {isDefinedNotEmptyString(buttonText) && (
               <Button
                 text={buttonText}
-                onClick={onSelectCard}
+                // onClick={() => onSelectCard}
                 className="text__action"
               />
             )}
