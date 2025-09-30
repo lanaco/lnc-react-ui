@@ -59,9 +59,5 @@ export const Group = styled.div`
   .city {
     cursor: pointer;
     transition: var(--transition);
-
-    &:hover {
-      color: var(--primary-500, #f59e0b);
-    }
   }
 `;

@@ -18,10 +18,7 @@ export const Wrapper = styled.div`
   cursor: pointer;
 
   &:hover {
-    & .text-wr-title {
-      color: var(--primary-500, #f59e0b);
-      transition: var(--transition);
-    }
+    
   }
 
   & img {

@@ -18,10 +18,7 @@ export const Wrapper = styled.div`
   min-height: 21.5625rem;
   cursor: pointer;
   &:hover {
-    & .text-wr-title {
-      color: var(--primary-500, #f59e0b);
-      transition: var(--transition);
-    }
+   
   }
 
   & img {

@@ -15,6 +15,18 @@ export const Wrapper = styled.div`
   background: ${(p) => p?.overlay};
   cursor: pointer;
 
+  & img {
+    transition: var(--transition, all 0.3s ease);
+    overflow: hidden;
+  }
+  overflow: hidden;
+
+  &:hover {
+    & img {
+      transform: scale(1.1);
+    }
+  }
+
   & .content-wrapper {
     position: absolute;
     right: 0;
@@ -63,12 +75,6 @@ export const Wrapper = styled.div`
   & .img-skeleton {
     background-color: ${linearGradientAnimation("-90deg")};
     min-height: 28.75rem;
-  }
-
-  &:hover {
-    & .content-text {
-      color: var(--primary-500, #f59e0b);
-    }
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

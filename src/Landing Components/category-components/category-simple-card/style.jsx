@@ -20,9 +20,7 @@ export const CardWrapper = styled.div`
   cursor: pointer;
 
   transition: var(--transition);
-  &:hover {
-    color: var(--primary-500, #f59e0b);
-  }
+
 
   /* drop-shadow-sm */
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);

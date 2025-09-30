@@ -55,16 +55,7 @@ export const Wrapper = styled.div`
       ${truncateTextInRows(2)}
     }
   }
-
-  &:hover {
     cursor: pointer;
-
-    & .wrapper__content {
-      & .wrapper__title {
-        color: var(--primary-500, #e87722);
-      }
-    }
-  }
 `;
 
 export const SkeletonWrapper = styled.div`

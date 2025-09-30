@@ -47,16 +47,7 @@ export const Wrapper = styled.div`
       transition: var(--transition, all 0.2s ease);
     }
   }
-
-  &:hover {
     cursor: pointer;
-
-    & .wrapper__content {
-      & .wrapper__title {
-        color: var(--primary-500, #e87722);
-      }
-    }
-  }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     background: transparent;

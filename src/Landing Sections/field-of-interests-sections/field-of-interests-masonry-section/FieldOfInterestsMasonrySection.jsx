@@ -91,27 +91,30 @@ const FieldOfInterestsMasonrySection = forwardRef(
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
         className={className}
+        numberOfTags={tags?.length}
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
-        <div className="wrapper__tags">
-          {tags && tags?.length > 0
-            ? tags?.map((tag, idx) => (
-                <FieldOfInterestsMasonryTag
-                  key={`field-of-interests-masonry-tag__${idx + 1}`}
-                  icon={tag?.icon}
-                  text={tag?.title}
-                  isActive={tag?.code === selectedTag}
-                  onSelectCard={() => onSelectTag?.(tag)}
-                />
-              ))
-            : Array.from("12345")?.map((_, idx) => (
-                <FieldOfInterestsMasonryTagSkeleton
-                  key={`field-of-interests-masonry-tag-skeleton__${idx + 1}`}
-                />
-              ))}
+        <div className="wrapper__tags__external">
+          <div className="wrapper__tags">
+            {tags && tags?.length > 0
+              ? tags?.map((tag, idx) => (
+                  <FieldOfInterestsMasonryTag
+                    key={`field-of-interests-masonry-tag__${idx + 1}`}
+                    icon={tag?.icon}
+                    text={tag?.title}
+                    isActive={tag?.code === selectedTag}
+                    onSelectCard={() => onSelectTag?.(tag)}
+                  />
+                ))
+              : Array.from("12345")?.map((_, idx) => (
+                  <FieldOfInterestsMasonryTagSkeleton
+                    key={`field-of-interests-masonry-tag-skeleton__${idx + 1}`}
+                  />
+                ))}
+          </div>
         </div>
         <div className="wrapper__cards">
           {items && items?.length > 0
