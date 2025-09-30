@@ -27,7 +27,6 @@ const BannerSectionCarousel = forwardRef(
           transitionTime={500}
           onClickItem={(idx) => {
             onSelectItem(carouselItems?.[idx]);
-            console.log(1);
           }}
         >
           {carouselItems &&
@@ -46,7 +45,7 @@ const BannerSectionCarousel = forwardRef(
                     {isDefinedNotEmptyString(b?.buttonText) && (
                       <Button
                         color="neutral"
-                        trailingIcon="arrow-right"
+                        // trailingIcon="arrow-right"
                         className="banner-action"
                         onClick={(e) => {
                           e?.stopPropagation();
