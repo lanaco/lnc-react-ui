@@ -4,7 +4,6 @@ import { forwardRef } from "react";
 import { Carousel } from "react-responsive-carousel";
 import PropTypes from "prop-types";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import useDetectMobile from "../../../_utils/useDetectMobile";
 import { Wrapper, Banner, BannerOverlay } from "./style";
 import Button from "../../../General/Button/Button";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
@@ -14,8 +13,6 @@ const BannerSectionCarousel = forwardRef(
     { carouselItems = [], onSelectItem = () => {}, onButtonAction = () => {} },
     ref
   ) => {
-    const isMobile = useDetectMobile();
-
     return (
       <Wrapper ref={ref}>
         <Carousel
@@ -26,9 +23,7 @@ const BannerSectionCarousel = forwardRef(
           showThumbs={false}
           transitionTime={500}
           onClickItem={(idx) => {
-            if (isMobile) {
-              onSelectItem(carouselItems?.[idx]);
-            }
+            onSelectItem(carouselItems?.[idx]);
           }}
         >
           {carouselItems &&
@@ -50,7 +45,8 @@ const BannerSectionCarousel = forwardRef(
                         // trailingIcon="arrow-right"
                         className="banner-action"
                         onClick={(e) => {
-                          e?.target?.blur();
+                          e?.stopPropagation();
+
                           onButtonAction(b);
                         }}
                       >

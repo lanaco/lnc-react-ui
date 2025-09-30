@@ -81,6 +81,7 @@ export const Block = styled.div`
 export const Banner = styled.div`
   position: relative;
   border-radius: 0.75rem;
+  cursor: pointer;
 
   background: ${(p) =>
     isDefinedNotEmptyString(p?.backgroundColor)
@@ -114,7 +115,6 @@ export const Banner = styled.div`
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     border-radius: unset;
-    cursor: pointer;
 
     & img {
       border-radius: unset;

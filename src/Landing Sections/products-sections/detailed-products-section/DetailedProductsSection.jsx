@@ -134,7 +134,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
       <GridWrapper limit={limit} gap={gap}>
         <SuspenseDetailedProductCard
           isLoading={isLoading}
-          itemsCount={limit}
+          limit={limit}
           keyPrefix={"explore-landing"}
         >
           {memoizedProducts}
