@@ -75,10 +75,7 @@ export const ContentWrapper = styled.div`
     font-weight: 600;
     font-size: 1.375rem;
     transition: var(--transition, all 0.3s ease);
-    &:hover {
-      color: var(--primary-500, #f59e0b);
-      font-size: 1.4rem;
-    }
+  
   }
 
   & .text-block-wrapper {

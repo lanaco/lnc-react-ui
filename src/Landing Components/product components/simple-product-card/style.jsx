@@ -91,7 +91,6 @@ export const Wrapper = styled.div`
   &:hover {
     & .title-simple-product-card {
       z-index: 1;
-      color: var(--primary-500, #f59e0b);
     }
   }
 `;

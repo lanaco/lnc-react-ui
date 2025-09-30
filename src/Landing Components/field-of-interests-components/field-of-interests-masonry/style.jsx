@@ -72,6 +72,7 @@ export const TagWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
+  height: 100%;
 
   &:hover {
     cursor: pointer;

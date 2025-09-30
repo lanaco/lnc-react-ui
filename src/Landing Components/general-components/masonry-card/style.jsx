@@ -111,14 +111,5 @@ export const Wrapper = styled.div`
       width: 9rem;
     }
   }
-
-  &:hover {
     cursor: pointer;
-
-    & .wrapper__text {
-      & .text__title {
-        color: var(--primary-500, #e87722);
-      }
-    }
-  }
 `;

@@ -21,12 +21,6 @@ export const Wrapper = styled.div`
      ${truncateTextInRows(2)}
   }
 
-  &:hover {
-    & .card-title {
-      color: var(--primary-500, #F59E0B);
-    }
-  }
-
   & .skeleton-img {
     background-color: ${linearGradientAnimation("-90deg")};
     border-radius: 0.75rem;
