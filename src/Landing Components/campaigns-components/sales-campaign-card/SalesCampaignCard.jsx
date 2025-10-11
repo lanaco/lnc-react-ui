@@ -43,7 +43,8 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     className,
     onSelectCard = () => {},
     onSelectShop = () => {},
-
+    upcoming = false,
+    upcomingCampaignText,
     campaignSingleText,
     salesCampaignTypes = [],
     startsInPrefixTextPlural,
@@ -98,7 +99,12 @@ const SalesCampaignCard = forwardRef((props, ref) => {
       <ContentWrapper theme={theme}>
         <div className="text-block-wrapper">
           <div className="title-block-wrapper">
-            <div className="campaign-title">{campaignSingleText}</div>
+            <div className="campaign-title">
+              {(upcoming
+                ? upcomingCampaignText
+                : campaignSingleText
+              )?.toUpperCase()}
+            </div>
             <div className="campaign-title-text">{title}</div>
             <div className="timestamp-text">
               {

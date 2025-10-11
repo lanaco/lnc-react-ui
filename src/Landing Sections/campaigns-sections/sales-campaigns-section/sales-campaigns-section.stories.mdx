@@ -11,7 +11,7 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export const TemplateDefault = (args) => (
   <SalesCampaignsSection
-    title={"Lorem ipsum"}
+    title={"Sponsored campaigns"}
     getImage={(cover, uuid) => cover}
     salesCampaignTypes={[
       {
@@ -57,6 +57,7 @@ export const TemplateDefault = (args) => (
         endDate: "2025-06-21T21:59:00",
         salesPackages: ["AddDiscount"],
         profileImage: "https://placehold.co/100x100/red/white",
+        upcoming: true,
       },
       {
         campaignUuid: "d7b8a42a-4cf6-4fb1-a17a-6369983c6050",
@@ -65,8 +66,7 @@ export const TemplateDefault = (args) => (
         profileImage:
           "MungosElectronicsTechnology_4f683464-8b99-4c31-9bf5-87ec898d7988",
         name: "Struja sniženja: Q6 SUV e-tron performance -30%",
-        coverPhoto:
-          "https://placehold.co/700x700/green/white",
+        coverPhoto: "https://placehold.co/700x700/green/white",
         description:
           "Q6 SUV e-tron performance sada je snižen 30%! Električni pogon, sportski duh i premium oprema – sve to po cijeni koja se ne viđa često. Moć, stil i ušteda u jednom. Ovo nije obična ponuda, ovo je trenutak za pametnu odluku.",
         startDate: "2025-06-06T09:09:19",
@@ -81,8 +81,7 @@ export const TemplateDefault = (args) => (
         profileImage:
           "MungosElectronicsTechnology_4f683464-8b99-4c31-9bf5-87ec898d7988",
         name: "Pametan poklon uz pametnu kupovinu",
-        coverPhoto:
-          "https://placehold.co/700x700/blue/white",
+        coverPhoto: "https://placehold.co/700x700/blue/white",
         description:
           "Kupuješ laptop, računar ili televizor? Imamo nešto za tebe – pametan sat ide gratis! Nema kvaka, nema sitnih slova. Samo ubaci jedan od ovih uređaja u korpu, i sat ti stiže uz njega. Jer kad već uzimaš pametnu stvar – red je da dobiješ još jednu.",
         startDate: "2025-06-06T09:09:18",
@@ -97,8 +96,7 @@ export const TemplateDefault = (args) => (
         profileImage:
           "AlverdeBeautyHealth_a52d1a85-8a43-4b24-963c-c1f3859751cd",
         name: "Proljetno čišćenje kože by alverde",
-        coverPhoto:
-          "https://placehold.co/700x700/yellow/black",
+        coverPhoto: "https://placehold.co/700x700/yellow/black",
         description:
           "Proljetno čišćenje kože počinje uz 1+1 gratis! Izaberi svoje omiljene proizvode za njegu lica i mi ti drugi poklanjamo. Uživaj i u besplatnoj dostavi. Vrijeme je za svježu kožu!",
         startDate: "2025-06-06T09:09:08",
@@ -107,11 +105,12 @@ export const TemplateDefault = (args) => (
         profileImage: "https://placehold.co/100x100/red/white",
       },
     ]}
-
-/>
+    upcomingCampaignText={"Upcoming campaign"}
+    campaignSingleText={"Campaign"}
+  />
 );
 
-## Calorie calculator section
+## Sales campaigns section
 
 <SyntaxHighlighter language="jsx" style={nord}>
   {

@@ -20,6 +20,7 @@ const SalesCampaignsSection = forwardRef(
       onSelectShop = () => {},
       getImage = () => {},
       campaignSingleText,
+      upcomingCampaignText,
       salesCampaignTypes = [],
       startsInPrefixTextPlural,
       startsinSuffixTextPlural,
@@ -56,6 +57,8 @@ const SalesCampaignsSection = forwardRef(
           onSelectCard={() => onSelectCard(item?.campaignUuid, item?.shopUuid)}
           onSelectShop={() => onSelectShop(item?.shopUuid)}
           campaignSingleText={campaignSingleText}
+          upcomingCampaignText={upcomingCampaignText}
+          upcoming={item?.upcoming}
           salesCampaignTypes={salesCampaignTypes}
           startsInPrefixTextPlural={startsInPrefixTextPlural}
           startsinSuffixTextPlural={startsinSuffixTextPlural}
