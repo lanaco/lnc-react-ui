@@ -75,7 +75,6 @@ export const ContentWrapper = styled.div`
     font-weight: 600;
     font-size: 1.375rem;
     transition: var(--transition, all 0.3s ease);
-  
   }
 
   & .text-block-wrapper {
@@ -160,7 +159,8 @@ export const StyledProfileItem = styled(motion.div)`
   ${flex(true)}
   gap: 0.5rem;
   padding: 0.5rem;
-  color: ${(p) => p.isActive === false ? "var(--gray-900)" : "var(--primary-600)"};
+  color: ${(p) =>
+    p.isActive === false ? "var(--gray-900)" : "var(--primary-600)"};
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -227,14 +227,10 @@ export const BadgeBar = styled.div`
   gap: 0.25rem;
 `;
 
-const getStatusTextColor = (color) => {
-  return `var(--${color}-700)`;
-};
-
 export const StatusBadge = styled.div`
   border-radius: ${(p) =>
     getBorderRadiusValueWithUnits(p.theme, p.borderRadius || "slight")};
-  background-color: ${(p) => getStatusTextColor(p?.color)};
+  background-color: ${(p) => p?.color};
   color: white;
   height: 1.5rem;
   min-width: 1.5rem;
