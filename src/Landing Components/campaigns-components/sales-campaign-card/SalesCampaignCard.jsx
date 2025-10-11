@@ -118,7 +118,6 @@ const SalesCampaignCard = forwardRef((props, ref) => {
               }
             </div>
           </div>
-          <div>{description}</div>
         </div>
         <ProfileItem
           hasPermission={true}
