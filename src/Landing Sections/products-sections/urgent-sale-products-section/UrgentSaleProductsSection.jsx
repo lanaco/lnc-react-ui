@@ -93,7 +93,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
           className="show-more"
           btnType="basic"
           type="button"
-          color="gray"
+          color="neutral"
           onClick={(e) => {
             e?.target?.blur();
             setShowAll(!showAll);

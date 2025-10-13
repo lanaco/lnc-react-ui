@@ -73,7 +73,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
           <Button
             type="button"
             btnType="tinted"
-            color="gray"
+            color="neutral"
             onClick={(e) => {
               e?.target?.blur();
               onButtonAction(buttonLink);
