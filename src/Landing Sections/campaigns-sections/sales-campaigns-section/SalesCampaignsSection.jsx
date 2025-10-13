@@ -26,9 +26,15 @@ const SalesCampaignsSection = forwardRef(
       startsinSuffixTextPlural,
       startsInPrefixTextSingular,
       startsinSuffixTextSingular,
+      endsInPrefixTextPlural,
+      endsinSuffixTextPlural,
+      endsInPrefixTextSingular,
+      endsinSuffixTextSingular,
       numOfSlides = 2,
       numOfSlidesForMobile = 1,
       showNavigation = true,
+      numberOfListingsTextSingular,
+      numberOfListingsTextPlural,
     },
     ref
   ) => {
@@ -51,6 +57,7 @@ const SalesCampaignsSection = forwardRef(
           shopImage={item?.profileImage}
           shopName={item?.shopName}
           shopUuid={item?.shopUuid}
+          shopCategory={item?.shopCategory}
           startDate={item?.startDate}
           title={item?.name}
           uuid={item?.campaignUuid}
@@ -64,7 +71,14 @@ const SalesCampaignsSection = forwardRef(
           startsinSuffixTextPlural={startsinSuffixTextPlural}
           startsInPrefixTextSingular={startsInPrefixTextSingular}
           startsinSuffixTextSingular={startsinSuffixTextSingular}
+          endsInPrefixTextPlural={endsInPrefixTextPlural}
+          endsinSuffixTextPlural={endsinSuffixTextPlural}
+          endsInPrefixTextSingular={endsInPrefixTextSingular}
+          endsinSuffixTextSingular={endsinSuffixTextSingular}
           themeData={item?.themeData}
+          numberOfListings={item?.numberOfListings}
+          numberOfListingsTextSingular={numberOfListingsTextSingular}
+          numberOfListingsTextPlural={numberOfListingsTextPlural}
         />
       ));
     }, [items]);

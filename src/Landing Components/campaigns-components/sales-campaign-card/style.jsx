@@ -89,9 +89,9 @@ export const ContentWrapper = styled.div`
   }
 
   & .timestamp-text {
-    font-size: 0.875rem;
-    font-weight: 400;
-    padding-top: 0.25rem;
+    font-size: 0.975rem;
+    font-weight: 500;
+    padding-top: 0.75rem;
     color: var(--gray-700, #4e555f);
   }
 
@@ -166,7 +166,12 @@ export const StyledProfileItem = styled(motion.div)`
   line-height: 1.25rem;
   border-radius: ${(p) => getBorderRadiusValueWithUnits(p.theme, "slight")};
   transition: all 0.25s ease;
-
+  & .description {
+    font-size: 0.85rem;
+    color: var(--gray-600, #676e79);
+    line-height: 1rem;
+    font-weight: 400;
+  }
   & .logo-wrapper {
     ${flex(true, false, true)}
     flex-shrink: 0;
@@ -181,8 +186,8 @@ export const StyledProfileItem = styled(motion.div)`
     .img-placeholder {
       border-radius: 999px;
       object-fit: cover;
-      height: 1.25rem;
-      width: 1.25rem;
+      height: 2.25rem;
+      width: 2.25rem;
       background-color: var(--gray-200, #dddfe4);
     }
 
@@ -199,6 +204,7 @@ export const StyledProfileItem = styled(motion.div)`
 
   & .name {
     flex-grow: 15;
+    font-size: 1.055rem;
   }
 
   & .notifications-number .badge {

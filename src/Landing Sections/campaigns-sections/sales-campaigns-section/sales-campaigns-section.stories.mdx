@@ -17,7 +17,7 @@ export const TemplateDefault = (args) => (
       {
         value: "AddDiscount",
         label: "salesCampaignTypes.addDiscount",
-        icon: "percentage",
+        icon: " mng-lnc-percentage",
         color: "#F44462",
         disableForService: false,
       },
@@ -25,20 +25,20 @@ export const TemplateDefault = (args) => (
         value: "FreeShipping",
         label: "salesCampaignTypes.freeShipping",
         color: "#1ABC86",
-        icon: "shipping-fast",
+        icon: " mng-lnc-delivery--parcel",
         disableForService: true,
       },
       {
         value: "FreeQuantity",
         label: "salesCampaignTypes.freeQuantity",
-        icon: "cube",
+        icon: " mng-lnc-3d-software",
         color: "#2691D9",
         disableForService: true,
       },
       {
         value: "IncludeGifts",
         label: "salesCampaignTypes.includeGifts",
-        icon: "gift",
+        icon: " mng-lnc-gift",
         color: "#8B5CF6",
         disableForService: false,
       },
@@ -53,11 +53,17 @@ export const TemplateDefault = (args) => (
         name: "Ljetno osvježenje",
         coverPhoto: "https://placehold.co/700x700/red/white",
         description: null,
-        startDate: "2025-06-11T06:59:23",
-        endDate: "2025-06-21T21:59:00",
-        salesPackages: ["AddDiscount"],
+        startDate: "2025-10-13T06:59:23",
+        endDate: "2025-10-14T21:59:00",
+        salesPackages: [
+          "AddDiscount",
+          "IncludeGifts",
+          "FreeShipping",
+          "FreeQuantity",
+        ],
         profileImage: "https://placehold.co/100x100/red/white",
         upcoming: true,
+        numberOfListings: 10,
       },
       {
         campaignUuid: "d7b8a42a-4cf6-4fb1-a17a-6369983c6050",
@@ -107,6 +113,16 @@ export const TemplateDefault = (args) => (
     ]}
     upcomingCampaignText={"Upcoming campaign"}
     campaignSingleText={"Campaign"}
+    startsInPrefixTextPlural={"Starts in"}
+    startsinSuffixTextPlural={"days"}
+    startsInPrefixTextSingular={"Starts in"}
+    startsinSuffixTextSingular={"day"}
+    endsInPrefixTextPlural={"Ends in"}
+    endsinSuffixTextPlural={"days"}
+    endsInPrefixTextSingular={"Ends in"}
+    endsinSuffixTextSingular={"day"}
+    numberOfListingsTextSingular={"listing"}
+    numberOfListingsTextPlural={"listings"}
   />
 );
 
