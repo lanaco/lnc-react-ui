@@ -75,7 +75,6 @@ export const ContentWrapper = styled.div`
     font-weight: 600;
     font-size: 1.375rem;
     transition: var(--transition, all 0.3s ease);
-  
   }
 
   & .text-block-wrapper {
@@ -90,9 +89,9 @@ export const ContentWrapper = styled.div`
   }
 
   & .timestamp-text {
-    font-size: 0.875rem;
-    font-weight: 400;
-    padding-top: 0.25rem;
+    font-size: 0.975rem;
+    font-weight: 500;
+    padding-top: 0.75rem;
     color: var(--gray-700, #4e555f);
   }
 
@@ -160,13 +159,19 @@ export const StyledProfileItem = styled(motion.div)`
   ${flex(true)}
   gap: 0.5rem;
   padding: 0.5rem;
-  color: ${(p) => p.isActive === false ? "var(--gray-900)" : "var(--primary-600)"};
+  color: ${(p) =>
+    p.isActive === false ? "var(--gray-900)" : "var(--primary-600)"};
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.25rem;
   border-radius: ${(p) => getBorderRadiusValueWithUnits(p.theme, "slight")};
   transition: all 0.25s ease;
-
+  & .description {
+    font-size: 0.85rem;
+    color: var(--gray-600, #676e79);
+    line-height: 1rem;
+    font-weight: 400;
+  }
   & .logo-wrapper {
     ${flex(true, false, true)}
     flex-shrink: 0;
@@ -181,8 +186,8 @@ export const StyledProfileItem = styled(motion.div)`
     .img-placeholder {
       border-radius: 999px;
       object-fit: cover;
-      height: 1.25rem;
-      width: 1.25rem;
+      height: 2.25rem;
+      width: 2.25rem;
       background-color: var(--gray-200, #dddfe4);
     }
 
@@ -199,6 +204,7 @@ export const StyledProfileItem = styled(motion.div)`
 
   & .name {
     flex-grow: 15;
+    font-size: 1.055rem;
   }
 
   & .notifications-number .badge {
@@ -227,14 +233,10 @@ export const BadgeBar = styled.div`
   gap: 0.25rem;
 `;
 
-const getStatusTextColor = (color) => {
-  return `var(--${color}-700)`;
-};
-
 export const StatusBadge = styled.div`
   border-radius: ${(p) =>
     getBorderRadiusValueWithUnits(p.theme, p.borderRadius || "slight")};
-  background-color: ${(p) => getStatusTextColor(p?.color)};
+  background-color: ${(p) => p?.color};
   color: white;
   height: 1.5rem;
   min-width: 1.5rem;
