@@ -174,12 +174,15 @@ const FaqSectionItems = forwardRef(
           ) : (
             <>
               {memoizedItems?.slice(0, 4)}
-              <Button
-                text={showMoreText}
-                btnType="basic"
-                className="section__show-more"
-                onClick={handleShowMore}
-              />
+              {memoizedItems?.length > 4 && (
+                <Button
+                  text={showMoreText}
+                  btnType="basic"
+                  color="neutral"
+                  className="section__show-more"
+                  onClick={handleShowMore}
+                />
+              )}
             </>
           )
         ) : (

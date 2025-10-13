@@ -317,6 +317,20 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/general-sections/feedback-section/FeedbackSection.jsx"
         ),
+        resolve(
+          __dirname,
+          "src/Help Sections/banner-section/HelpBannerSection.jsx"
+        ),
+        resolve(
+          __dirname,
+          "src/Help Sections/contact-section/ContactSection.jsx"
+        ),
+        resolve(__dirname, "src/Help Sections/faq-section/FaqSection.jsx"),
+        resolve(
+          __dirname,
+          "src/Help Sections/search-section/SearchSection.jsx"
+        ),
+        resolve(__dirname, "src/Help Sections/stats-section/StatsSection.jsx"),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {

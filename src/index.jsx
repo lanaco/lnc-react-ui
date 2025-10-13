@@ -217,6 +217,11 @@ export { default as BlogListSection } from "./Landing Sections/blogs-sections/bl
 export { default as AdBannerSection } from "./Landing Sections/general-sections/ad-banner-section/AdBannerSection";
 export { default as QuattroCardsSection } from "./Landing Sections/general-sections/quattro-cards-section/QuattroCardsSection";
 export { default as FeedbackSection } from "./Landing Sections/general-sections/feedback-section/FeedbackSection";
+export { default as HelpBannerSection } from "./Help Sections/banner-section/HelpBannerSection";
+export { default as ContactSection } from "./Help Sections/contact-section/ContactSection";
+export { default as FaqSection } from "./Help Sections/faq-section/FaqSection";
+export { default as SearchSection } from "./Help Sections/search-section/SearchSection";
+export { default as StatsSection } from "./Help Sections/stats-section/StatsSection";
 
 //======================== THEME ==============================================================
 

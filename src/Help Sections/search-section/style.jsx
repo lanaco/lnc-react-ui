@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { MOBILE_SIZE_PX } from "../../_utils/consts";
 
 export const Container = styled.div`
   display: flex;

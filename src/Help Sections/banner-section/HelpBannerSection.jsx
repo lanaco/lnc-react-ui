@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { Container } from "./style";
 
-const BannerSection = forwardRef(({ title, description, image }, ref) => {
+const HelpBannerSection = forwardRef(({ title, description, image }, ref) => {
   return (
     <Container ref={ref}>
       <div className="section__heading">
@@ -18,10 +18,10 @@ const BannerSection = forwardRef(({ title, description, image }, ref) => {
   );
 });
 
-BannerSection.propTypes = {
+HelpBannerSection.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
 };
 
-export default BannerSection;
+export default HelpBannerSection;

@@ -1,25 +1,25 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
 
-import BannerSection from "./BannerSection.jsx";
+import HelpBannerSection from "./HelpBannerSection.jsx";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-<Meta title="Help sections/Banner Section" component={BannerSection} />
+<Meta title="Help sections/Help Banner Section" component={HelpBannerSection} />
 
 export const TemplateDefault = (args) => (
-  <BannerSection
+  <HelpBannerSection
     title="Lorem ipsum dolor sit amet consectetur."
     description="Lorem ipsum dolor sit amet consectetur. Sagittis varius rhoncus consectetur eget tellus aenean mus ipsum molestie. Lorem ipsum dolor."
     image="https://placehold.co/1000x500/black/orange?text=Mungos"
   />
 );
 
-## Banner Section
+## Help Banner Section
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {'import BannerSection from "@lanaco/lnc-react-ui/BannerSection";'}
+  {'import HelpBannerSection from "@lanaco/lnc-react-ui/HelpBannerSection";'}
 </SyntaxHighlighter>
 
 <Canvas>

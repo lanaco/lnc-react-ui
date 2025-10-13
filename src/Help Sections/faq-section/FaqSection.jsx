@@ -2,8 +2,8 @@ import { forwardRef, useState } from "react";
 
 import PropTypes from "prop-types";
 
-import FaqSectionTags from "../../../Landing Components/help-components/faq-section-components/tag";
-import FaqSectionItems from "../../../Landing Components/help-components/faq-section-components/item";
+import FaqSectionTags from "../../Landing Components/help-components/faq-section-components/tag";
+import FaqSectionItems from "../../Landing Components/help-components/faq-section-components/item";
 import { Container } from "./style";
 
 const FaqSection = forwardRef(

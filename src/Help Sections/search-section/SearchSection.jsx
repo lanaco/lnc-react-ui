@@ -2,10 +2,10 @@ import { forwardRef } from "react";
 
 import PropTypes from "prop-types";
 
-import TextInput from "../../../Basic Inputs/TextInput/TextInput";
-import Icon from "../../../General/Icon/Icon";
-import SearchSectionTags from "../../../Landing Components/help-components/search-section-components/tag";
-import SearchSectionVideo from "../../../Landing Components/help-components/search-section-components/video";
+import TextInput from "../../Basic Inputs/TextInput/TextInput";
+import Icon from "../../General/Icon/Icon";
+import SearchSectionTags from "../../Landing Components/help-components/search-section-components/tag";
+import SearchSectionVideo from "../../Landing Components/help-components/search-section-components/video";
 import { Container } from "./style";
 
 const SearchSection = forwardRef(

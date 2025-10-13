@@ -3,11 +3,11 @@ import { Controller, useForm } from "react-hook-form";
 
 import PropTypes from "prop-types";
 
-import CheckBoxInput from "../../../Basic Inputs/CheckBoxInput/CheckBoxInput";
-import TextInput from "../../../Basic Inputs/TextInput/TextInput";
-import TextAreaInput from "../../../Basic Inputs/TextAreaInput/TextAreaInput";
-import Icon from "../../../General/Icon/Icon";
-import Button from "../../../General/Button/Button";
+import CheckBoxInput from "../../Basic Inputs/CheckBoxInput/CheckBoxInput";
+import TextInput from "../../Basic Inputs/TextInput/TextInput";
+import TextAreaInput from "../../Basic Inputs/TextAreaInput/TextAreaInput";
+import Icon from "../../General/Icon/Icon";
+import Button from "../../General/Button/Button";
 import { Container } from "./style";
 
 const ContactSection = forwardRef(
