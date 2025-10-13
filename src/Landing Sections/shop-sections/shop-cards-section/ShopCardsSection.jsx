@@ -44,6 +44,7 @@ const ShopCardsSection = forwardRef(
             {onButtonAction && (
               <Button
                 text={buttonText}
+                color="neutral"
                 borderRadius="curved"
                 btnType="tinted"
                 className="title__action"

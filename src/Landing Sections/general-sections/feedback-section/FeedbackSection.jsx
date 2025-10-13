@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
@@ -8,7 +10,7 @@ import { Container } from "./style";
 const FeedbackSection = forwardRef(
   ({ title, description, buttonText, onButtonAction = () => {} }, ref) => {
     return (
-      <Container>
+      <Container ref={ref}>
         <div className="feedback__content">
           {isDefinedNotEmptyString(title) && (
             <div className="feedback__title">

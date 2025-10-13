@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
@@ -23,7 +25,7 @@ const QuattroCardsSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         <div className="wrapper__heading">
           <div className="wrapper__title">
             {isDefinedNotEmptyString(title) && (
