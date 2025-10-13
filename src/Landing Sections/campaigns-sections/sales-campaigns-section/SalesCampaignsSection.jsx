@@ -20,14 +20,21 @@ const SalesCampaignsSection = forwardRef(
       onSelectShop = () => {},
       getImage = () => {},
       campaignSingleText,
+      upcomingCampaignText,
       salesCampaignTypes = [],
       startsInPrefixTextPlural,
       startsinSuffixTextPlural,
       startsInPrefixTextSingular,
       startsinSuffixTextSingular,
+      endsInPrefixTextPlural,
+      endsinSuffixTextPlural,
+      endsInPrefixTextSingular,
+      endsinSuffixTextSingular,
       numOfSlides = 2,
       numOfSlidesForMobile = 1,
       showNavigation = true,
+      numberOfListingsTextSingular,
+      numberOfListingsTextPlural,
     },
     ref
   ) => {
@@ -50,18 +57,28 @@ const SalesCampaignsSection = forwardRef(
           shopImage={item?.profileImage}
           shopName={item?.shopName}
           shopUuid={item?.shopUuid}
+          shopCategory={item?.shopCategory}
           startDate={item?.startDate}
           title={item?.name}
           uuid={item?.campaignUuid}
           onSelectCard={() => onSelectCard(item?.campaignUuid, item?.shopUuid)}
           onSelectShop={() => onSelectShop(item?.shopUuid)}
           campaignSingleText={campaignSingleText}
+          upcomingCampaignText={upcomingCampaignText}
+          upcoming={item?.upcoming}
           salesCampaignTypes={salesCampaignTypes}
           startsInPrefixTextPlural={startsInPrefixTextPlural}
           startsinSuffixTextPlural={startsinSuffixTextPlural}
           startsInPrefixTextSingular={startsInPrefixTextSingular}
           startsinSuffixTextSingular={startsinSuffixTextSingular}
+          endsInPrefixTextPlural={endsInPrefixTextPlural}
+          endsinSuffixTextPlural={endsinSuffixTextPlural}
+          endsInPrefixTextSingular={endsInPrefixTextSingular}
+          endsinSuffixTextSingular={endsinSuffixTextSingular}
           themeData={item?.themeData}
+          numberOfListings={item?.numberOfListings}
+          numberOfListingsTextSingular={numberOfListingsTextSingular}
+          numberOfListingsTextPlural={numberOfListingsTextPlural}
         />
       ));
     }, [items]);

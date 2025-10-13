@@ -19,7 +19,7 @@ const ProfileItem = (props) => {
     onClick = () => {},
     isActive,
     className,
-
+    shopCategory,
     // new
     themeData,
   } = props;
@@ -62,14 +62,17 @@ const ProfileItem = (props) => {
       themeColor={themeData?.code || "transparent"}
     >
       <div className="logo-wrapper">{image}</div>
-      <div className="name">{name}</div>
-      {notifications > 0 && (
-        <div className="notifications-number">
-          <Badge className="badge" color="danger" size="small">
-            {notifications > 99 ? "99+" : notifications}
-          </Badge>
-        </div>
-      )}
+      <div>
+        <div className="name">{name}</div>
+        {!isUser && <div className="description">{shopCategory}</div>}
+        {notifications > 0 && (
+          <div className="notifications-number">
+            <Badge className="badge" color="danger" size="small">
+              {notifications > 99 ? "99+" : notifications}
+            </Badge>
+          </div>
+        )}
+      </div>
     </StyledProfileItem>
   );
 };

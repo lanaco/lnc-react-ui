@@ -23,6 +23,19 @@ const calcDaysDifference = (date1, date2) => {
   return days;
 };
 
+const toLocaleDateString = (date) => {
+  if (date !== undefined) {
+    const dateTime = new Date(date);
+
+    const year = dateTime.getFullYear();
+    const month = dateTime.getMonth() + 1;
+
+    const day = String(dateTime.getDate()).padStart(2);
+
+    return `${day}. ${month}. ${year}.`;
+  }
+};
+
 const SalesCampaignCard = forwardRef((props, ref) => {
   const theme = useTheme();
 
@@ -39,18 +52,27 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     endDate,
     salesPackages,
     shopName,
+    shopCategory,
     shopImage,
     className,
     onSelectCard = () => {},
     onSelectShop = () => {},
-
+    upcoming = false,
+    upcomingCampaignText,
     campaignSingleText,
     salesCampaignTypes = [],
     startsInPrefixTextPlural,
     startsinSuffixTextPlural,
     startsInPrefixTextSingular,
     startsinSuffixTextSingular,
+    endsInPrefixTextPlural,
+    endsinSuffixTextPlural,
+    endsInPrefixTextSingular,
+    endsinSuffixTextSingular,
     themeData,
+    numberOfListings,
+    numberOfListingsTextSingular,
+    numberOfListingsTextPlural,
     ...rest
   } = props;
 
@@ -63,6 +85,21 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     startDate ? new Date(startDate) : null,
     new Date()
   );
+  const endsInDays = calcDaysDifference(
+    endDate ? new Date(endDate) : null,
+    new Date()
+  );
+
+  const durationText = (
+    prefixTextSingular,
+    prefixTextPlural,
+    days,
+    suffixTextSingular,
+    suffixTextPlural
+  ) =>
+    days === 1
+      ? `${prefixTextSingular} ${days} ${suffixTextSingular}`
+      : `${prefixTextPlural} ${days} ${suffixTextPlural}`;
 
   return (
     <Wrapper
@@ -98,21 +135,46 @@ const SalesCampaignCard = forwardRef((props, ref) => {
       <ContentWrapper theme={theme}>
         <div className="text-block-wrapper">
           <div className="title-block-wrapper">
-            <div className="campaign-title">{campaignSingleText}</div>
+            <div className="campaign-title">
+              {(upcoming
+                ? upcomingCampaignText
+                : campaignSingleText
+              )?.toUpperCase()}
+            </div>
             <div className="campaign-title-text">{title}</div>
+            {endDate && startDate && (
+              <div>
+                {toLocaleDateString(startDate)} - {toLocaleDateString(endDate)}
+              </div>
+            )}
             <div className="timestamp-text">
+              {numberOfListings > 0 &&
+                `${numberOfListings} ${
+                  numberOfListings === 1
+                    ? numberOfListingsTextSingular
+                    : numberOfListingsTextPlural
+                } ∙ `}
               {
                 hasStarted
-                  ? ""
-                  : startsInDays === 1
-                  ? `${startsInPrefixTextSingular} ${startsInDays} ${startsinSuffixTextSingular}`
-                  : `${startsInPrefixTextPlural} ${startsInDays} ${startsinSuffixTextPlural}`
+                  ? durationText(
+                      endsInPrefixTextSingular,
+                      endsInPrefixTextPlural,
+                      endsInDays,
+                      endsinSuffixTextSingular,
+                      endsinSuffixTextPlural
+                    )
+                  : durationText(
+                      startsInPrefixTextSingular,
+                      startsInPrefixTextPlural,
+                      startsInDays,
+                      startsinSuffixTextSingular,
+                      startsinSuffixTextPlural
+                    )
                 // ? t("dateTime.startsInSingle", { days: startsInDays })
                 // : t("dateTime.startsInPlural", { days: startsInDays })
               }
             </div>
           </div>
-          <div>{description}</div>
         </div>
         <ProfileItem
           hasPermission={true}
@@ -134,6 +196,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
           isActive={true}
           isUser={false}
           name={shopName}
+          shopCategory={shopCategory}
           //   onSelect={(e) => navigate(`/shop/${shopUuid}`)}
           onClick={() => onSelectShop(shopUuid)}
         />
