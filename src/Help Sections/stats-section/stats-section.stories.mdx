@@ -1,0 +1,55 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import StatsSection from "./StatsSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta title="Help sections/Stats Section" component={StatsSection} />
+
+export const TemplateDefault = (args) => (
+  <StatsSection
+    title="After 12 months, Mungos customers see"
+    description="Lorem ipsum dolor sit amet consectetur. Vel nisl ut ac at."
+    items={[
+      {
+        title: "82%",
+        description: "Lorem ipsum dolor sit amet dolor sit amet",
+        image: "https://placehold.co/100x100/orange/black?text=Mungos",
+      },
+      {
+        title: "82%",
+        description: "Lorem ipsum dolor sit amet dolor sit amet",
+        image: "https://placehold.co/100x100/black/orange?text=Mungos",
+      },
+      {
+        title: "82%",
+        description: "Lorem ipsum dolor sit amet dolor sit amet",
+        image: "https://placehold.co/100x100/orange/black?text=Mungos",
+      },
+      {
+        title: "82%",
+        description: "Lorem ipsum dolor sit amet dolor sit amet",
+        image: "https://placehold.co/100x100/black/orange?text=Mungos",
+      },
+      {
+        title: "82%",
+        description: "Lorem ipsum dolor sit amet dolor sit amet",
+        image: "https://placehold.co/100x100/orange/black?text=Mungos",
+      },
+    ]}
+  />
+);
+
+## Stats Section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import StatsSection from "@lanaco/lnc-react-ui/StatsSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

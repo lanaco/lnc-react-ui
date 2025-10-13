@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.112",
+  "version": "4.0.113",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -157,7 +157,12 @@
     "./BlogListSection": "./dist/BlogListSection.js",
     "./AdBannerSection": "./dist/AdBannerSection.js",
     "./QuattroCardsSection": "./dist/QuattroCardsSection.js",
-    "./FeedbackSection": "./dist/FeedbackSection.js"
+    "./FeedbackSection": "./dist/FeedbackSection.js",
+    "./HelpBannerSection": "./dist/HelpBannerSection.js",
+    "./ContactSection": "./dist/ContactSection.js",
+    "./FaqSection": "./dist/FaqSection.js",
+    "./SearchSection": "./dist/SearchSection.js",
+    "./StatsSection": "./dist/StatsSection.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",
@@ -187,6 +192,7 @@
     "react-hook-form": "^7.39.1",
     "react-modern-drawer": "^1.1.2",
     "react-number-format": "^4.9.3",
+    "react-player": "^2.16.0",
     "react-responsive-carousel": "^3.2.23",
     "react-select": "^5.4.0",
     "react-syntax-highlighter": "^15.5.0",

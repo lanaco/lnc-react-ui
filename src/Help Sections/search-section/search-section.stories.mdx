@@ -1,0 +1,39 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import SearchSection from "./SearchSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta title="Help sections/Search Section" component={SearchSection} />
+
+export const TemplateDefault = (args) => (
+  <SearchSection
+    title="How can we help?"
+    description="Lorem ipsum dolor sit amet consectetur. Sagittis varius rhoncus consectetur."
+    suggestedText="Suggested:"
+    searchPlaceholderText="Search for rules, tempates, forms and more"
+    includeSearch={true}
+    tags={[
+      { code: "get-started", name: "Get started" },
+      { code: "register-shop", name: "Register shop" },
+      { code: "sell", name: "Sell" },
+      { code: "create-deel", name: "Create Deel" },
+    ]}
+    video="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    thumbnail="https://placehold.co/500x300/black/orange?text=How Mungos works"
+  />
+);
+
+## Search Section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import SearchSection from "@lanaco/lnc-react-ui/SearchSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

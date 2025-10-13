@@ -18,7 +18,6 @@ export const Wrapper = styled.div`
   min-height: 21.5625rem;
   cursor: pointer;
   &:hover {
-   
   }
 
   & img {
@@ -38,11 +37,17 @@ export const Wrapper = styled.div`
   & .tags-wr {
     margin-top: auto;
     display: flex;
+
     gap: 0.5rem;
     padding: 0 1rem 1rem 1rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    max-height: 100%;
+    min-height: 100%;
+    & .tags-wr {
+      flex-wrap: wrap;
+    }
   }
 `;
 

@@ -36,20 +36,48 @@ const BlogCardItem = forwardRef(
         <div className="wrapper__content">
           <div className="wrapper__subcontent">
             <div className="wrapper__title">{title}</div>
-            <div className="wrapper__tags">
-              {options &&
-                options?.map((option, idx) => (
-                  <Chip
-                    key={`blog-card-sponsored-option__${idx + 1}`}
-                    label={option?.name}
-                    color={option?.color}
-                    className="wrapper__tag"
-                    onClick={(e) => {
-                      e?.stopPropagation();
-                      onSelectOption(option?.code);
-                    }}
-                  />
-                ))}
+            <div className="wrapper__tags-action">
+              <div className="wrapper__tags">
+                {options &&
+                  options?.map((option, idx) => (
+                    <Chip
+                      key={`blog-card-sponsored-option__${idx + 1}`}
+                      label={option?.name}
+                      color={option?.color}
+                      className="wrapper__tag"
+                      onClick={(e) => {
+                        e?.stopPropagation();
+                        onSelectOption(option?.code);
+                      }}
+                    />
+                  ))}
+              </div>
+              <div className="info__content mobile-only">
+                <IconButton
+                  icon={
+                    isBookmarked
+                      ? " mng-lnc-bookmark--filled"
+                      : " mng-lnc-bookmark"
+                  }
+                  borderRadius="curved"
+                  btnType="basic"
+                  color="neutral"
+                  onClick={(e) => {
+                    e?.stopPropagation();
+                    onBookmark();
+                  }}
+                />
+                <IconButton
+                  icon=" mng-lnc-share"
+                  borderRadius="curved"
+                  btnType="basic"
+                  color="neutral"
+                  onClick={(e) => {
+                    e?.stopPropagation();
+                    onShare();
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className="wrapper__info">
@@ -68,7 +96,7 @@ const BlogCardItem = forwardRef(
                 </div>
               </div>
             </div>
-            <div className="info__content">
+            <div className="info__content desktop-only">
               <IconButton
                 icon={
                   isBookmarked

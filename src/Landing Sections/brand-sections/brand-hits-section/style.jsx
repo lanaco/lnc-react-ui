@@ -15,12 +15,12 @@ export const Wrapper = styled.div`
   & .wrapper__heading {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     text-align: center;
     width: 100%;
 
     & .wrapper__title {
-      color: var(--gray-950, #14161a);
+      color: var(--navy-900, #0c1520);
       text-align: center;
       font-size: 1.5rem;
       font-style: normal;
@@ -30,11 +30,11 @@ export const Wrapper = styled.div`
     }
 
     & .wrapper__subtitle {
-      color: var(---gray-600, #676e79);
-      font-size: 0.875rem;
+      color: var(--navy-500, #7a8594);
+      font-size: 1rem;
       font-style: normal;
-      font-weight: 400;
-      line-height: 1.25rem;
+      font-weight: 500;
+      line-height: 1.5rem;
       letter-spacing: 0.25px;
     }
   }
