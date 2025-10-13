@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 
+import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
@@ -14,6 +15,10 @@ export const Wrapper = styled.div`
   min-height: 10.5rem;
   position: relative;
   width: 100%;
+
+  & .mobile-only {
+    display: none;
+  }
 
   &:hover {
     cursor: pointer;
@@ -79,6 +84,7 @@ export const Wrapper = styled.div`
       & .info__content {
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
         &:first-of-type {
           flex-grow: 1;
@@ -99,24 +105,47 @@ export const Wrapper = styled.div`
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     flex-direction: column;
+    padding: 0;
+    background: transparent;
+    border: none;
+
+    & .desktop-only {
+      display: none !important;
+    }
+
+    & .mobile-only {
+      display: block;
+    }
+
+    & .wrapper__subcontent {
+      order: 1;
+    }
+
+    & .wrapper__tags-action {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    & .wrapper__tags {
+      flex: 1;
+    }
 
     & .wrapper__content {
       gap: 1rem;
 
       & .wrapper__info {
         gap: 0.5rem;
-        flex-direction: column;
+        justify-content: space-between;
         width: 100%;
+        order: 0;
 
         & .info__content {
           align-items: flex-start;
           width: 100%;
-
-          &:first-of-type {
-            flex-direction: column;
-          }
         }
       }
     }

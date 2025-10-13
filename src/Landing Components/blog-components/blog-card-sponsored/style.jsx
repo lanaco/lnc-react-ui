@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 
+import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
@@ -109,15 +110,27 @@ export const Wrapper = styled.div`
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     flex-direction: column;
+    padding: 0;
+
+    & .wrapper__image {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
 
     & .wrapper__content {
       gap: 1rem;
+      padding: 0 1rem 1rem 1rem;
+
+      & .wrapper__subcontent {
+        order: 1;
+      }
 
       & .wrapper__info {
         gap: 0.5rem;
-        flex-direction: column;
+        justify-content: space-between;
+        order: 0;
       }
     }
   }

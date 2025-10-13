@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -20,7 +21,8 @@ export const Wrapper = styled.div`
 
       & .title__text {
         color: var(--gray-950, #14161a);
-        text-align: center;
+        ${truncateTextInRows(2)}
+
         font-size: 1.5rem;
         font-style: normal;
         font-weight: 600;
@@ -72,11 +74,9 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    & .wrapper__heading {
-      & .wrapper__title {
-        & .title__action {
-          display: none;
-        }
+    & .wrapper__title {
+      & .title__text {
+        font-size: 1.375rem;
       }
     }
 

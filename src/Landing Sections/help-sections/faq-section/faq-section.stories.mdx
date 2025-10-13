@@ -1,0 +1,146 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import FaqSection from "./FaqSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Help sections/FAQ Section"
+  component={FaqSection}
+  parameters={{
+    backgrounds: {
+      default: "custom",
+      values: [{ name: "custom", value: "#fff" }],
+    },
+  }}
+/>
+
+export const TemplateDefault = (args) => (
+  <FaqSection
+    title="Frequently asked questions"
+    description="Lorem ipsum dolor sit amet consectetur. Sagittis varius rhoncus consectetur."
+    questionText="What do you think about this answer?"
+    feedbackText="Thank you for feedback!"
+    showMoreText="Show more"
+    impressions={true}
+    tags={[
+      { code: null, name: "All" },
+      { code: "shopping", name: "Shopping" },
+      { code: "shop", name: "Shop" },
+      { code: "registration", name: "Registration" },
+      { code: "trade", name: "Trade" },
+    ]}
+    items={[
+      {
+        tagCode: "shopping",
+        title: "Kako da kupim nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "shopping",
+        title: "Kako da kupim nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "shopping",
+        title: "Kako da kupim nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "shopping",
+        title: "Kako da kupim nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "shopping",
+        title: "Kako da kupim nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "shopping",
+        title: "Kako da kupim nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "shopping",
+        title: "Kako da kupim nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "shopping",
+        title: "Kako da kupim nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "trade",
+        title: "Kako da prodam nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "trade",
+        title: "Kako da prodam nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "trade",
+        title: "Kako da prodam nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "trade",
+        title: "Kako da prodam nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "trade",
+        title: "Kako da prodam nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "trade",
+        title: "Kako da prodam nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "trade",
+        title: "Kako da prodam nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+      {
+        tagCode: "trade",
+        title: "Kako da prodam nešto na Mungosu?",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Ipsum adipiscing nunc vitae pellentesque viverra. Duis purus ut ultricies lorem interdum egestas porta. Lacus nisi hendrerit a porttitor semper posuere tincidunt vitae. Sit ac neque tincidunt velit id diam. Fames sagittis sit.",
+      },
+    ]}
+  />
+);
+
+## FAQ Section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import FaqSection from "@lanaco/lnc-react-ui/FaqSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

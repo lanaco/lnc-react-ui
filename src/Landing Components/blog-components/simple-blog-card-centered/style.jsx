@@ -23,6 +23,7 @@ export const Wrapper = styled.div`
   & button {
     width: fit-content;
     margin-top: auto;
+    color: var(--gray-950, #14161a);
   }
 
   & img {

@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
 
 export const SkeletonWrapper = styled.div`
   width: 7.5rem;
-  height: 7.5rem;
+  height: 3.5rem;
   background: ${linearGradientAnimation("-90deg")};
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
