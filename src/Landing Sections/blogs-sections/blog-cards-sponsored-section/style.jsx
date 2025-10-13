@@ -40,13 +40,13 @@ export const Wrapper = styled.div`
       }
 
       & .title__action {
-        color: var(--gray-950, #14161a);
-        background: var(--neutral-9504, rgba(20, 22, 26, 0.04));
+        /* color: var(--gray-950, #14161a);
+        background: var(--neutral-9504, rgba(20, 22, 26, 0.04)); */
         white-space: nowrap;
 
-        &:hover {
+        /* &:hover {
           background: var(--neutral-9504, rgba(20, 22, 26, 0.12));
-        }
+        } */
 
         &:focus {
           outline: none;
