@@ -11,9 +11,9 @@ const FaqSection = forwardRef(
     {
       title,
       description,
-      questionText,
-      feedbackText,
-      showMoreText,
+      questionText = "What do you think about this answer?",
+      feedbackText = "Thank you for feedback!",
+      showMoreText = "Show more",
       impressions = false,
       tags = [],
       items = [],
