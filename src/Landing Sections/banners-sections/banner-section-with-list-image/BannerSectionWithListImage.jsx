@@ -46,7 +46,7 @@ const BannerSectionWithListImage = forwardRef((props, ref) => {
         </ListWrapper>
         <Button
           size="medium"
-          color="gray"
+          color="neutral"
           type="button"
           btnType="outline"
           onClick={(e) => {

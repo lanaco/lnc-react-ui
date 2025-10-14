@@ -41,6 +41,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
 
     return (
       <Wrapper
+        ref={ref}
         limitTags={limitTags}
         limitTagsForMobile={limitTagsForMobile}
         limitCards={limit}
