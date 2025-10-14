@@ -13,8 +13,8 @@ const SearchSection = forwardRef(
     {
       title,
       description,
-      suggestedText,
-      searchPlaceholderText,
+      suggestedText = "Suggested",
+      searchPlaceholderText = "Search for rules, tempates, forms and more",
       tags = [],
       includeSearch = false,
       video,
