@@ -331,6 +331,10 @@ export default defineConfig({
           "src/Help Sections/search-section/SearchSection.jsx"
         ),
         resolve(__dirname, "src/Help Sections/stats-section/StatsSection.jsx"),
+        resolve(
+          __dirname,
+          "src/Help Sections/toggle-section/ToggleSection.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {

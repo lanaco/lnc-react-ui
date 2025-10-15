@@ -162,7 +162,8 @@
     "./ContactSection": "./dist/ContactSection.js",
     "./FaqSection": "./dist/FaqSection.js",
     "./SearchSection": "./dist/SearchSection.js",
-    "./StatsSection": "./dist/StatsSection.js"
+    "./StatsSection": "./dist/StatsSection.js",
+    "./ToggleSection": "./dist/ToggleSection.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",

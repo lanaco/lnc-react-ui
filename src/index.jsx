@@ -222,6 +222,7 @@ export { default as ContactSection } from "./Help Sections/contact-section/Conta
 export { default as FaqSection } from "./Help Sections/faq-section/FaqSection";
 export { default as SearchSection } from "./Help Sections/search-section/SearchSection";
 export { default as StatsSection } from "./Help Sections/stats-section/StatsSection";
+export { default as ToggleSection } from "./Help Sections/toggle-section/ToggleSection";
 
 //======================== THEME ==============================================================
 
