@@ -14,6 +14,7 @@ const FaqSection = forwardRef(
       questionText = "What do you think about this answer?",
       feedbackText = "Thank you for feedback!",
       showMoreText = "Show more",
+      allTagText = "All",
       impressions = false,
       tags = [],
       items = [],
@@ -38,6 +39,7 @@ const FaqSection = forwardRef(
         </div>
         <FaqSectionTags
           tags={tags}
+          allTagText={allTagText}
           selectedTagCode={selectedTagCode}
           onSelectTag={handleSelectTag}
         />
@@ -68,6 +70,7 @@ FaqSection.propTypes = {
   questionText: PropTypes.string,
   feedbackText: PropTypes.string,
   showMoreText: PropTypes.string,
+  allTagText: PropTypes.string,
   impressions: PropTypes.bool,
   onSelectItem: PropTypes.func,
   onImpressed: PropTypes.func,

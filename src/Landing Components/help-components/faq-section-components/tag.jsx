@@ -6,10 +6,13 @@ import Chip from "../../../Data display/Chip/Chip";
 import { TagsContainer } from "./style";
 
 const FaqSectionTags = forwardRef(
-  ({ tags = [], selectedTagCode = null, onSelectTag = () => {} }, ref) => {
+  (
+    { tags = [], allTagText, selectedTagCode = null, onSelectTag = () => {} },
+    ref
+  ) => {
     return (
       <TagsContainer>
-        {tags?.map((tag, idx) => (
+        {[{ name: allTagText, code: null }, ...tags]?.map((tag, idx) => (
           <Chip
             key={`faq-section-tag__${idx + 1}`}
             label={tag?.name}
@@ -30,6 +33,7 @@ const FaqSectionTags = forwardRef(
 
 FaqSectionTags.propTypes = {
   tags: PropTypes.array,
+  allTagText: PropTypes.string,
   onSelectTag: PropTypes.func,
 };
 
