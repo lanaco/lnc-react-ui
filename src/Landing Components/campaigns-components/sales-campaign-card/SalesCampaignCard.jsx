@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import { useTheme } from "@emotion/react";
 import {
@@ -10,7 +11,7 @@ import {
 import PropTypes from "prop-types";
 import Icon from "../../../General/Icon/Icon";
 import ProfileItem from "./ProfileItem";
-import { forwardRef } from "react";
+import { forwardRef, useState, useEffect } from "react";
 
 const calcDaysDifference = (date1, date2) => {
   if (!date1 || !date2) return null;
@@ -18,7 +19,7 @@ const calcDaysDifference = (date1, date2) => {
   let diff = Math.floor(date1?.getTime() - date2?.getTime());
   let day = 1000 * 60 * 60 * 24;
 
-  let days = Math.ceil(diff / day);
+  let days = Math.floor(diff / day);
 
   return days;
 };
@@ -40,14 +41,14 @@ const SalesCampaignCard = forwardRef((props, ref) => {
   const theme = useTheme();
 
   const {
-    uuid,
+    // uuid,
     shopUuid,
     title = "",
-    description,
-    badges,
+    // description,
+    // badges,
     coverPhoto,
     onSelect,
-    status,
+    // status,
     startDate,
     endDate,
     salesPackages,
@@ -77,10 +78,10 @@ const SalesCampaignCard = forwardRef((props, ref) => {
   } = props;
 
   const hasStarted = startDate ? new Date(startDate) <= new Date() : false;
-  const duration = calcDaysDifference(
-    endDate ? new Date(endDate) : null,
-    startDate ? new Date(startDate) : null
-  );
+  // const duration = calcDaysDifference(
+  //   endDate ? new Date(endDate) : null,
+  //   startDate ? new Date(startDate) : null
+  // );
   const startsInDays = calcDaysDifference(
     startDate ? new Date(startDate) : null,
     new Date()
@@ -89,6 +90,12 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     endDate ? new Date(endDate) : null,
     new Date()
   );
+
+  // Check if campaign ends in less than 3 days or 1 day
+  const endsInLessThan3Days =
+    endsInDays !== null && endsInDays <= 3 && endsInDays > 0;
+  const endsInLessThan1Day =
+    endsInDays !== null && endsInDays <= 1 && endsInDays >= 0;
 
   const durationText = (
     prefixTextSingular,
@@ -100,6 +107,37 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     days === 1
       ? `${prefixTextSingular} ${days} ${suffixTextSingular}`
       : `${prefixTextPlural} ${days} ${suffixTextPlural}`;
+
+  // Calculate hours and minutes for counter when less than 1 day
+  const getTimeRemaining = () => {
+    if (!endDate) return null;
+    const now = currentTime;
+    const end = new Date(endDate);
+    const diff = end.getTime() - now.getTime();
+
+    if (diff <= 0) return null;
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    return { hours, minutes, seconds };
+  };
+
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Update time every second when campaign ends in less than 1 day
+  useEffect(() => {
+    if (!endsInLessThan1Day) return;
+
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [endsInLessThan1Day]);
+
+  const timeRemaining = endsInLessThan1Day ? getTimeRemaining() : null;
 
   return (
     <Wrapper
@@ -148,31 +186,45 @@ const SalesCampaignCard = forwardRef((props, ref) => {
               </div>
             )}
             <div className="timestamp-text">
-              {numberOfListings > 0 &&
-                `${numberOfListings} ${
-                  numberOfListings === 1
+              {numberOfListings > 0 && (
+                <span className="listings-text">
+                  {numberOfListings}{" "}
+                  {numberOfListings === 1
                     ? numberOfListingsTextSingular
-                    : numberOfListingsTextPlural
-                } ∙ `}
-              {
-                hasStarted
-                  ? durationText(
-                      endsInPrefixTextSingular,
-                      endsInPrefixTextPlural,
-                      endsInDays,
-                      endsinSuffixTextSingular,
-                      endsinSuffixTextPlural
-                    )
-                  : durationText(
-                      startsInPrefixTextSingular,
-                      startsInPrefixTextPlural,
-                      startsInDays,
-                      startsinSuffixTextSingular,
-                      startsinSuffixTextPlural
-                    )
-                // ? t("dateTime.startsInSingle", { days: startsInDays })
-                // : t("dateTime.startsInPlural", { days: startsInDays })
-              }
+                    : numberOfListingsTextPlural}{" "}
+                  ∙{" "}
+                </span>
+              )}
+              <span
+                className={`duration-text ${
+                  endsInLessThan3Days ? "urgent" : ""
+                }`}
+              >
+                {endsInLessThan1Day && timeRemaining ? (
+                  <div className="countdown-timer">
+                    {endsInPrefixTextSingular}{" "}
+                    {timeRemaining.hours.toString().padStart(2, "0")}:
+                    {timeRemaining.minutes.toString().padStart(2, "0")}:
+                    {timeRemaining.seconds.toString().padStart(2, "0")}
+                  </div>
+                ) : hasStarted ? (
+                  durationText(
+                    endsInPrefixTextSingular,
+                    endsInPrefixTextPlural,
+                    endsInDays,
+                    endsinSuffixTextSingular,
+                    endsinSuffixTextPlural
+                  )
+                ) : (
+                  durationText(
+                    startsInPrefixTextSingular,
+                    startsInPrefixTextPlural,
+                    startsInDays,
+                    startsinSuffixTextSingular,
+                    startsinSuffixTextPlural
+                  )
+                )}
+              </span>
             </div>
           </div>
         </div>

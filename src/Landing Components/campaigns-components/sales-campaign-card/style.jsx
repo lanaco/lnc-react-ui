@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  getBorderRadiusValueWithUnits,
-  getColorRgbaValue,
-} from "../../../_utils/utils";
+import { getBorderRadiusValueWithUnits } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { motion } from "framer-motion";
 
@@ -93,6 +90,23 @@ export const ContentWrapper = styled.div`
     font-weight: 500;
     padding-top: 0.75rem;
     color: var(--gray-700, #4e555f);
+
+    & .listings-text {
+      color: var(--gray-700, #4e555f);
+    }
+
+    & .duration-text {
+      color: var(--gray-700, #4e555f);
+
+      &.urgent {
+        color: var(--primary-500, #f59e0b);
+      }
+    }
+
+    & .countdown-timer {
+      color: var(--primary-500, #f59e0b);
+      font-weight: 600;
+    }
   }
 
   & .profile-item:hover {
