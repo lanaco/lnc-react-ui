@@ -86,8 +86,14 @@ export const ContentWrapper = styled.div`
   }
 
   & .timestamp-text {
-    font-size: 0.975rem;
-    font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.01563rem;
+    gap: 0.25rem;
     padding-top: 0.75rem;
     color: var(--gray-700, #4e555f);
 
@@ -105,7 +111,6 @@ export const ContentWrapper = styled.div`
 
     & .countdown-timer {
       color: var(--primary-500, #f59e0b);
-      font-weight: 600;
     }
   }
 
