@@ -78,7 +78,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                   image={getImage(card?.image, card?.uuid, card?.sellerUuid)}
                   imageComponent={card?.imageComponent}
                   name={card?.name}
-                  description={card?.shortDescription || card?.description}
+                  description={card?.description || card?.shortDescription}
                   onSelectCard={() => handleSelectCard?.(card)}
                 />
               ))

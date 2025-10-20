@@ -51,6 +51,7 @@ const BannerSectionSimple = forwardRef((props, ref) => {
           size="medium"
           color="neutral"
           type="button"
+          className="header-button"
           onClick={(e) => {
             e?.target?.blur();
             onButtonAction(buttonLink);

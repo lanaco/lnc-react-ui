@@ -18,8 +18,12 @@ export const Wrapper = styled.div`
   & img {
     transition: var(--transition, all 0.3s ease);
     overflow: hidden;
+    scale: 1.1;
+    aspect-ratio: 1 / 1;
+    mix-blend-mode: multiply;
+    width: 100%;
+    object-fit: cover;
   }
-  overflow: hidden;
 
   &:hover {
     & img {
@@ -63,13 +67,6 @@ export const Wrapper = styled.div`
       font-weight: 600;
       ${truncateTextInRows(2)}
     }
-  }
-
-  & img {
-    aspect-ratio: 1 / 1;
-    mix-blend-mode: multiply;
-    width: 100%;
-    object-fit: cover;
   }
 
   & .img-skeleton {

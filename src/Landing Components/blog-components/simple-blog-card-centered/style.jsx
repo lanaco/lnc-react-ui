@@ -24,6 +24,11 @@ export const Wrapper = styled.div`
     width: fit-content;
     margin-top: auto;
     color: var(--gray-950, #14161a);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: -0.09px;
   }
 
   & img {
@@ -57,8 +62,11 @@ export const TextWrapper = styled.div`
   color: var(--gray-950, #14161a);
 
   & .text-wr-title {
-    font-weight: 600;
+    text-align: center;
     font-size: 1.375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.75rem;
   }
 
   & .skeleton-title {
@@ -68,10 +76,11 @@ export const TextWrapper = styled.div`
   }
 
   & .text-wr {
-    font-weight: 400;
     font-size: 0.875rem;
-    flex: 1;
-    color: var(--gray-700, #4e555f);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0156rem;
     ${truncateTextInRows(3)}
   }
 `;

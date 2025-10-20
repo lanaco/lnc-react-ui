@@ -12,6 +12,17 @@ export const Container = styled.div`
 
   & button {
     width: fit-content;
+    background: var(--gray-950, #14161a);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: -0.09px;
+    white-space: pre;
+
+    &:hover {
+      background: var(--gray-700, #424b56);
+    }
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
@@ -27,17 +38,34 @@ export const ContainerHeader = styled.div`
   gap: 0.25rem;
 
   & .header-title {
-    font-size: 1.5rem;
+    color: var(--gray-950, #14161a);
+    text-align: center;
+    font-size: 1.75rem;
+    font-style: normal;
     font-weight: 600;
+    line-height: 2.25rem;
   }
 
   & .header-subtitle {
     color: var(--gray-600, #676e79);
+    text-align: center;
     font-size: 1rem;
+    font-style: normal;
     font-weight: 500;
+    line-height: 1.5rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    & .header-title {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+    }
+
+    & .header-subtitle {
+      font-size: 0.875rem;
+      font-style: normal;
+      line-height: 1.25rem;
+    }
   }
 `;
 
@@ -54,10 +82,16 @@ export const ListWrapper = styled.div`
   & .list-item {
     display: flex;
     align-items: center;
+    color: var(--gray-950, #14161a);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: -0.0056rem;
 
     & .mng {
       font-size: 1.25rem;
-      color: var(--success-600);
+      color: var(--primary-600, #e86b1e);
     }
   }
 

@@ -35,6 +35,7 @@ export const Container = styled.div`
     min-height: unset;
     max-height: unset;
     border: none;
+    border-radius: 0;
 
     & button {
       width: fit-content;
@@ -58,6 +59,21 @@ export const Wrapper = styled.div`
 
   ${(p) => p.isHorizontalContent === true && `justify-content: space-between;`}
 
+  & .header-button {
+    width: fit-content;
+    background: var(--gray-950, #14161a);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: -0.09px;
+    white-space: pre;
+
+    &:hover {
+      background: var(--gray-700, #424b56);
+    }
+  }
+
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     padding: 0;
     flex-direction: column;
@@ -70,17 +86,37 @@ export const ContainerHeader = styled.div`
   gap: 0.25rem;
 
   & .header-title {
+    color: var(--gray-950, #14161a);
     font-size: 1.75rem;
+    font-style: normal;
     font-weight: 600;
+    line-height: 2.25rem;
+    letter-spacing: -0.0369rem;
   }
 
   & .header-subtitle {
     color: var(--gray-950, #14161a);
     font-size: 1rem;
+    font-style: normal;
     font-weight: 500;
+    line-height: 1.5rem;
+    letter-spacing: -0.0112rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     flex-direction: column;
+
+    & .header-title {
+      font-size: 1.375rem;
+      font-weight: 600;
+      line-height: 1.75rem;
+    }
+
+    & .header-subtitle {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5rem;
+      letter-spacing: -0.0112rem;
+    }
   }
 `;
