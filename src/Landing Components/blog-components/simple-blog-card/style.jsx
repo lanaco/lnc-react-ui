@@ -18,7 +18,6 @@ export const Wrapper = styled.div`
   cursor: pointer;
 
   &:hover {
-    
   }
 
   & img {
@@ -38,6 +37,16 @@ export const Wrapper = styled.div`
   & .action {
     padding: 0 1rem 1rem 1rem;
     margin-top: auto;
+    color: var(--gray-950, #14161a);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: -0.0056rem;
+
+    &:hover {
+      color: var(--gray-700, #4e555f);
+    }
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

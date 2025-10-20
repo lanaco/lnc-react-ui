@@ -45,6 +45,7 @@ export const Wrapper = styled.div`
     width: 100%;
     object-fit: cover;
     height: auto;
+    max-width: 12.5rem;
     max-height: 9rem;
     border-radius: 0.75rem;
   }
@@ -69,7 +70,7 @@ export const Wrapper = styled.div`
         font-weight: 600;
         line-height: 1.5rem;
         letter-spacing: 0.1px;
-        ${truncateTextInRows(3)}
+        ${truncateTextInRows(2)}
       }
 
       & .wrapper__tags {
@@ -106,6 +107,10 @@ export const Wrapper = styled.div`
         font-weight: 400;
         line-height: 1rem;
         letter-spacing: 0.4px;
+
+        & i {
+          color: var(--gray-300, #bcc4cf);
+        }
       }
     }
   }
@@ -117,6 +122,7 @@ export const Wrapper = styled.div`
     & .wrapper__image {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+      max-width: 100%;
     }
 
     & .wrapper__content {

@@ -5,11 +5,11 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  color: var(--gray-950, #14161A);
+  color: var(--gray-950, #14161a);
   justify-content: center;
 
   & button {
-    width: fit-content
+    width: fit-content;
   }
 
   & .block-group {
@@ -20,17 +20,17 @@ export const Wrapper = styled.div`
   & .txt-block-subtitle {
     font-size: 0.75rem;
     font-weight: 400;
-    color: var(--gray-500);
+    color: var(--gray-500, #868c98);
   }
   & .txt-block-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--gray-950, #14161A);
+    color: var(--gray-950, #14161a);
   }
   & .txt-block-description {
     font-size: 0.875rem;
     font-weight: 400;
-    color: var(--gray-700, #4E555F);
+    color: var(--gray-700, #4e555f);
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

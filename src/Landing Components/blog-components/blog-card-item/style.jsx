@@ -29,6 +29,7 @@ export const Wrapper = styled.div`
     object-fit: cover;
     height: auto;
     max-height: 9rem;
+    max-width: 17.75rem;
     border-radius: 0.75rem;
   }
 
@@ -84,7 +85,6 @@ export const Wrapper = styled.div`
       & .info__content {
         display: flex;
         align-items: center;
-        justify-content: space-between;
 
         &:first-of-type {
           flex-grow: 1;
@@ -100,6 +100,10 @@ export const Wrapper = styled.div`
           font-weight: 400;
           line-height: 1rem;
           letter-spacing: 0.4px;
+
+          & i {
+            color: var(--gray-300, #bcc4cf);
+          }
         }
       }
     }
@@ -110,6 +114,10 @@ export const Wrapper = styled.div`
     padding: 0;
     background: transparent;
     border: none;
+
+    & .wrapper__image {
+      max-width: 100%;
+    }
 
     & .desktop-only {
       display: none !important;

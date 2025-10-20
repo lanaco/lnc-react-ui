@@ -61,11 +61,11 @@ const BlogCardSponsored = forwardRef(
             )} • ${formatString(timeToReadText, timeToRead)}`}</div>
             <div className="info__text">
               <div>
-                <Icon icon=" mng-lnc-thumbs-up" sizeInUnits="1rem" />
+                <Icon icon=" mng-lnc-thumbs-up--filled" sizeInUnits="1rem" />
                 {getRoundedNumber(numberOfLikes)}
               </div>
               <div>
-                <Icon icon=" mng-lnc-messages" sizeInUnits="1rem" />
+                <Icon icon=" mng-lnc-messages-filled" sizeInUnits="1rem" />
                 {getRoundedNumber(numberOfComments)}
               </div>
             </div>

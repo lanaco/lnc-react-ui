@@ -38,8 +38,8 @@ export const GridWrapper = styled.div`
       max-height: 11.25rem;
     }
 
-    & .img1,
-    .img2 {
+    & .img-1,
+    .img-2 {
       border-radius: 0.75rem;
     }
 

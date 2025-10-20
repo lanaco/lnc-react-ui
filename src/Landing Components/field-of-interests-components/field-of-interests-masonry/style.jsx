@@ -58,6 +58,19 @@ export const Wrapper = styled.div`
       ${truncateTextInRows(2)}
     }
   }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    & .wrapper__content {
+      & .wrapper__title {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      & .wrapper__description {
+        display: none;
+      }
+    }
+  }
 `;
 
 export const SkeletonWrapper = styled.div`
@@ -119,13 +132,11 @@ export const TagWrapper = styled.div`
     align-items: center;
     gap: 0.25rem;
     border-radius: 999px;
-    width: 100%;
     background: var(--neutral-95004, rgba(20, 22, 26, 0.04));
     padding: 0 0.75rem;
 
     &.active {
       background: var(--gray-950, #14161a);
-
       & .wrapper__icon {
         background: transparent;
       }

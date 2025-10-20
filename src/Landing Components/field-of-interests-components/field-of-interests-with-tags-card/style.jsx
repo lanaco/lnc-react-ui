@@ -4,6 +4,7 @@ import {
   linearGradientAnimation,
   truncateTextInRows,
 } from "../../../_utils/utils";
+import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -55,7 +56,7 @@ export const Wrapper = styled.div`
       ${truncateTextInRows(2)}
     }
   }
-    cursor: pointer;
+  cursor: pointer;
 `;
 
 export const SkeletonWrapper = styled.div`
@@ -114,6 +115,10 @@ export const TagWrapper = styled.div`
     & .wrapper__text {
       color: var(--white, #fff);
     }
+  }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    min-width: fit-content;
   }
 `;
 
