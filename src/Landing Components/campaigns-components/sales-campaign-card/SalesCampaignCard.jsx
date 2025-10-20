@@ -16,12 +16,10 @@ import { forwardRef, useState, useEffect } from "react";
 const calcDaysDifference = (date1, date2) => {
   if (!date1 || !date2) return null;
 
-  let diff = Math.floor(date1?.getTime() - date2?.getTime());
-  let day = 1000 * 60 * 60 * 24;
+  const diffMs = date1.getTime() - date2.getTime();
+  const dayMs = 24 * 60 * 60 * 1000;
 
-  let days = Math.floor(diff / day);
-
-  return days;
+  return diffMs >= 0 ? Math.ceil(diffMs / dayMs) : Math.floor(diffMs / dayMs);
 };
 
 const toLocaleDateString = (date) => {
@@ -94,8 +92,12 @@ const SalesCampaignCard = forwardRef((props, ref) => {
   // Check if campaign ends in less than 3 days or 1 day
   const endsInLessThan3Days =
     endsInDays !== null && endsInDays <= 3 && endsInDays > 0;
+  const endMs = endDate ? new Date(endDate).getTime() : null;
+  const nowMs = Date.now();
+  const diffMs = endMs !== null ? endMs - nowMs : null;
+
   const endsInLessThan1Day =
-    endsInDays !== null && endsInDays <= 1 && endsInDays >= 0;
+    diffMs !== null && diffMs > 0 && diffMs < 24 * 60 * 60 * 1000;
 
   const durationText = (
     prefixTextSingular,
