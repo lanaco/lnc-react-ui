@@ -72,8 +72,8 @@ export const Wrapper = styled.div`
     }
 
     & .wrapper__cards {
-      grid-template-columns: ${(p) =>
-        `repeat(${p?.limitCardsForMobile}, minmax(0, 1fr))`};
+      display: flex;
+      flex-direction: column;
       gap: 1rem;
     }
   }
