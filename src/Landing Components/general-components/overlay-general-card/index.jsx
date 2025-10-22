@@ -1,69 +1,59 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
+import PropTypes from "prop-types";
+
 import Button from "../../../General/Button/Button";
-import { useTheme } from "../../../ThemeProvider/ThemeProvider";
+import { Container } from "./style";
 
-import { Wrapper } from "./style";
-import { isDefinedNotEmptyString } from "../../../_utils/utils";
-
-const LandingPageOverlayGeneralCard = forwardRef(
+const OverlayGeneralCard = forwardRef(
   (
     {
       title,
-      image,
-      backgroundColor,
       description,
       buttonText,
-      handleClick = () => {},
-      onButtonAction = () => {}
+      imageUrl,
+      backgroundColor,
+      handleSelectCard = () => {},
+      handleButtonAction = () => {},
     },
     ref
   ) => {
-    const { theme } = useTheme();
-
     return (
-      <>
-        {/* <LandingPageOverlayGeneralCardSkeleton /> */}
-        <Wrapper
-          ref={ref}
-          theme={theme}
-          overlay={backgroundColor}
-          onClick={handleClick}
-        >
-          <img src={image} />
-          <div className="content-wrapper">
-            <div className="content-text">
-              <div>{title}</div>
-              <div className="content-text-title">{description}</div>
-            </div>
-            {isDefinedNotEmptyString(buttonText) && (
-              <Button
-                text={buttonText}
-                onClick={onButtonAction}
-                className="text__action"
-                size="medium"
-                color="gray"
-              />
-            )}
-          </div>
-          {/* <div className="wrapper__overlay">
-            <img src={image} className="wrapper__image" />
-          </div>
-          <div className="wrapper__text">
-            <div className="text__title">{title}</div>
-            <div className="text__description">{description}</div>
-          </div>
-          <Button
-            text={actionText}
-            onClick={handleClick}
-            className="text__action"
-          /> */}
-        </Wrapper>
-      </>
+      <Container
+        backgroundImage={imageUrl}
+        backgroundColor={backgroundColor}
+        onClick={handleSelectCard}
+      >
+        <div className="section__text">
+          {title && <div className="section__title">{title}</div>}
+          {description && (
+            <div className="section__description">{description}</div>
+          )}
+        </div>
+        <Button
+          text={buttonText}
+          onClick={(e) => {
+            e?.stopPropagation();
+
+            handleButtonAction();
+          }}
+          borderRadius="regular"
+          color="gray"
+          className="section__action"
+        />
+      </Container>
     );
   }
 );
 
-export default LandingPageOverlayGeneralCard;
+OverlayGeneralCard.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  buttonText: PropTypes.string,
+  imageUrl: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  handleSelectCard: PropTypes.func,
+  handleButtonAction: PropTypes.func,
+};
+
+export default OverlayGeneralCard;
