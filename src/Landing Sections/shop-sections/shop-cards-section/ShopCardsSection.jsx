@@ -24,6 +24,7 @@ const ShopCardsSection = forwardRef(
       getImage = () => {},
       getProductImage = () => {},
       hideProducts = false,
+      showRating = true,
     },
     ref
   ) => {
@@ -58,6 +59,7 @@ const ShopCardsSection = forwardRef(
           {items && items?.length > 0
             ? items?.map((card, idx) => (
                 <ShopCard
+                  showRating={showRating}
                   key={`shop-card__${idx + 1}`}
                   uuid={card?.uuid}
                   title={card?.name}
