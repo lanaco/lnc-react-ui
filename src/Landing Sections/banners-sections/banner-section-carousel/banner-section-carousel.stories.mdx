@@ -11,33 +11,32 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export const TemplateDefault = (args) => (
   <BannerSectionCarousel
-    carouselItems={[
+    items={[
       {
-        id: "1",
         title: "Da nas ljeto ne uhvati nespremne!",
-        shopUuid: 1,
         buttonText: "Shop now",
         description:
           "Iskoristi first minute cijene na montažne bazene! -15% na sve modele",
-        imageUrl: "https://picsum.photos/1200/300",
+        imageUrl:
+          "https://placehold.co/1000x700/black/orange?font=poppins&text=mungos",
       },
       {
         id: "2",
         title: "Automobili na Mungosu!",
-        shopUuid: 1,
         buttonText: "Shop now",
         description:
           "Ne želiš da ti stari stane na pola puta dok ideš na more? Nabavi novi!",
-        imageUrl: "https://picsum.photos/1200/300",
+        imageUrl:
+          "https://placehold.co/1000x700/black/orange?font=poppins&text=mungos",
       },
       {
         id: "3",
         title: "Tražiš nekretninu?",
-        shopUuid: 1,
         buttonText: "Shop now",
         description:
           "Mungos te vodi do tvog novog doma! Stanovi od 30 do 100 kvadrata na sjajnim lokacijama.",
-        imageUrl: "https://picsum.photos/1200/300",
+        imageUrl:
+          "https://placehold.co/1000x700/black/orange?font=poppins&text=mungos",
       },
     ]}
   />
@@ -46,7 +45,9 @@ export const TemplateDefault = (args) => (
 ## Detailed products section
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {'import { BannerSectionCarousel } from "@lanaco/lnc-react-ui";'}
+  {
+    'import BannerSectionCarousel from "@lanaco/lnc-react-ui/BannerSectionCarousel";'
+  }
 </SyntaxHighlighter>
 
 <Canvas>
