@@ -24,6 +24,7 @@ const ShopCard = forwardRef(
       getProductImage = () => {},
       canAcceptPayments,
       hideProducts = false,
+      showRating = true,
     },
     ref
   ) => {
@@ -62,21 +63,24 @@ const ShopCard = forwardRef(
             <div className="wrapper__subtitle">{subtitle}</div>
             {badges && <div className="wrapper__badges"></div>}
 
-            <div className="wrapper__rating">
-              <div className="wrapper_stars">
-                {[...Array(5).keys()]?.map((star, idx) => (
-                  <Icon
-                    key={`shop-card-rating-star__${idx + 1}`}
-                    icon={" mng-lnc-star--filled"
-                    }
-                    className={`wrapper__star ${star >= rating ? "gold-star" : ""}`}
-                  />
-                ))}
+            {showRating && (
+              <div className="wrapper__rating">
+                <div className="wrapper_stars">
+                  {[...Array(5).keys()]?.map((star, idx) => (
+                    <Icon
+                      key={`shop-card-rating-star__${idx + 1}`}
+                      icon={" mng-lnc-star--filled"}
+                      className={`wrapper__star ${
+                        star >= rating ? "gold-star" : ""
+                      }`}
+                    />
+                  ))}
+                </div>
+                <div className="wrapper__review-count">
+                  ({reviewCount?.toLocaleString()})
+                </div>
               </div>
-              <div className="wrapper__review-count">
-                ({reviewCount?.toLocaleString()})
-              </div>
-            </div>
+            )}
           </div>
         </div>
         {hideProducts !== true && (
