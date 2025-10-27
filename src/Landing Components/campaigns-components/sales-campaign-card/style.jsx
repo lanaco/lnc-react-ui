@@ -65,7 +65,7 @@ export const ContentWrapper = styled.div`
     font-weight: 500;
     font-size: 0.75rem;
     letter-spacing: 0.1rem;
-    color: #009ea8;
+    color: var(--teal-500, #009ea8);
   }
 
   & .campaign-title-text {
@@ -110,7 +110,7 @@ export const ContentWrapper = styled.div`
       }
 
       &.starts-in {
-        color: #009ea8;
+        color: var(--teal-500, #009ea8);
       }
     }
 
