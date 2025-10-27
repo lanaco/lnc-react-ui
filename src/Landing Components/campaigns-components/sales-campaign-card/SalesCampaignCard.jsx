@@ -89,9 +89,9 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     new Date()
   );
 
-  // Check if campaign ends in less than 3 days or 1 day
-  const endsInLessThan3Days =
-    endsInDays !== null && endsInDays <= 3 && endsInDays > 0;
+  // Check if campaign ends in less than 2 days or 1 day
+  const endsInLessThan2Days =
+    endsInDays !== null && endsInDays <= 2 && endsInDays > 0;
   const endMs = endDate ? new Date(endDate).getTime() : null;
   const nowMs = Date.now();
   const diffMs = endMs !== null ? endMs - nowMs : null;
@@ -199,8 +199,8 @@ const SalesCampaignCard = forwardRef((props, ref) => {
               )}
               <span
                 className={`duration-text ${
-                  endsInLessThan3Days ? "urgent" : ""
-                }`}
+                  endsInLessThan2Days ? "urgent" : ""
+                } ${!hasStarted ? "starts-in" : ""}`}
               >
                 {endsInLessThan1Day && timeRemaining ? (
                   <div className="countdown-timer">
