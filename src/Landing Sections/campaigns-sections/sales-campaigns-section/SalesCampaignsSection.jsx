@@ -37,13 +37,15 @@ const SalesCampaignsSection = forwardRef(
       numberOfListingsTextSingular,
       numberOfListingsTextPlural,
       itemlessImageUrl,
+      itemlessLink,
+      handleItemlessLink = () => {},
     },
     ref
   ) => {
     const isMobile = useDetectMobile();
 
     const memoizedItems = useMemo(() => {
-      return items?.slice(0, 1)?.map((item, index) => (
+      let components = items?.map((item, index) => (
         <MemoizedCampaignItemRecommended
           key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
           className="campaign-item"
@@ -83,6 +85,19 @@ const SalesCampaignsSection = forwardRef(
           numberOfListingsTextPlural={numberOfListingsTextPlural}
         />
       ));
+
+      if (items?.length < 2 && !isMobile) {
+        return [
+          ...components,
+          <ItemlessBanner
+            imageUrl={itemlessImageUrl}
+            className="campaign-item"
+            handleClick={handleItemlessLink}
+          />,
+        ];
+      }
+
+      return components;
     }, [items]);
 
     return (
@@ -99,9 +114,6 @@ const SalesCampaignsSection = forwardRef(
           showNavigation={showNavigation}
         >
           {memoizedItems}
-          {memoizedItems?.length < 2 && !isMobile && (
-            <ItemlessBanner imageUrl={itemlessImageUrl} />
-          )}
         </ScrollableSectionV3>
       </SuspenseCampaignCard>
     );
