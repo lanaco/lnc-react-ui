@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 
 import PropTypes from "prop-types";
 
+import { formatLocaleDateString } from "../../../_utils/utils";
 import TextInput from "../../../Basic Inputs/TextInput/TextInput";
 import Icon from "../../../General/Icon/Icon";
 import Link from "../../../General/Link/Link";
@@ -12,7 +13,6 @@ import BlogProductCardsSection from "../../../Blog Sections/blog-product-cards-s
 import Pagination from "../../../Landing Components/blog-components/blog-explore/pagination";
 import BlogListSection from "../blog-list-section/BlogListSection";
 import { Container } from "./style";
-import { formatLocaleDateString } from "../../../_utils/utils";
 
 const BlogExploreSection = forwardRef(
   (
