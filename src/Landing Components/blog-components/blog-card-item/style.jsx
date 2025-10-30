@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   align-items: stretch;
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
   background: var(--white, #fff);
-  min-height: 10.5rem;
+  min-height: 9.5rem;
   position: relative;
   width: 100%;
 
@@ -28,7 +28,7 @@ export const Wrapper = styled.div`
     width: 100%;
     object-fit: cover;
     height: auto;
-    max-height: 9rem;
+    max-height: 9.5rem;
     max-width: 17.75rem;
     border-radius: 0.75rem;
   }
@@ -153,6 +153,7 @@ export const Wrapper = styled.div`
 
         & .info__content {
           align-items: flex-start;
+          justify-content: space-between;
           width: 100%;
         }
       }

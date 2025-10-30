@@ -31,7 +31,7 @@ const BlogCardItem = forwardRef(
     ref
   ) => {
     return (
-      <Wrapper onClick={onSelectCard}>
+      <Wrapper onClick={onSelectCard} className="blog-card-item">
         <ProductImageWrapper src={imageUrl} className="wrapper__image" />
         <div className="wrapper__content">
           <div className="wrapper__subcontent">

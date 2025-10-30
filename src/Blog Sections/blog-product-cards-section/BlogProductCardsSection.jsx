@@ -45,7 +45,11 @@ const BlogProductCardsSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper className={isHighlight ? "highlight" : ""}>
+      <Wrapper
+        className={`blog-product-cards-section ${
+          isHighlight ? "highlight" : ""
+        }`}
+      >
         <div className="wrapper__grid">
           <SuspenseSimpleProductCard
             isLoading={isLoading}

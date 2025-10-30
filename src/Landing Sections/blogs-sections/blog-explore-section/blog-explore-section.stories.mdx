@@ -1,0 +1,378 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import BlogExploreSection from "./BlogExploreSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Blog Explore Section"
+  component={BlogExploreSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <BlogExploreSection
+    mainTitle="Explore"
+    sideTitle="Recently saved"
+    tags={[
+      { code: "AtHome", name: "At Home" },
+      { code: "Gifts", name: "Gifts" },
+      { code: "HealthyLife", name: "Healthy life" },
+      { code: "Sport", name: "Sport" },
+      { code: "Other", name: "Other" },
+      { code: "Mungos", name: "Mungos writes" },
+    ]}
+    sortingOptions={[
+      {
+        code: "AtoZ",
+        name: "A to Z",
+      },
+      {
+        code: "ZtoA",
+        name: "Z to A",
+      },
+      {
+        code: "Oldest",
+        name: "Oldest",
+      },
+      {
+        code: "Newest",
+        name: "Newest",
+      },
+    ]}
+    sortBy={{ code: "Newest", name: "Newest" }}
+    blogs={[
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: true,
+        isBookmarked: true,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: false,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: false,
+        isBookmarked: true,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: true,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: true,
+        isBookmarked: true,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: false,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: false,
+        isBookmarked: true,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: true,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: true,
+        isBookmarked: true,
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/black/orange?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        options: [
+          {
+            code: "Sport",
+            name: "Sport",
+            color: "warning",
+          },
+          {
+            code: "Health",
+            name: "Health",
+            color: "success",
+          },
+        ],
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+        timeToRead: 3,
+        numberOfLikes: 12000,
+        numberOfComments: 201,
+        isSponsored: false,
+      },
+    ]}
+    timeToReadText="{0} min read"
+    getProductImageUrl={(x, y, z) => x}
+    getBlogImageUrl={(x, y) => x}
+    showAllButtonLink="/"
+    total={10}
+    products={[
+      {
+        name: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/200/300",
+        sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        name: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/200/300",
+        sellerUuid: "2adb55cb-9eef-4e46-b6a4-ee0228bce269",
+        uuid: "2ac81e58-0759-4aa3-949c-c9281494abfa",
+      },
+      {
+        name: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/200/300",
+        sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+      },
+      {
+        name: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 22000,
+        currency: "BAM",
+        image: "https://picsum.photos/200/300",
+        sellerUuid: "2adb55cb-9eef-4e46-b6a4-ee0228bce269",
+        uuid: "2ac81e58-0759-4aa3-949c-c9281494abfa",
+      },
+    ]}
+    miniBlogs={[
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/orange/black?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/orange/black?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/orange/black?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+      },
+      {
+        title:
+          "Lorem ipsum dolor sit amet consectetur. Proin quam. Lorem ipsum dolor sit amet quam sit.",
+        imageUrl: "https://placehold.co/1000x1000/orange/black?text=Mungos",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        titleSlug: "lorem-ipsum",
+        publishedAt: "2025-07-04T07:45:11.965+00:00",
+      },
+    ]}
+  />
+);
+
+## Blog explore section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import BlogExploreSection from "@lanaco/lnc-react-ui/BlogExploreSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
