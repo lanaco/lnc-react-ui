@@ -4,9 +4,11 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: 1.25rem;
 
   &.separated {
+    gap: 2.5rem;
+
     & > div {
       position: relative;
     }
@@ -19,7 +21,7 @@ export const Wrapper = styled.div`
       background: var(--gray-200, #dddfe4);
       position: absolute;
       left: 0;
-      bottom: -0.75rem;
+      bottom: -1.25rem;
     }
   }
 `;

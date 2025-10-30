@@ -5,6 +5,7 @@ import SalesCampaignCard from "../../../Landing Components/campaigns-components/
 import SuspenseCampaignCard from "./skeleton";
 import ScrollableSectionV3 from "../../../Utility/ScrollableSectionV3";
 import useDetectMobile from "../../../_utils/useDetectMobile";
+import ItemlessBanner from "../../../Landing Components/general-components/itemless-banner";
 
 const MemoizedCampaignItemRecommended = memo(SalesCampaignCard);
 
@@ -35,13 +36,16 @@ const SalesCampaignsSection = forwardRef(
       showNavigation = true,
       numberOfListingsTextSingular,
       numberOfListingsTextPlural,
+      itemlessImageUrl,
+      itemlessLink,
+      handleItemlessLink = () => {},
     },
     ref
   ) => {
     const isMobile = useDetectMobile();
 
     const memoizedItems = useMemo(() => {
-      return items?.map((item, index) => (
+      let components = items?.map((item, index) => (
         <MemoizedCampaignItemRecommended
           key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
           className="campaign-item"
@@ -81,6 +85,19 @@ const SalesCampaignsSection = forwardRef(
           numberOfListingsTextPlural={numberOfListingsTextPlural}
         />
       ));
+
+      if (items?.length < 2 && !isMobile) {
+        return [
+          ...components,
+          <ItemlessBanner
+            imageUrl={itemlessImageUrl}
+            className="campaign-item"
+            handleClick={handleItemlessLink}
+          />,
+        ];
+      }
+
+      return components;
     }, [items]);
 
     return (

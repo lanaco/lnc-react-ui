@@ -22,9 +22,9 @@ export const Wrapper = styled.div`
 
 export const ImageWrapper = styled.div`
   border-radius: ${(p) => getBorderRadiusValueWithUnits(p.theme, "edged")};
-  height: 15rem;
-  width: 15rem;
-  min-width: 15rem;
+  height: 13.75rem;
+  width: 13.75rem;
+  min-width: 13.75rem;
   cursor: pointer;
 
   position: relative;
