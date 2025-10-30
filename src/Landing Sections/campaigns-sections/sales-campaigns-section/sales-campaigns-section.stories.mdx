@@ -54,8 +54,8 @@ export const TemplateDefault = (args) => (
         name: "Ljetno osvježenje",
         coverPhoto: "https://placehold.co/700x700/red/white",
         description: null,
-        startDate: "2025-10-15T06:59:23",
-        endDate: "2025-10-19T21:59:00",
+        startDate: "2025-11-15T06:59:23",
+        endDate: "2025-11-19T21:59:00",
         salesPackages: [
           "AddDiscount",
           "IncludeGifts",
@@ -76,8 +76,8 @@ export const TemplateDefault = (args) => (
         coverPhoto: "https://placehold.co/700x700/green/white",
         description:
           "Q6 SUV e-tron performance sada je snižen 30%! Električni pogon, sportski duh i premium oprema – sve to po cijeni koja se ne viđa često. Moć, stil i ušteda u jednom. Ovo nije obična ponuda, ovo je trenutak za pametnu odluku.",
-        startDate: "2025-10-10T09:09:19",
-        endDate: "2025-10-20T09:09:19",
+        startDate: "2025-10-20T09:09:19",
+        endDate: "2025-11-22T09:09:19",
         salesPackages: ["AddDiscount"],
         profileImage: "https://placehold.co/100x100/red/white",
       },
@@ -91,8 +91,8 @@ export const TemplateDefault = (args) => (
         coverPhoto: "https://placehold.co/700x700/blue/white",
         description:
           "Kupuješ laptop, računar ili televizor? Imamo nešto za tebe – pametan sat ide gratis! Nema kvaka, nema sitnih slova. Samo ubaci jedan od ovih uređaja u korpu, i sat ti stiže uz njega. Jer kad već uzimaš pametnu stvar – red je da dobiješ još jednu.",
-        startDate: "2025-10-10T09:09:18",
-        endDate: "2025-10-20T23:59:59",
+        startDate: "2025-10-20T09:09:18",
+        endDate: "2025-10-29T23:59:59",
         salesPackages: ["IncludeGifts"],
         profileImage: "https://placehold.co/100x100/red/white",
       },
@@ -106,8 +106,8 @@ export const TemplateDefault = (args) => (
         coverPhoto: "https://placehold.co/700x700/yellow/black",
         description:
           "Proljetno čišćenje kože počinje uz 1+1 gratis! Izaberi svoje omiljene proizvode za njegu lica i mi ti drugi poklanjamo. Uživaj i u besplatnoj dostavi. Vrijeme je za svježu kožu!",
-        startDate: "2025-10-10T09:09:08",
-        endDate: "2025-10-25T09:09:08",
+        startDate: "2025-10-20T09:09:08",
+        endDate: "2025-10-29T09:09:08",
         salesPackages: ["FreeShipping", "FreeQuantity"],
         profileImage: "https://placehold.co/100x100/red/white",
       },
@@ -119,11 +119,25 @@ export const TemplateDefault = (args) => (
         name: "URGENT: Last chance campaign - ends in hours!",
         coverPhoto: "https://placehold.co/700x700/orange/white",
         description: "This campaign will show the countdown timer",
-        startDate: "2025-10-15T00:00:00",
-        endDate: "2025-10-17T23:30:00", // This will show countdown timer (less than 1 day)
+        startDate: "2025-10-20T00:00:00",
+        endDate: "2025-10-28T23:30:00", // This will show countdown timer (less than 1 day)
         salesPackages: ["AddDiscount"],
         profileImage: "https://placehold.co/100x100/red/white",
         numberOfListings: 5,
+      },
+      {
+        campaignUuid: "countdown-test-campaign",
+        shopUuid: "countdown-shop-uuid",
+        shopName: "Countdown Shop",
+        profileImage: "countdown-image",
+        name: "COUNTDOWN TEST: Ends in hours!",
+        coverPhoto: "https://placehold.co/700x700/purple/white",
+        description: "This campaign will show the live countdown timer",
+        startDate: "2025-10-20T00:00:00",
+        endDate: "2025-10-27T20:30:00", // This will show countdown timer (less than 24 hours)
+        salesPackages: ["FreeShipping"],
+        profileImage: "https://placehold.co/100x100/purple/white",
+        numberOfListings: 3,
       },
     ]}
     upcomingCampaignText={"Upcoming campaign"}

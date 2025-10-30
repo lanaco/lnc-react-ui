@@ -65,7 +65,7 @@ export const ContentWrapper = styled.div`
     font-weight: 500;
     font-size: 0.75rem;
     letter-spacing: 0.1rem;
-    color: var(--primary-500, #f59e0b);
+    color: var(--teal-500, #009ea8);
   }
 
   & .campaign-title-text {
@@ -83,6 +83,7 @@ export const ContentWrapper = styled.div`
   & .title-block-wrapper {
     display: flex;
     flex-direction: column;
+    gap: 0.1875rem;
   }
 
   & .timestamp-text {
@@ -106,6 +107,10 @@ export const ContentWrapper = styled.div`
 
       &.urgent {
         color: var(--primary-500, #f59e0b);
+      }
+
+      &.starts-in {
+        color: var(--teal-500, #009ea8);
       }
     }
 
@@ -133,20 +138,6 @@ export const ContentWrapper = styled.div`
     }
   }
 `;
-
-const ThemeColorDarker = {
-  "#ADE3EB": "#76D0DB",
-  "#DDD6FE": "#C4B5FD",
-  "#FDE68A": "#FCD34D",
-  "#A7F3D0": "#6EE7B7",
-  "#BADFFF": "#87C6FA",
-  "#FECDD3": "#FDA4AF",
-  "#EFE2CF": "#EAD2AF",
-  "#DDDFE4": "#C4C8CF",
-  "#E7E5E4": "#D6D3D1",
-  "#FED7AA": "#FDBA74",
-  default: "#C4C8CF",
-};
 
 const flex = (align = false, wrap = false, justify = false) => {
   return `
@@ -178,8 +169,7 @@ export const StyledProfileItem = styled(motion.div)`
   ${flex(true)}
   gap: 0.5rem;
   padding: 0.5rem;
-  color: ${(p) =>
-    p.isActive === false ? "var(--gray-900)" : "var(--primary-600)"};
+  color: var(--gray-950);
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -195,11 +185,6 @@ export const StyledProfileItem = styled(motion.div)`
     ${flex(true, false, true)}
     flex-shrink: 0;
     border-radius: 999px;
-    border: 3px solid
-      ${(p) =>
-        p.isActive === false
-          ? "var(--gray-300, #c4c8cf)"
-          : ThemeColorDarker[p.themeColor] ?? "var(--gray-300, #c4c8cf)"};
 
     & img,
     .img-placeholder {
@@ -212,12 +197,6 @@ export const StyledProfileItem = styled(motion.div)`
 
     & .no-image {
       background: white;
-    }
-  }
-
-  &.user-profile-item {
-    & .logo-wrapper {
-      border: 3px solid transparent;
     }
   }
 
@@ -240,7 +219,6 @@ export const StyledProfileItem = styled(motion.div)`
   &:hover {
     cursor: pointer;
     background-color: var(--gray-95080, #14161acc);
-    color: var(--gray-600, #676e79);
   }
 `;
 
