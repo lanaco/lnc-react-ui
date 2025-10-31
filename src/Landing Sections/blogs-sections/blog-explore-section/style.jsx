@@ -22,6 +22,10 @@ export const Container = styled.div`
     border-right: 1px solid var(--gray-200, #dddfe4);
     padding-right: 2rem;
 
+    & .section__tags {
+      flex-wrap: wrap;
+    }
+
     & .pagination {
       padding: 1.25rem 0;
     }
@@ -194,6 +198,10 @@ export const Container = styled.div`
       width: 100%;
       padding-right: 0;
       border-right: none;
+
+      & .section__tags {
+        flex-wrap: nowrap;
+      }
 
       & .main-content__actions {
         gap: 0.5rem;
