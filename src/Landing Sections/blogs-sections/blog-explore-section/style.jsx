@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
+
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Container = styled.div`
   display: flex;
@@ -177,6 +179,7 @@ export const Container = styled.div`
             font-style: normal;
             font-weight: 500;
             line-height: 1.25rem;
+            ${truncateTextInRows(2)}
           }
 
           & .item__description {
