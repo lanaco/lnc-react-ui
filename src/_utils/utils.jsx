@@ -289,13 +289,10 @@ export const isDefinedNotEmptyString = (data) =>
 export const isDefined = (data) => data !== null && data !== undefined;
 
 export const formatPrice = (price) => {
-  // Use 'de-DE' locale (Germany) to format the price with comma as decimal separator.
-  return Number.isInteger(Number(price))
-    ? new Intl.NumberFormat("de-DE").format(price)
-    : new Intl.NumberFormat("de-DE", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(price);
+  return new Intl.NumberFormat("de-DE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(price);
 };
 
 export const CurrencySymbolMap = {

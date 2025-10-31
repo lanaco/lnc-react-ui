@@ -17,7 +17,7 @@ const Pagination = forwardRef(
       handlePerPage = () => {},
       page = 1,
       handlePage = () => {},
-      total,
+      totalPage,
     },
     ref
   ) => {
@@ -28,7 +28,7 @@ const Pagination = forwardRef(
     };
 
     const handleNext = () => {
-      if (page < total) {
+      if (page < totalPage) {
         handlePage?.(page + 1);
       }
     };
@@ -36,17 +36,17 @@ const Pagination = forwardRef(
     const renderPageNumbers = () => {
       const pages = [];
 
-      if (total <= 7) {
-        for (let i = 1; i <= total; i++) {
+      if (totalPage <= 7) {
+        for (let i = 1; i <= totalPage; i++) {
           pages.push(i);
         }
       } else {
         if (page <= 3) {
-          pages.push(1, 2, 3, "...", total);
-        } else if (page >= total - 2) {
-          pages.push(1, "...", total - 2, total - 1, total);
+          pages.push(1, 2, 3, "...", totalPage);
+        } else if (page >= totalPage - 2) {
+          pages.push(1, "...", totalPage - 2, totalPage - 1, totalPage);
         } else {
-          pages.push(1, 2, 3, "...", total);
+          pages.push(1, 2, 3, "...", totalPage);
         }
       }
 
@@ -78,7 +78,10 @@ const Pagination = forwardRef(
       <Container className="pagination">
         <DropdownMenu
           color="neutral"
-          control={perPage || perPageOptions[0]?.name}
+          control={
+            perPageOptions?.find((p) => p?.code === perPage)?.name ||
+            perPageOptions[0]?.name
+          }
           placement="bottom"
           zIndex={1001}
           className="pagination__per-page"
@@ -103,7 +106,9 @@ const Pagination = forwardRef(
           </div>
           {renderPageNumbers()}
           <div
-            className={`pagination__page ${page === total ? "disabled" : ""}`}
+            className={`pagination__page ${
+              page === totalPage ? "disabled" : ""
+            }`}
             onClick={handleNext}
           >
             <Icon icon=" mng-lnc-chevron--right" />

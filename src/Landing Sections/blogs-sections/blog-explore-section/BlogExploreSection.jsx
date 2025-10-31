@@ -50,7 +50,7 @@ const BlogExploreSection = forwardRef(
       handlePage = () => {},
       perPage,
       handlePerPage = () => {},
-      total,
+      totalPage,
       perPageOptions,
       handleSearch = () => {},
     },
@@ -59,7 +59,7 @@ const BlogExploreSection = forwardRef(
     return (
       <Container>
         <div className="landing__main-content">
-          <div className="main-content__title">{mainTitle}</div>
+          {mainTitle && <div className="main-content__title">{mainTitle}</div>}
           {tags && (
             <BlogExploreSectionTags
               tags={tags}
@@ -102,52 +102,61 @@ const BlogExploreSection = forwardRef(
             </DropdownMenu>
           </div>
           <div className="main-content__items">
-            <BlogListSection
-              timeToReadText={timeToReadText}
-              items={blogs?.slice(0, 5)}
-              isLoading={blogsLoading}
-              getImage={getBlogImageUrl}
-              onSelectCard={handleSelectBlog}
-              onSelectOption={handleSelectBlogTag}
-              onShare={handleShareBlog}
-              onBookmark={handleBookmarkBlog}
-            />
+            {blogs && blogs?.length > 0 && (
+              <BlogListSection
+                timeToReadText={timeToReadText}
+                items={blogs?.slice(0, 5)}
+                isLoading={blogsLoading}
+                getImage={getBlogImageUrl}
+                onSelectCard={handleSelectBlog}
+                onSelectOption={handleSelectBlogTag}
+                onShare={handleShareBlog}
+                onBookmark={handleBookmarkBlog}
+              />
+            )}
             <div className="main-content__divider"></div>
-            <BlogProductCardsSection
-              buttonText={showAllButtonText}
-              buttonLink={showAllButtonLink}
-              onButtonAction={handleShowAll}
-              onSelectCard={handleSelectProduct}
-              items={products}
-              isLoading={productsLoading}
-              getImage={getProductImageUrl}
-              isHighlight={true}
-            />
+            {products && products?.length > 0 && (
+              <BlogProductCardsSection
+                buttonText={showAllButtonText}
+                buttonLink={showAllButtonLink}
+                onButtonAction={handleShowAll}
+                onSelectCard={handleSelectProduct}
+                items={products}
+                isLoading={productsLoading}
+                getImage={getProductImageUrl}
+                isHighlight={true}
+              />
+            )}
             <div className="main-content__divider"></div>
-            <BlogListSection
-              timeToReadText={timeToReadText}
-              items={blogs?.slice(5)}
-              isLoading={blogsLoading}
-              getImage={getBlogImageUrl}
-              onSelectCard={handleSelectBlog}
-              onSelectOption={handleSelectBlogTag}
-              onShare={handleShareBlog}
-              onBookmark={handleBookmarkBlog}
-            />
+            {blogs && blogs?.length > 0 && (
+              <BlogListSection
+                timeToReadText={timeToReadText}
+                items={blogs?.slice(5)}
+                isLoading={blogsLoading}
+                getImage={getBlogImageUrl}
+                onSelectCard={handleSelectBlog}
+                onSelectOption={handleSelectBlogTag}
+                onShare={handleShareBlog}
+                onBookmark={handleBookmarkBlog}
+              />
+            )}
           </div>
-          <Pagination
-            perPageOptions={perPageOptions}
-            perPage={perPage}
-            handlePerPage={handlePerPage}
-            page={page}
-            handlePage={handlePage}
-            total={total}
-          />
+          {totalPage && totalPage > 1 && (
+            <Pagination
+              perPageOptions={perPageOptions}
+              perPage={perPage}
+              handlePerPage={handlePerPage}
+              page={page}
+              handlePage={handlePage}
+              totalPage={totalPage}
+            />
+          )}
         </div>
         <div className="landing__side-content">
-          <div className="side-content__title">{sideTitle}</div>
+          {sideTitle && <div className="side-content__title">{sideTitle}</div>}
           <div className="side-content__items">
             {miniBlogs &&
+              miniBlogs?.length > 0 &&
               miniBlogs?.map((blog, idx) => (
                 <div
                   className="side-content__item"
@@ -208,7 +217,7 @@ BlogExploreSection.propTypes = {
   handlePage: PropTypes.func,
   perPage: PropTypes.any,
   handlePerPage: PropTypes.func,
-  total: PropTypes.number,
+  totalPage: PropTypes.number,
   perPageOptions: PropTypes.array,
   handleSearch: PropTypes.func,
 };

@@ -11,7 +11,7 @@ const FaqSectionTags = forwardRef(
     ref
   ) => {
     return (
-      <TagsContainer>
+      <TagsContainer className="section__tags">
         {[{ name: allTagText, code: null }, ...tags]?.map((tag, idx) => (
           <Chip
             key={`faq-section-tag__${idx + 1}`}
