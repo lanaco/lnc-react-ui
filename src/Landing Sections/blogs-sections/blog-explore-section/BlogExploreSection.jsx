@@ -64,7 +64,7 @@ const BlogExploreSection = forwardRef(
             <BlogExploreSectionTags
               tags={tags}
               allTagText={allTagText}
-              selectedTag={selectedTag}
+              selectedTagCode={selectedTag}
               onSelectTag={handleSelectTag}
             />
           )}
