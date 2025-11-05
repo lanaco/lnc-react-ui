@@ -26,7 +26,7 @@ const BannerSectionCarousel = forwardRef(
       mobile: {
         breakpoint: { max: 464, min: 0 },
         items: 1,
-        partialVisibilityGutter: 48,
+        partialVisibilityGutter: 64,
       },
     };
 

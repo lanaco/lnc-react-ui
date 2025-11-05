@@ -12,7 +12,7 @@ const OverlayGeneralCard = forwardRef(
       description,
       buttonText,
       imageUrl,
-      backgroundColor,
+      backgroundColor = "none",
       handleSelectCard = () => {},
       handleButtonAction = () => {},
     },

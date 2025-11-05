@@ -50,6 +50,7 @@ export const Content = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(${(p) => p?.numOfColumns}, 1fr);
   gap: 1.5rem;
+  width: 100%;
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     grid-template-columns: repeat(${(p) => p?.numOfColumnsForMobile}, 1fr);
