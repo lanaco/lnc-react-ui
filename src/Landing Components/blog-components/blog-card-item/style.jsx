@@ -45,6 +45,7 @@ export const Wrapper = styled.div`
       flex-direction: column;
       align-items: flex-start;
       gap: 0.5rem;
+      width: 100%;
 
       & .wrapper__title {
         color: var(--gray-950, #14161a);

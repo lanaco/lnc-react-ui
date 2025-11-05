@@ -9,6 +9,7 @@ export const Container = styled.div`
   max-height: ${(p) => `${p.height}px` || "22.5rem"};
   min-height: ${(p) => `${p.height}px` || "22.5rem"};
   background-color: ${(p) => p.bgcolor || "transparent"};
+  position: relative;
 
   & button {
     width: fit-content;
@@ -23,10 +24,10 @@ export const Container = styled.div`
   }
 
   & .header-image {
-    max-width: 148px;
-    max-height: 148px;
+    max-width: 9.25rem;
+    max-height: 9.25rem;
     position: absolute;
-    left: 2rem;
+    left: 1rem;
     top: 0;
   }
 
@@ -57,10 +58,9 @@ export const Container = styled.div`
     }
 
     & .header-image {
-      max-width: 128px;
-      max-height: 128px;
-      min-width: 128px;
-      position: absolute;
+      max-width: 8rem;
+      max-height: 8rem;
+      min-width: 8rem;
       left: 0;
     }
   }
@@ -95,7 +95,7 @@ export const Wrapper = styled.div`
     padding: 0;
     flex-direction: column;
 
-    ${(p) => (p?.hasHeaderImage ? "padding: 1rem 3rem;" : "")}
+    ${(p) => (p?.hasHeaderImage ? "padding: 3.5rem 3.5rem 0 3.5rem;" : "")}
   }
 `;
 
