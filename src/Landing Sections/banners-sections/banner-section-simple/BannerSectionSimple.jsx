@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import { Container, ContainerHeader, Wrapper } from "./style";
 import Button from "../../../General/Button/Button";
 import useDetectMobile from "../../../_utils/useDetectMobile";
+import { isDefined } from "../../../_utils/utils";
 
 const BannerSectionSimple = forwardRef((props, ref) => {
   const {
@@ -22,6 +23,7 @@ const BannerSectionSimple = forwardRef((props, ref) => {
     isHorizontalContent = false,
     backgroundColor,
     hasBorder = false,
+    headerImageUrl,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -35,13 +37,17 @@ const BannerSectionSimple = forwardRef((props, ref) => {
       imgHMob={imageHeightMobile}
       hasBorder={hasBorder}
     >
+      {headerImageUrl && (
+        <img src={headerImageUrl} className="header-image" alt="Header image" />
+      )}
       {imagePosition !== "right" &&
         !(hideImageForMobile === true && isMobile === true) && (
-          <img src={imageUrl} />
+          <img src={imageUrl} className="banner-image" />
         )}
       <Wrapper
         isHorizontalContent={isHorizontalContent}
         smallPadding={smallPadding}
+        hasHeaderImage={isDefined(headerImageUrl)}
       >
         <ContainerHeader>
           <div className="header-title">{title}</div>
@@ -62,7 +68,7 @@ const BannerSectionSimple = forwardRef((props, ref) => {
       </Wrapper>
       {imagePosition === "right" &&
         !(hideImageForMobile === true && isMobile === true) && (
-          <img src={imageUrl} />
+          <img src={imageUrl} className="banner-image" />
         )}
     </Container>
   );

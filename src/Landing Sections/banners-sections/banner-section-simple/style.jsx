@@ -22,6 +22,14 @@ export const Container = styled.div`
     min-height: ${(p) => `${p.height}px` || "22.5rem"};
   }
 
+  & .header-image {
+    max-width: 148px;
+    max-height: 148px;
+    position: absolute;
+    left: 2rem;
+    top: 0;
+  }
+
   ${(p) =>
     p.hasBorder === true &&
     `border: 1px solid var(--gray-95008, rgba(20, 22, 26, 0.08));
@@ -47,6 +55,14 @@ export const Container = styled.div`
       max-height: ${(p) => `${p.imgHMob}px` || "12.1rem"};
       min-height: ${(p) => `${p.imgHMob}px` || "12.1rem"};
     }
+
+    & .header-image {
+      max-width: 128px;
+      max-height: 128px;
+      min-width: 128px;
+      position: absolute;
+      left: 0;
+    }
   }
 `;
 
@@ -56,6 +72,7 @@ export const Wrapper = styled.div`
   gap: 2rem;
   flex-direction: ${(p) => (p.isHorizontalContent === true ? "row" : "column")};
   flex: 1;
+  z-index: 2;
 
   ${(p) => p.isHorizontalContent === true && `justify-content: space-between;`}
 
@@ -77,6 +94,8 @@ export const Wrapper = styled.div`
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     padding: 0;
     flex-direction: column;
+
+    ${(p) => (p?.hasHeaderImage ? "padding: 1rem 3rem;" : "")}
   }
 `;
 

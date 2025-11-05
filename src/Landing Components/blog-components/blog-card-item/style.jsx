@@ -58,6 +58,7 @@ export const Wrapper = styled.div`
 
       & .wrapper__tags {
         display: flex;
+        flex-wrap: wrap;
         gap: 0.25rem;
 
         & .wrapper__tag {

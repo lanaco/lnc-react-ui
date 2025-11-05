@@ -154,31 +154,33 @@ const BlogExploreSection = forwardRef(
         </div>
         <div className="landing__side-content">
           {sideTitle && <div className="side-content__title">{sideTitle}</div>}
-          <div className="side-content__items">
-            {miniBlogs &&
-              miniBlogs?.length > 0 &&
-              miniBlogs?.map((blog, idx) => (
-                <div
-                  className="side-content__item"
-                  onClick={() => handleSelectBlog(blog)}
-                >
-                  <img
-                    src={getBlogImageUrl(blog?.imageUrl, blog?.uuid) || null}
-                    alt={`Mini blog ${idx + 1}`}
-                    className="item__image"
-                  />
-                  <div className="item__content">
-                    <div className="item__title">{blog?.title}</div>
-                    <div className="item__description">
-                      {formatLocaleDateString(blog?.publishedAt)}
+          {miniBlogs && miniBlogs?.length > 0 && (
+            <>
+              <div className="side-content__items">
+                {miniBlogs?.map((blog, idx) => (
+                  <div
+                    className="side-content__item"
+                    onClick={() => handleSelectBlog(blog)}
+                  >
+                    <img
+                      src={getBlogImageUrl(blog?.imageUrl, blog?.uuid) || null}
+                      alt={`Mini blog ${idx + 1}`}
+                      className="item__image"
+                    />
+                    <div className="item__content">
+                      <div className="item__title">{blog?.title}</div>
+                      <div className="item__description">
+                        {formatLocaleDateString(blog?.publishedAt)}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-          </div>
-          <Link onClick={handleViewAll} className="side-content__link">
-            {viewAllButtonText}
-          </Link>
+                ))}
+              </div>
+              <Link onClick={handleViewAll} className="side-content__link">
+                {viewAllButtonText}
+              </Link>
+            </>
+          )}
         </div>
       </Container>
     );

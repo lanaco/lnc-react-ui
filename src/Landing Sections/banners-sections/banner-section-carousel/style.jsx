@@ -120,7 +120,11 @@ export const Container = styled.div`
     display: block;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 464px) {
+    & .carousel-item {
+      padding-right: 0.5rem;
+    }
+
     & .section__card {
       height: 23.4375rem;
       border-radius: 0.5rem;
@@ -135,12 +139,6 @@ export const Container = styled.div`
         height: 20.625rem;
         transform: scale(0.95);
       }
-    }
-  }
-
-  @media (max-width: 1024px) {
-    & .carousel-item {
-      padding-right: 0.5rem;
     }
   }
 `;

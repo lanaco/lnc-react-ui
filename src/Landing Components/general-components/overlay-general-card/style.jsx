@@ -11,11 +11,12 @@ export const Container = styled.div`
   cursor: pointer;
   flex: 1;
   flex-shrink: 0;
-  background: ${(p) => p?.backgroundColor}, url(${(p) => p?.backgroundImage});
+  background: ${(p) => p?.backgroundColor}, url("${(p) => p?.backgroundImage}");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 0.75rem;
+  transition: flex 0.3s ease;
 
   &:hover {
     flex: 2;
@@ -65,6 +66,7 @@ export const Container = styled.div`
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     padding: 2rem;
     min-height: 17.5rem;
+    width: 100%;
 
     &:hover {
       flex: 1;
