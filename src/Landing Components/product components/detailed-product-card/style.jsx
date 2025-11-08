@@ -106,6 +106,7 @@ export const ImageWrapper = styled.div`
   border-radius: 0.75rem;
   width: 100%;
   aspect-ratio: 1 / 1;
+  border: 1px solid #0c15201f;
 
   & img {
     display: block;
