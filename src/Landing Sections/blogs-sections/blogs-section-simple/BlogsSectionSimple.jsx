@@ -39,6 +39,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                 text={x?.description}
                 titleSlug={x?.titleSlug}
                 readMoreText={readMoreText}
+                options={x?.options}
                 onCardClick={() => onSelectCard(x?.titleSlug)}
               />
             ))
@@ -52,6 +53,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                   text={x?.description}
                   titleSlug={x?.titleSlug}
                   readMoreText={readMoreText}
+                  options={x?.options}
                   onCardClick={() => onSelectCard(x?.titleSlug)}
                 />
               ))}

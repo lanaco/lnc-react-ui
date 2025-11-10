@@ -11,6 +11,7 @@ import DropdownItem from "../../../Utility/DropdownMenu/DropdownItem";
 import BlogExploreSectionTags from "../../../Landing Components/help-components/faq-section-components/tag";
 import BlogProductCardsSection from "../../../Blog Sections/blog-product-cards-section/BlogProductCardsSection";
 import Pagination from "../../../Landing Components/blog-components/blog-explore/pagination";
+import ProductImageWrapper from "../../../Landing Components/product-img-wrapper";
 import BlogListSection from "../blog-list-section/BlogListSection";
 import { Container } from "./style";
 
@@ -56,8 +57,16 @@ const BlogExploreSection = forwardRef(
     },
     ref
   ) => {
+    const handlePageAndScrollToTop = (newPage) => {
+      const landingContainer = document.getElementById("landing__container");
+
+      landingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      handlePage?.(newPage);
+    };
+
     return (
-      <Container>
+      <Container id="landing__container">
         <div className="landing__main-content">
           {mainTitle && <div className="main-content__title">{mainTitle}</div>}
           {tags && (
@@ -147,7 +156,7 @@ const BlogExploreSection = forwardRef(
               perPage={perPage}
               handlePerPage={handlePerPage}
               page={page}
-              handlePage={handlePage}
+              handlePage={handlePageAndScrollToTop}
               totalPage={totalPage}
             />
           )}
@@ -162,7 +171,7 @@ const BlogExploreSection = forwardRef(
                     className="side-content__item"
                     onClick={() => handleSelectBlog(blog)}
                   >
-                    <img
+                    <ProductImageWrapper
                       src={getBlogImageUrl(blog?.imageUrl, blog?.uuid) || null}
                       alt={`Mini blog ${idx + 1}`}
                       className="item__image"

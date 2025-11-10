@@ -76,20 +76,7 @@ export const Wrapper = styled.div`
       & .wrapper__tags {
         display: flex;
         gap: 0.25rem;
-
-        & .wrapper__tag {
-          font-size: 0.75rem;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 1rem;
-          letter-spacing: 0.5px;
-          padding: 0.125rem 0.5rem;
-          justify-content: center;
-          align-items: center;
-          gap: 0.25rem;
-          height: 1.25rem;
-          border: 1px solid;
-        }
+        flex-wrap: wrap;
       }
     }
 

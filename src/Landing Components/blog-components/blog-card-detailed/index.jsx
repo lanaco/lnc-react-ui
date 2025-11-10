@@ -54,13 +54,15 @@ const BlogCardDetailed = forwardRef((props, ref) => {
           
         </div> */}
       </TextWrapper>
-      <div className="tags-wr">
-        {tags?.map((x, index) => (
-          <BlogTag key={index} color={x?.color}>
-            {x?.name}
-          </BlogTag>
-        ))}
-      </div>
+      {tags && (
+        <div className="tags-wr">
+          {tags?.map((x, index) => (
+            <BlogTag key={index} color={x?.color}>
+              {x?.name}
+            </BlogTag>
+          ))}
+        </div>
+      )}
     </Wrapper>
   );
 });

@@ -7,13 +7,7 @@ import Button from "../../../General/Button/Button";
 import ProductImageWrapper from "../../product-img-wrapper";
 
 const BlogCardLarge = forwardRef((props, ref) => {
-  const {
-    title,
-    imageUrl,
-    text,
-    onCardClick,
-    buttonText,
-} = props;
+  const { title, imageUrl, text, onCardClick, buttonText } = props;
   const isMobile = useDetectMobile();
 
   return (

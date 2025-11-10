@@ -61,6 +61,13 @@ export const Container = styled.div`
     position: relative;
     overflow: hidden;
 
+    & .section__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     & .card__content {
       position: absolute;
       top: 0;
@@ -113,13 +120,6 @@ export const Container = styled.div`
     }
   }
 
-  & .section__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
   @media (max-width: 464px) {
     & .carousel-item {
       padding-right: 0.5rem;
@@ -128,6 +128,10 @@ export const Container = styled.div`
     & .section__card {
       height: 23.4375rem;
       border-radius: 0.5rem;
+
+      & .section__image {
+        object-fit: fill;
+      }
 
       & .card__content {
         display: none;

@@ -20,7 +20,6 @@ const BlogCardsSponsoredSection = forwardRef(
       items,
       onButtonAction = () => {},
       onSelectCard = () => {},
-      onSelectOption = () => {},
       isLoading = false,
       getImage = () => {},
     },
@@ -42,7 +41,6 @@ const BlogCardsSponsoredSection = forwardRef(
             numberOfComments={x?.numberOfComments}
             isSponsored={x?.isSponsored}
             onSelectCard={() => onSelectCard?.(x)}
-            onSelectOption={(code) => onSelectOption?.(code)}
             imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
           />
         ));
