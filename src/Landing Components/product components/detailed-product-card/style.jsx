@@ -24,13 +24,6 @@ export const Wrapper = styled.div`
     gap: 0;
   }
 
-  & img {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* defining the aspect ratio of the image */
-    object-fit: cover; /* making sure the image isn't distorted */
-    border-radius: 0.75rem;
-  }
-
   & .card-title {
     font-size: 0.875rem;
     font-weight: 600;
@@ -96,19 +89,41 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    & .price-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+  }
+
+  &:hover .product-image-wrapper img {
+    transform: scale(1.1);
+  }
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid #0c15201f;
+
+  & img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    transition: var(--transition, all 0.3s ease);
+  }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & img {
       width: 8.875rem;
       height: 8.875rem;
       min-width: 8.875rem;
       min-height: 8.875rem;
-      min-width: 8.875rem;
-      min-height: 8.875rem;
       object-fit: cover;
-    }
-
-    & .price-text {
-      font-size: 0.875rem;
-      font-weight: 600;
     }
   }
 `;

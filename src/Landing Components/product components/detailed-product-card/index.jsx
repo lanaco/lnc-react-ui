@@ -3,7 +3,7 @@
 /* eslint-disable no-empty-pattern */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import { Wrapper } from "./style";
+import { Wrapper, ImageWrapper } from "./style";
 import {
   formatPrice,
   GetCurrencySymbol,
@@ -34,11 +34,13 @@ const DetailedProductCard = forwardRef((props, ref) => {
   return (
     // <LandingPageProductCardSkeleton />
     <Wrapper className="product-card" onClick={onSelectCard}>
-      {isDefined(imageComponent) ? (
-        imageComponent
-      ) : (
-        <ProductImageWrapper src={imageUrl} />
-      )}
+      <ImageWrapper className="product-image-wrapper">
+        {isDefined(imageComponent) ? (
+          imageComponent
+        ) : (
+          <ProductImageWrapper src={imageUrl} />
+        )}
+      </ImageWrapper>
       <div className="wrapper-card-1">
         <div className="card-title">{title}</div>
       </div>
