@@ -1,12 +1,12 @@
 import { forwardRef } from "react";
 
 import Icon from "../../../General/Icon/Icon";
-import Chip from "../../../Data display/Chip/Chip";
 import {
   formatLocaleDateString,
   formatString,
   getRoundedNumber,
 } from "../../../_utils/utils";
+import { BlogTag } from "../../../Landing Sections/style";
 import ProductImageWrapper from "../../product-img-wrapper";
 import { Wrapper } from "./style";
 
@@ -23,7 +23,6 @@ const BlogCardSponsored = forwardRef(
       numberOfComments = 0,
       isSponsored = false,
       onSelectCard = () => {},
-      onSelectOption = () => {},
     },
     ref
   ) => {
@@ -40,18 +39,10 @@ const BlogCardSponsored = forwardRef(
             <div className="wrapper__title">{title}</div>
             <div className="wrapper__tags">
               {options &&
-                options?.map((option, idx) => (
-                  <Chip
-                    key={`blog-card-sponsored-option__${idx + 1}`}
-                    label={option?.name}
-                    color={option?.color}
-                    className="wrapper__tag"
-                    onClick={(e) => {
-                      e?.stopPropagation();
-
-                      onSelectOption(option?.code);
-                    }}
-                  />
+                options?.map((x, idx) => (
+                  <BlogTag key={idx} color={x?.color}>
+                    {x?.name}
+                  </BlogTag>
                 ))}
             </div>
           </div>

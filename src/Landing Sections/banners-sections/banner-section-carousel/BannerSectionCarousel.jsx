@@ -36,13 +36,13 @@ const BannerSectionCarousel = forwardRef(
       <Container key={`banner-section-carousel__${isMobile}`} ref={ref}>
         <Carousel
           responsive={responsive}
-          removeArrowOnDeviceType="mobile"
+          removeArrowOnDeviceType={["tablet", "mobile"]}
           infinite={!isMobile}
           keyBoardControl={true}
           autoPlay={true}
           partialVisible={true}
-          customTransition="transform 300ms ease-in-out"
-          transitionDuration={300}
+          customTransition="transform 500ms ease-in-out"
+          transitionDuration={1000}
           sliderClass="carousel-slider"
           itemClass="carousel-item"
           containerClass="carousel-container"

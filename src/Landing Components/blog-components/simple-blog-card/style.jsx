@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
   border-radius: 0.75rem;
   border: 1px solid var(--gray-95008);
   overflow: hidden;
-  max-height: 21.5625rem;
   min-height: 21.5625rem;
   cursor: pointer;
 
@@ -47,6 +46,14 @@ export const Wrapper = styled.div`
     &:hover {
       color: var(--gray-700, #4e555f);
     }
+  }
+
+  & .tags-wr {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+    padding: 1rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
