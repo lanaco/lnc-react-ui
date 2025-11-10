@@ -1,15 +1,15 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import { forwardRef, Fragment, useEffect, useRef } from "react";
-import DefaultProductImage from "../../assets/images/NoListingsPhoto.svg";
+import DefaultShopImage from "../../assets/images/ShopAvatar.svg";
 import { isDefinedNotEmptyString } from "../../_utils/utils";
 
-const ProductImageWrapper = forwardRef(({ src, ...rest }, ref) => {
+const ShopImageWrapper = forwardRef(({ src, ...rest }, ref) => {
   const imgRef = useRef();
 
   useEffect(() => {
     const onErrorImage = (event) => {
-      event.target.src = DefaultProductImage;
+      event.target.src = DefaultShopImage;
       event.onerror = null;
     };
 
@@ -25,10 +25,10 @@ const ProductImageWrapper = forwardRef(({ src, ...rest }, ref) => {
       {isDefinedNotEmptyString(src) ? (
         <img ref={imgRef} src={src} {...rest} />
       ) : (
-        <img src={DefaultProductImage} {...rest} />
+        <img src={DefaultShopImage} {...rest} />
       )}
     </Fragment>
   );
 });
 
-export default ProductImageWrapper;
+export default ShopImageWrapper;

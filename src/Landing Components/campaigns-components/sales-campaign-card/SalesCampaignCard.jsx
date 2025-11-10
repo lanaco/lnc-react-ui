@@ -10,6 +10,7 @@ import {
 } from "./style";
 import PropTypes from "prop-types";
 import Icon from "../../../General/Icon/Icon";
+import ShopImageWrapper from "../../shop-img-wrapper";
 import ProfileItem from "./ProfileItem";
 import { forwardRef, useState, useEffect } from "react";
 
@@ -232,20 +233,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
         </div>
         <ProfileItem
           hasPermission={true}
-          image={
-            // <ShopFallbackImage
-            //   image={shopImage}
-            //   uuid={shopUuid}
-            //   size={ImageSize.SMALL}
-            //   className={`${shopImage ? "" : "no-image"}`}
-            // />
-            <img
-              src={shopImage}
-              // uuid={shopUuid}
-              // size={ImageSize.SMALL}
-              className={`${shopImage ? "" : "no-image"}`}
-            />
-          }
+          image={<ShopImageWrapper src={shopImage} />}
           themeData={themeData}
           isActive={true}
           isUser={false}
