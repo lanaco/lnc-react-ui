@@ -3,54 +3,44 @@ import { ArgsTable, Stories } from "@storybook/addon-docs";
 import BannerSectionCarousel from "./BannerSectionCarousel.jsx";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
-import useDetectMobile from "../../../_utils/useDetectMobile";
 
 <Meta
   title="Landing sections/Banner Section Carousel"
   component={BannerSectionCarousel}
 />
 
-export const TemplateDefault = (args) => {
-  const isMobile = useDetectMobile();
-
-const resolution = isMobile ? "287x375" : "1216x360";
-
-return (
-
-<BannerSectionCarousel
-  items={[
-    {
-      title: "Da nas ljeto ne uhvati nespremne!",
-      buttonText: "Shop now",
-      description:
-        "Iskoristi first minute cijene na montažne bazene! -15% na sve modele",
-      // imageUrl: `https://placehold.co/${resolution}/black/orange?font=poppins&text=mungos`,
-      imageUrl:
-        "https://qa.mungos.ba/api/v1/media/serving/images/landing-pages-content/Banneri/Homepage3_mob.jpg",
-    },
-    {
-      id: "2",
-      title: "Automobili na Mungosu!",
-      buttonText: "Shop now",
-      description:
-        "Ne želiš da ti stari stane na pola puta dok ideš na more? Nabavi novi!",
-      // imageUrl: `https://placehold.co/${resolution}/black/orange?font=poppins&text=mungos`,
-      imageUrl:
-        "https://qa.mungos.ba/api/v1/media/serving/images/landing-pages-content/Banneri/Homepage3_mob.jpg",
-    },
-    {
-      id: "3",
-      title: "Tražiš nekretninu?",
-      buttonText: "Shop now",
-      description:
-        "Mungos te vodi do tvog novog doma! Stanovi od 30 do 100 kvadrata na sjajnim lokacijama.",
-      // imageUrl: `https://placehold.co/${resolution}/black/orange?font=poppins&text=mungos`,
-      imageUrl:
-        "https://qa.mungos.ba/api/v1/media/serving/images/landing-pages-content/Banneri/Homepage3_mob.jpg",
-    },
-  ]}
-/>
-); };
+export const TemplateDefault = (args) => (
+  <BannerSectionCarousel
+    items={[
+      {
+        title: "Da nas ljeto ne uhvati nespremne!",
+        buttonText: "Shop now",
+        description:
+          "Iskoristi first minute cijene na montažne bazene! -15% na sve modele",
+        imageUrl:
+          "https://placehold.co/1000x1000/black/orange?font=poppins&text=mungos",
+      },
+      {
+        id: "2",
+        title: "Automobili na Mungosu!",
+        buttonText: "Shop now",
+        description:
+          "Ne želiš da ti stari stane na pola puta dok ideš na more? Nabavi novi!",
+        imageUrl:
+          "https://placehold.co/1000x1000/black/orange?font=poppins&text=mungos",
+      },
+      {
+        id: "3",
+        title: "Tražiš nekretninu?",
+        buttonText: "Shop now",
+        description:
+          "Mungos te vodi do tvog novog doma! Stanovi od 30 do 100 kvadrata na sjajnim lokacijama.",
+        imageUrl:
+          "https://placehold.co/1000x1000/black/orange?font=poppins&text=mungos",
+      },
+    ]}
+  />
+);
 
 ## Detailed products section
 
