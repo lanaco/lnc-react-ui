@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
 
 import Carousel from "react-multi-carousel";
 
@@ -30,11 +30,17 @@ const BannerSectionCarousel = forwardRef(
       },
     };
 
+    const carouselRef = useRef(null);
+
     const isMobile = useDetectMobile();
 
     return (
-      <Container key={`banner-section-carousel__${isMobile}`} ref={ref}>
+      <Container
+        key={`banner-section-carousel__${window.innerWidth}`}
+        ref={ref}
+      >
         <Carousel
+          ref={carouselRef}
           responsive={responsive}
           removeArrowOnDeviceType={["tablet", "mobile"]}
           infinite={!isMobile}
@@ -42,10 +48,11 @@ const BannerSectionCarousel = forwardRef(
           autoPlay={true}
           partialVisible={true}
           customTransition="transform 500ms ease-in-out"
-          transitionDuration={1000}
           sliderClass="carousel-slider"
           itemClass="carousel-item"
           containerClass="carousel-container"
+          rewind={true}
+          rewindWithAnimation={true}
         >
           {items?.map((item, idx) => (
             <div

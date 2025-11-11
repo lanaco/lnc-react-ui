@@ -121,10 +121,6 @@ export const Container = styled.div`
   }
 
   @media (max-width: 464px) {
-    & .carousel-item {
-      padding-right: 0.5rem;
-    }
-
     & .section__card {
       height: 23.4375rem;
       border-radius: 0.5rem;
@@ -141,7 +137,35 @@ export const Container = styled.div`
     & .react-multi-carousel-item:not(.react-multi-carousel-item--active) {
       & .section__card {
         height: 20.625rem;
-        transform: scale(0.95);
+      }
+    }
+
+    & .react-multi-carousel-item--active:not([data-index="0"]) {
+      & .section__card {
+        animation: scaleCarouselItem 500ms forwards;
+      }
+    }
+
+    & .carousel-item {
+      padding-right: 1rem;
+
+      &:last-of-type {
+        padding-left: 1rem;
+        padding-right: 0;
+      }
+
+      &:nth-last-child(2) {
+        padding-right: 0;
+      }
+    }
+
+    @keyframes scaleCarouselItem {
+      from {
+        height: 20.625rem;
+      }
+
+      top {
+        height: 23.4375rem;
       }
     }
   }
