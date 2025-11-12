@@ -1,4 +1,4 @@
-import { forwardRef, useRef } from "react";
+import { forwardRef } from "react";
 
 import Carousel from "react-multi-carousel";
 
@@ -30,14 +30,11 @@ const BannerSectionCarousel = forwardRef(
       },
     };
 
-    const carouselRef = useRef(null);
-
     const isMobile = useDetectMobile();
 
     return (
       <Container key={`banner-section-carousel__${isMobile}`} ref={ref}>
         <Carousel
-          ref={carouselRef}
           responsive={responsive}
           removeArrowOnDeviceType={["tablet", "mobile"]}
           infinite={!isMobile}
