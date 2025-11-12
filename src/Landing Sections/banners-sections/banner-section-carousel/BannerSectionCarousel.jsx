@@ -35,10 +35,7 @@ const BannerSectionCarousel = forwardRef(
     const isMobile = useDetectMobile();
 
     return (
-      <Container
-        key={`banner-section-carousel__${window.innerWidth}`}
-        ref={ref}
-      >
+      <Container key={`banner-section-carousel__${isMobile}`} ref={ref}>
         <Carousel
           ref={carouselRef}
           responsive={responsive}
