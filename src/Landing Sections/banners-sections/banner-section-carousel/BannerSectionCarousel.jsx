@@ -42,10 +42,11 @@ const BannerSectionCarousel = forwardRef(
           autoPlay={true}
           partialVisible={true}
           customTransition="transform 500ms ease-in-out"
-          transitionDuration={1000}
           sliderClass="carousel-slider"
           itemClass="carousel-item"
           containerClass="carousel-container"
+          rewind={true}
+          rewindWithAnimation={true}
         >
           {items?.map((item, idx) => (
             <div

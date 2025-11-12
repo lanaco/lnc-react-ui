@@ -46,6 +46,7 @@ export const Wrapper = styled.div`
     object-fit: cover;
     height: auto;
     max-width: 12.5rem;
+    min-width: 12.5rem;
     max-height: 9rem;
     border-radius: 0.75rem;
   }
@@ -110,6 +111,7 @@ export const Wrapper = styled.div`
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       max-width: 100%;
+      min-width: 100%;
     }
 
     & .wrapper__content {
