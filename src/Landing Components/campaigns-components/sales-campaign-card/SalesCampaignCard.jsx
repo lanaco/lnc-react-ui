@@ -54,6 +54,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     shopName,
     shopCategory,
     shopImage,
+    shopImageComponent,
     className,
     onSelectCard = () => {},
     onSelectShop = () => {},
@@ -234,6 +235,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
         <ProfileItem
           hasPermission={true}
           image={<ShopImageWrapper src={shopImage} />}
+          imageComponent={shopImageComponent}
           themeData={themeData}
           isActive={true}
           isUser={false}

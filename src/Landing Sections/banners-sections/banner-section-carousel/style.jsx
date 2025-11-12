@@ -13,10 +13,6 @@ export const Container = styled.div`
     align-items: center;
   }
 
-  & .carousel-container {
-    padding-bottom: 1.25rem;
-  }
-
   & .carousel-item {
     padding-right: 0;
 
@@ -121,6 +117,10 @@ export const Container = styled.div`
   }
 
   @media (max-width: 464px) {
+    & .carousel-container {
+      min-height: 23.4375rem;
+    }
+
     & .carousel-item {
       padding-right: 1rem;
 

@@ -114,5 +114,7 @@ export const BlogTag = styled.div`
   max-height: 1.25rem;
   border-radius: 0.25rem;
   display: flex;
+  max-width: 12.5rem;
   ${(p) => getColor(p.color)}
+  ${truncateText()}
 `;

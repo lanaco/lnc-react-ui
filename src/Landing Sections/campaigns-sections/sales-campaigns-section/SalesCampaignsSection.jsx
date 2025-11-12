@@ -59,6 +59,7 @@ const SalesCampaignsSection = forwardRef(
           // sellerType={SellerType.SHOP}
           sellerType={sellerType}
           shopImage={item?.profileImage}
+          shopImageComponent={item?.profileImageComponent}
           shopName={item?.shopName}
           shopUuid={item?.shopUuid}
           shopCategory={item?.shopCategory}

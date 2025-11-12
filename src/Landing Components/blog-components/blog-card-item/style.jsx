@@ -30,6 +30,7 @@ export const Wrapper = styled.div`
     height: auto;
     max-height: 9.5rem;
     max-width: 17.75rem;
+    min-width: 17.75rem;
     border-radius: 0.75rem;
   }
 
@@ -105,6 +106,7 @@ export const Wrapper = styled.div`
 
     & .wrapper__image {
       max-width: 100%;
+      min-width: 100%;
     }
 
     & .desktop-only {

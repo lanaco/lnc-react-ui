@@ -3,6 +3,7 @@ import { useTheme } from "@emotion/react";
 import Badge from "../../../Data display/Badge/Badge";
 import PropTypes from "prop-types";
 import { StyledProfileItem } from "./style";
+import { isDefined } from "../../../_utils/utils";
 
 const ProfileItem = (props) => {
   const {
@@ -10,6 +11,7 @@ const ProfileItem = (props) => {
     hasPermission = true,
     isUser,
     image,
+    imageComponent,
     name,
     notifications = 0,
     color = "primary",
@@ -61,7 +63,9 @@ const ProfileItem = (props) => {
       isActive={isActive}
       themeColor={themeData?.code || "transparent"}
     >
-      <div className="logo-wrapper">{image}</div>
+      <div className="logo-wrapper">
+        {isDefined(imageComponent) ? imageComponent : image}
+      </div>
       <div>
         <div className="name">{name}</div>
         {!isUser && <div className="description">{shopCategory}</div>}
