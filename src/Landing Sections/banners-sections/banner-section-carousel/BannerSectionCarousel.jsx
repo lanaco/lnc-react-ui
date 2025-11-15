@@ -110,6 +110,7 @@ const BannerSectionCarousel = forwardRef(
 BannerSectionCarousel.propTypes = {
   items: PropTypes.array,
   isLoading: PropTypes.bool,
+  fallbackComponent: PropTypes.any,
   onSelectItem: PropTypes.func,
   onButtonAction: PropTypes.func,
 };
