@@ -16,13 +16,10 @@ export const Wrapper = styled.div`
   min-height: 21.5625rem;
   cursor: pointer;
 
-  &:hover {
-  }
-
   & img {
     max-height: 12.5625rem;
     min-height: 12.5625rem;
-    object-fit: fill;
+    object-fit: cover;
     width: 100%;
   }
 
