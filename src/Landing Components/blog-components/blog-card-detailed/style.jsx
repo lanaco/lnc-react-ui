@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
   & img {
     max-height: 11.0625rem;
     min-height: 11.0625rem;
-    object-fit: fill;
+    object-fit: cover;
     width: 100%;
   }
 

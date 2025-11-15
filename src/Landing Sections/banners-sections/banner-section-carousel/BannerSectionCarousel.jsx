@@ -6,12 +6,22 @@ import "react-multi-carousel/lib/styles.css";
 
 import PropTypes from "prop-types";
 
+import SuspenseBannerCarousel from "../../../Landing Components/skeleton-components/banner-skeletons/banner-section-carousel";
 import Button from "../../../General/Button/Button";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { Container } from "./style";
 
 const BannerSectionCarousel = forwardRef(
-  ({ items = [], onSelectItem = () => {}, onButtonAction = () => {} }, ref) => {
+  (
+    {
+      items = [],
+      isLoading = false,
+      fallbackComponent = <></>,
+      onSelectItem = () => {},
+      onButtonAction = () => {},
+    },
+    ref
+  ) => {
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
@@ -34,56 +44,64 @@ const BannerSectionCarousel = forwardRef(
 
     return (
       <Container key={`banner-section-carousel__${isMobile}`} ref={ref}>
-        <Carousel
-          responsive={responsive}
-          removeArrowOnDeviceType={["tablet", "mobile"]}
-          infinite={!isMobile}
-          keyBoardControl={true}
-          autoPlay={true}
-          partialVisible={true}
-          customTransition="transform 500ms ease-in-out"
-          sliderClass="carousel-slider"
-          itemClass="carousel-item"
-          containerClass="carousel-container"
-          rewind={true}
-          rewindWithAnimation={true}
+        <SuspenseBannerCarousel
+          fallbackComponent={fallbackComponent}
+          keyPrefix="banner-carousel-skeleton"
+          isLoading={isLoading}
         >
-          {items?.map((item, idx) => (
-            <div
-              key={`banner-section-carousel-item__${idx + 1}`}
-              className="section__card"
-              onClick={() => onSelectItem(item)}
-            >
-              <img
-                src={item?.imageUrl}
-                alt={`Slide ${idx + 1}`}
-                className="section__image"
-              />
-              <div className="card__content">
-                <div className="card__text">
-                  {item?.title && (
-                    <div className="card__title">{item?.title}</div>
-                  )}
-                  {item?.title && (
-                    <div className="card__description">{item?.description}</div>
+          <Carousel
+            responsive={responsive}
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            infinite={!isMobile}
+            keyBoardControl={true}
+            autoPlay={true}
+            partialVisible={true}
+            customTransition="transform 500ms ease-in-out"
+            sliderClass="carousel-slider"
+            itemClass="carousel-item"
+            containerClass="carousel-container"
+            rewind={true}
+            rewindWithAnimation={true}
+          >
+            {items?.map((item, idx) => (
+              <div
+                key={`banner-section-carousel-item__${idx + 1}`}
+                className="section__card"
+                onClick={() => onSelectItem(item)}
+              >
+                <img
+                  src={item?.imageUrl}
+                  alt={`Slide ${idx + 1}`}
+                  className="section__image"
+                />
+                <div className="card__content">
+                  <div className="card__text">
+                    {item?.title && (
+                      <div className="card__title">{item?.title}</div>
+                    )}
+                    {item?.title && (
+                      <div className="card__description">
+                        {item?.description}
+                      </div>
+                    )}
+                  </div>
+                  {item?.buttonText && (
+                    <Button
+                      text={item?.buttonText}
+                      className="card__action"
+                      size="medium"
+                      onClick={(e) => {
+                        e?.stopPropagation();
+
+                        onButtonAction(item);
+                      }}
+                    />
                   )}
                 </div>
-                {item?.buttonText && (
-                  <Button
-                    text={item?.buttonText}
-                    className="card__action"
-                    size="medium"
-                    onClick={(e) => {
-                      e?.stopPropagation();
-
-                      onButtonAction(item);
-                    }}
-                  />
-                )}
               </div>
-            </div>
-          ))}
-        </Carousel>
+            ))}
+          </Carousel>
+        </SuspenseBannerCarousel>
       </Container>
     );
   }
@@ -91,6 +109,8 @@ const BannerSectionCarousel = forwardRef(
 
 BannerSectionCarousel.propTypes = {
   items: PropTypes.array,
+  isLoading: PropTypes.bool,
+  fallbackComponent: PropTypes.any,
   onSelectItem: PropTypes.func,
   onButtonAction: PropTypes.func,
 };
