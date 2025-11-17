@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.135",
+  "version": "4.0.136",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -173,6 +173,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@floating-ui/react": "^0.17.0",
+    "@hookform/resolvers": "^5.2.2",
     "@mdx-js/preact": "^2.1.5",
     "@mdx-js/react": "^2.1.5",
     "classnames": "^2.3.2",
@@ -203,7 +204,8 @@
     "react-transition-group": "^4.4.5",
     "react-use": "^17.3.2",
     "styled-components": "^5.3.6",
-    "use-state-with-callback": "^2.0.3"
+    "use-state-with-callback": "^2.0.3",
+    "yup": "^0.32.11"
   },
   "peerDependencies": {
     "@emotion/react": "^11.10.5",
