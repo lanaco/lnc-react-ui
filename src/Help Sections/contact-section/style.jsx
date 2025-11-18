@@ -7,6 +7,16 @@ export const Container = styled.div`
   align-items: flex-start;
   gap: 2.5rem;
 
+  & .lnc-ui-form-field {
+    & span {
+      font-size: 0.75rem;
+    }
+  }
+
+  & .message-input * {
+    resize: vertical;
+  }
+
   & .section__card {
     display: flex;
     flex-direction: column;
@@ -112,7 +122,7 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 1.25rem;
+      gap: 0.25rem;
 
       & .form__field {
         display: flex;
@@ -170,10 +180,16 @@ export const Container = styled.div`
             }
           }
         }
+        & .form-field {
+          width: 100%;
+          min-height: 4.25rem;
+          & span {
+            margin-top: 0.25rem;
+          }
+        }
 
         & .field__text-input {
-          height: 2.75rem;
-          min-height: 2.75rem;
+          height: 100%;
           border-radius: 0.75rem;
           border: 1px solid var(--gray-200, #e4e9f0);
           box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

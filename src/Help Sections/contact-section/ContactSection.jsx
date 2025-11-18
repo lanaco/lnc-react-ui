@@ -1,14 +1,15 @@
 import { forwardRef } from "react";
 import { Controller, useForm } from "react-hook-form";
-
 import PropTypes from "prop-types";
-
 import CheckBoxInput from "../../Basic Inputs/CheckBoxInput/CheckBoxInput";
 import TextInput from "../../Basic Inputs/TextInput/TextInput";
 import TextAreaInput from "../../Basic Inputs/TextAreaInput/TextAreaInput";
 import Icon from "../../General/Icon/Icon";
 import Button from "../../General/Button/Button";
 import { Container } from "./style";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { contactUsValidation } from "./validation";
+import FormField from "../../Layout/FormField/FormField";
 
 const ContactSection = forwardRef(
   (
@@ -29,12 +30,31 @@ const ContactSection = forwardRef(
       agrementText = "I agree with Privacy policy.",
       submitText = "Submit",
       onSubmit = () => {},
+      validationSchema,
+      validationMode = "onTouched",
+      isLoading = false,
     },
     ref
   ) => {
-    const { watch, handleSubmit, control } = useForm();
+    const {
+      watch,
+      handleSubmit,
+      formState: { errors, isValid },
+      control,
+      reset,
+    } = useForm({
+      resolver: yupResolver(
+        validationSchema ? validationSchema() : contactUsValidation()
+      ),
+      mode: validationMode,
+    });
 
     const watchMessage = watch("message");
+
+    const onSendMessage = (data) => {
+      onSubmit?.(data);
+      reset();
+    };
 
     return (
       <Container ref={ref}>
@@ -98,65 +118,92 @@ const ContactSection = forwardRef(
           <div>
             <div className="form__fields">
               <div className="form__field">
-                <Controller
-                  control={control}
-                  name="fullName"
-                  render={({ field }) => (
-                    <TextInput
-                      {...field}
-                      className="field__text-input"
-                      color="neutral"
-                      placeholder={fullNamePlaceholderText}
-                      debounceTime={200}
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name="email"
-                  render={({ field }) => (
-                    <TextInput
-                      {...field}
-                      className="field__text-input"
-                      color="neutral"
-                      placeholder={emailPlaceholderText}
-                      debounceTime={200}
-                    />
-                  )}
-                />
-              </div>
-              <div className="form__field">
-                <Controller
-                  control={control}
-                  name="subject"
-                  render={({ field }) => (
-                    <TextInput
-                      {...field}
-                      className="field__text-input"
-                      color="neutral"
-                      placeholder={subjectPlaceholderText}
-                      debounceTime={200}
-                    />
-                  )}
-                />
-              </div>
-              <div className="form__field">
-                <div className="field__wrapper">
+                <FormField
+                  color="danger"
+                  text={errors?.fullName?.message}
+                  className="form-field"
+                >
                   <Controller
                     control={control}
-                    name="message"
+                    name="fullName"
                     render={({ field }) => (
-                      <TextAreaInput
+                      <TextInput
                         {...field}
-                        className="field__text-input text-area"
+                        className="field__text-input"
                         color="neutral"
-                        placeholder={messagePlaceholderText}
+                        size="large"
+                        placeholder={fullNamePlaceholderText}
                         debounceTime={200}
-                        minRows={7}
-                        maxLength={messageMaxLength}
                       />
                     )}
                   />
+                </FormField>
+                <FormField
+                  color="danger"
+                  text={errors?.email?.message}
+                  className="form-field"
+                >
+                  <Controller
+                    control={control}
+                    name="email"
+                    render={({ field }) => (
+                      <TextInput
+                        {...field}
+                        size="large"
+                        className="field__text-input"
+                        color="neutral"
+                        placeholder={emailPlaceholderText}
+                        debounceTime={200}
+                      />
+                    )}
+                  />
+                </FormField>
+              </div>
+              <div className="form__field">
+                <FormField
+                  color="danger"
+                  text={errors?.subject?.message}
+                  className="form-field"
+                >
+                  <Controller
+                    control={control}
+                    name="subject"
+                    render={({ field }) => (
+                      <TextInput
+                        {...field}
+                        size="large"
+                        className="field__text-input"
+                        color="neutral"
+                        placeholder={subjectPlaceholderText}
+                        debounceTime={200}
+                      />
+                    )}
+                  />
+                </FormField>
+              </div>
+              <div className="form__field">
+                <div className="field__wrapper">
+                  <FormField
+                    color="danger"
+                    text={errors?.message?.message}
+                    className="form-field"
+                  >
+                    <Controller
+                      control={control}
+                      name="message"
+                      render={({ field }) => (
+                        <TextAreaInput
+                          {...field}
+                          className="message-input field__text-input text-area"
+                          color="neutral"
+                          placeholder={messagePlaceholderText}
+                          debounceTime={200}
+                          minRows={7}
+                          maxLength={messageMaxLength}
+                        />
+                      )}
+                    />
+                  </FormField>
                   <div className="field__hint">{`${
                     watchMessage?.length || 0
                   }/${messageMaxLength}`}</div>
@@ -177,7 +224,13 @@ const ContactSection = forwardRef(
                 </div>
               </div>
               <div className="form__field right">
-                <Button text={submitText} onClick={handleSubmit(onSubmit)} />
+                <Button
+                  color="primary"
+                  text={submitText}
+                  onClick={handleSubmit(onSendMessage)}
+                  leadingIcon={isLoading ? "circle-notch fa-spin" : ""}
+                  disabled={!isValid || isLoading}
+                />
               </div>
             </div>
           </div>
