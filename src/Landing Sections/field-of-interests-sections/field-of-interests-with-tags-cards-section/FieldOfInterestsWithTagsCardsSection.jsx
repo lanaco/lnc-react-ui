@@ -20,25 +20,11 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       limitForMobile = 2,
       items = [],
       selectedTag,
-      isLoadingTags = false,
-      isLoadingItems = false,
       onSelectTag = () => {},
       onSelectCard = () => {},
-      getImage = () => {},
     },
     ref
   ) => {
-    // const [active, setActive] = useState();
-
-    const handleSelectTag = (tag) => {
-      // setActive(tag?.uuid);
-      onSelectTag?.(tag);
-    };
-
-    const handleSelectCard = (card) => {
-      onSelectCard?.(card);
-    };
-
     return (
       <Wrapper
         ref={ref}
@@ -52,14 +38,14 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
         <div className="wrapper__tags">
-          {!isLoadingTags
+          {tags && tags?.length > 0
             ? tags?.map((tag, idx) => (
                 <FieldOfInterestsWithTagsCardTag
                   key={`field-of-interests-with-tags-card-tag__${idx + 1}`}
                   icon={tag?.icon}
-                  name={tag?.name}
-                  isActive={tag?.uuid === selectedTag?.uuid}
-                  onSelectCard={() => handleSelectTag?.(tag)}
+                  name={tag?.title}
+                  isActive={tag?.code === selectedTag}
+                  onSelectCard={() => onSelectTag?.(tag)}
                 />
               ))
             : Array.from("123")?.map((_, idx) => (
@@ -71,15 +57,15 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
               ))}
         </div>
         <div className="wrapper__cards">
-          {!isLoadingItems
+          {items && items?.length > 0
             ? items?.map((card, idx) => (
                 <FieldOfInterestsWithTagsCard
                   key={`field-of-interests-with-tags-card__${idx + 1}`}
-                  image={getImage(card?.image, card?.uuid, card?.sellerUuid)}
+                  image={card?.image}
                   imageComponent={card?.imageComponent}
-                  name={card?.name}
-                  description={card?.description || card?.shortDescription}
-                  onSelectCard={() => handleSelectCard?.(card)}
+                  name={card?.title}
+                  description={card?.description}
+                  onSelectCard={() => onSelectCard?.(card)}
                 />
               ))
             : Array.from("123")?.map((_, idx) => (
