@@ -1,22 +1,23 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import DetailedProductsSection from "./DetailedProductsSection.jsx";
+import DetailedProductsSectionInfinitive from "./DetailedProductsSectionInfinitive.jsx";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta
-  title="Landing sections/Detailed Products Section"
-  component={DetailedProductsSection}
+  title="Landing sections/Detailed Products Section Infinitive"
+  component={DetailedProductsSectionInfinitive}
 />
 
 export const TemplateDefault = (args) => (
-  <DetailedProductsSection
-    subtitle="LOREM IPSUM DOLOR"
-    title="Lore ipsum dolor sit amet"
-    buttonText="Lore ipsum dolor"
-    buttonLink={`/`}
-    limit={6}
+  <DetailedProductsSectionInfinitive
+    title="Just for you"
+    viewAllButtonText="View all"
+    viewAllbuttonLink="/"
+    onLoadMore={() => {}}
+    onSelectCard={() => {}}
     getImage={(x, y, z) => x}
+    limit={5}
     items={[
       {
         title: "Minimalist Stuiod | Urbal Core | Studio",
@@ -24,7 +25,7 @@ export const TemplateDefault = (args) => (
         sellingPrice: 0,
         isFree: true,
         currency: "BAM",
-        image: "https://picsum.photos/200/300",
+        image: "https://picsum.photos/500/500",
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
         isSponsored: true,
@@ -53,39 +54,9 @@ export const TemplateDefault = (args) => (
       {
         title: "Minimalist Stuiod | Urbal Core | Studio",
         price: 22000,
-        sellingPrice: 20,
-        currency: "BAM",
-        image: "https://picsum.photos/200/300",
-        sellerUuid: "2adb55cb-9eef-4e46-b6a4-ee0228bce269",
-        uuid: "2ac81e58-0759-4aa3-949c-c9281494abfa",
-        location: "Banja Luka",
-        tags: [
-          {
-            code: "AdType",
-            name: "",
-            value: "Prodaja",
-            measurementUnit: null,
-          },
-          {
-            code: "SurfaceArea",
-            name: "",
-            value: "45.00",
-            measurementUnit: null,
-          },
-          {
-            code: "NumberOfRooms",
-            name: "",
-            value: "Jednosoban",
-            measurementUnit: null,
-          },
-        ],
-      },
-      {
-        title: "Minimalist Stuiod | Urbal Core | Studio",
-        price: 22000,
         sellingPrice: 25000,
         currency: "BAM",
-        image: "https://picsum.photos/200/300",
+        image: "https://picsum.photos/500/500",
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
         location: "Banja Luka",
@@ -116,7 +87,7 @@ export const TemplateDefault = (args) => (
         sellingPrice: 25000,
         isNegotiable: true,
         currency: "BAM",
-        image: "https://picsum.photos/200/300",
+        image: "https://picsum.photos/500/500",
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
         location: "Banja Luka",
@@ -146,7 +117,7 @@ export const TemplateDefault = (args) => (
         price: 22000,
         sellingPrice: 25000,
         currency: "BAM",
-        image: "https://picsum.photos/200/300",
+        image: "https://picsum.photos/500/500",
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
         location: "Banja Luka",
@@ -175,7 +146,36 @@ export const TemplateDefault = (args) => (
         title: "Minimalist Stuiod | Urbal Core | Studio",
         price: 25000,
         currency: "BAM",
-        image: "https://picsum.photos/200/300",
+        image: "https://picsum.photos/500/500",
+        sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
+        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
+        location: "Banja Luka",
+        tags: [
+          {
+            code: "AdType",
+            name: "",
+            value: "Prodaja",
+            measurementUnit: null,
+          },
+          {
+            code: "SurfaceArea",
+            name: "",
+            value: "45.00",
+            measurementUnit: null,
+          },
+          {
+            code: "NumberOfRooms",
+            name: "",
+            value: "Jednosoban",
+            measurementUnit: null,
+          },
+        ],
+      },
+      {
+        title: "Minimalist Stuiod | Urbal Core | Studio",
+        price: 25000,
+        currency: "BAM",
+        image: "https://picsum.photos/500/500",
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
         location: "Banja Luka",
@@ -204,10 +204,12 @@ export const TemplateDefault = (args) => (
   />
 );
 
-## Detailed products section
+## Detailed products section infinitive
 
 <SyntaxHighlighter language="jsx" style={nord}>
-  {'import { DetailedProductsSection } from "@lanaco/lnc-react-ui";'}
+  {
+    'import  DetailedProductsSectionInfinitive from "@lanaco/lnc-react-ui/DetailedProductsSectionInfinitive";'
+  }
 </SyntaxHighlighter>
 
 <Canvas>

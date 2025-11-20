@@ -24,6 +24,40 @@ export const Wrapper = styled.div`
     gap: 0;
   }
 
+  & .wrapper-card-3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  & .tag {
+    height: 1.5rem;
+    gap: 0.25rem;
+    padding: 0.25rem 0.375rem;
+    border-radius: 0.375rem;
+    background: #f9fafb;
+    border: 1px solid var(--gray-95012, #14161a1f);
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.025rem;
+    color: var(--gray-950, #14161a);
+
+    &.tag-sponsored {
+      & i {
+        color: var(--yellow-500, #f59e0b);
+      }
+    }
+  }
+
+  & .tag-mobile {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.025rem;
+    color: var(--gray-600, #676e79);
+  }
+
   & .card-title {
     font-size: 0.875rem;
     font-weight: 600;
@@ -37,6 +71,7 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: end;
     gap: 0.5rem;
+
     & .full-price {
       text-decoration: line-through;
       font-size: 0.75rem;
@@ -92,6 +127,10 @@ export const Wrapper = styled.div`
     & .price-text {
       font-size: 0.875rem;
       font-weight: 600;
+
+      & .full-price {
+        display: none;
+      }
     }
   }
 
