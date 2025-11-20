@@ -116,6 +116,21 @@ const customStyles = {
     fontWeight: s.theme.components["Input"].default["enabled"].fontWeight,
     fontSize: s.theme.typography.component[s.selectProps.size].fontSize,
     lineHeight: s.theme.typography.component[s.selectProps.size].lineHeight,
+    color: s?.isSelected
+      ? getColorRgbaValue(
+          s.theme,
+          "Dropdown",
+          s.selectProps.color,
+          "selected",
+          "text"
+        )
+      : getColorRgbaValue(
+          s.theme,
+          "Dropdown",
+          s.selectProps.color,
+          "enabled",
+          "text"
+        ),
     backgroundColor: s.isSelected
       ? getColorRgbaValue(
           s.theme,
@@ -141,7 +156,13 @@ const customStyles = {
         "hover",
         "background"
       ),
-      color: "unset",
+      color:  getColorRgbaValue(
+          s.theme,
+          "Dropdown",
+          s.selectProps.color,
+          "hover",
+          "text"
+        ),
     },
   }),
   multiValue: (p, s) => ({
