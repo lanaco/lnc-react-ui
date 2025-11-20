@@ -138,6 +138,7 @@ const DropdownLookup = forwardRef((props, ref) => {
       className={className}
       style={style}
       {...rest}
+      // menuIsOpen={true}
     />
   );
 });
