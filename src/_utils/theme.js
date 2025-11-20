@@ -2602,12 +2602,15 @@ export const lanaco_light = {
         enabled: {
           background: 0,
           removeIcon: 400,
+          text: 900,
         },
         hover: {
           background: 100,
+          text: 900,
         },
         selected: {
           background: 500,
+          text: 0,
         },
       },
       teal: {
