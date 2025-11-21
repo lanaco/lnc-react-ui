@@ -55,6 +55,10 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 negotiableText={negotiableText}
                 freeText={freeText}
                 tags={x?.tags}
+                categoryCode={x?.categoryCode}
+                condition={x?.condition}
+                quantity={x?.quantity}
+                trade={x?.trade}
               />
             ))
           : items
@@ -79,6 +83,10 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                   negotiableText={negotiableText}
                   freeText={freeText}
                   tags={x?.tags}
+                  categoryCode={x?.categoryCode}
+                  condition={x?.condition}
+                  quantity={x?.quantity}
+                  trade={x?.trade}
                 />
               ))}
       </>

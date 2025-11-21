@@ -8,6 +8,17 @@ export const ImageSize = {
   EXTRA_EXTRA_SMALL: "ExtraExtraSmall",
 };
 
+export const VehiclesCarsCategoryCode = "Vehicles_Cars";
+export const VehiclesMotorcycleCategoryCode = "Vehicles_Motorcycles";
+export const VehiclesTrucksCategoryCode = "Vehicles_Trucks";
+export const VehiclesTractorsCategoryCode =
+  "Vehicles_AgriculturalMachines_Tractors";
+export const VehiclesConstructionMachinesCategoryCode =
+  "Vehicles_ConstructionMachines";
+export const VehiclesBusesCategoryCode = "Vehicles_Bus";
+export const VehiclesCampersCategoryCode = "Vehicles_Campers";
+export const RealEstateCategoryPrefix = "RealEstates_";
+
 export const AttributeTags = {
   Mileage: {
     icon: "mng-lnc-road",

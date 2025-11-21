@@ -77,7 +77,7 @@ export const Wrapper = styled.div`
       font-size: 0.75rem;
       font-weight: 400;
       padding-bottom: 0.125rem;
-      color: var(--gray-600, #676e79);
+      color: var(--danger-600, #e11d48);
     }
   }
 
@@ -123,6 +123,12 @@ export const Wrapper = styled.div`
     height: 1rem;
   }
 
+  & .tags-popover__trigger {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & .price-text {
       font-size: 0.875rem;
@@ -163,6 +169,58 @@ export const ImageWrapper = styled.div`
       min-width: 8.875rem;
       min-height: 8.875rem;
       object-fit: cover;
+    }
+  }
+`;
+
+export const TagsPopoverContent = styled.div`
+  background: var(--white, #fff);
+  z-index: 1;
+
+  border: 1px solid var(--gray-200, #dddfe4);
+  border-radius: 0.5rem;
+  line-height: 1rem;
+  position: absolute;
+  padding: 0.5rem 0.75rem;
+  top: 0.5rem;
+  left: 25%;
+  transform: translateX(-50%);
+  min-width: 10rem;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-style: solid;
+    border-width: 0.625rem;
+  }
+
+  &::after {
+    top: -1.1875rem;
+    border-color: transparent transparent var(--white, #fff) transparent;
+  }
+
+  &::before {
+    top: -1.25rem;
+    border-color: transparent transparent var(--gray-200, #dddfe4) transparent;
+  }
+
+  & .tags-popover__content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+
+    & .tags-popover__name {
+      color: var(--gray-600, #676e79);
+    }
+
+    & .tags-popover__value {
+      color: var(--gray-950, #14161a);
     }
   }
 `;
