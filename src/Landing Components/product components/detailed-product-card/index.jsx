@@ -28,7 +28,7 @@ import {
 } from "../../consts";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 
-const DetailedProductCard = forwardRef((props) => {
+const DetailedProductCard = forwardRef((props, ref) => {
   const {
     title,
     price = 0,
@@ -175,7 +175,7 @@ const DetailedProductCard = forwardRef((props) => {
 
   return (
     // <LandingPageProductCardSkeleton />
-    <Wrapper className="product-card" onClick={onSelectCard}>
+    <Wrapper ref={ref} className="product-card" onClick={onSelectCard}>
       <ImageWrapper className="product-image-wrapper">
         {isDefined(imageComponent) ? (
           imageComponent
