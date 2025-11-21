@@ -1,37 +1,35 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
-import { GridWrapper } from "./style";
+import { Container } from "./style";
+import IconButton from "../../../General/IconButton/IconButton";
 import Button from "../../../General/Button/Button";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
-import { TitleWithOptionsSectionWrapper } from "../../style";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
 import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-detailed";
-import SelectBar from "../../../Inputs/SelectBar";
 
 const MemoizedProductCard = memo(DetailedProductCard);
 
-const DetailedProductsSection = forwardRef((props, ref) => {
+const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
   const {
-    icon,
     title,
-    buttonLink,
     items,
-    buttonText,
     limit = 4,
-    onSelectCard = () => {},
-    onButtonAction = () => {},
     isLoading = false,
+    onSelectCard = () => {},
+    onLoadMore = () => {},
+    onButtonAction = () => {},
     getImage = () => {},
+    viewAllbuttonLink,
+    viewAllButonText = "View all",
     negotiableText,
     freeText,
-    options,
-    onSelectOption = () => {},
-    productsToolbarName = "All",
+    loadMoreButtonIcon = "angle-down",
   } = props;
 
   const isMobile = useDetectMobile();
+
   const memoizedProducts = useMemo(() => {
     return (
       <>
@@ -94,63 +92,47 @@ const DetailedProductsSection = forwardRef((props, ref) => {
   }, [items, isMobile, limit]);
 
   return (
-    <TitleWithOptionsSectionWrapper ref={ref}>
-      <div className="regular-title">
-        <div className="regular-title-text">
-          {isDefinedNotEmptyString(icon) && <i className={icon} />}
-          <span>{title}</span>
-        </div>
-        {isDefinedNotEmptyString(buttonLink) && (
+    <Container limit={limit}>
+      <div className="section__heading">
+        {isDefinedNotEmptyString(title) && (
+          <div className="section__title">{title}</div>
+        )}
+        {isMobile && isDefinedNotEmptyString(viewAllbuttonLink) && (
           <Button
             type="button"
             btnType="tinted"
             color="neutral"
             onClick={(e) => {
               e?.target?.blur();
-              onButtonAction(buttonLink);
+
+              onButtonAction(viewAllbuttonLink);
             }}
             borderRadius="curved"
-            className="button-link"
+            className="section__view-all"
           >
-            {buttonText}
+            {viewAllButonText}
           </Button>
         )}
       </div>
-      {options?.length > 0 && (
-        <SelectBar
-          // items={dataExplore?.map((item) => ({
-          //   ...item,
-          // }))}
-          items={options}
-          // selectedIds={selectedExploreCategoriesIds}
-          onRemove={(item) => {
-            onSelectOption(item);
-            // setSelectedExploreCategoriesIds([
-            //   ...selectedExploreCategoriesIds.filter((x) => x != id),
-            // ])
-          }}
-          onSelect={(item) => {
-            onSelectOption(item);
-            // setSelectedExploreCategoriesIds([id]);
-          }}
-          // onSelectAll={() => setSelectedExploreCategoriesIds([])}
-          labelKey={"name"}
-          valueKey={"code"}
-          noMargin={true}
-          productsToolbarName={productsToolbarName}
+      <SuspenseDetailedProductCard
+        isLoading={isLoading}
+        limit={limit}
+        keyPrefix="explore-landing"
+      >
+        <div className="section__items">{memoizedProducts}</div>
+      </SuspenseDetailedProductCard>
+      {!isMobile && (
+        <IconButton
+          icon={loadMoreButtonIcon}
+          borderRadius="curved"
+          btnType="basic"
+          color="neutral"
+          className="section__show-more"
+          onClick={onLoadMore}
         />
       )}
-      <GridWrapper limit={limit}>
-        <SuspenseDetailedProductCard
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix={"explore-landing"}
-        >
-          {memoizedProducts}
-        </SuspenseDetailedProductCard>
-      </GridWrapper>
-    </TitleWithOptionsSectionWrapper>
+    </Container>
   );
 });
 
-export default DetailedProductsSection;
+export default DetailedProductsSectionInfinitive;

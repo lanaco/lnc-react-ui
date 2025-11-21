@@ -4,7 +4,7 @@ import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 export const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: ${(p) => `repeat(${p.limit},  minmax(0, 1fr))`};
-  gap: ${(p) => p?.gap || "1.25rem"};
+  gap: 1.25rem;
 
   & .button-link {
     white-space: nowrap;
