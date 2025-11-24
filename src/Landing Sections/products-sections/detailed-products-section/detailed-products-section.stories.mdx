@@ -27,7 +27,7 @@ export const TemplateDefault = (args) => (
         image: "https://picsum.photos/200/300",
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
-        isSponsored: true,
+        sponsored: true,
         location: "Banja Luka",
         categoryCode: "RealEstates_Apartments",
         tags: [
@@ -71,24 +71,22 @@ export const TemplateDefault = (args) => (
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
         location: "Banja Luka",
+        categoryCode: "Vehicles_Cars",
         tags: [
           {
             code: "AdType",
-            name: "",
+            name: "Tip oglasa",
             value: "Prodaja",
             measurementUnit: null,
           },
           {
             code: "SurfaceArea",
-            name: "",
-            value: "45.00",
-            measurementUnit: null,
-          },
-          {
-            code: "NumberOfRooms",
-            name: "",
-            value: "Jednosoban",
-            measurementUnit: null,
+            name: "Površina",
+            value: "49,00",
+            measurementUnit: {
+              symbol: "m²",
+              name: "Kvadratni metar",
+            },
           },
         ],
       },
