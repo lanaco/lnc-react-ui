@@ -11,6 +11,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   cursor: pointer;
+  overflow: hidden;
+  width: 100%;
 
   & .wrapper-card-1 {
     display: flex;
@@ -28,6 +30,12 @@ export const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem;
+
+    & > div {
+      & > div {
+        width: 100% !important;
+      }
+    }
   }
 
   & .tag {
@@ -42,6 +50,8 @@ export const Wrapper = styled.div`
     line-height: 1rem;
     letter-spacing: 0.025rem;
     color: var(--gray-950, #14161a);
+    white-space: nowrap;
+    flex: 0 0 auto;
 
     &.tag-sponsored {
       & i {
@@ -71,13 +81,18 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: end;
     gap: 0.5rem;
+    color: var(--gray-950, #14161a);
+
+    &.new-price {
+      color: var(--danger-600, #e11d48);
+    }
 
     & .full-price {
       text-decoration: line-through;
       font-size: 0.75rem;
       font-weight: 400;
       padding-bottom: 0.125rem;
-      color: var(--danger-600, #e11d48);
+      color: var(--gray-600, #676e79);
     }
   }
 
@@ -125,11 +140,16 @@ export const Wrapper = styled.div`
 
   & .tags-popover__trigger {
     display: flex;
-    flex-wrap: wrap;
     gap: 0.25rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    overflow: visible;
+
+    & .tags-popover__trigger {
+      flex-wrap: wrap;
+    }
+
     & .price-text {
       font-size: 0.875rem;
       font-weight: 600;
@@ -185,7 +205,7 @@ export const TagsPopoverContent = styled.div`
   top: 0.5rem;
   left: 25%;
   transform: translateX(-50%);
-  min-width: 10rem;
+  min-width: 13rem;
 
   &::before,
   &::after {

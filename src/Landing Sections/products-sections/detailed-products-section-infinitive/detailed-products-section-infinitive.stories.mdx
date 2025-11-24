@@ -17,10 +17,11 @@ export const TemplateDefault = (args) => (
     onLoadMore={() => {}}
     onSelectCard={() => {}}
     getImage={(x, y, z) => x}
+    sponsoredText="Sponzorisano"
     limit={5}
     items={[
       {
-        title: "Minimalist Stuiod | Urbal Core | Studio",
+        title: "Minimalist Stuiod | Urbal Core | Studio 1",
         price: 0,
         sellingPrice: 0,
         isFree: true,
@@ -28,7 +29,7 @@ export const TemplateDefault = (args) => (
         image: "https://picsum.photos/500/500",
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
-        isSponsored: true,
+        sponsored: true,
         location: "Banja Luka",
         categoryCode: "RealEstates_Apartments",
         tags: [
@@ -50,7 +51,7 @@ export const TemplateDefault = (args) => (
         ],
       },
       {
-        title: "Minimalist Stuiod | Urbal Core | Studio",
+        title: "Minimalist Stuiod | Urbal Core | Studio 2",
         price: 22000,
         sellingPrice: 25000,
         currency: "BAM",
@@ -65,7 +66,7 @@ export const TemplateDefault = (args) => (
         tags: [],
       },
       {
-        title: "Minimalist Stuiod | Urbal Core | Studio",
+        title: "Minimalist Stuiod | Urbal Core | Studio 3",
         price: 22000,
         sellingPrice: 25000,
         isNegotiable: true,
@@ -74,29 +75,37 @@ export const TemplateDefault = (args) => (
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
         uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
         location: "Banja Luka",
+        categoryCode: "Vehicles_Cars",
+        sponsored: true,
         tags: [
           {
-            code: "AdType",
-            name: "",
-            value: "Prodaja",
+            code: "YearOfProduction",
+            name: "Godina proizvodnje",
+            value: "2024",
             measurementUnit: null,
           },
           {
-            code: "SurfaceArea",
-            name: "",
-            value: "45.00",
-            measurementUnit: null,
+            code: "Mileage",
+            name: "Kilometraža",
+            value: "111.000,00",
+            measurementUnit: {
+              symbol: "km",
+              name: "Kilometar",
+            },
           },
           {
-            code: "NumberOfRooms",
-            name: "",
-            value: "Jednosoban",
-            measurementUnit: null,
+            code: "EnginePowerKW",
+            name: "Snaga motora",
+            value: "320,00",
+            measurementUnit: {
+              symbol: "kW",
+              name: "Kilovat",
+            },
           },
         ],
       },
       {
-        title: "Minimalist Stuiod | Urbal Core | Studio",
+        title: "Minimalist Stuiod | Urbal Core | Studio 4",
         price: 22000,
         sellingPrice: 25000,
         currency: "BAM",
@@ -126,37 +135,9 @@ export const TemplateDefault = (args) => (
         ],
       },
       {
-        title: "Minimalist Stuiod | Urbal Core | Studio",
+        title: "Minimalist Stuiod | Urbal Core | Studio 5",
         price: 25000,
-        currency: "BAM",
-        image: "https://picsum.photos/500/500",
-        sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",
-        uuid: "9e32f86d-9f21-4776-9b44-ea40d3403024",
-        location: "Banja Luka",
-        tags: [
-          {
-            code: "AdType",
-            name: "",
-            value: "Prodaja",
-            measurementUnit: null,
-          },
-          {
-            code: "SurfaceArea",
-            name: "",
-            value: "45.00",
-            measurementUnit: null,
-          },
-          {
-            code: "NumberOfRooms",
-            name: "",
-            value: "Jednosoban",
-            measurementUnit: null,
-          },
-        ],
-      },
-      {
-        title: "Minimalist Stuiod | Urbal Core | Studio",
-        price: 25000,
+        sellingPrice: 25000,
         currency: "BAM",
         image: "https://picsum.photos/500/500",
         sellerUuid: "08531dfd-a90d-4bae-b75a-d14c44fa3146",

@@ -26,6 +26,7 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
     negotiableText,
     freeText,
     loadMoreButtonIcon = "angle-down",
+    sponsoredText,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -44,7 +45,7 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
                 image={x?.image}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
-                isSponsored={x?.isSponsored}
+                sponsored={x?.sponsored}
                 imageComponent={x?.imageComponent}
                 onSelectCard={() => onSelectCard(x?.uuid)}
                 imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
@@ -57,6 +58,7 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
                 condition={x?.condition}
                 quantity={x?.quantity}
                 trade={x?.trade}
+                sponsoredText={sponsoredText}
               />
             ))
           : items
@@ -72,7 +74,7 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
                   location={x?.location}
-                  isSponsored={x?.isSponsored}
+                  sponsored={x?.sponsored}
                   imageComponent={x?.imageComponent}
                   onSelectCard={() => onSelectCard(x?.uuid)}
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
@@ -85,6 +87,7 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
                   condition={x?.condition}
                   quantity={x?.quantity}
                   trade={x?.trade}
+                  sponsoredText={sponsoredText}
                 />
               ))}
       </>

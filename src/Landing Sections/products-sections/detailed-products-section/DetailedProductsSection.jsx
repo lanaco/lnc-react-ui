@@ -29,6 +29,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     options,
     onSelectOption = () => {},
     productsToolbarName = "All",
+    sponsoredText,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -46,7 +47,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 image={x?.image}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
-                isSponsored={x?.isSponsored}
+                sponsored={x?.sponsored}
                 imageComponent={x?.imageComponent}
                 onSelectCard={() => onSelectCard(x?.uuid)}
                 imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
@@ -59,6 +60,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 condition={x?.condition}
                 quantity={x?.quantity}
                 trade={x?.trade}
+                sponsoredText={sponsoredText}
               />
             ))
           : items
@@ -74,7 +76,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
                   location={x?.location}
-                  isSponsored={x?.isSponsored}
+                  sponsored={x?.sponsored}
                   imageComponent={x?.imageComponent}
                   onSelectCard={() => onSelectCard(x?.uuid)}
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
@@ -87,6 +89,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                   condition={x?.condition}
                   quantity={x?.quantity}
                   trade={x?.trade}
+                  sponsoredText={sponsoredText}
                 />
               ))}
       </>

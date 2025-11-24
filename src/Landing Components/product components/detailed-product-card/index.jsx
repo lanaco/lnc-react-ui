@@ -2,12 +2,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-empty-pattern */
 /* eslint-disable react/display-name */
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { Wrapper, ImageWrapper, TagsPopoverContent } from "./style";
 import {
   formatPrice,
   GetCurrencySymbol,
   isDefined,
+  isDefinedNotEmptyString,
 } from "../../../_utils/utils";
 import SponsoredLine from "../../sponsored-line";
 import ProductImageWrapper from "../../product-img-wrapper";
@@ -38,7 +39,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     isFree,
     imageUrl,
     location,
-    isSponsored,
+    sponsored,
     imageComponent,
     onSelectCard = () => {},
     freeText = "Free",
@@ -48,6 +49,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     condition,
     quantity,
     trade,
+    sponsoredText,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -77,10 +79,52 @@ const DetailedProductCard = forwardRef((props, ref) => {
     setPopover(false);
   };
 
+  const productCardRef = useRef(null);
+  const tagRefs = useRef([]);
+  const [visibleNumOfTags, setVisibleNumOfTags] = useState(tags?.length);
+
+  const calculateVisible = () => {
+    if (!productCardRef?.current || tagRefs?.current?.length === 0) return;
+
+    const productCardWidth = productCardRef?.current?.offsetWidth;
+
+    let totalWidth = 0;
+    let numOfTags = 0;
+
+    for (let i = 0; i < tags?.length; i++) {
+      const tagWidth = tagRefs?.current[i]?.offsetWidth || 0;
+      const tmpTotalWidth = totalWidth + tagWidth + 4;
+
+      if (tmpTotalWidth <= productCardWidth) {
+        totalWidth += tmpTotalWidth;
+        numOfTags++;
+      } else {
+        break;
+      }
+    }
+
+    setVisibleNumOfTags(numOfTags);
+  };
+
+  useEffect(() => {
+    const parent = productCardRef?.current;
+    if (!parent) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      calculateVisible();
+    });
+
+    resizeObserver.observe(parent);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [tags]);
+
   const renderTags = () => {
     return (
       <div className="tags-popover__trigger">
-        {tags?.map((x, idx) => {
+        {tags?.slice(0, visibleNumOfTags)?.map((x, idx) => {
           const icon =
             AttributeTags?.[x?.code]?.icon ??
             AttributeTags?.default?.icon ??
@@ -98,15 +142,16 @@ const DetailedProductCard = forwardRef((props, ref) => {
             return (
               <div className="tag-mobile">
                 {text}
-                {idx === 0 ? " · " : ""}
+                {idx < visibleNumOfTags - 1 ? " · " : ""}
               </div>
             );
           }
 
           return (
             <Badge
+              ref={(el) => (tagRefs.current[idx] = el)}
               key={`detailed-products-section-tag__${idx + 1}`}
-              className={`tag ${isSponsored ? "tag-sponsored" : ""}`}
+              className={`tag ${sponsored ? "tag-sponsored" : ""}`}
             >
               <i className={icon} />
               {text}
@@ -143,12 +188,15 @@ const DetailedProductCard = forwardRef((props, ref) => {
 
   const renderOtherTags = () => {
     if (isMobile) {
-      return [condition, quantity, trade]?.map((x, idx) => (
-        <div className="tag-mobile">
-          {x}
-          {idx === 0 ? " · " : ""}
-        </div>
-      ));
+      const otherTags = [condition, quantity, trade];
+      return otherTags
+        ?.filter((x) => isDefinedNotEmptyString(x))
+        ?.map((x, idx, arr) => (
+          <div className="tag-mobile">
+            {x}
+            {idx < arr?.length - 1 ? " · " : ""}
+          </div>
+        ));
     }
 
     return (
@@ -173,9 +221,20 @@ const DetailedProductCard = forwardRef((props, ref) => {
     );
   };
 
+  const newPrice =
+    price > 0 &&
+    currency &&
+    isNegotiable !== true &&
+    isFree !== true &&
+    price !== sellingPrice;
+
   return (
     // <LandingPageProductCardSkeleton />
-    <Wrapper ref={ref} className="product-card" onClick={onSelectCard}>
+    <Wrapper
+      ref={productCardRef}
+      className="product-card"
+      onClick={onSelectCard}
+    >
       <ImageWrapper className="product-image-wrapper">
         {isDefined(imageComponent) ? (
           imageComponent
@@ -208,7 +267,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
       </div>
 
       <div className="wrapper-card-2">
-        <div className="price-text">
+        <div className={`price-text ${newPrice ? "new-price" : ""}`}>
           {sellingPrice > 0 &&
             currency &&
             isNegotiable !== true &&
@@ -217,21 +276,17 @@ const DetailedProductCard = forwardRef((props, ref) => {
                 {`${formatPrice(sellingPrice)} ${GetCurrencySymbol(currency)}`}
               </div>
             )}
-          {price > 0 &&
-            currency &&
-            isNegotiable !== true &&
-            isFree !== true &&
-            price !== sellingPrice && (
-              <div className={`${sellingPrice > 0 ? "full-price" : ""}`}>
-                {`${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
-              </div>
-            )}
+          {newPrice && (
+            <div className={`${sellingPrice > 0 ? "full-price" : ""}`}>
+              {`${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
+            </div>
+          )}
           {isNegotiable && negotiableText}
           {isFree && freeText}
         </div>
         <div className="location-text">{location}</div>
       </div>
-      {isSponsored === true && <SponsoredLine />}
+      {sponsored === true && <SponsoredLine sponsoredText={sponsoredText} />}
     </Wrapper>
   );
 });
