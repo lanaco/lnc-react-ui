@@ -173,6 +173,21 @@ export const ImageWrapper = styled.div`
   aspect-ratio: 1 / 1;
   border: 1px solid #0c15201f;
 
+  & .bookmarking-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    z-index: 1;
+
+    display: none;
+  }
+
+  &:hover {
+    & .bookmarking-btn {
+      display: flex;
+    }
+  }
+
   & img {
     display: block;
     width: 100%;
@@ -189,6 +204,10 @@ export const ImageWrapper = styled.div`
       min-width: 8.875rem;
       min-height: 8.875rem;
       object-fit: cover;
+    }
+
+    & .bookmarking-btn {
+      display: flex;
     }
   }
 `;

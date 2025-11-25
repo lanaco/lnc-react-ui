@@ -22,6 +22,8 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
     getImage = () => {},
     negotiableText,
     freeText,
+    onBookmark = () => {},
+    bookmarkComponent = <></>,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -49,6 +51,10 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
                   freeText={freeText}
+                  onBookmark={onBookmark}
+                  bookmarkComponent={bookmarkComponent}
+                  bookmarked={x?.bookmarked}
+                  bookmarkLists={x?.bookmarkLists}
                 />
               ))
           : items
@@ -69,6 +75,10 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
                   freeText={freeText}
+                  onBookmark={onBookmark}
+                  bookmarkComponent={bookmarkComponent}
+                  bookmarked={x?.bookmarked}
+                  bookmarkLists={x?.bookmarkLists}
                 />
               ))}
       </>

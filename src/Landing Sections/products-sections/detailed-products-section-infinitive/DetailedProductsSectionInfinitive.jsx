@@ -27,6 +27,8 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
     freeText,
     loadMoreButtonIcon = "angle-down",
     sponsoredText,
+    onBookmark = () => {},
+    bookmarkComponent = <></>,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -59,6 +61,10 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
                 quantity={x?.quantity}
                 trade={x?.trade}
                 sponsoredText={sponsoredText}
+                onBookmark={onBookmark}
+                bookmarkComponent={bookmarkComponent}
+                bookmarked={x?.bookmarked}
+                bookmarkLists={x?.bookmarkLists}
               />
             ))
           : items
@@ -88,6 +94,10 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
                   quantity={x?.quantity}
                   trade={x?.trade}
                   sponsoredText={sponsoredText}
+                  onBookmark={onBookmark}
+                  bookmarkComponent={bookmarkComponent}
+                  bookmarked={x?.bookmarked}
+                  bookmarkLists={x?.bookmarkLists}
                 />
               ))}
       </>
