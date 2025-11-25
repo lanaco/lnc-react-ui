@@ -30,6 +30,8 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     onSelectOption = () => {},
     productsToolbarName = "All",
     sponsoredText,
+    onBookmark = () => {},
+    bookmarkComponent = <></>,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -61,6 +63,10 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 quantity={x?.quantity}
                 trade={x?.trade}
                 sponsoredText={sponsoredText}
+                onBookmark={onBookmark}
+                bookmarkComponent={bookmarkComponent}
+                bookmarked={x?.bookmarked}
+                bookmarkLists={x?.bookmarkLists}
               />
             ))
           : items
@@ -90,6 +96,10 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                   quantity={x?.quantity}
                   trade={x?.trade}
                   sponsoredText={sponsoredText}
+                  onBookmark={onBookmark}
+                  bookmarkComponent={bookmarkComponent}
+                  bookmarked={x?.bookmarked}
+                  bookmarkLists={x?.bookmarkLists}
                 />
               ))}
       </>

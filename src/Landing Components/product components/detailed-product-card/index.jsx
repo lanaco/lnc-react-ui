@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-empty-pattern */
 /* eslint-disable react/display-name */
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { cloneElement, forwardRef, useEffect, useRef, useState } from "react";
 import { Wrapper, ImageWrapper, TagsPopoverContent } from "./style";
 import {
   formatPrice,
@@ -31,6 +31,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 
 const DetailedProductCard = forwardRef((props, ref) => {
   const {
+    uuid,
     title,
     price = 0,
     sellingPrice,
@@ -50,9 +51,27 @@ const DetailedProductCard = forwardRef((props, ref) => {
     quantity,
     trade,
     sponsoredText,
+
+    onBookmark = () => {},
+    bookmarkComponent,
+    bookmarked,
+    bookmarkLists,
   } = props;
 
   const isMobile = useDetectMobile();
+
+  const ClonedBookmarkComponent = () => {
+    if (!isDefined(bookmarkComponent)) return <></>;
+
+    return cloneElement(bookmarkComponent, {
+      key: `bookmark_pr__${bookmarked}`,
+      bookmarked: bookmarked,
+      productUuid: uuid,
+      onAddToBookmark: () => onBookmark(true, uuid),
+      onRemoveFromBookmark: () => onBookmark(false, uuid),
+      bookmarkedUuidList: bookmarkLists,
+    });
+  };
 
   const CATEGORY_PREFIXES = [
     VehiclesCarsCategoryCode,
@@ -236,6 +255,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
       onClick={onSelectCard}
     >
       <ImageWrapper className="product-image-wrapper">
+        <ClonedBookmarkComponent />
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
