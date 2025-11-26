@@ -51,7 +51,7 @@ const StyledDrawer = styled.div`
       props.drawerSize,
       props.unsetWidth
     )}
-  position: fixed;
+  position: ${(props) => props.position};
   z-index: ${(props) => props.zIndex};
   ${(props) => (props.direction === "bottom" ? "bottom: 0" : "top: 0")};
   ${(props) => (props.direction === "right" ? "right: 0" : "left: 0")};
@@ -80,7 +80,7 @@ const StyledDrawer = styled.div`
 
 const StyledOverlay = styled.div`
   z-index: ${(props) => props.zIndex};
-  position: fixed;
+  position: ${(props) => props.position};
   top: 0;
   left: 0;
 
@@ -98,6 +98,7 @@ const SwipeableDrawer = forwardRef((props, ref) => {
     duration = 0.8,
     enableOverlay = true,
     zIndex = 100,
+    position = "fixed",
     closeOnClickOutside = true,
     closeOnSwipe = true,
     isFullPage = false,
@@ -213,6 +214,7 @@ const SwipeableDrawer = forwardRef((props, ref) => {
         overlayColor={overlayColor}
         isOpen={isOpen}
         zIndex={zIndex}
+        position={position}
       >
         <StyledDrawer
           ref={drawerRef}
@@ -285,6 +287,7 @@ SwipeableDrawer.propTypes = {
    * z-index of Drawer
    */
   zIndex: PropTypes.number,
+  position: PropTypes.string,
   closeOnClickOutside: PropTypes.bool,
   closeOnSwipe: PropTypes.bool,
   /**

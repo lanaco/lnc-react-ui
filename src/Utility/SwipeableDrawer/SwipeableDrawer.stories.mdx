@@ -135,7 +135,7 @@ This component exposes public methods. You can invoke them directly on the insta
     '     <Button onClick={() => openDrawer("top")}>Top</Button>\n' +
     "     &nbsp;&nbsp;\n" +
     '     <Button onClick={() => openDrawer("bottom")}>Bottom</Button>\n' +
-    "     <SwipeableDrawer ref={drawerRef} direction={direction} {...args}>\n" +
+    "     <ref={drawerRef} direction={direction} {...args}>\n" +
     '       Swipe{" "}\n' +
     '       {direction == "top" ? "up" : direction === "bottom" ? "down" : direction}\n' +
     '       {" "}\n' +
