@@ -23,9 +23,6 @@ export const Container = styled.div`
       align-items: center;
       gap: 0.5rem;
 
-      & .title__icon {
-      }
-
       & .title__text {
         color: var(--gray-950, #14161a);
         font-size: 1.5rem;
@@ -44,6 +41,17 @@ export const Container = styled.div`
     top: 0;
     right: 0;
   }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    & .scrollable-section__header {
+      & .scrollable-section__title {
+        & .title__text {
+          font-size: 1.375rem;
+          line-height: 1.75rem;
+        }
+      }
+    }
+  }
 `;
 
 export const Content = styled(motion.div)`
@@ -53,6 +61,25 @@ export const Content = styled(motion.div)`
   width: 100%;
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    grid-template-columns: repeat(${(p) => p?.numOfColumnsForMobile}, 1fr);
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    -webkit-overflow-scrolling: touch;
+    ::-webkit-scrollbar {
+      -webkit-appearance: none;
+    }
+
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+      /* Safari and Chrome */
+    }
   }
 `;

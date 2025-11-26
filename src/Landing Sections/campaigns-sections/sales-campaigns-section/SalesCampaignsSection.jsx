@@ -32,7 +32,6 @@ const SalesCampaignsSection = forwardRef(
       endsInPrefixTextSingular,
       endsinSuffixTextSingular,
       numOfSlides = 2,
-      numOfSlidesForMobile = 1,
       showNavigation = true,
       numberOfListingsTextSingular,
       numberOfListingsTextPlural,
@@ -108,10 +107,10 @@ const SalesCampaignsSection = forwardRef(
         keyPrefix="sales-camp"
       >
         <ScrollableSectionV3
+          key={`sales-campaign-section__${isMobile}`}
           icon={icon}
           title={title}
           numOfSlides={numOfSlides}
-          numOfSlidesForMobile={numOfSlidesForMobile}
           showNavigation={showNavigation}
         >
           {memoizedItems}

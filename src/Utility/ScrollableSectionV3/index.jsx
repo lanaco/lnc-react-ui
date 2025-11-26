@@ -9,17 +9,7 @@ import { isDefinedNotEmptyString } from "../../_utils/utils";
 import { Container, Content } from "./style";
 
 const ScrollableSectionV3 = forwardRef(
-  (
-    {
-      icon,
-      title,
-      numOfSlides = 2,
-      numOfSlidesForMobile = 1,
-      showNavigation = true,
-      children,
-    },
-    ref
-  ) => {
+  ({ icon, title, numOfSlides = 2, showNavigation = true, children }, ref) => {
     const [index, setIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(1);
     const [touchStart, setTouchStart] = useState(null);
@@ -32,7 +22,7 @@ const ScrollableSectionV3 = forwardRef(
 
     useEffect(() => {
       const handleResize = () => {
-        setItemsPerView(isMobile ? numOfSlidesForMobile : numOfSlides);
+        setItemsPerView(numOfSlides);
       };
 
       window.addEventListener("resize", handleResize);
@@ -41,7 +31,9 @@ const ScrollableSectionV3 = forwardRef(
       return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const visibleItems = children?.slice(index, index + itemsPerView);
+    const visibleItems = isMobile
+      ? children
+      : children?.slice(index, index + itemsPerView);
 
     const scrollToRight = (e) => {
       e?.target?.blur();
@@ -59,33 +51,8 @@ const ScrollableSectionV3 = forwardRef(
       }
     };
 
-    const onTouchStart = (e) => {
-      setTouchEnd(null);
-
-      setTouchStart(e?.targetTouches["0"]?.clientX);
-    };
-
-    const onTouchMove = (e) => {
-      setTouchEnd(e?.targetTouches["0"]?.clientX);
-    };
-
-    const onTouchEnd = () => {
-      if (!touchStart || !touchEnd) return;
-      const distance = touchStart - touchEnd;
-
-      if (distance > minSwipeDistance) {
-        scrollToRight();
-      }
-      if (distance < -minSwipeDistance) {
-        scrollToLeft();
-      }
-    };
-
     return (
-      <Container
-        ref={ref}
-        {...(isMobile ? { onTouchStart, onTouchMove, onTouchEnd } : {})}
-      >
+      <Container ref={ref}>
         <div className="scrollable-section__header">
           <div className="scrollable-section__title">
             {isDefinedNotEmptyString(icon) && (
@@ -104,15 +71,16 @@ const ScrollableSectionV3 = forwardRef(
         <Content
           key={`scrollable-section__content-${index}`}
           numOfColumns={numOfSlides}
-          numOfColumnsForMobile={numOfSlidesForMobile}
-          animate={{
-            x: 0,
-            opacity: 1,
-          }}
-          initial={{
-            x: 10,
-            opacity: 0,
-          }}
+          {...(!isMobile && {
+            animate: {
+              x: 0,
+              opacity: 1,
+            },
+            initial: {
+              x: 10,
+              opacity: 0,
+            },
+          })}
         >
           {visibleItems}
         </Content>

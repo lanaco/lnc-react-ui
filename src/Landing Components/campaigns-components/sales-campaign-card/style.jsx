@@ -8,15 +8,13 @@ export const Wrapper = styled.div`
   display: flex;
   gap: 1rem;
   padding: 1.25rem;
-  border-radius: 20px;
-  border: 1px solid var(--gray-95008, #14161a14);
+  border-radius: 1.25rem;
+  border: 1px solid var(--gray-200, #e4e9f0);
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     flex-direction: column;
-    padding: 0;
+    padding: 1rem;
     gap: 0;
-    border: none;
-    border-radius: 0;
   }
 `;
 
@@ -46,8 +44,7 @@ export const ImageWrapper = styled.div`
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     width: 100%;
-    max-width: 100dvh;
-    height: 23.438rem;
+    height: 100%;
   }
 `;
 
@@ -64,6 +61,7 @@ export const ContentWrapper = styled.div`
   & .campaign-title {
     font-weight: 500;
     font-size: 0.75rem;
+    line-height: 1rem;
     letter-spacing: 0.1rem;
     color: var(--teal-500, #009ea8);
   }
@@ -71,7 +69,8 @@ export const ContentWrapper = styled.div`
   & .campaign-title-text {
     font-weight: 600;
     font-size: 1.375rem;
-    transition: var(--transition, all 0.3s ease);
+    leading-trim: none;
+    line-height: 1.75rem;
   }
 
   & .text-block-wrapper {
@@ -84,6 +83,7 @@ export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.1875rem;
+    padding-top: 0.5rem;
   }
 
   & .timestamp-text {
@@ -123,11 +123,30 @@ export const ContentWrapper = styled.div`
     background-color: transparent;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    padding: 1.25rem;
+  & .campaign-date {
+    font-weight: 400;
+    font-size: 0.875rem;
+    leading-trim: none;
+    line-height: 1.25rem;
+    color: var(--gray-600, #676e79);
+  }
 
-    & .campaign-title {
-      font-size: 0.875rem;
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    padding: 1rem 0 0 0;
+
+    & .campaign-title-text {
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    & .campaign-date {
+      display: none;
+    }
+
+    & .timestamp-text {
+      line-height: 1rem;
+      padding-top: 0.5rem;
     }
 
     & .text-block-wrapper {
@@ -169,10 +188,10 @@ export const StyledProfileItem = styled(motion.div)`
   ${flex(true)}
   gap: 0.5rem;
   padding: 0.5rem;
-  color: var(--gray-950);
+  color: var(--gray-950, #14161a);
   font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   border-radius: ${(p) => getBorderRadiusValueWithUnits(p.theme, "slight")};
   transition: all 0.25s ease;
   & .description {
@@ -219,6 +238,11 @@ export const StyledProfileItem = styled(motion.div)`
   &:hover {
     cursor: pointer;
     background-color: var(--gray-95080, #14161acc);
+  }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    padding: 0;
+    font-size: 0.875rem;
   }
 `;
 
