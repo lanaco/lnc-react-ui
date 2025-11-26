@@ -42,7 +42,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
           ? items?.map((x, index) => (
               <MemoizedProductCard
                 key={index}
-                title={x?.title}
+                name={x?.name}
                 price={x?.price}
                 sellingPrice={x?.sellingPrice}
                 currency={x?.currency}
@@ -74,7 +74,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
               .map((x, index) => (
                 <MemoizedProductCard
                   key={index}
-                  title={x?.title}
+                  name={x?.name}
                   price={x?.price}
                   sellingPrice={x?.sellingPrice}
                   currency={x?.currency}

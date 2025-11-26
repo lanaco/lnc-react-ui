@@ -32,7 +32,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 const DetailedProductCard = forwardRef((props, ref) => {
   const {
     uuid,
-    title,
+    name,
     price = 0,
     sellingPrice,
     currency,
@@ -263,7 +263,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
         )}
       </ImageWrapper>
       <div className="wrapper-card-1">
-        <div className="card-title">{title}</div>
+        <div className="card-title">{name}</div>
       </div>
       <div className="wrapper-card-3">
         {isVehiclesRealEstateCategory && (

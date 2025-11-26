@@ -185,7 +185,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
             </div>
             <div className="campaign-title-text">{title}</div>
             {endDate && startDate && (
-              <div>
+              <div className="campaign-date">
                 {toLocaleDateString(startDate)} - {toLocaleDateString(endDate)}
               </div>
             )}
