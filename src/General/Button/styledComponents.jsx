@@ -105,7 +105,7 @@ export const FilledButton = styled.button`
       getColorRgbaValue(
         props.theme,
         "ButtonFilled",
-        "gray",
+        props.color,
         "disabled",
         "background"
       )};
@@ -298,7 +298,7 @@ export const TintedButton = styled.button`
       getColorRgbaValue(
         props.theme,
         "ButtonTinted",
-        "gray",
+        props.color,
         "disabled",
         "background",
         "backgroundOpacity"
@@ -411,7 +411,7 @@ export const BasicButton = styled.button`
       getColorRgbaValue(
         props.theme,
         "ButtonBasic",
-        "gray",
+        props.color,
         "disabled",
         "background",
         "backgroundOpacity"
