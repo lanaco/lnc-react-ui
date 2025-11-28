@@ -135,7 +135,8 @@ export const FilledButton = styled.button`
         "ButtonFilled",
         props.color,
         "disabled",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
     color: ${(props) =>
       getColorRgbaValue(

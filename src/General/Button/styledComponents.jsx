@@ -107,7 +107,8 @@ export const FilledButton = styled.button`
         "ButtonFilled",
         props.color,
         "disabled",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
     color: ${(props) =>
       getColorRgbaValue(
@@ -127,7 +128,8 @@ export const FilledButton = styled.button`
         "ButtonFilled",
         props.color,
         "hover",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
     color: ${(props) =>
       props.disabled === false &&
@@ -148,7 +150,8 @@ export const FilledButton = styled.button`
         "ButtonFilled",
         props.color,
         "focus",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
     color: ${(props) =>
       props.disabled === false &&
@@ -170,7 +173,8 @@ export const FilledButton = styled.button`
         "ButtonFilled",
         props.color,
         "active",
-        "background"
+        "background",
+        "backgroundOpacity"
       )};
     color: ${(props) =>
       props.disabled === false &&
