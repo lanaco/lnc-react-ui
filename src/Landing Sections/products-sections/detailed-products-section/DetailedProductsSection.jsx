@@ -31,7 +31,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     productsToolbarName = "All",
     sponsoredText,
     onBookmark = () => {},
-    bookmarkComponent = <></>,
+    bookmarkComponent,
   } = props;
 
   const isMobile = useDetectMobile();

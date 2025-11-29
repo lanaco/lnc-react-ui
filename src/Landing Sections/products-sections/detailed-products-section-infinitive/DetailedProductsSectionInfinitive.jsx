@@ -28,7 +28,7 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
     loadMoreButtonIcon = "angle-down",
     sponsoredText,
     onBookmark = () => {},
-    bookmarkComponent = <></>,
+    bookmarkComponent,
   } = props;
 
   const isMobile = useDetectMobile();
