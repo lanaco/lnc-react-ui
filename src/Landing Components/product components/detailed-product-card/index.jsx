@@ -62,8 +62,10 @@ const DetailedProductCard = forwardRef((props, ref) => {
 
   const ClonedBookmarkComponent = () => {
     if (!isDefined(bookmarkComponent)) return <></>;
+    const wrapper = bookmarkComponent;
+    const bookComponent = bookmarkComponent?.props?.children; 
 
-    return cloneElement(bookmarkComponent, {
+    const clonedChild = cloneElement(bookComponent, {
       key: `bookmark_pr__${bookmarked}`,
       bookmarked: bookmarked,
       productUuid: uuid,
@@ -71,6 +73,8 @@ const DetailedProductCard = forwardRef((props, ref) => {
       onRemoveFromBookmark: () => onBookmark(false, uuid),
       bookmarkedUuidList: bookmarkLists,
     });
+
+    return cloneElement(wrapper, undefined, clonedChild);
   };
 
   const CATEGORY_PREFIXES = [
