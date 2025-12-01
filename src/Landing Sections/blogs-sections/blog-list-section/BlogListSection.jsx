@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 
 import BlogCardItem from "../../../Landing Components/blog-components/blog-card-item";
@@ -17,13 +18,15 @@ const BlogListSection = forwardRef(
       isLoading = false,
       getImage = () => {},
       isSeparated = true,
+      bookmarkComponent = <></>,
     },
     ref
   ) => {
     const memoizedBlogs = useMemo(() => {
       return items?.map((x, idx) => (
         <MemoizedBlogCardItem
-          key={`blog-card-item__${idx + 1}`}
+          key={`blog-card-item__${idx + 1}__${x?.isBookmarked?.toString()}`}
+          blogUuid={x?.uuid}
           title={x?.title}
           titleSlug={x?.titleSlug}
           options={x?.options}
@@ -36,8 +39,9 @@ const BlogListSection = forwardRef(
           isBookmarked={x?.isBookmarked}
           onSelectCard={() => onSelectCard?.(x)}
           onShare={() => onShare?.(x)}
-          onBookmark={() => onBookmark?.(x)}
+          onBookmark={onBookmark}
           imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
+          bookmarkComponent={bookmarkComponent}
         />
       ));
     }, [items]);
