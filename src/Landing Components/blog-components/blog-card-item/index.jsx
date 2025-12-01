@@ -1,4 +1,6 @@
-import { forwardRef } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+import { cloneElement, forwardRef, useState } from "react";
 
 import Icon from "../../../General/Icon/Icon";
 import IconButton from "../../../General/IconButton/IconButton";
@@ -6,6 +8,7 @@ import {
   formatLocaleDateString,
   formatString,
   getRoundedNumber,
+  isDefined,
 } from "../../../_utils/utils";
 import ProductImageWrapper from "../../product-img-wrapper";
 import { BlogTag } from "../../../Landing Sections/style";
@@ -14,6 +17,7 @@ import { Wrapper } from "./style";
 const BlogCardItem = forwardRef(
   (
     {
+      blogUuid,
       title,
       imageUrl,
       options,
@@ -26,9 +30,25 @@ const BlogCardItem = forwardRef(
       onSelectCard = () => {},
       onBookmark = () => {},
       onShare = () => {},
+      bookmarkComponent = <></>,
     },
     ref
   ) => {
+    const ClonedBookmarkComponent = () => {
+      if (!isDefined(bookmarkComponent)) return <></>;
+
+      const clonedChild = cloneElement(bookmarkComponent, {
+        key: `bookmark_blog__${blogUuid}__${isBookmarked}`,
+        isBookmarked: isBookmarked,
+        blogUuid: blogUuid,
+        onBookmark: (isAdded, uuid) => onBookmark(isAdded, uuid),
+        ref: ref,
+        componentName: "ExploreBlogSectionCard",
+      });
+
+      return clonedChild;
+    };
+
     return (
       <Wrapper onClick={onSelectCard} className="blog-card-item">
         <ProductImageWrapper src={imageUrl} className="wrapper__image" />
@@ -48,20 +68,7 @@ const BlogCardItem = forwardRef(
                   ))}
               </div>
               <div className="info__content mobile-only">
-                <IconButton
-                  icon={
-                    isBookmarked
-                      ? " mng-lnc-bookmark--filled"
-                      : " mng-lnc-bookmark"
-                  }
-                  borderRadius="curved"
-                  btnType="basic"
-                  color="neutral"
-                  onClick={(e) => {
-                    e?.stopPropagation();
-                    onBookmark();
-                  }}
-                />
+                <ClonedBookmarkComponent />
                 <IconButton
                   icon=" mng-lnc-share"
                   borderRadius="curved"
@@ -92,20 +99,7 @@ const BlogCardItem = forwardRef(
               </div>
             </div>
             <div className="info__content desktop-only">
-              <IconButton
-                icon={
-                  isBookmarked
-                    ? " mng-lnc-bookmark--filled"
-                    : " mng-lnc-bookmark"
-                }
-                borderRadius="curved"
-                btnType="basic"
-                color="neutral"
-                onClick={(e) => {
-                  e?.stopPropagation();
-                  onBookmark();
-                }}
-              />
+              <ClonedBookmarkComponent />
               <IconButton
                 icon=" mng-lnc-share"
                 borderRadius="curved"
