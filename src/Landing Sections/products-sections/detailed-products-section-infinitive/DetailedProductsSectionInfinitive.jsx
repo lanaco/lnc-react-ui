@@ -49,7 +49,9 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
                 uuid={x?.uuid}
                 sponsored={x?.sponsored}
                 imageComponent={x?.imageComponent}
-                onSelectCard={() => onSelectCard(x?.uuid)}
+                onSelectCard={() =>
+                  onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                }
                 imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 isFree={x?.isFree}
                 isNegotiable={x?.isNegotiable}
@@ -82,7 +84,9 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
                   location={x?.location}
                   sponsored={x?.sponsored}
                   imageComponent={x?.imageComponent}
-                  onSelectCard={() => onSelectCard(x?.uuid)}
+                  onSelectCard={() =>
+                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  }
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   isFree={x?.isFree}
                   isNegotiable={x?.isNegotiable}

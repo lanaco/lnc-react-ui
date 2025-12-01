@@ -23,7 +23,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
     negotiableText,
     freeText,
     onBookmark = () => {},
-    bookmarkComponent = <></>,
+    bookmarkComponent,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -47,7 +47,9 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
                   isSponsored={x?.isSponsored}
-                  onSelectCard={() => onSelectCard?.(x?.uuid)}
+                  onSelectCard={() =>
+                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  }
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
                   freeText={freeText}
@@ -71,7 +73,9 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   uuid={x?.uuid}
                   location={x?.location}
                   isSponsored={x?.isSponsored}
-                  onSelectCard={() => onSelectCard?.(x?.uuid)}
+                  onSelectCard={() =>
+                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  }
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
                   freeText={freeText}
