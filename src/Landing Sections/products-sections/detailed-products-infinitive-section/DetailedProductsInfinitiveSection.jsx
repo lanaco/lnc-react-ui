@@ -34,79 +34,39 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
   const isMobile = useDetectMobile();
 
   const memoizedProducts = useMemo(() => {
-    return (
-      <>
-        {isMobile === true
-          ? items?.map((x, index) => (
-              <MemoizedProductCard
-                key={index}
-                name={x?.name}
-                price={x?.price}
-                sellingPrice={x?.sellingPrice}
-                currency={x?.currency}
-                image={x?.image}
-                sellerUuid={x?.sellerUuid}
-                uuid={x?.uuid}
-                sponsored={x?.sponsored}
-                imageComponent={x?.imageComponent}
-                onSelectCard={() =>
-                  onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
-                }
-                imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
-                isFree={x?.isFree}
-                isNegotiable={x?.isNegotiable}
-                negotiableText={negotiableText}
-                freeText={freeText}
-                tags={x?.tags}
-                categoryCode={x?.categoryCode}
-                condition={x?.condition}
-                quantity={x?.quantity}
-                trade={x?.trade}
-                sponsoredText={sponsoredText}
-                onBookmark={onBookmark}
-                bookmarkComponent={bookmarkComponent}
-                bookmarked={x?.bookmarked}
-                bookmarkLists={x?.bookmarkLists}
-              />
-            ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <MemoizedProductCard
-                  key={index}
-                  name={x?.name}
-                  price={x?.price}
-                  sellingPrice={x?.sellingPrice}
-                  currency={x?.currency}
-                  image={x?.image}
-                  sellerUuid={x?.sellerUuid}
-                  uuid={x?.uuid}
-                  location={x?.location}
-                  sponsored={x?.sponsored}
-                  imageComponent={x?.imageComponent}
-                  onSelectCard={() =>
-                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
-                  }
-                  imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
-                  isFree={x?.isFree}
-                  isNegotiable={x?.isNegotiable}
-                  negotiableText={negotiableText}
-                  freeText={freeText}
-                  tags={x?.tags}
-                  categoryCode={x?.categoryCode}
-                  condition={x?.condition}
-                  quantity={x?.quantity}
-                  trade={x?.trade}
-                  sponsoredText={sponsoredText}
-                  onBookmark={onBookmark}
-                  bookmarkComponent={bookmarkComponent}
-                  bookmarked={x?.bookmarked}
-                  bookmarkLists={x?.bookmarkLists}
-                />
-              ))}
-      </>
-    );
-  }, [items, isMobile, limit]);
+    return items?.map((x, index) => (
+      <MemoizedProductCard
+        key={index}
+        name={x?.name}
+        price={x?.price}
+        sellingPrice={x?.sellingPrice}
+        currency={x?.currency}
+        image={x?.image}
+        sellerUuid={x?.sellerUuid}
+        uuid={x?.uuid}
+        sponsored={x?.sponsored}
+        imageComponent={x?.imageComponent}
+        onSelectCard={() =>
+          onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+        }
+        imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+        isFree={x?.isFree}
+        isNegotiable={x?.isNegotiable}
+        negotiableText={negotiableText}
+        freeText={freeText}
+        tags={x?.tags}
+        categoryCode={x?.categoryCode}
+        condition={x?.condition}
+        quantity={x?.quantity}
+        trade={x?.trade}
+        sponsoredText={sponsoredText}
+        onBookmark={onBookmark}
+        bookmarkComponent={bookmarkComponent}
+        bookmarked={x?.bookmarked}
+        bookmarkLists={x?.bookmarkLists}
+      />
+    ));
+  }, [items]);
 
   return (
     <Container limit={limit}>
