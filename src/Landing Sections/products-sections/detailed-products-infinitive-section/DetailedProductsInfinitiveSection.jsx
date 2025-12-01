@@ -11,7 +11,7 @@ import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-co
 
 const MemoizedProductCard = memo(DetailedProductCard);
 
-const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
+const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
   const {
     title,
     items,
@@ -152,4 +152,4 @@ const DetailedProductsSectionInfinitive = forwardRef((props, ref) => {
   );
 });
 
-export default DetailedProductsSectionInfinitive;
+export default DetailedProductsInfinitiveSection;
