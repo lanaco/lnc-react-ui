@@ -1,16 +1,16 @@
 import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { ArgsTable, Stories } from "@storybook/addon-docs";
-import DetailedProductsSectionInfinitive from "./DetailedProductsSectionInfinitive.jsx";
+import DetailedProductsInfinitiveSection from "./DetailedProductsInfinitiveSection.jsx";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 <Meta
-  title="Landing sections/Detailed Products Section Infinitive"
-  component={DetailedProductsSectionInfinitive}
+  title="Landing sections/Detailed Products Infinitive Section"
+  component={DetailedProductsInfinitiveSection}
 />
 
 export const TemplateDefault = (args) => (
-  <DetailedProductsSectionInfinitive
+  <DetailedProductsInfinitiveSection
     title="Just for you"
     viewAllButtonText="View all"
     viewAllbuttonLink="/"
@@ -168,11 +168,11 @@ export const TemplateDefault = (args) => (
   />
 );
 
-## Detailed products section infinitive
+## Detailed products infinitive section
 
 <SyntaxHighlighter language="jsx" style={nord}>
   {
-    'import  DetailedProductsSectionInfinitive from "@lanaco/lnc-react-ui/DetailedProductsSectionInfinitive";'
+    'import  DetailedProductsInfinitiveSection from "@lanaco/lnc-react-ui/DetailedProductsInfinitiveSection";'
   }
 </SyntaxHighlighter>
 

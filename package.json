@@ -116,6 +116,7 @@
     "./ThemeProvider": "./dist/ThemeProvider.js",
     "./MasonryGeneralCardsSection": "./dist/MasonryGeneralCardsSection.js",
     "./DetailedProductsSection": "./dist/DetailedProductsSection.js",
+    "./DetailedProductsInfinitiveSection": "./dist/DetailedProductsInfinitiveSection.js",
     "./ProductsWithBannerSection": "./dist/ProductsWithBannerSection.js",
     "./SimpleProductsSection": "./dist/SimpleProductsSection.js",
     "./UrgentSaleProductsSection": "./dist/UrgentSaleProductsSection.js",
