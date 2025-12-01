@@ -1,4 +1,7 @@
-import { forwardRef } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/display-name */
+import { forwardRef, Fragment } from "react";
 
 import PropTypes from "prop-types";
 
@@ -38,7 +41,7 @@ const BlogExploreSection = forwardRef(
       handleSelectBlog = () => {},
       handleSelectBlogTag = () => {},
       handleShareBlog = () => {},
-      handleBookmarkBlog = () => {},
+      // handleBookmarkBlog = () => {},
       showAllButtonLink,
       showAllButtonText = "Show all products",
       viewAllButtonText = "View all (11)",
@@ -54,6 +57,8 @@ const BlogExploreSection = forwardRef(
       totalPage,
       perPageOptions,
       handleSearch = () => {},
+      onBookmark = () => {},
+      bookmarkComponent = <> </>,
     },
     ref
   ) => {
@@ -120,7 +125,9 @@ const BlogExploreSection = forwardRef(
                 onSelectCard={handleSelectBlog}
                 onSelectOption={handleSelectBlogTag}
                 onShare={handleShareBlog}
-                onBookmark={handleBookmarkBlog}
+                // onBookmark={handleBookmarkBlog}
+                onBookmark={onBookmark}
+                bookmarkComponent={bookmarkComponent}
               />
             )}
             <div className="main-content__divider"></div>
@@ -146,7 +153,9 @@ const BlogExploreSection = forwardRef(
                 onSelectCard={handleSelectBlog}
                 onSelectOption={handleSelectBlogTag}
                 onShare={handleShareBlog}
-                onBookmark={handleBookmarkBlog}
+                // onBookmark={handleBookmarkBlog}
+                onBookmark={onBookmark}
+                bookmarkComponent={bookmarkComponent}
               />
             )}
           </div>
@@ -167,22 +176,26 @@ const BlogExploreSection = forwardRef(
             <>
               <div className="side-content__items">
                 {miniBlogs?.map((blog, idx) => (
-                  <div
-                    className="side-content__item"
-                    onClick={() => handleSelectBlog(blog)}
-                  >
-                    <ProductImageWrapper
-                      src={getBlogImageUrl(blog?.imageUrl, blog?.uuid) || null}
-                      alt={`Mini blog ${idx + 1}`}
-                      className="item__image"
-                    />
-                    <div className="item__content">
-                      <div className="item__title">{blog?.title}</div>
-                      <div className="item__description">
-                        {formatLocaleDateString(blog?.publishedAt)}
+                  <Fragment key={`mini_blg_${idx}`}>
+                    <div
+                      className="side-content__item"
+                      onClick={() => handleSelectBlog(blog)}
+                    >
+                      <ProductImageWrapper
+                        src={
+                          getBlogImageUrl(blog?.imageUrl, blog?.uuid) || null
+                        }
+                        alt={`Mini blog ${idx + 1}`}
+                        className="item__image"
+                      />
+                      <div className="item__content">
+                        <div className="item__title">{blog?.title}</div>
+                        <div className="item__description">
+                          {formatLocaleDateString(blog?.publishedAt)}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Fragment>
                 ))}
               </div>
               <Link onClick={handleViewAll} className="side-content__link">
