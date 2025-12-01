@@ -43,28 +43,34 @@ const SimpleProductsSection = forwardRef((props, ref) => {
                   currency={x?.currency}
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
-                  onSelectCard={() => onSelectCard?.(x?.uuid)}
+                  onSelectCard={() =>
+                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  }
                   image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
                   freeText={freeText}
                 />
               ))
-          : items?.slice(0, 9)?.map((x, index) => (
-              <MemoizedProductCard
-                key={index}
-                title={x?.name}
-                price={x?.price}
-                isFree={x?.isFree}
-                isNegotiable={x?.isNegotiable}
-                currency={x?.currency}
-                sellerUuid={x?.sellerUuid}
-                uuid={x?.uuid}
-                onSelectCard={() => onSelectCard?.(x?.uuid)}
-                image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
-                negotiableText={negotiableText}
-                freeText={freeText}
-              />
-            ))}
+          : items
+              ?.slice(0, 9)
+              ?.map((x, index) => (
+                <MemoizedProductCard
+                  key={index}
+                  title={x?.name}
+                  price={x?.price}
+                  isFree={x?.isFree}
+                  isNegotiable={x?.isNegotiable}
+                  currency={x?.currency}
+                  sellerUuid={x?.sellerUuid}
+                  uuid={x?.uuid}
+                  onSelectCard={() =>
+                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  }
+                  image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                  negotiableText={negotiableText}
+                  freeText={freeText}
+                />
+              ))}
       </>
     );
   }, [items, isMobile, limit]);

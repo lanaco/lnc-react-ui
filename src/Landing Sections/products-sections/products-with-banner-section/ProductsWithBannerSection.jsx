@@ -33,7 +33,9 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                 title={x?.name}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
-                onSelectCard={() => onSelectCard?.(x?.uuid)}
+                onSelectCard={() =>
+                  onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                }
                 image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
               />
             ))
@@ -45,7 +47,9 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                   title={x?.name}
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
-                  onSelectCard={() => onSelectCard?.(x?.uuid)}
+                  onSelectCard={() =>
+                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  }
                   image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 />
               ))}
