@@ -138,12 +138,15 @@ export const Wrapper = styled.div`
 
   & .tags-popover__trigger {
     display: flex;
-    flex-wrap: wrap;
     gap: 0.25rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     overflow: visible;
+
+    & .tags-popover__trigger {
+      flex-wrap: wrap;
+    }
 
     & .price-text {
       font-size: 0.875rem;

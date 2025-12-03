@@ -44,7 +44,7 @@ const BlogShopCardsSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper className={isHighlight ? "highlight" : ""}>
+      <Wrapper ref={ref} className={isHighlight ? "highlight" : ""}>
         <div className="wrapper__grid">
           <SuspenseShopCards
             isLoading={isLoading}

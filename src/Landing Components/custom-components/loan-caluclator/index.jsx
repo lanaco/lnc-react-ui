@@ -18,7 +18,7 @@ const LoanCalculator = forwardRef((props, ref) => {
   const [amount, setAmount] = useState(null);
 
   return (
-    <Wrapper className="loan-calculator">
+    <Wrapper ref={ref} className="loan-calculator">
       <ContentWrapper>
         <img src={CalculatorImage} />
         {isMobile === true && (

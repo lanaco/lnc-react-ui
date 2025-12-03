@@ -71,7 +71,7 @@ const BlogExploreSection = forwardRef(
     };
 
     return (
-      <Container id="landing__container">
+      <Container ref={ref} id="landing__container">
         <div className="landing__main-content">
           {mainTitle && <div className="main-content__title">{mainTitle}</div>}
           {tags && (

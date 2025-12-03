@@ -9,7 +9,7 @@ const QuattroCard = forwardRef(
     const { theme } = useTheme();
 
     return (
-      <Container theme={theme} onClick={onSelectCard}>
+      <Container ref={ref} theme={theme} onClick={onSelectCard}>
         <img loading="lazy" src={imageUrl} />
         <Gradient theme={theme} className="quattro-card__gradient">
           <div className="quattro-card__text">

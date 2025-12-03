@@ -27,7 +27,7 @@ const BlogCardSponsored = forwardRef(
     ref
   ) => {
     return (
-      <Wrapper isSponsored={isSponsored} onClick={onSelectCard}>
+      <Wrapper ref={ref} isSponsored={isSponsored} onClick={onSelectCard}>
         {isSponsored && (
           <div className="wrapper__sponsored">
             <Icon icon=" mng-lnc-paw" sizeInUnits="1.5rem" />

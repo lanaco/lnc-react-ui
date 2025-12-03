@@ -60,7 +60,7 @@ const ToggleSectionItems = forwardRef(
     }, [items]);
 
     return (
-      <ItemsContainer>
+      <ItemsContainer ref={ref}>
         {isMobile ? (
           showMore ? (
             memoizedItems

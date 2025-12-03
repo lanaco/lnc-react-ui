@@ -11,7 +11,7 @@ const ToggleSectionOptions = forwardRef(
     ref
   ) => {
     return (
-      <OptionsContainer>
+      <OptionsContainer ref={ref}>
         {options?.map((option, idx) => (
           <Chip
             key={`toggle-section-tag__${idx + 1}`}

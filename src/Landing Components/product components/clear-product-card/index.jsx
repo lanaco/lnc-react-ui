@@ -18,8 +18,12 @@ const ClearProductCard = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Wrapper className="product-card" onClick={onSelectCard}>
-      {isDefined(imageComponent) ? imageComponent : <ProductImageWrapper src={image} />}
+    <Wrapper ref={ref} className="product-card" onClick={onSelectCard}>
+      {isDefined(imageComponent) ? (
+        imageComponent
+      ) : (
+        <ProductImageWrapper src={image} />
+      )}
       <div className="card-title">{title}</div>
     </Wrapper>
   );
