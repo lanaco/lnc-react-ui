@@ -7,6 +7,7 @@ const FieldOfInterestsWithAvatarsCardAvatar = forwardRef(
   ({ isActive, image, imageComponent, onSelectCard = () => {} }, ref) => {
     return (
       <AvatarWrapper
+        ref={ref}
         className={isActive ? "active" : ""}
         onClick={onSelectCard}
       >

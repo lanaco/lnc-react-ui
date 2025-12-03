@@ -5,7 +5,7 @@ import { Wrapper } from "./style";
 const AdBanner = forwardRef(
   ({ image, imageForMobile, isMobile, onSelectCard }, ref) => {
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         <img
           src={isMobile ? imageForMobile : image}
           className="wrapper__image"

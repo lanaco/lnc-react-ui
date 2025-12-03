@@ -36,6 +36,7 @@ const LoanCalculatorModalContentWrapper = forwardRef(
   ) => {
     return (
       <LoanCalculatorModalContent
+        ref={ref}
         defaultLoanAmount={defaultLoanAmount}
         defaultInterestRate={defaultInterestRate}
         defaultLoanPeriod={defaultLoanPeriod}

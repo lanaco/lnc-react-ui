@@ -47,7 +47,7 @@ const BlogListSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper className={isSeparated ? "separated" : ""}>
+      <Wrapper ref={ref} className={isSeparated ? "separated" : ""}>
         <SuspenseBlogLarge
           isLoading={isLoading}
           limit={5}

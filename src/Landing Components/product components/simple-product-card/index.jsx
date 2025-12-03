@@ -28,7 +28,7 @@ const SimpleProductCard = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Wrapper className="simple-product-card" onClick={onSelectCard}>
+    <Wrapper ref={ref} className="simple-product-card" onClick={onSelectCard}>
       {isDefined(imageComponent) ? (
         imageComponent
       ) : (

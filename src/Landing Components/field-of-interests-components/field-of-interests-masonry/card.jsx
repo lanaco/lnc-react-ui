@@ -20,7 +20,12 @@ const FieldOfInterestsMasonryCard = forwardRef(
     const { theme } = useTheme();
 
     return (
-      <Wrapper theme={theme} className={className} onClick={onSelectCard}>
+      <Wrapper
+        ref={ref}
+        theme={theme}
+        className={className}
+        onClick={onSelectCard}
+      >
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

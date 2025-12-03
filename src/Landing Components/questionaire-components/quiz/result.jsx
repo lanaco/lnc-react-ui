@@ -17,7 +17,7 @@ const QuizResult = forwardRef(
     ref
   ) => {
     return (
-      <ResultWrapper>
+      <ResultWrapper ref={ref}>
         <div className="wrapper__content">
           <Icon
             icon=" mng-lnc-checkmark--outline"

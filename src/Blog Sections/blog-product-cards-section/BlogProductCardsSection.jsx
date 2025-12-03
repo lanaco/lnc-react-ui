@@ -46,6 +46,7 @@ const BlogProductCardsSection = forwardRef(
 
     return (
       <Wrapper
+        ref={ref}
         className={`blog-product-cards-section ${
           isHighlight ? "highlight" : ""
         }`}

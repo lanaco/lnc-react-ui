@@ -14,7 +14,7 @@ const QuizWelcome = forwardRef(
     ref
   ) => {
     return (
-      <WelcomeWrapper>
+      <WelcomeWrapper ref={ref}>
         <div className="wrapper__content">
           <div className="wrapper__title">{title}</div>
           <div className="wrapper__description">{description}</div>

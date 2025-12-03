@@ -6,6 +6,7 @@ const CategorySimpleCard = forwardRef((props, ref) => {
 
   return (
     <CardWrapper
+      ref={ref}
       className="simple-category-card"
       onClick={() => onSelectCard(uuid)}
     >

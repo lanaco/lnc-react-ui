@@ -7,7 +7,11 @@ import { TagWrapper } from "./style";
 const FieldOfInterestsWithTagsCardTag = forwardRef(
   ({ name, isActive, icon, onSelectCard = () => {} }, ref) => {
     return (
-      <TagWrapper className={isActive ? "active" : ""} onClick={onSelectCard}>
+      <TagWrapper
+        ref={ref}
+        className={isActive ? "active" : ""}
+        onClick={onSelectCard}
+      >
         {isDefinedNotEmptyString(icon) && (
           <Icon icon={icon} className="wrapper__icon" />
         )}

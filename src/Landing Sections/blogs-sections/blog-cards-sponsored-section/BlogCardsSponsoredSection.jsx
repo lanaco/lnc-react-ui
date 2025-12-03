@@ -47,7 +47,7 @@ const BlogCardsSponsoredSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         <div className="wrapper__heading">
           <div className="wrapper__title">
             {title && (

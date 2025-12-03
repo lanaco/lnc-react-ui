@@ -24,6 +24,7 @@ const FieldOfInterestsWithAvatarsCard = forwardRef(
   ) => {
     return (
       <SimpleProductCard
+        ref={ref}
         uuid={uuid}
         title={title}
         price={price}

@@ -9,7 +9,7 @@ const OverlayGeneralCardsSection = forwardRef(
     ref
   ) => {
     return (
-      <Container>
+      <Container ref={ref}>
         <div className="section__title">{title}</div>
         <div className="section__items">
           {items?.map((item, idx) => (

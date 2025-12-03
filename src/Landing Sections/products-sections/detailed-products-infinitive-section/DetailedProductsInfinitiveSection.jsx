@@ -69,7 +69,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
   }, [items]);
 
   return (
-    <Container limit={limit}>
+    <Container ref={ref} limit={limit}>
       <div className="section__heading">
         {isDefinedNotEmptyString(title) && (
           <div className="section__title">{title}</div>
