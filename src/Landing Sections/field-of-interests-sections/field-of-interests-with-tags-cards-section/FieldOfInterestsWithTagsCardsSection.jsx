@@ -20,6 +20,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       limitForMobile = 2,
       items = [],
       selectedTag,
+      activeColor,
       onSelectTag = () => {},
       onSelectCard = () => {},
     },
@@ -45,6 +46,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                   icon={tag?.icon}
                   name={tag?.title}
                   isActive={tag?.code === selectedTag}
+                  activeColor={activeColor}
                   onSelectCard={() => onSelectTag?.(tag)}
                 />
               ))
