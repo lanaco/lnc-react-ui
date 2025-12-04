@@ -23,7 +23,8 @@ export const Wrapper = styled.div`
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    height: auto;
+    height: 100%;
+    max-height: 10.375rem;
     border-radius: 0.75rem 0.75rem 0 0;
   }
 
@@ -106,7 +107,7 @@ export const TagWrapper = styled.div`
   }
 
   &.active {
-    background: var(--yellow-600, #d97706);
+    background: ${(p) => p?.activeColor || "var(--yellow-600, #d97706)"};
 
     & .wrapper__icon {
       color: var(--white, #fff);
