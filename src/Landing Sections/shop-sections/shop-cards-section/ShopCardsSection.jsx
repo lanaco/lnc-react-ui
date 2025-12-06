@@ -61,7 +61,7 @@ const ShopCardsSection = forwardRef(
           {items && items?.length > 0
             ? items?.map((card, idx) => (
                 <ShopCard
-                  showRating={!showRating}
+                  showRating={showRating}
                   key={`shop-card__${idx + 1}`}
                   uuid={card?.uuid}
                   title={card?.name}
@@ -74,7 +74,7 @@ const ShopCardsSection = forwardRef(
                   image={getImage(card?.profileImage, card?.uuid) || null}
                   getProductImage={getProductImage}
                   canAcceptPayments={card?.canAcceptPayments}
-                  hideProducts={!hideProducts}
+                  hideProducts={hideProducts}
                 />
               ))
             : Array.from("1234")?.map((_, idx) => (
