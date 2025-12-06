@@ -46,8 +46,8 @@ export const Wrapper = styled.div`
     row-gap: 1rem;
     display: grid;
     grid-template-columns: repeat(2, auto);
-    max-height: 13.25rem;
-    min-height: 13.25rem;
+    max-height: 100%;
+    min-height: 100%;
     & .action {
       grid-column: 1 / 3;
     }

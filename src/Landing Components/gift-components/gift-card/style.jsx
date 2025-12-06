@@ -30,7 +30,7 @@ export const CardWrapper = styled.div`
   max-height: 11rem;
   position: relative;
   border-radius: 0.75rem;
-  border: 1px solid var(--warning-500);
+  border: 1px solid var(--warning-500, #f59e0b);
   overflow: hidden;
 
   & .skeleton__card {

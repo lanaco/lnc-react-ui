@@ -4,6 +4,7 @@ import {
   linearGradientAnimation,
   truncateTextInRows,
 } from "../../../_utils/utils";
+import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -36,6 +37,10 @@ export const Wrapper = styled.div`
       max-height: 4rem;
       border-radius: 999px;
     }
+  }
+
+  & .wrapper_stars {
+    display: flex;
   }
 
   & .wrapper__info {
@@ -126,6 +131,17 @@ export const Wrapper = styled.div`
         height: calc(100% / 3);
         max-height: 5.75rem;
         object-fit: cover;
+      }
+    }
+  }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    max-width: 10rem;
+    min-width: 10rem;
+
+    & .wrapper__content {
+      & .wrapper__image {
+        max-height: 3rem;
       }
     }
   }

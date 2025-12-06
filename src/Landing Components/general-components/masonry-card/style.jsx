@@ -4,6 +4,7 @@ import {
   linearGradientAnimation,
   truncateTextInRows,
 } from "../../../_utils/utils";
+import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -19,7 +20,9 @@ export const Wrapper = styled.div`
   grid-row: ${(p) => p.position?.rowStart || "1"} /
     ${(p) => p.position?.rowEnd || "1"};
 
-  background: ${p => p.backgroundColor || `linear-gradient(
+  background: ${(p) =>
+    p.backgroundColor ||
+    `linear-gradient(
     178deg,
     rgba(0, 0, 0, 0) 1.5%,
     rgba(0, 0, 0, 0.16) 8.95%,
@@ -111,5 +114,12 @@ export const Wrapper = styled.div`
       width: 9rem;
     }
   }
-    cursor: pointer;
+  cursor: pointer;
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    & .wrapper__image {
+      height: 100%;
+      max-height: 14.5rem;
+    }
+  }
 `;

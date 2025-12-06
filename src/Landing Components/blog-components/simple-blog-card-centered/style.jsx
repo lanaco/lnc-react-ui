@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
 
   & button {
     width: fit-content;
-    margin-top: auto;
+    margin-top: 1.5rem;
     color: var(--gray-950, #14161a);
     font-size: 0.875rem;
     font-style: normal;
