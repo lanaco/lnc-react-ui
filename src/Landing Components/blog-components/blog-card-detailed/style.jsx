@@ -20,16 +20,16 @@ export const Wrapper = styled.div`
   }
 
   & img {
-    max-height: 11.0625rem;
-    min-height: 11.0625rem;
+    max-height: 11.25rem;
+    min-height: 11.25rem;
     object-fit: cover;
     width: 100%;
   }
 
   & .skeleton-img {
     width: 100%;
-    max-height: 11.0625rem;
-    min-height: 11.0625rem;
+    max-height: 11.25rem;
+    min-height: 11.25rem;
     background-color: ${linearGradientAnimation("-90deg")};
   }
 

@@ -25,6 +25,7 @@ const ShopCardsSection = forwardRef(
       getProductImage = () => {},
       hideProducts = false,
       showRating = true,
+      gridView = false,
     },
     ref
   ) => {
@@ -33,6 +34,7 @@ const ShopCardsSection = forwardRef(
         ref={ref}
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
+        gridView={gridView}
       >
         <div className="wrapper__heading">
           <div className="wrapper__title">
@@ -48,7 +50,7 @@ const ShopCardsSection = forwardRef(
                 color="neutral"
                 borderRadius="curved"
                 btnType="tinted"
-                className="title__action"
+                className={`title__action ${gridView ? "grid" : ""}`}
                 onClick={onButtonAction}
               />
             )}
@@ -59,7 +61,7 @@ const ShopCardsSection = forwardRef(
           {items && items?.length > 0
             ? items?.map((card, idx) => (
                 <ShopCard
-                  showRating={showRating}
+                  showRating={!showRating}
                   key={`shop-card__${idx + 1}`}
                   uuid={card?.uuid}
                   title={card?.name}
@@ -72,13 +74,23 @@ const ShopCardsSection = forwardRef(
                   image={getImage(card?.profileImage, card?.uuid) || null}
                   getProductImage={getProductImage}
                   canAcceptPayments={card?.canAcceptPayments}
-                  hideProducts={hideProducts}
+                  hideProducts={!hideProducts}
                 />
               ))
             : Array.from("1234")?.map((_, idx) => (
                 <ShopCardSkeleton key={`shop-card-skeleton__${idx + 1}`} />
               ))}
         </div>
+        {gridView && onButtonAction && (
+          <Button
+            text={buttonText}
+            borderRadius="curved"
+            btnType="basic"
+            color="neutral"
+            className="wrapper__view-all"
+            onClick={onButtonAction}
+          />
+        )}
       </Wrapper>
     );
   }

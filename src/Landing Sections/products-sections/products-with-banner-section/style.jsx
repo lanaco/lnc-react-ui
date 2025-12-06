@@ -18,6 +18,13 @@ export const ProductsBannerWrapper = styled.div`
     height: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    aspect-ratio: 1 / 1;
+  }
 `;
 
 export const GridWrapper = styled.div`

@@ -51,7 +51,7 @@ const ShopCard = forwardRef(
           ) : image ? (
             <img ref={shopImgRef} src={image} className="wrapper__image" />
           ) : (
-            <img src={DefaultShopImage} />
+            <img src={DefaultShopImage} className="wrapper__image" />
           )}
           <div className="wrapper__info">
             <div className="wrapper__title">

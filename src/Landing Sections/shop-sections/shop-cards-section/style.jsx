@@ -71,26 +71,66 @@ export const Wrapper = styled.div`
     width: 100%;
   }
 
+  & .wrapper__view-all {
+    align-self: center;
+    color: var(--neutral-600, #0f2a46);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: -0.0056rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    display: none;
+  }
+
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    & .wrapper__view-all {
+      display: unset;
+    }
+
     & .wrapper__heading {
       & .wrapper__title {
         & .title__action {
-          display: none;
+          &.grid {
+            display: none;
+          }
         }
       }
     }
 
     & .wrapper__cards {
-      grid-template-columns: ${(p) =>
-        `repeat(${p?.limitCardsForMobile}, minmax(0, 1fr))`};
       gap: 1rem;
-    }
-  }
 
-  @media (max-width: 400px) {
-    & .wrapper__cards {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-      gap: 1rem;
+      ${(p) =>
+        p?.gridView
+          ? `
+            grid-template-columns: repeat(2, minmax(0, 1fr)); 
+            & > div {
+              min-width:100%;
+             max-width:100%;
+            }`
+          : `
+            display: flex;
+            overflow-x: auto;
+
+            -webkit-overflow-scrolling: touch;
+            ::-webkit-scrollbar {
+              -webkit-appearance: none;
+            }
+
+            -ms-overflow-style: none;
+            /* Internet Explorer 10+ */
+            scrollbar-width: none;
+            /* Firefox */
+
+            &::-webkit-scrollbar {
+              display: none;
+              /* Safari and Chrome */
+            }`}
     }
   }
 `;
