@@ -17,6 +17,11 @@ export const Container = styled.div`
     font-size: 1.5rem;
     line-height: 2rem;
     letter-spacing: -0.0294rem;
+
+    & i {
+      font-size: 1.5rem;
+      color: var(--primary-500, #f59e0b);
+    }
   }
 
   & .section__items {

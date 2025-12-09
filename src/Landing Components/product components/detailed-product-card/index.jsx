@@ -109,6 +109,12 @@ const DetailedProductCard = forwardRef((props, ref) => {
   const calculateVisible = () => {
     if (!productCardRef?.current || tagRefs?.current?.length === 0) return;
 
+    if (isMobile) {
+      setVisibleNumOfTags(tags?.length);
+
+      return;
+    }
+
     const productCardWidth = productCardRef?.current?.offsetWidth;
 
     let totalWidth = 0;
@@ -142,7 +148,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [tags]);
+  }, [tags, isMobile]);
 
   const renderTags = () => {
     return (
@@ -160,15 +166,6 @@ const DetailedProductCard = forwardRef((props, ref) => {
 
           const value = x?.value ?? x?.multiOptions?.[0] ?? "";
           const text = [value, unit].filter(Boolean).join(" ");
-
-          if (isMobile) {
-            return (
-              <div className="tag-mobile">
-                {text}
-                {idx < tags?.length - 1 ? " · " : ""}
-              </div>
-            );
-          }
 
           return (
             <Badge
@@ -210,18 +207,6 @@ const DetailedProductCard = forwardRef((props, ref) => {
   };
 
   const renderOtherTags = () => {
-    if (isMobile) {
-      const otherTags = [condition, quantity, trade];
-      return otherTags
-        ?.filter((x) => isDefinedNotEmptyString(x))
-        ?.map((x, idx, arr) => (
-          <div className="tag-mobile">
-            {x}
-            {idx < arr?.length - 1 ? " · " : ""}
-          </div>
-        ));
-    }
-
     return (
       <>
         {condition && (
