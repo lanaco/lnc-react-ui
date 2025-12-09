@@ -58,14 +58,6 @@ export const Wrapper = styled.div`
     }
   }
 
-  & .tag-mobile {
-    font-weight: 400;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    letter-spacing: 0.025rem;
-    color: var(--gray-600, #676e79);
-  }
-
   & .card-title {
     font-size: 0.875rem;
     font-weight: 600;
@@ -146,8 +138,51 @@ export const Wrapper = styled.div`
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     overflow: visible;
 
+    & .wrapper-card-3 {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: scroll;
+      width: 8.875rem !important;
+
+      -webkit-overflow-scrolling: touch;
+      ::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+      -ms-overflow-style: none;
+      /* Internet Explorer 10+ */
+      scrollbar-width: none;
+      /* Firefox */
+
+      &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+      }
+
+      & > div {
+        & > div {
+          width: 8.875rem !important;
+        }
+      }
+    }
+
     & .tags-popover__trigger {
-      flex-wrap: wrap;
+      overflow-x: scroll;
+      justify-content: flex-start;
+      width: 100%;
+
+      -webkit-overflow-scrolling: touch;
+      ::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+      -ms-overflow-style: none;
+      /* Internet Explorer 10+ */
+      scrollbar-width: none;
+      /* Firefox */
+
+      &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+      }
     }
 
     & .price-text {
