@@ -41,11 +41,6 @@ export const ImageWrapper = styled.div`
       transform: scale(1.25);
     }
   }
-
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 export const ContentWrapper = styled.div`

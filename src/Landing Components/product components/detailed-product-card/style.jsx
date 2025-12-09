@@ -110,6 +110,8 @@ export const Wrapper = styled.div`
     background-color: ${linearGradientAnimation("-90deg")};
     border-radius: 0.75rem;
     border: 1px solid white;
+    width: 100%;
+    height: 11rem;
   }
 
   & .skeleton-title {

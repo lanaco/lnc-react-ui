@@ -91,14 +91,16 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
           </Button>
         )}
       </div>
-      <SuspenseDetailedProductCard
-        isLoading={isLoading}
-        limit={limit}
-        keyPrefix="explore-landing"
-      >
-        <div className="section__items">{memoizedProducts}</div>
-      </SuspenseDetailedProductCard>
-      {!isMobile && (
+      <div className="section__items">
+        <SuspenseDetailedProductCard
+          isLoading={isLoading}
+          limit={limit}
+          keyPrefix="explore-landing"
+        >
+          {memoizedProducts}
+        </SuspenseDetailedProductCard>
+      </div>
+      {!isMobile && !isLoading && (
         <IconButton
           icon={loadMoreButtonIcon}
           borderRadius="curved"
