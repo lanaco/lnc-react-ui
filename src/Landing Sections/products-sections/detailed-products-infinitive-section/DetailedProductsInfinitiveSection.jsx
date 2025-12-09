@@ -14,6 +14,7 @@ const MemoizedProductCard = memo(DetailedProductCard);
 const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
   const {
     title,
+    icon,
     items,
     limit = 4,
     isLoading = false,
@@ -74,7 +75,9 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     <Container ref={ref} limit={limit}>
       <div className="section__heading">
         {isDefinedNotEmptyString(title) && (
-          <div className="section__title">{title}</div>
+          <div className="section__title">
+            {isDefinedNotEmptyString(icon) && <i className={icon} />} {title}
+          </div>
         )}
         {isMobile && isDefinedNotEmptyString(viewAllbuttonLink) && (
           <Button
@@ -93,14 +96,16 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
           </Button>
         )}
       </div>
-      <SuspenseDetailedProductCard
-        isLoading={isLoading}
-        limit={limit}
-        keyPrefix="explore-landing"
-      >
-        <div className="section__items">{memoizedProducts}</div>
-      </SuspenseDetailedProductCard>
-      {!isMobile && (
+      <div className="section__items">
+        <SuspenseDetailedProductCard
+          isLoading={isLoading}
+          limit={limit}
+          keyPrefix="explore-landing"
+        >
+          {memoizedProducts}
+        </SuspenseDetailedProductCard>
+      </div>
+      {!isMobile && !isLoading && (
         <IconButton
           icon={loadMoreButtonIcon}
           borderRadius="curved"

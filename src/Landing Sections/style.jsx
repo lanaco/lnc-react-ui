@@ -68,6 +68,10 @@ export const TitleWithOptionsSectionWrapper = styled.div`
       }
     }
 
+    & .button-link {
+      white-space: nowrap;
+    }
+
     & i {
       font-size: 1.5rem;
       color: var(--primary-500, #f59e0b);

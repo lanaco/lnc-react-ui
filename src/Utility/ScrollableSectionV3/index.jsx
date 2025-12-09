@@ -64,7 +64,7 @@ const ScrollableSectionV3 = forwardRef(
               />
             )}
             {isDefinedNotEmptyString(title) && (
-              <div className="title__text">{title}</div>
+              <div className="title__text"> {title}</div>
             )}
           </div>
         </div>
