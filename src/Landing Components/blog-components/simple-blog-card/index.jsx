@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import Link from "../../../General/Link/Link";
 import ProductImageWrapper from "../../product-img-wrapper";
@@ -14,10 +14,19 @@ const SimpleBlogCard = forwardRef((props, ref) => {
     options,
     onCardClick,
     readMoreText = "Read more",
+    metadata,
   } = props;
 
+  const cardRef = useRef();
+
   return (
-    <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
+    <Wrapper
+      ref={cardRef}
+      name={metadata?.name}
+      data-accessor={metadata?.name}
+      className="blog-card"
+      onClick={(e) => onCardClick(e, cardRef)}
+    >
       <ProductImageWrapper src={imageUrl} />
       <TextWrapper>
         <div className="text-wr-title">{title}</div>

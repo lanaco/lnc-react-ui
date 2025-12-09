@@ -12,6 +12,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
     limit = 3,
     onSelectCard = () => {},
     isLoading = false,
+    componentName,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -33,7 +34,8 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                     image={x?.image || null}
                     text={x?.text}
                     buttonText={x?.buttonText}
-                    onCardClick={() => onSelectCard(x)}
+                    onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
+                    metadata={{ name: componentName, accessor: x?.accessor }}
                   />
                 ))
               : items
@@ -45,7 +47,8 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                       image={x?.image || null}
                       text={x?.text}
                       buttonText={x?.buttonText}
-                      onCardClick={() => onSelectCard(x)}
+                      onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
+                      metadata={{ name: componentName, accessor: x?.accessor }}
                     />
                   ))}
           </>

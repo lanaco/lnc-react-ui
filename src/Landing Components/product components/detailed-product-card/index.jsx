@@ -56,6 +56,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     bookmarkComponent,
     bookmarked,
     bookmarkLists,
+    metadata,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -256,7 +257,9 @@ const DetailedProductCard = forwardRef((props, ref) => {
     <Wrapper
       ref={productCardRef}
       className="product-card"
-      onClick={onSelectCard}
+      data-accessor={metadata?.accessor}
+      name={metadata?.name}
+      onClick={(e) => onSelectCard(e, productCardRef)}
     >
       <ImageWrapper className="product-image-wrapper">
         <ClonedBookmarkComponent />

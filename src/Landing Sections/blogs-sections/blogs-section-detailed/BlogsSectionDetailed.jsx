@@ -10,7 +10,7 @@ import Button from "../../../General/Button/Button";
 import BlogCardDetailed from "../../../Landing Components/blog-components/blog-card-detailed";
 import SuspenseBlogDetailed from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-detailed";
 
-const MemoizedProductCard = memo(BlogCardDetailed);
+const MemoizedBlogCard = memo(BlogCardDetailed);
 
 const BlogsSectionDetailed = forwardRef((props, ref) => {
   const {
@@ -25,6 +25,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
     isLoading = false,
     buttonLink,
     getImage = () => {},
+    componentName,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -34,7 +35,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
       <>
         {isMobile === true
           ? items?.map((x, index) => (
-              <MemoizedProductCard
+              <MemoizedBlogCard
                 key={index}
                 title={x?.title}
                 text={x?.description}
@@ -45,14 +46,17 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                 timeToRead={x?.timeToRead}
                 timeToReadText={timeToReadText}
                 tags={x?.tags}
-                onCardClick={() => onSelectCard(x?.titleSlug)}
+                onCardClick={(e, cardRef) =>
+                  onSelectCard(x?.titleSlug, cardRef)
+                }
                 imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
+                metadata={{ name: componentName, accessor: x?.accessor }}
               />
             ))
           : items
               ?.slice(0, limit)
               .map((x, index) => (
-                <MemoizedProductCard
+                <MemoizedBlogCard
                   key={index}
                   title={x?.title}
                   imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
@@ -64,7 +68,10 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
                   publishedAt={x?.publishedAt}
                   timeToRead={x?.timeToRead}
                   timeToReadText={timeToReadText}
-                  onCardClick={() => onSelectCard(x?.titleSlug)}
+                  onCardClick={(e, cardRef) =>
+                    onSelectCard(x?.titleSlug, cardRef)
+                  }
+                  metadata={{ name: componentName, accessor: x?.accessor }}
                 />
               ))}
       </>

@@ -25,10 +25,12 @@ const ShopCard = forwardRef(
       canAcceptPayments,
       hideProducts = false,
       showRating = true,
+      metadata = {},
     },
     ref
   ) => {
     const shopImgRef = useRef();
+    const shopCardRef = useRef();
 
     useEffect(() => {
       const onErrorImage = (event) => {
@@ -44,7 +46,12 @@ const ShopCard = forwardRef(
     }, []);
 
     return (
-      <Wrapper ref={ref} onClick={onSelectCard}>
+      <Wrapper
+        ref={shopCardRef}
+        onClick={(e) => onSelectCard(e, shopCardRef)}
+        name={metadata?.name}
+        data-accessor={metadata?.accessor}
+      >
         <div className="wrapper__content">
           {isDefined(imageComponent) ? (
             imageComponent
