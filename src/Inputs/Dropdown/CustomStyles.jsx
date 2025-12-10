@@ -71,7 +71,6 @@ const customStyles = {
       maxHeight: getSizeValueWithUnits(s.theme, s.selectProps.size),
     },
     // This line disable the blue border
-    boxShadow: "none",
     backgroundColor: s.isDisabled
       ? getDisabledBg(s.theme)
       : getColorRgbaValue(s.theme, "Input", s.color, "enabled", "background"),
@@ -156,13 +155,13 @@ const customStyles = {
         "hover",
         "background"
       ),
-      color:  getColorRgbaValue(
-          s.theme,
-          "Dropdown",
-          s.selectProps.color,
-          "hover",
-          "text"
-        ),
+      color: getColorRgbaValue(
+        s.theme,
+        "Dropdown",
+        s.selectProps.color,
+        "hover",
+        "text"
+      ),
     },
   }),
   multiValue: (p, s) => ({
