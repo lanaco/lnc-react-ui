@@ -30,6 +30,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     sponsoredText,
     onBookmark = () => {},
     bookmarkComponent,
+    componentName,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -47,8 +48,8 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         uuid={x?.uuid}
         sponsored={x?.sponsored}
         imageComponent={x?.imageComponent}
-        onSelectCard={() =>
-          onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+        onSelectCard={(e, cardRef) =>
+          onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug, cardRef })
         }
         imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
         isFree={x?.isFree}
@@ -65,6 +66,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         bookmarkComponent={bookmarkComponent}
         bookmarked={x?.bookmarked}
         bookmarkLists={x?.bookmarkLists}
+        metadata={{ accessor: x?.accessor, name: componentName }}
       />
     ));
   }, [items]);

@@ -24,9 +24,11 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
     isLoading = false,
     getImage = () => {},
     readMoreText = "Read more",
+    componentName,
   } = props;
 
   const isMobile = useDetectMobile();
+
   const memoizedProducts = useMemo(() => {
     return (
       <>
@@ -40,7 +42,10 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                 titleSlug={x?.titleSlug}
                 readMoreText={readMoreText}
                 options={x?.options}
-                onCardClick={() => onSelectCard(x?.titleSlug)}
+                onCardClick={(e, cardRef) =>
+                  onSelectCard(x?.titleSlug, cardRef)
+                }
+                metadata={{ name: componentName, accessor: x?.accessor }}
               />
             ))
           : items
@@ -54,7 +59,10 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                   titleSlug={x?.titleSlug}
                   readMoreText={readMoreText}
                   options={x?.options}
-                  onCardClick={() => onSelectCard(x?.titleSlug)}
+                  onCardClick={(e, cardRef) =>
+                    onSelectCard(x?.titleSlug, cardRef)
+                  }
+                  metadata={{ name: componentName, accessor: x?.accessor }}
                 />
               ))}
       </>

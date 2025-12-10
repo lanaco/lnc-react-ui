@@ -20,6 +20,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
     title = "Season inspiration",
     isLoading = false,
     getImage = () => {},
+    componentName,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -33,10 +34,15 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                 title={x?.name}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
-                onSelectCard={() =>
-                  onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                onSelectCard={(e, cardRef) =>
+                  onSelectCard({
+                    uuid: x?.uuid,
+                    nameSlug: x?.nameSlug,
+                    cardRef,
+                  })
                 }
                 image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                metadata={{ name: componentName, accessor: x?.accessor }}
               />
             ))
           : items
@@ -47,10 +53,15 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                   title={x?.name}
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
-                  onSelectCard={() =>
-                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  onSelectCard={(e, cardRef) =>
+                    onSelectCard({
+                      uuid: x?.uuid,
+                      nameSlug: x?.nameSlug,
+                      cardRef,
+                    })
                   }
                   image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                  metadata={{ name: componentName, accessor: x?.accessor }}
                 />
               ))}
       </>

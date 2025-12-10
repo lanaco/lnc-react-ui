@@ -10,7 +10,7 @@ import SimpleBlogCardHorizontal from "../../../Landing Components/blog-component
 import SelectBar from "../../../Inputs/SelectBar";
 import SuspenseBlogWithFilters from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-with-filters";
 
-const MemoizedProductCard = memo(SimpleBlogCardHorizontal);
+const MemoizedBlogCard = memo(SimpleBlogCardHorizontal);
 
 const BlogsSectionWithFilters = forwardRef((props, ref) => {
   const {
@@ -29,33 +29,37 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     onSelectCard = () => {},
     productsToolbarName = "All",
     allButton = false,
+    componentName,
   } = props;
 
   const isMobile = useDetectMobile();
+
   const memoizedProducts = useMemo(() => {
     return (
       <>
         {isMobile === true
           ? items?.map((x, index) => (
-              <MemoizedProductCard
+              <MemoizedBlogCard
                 key={index}
                 title={x?.title}
                 imageUrl={x?.image || null}
                 text={x?.text}
                 buttonText={x?.buttonText}
-                onCardClick={() => onSelectCard(x)}
+                onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
+                metadata={{ name: componentName, accessor: x?.accessor }}
               />
             ))
           : items
               ?.slice(0, limit)
               ?.map((x, index) => (
-                <MemoizedProductCard
+                <MemoizedBlogCard
                   key={index}
                   title={x?.title}
                   imageUrl={x?.image || null}
                   text={x?.text}
                   buttonText={x?.buttonText}
-                  onCardClick={() => onSelectCard(x)}
+                  onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
+                  metadata={{ name: componentName, accessor: x?.accessor }}
                 />
               ))}
       </>

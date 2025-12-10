@@ -5,7 +5,12 @@ import BlogCardLarge from "../../../Landing Components/blog-components/blog-card
 import SuspenseBlogSingle from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-single";
 
 const BlogsSectionLarge = forwardRef((props, ref) => {
-  const { isLoading, item, onSelectCard = () => {}, getImage = () => {} } = props;
+  const {
+    isLoading,
+    item,
+    onSelectCard = () => {},
+    getImage = () => {},
+  } = props;
 
   return (
     <SuspenseBlogSingle

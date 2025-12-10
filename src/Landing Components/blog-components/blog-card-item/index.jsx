@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { cloneElement, forwardRef, useState } from "react";
+import { cloneElement, forwardRef, useRef } from "react";
 
 import Icon from "../../../General/Icon/Icon";
 import IconButton from "../../../General/IconButton/IconButton";
@@ -31,6 +31,7 @@ const BlogCardItem = forwardRef(
       onBookmark = () => {},
       onShare = () => {},
       bookmarkComponent = <></>,
+      metadata,
     },
     ref
   ) => {
@@ -49,8 +50,16 @@ const BlogCardItem = forwardRef(
       return clonedChild;
     };
 
+    const blogCardRef = useRef();
+
     return (
-      <Wrapper onClick={onSelectCard} className="blog-card-item">
+      <Wrapper
+        ref={blogCardRef}
+        name={metadata?.name}
+        data-accessor={metadata?.accessor}
+        onClick={(e) => onSelectCard(e, blogCardRef)}
+        className="blog-card-item"
+      >
         <ProductImageWrapper src={imageUrl} className="wrapper__image" />
         <div className="wrapper__content">
           <div className="wrapper__subcontent">

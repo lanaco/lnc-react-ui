@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 
 import useDetectMobile from "../../_utils/useDetectMobile";
@@ -20,6 +22,7 @@ const BlogProductCardsSection = forwardRef(
       limit = 4,
       getImage = () => {},
       isHighlight = false,
+      componentName,
     },
     ref
   ) => {
@@ -38,8 +41,9 @@ const BlogProductCardsSection = forwardRef(
             currency={x?.currency}
             sellerUuid={x?.sellerUuid}
             uuid={x?.uuid}
-            onSelectCard={() => onSelectCard?.(x?.uuid)}
+            onSelectCard={(e, cardRef) => onSelectCard?.(x?.uuid, cardRef)}
             image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+            metadata={{ name: componentName, accessor: x?.accessor }}
           />
         ));
     }, [items]);
