@@ -20,7 +20,7 @@ const calcDaysDifference = (date1, date2) => {
   const diffMs = date1.getTime() - date2.getTime();
   const dayMs = 24 * 60 * 60 * 1000;
 
-  return diffMs >= 0 ? Math.ceil(diffMs / dayMs) : Math.floor(diffMs / dayMs);
+  return Math.floor(diffMs / dayMs);
 };
 
 const toLocaleDateString = (date) => {
