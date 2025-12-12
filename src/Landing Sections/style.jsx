@@ -81,6 +81,7 @@ export const TitleWithOptionsSectionWrapper = styled.div`
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & .regular-title {
       font-size: 1.375rem;
+      padding-bottom: 0.5rem;
     }
   }
 `;

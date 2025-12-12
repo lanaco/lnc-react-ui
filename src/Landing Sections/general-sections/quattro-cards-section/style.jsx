@@ -49,6 +49,8 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    gap: 1.25rem;
+
     & .wrapper__cards {
       grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 1rem;

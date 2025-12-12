@@ -41,7 +41,6 @@ export const Wrapper = styled.div`
   & .wrapper__tags {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 0.75rem;
   }
 
@@ -60,6 +59,8 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    gap: 1rem;
+
     & .wrapper__tags {
       overflow-x: scroll;
       justify-content: flex-start;

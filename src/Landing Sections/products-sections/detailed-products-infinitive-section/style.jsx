@@ -51,6 +51,8 @@ export const Container = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    gap: 1.25rem;
+
     & .section__items {
       display: flex;
       gap: 1rem;

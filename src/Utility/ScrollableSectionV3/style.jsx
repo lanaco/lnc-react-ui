@@ -43,6 +43,8 @@ export const Container = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    gap: 1.25rem;
+
     & .scrollable-section__header {
       & .scrollable-section__title {
         & .title__text {

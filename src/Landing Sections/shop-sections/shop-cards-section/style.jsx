@@ -88,6 +88,8 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    gap: 1.25rem;
+
     & .wrapper__view-all {
       display: unset;
     }

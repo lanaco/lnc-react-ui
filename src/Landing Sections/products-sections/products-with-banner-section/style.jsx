@@ -24,6 +24,15 @@ export const ProductsBannerWrapper = styled.div`
     min-height: 100%;
     max-height: 100%;
     aspect-ratio: 1 / 1;
+
+    & .product-card {
+      & img {
+        width: 100%;
+        height: 100%;
+        min-width: 100%;
+        min-height: 100%;
+      }
+    }
   }
 `;
 
@@ -33,22 +42,6 @@ export const GridWrapper = styled.div`
   gap: 1.25rem;
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-
-    -webkit-overflow-scrolling: touch;
-    ::-webkit-scrollbar {
-      -webkit-appearance: none;
-    }
-    -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
-    scrollbar-width: none;
-    /* Firefox */
-
-    &::-webkit-scrollbar {
-      display: none;
-      /* Safari and Chrome */
-    }
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 `;
