@@ -44,17 +44,17 @@ const ScrollableSectionV3 = forwardRef(
       ? children
       : children?.slice(index, index + itemsPerView);
 
-    useEffect(() => {
-      if (index + itemsPerView >= numOfItems && hasNextPage) {
-        handleFetchNextPage();
-      }
-    }, [index]);
-
     const scrollToRight = (e) => {
       e?.target?.blur();
 
-      if (index + itemsPerView < numOfItems) {
-        setIndex(index + itemsPerView);
+      const nextIndex = index + itemsPerView;
+
+      if (nextIndex < numOfItems) {
+        setIndex(nextIndex);
+      }
+
+      if (nextIndex + itemsPerView >= numOfItems && hasNextPage) {
+        handleFetchNextPage();
       }
     };
 
