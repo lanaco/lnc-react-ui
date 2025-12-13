@@ -40,6 +40,8 @@ const SalesCampaignsSection = forwardRef(
       itemlessLink,
       handleItemlessLink = () => {},
       componentName,
+      hasNextPage = false,
+      handleFetchNextPage = () => {},
     },
     ref
   ) => {
@@ -118,6 +120,8 @@ const SalesCampaignsSection = forwardRef(
           title={title}
           numOfSlides={numOfSlides}
           showNavigation={showNavigation}
+          hasNextPage={hasNextPage}
+          handleFetchNextPage={handleFetchNextPage}
         >
           {memoizedItems}
         </ScrollableSectionV3>
