@@ -26,8 +26,6 @@ export const RegularTitleSectionWrapper = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    gap: 1.25rem;
-
     & .regular-title {
       font-size: 1.375rem;
 
@@ -51,7 +49,7 @@ export const GridWrapper = styled.div`
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
     width: 100%;
     height: 100%;
     max-height: 100%;
