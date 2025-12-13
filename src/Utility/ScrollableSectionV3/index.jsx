@@ -5,19 +5,28 @@ import PropTypes from "prop-types";
 import Icon from "../../General/Icon/Icon";
 import IconButton from "../../General/IconButton/IconButton";
 import useDetectMobile from "../../_utils/useDetectMobile";
+import InfiniteScrollEndElement from "../InfiniteScrollEndElement";
 import { isDefinedNotEmptyString } from "../../_utils/utils";
 import { Container, Content } from "./style";
 
 const ScrollableSectionV3 = forwardRef(
-  ({ icon, title, numOfSlides = 2, showNavigation = true, children }, ref) => {
+  (
+    {
+      icon,
+      title,
+      numOfSlides = 2,
+      showNavigation = true,
+      hasNextPage = false,
+      handleFetchNextPage = () => {},
+      children,
+    },
+    ref
+  ) => {
     const [index, setIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(1);
-    const [touchStart, setTouchStart] = useState(null);
-    const [touchEnd, setTouchEnd] = useState(null);
 
     const isMobile = useDetectMobile();
 
-    const minSwipeDistance = 50;
     const numOfItems = children?.length ?? 1;
 
     useEffect(() => {
@@ -38,8 +47,14 @@ const ScrollableSectionV3 = forwardRef(
     const scrollToRight = (e) => {
       e?.target?.blur();
 
-      if (index + itemsPerView < numOfItems) {
-        setIndex(index + itemsPerView);
+      const nextIndex = index + itemsPerView;
+
+      if (nextIndex < numOfItems) {
+        setIndex(nextIndex);
+      }
+
+      if (nextIndex + itemsPerView >= numOfItems && hasNextPage) {
+        handleFetchNextPage();
       }
     };
 
@@ -83,6 +98,9 @@ const ScrollableSectionV3 = forwardRef(
           })}
         >
           {visibleItems}
+          {isMobile && hasNextPage && (
+            <InfiniteScrollEndElement onIsVisible={handleFetchNextPage} />
+          )}
         </Content>
         {showNavigation && numOfItems > itemsPerView && !isMobile && (
           <div className="scrollable-section__navigation">
@@ -116,6 +134,7 @@ ScrollableSectionV3.propTypes = {
   title: PropTypes.string,
   numOfSlides: PropTypes.number,
   numOfSlidesForMobile: PropTypes.number,
+  handleFetchNextPage: PropTypes.func,
   showNavigation: PropTypes.bool,
 };
 
