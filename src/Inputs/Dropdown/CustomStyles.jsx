@@ -54,7 +54,7 @@ const customStyles = {
     fontSize: s.theme.typography.component[s.selectProps.size].fontSize,
     lineHeight: s.theme.typography.component[s.selectProps.size].lineHeight,
     boxShadow:
-      "0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)",
+      "none",
     outline: s.isFocused ? getOutline(s.theme) : "none",
     outlineOffset: s.isFocused ? s.theme.palette.outline.offset : "0",
     "&:hover": {
