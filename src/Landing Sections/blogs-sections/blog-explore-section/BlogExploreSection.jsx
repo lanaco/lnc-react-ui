@@ -59,6 +59,7 @@ const BlogExploreSection = forwardRef(
       handleSearch = () => {},
       onBookmark = () => {},
       bookmarkComponent = <> </>,
+      componentName,
     },
     ref
   ) => {
@@ -71,7 +72,7 @@ const BlogExploreSection = forwardRef(
     };
 
     return (
-      <Container id="landing__container">
+      <Container ref={ref} id="landing__container">
         <div className="landing__main-content">
           {mainTitle && <div className="main-content__title">{mainTitle}</div>}
           {tags && (
@@ -128,6 +129,7 @@ const BlogExploreSection = forwardRef(
                 // onBookmark={handleBookmarkBlog}
                 onBookmark={onBookmark}
                 bookmarkComponent={bookmarkComponent}
+                componentName={componentName}
               />
             )}
             <div className="main-content__divider"></div>
@@ -141,6 +143,7 @@ const BlogExploreSection = forwardRef(
                 isLoading={productsLoading}
                 getImage={getProductImageUrl}
                 isHighlight={true}
+                componentName={componentName}
               />
             )}
             <div className="main-content__divider"></div>
@@ -156,6 +159,7 @@ const BlogExploreSection = forwardRef(
                 // onBookmark={handleBookmarkBlog}
                 onBookmark={onBookmark}
                 bookmarkComponent={bookmarkComponent}
+                componentName={componentName}
               />
             )}
           </div>

@@ -9,7 +9,7 @@ import { TagsContainer } from "./style";
 const SearchSectionTags = forwardRef(
   ({ tags = [], selectedTagCode = null, onSelectTag = () => {} }, ref) => {
     return (
-      <TagsContainer>
+      <TagsContainer ref={ref}>
         {tags?.map((tag, idx) => (
           <Chip
             key={`search-section-tag__${idx + 1}`}

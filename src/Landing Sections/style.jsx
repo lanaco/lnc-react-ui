@@ -68,6 +68,10 @@ export const TitleWithOptionsSectionWrapper = styled.div`
       }
     }
 
+    & .button-link {
+      white-space: nowrap;
+    }
+
     & i {
       font-size: 1.5rem;
       color: var(--primary-500, #f59e0b);
@@ -77,6 +81,7 @@ export const TitleWithOptionsSectionWrapper = styled.div`
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     & .regular-title {
       font-size: 1.375rem;
+      padding-bottom: 0.5rem;
     }
   }
 `;

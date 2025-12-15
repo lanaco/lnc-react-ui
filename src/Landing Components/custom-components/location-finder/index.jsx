@@ -46,7 +46,7 @@ const LocationFinder = forwardRef(
     };
 
     return (
-      <Wrapper className="location-finder">
+      <Wrapper ref={ref} className="location-finder">
         <ContentWrapper>
           <img src={MapImage} />
           {isMobile === true && (

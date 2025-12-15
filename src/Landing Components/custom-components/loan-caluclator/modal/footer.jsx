@@ -6,7 +6,7 @@ import { FooterContainer } from "./style";
 const LoanCalculatorModalFooter = forwardRef(
   ({ footerTitleText = "Close", handleClick = () => {} }, ref) => {
     return (
-      <FooterContainer className="loan-calculator__modal-footer">
+      <FooterContainer ref={ref} className="loan-calculator__modal-footer">
         <Button
           text={footerTitleText}
           btnType="basic"

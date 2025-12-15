@@ -5,9 +5,14 @@ import Icon from "../../../General/Icon/Icon";
 import { TagWrapper } from "./style";
 
 const FieldOfInterestsWithTagsCardTag = forwardRef(
-  ({ name, isActive, icon, onSelectCard = () => {} }, ref) => {
+  ({ name, isActive, activeColor, icon, onSelectCard = () => {} }, ref) => {
     return (
-      <TagWrapper className={isActive ? "active" : ""} onClick={onSelectCard}>
+      <TagWrapper
+        ref={ref}
+        className={isActive ? "active" : ""}
+        activeColor={activeColor}
+        onClick={onSelectCard}
+      >
         {isDefinedNotEmptyString(icon) && (
           <Icon icon={icon} className="wrapper__icon" />
         )}

@@ -151,6 +151,10 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
+          "src/Landing Sections/products-sections/detailed-products-infinitive-section/DetailedProductsInfinitiveSection.jsx"
+        ),
+        resolve(
+          __dirname,
           "src/Landing Sections/products-sections/products-with-banner-section/ProductsWithBannerSection.jsx"
         ),
         resolve(

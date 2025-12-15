@@ -24,6 +24,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
     freeText,
     onBookmark = () => {},
     bookmarkComponent,
+    componentName,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -47,8 +48,12 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
                   isSponsored={x?.isSponsored}
-                  onSelectCard={() =>
-                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  onSelectCard={(e, cardRef) =>
+                    onSelectCard({
+                      uuid: x?.uuid,
+                      nameSlug: x?.nameSlug,
+                      cardRef,
+                    })
                   }
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
@@ -57,6 +62,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   bookmarkComponent={bookmarkComponent}
                   bookmarked={x?.bookmarked}
                   bookmarkLists={x?.bookmarkLists}
+                  metadata={{ name: componentName, accessor: x?.accessor }}
                 />
               ))
           : items
@@ -73,8 +79,12 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   uuid={x?.uuid}
                   location={x?.location}
                   isSponsored={x?.isSponsored}
-                  onSelectCard={() =>
-                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  onSelectCard={(e, cardRef) =>
+                    onSelectCard({
+                      uuid: x?.uuid,
+                      nameSlug: x?.nameSlug,
+                      cardRef,
+                    })
                   }
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
@@ -83,6 +93,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   bookmarkComponent={bookmarkComponent}
                   bookmarked={x?.bookmarked}
                   bookmarkLists={x?.bookmarkLists}
+                  metadata={{ name: componentName, accessor: x?.accessor }}
                 />
               ))}
       </>

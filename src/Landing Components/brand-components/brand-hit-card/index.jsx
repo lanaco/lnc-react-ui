@@ -6,7 +6,7 @@ import { Wrapper } from "./style";
 const BrandHitCard = forwardRef(
   ({ imageComponent, image, onSelectCard }, ref) => {
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

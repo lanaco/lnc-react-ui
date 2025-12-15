@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, memo, useMemo } from "react";
 
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
@@ -22,6 +24,7 @@ const BlogCardsSponsoredSection = forwardRef(
       onSelectCard = () => {},
       isLoading = false,
       getImage = () => {},
+      componentName,
     },
     ref
   ) => {
@@ -40,14 +43,15 @@ const BlogCardsSponsoredSection = forwardRef(
             numberOfLikes={x?.numberOfLikes}
             numberOfComments={x?.numberOfComments}
             isSponsored={x?.isSponsored}
-            onSelectCard={() => onSelectCard?.(x)}
+            onSelectCard={(e, cardRef) => onSelectCard?.(x, cardRef)}
             imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
+            metadata={{ name: componentName, accessor: x?.accessor }}
           />
         ));
     }, [items]);
 
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         <div className="wrapper__heading">
           <div className="wrapper__title">
             {title && (

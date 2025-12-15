@@ -1,4 +1,6 @@
-import { forwardRef } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+import { forwardRef, useRef } from "react";
 
 import Icon from "../../../General/Icon/Icon";
 import {
@@ -23,11 +25,20 @@ const BlogCardSponsored = forwardRef(
       numberOfComments = 0,
       isSponsored = false,
       onSelectCard = () => {},
+      metadata,
     },
     ref
   ) => {
+    const cardRef = useRef();
+
     return (
-      <Wrapper isSponsored={isSponsored} onClick={onSelectCard}>
+      <Wrapper
+        ref={cardRef}
+        isSponsored={isSponsored}
+        data-accessor={metadata?.accessor}
+        name={metadata?.name}
+        onClick={(e) => onSelectCard(e, cardRef)}
+      >
         {isSponsored && (
           <div className="wrapper__sponsored">
             <Icon icon=" mng-lnc-paw" sizeInUnits="1.5rem" />

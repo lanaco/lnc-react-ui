@@ -11,7 +11,7 @@ const AdBannerSection = forwardRef(
     const isMobile = useDetectMobile();
 
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         <AdBanner
           image={image}
           imageForMobile={imageForMobile}

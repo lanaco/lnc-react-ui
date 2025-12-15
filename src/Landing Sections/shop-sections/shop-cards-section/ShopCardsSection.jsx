@@ -25,6 +25,8 @@ const ShopCardsSection = forwardRef(
       getProductImage = () => {},
       hideProducts = false,
       showRating = true,
+      gridView = false,
+      componentName,
     },
     ref
   ) => {
@@ -33,6 +35,7 @@ const ShopCardsSection = forwardRef(
         ref={ref}
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
+        gridView={gridView}
       >
         <div className="wrapper__heading">
           <div className="wrapper__title">
@@ -48,7 +51,7 @@ const ShopCardsSection = forwardRef(
                 color="neutral"
                 borderRadius="curved"
                 btnType="tinted"
-                className="title__action"
+                className={`title__action ${gridView ? "grid" : ""}`}
                 onClick={onButtonAction}
               />
             )}
@@ -68,17 +71,30 @@ const ShopCardsSection = forwardRef(
                   reviewCount={card?.reviewCount}
                   products={card?.products}
                   imageComponent={card?.imageComponent}
-                  onSelectCard={() => onSelectCard(card?.uuid)}
+                  onSelectCard={(e, shopCardRef) =>
+                    onSelectCard(card?.uuid, shopCardRef)
+                  }
                   image={getImage(card?.profileImage, card?.uuid) || null}
                   getProductImage={getProductImage}
                   canAcceptPayments={card?.canAcceptPayments}
                   hideProducts={hideProducts}
+                  metadata={{ name: componentName, accessor: card?.accessor }}
                 />
               ))
             : Array.from("1234")?.map((_, idx) => (
                 <ShopCardSkeleton key={`shop-card-skeleton__${idx + 1}`} />
               ))}
         </div>
+        {gridView && onButtonAction && (
+          <Button
+            text={buttonText}
+            borderRadius="curved"
+            btnType="basic"
+            color="neutral"
+            className="wrapper__view-all"
+            onClick={onButtonAction}
+          />
+        )}
       </Wrapper>
     );
   }

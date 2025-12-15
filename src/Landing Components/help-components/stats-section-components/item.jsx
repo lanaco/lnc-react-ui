@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 
 import { Container } from "./style";
 
-const StatsSectionItems = forwardRef(({ items = [] }) => {
+const StatsSectionItems = forwardRef(({ items = [] }, ref) => {
   return (
-    <Container>
+    <Container ref={ref}>
       {items?.map((item, idx) => (
         <div key={`stats-section-item__${idx + 1}`} className="section__card">
           <div>

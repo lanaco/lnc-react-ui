@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-empty-pattern */
 /* eslint-disable react/display-name */
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
 import { Wrapper } from "./style";
 import {
   formatPrice,
@@ -25,10 +25,19 @@ const SimpleProductCard = forwardRef((props, ref) => {
     imageComponent,
     negotiableText = "Negotiable",
     freeText = "Free",
+    metadata,
   } = props;
 
+  const productCardRef = useRef();
+
   return (
-    <Wrapper className="simple-product-card" onClick={onSelectCard}>
+    <Wrapper
+      ref={productCardRef}
+      className="simple-product-card"
+      data-accessor={metadata?.accessor}
+      name={metadata?.name}
+      onClick={(e) => onSelectCard(e, productCardRef)}
+    >
       {isDefined(imageComponent) ? (
         imageComponent
       ) : (

@@ -155,13 +155,13 @@ const customStyles = {
         "hover",
         "background"
       ),
-      color:  getColorRgbaValue(
-          s.theme,
-          "Dropdown",
-          s.selectProps.color,
-          "hover",
-          "text"
-        ),
+      color: getColorRgbaValue(
+        s.theme,
+        "Dropdown",
+        s.selectProps.color,
+        "hover",
+        "text"
+      ),
     },
   }),
   multiValue: (p, s) => ({

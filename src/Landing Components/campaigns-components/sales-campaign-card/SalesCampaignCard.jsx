@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import Icon from "../../../General/Icon/Icon";
 import ShopImageWrapper from "../../shop-img-wrapper";
 import ProfileItem from "./ProfileItem";
-import { forwardRef, useState, useEffect } from "react";
+import { forwardRef, useState, useEffect, useRef } from "react";
 
 const calcDaysDifference = (date1, date2) => {
   if (!date1 || !date2) return null;
@@ -20,7 +20,7 @@ const calcDaysDifference = (date1, date2) => {
   const diffMs = date1.getTime() - date2.getTime();
   const dayMs = 24 * 60 * 60 * 1000;
 
-  return diffMs >= 0 ? Math.ceil(diffMs / dayMs) : Math.floor(diffMs / dayMs);
+  return Math.floor(diffMs / dayMs);
 };
 
 const toLocaleDateString = (date) => {
@@ -74,8 +74,11 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     numberOfListings,
     numberOfListingsTextSingular,
     numberOfListingsTextPlural,
+    metadata,
     ...rest
   } = props;
+
+  const cardRef = useRef();
 
   const hasStarted = startDate ? new Date(startDate) <= new Date() : false;
   // const duration = calcDaysDifference(
@@ -145,11 +148,13 @@ const SalesCampaignCard = forwardRef((props, ref) => {
 
   return (
     <Wrapper
-      ref={ref}
+      ref={cardRef}
       theme={theme}
       //   onClick={() => navigate(`/shop/${shopUuid}/campaign/${uuid}`)}
       className={className}
-      onClick={onSelectCard}
+      name={metadata?.name}
+      data-accessor={metadata?.accessor}
+      onClick={(e) => onSelectCard(e, cardRef)}
       {...rest}
     >
       <ImageWrapper theme={theme} onClick={() => onSelect?.()}>

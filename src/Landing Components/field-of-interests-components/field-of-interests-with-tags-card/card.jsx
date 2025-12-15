@@ -13,7 +13,7 @@ const FieldOfInterestsWithTagsCard = forwardRef(
     const { theme } = useTheme();
 
     return (
-      <Wrapper theme={theme} onClick={onSelectCard}>
+      <Wrapper ref={ref} theme={theme} onClick={onSelectCard}>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

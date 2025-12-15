@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.150",
+  "version": "4.0.163",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -116,6 +116,7 @@
     "./ThemeProvider": "./dist/ThemeProvider.js",
     "./MasonryGeneralCardsSection": "./dist/MasonryGeneralCardsSection.js",
     "./DetailedProductsSection": "./dist/DetailedProductsSection.js",
+    "./DetailedProductsInfinitiveSection": "./dist/DetailedProductsInfinitiveSection.js",
     "./ProductsWithBannerSection": "./dist/ProductsWithBannerSection.js",
     "./SimpleProductsSection": "./dist/SimpleProductsSection.js",
     "./UrgentSaleProductsSection": "./dist/UrgentSaleProductsSection.js",

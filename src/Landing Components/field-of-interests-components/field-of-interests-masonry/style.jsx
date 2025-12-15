@@ -86,6 +86,8 @@ export const TagWrapper = styled.div`
   align-items: center;
   gap: 0.75rem;
   height: 100%;
+  max-width: 8rem;
+  min-width: 8rem;
 
   &:hover {
     cursor: pointer;
@@ -118,6 +120,8 @@ export const TagWrapper = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 1.5rem;
+    max-width: 8rem;
+    ${truncateTextInRows(2)}
   }
 
   &.active {
@@ -128,6 +132,8 @@ export const TagWrapper = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    max-width: unset;
+    min-width: unset;
     flex-direction: row;
     align-items: center;
     gap: 0.25rem;
@@ -162,6 +168,7 @@ export const TagWrapper = styled.div`
       font-size: 0.875rem;
       line-height: 1.25rem;
       white-space: nowrap;
+      max-width: unset;
     }
   }
 `;

@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 
 import useDetectMobile from "../../_utils/useDetectMobile";
@@ -20,6 +22,7 @@ const BlogShopCardsSection = forwardRef(
       limit = 4,
       getImage = () => {},
       isHighlight = false,
+      componentName,
     },
     ref
   ) => {
@@ -36,15 +39,16 @@ const BlogShopCardsSection = forwardRef(
             subtitle={x?.shortDescription}
             rating={x?.rating}
             reviewCount={x?.reviewCount}
-            onSelectCard={() => onSelectCard?.(x?.uuid)}
+            onSelectCard={(e, cardRef) => onSelectCard?.(x?.uuid, cardRef)}
             image={getImage(x?.profileImage, x?.uuid) || null}
             hideProducts={true}
+            metadata={{ name: componentName, accessor: x?.accessor }}
           />
         ));
     }, [items]);
 
     return (
-      <Wrapper className={isHighlight ? "highlight" : ""}>
+      <Wrapper ref={ref} className={isHighlight ? "highlight" : ""}>
         <div className="wrapper__grid">
           <SuspenseShopCards
             isLoading={isLoading}

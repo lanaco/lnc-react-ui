@@ -167,7 +167,7 @@ const FaqSectionItems = forwardRef(
     }, [items, isMobile]);
 
     return (
-      <ItemsContainer>
+      <ItemsContainer ref={ref}>
         {isMobile ? (
           showMore ? (
             memoizedItems

@@ -19,6 +19,7 @@ const BannerSectionBasic = forwardRef((props, ref) => {
 
   return (
     <Container
+      ref={ref}
       bgcolor={backgroundColor}
       height={height}
       imgW={imageWidth}

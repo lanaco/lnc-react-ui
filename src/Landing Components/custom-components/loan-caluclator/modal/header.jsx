@@ -6,7 +6,7 @@ import { HeaderContainer } from "./style";
 const LoanCalculatorModalHeader = forwardRef(
   ({ headerTitleText = "Loan calculator", handleClick = () => {} }, ref) => {
     return (
-      <HeaderContainer className="loan-calculator__modal-header">
+      <HeaderContainer ref={ref} className="loan-calculator__modal-header">
         <div className="header__title">{headerTitleText}</div>
         <IconButton
           icon="times"

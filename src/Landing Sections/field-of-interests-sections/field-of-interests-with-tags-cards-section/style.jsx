@@ -51,6 +51,8 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    gap: 1rem;
+
     & .wrapper__tags {
       overflow-x: scroll;
       justify-content: flex-start;

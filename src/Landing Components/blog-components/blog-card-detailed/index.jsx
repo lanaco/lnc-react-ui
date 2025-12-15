@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
 import { BlogTag } from "../../../Landing Sections/style";
 import ProductImageWrapper from "../../product-img-wrapper";
@@ -22,11 +22,20 @@ const BlogCardDetailed = forwardRef((props, ref) => {
     tags,
     onCardClick,
     timeToReadText = "{0} min read",
+    metadata,
   } = props;
+
+  const cardRef = useRef();
 
   return (
     // <BlogCardDetailedSkeleton />
-    <Wrapper ref={ref} className="blog-card" onClick={onCardClick}>
+    <Wrapper
+      ref={cardRef}
+      className="blog-card"
+      data-accessor={metadata?.accessor}
+      name={metadata?.name}
+      onClick={(e) => onCardClick(e, cardRef)}
+    >
       <ProductImageWrapper src={imageUrl} />
       <TextWrapper>
         <div className="info-wr">

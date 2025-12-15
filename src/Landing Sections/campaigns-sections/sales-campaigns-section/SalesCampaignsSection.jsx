@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
@@ -38,6 +39,9 @@ const SalesCampaignsSection = forwardRef(
       itemlessImageUrl,
       itemlessLink,
       handleItemlessLink = () => {},
+      componentName,
+      hasNextPage = false,
+      handleFetchNextPage = () => {},
     },
     ref
   ) => {
@@ -65,7 +69,9 @@ const SalesCampaignsSection = forwardRef(
           startDate={item?.startDate}
           title={item?.name}
           uuid={item?.campaignUuid}
-          onSelectCard={() => onSelectCard(item?.campaignUuid, item?.shopUuid)}
+          onSelectCard={(e, cardRef) =>
+            onSelectCard(item?.campaignUuid, item?.shopUuid, cardRef)
+          }
           onSelectShop={() => onSelectShop(item?.shopUuid)}
           campaignSingleText={campaignSingleText}
           upcomingCampaignText={upcomingCampaignText}
@@ -83,6 +89,7 @@ const SalesCampaignsSection = forwardRef(
           numberOfListings={item?.numberOfListings}
           numberOfListingsTextSingular={numberOfListingsTextSingular}
           numberOfListingsTextPlural={numberOfListingsTextPlural}
+          metadata={{ name: componentName, accessor: item?.accessor }}
         />
       ));
 
@@ -90,6 +97,7 @@ const SalesCampaignsSection = forwardRef(
         return [
           ...components,
           <ItemlessBanner
+            key={`itemless-campaign-section-banner`}
             imageUrl={itemlessImageUrl}
             className="campaign-item"
             handleClick={handleItemlessLink}
@@ -112,6 +120,8 @@ const SalesCampaignsSection = forwardRef(
           title={title}
           numOfSlides={numOfSlides}
           showNavigation={showNavigation}
+          hasNextPage={hasNextPage}
+          handleFetchNextPage={handleFetchNextPage}
         >
           {memoizedItems}
         </ScrollableSectionV3>

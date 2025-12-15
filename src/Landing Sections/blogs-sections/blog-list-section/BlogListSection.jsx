@@ -19,6 +19,7 @@ const BlogListSection = forwardRef(
       getImage = () => {},
       isSeparated = true,
       bookmarkComponent = <></>,
+      componentName,
     },
     ref
   ) => {
@@ -37,17 +38,18 @@ const BlogListSection = forwardRef(
           numberOfComments={x?.numberOfComments}
           isSponsored={x?.isSponsored}
           isBookmarked={x?.isBookmarked}
-          onSelectCard={() => onSelectCard?.(x)}
+          onSelectCard={(e, cardRef) => onSelectCard?.(x, cardRef)}
           onShare={() => onShare?.(x)}
           onBookmark={onBookmark}
           imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
           bookmarkComponent={bookmarkComponent}
+          metadata={{ name: componentName, accessor: x?.accessor }}
         />
       ));
     }, [items]);
 
     return (
-      <Wrapper className={isSeparated ? "separated" : ""}>
+      <Wrapper ref={ref} className={isSeparated ? "separated" : ""}>
         <SuspenseBlogLarge
           isLoading={isLoading}
           limit={5}

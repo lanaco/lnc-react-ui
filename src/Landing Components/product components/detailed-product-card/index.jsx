@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-empty-pattern */
 /* eslint-disable react/display-name */
-import { cloneElement, forwardRef, useState } from "react";
+import { cloneElement, forwardRef, useEffect, useRef, useState } from "react";
 import { Wrapper, ImageWrapper, TagsPopoverContent } from "./style";
 import {
   formatPrice,
@@ -56,6 +56,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     bookmarkComponent,
     bookmarked,
     bookmarkLists,
+    metadata,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -102,10 +103,58 @@ const DetailedProductCard = forwardRef((props, ref) => {
     setPopover(false);
   };
 
+  const productCardRef = useRef(null);
+  const tagRefs = useRef([]);
+  const [visibleNumOfTags, setVisibleNumOfTags] = useState(tags?.length);
+
+  const calculateVisible = () => {
+    if (!productCardRef?.current || tagRefs?.current?.length === 0) return;
+
+    if (isMobile) {
+      setVisibleNumOfTags(tags?.length);
+
+      return;
+    }
+
+    const productCardWidth = productCardRef?.current?.offsetWidth;
+
+    let totalWidth = 0;
+    let numOfTags = 0;
+
+    for (let i = 0; i < tags?.length; i++) {
+      const tagWidth = tagRefs?.current[i]?.offsetWidth || 0;
+      const tmpTotalWidth = totalWidth + tagWidth + 4;
+
+      if (tmpTotalWidth <= productCardWidth) {
+        totalWidth += tmpTotalWidth;
+        numOfTags++;
+      } else {
+        break;
+      }
+    }
+
+    setVisibleNumOfTags(numOfTags);
+  };
+
+  useEffect(() => {
+    const parent = productCardRef?.current;
+    if (!parent) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      calculateVisible();
+    });
+
+    resizeObserver.observe(parent);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [tags, isMobile]);
+
   const renderTags = () => {
     return (
       <div className="tags-popover__trigger">
-        {tags?.map((x, idx) => {
+        {tags?.slice(0, visibleNumOfTags)?.map((x, idx) => {
           const icon =
             AttributeTags?.[x?.code]?.icon ??
             AttributeTags?.default?.icon ??
@@ -119,17 +168,9 @@ const DetailedProductCard = forwardRef((props, ref) => {
           const value = x?.value ?? x?.multiOptions?.[0] ?? "";
           const text = [value, unit].filter(Boolean).join(" ");
 
-          if (isMobile) {
-            return (
-              <div className="tag-mobile">
-                {text}
-                {idx < tags?.length - 1 ? " · " : ""}
-              </div>
-            );
-          }
-
           return (
             <Badge
+              ref={(el) => (tagRefs.current[idx] = el)}
               key={`detailed-products-section-tag__${idx + 1}`}
               className="tag"
             >
@@ -167,18 +208,6 @@ const DetailedProductCard = forwardRef((props, ref) => {
   };
 
   const renderOtherTags = () => {
-    if (isMobile) {
-      const otherTags = [condition, quantity, trade];
-      return otherTags
-        ?.filter((x) => isDefinedNotEmptyString(x))
-        ?.map((x, idx, arr) => (
-          <div className="tag-mobile">
-            {x}
-            {idx < arr?.length - 1 ? " · " : ""}
-          </div>
-        ));
-    }
-
     return (
       <>
         {condition && (
@@ -210,7 +239,13 @@ const DetailedProductCard = forwardRef((props, ref) => {
 
   return (
     // <LandingPageProductCardSkeleton />
-    <Wrapper className="product-card" onClick={onSelectCard}>
+    <Wrapper
+      ref={productCardRef}
+      className="product-card"
+      data-accessor={metadata?.accessor}
+      name={metadata?.name}
+      onClick={(e) => onSelectCard(e, productCardRef)}
+    >
       <ImageWrapper className="product-image-wrapper">
         <ClonedBookmarkComponent />
         {isDefined(imageComponent) ? (

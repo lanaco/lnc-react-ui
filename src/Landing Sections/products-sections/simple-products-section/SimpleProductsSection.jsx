@@ -24,6 +24,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
     getImage = () => {},
     negotiableText,
     freeText,
+    componentName,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -43,12 +44,17 @@ const SimpleProductsSection = forwardRef((props, ref) => {
                   currency={x?.currency}
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
-                  onSelectCard={() =>
-                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  onSelectCard={(e, cardRef) =>
+                    onSelectCard({
+                      uuid: x?.uuid,
+                      nameSlug: x?.nameSlug,
+                      cardRef,
+                    })
                   }
                   image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
                   freeText={freeText}
+                  metadata={{ name: componentName, accessor: x?.accessor }}
                 />
               ))
           : items
@@ -63,12 +69,17 @@ const SimpleProductsSection = forwardRef((props, ref) => {
                   currency={x?.currency}
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
-                  onSelectCard={() =>
-                    onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug })
+                  onSelectCard={(e, cardRef) =>
+                    onSelectCard({
+                      uuid: x?.uuid,
+                      nameSlug: x?.nameSlug,
+                      cardRef,
+                    })
                   }
                   image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   negotiableText={negotiableText}
                   freeText={freeText}
+                  metadata={{ name: componentName, accessor: x?.accessor }}
                 />
               ))}
       </>
