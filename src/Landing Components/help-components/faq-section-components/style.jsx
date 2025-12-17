@@ -10,7 +10,7 @@ export const TagsContainer = styled.div`
 
   & .tags__item {
     color: var(--gray-900, #0c1520);
-    background: var(--gray-100, #f3f6fb);
+    background: var(--neutral-95004, rgba(20, 22, 26, 0.04));
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
@@ -31,6 +31,7 @@ export const TagsContainer = styled.div`
 
     &:hover {
       background: var(--gray-200, #e4e9f0);
+      background: var(--neutral-95008, rgba(20, 22, 26, 0.08));
     }
 
     &:focus {
