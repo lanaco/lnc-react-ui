@@ -20,16 +20,42 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
+    max-width: 50rem;
 
     border-right: 1px solid var(--gray-200, #dddfe4);
     padding-right: 2rem;
 
     & .section__tags {
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      width: 100%;
+      overflow-x: hidden;
+      white-space: nowrap;
     }
 
     & .pagination {
       padding: 1.25rem 0;
+    }
+
+    & .main-content__heading {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      & .main-content__tags-nav {
+        display: flex;
+        gap: 0.25rem;
+
+        & .main-content__tag-nav {
+          &:not(:disabled) {
+            color: var(--gray-950, #14161a);
+            background: var(--neutral-95004, rgba(20, 22, 26, 0.04));
+
+            &:hover {
+              background: var(--neutral-95008, rgba(20, 22, 26, 0.08));
+            }
+          }
+        }
+      }
     }
 
     & .main-content__title {
@@ -42,7 +68,11 @@ export const Container = styled.div`
 
     & .tags__item {
       &:not(.active) {
-        background: var(--neutral-9504, rgba(20, 22, 26, 0.04));
+        background: var(--neutral-95004, rgba(20, 22, 26, 0.04));
+
+        &:hover {
+          background: var(--neutral-95008, rgba(20, 22, 26, 0.08));
+        }
       }
     }
 
@@ -199,11 +229,14 @@ export const Container = styled.div`
 
     & .landing__main-content {
       width: 100%;
+      max-width: 100%;
       padding-right: 0;
       border-right: none;
 
       & .section__tags {
-        flex-wrap: nowrap;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
       }
 
       & .main-content__actions {
@@ -211,6 +244,8 @@ export const Container = styled.div`
       }
 
       & .main-content__items {
+        width: 100%;
+
         & .main-content__divider {
           display: none;
         }

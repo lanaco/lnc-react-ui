@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/display-name */
-import { forwardRef, Fragment } from "react";
+import { forwardRef, Fragment, useEffect, useRef, useState } from "react";
 
 import PropTypes from "prop-types";
 
+import useDetectMobile from "../../../_utils/useDetectMobile";
 import { formatLocaleDateString } from "../../../_utils/utils";
 import TextInput from "../../../Basic Inputs/TextInput/TextInput";
 import Icon from "../../../General/Icon/Icon";
 import Link from "../../../General/Link/Link";
+import IconButton from "../../../General/IconButton/IconButton";
 import DropdownMenu from "../../../Utility/DropdownMenu/DropdownMenu";
 import DropdownItem from "../../../Utility/DropdownMenu/DropdownItem";
 import BlogExploreSectionTags from "../../../Landing Components/help-components/faq-section-components/tag";
@@ -45,7 +47,7 @@ const BlogExploreSection = forwardRef(
       showAllButtonLink,
       showAllButtonText = "Show all products",
       viewAllButtonText = "View all (11)",
-      viewAllButtonLink,
+      // viewAllButtonLink,
       handleViewAll = () => {},
       handleShowAll = () => {},
       handleSelectProduct = () => {},
@@ -58,7 +60,7 @@ const BlogExploreSection = forwardRef(
       perPageOptions,
       handleSearch = () => {},
       onBookmark = () => {},
-      bookmarkComponent = <> </>,
+      bookmarkComponent = <></>,
       componentName,
     },
     ref
@@ -71,12 +73,85 @@ const BlogExploreSection = forwardRef(
       handlePage?.(newPage);
     };
 
+    const tagsRef = useRef(null);
+
+    const isMobile = useDetectMobile();
+
+    const [tagsElementInfo, setTagsElementInfo] = useState({
+      arrowsVisible: false,
+      leftArrowDisabled: false,
+      rightArrowDisabled: false,
+    });
+
+    useEffect(() => {
+      const tagsContent = tagsRef?.current;
+
+      if (!tagsContent) return;
+
+      const updateTagsElementInfo = () => {
+        const maxScroll = tagsContent.scrollWidth - tagsContent.clientWidth;
+
+        setTagsElementInfo((prev) => ({
+          ...prev,
+          arrowsVisible: tagsContent.clientWidth < tagsContent.scrollWidth,
+          leftArrowDisabled: tagsContent.scrollLeft <= 0,
+          rightArrowDisabled: tagsContent.scrollLeft >= maxScroll,
+        }));
+      };
+
+      const observer = new ResizeObserver(updateTagsElementInfo);
+
+      observer.observe(tagsContent);
+
+      updateTagsElementInfo();
+
+      tagsContent.addEventListener("scroll", updateTagsElementInfo);
+
+      return () => {
+        observer.disconnect();
+        tagsContent.removeEventListener("scroll", updateTagsElementInfo);
+      };
+    }, []);
+
+    const handleRightNavigate = () => {
+      tagsRef?.current?.scrollBy({ left: 100, behavior: "smooth" });
+    };
+
+    const handleLeftNavigate = () => {
+      tagsRef?.current?.scrollBy({ left: -100, behavior: "smooth" });
+    };
+
     return (
       <Container ref={ref} id="landing__container">
         <div className="landing__main-content">
-          {mainTitle && <div className="main-content__title">{mainTitle}</div>}
+          <div className="main-content__heading">
+            <div className="main-content__title">{mainTitle}</div>
+            {!isMobile && tagsElementInfo?.arrowsVisible && (
+              <div className="main-content__tags-nav">
+                <IconButton
+                  icon="chevron-left"
+                  borderRadius="curved"
+                  btnType="tinted"
+                  color="neutral"
+                  disabled={tagsElementInfo?.leftArrowDisabled}
+                  className="main-content__tag-nav"
+                  onClick={handleLeftNavigate}
+                />
+                <IconButton
+                  icon="chevron-right"
+                  borderRadius="curved"
+                  btnType="tinted"
+                  color="neutral"
+                  disabled={tagsElementInfo?.rightArrowDisabled}
+                  className="main-content__tag-nav"
+                  onClick={handleRightNavigate}
+                />
+              </div>
+            )}
+          </div>
           {tags && (
             <BlogExploreSectionTags
+              ref={tagsRef}
               tags={tags}
               allTagText={allTagText}
               selectedTagCode={selectedTag}
