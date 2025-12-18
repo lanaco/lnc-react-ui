@@ -25,6 +25,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
     onBookmark = () => {},
     bookmarkComponent,
     componentName,
+    sponsoredText,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -40,14 +41,16 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
               ?.map((x, index) => (
                 <MemoizedProductCard
                   key={index}
-                  title={x?.name}
+                  name={x?.name}
                   price={x?.price}
+                  sellingPrice={x?.sellingPrice}
                   isFree={x?.isFree}
                   isNegotiable={x?.isNegotiable}
                   currency={x?.currency}
+                  categoryCode={x?.categoryCode}
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
-                  isSponsored={x?.isSponsored}
+                  sponsored={x?.sponsored}
                   onSelectCard={(e, cardRef) =>
                     onSelectCard({
                       uuid: x?.uuid,
@@ -55,7 +58,9 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                       cardRef,
                     })
                   }
+                  image={x?.image}
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                  imageComponent={x?.imageComponent}
                   negotiableText={negotiableText}
                   freeText={freeText}
                   onBookmark={onBookmark}
@@ -63,39 +68,51 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   bookmarked={x?.bookmarked}
                   bookmarkLists={x?.bookmarkLists}
                   metadata={{ name: componentName, accessor: x?.accessor }}
+                  tags={x?.tags}
+                  condition={x?.condition}
+                  quantity={x?.quantity}
+                  trade={x?.trade}
+                  sponsoredText={sponsoredText}
                 />
               ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <MemoizedProductCard
-                  key={index}
-                  title={x?.name}
-                  price={x?.price}
-                  isFree={x?.isFree}
-                  isNegotiable={x?.isNegotiable}
-                  currency={x?.currency}
-                  sellerUuid={x?.sellerUuid}
-                  uuid={x?.uuid}
-                  location={x?.location}
-                  isSponsored={x?.isSponsored}
-                  onSelectCard={(e, cardRef) =>
-                    onSelectCard({
-                      uuid: x?.uuid,
-                      nameSlug: x?.nameSlug,
-                      cardRef,
-                    })
-                  }
-                  imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
-                  negotiableText={negotiableText}
-                  freeText={freeText}
-                  onBookmark={onBookmark}
-                  bookmarkComponent={bookmarkComponent}
-                  bookmarked={x?.bookmarked}
-                  bookmarkLists={x?.bookmarkLists}
-                  metadata={{ name: componentName, accessor: x?.accessor }}
-                />
-              ))}
+          : items?.slice(0, limit).map((x, index) => (
+              <MemoizedProductCard
+                key={index}
+                name={x?.name}
+                price={x?.price}
+                sellingPrice={x?.sellingPrice}
+                isFree={x?.isFree}
+                isNegotiable={x?.isNegotiable}
+                currency={x?.currency}
+                categoryCode={x?.categoryCode}
+                sellerUuid={x?.sellerUuid}
+                uuid={x?.uuid}
+                location={x?.location}
+                sponsored={x?.sponsored}
+                onSelectCard={(e, cardRef) =>
+                  onSelectCard({
+                    uuid: x?.uuid,
+                    nameSlug: x?.nameSlug,
+                    cardRef,
+                  })
+                }
+                image={x?.image}
+                imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                imageComponent={x?.imageComponent}
+                negotiableText={negotiableText}
+                freeText={freeText}
+                onBookmark={onBookmark}
+                bookmarkComponent={bookmarkComponent}
+                bookmarked={x?.bookmarked}
+                bookmarkLists={x?.bookmarkLists}
+                metadata={{ name: componentName, accessor: x?.accessor }}
+                tags={x?.tags}
+                condition={x?.condition}
+                quantity={x?.quantity}
+                trade={x?.trade}
+                sponsoredText={sponsoredText}
+              />
+            ))}
       </>
     );
   }, [items, isMobile, limit, limitMobile, showAll]);
