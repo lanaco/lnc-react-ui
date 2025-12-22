@@ -14,32 +14,38 @@ export const Wrapper = styled.div`
   border-radius: 0.75rem;
   border: 1px solid var(--gray-95008, #14161a14);
   overflow: hidden;
-  min-height: 21.5625rem;
+  min-height: 23rem;
   cursor: pointer;
-  &:hover {
+  height: 100%;
+
+  & .blog-card-content {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-top: 1px solid var(--gray-95008, #14161a14);
+    gap: 1.25rem;
   }
 
   & img {
-    max-height: 11.25rem;
-    min-height: 11.25rem;
+    max-height: 12.5rem;
+    min-height: 12.5rem;
     object-fit: cover;
     width: 100%;
   }
 
   & .skeleton-img {
     width: 100%;
-    max-height: 11.25rem;
-    min-height: 11.25rem;
+    max-height: 12.5rem;
+    min-height: 12.5rem;
     background-color: ${linearGradientAnimation("-90deg")};
   }
 
   & .tags-wr {
-    margin-top: auto;
     display: flex;
     flex-wrap: wrap;
-
     gap: 0.5rem;
-    padding: 0 1rem 1rem 1rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
@@ -49,12 +55,10 @@ export const Wrapper = styled.div`
 `;
 
 export const TextWrapper = styled.div`
-  padding: 1rem 1rem 0 1rem;
   display: flex;
   flex-direction: column;
   gap: 0;
   color: var(--gray-950, #14161a);
-  border-top: 1px solid var(--gray-95008, #14161a14);
 
   & .text-wr-title {
     font-weight: 600;

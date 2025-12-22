@@ -64,11 +64,6 @@ export const GridWrapper = styled.div`
     grid-template-columns: repeat(2, 1fr);
     padding: 2rem 1.25rem;
     gap: 1.19rem;
-  }
-
-  @media (max-width: ${SMALL_MOBILE_SIZE_PX + "px"}) {
-    display: flex;
-    flex-direction: column;
 
     & .product-card {
       & img {
@@ -76,5 +71,10 @@ export const GridWrapper = styled.div`
         height: 100%;
       }
     }
+  }
+
+  @media (max-width: ${SMALL_MOBILE_SIZE_PX + "px"}) {
+    display: flex;
+    flex-direction: column;
   }
 `;
