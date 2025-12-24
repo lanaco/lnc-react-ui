@@ -57,7 +57,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     bookmarked,
     bookmarkLists,
     metadata,
-    sellerName
+    sellerName,
   } = props;
 
   const isMobile = useDetectMobile();
