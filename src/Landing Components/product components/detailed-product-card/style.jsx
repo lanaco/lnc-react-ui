@@ -229,24 +229,22 @@ export const ImageWrapper = styled.div`
     align-items: center;
     justify-content: center;
 
-    & button {
-      width: 2.25rem;
-      height: 2.25rem;
-      border-radius: ${(p) => getBorderRadiusValueWithUnits(p.theme, "curved")};
-      border: 1px solid var(--gray-95008);
-      background-color: white;
-      color: var(--gray-950);
-      transition: transform 0.2s ease;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: ${(p) => getBorderRadiusValueWithUnits(p.theme, "curved")};
+    border: 1px solid var(--gray-95008);
+    background-color: white;
+    color: var(--gray-950);
+    transition: transform 0.2s ease;
 
-      &:hover {
-        transform: scale(1.05);
-      }
+    &:hover {
+      transform: scale(1.05);
+    }
 
-      i {
-        color: #14161a;
-        font-size: 1.1rem;
-        line-height: 1;
-      }
+    i {
+      color: #14161a;
+      font-size: 1.1rem;
+      line-height: 1;
     }
   }
 
