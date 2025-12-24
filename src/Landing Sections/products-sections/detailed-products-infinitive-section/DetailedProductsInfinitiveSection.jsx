@@ -68,6 +68,10 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         bookmarkLists={x?.bookmarkLists}
         metadata={{ accessor: x?.accessor, name: componentName }}
         sellerName={x?.sellerName}
+        forCart={x?.forCart}
+        forOrder={x?.forOrder}
+        contactSeller={x?.contactSeller}
+        hasVariants={x?.hasVariants}
       />
     ));
   }, [items]);
