@@ -60,6 +60,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                     cardRef,
                   })
                 }
+                sellerName={x?.sellerName}
                 imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 isFree={x?.isFree}
                 isNegotiable={x?.isNegotiable}
@@ -116,6 +117,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                   bookmarked={x?.bookmarked}
                   bookmarkLists={x?.bookmarkLists}
                   metadata={{ accessor: x?.accessor, name: componentName }}
+                  sellerName={x?.sellerName}
                 />
               ))}
       </>

@@ -14,6 +14,14 @@ export const Wrapper = styled.div`
   overflow: hidden;
   width: 100%;
 
+  & .seller {
+    text-transform: uppercase;
+    ${truncateText()}
+    color: var(--gray-500);
+    font-size: 0.625rem;
+    font-weight: 400;
+  }
+
   & .wrapper-card-1 {
     display: flex;
     flex-direction: column;
