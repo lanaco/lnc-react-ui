@@ -41,6 +41,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
               ?.map((x, index) => (
                 <MemoizedProductCard
                   key={index}
+                  sellerName={x?.sellerName}
                   name={x?.name}
                   price={x?.price}
                   sellingPrice={x?.sellingPrice}
@@ -111,6 +112,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                 quantity={x?.quantity}
                 trade={x?.trade}
                 sponsoredText={sponsoredText}
+                sellerName={x?.sellerName}
               />
             ))}
       </>

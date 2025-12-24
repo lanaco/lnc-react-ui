@@ -57,6 +57,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     bookmarked,
     bookmarkLists,
     metadata,
+    sellerName
   } = props;
 
   const isMobile = useDetectMobile();
@@ -255,6 +256,9 @@ const DetailedProductCard = forwardRef((props, ref) => {
         )}
       </ImageWrapper>
       <div className="wrapper-card-1">
+        <div className="seller" title={sellerName}>
+          {sellerName}
+        </div>
         <div className="card-title">{name}</div>
       </div>
       <div className="wrapper-card-3">
