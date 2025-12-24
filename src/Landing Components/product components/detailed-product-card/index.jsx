@@ -32,6 +32,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 const DetailedProductCard = forwardRef((props, ref) => {
   const {
     uuid,
+    sellerUuid,
     name,
     price = 0,
     sellingPrice,
@@ -51,13 +52,17 @@ const DetailedProductCard = forwardRef((props, ref) => {
     quantity,
     trade,
     sponsoredText,
+    forCart,
+    forOrder,
+    contactSeller,
+    hasVariants,
 
     onBookmark = () => {},
     bookmarkComponent,
     bookmarked,
     bookmarkLists,
     metadata,
-    sellerName
+    sellerName,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -74,6 +79,14 @@ const DetailedProductCard = forwardRef((props, ref) => {
       onAddToBookmark: () => onBookmark(true, uuid),
       onRemoveFromBookmark: () => onBookmark(false, uuid),
       bookmarkedUuidList: bookmarkLists,
+
+      sellerUuid,
+
+      handleBookmarking: onBookmark,
+      forCart,
+      forOrder,
+      contactSeller,
+      hasVariants,
     });
 
     return cloneElement(wrapper, undefined, clonedChild);
