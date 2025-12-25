@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 import { truncateTextInRows } from "../../../_utils/utils";
-import { linearGradientAnimation } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -35,13 +34,6 @@ export const Wrapper = styled.div`
     width: 100%;
   }
 
-  & .skeleton-img {
-    width: 100%;
-    max-height: 12.5rem;
-    min-height: 12.5rem;
-    background-color: ${linearGradientAnimation("-90deg")};
-  }
-
   & .tags-wr {
     display: flex;
     flex-wrap: wrap;
@@ -63,18 +55,6 @@ export const TextWrapper = styled.div`
   & .text-wr-title {
     font-weight: 600;
     font-size: 1rem;
-  }
-
-  & .info-wr-skeleton {
-    background-color: ${linearGradientAnimation("-90deg")};
-    height: 1rem;
-    width: 100%;
-  }
-
-  & .skeleton-title {
-    background-color: ${linearGradientAnimation("-90deg")};
-    height: 1.5rem;
-    width: 70%;
   }
 
   & .text-wr {

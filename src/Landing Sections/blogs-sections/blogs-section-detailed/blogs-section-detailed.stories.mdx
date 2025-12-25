@@ -13,8 +13,9 @@ export const TemplateDefault = (args) => (
   <BlogsSectionDetailed
     title="Mungos inspires you"
     buttonText="View all"
+    buttonLink="/"
+    isLoading={false}
     onButtonAction={(card) => window.open("https://google.com", "_blank", "noopener,noreferrer")}
-
     items={[
       {
         title: "Lorem ipsum dolor sit amet",

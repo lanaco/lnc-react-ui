@@ -1,7 +1,6 @@
 import { forwardRef, memo, useMemo } from "react";
 
 import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card/CategorySimpleCard";
-import SuspenseSimpleCategoryCard from "../../Landing Components/skeleton-components/categories-skeletons/suspense-categories-card-simple";
 import { Wrapper } from "../style";
 
 const MemoizedCategorySimpleCard = memo(CategorySimpleCard);
@@ -33,15 +32,7 @@ const BlogCategoryCardsSection = forwardRef(
 
     return (
       <Wrapper ref={ref} className={isHighlight ? "highlight" : ""}>
-        <div className="wrapper__grid">
-          <SuspenseSimpleCategoryCard
-            isLoading={isLoading}
-            limit={limit}
-            keyPrefix="blog-section"
-          >
-            {memoizedCategories}
-          </SuspenseSimpleCategoryCard>
-        </div>
+        <div className="wrapper__grid">{memoizedCategories}</div>
       </Wrapper>
     );
   }

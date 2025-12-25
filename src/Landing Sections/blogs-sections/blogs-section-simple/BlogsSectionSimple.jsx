@@ -7,7 +7,7 @@ import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import { RegulatTitleSectionWrapper } from "../../style";
 import Button from "../../../General/Button/Button";
 import SimpleBlogCard from "../../../Landing Components/blog-components/simple-blog-card";
-import SuspenseBlogSimple from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-simple";
+import SuspenseBlogsSectionDetailed from "../../../Landing Components/skeleton-components/blog/blogs-section-detailed";
 
 const MemoizedProductCard = memo(SimpleBlogCard);
 
@@ -76,31 +76,30 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(buttonLink) && (
-          <Button
-            type="button"
-            btnType="tinted"
-            color="neutral"
-            onClick={(e) => {
-              e?.target?.blur();
-              onButtonAction(buttonLink);
-            }}
-            borderRadius="curved"
-            className="button-link"
-          >
-            {buttonText}
-          </Button>
-        )}
+        {isDefinedNotEmptyString(buttonText) &&
+          isDefinedNotEmptyString(buttonLink) &&
+          !isLoading && (
+            <Button
+              type="button"
+              btnType="tinted"
+              color="neutral"
+              onClick={(e) => {
+                e?.target?.blur();
+                onButtonAction(buttonLink);
+              }}
+              borderRadius="curved"
+              className="button-link"
+            >
+              {buttonText}
+            </Button>
+          )}
       </div>
-      <GridWrapper limit={limit}>
-        <SuspenseBlogSimple
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix={"explore-landing"}
-        >
-          {memoizedProducts}
-        </SuspenseBlogSimple>
-      </GridWrapper>
+      <SuspenseBlogsSectionDetailed
+        isLoading={isLoading}
+        keyPrefix="blogs-simple-skeleton"
+      >
+        <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>
+      </SuspenseBlogsSectionDetailed>
     </RegulatTitleSectionWrapper>
   );
 });

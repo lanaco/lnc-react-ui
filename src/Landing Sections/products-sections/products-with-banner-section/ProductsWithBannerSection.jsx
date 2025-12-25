@@ -6,7 +6,7 @@ import useDetectMobile from "../../../_utils/useDetectMobile";
 import { RegulatTitleSectionWrapper } from "../../style";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import ClearProductCard from "../../../Landing Components/product components/clear-product-card";
-import SuspenseClearProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-clear";
+import SuspenseProductsWithBanner from "../../../Landing Components/skeleton-components/product/products-with-banner";
 
 const MemoizedProductCard = memo(ClearProductCard);
 
@@ -45,25 +45,23 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                 metadata={{ name: componentName, accessor: x?.accessor }}
               />
             ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <MemoizedProductCard
-                  key={index}
-                  title={x?.name}
-                  sellerUuid={x?.sellerUuid}
-                  uuid={x?.uuid}
-                  onSelectCard={(e, cardRef) =>
-                    onSelectCard({
-                      uuid: x?.uuid,
-                      nameSlug: x?.nameSlug,
-                      cardRef,
-                    })
-                  }
-                  image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
-                  metadata={{ name: componentName, accessor: x?.accessor }}
-                />
-              ))}
+          : items?.slice(0, limit).map((x, index) => (
+              <MemoizedProductCard
+                key={index}
+                title={x?.name}
+                sellerUuid={x?.sellerUuid}
+                uuid={x?.uuid}
+                onSelectCard={(e, cardRef) =>
+                  onSelectCard({
+                    uuid: x?.uuid,
+                    nameSlug: x?.nameSlug,
+                    cardRef,
+                  })
+                }
+                image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                metadata={{ name: componentName, accessor: x?.accessor }}
+              />
+            ))}
       </>
     );
   }, [items, isMobile, limit]);
@@ -76,18 +74,15 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
           <span>{title}</span>
         </div>
       </div>
-      <ProductsBannerWrapper className="products-banner">
-        <img src={imageUrl} />
-      </ProductsBannerWrapper>
-      <GridWrapper limit={limit}>
-        <SuspenseClearProductCard
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix={"explore-landing"}
-        >
-          {memoizedProducts}
-        </SuspenseClearProductCard>
-      </GridWrapper>
+      <SuspenseProductsWithBanner
+        isLoading={isLoading}
+        keyPrefix="products-with-banner-skeleton"
+      >
+        <ProductsBannerWrapper className="products-banner">
+          <img src={imageUrl} />
+        </ProductsBannerWrapper>
+        <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>
+      </SuspenseProductsWithBanner>
     </RegulatTitleSectionWrapper>
   );
 });

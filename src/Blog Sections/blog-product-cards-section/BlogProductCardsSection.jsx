@@ -4,7 +4,6 @@ import { forwardRef, memo, useMemo } from "react";
 
 import useDetectMobile from "../../_utils/useDetectMobile";
 import SimpleProductCard from "../../Landing Components/product components/simple-product-card";
-import SuspenseSimpleProductCard from "../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-simple";
 import Button from "../../General/Button/Button";
 import { Wrapper } from "../style";
 
@@ -55,15 +54,7 @@ const BlogProductCardsSection = forwardRef(
           isHighlight ? "highlight" : ""
         }`}
       >
-        <div className="wrapper__grid">
-          <SuspenseSimpleProductCard
-            isLoading={isLoading}
-            limit={limit}
-            keyPrefix="blog-section"
-          >
-            {memoizedProducts}
-          </SuspenseSimpleProductCard>
-        </div>
+        <div className="wrapper__grid">{memoizedProducts}</div>
         <Button
           text={buttonText}
           borderRadius="curved"

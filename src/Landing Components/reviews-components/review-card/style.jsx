@@ -1,9 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  truncateText,
-  truncateTextInRows,
-  linearGradientAnimation,
-} from "../../../_utils/utils";
+import { truncateText, truncateTextInRows } from "../../../_utils/utils";
 
 export const ExternalWrapper = styled.div`
   padding-top: 5rem;
@@ -65,23 +61,5 @@ export const Wrapper = styled.div`
     /* drop-shadow-lg */
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
       0px 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  & .skeleton-img {
-    position: absolute;
-    top: -3.125rem;
-    left: 1.25rem;
-    min-width: 6.25rem;
-    max-width: 6.25rem;
-    min-height: 6.25rem;
-    max-height: 6.25rem;
-    border-radius: 0.75rem;
-    border: 1px solid var(--gray-95008);
-
-    /* drop-shadow-lg */
-    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0px 4px 6px -2px rgba(0, 0, 0, 0.05);
-
-    ${linearGradientAnimation("-90deg")}
   }
 `;

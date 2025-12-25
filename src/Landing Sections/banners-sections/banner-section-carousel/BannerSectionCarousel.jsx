@@ -6,10 +6,10 @@ import "react-multi-carousel/lib/styles.css";
 
 import PropTypes from "prop-types";
 
-import SuspenseBannerCarousel from "../../../Landing Components/skeleton-components/banner-skeletons/banner-section-carousel";
 import Button from "../../../General/Button/Button";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { Container } from "./style";
+import SuspenseBannerSectionCarousel from "../../../Landing Components/skeleton-components/banner/banner-section-carousel";
 
 const BannerSectionCarousel = forwardRef(
   (
@@ -44,7 +44,7 @@ const BannerSectionCarousel = forwardRef(
 
     return (
       <Container key={`banner-section-carousel__${isMobile}`} ref={ref}>
-        <SuspenseBannerCarousel
+        <SuspenseBannerSectionCarousel
           fallbackComponent={fallbackComponent}
           keyPrefix="banner-carousel-skeleton"
           isLoading={isLoading}
@@ -101,7 +101,7 @@ const BannerSectionCarousel = forwardRef(
               </div>
             ))}
           </Carousel>
-        </SuspenseBannerCarousel>
+        </SuspenseBannerSectionCarousel>
       </Container>
     );
   }

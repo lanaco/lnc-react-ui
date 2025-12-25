@@ -4,7 +4,7 @@ import { forwardRef, memo, useMemo } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import BlogCardLarge from "../../../Landing Components/blog-components/blog-card-large";
-import SuspenseBlogLarge from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-large";
+import SuspenseBlogsSectionLarge from "../../../Landing Components/skeleton-components/blog/blogs-section-large";
 
 const MemoizedBlogCard = memo(BlogCardLarge);
 
@@ -59,15 +59,14 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
   }, [items, isMobile, limit, onSelectCard]);
 
   return (
-    <GridWrapper ref={ref} limit={limit}>
-      <SuspenseBlogLarge
-        isLoading={isLoading}
-        limit={limit}
-        keyPrefix={"explore-landing"}
-      >
+    <SuspenseBlogsSectionLarge
+      isLoading={isLoading}
+      keyPrefix="blogs-large-skeleton"
+    >
+      <GridWrapper ref={ref} limit={limit}>
         {memoizedProducts}
-      </SuspenseBlogLarge>
-    </GridWrapper>
+      </GridWrapper>
+    </SuspenseBlogsSectionLarge>
   );
 });
 

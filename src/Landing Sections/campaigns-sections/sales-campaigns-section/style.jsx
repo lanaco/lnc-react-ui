@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-import {
-  getBorderRadiusValueWithUnits,
-  linearGradientAnimation,
-} from "../../../_utils/utils";
+import { getBorderRadiusValueWithUnits } from "../../../_utils/utils";
 
 export const SectionBlock = styled.div`
   display: flex;
@@ -46,33 +43,11 @@ export const SectionBlock = styled.div`
   }
 `;
 
-export const FilledPlaceholder = styled.div`
-  width: ${(p) => p.width || "100%"};
-  height: ${(p) => (p.heightCoeff || 1) * 1.125}rem;
-  background-color: var(--gray-200, #dddfe4);
-
-  ${linearGradientAnimation("-90deg")}
-`;
-
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: ${(p) => (p?.row ? "row" : "column")};
   gap: ${(p) => p?.gap ?? "0.5rem"};
   width: ${(p) => p?.width ?? "100%"};
-`;
-
-export const ImgWrapper = styled.div`
-  border-radius: ${(p) =>
-    getBorderRadiusValueWithUnits(p.theme, p?.borderRadius ?? "regular")};
-  background: var(--gray-200, #dddfe4);
-  position: relative;
-  max-height: ${(p) => p?.height ?? "5rem"};
-  max-width: ${(p) => p?.width ?? "5rem"};
-  height: ${(p) => p?.height ?? "5rem"};
-  width: ${(p) => p?.width ?? "5rem"};
-  flex-shrink: 0;
-
-  ${linearGradientAnimation()}
 `;
 
 export const CampaignCardContainer = styled.div`
@@ -111,9 +86,4 @@ export const CampaignCardContainer = styled.div`
       margin-top: 1rem;
     }
   }
-`;
-
-export const SkeletonContainer = styled.div`
-  display: flex;
-  gap: 1.5rem;
 `;

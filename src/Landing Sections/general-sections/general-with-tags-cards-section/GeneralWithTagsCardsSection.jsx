@@ -2,11 +2,11 @@
 /* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
-import GeneralWithTagsCardTagSkeleton from "../../../Landing Components/general-components/general-with-tags-card/tag-skeleton";
 import GeneralWithTagsCardTag from "../../../Landing Components/general-components/general-with-tags-card/tag";
 import GeneralWithTagsCard from "../../../Landing Components/general-components/general-with-tags-card/card";
-import GeneralWithTagsCardSkeleton from "../../../Landing Components/general-components/general-with-tags-card/card-skeleton";
 import { Wrapper } from "./style";
+import SuspenseFieldOfInterestsWithTagsTag from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-with-tags/tags";
+import SuspenseFieldOfInterestsWithTagsCard from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-with-tags/cards";
 
 const GeneralWithTagsCardsSection = forwardRef(
   (
@@ -21,7 +21,8 @@ const GeneralWithTagsCardsSection = forwardRef(
       items = [],
       onSelectTag = () => {},
       onSelectCard = () => {},
-      isLoading,
+      isLoadingTags = false,
+      isLoadingCards = false,
     },
     ref
   ) => {
@@ -37,26 +38,28 @@ const GeneralWithTagsCardsSection = forwardRef(
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
-        <div className="wrapper__cards">
-          {items && items?.length > 0
-            ? items?.map((card, idx) => (
-                <GeneralWithTagsCard
-                  key={`general-with-tags-card__${idx + 1}`}
-                  imageUrl={card?.imageUrl}
-                  imageComponent={card?.imageComponent}
-                  title={card?.title}
-                  onSelectCard={() => {
-                    onSelectCard?.(card);
-                  }}
-                />
-              ))
-            : Array.from("123")?.map((_, idx) => (
-                <GeneralWithTagsCardSkeleton
-                  key={`general-with-tags-card-skeleton__${idx + 1}`}
-                />
-              ))}
-        </div>
-        {options?.length > 0 && (
+        <SuspenseFieldOfInterestsWithTagsCard
+          isLoading={isLoadingCards}
+          keyPrefix="general-with-tags-cards-card"
+        >
+          <div className="wrapper__cards">
+            {items?.map((card, idx) => (
+              <GeneralWithTagsCard
+                key={`general-with-tags-card__${idx + 1}`}
+                imageUrl={card?.imageUrl}
+                imageComponent={card?.imageComponent}
+                title={card?.title}
+                onSelectCard={() => {
+                  onSelectCard?.(card);
+                }}
+              />
+            ))}
+          </div>
+        </SuspenseFieldOfInterestsWithTagsCard>
+        <SuspenseFieldOfInterestsWithTagsTag
+          isLoading={isLoadingTags}
+          keyPrefix="general-with-tags-cards-tag"
+        >
           <div className="wrapper__tags">
             {options?.map((tag, idx) => (
               <GeneralWithTagsCardTag
@@ -67,17 +70,7 @@ const GeneralWithTagsCardsSection = forwardRef(
               />
             ))}
           </div>
-        )}
-
-        {isLoading === true && !(options?.length > 0) && (
-          <div className="wrapper__tags">
-            {Array.from("123")?.map((_, idx) => (
-              <GeneralWithTagsCardTagSkeleton
-                key={`general-with-tags-card-tag-skeleton__${idx + 1}`}
-              />
-            ))}
-          </div>
-        )}
+        </SuspenseFieldOfInterestsWithTagsTag>
       </Wrapper>
     );
   }

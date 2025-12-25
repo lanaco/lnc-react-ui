@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 
-import {
-  linearGradientAnimation,
-  truncateTextInRows,
-} from "../../../_utils/utils";
+import { truncateTextInRows } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
@@ -143,51 +140,6 @@ export const Wrapper = styled.div`
       & .wrapper__image {
         max-height: 3rem;
       }
-    }
-  }
-`;
-
-export const SkeletonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1 0 0;
-  border-radius: 1.25rem;
-  border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
-  background: var(--Lanaco-Gray-white, #fff);
-  width: 100%;
-
-  /* drop-shadow-sm */
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-
-  & .wrapper__content {
-    display: flex;
-    padding: 1.25rem;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    align-self: strech;
-    width: 100%;
-
-    & .wrapper__image {
-      width: 4rem;
-      height: 4rem;
-      border-radius: 999px;
-      background-color: ${linearGradientAnimation("-90deg")};
-    }
-  }
-
-  & .wrapper__info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.375rem;
-    width: 100%;
-
-    & .wrapper__info-item {
-      background-color: ${linearGradientAnimation("-90deg")};
-      height: 1rem;
-      width: 100%;
     }
   }
 `;

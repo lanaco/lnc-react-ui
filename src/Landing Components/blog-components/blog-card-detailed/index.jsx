@@ -28,7 +28,6 @@ const BlogCardDetailed = forwardRef((props, ref) => {
   const cardRef = useRef();
 
   return (
-    // <BlogCardDetailedSkeleton />
     <Wrapper
       ref={cardRef}
       className="blog-card"

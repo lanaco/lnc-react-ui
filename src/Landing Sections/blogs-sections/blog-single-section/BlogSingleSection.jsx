@@ -2,7 +2,7 @@
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import BlogCardLarge from "../../../Landing Components/blog-components/blog-card-large";
-import SuspenseBlogSingle from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-single";
+import SuspenseBlogSingle from "../../../Landing Components/skeleton-components/blog/blog-single";
 
 const BlogsSectionLarge = forwardRef((props, ref) => {
   const {
@@ -13,11 +13,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <SuspenseBlogSingle
-      isLoading={isLoading}
-      limit={1}
-      keyPrefix={"explore-landing"}
-    >
+    <SuspenseBlogSingle isLoading={isLoading} keyPrefix="blogs-single-skeleton">
       <BlogCardLarge
         ref={ref}
         title={item?.title}

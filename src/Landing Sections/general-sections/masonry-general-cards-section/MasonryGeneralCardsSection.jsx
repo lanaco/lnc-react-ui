@@ -5,9 +5,13 @@ import LandingPageMasonryGeneralCard from "../../../Landing Components/general-c
 
 import { GridWrapper } from "./style";
 import { RegularTitleSectionWrapper } from "./style";
+import SuspenseMasonryGeneralCards from "../../../Landing Components/skeleton-components/general/masonry-general-cards";
 
 const MasonryGeneralCardsSection = forwardRef(
-  ({ title, items, limit = 3, onSelectCard = () => {} }, ref) => {
+  (
+    { title, items, isLoading = false, limit = 3, onSelectCard = () => {} },
+    ref
+  ) => {
     return (
       <RegularTitleSectionWrapper ref={ref}>
         <div className="regular-title">
@@ -15,16 +19,21 @@ const MasonryGeneralCardsSection = forwardRef(
             <span>{title}</span>
           </div>
         </div>
-        <GridWrapper limit={limit}>
-          {items &&
-            items?.map((item, index) => (
-              <LandingPageMasonryGeneralCard
-                key={`landing-page-masonry-general-card__${index + 1}`}
-                {...item}
-                onSelectCard={() => onSelectCard(item)}
-              />
-            ))}
-        </GridWrapper>
+        <SuspenseMasonryGeneralCards
+          isLoading={isLoading}
+          keyPrefix="masonry-general-cards-skeleton"
+        >
+          <GridWrapper limit={limit}>
+            {items &&
+              items?.map((item, index) => (
+                <LandingPageMasonryGeneralCard
+                  key={`landing-page-masonry-general-card__${index + 1}`}
+                  {...item}
+                  onSelectCard={() => onSelectCard(item)}
+                />
+              ))}
+          </GridWrapper>
+        </SuspenseMasonryGeneralCards>
       </RegularTitleSectionWrapper>
     );
   }

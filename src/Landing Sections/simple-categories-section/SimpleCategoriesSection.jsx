@@ -7,7 +7,7 @@ import { isDefinedNotEmptyString } from "../../_utils/utils";
 import { RegulatTitleSectionWrapper } from "../style";
 import Button from "../../General/Button/Button";
 import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card/CategorySimpleCard";
-import SuspenseSimpleCategoryCard from "../../Landing Components/skeleton-components/categories-skeletons/suspense-categories-card-simple";
+import SuspenseSimpleCategories from "../../Landing Components/skeleton-components/general/simple-categories";
 
 const MemoizedCategoryCard = memo(CategorySimpleCard);
 
@@ -62,31 +62,30 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(buttonLink) && (
-          <Button
-            type="button"
-            btnType="tinted"
-            color="neutral"
-            onClick={(e) => {
-              e?.target?.blur();
-              onButtonAction(buttonLink);
-            }}
-            borderRadius="curved"
-            className="button-link"
-          >
-            {buttonText}
-          </Button>
-        )}
+        {isDefinedNotEmptyString(buttonText) &&
+          isDefinedNotEmptyString(buttonLink) &&
+          !isLoading && (
+            <Button
+              type="button"
+              btnType="tinted"
+              color="neutral"
+              onClick={(e) => {
+                e?.target?.blur();
+                onButtonAction(buttonLink);
+              }}
+              borderRadius="curved"
+              className="button-link"
+            >
+              {buttonText}
+            </Button>
+          )}
       </div>
-      <GridWrapper limit={limit}>
-        <SuspenseSimpleCategoryCard
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix={"explore-landing"}
-        >
-          {memoizedProducts}
-        </SuspenseSimpleCategoryCard>
-      </GridWrapper>
+      <SuspenseSimpleCategories
+        isLoading={isLoading}
+        keyPrefix="simple-categories-skeleton"
+      >
+        <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>
+      </SuspenseSimpleCategories>
     </RegulatTitleSectionWrapper>
   );
 });

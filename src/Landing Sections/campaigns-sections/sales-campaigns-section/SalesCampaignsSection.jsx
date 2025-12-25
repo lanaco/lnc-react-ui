@@ -3,10 +3,10 @@
 /* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 import SalesCampaignCard from "../../../Landing Components/campaigns-components/sales-campaign-card/SalesCampaignCard";
-import SuspenseCampaignCard from "./skeleton";
 import ScrollableSectionV3 from "../../../Utility/ScrollableSectionV3";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import ItemlessBanner from "../../../Landing Components/general-components/itemless-banner";
+import SuspenseSalesCampaign from "../../../Landing Components/skeleton-components/general/sales-campaign";
 
 const MemoizedCampaignItemRecommended = memo(SalesCampaignCard);
 
@@ -109,10 +109,9 @@ const SalesCampaignsSection = forwardRef(
     }, [items]);
 
     return (
-      <SuspenseCampaignCard
+      <SuspenseSalesCampaign
         isLoading={isLoading}
-        itemsCount={isMobile ? 1 : 2}
-        keyPrefix="sales-camp"
+        keyPrefix="sales-campaign-skeleton"
       >
         <ScrollableSectionV3
           key={`sales-campaign-section__${isMobile}`}
@@ -125,7 +124,7 @@ const SalesCampaignsSection = forwardRef(
         >
           {memoizedItems}
         </ScrollableSectionV3>
-      </SuspenseCampaignCard>
+      </SuspenseSalesCampaign>
     );
   }
 );
