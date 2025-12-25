@@ -225,7 +225,6 @@ export const ImageWrapper = styled.div`
 
     display: none;
 
-    display: flex;
     align-items: center;
     justify-content: center;
 
