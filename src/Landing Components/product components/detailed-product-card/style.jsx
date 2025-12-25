@@ -151,7 +151,7 @@ export const Wrapper = styled.div`
       flex-wrap: nowrap;
       justify-content: flex-start;
       overflow-x: scroll;
-      width: 11rem;
+      width: 8.875rem !important;
 
       -webkit-overflow-scrolling: touch;
       ::-webkit-scrollbar {
