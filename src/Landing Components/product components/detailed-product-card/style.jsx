@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
   & .wrapper-card-1 {
     display: flex;
     flex-direction: column;
-    gap: 0.38rem;
+    gap: 0.12rem;
   }
 
   & .wrapper-card-2 {
@@ -151,7 +151,7 @@ export const Wrapper = styled.div`
       flex-wrap: nowrap;
       justify-content: flex-start;
       overflow-x: scroll;
-      width: 8.875rem !important;
+      width: 11rem;
 
       -webkit-overflow-scrolling: touch;
       ::-webkit-scrollbar {
