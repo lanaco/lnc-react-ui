@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
   & .wrapper-card-1 {
     display: flex;
     flex-direction: column;
-    gap: 0.38rem;
+    gap: 0.12rem;
   }
 
   & .wrapper-card-2 {
