@@ -273,6 +273,8 @@ export const ImageWrapper = styled.div`
 
     & .bookmarking-btn {
       display: flex;
+      bottom: 0.5rem;
+      top: unset;
     }
   }
 `;
