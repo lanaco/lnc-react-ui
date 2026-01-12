@@ -3,8 +3,8 @@
 import { forwardRef } from "react";
 
 import BrandHitCard from "../../../Landing Components/brand-components/brand-hit-card";
-import BrandHitCardSkeleton from "../../../Landing Components/brand-components/brand-hit-card/skeleton";
 import { Wrapper } from "./style";
+import SuspenseBrandHits from "../../../Landing Components/skeleton-components/brand/brand-hits";
 
 const BrandHitsSection = forwardRef(
   (
@@ -17,23 +17,22 @@ const BrandHitsSection = forwardRef(
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
-        <div className="wrapper__content">
-          {isLoading
-            ? Array.from("12345")?.map((_, idx) => (
-                <BrandHitCardSkeleton
-                  key={`brand-hit-card-skeleton__${idx + 1}`}
-                />
-              ))
-            : items?.map((item, idx) => (
-                <BrandHitCard
-                  key={`brand-hit-card__${idx + 1}`}
-                  image={item?.image}
-                  imageComponent={item?.imageComponent}
-                  onSelectCard={() => onSelectCard?.(item)}
-                  className="wrapper__item"
-                />
-              ))}
-        </div>
+        <SuspenseBrandHits
+          isLoading={isLoading}
+          keyPrefix="brand-hits-skeleton"
+        >
+          <div className="wrapper__content">
+            {items?.map((item, idx) => (
+              <BrandHitCard
+                key={`brand-hit-card__${idx + 1}`}
+                image={item?.image}
+                imageComponent={item?.imageComponent}
+                onSelectCard={() => onSelectCard?.(item)}
+                className="wrapper__item"
+              />
+            ))}
+          </div>
+        </SuspenseBrandHits>
       </Wrapper>
     );
   }

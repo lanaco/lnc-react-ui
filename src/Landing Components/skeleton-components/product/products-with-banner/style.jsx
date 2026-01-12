@@ -1,0 +1,13 @@
+import styled from "@emotion/styled";
+
+import { MOBILE_SIZE_PX } from "../../../../_utils/consts";
+import { SkeletonColumnWrapper } from "../../style";
+
+export const Container = styled(SkeletonColumnWrapper)`
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    & .skeleton__banner {
+      height: 100%;
+      aspect-ratio: 1 / 1;
+    }
+  }
+`;

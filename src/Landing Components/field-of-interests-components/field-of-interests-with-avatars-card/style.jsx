@@ -1,14 +1,6 @@
 import styled from "@emotion/styled";
 
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-import { linearGradientAnimation } from "../../../_utils/utils";
-
-export const SkeletonWrapper = styled.div`
-  width: 100%;
-  height: 11.625rem;
-  border-radius: 0.75rem;
-  background: ${linearGradientAnimation("-90deg")};
-`;
 
 export const AvatarWrapper = styled.div`
   width: 100%;
@@ -35,17 +27,5 @@ export const AvatarWrapper = styled.div`
     & .wrapper__image {
       height: auto;
     }
-  }
-`;
-
-export const AvatarSkeletonWrapper = styled.div`
-  width: 9.875rem;
-  height: 9.875rem;
-  border-radius: 999px;
-  background: ${linearGradientAnimation("-90deg")};
-
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    width: 4.5rem;
-    height: 4.5rem;
   }
 `;

@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { linearGradientAnimation } from "../../../_utils/utils";
 
 export const ExternalWrapper = styled.div`
   display: flex;
@@ -33,18 +32,6 @@ export const CardWrapper = styled.div`
   border: 1px solid var(--warning-500, #f59e0b);
   overflow: hidden;
 
-  & .skeleton__card {
-    height: 100%;
-    width: 100%;
-    ${linearGradientAnimation("-90deg")}
-
-    background: linear-gradient(
-      178deg,
-      rgba(0, 0, 0, 0) 1.5%,
-      rgba(0, 0, 0, 0.16) 8.95%,
-      #000 98.39%
-    );
-  }
   & img {
     min-height: 11rem;
     max-height: 11rem;
@@ -73,11 +60,4 @@ export const CardWrapper = styled.div`
     -webkit-transform: rotate(315deg);
     transform: rotate(315deg);
   }
-`;
-
-export const SkeletonWrapper = styled.div`
-  width: 100%;
-  height: 11.5rem;
-  border-radius: 0.75rem;
-  background: ${linearGradientAnimation("-90deg")};
 `;

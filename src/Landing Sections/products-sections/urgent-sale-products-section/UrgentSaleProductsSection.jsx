@@ -5,7 +5,7 @@ import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import Button from "../../../General/Button/Button";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
-import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-detailed";
+import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product/detailed-product-card";
 
 const MemoizedProductCard = memo(DetailedProductCard);
 
@@ -120,33 +120,32 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
   }, [items, isMobile, limit, limitMobile, showAll]);
 
   return (
-    <GridWrapper ref={ref} limit={limit}>
-      <div className="urgent-tag">
-        <i className="mng mng-lnc-bolt-filled" />
-        <span>{title}</span>
-      </div>
-      <SuspenseDetailedProductCard
-        isLoading={isLoading}
-        limit={limit}
-        keyPrefix={"explore-landing"}
-      >
-        {memoizedProducts}
-      </SuspenseDetailedProductCard>
-      {isMobile === true && limitMobile < items?.length && (
-        <Button
-          className="show-more"
-          btnType="basic"
-          type="button"
-          color="neutral"
-          onClick={(e) => {
-            e?.target?.blur();
-            setShowAll(!showAll);
-          }}
-        >
-          {showAll === true ? showLessText : showMoreText}
-        </Button>
-      )}
-    </GridWrapper>
+    <SuspenseDetailedProductCard
+      isLoading={isLoading}
+      keyPrefix="urgent-sale-products-skeleton"
+    >
+      <GridWrapper ref={ref} limit={limit}>
+        <div className="urgent-tag">
+          <i className="mng mng-lnc-bolt-filled" />
+          <span>{title}</span>
+        </div>{" "}
+        {memoizedProducts}{" "}
+        {isMobile === true && limitMobile < items?.length && !isLoading && (
+          <Button
+            className="show-more"
+            btnType="basic"
+            type="button"
+            color="neutral"
+            onClick={(e) => {
+              e?.target?.blur();
+              setShowAll(!showAll);
+            }}
+          >
+            {showAll === true ? showLessText : showMoreText}
+          </Button>
+        )}
+      </GridWrapper>
+    </SuspenseDetailedProductCard>
   );
 });
 

@@ -4,16 +4,6 @@ import {
   truncateTextInRows,
 } from "../../../_utils/utils";
 
-export const SkeletonWrapper = styled.div`
-  background-color: var(--gray-200, #dddfe4);
-  border-radius: 0.75rem;
-  min-width: 11.625rem;
-  min-height: 11.625rem;
-  max-width: 11.625rem;
-  max-height: 11.625rem;
-  ${linearGradientAnimation("-90deg")}
-`;
-
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;

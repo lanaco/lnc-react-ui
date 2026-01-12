@@ -2,11 +2,11 @@
 /* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
-import FieldOfInterestsWithAvatarsCardAvatarSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/avatar-skeleton";
 import FieldOfInterestsWithAvatarsCardAvatar from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/avatar";
 import FieldOfInterestsWithAvatarsCard from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/card";
-import FieldOfInterestsWithAvatarsCardSkeleton from "../../../Landing Components/field-of-interests-components/field-of-interests-with-avatars-card/card-skeleton";
 import { Wrapper } from "./style";
+import SuspenseFieldOfInterestsWithAvatarsTag from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-with-avatars/tags";
+import SuspenseFieldOfInterestsWithAvatarsCard from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-with-avatars/cards";
 
 const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
   (
@@ -21,6 +21,8 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
       items = [],
       onSelectAvatar = () => {},
       onSelectCard = () => {},
+      isLoadingTags = false,
+      isLoadingCards = false,
     },
     ref
   ) => {
@@ -47,54 +49,48 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
-        <div className="wrapper__avatars">
-          {avatars && avatars?.length > 0
-            ? avatars?.map((avatar, idx) => (
-                <FieldOfInterestsWithAvatarsCardAvatar
-                  key={`field-of-interests-with-avatars-card-avatar__${
-                    idx + 1
-                  }`}
-                  image={avatar?.image}
-                  imageComponent={avatar?.imageComponent}
-                  // isActive={tag?.uuid === active}
-                  onSelectCard={() => handleSelectAvatar?.(avatar)}
-                />
-              ))
-            : Array.from("1234")?.map((_, idx) => (
-                <FieldOfInterestsWithAvatarsCardAvatarSkeleton
-                  key={`field-of-interests-with-avatars-card-avatar-skeleton__${
-                    idx + 1
-                  }`}
-                />
-              ))}
-        </div>
-        <div className="wrapper__cards">
-          {items && items?.length > 0
-            ? items?.map((card, idx) => (
-                <FieldOfInterestsWithAvatarsCard
-                  key={`field-of-interests-with-avatars-card__${idx + 1}`}
-                  uuid={card?.uuid}
-                  title={card?.title}
-                  price={card?.price}
-                  currency={card?.currency}
-                  isNegotiable={card?.isNegotiable}
-                  isFree={card?.isFree}
-                  image={card?.image}
-                  imageComponent={card?.imageComponent}
-                  sellerUuid={card?.sellerUuid}
-                  negotiableText={card?.negotiableText}
-                  freeText={card?.freeText}
-                  onSelectCard={() => handleSelectCard?.(card)}
-                />
-              ))
-            : Array.from("123456")?.map((_, idx) => (
-                <FieldOfInterestsWithAvatarsCardSkeleton
-                  key={`field-of-interests-with-avatars-card-skeleton__${
-                    idx + 1
-                  }`}
-                />
-              ))}
-        </div>
+
+        <SuspenseFieldOfInterestsWithAvatarsTag
+          isLoading={isLoadingTags}
+          keyPrefix="field-of-interests-with-avatars-tag"
+        >
+          <div className="wrapper__avatars">
+            {avatars?.map((avatar, idx) => (
+              <FieldOfInterestsWithAvatarsCardAvatar
+                key={`field-of-interests-with-avatars-card-avatar__${idx + 1}`}
+                image={avatar?.image}
+                imageComponent={avatar?.imageComponent}
+                // isActive={tag?.uuid === active}
+                onSelectCard={() => handleSelectAvatar?.(avatar)}
+              />
+            ))}
+          </div>
+        </SuspenseFieldOfInterestsWithAvatarsTag>
+
+        <SuspenseFieldOfInterestsWithAvatarsCard
+          isLoading={isLoadingCards}
+          keyPrefix="field-of-interests-with-avatars-card"
+        >
+          <div className="wrapper__cards">
+            {items?.map((card, idx) => (
+              <FieldOfInterestsWithAvatarsCard
+                key={`field-of-interests-with-avatars-card__${idx + 1}`}
+                uuid={card?.uuid}
+                title={card?.title}
+                price={card?.price}
+                currency={card?.currency}
+                isNegotiable={card?.isNegotiable}
+                isFree={card?.isFree}
+                image={card?.image}
+                imageComponent={card?.imageComponent}
+                sellerUuid={card?.sellerUuid}
+                negotiableText={card?.negotiableText}
+                freeText={card?.freeText}
+                onSelectCard={() => handleSelectCard?.(card)}
+              />
+            ))}
+          </div>
+        </SuspenseFieldOfInterestsWithAvatarsCard>
       </Wrapper>
     );
   }

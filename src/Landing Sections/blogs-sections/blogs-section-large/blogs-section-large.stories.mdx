@@ -11,6 +11,7 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export const TemplateDefault = (args) => (
   <BlogsSectionLarge
+    isLoading={false}
     onButtonClick={(card) => window.open(`/blog/${card.titleSlug}`, "_blank")}
     items={[
       {
