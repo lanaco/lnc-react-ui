@@ -8,7 +8,14 @@ export const Container = styled(SkeletonRowWrapper)`
     flex-direction: column;
 
     & > div {
-      flex-direction: column;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        #f4f6fb 40%,
+        #f4f6fb 100%
+      );
+
+      box-shadow: none;
     }
   }
 `;
