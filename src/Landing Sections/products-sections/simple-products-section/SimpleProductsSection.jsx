@@ -5,7 +5,7 @@ import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import SimpleProductCard from "../../../Landing Components/product components/simple-product-card";
 import TextBlockV1 from "../../../Landing Components/text-block-v1/index";
-import SuspenseSimpleProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-simple";
+import SuspenseSimpleProducts from "../../../Landing Components/skeleton-components/product/simple-products";
 
 const MemoizedProductCard = memo(SimpleProductCard);
 
@@ -32,79 +32,74 @@ const SimpleProductsSection = forwardRef((props, ref) => {
     return (
       <>
         {isMobile === true
-          ? items
-              ?.slice(0, 4)
-              ?.map((x, index) => (
-                <MemoizedProductCard
-                  key={index}
-                  title={x?.name}
-                  price={x?.price}
-                  isFree={x?.isFree}
-                  isNegotiable={x?.isNegotiable}
-                  currency={x?.currency}
-                  sellerUuid={x?.sellerUuid}
-                  uuid={x?.uuid}
-                  onSelectCard={(e, cardRef) =>
-                    onSelectCard({
-                      uuid: x?.uuid,
-                      nameSlug: x?.nameSlug,
-                      cardRef,
-                    })
-                  }
-                  image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
-                  negotiableText={negotiableText}
-                  freeText={freeText}
-                  metadata={{ name: componentName, accessor: x?.accessor }}
-                />
-              ))
-          : items
-              ?.slice(0, 9)
-              ?.map((x, index) => (
-                <MemoizedProductCard
-                  key={index}
-                  title={x?.name}
-                  price={x?.price}
-                  isFree={x?.isFree}
-                  isNegotiable={x?.isNegotiable}
-                  currency={x?.currency}
-                  sellerUuid={x?.sellerUuid}
-                  uuid={x?.uuid}
-                  onSelectCard={(e, cardRef) =>
-                    onSelectCard({
-                      uuid: x?.uuid,
-                      nameSlug: x?.nameSlug,
-                      cardRef,
-                    })
-                  }
-                  image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
-                  negotiableText={negotiableText}
-                  freeText={freeText}
-                  metadata={{ name: componentName, accessor: x?.accessor }}
-                />
-              ))}
+          ? items?.slice(0, 4)?.map((x, index) => (
+              <MemoizedProductCard
+                key={index}
+                title={x?.name}
+                price={x?.price}
+                isFree={x?.isFree}
+                isNegotiable={x?.isNegotiable}
+                currency={x?.currency}
+                sellerUuid={x?.sellerUuid}
+                uuid={x?.uuid}
+                onSelectCard={(e, cardRef) =>
+                  onSelectCard({
+                    uuid: x?.uuid,
+                    nameSlug: x?.nameSlug,
+                    cardRef,
+                  })
+                }
+                image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                negotiableText={negotiableText}
+                freeText={freeText}
+                metadata={{ name: componentName, accessor: x?.accessor }}
+              />
+            ))
+          : items?.slice(0, 9)?.map((x, index) => (
+              <MemoizedProductCard
+                key={index}
+                title={x?.name}
+                price={x?.price}
+                isFree={x?.isFree}
+                isNegotiable={x?.isNegotiable}
+                currency={x?.currency}
+                sellerUuid={x?.sellerUuid}
+                uuid={x?.uuid}
+                onSelectCard={(e, cardRef) =>
+                  onSelectCard({
+                    uuid: x?.uuid,
+                    nameSlug: x?.nameSlug,
+                    cardRef,
+                  })
+                }
+                image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                negotiableText={negotiableText}
+                freeText={freeText}
+                metadata={{ name: componentName, accessor: x?.accessor }}
+              />
+            ))}
       </>
     );
   }, [items, isMobile, limit]);
 
   return (
-    <GridWrapper ref={ref} limit={limit}>
-      <TextBlockV1
-        subtitle={subtitle}
-        title={title}
-        description={description}
-        buttonText={buttonText}
-        buttonLink={buttonLink}
-        onButtonAction={onButtonAction}
-        className="text-block-v1"
-      />
-      <SuspenseSimpleProductCard
-        isLoading={isLoading}
-        limit={limit}
-        keyPrefix={"explore-landing"}
-      >
+    <SuspenseSimpleProducts
+      isLoading={isLoading}
+      keyPrefix="simple-products-skeleton"
+    >
+      <GridWrapper ref={ref} limit={limit}>
+        <TextBlockV1
+          subtitle={subtitle}
+          title={title}
+          description={description}
+          buttonText={buttonText}
+          buttonLink={buttonLink}
+          onButtonAction={onButtonAction}
+          className="text-block-v1"
+        />
         {memoizedProducts}
-      </SuspenseSimpleProductCard>
-    </GridWrapper>
+      </GridWrapper>
+    </SuspenseSimpleProducts>
   );
 });
 

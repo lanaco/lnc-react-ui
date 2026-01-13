@@ -7,6 +7,7 @@ import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import Button from "../../../General/Button/Button";
 import { GridWrapper } from "./style";
 import GiftCard from "../../../Landing Components/gift-components/gift-card";
+import SuspenseGiftCards from "../../../Landing Components/skeleton-components/general/gift-cards";
 
 const GiftsSection = forwardRef((props, ref) => {
   const {
@@ -14,6 +15,7 @@ const GiftsSection = forwardRef((props, ref) => {
     title,
     buttonLink,
     items,
+    isLoading = false,
     buttonText,
     limit = 4,
     onSelectCard = () => {},
@@ -29,38 +31,28 @@ const GiftsSection = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(buttonLink) && (
-          <Button
-            type="button"
-            btnType="tinted"
-            color="neutral"
-            onClick={(e) => {
-              e?.target?.blur();
-              onButtonAction(buttonLink);
-            }}
-            borderRadius="curved"
-            className="button-link"
-          >
-            {buttonText}
-          </Button>
-        )}
+        {isDefinedNotEmptyString(buttonText) &&
+          isDefinedNotEmptyString(buttonLink) &&
+          !isLoading && (
+            <Button
+              type="button"
+              btnType="tinted"
+              color="neutral"
+              onClick={(e) => {
+                e?.target?.blur();
+                onButtonAction(buttonLink);
+              }}
+              borderRadius="curved"
+              className="button-link"
+            >
+              {buttonText}
+            </Button>
+          )}
       </div>
-      <GridWrapper limit={limit}>
-        {isMobile === true
-          ? items?.map((x, index) => (
-              <GiftCard
-                key={index}
-                text={x?.text}
-                price={x?.priceTo}
-                currency={x?.currencyIsoCode}
-                image={x?.imageUrl}
-                uuid={x?.uuid}
-                onSelectGiftCard={(uuid) => onSelectCard(x)}
-              />
-            ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
+      <SuspenseGiftCards isLoading={isLoading} keyPrefix="gift-cards-skeleton">
+        <GridWrapper limit={limit}>
+          {isMobile === true
+            ? items?.map((x, index) => (
                 <GiftCard
                   key={index}
                   text={x?.text}
@@ -70,8 +62,22 @@ const GiftsSection = forwardRef((props, ref) => {
                   uuid={x?.uuid}
                   onSelectGiftCard={(uuid) => onSelectCard(x)}
                 />
-              ))}
-      </GridWrapper>
+              ))
+            : items
+                ?.slice(0, limit)
+                .map((x, index) => (
+                  <GiftCard
+                    key={index}
+                    text={x?.text}
+                    price={x?.priceTo}
+                    currency={x?.currencyIsoCode}
+                    image={x?.imageUrl}
+                    uuid={x?.uuid}
+                    onSelectGiftCard={(uuid) => onSelectCard(x)}
+                  />
+                ))}
+        </GridWrapper>
+      </SuspenseGiftCards>
     </RegulatTitleSectionWrapper>
   );
 });

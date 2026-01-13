@@ -1,10 +1,7 @@
 import styled from "@emotion/styled";
 
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-import {
-  linearGradientAnimation,
-  truncateTextInRows,
-} from "../../../_utils/utils";
+import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -47,7 +44,7 @@ export const Wrapper = styled.div`
       transition: var(--transition, all 0.2s ease);
     }
   }
-    cursor: pointer;
+  cursor: pointer;
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     background: transparent;
@@ -70,19 +67,6 @@ export const Wrapper = styled.div`
         line-height: 1.25rem;
       }
     }
-  }
-`;
-
-export const SkeletonWrapper = styled.div`
-  width: 100%;
-  height: 11.625rem;
-  border-radius: 0.75rem;
-  background: ${linearGradientAnimation("-90deg")};
-
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 999px;
   }
 `;
 
@@ -132,11 +116,4 @@ export const TagWrapper = styled.div`
       white-space: nowrap;
     }
   }
-`;
-
-export const TagSkeletonWrapper = styled.div`
-  width: 7rem;
-  height: 3rem;
-  border-radius: 999px;
-  background: ${linearGradientAnimation("-90deg")};
 `;

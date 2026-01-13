@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 
-import {
-  linearGradientAnimation,
-  truncateTextInRows,
-} from "../../../_utils/utils";
+import { truncateTextInRows } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const Wrapper = styled.div`
@@ -60,13 +57,6 @@ export const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-export const SkeletonWrapper = styled.div`
-  width: 100%;
-  height: 11.625rem;
-  border-radius: 0.75rem;
-  background: ${linearGradientAnimation("-90deg")};
-`;
-
 export const TagWrapper = styled.div`
   display: flex;
   padding: 0 0.75rem 0 0.75rem;
@@ -121,11 +111,4 @@ export const TagWrapper = styled.div`
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     min-width: fit-content;
   }
-`;
-
-export const TagSkeletonWrapper = styled.div`
-  width: 7rem;
-  height: 3rem;
-  border-radius: 999px;
-  background: ${linearGradientAnimation("-90deg")};
 `;

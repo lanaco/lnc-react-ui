@@ -4,9 +4,9 @@ import { forwardRef, memo, useMemo } from "react";
 
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import BlogCardSponsored from "../../../Landing Components/blog-components/blog-card-sponsored";
-import SuspenseBlogLarge from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-large";
 import Button from "../../../General/Button/Button";
 import { Wrapper } from "./style";
+import SuspenseBlogCardsSponsored from "../../../Landing Components/skeleton-components/blog/blog-cards-sponsored";
 
 const MemoizedBlogCardSponsored = memo(BlogCardSponsored);
 
@@ -60,31 +60,30 @@ const BlogCardsSponsoredSection = forwardRef(
                 <span>{title}</span>
               </div>
             )}
-            {onButtonAction && (
-              <Button
-                text={buttonText}
-                borderRadius="curved"
-                btnType="tinted"
-                className="title__action"
-                color="neutral"
-                onClick={(e) => {
-                  e?.target?.blur();
-                  onButtonAction?.(buttonLink);
-                }}
-              />
-            )}
+            {isDefinedNotEmptyString(buttonText) &&
+              isDefinedNotEmptyString(buttonLink) &&
+              !isLoading && (
+                <Button
+                  text={buttonText}
+                  borderRadius="curved"
+                  btnType="tinted"
+                  className="title__action"
+                  color="neutral"
+                  onClick={(e) => {
+                    e?.target?.blur();
+                    onButtonAction?.(buttonLink);
+                  }}
+                />
+              )}
           </div>
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
-        <div className="wrapper__cards">
-          <SuspenseBlogLarge
-            isLoading={isLoading}
-            limit={4}
-            keyPrefix="blog-section"
-          >
-            {memoizedBlogs}
-          </SuspenseBlogLarge>
-        </div>
+        <SuspenseBlogCardsSponsored
+          isLoading={isLoading}
+          keyPrefix="blog-cards-sponsored-skeleton"
+        >
+          <div className="wrapper__cards">{memoizedBlogs}</div>
+        </SuspenseBlogCardsSponsored>
       </Wrapper>
     );
   }

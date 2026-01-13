@@ -4,7 +4,7 @@ import { forwardRef, memo, useMemo } from "react";
 import { Container, GridWrapper } from "./style";
 import useDetectMobile from "../../_utils/useDetectMobile";
 import ReviewCard from "../../Landing Components/reviews-components/review-card/ReviewCard";
-import SuspenseReviewCard from "../../Landing Components/skeleton-components/review-skeletons/suspense-reviews-card";
+import SuspenseReviews from "../../Landing Components/skeleton-components/general/review";
 
 const MemoizedReviewCard = memo(ReviewCard);
 
@@ -54,15 +54,9 @@ const ReviewsSection = forwardRef((props, ref) => {
   return (
     <Container ref={ref}>
       <div className="container-title">{title}</div>
-      <GridWrapper limit={limit}>
-        <SuspenseReviewCard
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix={"explore-landing"}
-        >
-          {memoizedProducts}
-        </SuspenseReviewCard>
-      </GridWrapper>
+      <SuspenseReviews isLoading={isLoading} keyPrefix="reviews-skeleton">
+        <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>
+      </SuspenseReviews>
     </Container>
   );
 });

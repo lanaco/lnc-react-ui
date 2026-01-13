@@ -7,7 +7,7 @@ import Button from "../../../General/Button/Button";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
-import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-detailed";
+import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product/detailed-product-card";
 
 const MemoizedProductCard = memo(DetailedProductCard);
 
@@ -84,32 +84,33 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
             {isDefinedNotEmptyString(icon) && <i className={icon} />} {title}
           </div>
         )}
-        {isMobile && isDefinedNotEmptyString(viewAllbuttonLink) && (
-          <Button
-            type="button"
-            btnType="tinted"
-            color="neutral"
-            onClick={(e) => {
-              e?.target?.blur();
+        {isMobile &&
+          isDefinedNotEmptyString(viewAllbuttonLink) &&
+          isDefinedNotEmptyString(viewAllButonText) &&
+          !isLoading && (
+            <Button
+              type="button"
+              btnType="tinted"
+              color="neutral"
+              onClick={(e) => {
+                e?.target?.blur();
 
-              onButtonAction(viewAllbuttonLink);
-            }}
-            borderRadius="curved"
-            className="section__view-all"
-          >
-            {viewAllButonText}
-          </Button>
-        )}
+                onButtonAction(viewAllbuttonLink);
+              }}
+              borderRadius="curved"
+              className="section__view-all"
+            >
+              {viewAllButonText}
+            </Button>
+          )}
       </div>
-      <div className="section__items">
-        <SuspenseDetailedProductCard
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix="explore-landing"
-        >
-          {memoizedProducts}
-        </SuspenseDetailedProductCard>
-      </div>
+      <SuspenseDetailedProductCard
+        isLoading={isLoading}
+        keyPrefix="detailed-product-card-skeleton"
+      >
+        <div className="section__items">{memoizedProducts}</div>
+      </SuspenseDetailedProductCard>
+
       {!isMobile && !isLoading && (
         <IconButton
           icon={loadMoreButtonIcon}

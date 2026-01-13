@@ -2,8 +2,8 @@
 import { forwardRef, memo, useMemo } from "react";
 
 import BlogCardItem from "../../../Landing Components/blog-components/blog-card-item";
-import SuspenseBlogLarge from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-large";
 import { Wrapper } from "./style";
+import SuspenseBlogList from "../../../Landing Components/skeleton-components/blog/blog-list";
 
 const MemoizedBlogCardItem = memo(BlogCardItem);
 
@@ -12,10 +12,10 @@ const BlogListSection = forwardRef(
     {
       timeToReadText = "{0} min read",
       items,
+      isLoading = false,
       onSelectCard = () => {},
       onShare = () => {},
       onBookmark = () => {},
-      isLoading = false,
       getImage = () => {},
       isSeparated = true,
       bookmarkComponent = <></>,
@@ -49,15 +49,11 @@ const BlogListSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper ref={ref} className={isSeparated ? "separated" : ""}>
-        <SuspenseBlogLarge
-          isLoading={isLoading}
-          limit={5}
-          keyPrefix="blog-section"
-        >
+      <SuspenseBlogList isLoading={isLoading} keyPrefix="blog-list-skeleton">
+        <Wrapper ref={ref} className={isSeparated ? "separated" : ""}>
           {memoizedBlogs}
-        </SuspenseBlogLarge>
-      </Wrapper>
+        </Wrapper>
+      </SuspenseBlogList>
     );
   }
 );

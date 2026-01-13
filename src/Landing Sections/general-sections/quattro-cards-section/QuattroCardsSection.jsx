@@ -5,11 +5,12 @@ import { forwardRef, memo, useMemo } from "react";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import QuattroCard from "../../../Landing Components/general-components/quattro-card";
 import { Wrapper } from "./style";
+import SuspenseBlogCardsSponsored from "../../../Landing Components/skeleton-components/blog/blog-cards-sponsored";
 
 const MemoizedQuattroCard = memo(QuattroCard);
 
 const QuattroCardsSection = forwardRef(
-  ({ title, items, onSelectCard = () => {} }, ref) => {
+  ({ title, items, isLoading = false, onSelectCard = () => {} }, ref) => {
     const memoizedCards = useMemo(() => {
       return items
         ?.slice(0, 4)
@@ -35,7 +36,12 @@ const QuattroCardsSection = forwardRef(
             )}
           </div>
         </div>
-        <div className="wrapper__cards">{memoizedCards}</div>
+        <SuspenseBlogCardsSponsored
+          isLoading={isLoading}
+          keyPrefix="quattro-cards-skeleton"
+        >
+          <div className="wrapper__cards">{memoizedCards}</div>
+        </SuspenseBlogCardsSponsored>
       </Wrapper>
     );
   }

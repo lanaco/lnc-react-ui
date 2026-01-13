@@ -8,7 +8,7 @@ import { RegulatTitleSectionWrapper } from "../../style";
 import Button from "../../../General/Button/Button";
 
 import BlogCardDetailed from "../../../Landing Components/blog-components/blog-card-detailed";
-import SuspenseBlogDetailed from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-detailed";
+import SuspenseBlogsSectionDetailed from "../../../Landing Components/skeleton-components/blog/blogs-section-detailed";
 
 const MemoizedBlogCard = memo(BlogCardDetailed);
 
@@ -86,7 +86,8 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
           <span>{title}</span>
         </div>
         {isDefinedNotEmptyString(buttonText) &&
-          isDefinedNotEmptyString(buttonLink) && (
+          isDefinedNotEmptyString(buttonLink) &&
+          !isLoading && (
             <Button
               type="button"
               btnType="tinted"
@@ -102,15 +103,12 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
             </Button>
           )}
       </div>
-      <GridWrapper limit={limit}>
-        <SuspenseBlogDetailed
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix={"explore-landing"}
-        >
-          {memoizedProducts}
-        </SuspenseBlogDetailed>
-      </GridWrapper>
+      <SuspenseBlogsSectionDetailed
+        isLoading={isLoading}
+        keyPrefix="blogs-detailed-skeleton"
+      >
+        <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>
+      </SuspenseBlogsSectionDetailed>
     </RegulatTitleSectionWrapper>
   );
 });

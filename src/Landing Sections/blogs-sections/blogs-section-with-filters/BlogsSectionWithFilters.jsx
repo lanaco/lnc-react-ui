@@ -8,7 +8,7 @@ import { TitleWithOptionsSectionWrapper } from "../../style";
 import Button from "../../../General/Button/Button";
 import SimpleBlogCardHorizontal from "../../../Landing Components/blog-components/simple-blog-card-horizontal";
 import SelectBar from "../../../Inputs/SelectBar";
-import SuspenseBlogWithFilters from "../../../Landing Components/skeleton-components/blog-skeletons/suspense-with-filters";
+import SuspenseBlogsSectionWithFilters from "../../../Landing Components/skeleton-components/blog/blogs-section-with-filters";
 
 const MemoizedBlogCard = memo(SimpleBlogCardHorizontal);
 
@@ -73,48 +73,47 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(buttonLink) && (
-          <Button
-            type="button"
-            btnType="tinted"
-            color="neutral"
-            onClick={(e) => {
-              e?.target?.blur();
-              onButtonAction(buttonLink);
-            }}
-            borderRadius="curved"
-          >
-            {buttonText}
-          </Button>
-        )}
+        {isDefinedNotEmptyString(buttonText) &&
+          isDefinedNotEmptyString(buttonLink) &&
+          !isLoading && (
+            <Button
+              type="button"
+              btnType="tinted"
+              color="neutral"
+              onClick={(e) => {
+                e?.target?.blur();
+                onButtonAction(buttonLink);
+              }}
+              borderRadius="curved"
+            >
+              {buttonText}
+            </Button>
+          )}
       </div>
-      {options?.length > 0 && (
-        <SelectBar
-          items={options}
-          selectedIds={selectedOption}
-          onRemove={(item) => {
-            onSelectOption(item);
-          }}
-          onSelect={(item) => {
-            onSelectOption(item);
-          }}
-          onSelectAll={onSelectAll}
-          labelKey={"name"}
-          valueKey={"code"}
-          noMargin={true}
-          productsToolbarName={productsToolbarName}
-          allButton={allButton}
-        />
-      )}
-      <GridWrapper limit={limit}>
-        <SuspenseBlogWithFilters
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix={"explore-landing"}
-        >
-          {memoizedProducts}
-        </SuspenseBlogWithFilters>
-      </GridWrapper>
+      <SuspenseBlogsSectionWithFilters
+        isLoading={isLoading}
+        keyPrefix="blogs-with-filters-skeleton"
+      >
+        {options?.length > 0 && (
+          <SelectBar
+            items={options}
+            selectedIds={selectedOption}
+            onRemove={(item) => {
+              onSelectOption(item);
+            }}
+            onSelect={(item) => {
+              onSelectOption(item);
+            }}
+            onSelectAll={onSelectAll}
+            labelKey={"name"}
+            valueKey={"code"}
+            noMargin={true}
+            productsToolbarName={productsToolbarName}
+            allButton={allButton}
+          />
+        )}
+        <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>
+      </SuspenseBlogsSectionWithFilters>
     </TitleWithOptionsSectionWrapper>
   );
 });

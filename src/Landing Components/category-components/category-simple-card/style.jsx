@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  linearGradientAnimation,
-  truncateTextInRows,
-} from "../../../_utils/utils";
+import { truncateTextInRows } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
 export const CardWrapper = styled.div`
@@ -20,7 +17,6 @@ export const CardWrapper = styled.div`
   cursor: pointer;
 
   transition: var(--transition);
-
 
   /* drop-shadow-sm */
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
@@ -40,13 +36,6 @@ export const CardWrapper = styled.div`
     object-fit: cover;
     min-height: 8.25rem;
     max-height: 8.25rem;
-  }
-
-  & .skeleton-img {
-    width: 100%;
-    min-height: 8.25rem;
-    max-height: 8.25rem;
-    ${linearGradientAnimation("-90deg")}
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

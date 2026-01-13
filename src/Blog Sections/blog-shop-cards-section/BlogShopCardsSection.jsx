@@ -4,7 +4,6 @@ import { forwardRef, memo, useMemo } from "react";
 
 import useDetectMobile from "../../_utils/useDetectMobile";
 import ShopCard from "../../Landing Components/shop-components/shop-card";
-import SuspenseShopCards from "../../Landing Components/skeleton-components/shop-skeletons/suspense-shop-cards";
 import Button from "../../General/Button/Button";
 import { Wrapper } from "../style";
 
@@ -49,15 +48,7 @@ const BlogShopCardsSection = forwardRef(
 
     return (
       <Wrapper ref={ref} className={isHighlight ? "highlight" : ""}>
-        <div className="wrapper__grid">
-          <SuspenseShopCards
-            isLoading={isLoading}
-            limit={limit}
-            keyPrefix="blog-section"
-          >
-            {memoizedShops}
-          </SuspenseShopCards>
-        </div>
+        <div className="wrapper__grid">{memoizedShops}</div>
         <Button
           text={buttonText}
           borderRadius="curved"

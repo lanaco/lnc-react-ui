@@ -3,7 +3,6 @@ import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import {
   truncateText,
   truncateTextInRows,
-  linearGradientAnimation,
   getBorderRadiusValueWithUnits,
 } from "../../../_utils/utils";
 
@@ -105,38 +104,6 @@ export const Wrapper = styled.div`
   & .tags-wrapper {
     display: flex;
     gap: 0.5rem;
-  }
-
-  & .skeleton-img {
-    background-color: ${linearGradientAnimation("-90deg")};
-    border-radius: 0.75rem;
-    border: 1px solid white;
-    width: 100%;
-    height: 11rem;
-  }
-
-  & .skeleton-title {
-    background-color: ${linearGradientAnimation("-90deg")};
-    width: 100%;
-    height: 2.5rem;
-  }
-
-  & .skeleton-tags {
-    background-color: ${linearGradientAnimation("-90deg")};
-    width: 80%;
-    height: 1.5rem;
-  }
-
-  & .skeleton-price {
-    background-color: ${linearGradientAnimation("-90deg")};
-    width: 50%;
-    height: 2.5rem;
-  }
-
-  & .skeleton-sponsored {
-    background-color: ${linearGradientAnimation("-90deg")};
-    width: 50%;
-    height: 1rem;
   }
 
   & .tags-popover__trigger {

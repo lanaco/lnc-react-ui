@@ -7,7 +7,7 @@ import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { TitleWithOptionsSectionWrapper } from "../../style";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
-import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product-skeletons/suspense-product-card-detailed";
+import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product/detailed-product-card";
 import SelectBar from "../../../Inputs/SelectBar";
 
 const MemoizedProductCard = memo(DetailedProductCard);
@@ -79,47 +79,45 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 metadata={{ accessor: x?.accessor, name: componentName }}
               />
             ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <MemoizedProductCard
-                  key={index}
-                  name={x?.name}
-                  price={x?.price}
-                  sellingPrice={x?.sellingPrice}
-                  currency={x?.currency}
-                  image={x?.image}
-                  sellerUuid={x?.sellerUuid}
-                  uuid={x?.uuid}
-                  location={x?.location}
-                  sponsored={x?.sponsored}
-                  imageComponent={x?.imageComponent}
-                  onSelectCard={(e, cardRef) =>
-                    onSelectCard({
-                      uuid: x?.uuid,
-                      nameSlug: x?.nameSlug,
-                      cardRef,
-                    })
-                  }
-                  imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
-                  isFree={x?.isFree}
-                  isNegotiable={x?.isNegotiable}
-                  negotiableText={negotiableText}
-                  freeText={freeText}
-                  tags={x?.tags}
-                  categoryCode={x?.categoryCode}
-                  condition={x?.condition}
-                  quantity={x?.quantity}
-                  trade={x?.trade}
-                  sponsoredText={sponsoredText}
-                  onBookmark={onBookmark}
-                  bookmarkComponent={bookmarkComponent}
-                  bookmarked={x?.bookmarked}
-                  bookmarkLists={x?.bookmarkLists}
-                  metadata={{ accessor: x?.accessor, name: componentName }}
-                  sellerName={x?.sellerName}
-                />
-              ))}
+          : items?.slice(0, limit).map((x, index) => (
+              <MemoizedProductCard
+                key={index}
+                name={x?.name}
+                price={x?.price}
+                sellingPrice={x?.sellingPrice}
+                currency={x?.currency}
+                image={x?.image}
+                sellerUuid={x?.sellerUuid}
+                uuid={x?.uuid}
+                location={x?.location}
+                sponsored={x?.sponsored}
+                imageComponent={x?.imageComponent}
+                onSelectCard={(e, cardRef) =>
+                  onSelectCard({
+                    uuid: x?.uuid,
+                    nameSlug: x?.nameSlug,
+                    cardRef,
+                  })
+                }
+                imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+                isFree={x?.isFree}
+                isNegotiable={x?.isNegotiable}
+                negotiableText={negotiableText}
+                freeText={freeText}
+                tags={x?.tags}
+                categoryCode={x?.categoryCode}
+                condition={x?.condition}
+                quantity={x?.quantity}
+                trade={x?.trade}
+                sponsoredText={sponsoredText}
+                onBookmark={onBookmark}
+                bookmarkComponent={bookmarkComponent}
+                bookmarked={x?.bookmarked}
+                bookmarkLists={x?.bookmarkLists}
+                metadata={{ accessor: x?.accessor, name: componentName }}
+                sellerName={x?.sellerName}
+              />
+            ))}
       </>
     );
   }, [items, isMobile, limit]);
@@ -131,21 +129,23 @@ const DetailedProductsSection = forwardRef((props, ref) => {
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
           <span>{title}</span>
         </div>
-        {isDefinedNotEmptyString(buttonLink) && (
-          <Button
-            type="button"
-            btnType="tinted"
-            color="neutral"
-            onClick={(e) => {
-              e?.target?.blur();
-              onButtonAction(buttonLink);
-            }}
-            borderRadius="curved"
-            className="button-link"
-          >
-            {buttonText}
-          </Button>
-        )}
+        {isDefinedNotEmptyString(buttonLink) &&
+          isDefinedNotEmptyString(buttonText) &&
+          !isLoading && (
+            <Button
+              type="button"
+              btnType="tinted"
+              color="neutral"
+              onClick={(e) => {
+                e?.target?.blur();
+                onButtonAction(buttonLink);
+              }}
+              borderRadius="curved"
+              className="button-link"
+            >
+              {buttonText}
+            </Button>
+          )}
       </div>
       {options?.length > 0 && (
         <SelectBar
@@ -171,15 +171,13 @@ const DetailedProductsSection = forwardRef((props, ref) => {
           productsToolbarName={productsToolbarName}
         />
       )}
-      <GridWrapper limit={limit}>
-        <SuspenseDetailedProductCard
-          isLoading={isLoading}
-          limit={limit}
-          keyPrefix={"explore-landing"}
-        >
-          {memoizedProducts}
-        </SuspenseDetailedProductCard>
-      </GridWrapper>
+
+      <SuspenseDetailedProductCard
+        isLoading={isLoading}
+        keyPrefix="detailed-products-skeleton"
+      >
+        <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>
+      </SuspenseDetailedProductCard>
     </TitleWithOptionsSectionWrapper>
   );
 });

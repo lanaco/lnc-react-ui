@@ -4,10 +4,10 @@ import { forwardRef } from "react";
 
 import Button from "../../../General/Button/Button";
 import ShopCard from "../../../Landing Components/shop-components/shop-card";
-import ShopCardSkeleton from "../../../Landing Components/shop-components/shop-card/skeleton";
 import { isDefinedNotEmptyString } from "../../../_utils/utils";
 
 import { Wrapper } from "./style";
+import SuspenseShopCards from "../../../Landing Components/skeleton-components/shop/shop-cards";
 
 const ShopCardsSection = forwardRef(
   (
@@ -15,6 +15,7 @@ const ShopCardsSection = forwardRef(
       title,
       subtitle,
       items,
+      isLoading = false,
       limit = 4,
       limitForMobile = 2,
       buttonText = "Show More",
@@ -45,7 +46,7 @@ const ShopCardsSection = forwardRef(
                 <span>{title}</span>
               </div>
             )}
-            {onButtonAction && (
+            {onButtonAction && !isLoading && (
               <Button
                 text={buttonText}
                 color="neutral"
@@ -58,34 +59,36 @@ const ShopCardsSection = forwardRef(
           </div>
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}
         </div>
-        <div className="wrapper__cards">
-          {items && items?.length > 0
-            ? items?.map((card, idx) => (
-                <ShopCard
-                  showRating={showRating}
-                  key={`shop-card__${idx + 1}`}
-                  uuid={card?.uuid}
-                  title={card?.name}
-                  subtitle={card?.shortDescription}
-                  rating={card?.ratingArithmeticMean}
-                  reviewCount={card?.reviewCount}
-                  products={card?.products}
-                  imageComponent={card?.imageComponent}
-                  onSelectCard={(e, shopCardRef) =>
-                    onSelectCard(card?.uuid, shopCardRef)
-                  }
-                  image={getImage(card?.profileImage, card?.uuid) || null}
-                  getProductImage={getProductImage}
-                  canAcceptPayments={card?.canAcceptPayments}
-                  hideProducts={hideProducts}
-                  metadata={{ name: componentName, accessor: card?.accessor }}
-                />
-              ))
-            : Array.from("1234")?.map((_, idx) => (
-                <ShopCardSkeleton key={`shop-card-skeleton__${idx + 1}`} />
-              ))}
-        </div>
-        {gridView && onButtonAction && (
+        <SuspenseShopCards
+          isLoading={isLoading}
+          keyPrefix="shop-cards-skeleton"
+        >
+          <div className="wrapper__cards">
+            {items?.map((card, idx) => (
+              <ShopCard
+                showRating={showRating}
+                key={`shop-card__${idx + 1}`}
+                uuid={card?.uuid}
+                title={card?.name}
+                subtitle={card?.shortDescription}
+                rating={card?.ratingArithmeticMean}
+                reviewCount={card?.reviewCount}
+                products={card?.products}
+                imageComponent={card?.imageComponent}
+                onSelectCard={(e, shopCardRef) =>
+                  onSelectCard(card?.uuid, shopCardRef)
+                }
+                image={getImage(card?.profileImage, card?.uuid) || null}
+                getProductImage={getProductImage}
+                canAcceptPayments={card?.canAcceptPayments}
+                hideProducts={hideProducts}
+                metadata={{ name: componentName, accessor: card?.accessor }}
+              />
+            ))}
+          </div>
+        </SuspenseShopCards>
+
+        {gridView && onButtonAction && !isLoading && (
           <Button
             text={buttonText}
             borderRadius="curved"

@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-import { linearGradientAnimation, truncateTextInRows } from "../../../_utils/utils";
+import {
+  linearGradientAnimation,
+  truncateTextInRows,
+} from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -18,19 +21,7 @@ export const Wrapper = styled.div`
   & .card-title {
     font-size: 0.875rem;
     font-weight: 600;
-     ${truncateTextInRows(2)}
-  }
-
-  & .skeleton-img {
-    background-color: ${linearGradientAnimation("-90deg")};
-    border-radius: 0.75rem;
-    border: 1px solid white;
-  }
-
-  & .skeleton-title {
-    background-color: ${linearGradientAnimation("-90deg")};
-    width: 100%;
-    height: 1.25rem;
+    ${truncateTextInRows(2)}
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
