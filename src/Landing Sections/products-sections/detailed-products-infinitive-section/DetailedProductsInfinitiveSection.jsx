@@ -31,6 +31,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     onBookmark = () => {},
     bookmarkComponent,
     componentName,
+    hasNextPage = false,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -111,7 +112,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         <div className="section__items">{memoizedProducts}</div>
       </SuspenseDetailedProductCard>
 
-      {!isMobile && !isLoading && (
+      {!isMobile && !isLoading && hasNextPage && (
         <IconButton
           icon={loadMoreButtonIcon}
           borderRadius="curved"
