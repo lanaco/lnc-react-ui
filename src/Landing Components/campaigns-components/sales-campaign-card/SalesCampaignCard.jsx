@@ -13,15 +13,12 @@ import Icon from "../../../General/Icon/Icon";
 import ShopImageWrapper from "../../shop-img-wrapper";
 import ProfileItem from "./ProfileItem";
 import { forwardRef, useState, useEffect, useRef } from "react";
-
-const calcDaysDifference = (date1, date2) => {
-  if (!date1 || !date2) return null;
-
-  const diffMs = date1.getTime() - date2.getTime();
-  const dayMs = 24 * 60 * 60 * 1000;
-
-  return Math.floor(diffMs / dayMs);
-};
+import {
+  normalizeDate,
+  getDayNumberPrecise,
+  calcDaysRemaining,
+  calcDaysUntil,
+} from "../../../_utils/utils";
 
 const toLocaleDateString = (date) => {
   if (date !== undefined) {
@@ -70,6 +67,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     endsinSuffixTextPlural,
     endsInPrefixTextSingular,
     endsinSuffixTextSingular,
+    endedText,
     themeData,
     numberOfListings,
     numberOfListingsTextSingular,
@@ -80,26 +78,25 @@ const SalesCampaignCard = forwardRef((props, ref) => {
 
   const cardRef = useRef();
 
-  const hasStarted = startDate ? new Date(startDate) <= new Date() : false;
-  // const duration = calcDaysDifference(
-  //   endDate ? new Date(endDate) : null,
-  //   startDate ? new Date(startDate) : null
-  // );
-  const startsInDays = calcDaysDifference(
-    startDate ? new Date(startDate) : null,
-    new Date()
-  );
-  const endsInDays = calcDaysDifference(
-    endDate ? new Date(endDate) : null,
-    new Date()
-  );
+  // Use the same date calculation logic as the app
+  const campaignState = getDayNumberPrecise(startDate, endDate);
+  const isEnded = campaignState !== -1 && campaignState?.isEnded === true;
+  // Campaign has started if it's not -1 (hasn't started) and not ended
+  const hasStarted = campaignState !== -1 && !isEnded;
+
+  // Calculate days using UTC normalization
+  const startsInDays = calcDaysUntil(startDate);
+  const endsInDays = calcDaysRemaining(endDate);
 
   // Check if campaign ends in less than 2 days or 1 day
   const endsInLessThan2Days =
     endsInDays !== null && endsInDays <= 2 && endsInDays > 0;
-  const endMs = endDate ? new Date(endDate).getTime() : null;
-  const nowMs = Date.now();
-  const diffMs = endMs !== null ? endMs - nowMs : null;
+
+  // For countdown timer, use precise calculation
+  const endStr = normalizeDate(endDate);
+  const end = endStr ? new Date(endStr) : null;
+  const now = new Date();
+  const diffMs = end ? end.getTime() - now.getTime() : null;
 
   const endsInLessThan1Day =
     diffMs !== null && diffMs > 0 && diffMs < 24 * 60 * 60 * 1000;
@@ -118,8 +115,11 @@ const SalesCampaignCard = forwardRef((props, ref) => {
   // Calculate hours and minutes for counter when less than 1 day
   const getTimeRemaining = () => {
     if (!endDate) return null;
+    const endStr = normalizeDate(endDate);
+    const end = endStr ? new Date(endStr) : null;
+    if (!end) return null;
+
     const now = currentTime;
-    const end = new Date(endDate);
     const diff = end.getTime() - now.getTime();
 
     if (diff <= 0) return null;
@@ -216,7 +216,10 @@ const SalesCampaignCard = forwardRef((props, ref) => {
                     {timeRemaining.minutes.toString().padStart(2, "0")}:
                     {timeRemaining.seconds.toString().padStart(2, "0")}
                   </div>
-                ) : hasStarted ? (
+                ) : hasStarted &&
+                  !isEnded &&
+                  endsInDays !== null &&
+                  endsInDays > 0 ? (
                   durationText(
                     endsInPrefixTextSingular,
                     endsInPrefixTextPlural,
@@ -224,7 +227,9 @@ const SalesCampaignCard = forwardRef((props, ref) => {
                     endsinSuffixTextSingular,
                     endsinSuffixTextPlural
                   )
-                ) : (
+                ) : isEnded ? (
+                  endedText || "Završena"
+                ) : !hasStarted && startsInDays !== null && startsInDays > 0 ? (
                   durationText(
                     startsInPrefixTextSingular,
                     startsInPrefixTextPlural,
@@ -232,7 +237,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
                     startsinSuffixTextSingular,
                     startsinSuffixTextPlural
                   )
-                )}
+                ) : null}
               </span>
             </div>
           </div>

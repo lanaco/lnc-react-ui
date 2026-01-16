@@ -458,3 +458,104 @@ export const formatLocaleDateString = (isoDate) => {
 
   return `${day}. ${month}. ${year}`;
 };
+
+// Backend works with UTC time, frontend shows in current time
+// We need to handle the timezone difference properly
+export const normalizeDate = (date) => {
+  if (!date) return null;
+  if (date instanceof Date) {
+    // If it's a Date object, convert to ISO string (already includes 'Z')
+    return date.toISOString();
+  }
+  // If it's a string, ensure it has 'Z' for UTC parsing
+  const dateStr = String(date);
+  // Check if it already has timezone info (Z, +HH:MM, or -HH:MM pattern)
+  if (dateStr.endsWith("Z") || /[+-]\d{2}:\d{2}$/.test(dateStr)) {
+    return dateStr;
+  }
+  // Add 'Z' to indicate UTC if not present
+  return dateStr + "Z";
+};
+
+// Generic function to calculate day number for campaigns/promotions
+// Works with UTC dates from backend
+export const getDayNumberPrecise = (startDate, endDate) => {
+  // Backend sends UTC times, so we need to treat them as UTC
+  // Handle both Date objects and strings properly
+  const startStr = normalizeDate(startDate);
+  const endStr = normalizeDate(endDate);
+  const start = startStr ? new Date(startStr) : null;
+  const end = endStr ? new Date(endStr) : null;
+  const now = new Date();
+
+  if (!start || !end) {
+    return -1;
+  }
+
+  // Calculate total duration in milliseconds
+  const totalDurationMs = end.getTime() - start.getTime();
+
+  // Calculate elapsed time in milliseconds
+  const elapsedMs = now.getTime() - start.getTime();
+
+  // Calculate total days (including fractional days)
+  const totalDays = totalDurationMs / (1000 * 60 * 60 * 24);
+
+  // Calculate current day (including fractional days)
+  const currentDay = elapsedMs / (1000 * 60 * 60 * 24);
+
+  // If hasn't started yet
+  if (elapsedMs < 0) {
+    return -1;
+  }
+
+  // If has ended
+  if (elapsedMs >= totalDurationMs) {
+    return {
+      day: Math.ceil(totalDays),
+      totalDays: Math.ceil(totalDays),
+      isEnded: true,
+    };
+  }
+
+  return {
+    day: Math.floor(currentDay), // Make it 1-based (Day 1, 2, 3, 4 instead of 0, 1, 2, 3)
+    totalDays: Math.ceil(totalDays),
+    isEnded: false,
+    // Additional precision info for progress calculations
+    dayProgress: currentDay / totalDays, // 0 to 1 progress within current day
+    totalProgress: elapsedMs / totalDurationMs, // 0 to 1 overall progress
+  };
+};
+
+// Calculate days remaining until a date (using UTC normalization)
+export const calcDaysRemaining = (targetDate) => {
+  if (!targetDate) return null;
+
+  const targetStr = normalizeDate(targetDate);
+  const target = targetStr ? new Date(targetStr) : null;
+  const now = new Date();
+
+  if (!target) return null;
+
+  const diffMs = target.getTime() - now.getTime();
+  const dayMs = 24 * 60 * 60 * 1000;
+
+  return Math.ceil(diffMs / dayMs);
+};
+
+// Calculate days until a date (using UTC normalization)
+export const calcDaysUntil = (targetDate) => {
+  if (!targetDate) return null;
+
+  const targetStr = normalizeDate(targetDate);
+  const target = targetStr ? new Date(targetStr) : null;
+  const now = new Date();
+
+  if (!target) return null;
+
+  const diffMs = target.getTime() - now.getTime();
+  const dayMs = 24 * 60 * 60 * 1000;
+
+  return Math.ceil(diffMs / dayMs);
+};
