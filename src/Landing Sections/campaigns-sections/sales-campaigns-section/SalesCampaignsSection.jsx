@@ -32,6 +32,7 @@ const SalesCampaignsSection = forwardRef(
       endsinSuffixTextPlural,
       endsInPrefixTextSingular,
       endsinSuffixTextSingular,
+      endedText,
       numOfSlides = 2,
       showNavigation = true,
       numberOfListingsTextSingular,
@@ -85,6 +86,7 @@ const SalesCampaignsSection = forwardRef(
           endsinSuffixTextPlural={endsinSuffixTextPlural}
           endsInPrefixTextSingular={endsInPrefixTextSingular}
           endsinSuffixTextSingular={endsinSuffixTextSingular}
+          endedText={endedText}
           themeData={item?.themeData}
           numberOfListings={item?.numberOfListings}
           numberOfListingsTextSingular={numberOfListingsTextSingular}
