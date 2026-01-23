@@ -1,0 +1,35 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import BlogImagePathSection from "./BlogImagePathSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Blog Image Path Section"
+  component={BlogImagePathSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <BlogImagePathSection
+    image="https://picsum.photos/500"
+    altText={"This is BlogImagePathSection alternative text"}
+    imageWidth={400}
+    imageHeight={400}
+    imageMobileWidth={200}
+    imageMobileHeight={200}
+  />
+);
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import BlogImagePathSection from "@lanaco/lnc-react-ui/BlogImagePathSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
