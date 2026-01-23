@@ -27,6 +27,7 @@ const ImageBanner = forwardRef((props, ref) => {
       className={`image-banner__wrapper`}
     >
       <img
+        loading="lazy"
         src={image}
         alt={altText}
         className="wrapper__image"
