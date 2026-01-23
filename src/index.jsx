@@ -225,6 +225,7 @@ export { default as SearchSection } from "./Help Sections/search-section/SearchS
 export { default as StatsSection } from "./Help Sections/stats-section/StatsSection";
 export { default as ToggleSection } from "./Help Sections/toggle-section/ToggleSection";
 export { default as BlogExploreSection } from "./Landing Sections/blogs-sections/blog-explore-section/BlogExploreSection";
+export { default as BlogImagePathSection } from "./Blog Sections/blog-image-path-section/BlogImagePathSection";
 
 //======================== THEME ==============================================================
 

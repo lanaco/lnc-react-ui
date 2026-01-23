@@ -343,6 +343,10 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/blogs-sections/blog-explore-section/BlogExploreSection.jsx"
         ),
+        resolve(
+          __dirname,
+          "src/Blog Sections/blog-image-path-section/BlogImagePathSection.jsx"
+        ),
       ],
       name: "@lanaco/lnc-react-ui",
       fileName: (format, name) => {

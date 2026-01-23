@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.175",
+  "version": "4.0.176",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -165,7 +165,8 @@
     "./SearchSection": "./dist/SearchSection.js",
     "./StatsSection": "./dist/StatsSection.js",
     "./ToggleSection": "./dist/ToggleSection.js",
-    "./BlogExploreSection": "./dist/BlogExploreSection.js"
+    "./BlogExploreSection": "./dist/BlogExploreSection.js",
+    "./BlogImagePathSection": "./dist/BlogImagePathSection.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",
