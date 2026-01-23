@@ -56,7 +56,8 @@ const DetailedProductCard = forwardRef((props, ref) => {
     forOrder,
     contactSeller,
     hasVariants,
-
+    hasQuantities,
+    status,
     onBookmark = () => {},
     bookmarkComponent,
     bookmarked,
@@ -79,14 +80,15 @@ const DetailedProductCard = forwardRef((props, ref) => {
       onAddToBookmark: () => onBookmark(true, uuid),
       onRemoveFromBookmark: () => onBookmark(false, uuid),
       bookmarkedUuidList: bookmarkLists,
-
       sellerUuid,
-
       handleBookmarking: onBookmark,
       forCart,
       forOrder,
       contactSeller,
       hasVariants,
+      status,
+      quantity,
+      hasQuantities,
     });
 
     return cloneElement(wrapper, undefined, clonedChild);
@@ -104,7 +106,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
   ];
 
   const isVehiclesRealEstateCategory = CATEGORY_PREFIXES.some((prefix) =>
-    categoryCode?.includes(prefix)
+    categoryCode?.includes(prefix),
   );
 
   const [popover, setPopover] = useState(false);
