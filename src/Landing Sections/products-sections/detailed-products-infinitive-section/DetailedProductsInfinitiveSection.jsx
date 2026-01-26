@@ -61,6 +61,8 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         categoryCode={x?.categoryCode}
         condition={x?.condition}
         quantity={x?.quantity}
+        hasQuantities={x?.hasQuantities}
+        status={x?.status}
         trade={x?.trade}
         sponsoredText={sponsoredText}
         onBookmark={onBookmark}
