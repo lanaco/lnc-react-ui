@@ -72,6 +72,8 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   tags={x?.tags}
                   condition={x?.condition}
                   quantity={x?.quantity}
+                  hasQuantities={x?.hasQuantities}
+                  status={x?.status}
                   trade={x?.trade}
                   sponsoredText={sponsoredText}
                 />
@@ -110,6 +112,8 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                 tags={x?.tags}
                 condition={x?.condition}
                 quantity={x?.quantity}
+                hasQuantities={x?.hasQuantities}
+                status={x?.status}
                 trade={x?.trade}
                 sponsoredText={sponsoredText}
                 sellerName={x?.sellerName}
