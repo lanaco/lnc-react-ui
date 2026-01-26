@@ -73,6 +73,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 hasQuantities={x?.hasQuantities}
                 status={x?.status}
                 trade={x?.trade}
+                forCart={x?.forCart}
                 sponsoredText={sponsoredText}
                 onBookmark={onBookmark}
                 actionComponent={actionComponent}
@@ -113,6 +114,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 hasQuantities={x?.hasQuantities}
                 status={x?.status}
                 trade={x?.trade}
+                forCart={x?.forCart}
                 sponsoredText={sponsoredText}
                 onBookmark={onBookmark}
                 actionComponent={actionComponent}
