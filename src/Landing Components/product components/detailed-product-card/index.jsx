@@ -8,7 +8,6 @@ import {
   formatPrice,
   GetCurrencySymbol,
   isDefined,
-  isDefinedNotEmptyString,
 } from "../../../_utils/utils";
 import SponsoredLine from "../../sponsored-line";
 import ProductImageWrapper from "../../product-img-wrapper";
@@ -59,7 +58,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     hasQuantities,
     status,
     onBookmark = () => {},
-    bookmarkComponent,
+    actionComponent,
     bookmarked,
     bookmarkLists,
     metadata,
@@ -68,12 +67,12 @@ const DetailedProductCard = forwardRef((props, ref) => {
 
   const isMobile = useDetectMobile();
 
-  const ClonedBookmarkComponent = () => {
-    if (!isDefined(bookmarkComponent)) return <></>;
-    const wrapper = bookmarkComponent;
-    const bookComponent = bookmarkComponent?.props?.children;
+  const ClonedActionComponent = () => {
+    if (!isDefined(actionComponent)) return <></>;
+    const wrapper = actionComponent;
+    const aComponent = actionComponent?.props?.children;
 
-    const clonedChild = cloneElement(bookComponent, {
+    const clonedChild = cloneElement(aComponent, {
       key: `bookmark_pr__${bookmarked}`,
       bookmarked: bookmarked,
       productUuid: uuid,
@@ -263,7 +262,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
       onClick={(e) => onSelectCard(e, productCardRef)}
     >
       <ImageWrapper className="product-image-wrapper">
-        <ClonedBookmarkComponent />
+        <ClonedActionComponent />
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
