@@ -16,11 +16,12 @@ const BannerSectionCarousel = forwardRef(
     {
       items = [],
       isLoading = false,
+      deviceType,
       fallbackComponent = <></>,
       onSelectItem = () => {},
       onButtonAction = () => {},
     },
-    ref
+    ref,
   ) => {
     const responsive = {
       desktop: {
@@ -51,6 +52,7 @@ const BannerSectionCarousel = forwardRef(
         >
           <Carousel
             responsive={responsive}
+            deviceType={deviceType}
             removeArrowOnDeviceType={["tablet", "mobile"]}
             infinite={!isMobile}
             keyBoardControl={true}
@@ -104,7 +106,7 @@ const BannerSectionCarousel = forwardRef(
         </SuspenseBannerSectionCarousel>
       </Container>
     );
-  }
+  },
 );
 
 BannerSectionCarousel.propTypes = {
