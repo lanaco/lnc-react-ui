@@ -17,9 +17,11 @@ const BannerSectionCarousel = forwardRef(
       items = [],
       isLoading = false,
       deviceType,
+      partialVisible = true,
       fallbackComponent = <></>,
       onSelectItem = () => {},
       onButtonAction = () => {},
+      carouselProps,
     },
     ref,
   ) => {
@@ -57,13 +59,14 @@ const BannerSectionCarousel = forwardRef(
             infinite={!isMobile}
             keyBoardControl={true}
             autoPlay={true}
-            partialVisible={true}
+            partialVisible={partialVisible}
             customTransition="transform 500ms ease-in-out"
             sliderClass="carousel-slider"
             itemClass="carousel-item"
             containerClass="carousel-container"
             rewind={true}
             rewindWithAnimation={true}
+            {...carouselProps}
           >
             {items?.map((item, idx) => (
               <div
