@@ -47,6 +47,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     negotiableText = "Negotiable",
     tags = [],
     categoryCode,
+    categoryName,
     condition,
     quantity,
     trade,
@@ -88,6 +89,16 @@ const DetailedProductCard = forwardRef((props, ref) => {
       status,
       quantity,
       hasQuantities,
+      productBasicInfo: {
+        uuid,
+        price,
+        sellingPrice,
+        categoryCode,
+        categoryName,
+        currency,
+        isNegotiable,
+        isFree,
+      },
     });
 
     return cloneElement(wrapper, undefined, clonedChild);
