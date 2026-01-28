@@ -16,11 +16,14 @@ const BannerSectionCarousel = forwardRef(
     {
       items = [],
       isLoading = false,
+      deviceType,
+      partialVisible = true,
       fallbackComponent = <></>,
       onSelectItem = () => {},
       onButtonAction = () => {},
+      carouselProps,
     },
-    ref
+    ref,
   ) => {
     const responsive = {
       desktop: {
@@ -51,17 +54,19 @@ const BannerSectionCarousel = forwardRef(
         >
           <Carousel
             responsive={responsive}
+            deviceType={deviceType}
             removeArrowOnDeviceType={["tablet", "mobile"]}
             infinite={!isMobile}
             keyBoardControl={true}
             autoPlay={true}
-            partialVisible={true}
+            partialVisible={partialVisible}
             customTransition="transform 500ms ease-in-out"
             sliderClass="carousel-slider"
             itemClass="carousel-item"
             containerClass="carousel-container"
             rewind={true}
             rewindWithAnimation={true}
+            {...carouselProps}
           >
             {items?.map((item, idx) => (
               <div
@@ -104,7 +109,7 @@ const BannerSectionCarousel = forwardRef(
         </SuspenseBannerSectionCarousel>
       </Container>
     );
-  }
+  },
 );
 
 BannerSectionCarousel.propTypes = {

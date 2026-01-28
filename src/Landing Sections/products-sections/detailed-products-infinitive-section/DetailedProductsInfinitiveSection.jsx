@@ -29,7 +29,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     loadMoreButtonIcon = "angle-down",
     sponsoredText,
     onBookmark = () => {},
-    bookmarkComponent,
+    actionComponent,
     componentName,
     hasNextPage = false,
   } = props;
@@ -61,10 +61,12 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         categoryCode={x?.categoryCode}
         condition={x?.condition}
         quantity={x?.quantity}
+        hasQuantities={x?.hasQuantities}
+        status={x?.status}
         trade={x?.trade}
         sponsoredText={sponsoredText}
         onBookmark={onBookmark}
-        bookmarkComponent={bookmarkComponent}
+        actionComponent={actionComponent}
         bookmarked={x?.bookmarked}
         bookmarkLists={x?.bookmarkLists}
         metadata={{ accessor: x?.accessor, name: componentName }}

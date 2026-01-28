@@ -31,7 +31,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     productsToolbarName = "All",
     sponsoredText,
     onBookmark = () => {},
-    bookmarkComponent,
+    actionComponent,
     componentName,
   } = props;
 
@@ -70,10 +70,13 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 categoryCode={x?.categoryCode}
                 condition={x?.condition}
                 quantity={x?.quantity}
+                hasQuantities={x?.hasQuantities}
+                status={x?.status}
                 trade={x?.trade}
+                forCart={x?.forCart}
                 sponsoredText={sponsoredText}
                 onBookmark={onBookmark}
-                bookmarkComponent={bookmarkComponent}
+                actionComponent={actionComponent}
                 bookmarked={x?.bookmarked}
                 bookmarkLists={x?.bookmarkLists}
                 metadata={{ accessor: x?.accessor, name: componentName }}
@@ -108,10 +111,13 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 categoryCode={x?.categoryCode}
                 condition={x?.condition}
                 quantity={x?.quantity}
+                hasQuantities={x?.hasQuantities}
+                status={x?.status}
                 trade={x?.trade}
+                forCart={x?.forCart}
                 sponsoredText={sponsoredText}
                 onBookmark={onBookmark}
-                bookmarkComponent={bookmarkComponent}
+                actionComponent={actionComponent}
                 bookmarked={x?.bookmarked}
                 bookmarkLists={x?.bookmarkLists}
                 metadata={{ accessor: x?.accessor, name: componentName }}

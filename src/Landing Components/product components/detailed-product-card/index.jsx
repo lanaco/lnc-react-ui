@@ -8,7 +8,6 @@ import {
   formatPrice,
   GetCurrencySymbol,
   isDefined,
-  isDefinedNotEmptyString,
 } from "../../../_utils/utils";
 import SponsoredLine from "../../sponsored-line";
 import ProductImageWrapper from "../../product-img-wrapper";
@@ -56,9 +55,10 @@ const DetailedProductCard = forwardRef((props, ref) => {
     forOrder,
     contactSeller,
     hasVariants,
-
+    hasQuantities,
+    status,
     onBookmark = () => {},
-    bookmarkComponent,
+    actionComponent,
     bookmarked,
     bookmarkLists,
     metadata,
@@ -67,26 +67,27 @@ const DetailedProductCard = forwardRef((props, ref) => {
 
   const isMobile = useDetectMobile();
 
-  const ClonedBookmarkComponent = () => {
-    if (!isDefined(bookmarkComponent)) return <></>;
-    const wrapper = bookmarkComponent;
-    const bookComponent = bookmarkComponent?.props?.children;
+  const ClonedActionComponent = () => {
+    if (!isDefined(actionComponent)) return <></>;
+    const wrapper = actionComponent;
+    const aComponent = actionComponent?.props?.children;
 
-    const clonedChild = cloneElement(bookComponent, {
+    const clonedChild = cloneElement(aComponent, {
       key: `bookmark_pr__${bookmarked}`,
       bookmarked: bookmarked,
       productUuid: uuid,
       onAddToBookmark: () => onBookmark(true, uuid),
       onRemoveFromBookmark: () => onBookmark(false, uuid),
       bookmarkedUuidList: bookmarkLists,
-
       sellerUuid,
-
       handleBookmarking: onBookmark,
       forCart,
       forOrder,
       contactSeller,
       hasVariants,
+      status,
+      quantity,
+      hasQuantities,
     });
 
     return cloneElement(wrapper, undefined, clonedChild);
@@ -104,7 +105,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
   ];
 
   const isVehiclesRealEstateCategory = CATEGORY_PREFIXES.some((prefix) =>
-    categoryCode?.includes(prefix)
+    categoryCode?.includes(prefix),
   );
 
   const [popover, setPopover] = useState(false);
@@ -261,7 +262,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
       onClick={(e) => onSelectCard(e, productCardRef)}
     >
       <ImageWrapper className="product-image-wrapper">
-        <ClonedBookmarkComponent />
+        <ClonedActionComponent />
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

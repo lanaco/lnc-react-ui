@@ -23,7 +23,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
     negotiableText,
     freeText,
     onBookmark = () => {},
-    bookmarkComponent,
+    actionComponent,
     componentName,
     sponsoredText,
   } = props;
@@ -65,14 +65,17 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   negotiableText={negotiableText}
                   freeText={freeText}
                   onBookmark={onBookmark}
-                  bookmarkComponent={bookmarkComponent}
+                  actionComponent={actionComponent}
                   bookmarked={x?.bookmarked}
                   bookmarkLists={x?.bookmarkLists}
                   metadata={{ name: componentName, accessor: x?.accessor }}
                   tags={x?.tags}
                   condition={x?.condition}
                   quantity={x?.quantity}
+                  hasQuantities={x?.hasQuantities}
+                  status={x?.status}
                   trade={x?.trade}
+                  forCart={x?.forCart}
                   sponsoredText={sponsoredText}
                 />
               ))
@@ -103,14 +106,17 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                 negotiableText={negotiableText}
                 freeText={freeText}
                 onBookmark={onBookmark}
-                bookmarkComponent={bookmarkComponent}
+                actionComponent={actionComponent}
                 bookmarked={x?.bookmarked}
                 bookmarkLists={x?.bookmarkLists}
                 metadata={{ name: componentName, accessor: x?.accessor }}
                 tags={x?.tags}
                 condition={x?.condition}
                 quantity={x?.quantity}
+                hasQuantities={x?.hasQuantities}
+                status={x?.status}
                 trade={x?.trade}
+                forCart={x?.forCart}
                 sponsoredText={sponsoredText}
                 sellerName={x?.sellerName}
               />
