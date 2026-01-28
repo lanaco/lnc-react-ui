@@ -218,6 +218,8 @@ const Modal = forwardRef((props, ref) => {
   let themeProps = { theme, size, zIndex, className, style };
 
   const onClickOutsideModal = (event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
     if (event.target !== event.currentTarget) return;
     if (clickOutsideToClose) close(event);
   };
