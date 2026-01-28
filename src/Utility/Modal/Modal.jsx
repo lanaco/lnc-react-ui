@@ -1,5 +1,11 @@
 /* eslint-disable react/display-name */
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,7 +76,8 @@ const ModalContainer = styled(motion.div)`
   z-index: ${(props) => props.zIndex};
   width: ${(props) => ModalSizes[props.size.toUpperCase()]};
   max-width: ${(props) => getMaxWidth(props.size.toUpperCase())};
-  box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0px 20px 25px -5px rgba(0, 0, 0, 0.1),
     0px 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-radius: ${(props) =>
     props.size.toUpperCase() != "FULL" ? "16px" : "0"};
@@ -105,7 +112,7 @@ const ModalContainer = styled(motion.div)`
       `max-height: ${getMaxHeight(
         props.size.toUpperCase(),
         props.header,
-        props.footer
+        props.footer,
       )};`}
     overflow: auto;
     margin: ${(props) => getMargin(props.size, props.header, props.footer)};
@@ -124,7 +131,7 @@ const CloseButton = styled.div`
       "Modal",
       "primary",
       "enabled",
-      "cancelButton"
+      "cancelButton",
     )};
   height: 1.5rem;
   width: 1.5rem;
@@ -144,7 +151,7 @@ const CloseButton = styled.div`
         "primary",
         "hover",
         "cancelBtnBg",
-        "cancelBtnBgOpacity"
+        "cancelBtnBgOpacity",
       )};
   }
   &:focus {
@@ -155,7 +162,7 @@ const CloseButton = styled.div`
         "primary",
         "focus",
         "cancelBtnBg",
-        "cancelBtnBgOpacity"
+        "cancelBtnBgOpacity",
       )};
   }
 `;
@@ -174,6 +181,7 @@ const SecondOverlay = styled(motion.div)`
 
 const Modal = forwardRef((props, ref) => {
   const {
+    preventDefault = false,
     portalElement = document.body,
     isOpen = false,
     header,
@@ -218,8 +226,11 @@ const Modal = forwardRef((props, ref) => {
   let themeProps = { theme, size, zIndex, className, style };
 
   const onClickOutsideModal = (event) => {
-    event?.preventDefault();
-    event?.stopPropagation();
+    if (preventDefault) {
+      event?.preventDefault();
+      event?.stopPropagation();
+    }
+
     if (event.target !== event.currentTarget) return;
     if (clickOutsideToClose) close(event);
   };
@@ -257,10 +268,10 @@ const Modal = forwardRef((props, ref) => {
   };
 
   useEffect(() => {
-    if(show === true) {
+    if (show === true) {
       onFinishOpen();
     }
-  }, [show])
+  }, [show]);
 
   return (
     <>
@@ -288,7 +299,7 @@ const Modal = forwardRef((props, ref) => {
                 >
                   {children}
                 </ModalContent>,
-                portalElement
+                portalElement,
               )}
             </>
           ) : (
@@ -337,7 +348,7 @@ const ModalContent = forwardRef(
       children,
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <AnimatePresence>
@@ -390,7 +401,7 @@ const ModalContent = forwardRef(
         )}
       </AnimatePresence>
     );
-  }
+  },
 );
 
 const ModalWrapper = forwardRef(
@@ -406,7 +417,7 @@ const ModalWrapper = forwardRef(
       children,
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <AnimatePresence>
@@ -435,7 +446,7 @@ const ModalWrapper = forwardRef(
         </ModalContainer>
       </AnimatePresence>
     );
-  }
+  },
 );
 
 // Modal.defaultProps = {
