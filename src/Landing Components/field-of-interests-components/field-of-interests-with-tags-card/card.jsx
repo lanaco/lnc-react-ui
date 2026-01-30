@@ -1,19 +1,21 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import { useTheme } from "@emotion/react";
 
-import { isDefined } from "../../../_utils/utils";
+import { isDefined, isDefinedNotEmptyString } from "../../../_utils/utils";
 import { Wrapper } from "./style";
 
 const FieldOfInterestsWithTagsCard = forwardRef(
   (
-    { image, imageComponent, name, description, onSelectCard = () => {} },
+    { image, imageComponent, name, description, onSelectCard = () => {}, uuid, nameSlug },
     ref
   ) => {
     const { theme } = useTheme();
 
     return (
-      <Wrapper ref={ref} theme={theme} onClick={onSelectCard}>
+      <Wrapper ref={ref} theme={theme} onClick={onSelectCard} href={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

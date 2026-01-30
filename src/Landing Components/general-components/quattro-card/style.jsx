@@ -48,7 +48,9 @@ export const Gradient = styled.div`
   z-index: 2;
 `;
 
-export const Container = styled.div`
+export const Container = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   cursor: pointer;
   position: relative;
   border-radius: 0.75rem;

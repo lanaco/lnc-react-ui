@@ -47,6 +47,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                 buttonText={x?.buttonText}
                 onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
                 metadata={{ name: componentName, accessor: x?.accessor }}
+                link={x?.link}
               />
             ))
           : items
@@ -60,11 +61,12 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                   buttonText={x?.buttonText}
                   onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
                   metadata={{ name: componentName, accessor: x?.accessor }}
+                  link={x?.link}
                 />
               ))}
       </>
     );
-  }, [items, isMobile, limit, onSelectCard]);
+  }, [items, isMobile, limit]);
 
   return (
     <TitleWithOptionsSectionWrapper ref={ref}>

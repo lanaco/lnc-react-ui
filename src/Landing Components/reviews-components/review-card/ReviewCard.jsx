@@ -6,10 +6,10 @@ import StarRating from "../../star-rating/StarRating";
 import ProductImageWrapper from "../../product-img-wrapper";
 
 const ReviewCard = forwardRef((props, ref) => {
-  const { image, text, title, onSelectCard = () => {}, rating } = props;
+  const { image, text, title, link, rating, onSelectCard = () => { } } = props;
 
   return (
-    <ExternalWrapper ref={ref} className="review-card" onClick={onSelectCard}>
+    <ExternalWrapper ref={ref} className="review-card" onClick={onSelectCard} href={`/${link}`}>
       <Wrapper>
         <ProductImageWrapper src={image} />
         <div className="cont">

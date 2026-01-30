@@ -27,11 +27,12 @@ const BlogCardItem = forwardRef(
       numberOfLikes = 0,
       numberOfComments = 0,
       isBookmarked = false,
-      onSelectCard = () => {},
-      onBookmark = () => {},
-      onShare = () => {},
+      onSelectCard = () => { },
+      onBookmark = () => { },
+      onShare = () => { },
       bookmarkComponent = <></>,
       metadata,
+      titleSlug,
     },
     ref
   ) => {
@@ -59,6 +60,7 @@ const BlogCardItem = forwardRef(
         data-accessor={metadata?.accessor}
         onClick={(e) => onSelectCard(e, blogCardRef)}
         className="blog-card-item"
+        href={`/blog/${titleSlug}`}
       >
         <ProductImageWrapper src={imageUrl} className="wrapper__image" />
         <div className="wrapper__content">
@@ -76,15 +78,17 @@ const BlogCardItem = forwardRef(
                     </BlogTag>
                   ))}
               </div>
-              <div className="info__content mobile-only">
+              <div className="info__content mobile-only" onClick={(e)=> {
+                e.stopPropagation();
+                e.preventDefault();
+              }}>
                 <ClonedBookmarkComponent />
                 <IconButton
                   icon=" mng-lnc-share"
                   borderRadius="curved"
                   btnType="basic"
                   color="neutral"
-                  onClick={(e) => {
-                    e?.stopPropagation();
+                  onClick={() => {
                     onShare();
                   }}
                 />
@@ -107,15 +111,18 @@ const BlogCardItem = forwardRef(
                 </div>
               </div>
             </div>
-            <div className="info__content desktop-only">
+            <div className="info__content desktop-only" onClick={(e) => {
+              e?.preventDefault();
+              e?.stopPropagation();
+            }}>
               <ClonedBookmarkComponent />
               <IconButton
                 icon=" mng-lnc-share"
                 borderRadius="curved"
                 btnType="basic"
                 color="neutral"
-                onClick={(e) => {
-                  e?.stopPropagation();
+                onClick={() => {
+
                   onShare();
                 }}
               />

@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 
-export const ExternalWrapper = styled.div`
+export const ExternalWrapper = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

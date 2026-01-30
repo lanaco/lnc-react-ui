@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import OverlayGeneralCard from "../../../Landing Components/general-components/overlay-general-card";
 import { Container } from "./style";
 import SuspenseBlogsSectionDetailed from "../../../Landing Components/skeleton-components/blog/blogs-section-detailed";
 
+// eslint-disable-next-line react/display-name
 const OverlayGeneralCardsSection = forwardRef(
   (
     {
@@ -33,6 +35,7 @@ const OverlayGeneralCardsSection = forwardRef(
                 backgroundColor={item?.backgroundColor}
                 handleSelectCard={() => onSelectCard(item)}
                 handleButtonAction={() => onButtonAction(item)}
+                selectAction={item?.selectAction}
               />
             ))}
           </div>

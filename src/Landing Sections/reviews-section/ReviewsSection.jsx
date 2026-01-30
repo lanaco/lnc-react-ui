@@ -49,7 +49,7 @@ const ReviewsSection = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items, isMobile, onSelectCard, limit]);
+  }, [items, isMobile, limit]);
 
   return (
     <Container ref={ref}>

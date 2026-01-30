@@ -19,10 +19,10 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
     buttonText = "Shop now",
     buttonLink,
     limit = 12,
-    onButtonAction = () => {},
-    onSelectCard = () => {},
+    onButtonAction = () => { },
+    onSelectCard = () => { },
     isLoading = false,
-    getImage = () => {},
+    getImage = () => { },
   } = props;
 
   const isMobile = useDetectMobile();
@@ -32,25 +32,29 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
       <>
         {isMobile === true
           ? items?.map((x, index) => (
+            <MemoizedCategoryCard
+              key={index}
+              uuid={x?.uuid}
+              image={getImage(x?.image) || null}
+              name={x?.name}
+              code={x?.code}
+              onSelectCard={() => onSelectCard?.(x?.uuid)}
+              {...x}
+            />
+          ))
+          : items
+            ?.slice(0, limit)
+            .map((x, index) => (
               <MemoizedCategoryCard
                 key={index}
                 uuid={x?.uuid}
                 image={getImage(x?.image) || null}
                 name={x?.name}
+                code={x?.code}
                 onSelectCard={() => onSelectCard?.(x?.uuid)}
+                {...x}
               />
-            ))
-          : items
-              ?.slice(0, limit)
-              .map((x, index) => (
-                <MemoizedCategoryCard
-                  key={index}
-                  uuid={x?.uuid}
-                  image={getImage(x?.image) || null}
-                  name={x?.name}
-                  onSelectCard={() => onSelectCard?.(x)}
-                />
-              ))}
+            ))}
       </>
     );
   }, [items]);

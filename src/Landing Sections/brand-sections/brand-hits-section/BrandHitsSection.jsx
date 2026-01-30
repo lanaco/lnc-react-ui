@@ -8,7 +8,7 @@ import SuspenseBrandHits from "../../../Landing Components/skeleton-components/b
 
 const BrandHitsSection = forwardRef(
   (
-    { title, subtitle, items = [], isLoading = false, onSelectCard = () => {} },
+    { title, subtitle, items = [], isLoading = false, onSelectCard = () => {}, urlPrefix, urlSufix },
     ref
   ) => {
     return (
@@ -29,6 +29,9 @@ const BrandHitsSection = forwardRef(
                 imageComponent={item?.imageComponent}
                 onSelectCard={() => onSelectCard?.(item)}
                 className="wrapper__item"
+                urlPrefix={urlPrefix}
+                urlSufix={urlSufix}
+                code={item?.card}
               />
             ))}
           </div>

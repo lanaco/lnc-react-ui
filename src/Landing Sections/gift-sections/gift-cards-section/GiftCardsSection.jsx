@@ -60,6 +60,7 @@ const GiftsSection = forwardRef((props, ref) => {
                   currency={x?.currencyIsoCode}
                   image={x?.imageUrl}
                   uuid={x?.uuid}
+                  selectAction={x?.selectAction}
                   onSelectGiftCard={(uuid) => onSelectCard(x)}
                 />
               ))
@@ -73,6 +74,7 @@ const GiftsSection = forwardRef((props, ref) => {
                     currency={x?.currencyIsoCode}
                     image={x?.imageUrl}
                     uuid={x?.uuid}
+                    selectAction={x?.selectAction}
                     onSelectGiftCard={(uuid) => onSelectCard(x)}
                   />
                 ))}

@@ -3,7 +3,9 @@ import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateTextInRows } from "../../../_utils/utils";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -70,7 +72,9 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const TagWrapper = styled.div`
+export const TagWrapper = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   display: flex;
   padding: 0 0.75rem 0 0.75rem;
   align-items: center;

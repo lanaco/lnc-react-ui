@@ -49,6 +49,7 @@ const GeneralWithTagsCardsSection = forwardRef(
                 imageUrl={card?.imageUrl}
                 imageComponent={card?.imageComponent}
                 title={card?.title}
+                selectAction={card?.selectAction}
                 onSelectCard={() => {
                   onSelectCard?.(card);
                 }}
@@ -67,6 +68,7 @@ const GeneralWithTagsCardsSection = forwardRef(
                 icon={tag?.icon}
                 title={tag?.title}
                 onSelectCard={() => onSelectTag?.(tag)}
+                selectAction={tag?.selectAction}
               />
             ))}
           </div>

@@ -21,6 +21,7 @@ const QuattroCardsSection = forwardRef(
             description={x?.description}
             imageUrl={x?.imageUrl}
             onSelectCard={() => onSelectCard?.(x)}
+            link={x?.link}
           />
         ));
     }, [items]);

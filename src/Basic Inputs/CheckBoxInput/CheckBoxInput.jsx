@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import {
@@ -342,42 +342,5 @@ const CheckBoxInput = forwardRef((props, ref) => {
     </Container>
   );
 });
-
-CheckBoxInput.propTypes = {
-  containerRef: PropTypes.any,
-  id: PropTypes.any,
-  defaultChecked: PropTypes.bool,
-  checked: PropTypes.bool,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * Default state indeterminate
-   */
-  indeterminate: PropTypes.bool,
-  labelPosition: PropTypes.oneOf(["right", "left"]),
-  tabIndex: PropTypes.number,
-  spaceBetween: PropTypes.bool,
-  customCheckmark: PropTypes.element,
-  //---------------------------------------------------------------
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onClick: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default CheckBoxInput;

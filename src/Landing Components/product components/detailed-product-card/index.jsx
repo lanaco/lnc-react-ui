@@ -8,6 +8,7 @@ import {
   formatPrice,
   GetCurrencySymbol,
   isDefined,
+  isDefinedNotEmptyString,
 } from "../../../_utils/utils";
 import SponsoredLine from "../../sponsored-line";
 import ProductImageWrapper from "../../product-img-wrapper";
@@ -42,7 +43,6 @@ const DetailedProductCard = forwardRef((props, ref) => {
     location,
     sponsored,
     imageComponent,
-    onSelectCard = () => {},
     freeText = "Free",
     negotiableText = "Negotiable",
     tags = [],
@@ -58,12 +58,14 @@ const DetailedProductCard = forwardRef((props, ref) => {
     hasVariants,
     hasQuantities,
     status,
-    onBookmark = () => {},
+    onBookmark = () => { },
     actionComponent,
     bookmarked,
     bookmarkLists,
     metadata,
     sellerName,
+    nameSlug,
+    onSelectCard = () => {},
   } = props;
 
   const isMobile = useDetectMobile();
@@ -271,9 +273,15 @@ const DetailedProductCard = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onSelectCard(e, productCardRef)}
+      href={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}
     >
       <ImageWrapper className="product-image-wrapper">
-        <ClonedActionComponent />
+        <div onClick={(e) => {
+          e?.preventDefault();
+          e?.stopPropagation();
+        }}>
+          <ClonedActionComponent />
+        </div>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
@@ -286,15 +294,18 @@ const DetailedProductCard = forwardRef((props, ref) => {
         </div>
         <div className="card-title">{name}</div>
       </div>
-      <div className="wrapper-card-3">
+      <div className="wrapper-card-3" onClick={(e) => {
+        e?.preventDefault();
+        e?.stopPropagation();
+      }}>
         {isVehiclesRealEstateCategory && (
           <div
             {...(isMobile
               ? {}
               : {
-                  onMouseEnter: handleOpenPopover,
-                  onMouseLeave: handleClosePopover,
-                })}
+                onMouseEnter: handleOpenPopover,
+                onMouseLeave: handleClosePopover,
+              })}
           >
             <Popover placement="bottom" open={popover}>
               <PopoverTrigger>{renderTags()}</PopoverTrigger>

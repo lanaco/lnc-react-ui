@@ -56,7 +56,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items, isMobile, limit, onSelectCard]);
+  }, [items, isMobile, limit]);
 
   return (
     <SuspenseBlogsSectionLarge

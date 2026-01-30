@@ -4,7 +4,7 @@
 /* eslint-disable react/display-name */
 import { forwardRef, useRef } from "react";
 import { Wrapper } from "./style";
-import { isDefined } from "../../../_utils/utils";
+import { isDefined, isDefinedNotEmptyString } from "../../../_utils/utils";
 import ProductImageWrapper from "../../product-img-wrapper";
 
 const ClearProductCard = forwardRef((props, ref) => {
@@ -13,9 +13,9 @@ const ClearProductCard = forwardRef((props, ref) => {
     title,
     image,
     sellerUuid,
-    onSelectCard = () => {},
-    imageComponent,
+  onSelectCard = () => {},    imageComponent,
     metadata,
+    nameSlug,
   } = props;
 
   const productCardRef = useRef(null);
@@ -27,6 +27,7 @@ const ClearProductCard = forwardRef((props, ref) => {
       name={metadata?.name}
       data-accessor={metadata?.accessor}
       onClick={(e) => onSelectCard(e, ref)}
+      href={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}
     >
       {isDefined(imageComponent) ? (
         imageComponent

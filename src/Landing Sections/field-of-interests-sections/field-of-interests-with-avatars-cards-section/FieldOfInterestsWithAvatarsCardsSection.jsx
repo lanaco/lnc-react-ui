@@ -87,6 +87,7 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
                 negotiableText={card?.negotiableText}
                 freeText={card?.freeText}
                 onSelectCard={() => handleSelectCard?.(card)}
+                nameSlug={card?.nameSlug}
               />
             ))}
           </div>

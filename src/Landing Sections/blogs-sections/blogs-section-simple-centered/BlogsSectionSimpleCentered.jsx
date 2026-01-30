@@ -34,6 +34,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                   buttonText={x?.buttonText}
                   onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
                   metadata={{ name: componentName, accessor: x?.accessor }}
+                  link={x?.link}
                 />
               ))
             : items
@@ -47,6 +48,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                     buttonText={x?.buttonText}
                     onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
                     metadata={{ name: componentName, accessor: x?.accessor }}
+                    link={x?.link}
                   />
                 ))}
         </>

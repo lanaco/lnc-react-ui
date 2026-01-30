@@ -18,7 +18,6 @@ const SimpleProductsSection = forwardRef((props, ref) => {
     buttonLink,
     items,
     onButtonAction = () => {},
-    onSelectCard = () => {},
     isLoading = false,
     limit = 6,
     getImage = () => {},
@@ -42,13 +41,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
                 currency={x?.currency}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
-                onSelectCard={(e, cardRef) =>
-                  onSelectCard({
-                    uuid: x?.uuid,
-                    nameSlug: x?.nameSlug,
-                    cardRef,
-                  })
-                }
+                nameSlug={x?.nameSlug}
                 image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 negotiableText={negotiableText}
                 freeText={freeText}
@@ -65,13 +58,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
                 currency={x?.currency}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
-                onSelectCard={(e, cardRef) =>
-                  onSelectCard({
-                    uuid: x?.uuid,
-                    nameSlug: x?.nameSlug,
-                    cardRef,
-                  })
-                }
+                nameSlug={x?.nameSlug}
                 image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 negotiableText={negotiableText}
                 freeText={freeText}

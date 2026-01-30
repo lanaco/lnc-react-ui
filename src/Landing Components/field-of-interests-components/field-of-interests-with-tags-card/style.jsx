@@ -3,7 +3,9 @@ import styled from "@emotion/styled";
 import { truncateTextInRows } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
