@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef, useImperativeHandle } from "react";
+import { useEffect, forwardRef, useImperativeHandle } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";

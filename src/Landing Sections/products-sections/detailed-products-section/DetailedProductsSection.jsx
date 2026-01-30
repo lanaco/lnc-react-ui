@@ -53,6 +53,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 uuid={x?.uuid}
                 sponsored={x?.sponsored}
                 imageComponent={x?.imageComponent}
+                nameSlug={x?.nameSlug}
                 onSelectCard={(e, cardRef) =>
                   onSelectCard({
                     uuid: x?.uuid,
@@ -102,6 +103,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                     cardRef,
                   })
                 }
+                nameSlug={x?.nameSlug}
                 imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 isFree={x?.isFree}
                 isNegotiable={x?.isNegotiable}

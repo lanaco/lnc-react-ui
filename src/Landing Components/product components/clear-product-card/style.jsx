@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import {
-  linearGradientAnimation,
   truncateTextInRows,
 } from "../../../_utils/utils";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   cursor: pointer;
+  text-decoration: none;
+  color: var(--gray-950);
 
   & img {
     width: 100%;

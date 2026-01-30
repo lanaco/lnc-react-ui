@@ -48,9 +48,10 @@ const ShopCard = forwardRef(
     return (
       <Wrapper
         ref={shopCardRef}
-        onClick={(e) => onSelectCard(e, shopCardRef)}
         name={metadata?.name}
         data-accessor={metadata?.accessor}
+        onClick={(e) => onSelectCard(e, shopCardRef)}
+        href={`/shop/${uuid}`}
       >
         <div className="wrapper__content">
           {isDefined(imageComponent) ? (

@@ -1,7 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
-
-import PropTypes from "prop-types";
-
 import Button from "../../../General/Button/Button";
 import { Container } from "./style";
 
@@ -15,14 +14,17 @@ const OverlayGeneralCard = forwardRef(
       backgroundColor = "none",
       handleSelectCard = () => {},
       handleButtonAction = () => {},
+      selectAction
     },
     ref
   ) => {
     return (
       <Container
+        ref={ref}
         backgroundImage={imageUrl}
         backgroundColor={backgroundColor}
         onClick={handleSelectCard}
+        href={`/${selectAction}`}
       >
         <div className="section__text">
           {title && <div className="section__title">{title}</div>}
@@ -33,6 +35,7 @@ const OverlayGeneralCard = forwardRef(
         <Button
           text={buttonText}
           onClick={(e) => {
+            e?.preventDefault();
             e?.stopPropagation();
 
             handleButtonAction();
@@ -45,15 +48,5 @@ const OverlayGeneralCard = forwardRef(
     );
   }
 );
-
-OverlayGeneralCard.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  buttonText: PropTypes.string,
-  imageUrl: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  handleSelectCard: PropTypes.func,
-  handleButtonAction: PropTypes.func,
-};
 
 export default OverlayGeneralCard;

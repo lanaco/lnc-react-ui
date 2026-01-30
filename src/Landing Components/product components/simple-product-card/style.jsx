@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 import {
-  linearGradientAnimation,
   truncateTextInRows,
 } from "../../../_utils/utils";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   display: flex;
   flex-direction: column;
   justify-content: end;

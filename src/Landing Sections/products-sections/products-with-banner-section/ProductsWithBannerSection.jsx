@@ -16,7 +16,6 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
     items,
     limit = 4,
     imageUrl,
-    onSelectCard = () => {},
     title = "Season inspiration",
     isLoading = false,
     getImage = () => {},
@@ -34,13 +33,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                 title={x?.name}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
-                onSelectCard={(e, cardRef) =>
-                  onSelectCard({
-                    uuid: x?.uuid,
-                    nameSlug: x?.nameSlug,
-                    cardRef,
-                  })
-                }
+                nameSlug={x?.nameSlug}
                 image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 metadata={{ name: componentName, accessor: x?.accessor }}
               />
@@ -51,13 +44,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                 title={x?.name}
                 sellerUuid={x?.sellerUuid}
                 uuid={x?.uuid}
-                onSelectCard={(e, cardRef) =>
-                  onSelectCard({
-                    uuid: x?.uuid,
-                    nameSlug: x?.nameSlug,
-                    cardRef,
-                  })
-                }
+                nameSlug={x?.nameSlug}
                 image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 metadata={{ name: componentName, accessor: x?.accessor }}
               />

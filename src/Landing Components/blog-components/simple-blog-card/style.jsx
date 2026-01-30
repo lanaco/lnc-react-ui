@@ -3,7 +3,9 @@ import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateTextInRows } from "../../../_utils/utils";
 import { linearGradientAnimation } from "../../../_utils/utils";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   display: flex;
   flex-direction: column;
   width: 100%;

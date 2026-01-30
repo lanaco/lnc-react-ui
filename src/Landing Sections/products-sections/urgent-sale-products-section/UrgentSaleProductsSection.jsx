@@ -52,13 +52,14 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
                   sponsored={x?.sponsored}
-                  onSelectCard={(e, cardRef) =>
+                   onSelectCard={(e, cardRef) =>
                     onSelectCard({
                       uuid: x?.uuid,
                       nameSlug: x?.nameSlug,
                       cardRef,
                     })
                   }
+                  nameSlug={x?.nameSlug}
                   image={x?.image}
                   imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                   imageComponent={x?.imageComponent}
@@ -93,13 +94,14 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                 uuid={x?.uuid}
                 location={x?.location}
                 sponsored={x?.sponsored}
-                onSelectCard={(e, cardRef) =>
-                  onSelectCard({
-                    uuid: x?.uuid,
-                    nameSlug: x?.nameSlug,
-                    cardRef,
-                  })
-                }
+                 onSelectCard={(e, cardRef) =>
+                    onSelectCard({
+                      uuid: x?.uuid,
+                      nameSlug: x?.nameSlug,
+                      cardRef,
+                    })
+                  }
+                nameSlug={x?.nameSlug}
                 image={x?.image}
                 imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 imageComponent={x?.imageComponent}

@@ -8,7 +8,6 @@ import {
   StatusBadge,
   Wrapper,
 } from "./style";
-import PropTypes from "prop-types";
 import Icon from "../../../General/Icon/Icon";
 import ShopImageWrapper from "../../shop-img-wrapper";
 import ProfileItem from "./ProfileItem";
@@ -37,7 +36,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
   const theme = useTheme();
 
   const {
-    // uuid,
+    uuid,
     shopUuid,
     title = "",
     // description,
@@ -155,9 +154,10 @@ const SalesCampaignCard = forwardRef((props, ref) => {
       name={metadata?.name}
       data-accessor={metadata?.accessor}
       onClick={(e) => onSelectCard(e, cardRef)}
+      href={`/shop/${shopUuid}/campaign/${uuid}`}
       {...rest}
     >
-      <ImageWrapper theme={theme} onClick={() => onSelect?.()}>
+      <ImageWrapper theme={theme}>
         {/* <CampaignFallbackImage
           image={coverPhoto}
           uuid={uuid}
@@ -251,6 +251,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
           isUser={false}
           name={shopName}
           shopCategory={shopCategory}
+          uuid={shopUuid}
           //   onSelect={(e) => navigate(`/shop/${shopUuid}`)}
           onClick={() => onSelectShop(shopUuid)}
         />
@@ -258,12 +259,5 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     </Wrapper>
   );
 });
-
-SalesCampaignCard.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  numberOfListings: PropTypes.number,
-  dropdown: PropTypes.any,
-  color: PropTypes.string,
-};
 
 export default SalesCampaignCard;

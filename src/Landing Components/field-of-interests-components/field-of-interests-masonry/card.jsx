@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import { useTheme } from "@emotion/react";
@@ -14,6 +16,7 @@ const FieldOfInterestsMasonryCard = forwardRef(
       description,
       className,
       onSelectCard = () => {},
+      link,
     },
     ref
   ) => {
@@ -25,6 +28,7 @@ const FieldOfInterestsMasonryCard = forwardRef(
         theme={theme}
         className={className}
         onClick={onSelectCard}
+        href={`/${link}`}
       >
         {isDefined(imageComponent) ? (
           imageComponent

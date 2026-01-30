@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import { truncateTextInRows } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.a`
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   gap: 0;

@@ -131,6 +131,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
                 description={card?.description}
                 onSelectCard={() => onSelectCard?.(card)}
                 className="wrapper__card"
+                link={card?.link}
               />
             ))}
           </div>

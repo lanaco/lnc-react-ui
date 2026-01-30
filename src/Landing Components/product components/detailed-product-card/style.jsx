@@ -6,14 +6,15 @@ import {
   getBorderRadiusValueWithUnits,
 } from "../../../_utils/utils";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   cursor: pointer;
   overflow: hidden;
   width: 100%;
-
+  text-decoration: none;
+  color: var(--gray-950, #14161a);
   & .seller {
     text-transform: uppercase;
     ${truncateText()}

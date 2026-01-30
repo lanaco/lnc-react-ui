@@ -70,6 +70,8 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                 name={card?.title}
                 description={card?.description}
                 onSelectCard={() => onSelectCard?.(card)}
+                uuid={card?.uuid}
+                nameSlug={card?.nameSlug}
               />
             ))}
           </div>

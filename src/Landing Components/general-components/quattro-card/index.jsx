@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import { useTheme } from "@emotion/react";
@@ -5,11 +7,11 @@ import { useTheme } from "@emotion/react";
 import { Container, Gradient } from "./style";
 
 const QuattroCard = forwardRef(
-  ({ title, description, imageUrl, onSelectCard = () => {} }, ref) => {
+  ({ title, description, imageUrl, onSelectCard = () => {}, link }, ref) => {
     const { theme } = useTheme();
 
     return (
-      <Container ref={ref} theme={theme} onClick={onSelectCard}>
+      <Container ref={ref} theme={theme} onClick={onSelectCard} href={`/${link}`}>
         <img loading="lazy" src={imageUrl} />
         <Gradient theme={theme} className="quattro-card__gradient">
           <div className="quattro-card__text">

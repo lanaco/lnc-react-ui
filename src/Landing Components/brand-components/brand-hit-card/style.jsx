@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   width: 7.5rem;
   height: auto;
   max-height: 7.5rem;

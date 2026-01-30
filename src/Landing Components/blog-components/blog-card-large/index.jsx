@@ -7,7 +7,7 @@ import Button from "../../../General/Button/Button";
 import ProductImageWrapper from "../../product-img-wrapper";
 
 const BlogCardLarge = forwardRef((props, ref) => {
-  const { title, imageUrl, text, onCardClick, buttonText, metadata } = props;
+  const { title, imageUrl, text, onCardClick, buttonText, metadata, titleSlug } = props;
 
   const isMobile = useDetectMobile();
 
@@ -20,6 +20,7 @@ const BlogCardLarge = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onCardClick(e, cardRef)}
+      href={`/blog/${titleSlug}`}
     >
       <ProductImageWrapper src={imageUrl} />
       <TextWrapper>

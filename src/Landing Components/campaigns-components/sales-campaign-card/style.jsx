@@ -3,7 +3,9 @@ import { getBorderRadiusValueWithUnits } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { motion } from "framer-motion";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   cursor: pointer;
   display: flex;
   gap: 1rem;
@@ -163,8 +165,9 @@ const flex = (align = false, wrap = false, justify = false) => {
   `;
 };
 
-export const StyledProfileItem = styled(motion.div)`
+export const StyledProfileItem = styled(motion.a)`
   text-decoration: none;
+  color: var(--gray-950);
   ${(p) => p.hasPermission === true && "cursor: pointer"};
 
   &:focus,

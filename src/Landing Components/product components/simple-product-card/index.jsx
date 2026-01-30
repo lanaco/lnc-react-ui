@@ -8,6 +8,7 @@ import {
   formatPrice,
   GetCurrencySymbol,
   isDefined,
+  isDefinedNotEmptyString,
 } from "../../../_utils/utils";
 import ProductImageWrapper from "../../product-img-wrapper";
 
@@ -21,6 +22,7 @@ const SimpleProductCard = forwardRef((props, ref) => {
     isFree,
     image,
     sellerUuid,
+    nameSlug,
     onSelectCard = () => {},
     imageComponent,
     negotiableText = "Negotiable",
@@ -37,6 +39,7 @@ const SimpleProductCard = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onSelectCard(e, productCardRef)}
+      href={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}
     >
       {isDefined(imageComponent) ? (
         imageComponent

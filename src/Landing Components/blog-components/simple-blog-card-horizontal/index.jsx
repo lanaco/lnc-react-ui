@@ -6,7 +6,7 @@ import Link from "../../../General/Link/Link";
 import ProductImageWrapper from "../../product-img-wrapper";
 
 const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
-  const { title, imageUrl, text, buttonText, onCardClick, metadata } = props;
+  const { title, imageUrl, text, buttonText, onCardClick, metadata, link } = props;
 
   const cardRef = useRef();
 
@@ -21,6 +21,7 @@ const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       className="blog-card"
       onClick={handleCardClick}
+      href={`/${link}`}
     >
       <TextWrapper>
         <div className="text-wr-title">{title}</div>

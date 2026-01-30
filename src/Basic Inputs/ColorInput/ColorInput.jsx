@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, useCallback, useState } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
@@ -335,40 +335,5 @@ const ColorInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-ColorInput.propTypes = {
-  id: PropTypes.any,
-  name: PropTypes.string,
-  defaultValue: PropTypes.string,
-  value: PropTypes.string,
-  debounceTime: PropTypes.number,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  preventDefault: PropTypes.bool,
-  labelRef: PropTypes.any,
-  inputProps: PropTypes.bool,
-  withInput: PropTypes.bool,
-  //---------------------------------------------------------------
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onInput: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default ColorInput;

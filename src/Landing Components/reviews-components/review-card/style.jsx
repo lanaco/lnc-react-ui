@@ -4,6 +4,8 @@ import { truncateText, truncateTextInRows } from "../../../_utils/utils";
 export const ExternalWrapper = styled.div`
   padding-top: 5rem;
   overflow: hidden;
+  text-decoration: none;
+  color: var(--gray-950);
 `;
 
 export const Wrapper = styled.div`

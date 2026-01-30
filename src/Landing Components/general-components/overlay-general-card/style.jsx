@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
-export const Container = styled.div`
+export const Container = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   display: flex;
   height: 28.75rem;
   padding: 2.25rem;

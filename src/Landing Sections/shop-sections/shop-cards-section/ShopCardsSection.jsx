@@ -75,7 +75,7 @@ const ShopCardsSection = forwardRef(
                 reviewCount={card?.reviewCount}
                 products={card?.products}
                 imageComponent={card?.imageComponent}
-                onSelectCard={(e, shopCardRef) =>
+                 onSelectCard={(e, shopCardRef) =>
                   onSelectCard(card?.uuid, shopCardRef)
                 }
                 image={getImage(card?.profileImage, card?.uuid) || null}

@@ -52,6 +52,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         onSelectCard={(e, cardRef) =>
           onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug, cardRef })
         }
+        nameSlug={x?.nameSlug}
         imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
         isFree={x?.isFree}
         isNegotiable={x?.isNegotiable}

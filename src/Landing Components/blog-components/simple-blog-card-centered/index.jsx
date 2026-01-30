@@ -6,7 +6,7 @@ import Button from "../../../General/Button/Button";
 import ProductImageWrapper from "../../product-img-wrapper";
 
 const SimpleBlogCardCentered = forwardRef((props, ref) => {
-  const { title, image, text, buttonText, onCardClick, metadata } = props;
+  const { title, image, text, buttonText, onCardClick, metadata, link } = props;
 
   const cardRef = useRef();
 
@@ -21,6 +21,7 @@ const SimpleBlogCardCentered = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       className="blog-card"
       onClick={handleCardClick}
+      href={`/${link}`}
     >
       <ProductImageWrapper src={image} />
       <TextWrapper>
