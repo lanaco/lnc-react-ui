@@ -23,6 +23,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
     onSelectCard = () => { },
     isLoading = false,
     getImage = () => { },
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -39,6 +40,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
               name={x?.name}
               code={x?.code}
               onSelectCard={() => onSelectCard?.(x?.uuid)}
+              LinkComponent={LinkComponent}
               {...x}
             />
           ))
@@ -52,6 +54,7 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
                 name={x?.name}
                 code={x?.code}
                 onSelectCard={() => onSelectCard?.(x?.uuid)}
+                LinkComponent={LinkComponent}
                 {...x}
               />
             ))}

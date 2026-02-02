@@ -13,6 +13,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
     onSelectCard = () => {},
     isLoading = false,
     componentName,
+    LinkComponent,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -35,6 +36,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                   onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
                   metadata={{ name: componentName, accessor: x?.accessor }}
                   link={x?.link}
+                  LinkComponent={LinkComponent}
                 />
               ))
             : items
@@ -49,6 +51,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
                     onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
                     metadata={{ name: componentName, accessor: x?.accessor }}
                     link={x?.link}
+                    LinkComponent={LinkComponent}
                   />
                 ))}
         </>

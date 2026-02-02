@@ -4,14 +4,16 @@ import { forwardRef } from "react";
 import { CardWrapper } from "./style";
 
 const CategorySimpleCard = forwardRef((props, ref) => {
-  const { image, name, urlPrefix, urlSufix, code, uuid, onSelectCard = () => {} } = props;
+  const { image, name, urlPrefix, urlSufix, code, uuid, onSelectCard = () => {}, LinkComponent } = props;
+  const Component = LinkComponent || "a";
 
   return (
     <CardWrapper
       ref={ref}
       className="simple-category-card"
       onClick={() => onSelectCard(uuid)}
-      to={`${urlPrefix}${code}${urlSufix}`}
+      as={Component}
+      {...(LinkComponent ? { to: `${urlPrefix}${code}${urlSufix}` } : { href: `${urlPrefix}${code}${urlSufix}` })}
     >
       <img src={image} />
       <div className="card-content">

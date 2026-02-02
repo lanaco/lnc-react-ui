@@ -27,9 +27,11 @@ const BlogCardSponsored = forwardRef(
       onSelectCard = () => {},
       metadata,
       titleSlug,
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
+    const Component = LinkComponent || "a";
     const cardRef = useRef();
 
     return (
@@ -39,7 +41,10 @@ const BlogCardSponsored = forwardRef(
         data-accessor={metadata?.accessor}
         name={metadata?.name}
         onClick={(e) => onSelectCard(e, cardRef)}
-        to={`/blog/${titleSlug}`}
+        as={Component}
+        {...(LinkComponent
+        ? { to: `/blog/${titleSlug}` }
+        : { href: `/blog/${titleSlug}` })}
       >
         {isSponsored && (
           <div className="wrapper__sponsored">
@@ -61,7 +66,7 @@ const BlogCardSponsored = forwardRef(
           </div>
           <div className="wrapper__info">
             <div className="info__text">{`${formatLocaleDateString(
-              publishedAt
+              publishedAt,
             )} • ${formatString(timeToReadText, timeToRead)}`}</div>
             <div className="info__text">
               <div>
@@ -77,7 +82,7 @@ const BlogCardSponsored = forwardRef(
         </div>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default BlogCardSponsored;

@@ -43,6 +43,7 @@ const SalesCampaignsSection = forwardRef(
       componentName,
       hasNextPage = false,
       handleFetchNextPage = () => {},
+      LinkComponent
     },
     ref
   ) => {
@@ -92,6 +93,7 @@ const SalesCampaignsSection = forwardRef(
           numberOfListingsTextSingular={numberOfListingsTextSingular}
           numberOfListingsTextPlural={numberOfListingsTextPlural}
           metadata={{ name: componentName, accessor: item?.accessor }}
+          LinkComponent={LinkComponent}
         />
       ));
 

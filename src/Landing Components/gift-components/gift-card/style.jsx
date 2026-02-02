@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
 
-export const ExternalWrapper = styled(Link)`
+export const ExternalWrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);
   display: flex;

@@ -14,17 +14,27 @@ const OverlayGeneralCard = forwardRef(
       backgroundColor = "none",
       handleSelectCard = () => {},
       handleButtonAction = () => {},
-      selectAction
+      selectAction,
+      LinkComponent
     },
     ref
   ) => {
+    const Component = LinkComponent || "a";
+    
     return (
       <Container
         ref={ref}
         backgroundImage={imageUrl}
         backgroundColor={backgroundColor}
         onClick={handleSelectCard}
-        to={`/${selectAction}`}
+        as={Component}
+        {...(LinkComponent
+          ? {
+              to: `/${selectAction}`,
+            }
+          : {
+              href: `/${selectAction}`,
+            })}
       >
         <div className="section__text">
           {title && <div className="section__title">{title}</div>}

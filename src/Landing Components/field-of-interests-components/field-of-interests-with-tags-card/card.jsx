@@ -9,13 +9,39 @@ import { Wrapper } from "./style";
 
 const FieldOfInterestsWithTagsCard = forwardRef(
   (
-    { image, imageComponent, name, description, onSelectCard = () => {}, uuid, nameSlug },
-    ref
+    {
+      image,
+      imageComponent,
+      name,
+      description,
+      onSelectCard = () => {},
+      uuid,
+      nameSlug,
+      LinkComponent,
+    },
+    ref,
   ) => {
+    const Component = LinkComponent || "a";
     const { theme } = useTheme();
 
     return (
-      <Wrapper ref={ref} theme={theme} onClick={onSelectCard} to={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}>
+      <Wrapper
+        ref={ref}
+        theme={theme}
+        onClick={onSelectCard}
+        as={Component}
+        {...(LinkComponent
+          ? {
+              to: `/product/${
+                isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+              }${uuid}`,
+            }
+          : {
+              href: `/product/${
+                isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+              }${uuid}`,
+            })}
+      >
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
@@ -29,7 +55,7 @@ const FieldOfInterestsWithTagsCard = forwardRef(
         </div>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default FieldOfInterestsWithTagsCard;

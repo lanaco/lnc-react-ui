@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import { Container, ContainerHeader, Wrapper } from "./style";
 import Button from "../../../General/Button/Button";

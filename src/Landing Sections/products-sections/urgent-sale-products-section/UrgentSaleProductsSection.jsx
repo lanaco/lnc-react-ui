@@ -26,6 +26,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
     actionComponent,
     componentName,
     sponsoredText,
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -78,6 +79,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   trade={x?.trade}
                   forCart={x?.forCart}
                   sponsoredText={sponsoredText}
+                  LinkComponent={LinkComponent}
                 />
               ))
           : items?.slice(0, limit).map((x, index) => (
@@ -121,6 +123,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                 forCart={x?.forCart}
                 sponsoredText={sponsoredText}
                 sellerName={x?.sellerName}
+                LinkComponent={LinkComponent}
               />
             ))}
       </>

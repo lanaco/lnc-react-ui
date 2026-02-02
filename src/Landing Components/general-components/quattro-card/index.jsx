@@ -7,11 +7,34 @@ import { useTheme } from "@emotion/react";
 import { Container, Gradient } from "./style";
 
 const QuattroCard = forwardRef(
-  ({ title, description, imageUrl, onSelectCard = () => {}, link }, ref) => {
+  (
+    {
+      title,
+      description,
+      imageUrl,
+      onSelectCard = () => {},
+      link,
+      LinkComponent,
+    },
+    ref,
+  ) => {
     const { theme } = useTheme();
+    const Component = LinkComponent || "a";
 
     return (
-      <Container ref={ref} theme={theme} onClick={onSelectCard} to={`/${link}`}>
+      <Container
+        ref={ref}
+        theme={theme}
+        onClick={onSelectCard}
+        as={Component}
+        {...(LinkComponent
+          ? {
+              to: `/${link}`,
+            }
+          : {
+              href: `/${link}`,
+            })}
+      >
         <img loading="lazy" src={imageUrl} />
         <Gradient theme={theme} className="quattro-card__gradient">
           <div className="quattro-card__text">
@@ -21,7 +44,7 @@ const QuattroCard = forwardRef(
         </Gradient>
       </Container>
     );
-  }
+  },
 );
 
 export default QuattroCard;

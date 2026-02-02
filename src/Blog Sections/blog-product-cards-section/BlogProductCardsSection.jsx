@@ -22,6 +22,7 @@ const BlogProductCardsSection = forwardRef(
       getImage = () => {},
       isHighlight = false,
       componentName,
+      LinkComponent
     },
     ref
   ) => {
@@ -43,6 +44,7 @@ const BlogProductCardsSection = forwardRef(
             onSelectCard={(e, cardRef) => onSelectCard?.(x?.uuid, cardRef)}
             image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
             metadata={{ name: componentName, accessor: x?.accessor }}
+            LinkComponent={LinkComponent}
           />
         ));
     }, [items]);

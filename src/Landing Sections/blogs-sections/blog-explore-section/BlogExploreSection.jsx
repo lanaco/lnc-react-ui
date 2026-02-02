@@ -62,6 +62,7 @@ const BlogExploreSection = forwardRef(
       onBookmark = () => {},
       bookmarkComponent = <></>,
       componentName,
+      LinkComponent
     },
     ref
   ) => {
@@ -205,6 +206,7 @@ const BlogExploreSection = forwardRef(
                 onBookmark={onBookmark}
                 bookmarkComponent={bookmarkComponent}
                 componentName={componentName}
+                LinkComponent={LinkComponent}
               />
             )}
             <div className="main-content__divider"></div>
@@ -219,6 +221,7 @@ const BlogExploreSection = forwardRef(
                 getImage={getProductImageUrl}
                 isHighlight={true}
                 componentName={componentName}
+                LinkComponent={LinkComponent}
               />
             )}
             <div className="main-content__divider"></div>
@@ -235,6 +238,7 @@ const BlogExploreSection = forwardRef(
                 onBookmark={onBookmark}
                 bookmarkComponent={bookmarkComponent}
                 componentName={componentName}
+                LinkComponent={LinkComponent}
               />
             )}
           </div>
@@ -287,42 +291,5 @@ const BlogExploreSection = forwardRef(
     );
   }
 );
-
-BlogExploreSection.propTypes = {
-  mainTitle: PropTypes.string,
-  sideTitle: PropTypes.string,
-  tags: PropTypes.array,
-  selectedTag: PropTypes.any,
-  handleSelectTag: PropTypes.func,
-  blogs: PropTypes.array,
-  miniBlogs: PropTypes.array,
-  products: PropTypes.array,
-  blogsLoading: PropTypes.bool,
-  productsLoading: PropTypes.bool,
-  sortingOptions: PropTypes.array,
-  sortBy: PropTypes.any,
-  handleSortBy: PropTypes.func,
-  allTagText: PropTypes.string,
-  searchPlaceholderText: PropTypes.string,
-  timeToReadText: PropTypes.string,
-  getBlogImageUrl: PropTypes.func,
-  handleSelectBlog: PropTypes.func,
-  handleSelectBlogTag: PropTypes.func,
-  handleShareBlog: PropTypes.func,
-  handleBookmarkBlog: PropTypes.func,
-  showAllButtonLink: PropTypes.string,
-  showAllButtonText: PropTypes.string,
-  viewAllButtonText: PropTypes.string,
-  handleShowAll: PropTypes.func,
-  handleSelectProduct: PropTypes.func,
-  getProductImageUrl: PropTypes.func,
-  page: PropTypes.number,
-  handlePage: PropTypes.func,
-  perPage: PropTypes.any,
-  handlePerPage: PropTypes.func,
-  totalPage: PropTypes.number,
-  perPageOptions: PropTypes.array,
-  handleSearch: PropTypes.func,
-};
 
 export default BlogExploreSection;

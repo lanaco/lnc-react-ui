@@ -72,8 +72,10 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     numberOfListingsTextSingular,
     numberOfListingsTextPlural,
     metadata,
+    LinkComponent,
     ...rest
   } = props;
+  const Component = LinkComponent || "a";
 
   const cardRef = useRef();
 
@@ -154,7 +156,8 @@ const SalesCampaignCard = forwardRef((props, ref) => {
       name={metadata?.name}
       data-accessor={metadata?.accessor}
       onClick={(e) => onSelectCard(e, cardRef)}
-      to={`/shop/${shopUuid}/campaign/${uuid}`}
+      as={Component}
+      {...(LinkComponent ? { to: `/shop/${shopUuid}/campaign/${uuid}` } : { href: `/shop/${shopUuid}/campaign/${uuid}` })}
       {...rest}
     >
       <ImageWrapper theme={theme}>

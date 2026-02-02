@@ -10,6 +10,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
     item,
     onSelectCard = () => {},
     getImage = () => {},
+    LinkComponent
   } = props;
 
   return (
@@ -22,6 +23,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
         titleSlug={item?.titleSlug}
         buttonText={item?.buttonText}
         onCardClick={() => onSelectCard(item?.titleSlug)}
+        LinkComponent={LinkComponent}
       />
     </SuspenseBlogSingle>
   );

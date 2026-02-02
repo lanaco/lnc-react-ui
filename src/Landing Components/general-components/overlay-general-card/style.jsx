@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-import { Link } from "react-router-dom";
 
-export const Container = styled(Link)`
+export const Container = styled.a`
   text-decoration: none;
   color: var(--gray-950);
   display: flex;

@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateText, truncateTextInRows } from "../../../_utils/utils";
-import { Link } from "react-router-dom";
 
 export const Gradient = styled.div`
   position: absolute;
@@ -49,7 +48,7 @@ export const Gradient = styled.div`
   z-index: 2;
 `;
 
-export const Container = styled(Link)`
+export const Container = styled.a`
   text-decoration: none;
   color: var(--gray-950);
   cursor: pointer;

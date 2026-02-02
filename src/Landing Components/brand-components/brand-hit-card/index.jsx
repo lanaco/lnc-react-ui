@@ -6,9 +6,13 @@ import { isDefined } from "../../../_utils/utils";
 import { Wrapper } from "./style";
 
 const BrandHitCard = forwardRef(
-  ({ imageComponent, image, onSelectCard, urlPrefix, urlSufix, code }, ref) => {
+  ({ imageComponent, image, onSelectCard, urlPrefix, urlSufix, code, LinkComponent }, ref) => {
+    const Component = LinkComponent || "a";
+
     return (
-      <Wrapper ref={ref} onClick={onSelectCard} to={`${urlPrefix}${code}${urlSufix}`}>
+      <Wrapper ref={ref} onClick={onSelectCard} 
+      as={Component}
+      {...(LinkComponent ? { to: `${urlPrefix}${code}${urlSufix}` } : { href: `${urlPrefix}${code}${urlSufix}` })}>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

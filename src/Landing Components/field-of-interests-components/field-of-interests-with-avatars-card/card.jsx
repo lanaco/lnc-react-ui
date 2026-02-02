@@ -19,7 +19,8 @@ const FieldOfInterestsWithAvatarsCard = forwardRef(
       imageComponent,
       negotiableText = "Negotiable",
       freeText = "Free",
-      nameSlug
+      nameSlug,
+      LinkComponent
     },
     ref
   ) => {
@@ -39,6 +40,7 @@ const FieldOfInterestsWithAvatarsCard = forwardRef(
         negotiableText={negotiableText}
         freeText={freeText}
         nameSlug={nameSlug}
+        LinkComponent={LinkComponent}
       />
     );
   }

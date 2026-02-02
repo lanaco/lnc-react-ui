@@ -58,7 +58,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     hasVariants,
     hasQuantities,
     status,
-    onBookmark = () => { },
+    onBookmark = () => {},
     actionComponent,
     bookmarked,
     bookmarkLists,
@@ -66,7 +66,9 @@ const DetailedProductCard = forwardRef((props, ref) => {
     sellerName,
     nameSlug,
     onSelectCard = () => {},
+    LinkComponent,
   } = props;
+  const Component = LinkComponent || "a";
 
   const isMobile = useDetectMobile();
 
@@ -273,13 +275,26 @@ const DetailedProductCard = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onSelectCard(e, productCardRef)}
-      to={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}
+      as={Component}
+      {...(LinkComponent
+        ? {
+            to: `/product/${
+              isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+            }${uuid}`,
+          }
+        : {
+            href: `/product/${
+              isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+            }${uuid}`,
+          })}
     >
       <ImageWrapper className="product-image-wrapper">
-        <div onClick={(e) => {
-          e?.preventDefault();
-          e?.stopPropagation();
-        }}>
+        <div
+          onClick={(e) => {
+            e?.preventDefault();
+            e?.stopPropagation();
+          }}
+        >
           <ClonedActionComponent />
         </div>
         {isDefined(imageComponent) ? (
@@ -294,18 +309,21 @@ const DetailedProductCard = forwardRef((props, ref) => {
         </div>
         <div className="card-title">{name}</div>
       </div>
-      <div className="wrapper-card-3" onClick={(e) => {
-        e?.preventDefault();
-        e?.stopPropagation();
-      }}>
+      <div
+        className="wrapper-card-3"
+        onClick={(e) => {
+          e?.preventDefault();
+          e?.stopPropagation();
+        }}
+      >
         {isVehiclesRealEstateCategory && (
           <div
             {...(isMobile
               ? {}
               : {
-                onMouseEnter: handleOpenPopover,
-                onMouseLeave: handleClosePopover,
-              })}
+                  onMouseEnter: handleOpenPopover,
+                  onMouseLeave: handleClosePopover,
+                })}
           >
             <Popover placement="bottom" open={popover}>
               <PopoverTrigger>{renderTags()}</PopoverTrigger>
