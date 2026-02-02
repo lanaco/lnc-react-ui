@@ -9,7 +9,7 @@ const ReviewCard = forwardRef((props, ref) => {
   const { image, text, title, link, rating, onSelectCard = () => { } } = props;
 
   return (
-    <ExternalWrapper ref={ref} className="review-card" onClick={onSelectCard} href={`/${link}`}>
+    <ExternalWrapper ref={ref} className="review-card" onClick={onSelectCard} to={`/${link}`}>
       <Wrapper>
         <ProductImageWrapper src={image} />
         <div className="cont">

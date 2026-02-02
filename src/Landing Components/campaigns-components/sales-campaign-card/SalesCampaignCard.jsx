@@ -154,7 +154,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
       name={metadata?.name}
       data-accessor={metadata?.accessor}
       onClick={(e) => onSelectCard(e, cardRef)}
-      href={`/shop/${shopUuid}/campaign/${uuid}`}
+      to={`/shop/${shopUuid}/campaign/${uuid}`}
       {...rest}
     >
       <ImageWrapper theme={theme}>

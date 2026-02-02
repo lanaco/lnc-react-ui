@@ -51,7 +51,7 @@ const ShopCard = forwardRef(
         name={metadata?.name}
         data-accessor={metadata?.accessor}
         onClick={(e) => onSelectCard(e, shopCardRef)}
-        href={`/shop/${uuid}`}
+        to={`/shop/${uuid}`}
       >
         <div className="wrapper__content">
           {isDefined(imageComponent) ? (

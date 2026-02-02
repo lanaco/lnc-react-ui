@@ -20,7 +20,7 @@ const BlogCardLarge = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onCardClick(e, cardRef)}
-      href={`/blog/${titleSlug}`}
+      to={`/blog/${titleSlug}`}
     >
       <ProductImageWrapper src={imageUrl} />
       <TextWrapper>

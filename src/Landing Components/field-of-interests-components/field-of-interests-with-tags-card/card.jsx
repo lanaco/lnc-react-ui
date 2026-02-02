@@ -15,7 +15,7 @@ const FieldOfInterestsWithTagsCard = forwardRef(
     const { theme } = useTheme();
 
     return (
-      <Wrapper ref={ref} theme={theme} onClick={onSelectCard} href={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}>
+      <Wrapper ref={ref} theme={theme} onClick={onSelectCard} to={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

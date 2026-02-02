@@ -8,7 +8,7 @@ import { Wrapper } from "./style";
 const BrandHitCard = forwardRef(
   ({ imageComponent, image, onSelectCard, urlPrefix, urlSufix, code }, ref) => {
     return (
-      <Wrapper ref={ref} onClick={onSelectCard} href={`${urlPrefix}${code}${urlSufix}`}>
+      <Wrapper ref={ref} onClick={onSelectCard} to={`${urlPrefix}${code}${urlSufix}`}>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
