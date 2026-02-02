@@ -6,6 +6,7 @@ import {
 } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
+
 export const Wrapper = styled.a`
   text-decoration: none;
   display: flex;

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateTextInRows } from "../../../_utils/utils";
 
+
 export const Wrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);

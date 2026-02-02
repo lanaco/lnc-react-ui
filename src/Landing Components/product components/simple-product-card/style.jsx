@@ -3,6 +3,7 @@ import {
   truncateTextInRows,
 } from "../../../_utils/utils";
 
+
 export const Wrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);

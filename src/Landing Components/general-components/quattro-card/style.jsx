@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateText, truncateTextInRows } from "../../../_utils/utils";
 
+
 export const Gradient = styled.div`
   position: absolute;
   top: 0;

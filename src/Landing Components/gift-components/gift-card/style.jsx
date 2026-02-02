@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 
+
 export const ExternalWrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);
