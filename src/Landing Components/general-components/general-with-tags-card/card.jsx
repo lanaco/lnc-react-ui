@@ -12,7 +12,7 @@ const GeneralWithTagsCard = forwardRef(
     const { theme } = useTheme();
 
     return (
-      <Wrapper ref={ref} theme={theme} onClick={onSelectCard} href={`/${selectAction}`}>
+      <Wrapper ref={ref} theme={theme} onClick={onSelectCard} to={`/${selectAction}`}>
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

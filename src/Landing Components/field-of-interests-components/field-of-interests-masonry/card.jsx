@@ -28,7 +28,7 @@ const FieldOfInterestsMasonryCard = forwardRef(
         theme={theme}
         className={className}
         onClick={onSelectCard}
-        href={`/${link}`}
+        to={`/${link}`}
       >
         {isDefined(imageComponent) ? (
           imageComponent

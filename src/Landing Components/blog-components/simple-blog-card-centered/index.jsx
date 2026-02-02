@@ -21,7 +21,7 @@ const SimpleBlogCardCentered = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       className="blog-card"
       onClick={handleCardClick}
-      href={`/${link}`}
+      to={`/${link}`}
     >
       <ProductImageWrapper src={image} />
       <TextWrapper>

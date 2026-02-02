@@ -21,7 +21,7 @@ const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       className="blog-card"
       onClick={handleCardClick}
-      href={`/${link}`}
+      to={`/${link}`}
     >
       <TextWrapper>
         <div className="text-wr-title">{title}</div>

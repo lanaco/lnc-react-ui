@@ -9,7 +9,7 @@ import { isDefinedNotEmptyString } from "../../../_utils/utils";
 const GeneralWithTagsCardTag = forwardRef(
   ({ title, icon, onSelectCard = () => {}, selectAction }, ref) => {
     return (
-      <TagWrapper ref={ref} onClick={onSelectCard} href={`/${selectAction}`}>
+      <TagWrapper ref={ref} onClick={onSelectCard} to={`/${selectAction}`}>
         {isDefinedNotEmptyString(icon) && (
           <Icon icon={icon} className="wrapper__icon" />
         )}

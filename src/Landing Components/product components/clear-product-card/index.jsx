@@ -27,7 +27,7 @@ const ClearProductCard = forwardRef((props, ref) => {
       name={metadata?.name}
       data-accessor={metadata?.accessor}
       onClick={(e) => onSelectCard(e, ref)}
-      href={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}
+      to={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}
     >
       {isDefined(imageComponent) ? (
         imageComponent
