@@ -277,7 +277,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onSelectCard(e, productCardRef)}
-      href={`/product/${
+      to={`/product/${
         isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
       }${uuid}`}
     >

@@ -39,7 +39,7 @@ const BlogCardSponsored = forwardRef(
         data-accessor={metadata?.accessor}
         name={metadata?.name}
         onClick={(e) => onSelectCard(e, cardRef)}
-        href={`/blog/${titleSlug}`}
+        to={`/blog/${titleSlug}`}
       >
         {isSponsored && (
           <div className="wrapper__sponsored">

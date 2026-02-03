@@ -5,8 +5,9 @@ import {
   truncateTextInRows,
   getBorderRadiusValueWithUnits,
 } from "../../../_utils/utils";
+import { Link } from "react-router-dom";
 
-export const Wrapper = styled.a`
+export const Wrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

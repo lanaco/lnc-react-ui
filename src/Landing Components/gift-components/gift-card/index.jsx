@@ -19,7 +19,7 @@ const GiftCard = forwardRef((props, ref) => {
       ref={ref}
       className="simple-gift-card"
       onClick={() => onSelectGiftCard(price)}
-      href={selectAction}
+      to={selectAction}
     >
       <CardWrapper>
         <div className="price-tag">

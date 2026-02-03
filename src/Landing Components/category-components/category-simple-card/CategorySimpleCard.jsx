@@ -11,7 +11,7 @@ const CategorySimpleCard = forwardRef((props, ref) => {
       ref={ref}
       className="simple-category-card"
       onClick={() => onSelectCard(uuid)}
-      href={`${urlPrefix}${code}${urlSufix}`}
+      to={`${urlPrefix}${code}${urlSufix}`}
     >
       <img src={image} />
       <div className="card-content">

@@ -24,7 +24,7 @@ const OverlayGeneralCard = forwardRef(
         backgroundImage={imageUrl}
         backgroundColor={backgroundColor}
         onClick={handleSelectCard}
-        href={`/${selectAction}`}
+        to={`/${selectAction}`}
       >
         <div className="section__text">
           {title && <div className="section__title">{title}</div>}

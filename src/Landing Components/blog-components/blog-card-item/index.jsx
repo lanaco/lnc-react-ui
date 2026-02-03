@@ -60,7 +60,7 @@ const BlogCardItem = forwardRef(
         data-accessor={metadata?.accessor}
         onClick={(e) => onSelectCard(e, blogCardRef)}
         className="blog-card-item"
-        href={`/blog/${titleSlug}`}
+        to={`/blog/${titleSlug}`}
       >
         <ProductImageWrapper src={imageUrl} className="wrapper__image" />
         <div className="wrapper__content">

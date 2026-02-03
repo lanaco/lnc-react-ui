@@ -63,7 +63,7 @@ const ProfileItem = (props) => {
       // }}
       isActive={isActive}
       themeColor={themeData?.code || "transparent"}
-      href={`/${isUser ? "user" : "shop"}/${uuid}`}
+      to={`/${isUser ? "user" : "shop"}/${uuid}`}
     >
       <div className="logo-wrapper">
         {isDefined(imageComponent) ? imageComponent : image}
