@@ -27,15 +27,18 @@ const BlogCardItem = forwardRef(
       numberOfLikes = 0,
       numberOfComments = 0,
       isBookmarked = false,
-      onSelectCard = () => { },
-      onBookmark = () => { },
-      onShare = () => { },
+      onSelectCard = () => {},
+      onBookmark = () => {},
+      onShare = () => {},
       bookmarkComponent = <></>,
       metadata,
       titleSlug,
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
+    const Component = LinkComponent || "a";
+
     const ClonedBookmarkComponent = () => {
       if (!isDefined(bookmarkComponent)) return <></>;
 
@@ -60,7 +63,10 @@ const BlogCardItem = forwardRef(
         data-accessor={metadata?.accessor}
         onClick={(e) => onSelectCard(e, blogCardRef)}
         className="blog-card-item"
-        to={`/blog/${titleSlug}`}
+        as={Component}
+        {...(LinkComponent
+        ? { to: `/blog/${titleSlug}` }
+        : { href: `/blog/${titleSlug}` })}
       >
         <ProductImageWrapper src={imageUrl} className="wrapper__image" />
         <div className="wrapper__content">
@@ -78,10 +84,13 @@ const BlogCardItem = forwardRef(
                     </BlogTag>
                   ))}
               </div>
-              <div className="info__content mobile-only" onClick={(e)=> {
-                e.stopPropagation();
-                e.preventDefault();
-              }}>
+              <div
+                className="info__content mobile-only"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+              >
                 <ClonedBookmarkComponent />
                 <IconButton
                   icon=" mng-lnc-share"
@@ -98,7 +107,7 @@ const BlogCardItem = forwardRef(
           <div className="wrapper__info">
             <div className="info__content">
               <div className="info__text">{`${formatLocaleDateString(
-                publishedAt
+                publishedAt,
               )} • ${formatString(timeToReadText, timeToRead)}`}</div>
               <div className="info__text">
                 <div>
@@ -111,10 +120,13 @@ const BlogCardItem = forwardRef(
                 </div>
               </div>
             </div>
-            <div className="info__content desktop-only" onClick={(e) => {
-              e?.preventDefault();
-              e?.stopPropagation();
-            }}>
+            <div
+              className="info__content desktop-only"
+              onClick={(e) => {
+                e?.preventDefault();
+                e?.stopPropagation();
+              }}
+            >
               <ClonedBookmarkComponent />
               <IconButton
                 icon=" mng-lnc-share"
@@ -122,7 +134,6 @@ const BlogCardItem = forwardRef(
                 btnType="basic"
                 color="neutral"
                 onClick={() => {
-
                   onShare();
                 }}
               />
@@ -131,7 +142,7 @@ const BlogCardItem = forwardRef(
         </div>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default BlogCardItem;

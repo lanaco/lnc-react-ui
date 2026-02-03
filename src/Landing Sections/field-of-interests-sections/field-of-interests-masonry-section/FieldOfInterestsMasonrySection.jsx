@@ -26,6 +26,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
       className,
       isLoadingTags = false,
       isLoadingCards = false,
+      LinkComponent
     },
     ref
   ) => {
@@ -132,6 +133,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
                 onSelectCard={() => onSelectCard?.(card)}
                 className="wrapper__card"
                 link={card?.link}
+                LinkComponent={LinkComponent}
               />
             ))}
           </div>

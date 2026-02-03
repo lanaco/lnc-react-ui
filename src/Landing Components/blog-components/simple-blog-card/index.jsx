@@ -16,7 +16,9 @@ const SimpleBlogCard = forwardRef((props, ref) => {
     readMoreText = "Read more",
     metadata,
     titleSlug,
+    LinkComponent,
   } = props;
+  const Component = LinkComponent || "a";
 
   const cardRef = useRef();
 
@@ -27,7 +29,10 @@ const SimpleBlogCard = forwardRef((props, ref) => {
       data-accessor={metadata?.name}
       className="blog-card"
       onClick={(e) => onCardClick(e, cardRef)}
-      to={`/blog/${titleSlug}`}
+      as={Component}
+      {...(LinkComponent
+        ? { to: `/blog/${titleSlug}` }
+        : { href: `/blog/${titleSlug}` })}
     >
       <ProductImageWrapper src={imageUrl} />
       <TextWrapper>

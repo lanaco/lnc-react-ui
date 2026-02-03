@@ -5,9 +5,9 @@ import {
   truncateTextInRows,
 } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-import { Link } from "react-router-dom";
 
-export const Wrapper = styled(Link)`
+
+export const Wrapper = styled.a`
   text-decoration: none;
   display: flex;
   flex-direction: column;

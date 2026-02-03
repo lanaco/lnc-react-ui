@@ -32,6 +32,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     actionComponent,
     componentName,
     hasNextPage = false,
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -76,6 +77,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         forOrder={x?.forOrder}
         contactSeller={x?.contactSeller}
         hasVariants={x?.hasVariants}
+        LinkComponent={LinkComponent}
       />
     ));
   }, [items]);

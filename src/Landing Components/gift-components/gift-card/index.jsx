@@ -11,15 +11,24 @@ const GiftCard = forwardRef((props, ref) => {
     price,
     currency,
     onSelectGiftCard = () => {},
-    selectAction
+    selectAction,
+    LinkComponent,
   } = props;
+  const Component = LinkComponent || "a";
 
   return (
     <ExternalWrapper
       ref={ref}
       className="simple-gift-card"
       onClick={() => onSelectGiftCard(price)}
-      to={selectAction}
+      as={Component}
+      {...(LinkComponent
+        ? {
+            to: `${selectAction}`,
+          }
+        : {
+            href: `${selectAction}`,
+          })}
     >
       <CardWrapper>
         <div className="price-tag">

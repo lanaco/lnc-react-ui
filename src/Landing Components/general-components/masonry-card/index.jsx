@@ -19,10 +19,12 @@ const LandingPageMasonryGeneralCard = forwardRef(
       position,
       tag,
       backgroundColor,
-      buttonLink
+      buttonLink,
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
+    const Component = LinkComponent || "a";
     const theme = useTheme();
 
     return (
@@ -35,7 +37,14 @@ const LandingPageMasonryGeneralCard = forwardRef(
           position={position}
           backgroundColor={backgroundColor}
           onClick={onSelectCard}
-          to={`/${buttonLink}`}
+          as={Component}
+          {...(LinkComponent
+            ? {
+                to: `/${buttonLink}`,
+              }
+            : {
+                href: `/${buttonLink}`,
+              })}
         >
           <img src={imageUrl} className="wrapper__image" />
           <div className="wrapper__text">
@@ -55,7 +64,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
         </Wrapper>
       </>
     );
-  }
+  },
 );
 
 export default LandingPageMasonryGeneralCard;

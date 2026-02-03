@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
@@ -8,11 +9,34 @@ import { Wrapper } from "./style";
 
 const GeneralWithTagsCard = forwardRef(
   // eslint-disable-next-line react/prop-types
-  ({ imageUrl, imageComponent, title, onSelectCard = () => {}, selectAction }, ref) => {
+  (
+    {
+      imageUrl,
+      imageComponent,
+      title,
+      onSelectCard = () => {},
+      selectAction,
+      LinkComponent,
+    },
+    ref,
+  ) => {
     const { theme } = useTheme();
+    const Component = LinkComponent || "a";
 
     return (
-      <Wrapper ref={ref} theme={theme} onClick={onSelectCard} to={`/${selectAction}`}>
+      <Wrapper
+        ref={ref}
+        theme={theme}
+        onClick={onSelectCard}
+        as={Component}
+        {...(LinkComponent
+          ? {
+              to: `/${selectAction}`,
+            }
+          : {
+              href: `/${selectAction}`,
+            })}
+      >
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
@@ -23,7 +47,7 @@ const GeneralWithTagsCard = forwardRef(
         </div>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default GeneralWithTagsCard;

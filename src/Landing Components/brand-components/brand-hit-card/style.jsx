@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
-
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
-export const Wrapper = styled(Link)`
+export const Wrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);
   width: 7.5rem;

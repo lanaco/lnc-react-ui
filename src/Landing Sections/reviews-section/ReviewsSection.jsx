@@ -15,6 +15,7 @@ const ReviewsSection = forwardRef((props, ref) => {
     limit = 3,
     onSelectCard = () => {},
     isLoading = false,
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -32,6 +33,7 @@ const ReviewsSection = forwardRef((props, ref) => {
                 link={x?.link}
                 rating={x?.ratingArithmeticMean}
                 onSelectCard={() => onSelectCard(x)}
+                LinkComponent={LinkComponent}
               />
             ))
           : items
@@ -45,6 +47,7 @@ const ReviewsSection = forwardRef((props, ref) => {
                   link={x?.link}
                   rating={x?.ratingArithmeticMean}
                   onSelectCard={() => onSelectCard(x)}
+                  LinkComponent={LinkComponent}
                 />
               ))}
       </>

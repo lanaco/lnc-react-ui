@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import { truncateText, truncateTextInRows } from "../../../_utils/utils";
-import { Link } from "react-router-dom";
 
-export const ExternalWrapper = styled(Link)`
+export const ExternalWrapper = styled.a`
   padding-top: 5rem;
   overflow: hidden;
   text-decoration: none;

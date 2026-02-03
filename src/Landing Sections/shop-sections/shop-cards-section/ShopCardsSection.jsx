@@ -28,6 +28,7 @@ const ShopCardsSection = forwardRef(
       showRating = true,
       gridView = false,
       componentName,
+      LinkComponent
     },
     ref
   ) => {
@@ -83,6 +84,7 @@ const ShopCardsSection = forwardRef(
                 canAcceptPayments={card?.canAcceptPayments}
                 hideProducts={hideProducts}
                 metadata={{ name: componentName, accessor: card?.accessor }}
+                LinkComponent={LinkComponent}
               />
             ))}
           </div>

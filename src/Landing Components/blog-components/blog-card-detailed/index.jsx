@@ -24,7 +24,9 @@ const BlogCardDetailed = forwardRef((props, ref) => {
     timeToReadText = "{0} min read",
     metadata,
     titleSlug,
+    LinkComponent,
   } = props;
+  const Component = LinkComponent || "a";
 
   const cardRef = useRef();
 
@@ -35,7 +37,10 @@ const BlogCardDetailed = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onCardClick(e, cardRef)}
-      to={`/blog/${titleSlug}`}
+      as={Component}
+      {...(LinkComponent
+        ? { to: `/blog/${titleSlug}` }
+        : { href: `/blog/${titleSlug}` })}
     >
       <ProductImageWrapper src={imageUrl} />
       <div className="blog-card-content">
