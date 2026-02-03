@@ -19,6 +19,7 @@ import PopoverContent from "../../../Utility/Popover/PopoverContent";
 import {
   AttributeTags,
   RealEstateCategoryPrefix,
+  SalesPackageIcons,
   VehiclesBusesCategoryCode,
   VehiclesCampersCategoryCode,
   VehiclesCarsCategoryCode,
@@ -28,6 +29,7 @@ import {
   VehiclesTrucksCategoryCode,
 } from "../../consts";
 import useDetectMobile from "../../../_utils/useDetectMobile";
+import Icon from "../../../General/Icon/Icon";
 
 const DetailedProductCard = forwardRef((props, ref) => {
   const {
@@ -58,7 +60,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     hasVariants,
     hasQuantities,
     status,
-    onBookmark = () => { },
+    onBookmark = () => {},
     actionComponent,
     bookmarked,
     bookmarkLists,
@@ -66,6 +68,8 @@ const DetailedProductCard = forwardRef((props, ref) => {
     sellerName,
     nameSlug,
     onSelectCard = () => {},
+    activeSalesPackages,
+    urgentText = "Urgent",
   } = props;
 
   const isMobile = useDetectMobile();
@@ -273,13 +277,17 @@ const DetailedProductCard = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onSelectCard(e, productCardRef)}
-      href={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}
+      href={`/product/${
+        isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+      }${uuid}`}
     >
       <ImageWrapper className="product-image-wrapper">
-        <div onClick={(e) => {
-          e?.preventDefault();
-          e?.stopPropagation();
-        }}>
+        <div
+          onClick={(e) => {
+            e?.preventDefault();
+            e?.stopPropagation();
+          }}
+        >
           <ClonedActionComponent />
         </div>
         {isDefined(imageComponent) ? (
@@ -288,24 +296,49 @@ const DetailedProductCard = forwardRef((props, ref) => {
           <ProductImageWrapper src={imageUrl} />
         )}
       </ImageWrapper>
+      {activeSalesPackages && activeSalesPackages.length > 0 && (
+        <div className="campaign-badges">
+          {activeSalesPackages.map((packageType, index) => (
+            <div
+              key={index}
+              className={`campaign-badge campaign-badge-${packageType?.salesPackageCode?.toLowerCase()}`}
+            >
+              {packageType?.salesPackageCode !== "Urgent" && (
+                <Icon
+                  icon={
+                    SalesPackageIcons?.[
+                      packageType?.salesPackageCode?.toUpperCase()
+                    ]
+                  }
+                  sizeInUnits="1rem"
+                />
+              )}
+              {packageType?.salesPackageCode === "Urgent" && <> {urgentText}</>}
+            </div>
+          ))}
+        </div>
+      )}
       <div className="wrapper-card-1">
         <div className="seller" title={sellerName}>
           {sellerName}
         </div>
         <div className="card-title">{name}</div>
       </div>
-      <div className="wrapper-card-3" onClick={(e) => {
-        e?.preventDefault();
-        e?.stopPropagation();
-      }}>
+      <div
+        className="wrapper-card-3"
+        onClick={(e) => {
+          e?.preventDefault();
+          e?.stopPropagation();
+        }}
+      >
         {isVehiclesRealEstateCategory && (
           <div
             {...(isMobile
               ? {}
               : {
-                onMouseEnter: handleOpenPopover,
-                onMouseLeave: handleClosePopover,
-              })}
+                  onMouseEnter: handleOpenPopover,
+                  onMouseLeave: handleClosePopover,
+                })}
           >
             <Popover placement="bottom" open={popover}>
               <PopoverTrigger>{renderTags()}</PopoverTrigger>
