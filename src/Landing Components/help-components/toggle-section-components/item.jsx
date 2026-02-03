@@ -1,7 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef, useMemo, useState } from "react";
-
-import PropTypes from "prop-types";
-
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import Button from "../../../General/Button/Button";
 import { ItemContainer, ItemsContainer } from "./style";
@@ -12,9 +11,19 @@ const ToggleSectionItem = ({
   image,
   learnMoreText,
   onSelectItem = () => {},
+  LinkComponent,
+  link
 }) => {
+  const Component = LinkComponent || "a";
+
   return (
-    <ItemContainer onClick={onSelectItem}>
+    <ItemContainer
+      onClick={onSelectItem}
+      as={Component}
+      {...(LinkComponent
+        ? { to: `/${link}` }
+        : { href: `/${link}` })}
+    >
       <div className="card__content">
         <img src={image} alt={`Card ${title}`} className="card__image" />
         <div className="card__text">
@@ -35,8 +44,14 @@ const ToggleSectionItem = ({
 
 const ToggleSectionItems = forwardRef(
   (
-    { items = [], showMoreText, learnMoreText, onSelectItem = () => {} },
-    ref
+    {
+      items = [],
+      showMoreText,
+      learnMoreText,
+      onSelectItem = () => {},
+      LinkComponent,
+    },
+    ref,
   ) => {
     const isMobile = useDetectMobile();
 
@@ -55,6 +70,8 @@ const ToggleSectionItems = forwardRef(
           image={item?.image}
           learnMoreText={learnMoreText}
           onSelectItem={() => onSelectItem(item)}
+          LinkComponent={LinkComponent}
+          link={item?.link}
         />
       ));
     }, [items]);
@@ -83,22 +100,7 @@ const ToggleSectionItems = forwardRef(
         )}
       </ItemsContainer>
     );
-  }
+  },
 );
-
-ToggleSectionItem.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  image: PropTypes.string,
-  learnMoreText: PropTypes.string,
-  onSelectItem: PropTypes.func,
-};
-
-ToggleSectionItems.propTypes = {
-  items: PropTypes.array,
-  showMoreText: PropTypes.string,
-  learnMoreText: PropTypes.string,
-  onSelectItem: PropTypes.func,
-};
 
 export default ToggleSectionItems;

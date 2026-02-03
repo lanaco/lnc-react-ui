@@ -101,7 +101,9 @@ export const ItemsContainer = styled.div`
   }
 `;
 
-export const ItemContainer = styled.div`
+export const ItemContainer = styled.a`
+  text-decoration: none;
+  color: var(--gray-950);
   display: flex;
   padding: 2rem 1.25rem 1.25rem 1.25rem;
   flex-direction: column;

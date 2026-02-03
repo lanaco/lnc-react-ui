@@ -1,7 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useState } from "react";
-
-import PropTypes from "prop-types";
-
 import ToggleSectionOptions from "../../Landing Components/help-components/toggle-section-components/option";
 import ToggleSectionItems from "../../Landing Components/help-components/toggle-section-components/item";
 import { Container } from "./style";
@@ -16,6 +15,7 @@ const ToggleSection = forwardRef(
       options = [],
       items = [],
       onSelectItem = () => {},
+      LinkComponent,
     },
     ref
   ) => {
@@ -37,6 +37,7 @@ const ToggleSection = forwardRef(
           options={options}
           selectedOptionCode={selectedOptionCode}
           onSelectOption={handleSelectOption}
+          LinkComponent={LinkComponent}
         />
         <ToggleSectionItems
           key={`toggle-section-items__${selectedOptionCode}`}
@@ -44,20 +45,11 @@ const ToggleSection = forwardRef(
           showMoreText={showMoreText}
           learnMoreText={learnMoreText}
           onSelectItem={onSelectItem}
+          LinkComponent={LinkComponent}
         />
       </Container>
     );
   }
 );
-
-ToggleSection.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  options: PropTypes.array,
-  items: PropTypes.array,
-  showMoreText: PropTypes.string,
-  learnMoreText: PropTypes.string,
-  onSelectItem: PropTypes.func,
-};
 
 export default ToggleSection;
