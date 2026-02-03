@@ -21,6 +21,7 @@ const BlogListSection = forwardRef(
       isSeparated = true,
       bookmarkComponent = <></>,
       componentName,
+      LinkComponent
     },
     ref
   ) => {
@@ -45,6 +46,7 @@ const BlogListSection = forwardRef(
           imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
           bookmarkComponent={bookmarkComponent}
           metadata={{ name: componentName, accessor: x?.accessor }}
+          LinkComponent={LinkComponent}
         />
       ));
     }, [items]);

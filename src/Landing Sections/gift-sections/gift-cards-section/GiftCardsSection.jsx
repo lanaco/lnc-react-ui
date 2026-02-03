@@ -20,6 +20,7 @@ const GiftsSection = forwardRef((props, ref) => {
     limit = 4,
     onSelectCard = () => {},
     onButtonAction = () => {},
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -62,6 +63,7 @@ const GiftsSection = forwardRef((props, ref) => {
                   uuid={x?.uuid}
                   selectAction={x?.selectAction}
                   onSelectGiftCard={(uuid) => onSelectCard(x)}
+                  LinkComponent={LinkComponent}
                 />
               ))
             : items
@@ -76,6 +78,7 @@ const GiftsSection = forwardRef((props, ref) => {
                     uuid={x?.uuid}
                     selectAction={x?.selectAction}
                     onSelectGiftCard={(uuid) => onSelectCard(x)}
+                    LinkComponent={LinkComponent}
                   />
                 ))}
         </GridWrapper>

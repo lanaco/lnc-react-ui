@@ -24,8 +24,9 @@ const ProfileItem = (props) => {
     shopCategory,
     // new
     themeData,
+    LinkComponent
   } = props;
-
+  const Component = LinkComponent || "a";
   const theme = useTheme();
 
   //   const { data: themeData } = useShopTheme(isUser !== true ? uuid : null);
@@ -63,7 +64,8 @@ const ProfileItem = (props) => {
       // }}
       isActive={isActive}
       themeColor={themeData?.code || "transparent"}
-      to={`/${isUser ? "user" : "shop"}/${uuid}`}
+      as={Component}
+      {...(LinkComponent ? { to: `/${isUser ? "user" : "shop"}/${uuid}` } : { href: `/${isUser ? "user" : "shop"}/${uuid}` })}
     >
       <div className="logo-wrapper">
         {isDefined(imageComponent) ? imageComponent : image}

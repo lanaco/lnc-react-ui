@@ -26,9 +26,11 @@ const ShopCard = forwardRef(
       hideProducts = false,
       showRating = true,
       metadata = {},
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
+    const Component = LinkComponent || "a";
     const shopImgRef = useRef();
     const shopCardRef = useRef();
 
@@ -51,7 +53,14 @@ const ShopCard = forwardRef(
         name={metadata?.name}
         data-accessor={metadata?.accessor}
         onClick={(e) => onSelectCard(e, shopCardRef)}
-        to={`/shop/${uuid}`}
+        as={Component}
+        {...(LinkComponent
+          ? {
+              to: `/shop/${uuid}`,
+            }
+          : {
+              href: `/shop/${uuid}`,
+            })}
       >
         <div className="wrapper__content">
           {isDefined(imageComponent) ? (
@@ -107,7 +116,7 @@ const ShopCard = forwardRef(
                         src={getProductImage(
                           product?.image,
                           product?.uuid,
-                          uuid
+                          uuid,
                         )}
                         className="product__image"
                       />
@@ -119,7 +128,7 @@ const ShopCard = forwardRef(
         )}
       </Wrapper>
     );
-  }
+  },
 );
 
 export default ShopCard;

@@ -23,6 +23,7 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
       onSelectCard = () => {},
       isLoadingTags = false,
       isLoadingCards = false,
+      LinkComponent
     },
     ref
   ) => {
@@ -88,6 +89,7 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
                 freeText={card?.freeText}
                 onSelectCard={() => handleSelectCard?.(card)}
                 nameSlug={card?.nameSlug}
+                LinkComponent={LinkComponent}
               />
             ))}
           </div>

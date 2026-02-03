@@ -20,6 +20,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
     isLoading = false,
     getImage = () => {},
     componentName,
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -36,6 +37,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                 nameSlug={x?.nameSlug}
                 image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 metadata={{ name: componentName, accessor: x?.accessor }}
+                LinkComponent={LinkComponent}
               />
             ))
           : items?.slice(0, limit).map((x, index) => (
@@ -47,6 +49,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
                 nameSlug={x?.nameSlug}
                 image={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
                 metadata={{ name: componentName, accessor: x?.accessor }}
+                LinkComponent={LinkComponent}
               />
             ))}
       </>

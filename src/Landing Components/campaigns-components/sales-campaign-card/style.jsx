@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
 import { getBorderRadiusValueWithUnits } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 
-export const Wrapper = styled(Link)`
+export const Wrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);
   cursor: pointer;
@@ -166,7 +164,7 @@ const flex = (align = false, wrap = false, justify = false) => {
   `;
 };
 
-export const StyledProfileItem = styled(Link)`
+export const StyledProfileItem = styled.a`
   text-decoration: none;
   color: var(--gray-950);
   ${(p) => p.hasPermission === true && "cursor: pointer"};

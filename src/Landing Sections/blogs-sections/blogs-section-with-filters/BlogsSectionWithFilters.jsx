@@ -30,6 +30,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
     productsToolbarName = "All",
     allButton = false,
     componentName,
+    LinkComponent,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -48,6 +49,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                 onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
                 metadata={{ name: componentName, accessor: x?.accessor }}
                 link={x?.link}
+                LinkComponent={LinkComponent}
               />
             ))
           : items
@@ -62,6 +64,7 @@ const BlogsSectionWithFilters = forwardRef((props, ref) => {
                   onCardClick={(e, cardRef) => onSelectCard(x, cardRef)}
                   metadata={{ name: componentName, accessor: x?.accessor }}
                   link={x?.link}
+                  LinkComponent={LinkComponent}
                 />
               ))}
       </>

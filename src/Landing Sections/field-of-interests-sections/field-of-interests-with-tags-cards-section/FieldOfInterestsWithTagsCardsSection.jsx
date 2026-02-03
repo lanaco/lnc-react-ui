@@ -25,6 +25,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       activeColor,
       onSelectTag = () => {},
       onSelectCard = () => {},
+      LinkComponent
     },
     ref
   ) => {
@@ -72,6 +73,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
                 onSelectCard={() => onSelectCard?.(card)}
                 uuid={card?.uuid}
                 nameSlug={card?.nameSlug}
+                LinkComponent={LinkComponent}
               />
             ))}
           </div>

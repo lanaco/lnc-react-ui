@@ -24,6 +24,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
     negotiableText,
     freeText,
     componentName,
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -46,6 +47,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
                 negotiableText={negotiableText}
                 freeText={freeText}
                 metadata={{ name: componentName, accessor: x?.accessor }}
+                LinkComponent={LinkComponent}
               />
             ))
           : items?.slice(0, 9)?.map((x, index) => (
@@ -63,6 +65,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
                 negotiableText={negotiableText}
                 freeText={freeText}
                 metadata={{ name: componentName, accessor: x?.accessor }}
+                LinkComponent={LinkComponent}
               />
             ))}
       </>

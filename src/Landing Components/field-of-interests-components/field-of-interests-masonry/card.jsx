@@ -17,9 +17,11 @@ const FieldOfInterestsMasonryCard = forwardRef(
       className,
       onSelectCard = () => {},
       link,
+      LinkComponent
     },
     ref
   ) => {
+    const Component = LinkComponent || "a";
     const { theme } = useTheme();
 
     return (
@@ -28,7 +30,8 @@ const FieldOfInterestsMasonryCard = forwardRef(
         theme={theme}
         className={className}
         onClick={onSelectCard}
-        to={`/${link}`}
+        as={Component}
+        {...(LinkComponent ? { to: `/${link}` } : { href: `/${link}` })}
       >
         {isDefined(imageComponent) ? (
           imageComponent

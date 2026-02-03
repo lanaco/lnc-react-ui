@@ -9,8 +9,15 @@ import SuspenseMasonryGeneralCards from "../../../Landing Components/skeleton-co
 
 const MasonryGeneralCardsSection = forwardRef(
   (
-    { title, items, isLoading = false, limit = 3, onSelectCard = () => {} },
-    ref
+    {
+      title,
+      items,
+      isLoading = false,
+      limit = 3,
+      onSelectCard = () => {},
+      LinkComponent,
+    },
+    ref,
   ) => {
     return (
       <RegularTitleSectionWrapper ref={ref}>
@@ -30,13 +37,14 @@ const MasonryGeneralCardsSection = forwardRef(
                   key={`landing-page-masonry-general-card__${index + 1}`}
                   {...item}
                   onSelectCard={() => onSelectCard(item)}
+                  LinkComponent={LinkComponent}
                 />
               ))}
           </GridWrapper>
         </SuspenseMasonryGeneralCards>
       </RegularTitleSectionWrapper>
     );
-  }
+  },
 );
 
 export default MasonryGeneralCardsSection;

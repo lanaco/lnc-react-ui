@@ -25,6 +25,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
     getImage = () => { },
     readMoreText = "Read more",
     componentName,
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -47,6 +48,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                 onSelectCard(x?.titleSlug, cardRef)
               }
               metadata={{ name: componentName, accessor: x?.accessor }}
+              LinkComponent={LinkComponent}
             />
           ))
           : items
@@ -65,6 +67,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
                   onSelectCard(x?.titleSlug, cardRef)
                 }
                 metadata={{ name: componentName, accessor: x?.accessor }}
+                LinkComponent={LinkComponent}
               />
             ))}
       </>

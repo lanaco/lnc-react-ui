@@ -14,6 +14,7 @@ const OverlayGeneralCardsSection = forwardRef(
       isLoading = false,
       onSelectCard = () => {},
       onButtonAction = () => {},
+      LinkComponent
     },
     ref
   ) => {
@@ -36,6 +37,7 @@ const OverlayGeneralCardsSection = forwardRef(
                 handleSelectCard={() => onSelectCard(item)}
                 handleButtonAction={() => onButtonAction(item)}
                 selectAction={item?.selectAction}
+                LinkComponent={LinkComponent}
               />
             ))}
           </div>

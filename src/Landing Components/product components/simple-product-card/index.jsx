@@ -28,8 +28,9 @@ const SimpleProductCard = forwardRef((props, ref) => {
     negotiableText = "Negotiable",
     freeText = "Free",
     metadata,
+    LinkComponent,
   } = props;
-
+  const Component = LinkComponent || "a";
   const productCardRef = useRef();
 
   return (
@@ -39,7 +40,18 @@ const SimpleProductCard = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onSelectCard(e, productCardRef)}
-      to={`/product/${isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""}${uuid}`}
+      as={Component}
+      {...(LinkComponent
+        ? {
+            to: `/product/${
+              isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+            }${uuid}`,
+          }
+        : {
+            href: `/product/${
+              isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+            }${uuid}`,
+          })}
     >
       {isDefined(imageComponent) ? (
         imageComponent

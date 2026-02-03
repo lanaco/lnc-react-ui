@@ -16,6 +16,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
     isLoading = false,
     getImage = () => {},
     componentName,
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -36,6 +37,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
                   onSelectCard(x?.titleSlug, cardRef)
                 }
                 metadata={{ name: componentName, accessor: x?.accessor }}
+                LinkComponent={LinkComponent}
               />
             ))
           : items
@@ -52,6 +54,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
                     onSelectCard(x?.titleSlug, cardRef)
                   }
                   metadata={{ name: componentName, accessor: x?.accessor }}
+                  LinkComponent={LinkComponent}
                 />
               ))}
       </>

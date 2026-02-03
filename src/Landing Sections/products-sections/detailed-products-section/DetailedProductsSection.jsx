@@ -33,6 +33,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     onBookmark = () => {},
     actionComponent,
     componentName,
+    LinkComponent
   } = props;
 
   const isMobile = useDetectMobile();
@@ -81,6 +82,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 bookmarked={x?.bookmarked}
                 bookmarkLists={x?.bookmarkLists}
                 metadata={{ accessor: x?.accessor, name: componentName }}
+                LinkComponent={LinkComponent}
               />
             ))
           : items?.slice(0, limit).map((x, index) => (
@@ -124,6 +126,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 bookmarkLists={x?.bookmarkLists}
                 metadata={{ accessor: x?.accessor, name: componentName }}
                 sellerName={x?.sellerName}
+                LinkComponent={LinkComponent}
               />
             ))}
       </>

@@ -23,6 +23,7 @@ const GeneralWithTagsCardsSection = forwardRef(
       onSelectCard = () => {},
       isLoadingTags = false,
       isLoadingCards = false,
+      LinkComponent
     },
     ref
   ) => {
@@ -53,6 +54,7 @@ const GeneralWithTagsCardsSection = forwardRef(
                 onSelectCard={() => {
                   onSelectCard?.(card);
                 }}
+                LinkComponent={LinkComponent}
               />
             ))}
           </div>
@@ -69,6 +71,7 @@ const GeneralWithTagsCardsSection = forwardRef(
                 title={tag?.title}
                 onSelectCard={() => onSelectTag?.(tag)}
                 selectAction={tag?.selectAction}
+                LinkComponent={LinkComponent}
               />
             ))}
           </div>

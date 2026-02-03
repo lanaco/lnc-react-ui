@@ -10,7 +10,7 @@ import SuspenseBlogCardsSponsored from "../../../Landing Components/skeleton-com
 const MemoizedQuattroCard = memo(QuattroCard);
 
 const QuattroCardsSection = forwardRef(
-  ({ title, items, isLoading = false, onSelectCard = () => {} }, ref) => {
+  ({ title, items, isLoading = false, onSelectCard = () => {}, LinkComponent }, ref) => {
     const memoizedCards = useMemo(() => {
       return items
         ?.slice(0, 4)
@@ -22,6 +22,7 @@ const QuattroCardsSection = forwardRef(
             imageUrl={x?.imageUrl}
             onSelectCard={() => onSelectCard?.(x)}
             link={x?.link}
+            LinkComponent={LinkComponent}
           />
         ));
     }, [items]);

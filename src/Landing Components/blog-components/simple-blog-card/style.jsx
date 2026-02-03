@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateTextInRows } from "../../../_utils/utils";
 import { linearGradientAnimation } from "../../../_utils/utils";
-import { Link } from "react-router-dom";
 
-export const Wrapper = styled(Link)`
+
+export const Wrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);
   display: flex;

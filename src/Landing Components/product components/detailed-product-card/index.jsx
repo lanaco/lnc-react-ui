@@ -70,7 +70,9 @@ const DetailedProductCard = forwardRef((props, ref) => {
     onSelectCard = () => {},
     activeSalesPackages,
     urgentText = "Urgent",
+    LinkComponent,
   } = props;
+  const Component = LinkComponent || "a";
 
   const isMobile = useDetectMobile();
 
@@ -277,9 +279,18 @@ const DetailedProductCard = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       name={metadata?.name}
       onClick={(e) => onSelectCard(e, productCardRef)}
-      to={`/product/${
-        isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
-      }${uuid}`}
+      as={Component}
+      {...(LinkComponent
+        ? {
+            to: `/product/${
+              isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+            }${uuid}`,
+          }
+        : {
+            href: `/product/${
+              isDefinedNotEmptyString(nameSlug) ? `${nameSlug}-` : ""
+            }${uuid}`,
+          })}
     >
       <ImageWrapper className="product-image-wrapper">
         <div
