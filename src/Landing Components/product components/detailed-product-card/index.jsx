@@ -19,6 +19,7 @@ import PopoverContent from "../../../Utility/Popover/PopoverContent";
 import {
   AttributeTags,
   RealEstateCategoryPrefix,
+  SalesPackageIcons,
   VehiclesBusesCategoryCode,
   VehiclesCampersCategoryCode,
   VehiclesCarsCategoryCode,
@@ -28,6 +29,7 @@ import {
   VehiclesTrucksCategoryCode,
 } from "../../consts";
 import useDetectMobile from "../../../_utils/useDetectMobile";
+import Icon from "../../../General/Icon/Icon";
 
 const DetailedProductCard = forwardRef((props, ref) => {
   const {
@@ -66,6 +68,8 @@ const DetailedProductCard = forwardRef((props, ref) => {
     sellerName,
     nameSlug,
     onSelectCard = () => {},
+    activeSalesPackages,
+    urgentText = "Urgent",
     LinkComponent,
   } = props;
   const Component = LinkComponent || "a";
@@ -303,6 +307,28 @@ const DetailedProductCard = forwardRef((props, ref) => {
           <ProductImageWrapper src={imageUrl} />
         )}
       </ImageWrapper>
+      {activeSalesPackages && activeSalesPackages.length > 0 && (
+        <div className="campaign-badges">
+          {activeSalesPackages.map((packageType, index) => (
+            <div
+              key={index}
+              className={`campaign-badge campaign-badge-${packageType?.salesPackageCode?.toLowerCase()}`}
+            >
+              {packageType?.salesPackageCode !== "Urgent" && (
+                <Icon
+                  icon={
+                    SalesPackageIcons?.[
+                      packageType?.salesPackageCode?.toUpperCase()
+                    ]
+                  }
+                  sizeInUnits="1rem"
+                />
+              )}
+              {packageType?.salesPackageCode === "Urgent" && <> {urgentText}</>}
+            </div>
+          ))}
+        </div>
+      )}
       <div className="wrapper-card-1">
         <div className="seller" title={sellerName}>
           {sellerName}

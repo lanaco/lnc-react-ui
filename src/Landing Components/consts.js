@@ -121,3 +121,11 @@ export const AttributeTags = {
     measure: "",
   },
 };
+
+export const SalesPackageIcons = {
+  ADDDISCOUNT: " mng-lnc-percentage",
+  URGENT: " mng-lnc-flash",
+  FREEQUANTITY: " mng-lnc-3d-software",
+  INCLUDEGIFTS: " mng-lnc-gift",
+  FREESHIPPING: " mng-lnc-delivery--parcel",
+};

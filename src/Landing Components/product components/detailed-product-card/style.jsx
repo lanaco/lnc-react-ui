@@ -16,6 +16,7 @@ export const Wrapper = styled.a`
   width: 100%;
   text-decoration: none;
   color: var(--gray-950, #14161a);
+  position: relative;
   & .seller {
     text-transform: uppercase;
     ${truncateText()}
@@ -111,6 +112,59 @@ export const Wrapper = styled.a`
   & .tags-popover__trigger {
     display: flex;
     gap: 0.25rem;
+  }
+
+  & .campaign-badges {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    z-index: 1;
+    width: max-content;
+    max-width: 7rem;
+  }
+
+  & .campaign-badge {
+    width: fit-content;
+    height: 1.5rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    padding-inline: 0.15rem;
+
+    i {
+      ::before {
+        margin-inline: 0;
+      }
+    }
+  }
+
+  & .campaign-badge-adddiscount {
+    background-color: #f43f5e;
+  }
+
+  & .campaign-badge-freeshipping {
+    background-color: #1abc86;
+  }
+
+  & .campaign-badge-freequantity {
+    background-color: #2691d9;
+  }
+
+  & .campaign-badge-includegifts {
+    background-color: #8b5cf6;
+  }
+
+  & .campaign-badge-urgent {
+    background-color: #e11d48;
+    width: fit-content;
+    padding-inline: 0.5rem;
   }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
