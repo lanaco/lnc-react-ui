@@ -32,7 +32,8 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     actionComponent,
     componentName,
     hasNextPage = false,
-    LinkComponent
+    LinkComponent,
+    urgentText,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -78,6 +79,8 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         contactSeller={x?.contactSeller}
         hasVariants={x?.hasVariants}
         LinkComponent={LinkComponent}
+        activeSalesPackages={x?.activeSalesPackages}
+        urgentText={urgentText}
       />
     ));
   }, [items]);
