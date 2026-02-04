@@ -293,14 +293,17 @@ const DetailedProductCard = forwardRef((props, ref) => {
           })}
     >
       <ImageWrapper className="product-image-wrapper">
-        <div
-          onClick={(e) => {
-            e?.preventDefault();
-            e?.stopPropagation();
-          }}
-        >
-          <ClonedActionComponent />
-        </div>
+        {isDefined(actionComponent) && (
+          <div
+            className="prevent-el"
+            onClick={(e) => {
+              e?.preventDefault();
+              e?.stopPropagation();
+            }}
+          >
+            <ClonedActionComponent />
+          </div>
+        )}
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (

@@ -17,6 +17,11 @@ export const Wrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950, #14161a);
   position: relative;
+
+  & .prevent-el {
+    height: 0;
+    width: 0;
+  }
   & .seller {
     text-transform: uppercase;
     ${truncateText()}
