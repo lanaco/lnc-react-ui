@@ -8,6 +8,8 @@ import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
 import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product/detailed-product-card";
+import SelectBar from "../../../Inputs/SelectBar";
+import SuspenseSelectBar from "../../../Landing Components/skeleton-components/general/select-bar";
 
 const MemoizedProductCard = memo(DetailedProductCard);
 
@@ -34,6 +36,17 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     hasNextPage = false,
     LinkComponent,
     urgentText,
+    options = [],
+    isLoadingOptions = false,
+    selectedOption,
+    onSelectOption = () => {},
+    onRemoveOption = () => {},
+    allOptionsEnabled = false,
+    allOptionsLabel = "All",
+    onSelectAllOptions = () => {},
+    optionLabel = "label",
+    optionValue = "value",
+    optionCode = "code",
   } = props;
 
   const isMobile = useDetectMobile();
@@ -113,6 +126,24 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
             </Button>
           )}
       </div>
+      <SuspenseSelectBar isLoading={isLoadingOptions}>
+        <SelectBar
+          items={options}
+          selectedIds={selectedOption}
+          onRemove={onRemoveOption}
+          onSelect={onSelectOption}
+          allButton={allOptionsEnabled}
+          onSelectAll={onSelectAllOptions}
+          labelKey={optionLabel}
+          valueKey={optionValue}
+          codeKey={optionCode}
+          noMargin={true}
+          productsToolbarName={allOptionsLabel}
+          noGradient={true}
+          className="section__options"
+        />
+      </SuspenseSelectBar>
+
       <SuspenseDetailedProductCard
         isLoading={isLoading}
         keyPrefix="detailed-product-card-skeleton"

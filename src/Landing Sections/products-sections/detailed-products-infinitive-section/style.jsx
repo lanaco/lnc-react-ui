@@ -24,6 +24,15 @@ export const Container = styled.div`
     }
   }
 
+  & .section__options {
+    & button {
+      &:focus {
+        outline: none;
+        outline-offset: 0;
+      }
+    }
+  }
+
   & .section__items {
     display: grid;
     grid-template-columns: ${(p) => `repeat(${p.limit},  minmax(0, 1fr))`};
