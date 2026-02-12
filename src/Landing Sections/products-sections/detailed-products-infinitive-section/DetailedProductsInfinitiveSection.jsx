@@ -94,6 +94,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         LinkComponent={LinkComponent}
         activeSalesPackages={x?.activeSalesPackages}
         urgentText={urgentText}
+        hasFreeShipping={x?.hasFreeShipping}
       />
     ));
   }, [items]);
