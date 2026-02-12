@@ -71,6 +71,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     activeSalesPackages,
     urgentText = "Urgent",
     LinkComponent,
+    hasFreeShipping,
   } = props;
   const Component = LinkComponent || "a";
 
@@ -270,6 +271,12 @@ const DetailedProductCard = forwardRef((props, ref) => {
     isNegotiable !== true &&
     isFree !== true &&
     price !== sellingPrice;
+  const hasFreeShippingPackage = activeSalesPackages?.some(
+    (item) => item?.salesPackageCode === "FreeShipping",
+  );
+
+  const shouldShowFreeShipping =
+    hasFreeShipping === true && !hasFreeShippingPackage;
 
   return (
     // <LandingPageProductCardSkeleton />
@@ -310,9 +317,16 @@ const DetailedProductCard = forwardRef((props, ref) => {
           <ProductImageWrapper src={imageUrl} />
         )}
       </ImageWrapper>
-      {activeSalesPackages && activeSalesPackages.length > 0 && (
+      {(shouldShowFreeShipping ||
+        (activeSalesPackages && activeSalesPackages.length > 0)) && (
         <div className="campaign-badges">
-          {activeSalesPackages.map((packageType, index) => (
+          {shouldShowFreeShipping && (
+            <div className="campaign-badge campaign-badge-freeshipping">
+              <Icon icon={SalesPackageIcons?.FREESHIPPING} sizeInUnits="1rem" />
+            </div>
+          )}
+
+          {activeSalesPackages?.map((packageType, index) => (
             <div
               key={index}
               className={`campaign-badge campaign-badge-${packageType?.salesPackageCode?.toLowerCase()}`}
@@ -327,11 +341,13 @@ const DetailedProductCard = forwardRef((props, ref) => {
                   sizeInUnits="1rem"
                 />
               )}
-              {packageType?.salesPackageCode === "Urgent" && <> {urgentText}</>}
+
+              {packageType?.salesPackageCode === "Urgent" && <>{urgentText}</>}
             </div>
           ))}
         </div>
       )}
+
       <div className="wrapper-card-1">
         <div className="seller" title={sellerName}>
           {sellerName}

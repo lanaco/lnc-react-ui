@@ -26,7 +26,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
     actionComponent,
     componentName,
     sponsoredText,
-    LinkComponent
+    LinkComponent,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -53,7 +53,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   sellerUuid={x?.sellerUuid}
                   uuid={x?.uuid}
                   sponsored={x?.sponsored}
-                   onSelectCard={(e, cardRef) =>
+                  onSelectCard={(e, cardRef) =>
                     onSelectCard({
                       uuid: x?.uuid,
                       nameSlug: x?.nameSlug,
@@ -80,6 +80,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                   forCart={x?.forCart}
                   sponsoredText={sponsoredText}
                   LinkComponent={LinkComponent}
+                  hasFreeShipping={x?.hasFreeShipping}
                 />
               ))
           : items?.slice(0, limit).map((x, index) => (
@@ -96,13 +97,13 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                 uuid={x?.uuid}
                 location={x?.location}
                 sponsored={x?.sponsored}
-                 onSelectCard={(e, cardRef) =>
-                    onSelectCard({
-                      uuid: x?.uuid,
-                      nameSlug: x?.nameSlug,
-                      cardRef,
-                    })
-                  }
+                onSelectCard={(e, cardRef) =>
+                  onSelectCard({
+                    uuid: x?.uuid,
+                    nameSlug: x?.nameSlug,
+                    cardRef,
+                  })
+                }
                 nameSlug={x?.nameSlug}
                 image={x?.image}
                 imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
@@ -124,6 +125,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
                 sponsoredText={sponsoredText}
                 sellerName={x?.sellerName}
                 LinkComponent={LinkComponent}
+                hasFreeShipping={x?.hasFreeShipping}
               />
             ))}
       </>

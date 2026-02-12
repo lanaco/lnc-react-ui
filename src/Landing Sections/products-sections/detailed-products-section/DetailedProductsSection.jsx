@@ -86,6 +86,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 LinkComponent={LinkComponent}
                 activeSalesPackages={x?.activeSalesPackages}
                 urgentText={urgentText}
+                hasFreeShipping={x?.hasFreeShipping}
               />
             ))
           : items?.slice(0, limit).map((x, index) => (
@@ -132,6 +133,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 LinkComponent={LinkComponent}
                 activeSalesPackages={x?.activeSalesPackages}
                 urgentText={urgentText}
+                hasFreeShipping={x?.hasFreeShipping}
               />
             ))}
       </>
