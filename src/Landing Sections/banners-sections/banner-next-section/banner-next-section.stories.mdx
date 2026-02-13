@@ -1,0 +1,35 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import BannerNextSection from "./BannerNextSection.jsx";
+
+<Meta
+  title="Landing Sections/Banner Next Section"
+  component={BannerNextSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <BannerNextSection
+    title="Lorem ipsum dolor sit amet consectetur. Tempor amet."
+    description="Lorem ipsum dolor sit amet consectetur. Sed libero vehicula et cum."
+    buttonText="Get started"
+    buttonLink="/"
+    imageUrl="https://freepngimg.com/download/car/31510-9-car-transparent-background.png"
+    backgroundColor="linear-gradient(90deg, #FFFEFA 63.66%, #F0F0F8 100%)"
+  />
+);
+
+## Banner next section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {'import BannerNextSection from "@lanaco/lnc-react-ui/BannerNextSection";'}
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

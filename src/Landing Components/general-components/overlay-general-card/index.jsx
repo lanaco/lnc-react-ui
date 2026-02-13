@@ -15,12 +15,12 @@ const OverlayGeneralCard = forwardRef(
       handleSelectCard = () => {},
       handleButtonAction = () => {},
       selectAction,
-      LinkComponent
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     const Component = LinkComponent || "a";
-    
+
     return (
       <Container
         ref={ref}
@@ -56,7 +56,7 @@ const OverlayGeneralCard = forwardRef(
         />
       </Container>
     );
-  }
+  },
 );
 
 export default OverlayGeneralCard;
