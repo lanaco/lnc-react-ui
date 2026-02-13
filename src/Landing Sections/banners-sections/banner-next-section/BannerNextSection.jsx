@@ -25,7 +25,7 @@ const BannerNextSection = forwardRef(
         <div className="section__left">
           {imageUrl && (
             <div className="section__image">
-              <img src={imageUrl} alt="Banner next image" />
+              <img src={imageUrl} alt="Banner next image" loading="lazy" />
             </div>
           )}
         </div>
