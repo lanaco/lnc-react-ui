@@ -10,6 +10,15 @@ export const GridWrapper = styled.div`
     white-space: nowrap;
   }
 
+  & .section__options {
+    & button {
+      &:focus {
+        outline: none;
+        outline-offset: 0;
+      }
+    }
+  }
+
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     display: flex;
     gap: 1rem;

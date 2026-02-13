@@ -21,7 +21,7 @@ export default defineConfig({
         resolve(__dirname, "src/Basic Inputs/DecimalInput/DecimalInput.jsx"),
         resolve(
           __dirname,
-          "src/Basic Inputs/DecimalInputV2/DecimalInputV2.jsx"
+          "src/Basic Inputs/DecimalInputV2/DecimalInputV2.jsx",
         ),
         resolve(__dirname, "src/Basic Inputs/FileInput/FileInput.jsx"),
         resolve(__dirname, "src/Basic Inputs/NumberInput/NumberInput.jsx"),
@@ -41,20 +41,20 @@ export default defineConfig({
         resolve(__dirname, "src/Data display/Kanban/Kanban.jsx"),
         resolve(
           __dirname,
-          "src/Data display/Kanban/components/KanbanCard/KanbanCard.jsx"
+          "src/Data display/Kanban/components/KanbanCard/KanbanCard.jsx",
         ),
         resolve(
           __dirname,
-          "src/Data display/Kanban/components/KanbanHeader/KanbanHeader.jsx"
+          "src/Data display/Kanban/components/KanbanHeader/KanbanHeader.jsx",
         ),
         resolve(
           __dirname,
-          "src/Data display/Kanban/components/KanbanFooter/KanbanFooter.jsx"
+          "src/Data display/Kanban/components/KanbanFooter/KanbanFooter.jsx",
         ),
         resolve(__dirname, "src/Data display/KanbanView/KanbanView.jsx"),
         resolve(
           __dirname,
-          "src/Data display/KanbanView/KanbanActionsToolbar.jsx"
+          "src/Data display/KanbanView/KanbanActionsToolbar.jsx",
         ),
         resolve(__dirname, "src/Data display/Table/Table.jsx"),
         resolve(__dirname, "src/Data display/TableView/TableView.jsx"),
@@ -64,7 +64,7 @@ export default defineConfig({
         resolve(__dirname, "src/Feedback/Notification/Notification.jsx"),
         resolve(
           __dirname,
-          "src/Feedback/Notification/NotificationContainer.jsx"
+          "src/Feedback/Notification/NotificationContainer.jsx",
         ),
         resolve(__dirname, "src/Feedback/Notification/NotificationMessage.jsx"),
         resolve(__dirname, "src/Feedback/ProgressBar/ProgressBar.jsx"),
@@ -80,7 +80,7 @@ export default defineConfig({
         //--------------------------------------------------------------------
         resolve(
           __dirname,
-          "src/Inputs/DoubleRangeSlider/DoubleRangeSlider.jsx"
+          "src/Inputs/DoubleRangeSlider/DoubleRangeSlider.jsx",
         ),
         resolve(__dirname, "src/Inputs/DragAndDropFile/DragAndDropFile.jsx"),
         resolve(__dirname, "src/Inputs/DragDropFiles/DragDropFiles.jsx"),
@@ -88,11 +88,11 @@ export default defineConfig({
         resolve(__dirname, "src/Inputs/DropdownLookup/DropdownLookup.jsx"),
         resolve(
           __dirname,
-          "src/Inputs/MultiSelectDropdown/MultiSelectDropdown.jsx"
+          "src/Inputs/MultiSelectDropdown/MultiSelectDropdown.jsx",
         ),
         resolve(
           __dirname,
-          "src/Inputs/MultiSelectDropdownLookup/MultiSelectDropdownLookup.jsx"
+          "src/Inputs/MultiSelectDropdownLookup/MultiSelectDropdownLookup.jsx",
         ),
         resolve(__dirname, "src/Inputs/RadioGroup/RadioGroup.jsx"),
         resolve(__dirname, "src/Inputs/SearchBar/SearchBar.jsx"),
@@ -143,209 +143,213 @@ export default defineConfig({
         //--------------------------------------------------------------------
         resolve(
           __dirname,
-          "src/Landing Sections/general-sections/masonry-general-cards-section/MasonryGeneralCardsSection.jsx"
+          "src/Landing Sections/general-sections/masonry-general-cards-section/MasonryGeneralCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/detailed-products-section/DetailedProductsSection.jsx"
+          "src/Landing Sections/products-sections/detailed-products-section/DetailedProductsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/detailed-products-infinitive-section/DetailedProductsInfinitiveSection.jsx"
+          "src/Landing Sections/products-sections/detailed-products-infinitive-section/DetailedProductsInfinitiveSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/products-with-banner-section/ProductsWithBannerSection.jsx"
+          "src/Landing Sections/products-sections/products-with-banner-section/ProductsWithBannerSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/simple-products-section/SimpleProductsSection.jsx"
+          "src/Landing Sections/products-sections/simple-products-section/SimpleProductsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/products-sections/urgent-sale-products-section/UrgentSaleProductsSection.jsx"
+          "src/Landing Sections/products-sections/urgent-sale-products-section/UrgentSaleProductsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blogs-section-detailed/BlogsSectionDetailed.jsx"
+          "src/Landing Sections/blogs-sections/blogs-section-detailed/BlogsSectionDetailed.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blogs-section-large/BlogsSectionLarge.jsx"
+          "src/Landing Sections/blogs-sections/blogs-section-large/BlogsSectionLarge.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blog-single-section/BlogSingleSection.jsx"
+          "src/Landing Sections/blogs-sections/blog-single-section/BlogSingleSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blogs-section-simple/BlogsSectionSimple.jsx"
+          "src/Landing Sections/blogs-sections/blogs-section-simple/BlogsSectionSimple.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blogs-section-simple-centered/BlogsSectionSimpleCentered.jsx"
+          "src/Landing Sections/blogs-sections/blogs-section-simple-centered/BlogsSectionSimpleCentered.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blogs-section-with-filters/BlogsSectionWithFilters.jsx"
+          "src/Landing Sections/blogs-sections/blogs-section-with-filters/BlogsSectionWithFilters.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/custom-sections/custom-loan-map-section/CustomLoanMapSection.jsx"
+          "src/Landing Sections/custom-sections/custom-loan-map-section/CustomLoanMapSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blog-single-section/BlogSingleSection.jsx"
+          "src/Landing Sections/blogs-sections/blog-single-section/BlogSingleSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/custom-sections/location-finder-section/LocationFinderSection.jsx"
+          "src/Landing Sections/custom-sections/location-finder-section/LocationFinderSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/custom-sections/loan-calculator-section/LoanCalculatorSection.jsx"
+          "src/Landing Sections/custom-sections/loan-calculator-section/LoanCalculatorSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/custom-sections/separator-section/SeparatorSection.jsx"
+          "src/Landing Sections/custom-sections/separator-section/SeparatorSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/simple-categories-section/SimpleCategoriesSection.jsx"
+          "src/Landing Sections/simple-categories-section/SimpleCategoriesSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-basic/BannerSectionBasic.jsx"
+          "src/Landing Sections/banners-sections/banner-section-basic/BannerSectionBasic.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-carousel/BannerSectionCarousel.jsx"
+          "src/Landing Sections/banners-sections/banner-section-carousel/BannerSectionCarousel.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-grid/BannerSectionGrid.jsx"
+          "src/Landing Sections/banners-sections/banner-section-grid/BannerSectionGrid.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-simple/BannerSectionSimple.jsx"
+          "src/Landing Sections/banners-sections/banner-section-simple/BannerSectionSimple.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-with-list/BannerSectionWithList.jsx"
+          "src/Landing Sections/banners-sections/banner-section-with-list/BannerSectionWithList.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/banners-sections/banner-section-with-list-image/BannerSectionWithListImage.jsx"
+          "src/Landing Sections/banners-sections/banner-section-with-list-image/BannerSectionWithListImage.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/gift-sections/gift-cards-section/GiftCardsSection.jsx"
+          "src/Landing Sections/gift-sections/gift-cards-section/GiftCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/brand-sections/brand-hits-section/BrandHitsSection.jsx"
+          "src/Landing Sections/brand-sections/brand-hits-section/BrandHitsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/field-of-interests-sections/field-of-interests-masonry-section/FieldOfInterestsMasonrySection.jsx"
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-masonry-section/FieldOfInterestsMasonrySection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section/FieldOfInterestsWithAvatarsCardsSection.jsx"
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-avatars-cards-section/FieldOfInterestsWithAvatarsCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/FieldOfInterestsWithTagsCardsSection.jsx"
+          "src/Landing Sections/field-of-interests-sections/field-of-interests-with-tags-cards-section/FieldOfInterestsWithTagsCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/general-sections/general-with-tags-cards-section/GeneralWithTagsCardsSection.jsx"
+          "src/Landing Sections/general-sections/general-with-tags-cards-section/GeneralWithTagsCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/general-sections/overlay-general-cards-section/OverlayGeneralCardsSection.jsx"
+          "src/Landing Sections/general-sections/overlay-general-cards-section/OverlayGeneralCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/shop-sections/shop-cards-section/ShopCardsSection.jsx"
+          "src/Landing Sections/shop-sections/shop-cards-section/ShopCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/questionaire-sections/quiz-section/QuizSection.jsx"
+          "src/Landing Sections/questionaire-sections/quiz-section/QuizSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/locations-sections/location-search-section/LocationSearchSection.jsx"
+          "src/Landing Sections/locations-sections/location-search-section/LocationSearchSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/campaigns-sections/sales-campaigns-section/SalesCampaignsSection.jsx"
+          "src/Landing Sections/campaigns-sections/sales-campaigns-section/SalesCampaignsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/custom-sections/calorie-calculator-section/CalorieCalculatorSection.jsx"
+          "src/Landing Sections/custom-sections/calorie-calculator-section/CalorieCalculatorSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/reviews-section/ReviewsSection.jsx"
+          "src/Landing Sections/reviews-section/ReviewsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Blog Sections/blog-category-cards-section/BlogCategoryCardsSection.jsx"
+          "src/Blog Sections/blog-category-cards-section/BlogCategoryCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Blog Sections/blog-product-cards-section/BlogProductCardsSection.jsx"
+          "src/Blog Sections/blog-product-cards-section/BlogProductCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Blog Sections/blog-shop-cards-section/BlogShopCardsSection.jsx"
+          "src/Blog Sections/blog-shop-cards-section/BlogShopCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blog-cards-sponsored-section/BlogCardsSponsoredSection.jsx"
+          "src/Landing Sections/blogs-sections/blog-cards-sponsored-section/BlogCardsSponsoredSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blog-list-section/BlogListSection.jsx"
+          "src/Landing Sections/blogs-sections/blog-list-section/BlogListSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/general-sections/ad-banner-section/AdBannerSection.jsx"
+          "src/Landing Sections/general-sections/ad-banner-section/AdBannerSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/general-sections/quattro-cards-section/QuattroCardsSection.jsx"
+          "src/Landing Sections/general-sections/quattro-cards-section/QuattroCardsSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/general-sections/feedback-section/FeedbackSection.jsx"
+          "src/Landing Sections/general-sections/feedback-section/FeedbackSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Help Sections/banner-section/HelpBannerSection.jsx"
+          "src/Help Sections/banner-section/HelpBannerSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Help Sections/contact-section/ContactSection.jsx"
+          "src/Help Sections/contact-section/ContactSection.jsx",
         ),
         resolve(__dirname, "src/Help Sections/faq-section/FaqSection.jsx"),
         resolve(
           __dirname,
-          "src/Help Sections/search-section/SearchSection.jsx"
+          "src/Help Sections/search-section/SearchSection.jsx",
         ),
         resolve(__dirname, "src/Help Sections/stats-section/StatsSection.jsx"),
         resolve(
           __dirname,
-          "src/Help Sections/toggle-section/ToggleSection.jsx"
+          "src/Help Sections/toggle-section/ToggleSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Landing Sections/blogs-sections/blog-explore-section/BlogExploreSection.jsx"
+          "src/Landing Sections/blogs-sections/blog-explore-section/BlogExploreSection.jsx",
         ),
         resolve(
           __dirname,
-          "src/Blog Sections/blog-image-path-section/BlogImagePathSection.jsx"
+          "src/Blog Sections/blog-image-path-section/BlogImagePathSection.jsx",
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/banners-sections/banner-next-section/BannerNextSection.jsx",
         ),
       ],
       name: "@lanaco/lnc-react-ui",

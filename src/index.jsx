@@ -226,6 +226,7 @@ export { default as StatsSection } from "./Help Sections/stats-section/StatsSect
 export { default as ToggleSection } from "./Help Sections/toggle-section/ToggleSection";
 export { default as BlogExploreSection } from "./Landing Sections/blogs-sections/blog-explore-section/BlogExploreSection";
 export { default as BlogImagePathSection } from "./Blog Sections/blog-image-path-section/BlogImagePathSection";
+export { default as BannerNextSection } from "./Landing Sections/banners-sections/banner-next-section/BannerNextSection";
 
 //======================== THEME ==============================================================
 

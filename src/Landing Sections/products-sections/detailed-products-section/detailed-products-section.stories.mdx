@@ -18,6 +18,17 @@ export const TemplateDefault = (args) => (
     limit={6}
     getImage={(x, y, z) => x}
     isLoading={false}
+    allOptionsEnabled={true}
+    allOptionsLabel="Svi"
+    options={[
+      { label: "Nekretnine", value: "Nekretnine", code: "RealEstates" },
+      {
+        label: "Apartmani",
+        value: "Apartmani",
+        code: "RealEstates_Apartments",
+      },
+    ]}
+    isLoadingOptions={false}
     items={[
       {
         name: "Minimalist Stuiod | Urbal Core | Studio",

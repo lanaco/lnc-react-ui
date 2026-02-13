@@ -9,6 +9,7 @@ import { TitleWithOptionsSectionWrapper } from "../../style";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
 import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product/detailed-product-card";
 import SelectBar from "../../../Inputs/SelectBar";
+import SuspenseSelectBar from "../../../Landing Components/skeleton-components/general/select-bar";
 
 const MemoizedProductCard = memo(DetailedProductCard);
 
@@ -26,9 +27,17 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     getImage = () => {},
     negotiableText,
     freeText,
-    options,
+    options = [],
+    isLoadingOptions = false,
+    selectedOption,
     onSelectOption = () => {},
-    productsToolbarName = "All",
+    onRemoveOption = () => {},
+    allOptionsEnabled = false,
+    allOptionsLabel = "All",
+    onSelectAllOptions = () => {},
+    optionLabel = "label",
+    optionValue = "value",
+    optionCode = "code",
     sponsoredText,
     onBookmark = () => {},
     actionComponent,
@@ -165,30 +174,23 @@ const DetailedProductsSection = forwardRef((props, ref) => {
             </Button>
           )}
       </div>
-      {options?.length > 0 && (
+      <SuspenseSelectBar isLoading={isLoadingOptions}>
         <SelectBar
-          // items={dataExplore?.map((item) => ({
-          //   ...item,
-          // }))}
           items={options}
-          // selectedIds={selectedExploreCategoriesIds}
-          onRemove={(item) => {
-            onSelectOption(item);
-            // setSelectedExploreCategoriesIds([
-            //   ...selectedExploreCategoriesIds.filter((x) => x != id),
-            // ])
-          }}
-          onSelect={(item) => {
-            onSelectOption(item);
-            // setSelectedExploreCategoriesIds([id]);
-          }}
-          // onSelectAll={() => setSelectedExploreCategoriesIds([])}
-          labelKey={"name"}
-          valueKey={"code"}
+          selectedIds={selectedOption}
+          onRemove={onRemoveOption}
+          onSelect={onSelectOption}
+          allButton={allOptionsEnabled}
+          onSelectAll={onSelectAllOptions}
+          labelKey={optionLabel}
+          valueKey={optionValue}
+          codeKey={optionCode}
           noMargin={true}
-          productsToolbarName={productsToolbarName}
+          productsToolbarName={allOptionsLabel}
+          noGradient={true}
+          className="section__options"
         />
-      )}
+      </SuspenseSelectBar>
 
       <SuspenseDetailedProductCard
         isLoading={isLoading}
