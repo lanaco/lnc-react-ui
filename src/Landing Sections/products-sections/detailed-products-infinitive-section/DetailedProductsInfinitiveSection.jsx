@@ -128,21 +128,23 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
           )}
       </div>
       <SuspenseSelectBar isLoading={isLoadingOptions}>
-        <SelectBar
-          items={options}
-          selectedIds={selectedOption}
-          onRemove={onRemoveOption}
-          onSelect={onSelectOption}
-          allButton={allOptionsEnabled}
-          onSelectAll={onSelectAllOptions}
-          labelKey={optionLabel}
-          valueKey={optionValue}
-          codeKey={optionCode}
-          noMargin={true}
-          productsToolbarName={allOptionsLabel}
-          noGradient={true}
-          className="section__options"
-        />
+        {options && options?.length > 0 && (
+          <SelectBar
+            items={options}
+            selectedIds={selectedOption}
+            onRemove={onRemoveOption}
+            onSelect={onSelectOption}
+            allButton={allOptionsEnabled}
+            onSelectAll={onSelectAllOptions}
+            labelKey={optionLabel}
+            valueKey={optionValue}
+            codeKey={optionCode}
+            noMargin={true}
+            productsToolbarName={allOptionsLabel}
+            noGradient={true}
+            className="section__options"
+          />
+        )}
       </SuspenseSelectBar>
 
       <SuspenseDetailedProductCard
