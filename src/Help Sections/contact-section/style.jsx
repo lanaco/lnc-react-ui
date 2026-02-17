@@ -90,6 +90,12 @@ export const Container = styled.div`
               font-weight: 400;
               line-height: 1.25rem;
               letter-spacing: 0.0156rem;
+              text-decoration: none;
+              cursor: pointer;
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
         }

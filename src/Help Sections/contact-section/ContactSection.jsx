@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import { Controller, useForm } from "react-hook-form";
-import PropTypes from "prop-types";
 import CheckBoxInput from "../../Basic Inputs/CheckBoxInput/CheckBoxInput";
 import TextInput from "../../Basic Inputs/TextInput/TextInput";
 import TextAreaInput from "../../Basic Inputs/TextAreaInput/TextAreaInput";
@@ -34,7 +34,7 @@ const ContactSection = forwardRef(
       validationMode = "onTouched",
       isLoading = false,
     },
-    ref
+    ref,
   ) => {
     const {
       watch,
@@ -44,7 +44,7 @@ const ContactSection = forwardRef(
       reset,
     } = useForm({
       resolver: yupResolver(
-        validationSchema ? validationSchema() : contactUsValidation()
+        validationSchema ? validationSchema() : contactUsValidation(),
       ),
       mode: validationMode,
     });
@@ -72,12 +72,13 @@ const ContactSection = forwardRef(
                   <div className="tile__title">{phoneText}</div>
                   <div className="tile__items">
                     {phones?.map((phone, idx) => (
-                      <div
+                      <a
                         key={`contanct-section-phone__${idx}`}
+                        href={`tel:${phone}`}
                         className="tile__item"
                       >
                         {phone}
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -94,12 +95,13 @@ const ContactSection = forwardRef(
                   <div className="tile__title">{emailText}</div>
                   <div className="tile__items">
                     {emails?.map((email, idx) => (
-                      <div
+                      <a
                         key={`contanct-section-email__${idx}`}
+                        href={`mailto:${email}`}
                         className="tile__item"
                       >
                         {email}
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -237,26 +239,7 @@ const ContactSection = forwardRef(
         </div>
       </Container>
     );
-  }
+  },
 );
-
-ContactSection.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  image: PropTypes.string,
-  phoneText: PropTypes.string,
-  phones: PropTypes.array,
-  emailText: PropTypes.string,
-  emails: PropTypes.array,
-  fullNamePlaceholderText: PropTypes.string,
-  emailPlaceholderText: PropTypes.string,
-  subjectPlaceholderText: PropTypes.string,
-  messagePlaceholderText: PropTypes.string,
-  messageMaxLength: PropTypes.number,
-  hasAgrement: PropTypes.bool,
-  agrementText: PropTypes.string,
-  submitText: PropTypes.string,
-  onSubmit: PropTypes.func,
-};
 
 export default ContactSection;
