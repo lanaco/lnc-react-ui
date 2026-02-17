@@ -77,6 +77,7 @@ export const ItemsContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  align-items: stretch;
   width: 100%;
 
   & .section__show-more {
