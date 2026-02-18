@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import Icon from "../../../General/Icon/Icon";
@@ -14,7 +16,7 @@ const QuizResult = forwardRef(
       onContinue = () => {},
       onEndQuiz = () => {},
     },
-    ref
+    ref,
   ) => {
     return (
       <ResultWrapper ref={ref}>
@@ -50,7 +52,7 @@ const QuizResult = forwardRef(
         </div>
       </ResultWrapper>
     );
-  }
+  },
 );
 
 export default QuizResult;

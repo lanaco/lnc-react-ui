@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import RadioInput from "../../Basic Inputs/RadioInput/RadioInput";
 
@@ -21,8 +21,7 @@ const RadioGroup = forwardRef((props, ref) => {
     disabled = false,
     readOnly = false,
     items = [],
-    mapId = "id",
-    mapValue = "value",
+
     radioProps,
     inline = true,
     //----------------
@@ -50,7 +49,7 @@ const RadioGroup = forwardRef((props, ref) => {
     readOnly,
   };
 
-  const handleChange = (e, id) => {
+  const handleChange = (e) => {
     if (onChange) onChange(e);
   };
 
@@ -95,34 +94,5 @@ const RadioGroup = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-RadioGroup.propTypes = {
-  id: PropTypes.any,
-  name: PropTypes.string,
-  value: PropTypes.any,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  items: PropTypes.arrayOf(PropTypes.object),
-  mapid: PropTypes.any,
-  mapValue: PropTypes.string,
-  inline: PropTypes.bool,
-  //----------------
-  onChange: PropTypes.func,
-  //----------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  radioProps: PropTypes.any,
-};
 
 export default RadioGroup;

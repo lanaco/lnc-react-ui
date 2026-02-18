@@ -286,6 +286,7 @@ export const Container = styled.div`
       border: none;
       background: transparent;
       box-shadow: none;
+      padding-bottom: 2.5rem;
       order: 2;
 
       & .card__image {

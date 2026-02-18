@@ -1,6 +1,6 @@
-/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
+
 import { forwardRef, useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon/Icon";
@@ -32,14 +32,14 @@ const Item = styled.div`
             "MenuItem",
             props.color,
             "focus",
-            "icon"
+            "icon",
           )
         : getColorRgbaValue(
             props.theme,
             "MenuItem",
             props.color,
             "enabled",
-            "icon"
+            "icon",
           )};
 
     ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
@@ -61,14 +61,14 @@ const Item = styled.div`
       props.color,
       "focus",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
     color: ${getColorRgbaValue(
       props.theme,
       "MenuItem",
       props.color,
       "focus",
-      "text"
+      "text",
     )};
   `}
   outline: none;
@@ -83,14 +83,14 @@ const Item = styled.div`
         props.color,
         "hover",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
       color: ${getColorRgbaValue(
         props.theme,
         "MenuItem",
         props.color,
         "hover",
-        "text"
+        "text",
       )};
       `}
   }
@@ -104,14 +104,13 @@ const MenuItem = forwardRef((props, ref) => {
     disabled = false,
     isNested = false,
     showNested,
-    justifyToEnd = false,
+
     //----------------
     onFocus = () => {},
     onBlur = () => {},
     onClick = () => {},
     onKeyDown = () => {},
-    onMouseEnter = () => {},
-    onMouseLeave = () => {},
+
     toggleNested = () => {},
     onItemSelected = () => {},
     //----------------
@@ -120,7 +119,6 @@ const MenuItem = forwardRef((props, ref) => {
     color = "primary",
     size = "small",
     iconProps,
-    __TYPE__ = "MENU_ITEM",
     children,
     ...rest
   } = props;
@@ -308,38 +306,6 @@ const MenuItem = forwardRef((props, ref) => {
 //   size: "small",
 //   __TYPE__: "MENU_ITEM",
 // };
-
-MenuItem.propTypes = {
-  value: PropTypes.any,
-  active: PropTypes.bool,
-  icon: PropTypes.string,
-  disabled: PropTypes.bool,
-  isNested: PropTypes.bool,
-  justifyToEnd: PropTypes.bool,
-  //---------------------------------------------------------------
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  iconProps: PropTypes.any,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  __TYPE__: PropTypes.string,
-};
 
 export default MenuItem;
 

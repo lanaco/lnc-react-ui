@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import FlexGrid from "../../Layout/FlexGrid/FlexGrid";
 import FlexGridItem from "../../Layout/FlexGrid/FlexGridItem";
@@ -40,7 +40,7 @@ const StyledFormView = styled.form`
       "Popover",
       props.color,
       "enabled",
-      "boxShadow"
+      "boxShadow",
     )};
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, props.borderRadius)};
@@ -80,9 +80,9 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
           radioProps={inputProps.radioProps}
           name={accessor}
           items={[
-            ...inputProps.items?.map((o) => {
+            ...(inputProps.items?.map((o) => {
               return { value: o.value, label: o.label };
-            }),
+            }) ?? []),
           ]}
         />
       );
@@ -183,7 +183,6 @@ const getInput = (type, inputProps, accessor, value, color, size) => {
 
 const FormView = forwardRef((props, ref) => {
   const {
-    __TYPE__ = "FORM_VIEW",
     goToPreviousView,
     id,
     data,
@@ -194,11 +193,9 @@ const FormView = forwardRef((props, ref) => {
     backActive = true,
     nextActive = true,
     previousActive = true,
-    editActive,
     disableGoBack = false,
     disableNext = false,
     disablePrevious = false,
-    disableEdit,
     disableDiscard = false,
     disableSave = false,
     discardText = "Discard",
@@ -206,13 +203,10 @@ const FormView = forwardRef((props, ref) => {
     //------------------
     goToNext = () => {},
     goToPrevious = () => {},
-    onEdit = () => {},
     goBack = () => {},
     onSubmit = () => {},
     onDiscard = () => {},
     //------------------
-    className = "",
-    style = {},
     color = "primary",
     size = "small",
     children,
@@ -248,7 +242,7 @@ const FormView = forwardRef((props, ref) => {
                         item.accessor,
                         data[item.accessor],
                         errors[item.accessor] ? "danger" : color,
-                        size
+                        size,
                       )}
                 </FormField>
               </FlexGridItem>
@@ -359,46 +353,6 @@ const FormView = forwardRef((props, ref) => {
 //   style: {},
 //   size: "small",
 // };
-
-FormView.propTypes = {
-  __TYPE__: PropTypes.string,
-  goBackText: PropTypes.string,
-  fields: PropTypes.array,
-  data: PropTypes.object,
-  errors: PropTypes.object,
-  backActive: PropTypes.bool,
-  nextActive: PropTypes.bool,
-  disableGoBack: PropTypes.bool,
-  disableNext: PropTypes.bool,
-  disablePrevious: PropTypes.bool,
-  previousActive: PropTypes.bool,
-  editActive: PropTypes.bool,
-  flexGridProps: PropTypes.any,
-  disableDiscard: PropTypes.bool,
-  disableSave: PropTypes.bool,
-  discardText: PropTypes.string,
-  saveText: PropTypes.string,
-  //-----------------------------------------------------------
-  goToNext: PropTypes.func,
-  goToPrevious: PropTypes.func,
-  onEdit: PropTypes.func,
-  goBack: PropTypes.func,
-  onSubmit: PropTypes.func,
-  //------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default FormView;
 

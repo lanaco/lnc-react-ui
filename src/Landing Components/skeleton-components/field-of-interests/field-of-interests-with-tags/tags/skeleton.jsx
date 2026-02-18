@@ -1,8 +1,5 @@
-import {
-  SkeletonCirclePlaceholder,
-  SkeletonColumnWrapper,
-  SkeletonLinePlaceholder,
-} from "../../../style";
+/* eslint-disable react/prop-types */
+import { SkeletonColumnWrapper, SkeletonLinePlaceholder } from "../../../style";
 import { Container } from "../style";
 
 const SkeletonFieldOfInterestsWithTagsTag = ({ keyPrefix }) => {

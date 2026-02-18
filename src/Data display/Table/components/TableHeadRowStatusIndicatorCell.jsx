@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../../_utils/utils";
 
@@ -13,8 +13,8 @@ const HtmlHeadCell = styled.th`
       "TableHeadCell",
       null,
       "enabled",
-      "background"
-    )}};
+      "background",
+    )};
 
   border-bottom: ${(props) =>
     "1px solid " +
@@ -23,22 +23,15 @@ const HtmlHeadCell = styled.th`
       "TableHeadCell",
       null,
       "enabled",
-      "border"
-    )}};
+      "border",
+    )};
   
   border-radius: 0.5rem 0 0 0;
 `;
 
 const TableHeadRowStatusIndicatorCell = (props) => {
   //--------------------------
-  const {
-    __TYPE__ = "TABLE_HEAD_ROW_STATUS_INDICATOR_CELL",
-    Index,
-    //-----------
-    className = "",
-    size = "small",
-    color = "primary",
-  } = props;
+  const { Index, className = "", size = "small", color = "primary" } = props;
 
   const theme = useTheme();
 
@@ -60,23 +53,6 @@ const TableHeadRowStatusIndicatorCell = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableHeadRowStatusIndicatorCell.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableHeadRowStatusIndicatorCell;
 

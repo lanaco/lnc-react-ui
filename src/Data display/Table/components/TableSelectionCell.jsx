@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import Checkbox from "../../../Basic Inputs/CheckBoxInput/CheckBoxInput";
 import { getColorRgbaValue } from "../../../_utils/utils";
@@ -16,7 +16,6 @@ const HtmlCell = styled.td`
 const TableSelectionCell = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_SELECTION_CELL",
     RowData = {},
     onSelectRow = () => {},
     IsSelected = null,
@@ -38,7 +37,7 @@ const TableSelectionCell = (props) => {
     theme,
   };
 
-  const onChange = (e, value) => {
+  const onChange = (e) => {
     onSelectRow(e, RowData, IsSelected);
   };
 
@@ -87,32 +86,6 @@ const TableSelectionCell = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableSelectionCell.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  Column: PropTypes.object,
-  RowData: PropTypes.object,
-  onSelectRow: PropTypes.func,
-  Index: PropTypes.number,
-  SelectedData: PropTypes.array,
-  IsSelected: PropTypes.bool,
-  EnableRowHighlight: PropTypes.bool,
-  GetRowHighlightColor: PropTypes.func,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableSelectionCell;
 

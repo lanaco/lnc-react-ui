@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-/* eslint-disable no-undef */
-import PropTypes from "prop-types";
+
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../_utils/utils";
@@ -14,7 +14,7 @@ const StyledSeparator = styled.div`
       "MenuItem",
       "default",
       "enabled",
-      "separator"
+      "separator",
     )};
   margin-left: -0.25rem;
   margin-right: -0.25rem;
@@ -34,13 +34,5 @@ const TreeMenuSeparator = forwardRef((props, ref) => {
     ></StyledSeparator>
   );
 });
-
-TreeMenuSeparator.propTypes = {
-  /**
-   * When the separator needs to be set beetween Menu Items that are justified to end, prop needs to be set to `justifyToEnd={true}`
-   */
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
 
 export default TreeMenuSeparator;

@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-
-import PropTypes from "prop-types";
 
 import { Container } from "./style";
 
@@ -17,11 +17,5 @@ const HelpBannerSection = forwardRef(({ title, description, image }, ref) => {
     </Container>
   );
 });
-
-HelpBannerSection.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  image: PropTypes.string,
-};
 
 export default HelpBannerSection;

@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Icon from "../../General/Icon/Icon";
 import { getColorRgbaValue } from "../../_utils/utils";
@@ -21,7 +21,7 @@ const StyledSummary = styled.div`
       "Accordion",
       "primary",
       "enabled",
-      "summaryText"
+      "summaryText",
     )};
 
   padding: ${(props) => GET_PADDING[props.size]};
@@ -34,7 +34,6 @@ const StyledSummary = styled.div`
 
 const AccordionSummary = forwardRef((props, ref) => {
   const {
-    __TYPE__ = "ACCORDION_SUMMARY",
     disabled,
     isExpanded,
     onExpand,
@@ -81,15 +80,6 @@ const AccordionSummary = forwardRef((props, ref) => {
 //   style: {},
 //   size: "small",
 // };
-
-AccordionSummary.propTypes = {
-  __TYPE__: PropTypes.string,
-  onClick: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default AccordionSummary;
 

@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useState, forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
@@ -38,28 +39,28 @@ const CustomDatePicker = forwardRef((props, ref) => {
 
   var [focused, setFocused] = useState(false);
 
-  const handleChange = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-    onChange(e, !checked, id);
-  };
+  // const handleChange = (e) => {
+  //   e.stopPropagation();
+  //   e.nativeEvent.stopImmediatePropagation();
+  //   onChange(e, !checked, id);
+  // };
 
-  const onKeyDown = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-    onChange(e, !checked, id);
-  };
+  // const onKeyDown = (e) => {
+  //   e.stopPropagation();
+  //   e.nativeEvent.stopImmediatePropagation();
+  //   onChange(e, !checked, id);
+  // };
 
-  const handleOnBlur = (e) => {
-    setFocused(false);
-    if (onBlur) onBlur(e, id);
-  };
+  // const handleOnBlur = (e) => {
+  //   setFocused(false);
+  //   if (onBlur) onBlur(e, id);
+  // };
 
-  const handleOnFocus = (e) => {
-    setFocused(true);
+  // const handleOnFocus = (e) => {
+  //   setFocused(true);
 
-    if (onFocus) onFocus(e, id);
-  };
+  //   if (onFocus) onFocus(e, id);
+  // };
 
   return (
     <Container>
@@ -67,25 +68,5 @@ const CustomDatePicker = forwardRef((props, ref) => {
     </Container>
   );
 });
-
-CustomDatePicker.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  checked: PropTypes.bool,
-  preventDefault: PropTypes.bool,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  label: PropTypes.string,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "error",
-    "warning",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default CustomDatePicker;

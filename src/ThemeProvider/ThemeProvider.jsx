@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { useEffect, useState, createContext } from "react";
 import { themes } from "../_utils/theme";
-import PropTypes from "prop-types";
 import { getColorRgbaValue, getSizeValueWithUnits } from "../_utils/utils";
 import { getDisabledBg, getDisabledColor } from "./_themeutils";
 import { createGlobalStyle } from "styled-components";
@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
           "Background",
           "default",
           "enabled",
-          "background"
+          "background",
         )} !important;
         color: ${(props) =>
           getColorRgbaValue(
@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
             "Text",
             "default",
             "enabled",
-            "text"
+            "text",
           )} !important;
     }
     & td {
@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
           "Background",
           "default",
           "enabled",
-          "background"
+          "background",
         )} !important;
         color: ${(props) =>
           getColorRgbaValue(
@@ -57,7 +57,7 @@ const GlobalStyle = createGlobalStyle`
             "Text",
             "default",
             "enabled",
-            "text"
+            "text",
           )} !important;
     }
   }
@@ -69,7 +69,7 @@ const GlobalStyle = createGlobalStyle`
         "Background",
         "default",
         "enabled",
-        "background"
+        "background",
       )} !important;
     color: ${(props) =>
       getColorRgbaValue(
@@ -77,7 +77,7 @@ const GlobalStyle = createGlobalStyle`
         "Text",
         "default",
         "enabled",
-        "text"
+        "text",
       )} !important;
   }
 }
@@ -89,7 +89,7 @@ const GlobalStyle = createGlobalStyle`
         "Background",
         "default",
         "enabled",
-        "background"
+        "background",
       )};
     color: ${(props) =>
       getColorRgbaValue(props.theme, "Text", "default", "enabled", "text")};
@@ -115,7 +115,7 @@ const ThemeProvider = ({ theme = "Lanaco Light", children }) => {
     else setCurrentTheme(theme);
   }, [theme]);
 
-  const switchTheme = (name) => {
+  const switchTheme = () => {
     if (typeof theme == "string")
       setCurrentTheme(themes?.find((item) => item.name == theme));
     else setCurrentTheme(theme);
@@ -131,10 +131,6 @@ const ThemeProvider = ({ theme = "Lanaco Light", children }) => {
       </EmotionThemeProvider>
     </ThemeContext.Provider>
   );
-};
-
-ThemeProvider.propTypes = {
-  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 export default ThemeProvider;

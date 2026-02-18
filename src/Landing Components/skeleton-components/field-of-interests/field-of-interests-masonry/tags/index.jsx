@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Suspense } from "react";
 
 import SkeletonFieldOfInterestsMasonryTag from "./skeleton";

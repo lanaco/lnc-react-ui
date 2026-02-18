@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useCallback, useEffect, useRef, useState, forwardRef } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import {
   getBorderRadiusValueWithUnits,
@@ -339,30 +339,5 @@ const DoubleRangeSlider = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-DoubleRangeSlider.propTypes = {
-  minValue: PropTypes.number,
-  maxValue: PropTypes.number,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  disabled: PropTypes.bool,
-  //-----------------------------
-  onChange: PropTypes.func,
-  //-------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "disabled",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default DoubleRangeSlider;

@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 import ReactPlayer from "react-player";
-
-import PropTypes from "prop-types";
 
 import PlayButton from "../../../assets/images/PlayButton.svg";
 import useDetectMobile from "../../../_utils/useDetectMobile";
@@ -31,14 +32,5 @@ const SearchSectionVideo = forwardRef(({ video, thumbnail }, ref) => {
     />
   );
 });
-
-SearchSectionThumbnail.propTypes = {
-  thumbnail: PropTypes.string,
-};
-
-SearchSectionVideo.propTypes = {
-  video: PropTypes.string,
-  thumbnail: PropTypes.string,
-};
 
 export default SearchSectionVideo;

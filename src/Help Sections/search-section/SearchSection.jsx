@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-
-import PropTypes from "prop-types";
 
 import TextInput from "../../Basic Inputs/TextInput/TextInput";
 import Icon from "../../General/Icon/Icon";
@@ -20,7 +20,7 @@ const SearchSection = forwardRef(
       video,
       thumbnail,
     },
-    ref
+    ref,
   ) => {
     return (
       <Container ref={ref}>
@@ -62,18 +62,7 @@ const SearchSection = forwardRef(
         </div>
       </Container>
     );
-  }
+  },
 );
-
-SearchSection.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  suggestedText: PropTypes.string,
-  searchPlaceholderText: PropTypes.string,
-  tags: PropTypes.array,
-  includeSearch: PropTypes.bool,
-  video: PropTypes.string,
-  thumbnail: PropTypes.string,
-};
 
 export default SearchSection;

@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
@@ -21,7 +21,7 @@ const Span = styled.span`
       "Icon",
       props.color,
       "enabled",
-      "icon"
+      "icon",
     )}`};
   display: inline-flex;
   justify-content: center;
@@ -30,7 +30,6 @@ const Span = styled.span`
 
 const Icon = forwardRef((props, ref) => {
   const {
-    id = "",
     icon = "",
     iconStyle = "solid",
     tooltip = "",
@@ -78,30 +77,5 @@ const Icon = forwardRef((props, ref) => {
 //   size: "small",
 //   sizeInUnits: "",
 // };
-
-Icon.propTypes = {
-  id: PropTypes.any,
-  icon: PropTypes.string,
-  iconStyle: PropTypes.oneOf(["solid", "regular"]),
-  tooltip: PropTypes.string,
-  //----------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  /**
-    Size in one of the css units (px, rem, em, ... ), sizeInUnits overrides size property
-   */
-  sizeInUnits: PropTypes.string,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default Icon;

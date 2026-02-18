@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { cloneElement, forwardRef, isValidElement } from "react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import {
@@ -17,7 +17,7 @@ const Bar = styled.div`
       "Progress",
       props.color,
       "enabled",
-      "unfilled"
+      "unfilled",
     )};
   height: ${(props) =>
     props.theme.components.Progress.default.enabled.sizes[props.size]};
@@ -35,7 +35,7 @@ const Progressed = styled.div`
       "Progress",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
   position: absolute;
   border-radius: ${(props) =>
@@ -63,12 +63,10 @@ const Label = styled.label`
 
 const ProgressBar = forwardRef((props, ref) => {
   const {
-    id = "",
     showLabel = false,
     progressPercentage = 0,
     className = "",
     style = {},
-    onChange = () => {},
     size = "small",
     color = "primary",
     progressBarEndComponent,
@@ -124,29 +122,5 @@ const ProgressBar = forwardRef((props, ref) => {
 //   color: "primary",
 //   //-------------------
 // };
-
-ProgressBar.propTypes = {
-  id: PropTypes.any,
-  showLabel: PropTypes.bool,
-  progressPercentage: PropTypes.number,
-  //-------------------------
-  onChange: PropTypes.func,
-  //-------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "disabled",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  progressBarEndComponent: PropTypes.any,
-};
 
 export default ProgressBar;

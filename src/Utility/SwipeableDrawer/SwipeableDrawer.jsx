@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, useState } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 
@@ -40,7 +40,7 @@ const StyledDrawer = styled.div`
       props.isOpen,
       props.isFullPage,
       props.drawerSize,
-      props.unsetHeight
+      props.unsetHeight,
     )}
   max-width: ${(p) => (p.isOpen || p.unsetWidth === false ? "100vw" : 0)};
   ${(props) =>
@@ -49,7 +49,7 @@ const StyledDrawer = styled.div`
       props.isOpen,
       props.isFullPage,
       props.drawerSize,
-      props.unsetWidth
+      props.unsetWidth,
     )}
   position: ${(props) => props.position};
   z-index: ${(props) => props.zIndex};
@@ -70,7 +70,7 @@ const StyledDrawer = styled.div`
       "Drawer",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
   color: ${(props) =>
     getColorRgbaValue(props.theme, "Drawer", props.color, "enabled", "text")};
@@ -94,7 +94,6 @@ const StyledOverlay = styled.div`
 const SwipeableDrawer = forwardRef((props, ref) => {
   const {
     direction = "right",
-    open = false,
     duration = 0.8,
     enableOverlay = true,
     zIndex = 100,
@@ -271,56 +270,5 @@ const SwipeableDrawer = forwardRef((props, ref) => {
 //   style: {},
 //   color: "neutral",
 // };
-
-SwipeableDrawer.propTypes = {
-  direction: PropTypes.oneOf(["top", "right", "left", "bottom"]),
-  open: PropTypes.bool,
-  /**
-   * Duration of opening the drawer in ms
-   */
-  duration: PropTypes.number,
-  /**
-   * Determines whether to show the overlay
-   */
-  enableOverlay: PropTypes.bool,
-  /**
-   * z-index of Drawer
-   */
-  zIndex: PropTypes.number,
-  position: PropTypes.string,
-  closeOnClickOutside: PropTypes.bool,
-  closeOnSwipe: PropTypes.bool,
-  /**
-   * Determines whether drawer takes up the whole page
-   */
-  isFullPage: PropTypes.bool,
-  unsetHeight: PropTypes.bool,
-  unsetWidth: PropTypes.bool,
-  //---------------------------------------------------------------
-  onClose: PropTypes.func,
-  onOpen: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  overlayColor: PropTypes.string,
-  /**
-   * Determines drawer's height or width depending on direction
-   */
-  drawerSize: PropTypes.string,
-  /**
-   * Determines font size
-   */
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default SwipeableDrawer;

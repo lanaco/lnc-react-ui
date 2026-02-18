@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { ToastContainer } from "react-toastify";
 import {
@@ -145,38 +144,5 @@ const NotificationContainer = forwardRef((props, ref) => {
     </StyledNotification>
   );
 });
-
-NotificationContainer.propTypes = {
-  position: PropTypes.oneOf([
-    "top-right",
-    "top-center",
-    "top-left",
-    "bottom-right",
-    "bottom-center",
-    "bottom-left",
-  ]),
-  /**
-   * Value in ms
-   */
-  autoClose: PropTypes.number,
-  hideProgressBar: PropTypes.bool,
-  newestOnTop: PropTypes.bool,
-  closeOnClick: PropTypes.bool,
-  /**
-   * Right to Left
-   */
-  rtl: PropTypes.bool,
-  pauseOnFocusLoss: PropTypes.bool,
-  draggable: PropTypes.bool,
-  pauseOnHover: PropTypes.bool,
-  closeButton: PropTypes.bool,
-  //----------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  /**
-   * Other react-toastify ToastContainer props.
-   */
-  toastContainerProps: PropTypes.any,
-};
 
 export default NotificationContainer;

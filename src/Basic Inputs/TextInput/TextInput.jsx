@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
-import PropTypes from "prop-types";
 import { useCallback, useEffect, useState, forwardRef, useRef } from "react";
 import debounce from "lodash.debounce";
 import {
@@ -51,7 +51,7 @@ const TextInput = forwardRef((props, ref) => {
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
-    [onChange]
+    [onChange],
   );
 
   const handleChange = (e, value) => {
@@ -192,53 +192,5 @@ const TextInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TextInput.propTypes = {
-  id: PropTypes.any,
-  defaultValue: PropTypes.string,
-  value: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  /**
-   * Time in miliseconds before onChange event fires after it has been triggered.
-   */
-  debounceTime: PropTypes.number,
-  placeholder: PropTypes.string,
-  type: PropTypes.oneOf(["text", "email"]),
-  tabIndex: PropTypes.number,
-  /**
-   * Reserved space before input. Intented to be used with plain text or `Icon` component.
-   */
-  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * Reserved space after input. Intented to be used with plain text or `Icon` component.
-   */
-  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * `(event, value) => void`
-   */
-  onChange: PropTypes.func,
-  /**
-   * `(event) => void`
-   */
-  onBlur: PropTypes.func,
-  /**
-   * `(event) => void`
-   */
-  onFocus: PropTypes.func,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TextInput;

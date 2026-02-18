@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useCallback, useEffect, useRef, useState, forwardRef } from "react";
 import { createPortal } from "react-dom";
-import PropTypes from "prop-types";
 import {
   getColorRgbaValue,
   getCustomRenderById,
@@ -73,8 +73,6 @@ const dropAnimation = {
   }),
 };
 
-const PLACEHOLDER_ID = "placeholder";
-
 const useMountStatus = () => {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -94,7 +92,7 @@ const getColor = (color, theme) => {
       "KanbanCard",
       color,
       "enabled",
-      "highlight"
+      "highlight",
     );
   }
   return undefined;
@@ -103,7 +101,6 @@ const getColor = (color, theme) => {
 const DroppableContainer = ({
   children,
   containerId,
-  columns = 1,
   disabled,
   id,
   items,
@@ -175,11 +172,9 @@ const SortableItem = ({
   cardProps,
   theme,
   renderContent,
-  color,
 }) => {
   const {
     setNodeRef,
-    setActivatorNodeRef,
     listeners,
     isDragging,
     isSorting,
@@ -261,7 +256,6 @@ const Kanban = forwardRef((props, ref) => {
     footerProps,
     //---------------------------
     data = [],
-    columnInfo = {},
     onColumnMoved = () => {},
     onCardMoved = () => {},
     onCardChangedColumns = () => {},
@@ -281,7 +275,7 @@ const Kanban = forwardRef((props, ref) => {
       data ?? {
         A: createRange(itemCount, (index) => `A${index + 1}`),
         B: createRange(itemCount, (index) => `B${index + 1}`),
-      }
+      },
   );
 
   const [containers, setContainers] = useState(Object.keys(data));
@@ -306,7 +300,7 @@ const Kanban = forwardRef((props, ref) => {
         return closestCenter({
           ...args,
           droppableContainers: args.droppableContainers.filter(
-            (container) => container.id in items
+            (container) => container.id in items,
           ),
         });
       }
@@ -332,7 +326,7 @@ const Kanban = forwardRef((props, ref) => {
               droppableContainers: args.droppableContainers.filter(
                 (container) =>
                   container.id !== overId &&
-                  containerItems.map((x) => x.id).includes(container.id)
+                  containerItems.map((x) => x.id).includes(container.id),
               ),
             })[0]?.id;
           }
@@ -354,7 +348,7 @@ const Kanban = forwardRef((props, ref) => {
       // If no droppable is matched, return the last match
       return lastOverId.current ? [{ id: lastOverId.current }] : [];
     },
-    [activeId, items]
+    [activeId, items],
   );
 
   const [clonedItems, setClonedItems] = useState([]);
@@ -364,7 +358,7 @@ const Kanban = forwardRef((props, ref) => {
     useSensor(TouchSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter,
-    })
+    }),
   );
 
   //================== LIFECYCLE =====================
@@ -391,7 +385,7 @@ const Kanban = forwardRef((props, ref) => {
     if (id in items) return id;
 
     return Object.keys(items).find((key) =>
-      items[key].map((x) => x.id).includes(id)
+      items[key].map((x) => x.id).includes(id),
     );
   };
 
@@ -465,14 +459,14 @@ const Kanban = forwardRef((props, ref) => {
         return {
           ...items,
           [activeContainer]: items[activeContainer].filter(
-            (item) => item.id != active.id
+            (item) => item.id != active.id,
           ),
           [overContainer]: [
             ...items[overContainer].slice(0, newIndex),
             items[activeContainer][activeIndex],
             ...items[overContainer].slice(
               newIndex,
-              items[overContainer].length
+              items[overContainer].length,
             ),
           ],
         };
@@ -519,7 +513,7 @@ const Kanban = forwardRef((props, ref) => {
     if (overContainer) {
       const activeIndex = findIndex(
         items[activeContainer],
-        (x) => x.id == active.id
+        (x) => x.id == active.id,
       );
 
       const overIndex = findIndex(items[overContainer], (x) => x.id == overId);
@@ -530,7 +524,7 @@ const Kanban = forwardRef((props, ref) => {
           [overContainer]: arrayMove(
             cachedItems[overContainer],
             activeIndex,
-            overIndex
+            overIndex,
           ),
         };
 
@@ -539,7 +533,7 @@ const Kanban = forwardRef((props, ref) => {
           [overContainer]: arrayMove(
             items[overContainer],
             activeIndex,
-            overIndex
+            overIndex,
           ),
         }));
       }
@@ -685,7 +679,7 @@ const Kanban = forwardRef((props, ref) => {
           column: column,
         },
         column?.header,
-        true
+        true,
       ) ||
       renderCustomElement(
         getCustomRenderById("KANBAN_HEADER", null, children),
@@ -695,7 +689,7 @@ const Kanban = forwardRef((props, ref) => {
           column: column,
         },
         column?.header,
-        true
+        true,
       ) || (
         <KanbanHeader
           id={containerId}
@@ -719,7 +713,7 @@ const Kanban = forwardRef((props, ref) => {
           ...footerProps,
           id: containerId,
         },
-        null
+        null,
       ) ||
       renderCustomElement(
         getCustomRenderById("KANBAN_FOOTER", null, children),
@@ -727,7 +721,7 @@ const Kanban = forwardRef((props, ref) => {
           ...footerProps,
           id: containerId,
         },
-        null
+        null,
       )
     );
   };
@@ -740,7 +734,7 @@ const Kanban = forwardRef((props, ref) => {
           ...props,
         },
         content,
-        true
+        true,
       ) ||
       renderCustomElement(
         getCustomRenderById("KANBAN_CARD", null, children),
@@ -748,7 +742,7 @@ const Kanban = forwardRef((props, ref) => {
           ...props,
         },
         content,
-        true
+        true,
       ) || (
         <KanbanCard color={color} size={size} {...props}>
           {content}
@@ -836,7 +830,7 @@ const Kanban = forwardRef((props, ref) => {
                 : renderSortableItemDragOverlay(activeId)
               : null}
           </DragOverlay>,
-          document.body
+          document.body,
         )}
       </DndContext>
     </ComponentContainer>
@@ -858,63 +852,5 @@ const Kanban = forwardRef((props, ref) => {
 //   className: "",
 //   stlye: {},
 // };
-
-Kanban.propTypes = {
-  horizontalDisplay: PropTypes.bool,
-  verticalDisplay: PropTypes.bool,
-  adjustScale: PropTypes.bool,
-  //Number of items in container
-  itemCount: PropTypes.bool,
-  cancelDrop: PropTypes.func,
-  /**
-   * type of: [{id: `<string | number>`, content: `<string | element>`}, ...]
-   */
-  columns: PropTypes.array,
-  handle: PropTypes.bool,
-  // containerStyle,
-  // coordinateGetter = multipleContainersCoordinateGetter,
-  getItemStyles: PropTypes.func,
-  wrapperStyle: PropTypes.func,
-  minimal: PropTypes.bool,
-  // modifiers,
-  renderItem: PropTypes.func,
-  // strategy = verticalListSortingStrategy,
-  scrollable: PropTypes.bool,
-  cardProps: PropTypes.any,
-  headerProps: PropTypes.any,
-  footerProps: PropTypes.any,
-  //---------------------------
-  /**
-   * Type of:
-   * { < string | number >:
-   * array[{ id< string | number >,
-   * name< string >,
-   *  content< element >,
-   * color< "primary" | "secondary" | "danger" | "warning" | "information" | "neutral" >]}] }
-   */
-  data: PropTypes.object,
-  columnInfo: PropTypes.object,
-  onColumnMoved: PropTypes.func,
-  onCardMoved: PropTypes.func,
-  onCardChangedColumns: PropTypes.func,
-  /**
-   * Max height of column container (cards list) before scroll appears.
-   */
-  maxContainerHeight: PropTypes.string,
-  //----------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default Kanban;

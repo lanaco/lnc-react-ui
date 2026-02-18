@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 
 const HtmlRow = styled.tr`
@@ -9,7 +9,6 @@ const HtmlRow = styled.tr`
 const TableHeadRow = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_HEAD_ROW",
     Index = 0,
     //-------------
     className = "",
@@ -43,25 +42,6 @@ const TableHeadRow = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableHeadRow.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  Index: PropTypes.any,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableHeadRow;
 

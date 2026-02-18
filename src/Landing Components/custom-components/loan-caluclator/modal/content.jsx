@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useState } from "react";
 
 import Button from "../../../../General/Button/Button";
@@ -36,7 +38,7 @@ const LoanCalculatorModalContent = forwardRef(
       summaryTotalPaymentHint = "Lorem ipsum dolor sit amet consectetur. Sed sed viverra sed lobortis. At eu tellus tristique hac quis.",
       handleSubmit = () => {},
     },
-    ref
+    ref,
   ) => {
     const [loanAmount, setLoanAmount] = useState(defaultLoanAmount);
     const [interestRate, setInterestRate] = useState(defaultInterestRate);
@@ -180,7 +182,7 @@ const LoanCalculatorModalContent = forwardRef(
         </div>
       </Container>
     );
-  }
+  },
 );
 
 export default LoanCalculatorModalContent;

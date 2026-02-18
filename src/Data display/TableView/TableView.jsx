@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { forwardRef, useRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import ActionsToolbar from "./ActionsToolbar";
 import { useState } from "react";
@@ -18,17 +18,13 @@ const StyledView = styled.div`
 
 const TableView = forwardRef((props, ref) => {
   const {
-    __TYPE__ = "TABLE_VIEW",
-    goToPreviousView,
     tableProps = {},
     paginationProps = {},
     actionsToolbarProps = {},
     rowsSingleSelect = true,
     rowsMultiSelect = false,
-    loading = false,
     showCreate = true,
     enableCreate = true,
-    enableDetails = true,
     showEdit,
     enableEditOnSelection,
     showDelete = true,
@@ -47,13 +43,8 @@ const TableView = forwardRef((props, ref) => {
     onDelete = () => {},
     onDetails = () => {},
     onCopy = () => {},
-    onFilter = () => {},
-    onSort = () => {},
     onPageChange = () => {},
-    onEmptyRowsSelection = () => {},
     //------------------
-    className = "",
-    style = {},
     color = "primary",
     size = "small",
     children,
@@ -146,7 +137,7 @@ const TableView = forwardRef((props, ref) => {
           color: toolbarProps?.color ? toolbarProps.color : color,
           className: "table-view-toolbar-lnc " + toolbarProps?.className,
         },
-        children
+        children,
       ) || (
         <ActionsToolbar
           {...toolbarProps}
@@ -177,7 +168,7 @@ const TableView = forwardRef((props, ref) => {
           color: tableProps?.color ? tableProps.color : color,
           className: "table-view-pagination-lnc " + tableProps?.className,
         },
-        children
+        children,
       ) || (
         <Table
           size={tableProps?.size ? tableProps.size : size}
@@ -206,7 +197,7 @@ const TableView = forwardRef((props, ref) => {
           color: paginationProps?.color ? paginationProps.color : color,
           className: "table-view-pagination-lnc " + paginationProps?.className,
         },
-        children
+        children,
       ) || (
         <Pagination
           {...paginationProps}
@@ -262,78 +253,6 @@ const TableView = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableView.propTypes = {
-  __TYPE__: PropTypes.string,
-  tableProps: PropTypes.object,
-  actionsToolbarProps: PropTypes.object,
-  paginationProps: PropTypes.object,
-  rowsSingleSelect: PropTypes.bool,
-  rowsMultiSelect: PropTypes.bool,
-  loading: PropTypes.bool,
-  showCreate: PropTypes.bool,
-  actionsDropdownZIndex: PropTypes.any,
-  actionsDropdownPlacement: PropTypes.any,
-  /**
-   * Enable create
-   */
-  enableCreate: PropTypes.bool,
-  /**
-   * Enable details on row click
-   */
-  enableDetails: PropTypes.bool,
-  showEdit: PropTypes.bool,
-  /**
-   * Enable edit when one row is selected
-   */
-  enableEditOnSelection: PropTypes.bool,
-  showDelete: PropTypes.bool,
-  /**
-   * Enable delete when one row is selected
-   */
-  enableDeleteOnSelection: PropTypes.bool,
-  showCopy: PropTypes.bool,
-  /**
-   * Enable copy when one row is selected
-   */
-  enableCopyOnSelection: PropTypes.bool,
-  /**
-   * Actions that will be shown in toolbar with existing actions
-   * type of [{name: `<string>`, show: `<bool>`, enable: `<bool>`, enableOnSelection: `<bool>`, onAction: `<func>`, customAction: `<elemet>`}, ...]
-   */
-  customActions: PropTypes.array,
-  /**
-   * Determines whether will pagination be shown in view
-   */
-  pagination: PropTypes.bool,
-  /**
-   * If `readOnly={true}` actions Delete, Edit and Copy won't be shown. Row Selction will be disabled.
-   */
-  readOnly: PropTypes.bool,
-  //-------------------------------------------------------------
-  onCreate: PropTypes.func,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
-  onDetails: PropTypes.func,
-  onCopy: PropTypes.func,
-  onFilter: PropTypes.func,
-  onSort: PropTypes.func,
-  onPageChange: PropTypes.func,
-  //------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableView;
 

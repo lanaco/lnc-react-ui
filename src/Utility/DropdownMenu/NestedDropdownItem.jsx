@@ -1,4 +1,4 @@
-/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import {
   useState,
   forwardRef,
@@ -6,7 +6,6 @@ import {
   isValidElement,
   cloneElement,
 } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../_utils/utils";
@@ -21,14 +20,13 @@ const StyledNested = styled(motion.div)`
       "MenuItem",
       props.color,
       "focus",
-      "background"
+      "background",
     )}`};
   border-radius: 2px;
 `;
 
 const NestedDropdownItem = forwardRef((props, ref) => {
   const {
-    __TYPE__ = "NESTED_ITEM",
     item,
     //------------------
     onItemSelected = () => {},
@@ -131,27 +129,6 @@ const NestedDropdownItem = forwardRef((props, ref) => {
 //   className: "",
 //   __TYPE__: "NESTED_ITEM",
 // };
-
-NestedDropdownItem.propTypes = {
-  item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  //--------------------------
-  defaultOpen: PropTypes.bool,
-  animation: PropTypes.object,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  __TYPE__: PropTypes.string,
-};
 
 export default NestedDropdownItem;
 

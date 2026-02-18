@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import LoanCalculatorModalContent from "./content";
@@ -32,7 +34,7 @@ const LoanCalculatorModalContentWrapper = forwardRef(
       summaryTotalPaymentHint = "Lorem ipsum dolor sit amet consectetur. Sed sed viverra sed lobortis. At eu tellus tristique hac quis.",
       handleSubmit = () => {},
     },
-    ref
+    ref,
   ) => {
     return (
       <LoanCalculatorModalContent
@@ -65,7 +67,7 @@ const LoanCalculatorModalContentWrapper = forwardRef(
         handleSubmit={handleSubmit}
       />
     );
-  }
+  },
 );
 
 export default LoanCalculatorModalContentWrapper;

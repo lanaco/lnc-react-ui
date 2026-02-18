@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useTheme } from "@emotion/react";
 import Badge from "../../../Data display/Badge/Badge";
-import PropTypes from "prop-types";
 import { StyledProfileItem } from "./style";
 import { isDefined } from "../../../_utils/utils";
 
@@ -83,31 +82,6 @@ const ProfileItem = (props) => {
       </div>
     </StyledProfileItem>
   );
-};
-
-ProfileItem.propTypes = {
-  id: PropTypes.any,
-  isUserProfile: PropTypes.bool,
-  themeColor: PropTypes.string,
-  image: PropTypes.any,
-  name: PropTypes.string,
-  notifications: PropTypes.number,
-  style: PropTypes.object,
-  className: PropTypes.string,
-
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-  ]),
-
-  size: PropTypes.oneOf(["large"]),
-  onSelect: PropTypes.func,
-  hasPermission: PropTypes.bool,
 };
 
 export default ProfileItem;

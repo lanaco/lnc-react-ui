@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { memo, forwardRef } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import IconButton from "../../../../General/IconButton/IconButton";
 
 const StyledFooter = styled.div`
@@ -14,20 +14,17 @@ const KanbanFooter = memo(
   forwardRef(
     (
       {
-        __TYPE__ = "KANBAN_FOOTER",
         id,
         showAddNewCard = false,
         showLoadMoreCards = false,
-        addNewCardText = "Add New Card",
         onAddNewCard = () => {},
         onLoadMoreCards = () => {},
         className = "",
         style = {},
-        color = "primary",
         children,
         ...rest
       },
-      ref
+      ref,
     ) => {
       const theme = useTheme();
 
@@ -58,8 +55,8 @@ const KanbanFooter = memo(
           )}
         </StyledFooter>
       );
-    }
-  )
+    },
+  ),
 );
 
 // TODO : type
@@ -77,21 +74,6 @@ const KanbanFooter = memo(
 //   color: "primary",
 //   size: "small",
 // };
-
-KanbanFooter.propTypes = {
-  __TYPE__: PropTypes.string,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  //---------------------------------------------------------
-  showLoadMoreCards: PropTypes.bool,
-  showAddNewCard: PropTypes.bool,
-  addNewCardText: PropTypes.string,
-  //---------------------------------------------------------
-  onAddNewCard: PropTypes.func,
-  onLoadMoreCards: PropTypes.func,
-  //---------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
 
 export default KanbanFooter;
 

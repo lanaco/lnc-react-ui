@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useMemo, useState } from "react";
-
-import PropTypes from "prop-types";
 
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import Icon from "../../../General/Icon/Icon";
@@ -99,7 +99,7 @@ const FaqSectionItems = forwardRef(
       onSelectItem = () => {},
       onImpressed = () => {},
     },
-    ref
+    ref,
   ) => {
     const isMobile = useDetectMobile();
 
@@ -140,7 +140,7 @@ const FaqSectionItems = forwardRef(
               impressions={impressions}
               onSelectItem={() => onSelectItem(item)}
               onImpressed={(value) => onImpressed(item, value)}
-            />
+            />,
           );
         } else {
           rightItems.push(
@@ -153,7 +153,7 @@ const FaqSectionItems = forwardRef(
               impressions={impressions}
               onSelectItem={() => onSelectItem(item)}
               onImpressed={(value) => onImpressed(item, value)}
-            />
+            />,
           );
         }
       });
@@ -190,28 +190,7 @@ const FaqSectionItems = forwardRef(
         )}
       </ItemsContainer>
     );
-  }
+  },
 );
-
-FaqSectionItem.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  questionText: PropTypes.string,
-  feedbackText: PropTypes.string,
-  showMoreText: PropTypes.string,
-  impressions: PropTypes.bool,
-  onSelectItem: PropTypes.func,
-  onImpressed: PropTypes.func,
-};
-
-FaqSectionItems.propTypes = {
-  items: PropTypes.array,
-  questionText: PropTypes.string,
-  feedbackText: PropTypes.string,
-  showMoreText: PropTypes.string,
-  impressions: PropTypes.bool,
-  onSelectItem: PropTypes.func,
-  onImpressed: PropTypes.func,
-};
 
 export default FaqSectionItems;

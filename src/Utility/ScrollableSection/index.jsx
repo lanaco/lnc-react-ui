@@ -1,4 +1,5 @@
-import PropTypes from "prop-types";
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import React, { useRef, useState, useEffect, useImperativeHandle } from "react";
 import FlexBox from "../../Layout/FlexBox/FlexBox";
 import IconButton from "../../General/IconButton/IconButton";
@@ -27,7 +28,7 @@ const ScrollableSection = React.forwardRef(
       noMargin = false,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const isMobile = useDetectMobile();
 
@@ -50,7 +51,7 @@ const ScrollableSection = React.forwardRef(
 
     useEffect(() => {
       setHasOferflow(
-        wrapperRef?.current?.scrollWidth > wrapperRef?.current?.clientWidth
+        wrapperRef?.current?.scrollWidth > wrapperRef?.current?.clientWidth,
       );
     }, [children]);
 
@@ -162,20 +163,7 @@ const ScrollableSection = React.forwardRef(
         </FlexBox>
       </Styled_Section>
     );
-  }
+  },
 );
-
-ScrollableSection.propTypes = {
-  title: PropTypes.string,
-  rowGap: PropTypes.string,
-  columnGap: PropTypes.string,
-  scrollBySize: PropTypes.number,
-  wrapForMobile: PropTypes.bool,
-  wrap: PropTypes.bool,
-  methodsRef: PropTypes.any,
-  arrowsVisibleOnHover: PropTypes.bool,
-  rightAlignArrows: PropTypes.bool,
-  padding: PropTypes.string,
-};
 
 export default ScrollableSection;

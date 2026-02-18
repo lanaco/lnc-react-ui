@@ -3,7 +3,7 @@ import { MOBILE_SIZE_PX } from "../../_utils/consts";
 
 export const GridWrapper = styled.div`
   display: grid;
-  grid-template-columns: ${(p) => `repeat(6,  minmax(0, 1fr))`};
+  grid-template-columns: ${() => `repeat(6,  minmax(0, 1fr))`};
   gap: 2rem;
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {

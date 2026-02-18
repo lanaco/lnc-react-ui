@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import DropdownMenu from "../../Utility/DropdownMenu/DropdownMenu";
 import DropdownItem from "../../Utility/DropdownMenu/DropdownItem";
@@ -24,7 +24,7 @@ const StyledToolbar = styled.div`
       props.color,
       "enabled",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
   border: ${(props) =>
     `1px solid ${getColorRgbaValue(
@@ -33,7 +33,7 @@ const StyledToolbar = styled.div`
       props.color,
       "enabled",
       "border",
-      "borderOpacity"
+      "borderOpacity",
     )}`};
   gap: 6px;
   justify-content: space-between;
@@ -41,12 +41,10 @@ const StyledToolbar = styled.div`
     display: flex;
     gap: 0.5rem;
   }
-}
 `;
 
 const ActionsToolbar = forwardRef((props, ref) => {
   const {
-    __TYPE__ = "ACTIONS_TOOLBAR",
     showCreate = true,
     enableCreate = true,
     createText = "Create new item",
@@ -208,56 +206,6 @@ const ActionsToolbar = forwardRef((props, ref) => {
 //   color: "primary",
 //   size: "small",
 // };
-
-ActionsToolbar.propTypes = {
-  /**
-   * This property determines where the component is rendered.
-   * Should not be overridden!
-   */
-  __TYPE__: PropTypes.string,
-  showCreate: PropTypes.bool,
-  enableCreate: PropTypes.bool,
-  createText: PropTypes.string,
-  showEdit: PropTypes.bool,
-  enableEditOnSelection: PropTypes.bool,
-  editText: PropTypes.string,
-  showDelete: PropTypes.bool,
-  enableDeleteOnSelection: PropTypes.bool,
-  deleteText: PropTypes.string,
-  showCopy: PropTypes.bool,
-  enableCopyOnSelection: PropTypes.bool,
-  copyText: PropTypes.string,
-  actionsText: PropTypes.string,
-  /**
-   * Actions that will be shown in toolbar with existing actions
-   * customActions=[{name: `<string>`, show: `<bool>`, enable: `<bool>`, enableOnSelection: `<bool>`, onAction: `PropTypes.func`}, ...]
-   */
-  customActions: PropTypes.array,
-  selectedRowsLength: PropTypes.number,
-  /**
-   * If `readOnly={true}` actions Delete, Edit and Copy won't be shown.
-   */
-  readOnly: PropTypes.bool,
-  //-------------------------------------------------------------
-  onCreate: PropTypes.func,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
-  onCopy: PropTypes.func,
-  //------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default ActionsToolbar;
 

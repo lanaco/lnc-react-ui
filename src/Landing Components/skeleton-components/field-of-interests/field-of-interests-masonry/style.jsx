@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 
 import { MOBILE_SIZE_PX } from "../../../../_utils/consts";

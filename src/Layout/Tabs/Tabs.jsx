@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, useState, Children, cloneElement } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 
@@ -78,24 +78,5 @@ const Tabs = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-Tabs.propTypes = {
-  type: PropTypes.oneOf(["regular", "pill", "underline"]),
-  fullWidth: PropTypes.bool,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default Tabs;

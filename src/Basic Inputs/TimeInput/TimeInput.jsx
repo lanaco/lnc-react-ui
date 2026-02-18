@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useCallback, useState, useEffect, forwardRef } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import {
   getBorderRadiusValueWithUnits,
@@ -40,7 +40,7 @@ const SyledInput = styled.input`
       "Input",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
   border: 1px solid
     ${(props) =>
@@ -49,7 +49,7 @@ const SyledInput = styled.input`
         "Input",
         props.color,
         props.disabled === true ? "disabled" : "enabled",
-        "border"
+        "border",
       )};
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "regular")};
@@ -63,7 +63,7 @@ const SyledInput = styled.input`
       props.color,
       "disabled",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
         color: ${(props) =>
           getColorRgbaValue(
@@ -71,7 +71,7 @@ const SyledInput = styled.input`
             "Input",
             props.color,
             "disabled",
-            "text"
+            "text",
           )};`}
     cursor: default;
   }
@@ -87,7 +87,7 @@ const SyledInput = styled.input`
           "Input",
           "primary",
           props.disabled === true ? "disabled" : "enabled",
-          "border"
+          "border",
         )};
   }
 `;
@@ -122,7 +122,7 @@ const TimeInput = forwardRef((props, ref) => {
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
-    [onChange]
+    [onChange],
   );
 
   const handleChange = (e, value) => {
@@ -169,31 +169,5 @@ const TimeInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TimeInput.propTypes = {
-  id: PropTypes.any,
-  defaultValue: PropTypes.string,
-  value: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  debounceTime: PropTypes.number,
-  tabIndex: PropTypes.number,
-  //----------------
-  onChange: PropTypes.func,
-  //----------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TimeInput;

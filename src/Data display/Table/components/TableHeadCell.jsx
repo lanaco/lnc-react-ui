@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import Icon from "../../../General/Icon/Icon";
 import {
   getColorRgbaValue,
@@ -25,7 +25,7 @@ white-space: nowrap;
             "TableHeadCell",
             null,
             "hover",
-            "background"
+            "background",
           )};`
         : ""}
   }
@@ -35,11 +35,11 @@ white-space: nowrap;
       props.theme,
       "TableHeadCell",
       props.size,
-      "enabled"
+      "enabled",
     )};
 
   color: ${(props) =>
-    getColorRgbaValue(props.theme, "TableHeadCell", null, "enabled", "text")}};
+    getColorRgbaValue(props.theme, "TableHeadCell", null, "enabled", "text")};
 
   background-color: ${(props) =>
     getColorRgbaValue(
@@ -47,8 +47,8 @@ white-space: nowrap;
       "TableHeadCell",
       null,
       "enabled",
-      "background"
-    )}};
+      "background",
+    )};
 
   border-top: ${(props) =>
     "1px solid " +
@@ -57,8 +57,8 @@ white-space: nowrap;
       "TableHeadCell",
       null,
       "enabled",
-      "border"
-    )}};
+      "border",
+    )};
 
   border-bottom: ${(props) =>
     "1px solid " +
@@ -67,8 +67,8 @@ white-space: nowrap;
       "TableHeadCell",
       null,
       "enabled",
-      "border"
-    )}};
+      "border",
+    )};
 
 
   &:first-of-type {
@@ -79,9 +79,9 @@ white-space: nowrap;
         props.theme,
         "TableHeadCell",
         null,
-        "enabled",
-        "border"
-      )}};
+      "enabled",
+      "border",
+    )};
   }
 
   &:last-of-type {
@@ -93,8 +93,8 @@ white-space: nowrap;
         "TableHeadCell",
         null,
         "enabled",
-        "border"
-      )}};
+        "border",
+      )};
   }
 `;
 
@@ -116,7 +116,7 @@ const HeaderCellText = styled.span`
       "TableHeadCell",
       props.color,
       "enabled",
-      "text"
+      "text",
     )};
 
   font-weight: ${(props) =>
@@ -125,7 +125,7 @@ const HeaderCellText = styled.span`
       "TableHeadCell",
       props.color,
       "enabled",
-      "fontWeight"
+      "fontWeight",
     )};
 `;
 
@@ -139,7 +139,7 @@ const HeaderCellIcon = styled.span`
             "TableHeadCell",
             props.color,
             "enabled",
-            "text"
+            "text",
           )};
 
     font-weight: ${(props) =>
@@ -148,7 +148,7 @@ const HeaderCellIcon = styled.span`
         "TableHeadCell",
         props.color,
         "enabled",
-        "fontWeight"
+        "fontWeight",
       )};
   }
 `;
@@ -156,7 +156,6 @@ const HeaderCellIcon = styled.span`
 const TableHeadCell = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_HEAD_CELL",
     Column = {},
     Ordering = {},
     Index = 0,
@@ -283,30 +282,6 @@ const TableHeadCell = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableHeadCell.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  Columns: PropTypes.object,
-  Ordering: PropTypes.object,
-  Index: PropTypes.any,
-  EnableSelectAll: PropTypes.bool,
-  EnableOrdering: PropTypes.bool,
-  onColumnClick: PropTypes.func,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableHeadCell;
 

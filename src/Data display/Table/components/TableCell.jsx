@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import { isValidElement } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import isFunction from "lodash.isfunction";
 import isEmpty from "lodash.isempty";
 import { useTheme } from "@emotion/react";
@@ -28,7 +28,6 @@ const HtmlCell = styled.td`
 const TableCell = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_CELL",
     Column = {},
     RowData = {},
     Index = 0,
@@ -82,13 +81,13 @@ const TableCell = (props) => {
       if (isValidElement(element)) return element;
       else
         console.error(
-          `${Column.id}/${Column.accessor}: invalid render function.`
+          `${Column.id}/${Column.accessor}: invalid render function.`,
         );
     }
 
     if (isEmpty(Column.accessor))
       console.error(
-        `${Column.index}: accessor property is required when the render function is not suplied`
+        `${Column.index}: accessor property is required when the render function is not suplied`,
       );
 
     return RowData[Column.accessor];
@@ -123,30 +122,6 @@ const TableCell = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableCell.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  Column: PropTypes.object,
-  RowData: PropTypes.object,
-  Index: PropTypes.number,
-  EnableSelection: PropTypes.bool,
-  EnableRowHighlight: PropTypes.bool,
-  GetRowHighlightColor: PropTypes.func,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableCell;
 

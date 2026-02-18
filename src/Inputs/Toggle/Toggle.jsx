@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
@@ -224,13 +224,13 @@ const Container = styled.label`
     height: ${(props) => sizes.slider[props.size]};
     top: 0.25rem;
     border-radius: 100px;
-    box-shadow: 1px 1px 0.25rem; rgba(15, 23, 42, 0.16);
+    box-shadow: 1px 1px 0.25rem rgba(15, 23, 42, 0.16);
     flex-shrink: 0;
   }
 
   & span.toggle-slider::before {
-    content: "${(props) =>
-      props.unicodeIcon ? "\\" + props.unicodeIcon : ""}";
+    content: ${(props) =>
+      `"${props.unicodeIcon ? "\\" + props.unicodeIcon : ""}"`};
     font-family: FontAwesome;
     font-weight: 900;
     width: ${(props) => sizes.icon[props.size]};
@@ -262,8 +262,8 @@ const Container = styled.label`
   }
 
   & input:checked ~ span.toggle-slider::before {
-    content: "${(props) =>
-      props.unicodeIcon ? "\\" + props.unicodeIcon : ""}";
+    content: ${(props) =>
+      `"${props.unicodeIcon ? "\\" + props.unicodeIcon : ""}"`};
     font-family: FontAwesome;
     font-weight: 900;
     width: ${(props) => sizes.icon[props.size]};
@@ -377,7 +377,6 @@ const Toggle = (props) => {
     // tabIndex,
     //----------------
     onChange,
-    change,
     onFocus,
     onBlur,
     //----------------
@@ -463,35 +462,5 @@ const Toggle = (props) => {
 //   size: "medium",
 //   color: "primary",
 // };
-
-Toggle.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  label: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-  unicodeIcon: PropTypes.string,
-  labelPosition: PropTypes.oneOf(["right", "left"]),
-  spaceBetween: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  //-------------------------------
-  onChange: PropTypes.func,
-  change: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  //-------------------------------
-  style: PropTypes.object,
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default Toggle;

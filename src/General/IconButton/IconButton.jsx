@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, isValidElement } from "react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import {
   FilledButton,
@@ -19,7 +19,6 @@ const Button = forwardRef((props, ref) => {
     borderRadius = "regular",
     btnType = "filled",
     disabled = false,
-    tabIndex = 0,
     //----------------
     onFocus = () => {},
     onBlur = () => {},
@@ -161,42 +160,5 @@ const Button = forwardRef((props, ref) => {
 //   color: "primary",
 //   size: "small",
 // };
-
-Button.propTypes = {
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  iconStyle: PropTypes.oneOf(["regular", "solid"]),
-  borderRadius: PropTypes.oneOf([
-    "slight",
-    "regular",
-    "edged",
-    "curved",
-    "none",
-  ]),
-  /**
-   * Different styles
-   */
-  btnType: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
-  disabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  //---------------------------------------------------------------
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default Button;

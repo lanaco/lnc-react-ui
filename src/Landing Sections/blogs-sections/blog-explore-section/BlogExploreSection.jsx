@@ -1,9 +1,6 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-key */
 /* eslint-disable react/display-name */
 import { forwardRef, Fragment, useEffect, useRef, useState } from "react";
-
-import PropTypes from "prop-types";
 
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { formatLocaleDateString } from "../../../_utils/utils";
@@ -62,9 +59,9 @@ const BlogExploreSection = forwardRef(
       onBookmark = () => {},
       bookmarkComponent = <></>,
       componentName,
-      LinkComponent
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     const handlePageAndScrollToTop = (newPage) => {
       const landingContainer = document.getElementById("landing__container");
@@ -289,7 +286,7 @@ const BlogExploreSection = forwardRef(
         </div>
       </Container>
     );
-  }
+  },
 );
 
 export default BlogExploreSection;

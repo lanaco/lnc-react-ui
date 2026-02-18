@@ -54,7 +54,7 @@ const Container = styled.label`
         "Checkbox",
         props.color,
         "enabled",
-        "text"
+        "text",
       )};
   }
   & input {
@@ -89,7 +89,7 @@ const Container = styled.label`
         "Checkbox",
         props.color,
         "enabled",
-        "text"
+        "text",
       )};
     border: 1px solid
       ${(props) =>
@@ -98,7 +98,7 @@ const Container = styled.label`
           "Checkbox",
           props.color,
           "enabled",
-          "border"
+          "border",
         )};
     border-radius: ${(props) =>
       getBorderRadiusValueWithUnits(props.theme, "slight")};
@@ -109,7 +109,7 @@ const Container = styled.label`
         "Checkbox",
         props.color,
         "disabled",
-        "border"
+        "border",
       )}`};
     & svg {
       height: 0;
@@ -130,7 +130,7 @@ const Container = styled.label`
         props.color,
         "active",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
     border: 1px solid
       ${(props) =>
@@ -139,7 +139,7 @@ const Container = styled.label`
           "Checkbox",
           props.color,
           "active",
-          "border"
+          "border",
         )};
     & .checked {
       height: ${(props) => getCheckSize(props.theme, props.size)};
@@ -162,7 +162,7 @@ const Container = styled.label`
         "Checkbox",
         props.color,
         "active",
-        "text"
+        "text",
       )};
   }
   & input:indeterminate ~ .checkmark {
@@ -177,7 +177,7 @@ const Container = styled.label`
         props.color,
         "active",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
     & .indeterminate {
       height: ${(props) => getCheckSize(props.theme, props.size)};
@@ -192,7 +192,7 @@ const Container = styled.label`
         "Checkbox",
         props.color,
         "enabled",
-        "text"
+        "text",
       )};
   }
   & input:disabled ~ .checkmark {
@@ -203,14 +203,14 @@ const Container = styled.label`
         "Checkbox",
         props.color,
         "disabled",
-        "border"
+        "border",
       )};
     border-color: ${getColorRgbaValue(
       props.theme,
       "Checkbox",
       props.color,
       "disabled",
-      "border"
+      "border",
     )};
     `};
   }
@@ -221,7 +221,7 @@ const Container = styled.label`
         "Checkbox",
         props.color,
         "disabled",
-        "text"
+        "text",
       )};
   }
   & input:focus ~ .checkmark {
@@ -235,8 +235,6 @@ const Container = styled.label`
 const CheckBoxInput = forwardRef((props, ref) => {
   const {
     containerRef,
-    id,
-    indeterminate,
     disabled,
     readOnly,
     label,
@@ -253,7 +251,6 @@ const CheckBoxInput = forwardRef((props, ref) => {
     size = "small",
     className = "",
     style = {},
-    children,
     ...rest
   } = props;
 

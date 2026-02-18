@@ -1,4 +1,6 @@
-import React, { forwardRef } from "react";
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
+import { forwardRef } from "react";
 import { Handle } from "../Handle/Handle";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
@@ -55,7 +57,7 @@ const StyledContainer = styled.div`
       "Kanban",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
 `;
 
@@ -75,7 +77,7 @@ const Header = styled.div`
       "KanbanHeader",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
   color: ${(props) =>
     getColorRgbaValue(
@@ -83,7 +85,7 @@ const Header = styled.div`
       "KanbanHeader",
       props.color ? "primary" : props.color,
       "enabled",
-      "text"
+      "text",
     )};
   &:hover .Actions > * {
     opacity: 1 !important;
@@ -114,21 +116,17 @@ export const Container = forwardRef((props, ref) => {
     horizontal,
     hover,
     onClick,
-    onRemove,
     label,
-    placeholder,
     maxContainerHeight,
     style,
     scrollable,
     shadow,
     unstyled,
-    size,
     color,
     ...rest
   } = props;
 
   const theme = useTheme();
-  const themeProps = { theme, color, size };
 
   return (
     <StyledContainer

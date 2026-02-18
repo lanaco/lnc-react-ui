@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import Button from "../../../General/Button/Button";
@@ -11,7 +13,7 @@ const QuizWelcome = forwardRef(
       startQuizText = "Start quiz",
       onStartQuiz = () => {},
     },
-    ref
+    ref,
   ) => {
     return (
       <WelcomeWrapper ref={ref}>
@@ -27,7 +29,7 @@ const QuizWelcome = forwardRef(
         />
       </WelcomeWrapper>
     );
-  }
+  },
 );
 
 export default QuizWelcome;

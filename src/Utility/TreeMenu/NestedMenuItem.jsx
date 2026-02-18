@@ -1,4 +1,6 @@
-/* eslint-disable react/display-name */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+
 import {
   forwardRef,
   useState,
@@ -6,7 +8,6 @@ import {
   isValidElement,
   cloneElement,
 } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../_utils/utils";
@@ -23,7 +24,7 @@ const StyledNested = styled(motion.div)`
       props.color,
       "focus",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};`}
     border-radius: 2px;
 `;
@@ -52,7 +53,6 @@ const NestedMenuItem = forwardRef((props, ref) => {
     style = {},
     color = "primary",
     size = "small",
-    __TYPE__ = "NESTED_ITEM",
     children,
     ...rest
   } = props;
@@ -140,32 +140,6 @@ const NestedMenuItem = forwardRef((props, ref) => {
 //   className: "",
 //   __TYPE__: "NESTED_ITEM",
 // };
-
-NestedMenuItem.propTypes = {
-  item: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  //--------------------------
-  defaultOpen: PropTypes.bool,
-  /**
-   * Determines wether nested items will be tucked in to the right (using margin-right and padding-left).
-   */
-  tuckIn: PropTypes.bool,
-  tuckInSize: PropTypes.string,
-  animation: PropTypes.object,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  __TYPE__: PropTypes.string,
-};
 
 export default NestedMenuItem;
 

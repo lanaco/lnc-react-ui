@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
@@ -197,43 +196,5 @@ const Chip = forwardRef((props, ref) => {
     </StyledChip>
   );
 });
-
-Chip.propTypes = {
-  label: PropTypes.string,
-  leadingIcon: PropTypes.string,
-  trailingIcon: PropTypes.string,
-  avatar: PropTypes.bool,
-  borderRadius: PropTypes.oneOf([
-    "slight",
-    "regular",
-    "edged",
-    "curved",
-    "none",
-  ]),
-  disabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  //---------------------------------------------------------------
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onLeadingIconClick: PropTypes.func,
-  onTrailingIconClick: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  avatarProps: PropTypes.any,
-};
 
 export default Chip;

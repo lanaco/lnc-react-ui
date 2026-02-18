@@ -1,6 +1,5 @@
-/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon/Icon";
@@ -26,7 +25,7 @@ const Item = styled.div`
       "MenuItem",
       props.color,
       props.isActive === true ? "active" : "enabled",
-      "text"
+      "text",
     )};
   &:hover {
     ${(props) =>
@@ -37,7 +36,7 @@ const Item = styled.div`
         props.color,
         "hover",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};`}
 
     ${(props) =>
@@ -47,7 +46,7 @@ const Item = styled.div`
         "MenuItem",
         props.color,
         "hover",
-        "text"
+        "text",
       )};`}
     & .drop-down-icon-lnc {
       ${(props) =>
@@ -57,7 +56,7 @@ const Item = styled.div`
           "MenuItem",
           props.color,
           "hover",
-          "icon"
+          "icon",
         )};`}
     }
   }
@@ -71,14 +70,14 @@ const Item = styled.div`
             "MenuItem",
             props.color,
             "focus",
-            "icon"
+            "icon",
           )
         : getColorRgbaValue(
             props.theme,
             "MenuItem",
             props.color,
             "enabled",
-            "icon"
+            "icon",
           )};
     ${(props) => props.disabled === true && getDisabledStateCss(props.theme)};
     background: transparent;
@@ -98,14 +97,14 @@ const Item = styled.div`
       props.color,
       "focus",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
     color: ${getColorRgbaValue(
       props.theme,
       "MenuItem",
       props.color,
       "focus",
-      "text"
+      "text",
     )};
   `}
   outline: none;
@@ -114,7 +113,6 @@ const Item = styled.div`
 
 const DropdownItem = forwardRef((props, ref) => {
   const {
-    __TYPE__ = "MENU_ITEM",
     active = false,
     icon,
     disabled = false,
@@ -126,8 +124,6 @@ const DropdownItem = forwardRef((props, ref) => {
     onBlur = () => {},
     onClick = () => {},
     onKeyDown = () => {},
-    onMouseEnter = () => {},
-    onMouseLeave = () => {},
     toggleNested = () => {},
     onItemSelected = () => {},
     //----------------
@@ -319,37 +315,6 @@ const DropdownItem = forwardRef((props, ref) => {
 //   size: "small",
 //   __TYPE__: "MENU_ITEM",
 // };
-
-DropdownItem.propTypes = {
-  active: PropTypes.bool,
-  icon: PropTypes.string,
-  disabled: PropTypes.bool,
-  isNested: PropTypes.bool,
-  value: PropTypes.any,
-  //---------------------------------------------------------------
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  iconProps: PropTypes.any,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  __TYPE__: PropTypes.string,
-};
 
 export default DropdownItem;
 

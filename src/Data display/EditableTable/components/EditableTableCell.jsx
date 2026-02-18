@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { inputType } from "../constants/constants";
 import { useTheme } from "@emotion/react";
 import { getComponentTypographyCss } from "../../../_utils/utils";
@@ -32,7 +32,7 @@ const DefaultCellContent = styled.div`
       props.theme,
       "TableSpecialLastRow",
       props.size,
-      "enabled"
+      "enabled",
     )};
   padding: ${(props) => (props.hasRender ? "0" : "9.5px 6px 9.5px 0")};
   cursor: ${(props) => (props.tabIndex !== -1 ? "pointer" : "auto")};
@@ -55,7 +55,6 @@ const EditableTableCell = (props) => {
 
   //--------------------------
   const {
-    __TYPE__ = "TABLE_CELL",
     Column = {},
     ColumnsToRender,
     RowData = {},
@@ -64,7 +63,6 @@ const EditableTableCell = (props) => {
     EnableSelection = false,
     TabIndexOffset = 100,
     onFocusChanged,
-    RowIdentifier,
     onDiscard,
     onMount,
     //----------------
@@ -143,7 +141,7 @@ const EditableTableCell = (props) => {
     };
 
     var dropdownOnChange = (value) => {
-      onChange(_, value, RowIndex, Index, Column, RowData);
+      onChange(null, value, RowIndex, Index, Column, RowData);
     };
 
     var inputProps = {
@@ -196,7 +194,7 @@ const EditableTableCell = (props) => {
             value={Column.inputProps.options.find((x) =>
               x.value === Column?.objectAccessor
                 ? RowData[Column.accessor][Column?.objectAccessor]
-                : RowData[Column.accessor]
+                : RowData[Column.accessor],
             )}
             onChange={dropdownOnChange}
             ref={inputRef}
@@ -312,29 +310,6 @@ const EditableTableCell = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-EditableTableCell.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  Column: PropTypes.object,
-  RowData: PropTypes.object,
-  Index: PropTypes.number,
-  EnableSelection: PropTypes.bool,
-  TabIndexOffset: PropTypes.number,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default EditableTableCell;
 

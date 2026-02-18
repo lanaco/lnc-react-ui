@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { SkeletonCirclePlaceholder } from "../../../style";
 import { Container } from "../style";
 

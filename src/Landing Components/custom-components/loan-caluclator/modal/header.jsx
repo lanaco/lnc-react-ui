@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import IconButton from "../../../../General/IconButton/IconButton";
@@ -19,7 +21,7 @@ const LoanCalculatorModalHeader = forwardRef(
         />
       </HeaderContainer>
     );
-  }
+  },
 );
 
 export default LoanCalculatorModalHeader;

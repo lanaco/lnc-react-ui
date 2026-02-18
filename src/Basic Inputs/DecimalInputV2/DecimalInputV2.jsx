@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
-import PropTypes from "prop-types";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { StyledPrefix, StyledSuffix, StyledWrapper } from "./styledComponents";
 
@@ -141,7 +141,7 @@ const DecimalInputV2 = forwardRef((props, ref) => {
 
         let afterDecimalScale = fullStr.slice(
           0,
-          fullStr?.length - decimalScale
+          fullStr?.length - decimalScale,
         );
         let beforeDecimalScale = fullStr.slice(fullStr?.length - decimalScale);
 
@@ -284,62 +284,5 @@ const DecimalInputV2 = forwardRef((props, ref) => {
     </StyledWrapper>
   );
 });
-
-DecimalInputV2.propTypes = {
-  id: PropTypes.any,
-  value: PropTypes.any,
-  defaultValue: PropTypes.any,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  debounceTime: PropTypes.number,
-  /**
-   * Reserved space before input. Intented to be used with plain text or `Icon` component.
-   */
-  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * Reserved space after input. Intented to be used with plain text or `Icon` component.
-   */
-  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  thousandSeparator: PropTypes.oneOf([".", ",", " "]),
-  decimalSeparator: PropTypes.oneOf([".", ","]),
-  decimalScale: PropTypes.number,
-  fixedDecimalScale: PropTypes.bool,
-  allowNegative: PropTypes.bool,
-  //----------------
-  /**
-   * `(event, value) => void`
-   */
-  onChange: PropTypes.func,
-  /**
-   * `(event, value) => void`
-   */
-  onInputChange: PropTypes.func,
-  /**
-   * `(event) => void`
-   */
-  onBlur: PropTypes.func,
-  /**
-   * `(event) => void`
-   */
-  onFocus: PropTypes.func,
-  /**
-   * `(event) => void`
-   */
-  onKeyDown: PropTypes.func,
-  //----------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default DecimalInputV2;

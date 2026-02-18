@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import {
   useState,
@@ -6,7 +7,6 @@ import {
   cloneElement,
   isValidElement,
 } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useUpdateEffect } from "react-use";
 import { useImperativeHandle } from "react";
@@ -20,14 +20,12 @@ const DataView = forwardRef((props, ref) => {
     activeViewType,
     //------------------
     className = "",
-    style = {},
     children,
-    size = "small",
     ...rest
   } = props;
 
   const [currentViewType, setCurrentViewType] = useState(
-    activeViewType ? activeViewType : defaultViewType
+    activeViewType ? activeViewType : defaultViewType,
   );
   const viewsHistory = useRef([defaultViewType]);
 
@@ -83,23 +81,5 @@ const DataView = forwardRef((props, ref) => {
     </StyledDataView>
   );
 });
-
-DataView.propTypes = {
-  defaultViewType: PropTypes.oneOf([
-    "DETAILS_VIEW",
-    "FORM_VIEW",
-    "TABLE_VIEW",
-    "KANBAN_VIEW",
-  ]),
-  activeViewType: PropTypes.oneOf([
-    "DETAILS_VIEW",
-    "FORM_VIEW",
-    "TABLE_VIEW",
-    "KANBAN_VIEW",
-  ]),
-  //------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
 
 export default DataView;

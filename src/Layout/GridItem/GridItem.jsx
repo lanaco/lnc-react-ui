@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
 const StyledGridItem = styled.div`
@@ -73,38 +73,5 @@ const GridItem = forwardRef((props, ref) => {
 //     style: {},
 //     className: "",
 // };
-
-GridItem.propTypes = {
-  /**
-   * start the element at the columnStart column position
-   */
-  colStart: PropTypes.number,
-  /**
-   * end the element at the columnEnd column position
-   */
-  colEnd: PropTypes.number,
-  /**
-   * start the element at the rowStart row position
-   */
-  rowStart: PropTypes.number,
-  /**
-   * end the element at the rowStart row position
-   */
-  rowEnd: PropTypes.number,
-  /**
-   * span specific amount of columns
-   */
-  colSpan: PropTypes.number,
-  /**
-   * span specific amount of rows
-   */
-  rowSpan: PropTypes.number,
-  justifySelf: PropTypes.oneOf(["start", "end", "center", "stretch"]),
-  alignSelf: PropTypes.oneOf(["start", "end", "center", "stretch"]),
-  area: PropTypes.string,
-  //-------------
-  style: PropTypes.object,
-  className: PropTypes.string,
-};
 
 export default GridItem;

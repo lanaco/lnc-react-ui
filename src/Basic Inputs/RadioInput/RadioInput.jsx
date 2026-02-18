@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
 import { useState, forwardRef } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import {
   getColorRgbaValue,
   getComponentTypographyCss,
@@ -71,7 +71,7 @@ const Container = styled.label`
             "Radio",
             props.color,
             "enabled",
-            "border"
+            "border",
           )};
       }
       & .inner-circle {
@@ -81,7 +81,7 @@ const Container = styled.label`
             "Radio",
             props.color,
             "enabled",
-            "border"
+            "border",
           )};
       }
     }
@@ -105,7 +105,7 @@ const Container = styled.label`
           props.color,
           "active",
           "background",
-          "backgroundOpacity"
+          "backgroundOpacity",
         )};
       & .outer-circle {
         fill: ${(props) =>
@@ -114,7 +114,7 @@ const Container = styled.label`
             "Radio",
             props.color,
             "active",
-            "border"
+            "border",
           )};
       }
       & .inner-circle {
@@ -126,7 +126,7 @@ const Container = styled.label`
                 "Radio",
                 props.color,
                 "active",
-                "border"
+                "border",
               )}};
       }
     }
@@ -146,7 +146,7 @@ const Container = styled.label`
           props.color,
           "disabled",
           "background",
-          "backgroundOpacity"
+          "backgroundOpacity",
         )};
       & .outer-circle {
         fill: ${(props) =>
@@ -155,7 +155,7 @@ const Container = styled.label`
             "Radio",
             props.color,
             "disabled",
-            "border"
+            "border",
           )};
       }
       & .inner-circle {
@@ -167,7 +167,7 @@ const Container = styled.label`
                 "Radio",
                 props.color,
                 "disabled",
-                "border"
+                "border",
               )}
             };
       }
@@ -183,7 +183,7 @@ const Container = styled.label`
             props.color,
             "disabled",
             "background",
-            "backgroundOpacity"
+            "backgroundOpacity",
           )};
         & .outer-circle {
           fill: ${(props) =>
@@ -192,7 +192,7 @@ const Container = styled.label`
               "Radio",
               props.color,
               "disabled",
-              "border"
+              "border",
             )};
         }
         & .inner-circle {
@@ -202,9 +202,8 @@ const Container = styled.label`
               "Radio",
               props.color,
               "disabled",
-              "border"
-            )}
-              };
+              "border",
+            )};
         }
       }
 
@@ -221,7 +220,7 @@ const Container = styled.label`
             props.color,
             "hover",
             "background",
-            "backgroundOpacity"
+            "backgroundOpacity",
           )};
         & .outer-circle {
           fill: ${(props) =>
@@ -230,7 +229,7 @@ const Container = styled.label`
               "Radio",
               props.color,
               "disabled",
-              "border"
+              "border",
             )};
         }
         & .inner-circle {
@@ -242,10 +241,11 @@ const Container = styled.label`
                   "Radio",
                   props.color,
                   "disabled",
-                  "border"
-                )}};
+                  "border",
+                )};
         }
       }
+    }
 `;
 
 const Label = styled.label`
@@ -272,7 +272,6 @@ const RadioInput = forwardRef((props, ref) => {
     onFocus,
     onBlur,
     onClick,
-    onKeyDown,
     label,
     labelPosition = "right",
     spaceBetween,
@@ -384,49 +383,5 @@ const RadioInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-RadioInput.propTypes = {
-  id: PropTypes.any,
-  name: PropTypes.string,
-  checked: PropTypes.bool,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  labelPosition: PropTypes.oneOf(["right", "left"]),
-  tabIndex: PropTypes.number,
-  spaceBetween: PropTypes.bool,
-  //-------------------------
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  //-------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  innerColor: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-    "white",
-    "transparent",
-  ]),
-};
 
 export default RadioInput;

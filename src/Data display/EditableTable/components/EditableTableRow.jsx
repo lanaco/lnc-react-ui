@@ -1,20 +1,20 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../../_utils/utils";
 
 const HtmlRow = styled.tr`
   border-bottom: ${(props) =>
     "1px solid " +
-    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")};
 
   border-left: ${(props) =>
     "1px solid " +
-    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")};
 
   border-right: ${(props) =>
     "1px solid " +
-    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")}};
+    getColorRgbaValue(props.theme, "TableRow", null, "enabled", "border")};
 
   &:last-of-type > td:first-of-type {
     border-radius: 0 0 0 0.5rem;
@@ -34,7 +34,7 @@ const HtmlRow = styled.tr`
               "TableRow",
               null,
               "hover",
-              "background"
+              "background",
             )};
           }
       }`;
@@ -50,7 +50,7 @@ const HtmlRow = styled.tr`
             "TableRow",
             props.color,
             "active",
-            "background"
+            "background",
           )};
         }
       `;
@@ -61,8 +61,6 @@ const HtmlRow = styled.tr`
 const EditableTableRow = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_ROW",
-    RowData = {},
     Index,
     IsSelected = null,
     //----------------
@@ -98,26 +96,6 @@ const EditableTableRow = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-EditableTableRow.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  RowData: PropTypes.object,
-  IsSelected: PropTypes.bool,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default EditableTableRow;
 

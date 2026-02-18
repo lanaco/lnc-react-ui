@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useEffect, useState, useCallback, useRef, forwardRef } from "react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
 import Icon from "../../General/Icon/Icon";
@@ -65,7 +65,7 @@ const PasswordInput = forwardRef((props, ref) => {
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
-    [onChange]
+    [onChange],
   );
 
   const handleChange = (e, value) => {
@@ -172,34 +172,5 @@ const PasswordInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-PasswordInput.propTypes = {
-  id: PropTypes.any,
-  value: PropTypes.string,
-  defaultValue: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  debounceTime: PropTypes.number,
-  placeholder: PropTypes.string,
-  tabIndex: PropTypes.number,
-  //----------------
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  //----------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default PasswordInput;

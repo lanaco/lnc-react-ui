@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import Modal from "../../../../Utility/Modal/Modal";
@@ -38,7 +40,7 @@ const LoanCalculatorModal = forwardRef(
       handleSubmit = () => {},
       handleCancel = () => {},
     },
-    ref
+    ref,
   ) => {
     const handleCloseModal = () => {
       ref?.current?.close();
@@ -94,7 +96,7 @@ const LoanCalculatorModal = forwardRef(
         />
       </Modal>
     );
-  }
+  },
 );
 
 export default LoanCalculatorModal;

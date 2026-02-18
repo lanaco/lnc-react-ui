@@ -1,4 +1,6 @@
-import React, { forwardRef } from "react";
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
+import { forwardRef } from "react";
 import classNames from "classnames";
 import styles from "./Action.module.css";
 
@@ -18,5 +20,5 @@ export const Action = forwardRef(
         }}
       />
     );
-  }
+  },
 );

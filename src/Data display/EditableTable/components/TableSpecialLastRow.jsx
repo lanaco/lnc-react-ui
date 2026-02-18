@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import { getComponentTypographyCss } from "../../../_utils/utils";
 
@@ -22,7 +22,7 @@ const SpecialRow = styled.div`
       props.theme,
       "TableSpecialLastRow",
       props.size,
-      "enabled"
+      "enabled",
     )};
 
   transition: all 0.2s ease;
@@ -58,9 +58,7 @@ const SpecialRow = styled.div`
 const TableSpecialLastRow = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_SPECIAL_LAST_ROW",
     Loading = false,
-    Columns,
     Disabled,
     Data,
     ColumnsToRender,
@@ -116,24 +114,6 @@ const TableSpecialLastRow = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableSpecialLastRow.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableSpecialLastRow;
 

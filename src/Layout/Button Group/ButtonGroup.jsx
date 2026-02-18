@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
-import PropTypes from "prop-types";
 import {
   getBorderRadiusValueWithUnits,
   getColorRgbaValue,
@@ -127,17 +126,5 @@ const ButtonGroup = ({
 //   className: "",
 //   style: {},
 // };
-
-ButtonGroup.propTypes = {
-  borderRadius: PropTypes.oneOf([
-    "slight",
-    "regular",
-    "edged",
-    "curved",
-    "none",
-  ]),
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
 
 export default ButtonGroup;

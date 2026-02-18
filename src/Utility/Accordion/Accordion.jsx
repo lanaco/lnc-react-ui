@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, isValidElement, Children, cloneElement } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
@@ -103,16 +103,5 @@ const Accordion = forwardRef((props, ref) => {
 //   style: {},
 //   size: "small",
 // };
-
-Accordion.propTypes = {
-  expanded: PropTypes.bool,
-  disabled: PropTypes.bool,
-  //--------------------------------------------------------------
-  change: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default Accordion;

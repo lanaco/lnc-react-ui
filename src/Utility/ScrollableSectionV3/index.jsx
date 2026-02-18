@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useEffect, useState } from "react";
-
-import PropTypes from "prop-types";
 
 import Icon from "../../General/Icon/Icon";
 import IconButton from "../../General/IconButton/IconButton";
@@ -20,7 +20,7 @@ const ScrollableSectionV3 = forwardRef(
       handleFetchNextPage = () => {},
       children,
     },
-    ref
+    ref,
   ) => {
     const [index, setIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(1);
@@ -126,16 +126,7 @@ const ScrollableSectionV3 = forwardRef(
         )}
       </Container>
     );
-  }
+  },
 );
-
-ScrollableSectionV3.propTypes = {
-  icon: PropTypes.string,
-  title: PropTypes.string,
-  numOfSlides: PropTypes.number,
-  numOfSlidesForMobile: PropTypes.number,
-  handleFetchNextPage: PropTypes.func,
-  showNavigation: PropTypes.bool,
-};
 
 export default ScrollableSectionV3;

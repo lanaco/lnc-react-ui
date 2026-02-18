@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
 import PopoverContext from "./PopoverContext";
 import usePopover from "./usePopover";
 
@@ -12,30 +12,5 @@ function Popover({ children, modal = false, ...restOptions }) {
     </PopoverContext.Provider>
   );
 }
-
-Popover.propTypes = {
-  initialOpen: PropTypes.bool,
-  placement: PropTypes.oneOf([
-    "center",
-    "top",
-    "right",
-    "bottom",
-    "left",
-    "top-start",
-    "top-end",
-    "right-start",
-    "right-end",
-    "bottom-start",
-    "bottom-end",
-    "left-start",
-    "left-end",
-  ]),
-  modal: PropTypes.bool,
-  offsetValue: PropTypes.number,
-  /** For controlled usage of Popover */
-  open: PropTypes.bool,
-  /** For controlled usage of Popover */
-  onOpenChange: PropTypes.func,
-};
 
 export default Popover;
