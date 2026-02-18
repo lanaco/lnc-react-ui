@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useCallback, useEffect, useState, useRef, forwardRef } from "react";
 import { useUpdateEffect } from "react-use";
 import {
@@ -60,7 +60,7 @@ const InputSlider = styled.input`
         props.color,
         props.disabled === true ? "disabled" : "enabled",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
     cursor: pointer; /* Cursor on hover */
     border: none;
@@ -77,7 +77,7 @@ const InputSlider = styled.input`
         props.color,
         props.disabled === true ? "disabled" : "enabled",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
     cursor: pointer; /* Cursor on hover */
     border: none;
@@ -103,7 +103,7 @@ const Popover = styled.div`
         "Range",
         props.color,
         props.disabled === true ? "disabled" : "enabled",
-        "background"
+        "background",
       )};
     border-radius: 3px;
     z-index: 2;
@@ -122,7 +122,7 @@ const Popover = styled.div`
             "Range",
             props.color,
             props.disabled === true ? "disabled" : "enabled",
-            "background"
+            "background",
           )};
         transform: rotate(45deg);
         position: absolute;
@@ -162,7 +162,7 @@ const RangeSliderInput = forwardRef((props, ref) => {
     "Range",
     color,
     "enabled",
-    "unfilled"
+    "unfilled",
   );
   const [valueColor, setValueColor] = useState(
     getColorRgbaValue(
@@ -170,8 +170,8 @@ const RangeSliderInput = forwardRef((props, ref) => {
       "Range",
       color,
       disabled ? "disabled" : "enabled",
-      "background"
-    )
+      "background",
+    ),
   );
   const [rangeBackground, setRangeBackground] = useState();
 
@@ -180,7 +180,7 @@ const RangeSliderInput = forwardRef((props, ref) => {
   // Convert to percentage
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
-    [min, max]
+    [min, max],
   );
 
   const [inputValue, setInputValue] = useState(value ? value : defaultValue);
@@ -200,8 +200,8 @@ const RangeSliderInput = forwardRef((props, ref) => {
         "Range",
         color,
         disabled ? "disabled" : "enabled",
-        "background"
-      )
+        "background",
+      ),
     );
   }, [color, disabled]);
 
@@ -214,8 +214,8 @@ const RangeSliderInput = forwardRef((props, ref) => {
   const changeSliderColor = (sliderValue) => {
     setRangeBackground(
       `linear-gradient(to right, ${valueColor} 0%, ${valueColor} ${getPercent(
-        sliderValue
-      )}%, ${sliderColor} ${getPercent(sliderValue)}%, ${sliderColor} 100%)`
+        sliderValue,
+      )}%, ${sliderColor} ${getPercent(sliderValue)}%, ${sliderColor} 100%)`,
     );
   };
 
@@ -302,32 +302,5 @@ const RangeSliderInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-RangeSliderInput.propTypes = {
-  value: PropTypes.number,
-  defaultValue: PropTypes.number,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  disabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  //-------------------------
-  onChange: PropTypes.func,
-  onInput: PropTypes.func,
-  //-------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "disabled",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default RangeSliderInput;

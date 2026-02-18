@@ -5,7 +5,6 @@ import {
   FloatingPortal,
   FloatingFocusManager,
 } from "@floating-ui/react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import PopoverContext from "./PopoverContext";
 import styled from "@emotion/styled";
@@ -86,11 +85,5 @@ const PopoverContent = forwardRef(function PopoverContent(
     </FloatingPortal>
   );
 });
-
-PopoverContent.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-  zIndex: PropTypes.number,
-};
 
 export default PopoverContent;

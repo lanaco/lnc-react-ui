@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import { useTheme } from "@emotion/react";
 import Button from "../../General/Button/Button";
 import IconButton from "../../General/IconButton/IconButton";
@@ -97,7 +97,7 @@ const Pagination = (props) => {
           btnType={"basic"}
           text={i.toString()}
           disabled={disabled}
-        />
+        />,
       );
     }
 
@@ -110,7 +110,7 @@ const Pagination = (props) => {
         btnType={currentPageButtonType}
         text={page.toString()}
         disabled={disabled}
-      />
+      />,
     );
 
     //after offset
@@ -128,7 +128,7 @@ const Pagination = (props) => {
           btnType={"basic"}
           text={i.toString()}
           disabled={disabled}
-        />
+        />,
       );
     }
 
@@ -231,89 +231,5 @@ const Pagination = (props) => {
 //   color: "primary",
 //   size: "small",
 // };
-
-Pagination.propTypes = {
-  icons: PropTypes.shape({
-    left: PropTypes.element,
-    right: PropTypes.element,
-    doubleLeft: PropTypes.element,
-    doubleRight: PropTypes.element,
-  }),
-  /**
-   *  Applies to the movement buttons and to the page number buttons
-   */
-  disabled: PropTypes.bool,
-  borderRadius: PropTypes.oneOf([
-    "slight",
-    "regular",
-    "edged",
-    "curved",
-    "none",
-  ]),
-  /**
-   * Sets the button `type`
-   */
-  buttonType: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
-
-  /**
-   * Set button `type` of the current page button
-   */
-  currentPageButtonType: PropTypes.oneOf([
-    "filled",
-    "tinted",
-    "outline",
-    "basic",
-  ]),
-  /**
-   * Show the First and Last buttons
-   */
-  withFirstLast: PropTypes.bool,
-  /**
-   * Wrap the buttons in a `ButtonGroup` component
-   */
-  withButtonGroup: PropTypes.bool,
-  /**
-   * Active page number
-   */
-  currentPage: PropTypes.number,
-  totalNumberOfPages: PropTypes.number,
-  /**
-   * how many page numbers will be shown to the right/left of the current page
-   */
-  pagesOffset: PropTypes.number,
-  /**
-   *  Applies to the Next button
-   */
-  disabledNext: PropTypes.bool,
-  /**
-   *  Applies to the Previous button
-   */
-  disabledPrevious: PropTypes.bool,
-  /**
-   *  Applies to the First button
-   */
-  disabledFirst: PropTypes.bool,
-  /**
-   *  Applies to the Last button
-   */
-  disabledLast: PropTypes.bool,
-  horizontalAlignment: PropTypes.oneOf(["left", "center", "right"]),
-  //-------------------------------
-  onPageChange: PropTypes.func,
-  //-------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default Pagination;

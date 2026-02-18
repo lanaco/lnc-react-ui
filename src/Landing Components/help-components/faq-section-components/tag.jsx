@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
-import PropTypes from "prop-types";
 
 import Chip from "../../../Data display/Chip/Chip";
 import { TagsContainer } from "./style";
@@ -31,11 +31,5 @@ const FaqSectionTags = forwardRef(
     );
   }
 );
-
-FaqSectionTags.propTypes = {
-  tags: PropTypes.array,
-  allTagText: PropTypes.string,
-  onSelectTag: PropTypes.func,
-};
 
 export default FaqSectionTags;

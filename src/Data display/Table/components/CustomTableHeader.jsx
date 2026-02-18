@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 import IconButton from "../../../General/IconButton/IconButton";
 
@@ -32,9 +32,6 @@ const CustomTableHeader = (props) => {
 // CustomTableHeader.defaultProps = {
 //   __TYPE__: "TABLE_HEADER",
 // };
-CustomTableHeader.propTypes = {
-  __TYPE__: PropTypes.string,
-};
 
 export default CustomTableHeader;
 

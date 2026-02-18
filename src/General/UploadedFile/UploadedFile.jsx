@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import Icon from "../Icon/Icon";
@@ -207,31 +207,5 @@ const UploadedFile = forwardRef((props, ref) => {
 //   fileIcon: "file",
 //   cancelIcon: "times",
 // };
-
-UploadedFile.propTypes = {
-  id: PropTypes.any,
-  fileName: PropTypes.string,
-  fileSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  showFileSize: PropTypes.bool,
-  progressPercentage: PropTypes.number,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  onFileClick: PropTypes.func,
-  onCancel: PropTypes.func,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "disabled",
-    "neutral",
-    "information",
-    "gray",
-  ]),
-  fileIcon: PropTypes.string,
-  cancelIcon: PropTypes.string,
-};
 
 export default UploadedFile;

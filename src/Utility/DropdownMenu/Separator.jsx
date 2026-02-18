@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { getColorRgbaValue } from "../../_utils/utils";
@@ -37,10 +37,5 @@ const Separator = forwardRef((props, ref) => {
 // Separator.defaultProps = {
 //     style: {},
 // };
-
-Separator.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
 
 export default Separator;

@@ -20,7 +20,7 @@ export const StyledWrapper = styled.div`
       "Input",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
   border: 1px solid
     ${(props) =>
@@ -29,7 +29,7 @@ export const StyledWrapper = styled.div`
         "Input",
         props.focused === true ? "primary" : props.color,
         "enabled",
-        "border"
+        "border",
       )};
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "regular")};
@@ -48,7 +48,7 @@ export const StyledWrapper = styled.div`
       props.color,
       "disabled",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
         color: ${(props) =>
           getColorRgbaValue(
@@ -56,7 +56,7 @@ export const StyledWrapper = styled.div`
             "Input",
             props.color,
             "disabled",
-            "text"
+            "text",
           )};`}
   ${(props) =>
     props.isDisabled === true
@@ -66,7 +66,7 @@ export const StyledWrapper = styled.div`
           "Input",
           props.color,
           "disabled",
-          "border"
+          "border",
         )
       : ""}
 
@@ -88,7 +88,7 @@ export const StyledWrapper = styled.div`
         "Input",
         props.focused === true ? "primary" : props.color,
         "enabled",
-        "text"
+        "text",
       )};
     caret-color: ${(props) =>
       getColorRgbaValue(props.theme, "Input", props.color, "enabled", "caret")};
@@ -104,7 +104,7 @@ export const StyledWrapper = styled.div`
       props.color,
       "disabled",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
         color: ${(props) =>
           getColorRgbaValue(
@@ -112,7 +112,7 @@ export const StyledWrapper = styled.div`
             "Input",
             props.color,
             "disabled",
-            "text"
+            "text",
           )};`}
     background: none;
   }
@@ -128,7 +128,7 @@ export const StyledWrapper = styled.div`
         "Input",
         props.color,
         "enabled",
-        "placeholder"
+        "placeholder",
       )};
   }
 `;
@@ -141,7 +141,7 @@ export const StyledPrefix = styled.span`
       "Input",
       props.focused === true ? "primary" : props.color,
       "enabled",
-      "prefix"
+      "prefix",
     )};
 `;
 

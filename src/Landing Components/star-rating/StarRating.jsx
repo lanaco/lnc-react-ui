@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 // TODO: add simpler view with just 1 star and rating number displayed
 // also, title for hover effect..
 import { Container, FilledStars, EmptyStars } from "./style";
 import { useTheme } from "../../ThemeProvider/ThemeProvider";
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 
 const StarRating = forwardRef((props, ref) => {
   const {
@@ -53,26 +53,5 @@ const StarRating = forwardRef((props, ref) => {
     </Container>
   );
 });
-
-StarRating.propTypes = {
-  rating: PropTypes.number,
-  reviewCount: PropTypes.any,
-  disabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  style: PropTypes.object,
-  className: PropTypes.string,
-
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-  ]),
-
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default StarRating;

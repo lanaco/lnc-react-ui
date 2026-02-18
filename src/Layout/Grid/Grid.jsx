@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
 const StyledGrid = styled.div`
@@ -72,31 +72,6 @@ Grid.defaultProps = {
   inline: false,
   style: {},
   className: "",
-};
-
-Grid.propTypes = {
-  inline: PropTypes.bool,
-  template: PropTypes.string,
-  templateColumns: PropTypes.string,
-  templateRows: PropTypes.string,
-  gap: PropTypes.string,
-  rowGap: PropTypes.string,
-  columnGap: PropTypes.string,
-  justifyItems: PropTypes.oneOf(["start", "end", "center", "stretch"]),
-  alignItems: PropTypes.oneOf(["start", "end", "center", "stretch"]),
-  placeItems: PropTypes.oneOf(["start", "end", "center", "stretch"]),
-  justifyContent: PropTypes.oneOf([
-    "start",
-    "end",
-    "center",
-    "stretch",
-    "space-between",
-    "space-evenly",
-  ]),
-  templateAreas: PropTypes.string,
-  //-------------
-  style: PropTypes.object,
-  className: PropTypes.string,
 };
 
 export default Grid;

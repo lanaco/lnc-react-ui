@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useState } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
@@ -255,40 +255,5 @@ const TabItem = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TabItem.propTypes = {
-  type: PropTypes.oneOf(["regular", "pill", "underline"]),
-  /**
-   * Is it first Tab Item in Tab Wrapper
-   * }
-   */
-  first: PropTypes.bool,
-  /**
-   * Is it last Tab Item in Tab Wrapper
-   * }
-   */
-  last: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  active: PropTypes.bool,
-  //---------------------------------------------------------------
-  onClick: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default TabItem;

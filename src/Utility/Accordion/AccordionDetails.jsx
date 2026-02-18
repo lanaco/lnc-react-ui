@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
 export const getPadding = (isExpanded, size) => {
@@ -26,13 +26,7 @@ const StyledDetails = styled.div`
 `;
 
 const AccordionDetails = forwardRef((props, ref) => {
-  const {
-    __TYPE__ = "ACCORDION_DETAILS",
-    isExpanded,
-    size = "small",
-    children,
-    ...rest
-  } = props;
+  const { isExpanded, size = "small", children, ...rest } = props;
 
   return (
     <StyledDetails ref={ref} size={size} isExpanded={isExpanded} {...rest}>
@@ -47,14 +41,6 @@ const AccordionDetails = forwardRef((props, ref) => {
 //   style: {},
 //   size: "small",
 // };
-
-AccordionDetails.propTypes = {
-  __TYPE__: PropTypes.string,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default AccordionDetails;
 

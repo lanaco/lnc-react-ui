@@ -1,4 +1,5 @@
-import React, { forwardRef } from "react";
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 
 import { Action } from "../Action/Action";
 

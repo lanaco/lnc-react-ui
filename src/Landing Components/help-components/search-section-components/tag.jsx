@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
-import PropTypes from "prop-types";
 
 import Chip from "../../../Data display/Chip/Chip";
 import { TagsContainer } from "./style";
@@ -28,10 +28,5 @@ const SearchSectionTags = forwardRef(
     );
   }
 );
-
-SearchSectionTags.propTypes = {
-  tags: PropTypes.array,
-  onSelectTag: PropTypes.func,
-};
 
 export default SearchSectionTags;

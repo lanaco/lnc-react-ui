@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
@@ -18,7 +18,7 @@ const StyledBreadcrumbs = styled.div`
       props.theme,
       "Breadcrumbs",
       props.size,
-      "enabled"
+      "enabled",
     )};
   color: ${(props) =>
     getColorRgbaValue(
@@ -26,7 +26,7 @@ const StyledBreadcrumbs = styled.div`
       "Breadcrumbs",
       props.color,
       "enabled",
-      "text"
+      "text",
     )};
 `;
 
@@ -92,7 +92,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
           />
         ) : (
           itemsBeforeCollapse == index && (
-            <StyledCollapse key={index} onClick={(e) => setCollapse(!collapse)}>
+            <StyledCollapse key={index} onClick={() => setCollapse(!collapse)}>
               <Icon icon="ellipsis" />
               {separator}&nbsp;
             </StyledCollapse>
@@ -106,7 +106,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
           separator={separator}
           child={child}
         />
-      )
+      ),
     );
   };
 
@@ -142,35 +142,5 @@ const Breadcrumbs = forwardRef((props, ref) => {
 //   color: "neutral",
 //   size: "small",
 // };
-
-Breadcrumbs.propTypes = {
-  separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * Specifies the maximum number of breadcrumbs to display. When there are more than the maximum number, only the first itemsBeforeCollapse and last itemsAfterCollapse will be shown, with an ellipsis in between
-   */
-  maxItems: PropTypes.number,
-  /**
-   * If max items is exceeded, the number of items to show after the ellipsis.
-   */
-  itemsAfterCollapse: PropTypes.number,
-  /**
-   * If max items is exceeded, the number of items to show before the ellipsis.
-   */
-  itemsBeforeCollapse: PropTypes.number,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default Breadcrumbs;

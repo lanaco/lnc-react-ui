@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, useState } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import {
   getColorRgbaValue,
@@ -23,7 +23,7 @@ const Container = styled.label`
       "Input",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
   border-radius: 8px;
   ${(props) =>
@@ -54,7 +54,7 @@ const Label = styled.div`
       "Input",
       props.focused === true ? "primary" : props.color,
       "enabled",
-      "prefix"
+      "prefix",
     )};
   cursor: ${(props) => (props.disabled === true ? "default" : "pointer")};
   background-color: ${(props) =>
@@ -63,7 +63,7 @@ const Label = styled.div`
       "Input",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
   border: 1px solid
     ${(props) =>
@@ -72,7 +72,7 @@ const Label = styled.div`
         "Input",
         props.focused === true ? "primary" : props.color,
         props.disabled === true ? "disabled" : "enabled",
-        "border"
+        "border",
       )};
   border-radius: 8px 0 0 8px;
 
@@ -86,7 +86,7 @@ const Label = styled.div`
       props.color,
       "disabled",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
         color: ${(props) =>
           getColorRgbaValue(
@@ -94,7 +94,7 @@ const Label = styled.div`
             "Input",
             props.color,
             "disabled",
-            "text"
+            "text",
           )};`}
 `;
 
@@ -112,7 +112,7 @@ const FileName = styled.input`
       "Input",
       props.focused === true ? "primary" : props.color,
       props.disabled === true ? "disabled" : "enabled",
-      "border"
+      "border",
     )};
   border-radius: 0 8px 8px 0;
   border-left: transparent;
@@ -122,7 +122,7 @@ const FileName = styled.input`
       "Input",
       props.focused === true ? "primary" : props.color,
       "enabled",
-      "text"
+      "text",
     )};
 
   background-color: ${(props) =>
@@ -131,7 +131,7 @@ const FileName = styled.input`
       "Input",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
   color: ${(props) =>
     getColorRgbaValue(
@@ -139,7 +139,7 @@ const FileName = styled.input`
       "Input",
       props.focused === true ? "primary" : props.color,
       "enabled",
-      "text"
+      "text",
     )};
 
   /* ${(props) =>
@@ -153,7 +153,7 @@ const FileName = styled.input`
       props.color,
       "disabled",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
         color: ${(props) =>
           getColorRgbaValue(
@@ -161,7 +161,7 @@ const FileName = styled.input`
             "Input",
             props.color,
             "disabled",
-            "text"
+            "text",
           )};`}
 `;
 
@@ -273,33 +273,5 @@ const FileInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-FileInput.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  multiple: PropTypes.bool,
-  accept: PropTypes.string,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  tabIndex: PropTypes.number,
-  //-------------------------
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  //-------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default FileInput;

@@ -1,7 +1,7 @@
-/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
+
 import { useState, createRef } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import Chip from "../../Data display/Chip/Chip";
 import FadeIn from "../../FadeIn/FadeIn";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -157,7 +157,7 @@ const SearchBar = (props) => {
       (
         c ^
         (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-      ).toString(16)
+      ).toString(16),
     );
   };
 
@@ -217,7 +217,7 @@ const SearchBar = (props) => {
     onChange(
       id,
       [...items].filter((_, i) => i !== index),
-      removedItem
+      removedItem,
     );
   };
 
@@ -320,27 +320,6 @@ SearchBar.defaultProps = {
   className: "",
   size: "small",
   color: "primary",
-};
-
-SearchBar.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  items: PropTypes.array,
-  suggestions: PropTypes.array,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "error",
-    "warning",
-    "gray",
-    "background",
-    "transparent",
-    "neutral",
-  ]),
 };
 
 export default SearchBar;

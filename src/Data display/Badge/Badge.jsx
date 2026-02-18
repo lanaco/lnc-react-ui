@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-/* eslint-disable no-undef */
+
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
@@ -28,7 +27,7 @@ const StyledBadge = styled.div`
       props.color,
       "enabled",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
   color: ${(props) =>
     getColorRgbaValue(props.theme, "Badge", props.color, "enabled", "text")};
@@ -81,30 +80,5 @@ const Badge = forwardRef((props, ref) => {
     </StyledBadge>
   );
 });
-
-Badge.propTypes = {
-  onClick: PropTypes.func,
-  borderRadius: PropTypes.oneOf([
-    "slight",
-    "regular",
-    "edged",
-    "curved",
-    "none",
-  ]),
-  //---------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default Badge;

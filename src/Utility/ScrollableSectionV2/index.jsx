@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import PropTypes from "prop-types";
 import {
   useRef,
   useState,
@@ -208,18 +208,5 @@ const ScrollableSectionV2 = forwardRef(
     );
   }
 );
-
-ScrollableSectionV2.propTypes = {
-  title: PropTypes.string,
-  rowGap: PropTypes.string,
-  columnGap: PropTypes.string,
-  scrollBySize: PropTypes.number,
-  wrapForMobile: PropTypes.bool,
-  wrap: PropTypes.bool,
-  methodsRef: PropTypes.any,
-  arrowsVisibleOnHover: PropTypes.bool,
-  rightAlignArrows: PropTypes.bool,
-  padding: PropTypes.string,
-};
 
 export default ScrollableSectionV2;

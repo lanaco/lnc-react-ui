@@ -1,4 +1,5 @@
 /* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import {
   forwardRef,
   useState,
@@ -7,7 +8,6 @@ import {
   useRef,
   cloneElement,
 } from "react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import Icon from "../../General/Icon/Icon";
@@ -44,7 +44,7 @@ const Container = styled.label`
       "DragDropFiles",
       props.color,
       "enabled",
-      "text"
+      "text",
     )};
 
   & .dnd-icon-lnc {
@@ -55,7 +55,7 @@ const Container = styled.label`
         "DragDropFiles",
         props.color,
         "enabled",
-        "text"
+        "text",
       )};
   }
 `;
@@ -104,14 +104,12 @@ const DragAndDropFile = forwardRef((props, ref) => {
     inputRef,
     id = "",
     disabled = false,
-    preventDefault,
     acceptDropzone = {},
     acceptInput,
     multiple = false,
     selectFileText = "Select file",
     control,
     dndFileText = "Drag and drop file here or",
-    showFileSize = false,
     showDnD = true,
     className = "",
     style = {},
@@ -155,7 +153,7 @@ const DragAndDropFile = forwardRef((props, ref) => {
     setDisplayDnD(false);
   };
 
-  const handleControlClick = (e) => {
+  const handleControlClick = () => {
     //open(e) doesen't work for Firefox
     // open(e);
 
@@ -187,7 +185,7 @@ const DragAndDropFile = forwardRef((props, ref) => {
     }
   };
 
-  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleOnDrop,
     accept: acceptDropzone,
     onDropAccepted: handleOnDropAccepted,
@@ -263,59 +261,5 @@ const DragAndDropFile = forwardRef((props, ref) => {
 //     size: "small",
 //     color: "primary",
 // };
-
-DragAndDropFile.propTypes = {
-  inputRef: PropTypes.any,
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  /**
-   * Type of: { \[key: string]: string[] }
-   *
-   * Ex: {
-   *
-   *   'image/png': ['.png'],
-   *
-   *   'text/html': ['.html', '.htm']
-   *
-   * }
-   */
-  accept: PropTypes.object,
-  multiple: PropTypes.bool,
-  selectFileText: PropTypes.string,
-  /**
-   * Custom control which opens file explorer on click
-   */
-  control: PropTypes.element,
-  dndFileText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  showFileSize: PropTypes.bool,
-  /**
-   * Determines whether Drag and Drop area or Add button will be shown
-   *
-   * }
-   */
-  showDnD: PropTypes.bool,
-  alwaysShowDropzone: PropTypes.bool,
-  //-------------------------
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onDropAccepted: PropTypes.func,
-  onDrop: PropTypes.func,
-  //-------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  inputProps: PropTypes.any,
-};
 
 export default DragAndDropFile;

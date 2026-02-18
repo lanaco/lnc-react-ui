@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useEffect, useState, forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useScreenSize } from "../../_utils/utils";
 
@@ -130,32 +130,5 @@ const FlexGridItem = forwardRef((props, ref) => {
 });
 
 //====================================== PROP TYPES / DEFAULT PROPS ====================================
-FlexGridItem.propTypes = {
-  /**
-   * Number of columns to take up on XS screens.
-   */
-  XS: PropTypes.number,
-  /**
-   * Number of columns to take up on S screens.
-   */
-  S: PropTypes.number,
-  /**
-   * Number of columns to take up on M screens.
-   */
-  M: PropTypes.number,
-  /**
-   * Number of columns to take up on L screens.
-   */
-  L: PropTypes.number,
-  /**
-   * Number of columns to take up on XL screens.
-   */
-  XL: PropTypes.number,
-  /**
-   * Number of columns to take up on any screen size.
-   * Defining number on columns for specific screen sizes takes priority over this.
-   */
-  col: PropTypes.number,
-};
 
 export default FlexGridItem;

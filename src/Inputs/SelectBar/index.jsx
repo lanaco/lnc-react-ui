@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import ScrollableSection from "../../Utility/ScrollableSection";
 import Button from "../../General/Button/Button";
 import Icon from "../../General/Icon/Icon";
@@ -93,19 +92,5 @@ const SelectBar = forwardRef((props, ref) => {
     </ScrollableSection>
   );
 });
-
-SelectBar.propTypes = {
-  allButton: PropTypes.bool,
-  items: PropTypes.array,
-  selectedIds: PropTypes.array,
-  onSelect: PropTypes.func,
-  onRemove: PropTypes.func,
-  onSelectAll: PropTypes.func,
-  className: PropTypes.string,
-  showTimesBtn: PropTypes.bool,
-  valuKey: PropTypes.string,
-  labelKey: PropTypes.string,
-  codeKey: PropTypes.string,
-};
 
 export default SelectBar;

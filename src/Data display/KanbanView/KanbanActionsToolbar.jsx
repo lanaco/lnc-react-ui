@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import DropdownMenu from "../../Utility/DropdownMenu/DropdownMenu";
 import DropdownItem from "../../Utility/DropdownMenu/DropdownItem";
@@ -23,7 +23,7 @@ const StyledToolbar = styled.div`
       props.color,
       "enabled",
       "background",
-      "backgroundOpacity"
+      "backgroundOpacity",
     )};
   border: ${(props) =>
     `1px solid ${getColorRgbaValue(
@@ -32,7 +32,7 @@ const StyledToolbar = styled.div`
       props.color,
       "enabled",
       "border",
-      "borderOpacity"
+      "borderOpacity",
     )}`};
   gap: 6px;
   justify-content: space-between;
@@ -40,12 +40,10 @@ const StyledToolbar = styled.div`
     display: flex;
     gap: 0.5rem;
   }
-}
 `;
 
 const KanbanActionsToolbar = forwardRef((props, ref) => {
   const {
-    __TYPE__ = "KANBAN_VIEW_ACTIONS_TOOLBAR",
     showCreate = true,
     enableCreate = true,
     createText = "Create New item",
@@ -136,39 +134,6 @@ const KanbanActionsToolbar = forwardRef((props, ref) => {
 //   color: "primary",
 //   size: "small"
 // };
-
-KanbanActionsToolbar.propTypes = {
-  /**
-   * This property determines where the component is rendered.
-   * Should not be overridden!
-   */
-  __TYPE__: PropTypes.string,
-  showCreate: PropTypes.bool,
-  enableCreate: PropTypes.bool,
-  createText: PropTypes.string,
-  actionsText: PropTypes.string,
-  /**
-   * Actions that will be shown in toolbar with existing actions
-   * actions=[{name: `<string>`, show: `<bool>`, enable: `<bool>`, onAction: `PropTypes.func`}, ...]
-   */
-  actions: PropTypes.array,
-  //-------------------------------------------------------------
-  onCreate: PropTypes.func,
-  //------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default KanbanActionsToolbar;
 

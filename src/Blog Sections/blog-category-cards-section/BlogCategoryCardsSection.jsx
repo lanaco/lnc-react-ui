@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, memo, useMemo } from "react";
 
 import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card/CategorySimpleCard";
@@ -10,11 +12,10 @@ const BlogCategoryCardsSection = forwardRef(
     {
       items,
       onSelectCard = () => {},
-      isLoading = false,
-      limit = 4,
+
       isHighlight = false,
     },
-    ref
+    ref,
   ) => {
     const memoizedCategories = useMemo(() => {
       return items
@@ -35,7 +36,7 @@ const BlogCategoryCardsSection = forwardRef(
         <div className="wrapper__grid">{memoizedCategories}</div>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default BlogCategoryCardsSection;

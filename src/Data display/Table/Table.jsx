@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import { useEffect, forwardRef, useImperativeHandle } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 import clone from "lodash.clone";
 import isFinite from "lodash.isfinite";
@@ -54,7 +54,7 @@ const LoaderContainerTransparent = styled.div`
       "Background",
       "primary",
       "enabled",
-      "background"
+      "background",
     )};
   filter: alpha(opacity=10);
   display: flex;
@@ -77,7 +77,7 @@ const HtmlTable = styled.table`
       "Table",
       null,
       "enabled",
-      "border"
+      "border",
     )};`}
 `;
 
@@ -115,7 +115,6 @@ const Table = forwardRef((props, ref) => {
   //================== PROPS ===========================================
 
   var {
-    __TYPE__ = "TABLE",
     EnableSelection = false,
     EnableOrdering = false,
     EnableSelectAll = false,
@@ -150,7 +149,6 @@ const Table = forwardRef((props, ref) => {
     //--------------------
     tableWidth = "100%",
     className = "",
-    style = {},
     color = "primary",
     size = "small",
   } = props;
@@ -174,7 +172,7 @@ const Table = forwardRef((props, ref) => {
     }),
     [
       Data, // Update functions when certain state changes
-    ]
+    ],
   );
 
   // Get width property of the table
@@ -190,7 +188,7 @@ const Table = forwardRef((props, ref) => {
       (RowIdentifier === null || RowIdentifier === "")
     )
       console.error(
-        "Error: Selection is enabled but the 'RowIdentifier' is empty"
+        "Error: Selection is enabled but the 'RowIdentifier' is empty",
       );
   }, []);
 
@@ -203,19 +201,19 @@ const Table = forwardRef((props, ref) => {
   // VisibilityPattern errors
   useEffect(() => {
     if (VisibilityPattern) {
-      if (!VisibilityPattern.hasOwnProperty(screenSizes.XS.type))
+      if (!Object.hasOwn(VisibilityPattern, screenSizes.XS.type))
         console.error(getVisibilityPatternError(screenSizes.XS.type));
 
-      if (!VisibilityPattern.hasOwnProperty(screenSizes.S.type))
+      if (!Object.hasOwn(VisibilityPattern, screenSizes.S.type))
         console.error(getVisibilityPatternError(screenSizes.S.type));
 
-      if (!VisibilityPattern.hasOwnProperty(screenSizes.M.type))
+      if (!Object.hasOwn(VisibilityPattern, screenSizes.M.type))
         console.error(getVisibilityPatternError(screenSizes.M.type));
 
-      if (!VisibilityPattern.hasOwnProperty(screenSizes.L.type))
+      if (!Object.hasOwn(VisibilityPattern, screenSizes.L.type))
         console.error(getVisibilityPatternError(screenSizes.L.type));
 
-      if (!VisibilityPattern.hasOwnProperty(screenSizes.XL.type))
+      if (!Object.hasOwn(VisibilityPattern, screenSizes.XL.type))
         console.error(getVisibilityPatternError(screenSizes.XL.type));
     }
   }, [VisibilityPattern]);
@@ -230,8 +228,6 @@ const Table = forwardRef((props, ref) => {
 
     // Calculate columns visibility and size
     if (isObject(VisibilityPattern)) {
-      var reduceWidthByAmount = 0;
-
       columnsToRender = VisibilityPattern[screenSize].map((colForSize) => {
         let col = Columns.find((x) => String(x.id) === String(colForSize.id));
         return {
@@ -241,7 +237,7 @@ const Table = forwardRef((props, ref) => {
       });
 
       if (EnableSelection === true) {
-        var reduceWidthByAmount =
+        let reduceWidthByAmount =
           ((getSelectionCellWidthBySize() / width) * 100) /
           columnsToRender.length;
 
@@ -258,7 +254,7 @@ const Table = forwardRef((props, ref) => {
       columnsToRender = Columns.map((x) => ({ ...x }));
 
       if (EnableSelection === true) {
-        var reduceWidthByAmount =
+        let reduceWidthByAmount =
           ((getSelectionCellWidthBySize() / width) * 100) /
           columnsToRender.length;
 
@@ -299,7 +295,7 @@ const Table = forwardRef((props, ref) => {
 
     // Check if row is selected
     let row = SelectedData.find(
-      (x) => String(x[RowIdentifier]) === String(rowData[RowIdentifier])
+      (x) => String(x[RowIdentifier]) === String(rowData[RowIdentifier]),
     );
 
     if (row !== null && row !== undefined) rowSelection.IsSelected = true;
@@ -361,7 +357,7 @@ const Table = forwardRef((props, ref) => {
       renderCustomElement(
         getCustomRender("TABLE_ROW", props.children),
         rowProps,
-        children
+        children,
       ) || (
         <TableRow {...rowProps} key={index} noBorder={noBorder}>
           {children}
@@ -388,7 +384,7 @@ const Table = forwardRef((props, ref) => {
     return (
       renderCustomElement(
         getCustomRender("TABLE_CELL", props.children),
-        cellProps
+        cellProps,
       ) || <TableCell {...cellProps} key={index} />
     );
   };
@@ -409,7 +405,7 @@ const Table = forwardRef((props, ref) => {
     return (
       renderCustomElement(
         getCustomRender("TABLE_SELLECTION_CELL", props.children),
-        selectionCellProps
+        selectionCellProps,
       ) || (
         <TableSelectionCell
           {...selectionCellProps}
@@ -440,7 +436,7 @@ const Table = forwardRef((props, ref) => {
       renderCustomElement(
         getCustomRender("TABLE_HEAD_ROW", props.children),
         headRowProps,
-        children
+        children,
       ) || (
         <TableHeadRow {...headRowProps} key={0}>
           {children}
@@ -464,7 +460,7 @@ const Table = forwardRef((props, ref) => {
     return (
       renderCustomElement(
         getCustomRender("TABLE_HEAD_CELL", props.children),
-        cellProps
+        cellProps,
       ) || <TableHeadCell {...cellProps} key={index} />
     );
   };
@@ -481,7 +477,7 @@ const Table = forwardRef((props, ref) => {
     return (
       renderCustomElement(
         getCustomRender("TABLE_HEAD_SELECTION_CELL", props.children),
-        cellProps
+        cellProps,
       ) || (
         <TableHeadSelectionCell
           {...cellProps}
@@ -522,7 +518,7 @@ const Table = forwardRef((props, ref) => {
           ColumnsToRender: filterColumns(),
           Disabled: Loading,
           ...themeProps,
-        }
+        },
       ) || <></>
     );
   };
@@ -563,7 +559,7 @@ const Table = forwardRef((props, ref) => {
         <>
           {renderCustomElement(
             getCustomRender("TABLE_ROW_STATUS_INDICATOR_CELL", props.children),
-            cellProps
+            cellProps,
           ) || (
             <TableRowStatusIndicatorCell {...cellProps} noBorder={noBorder} />
           )}
@@ -585,9 +581,9 @@ const Table = forwardRef((props, ref) => {
           {renderCustomElement(
             getCustomRender(
               "TABLE_HEAD_ROW_STATUS_INDICATOR_CELL",
-              props.children
+              props.children,
             ),
-            cellProps
+            cellProps,
           ) || <TableHeadRowStatusIndicatorCell {...cellProps} />}
         </>
       );
@@ -605,7 +601,7 @@ const Table = forwardRef((props, ref) => {
               {
                 ...themeProps,
                 Loading,
-              }
+              },
             ) || <Spinner {...themeProps} />}
           </LoaderContainerTransparent>
         </>
@@ -630,7 +626,7 @@ const Table = forwardRef((props, ref) => {
       renderCustomElement(
         getCustomRender("TABLE_BODY", props.children),
         bodyProps,
-        PreRenderedTableBody ? children : undefined
+        PreRenderedTableBody ? children : undefined,
       ) || <TableBody {...themeProps}>{children}</TableBody>
     );
   };
@@ -645,7 +641,7 @@ const Table = forwardRef((props, ref) => {
       renderCustomElement(
         getCustomRender("TABLE_HEAD", props.children),
         headProps,
-        PreRenderedTableHead ? children : null
+        PreRenderedTableHead ? children : null,
       ) || <TableHead {...themeProps}>{children}</TableHead>
     );
   };
@@ -682,7 +678,7 @@ const Table = forwardRef((props, ref) => {
       renderCustomElement(
         getCustomRender("TABLE_CONTAINER", props.children),
         containerProps,
-        children
+        children,
       ) || (
         <Container
           {...containerProps}
@@ -735,162 +731,6 @@ const Table = forwardRef((props, ref) => {
 //   color: "primary",
 //   className: "",
 // };
-
-Table.propTypes = {
-  /**
-   * This property determines where the component is rendered.
-   * Should not be overridden!
-   */
-  __TYPE__: PropTypes.string,
-  /**
-   *
-   */
-  id: PropTypes.any,
-  //----------------------------------------
-  noBorder: PropTypes.bool,
-  /**
-   * Show a selection checkbox in the first cell of every row.
-   * Value of the checkbox is determined by the `SelectedData` property.
-   */
-  EnableSelection: PropTypes.bool,
-  /**
-   * Show ordering arrows in header cells.
-   */
-  EnableOrdering: PropTypes.bool,
-  /**
-   * Show a spinner with backdrop on top of the table when `Loading` is set to `true`.
-   */
-  EnableLoader: PropTypes.bool,
-  /**
-   * Show a selection checkbox in the first cell of the table header.
-   * Value of the checkbox is determined by the `SelectedEntirePage` property.
-   */
-  EnableSelectAll: PropTypes.bool,
-  /**
-   * Show a special status indicator cell on the left edge of the row
-   */
-  EnableRowStatusIndicator: PropTypes.bool,
-  /**
-   *
-   */
-  EnableRowHighlight: PropTypes.bool,
-  /**
-   *
-   */
-  GetRowStatusIndicatorColor: PropTypes.func,
-  /**
-   *
-   */
-  GetRowHighlightColor: PropTypes.func,
-  //----------------------------------------
-  /**
-   * Specify the text that is shown when there are 0 rows in the `Data`.
-   */
-  NoDataText: PropTypes.string,
-  /**
-   * React component to show instead of the `NoDataText`
-   */
-  NoDataComponet: PropTypes.node,
-  //--------------------
-  /**
-   *  Disables some events and actions when set to `true`. Also triggers the spinner if `EnableLoader` is set to `true`.
-   */
-  Loading: PropTypes.bool,
-  /**
-   * Defines the table columns.
-   * @param id - Column identifier
-   * @param displayName - Text displayed in the header
-   * @param accessor - Access the property in `Data`
-   * @param width - Default column width (overridden by the VisibilityPattern)
-   * @param sortable - Can be sorted
-   *
-   */
-  Columns: PropTypes.arrayOf(PropTypes.object),
-  /**
-   * Defines the data displayed in each row.
-   */
-  Data: PropTypes.arrayOf(PropTypes.object),
-  /**
-   * Define the selected data.
-   * @param id - Column identifier (mandatory field)
-   */
-  SelectedData: PropTypes.arrayOf(PropTypes.object),
-  /**
-   *  Value of the `SelectAll` checkbox.
-   */
-  SelectedEntirePage: PropTypes.bool,
-  /**
-   *  Defines which field in a data object is the row identifier.
-   */
-  RowIdentifier: PropTypes.string,
-  /**
-   * An object that defines the width and order of columns for different screen sizes.
-   * (`XS`,`S`,`M`,`L`,`XL`)
-   */
-  VisibilityPattern: PropTypes.object,
-  /**
-   * Describe how the data is ordered.
-   * @param columnId - Column identifier, maps to the id on the Column object
-   */
-  Ordering: PropTypes.shape({
-    columnId: PropTypes.number,
-    ascending: PropTypes.bool,
-    descending: PropTypes.bool,
-  }),
-  //----------------------------------------
-  /**
-   * Triggered on header cell click.
-   * @param event - event object
-   * @param column - column definition
-   * @param ordering - updated ordering object, or undefined if ordering is not enabled or the column is not sortable
-   */
-  onColumnClick: PropTypes.func,
-  /**
-   * Triggered on table row click.
-   * @param event - event object
-   * @param rowData - row data
-   */
-  onRowClick: PropTypes.func,
-  /**
-   * Triggered on selection checkbox click.
-   * @param event - event object
-   * @param rowData - row data
-   * @param isSelected - the value of selection checkbox
-   */
-  onSelectRow: PropTypes.func,
-  /**
-   * Triggered on select all checkbox click.
-   * @param event - event object
-   * @param isSelected - the value of select all checkbox
-   */
-  onSelectAll: PropTypes.func,
-  //----------------------------------------
-  /**
-   * `width` applied to html table.
-   */
-  tableWidth: PropTypes.string,
-  /**
-   * `className` applied to the component container.
-   */
-  className: PropTypes.string,
-  /**
-   * Defines size of the component (padding, margin, font etc.).
-   */
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  /**
-   *  Defines the palette color for the component.
-   */
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default Table;
 

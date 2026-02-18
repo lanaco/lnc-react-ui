@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useState } from "react";
-
-import PropTypes from "prop-types";
 
 import FaqSectionTags from "../../Landing Components/help-components/faq-section-components/tag";
 import FaqSectionItems from "../../Landing Components/help-components/faq-section-components/item";
@@ -21,7 +21,7 @@ const FaqSection = forwardRef(
       onSelectItem = () => {},
       onImpressed = () => {},
     },
-    ref
+    ref,
   ) => {
     const [selectedTagCode, setSelectedTagCode] = useState(null);
 
@@ -59,21 +59,7 @@ const FaqSection = forwardRef(
         />
       </Container>
     );
-  }
+  },
 );
-
-FaqSection.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  tags: PropTypes.array,
-  items: PropTypes.array,
-  questionText: PropTypes.string,
-  feedbackText: PropTypes.string,
-  showMoreText: PropTypes.string,
-  allTagText: PropTypes.string,
-  impressions: PropTypes.bool,
-  onSelectItem: PropTypes.func,
-  onImpressed: PropTypes.func,
-};
 
 export default FaqSection;

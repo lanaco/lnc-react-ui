@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 
 const HtmlHead = styled.thead`
@@ -8,12 +8,7 @@ const HtmlHead = styled.thead`
 
 const TableHead = (props) => {
   //--------------------------
-  const {
-    __TYPE__ = "TABLE_HEAD",
-    className = "",
-    size = "small",
-    color = "primary",
-  } = props;
+  const { className = "", size = "small", color = "primary" } = props;
   const theme = useTheme();
 
   const themeProps = {
@@ -34,23 +29,6 @@ const TableHead = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableHead.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableHead;
 

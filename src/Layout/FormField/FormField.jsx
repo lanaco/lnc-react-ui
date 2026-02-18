@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import {
@@ -26,7 +26,7 @@ const StyledText = styled.span`
       "FormField",
       props.color,
       "enabled",
-      "text"
+      "text",
     )};
 `;
 
@@ -39,7 +39,6 @@ const FormField = (props) => {
     text = "",
     label = "",
     children,
-    ...rest
   } = props;
 
   const theme = useTheme();
@@ -69,29 +68,5 @@ const FormField = (props) => {
 //   style: {},
 //   className: "",
 // };
-
-FormField.propTypes = {
-  /**
-   * Additional text that appears below the main element.
-   */
-  text: PropTypes.string,
-  /**
-   * Label text that appears above the main element.
-   */
-  label: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  style: PropTypes.object,
-  className: PropTypes.string,
-};
 
 export default FormField;

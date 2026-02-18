@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import {
   forwardRef,
@@ -7,7 +8,6 @@ import {
   isValidElement,
   cloneElement,
 } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Button from "../../General/Button/Button";
 import { getColorRgbaValue } from "../../_utils/utils";
@@ -30,7 +30,7 @@ const StyledContent = styled(motion.div)`
       "Dropdown",
       props.color,
       "enabled",
-      "background"
+      "background",
     )};
 `;
 
@@ -63,16 +63,13 @@ const DropdownMenu = forwardRef((props, ref) => {
       },
     },
     className = "",
-    style = {},
     color = "primary",
     size = "small",
     contentClassName = "",
-    popoverProps,
     children,
     ...rest
   } = props;
 
-  const popoverRef = useRef();
   const menuContentRef = useRef();
   const { theme } = useTheme();
 
@@ -206,63 +203,5 @@ const DropdownMenu = forwardRef((props, ref) => {
 //   className: "",
 //   contentClassName: "",
 // };
-
-DropdownMenu.propTypes = {
-  control: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * Menu offset from the control
-   */
-  offsetValue: PropTypes.number,
-  placement: PropTypes.oneOf([
-    "center",
-    "top",
-    "right",
-    "bottom",
-    "left",
-    "top-start",
-    "top-end",
-    "right-start",
-    "right-end",
-    "bottom-start",
-    "bottom-end",
-    "left-start",
-    "left-end",
-  ]),
-  /**
-   * Adjust width of dropdown according to dropdown items content.
-   */
-  widthFitContent: PropTypes.bool,
-  /**
-   * Close menu when item is selected
-   */
-  closeOnItemSelect: PropTypes.bool,
-  /**
-   * zIndex of dropdown popup
-   */
-  zIndex: PropTypes.number,
-  //---------------------------------------------------------------
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
-  onItemSelected: PropTypes.func,
-  //---------------------------------------------------------------
-  animation: PropTypes.object,
-  className: PropTypes.string,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  popoverProps: PropTypes.any,
-};
 
 export default DropdownMenu;

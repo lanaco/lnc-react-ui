@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, useState } from "react";
-import PropTypes from "prop-types";
 import { SwitchWrapper } from "./style";
 
 const GenderRadioToggle = forwardRef((props, ref) => {
@@ -57,11 +56,5 @@ const GenderRadioToggle = forwardRef((props, ref) => {
     </SwitchWrapper>
   );
 });
-
-GenderRadioToggle.propTypes = {
-  value: PropTypes.any,
-  handleClick: PropTypes.func,
-  color: PropTypes.string,
-};
 
 export default GenderRadioToggle;

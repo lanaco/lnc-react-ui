@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 
 const Container = styled.div`
@@ -17,12 +16,7 @@ const Container = styled.div`
 
 const CustomTableContainer = (props) => {
   //--------------------------
-  const {
-    __TYPE__ = "TABLE_CONTAINER",
-    className = "",
-    size = "small",
-    color = "primary",
-  } = props;
+  const { className = "", size = "small", color = "primary" } = props;
   const theme = useTheme();
 
   const themeProps = {
@@ -43,24 +37,6 @@ const CustomTableContainer = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-CustomTableContainer.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "error",
-    "warning",
-    "gray",
-    "white",
-    "black",
-    "gray",
-  ]),
-};
 
 export default CustomTableContainer;
 

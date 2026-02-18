@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import Checkbox from "../../../Basic Inputs/CheckBoxInput/CheckBoxInput";
 import { getColorRgbaValue } from "../../../_utils/utils";
@@ -14,8 +14,8 @@ const HtmlCell = styled.th`
       "TableHeadCell",
       null,
       "enabled",
-      "background"
-    )}};
+      "background",
+    )};
   border-top: ${(props) =>
     "1px solid " +
     getColorRgbaValue(
@@ -23,8 +23,8 @@ const HtmlCell = styled.th`
       "TableHeadCell",
       null,
       "enabled",
-      "border"
-    )}};
+      "border",
+    )};
   
   border-bottom: ${(props) =>
     "1px solid " +
@@ -33,8 +33,8 @@ const HtmlCell = styled.th`
       "TableHeadCell",
       null,
       "enabled",
-      "border"
-    )}};
+      "border",
+    )};
   
   border-radius: 0.5rem 0 0 0;
 `;
@@ -42,7 +42,6 @@ const HtmlCell = styled.th`
 const TableHeadSelectionCell = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_HEAD_SELECTION_CELL",
     EnableSelectAll,
     IsSelected = null,
     Index = 0,
@@ -92,27 +91,6 @@ const TableHeadSelectionCell = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableHeadSelectionCell.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  Index: PropTypes.number,
-  IsSelected: PropTypes.bool,
-  EnableSelectAll: PropTypes.bool,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableHeadSelectionCell;
 

@@ -1,6 +1,6 @@
-/* eslint-disable react/jsx-key */
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useRef } from "react";
-import PropTypes from "prop-types";
 import useIsInViewport from "../../_utils/use-is-in-viewport";
 import { StyledDiv } from "./style";
 import { useUpdateEffect } from "react-use";
@@ -29,13 +29,5 @@ const InfiniteScrollEndElement = forwardRef((props, ref) => {
     />
   );
 });
-
-InfiniteScrollEndElement.propTypes = {
-  onIsVisible: PropTypes.func,
-  /**
-   * For horizontal scroll InfiniteScrollEndElement has to have some widh otherwise it won't ever be visible and trigger onIsVisible callback
-   */
-  isHorizontal: PropTypes.bool,
-};
 
 export default InfiniteScrollEndElement;

@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, cloneElement } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon/Icon";
@@ -21,7 +21,7 @@ const StyledTitle = styled.div`
         "ConfirmationForm",
         props.color,
         "enabled",
-        "icon"
+        "icon",
       )};
   }
   ${(props) => props.type == "centered" && "padding-top: 0.5rem;"}
@@ -49,7 +49,7 @@ const StyledActions = styled.div`
       "ConfirmationForm",
       "primary",
       "enabled",
-      "trackBg"
+      "trackBg",
     )};`}
    ${(props) => props.type == "centered" && "padding: 1rem 0 0.5rem 0;"}
 `;
@@ -79,7 +79,6 @@ const ConfirmationForm = forwardRef((props, ref) => {
     className = "",
     style = {},
     overlayProps,
-    children,
     rest,
   } = props;
   const theme = useTheme();
@@ -210,46 +209,5 @@ const ConfirmationForm = forwardRef((props, ref) => {
 //   size: "fluid",
 //   clickOutsideToClose: false,
 // };
-
-ConfirmationForm.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  /**
-   * Can be boolean (true - display default icon, false - don't display icon at all), string (display custom icon), element (display custom element as icon)
-   */
-  statusIcon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.bool,
-  ]),
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  type: PropTypes.oneOf(["regular", "centered"]),
-  actions: PropTypes.element,
-  /**
-   * Aligmnent of actions when `type="regular"`
-   */
-  actionsAlignment: PropTypes.oneOf(["right", "center", "left"]),
-  /**
-   * Defines whether actions will be inside a track
-   */
-  actionsTrack: PropTypes.bool,
-  showCloseButton: PropTypes.bool,
-  overlay: PropTypes.bool,
-  onClose: PropTypes.func,
-  zIndex: PropTypes.number,
-  clickOutsideToClose: PropTypes.bool,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["fluid", "xs", "s", "m", "l", "xl", "full"]),
-  overlayProps: PropTypes.any,
-};
 
 export default ConfirmationForm;

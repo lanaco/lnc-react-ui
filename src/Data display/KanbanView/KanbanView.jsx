@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import KanbanActionsToolbar from "./KanbanActionsToolbar";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
@@ -19,15 +19,12 @@ const StyledView = styled.div`
 
 const KanbanView = forwardRef((props, ref) => {
   const {
-    __TYPE__ = "KANBAN_VIEW",
-    goToPreviousView,
     toolbarActions = [],
     kanbanProps = {},
     actionsToolbarProps = {},
     footerProps = {},
     showCreate = true,
     enableCreate = true,
-    loading = false,
 
     customCardActions = [],
     customColumnActions = [],
@@ -88,7 +85,7 @@ const KanbanView = forwardRef((props, ref) => {
           color: toolbarProps?.color ? toolbarProps.color : color,
           className: "kanban-view-toolbar-lnc " + toolbarProps?.className,
         },
-        children
+        children,
       ) || (
         <KanbanActionsToolbar
           {...toolbarProps}
@@ -111,7 +108,7 @@ const KanbanView = forwardRef((props, ref) => {
           color: kanbanProps?.color ? kanbanProps.color : color,
           className: kanbanProps?.className,
         },
-        children
+        children,
       ) || (
         <Kanban
           size={kanbanProps?.size ? kanbanProps.size : size}
@@ -182,7 +179,7 @@ const KanbanView = forwardRef((props, ref) => {
           color: footerProps?.color ? footerProps.color : color,
           className: "kanban-view-footer-lnc " + footerProps?.className,
         },
-        children
+        children,
       ) || null
     );
   };
@@ -239,70 +236,6 @@ const KanbanView = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-KanbanView.propTypes = {
-  __TYPE__: PropTypes.string,
-  kanbanProps: PropTypes.object,
-  actionsToolbarProps: PropTypes.object,
-  footerProps: PropTypes.object,
-  loading: PropTypes.bool,
-  showCreate: PropTypes.bool,
-  /**
-   * Enable create
-   */
-  enableCreate: PropTypes.bool,
-  /**
-   * Actions that will be shown in toolbar with existing actions
-   * toolbarActions=[{name: `<string>`, show: `<bool>`, enable: `<bool>`, onAction: `<func>`, customAction: `<element>`}, ...]
-   */
-  toolbarActions: PropTypes.array,
-  customCardActions: PropTypes.array,
-  customColumnActions: PropTypes.array,
-  editCardText: PropTypes.string,
-  enableEditCard: PropTypes.bool,
-  showEditCard: PropTypes.bool,
-  deleteCardText: PropTypes.string,
-  enableDeleteCard: PropTypes.bool,
-  showDeleteCard: PropTypes.bool,
-  editColumnText: PropTypes.string,
-  enableEditColumn: PropTypes.bool,
-  showEditColumn: PropTypes.bool,
-  deleteColumnText: PropTypes.string,
-  enableDeleteColumn: PropTypes.bool,
-  showDeleteColumn: PropTypes.bool,
-  /**
-   * Show Add New Card in all Columns
-   */
-  showAddNewCard: PropTypes.bool,
-  /**
-   * Show Load More Cards in all Columns
-   */
-  showLoadMoreCards: PropTypes.bool,
-  //-------------------------------------------------------------
-  onCreate: PropTypes.func,
-  onEditCard: PropTypes.func,
-  onDeleteCard: PropTypes.func,
-  onEditColumn: PropTypes.func,
-  onDeleteColumn: PropTypes.func,
-  onCardDetails: PropTypes.func,
-  onColumnDetails: PropTypes.func,
-  onLoadMoreCards: PropTypes.func,
-  onAddNewCard: PropTypes.func,
-  //------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default KanbanView;
 

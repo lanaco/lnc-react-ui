@@ -1,6 +1,5 @@
-/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Icon from "../../General/Icon/Icon";
 import { useScreenSize } from "../../_utils/utils";
@@ -14,7 +13,6 @@ const SidebarContainer = styled.aside`
       props.sidebarCollapsed ? "0 0 0" : `0 0 ${props.size}`};
   }
   transition: flex 0.6s ease-in-out;
-}
 `;
 
 const StyledSidebar = styled.div`
@@ -62,7 +60,6 @@ const Sidebar = forwardRef((props, ref) => {
     size = "15rem",
     children,
     className,
-    __TYPE__ = "Sidebar",
     ...rest
   } = props;
 
@@ -90,7 +87,7 @@ const Sidebar = forwardRef((props, ref) => {
     >
       {!hideCollapseButton && (
         <ToggleSidebarButton
-          onClick={(e) => setSidebarCollapsed(!sidebarCollapsed)}
+          onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
           placement={placement}
           sidebarCollapsed={sidebarCollapsed}
           theme={theme}
@@ -123,27 +120,6 @@ const Sidebar = forwardRef((props, ref) => {
 //   size: "15rem",
 //   __TYPE__: "Sidebar",
 // };
-
-Sidebar.propTypes = {
-  /**
-   * Indicates if the sidebar is collapsed.
-   */
-  collapsed: PropTypes.bool,
-  /**
-   * Hides the collapse button.
-   * Useful if you want control the sidebar with your own button via `collapsed` prop.
-   */
-  hideCollapseButton: PropTypes.bool,
-  /**
-   * Controls the sidebar width.
-   */
-  size: PropTypes.string,
-  /**
-   * Do not override this property.
-   * Should only be used as indicator for type if you are passing custom component.
-   */
-  __TYPE__: PropTypes.string,
-};
 
 export default Sidebar;
 

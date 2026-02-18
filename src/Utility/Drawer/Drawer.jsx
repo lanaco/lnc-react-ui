@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, useState } from "react";
-import PropTypes from "prop-types";
 import { ClassNames, useTheme } from "@emotion/react";
 
 // import component
@@ -8,7 +8,6 @@ import ReactDrawer from "react-modern-drawer";
 
 //import styles
 import "react-modern-drawer/dist/index.css";
-import { useUpdateEffect } from "react-use";
 import { useImperativeHandle } from "react";
 import {
   getColorRgbaValue,
@@ -18,7 +17,6 @@ import {
 const Drawer = forwardRef((props, ref) => {
   const {
     direction = "right",
-    open = false,
     duration = 300,
     overlayOpacity = 0.4,
     enableOverlay = true,
@@ -87,17 +85,17 @@ const Drawer = forwardRef((props, ref) => {
                 "Drawer",
                 color,
                 "enabled",
-                "background"
+                "background",
               )} !important;
               color: ${getColorRgbaValue(
                 theme,
                 "Drawer",
                 color,
                 "enabled",
-                "text"
+                "text",
               )};
               ${getComponentTypographyCss(theme, "Drawer", size, "enabled")};
-            `
+            `,
           )}
           style={style}
           overlayColor={overlayColor}
@@ -126,42 +124,5 @@ const Drawer = forwardRef((props, ref) => {
 //   width: "unset",
 //   size: "small",
 // };
-
-Drawer.propTypes = {
-  direction: PropTypes.oneOf(["top", "right", "left", "bottom"]),
-  open: PropTypes.bool,
-  /**
-   * Duration of opening the drawer in ms
-   */
-  duration: PropTypes.number,
-  overlayOpacity: PropTypes.number,
-  /**
-   * Determines whether to show the overlay
-   */
-  enableOverlay: PropTypes.bool,
-  /**
-   * z-index of Drawer
-   */
-  zIndex: PropTypes.number,
-  //---------------------------------------------------------------
-  onClose: PropTypes.func,
-  onOpen: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  overlayColor: PropTypes.string,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default Drawer;

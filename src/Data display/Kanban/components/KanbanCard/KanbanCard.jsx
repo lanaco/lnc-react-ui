@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { memo, forwardRef } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import Icon from "../../../../General/Icon/Icon";
 import DropdownMenu from "../../../../Utility/DropdownMenu/DropdownMenu";
 import DropdownItem from "../../../../Utility/DropdownMenu/DropdownItem";
@@ -45,8 +45,6 @@ const KanbanCard = memo(
   forwardRef(
     (
       {
-        __TYPE__ = "KANBAN_CARD",
-        id,
         containerId,
         item,
         handle = true,
@@ -61,7 +59,7 @@ const KanbanCard = memo(
         children,
         ...rest
       },
-      ref
+      ref,
     ) => {
       const theme = useTheme();
 
@@ -120,8 +118,8 @@ const KanbanCard = memo(
           </div>
         </StyledCard>
       );
-    }
-  )
+    },
+  ),
 );
 
 // TODO : type
@@ -137,42 +135,6 @@ const KanbanCard = memo(
 //   color: "primary",
 //   size: "small",
 // };
-
-KanbanCard.propTypes = {
-  __TYPE__: PropTypes.string,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  containerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  className: PropTypes.string,
-  style: PropTypes.object,
-  handle: PropTypes.bool,
-  handleProps: PropTypes.any,
-  /**
-   * Show actions menu on Card
-   */
-  actionsMenu: PropTypes.bool,
-  /**
-   * type of: [{ name: `<string>`, show: `<bool>`, enable: `<bool>`, onAction: `<func>`, icon: `<string>`}]
-   * show and enable are true by default
-   */
-  actions: PropTypes.array,
-  //-------------------------------------------------------------
-  /**
-   * (e, item, columnId) => { }
-   */
-  onDetails: PropTypes.func,
-  //-------------------------------------------------------------
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default KanbanCard;
 

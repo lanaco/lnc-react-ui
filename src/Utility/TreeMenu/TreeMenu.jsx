@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import {
   useRef,
@@ -6,7 +7,6 @@ import {
   cloneElement,
   isValidElement,
 } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
 const StyledMenu = styled.div`
@@ -139,29 +139,5 @@ const TreeMenu = forwardRef((props, ref) => {
 //   color: "primary",
 //   size: "small",
 // };
-
-TreeMenu.propTypes = {
-  widthFitContent: PropTypes.bool,
-  /**
-   * Gap between Menu Items
-   */
-  itemsGap: PropTypes.string,
-  //---------------------------------------------------------------
-  onItemSelected: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default TreeMenu;

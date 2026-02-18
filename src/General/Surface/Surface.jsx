@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
-import PropTypes from "prop-types";
 import {
   getBorderRadiusValueWithUnits,
   getBoxShadowValue,
@@ -58,20 +58,5 @@ const Surface = ({
 //   className: "",
 //   style: {},
 // };
-
-Surface.propTypes = {
-  borderRadius: PropTypes.oneOf([
-    "slight",
-    "regular",
-    "edged",
-    "curved",
-    "none",
-  ]),
-  boxShadow: PropTypes.oneOf(["xs", "s", "m", "l", "xl", "xxl"]),
-  paddign: PropTypes.oneOf(["xs", "s", "m", "l", "xl", "xxl"]),
-  fullWidth: PropTypes.bool,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
 
 export default Surface;

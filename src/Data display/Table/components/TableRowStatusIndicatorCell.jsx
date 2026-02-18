@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import { statusColor } from "../constants/constants";
 
@@ -20,7 +20,6 @@ const Indicator = styled.div`
 const TableRowStatusIndicatorCell = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_ROW_STATUS_INDICATOR_CELL",
     RowData = {},
     Index,
     GetRowStatusIndicatorColor,
@@ -88,26 +87,6 @@ const TableRowStatusIndicatorCell = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableRowStatusIndicatorCell.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  Column: PropTypes.object,
-  RowData: PropTypes.object,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableRowStatusIndicatorCell;
 

@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { useTheme } from "styled-components";
 
 const HtmlRow = styled.tr`
@@ -31,17 +31,7 @@ const HtmlRow = styled.tr`
 
 const CustomTableRow = (props) => {
   //--------------------------
-  const {
-    __TYPE__ = "TABLE_ROW",
-    onRowClick,
-    onSelectRow,
-    RowData,
-    SelectedData,
-    Columns,
-    ColumnsToRender,
-    Index,
-    IsSelected,
-  } = props;
+  const { Index, IsSelected } = props;
 
   const theme = useTheme();
 
@@ -57,23 +47,6 @@ const CustomTableRow = (props) => {
 //   __TYPE__: "TABLE_ROW",
 //   //--------------------
 // };
-
-CustomTableRow.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  //----------------------------------------
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default CustomTableRow;
 

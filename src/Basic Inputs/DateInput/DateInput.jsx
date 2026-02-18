@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon/Icon";
 import { Styled_DatePickerWrapper } from "./styledComponents";
@@ -93,44 +93,6 @@ const DateInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-DateInput.propTypes = {
-  value: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  dateFormat: PropTypes.string,
-  tabIndex: PropTypes.number,
-
-  monthsShown: PropTypes.number,
-  withPortal: PropTypes.bool,
-  selectsRange: PropTypes.bool,
-  shouldCloseOnOpen: PropTypes.bool,
-  showTimeInput: PropTypes.bool,
-  showTimeSelect: PropTypes.bool,
-
-  startDate: PropTypes.any,
-  endDate: PropTypes.any,
-  selected: PropTypes.any,
-  locale: PropTypes.string,
-  //-----------------------------------------------------------
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  //-----------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default DateInput;
 export { registerLocale };

@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import Icon from "../../General/Icon/Icon";
@@ -142,22 +142,5 @@ const NotificationMessage = forwardRef((props, ref) => {
     </StyledMessage>
   );
 });
-
-NotificationMessage.propTypes = {
-  avatar: PropTypes.bool,
-  title: PropTypes.string,
-  /**
-   * If `avatar={true}` icon won't be displayed
-   */
-  icon: PropTypes.string,
-  actions: PropTypes.element,
-  inlineActions: PropTypes.bool,
-  sideButtons: PropTypes.bool,
-  //-----------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  iconProps: PropTypes.any,
-  avatarProps: PropTypes.any,
-};
 
 export default NotificationMessage;

@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-
-import PropTypes from "prop-types";
 
 import Chip from "../../../Data display/Chip/Chip";
 import { OptionsContainer } from "./style";
@@ -8,7 +8,7 @@ import { OptionsContainer } from "./style";
 const ToggleSectionOptions = forwardRef(
   (
     { options = [], selectedOptionCode = null, onSelectOption = () => {} },
-    ref
+    ref,
   ) => {
     return (
       <OptionsContainer ref={ref}>
@@ -28,13 +28,7 @@ const ToggleSectionOptions = forwardRef(
         ))}
       </OptionsContainer>
     );
-  }
+  },
 );
-
-ToggleSectionOptions.propTypes = {
-  options: PropTypes.array,
-  selectedOptionCode: PropTypes.any,
-  onSelectOption: PropTypes.func,
-};
 
 export default ToggleSectionOptions;

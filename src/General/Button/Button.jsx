@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import {
@@ -30,8 +30,7 @@ const Button = forwardRef((props, ref) => {
     onBlur,
     onClick,
     onKeyDown,
-    onLeadingIconClick,
-    onTrailingIconClick,
+
     //----------------
     size = "small",
     color = "primary",
@@ -217,50 +216,5 @@ const Button = forwardRef((props, ref) => {
 //   color: "primary",
 //   size: "small",
 // };
-
-Button.propTypes = {
-  text: PropTypes.string,
-  iconStyle: PropTypes.oneOf(["regular", "solid"]),
-  /**
-   * Icon before the text
-   */
-  leadingIcon: PropTypes.string,
-  /**
-   * Icon after the text
-   */
-  trailingIcon: PropTypes.string,
-  borderRadius: PropTypes.oneOf([
-    "slight",
-    "regular",
-    "edged",
-    "curved",
-    "none",
-  ]),
-  /**
-   * Different styles
-   */
-  btnType: PropTypes.oneOf(["filled", "tinted", "outline", "basic"]),
-  disabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  //---------------------------------------------------------------
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  //---------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default Button;

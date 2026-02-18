@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import Icon from "../../../General/Icon/Icon";
@@ -15,7 +17,7 @@ const FieldOfInterestsMasonryTag = forwardRef(
         <div className="wrapper__text">{text}</div>
       </TagWrapper>
     );
-  }
+  },
 );
 
 export default FieldOfInterestsMasonryTag;

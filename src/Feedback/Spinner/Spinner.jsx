@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 import { keyframes, useTheme } from "@emotion/react";
 import {
@@ -126,22 +126,5 @@ const Spinner = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-Spinner.propTypes = {
-  label: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default Spinner;

@@ -28,7 +28,7 @@ export const Styled_DatePickerWrapper = styled.div`
         props.theme,
         "DateInput",
         props.size,
-        "enabled"
+        "enabled",
       )}
   }
   & .react-datepicker {
@@ -39,7 +39,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "enabled",
-        "background"
+        "background",
       )};
     color: ${(props) =>
       getColorRgbaValue(
@@ -47,7 +47,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "enabled",
-        "text"
+        "text",
       )};
     border: none;
     box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -71,7 +71,7 @@ export const Styled_DatePickerWrapper = styled.div`
           "DateInput",
           props.color,
           "enabled",
-          "today"
+          "today",
         )};
     color: ${(props) =>
       getColorRgbaValue(
@@ -79,7 +79,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "enabled",
-        "today"
+        "today",
       )} !important;
     border-radius: 8px;
   }
@@ -97,7 +97,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "enabled",
-        "textWeekDays"
+        "textWeekDays",
       )} !important;
     background-color: transparent !important;
   }
@@ -115,7 +115,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "enabled",
-        "textWeekDays"
+        "textWeekDays",
       )} !important;
   }
   & .react-datepicker__day-name,
@@ -141,7 +141,7 @@ export const Styled_DatePickerWrapper = styled.div`
         props.color,
         "hover",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
     color: ${(props) =>
       getColorRgbaValue(
@@ -149,7 +149,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "hover",
-        "text"
+        "text",
       )};
   }
   & .react-datepicker__year-dropdown,
@@ -162,7 +162,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "enabled",
-        "background"
+        "background",
       )};
   }
 
@@ -202,7 +202,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "hover",
-        "text"
+        "text",
       )};
     border-radius: 8px;
     background-color: ${(props) =>
@@ -212,7 +212,7 @@ export const Styled_DatePickerWrapper = styled.div`
         props.color,
         "hover",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
   }
 
@@ -236,7 +236,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "active",
-        "text"
+        "text",
       )};
     border-radius: 8px;
     background-color: ${(props) =>
@@ -245,7 +245,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "active",
-        "background"
+        "background",
       )};
   }
 
@@ -315,7 +315,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "enabled",
-        "textWeekDays"
+        "textWeekDays",
       )};
   }
   & .react-datepicker__header--time {
@@ -327,7 +327,7 @@ export const Styled_DatePickerWrapper = styled.div`
         props.theme,
         "DateInput",
         props.size,
-        "enabled"
+        "enabled",
       )}
     background-color: var(--primary-100) !important;
     font-size: 0.9rem;
@@ -344,7 +344,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "hover",
-        "text"
+        "text",
       )};
     border-radius: 8px;
     background-color: ${(props) =>
@@ -354,7 +354,7 @@ export const Styled_DatePickerWrapper = styled.div`
         props.color,
         "hover",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
   }
   &
@@ -369,7 +369,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "active",
-        "text"
+        "text",
       )};
     border-radius: 8px;
     background-color: ${(props) =>
@@ -378,7 +378,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "active",
-        "background"
+        "background",
       )};
   }
   &
@@ -410,7 +410,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "active",
-        "background"
+        "background",
       )};
     color: ${(props) =>
       getColorRgbaValue(
@@ -418,7 +418,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "active",
-        "text"
+        "text",
       )};
     border: none;
   }
@@ -438,7 +438,7 @@ export const Styled_DatePickerWrapper = styled.div`
         props.color,
         "hover",
         "background",
-        "backgroundOpacity"
+        "backgroundOpacity",
       )};
     color: ${(props) =>
       getColorRgbaValue(
@@ -446,7 +446,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "hover",
-        "text"
+        "text",
       )};
   }
   & .react-datepicker__day--selecting-range-start,
@@ -457,7 +457,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "active",
-        "background"
+        "background",
       )};
     color: ${(props) =>
       getColorRgbaValue(
@@ -465,7 +465,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "active",
-        "text"
+        "text",
       )};
   }
 
@@ -476,7 +476,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "disabled",
-        "background"
+        "background",
       )};
     color: ${(props) =>
       getColorRgbaValue(
@@ -484,7 +484,7 @@ export const Styled_DatePickerWrapper = styled.div`
         "DateInput",
         props.color,
         "disabled",
-        "text"
+        "text",
       )};
 
     &:hover {
@@ -494,7 +494,7 @@ export const Styled_DatePickerWrapper = styled.div`
           "DateInput",
           props.color,
           "disabled",
-          "background"
+          "background",
         )};
       color: ${(props) =>
         getColorRgbaValue(
@@ -502,7 +502,7 @@ export const Styled_DatePickerWrapper = styled.div`
           "DateInput",
           props.color,
           "disabled",
-          "text"
+          "text",
         )};
     }
   }

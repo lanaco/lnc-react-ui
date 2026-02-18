@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 
 import Button from "../../../../General/Button/Button";
@@ -16,7 +18,7 @@ const LoanCalculatorModalFooter = forwardRef(
         />
       </FooterContainer>
     );
-  }
+  },
 );
 
 export default LoanCalculatorModalFooter;

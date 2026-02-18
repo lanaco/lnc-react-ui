@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { getColorRgbaValue } from "../../../_utils/utils";
 import { useTheme } from "@emotion/react";
 
@@ -11,7 +11,7 @@ const HtmlRow = styled.tr`
       "TableRow",
       null,
       "enabled",
-      "border"
+      "border",
     )};`}
   ${(props) =>
     props.noBorder == false &&
@@ -20,7 +20,7 @@ const HtmlRow = styled.tr`
       "TableRow",
       null,
       "enabled",
-      "border"
+      "border",
     )};`}
 ${(props) =>
     props.noBorder == false &&
@@ -29,7 +29,7 @@ ${(props) =>
       "TableRow",
       null,
       "enabled",
-      "border"
+      "border",
     )};`}
 
   ${(props) => props.rowCss || ""}
@@ -49,7 +49,7 @@ ${(props) =>
               "TableRow",
               null,
               "hover",
-              "background"
+              "background",
             )};
           }
       }`;
@@ -64,7 +64,7 @@ ${(props) =>
             "TableRow",
             props.color,
             "active",
-            "background"
+            "background",
           )};
         }
       `;
@@ -75,7 +75,6 @@ ${(props) =>
 const TableRow = (props) => {
   //--------------------------
   const {
-    __TYPE__ = "TABLE_ROW",
     onRowClick = () => {},
     RowData = {},
     Index,
@@ -131,29 +130,6 @@ const TableRow = (props) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TableRow.propTypes = {
-  __TYPE__: PropTypes.string,
-  //----------------------------------------
-  onRowClick: PropTypes.func,
-  RowData: PropTypes.object,
-  //----------------------------------------
-  IsSelected: PropTypes.bool,
-  noBorder: PropTypes.bool,
-  //----------------------------------------
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TableRow;
 

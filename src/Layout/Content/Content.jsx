@@ -1,9 +1,8 @@
-/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 
 const Content = forwardRef((props, ref) => {
-  const { children, __TYPE__ = "Content", ...rest } = props;
+  const { children, ...rest } = props;
 
   return (
     <main ref={ref} {...rest}>
@@ -16,14 +15,6 @@ const Content = forwardRef((props, ref) => {
 // Content.defaultProps = {
 //   __TYPE__: "Content",
 // };
-
-Content.propTypes = {
-  /**
-   * Do not override this property.
-   * Should only be used as indicator for type if you are passing custom component.
-   */
-  __TYPE__: PropTypes.string,
-};
 
 export default Content;
 

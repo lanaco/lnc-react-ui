@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { forwardRef, memo } from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import DropdownMenu from "../../../../Utility/DropdownMenu/DropdownMenu";
 import DropdownItem from "../../../../Utility/DropdownMenu/DropdownItem";
 import Icon from "../../../../General/Icon/Icon";
@@ -26,8 +26,6 @@ const KanbanHeader = memo(
   forwardRef(
     (
       {
-        __TYPE__ = "KANBAN_HEADER",
-        id,
         item,
         column,
         actionsMenu = false,
@@ -40,7 +38,7 @@ const KanbanHeader = memo(
         children,
         ...rest
       },
-      ref
+      ref,
     ) => {
       const theme = useTheme();
 
@@ -88,8 +86,8 @@ const KanbanHeader = memo(
           )}
         </StyledHeader>
       );
-    }
-  )
+    },
+  ),
 );
 
 // // TODO : type
@@ -104,36 +102,6 @@ const KanbanHeader = memo(
 //   color: "primary",
 //   size: "small",
 // };
-
-KanbanHeader.propTypes = {
-  __TYPE__: PropTypes.string,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Show actions menu on Card
-   */
-  actionsMenu: PropTypes.bool,
-  /**
-   * type of: [{ name: `<string>`, show: `<bool>`, enable: `<bool>`, onAction: `<func>`, icon: `<string>`}]
-   * show and enable are true by default
-   */
-  actions: PropTypes.array,
-  //---------------------------------
-  onDetails: PropTypes.func,
-  //---------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default KanbanHeader;
 

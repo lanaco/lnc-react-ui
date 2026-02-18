@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import PropTypes from "prop-types";
 import { useCallback, useEffect, useState, forwardRef } from "react";
 import { useTheme } from "@emotion/react";
 import debounce from "lodash.debounce";
@@ -15,7 +15,6 @@ const TextAreaInput = forwardRef((props, ref) => {
     value,
     defaultValue,
     debounceTime = 0,
-    type = "textarea",
     collapseOnBlur = false,
     minRows = 0,
     maxRows,
@@ -36,7 +35,7 @@ const TextAreaInput = forwardRef((props, ref) => {
   const [focused, setFocused] = useState(false);
   const [innerMinRows, setInnerMinRows] = useState(minRows);
   const [innerMaxRows, setInnerMaxRows] = useState(
-    collapseOnBlur ? minRows : maxRows
+    collapseOnBlur ? minRows : maxRows,
   );
 
   useEffect(() => {
@@ -57,7 +56,7 @@ const TextAreaInput = forwardRef((props, ref) => {
 
   const debouncedOnChange = useCallback(
     debounce((e, val) => handleChange(e, val), debounceTime),
-    [onChange]
+    [onChange],
   );
 
   const handleChange = (e, value) => {
@@ -132,54 +131,5 @@ const TextAreaInput = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-TextAreaInput.propTypes = {
-  id: PropTypes.any,
-  defaultValue: PropTypes.string,
-  value: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  debounceTime: PropTypes.number,
-  placeholder: PropTypes.string,
-  tabIndex: PropTypes.number,
-  /**
-   * Defines whether the textarea will collapse to its original size after it loses focus.
-   */
-  collapseOnBlur: PropTypes.bool,
-  /**
-   * Minimum number of rows to show.
-   */
-  minRows: PropTypes.number,
-  /**
-   * Maximum number of rows to be shown before scroller appears.
-   */
-  maxRows: PropTypes.number,
-  /**
-   * `(event, value) => void`
-   */
-  onChange: PropTypes.func,
-  /**
-   * `(event) => void`
-   */
-  onBlur: PropTypes.func,
-  /**
-   * `(event) => void`
-   */
-  onFocus: PropTypes.func,
-  //----------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default TextAreaInput;

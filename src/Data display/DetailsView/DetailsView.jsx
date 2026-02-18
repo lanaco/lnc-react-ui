@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import FlexGrid from "../../Layout/FlexGrid/FlexGrid";
 import FlexGridItem from "../../Layout/FlexGrid/FlexGridItem";
@@ -198,42 +197,6 @@ const DetailsView = forwardRef((props, ref) => {
 //   style: {},
 //   size: "small",
 // };
-
-DetailsView.propTypes = {
-  __TYPE__: PropTypes.string,
-  goBackText: PropTypes.string,
-  fields: PropTypes.array,
-  data: PropTypes.object,
-  showBack: PropTypes.bool,
-  showNext: PropTypes.bool,
-  showPrevious: PropTypes.bool,
-  showEdit: PropTypes.bool,
-  disableGoBack: PropTypes.bool,
-  disableNext: PropTypes.bool,
-  disablePrevious: PropTypes.bool,
-  disableEdit: PropTypes.bool,
-  flexGridProps: PropTypes.any,
-  editOnTop: PropTypes.bool,
-  //-----------------------------------------------------------
-  goToNext: PropTypes.func,
-  goToPrevious: PropTypes.func,
-  onEdit: PropTypes.func,
-  goBack: PropTypes.func,
-  //------------------------------------------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
 
 export default DetailsView;
 

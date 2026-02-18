@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
-
-import PropTypes from "prop-types";
 
 import { Container } from "./style";
 
@@ -25,9 +25,5 @@ const StatsSectionItems = forwardRef(({ items = [] }, ref) => {
     </Container>
   );
 });
-
-StatsSectionItems.propTypes = {
-  items: PropTypes.array,
-};
 
 export default StatsSectionItems;

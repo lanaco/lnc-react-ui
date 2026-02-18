@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { memo, useEffect, forwardRef, useState, useRef } from "react";
 import debounce from "lodash.debounce";
 import { useTheme } from "@emotion/react";
@@ -10,7 +11,7 @@ const paddingBySize = (size) => {
   if (size === "large") return "0.422375rem 0.375rem";
 };
 
-const heightBySize = (size, hasText) => {
+const heightBySize = (size) => {
   if (size === "small") return `1.625rem`;
   if (size === "medium") return `2rem`;
   if (size === "large") return `2.375rem`;
@@ -58,13 +59,11 @@ const CustomInput = forwardRef((props, ref) => {
     color = "primary",
     id = "",
     disabled = false,
-    preventDefault = false,
     className = "",
     size = "small",
     value = "",
     onChange = () => {},
     onKeyDown = () => {},
-    onInput = () => {},
     onBlur = () => {},
     onFocus = () => {},
     tabIndex = -1,
@@ -162,30 +161,6 @@ CustomInput.defaultProps = {
   size: "small",
   color: "primary",
   value: "",
-};
-
-CustomInput.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onInput: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  tabIndex: PropTypes.number,
-  className: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  value: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "error",
-    "warning",
-    "neutral",
-    "gray",
-  ]),
 };
 
 // export default CustomInput;

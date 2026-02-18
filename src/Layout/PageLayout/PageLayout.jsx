@@ -1,6 +1,5 @@
-/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { forwardRef, Children, isValidElement, cloneElement } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 
@@ -32,12 +31,12 @@ const StyledPageLayout = styled.section`
 `;
 
 const PageLayout = forwardRef((props, ref) => {
-  const { children, isChild, __TYPE__ = "PageLayout", ...rest } = props;
+  const { children, isChild, ...rest } = props;
   const theme = useTheme();
 
   const hasSidebar = Children.toArray(children).some(
     (component) =>
-      component.props.__TYPE__ || component?.type?.displayName == "Sidebar"
+      component.props.__TYPE__ || component?.type?.displayName == "Sidebar",
   );
   const getSidebarPlacement = (children) => {
     let layoutIndex, sidebarIndex, contentIndex;
@@ -111,14 +110,6 @@ const PageLayout = forwardRef((props, ref) => {
 // PageLayout.defaultProps = {
 //   __TYPE__: "PageLayout",
 // };
-
-PageLayout.propTypes = {
-  /**
-   * Do not override this property.
-   * Should only be used as indicator for type if you are passing custom component.
-   */
-  __TYPE__: PropTypes.string,
-};
 
 export default PageLayout;
 

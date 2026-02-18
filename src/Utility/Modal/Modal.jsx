@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import {
   forwardRef,
@@ -6,7 +7,6 @@ import {
   useRef,
   useState,
 } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@emotion/react";
@@ -76,8 +76,7 @@ const ModalContainer = styled(motion.div)`
   z-index: ${(props) => props.zIndex};
   width: ${(props) => ModalSizes[props.size.toUpperCase()]};
   max-width: ${(props) => getMaxWidth(props.size.toUpperCase())};
-  box-shadow:
-    0px 20px 25px -5px rgba(0, 0, 0, 0.1),
+  box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1),
     0px 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-radius: ${(props) =>
     props.size.toUpperCase() != "FULL" ? "16px" : "0"};
@@ -256,15 +255,6 @@ const Modal = forwardRef((props, ref) => {
   const close = (event) => {
     setShow(false);
     onClose(event);
-  };
-
-  const containerVariant = {
-    initial: {
-      opacity: 0,
-      transition: { type: "spring", duration: 3 },
-    },
-    isOpen: { opacity: 1 },
-    exit: { opacity: 0 },
   };
 
   useEffect(() => {
@@ -479,39 +469,6 @@ const ModalWrapper = forwardRef(
 //   size: "fluid",
 //   clickOutsideToClose: true,
 // };
-
-Modal.propTypes = {
-  /**
-   * If the value is given modal will use createPortal to be rendered in portalElement
-   */
-  portalElement: PropTypes.any,
-  /**
-   * Is modal open by default
-   */
-  isOpen: PropTypes.bool,
-  header: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  showCloseButton: PropTypes.bool,
-  overlay: PropTypes.bool,
-  /**
-   * when scrollOverlay=false whole modal contetn will be shown inside viewport and modal content will be scrollable,
-   * when scrollOverlay=true modal content won't be scrollable it will be fully shown inside overlay which will be scrollable
-   * to use this prop `overlay` must be set to `true`
-   * Make sure when setting `scrollOverlay={true} that the parent element has `position: relative`;
-   */
-  scrollOverlay: PropTypes.bool,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-  zIndex: PropTypes.number,
-  clickOutsideToClose: PropTypes.bool,
-  overlayColor: PropTypes.string,
-  overlayAnimation: PropTypes.object,
-  modalAnimation: PropTypes.object,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["fluid", "xs", "s", "m", "l", "xl", "full"]),
-  overlayProps: PropTypes.any,
-};
 
 export default Modal;
 

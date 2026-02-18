@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { DirectionMap, WrapMap, JustifyMap, AlignMap } from "./mappings";
 
 const StyledFlexbox = styled.div`
@@ -52,40 +52,5 @@ const FlexBox = forwardRef((props, ref) => {
 //   alignItems: "Stretch",
 //   gap: "0",
 // };
-
-FlexBox.propTypes = {
-  rowGap: PropTypes.string,
-  columnGap: PropTypes.string,
-  gap: PropTypes.string,
-  /**
-   * Controls the direction of items in FlexBox.
-   */
-  direction: PropTypes.oneOf(["Row", "RowReverse", "Column", "ColumnReverse"]),
-  /**
-   * Determines whether the FlexBox should wrap, when there is not enough space to display all items in one line.
-   */
-  wrap: PropTypes.oneOf(["NoWrap", "Wrap", "WrapReverse"]),
-  /**
-   * Controls how the space is distributed between items along the main-axis.
-   */
-  justifyContent: PropTypes.oneOf([
-    "Start",
-    "Center",
-    "End",
-    "SpaceAround",
-    "SpaceBetween",
-    "SpaceEvenly",
-  ]),
-  /**
-   * Controls how the space is distributed between items along the cross-axis.
-   */
-  alignItems: PropTypes.oneOf([
-    "Start",
-    "Center",
-    "Stretch",
-    "End",
-    "Baseline",
-  ]),
-};
 
 export default FlexBox;

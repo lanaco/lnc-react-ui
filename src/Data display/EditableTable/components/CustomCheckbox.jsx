@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useState, forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 
@@ -130,25 +130,5 @@ const CustomCheckbox = forwardRef((props, ref) => {
   //   />
   // );
 });
-
-CustomCheckbox.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  checked: PropTypes.bool,
-  preventDefault: PropTypes.bool,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  label: PropTypes.string,
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "error",
-    "warning",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default CustomCheckbox;

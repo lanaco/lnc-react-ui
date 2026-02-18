@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import { forwardRef, isValidElement, cloneElement, useContext } from "react";
 import { useMergeRefs } from "@floating-ui/react";
-import PropTypes from "prop-types";
 import PopoverContext from "./PopoverContext";
 
 const usePopoverState = () => {
@@ -46,10 +46,5 @@ const PopoverTrigger = forwardRef(function PopoverTrigger(
     </div>
   );
 });
-
-PopoverTrigger.propTypes = {
-  /** Allows the user to pass any element as the anchor */
-  asChild: PropTypes.bool,
-};
 
 export default PopoverTrigger;

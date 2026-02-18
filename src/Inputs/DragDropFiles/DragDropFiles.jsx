@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { useState, useCallback, useEffect, forwardRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import DragAndDropFile from "../DragAndDropFile/DragAndDropFile";
 import UploadedFile from "../../General/UploadedFile/UploadedFile";
@@ -23,7 +23,7 @@ const StyledDragDropFiles = styled.div`
       "DragDropFiles",
       props.color,
       "enabled",
-      "border"
+      "border",
     )}`};
   border-radius: ${(props) =>
     getBorderRadiusValueWithUnits(props.theme, "regular")};
@@ -57,8 +57,7 @@ const DragDropFiles = forwardRef((props, ref) => {
     fileClick = () => {},
     onCancel = () => {},
     // ----------------------------------------
-    className = "",
-    style = {},
+
     color = "primary",
     size = "small",
     dragAndDropFileProps,
@@ -161,57 +160,5 @@ const DragDropFiles = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-DragDropFiles.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  preventDefault: PropTypes.bool,
-  /**
-   * Type of: { \[key: string]: string[] }
-   *
-   * Ex: {
-   *
-   *   'image/png': ['.png'],
-   *
-   *   'text/html': ['.html', '.htm']
-   *
-   * }
-   */
-  acceptDropzone: PropTypes.object,
-  acceptInput: PropTypes.string,
-  multiple: PropTypes.bool,
-  selectFileText: PropTypes.string,
-  dndFileText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * Custom control which opens file explorer on click
-   */
-  control: PropTypes.element,
-  showFileSize: PropTypes.bool,
-  files: PropTypes.array,
-  //-------------------------
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onDropAccepted: PropTypes.func,
-  onDrop: PropTypes.func,
-  fileClick: PropTypes.func,
-  onCancel: PropTypes.func,
-  //-------------------------
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-  dragAndDropFileProps: PropTypes.any,
-  uploadedFileProps: PropTypes.any,
-};
 
 export default DragDropFiles;

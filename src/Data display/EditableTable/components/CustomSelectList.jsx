@@ -2,7 +2,6 @@
 /* eslint-disable react/display-name */
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import PropTypes from "prop-types";
 import { forwardRef } from "react";
 
 const heightBySize = (size) => {
@@ -115,27 +114,5 @@ const CustomSelectList = forwardRef((props, ref) => {
     </Select>
   );
 });
-
-CustomSelectList.propTypes = {
-  id: PropTypes.any,
-  disabled: PropTypes.bool,
-  tooltip: PropTypes.string,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  preventDefault: PropTypes.bool,
-  withoutEmpty: PropTypes.bool,
-  mapValueTo: PropTypes.string,
-  mapNameTo: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "error",
-    "warning",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default CustomSelectList;

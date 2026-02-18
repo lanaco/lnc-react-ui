@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, cloneElement } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { useTheme } from "../../ThemeProvider/ThemeProvider";
 import {
@@ -147,37 +147,5 @@ const Alert = forwardRef((props, ref) => {
 //   size: "small",
 //   color: "primary",
 // };
-
-Alert.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  actions: PropTypes.element,
-  /**
-   * Can be boolean (true - display default icon, false - don't display icon at all), string (display custom icon), element (display custom element as icon)
-   */
-  statusIcon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.bool,
-  ]),
-  /**
-   * Disable display of status icon
-   */
-  noIcon: PropTypes.bool,
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  /**
-   * When `status` is not defined color of alert can be defined with `color` prop
-   */
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "information",
-    "neutral",
-    "gray",
-  ]),
-};
 
 export default Alert;
