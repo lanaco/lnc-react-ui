@@ -7,23 +7,33 @@ export const Wrapper = styled.a`
   color: var(--gray-950);
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
-  padding: 1.25rem;
+  padding: 1rem;
   border-radius: 1.25rem;
-  border: 1px solid var(--gray-200, #e4e9f0);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+
+  ${(p) =>
+    p?.sponsored
+      ? `
+        border: 1px solid transparent;
+        background: 
+          linear-gradient(#ffffff, #ffffff) padding-box,
+          linear-gradient(to bottom, #fcd34d, #fef3c7) border-box;
+      `
+      : `
+        border: 1px solid var(--gray-200, #e4e9f0);
+        background: #ffffff;
+      `}
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
-    flex-direction: column;
-    padding: 1rem;
+    width: 100%;
     gap: 0;
   }
 `;
 
 export const ImageWrapper = styled.div`
   border-radius: ${(p) => getBorderRadiusValueWithUnits(p.theme, "edged")};
-  height: 13.75rem;
-  width: 13.75rem;
-  min-width: 13.75rem;
   cursor: pointer;
 
   position: relative;
@@ -41,6 +51,10 @@ export const ImageWrapper = styled.div`
     &:hover {
       transform: scale(1.25);
     }
+  }
+
+  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    width: 14.5rem;
   }
 `;
 
@@ -184,7 +198,6 @@ export const StyledProfileItem = styled.a`
 
   ${flex(true)}
   gap: 0.5rem;
-  padding: 0.5rem;
   color: var(--gray-950, #14161a);
   font-weight: 500;
   font-size: 1rem;

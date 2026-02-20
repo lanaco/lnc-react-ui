@@ -167,7 +167,9 @@
     "./ToggleSection": "./dist/ToggleSection.js",
     "./BlogExploreSection": "./dist/BlogExploreSection.js",
     "./BlogImagePathSection": "./dist/BlogImagePathSection.js",
-    "./BannerNextSection": "./dist/BannerNextSection.js"
+    "./BannerNextSection": "./dist/BannerNextSection.js",
+    "./PartnerStatsSection": "./dist/PartnerStatsSection.js",
+    "./PartnerBrandsSection": "./dist/PartnerBrandsSection.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",
