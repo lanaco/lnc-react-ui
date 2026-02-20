@@ -123,3 +123,35 @@ export const BlogTag = styled.div`
   ${(p) => getColor(p.color)}
   ${truncateText()}
 `;
+
+export const SectionHeadingContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  & .heading__title {
+    color: var(--gray-950, #14161a);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    letter-spacing: -0.0294rem;
+
+    & i {
+      font-size: 1.5rem;
+      color: var(--primary-500, #f59e0b);
+    }
+  }
+
+  & .heading__action {
+    /* color: var(--gray-950, #14161a);
+    background: var(--neutral-9504, rgba(20, 22, 26, 0.04)); */
+    white-space: nowrap;
+
+    /* &:hover {
+      background: var(--neutral-9504, rgba(20, 22, 26, 0.12));
+    } */
+
+    &:focus {
+      outline: none;
+    }
+  }
+`;

@@ -73,6 +73,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     numberOfListingsTextPlural,
     metadata,
     LinkComponent,
+    sponsored,
     ...rest
   } = props;
   const Component = LinkComponent || "a";
@@ -107,7 +108,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     prefixTextPlural,
     days,
     suffixTextSingular,
-    suffixTextPlural
+    suffixTextPlural,
   ) =>
     days === 1
       ? `${prefixTextSingular} ${days} ${suffixTextSingular}`
@@ -157,7 +158,10 @@ const SalesCampaignCard = forwardRef((props, ref) => {
       data-accessor={metadata?.accessor}
       onClick={(e) => onSelectCard(e, cardRef)}
       as={Component}
-      {...(LinkComponent ? { to: `/shop/${shopUuid}/campaign/${uuid}` } : { href: `/shop/${shopUuid}/campaign/${uuid}` })}
+      {...(LinkComponent
+        ? { to: `/shop/${shopUuid}/campaign/${uuid}` }
+        : { href: `/shop/${shopUuid}/campaign/${uuid}` })}
+      sponsored={sponsored}
       {...rest}
     >
       <ImageWrapper theme={theme}>
@@ -228,7 +232,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
                     endsInPrefixTextPlural,
                     endsInDays,
                     endsinSuffixTextSingular,
-                    endsinSuffixTextPlural
+                    endsinSuffixTextPlural,
                   )
                 ) : isEnded ? (
                   endedText || "Završena"
@@ -238,7 +242,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
                     startsInPrefixTextPlural,
                     startsInDays,
                     startsinSuffixTextSingular,
-                    startsinSuffixTextPlural
+                    startsinSuffixTextPlural,
                   )
                 ) : null}
               </span>

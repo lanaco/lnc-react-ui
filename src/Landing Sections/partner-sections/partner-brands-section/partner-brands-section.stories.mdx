@@ -1,0 +1,81 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import PartnerBrandsSection from "./PartnerBrandsSection.jsx";
+
+<Meta
+  title="Landing Sections/Partner Brands Section"
+  component={PartnerBrandsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <PartnerBrandsSection
+    title="Upoznaj naše partnere"
+    buttonText="Saznaj više"
+    buttonLink="/"
+    items={[
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%201",
+        link: "https://google.com",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%202",
+        link: "https://google.com",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%203",
+        link: "https://google.com",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%204",
+        link: "https://google.com",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%205",
+        link: "https://google.com",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%206",
+        link: "https://google.com",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%207",
+        link: "https://google.com",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%208",
+        link: "https://google.com",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/200x70/transparent/orange?text=Mungos%209",
+        link: "https://google.com",
+      },
+    ]}
+  />
+);
+
+## Partner brands section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import PartnerBrandsSection from "@lanaco/lnc-react-ui/PartnerBrandsSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

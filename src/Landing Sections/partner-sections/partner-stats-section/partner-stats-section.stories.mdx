@@ -1,0 +1,38 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import PartnerStatsSection from "./PartnerStatsSection.jsx";
+
+<Meta
+  title="Landing Sections/Partner Stats Section"
+  component={PartnerStatsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <PartnerStatsSection
+    title="Mungosovi partneri"
+    description="Lorem ipsum dolor sit amet consectetur. In eget dignissim nibh cursus ullamcorper maecenas egestas. Lectus lorem sit bibendum turpis consectetur posuere. Nibh enim proin ultrices cras volutpat pulvinar."
+    items={[
+      { title: "300", description: "neka statistika" },
+      { title: "500k+", description: "proizvoda" },
+      { title: "3k+", description: "zadovoljnih kupaca" },
+    ]}
+  />
+);
+
+## Partner stats section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import PartnerStatsSection from "@lanaco/lnc-react-ui/PartnerStatsSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
