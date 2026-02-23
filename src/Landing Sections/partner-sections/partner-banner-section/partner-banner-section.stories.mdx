@@ -1,0 +1,42 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import PartnerBannerSection from "./PartnerBannerSection.jsx";
+
+<Meta
+  title="Landing Sections/Partner Banner Section"
+  component={PartnerBannerSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <PartnerBannerSection
+    title="Kako postati Mungosov partner?"
+    description="Lorem ipsum dolor sit amet consectetur. In eget dignissim nibh cursus ullamcorper maecenas egestas. Lectus lorem sit bibendum turpis consectetur posuere. Nibh enim proin ultrices cras volutpat pulvinar."
+    imageUrl="https://cnu.edu/_source-data/default-header-1920x1080.png"
+    items={[
+      "Možda navesti neki benefit",
+      "Možda navesti neki benefit",
+      "Možda navesti neki benefit",
+      "Možda navesti neki benefit",
+    ]}
+    buttonText="Saznaj više"
+    buttonLink="/"
+  />
+);
+
+## Partner banner section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import PartnerBannerSection from "@lanaco/lnc-react-ui/PartnerBannerSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

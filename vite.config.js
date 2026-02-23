@@ -353,6 +353,14 @@ export default defineConfig({
         ),
         resolve(
           __dirname,
+          "src/Landing Sections/partner-sections/partner-cards-section/PartnerCardsSection.jsx",
+        ),
+        resolve(
+          __dirname,
+          "src/Landing Sections/partner-sections/partner-banner-section/PartnerBannerSection.jsx",
+        ),
+        resolve(
+          __dirname,
           "src/Landing Sections/partner-sections/partner-stats-section/PartnerStatsSection.jsx",
         ),
         resolve(

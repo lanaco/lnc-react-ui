@@ -1,0 +1,120 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import PartnerCardsSection from "./PartnerCardsSection.jsx";
+
+<Meta
+  title="Landing Sections/Partner Cards Section"
+  component={PartnerCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <PartnerCardsSection
+    icon=" mng-lnc-grid"
+    title="Integratori"
+    description="Lorem ipsum dolor sit amet consectetur. Tellus enim tortor enim a a morbi at sapien suspendisse. Facilisi nunc volutpat sed sed consequat nunc diam vulputate."
+    items={[
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%201",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%202",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%203",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%204",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%205",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%206",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%207",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%208",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%209",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%2010",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%2011",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+      {
+        imageUrl:
+          "https://placehold.co/300x120/transparent/orange?text=Mungos%2012",
+        link: "https://google.com",
+        description:
+          "Ovdje piše zašto je ovaj partner važan Mungosu itd. Lorem ipsum dolor sit amet consectetur. Sit pretium leo cursus blandit adipiscing sit sed luctus proin. Tellus quis ornare sit duis volutpat. Porttitor commodo ornare orci phasellus purus ullamcorper et. Tellus facilisis amet in enim nulla sed velit.",
+      },
+    ]}
+  />
+);
+
+## Partner cards section
+
+<SyntaxHighlighter language="jsx" style={nord}>
+  {
+    'import PartnerCardsSection from "@lanaco/lnc-react-ui/PartnerCardsSection";'
+  }
+</SyntaxHighlighter>
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
