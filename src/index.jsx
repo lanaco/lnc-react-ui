@@ -227,6 +227,8 @@ export { default as ToggleSection } from "./Help Sections/toggle-section/ToggleS
 export { default as BlogExploreSection } from "./Landing Sections/blogs-sections/blog-explore-section/BlogExploreSection";
 export { default as BlogImagePathSection } from "./Blog Sections/blog-image-path-section/BlogImagePathSection";
 export { default as BannerNextSection } from "./Landing Sections/banners-sections/banner-next-section/BannerNextSection";
+export { default as PartnerStatsSection } from "./Landing Sections/partner-sections/partner-stats-section/PartnerStatsSection";
+export { default as PartnerBrandsSection } from "./Landing Sections/partner-sections/partner-brands-section/PartnerBrandsSection";
 
 //======================== THEME ==============================================================
 
