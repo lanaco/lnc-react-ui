@@ -11,6 +11,46 @@ export const Container = styled.div`
   padding: 2rem;
   background: #f4f6fb;
 
+  & .section__drawer {
+    background: white !important;
+    opacity: 1;
+    padding-top: 0.5rem;
+    padding-bottom: 2.125rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    & .drawer__image {
+      max-height: 4rem;
+    }
+
+    & .drawer__content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    & .drawer__description {
+      color: var(--gray-900, #0c1520);
+      font-weight: 400;
+      font-size: 0.875rem;
+      leading-trim: none;
+      line-height: 1.25rem;
+      letter-spacing: 0.0156rem;
+      text-align: center;
+    }
+
+    & .drawer__action {
+      font-weight: 500;
+      font-style: medium;
+      font-size: 0.875rem;
+      leading-trim: none;
+      line-height: 1.25rem;
+      letter-spacing: -0.0056rem;
+    }
+  }
+
   & .section__text {
     display: flex;
     flex-direction: column;
