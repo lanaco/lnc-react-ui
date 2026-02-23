@@ -6,7 +6,6 @@ import {
 } from "../../../_utils/utils";
 import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 
-
 export const Wrapper = styled.a`
   text-decoration: none;
   display: flex;
@@ -90,12 +89,12 @@ export const Wrapper = styled.a`
     }
 
     & .text__action {
-      background: var(--white);
-      color: var(--black);
+      background: var(--white, #fff);
+      color: var(--neutral-600, #0f2a46);
 
       &:hover {
         background: var(--primary-500, #f59e0b);
-        color: var(--white);
+        color: var(--white, #fff);
       }
     }
 
