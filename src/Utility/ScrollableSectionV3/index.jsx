@@ -14,7 +14,7 @@ const ScrollableSectionV3 = forwardRef(
     {
       icon,
       title,
-      numOfSlides = 2,
+      numOfSlides = 4,
       showNavigation = true,
       hasNextPage = false,
       handleFetchNextPage = () => {},

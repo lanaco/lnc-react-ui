@@ -33,7 +33,7 @@ const SalesCampaignsSection = forwardRef(
       endsInPrefixTextSingular,
       endsinSuffixTextSingular,
       endedText,
-      numOfSlides = 2,
+      numOfSlides = 4,
       showNavigation = true,
       numberOfListingsTextSingular,
       numberOfListingsTextPlural,
@@ -43,9 +43,9 @@ const SalesCampaignsSection = forwardRef(
       componentName,
       hasNextPage = false,
       handleFetchNextPage = () => {},
-      LinkComponent
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     const isMobile = useDetectMobile();
 
@@ -56,7 +56,7 @@ const SalesCampaignsSection = forwardRef(
           className="campaign-item"
           coverPhoto={getImage(
             item?.coverPhoto,
-            item?.uuid || item?.campaignUuid
+            item?.uuid || item?.campaignUuid,
           )}
           description={item?.description}
           endDate={item?.endDate}
@@ -94,10 +94,11 @@ const SalesCampaignsSection = forwardRef(
           numberOfListingsTextPlural={numberOfListingsTextPlural}
           metadata={{ name: componentName, accessor: item?.accessor }}
           LinkComponent={LinkComponent}
+          sponsored={item?.sponsored}
         />
       ));
 
-      if (items?.length < 2 && !isMobile) {
+      if (items?.length < 4 && !isMobile) {
         return [
           ...components,
           <ItemlessBanner
@@ -130,7 +131,7 @@ const SalesCampaignsSection = forwardRef(
         </ScrollableSectionV3>
       </SuspenseSalesCampaign>
     );
-  }
+  },
 );
 
 export default SalesCampaignsSection;
