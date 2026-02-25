@@ -9,6 +9,7 @@ import "react-multi-carousel/lib/styles.css";
 
 import Button from "../../../General/Button/Button";
 import useDetectMobile from "../../../_utils/useDetectMobile";
+import { screenSizes } from "../../../_utils/breakpoints";
 import { Container } from "./style";
 import SuspenseBannerSectionCarousel from "../../../Landing Components/skeleton-components/banner/banner-section-carousel";
 
@@ -28,17 +29,17 @@ const BannerSectionCarousel = forwardRef(
   ) => {
     const responsive = {
       desktop: {
-        breakpoint: { max: 3000, min: 1024 },
+        breakpoint: { max: 3000, min: screenSizes.M.max },
         items: 1,
         partialVisibilityGutter: 0,
       },
       tablet: {
-        breakpoint: { max: 1024, min: 464 },
+        breakpoint: { max: screenSizes.M.max, min: screenSizes.S.min },
         items: 1,
         partialVisibilityGutter: 0,
       },
       mobile: {
-        breakpoint: { max: 464, min: 0 },
+        breakpoint: { max: screenSizes.XS.max, min: 0 },
         items: 1,
         partialVisibilityGutter: 64,
       },

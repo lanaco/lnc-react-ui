@@ -1,4 +1,21 @@
 import "./nunito-font.css";
+import {
+  up,
+  down,
+  only,
+  between,
+  screenSizes,
+  BREAKPOINT_ORDER,
+} from "./breakpoints";
+
+const breakpoints = {
+  up,
+  down,
+  only,
+  between,
+  values: screenSizes,
+  keys: BREAKPOINT_ORDER,
+};
 
 export const lanaco_light = {
   name: "Lanaco Light",
@@ -3445,6 +3462,7 @@ export const lanaco_light = {
     tooltip: 1500,
     popover: 1299,
   },
+  breakpoints,
 };
 
 export const lanaco_dark = {
@@ -6904,6 +6922,7 @@ export const lanaco_dark = {
     tooltip: 1500,
     popover: 1299,
   },
+  breakpoints,
 };
 
 export const lanaco_e_commerce = {
@@ -10018,38 +10037,6 @@ export const lanaco_e_commerce = {
         },
       },
     },
-    MainMenu: {
-      default: {
-        palette: "neutral",
-        enabled: {
-          color: 900,
-          mediumColor: 600,
-          lightColor: 500,
-          lightestColor: 100,
-          dividerOpacity: 80,
-          headerBackgroundColor: 50,
-          notificationBackgroundColor: 900,
-          notificationOpacity: 80,
-        },
-        hover: { backgroundColor: 900, backgroundOpacity: 80 },
-      },
-      teal: {
-        enabled: {
-          textColor: 700,
-          descriptionOpacity: 800,
-          backgroundColor: 600,
-          backgroundOpacity: 80,
-        },
-      },
-      gray: {
-        enabled: {
-          color: 600,
-          descriptionOpacity: 800,
-          backgroundColor: 600,
-          backgroundOpacity: 80,
-        },
-      },
-    },
     Danger: {
       default: {
         palette: "red",
@@ -10268,6 +10255,7 @@ export const lanaco_e_commerce = {
     tooltip: 1500,
     popover: 1299,
   },
+  breakpoints,
 };
 
 const themes = [lanaco_light, lanaco_dark, lanaco_e_commerce];

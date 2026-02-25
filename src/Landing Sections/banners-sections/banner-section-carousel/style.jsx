@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { SMALL_MOBILE_SIZE_PX } from "../../../_utils/breakpoints";
 
 export const Container = styled.div`
   &:hover {
@@ -116,7 +117,7 @@ export const Container = styled.div`
     right: 1rem;
   }
 
-  @media (max-width: 464px) {
+  @media (max-width: ${SMALL_MOBILE_SIZE_PX}px) {
     & .carousel-container {
       min-height: 23.4375rem;
     }

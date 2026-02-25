@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MOBILE_SIZE_PX } from "./consts";
+import { MOBILE_SIZE_PX } from "./breakpoints";
 
 const useDetectMobile = () => {
   const [width, setWidth] = useState(window.innerWidth);

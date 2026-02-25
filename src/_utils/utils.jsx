@@ -1,6 +1,6 @@
 import { isValidElement, Children, cloneElement } from "react";
 import { useMedia } from "react-use";
-import { screenSizes } from "../Data display/Table/constants/constants";
+import { screenSizes, isMobile as checkIsMobile } from "./breakpoints";
 
 export const getCustomRender = (type, children) => {
   var customElement = getChildComponentByType(type, children);
@@ -66,6 +66,15 @@ export const useScreenSize = () => {
   if (sizeXL) return screenSizes.XL.type;
 
   return screenSizes.M.type;
+};
+
+/**
+ * Semantic "mobile" check - true for XS and S (phones).
+ * Use when you need "mobile vs desktop" without caring about exact breakpoint.
+ */
+export const useIsMobile = () => {
+  const size = useScreenSize();
+  return checkIsMobile(size);
 };
 
 export const renderCustomElement = (
