@@ -40,6 +40,7 @@ export const Wrapper = styled.div`
 
   & .wrapper__tags {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 0.75rem;
   }
@@ -60,26 +61,6 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     gap: 1rem;
-
-    & .wrapper__tags {
-      overflow-x: scroll;
-      justify-content: flex-start;
-      width: 100%;
-
-      -webkit-overflow-scrolling: touch;
-      ::-webkit-scrollbar {
-        -webkit-appearance: none;
-      }
-      -ms-overflow-style: none;
-      /* Internet Explorer 10+ */
-      scrollbar-width: none;
-      /* Firefox */
-
-      &::-webkit-scrollbar {
-        display: none;
-        /* Safari and Chrome */
-      }
-    }
 
     & .wrapper__cards {
       grid-template-columns: ${(p) =>
