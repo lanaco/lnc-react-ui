@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -50,7 +50,13 @@ export const Wrapper = styled.div`
     width: 100%;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("M")} {
+    & .wrapper__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media ${down("S")} {
     gap: 1rem;
 
     & .wrapper__tags {
@@ -74,9 +80,7 @@ export const Wrapper = styled.div`
     }
 
     & .wrapper__cards {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
 `;

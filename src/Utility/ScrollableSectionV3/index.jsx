@@ -15,6 +15,7 @@ const ScrollableSectionV3 = forwardRef(
       icon,
       title,
       numOfSlides = 4,
+      tabletNumOfSlides,
       showNavigation = true,
       hasNextPage = false,
       handleFetchNextPage = () => {},
@@ -86,6 +87,7 @@ const ScrollableSectionV3 = forwardRef(
         <Content
           key={`scrollable-section__content-${index}`}
           numOfColumns={numOfSlides}
+          tabletNumOfColumns={tabletNumOfSlides}
           {...(!isMobile && {
             animate: {
               x: 0,

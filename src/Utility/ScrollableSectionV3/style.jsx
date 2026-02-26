@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
 import { MOBILE_SIZE_PX } from "../../_utils/consts";
+import { only } from "../../_utils/breakpoints";
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -61,6 +62,10 @@ export const Content = styled(motion.div)`
   grid-template-columns: repeat(${(p) => p?.numOfColumns}, 1fr);
   gap: 1.5rem;
   width: 100%;
+
+  @media ${only("M")} {
+    grid-template-columns: repeat(${(p) => p?.tabletNumOfColumns ?? 2}, 1fr);
+  }
 
   @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
     display: flex;

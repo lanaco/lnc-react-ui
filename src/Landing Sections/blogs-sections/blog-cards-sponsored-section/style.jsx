@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
@@ -73,7 +73,7 @@ export const Wrapper = styled.div`
     width: 100%;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 1.25rem;
 
     & .wrapper__title {
