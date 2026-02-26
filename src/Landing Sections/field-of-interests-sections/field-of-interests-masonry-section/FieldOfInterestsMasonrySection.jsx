@@ -7,7 +7,7 @@ import FieldOfInterestsMasonryTag from "../../../Landing Components/field-of-int
 import FieldOfInterestsMasonry from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/card";
 import { Wrapper } from "./style";
 import SuspenseFieldOfInterestsMasonryTag from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-masonry/tags";
-import SuspenseFieldOfInterestsMasonryCard from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-masonry/cards";
+// import SuspenseFieldOfInterestsMasonryCard from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-masonry/cards";
 
 const FieldOfInterestsMasonrySection = forwardRef(
   (
@@ -25,10 +25,10 @@ const FieldOfInterestsMasonrySection = forwardRef(
       onSelectCard = () => {},
       className,
       isLoadingTags = false,
-      isLoadingCards = false,
-      LinkComponent
+      // isLoadingCards = false,
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     useLayoutEffect(() => {
       if (!isDefinedNotEmptyString(className)) {
@@ -84,7 +84,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
       return () => {
         window.removeEventListener("resize", applyMasonry);
       };
-    }, [className, items, isLoadingCards]);
+    }, [className, items]);
 
     return (
       <Wrapper
@@ -118,29 +118,24 @@ const FieldOfInterestsMasonrySection = forwardRef(
             </div>
           </div>
         </SuspenseFieldOfInterestsMasonryTag>
-        <SuspenseFieldOfInterestsMasonryCard
-          isLoading={isLoadingCards}
-          keyPrefix="field-of-interests-masonry-card"
-        >
-          <div className="wrapper__cards">
-            {items?.map((card, idx) => (
-              <FieldOfInterestsMasonry
-                key={`field-of-interests-with-tags-card__${idx + 1}`}
-                image={card?.image}
-                imageComponent={card?.imageComponent}
-                title={card?.title}
-                description={card?.description}
-                onSelectCard={() => onSelectCard?.(card)}
-                className="wrapper__card"
-                link={card?.link}
-                LinkComponent={LinkComponent}
-              />
-            ))}
-          </div>
-        </SuspenseFieldOfInterestsMasonryCard>
+        <div className="wrapper__cards">
+          {items?.map((card, idx) => (
+            <FieldOfInterestsMasonry
+              key={`field-of-interests-with-tags-card__${idx + 1}`}
+              image={card?.image}
+              imageComponent={card?.imageComponent}
+              title={card?.title}
+              description={card?.description}
+              onSelectCard={() => onSelectCard?.(card)}
+              className="wrapper__card"
+              link={card?.link}
+              LinkComponent={LinkComponent}
+            />
+          ))}
+        </div>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default FieldOfInterestsMasonrySection;
