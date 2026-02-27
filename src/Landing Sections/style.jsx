@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../_utils/consts";
+import { down } from "../_utils/breakpoints";
 import { truncateText } from "../_utils/utils";
 
 export const RegulatTitleSectionWrapper = styled.div`
@@ -30,7 +30,7 @@ export const RegulatTitleSectionWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 1.25rem;
 
     & .regular-title {
@@ -78,7 +78,7 @@ export const TitleWithOptionsSectionWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .regular-title {
       font-size: 1.375rem;
       padding-bottom: 0.5rem;

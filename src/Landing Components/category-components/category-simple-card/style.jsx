@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { truncateTextInRows } from "../../../_utils/utils";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 
 export const CardWrapper = styled.a`
@@ -40,7 +40,7 @@ export const CardWrapper = styled.a`
     max-height: 8.25rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     min-width: 8.75rem;
     max-width: 8.75rem;
 

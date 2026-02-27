@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   width: 100%;
   gap: 2.25rem;
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 2rem;
   }
 `;
@@ -30,7 +30,7 @@ export const ContainerHeader = styled.div`
     font-weight: 500;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
   }
 `;
 
@@ -66,7 +66,7 @@ export const ExternalGridWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 2rem;
     & .btns-footer {
       width: 100%;
@@ -144,7 +144,7 @@ export const GridWrapper = styled.div`
     padding-top: 0 !important;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 0.25rem;
     grid-template-columns: auto;
 
@@ -199,7 +199,7 @@ export const ResultsExternalWrapper = styled.div`
     margin: 0 0.62rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 0.75rem;
     gap: 0.75rem;
 
@@ -221,7 +221,7 @@ export const ResultsWrapper = styled.div`
   gap: 1rem;
   flex: 1;
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
   }
@@ -253,7 +253,7 @@ export const ResultItem = styled.div`
     font-size: 3rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     flex-direction: row;
     gap: 0.25rem;
     font-size: 0.875rem;

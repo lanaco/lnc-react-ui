@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Container = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     text-align: center;
   }
 `;

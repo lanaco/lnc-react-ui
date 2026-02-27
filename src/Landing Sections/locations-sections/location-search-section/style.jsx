@@ -36,6 +36,10 @@ export const Content = styled.div`
   @media ${down("S")} {
     gap: 0.5rem;
   }
+
+  @media ${down("XS")} {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Group = styled.div`

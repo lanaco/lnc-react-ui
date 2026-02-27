@@ -35,7 +35,9 @@ export const Container = styled.div`
       font-size: 1.375rem;
       line-height: 1.75rem;
     }
+  }
 
+  @media ${down("XS")} {
     & .section__items {
       grid-template-columns: 1fr;
     }

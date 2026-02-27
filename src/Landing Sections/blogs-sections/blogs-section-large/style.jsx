@@ -11,6 +11,10 @@ export const GridWrapper = styled.div`
   }
 
   @media ${down("S")} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media ${down("XS")} {
     grid-template-columns: repeat(1, 1fr);
   }
 `;

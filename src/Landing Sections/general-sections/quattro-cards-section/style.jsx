@@ -50,7 +50,9 @@ export const Wrapper = styled.div`
 
   @media ${down("S")} {
     gap: 1.25rem;
+  }
 
+  @media ${down("XS")} {
     & .wrapper__cards {
       grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 1rem;

@@ -59,4 +59,10 @@ export const Wrapper = styled.div`
       width: unset;
     }
   }
+
+  @media ${down("XS")} {
+    & .wrapper__grid {
+      grid-template-columns: 1fr;
+    }
+  }
 `;

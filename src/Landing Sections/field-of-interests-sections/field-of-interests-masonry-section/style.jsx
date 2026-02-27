@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -59,7 +59,13 @@ export const Wrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("M")} {
+    & .wrapper__cards {
+      grid-template-columns: repeat(2, minmax(12.5rem, 1fr));
+    }
+  }
+
+  @media ${down("S")} {
     gap: 1rem;
 
     & .wrapper__cards {

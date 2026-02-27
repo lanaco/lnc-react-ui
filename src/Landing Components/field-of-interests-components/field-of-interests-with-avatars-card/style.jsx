@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const AvatarWrapper = styled.div`
   width: 100%;
@@ -23,7 +23,7 @@ export const AvatarWrapper = styled.div`
     border: var(--yellow-600, #d97706);
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .wrapper__image {
       height: auto;
     }

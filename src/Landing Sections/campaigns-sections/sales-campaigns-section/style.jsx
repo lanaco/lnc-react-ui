@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import { getBorderRadiusValueWithUnits } from "../../../_utils/utils";
 
 export const SectionBlock = styled.div`
@@ -34,7 +34,7 @@ export const SectionBlock = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .campaign-item {
       min-width: 100%;
       width: 100%;
@@ -79,7 +79,7 @@ export const CampaignCardContainer = styled.div`
     gap: 0.5rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     flex-direction: column;
 
     & .campaign__user {

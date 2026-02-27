@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { isDefined } from "../../_utils/utils";
-import { MOBILE_SIZE_PX } from "../../_utils/consts";
+import { down } from "../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ export const Wrapper = styled.div`
     padding: 0 1rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 1.25rem;
     & .hover-left-arrow,
     .hover-right-arrow {
@@ -53,7 +53,7 @@ export const HeaderWrapper = styled.div`
     gap: 0.375rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 0 1rem;
     & .btns-group {
       display: none;
@@ -137,7 +137,7 @@ export const Styled_Section = styled.div`
     visibility: ${(props) => (props.hasOverflow ? "visible" : "hidden")};
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .scroll-arrow-left,
     & .scroll-arrow-right {
       display: none;

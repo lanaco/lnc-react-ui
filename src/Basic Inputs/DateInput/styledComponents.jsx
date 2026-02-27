@@ -3,6 +3,7 @@ import {
   getColorRgbaValue,
   getComponentTypographyCss,
 } from "../../_utils/utils";
+import { down } from "../../_utils/breakpoints";
 
 export const Styled_DatePickerWrapper = styled.div`
   ${(props) =>
@@ -13,10 +14,10 @@ export const Styled_DatePickerWrapper = styled.div`
     top: 1.3rem;
     font-size: 1rem;
     width: 100%;
-    @media (max-width: 725px) {
+    @media ${down("S")} {
       width: ${(props) => (props.monthsShown > 1 ? "200%" : "100%")};
     }
-    @media (max-width: 550px) {
+    @media ${down("XS")} {
       width: 100%;
     }
   }

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const OptionsContainer = styled.div`
   display: flex;
@@ -62,7 +62,7 @@ export const OptionsContainer = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     width: 100%;
 
     & .options__item {
@@ -93,7 +93,7 @@ export const ItemsContainer = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     flex-direction: column;
 
     & .learn-more {
@@ -169,7 +169,7 @@ export const ItemContainer = styled.a`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     max-width: 100%;
     flex-direction: row;
     padding: 1rem;

@@ -26,9 +26,9 @@ const FieldOfInterestsMasonrySection = forwardRef(
       className,
       isLoadingTags = false,
       isLoadingCards = false,
-      LinkComponent
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     useLayoutEffect(() => {
       if (!isDefinedNotEmptyString(className)) {
@@ -140,7 +140,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
         </SuspenseFieldOfInterestsMasonryCard>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default FieldOfInterestsMasonrySection;

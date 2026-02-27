@@ -59,8 +59,9 @@ export const GridWrapper = styled.div`
     }
   }
 
-  /* Small phones (≤480px) */
+  /* Small phones (≤480px) – single column */
   @media ${down("XS")} {
+    grid-template-columns: 1fr;
     gap: 0.75rem;
   }
 `;

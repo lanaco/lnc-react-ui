@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../_utils/consts";
+import { down } from "../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ export const Wrapper = styled.div`
     color: var(--gray-700, #4e555f);
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     align-items: start;
     justify-content: start;
     & .txt-block-title {

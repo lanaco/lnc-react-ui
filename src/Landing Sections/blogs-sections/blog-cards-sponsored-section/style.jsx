@@ -81,7 +81,9 @@ export const Wrapper = styled.div`
         font-size: 1.375rem;
       }
     }
+  }
 
+  @media ${down("XS")} {
     & .wrapper__cards {
       grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 1.5rem;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import { truncateText } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
@@ -45,7 +45,7 @@ export const Wrapper = styled.div`
     overflow: hidden;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 1rem;
     flex-direction: column;
     padding: 1rem;
@@ -93,7 +93,7 @@ export const ContentWrapper = styled.div`
     white-space: nowrap;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 1.25rem;
     flex-direction: row;
 

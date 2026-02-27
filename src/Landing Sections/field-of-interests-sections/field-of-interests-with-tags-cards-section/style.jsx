@@ -78,7 +78,9 @@ export const Wrapper = styled.div`
         /* Safari and Chrome */
       }
     }
+  }
 
+  @media ${down("XS")} {
     & .wrapper__cards {
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
