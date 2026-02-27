@@ -17,11 +17,12 @@ const FieldOfInterestsMasonryCard = forwardRef(
       className,
       onSelectCard = () => {},
       link,
-      LinkComponent
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     const Component = LinkComponent || "a";
+
     const { theme } = useTheme();
 
     return (
@@ -46,7 +47,7 @@ const FieldOfInterestsMasonryCard = forwardRef(
         </div>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default FieldOfInterestsMasonryCard;
