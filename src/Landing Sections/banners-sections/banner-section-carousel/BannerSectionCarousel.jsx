@@ -6,12 +6,12 @@ import Carousel from "react-multi-carousel";
 
 import "react-multi-carousel/lib/styles.css";
 
-
+import SuspenseBannerSectionCarousel from "../../../Landing Components/skeleton-components/banner/banner-section-carousel";
 import Button from "../../../General/Button/Button";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import { screenSizes } from "../../../_utils/breakpoints";
+import { isDefined } from "../../../_utils/utils";
 import { Container } from "./style";
-import SuspenseBannerSectionCarousel from "../../../Landing Components/skeleton-components/banner/banner-section-carousel";
 
 const BannerSectionCarousel = forwardRef(
   (
@@ -76,11 +76,16 @@ const BannerSectionCarousel = forwardRef(
                 className="section__card"
                 onClick={() => onSelectItem(item)}
               >
-                <img
-                  src={item?.imageUrl}
-                  alt={`Slide ${idx + 1}`}
-                  className="section__image"
-                />
+                {isDefined(item?.imageComponent) ? (
+                  item?.imageComponent
+                ) : (
+                  <img
+                    src={item?.imageUrl}
+                    alt={`Slide ${idx + 1}`}
+                    loading="lazy"
+                    className="section__image"
+                  />
+                )}
                 <div className="card__content">
                   <div className="card__text">
                     {item?.title && (
