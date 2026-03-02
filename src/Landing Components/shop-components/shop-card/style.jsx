@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { truncateTextInRows } from "../../../_utils/utils";
 import { down } from "../../../_utils/breakpoints";
 
-
 export const Wrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);
@@ -123,6 +122,10 @@ export const Wrapper = styled.a`
 
       &:last-child {
         border-radius: 0 0 1.25rem 0;
+      }
+
+      &:only-child {
+        border-radius: 0 0 1.25rem 1.25rem;
       }
 
       & .product__image {
