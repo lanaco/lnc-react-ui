@@ -28,6 +28,14 @@ export const GridWrapper = styled.div`
     border-radius: 0.75rem 0rem 0.75rem 0.75rem;
   }
 
+  @media ${down("M")} {
+    padding: 1rem;
+
+    & .text-item {
+      padding: 1rem;
+    }
+  }
+
   @media ${down("S")} {
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;

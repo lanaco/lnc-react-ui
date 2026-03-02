@@ -126,7 +126,7 @@ export const Container = styled.div`
     }
 
     & .carousel-item .section__card .section__image {
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
     }
   }
