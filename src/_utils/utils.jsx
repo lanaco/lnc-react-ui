@@ -1,6 +1,6 @@
 import { isValidElement, Children, cloneElement } from "react";
-import { useMedia } from "react-use";
-import { screenSizes } from "../Data display/Table/constants/constants";
+import useMedia from "react-use/lib/useMedia";
+import { screenSizes, isMobile as checkIsMobile } from "./breakpoints";
 
 export const getCustomRender = (type, children) => {
   var customElement = getChildComponentByType(type, children);
@@ -17,7 +17,7 @@ export const getChildComponentByType = (type = "", children) => {
       .reverse()
       .find(
         (child) =>
-          child.props?.__TYPE__ === type || child.type?.displayName === type
+          child.props?.__TYPE__ === type || child.type?.displayName === type,
       );
 
     if (component) return component;
@@ -43,7 +43,7 @@ export const getChildComponentByTypeId = (type = "", id, children) => {
         (child) =>
           (child.props?.__TYPE__ === type ||
             child.type?.displayName === type) &&
-          (id ? child.props?.id === id : !child.props?.id)
+          (id ? child.props?.id === id : !child.props?.id),
       );
 
     if (component) return component;
@@ -68,11 +68,20 @@ export const useScreenSize = () => {
   return screenSizes.M.type;
 };
 
+/**
+ * Semantic "mobile" check - true for XS and S (phones).
+ * Use when you need "mobile vs desktop" without caring about exact breakpoint.
+ */
+export const useIsMobile = () => {
+  const size = useScreenSize();
+  return checkIsMobile(size);
+};
+
 export const renderCustomElement = (
   customRender,
   properties,
   children = null,
-  combineChildren = false
+  combineChildren = false,
 ) => {
   if (customRender.current !== null) {
     properties.children =
@@ -115,7 +124,7 @@ export const getColorRgbaValue = (
   context,
   stateProp,
   colorProp,
-  opacityProp
+  opacityProp,
 ) => {
   const palette = theme.colorContext[context];
   const componentDefault = theme.components[component].default;
@@ -142,7 +151,7 @@ export const getComponentPropValue = (
   component,
   context,
   stateProp,
-  prop
+  prop,
 ) => {
   const palette = theme.colorContext[context];
   const componentDefault = theme.components[component].default;
@@ -161,7 +170,7 @@ export const getComponentTypographyCss = (
   theme,
   component,
   size,
-  stateProp
+  stateProp,
 ) => {
   const componentDefault = theme.components[component].default;
   const fontWeight = componentDefault[stateProp].fontWeight;
@@ -258,7 +267,7 @@ export const linearGradientAnimation = (
   deg = "-45deg",
   bgSizePercent = "500% 500%",
   firstColor = "#b3b9c4",
-  secondColor = "#e5e9f1"
+  secondColor = "#e5e9f1",
 ) => {
   return `
     @keyframes gradient {
@@ -344,7 +353,7 @@ export const GetCurrencySymbol = (currency) => {
 
 function caloriesToMacros(
   totalCalories,
-  ratios = { carbs: 0.5, protein: 0.25, fat: 0.25 }
+  ratios = { carbs: 0.5, protein: 0.25, fat: 0.25 },
 ) {
   // Validate ratios sum to 1 (or very close)
   const totalRatio = ratios.carbs + ratios.protein + ratios.fat;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -51,14 +51,14 @@ export const Wrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .wrapper__content {
       align-content: center;
       gap: 1rem;
       flex-wrap: wrap;
 
       & .wrapper__item {
-        max-width: 4 0.5rem;
+        max-width: 4.5rem;
       }
     }
   }

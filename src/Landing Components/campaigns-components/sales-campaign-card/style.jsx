@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { getBorderRadiusValueWithUnits } from "../../../_utils/utils";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.a`
   text-decoration: none;
@@ -26,7 +26,7 @@ export const Wrapper = styled.a`
         background: #ffffff;
       `}
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     width: 100%;
     gap: 0;
   }
@@ -53,7 +53,7 @@ export const ImageWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     width: 14.5rem;
   }
 `;
@@ -141,7 +141,7 @@ export const ContentWrapper = styled.div`
     color: var(--gray-600, #676e79);
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 1rem 0 0 0;
 
     & .campaign-title-text {
@@ -250,7 +250,7 @@ export const StyledProfileItem = styled.a`
     background-color: var(--gray-95080, #14161acc);
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 0;
     font-size: 0.875rem;
   }

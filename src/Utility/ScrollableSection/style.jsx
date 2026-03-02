@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../_utils/consts";
+import { down } from "../../_utils/breakpoints";
 
 export const Styled_Section = styled.div`
   position: relative;
@@ -53,7 +53,7 @@ export const Styled_Section = styled.div`
       /* Safari and Chrome */
     }
 
-    @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+    @media ${down("S")} {
       margin-right: 0;
     }
   }
@@ -89,7 +89,7 @@ export const Styled_Section = styled.div`
     visibility: ${(props) => (props.hasOverflow ? "visible" : "hidden")};
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .scrollable-container {
       overflow: auto;
     }

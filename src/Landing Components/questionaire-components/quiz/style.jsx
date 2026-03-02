@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const WelcomeWrapper = styled.div`
   display: flex;
@@ -53,7 +53,7 @@ export const WelcomeWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .wrapper__title {
       font-size: 1.375rem;
       line-height: 1.75rem;
@@ -256,7 +256,7 @@ export const QuestionWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .wrapper__content {
       & .wrapper__item {
         & .wrapper__answers {
@@ -357,7 +357,7 @@ export const ResultWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     width: 100%;
 
     & .wrapper__actions {

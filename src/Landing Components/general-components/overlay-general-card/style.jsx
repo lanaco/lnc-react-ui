@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
-
+import { down } from "../../../_utils/breakpoints";
 
 export const Container = styled.a`
   text-decoration: none;
@@ -12,17 +11,18 @@ export const Container = styled.a`
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  flex: 1;
-  flex-shrink: 0;
+  width: 100%;
+  min-width: 0;
   background: ${(p) => p?.backgroundColor}, url("${(p) => p?.backgroundImage}");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 0.75rem;
-  transition: flex 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    flex: 2;
+    transform: scale(1.02);
+    box-shadow: 0 4px 24px rgba(20, 22, 26, 0.12);
   }
 
   & .section__text {
@@ -66,14 +66,10 @@ export const Container = styled.a`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 2rem;
     min-height: 17.5rem;
-    width: 100%;
-
-    &:hover {
-      flex: 1;
-    }
+    height: auto;
 
     & .section__text {
       gap: 0.5rem;

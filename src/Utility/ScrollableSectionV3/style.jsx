@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
-import { MOBILE_SIZE_PX } from "../../_utils/consts";
+import { down } from "../../_utils/breakpoints";
+import { only } from "../../_utils/breakpoints";
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -42,7 +43,7 @@ export const Container = styled.div`
     right: 0;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 1.25rem;
 
     & .scrollable-section__header {
@@ -62,7 +63,11 @@ export const Content = styled(motion.div)`
   gap: 1.5rem;
   width: 100%;
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${only("M")} {
+    grid-template-columns: repeat(${(p) => p?.tabletNumOfColumns ?? 2}, 1fr);
+  }
+
+  @media ${down("S")} {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;

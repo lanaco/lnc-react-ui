@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import { truncateTextInRows } from "../../../_utils/utils";
 
 
@@ -32,7 +32,7 @@ export const Wrapper = styled.a`
     border-radius: 0.75rem 0 0 0.75rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 1rem;
     column-gap: 1.5rem;
     row-gap: 1rem;
@@ -83,7 +83,7 @@ export const TextWrapper = styled.div`
     margin-top: auto;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 0;
   }
 `;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const GridWrapper = styled.div`
   display: grid;
@@ -7,7 +7,16 @@ export const GridWrapper = styled.div`
   gap: 1.25rem;
   margin: auto;
   width: fit-content;
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+
+  @media ${down("M")} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media ${down("S")} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media ${down("XS")} {
     grid-template-columns: repeat(1, 1fr);
   }
 `;

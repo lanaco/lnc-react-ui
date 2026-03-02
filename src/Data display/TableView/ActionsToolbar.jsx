@@ -7,6 +7,7 @@ import Separator from "../../Utility/DropdownMenu/Separator";
 import Button from "../../General/Button/Button";
 import { getColorRgbaValue } from "../../_utils/utils";
 import { useTheme } from "../../ThemeProvider/ThemeProvider";
+import { down } from "../../_utils/breakpoints";
 
 const StyledToolbar = styled.div`
   display: flex;
@@ -37,9 +38,20 @@ const StyledToolbar = styled.div`
     )}`};
   gap: 6px;
   justify-content: space-between;
+  flex-wrap: wrap;
   & > div {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  @media ${down("S")} {
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 8px;
+    & > div {
+      gap: 0.25rem;
+    }
   }
 `;
 

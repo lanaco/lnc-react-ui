@@ -6,6 +6,7 @@ import { useState } from "react";
 import Pagination from "../../Utility/Pagination/Pagination";
 import { getCustomRender, renderCustomElement } from "../../_utils/utils";
 import Table from "../Table/Table";
+import { down } from "../../_utils/breakpoints";
 
 const StyledView = styled.div`
   & .table-view-pagination-lnc {
@@ -13,6 +14,14 @@ const StyledView = styled.div`
   }
   & .table-view-toolbar-lnc {
     margin: 0 0.625rem;
+  }
+
+  @media ${down("S")} {
+    & .table-view-pagination-lnc,
+    & .table-view-toolbar-lnc {
+      margin: 0 0.5rem;
+      padding: 0 0.5rem;
+    }
   }
 `;
 

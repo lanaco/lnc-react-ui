@@ -64,6 +64,7 @@ export const Wrapper = styled.a`
     padding: 0 0.38rem;
     min-height: 1.25rem;
     max-height: 1.25rem;
+    min-width: fit-content;
     width: fit-content;
     display: flex;
     align-items: center;
@@ -72,6 +73,7 @@ export const Wrapper = styled.a`
     z-index: 1;
     background-color: var(--white, #fff);
     color: var(--gray-950, #14161a);
+    white-space: nowrap;
   }
   & .title-simple-product-card {
     z-index: 1;

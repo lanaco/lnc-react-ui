@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import { truncateTextInRows } from "../../../_utils/utils";
 
 
@@ -49,7 +49,7 @@ export const Wrapper = styled.a`
   }
   cursor: pointer;
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     background: transparent;
     border: none;
     box-shadow: none;
@@ -116,7 +116,7 @@ export const TagWrapper = styled.a`
     letter-spacing: -0.09px;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .wrapper__text {
       white-space: nowrap;
     }

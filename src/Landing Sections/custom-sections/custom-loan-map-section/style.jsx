@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   .location-finder {
     flex: 1;
   }
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     flex-direction: column;
     gap: 1.25rem;
   }

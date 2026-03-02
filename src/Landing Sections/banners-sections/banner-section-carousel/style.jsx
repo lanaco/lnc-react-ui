@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { down } from "../../../_utils/breakpoints";
 
 export const Container = styled.div`
   &:hover {
@@ -39,7 +40,9 @@ export const Container = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
         display: block;
+        border-radius: inherit;
       }
 
       & .card__content {
@@ -116,7 +119,25 @@ export const Container = styled.div`
     right: 1rem;
   }
 
-  @media (max-width: 464px) {
+  @media ${down("M")} {
+    & .carousel-item .section__card,
+    & .carousel-item:not(.react-multi-carousel-item--active) .section__card {
+      height: 26rem;
+    }
+    & .carousel-item .section__card .section__image {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  @media ${down("S")} {
+    & .carousel-item .section__card .section__image {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  @media ${down("XS")} {
     & .carousel-container {
       min-height: 23.4375rem;
     }
@@ -150,7 +171,8 @@ export const Container = styled.div`
         border-radius: 0.5rem;
 
         & .section__image {
-          object-fit: fill;
+          object-fit: cover;
+          object-position: center;
         }
 
         & .card__content {

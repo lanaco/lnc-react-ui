@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
@@ -73,7 +73,7 @@ export const Wrapper = styled.div`
     width: 100%;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 1.25rem;
 
     & .wrapper__title {
@@ -81,7 +81,9 @@ export const Wrapper = styled.div`
         font-size: 1.375rem;
       }
     }
+  }
 
+  @media ${down("XS")} {
     & .wrapper__cards {
       grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 1.5rem;

@@ -1,9 +1,13 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
 import Carousel from "react-multi-carousel";
 
 import Button from "../../../General/Button/Button";
 import useDetectMobile from "../../../_utils/useDetectMobile";
+import { screenSizes } from "../../../_utils/breakpoints";
 import { SectionHeadingContainer } from "../../style";
 import { Container } from "./style";
 
@@ -48,13 +52,19 @@ const PartnerBrandsSection = forwardRef(
             <Carousel
               responsive={{
                 desktop: {
-                  breakpoint: { max: 9999, min: 801 },
+                  breakpoint: {
+                    max: 9999,
+                    min: screenSizes.M.min,
+                  },
                   items: 7,
                   slidesToSlide: 1,
                   partialVisibilityGutter: 10,
                 },
                 mobile: {
-                  breakpoint: { max: 800, min: 0 },
+                  breakpoint: {
+                    max: screenSizes.S.max,
+                    min: 0,
+                  },
                   items: 2,
                   slidesToSlide: 1,
                   partialVisibilityGutter: 20,

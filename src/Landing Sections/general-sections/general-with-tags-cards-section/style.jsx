@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -51,7 +51,13 @@ export const Wrapper = styled.div`
     gap: 1.5rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("M")} {
+    & .wrapper__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media ${down("S")} {
     & .wrapper__tags {
       display: flex;
       flex-wrap: nowrap;

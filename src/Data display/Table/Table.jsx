@@ -24,6 +24,7 @@ import {
   getColorRgbaValue,
   getComponentTypographyCss,
 } from "../../_utils/utils";
+import { down } from "../../_utils/breakpoints";
 
 const Container = styled.div`
   display: flex;
@@ -37,6 +38,11 @@ const Container = styled.div`
 
   ${(props) =>
     getComponentTypographyCss(props.theme, "Table", props.size, "enabled")};
+
+  @media ${down("S")} {
+    padding: 0.5rem;
+    margin: 0;
+  }
 `;
 
 const LoaderContainerTransparent = styled.div`

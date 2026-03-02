@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
 import { truncateTextInRows } from "../../../_utils/utils";
 import { linearGradientAnimation } from "../../../_utils/utils";
-
 
 export const Wrapper = styled.a`
   text-decoration: none;
@@ -54,9 +52,6 @@ export const Wrapper = styled.a`
 
     gap: 0.5rem;
     padding: 1rem;
-  }
-
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
   }
 `;
 

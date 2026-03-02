@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.a`
@@ -58,7 +58,7 @@ export const Wrapper = styled.a`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .wrapper__content {
       & .wrapper__title {
         font-size: 0.875rem;
@@ -123,7 +123,7 @@ export const TagWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     max-width: unset;
     min-width: unset;
     flex-direction: row;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const TagsContainer = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const TagsContainer = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     width: 100%;
     overflow-x: auto;
     white-space: nowrap;

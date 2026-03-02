@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Container = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const Container = styled.div`
 
 `}
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     flex-direction: column;
     border-radius: 0;
     border: none;
@@ -49,7 +49,7 @@ export const Wrapper = styled.div`
   flex: 1;
   flex-direction: column;
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 0 0 1.25rem 0;
   }
 `;
@@ -77,7 +77,7 @@ export const ContainerHeader = styled.div`
     letter-spacing: -0.0112rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     flex-direction: column;
   }
 `;
@@ -103,8 +103,5 @@ export const ListWrapper = styled.div`
       font-size: 1.25rem;
       color: var(--info-600, #6d28d9);
     }
-  }
-
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
   }
 `;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Container = styled.div`
   display: flex;
@@ -18,37 +18,28 @@ export const Container = styled.div`
   }
 
   & .section__items {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     width: 100%;
   }
 
-  & .section__item {
-    background: lightblue;
-    height: 24rem;
-    transition: width 0.5s ease;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    flex: 1;
-
-    &:hover {
-      flex: 2;
-      transition: width 0.5s ease;
+  @media ${down("M")} {
+    & .section__items {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .section__title {
       font-size: 1.375rem;
       line-height: 1.75rem;
     }
+  }
 
+  @media ${down("XS")} {
     & .section__items {
-      flex-direction: column;
+      grid-template-columns: 1fr;
     }
   }
 `;

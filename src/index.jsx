@@ -239,4 +239,25 @@ export {
   useTheme,
 } from "./ThemeProvider/ThemeProvider";
 
+//======================== BREAKPOINTS & RESPONSIVE UTILS ======================================
+
+export {
+  screenSizes,
+  getMediaQuery,
+  up,
+  down,
+  only,
+  between,
+  BREAKPOINT_ORDER,
+  DEVICE_CATEGORIES,
+  isMobile,
+  isTablet,
+  isDesktop,
+  MOBILE_SIZE_PX,
+  SMALL_MOBILE_SIZE_PX,
+} from "./_utils/breakpoints";
+
+export { useScreenSize, useIsMobile } from "./_utils/utils";
+export { default as useDetectMobile } from "./_utils/useDetectMobile";
+
 //=============================================================================================

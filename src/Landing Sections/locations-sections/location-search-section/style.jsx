@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
     font-size: 1rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 0;
     border-radius: 0;
     box-shadow: none;
@@ -29,9 +29,16 @@ export const Content = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("M")} {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media ${down("S")} {
     gap: 0.5rem;
+  }
+
+  @media ${down("XS")} {
+    grid-template-columns: 1fr;
   }
 `;
 

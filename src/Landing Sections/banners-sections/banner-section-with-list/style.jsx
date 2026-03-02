@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Container = styled.div`
   padding-bottom: 1.38rem;
@@ -25,7 +25,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding-bottom: 0;
   }
 `;
@@ -55,7 +55,7 @@ export const ContainerHeader = styled.div`
     line-height: 1.5rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .header-title {
       font-size: 1.375rem;
       line-height: 1.75rem;
@@ -95,7 +95,7 @@ export const ListWrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .list-item {
       flex-direction: column;
       text-align: center;

@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Container = styled.div`
   display: flex;
   border-radius: 0.75rem;
   background-color: ${(p) => p.bgcolor || "transparent"};
   overflow: hidden;
-  max-height: ${(p) => `${p.height}px` || "22.5rem"};
-  min-height: ${(p) => `${p.height}px` || "22.5rem"};
+  max-height: ${(p) => (p.height != null ? `${p.height}px` : "22.5rem")};
+  min-height: ${(p) => (p.height != null ? `${p.height}px` : "22.5rem")};
   background-color: ${(p) => p.bgcolor || "transparent"};
   position: relative;
 
@@ -17,10 +17,10 @@ export const Container = styled.div`
 
   & img {
     object-fit: cover;
-    max-width: ${(p) => `${p.imgW}px` || "22.5rem"};
-    min-width: ${(p) => `${p.imgW}px` || "22.5rem"};
-    max-height: ${(p) => `${p.height}px` || "22.5rem"};
-    min-height: ${(p) => `${p.height}px` || "22.5rem"};
+    max-width: ${(p) => (p.imgW != null ? `${p.imgW}px` : "22.5rem")};
+    min-width: ${(p) => (p.imgW != null ? `${p.imgW}px` : "22.5rem")};
+    max-height: ${(p) => (p.height != null ? `${p.height}px` : "22.5rem")};
+    min-height: ${(p) => (p.height != null ? `${p.height}px` : "22.5rem")};
   }
 
   & .header-image {
@@ -38,7 +38,7 @@ export const Container = styled.div`
 
 `}
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     gap: 1.5rem;
     flex-direction: column;
     min-height: unset;
@@ -53,8 +53,8 @@ export const Container = styled.div`
     & img {
       max-width: 100%;
       min-width: 100%;
-      max-height: ${(p) => `${p.imgHMob}px` || "12.1rem"};
-      min-height: ${(p) => `${p.imgHMob}px` || "12.1rem"};
+      max-height: ${(p) => (p.imgHMob != null ? `${p.imgHMob}px` : "12.1rem")};
+      min-height: ${(p) => (p.imgHMob != null ? `${p.imgHMob}px` : "12.1rem")};
     }
 
     & .header-image {
@@ -91,7 +91,7 @@ export const Wrapper = styled.div`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     padding: 0;
     flex-direction: column;
 
@@ -122,7 +122,7 @@ export const ContainerHeader = styled.div`
     letter-spacing: -0.0112rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     flex-direction: column;
 
     & .header-title {

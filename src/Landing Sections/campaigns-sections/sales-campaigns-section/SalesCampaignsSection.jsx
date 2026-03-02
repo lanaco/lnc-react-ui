@@ -123,6 +123,7 @@ const SalesCampaignsSection = forwardRef(
           icon={icon}
           title={title}
           numOfSlides={numOfSlides}
+          tabletNumOfSlides={2}
           showNavigation={showNavigation}
           hasNextPage={hasNextPage}
           handleFetchNextPage={handleFetchNextPage}

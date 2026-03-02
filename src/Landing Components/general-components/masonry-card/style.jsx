@@ -4,7 +4,7 @@ import {
   linearGradientAnimation,
   truncateTextInRows,
 } from "../../../_utils/utils";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const Wrapper = styled.a`
   text-decoration: none;
@@ -118,7 +118,7 @@ export const Wrapper = styled.a`
   }
   cursor: pointer;
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & .wrapper__image {
       height: 100%;
       max-height: 14.5rem;

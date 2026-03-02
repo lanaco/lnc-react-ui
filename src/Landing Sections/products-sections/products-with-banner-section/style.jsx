@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 
 export const ProductsBannerWrapper = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ export const ProductsBannerWrapper = styled.div`
     object-fit: cover;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     height: 100%;
     min-height: 100%;
     max-height: 100%;
@@ -41,7 +41,17 @@ export const GridWrapper = styled.div`
   grid-template-columns: ${(p) => `repeat(${p.limit},  minmax(0, 1fr))`};
   gap: 1.25rem;
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("M")} {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media ${down("S")} {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media ${down("XS")} {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 `;

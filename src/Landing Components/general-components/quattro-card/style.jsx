@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import { truncateText, truncateTextInRows } from "../../../_utils/utils";
 
 
@@ -101,7 +101,7 @@ export const Container = styled.a`
     }
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     width: 100%;
 
     img {

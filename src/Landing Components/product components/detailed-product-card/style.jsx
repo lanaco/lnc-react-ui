@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_SIZE_PX } from "../../../_utils/consts";
+import { down } from "../../../_utils/breakpoints";
 import {
   truncateText,
   truncateTextInRows,
@@ -172,7 +172,7 @@ export const Wrapper = styled.a`
     padding-inline: 0.5rem;
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     overflow: visible;
 
     & .wrapper-card-3 {
@@ -290,7 +290,7 @@ export const ImageWrapper = styled.div`
     transition: var(--transition, all 0.3s ease);
   }
 
-  @media (max-width: ${MOBILE_SIZE_PX + "px"}) {
+  @media ${down("S")} {
     & img {
       width: 8.875rem;
       height: 8.875rem;
