@@ -122,8 +122,9 @@ export const Container = styled.div`
   @media ${down("M")} {
     & .carousel-item .section__card,
     & .carousel-item:not(.react-multi-carousel-item--active) .section__card {
-      height: 26rem;
+      height: 100%;
     }
+
     & .carousel-item .section__card .section__image {
       object-fit: cover;
       object-position: center;

@@ -46,10 +46,6 @@ export const GridWrapper = styled.div`
   height: 30rem;
   max-height: 30rem;
 
-  @media ${down("M")} {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
   @media ${down("S")} {
     display: flex;
     flex-direction: column;
