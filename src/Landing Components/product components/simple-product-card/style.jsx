@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  truncateTextInRows,
-} from "../../../_utils/utils";
-
+import { truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.a`
   text-decoration: none;
@@ -15,10 +12,10 @@ export const Wrapper = styled.a`
   overflow: hidden;
   cursor: pointer;
   background: linear-gradient(
-    178deg,
+    178.16deg,
     rgba(0, 0, 0, 0) 1.5%,
-    rgba(0, 0, 0, 0.16) 8.95%,
-    #000 98.39%
+    rgba(0, 0, 0, 0) 37.37%,
+    #000000 98.39%
   );
 
   & .text-block {
@@ -50,6 +47,7 @@ export const Wrapper = styled.a`
     object-fit: cover; /* making sure the image isn't distorted */
     border-radius: 0.75rem;
     mix-blend-mode: multiply;
+    border: 1px solid var(--gray-95008, #14161a14);
   }
 
   & .fallback-image {

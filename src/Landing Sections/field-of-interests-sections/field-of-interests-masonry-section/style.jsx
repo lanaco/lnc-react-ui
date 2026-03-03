@@ -42,7 +42,9 @@ export const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
+    align-items: center;
+    align-self: stretch;
+    gap: 2rem;
   }
 
   & .wrapper__cards {
@@ -60,6 +62,10 @@ export const Wrapper = styled.div`
   }
 
   @media ${down("M")} {
+    & .wrapper__tags {
+      gap: 0.75rem;
+    }
+
     & .wrapper__cards {
       grid-template-columns: repeat(2, minmax(12.5rem, 1fr));
     }
