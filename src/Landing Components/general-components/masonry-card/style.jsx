@@ -115,7 +115,7 @@ export const Wrapper = styled.a`
 
     & .text__action {
       background-color: var(--white, #fff);
-      color: var(--gray-600, #0f2a46);
+      color: var(--neutral-600, #0f2a46);
       border: 1px solid var(--gray-200, #e4e9f0);
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
         0 1px 2px 0 rgba(0, 0, 0, 0.06);
