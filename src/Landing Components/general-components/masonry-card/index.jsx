@@ -19,6 +19,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
       position,
       tag,
       backgroundColor,
+      borderColor,
       buttonLink,
       LinkComponent,
     },
@@ -38,6 +39,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
           backgroundColor={backgroundColor}
           onClick={onSelectCard}
           as={Component}
+          borderColor={borderColor}
           {...(LinkComponent
             ? {
                 to: `/${buttonLink}`,
@@ -46,7 +48,8 @@ const LandingPageMasonryGeneralCard = forwardRef(
                 href: `/${buttonLink}`,
               })}
         >
-          <img src={imageUrl} className="wrapper__image" />
+          <div className="border-top" />
+          <img src={imageUrl} className="wrapper__image" loading="lazy"/>
           <div className="wrapper__text">
             {tag && <div className="text__tag">{tag}</div>}
             <div className="text__title">{title}</div>
