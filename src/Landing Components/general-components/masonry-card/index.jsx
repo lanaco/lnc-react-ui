@@ -48,7 +48,6 @@ const LandingPageMasonryGeneralCard = forwardRef(
                 href: `/${buttonLink}`,
               })}
         >
-          <div className="border-top" />
           <img src={imageUrl} className="wrapper__image" loading="lazy"/>
           <div className="wrapper__text">
             {tag && <div className="text__tag">{tag}</div>}
