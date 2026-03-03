@@ -17,14 +17,12 @@ const BlogProductCardsSection = forwardRef(
       items,
       onButtonAction = () => {},
       onSelectCard = () => {},
-      isLoading = false,
-      limit = 4,
       getImage = () => {},
       isHighlight = false,
       componentName,
-      LinkComponent
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     const isMobile = useDetectMobile();
 
@@ -67,7 +65,7 @@ const BlogProductCardsSection = forwardRef(
         />
       </Wrapper>
     );
-  }
+  },
 );
 
 export default BlogProductCardsSection;

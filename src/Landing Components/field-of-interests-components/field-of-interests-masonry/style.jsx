@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { down } from "../../../_utils/breakpoints";
-import { truncateTextInRows } from "../../../_utils/utils";
+import { truncateText, truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.a`
   text-decoration: none;
@@ -15,7 +15,7 @@ export const Wrapper = styled.a`
   align-self: stretch;
   border-radius: 0.75rem;
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
-  background: var(--Lanaco-Gray-white, #fff);
+  background: var(--white, #fff);
 
   &:hover {
     cursor: pointer;
@@ -78,7 +78,6 @@ export const TagWrapper = styled.div`
   align-items: center;
   gap: 0.75rem;
   height: 100%;
-  max-width: 8rem;
   min-width: 8rem;
 
   &:hover {
@@ -112,8 +111,8 @@ export const TagWrapper = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 1.5rem;
-    max-width: 8rem;
-    ${truncateTextInRows(2)}
+    max-width: 16rem;
+    ${truncateText()}
   }
 
   &.active {
