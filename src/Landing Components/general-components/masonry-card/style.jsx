@@ -16,6 +16,7 @@ export const Wrapper = styled.a`
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   text-decoration: none;
+  overflow: hidden;
 
   grid-column: ${(p) => p.position?.columnStart || "1"} /
     ${(p) => p.position?.columnEnd || "6"};
@@ -31,12 +32,36 @@ export const Wrapper = styled.a`
     #000 98.39%
   )`};
 
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0.5rem;
+    width: 100%;
+    background: ${(p) => p.borderColor || `transparent`};
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1); /* ide na 100% */
+  }
+
+  
+
   & .wrapper__image {
     height: 100%;
     width: 100%;
     object-fit: cover;
     border-radius: 0.75rem;
     mix-blend-mode: multiply;
+    transition: var(--transiton, all 0.2s ease);
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   & .wrapper__image--skeleton {
@@ -89,12 +114,15 @@ export const Wrapper = styled.a`
     }
 
     & .text__action {
-      background: var(--white, #fff);
-      color: var(--neutral-600, #0f2a46);
+      background-color: var(--white, #fff);
+      color: var(--gray-600, #0f2a46);
+      border: 1px solid var(--gray-200, #e4e9f0);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      transition: var(--transiton, all 0.2s ease);
 
       &:hover {
-        background: var(--primary-500, #f59e0b);
-        color: var(--white, #fff);
+        background-color: var(--gray-200, #e4e9f0);
       }
     }
 
