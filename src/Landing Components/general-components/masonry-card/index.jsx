@@ -60,6 +60,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
                 text={buttonText}
                 // onClick={() => onSelectCard}
                 className="text__action"
+                color="gray"
               />
             )}
           </div>
