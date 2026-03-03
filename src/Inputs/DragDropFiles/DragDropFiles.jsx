@@ -69,7 +69,7 @@ const DragDropFiles = forwardRef((props, ref) => {
 
   const [inputFiles, setInputFiles] = useState([]);
   useEffect(() => {
-    setInputFiles(files);
+    // setInputFiles(files);
   }, [files]);
 
   const handleOnDrop = useCallback((acceptedFiles, rejectedFiles) => {

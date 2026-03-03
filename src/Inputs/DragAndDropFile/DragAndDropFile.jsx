@@ -13,7 +13,7 @@ import styled from "@emotion/styled";
 import Icon from "../../General/Icon/Icon";
 import { useDropzone } from "react-dropzone";
 import Button from "../../General/Button/Button";
-import { getColorRgbaValue } from "../../_utils/utils";
+import { getColorRgbaValue, isDefined } from "../../_utils/utils";
 
 const paddingBySize = {
   small: "0.5rem 0.813rem",
@@ -74,30 +74,17 @@ const PlusLabel = styled.span`
   cursor: pointer;
 `;
 
-// ----------------------------------------
-// ----------------------------------------
-// DragAndDropFile.defaultProps = {
-//     id: "",
-//     disabled: false,
-//     acceptDropzone: {},
-//     multiple: false,
-//     selectFileText: "Select file",
-//     dndFileText: "Drag and drop file here or",
-//     showFileSize: false,
-//     showDnD: true,
-//     alwaysShowDropzone: false,
-//     //------------------
-//     onChange: () => { },
-//     onFocus: () => { },
-//     onBlur: () => { },
-//     onDropAccepted: () => { },
-//     onDrop: () => { },
-//     //------------------
-//     className: "",
-//     style: {},
-//     size: "small",
-//     color: "primary",
-// };
+const getVideoDuration = (file) => {
+  return new Promise((resolve) => {
+    const video = document.createElement("video");
+    video.preload = "metadata";
+    video.onloadedmetadata = () => {
+      window.URL.revokeObjectURL(video?.src);
+      resolve(video?.duration);
+    };
+    video.src = URL.createObjectURL(file);
+  });
+};
 
 const DragAndDropFile = forwardRef((props, ref) => {
   const {
@@ -122,6 +109,8 @@ const DragAndDropFile = forwardRef((props, ref) => {
     size = "small",
     inputProps,
     alwaysShowDropzone = false,
+    maxVideoDuration = null, // in seconds
+    onMaxDurationExceed = () => {},
     ...rest
   } = props;
   const theme = useTheme();
@@ -135,22 +124,61 @@ const DragAndDropFile = forwardRef((props, ref) => {
 
   var themeProps = { theme, size, color, disabled, focused };
 
+  // Internal validation logic
+  const validateFiles = async (files) => {
+    if (!isDefined(maxVideoDuration)) return files; // No validation needed if max duration is not set
+    const validFiles = [];
+    for (const file of files) {
+      const duration = await getVideoDuration(file);
+      if (maxVideoDuration && duration > maxVideoDuration) {
+        console.error(
+          `${file.name} is too long. Max allowed: ${maxVideoDuration}`,
+        );
+        onMaxDurationExceed?.();
+        continue;
+      } else {
+        validFiles.push(file);
+      }
+    }
+    return validFiles;
+  };
+
+  // handle on drop
   const handleOnDrop = useCallback((acceptedFiles, rejectedFiles) => {
+    // const filtered = await validateFiles(acceptedFiles);
+
     if (onDrop) onDrop(acceptedFiles, rejectedFiles);
+    // if (onDrop) onDrop(filtered, rejectedFiles);
 
     setDisplayDnD(false);
   }, []);
 
-  const handleOnDropAccepted = useCallback((acceptedFiles) => {
-    if (onChange && !disabled) onChange(acceptedFiles);
-    if (onDropAccepted) onDropAccepted(acceptedFiles);
+  const handleOnDropAccepted = useCallback(async (acceptedFiles) => {
+    const filtered = await validateFiles(acceptedFiles);
 
-    setDisplayDnD(false);
+    if (filtered?.length > 0) {
+      if (onChange && !disabled) onChange(filtered);
+      if (onDropAccepted) onDropAccepted(filtered);
+
+      setDisplayDnD(false);
+    }
+    // if (onChange && !disabled) onChange(acceptedFiles);
+    // if (onDropAccepted) onDropAccepted(acceptedFiles);
+    // setDisplayDnD(false);
   }, []);
 
-  const handleOnChange = (e) => {
-    if (onChange && !disabled) onChange(e);
-    setDisplayDnD(false);
+  const handleOnChange = async (e) => {
+    const files = Array.from(e?.target?.files);
+    const filtered = await validateFiles(files);
+
+    if(filtered?.length > 0) {
+      if (onChange && !disabled) onChange(filtered);
+      setDisplayDnD(false);
+    } else {
+      e.target.value = ""; // reset input if files are invalid
+    }
+    // if (onChange && !disabled) onChange(e);
+    // setDisplayDnD(false);
   };
 
   const handleControlClick = () => {
@@ -238,28 +266,5 @@ const DragAndDropFile = forwardRef((props, ref) => {
     </Container>
   );
 });
-
-// DragAndDropFile.defaultProps = {
-//     id: "",
-//     disabled: false,
-//     acceptDropzone: {},
-//     multiple: false,
-//     selectFileText: "Select file",
-//     dndFileText: "Drag and drop file here or",
-//     showFileSize: false,
-//     showDnD: true,
-//     alwaysShowDropzone: false,
-//     //------------------
-//     onChange: () => { },
-//     onFocus: () => { },
-//     onBlur: () => { },
-//     onDropAccepted: () => { },
-//     onDrop: () => { },
-//     //------------------
-//     className: "",
-//     style: {},
-//     size: "small",
-//     color: "primary",
-// };
 
 export default DragAndDropFile;
