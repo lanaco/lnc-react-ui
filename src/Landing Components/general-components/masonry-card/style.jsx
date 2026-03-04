@@ -37,7 +37,7 @@ export const Wrapper = styled.a`
     position: absolute;
     top: 0;
     left: 0;
-    height: 0.5rem;
+    height: 0.375rem;
     width: 100%;
     background: ${(p) => p.borderColor || `transparent`};
     transform: scaleX(0);
