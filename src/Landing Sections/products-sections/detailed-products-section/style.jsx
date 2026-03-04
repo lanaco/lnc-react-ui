@@ -20,7 +20,7 @@ export const GridWrapper = styled.div`
   }
 
   @media ${down("M")} {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   @media ${down("S")} {
