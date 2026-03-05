@@ -21,7 +21,7 @@ const Pagination = forwardRef(
       handlePage = () => {},
       totalPage,
     },
-    ref
+    ref,
   ) => {
     const handlePrev = () => {
       if (page > 1) {
@@ -76,6 +76,8 @@ const Pagination = forwardRef(
       });
     };
 
+    const pages = renderPageNumbers();
+
     return (
       <Container className="pagination">
         <DropdownMenu
@@ -99,26 +101,28 @@ const Pagination = forwardRef(
             </DropdownItem>
           ))}
         </DropdownMenu>
-        <div className="pagination__pages">
-          <div
-            className={`pagination__page ${page === 1 ? "disabled" : ""}`}
-            onClick={handlePrev}
-          >
-            <Icon icon=" mng-lnc-chevron--left" />
+        {pages?.length > 0 && (
+          <div className="pagination__pages">
+            <div
+              className={`pagination__page ${page === 1 ? "disabled" : ""}`}
+              onClick={handlePrev}
+            >
+              <Icon icon=" mng-lnc-chevron--left" />
+            </div>
+            {pages}
+            <div
+              className={`pagination__page ${
+                page === totalPage ? "disabled" : ""
+              }`}
+              onClick={handleNext}
+            >
+              <Icon icon=" mng-lnc-chevron--right" />
+            </div>
           </div>
-          {renderPageNumbers()}
-          <div
-            className={`pagination__page ${
-              page === totalPage ? "disabled" : ""
-            }`}
-            onClick={handleNext}
-          >
-            <Icon icon=" mng-lnc-chevron--right" />
-          </div>
-        </div>
+        )}
       </Container>
     );
-  }
+  },
 );
 
 export default Pagination;

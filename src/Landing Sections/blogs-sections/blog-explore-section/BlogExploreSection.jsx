@@ -53,13 +53,14 @@ const BlogExploreSection = forwardRef(
       handlePage = () => {},
       perPage,
       handlePerPage = () => {},
-      totalPage,
+      totalPage = 0,
       perPageOptions,
       handleSearch = () => {},
       onBookmark = () => {},
       bookmarkComponent = <></>,
       componentName,
       LinkComponent,
+      showPerPage = false,
     },
     ref,
   ) => {
@@ -239,7 +240,7 @@ const BlogExploreSection = forwardRef(
               />
             )}
           </div>
-          {totalPage && totalPage > 1 && (
+          {(totalPage > 1 || showPerPage) && (
             <Pagination
               perPageOptions={perPageOptions}
               perPage={perPage}
