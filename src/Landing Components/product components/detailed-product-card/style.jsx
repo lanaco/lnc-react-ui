@@ -6,7 +6,6 @@ import {
   getBorderRadiusValueWithUnits,
 } from "../../../_utils/utils";
 
-
 export const Wrapper = styled.a`
   display: flex;
   flex-direction: column;
@@ -99,6 +98,7 @@ export const Wrapper = styled.a`
       font-weight: 400;
       padding-bottom: 0.125rem;
       color: var(--gray-600, #676e79);
+      ${truncateText()}
     }
   }
 
