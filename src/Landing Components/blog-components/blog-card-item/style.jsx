@@ -7,7 +7,7 @@ export const Wrapper = styled.a`
   text-decoration: none;
   color: var(--gray-950);
   display: flex;
-  padding: 1rem;
+  padding: 1rem 0 1rem 1rem;
   align-items: center;
   gap: 1.25rem;
   border-radius: 1.25rem;
@@ -17,6 +17,21 @@ export const Wrapper = styled.a`
   min-height: 9.5rem;
   position: relative;
   width: 100%;
+
+  & .image-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .image-container .action {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+
+    & .mobile-only {
+      display: none;
+    }
+  }
 
   & .mobile-only {
     display: none;
@@ -72,10 +87,17 @@ export const Wrapper = styled.a`
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      & .action {
+        align-self: flex-start;
+        & > button {
+          min-height: 1rem;
+        }
+      }
 
       & .info__content {
         display: flex;
         align-items: center;
+        padding-right: 1rem;
 
         &:first-of-type {
           flex-grow: 1;
