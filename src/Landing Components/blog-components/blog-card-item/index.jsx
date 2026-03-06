@@ -34,6 +34,9 @@ const BlogCardItem = forwardRef(
       metadata,
       titleSlug,
       LinkComponent,
+      hasShare = true,
+      hasDelete = false,
+      onDelete = () => {},
     },
     ref,
   ) => {
@@ -65,13 +68,57 @@ const BlogCardItem = forwardRef(
         className="blog-card-item"
         as={Component}
         {...(LinkComponent
-        ? { to: `/blog/${titleSlug}` }
-        : { href: `/blog/${titleSlug}` })}
+          ? { to: `/blog/${titleSlug}` }
+          : { href: `/blog/${titleSlug}` })}
       >
-        <ProductImageWrapper src={imageUrl} className="wrapper__image" />
+        <div className="image-container">
+          {hasDelete && (
+            <div
+              className="action mobile-only"
+              onClick={(e) => {
+                e?.preventDefault();
+                e?.stopPropagation();
+              }}
+            >
+              <IconButton
+                icon=" mng-lnc-close"
+                borderRadius="curved"
+                type="button"
+                btnType={"filled"}
+                color="neutral"
+                size="large"
+                onClick={() => {
+                  onDelete();
+                }}
+              />
+            </div>
+          )}
+          <ProductImageWrapper src={imageUrl} className="wrapper__image" />
+        </div>
         <div className="wrapper__content">
           <div className="wrapper__subcontent">
-            <div className="wrapper__title">{title}</div>
+            <div className="wrapper__info">
+              <div className="wrapper__title">{title}</div>
+              {hasDelete && (
+                <div
+                  className="action desktop-only"
+                  onClick={(e) => {
+                    e?.preventDefault();
+                    e?.stopPropagation();
+                  }}
+                >
+                  <IconButton
+                    icon=" mng-lnc-close"
+                    borderRadius="curved"
+                    btnType="basic"
+                    color="neutral"
+                    onClick={() => {
+                      onDelete();
+                    }}
+                  />
+                </div>
+              )}
+            </div>
             <div className="wrapper__tags-action">
               <div className="wrapper__tags">
                 {options &&
@@ -92,15 +139,17 @@ const BlogCardItem = forwardRef(
                 }}
               >
                 <ClonedBookmarkComponent />
-                <IconButton
-                  icon=" mng-lnc-share"
-                  borderRadius="curved"
-                  btnType="basic"
-                  color="neutral"
-                  onClick={() => {
-                    onShare();
-                  }}
-                />
+                {hasShare && (
+                  <IconButton
+                    icon=" mng-lnc-share"
+                    borderRadius="curved"
+                    btnType="basic"
+                    color="neutral"
+                    onClick={() => {
+                      onShare();
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -128,15 +177,17 @@ const BlogCardItem = forwardRef(
               }}
             >
               <ClonedBookmarkComponent />
-              <IconButton
-                icon=" mng-lnc-share"
-                borderRadius="curved"
-                btnType="basic"
-                color="neutral"
-                onClick={() => {
-                  onShare();
-                }}
-              />
+              {hasShare && (
+                <IconButton
+                  icon=" mng-lnc-share"
+                  borderRadius="curved"
+                  btnType="basic"
+                  color="neutral"
+                  onClick={() => {
+                    onShare();
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>

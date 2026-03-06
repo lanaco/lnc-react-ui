@@ -21,9 +21,12 @@ const BlogListSection = forwardRef(
       isSeparated = true,
       bookmarkComponent = <></>,
       componentName,
-      LinkComponent
+      LinkComponent,
+      hasShare = true,
+      hasDelete = false,
+      onDelete = () => {},
     },
-    ref
+    ref,
   ) => {
     const memoizedBlogs = useMemo(() => {
       return items?.map((x, idx) => (
@@ -41,6 +44,9 @@ const BlogListSection = forwardRef(
           isSponsored={x?.isSponsored}
           isBookmarked={x?.isBookmarked}
           onSelectCard={(e, cardRef) => onSelectCard?.(x, cardRef)}
+          hasShare={hasShare}
+          hasDelete={hasDelete}
+          onDelete={onDelete}
           onShare={() => onShare?.(x)}
           onBookmark={onBookmark}
           imageUrl={getImage(x?.imageUrl, x?.uuid) || null}
@@ -58,7 +64,7 @@ const BlogListSection = forwardRef(
         </Wrapper>
       </SuspenseBlogList>
     );
-  }
+  },
 );
 
 export default BlogListSection;
