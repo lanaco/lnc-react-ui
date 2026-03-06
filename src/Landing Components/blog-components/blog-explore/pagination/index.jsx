@@ -101,7 +101,7 @@ const Pagination = forwardRef(
             </DropdownItem>
           ))}
         </DropdownMenu>
-        {pages?.length > 0 && (
+        {pages?.length > 1 && (
           <div className="pagination__pages">
             <div
               className={`pagination__page ${page === 1 ? "disabled" : ""}`}
