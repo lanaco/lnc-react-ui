@@ -46,7 +46,7 @@ const BlogListSection = forwardRef(
           onSelectCard={(e, cardRef) => onSelectCard?.(x, cardRef)}
           hasShare={hasShare}
           hasDelete={hasDelete}
-          onDelete={onDelete}
+          onDelete={() => onDelete?.(x)}
           onShare={() => onShare?.(x)}
           onBookmark={onBookmark}
           imageUrl={getImage(x?.imageUrl, x?.uuid) || null}

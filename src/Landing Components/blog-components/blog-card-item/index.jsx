@@ -84,9 +84,9 @@ const BlogCardItem = forwardRef(
                 icon=" mng-lnc-close"
                 borderRadius="curved"
                 type="button"
-                btnType={"filled"}
+                btnType="filled"
                 color="neutral"
-                size="large"
+                size="medium"
                 onClick={() => {
                   onDelete();
                 }}
