@@ -18,6 +18,7 @@ const ScrollableSectionV3 = forwardRef(
       tabletNumOfSlides,
       showNavigation = true,
       hasNextPage = false,
+      className = "",
       handleFetchNextPage = () => {},
       children,
     },
@@ -68,7 +69,7 @@ const ScrollableSectionV3 = forwardRef(
     };
 
     return (
-      <Container ref={ref}>
+      <Container ref={ref} className={className}>
         <div className="scrollable-section__header">
           <div className="scrollable-section__title">
             {isDefinedNotEmptyString(icon) && (
@@ -98,6 +99,7 @@ const ScrollableSectionV3 = forwardRef(
               opacity: 0,
             },
           })}
+          className="scrollable-section__content"
         >
           {visibleItems}
           {isMobile && hasNextPage && (

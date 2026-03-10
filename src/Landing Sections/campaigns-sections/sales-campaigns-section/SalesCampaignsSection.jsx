@@ -38,7 +38,7 @@ const SalesCampaignsSection = forwardRef(
       numberOfListingsTextSingular,
       numberOfListingsTextPlural,
       itemlessImageUrl,
-      itemlessLink,
+      itemlessMaxHeight,
       handleItemlessLink = () => {},
       componentName,
       hasNextPage = false,
@@ -53,7 +53,9 @@ const SalesCampaignsSection = forwardRef(
       let components = items?.map((item, index) => (
         <MemoizedCampaignItemRecommended
           key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
-          className="campaign-item"
+          className={`campaign-item ${
+            items?.length === 1 ? "horizontal-campaign-item" : ""
+          }`}
           coverPhoto={getImage(
             item?.coverPhoto,
             item?.uuid || item?.campaignUuid,
@@ -105,6 +107,7 @@ const SalesCampaignsSection = forwardRef(
             key={`itemless-campaign-section-banner`}
             imageUrl={itemlessImageUrl}
             className="campaign-item"
+            maxHeight={itemlessMaxHeight}
             handleClick={handleItemlessLink}
           />,
         ];
@@ -127,6 +130,7 @@ const SalesCampaignsSection = forwardRef(
           showNavigation={showNavigation}
           hasNextPage={hasNextPage}
           handleFetchNextPage={handleFetchNextPage}
+          className={items?.length < 4 && !isMobile ? "itemless" : ""}
         >
           {memoizedItems}
         </ScrollableSectionV3>
