@@ -26,9 +26,27 @@ export const Wrapper = styled.a`
         background: #ffffff;
       `}
 
+  &.horizontal-campaign-item {
+    flex-direction: row;
+
+    & img {
+      max-width: 13.75rem;
+      max-height: 13.75rem;
+    }
+  }
+
   @media ${down("S")} {
     width: 100%;
     gap: 0;
+
+    &.horizontal-campaign-item {
+      flex-direction: column;
+
+      & img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
   }
 `;
 

@@ -43,6 +43,18 @@ export const Container = styled.div`
     right: 0;
   }
 
+  &.itemless {
+    & .scrollable-section__content {
+      &:has(.campaign-item:nth-child(3):last-child) {
+        & .campaign-item {
+          &:last-child {
+            grid-column: span 2;
+          }
+        }
+      }
+    }
+  }
+
   @media ${down("S")} {
     gap: 1.25rem;
 
