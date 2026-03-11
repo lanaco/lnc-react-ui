@@ -19,7 +19,7 @@ export const Container = styled.div`
 
   & .section__items {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(${(p) => p?.numOfColumns}, 1fr);
     gap: 1rem;
     width: 100%;
   }

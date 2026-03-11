@@ -12,14 +12,15 @@ const OverlayGeneralCardsSection = forwardRef(
       title,
       items,
       isLoading = false,
+      numOfColumns = 4,
       onSelectCard = () => {},
       onButtonAction = () => {},
-      LinkComponent
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     return (
-      <Container ref={ref}>
+      <Container ref={ref} numOfColumns={numOfColumns}>
         <div className="section__title">{title}</div>
         <SuspenseBlogsSectionDetailed
           isLoading={isLoading}
@@ -44,7 +45,7 @@ const OverlayGeneralCardsSection = forwardRef(
         </SuspenseBlogsSectionDetailed>
       </Container>
     );
-  }
+  },
 );
 
 export default OverlayGeneralCardsSection;
