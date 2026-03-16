@@ -183,6 +183,7 @@ export const Container = styled.div`
         align-items: flex-start;
         gap: 1rem;
         align-self: stretch;
+        text-decoration: none;
 
         &:hover {
           cursor: pointer;
