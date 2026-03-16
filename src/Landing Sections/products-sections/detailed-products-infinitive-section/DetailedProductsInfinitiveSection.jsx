@@ -107,8 +107,7 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
             {isDefinedNotEmptyString(icon) && <i className={icon} />} {title}
           </div>
         )}
-        {isMobile &&
-          isDefinedNotEmptyString(viewAllbuttonLink) &&
+        {isDefinedNotEmptyString(viewAllbuttonLink) &&
           isDefinedNotEmptyString(viewAllButonText) &&
           !isLoading && (
             <Button
