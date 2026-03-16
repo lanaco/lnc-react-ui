@@ -120,6 +120,8 @@ const BlogExploreSection = forwardRef(
       tagsRef?.current?.scrollBy({ left: -100, behavior: "smooth" });
     };
 
+    const Component = LinkComponent || "a";
+
     return (
       <Container ref={ref} id="landing__container">
         <div className="landing__main-content">
@@ -258,9 +260,12 @@ const BlogExploreSection = forwardRef(
               <div className="side-content__items">
                 {miniBlogs?.map((blog, idx) => (
                   <Fragment key={`mini_blg_${idx}`}>
-                    <div
+                    <Component
                       className="side-content__item"
                       onClick={() => handleSelectBlog(blog)}
+                      {...(LinkComponent
+                        ? { to: `/blog/${blog?.titleSlug}` }
+                        : { href: `/blog/${blog?.titleSlug}` })}
                     >
                       <ProductImageWrapper
                         src={
@@ -275,7 +280,7 @@ const BlogExploreSection = forwardRef(
                           {formatLocaleDateString(blog?.publishedAt)}
                         </div>
                       </div>
-                    </div>
+                    </Component>
                   </Fragment>
                 ))}
               </div>
