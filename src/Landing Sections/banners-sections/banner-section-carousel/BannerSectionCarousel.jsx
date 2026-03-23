@@ -54,6 +54,7 @@ const BannerSectionCarousel = forwardRef(
           keyPrefix="banner-carousel-skeleton"
           isLoading={isLoading}
         >
+          {/* here */}
           <Carousel
             responsive={responsive}
             deviceType={deviceType}

@@ -29,7 +29,7 @@ export const GridWrapper = styled.div`
   }
 
   @media ${down("M")} {
-    padding: 1rem;
+    padding: 0;
 
     & .text-item {
       padding: 1rem;
