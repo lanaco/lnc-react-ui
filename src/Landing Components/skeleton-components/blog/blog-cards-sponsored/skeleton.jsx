@@ -1,18 +1,16 @@
 /* eslint-disable react/prop-types */
-import { SkeletonRowWrapper, SkeletonLinePlaceholder } from "../../style";
+import { SkeletonContainer, SkeletonRect } from "../../style";
 import { Container } from "./style";
 
 const SkeletonBlogCardsSponsored = ({ keyPrefix }) => {
   return (
     <Container>
-      <SkeletonRowWrapper>
-        <SkeletonLinePlaceholder key={`${keyPrefix}-1`} height="11.25rem" />
-        <SkeletonLinePlaceholder key={`${keyPrefix}-2`} height="11.25rem" />
-      </SkeletonRowWrapper>
-      <SkeletonRowWrapper>
-        <SkeletonLinePlaceholder key={`${keyPrefix}-3`} height="11.25rem" />
-        <SkeletonLinePlaceholder key={`${keyPrefix}-4`} height="11.25rem" />
-      </SkeletonRowWrapper>
+      {[1, 2]?.map((x) => (
+        <SkeletonContainer key={`${keyPrefix}-${x}`}>
+          <SkeletonRect width="100%" height="11.25rem" />
+          <SkeletonRect width="100%" height="11.25rem" />
+        </SkeletonContainer>
+      ))}
     </Container>
   );
 };

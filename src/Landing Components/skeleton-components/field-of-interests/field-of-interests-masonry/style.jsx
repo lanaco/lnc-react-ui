@@ -2,9 +2,9 @@
 import styled from "@emotion/styled";
 
 import { down } from "../../../../_utils/breakpoints";
-import { SkeletonRowWrapper } from "../../style";
+import { SkeletonAnimationContainer } from "../../style";
 
-export const Container = styled(SkeletonRowWrapper)`
+export const Container = styled(SkeletonAnimationContainer)`
   &.skeleton__tags {
     max-width: 50rem;
   }

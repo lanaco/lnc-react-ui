@@ -1,31 +1,32 @@
 /* eslint-disable react/prop-types */
 import {
-  SkeletonRowWrapper,
-  SkeletonLinePlaceholder,
-  SkeletonColumnWrapper,
+  SkeletonColumnContainer,
+  SkeletonRect,
+  SkeletonContainer,
 } from "../../style";
 import { Container } from "./style";
 
 const SkeletonMasonryGeneralCards = ({ keyPrefix }) => {
   return (
     <Container>
-      <SkeletonColumnWrapper>
-        <SkeletonLinePlaceholder
+      <SkeletonColumnContainer>
+        <SkeletonRect
           key={`${keyPrefix}-1`}
           height="31.25rem"
           className="skeleton__big"
+          width="100%"
         />
-      </SkeletonColumnWrapper>
-      <SkeletonColumnWrapper>
-        <SkeletonRowWrapper noGradient={true}>
-          <SkeletonLinePlaceholder key={`${keyPrefix}-2`} height="15rem" />
-          <SkeletonLinePlaceholder key={`${keyPrefix}-3`} height="15rem" />
-        </SkeletonRowWrapper>
-        <SkeletonRowWrapper noGradient={true}>
-          <SkeletonLinePlaceholder key={`${keyPrefix}-4`} height="15rem" />
-          <SkeletonLinePlaceholder key={`${keyPrefix}-5`} height="15rem" />
-        </SkeletonRowWrapper>
-      </SkeletonColumnWrapper>
+      </SkeletonColumnContainer>
+      <SkeletonColumnContainer>
+        <SkeletonContainer>
+          <SkeletonRect key={`${keyPrefix}-2`} width="100%" height="15rem" />
+          <SkeletonRect key={`${keyPrefix}-3`} width="100%" height="15rem" />
+        </SkeletonContainer>
+        <SkeletonContainer>
+          <SkeletonRect key={`${keyPrefix}-4`} width="100%" height="15rem" />
+          <SkeletonRect key={`${keyPrefix}-5`} width="100%" height="15rem" />
+        </SkeletonContainer>
+      </SkeletonColumnContainer>
     </Container>
   );
 };

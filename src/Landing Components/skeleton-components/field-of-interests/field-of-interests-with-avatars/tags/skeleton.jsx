@@ -1,30 +1,13 @@
 /* eslint-disable react/prop-types */
-import { SkeletonCirclePlaceholder } from "../../../style";
+import { SkeletonCircle } from "../../../style";
 import { Container } from "../style";
 
 const SkeletonFieldOfInterestsWithAvatarsTag = ({ keyPrefix }) => {
   return (
     <Container className="skeleton__tags" justifyContent="center">
-      <SkeletonCirclePlaceholder
-        width="9.875rem"
-        height="9.875rem"
-        key={`${keyPrefix}-1`}
-      />
-      <SkeletonCirclePlaceholder
-        width="9.875rem"
-        height="9.875rem"
-        key={`${keyPrefix}-2`}
-      />
-      <SkeletonCirclePlaceholder
-        width="9.875rem"
-        height="9.875rem"
-        key={`${keyPrefix}-3`}
-      />
-      <SkeletonCirclePlaceholder
-        width="9.875rem"
-        height="9.875rem"
-        key={`${keyPrefix}-4`}
-      />
+      {[1, 2, 3, 4]?.map((x) => (
+        <SkeletonCircle size="9.875rem" key={`${keyPrefix}-${x}`} />
+      ))}
     </Container>
   );
 };
