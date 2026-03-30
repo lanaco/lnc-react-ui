@@ -1,15 +1,11 @@
 /* eslint-disable react/prop-types */
-import { SkeletonLinePlaceholder } from "../../style";
+import { SkeletonRect } from "../../style";
 import { Container } from "./style";
 
 const SkeletonBlogSingle = ({ keyPrefix }) => {
   return (
     <Container>
-      <SkeletonLinePlaceholder
-        key={`${keyPrefix}-1`}
-        height="11.25rem"
-        borderRadius="0.75rem"
-      />
+      <SkeletonRect key={`${keyPrefix}-0`} width="100%" height="11.25rem" />
     </Container>
   );
 };

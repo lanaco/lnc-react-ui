@@ -1,75 +1,28 @@
 /* eslint-disable react/prop-types */
 import {
-  SkeletonRowWrapper,
-  SkeletonLinePlaceholder,
-  SkeletonSquarePlaceholder,
-  SkeletonColumnWrapper,
+  SkeletonRect,
+  SkeletonContainer,
+  SkeletonColumnContainer,
 } from "../../style";
 import { Container } from "./style";
 
 const SkeletonBlogList = ({ keyPrefix }) => {
   return (
     <Container>
-      <SkeletonRowWrapper key={`${keyPrefix}-1`}>
-        <SkeletonSquarePlaceholder height="9.5rem" width="17.75rem" />
-        <SkeletonColumnWrapper noGradient={true}>
-          <SkeletonLinePlaceholder height="1.5rem" />
-          <SkeletonRowWrapper noGradient={true}>
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-          </SkeletonRowWrapper>
-        </SkeletonColumnWrapper>
-      </SkeletonRowWrapper>
-      <SkeletonRowWrapper key={`${keyPrefix}-2`}>
-        <SkeletonSquarePlaceholder height="9.5rem" width="17.75rem" />
-        <SkeletonColumnWrapper noGradient={true}>
-          <SkeletonLinePlaceholder height="1.5rem" />
-          <SkeletonRowWrapper noGradient={true}>
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-          </SkeletonRowWrapper>
-        </SkeletonColumnWrapper>
-      </SkeletonRowWrapper>
-      <SkeletonRowWrapper key={`${keyPrefix}-3`}>
-        <SkeletonSquarePlaceholder height="9.5rem" width="17.75rem" />
-        <SkeletonColumnWrapper noGradient={true}>
-          <SkeletonLinePlaceholder height="1.5rem" />
-          <SkeletonRowWrapper noGradient={true}>
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-          </SkeletonRowWrapper>
-        </SkeletonColumnWrapper>
-      </SkeletonRowWrapper>
-      <SkeletonRowWrapper key={`${keyPrefix}-4`}>
-        <SkeletonSquarePlaceholder height="9.5rem" width="17.75rem" />
-        <SkeletonColumnWrapper noGradient={true}>
-          <SkeletonLinePlaceholder height="1.5rem" />
-          <SkeletonRowWrapper noGradient={true}>
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-          </SkeletonRowWrapper>
-        </SkeletonColumnWrapper>
-      </SkeletonRowWrapper>
-      <SkeletonRowWrapper key={`${keyPrefix}-5`}>
-        <SkeletonSquarePlaceholder height="9.5rem" width="17.75rem" />
-        <SkeletonColumnWrapper noGradient={true}>
-          <SkeletonLinePlaceholder height="1.5rem" />
-          <SkeletonRowWrapper noGradient={true}>
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-          </SkeletonRowWrapper>
-        </SkeletonColumnWrapper>
-      </SkeletonRowWrapper>
+      {[1, 2, 3, 4, 5]?.map((x) => (
+        <SkeletonContainer key={`${keyPrefix}-${x}`}>
+          <SkeletonRect height="9.5rem" width="17.75rem" />
+          <SkeletonColumnContainer>
+            <SkeletonRect height="1.5rem" width="100%" />
+            <SkeletonContainer>
+              <SkeletonRect width="5rem" height="1.25rem" />
+              <SkeletonRect width="5rem" height="1.25rem" />
+              <SkeletonRect width="5rem" height="1.25rem" />
+              <SkeletonRect width="5rem" height="1.25rem" />
+            </SkeletonContainer>
+          </SkeletonColumnContainer>
+        </SkeletonContainer>
+      ))}
     </Container>
   );
 };

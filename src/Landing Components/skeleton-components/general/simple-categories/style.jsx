@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
 import { down } from "../../../../_utils/breakpoints";
-import { SkeletonColumnWrapper } from "../../style";
+import { SkeletonAnimationColumnContainer } from "../../style";
 
-export const Container = styled(SkeletonColumnWrapper)`
+export const Container = styled(SkeletonAnimationColumnContainer)`
   @media ${down("S")} {
     & .skeleton__cards {
       overflow-x: hidden;

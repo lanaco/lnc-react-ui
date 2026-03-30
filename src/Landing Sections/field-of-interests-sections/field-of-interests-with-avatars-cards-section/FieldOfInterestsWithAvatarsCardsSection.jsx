@@ -23,9 +23,9 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
       onSelectCard = () => {},
       isLoadingTags = false,
       isLoadingCards = false,
-      LinkComponent
+      LinkComponent,
     },
-    ref
+    ref,
   ) => {
     // const [active, setActive] = useState();
 
@@ -96,7 +96,7 @@ const FieldOfInterestsWithAvatarsCardsSection = forwardRef(
         </SuspenseFieldOfInterestsWithAvatarsCard>
       </Wrapper>
     );
-  }
+  },
 );
 
 export default FieldOfInterestsWithAvatarsCardsSection;

@@ -1,52 +1,31 @@
 /* eslint-disable react/prop-types */
 import {
-  SkeletonCirclePlaceholder,
-  SkeletonColumnWrapper,
-  SkeletonLinePlaceholder,
-  SkeletonRowWrapper,
-  SkeletonSquarePlaceholder,
+  SkeletonCircle,
+  SkeletonColumnContainer,
+  SkeletonContainer,
+  SkeletonRect,
+  SkeletonSquare,
 } from "../../style";
 import { Container } from "./style";
 
 const SkeletonSalesCampaign = ({ keyPrefix }) => {
   return (
     <Container>
-      <SkeletonRowWrapper>
-        <SkeletonSquarePlaceholder
-          width="13.75rem"
-          height="13.75rem"
-          key={`${keyPrefix}-1`}
-          className="skeleton__image"
-        />
-        <SkeletonColumnWrapper noGradient={true}>
-          <SkeletonLinePlaceholder height="1rem" />
-          <SkeletonLinePlaceholder height="1.75rem" />
-          <SkeletonLinePlaceholder height="1.25rem" />
-          <SkeletonLinePlaceholder height="2rem" />
-          <SkeletonRowWrapper alignItems="center" noGradient={true}>
-            <SkeletonCirclePlaceholder width="2.5rem" height="2.5rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-          </SkeletonRowWrapper>
-        </SkeletonColumnWrapper>
-      </SkeletonRowWrapper>
-      <SkeletonRowWrapper noGradient={true}>
-        <SkeletonSquarePlaceholder
-          width="13.75rem"
-          height="13.75rem"
-          key={`${keyPrefix}-2`}
-          className="skeleton__image"
-        />
-        <SkeletonColumnWrapper noGradient={true}>
-          <SkeletonLinePlaceholder height="1rem" />
-          <SkeletonLinePlaceholder height="1.75rem" />
-          <SkeletonLinePlaceholder height="1.25rem" />
-          <SkeletonLinePlaceholder height="2rem" />
-          <SkeletonRowWrapper alignItems="center" noGradient={true}>
-            <SkeletonCirclePlaceholder width="2.5rem" height="2.5rem" />
-            <SkeletonLinePlaceholder width="5rem" height="1.25rem" />
-          </SkeletonRowWrapper>
-        </SkeletonColumnWrapper>
-      </SkeletonRowWrapper>
+      {[1, 2]?.map((x) => (
+        <SkeletonContainer key={`${keyPrefix}-${x}`}>
+          <SkeletonSquare size="13.75rem" className="skeleton__image" />
+          <SkeletonColumnContainer>
+            <SkeletonRect width="100%" height="1rem" />
+            <SkeletonRect width="100%" height="1.75rem" />
+            <SkeletonRect width="100%" height="1.25rem" />
+            <SkeletonRect width="100%" height="2rem" />
+            <SkeletonContainer alignItems="center">
+              <SkeletonCircle size="2.5rem" />
+              <SkeletonRect width="5rem" height="1.25rem" />
+            </SkeletonContainer>
+          </SkeletonColumnContainer>
+        </SkeletonContainer>
+      ))}
     </Container>
   );
 };

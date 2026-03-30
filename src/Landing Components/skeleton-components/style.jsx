@@ -1,79 +1,83 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 
-export const noGradientStyle = css`
-  background: #f4f6fb;
+import { keyframes } from "@emotion/react";
 
-  /* drop-shadow-sm */
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+const shimmer = keyframes`
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 `;
 
-export const skeletonGradientBackground = css`
-  ${noGradientStyle}
+export const SkeletonContainer = styled.div`
+  display: flex;
+  gap: ${({ gap = "1.25rem" }) => gap};
+  flex-wrap: ${({ wrap = "nowrap" }) => wrap};
+  align-content ${({ alignContent = "normal" }) => alignContent};
+  justify-content: ${({ justifyContent = "normal" }) => justifyContent};
+  align-items: ${({ alignItems = "normal" }) => alignItems};
+  width: 100%;
+`;
 
-  &:first-of-type {
+export const SkeletonAnimationContainer = styled(SkeletonContainer)`
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
-      to right,
+      90deg,
       transparent 0%,
-      #f4f6fb 40%,
-      #f4f6fb 100%
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.75) 50%,
+      rgba(255, 255, 255, 0) 80%,
+      transparent 100%
     );
-
-    box-shadow: none;
+    animation: ${shimmer} 2s infinite linear;
+    pointer-events: none;
+    z-index: 10;
   }
 `;
 
-export const SkeletonRowWrapper = styled.div`
-  display: flex;
-  gap: ${(p) => p?.gap || "1.25rem"};
-  width: ${(p) => p?.width || "100%"};
-  align-items: ${(p) => p?.alignItems || "normal"};
-  justify-content: ${(p) => p?.justifyContent || "normal"};
-
-  & > div {
-    &:first-of-type {
-      ${(p) => p?.noGradient && noGradientStyle}
-    }
-  }
-`;
-
-export const SkeletonColumnWrapper = styled.div`
-  display: flex;
+export const SkeletonAnimationColumnContainer = styled(
+  SkeletonAnimationContainer,
+)`
   flex-direction: column;
-  gap: ${(p) => p?.gap || "1.25rem"};
-  width: ${(p) => p?.width || "100%"};
-  align-items: ${(p) => p?.alignItems || "normal"};
-  justify-content: ${(p) => p?.justifyContent || "normal"};
-  height: ${(p) => p?.height || "100%"};
-
-  & > div {
-    &:first-of-type {
-      ${(p) => p?.noGradient && noGradientStyle}
-    }
-  }
 `;
 
-export const SkeletonSquarePlaceholder = styled.div`
-  border-radius: ${(p) => p?.borderRadius || "0.5rem"};
-  height: ${(p) => p?.height || "11rem"};
-  width: ${(p) => p?.width || "11rem"};
+export const SkeletonColumnContainer = styled(SkeletonContainer)`
+  flex-direction: column;
+`;
+
+const SkeletonBase = styled.div`
+  background-color: #f4f6fb;
+  position: relative;
+`;
+
+export const SkeletonSquare = styled(SkeletonBase)`
+  max-height: ${({ size = "4rem" }) => size};
+  width: 100%;
   aspect-ratio: 1 / 1;
-
-  ${skeletonGradientBackground}
+  border-radius: ${({ borderRadius = "0.75rem" }) => borderRadius};
 `;
 
-export const SkeletonCirclePlaceholder = styled.div`
-  border-radius: 999px;
-  height: ${(p) => p?.height || "11rem"};
-  width: ${(p) => p?.width || "11rem"};
-
-  ${skeletonGradientBackground}
+export const SkeletonRect = styled(SkeletonBase)`
+  width: ${({ width = "8rem" }) => width};
+  height: ${({ height = "1.5rem" }) => height};
+  border-radius: ${({ borderRadius = "0.75rem" }) => borderRadius};
 `;
 
-export const SkeletonLinePlaceholder = styled.div`
-  border-radius: ${(p) => p?.borderRadius || "0.5rem"};
-  width: ${(p) => p?.width || "100%"};
-  height: ${(p) => p?.height || "2rem"};
+export const SkeletonCircle = styled(SkeletonBase)`
+  width: ${({ size = "4rem" }) => size};
+  height: ${({ size = "4rem" }) => size};
+  border-radius: 50%;
+`;
 
-  ${skeletonGradientBackground}
+export const SkeletonEmpty = styled.div`
+  width: ${({ width = "1rem" }) => width};
+  height: ${({ height = "1rem" }) => height};
+  background: transparent;
 `;

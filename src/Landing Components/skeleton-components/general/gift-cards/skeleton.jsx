@@ -1,54 +1,16 @@
 /* eslint-disable react/prop-types */
-import { SkeletonColumnWrapper, SkeletonLinePlaceholder } from "../../style";
+import { SkeletonColumnContainer, SkeletonRect } from "../../style";
 import { Container } from "./style";
 
 const SkeletonGiftCards = ({ keyPrefix }) => {
   return (
     <Container>
-      <SkeletonColumnWrapper key={`${keyPrefix}-1`} alignItems="center">
-        <SkeletonLinePlaceholder height="11rem" borderRadius="0.75rem" />
-        <SkeletonLinePlaceholder
-          height="1.25rem"
-          borderRadius="0.75rem"
-          width="5rem"
-        />
-      </SkeletonColumnWrapper>
-      <SkeletonColumnWrapper
-        key={`${keyPrefix}-2`}
-        alignItems="center"
-        noGradient={true}
-      >
-        <SkeletonLinePlaceholder height="11rem" borderRadius="0.75rem" />
-        <SkeletonLinePlaceholder
-          height="1.25rem"
-          borderRadius="0.75rem"
-          width="5rem"
-        />
-      </SkeletonColumnWrapper>
-      <SkeletonColumnWrapper
-        key={`${keyPrefix}-3`}
-        alignItems="center"
-        noGradient={true}
-      >
-        <SkeletonLinePlaceholder height="11rem" borderRadius="0.75rem" />
-        <SkeletonLinePlaceholder
-          height="1.25rem"
-          borderRadius="0.75rem"
-          width="5rem"
-        />
-      </SkeletonColumnWrapper>
-      <SkeletonColumnWrapper
-        key={`${keyPrefix}-4`}
-        alignItems="center"
-        noGradient={true}
-      >
-        <SkeletonLinePlaceholder height="11rem" borderRadius="0.75rem" />
-        <SkeletonLinePlaceholder
-          height="1.25rem"
-          borderRadius="0.75rem"
-          width="5rem"
-        />
-      </SkeletonColumnWrapper>
+      {[1, 2, 3, 4]?.map((x) => (
+        <SkeletonColumnContainer key={`${keyPrefix}-${x}`} alignItems="center">
+          <SkeletonRect width="100%" height="11rem" borderRadius="0.75rem" />
+          <SkeletonRect height="1.25rem" borderRadius="0.75rem" width="5rem" />
+        </SkeletonColumnContainer>
+      ))}
     </Container>
   );
 };
