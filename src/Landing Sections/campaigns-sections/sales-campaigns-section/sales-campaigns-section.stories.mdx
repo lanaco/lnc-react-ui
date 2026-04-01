@@ -9,7 +9,16 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
   component={SalesCampaignsSection}
 />
 
-export const TemplateDefault = (args) => (
+export const TemplateDefault = (args) => {
+  const now = Date.now();
+  const hourMs = 60 * 60 * 1000;
+  const iso = (t) => new Date(t).toISOString();
+  const startedLastWeek = iso(now - 7 * 24 * hourMs);
+  const endsIn12Hours = iso(now + 12 * hourMs);
+  const endsIn5Days = iso(now + 5 * 24 * hourMs);
+  const startsTomorrow = iso(now + 24 * hourMs);
+
+  return (
   <SalesCampaignsSection
     title={"Sponsored campaigns"}
     getImage={(cover, uuid) => cover}
@@ -50,11 +59,11 @@ export const TemplateDefault = (args) => (
         campaignUuid: "4fa20bd0-92ce-4d36-8425-63470860068a",
         shopUuid: "562627ca-e187-449d-b901-ea5510cce7e8",
         shopName: "Waterdrop",
-        name: "Ljetno osvježenje",
+        name: "Upcoming — starts tomorrow (no end countdown yet)",
         coverPhoto: "https://placehold.co/700x700/red/white",
         description: null,
-        startDate: "2025-12-05T06:59:23",
-        endDate: "2025-12-10T21:59:00",
+        startDate: startsTomorrow,
+        endDate: iso(now + 14 * 24 * hourMs),
         salesPackages: [
           "AddDiscount",
           "IncludeGifts",
@@ -70,68 +79,41 @@ export const TemplateDefault = (args) => (
         campaignUuid: "d7b8a42a-4cf6-4fb1-a17a-6369983c6050",
         shopUuid: "a7aeccb7-78a5-40f1-bf09-d83049357df2",
         shopName: "Mungos",
-        name: "Struja sniženja: Q6 SUV e-tron performance -30%",
+        name: "Active long — ends in 5 days (no “Ends in X days” line)",
         coverPhoto: "https://placehold.co/700x700/green/white",
         description:
-          "Q6 SUV e-tron performance sada je snižen 30%! Električni pogon, sportski duh i premium oprema – sve to po cijeni koja se ne viđa često. Moć, stil i ušteda u jednom. Ovo nije obična ponuda, ovo je trenutak za pametnu odluku.",
-        startDate: "2025-10-20T09:09:19",
-        endDate: "2025-11-22T09:09:19",
+          "End-time line is hidden until less than 24h remain; date range still shows above.",
+        startDate: startedLastWeek,
+        endDate: endsIn5Days,
         salesPackages: ["AddDiscount"],
         profileImage: "https://placehold.co/100x100/red/white",
+        numberOfListings: 2,
       },
       {
         campaignUuid: "538339d0-f102-41eb-b9e8-612d0362d08e",
         shopUuid: "a7aeccb7-78a5-40f1-bf09-d83049357df2",
         shopName: "Mungos",
-        name: "Pametan poklon uz pametnu kupovinu",
+        name: "Active — under 24h left (countdown)",
         coverPhoto: "https://placehold.co/700x700/blue/white",
-        description:
-          "Kupuješ laptop, računar ili televizor? Imamo nešto za tebe – pametan sat ide gratis! Nema kvaka, nema sitnih slova. Samo ubaci jedan od ovih uređaja u korpu, i sat ti stiže uz njega. Jer kad već uzimaš pametnu stvar – red je da dobiješ još jednu.",
-        startDate: "2025-10-20T09:09:18",
-        endDate: "2025-10-29T23:59:59",
+        description: "endDate is ~12h from now — shows HH:MM:SS countdown.",
+        startDate: startedLastWeek,
+        endDate: endsIn12Hours,
         salesPackages: ["IncludeGifts"],
         profileImage: "https://placehold.co/100x100/red/white",
         sponsored: true,
+        numberOfListings: 7,
       },
       {
         campaignUuid: "90c68a67-4272-4789-9a9d-29f1b565704a",
         shopUuid: "765abc83-64dc-4935-a05e-0bc788783a4d",
         shopName: "Alverde",
-        name: "Proljetno čišćenje kože by alverde",
+        name: "Active long — no listings suffix when no duration line",
         coverPhoto: "https://placehold.co/700x700/yellow/black",
-        description:
-          "Proljetno čišćenje kože počinje uz 1+1 gratis! Izaberi svoje omiljene proizvode za njegu lica i mi ti drugi poklanjamo. Uživaj i u besplatnoj dostavi. Vrijeme je za svježu kožu!",
-        startDate: "2025-10-20T09:09:08",
-        endDate: "2025-10-29T09:09:08",
+        description: "No listing count — no trailing bullet when end line hidden.",
+        startDate: startedLastWeek,
+        endDate: endsIn5Days,
         salesPackages: ["FreeShipping", "FreeQuantity"],
         profileImage: "https://placehold.co/100x100/red/white",
-      },
-      {
-        campaignUuid: "urgent-campaign-test",
-        shopUuid: "test-shop-uuid",
-        shopName: "Test Shop",
-        name: "URGENT: Last chance campaign - ends in hours!",
-        coverPhoto: "https://placehold.co/700x700/orange/white",
-        description: "This campaign will show the countdown timer",
-        startDate: "2025-10-20T00:00:00",
-        endDate: "2025-10-28T23:30:00", // This will show countdown timer (less than 1 day)
-        salesPackages: ["AddDiscount"],
-        profileImage: "https://placehold.co/100x100/red/white",
-        numberOfListings: 5,
-        sponsored: true,
-      },
-      {
-        campaignUuid: "countdown-test-campaign",
-        shopUuid: "countdown-shop-uuid",
-        shopName: "Countdown Shop",
-        name: "COUNTDOWN TEST: Ends in hours!",
-        coverPhoto: "https://placehold.co/700x700/purple/white",
-        description: "This campaign will show the live countdown timer",
-        startDate: "2025-10-20T00:00:00",
-        endDate: "2025-10-27T20:30:00", // This will show countdown timer (less than 24 hours)
-        salesPackages: ["FreeShipping"],
-        profileImage: "https://placehold.co/100x100/purple/white",
-        numberOfListings: 3,
       },
     ]}
     upcomingCampaignText={"Upcoming campaign"}
@@ -147,7 +129,8 @@ export const TemplateDefault = (args) => (
     numberOfListingsTextSingular={"listing"}
     numberOfListingsTextPlural={"listings"}
   />
-);
+  );
+};
 
 ## Sales campaigns section
 

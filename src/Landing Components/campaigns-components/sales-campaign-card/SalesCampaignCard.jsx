@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import { useTheme } from "@emotion/react";
@@ -15,7 +16,6 @@ import { forwardRef, useState, useEffect, useRef } from "react";
 import {
   normalizeDate,
   getDayNumberPrecise,
-  calcDaysRemaining,
   calcDaysUntil,
 } from "../../../_utils/utils";
 
@@ -76,6 +76,11 @@ const SalesCampaignCard = forwardRef((props, ref) => {
     sponsored,
     ...rest
   } = props;
+  void [
+    endsInPrefixTextPlural,
+    endsinSuffixTextPlural,
+    endsinSuffixTextSingular,
+  ];
   const Component = LinkComponent || "a";
 
   const cardRef = useRef();
@@ -88,11 +93,6 @@ const SalesCampaignCard = forwardRef((props, ref) => {
 
   // Calculate days using UTC normalization
   const startsInDays = calcDaysUntil(startDate);
-  const endsInDays = calcDaysRemaining(endDate);
-
-  // Check if campaign ends in less than 2 days or 1 day
-  const endsInLessThan2Days =
-    endsInDays !== null && endsInDays <= 2 && endsInDays > 0;
 
   // For countdown timer, use precise calculation
   const endStr = normalizeDate(endDate);
@@ -147,6 +147,14 @@ const SalesCampaignCard = forwardRef((props, ref) => {
   }, [endsInLessThan1Day]);
 
   const timeRemaining = endsInLessThan1Day ? getTimeRemaining() : null;
+
+  const showEndCountdown = Boolean(
+    hasStarted && !isEnded && endsInLessThan1Day && timeRemaining,
+  );
+  const hasDurationText =
+    showEndCountdown ||
+    isEnded ||
+    (!hasStarted && startsInDays !== null && startsInDays > 0);
 
   return (
     <Wrapper
@@ -207,33 +215,22 @@ const SalesCampaignCard = forwardRef((props, ref) => {
                   {numberOfListings}{" "}
                   {numberOfListings === 1
                     ? numberOfListingsTextSingular
-                    : numberOfListingsTextPlural}{" "}
-                  ∙{" "}
+                    : numberOfListingsTextPlural}
+                  {hasDurationText ? " ∙ " : ""}
                 </span>
               )}
               <span
-                className={`duration-text ${
-                  endsInLessThan2Days ? "urgent" : ""
-                } ${!hasStarted ? "starts-in" : ""}`}
+                className={`duration-text ${showEndCountdown ? "urgent" : ""} ${
+                  !hasStarted ? "starts-in" : ""
+                }`}
               >
-                {endsInLessThan1Day && timeRemaining ? (
+                {showEndCountdown ? (
                   <div className="countdown-timer">
                     {endsInPrefixTextSingular}{" "}
                     {timeRemaining.hours.toString().padStart(2, "0")}:
                     {timeRemaining.minutes.toString().padStart(2, "0")}:
                     {timeRemaining.seconds.toString().padStart(2, "0")}
                   </div>
-                ) : hasStarted &&
-                  !isEnded &&
-                  endsInDays !== null &&
-                  endsInDays > 0 ? (
-                  durationText(
-                    endsInPrefixTextSingular,
-                    endsInPrefixTextPlural,
-                    endsInDays,
-                    endsinSuffixTextSingular,
-                    endsinSuffixTextPlural,
-                  )
                 ) : isEnded ? (
                   endedText || "Završena"
                 ) : !hasStarted && startsInDays !== null && startsInDays > 0 ? (
