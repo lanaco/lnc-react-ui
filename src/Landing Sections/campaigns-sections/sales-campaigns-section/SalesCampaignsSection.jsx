@@ -100,7 +100,7 @@ const SalesCampaignsSection = forwardRef(
         />
       ));
 
-      if (items?.length < 4 && !isMobile) {
+      if (items?.length < 4 && !isMobile && itemlessImageUrl) {
         return [
           ...components,
           <ItemlessBanner
