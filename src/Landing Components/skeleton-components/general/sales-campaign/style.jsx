@@ -7,13 +7,13 @@ export const Container = styled(SkeletonAnimationContainer)`
   @media ${down("S")} {
     flex-direction: column;
 
-    & .skeleton__image {
+    & .skeleton__square {
       width: 100%;
       height: 100%;
     }
 
     & > div {
-      &:last-of-type {
+      &:not(:first-of-type) {
         display: none;
       }
     }
