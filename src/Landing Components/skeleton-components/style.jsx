@@ -73,6 +73,7 @@ export const SkeletonRect = styled(SkeletonBase)`
 export const SkeletonCircle = styled(SkeletonBase)`
   width: ${({ size = "4rem" }) => size};
   height: ${({ size = "4rem" }) => size};
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
 `;
 
