@@ -18,119 +18,120 @@ export const TemplateDefault = (args) => {
   const endsIn5Days = iso(now + 5 * 24 * hourMs);
   const startsTomorrow = iso(now + 24 * hourMs);
 
-  return (
-  <SalesCampaignsSection
-    title={"Sponsored campaigns"}
-    getImage={(cover, uuid) => cover}
-    itemlessImageUrl="https://placehold.co/1000x1000/black/orange?text=mungos"
-    isLoading={false}
-    salesCampaignTypes={[
-      {
-        value: "AddDiscount",
-        label: "salesCampaignTypes.addDiscount",
-        icon: " mng-lnc-percentage",
-        color: "#F44462",
-        disableForService: false,
-      },
-      {
-        value: "FreeShipping",
-        label: "salesCampaignTypes.freeShipping",
-        color: "#1ABC86",
-        icon: " mng-lnc-delivery--parcel",
-        disableForService: true,
-      },
-      {
-        value: "FreeQuantity",
-        label: "salesCampaignTypes.freeQuantity",
-        icon: " mng-lnc-3d-software",
-        color: "#2691D9",
-        disableForService: true,
-      },
-      {
-        value: "IncludeGifts",
-        label: "salesCampaignTypes.includeGifts",
-        icon: " mng-lnc-gift",
-        color: "#8B5CF6",
-        disableForService: false,
-      },
-    ]}
-    items={[
-      {
-        campaignUuid: "4fa20bd0-92ce-4d36-8425-63470860068a",
-        shopUuid: "562627ca-e187-449d-b901-ea5510cce7e8",
-        shopName: "Waterdrop",
-        name: "Upcoming — starts tomorrow (no end countdown yet)",
-        coverPhoto: "https://placehold.co/700x700/red/white",
-        description: null,
-        startDate: startsTomorrow,
-        endDate: iso(now + 14 * 24 * hourMs),
-        salesPackages: [
-          "AddDiscount",
-          "IncludeGifts",
-          "FreeShipping",
-          "FreeQuantity",
-        ],
-        profileImage: "https://placehold.co/100x100/red/white",
-        upcoming: true,
-        numberOfListings: 10,
-        sponsored: true,
-      },
-      {
-        campaignUuid: "d7b8a42a-4cf6-4fb1-a17a-6369983c6050",
-        shopUuid: "a7aeccb7-78a5-40f1-bf09-d83049357df2",
-        shopName: "Mungos",
-        name: "Active long — ends in 5 days (no “Ends in X days” line)",
-        coverPhoto: "https://placehold.co/700x700/green/white",
-        description:
-          "End-time line is hidden until less than 24h remain; date range still shows above.",
-        startDate: startedLastWeek,
-        endDate: endsIn5Days,
-        salesPackages: ["AddDiscount"],
-        profileImage: "https://placehold.co/100x100/red/white",
-        numberOfListings: 2,
-      },
-      {
-        campaignUuid: "538339d0-f102-41eb-b9e8-612d0362d08e",
-        shopUuid: "a7aeccb7-78a5-40f1-bf09-d83049357df2",
-        shopName: "Mungos",
-        name: "Active — under 24h left (countdown)",
-        coverPhoto: "https://placehold.co/700x700/blue/white",
-        description: "endDate is ~12h from now — shows HH:MM:SS countdown.",
-        startDate: startedLastWeek,
-        endDate: endsIn12Hours,
-        salesPackages: ["IncludeGifts"],
-        profileImage: "https://placehold.co/100x100/red/white",
-        sponsored: true,
-        numberOfListings: 7,
-      },
-      {
-        campaignUuid: "90c68a67-4272-4789-9a9d-29f1b565704a",
-        shopUuid: "765abc83-64dc-4935-a05e-0bc788783a4d",
-        shopName: "Alverde",
-        name: "Active long — no listings suffix when no duration line",
-        coverPhoto: "https://placehold.co/700x700/yellow/black",
-        description: "No listing count — no trailing bullet when end line hidden.",
-        startDate: startedLastWeek,
-        endDate: endsIn5Days,
-        salesPackages: ["FreeShipping", "FreeQuantity"],
-        profileImage: "https://placehold.co/100x100/red/white",
-      },
-    ]}
-    upcomingCampaignText={"Upcoming campaign"}
-    campaignSingleText={"Campaign"}
-    startsInPrefixTextPlural={"Starts in"}
-    startsinSuffixTextPlural={"days"}
-    startsInPrefixTextSingular={"Starts in"}
-    startsinSuffixTextSingular={"day"}
-    endsInPrefixTextPlural={"Ends in"}
-    endsinSuffixTextPlural={"days"}
-    endsInPrefixTextSingular={"Ends in"}
-    endsinSuffixTextSingular={"day"}
-    numberOfListingsTextSingular={"listing"}
-    numberOfListingsTextPlural={"listings"}
-  />
-  );
-};
+return (
+
+<SalesCampaignsSection
+  title={"Sponsored campaigns"}
+  getImage={(cover, uuid) => cover}
+  itemlessImageUrl="https://placehold.co/1000x1000/black/orange?text=mungos"
+  isLoading={false}
+  salesCampaignTypes={[
+    {
+      value: "AddDiscount",
+      label: "salesCampaignTypes.addDiscount",
+      icon: " mng-lnc-percentage",
+      color: "#F44462",
+      disableForService: false,
+    },
+    {
+      value: "FreeShipping",
+      label: "salesCampaignTypes.freeShipping",
+      color: "#1ABC86",
+      icon: " mng-lnc-delivery--parcel",
+      disableForService: true,
+    },
+    {
+      value: "FreeQuantity",
+      label: "salesCampaignTypes.freeQuantity",
+      icon: " mng-lnc-3d-software",
+      color: "#2691D9",
+      disableForService: true,
+    },
+    {
+      value: "IncludeGifts",
+      label: "salesCampaignTypes.includeGifts",
+      icon: " mng-lnc-gift",
+      color: "#8B5CF6",
+      disableForService: false,
+    },
+  ]}
+  items={[
+    {
+      campaignUuid: "4fa20bd0-92ce-4d36-8425-63470860068a",
+      shopUuid: "562627ca-e187-449d-b901-ea5510cce7e8",
+      shopName: "Waterdrop",
+      name: "Upcoming — starts tomorrow (no end countdown yet)",
+      coverPhoto: "https://placehold.co/700x700/red/white",
+      description: null,
+      startDate: startsTomorrow,
+      endDate: iso(now + 14 * 24 * hourMs),
+      salesPackages: [
+        "AddDiscount",
+        "IncludeGifts",
+        "FreeShipping",
+        "FreeQuantity",
+      ],
+      profileImage: "https://placehold.co/100x100/red/white",
+      upcoming: true,
+      numberOfListings: 10,
+      sponsored: true,
+    },
+    {
+      campaignUuid: "d7b8a42a-4cf6-4fb1-a17a-6369983c6050",
+      shopUuid: "a7aeccb7-78a5-40f1-bf09-d83049357df2",
+      shopName: "Mungos",
+      name: "Active long — ends in 5 days (no “Ends in X days” line)",
+      coverPhoto: "https://placehold.co/700x700/green/white",
+      description:
+        "End-time line is hidden until less than 24h remain; date range still shows above.",
+      startDate: startedLastWeek,
+      endDate: endsIn5Days,
+      salesPackages: ["AddDiscount"],
+      profileImage: "https://placehold.co/100x100/red/white",
+      numberOfListings: 2,
+    },
+    {
+      campaignUuid: "538339d0-f102-41eb-b9e8-612d0362d08e",
+      shopUuid: "a7aeccb7-78a5-40f1-bf09-d83049357df2",
+      shopName: "Mungos",
+      name: "Active — under 24h left (countdown)",
+      coverPhoto: "https://placehold.co/700x700/blue/white",
+      description: "endDate is ~12h from now — shows HH:MM:SS countdown.",
+      startDate: startedLastWeek,
+      endDate: endsIn12Hours,
+      salesPackages: ["IncludeGifts"],
+      profileImage: "https://placehold.co/100x100/red/white",
+      sponsored: true,
+      numberOfListings: 7,
+    },
+    {
+      campaignUuid: "90c68a67-4272-4789-9a9d-29f1b565704a",
+      shopUuid: "765abc83-64dc-4935-a05e-0bc788783a4d",
+      shopName: "Alverde",
+      name: "Active long — no listings suffix when no duration line",
+      coverPhoto: "",
+      description:
+        "No listing count — no trailing bullet when end line hidden.",
+      startDate: startedLastWeek,
+      endDate: endsIn5Days,
+      salesPackages: ["FreeShipping", "FreeQuantity"],
+      profileImage: "https://placehold.co/100x100/red/white",
+    },
+  ]}
+  upcomingCampaignText={"Upcoming campaign"}
+  campaignSingleText={"Campaign"}
+  startsInPrefixTextPlural={"Starts in"}
+  startsinSuffixTextPlural={"days"}
+  startsInPrefixTextSingular={"Starts in"}
+  startsinSuffixTextSingular={"day"}
+  endsInPrefixTextPlural={"Ends in"}
+  endsinSuffixTextPlural={"days"}
+  endsInPrefixTextSingular={"Ends in"}
+  endsinSuffixTextSingular={"day"}
+  numberOfListingsTextSingular={"listing"}
+  numberOfListingsTextPlural={"listings"}
+/>
+); };
 
 ## Sales campaigns section
 

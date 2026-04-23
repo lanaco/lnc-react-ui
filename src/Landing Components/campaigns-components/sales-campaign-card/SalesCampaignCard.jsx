@@ -18,6 +18,7 @@ import {
   getDayNumberPrecise,
   calcDaysUntil,
 } from "../../../_utils/utils";
+import NoListingsPhoto from "../../../assets/images/NoListingsPhoto.svg";
 
 const toLocaleDateString = (date) => {
   if (date !== undefined) {
@@ -178,7 +179,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
           uuid={uuid}
           size={ImageSize.EXTRA_LARGE}
         /> */}
-        <img src={coverPhoto} />
+        <img src={coverPhoto || NoListingsPhoto} />
 
         <BadgeBar>
           {salesPackages?.map((item, index) => (
