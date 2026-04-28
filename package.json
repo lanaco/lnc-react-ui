@@ -171,7 +171,8 @@
     "./PartnerCardsSection": "./dist/PartnerCardsSection.js",
     "./PartnerBannerSection": "./dist/PartnerBannerSection.js",
     "./PartnerStatsSection": "./dist/PartnerStatsSection.js",
-    "./PartnerBrandsSection": "./dist/PartnerBrandsSection.js"
+    "./PartnerBrandsSection": "./dist/PartnerBrandsSection.js",
+    "./CategoryCardsSection": "./dist/CategoryCardsSection.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.5",

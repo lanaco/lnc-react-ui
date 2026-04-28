@@ -231,6 +231,7 @@ export { default as PartnerCardsSection } from "./Landing Sections/partner-secti
 export { default as PartnerBannerSection } from "./Landing Sections/partner-sections/partner-banner-section/PartnerBannerSection";
 export { default as PartnerStatsSection } from "./Landing Sections/partner-sections/partner-stats-section/PartnerStatsSection";
 export { default as PartnerBrandsSection } from "./Landing Sections/partner-sections/partner-brands-section/PartnerBrandsSection";
+export { default as CategoryCardsSection } from "./Landing Sections/category-sections/category-cards-section/CategoryCardsSection";
 
 //======================== THEME ==============================================================
 

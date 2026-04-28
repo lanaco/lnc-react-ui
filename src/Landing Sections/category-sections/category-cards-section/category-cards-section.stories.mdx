@@ -1,0 +1,63 @@
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { ArgsTable, Stories } from "@storybook/addon-docs";
+
+import CategoryCardsSection from "./CategoryCardsSection.jsx";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+<Meta
+  title="Landing sections/Category Cards Section"
+  component={CategoryCardsSection}
+/>
+
+export const TemplateDefault = (args) => (
+  <CategoryCardsSection
+    title="Izdvojeno za tebe"
+    onSelectCard={(item) => {}}
+    items={[
+      {
+        name: "Vozila i oprema",
+        buttonLink: "vozila-i-oprema",
+        imageUrl: "https://placehold.co/300x150/white/3b82f6?text=Vozila",
+        borderColor: "linear-gradient(90deg, #3B82F6, #60A5FA)",
+      },
+      {
+        name: "Nekretnine",
+        buttonLink: "nekretnine",
+        imageUrl: "https://placehold.co/300x150/white/10b981?text=Nekretnine",
+        borderColor: "linear-gradient(90deg, #10B981, #34D399)",
+      },
+      {
+        name: "Elektronika",
+        buttonLink: "elektronika",
+        imageUrl: "https://placehold.co/300x150/white/f59e0b?text=Elektronika",
+        borderColor: "linear-gradient(90deg, #F59E0B, #FBBF24)",
+      },
+      {
+        name: "Kod kuće",
+        buttonLink: "kod-kuce",
+        imageUrl: "https://placehold.co/300x150/white/ef4444?text=Kod+kuce",
+        borderColor: "linear-gradient(90deg, #EF4444, #F87171)",
+      },
+      {
+        name: "Zdrav život",
+        buttonLink: "zdrav-zivot",
+        imageUrl: "https://placehold.co/300x150/white/8b5cf6?text=Zdrav+zivot",
+        borderColor: "linear-gradient(90deg, #8B5CF6, #A78BFA)",
+      },
+      {
+        name: "Pokloni",
+        buttonLink: "pokloni",
+        imageUrl: "https://placehold.co/300x150/white/ec4899?text=Pokloni",
+        borderColor: "linear-gradient(90deg, #EC4899, #F472B6)",
+      },
+    ]}
+  />
+);
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>
