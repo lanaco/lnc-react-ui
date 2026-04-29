@@ -19,6 +19,7 @@ const CategoryCardsSection = forwardRef(
           name={x?.name}
           imageUrl={x?.imageUrl}
           borderColor={x?.borderColor}
+          buttonLink={x?.buttonLink}
           onSelectCard={(e, cardRef) => onSelectCard?.(x, cardRef)}
           LinkComponent={LinkComponent}
         />
