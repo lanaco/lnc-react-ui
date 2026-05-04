@@ -1,6 +1,6 @@
 {
   "name": "@lanaco/lnc-react-ui",
-  "version": "4.0.234",
+  "version": "4.0.236",
   "description": "React component library",
   "type": "module",
   "keywords": [
@@ -10,6 +10,7 @@
   ],
   "author": "Lanaco",
   "license": "MIT",
+  "sideEffects": false,
   "scripts": {
     "dev": "vite",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
