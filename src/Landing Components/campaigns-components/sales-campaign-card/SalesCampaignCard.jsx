@@ -168,8 +168,8 @@ const SalesCampaignCard = forwardRef((props, ref) => {
       onClick={(e) => onSelectCard(e, cardRef)}
       as={Component}
       {...(LinkComponent
-        ? { to: `/shop/${shopUuid}/campaign/${uuid}` }
-        : { href: `/shop/${shopUuid}/campaign/${uuid}` })}
+        ? { to: `/shops/${shopUuid}/campaign/${uuid}` }
+        : { href: `/shops/${shopUuid}/campaign/${uuid}` })}
       sponsored={sponsored}
       {...rest}
     >
