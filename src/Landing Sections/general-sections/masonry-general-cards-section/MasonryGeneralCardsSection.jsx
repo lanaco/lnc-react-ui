@@ -20,7 +20,7 @@ const MasonryGeneralCardsSection = forwardRef(
     ref,
   ) => {
     return (
-      <RegularTitleSectionWrapper ref={ref}>
+      <RegularTitleSectionWrapper ref={ref} className="lp-section lp-general-section lp-masonry-general-cards-section">
         <div className="regular-title">
           <div className="regular-title-text">
             <span>{title}</span>

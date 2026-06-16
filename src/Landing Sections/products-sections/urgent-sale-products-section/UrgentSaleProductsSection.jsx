@@ -137,7 +137,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
       isLoading={isLoading}
       keyPrefix="urgent-sale-products-skeleton"
     >
-      <GridWrapper ref={ref} limit={limit}>
+      <GridWrapper ref={ref} limit={limit} className="lp-section lp-urgent-sale-products-section">
         <div className="urgent-tag">
           <i className="mng mng-lnc-bolt-filled" />
           <span>{title}</span>

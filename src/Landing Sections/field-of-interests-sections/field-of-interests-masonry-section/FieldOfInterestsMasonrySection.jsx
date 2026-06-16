@@ -93,7 +93,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
         limitTagsForMobile={limitTagsForMobile}
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
-        className={className}
+        className={`lp-section lp-field-of-interests-masonry-section${className ? ` ${className}` : ""}`}
         numberOfTags={tags?.length}
       >
         <div className="wrapper__heading">

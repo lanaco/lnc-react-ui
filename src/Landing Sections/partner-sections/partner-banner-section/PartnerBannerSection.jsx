@@ -18,7 +18,7 @@ const PartnerBannerSerction = forwardRef(
     ref,
   ) => {
     return (
-      <Container imageUrl={imageUrl}>
+      <Container imageUrl={imageUrl} className="lp-section lp-partner-banner-section">
         <div className="section__text">
           {title && <div className="section__title">{title}</div>}
           {description && (

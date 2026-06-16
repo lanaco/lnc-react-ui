@@ -57,7 +57,7 @@ const ProductsWithBannerSection = forwardRef((props, ref) => {
   }, [items, isMobile, limit]);
 
   return (
-    <RegulatTitleSectionWrapper ref={ref}>
+    <RegulatTitleSectionWrapper ref={ref} className="lp-section lp-products-with-banner-section">
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}

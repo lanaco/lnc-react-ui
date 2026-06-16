@@ -23,7 +23,7 @@ const BannerNextSection = forwardRef(
     const theme = useTheme();
 
     return (
-      <Container ref={ref} theme={theme} backgroundColor={backgroundColor}>
+      <Container className="lp-section lp-bnr-section lp-banner-next-section banner-next-section-lnc" ref={ref} theme={theme} backgroundColor={backgroundColor}>
         <div className="section__left">
           {imageUrl && (
             <div className="section__image">

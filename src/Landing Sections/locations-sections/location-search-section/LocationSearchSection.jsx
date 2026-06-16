@@ -18,7 +18,7 @@ const LocationSearchSection = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Wrapper ref={ref}>
+    <Wrapper ref={ref} className="lp-section lp-location-search-section">
       <div className="wrapper-title">{title}</div>
       {options?.length > 0 && (
         <SelectBar

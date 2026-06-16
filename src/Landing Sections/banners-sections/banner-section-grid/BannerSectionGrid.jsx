@@ -26,7 +26,7 @@ const BannerSectionGrid = forwardRef((props, ref) => {
   const isMobile = useDetectMobile();
 
   return (
-    <GridWrapper ref={ref} height={rowHeight}>
+    <GridWrapper className="lp-section lp-bnr-section lp-banner-section-grid banner-section-grid-lnc" ref={ref} height={rowHeight}>
       <TextBlockV1
         className="text-item"
         title={title1}

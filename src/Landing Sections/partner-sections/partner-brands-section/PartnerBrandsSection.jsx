@@ -29,7 +29,7 @@ const PartnerBrandsSection = forwardRef(
     const shouldScroll = items?.length > threshold;
 
     return (
-      <Container>
+      <Container className="lp-section lp-partner-brands-section">
         <SectionHeadingContainer>
           {title && <div className="heading__title">{title}</div>}
           {buttonText && buttonLink && (

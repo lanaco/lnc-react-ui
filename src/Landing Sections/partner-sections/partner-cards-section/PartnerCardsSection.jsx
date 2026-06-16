@@ -29,7 +29,7 @@ const PartnerCardsSection = forwardRef(
     };
 
     return (
-      <Container>
+      <Container className="lp-section lp-partner-cards-section">
         <div className="section__text">
           {icon && (
             <Icon

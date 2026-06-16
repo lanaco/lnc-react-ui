@@ -82,7 +82,7 @@ const BlogsSectionDetailed = forwardRef((props, ref) => {
   }, [items, isMobile, limit, onSelectCard]);
 
   return (
-    <RegulatTitleSectionWrapper ref={ref}>
+    <RegulatTitleSectionWrapper ref={ref} className="lp-section lp-blogs-section-detailed">
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}

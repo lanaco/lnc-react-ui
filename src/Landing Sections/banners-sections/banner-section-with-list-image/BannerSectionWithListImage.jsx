@@ -28,13 +28,14 @@ const BannerSectionWithListImage = forwardRef((props, ref) => {
       imgHMob={imageHeightMobile}
       hasBorder={hasBorder}
       bgColor={backgroundColor}
+      className="lp-section lp-bnr-section lp-banner-section-with-list-image banner-sec-listimg"
     >
-      <Wrapper>
+      <Wrapper className="banner-sec-listimg-wrapper">
         <ContainerHeader>
           <div className="header-title">{title}</div>
           <div className="header-subitle">{subtitle}</div>
         </ContainerHeader>
-        <ListWrapper>
+        <ListWrapper lassName="banner-sec-listimg-list">
           {list?.map((x, index) => (
             <Fragment key={index}>
               <div className="list-item">

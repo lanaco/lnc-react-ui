@@ -23,7 +23,7 @@ const BlogsSectionSimpleCentered = forwardRef((props, ref) => {
       isLoading={isLoading}
       keyPrefix="blogs-simple-centered-skeleton"
     >
-      <GridWrapper ref={ref} limit={limit}>
+      <GridWrapper ref={ref} limit={limit} className="lp-section lp-blogs-section-simple-centered">
         <>
           {isMobile === true
             ? items?.map((x, index) => (

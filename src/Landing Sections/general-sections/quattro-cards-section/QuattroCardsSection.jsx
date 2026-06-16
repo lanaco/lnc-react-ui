@@ -28,7 +28,7 @@ const QuattroCardsSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper ref={ref}>
+      <Wrapper ref={ref} className="lp-section lp-general-section lp-quattro-cards-section">
         <div className="wrapper__heading">
           <div className="wrapper__title">
             {isDefinedNotEmptyString(title) && (

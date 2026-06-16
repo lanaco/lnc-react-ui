@@ -77,7 +77,7 @@ const SimpleProductsSection = forwardRef((props, ref) => {
       isLoading={isLoading}
       keyPrefix="simple-products-skeleton"
     >
-      <GridWrapper ref={ref} limit={limit}>
+      <GridWrapper ref={ref} limit={limit} className="lp-section lp-simple-products-section">
         <TextBlockV1
           subtitle={subtitle}
           title={title}

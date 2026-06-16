@@ -12,7 +12,7 @@ const BrandHitsSection = forwardRef(
     ref
   ) => {
     return (
-      <Wrapper ref={ref}>
+      <Wrapper ref={ref} className="lp-section lp-brand-hits-section">
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
           {subtitle && <div className="wrapper__subtitle">{subtitle}</div>}

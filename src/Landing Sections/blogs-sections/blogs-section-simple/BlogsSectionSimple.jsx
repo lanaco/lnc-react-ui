@@ -75,7 +75,7 @@ const BlogsSectionSimple = forwardRef((props, ref) => {
   }, [items]);
 
   return (
-    <RegulatTitleSectionWrapper ref={ref}>
+    <RegulatTitleSectionWrapper ref={ref} className="lp-section lp-blogs-section-simple">
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}

@@ -50,7 +50,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   @media ${down("S")} {
-    padding: 0 0 1.25rem 0;
+    padding: 1rem 1rem 1.25rem 1rem;
   }
 `;
 

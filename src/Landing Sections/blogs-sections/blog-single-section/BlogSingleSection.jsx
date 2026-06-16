@@ -14,18 +14,20 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <SuspenseBlogSingle isLoading={isLoading} keyPrefix="blogs-single-skeleton">
-      <BlogCardLarge
-        ref={ref}
-        title={item?.title}
-        imageUrl={getImage(item?.imageUrl, item?.uuid) || null}
-        text={item?.description}
-        titleSlug={item?.titleSlug}
-        buttonText={item?.buttonText}
-        onCardClick={() => onSelectCard(item?.titleSlug)}
-        LinkComponent={LinkComponent}
-      />
-    </SuspenseBlogSingle>
+    <div className="lp-section lp-blog-single-section">
+      <SuspenseBlogSingle isLoading={isLoading} keyPrefix="blogs-single-skeleton">
+        <BlogCardLarge
+          ref={ref}
+          title={item?.title}
+          imageUrl={getImage(item?.imageUrl, item?.uuid) || null}
+          text={item?.description}
+          titleSlug={item?.titleSlug}
+          buttonText={item?.buttonText}
+          onCardClick={() => onSelectCard(item?.titleSlug)}
+          LinkComponent={LinkComponent}
+        />
+      </SuspenseBlogSingle>
+    </div>
   );
 });
 

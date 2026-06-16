@@ -4,7 +4,7 @@ import { Container } from "./style";
 
 const PartnerStatsSection = forwardRef(({ title, description, items }, ref) => {
   return (
-    <Container>
+    <Container className="lp-section lp-partner-stats-section">
       <div className="section__text">
         {title && <div className="section__title">{title}</div>}
         {description && (

@@ -59,7 +59,7 @@ const BlogListSection = forwardRef(
 
     return (
       <SuspenseBlogList isLoading={isLoading} keyPrefix="blog-list-skeleton">
-        <Wrapper ref={ref} className={isSeparated ? "separated" : ""}>
+        <Wrapper ref={ref} className={`lp-section lp-blog-list-section${isSeparated ? " separated" : ""}`}>
           {memoizedBlogs}
         </Wrapper>
       </SuspenseBlogList>

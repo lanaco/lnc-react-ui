@@ -27,7 +27,7 @@ const CategoryCardsSection = forwardRef(
     }, [items]);
 
     return (
-      <Wrapper ref={ref}>
+      <Wrapper ref={ref} className="lp-section lp-category-cards-section">
         {title && <div className="wrapper__title">{title}</div>}
         <div className="wrapper__grid">{memoizedCards}</div>
       </Wrapper>
