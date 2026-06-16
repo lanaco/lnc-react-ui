@@ -36,7 +36,7 @@ const BannerSectionSimple = forwardRef((props, ref) => {
       imgW={imageWidth}
       imgHMob={imageHeightMobile}
       hasBorder={hasBorder}
-      className="lp-section lp-banner-section-simple banner-section-simple-lnc"
+      className="lp-section lp-bnr-section lp-banner-section-simple banner-section-simple-lnc"
     >
       {headerImageUrl && (
         <img src={headerImageUrl} className="header-image" alt="Header image" />

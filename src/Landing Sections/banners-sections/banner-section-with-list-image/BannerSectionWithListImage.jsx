@@ -28,7 +28,7 @@ const BannerSectionWithListImage = forwardRef((props, ref) => {
       imgHMob={imageHeightMobile}
       hasBorder={hasBorder}
       bgColor={backgroundColor}
-      className="lp-section lp-banner-section-with-list-image banner-sec-listimg"
+      className="lp-section lp-bnr-section lp-banner-section-with-list-image banner-sec-listimg"
     >
       <Wrapper className="banner-sec-listimg-wrapper">
         <ContainerHeader>

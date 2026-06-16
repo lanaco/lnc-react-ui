@@ -48,7 +48,7 @@ const BannerSectionCarousel = forwardRef(
     const isMobile = useDetectMobile();
 
     return (
-      <Container key={`banner-section-carousel__${isMobile}`} className="lp-section lp-banner-section-carousel banner-section-carousel-lnc" ref={ref}>
+      <Container key={`banner-section-carousel__${isMobile}`} className="lp-section lp-bnr-section lp-banner-section-carousel banner-section-carousel-lnc" ref={ref}>
         <SuspenseBannerSectionCarousel
           fallbackComponent={fallbackComponent}
           keyPrefix="banner-carousel-skeleton"

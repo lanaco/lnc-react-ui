@@ -27,7 +27,7 @@ const BannerSectionBasic = forwardRef((props, ref) => {
       imgW={imageWidth}
       imgHMob={imageHeightMob}
       hasBorder={hasBorder}
-      className="lp-section lp-banner-section-basic banner-section-basic-lnc"
+      className="lp-section lp-bnr-section lp-banner-section-basic banner-section-basic-lnc"
     >
       <Wrapper
         isHorizontalContent={isHorizontalContent}

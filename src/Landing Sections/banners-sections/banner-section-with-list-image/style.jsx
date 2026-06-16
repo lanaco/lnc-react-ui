@@ -32,9 +32,6 @@ export const Container = styled.div`
     border: none;
     box-shadow: none;
 
-      border: 1px solid black !important;
-
-
     & img {
       max-width: 100%;
       min-width: 100%;
