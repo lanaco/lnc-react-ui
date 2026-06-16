@@ -32,6 +32,9 @@ export const Container = styled.div`
     border: none;
     box-shadow: none;
 
+      border: 1px solid black !important;
+
+
     & img {
       max-width: 100%;
       min-width: 100%;
@@ -50,7 +53,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   @media ${down("S")} {
-    padding: 0 0 1.25rem 0;
+    padding: 1rem 1rem 1.25rem 1rem;
   }
 `;
 

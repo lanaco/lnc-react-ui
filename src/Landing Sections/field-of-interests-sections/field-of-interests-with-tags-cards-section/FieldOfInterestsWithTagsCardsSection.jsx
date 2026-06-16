@@ -36,6 +36,7 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
         limitTagsForMobile={limitTagsForMobile}
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
+        className="lp-section lp-field-of-interests-with-tags-cards-section"
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}

@@ -14,15 +14,17 @@ const LocationFinderSection = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <LocationFinder
-      ref={ref}
-      title={locationFinderTitle}
-      placeholderText={locationFinderPlaceholder}
-      onOpenMap={onOpenMap}
-      openMapText={openMapText}
-      mapFilters={mapFilters}
-      inputComponent={inputComponent}
-    />
+    <div className="lp-section lp-location-finder-section">
+      <LocationFinder
+        ref={ref}
+        title={locationFinderTitle}
+        placeholderText={locationFinderPlaceholder}
+        onOpenMap={onOpenMap}
+        openMapText={openMapText}
+        mapFilters={mapFilters}
+        inputComponent={inputComponent}
+      />
+    </div>
   );
 });
 

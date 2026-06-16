@@ -16,7 +16,7 @@ const BannerSectionWithList = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Container ref={ref}>
+    <Container ref={ref} className="lp-section lp-banner-section-with-list">
       {(isDefined(title) || isDefined(subtitle)) && (
         <ContainerHeader>
           {isDefined(title) && <div className="header-title">{title}</div>}

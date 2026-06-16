@@ -130,7 +130,7 @@ const SalesCampaignsSection = forwardRef(
           showNavigation={showNavigation}
           hasNextPage={hasNextPage}
           handleFetchNextPage={handleFetchNextPage}
-          className={items?.length < 4 && !isMobile ? "itemless" : ""}
+          className={`lp-section lp-sales-campaigns-section${items?.length < 4 && !isMobile ? " itemless" : ""}`}
         >
           {memoizedItems}
         </ScrollableSectionV3>

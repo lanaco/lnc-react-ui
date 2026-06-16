@@ -53,7 +53,7 @@ const CustomLoanMapSection = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Wrapper ref={ref}>
+    <Wrapper ref={ref} className="lp-section lp-custom-loan-map-section">
       {hasLocationFinder === true && (
         <LocationFinder
           title={locationFinderTitle}

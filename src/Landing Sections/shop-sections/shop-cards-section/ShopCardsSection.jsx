@@ -38,6 +38,7 @@ const ShopCardsSection = forwardRef(
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
         gridView={gridView}
+        className="lp-section lp-shop-cards-section"
       >
         <div className="wrapper__heading">
           <div className="wrapper__title">

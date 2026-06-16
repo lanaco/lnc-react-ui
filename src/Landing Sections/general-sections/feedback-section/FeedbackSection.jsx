@@ -10,7 +10,7 @@ import { Container } from "./style";
 const FeedbackSection = forwardRef(
   ({ title, description, buttonText, onButtonAction = () => {} }, ref) => {
     return (
-      <Container ref={ref}>
+      <Container ref={ref} className="lp-section lp-feedback-section">
         <div className="feedback__content">
           {isDefinedNotEmptyString(title) && (
             <div className="feedback__title">

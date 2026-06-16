@@ -66,7 +66,7 @@ const BlogsSectionLarge = forwardRef((props, ref) => {
       isLoading={isLoading}
       keyPrefix="blogs-large-skeleton"
     >
-      <GridWrapper ref={ref} limit={limit}>
+      <GridWrapper ref={ref} limit={limit} className="lp-section lp-blogs-section-large">
         {memoizedProducts}
       </GridWrapper>
     </SuspenseBlogsSectionLarge>

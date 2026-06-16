@@ -123,7 +123,7 @@ const BlogExploreSection = forwardRef(
     const Component = LinkComponent || "a";
 
     return (
-      <Container ref={ref} id="landing__container">
+      <Container ref={ref} id="landing__container" className="lp-section lp-blog-explore-section">
         <div className="landing__main-content">
           <div className="main-content__heading">
             <div className="main-content__title">{mainTitle}</div>

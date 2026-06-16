@@ -51,7 +51,7 @@ const LoanCalculatorSection = forwardRef((props, ref) => {
   };
 
   return (
-    <>
+    <div className="lp-section lp-loan-calculator-section">
       <LoanCalculator
         ref={ref}
         title={loanCalculatorTitle}
@@ -91,7 +91,7 @@ const LoanCalculatorSection = forwardRef((props, ref) => {
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
       />
-    </>
+    </div>
   );
 });
 

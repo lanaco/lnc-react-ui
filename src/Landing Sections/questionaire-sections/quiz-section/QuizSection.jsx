@@ -133,7 +133,7 @@ const QuizSection = forwardRef(
     };
 
     return (
-      <Wrapper ref={ref}>
+      <Wrapper ref={ref} className="lp-section lp-quiz-section">
         <div className="wrapper__outlet">
           {step === QuizContent.START_QUIZ && (
             <QuizWelcome

@@ -55,7 +55,7 @@ const ReviewsSection = forwardRef((props, ref) => {
   }, [items, isMobile, limit]);
 
   return (
-    <Container ref={ref}>
+    <Container ref={ref} className="lp-section lp-reviews-section">
       <div className="container-title">{title}</div>
       <SuspenseReviews isLoading={isLoading} keyPrefix="reviews-skeleton">
         <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>

@@ -150,7 +150,7 @@ const DetailedProductsSection = forwardRef((props, ref) => {
   }, [items, isMobile, limit]);
 
   return (
-    <TitleWithOptionsSectionWrapper ref={ref}>
+    <TitleWithOptionsSectionWrapper ref={ref} className="lp-section lp-detailed-products-section">
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}

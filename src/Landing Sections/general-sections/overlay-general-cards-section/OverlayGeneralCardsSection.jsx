@@ -20,7 +20,7 @@ const OverlayGeneralCardsSection = forwardRef(
     ref,
   ) => {
     return (
-      <Container ref={ref} numOfColumns={numOfColumns}>
+      <Container ref={ref} numOfColumns={numOfColumns} className="lp-section lp-overlay-general-cards-section">
         <div className="section__title">{title}</div>
         <SuspenseBlogsSectionDetailed
           isLoading={isLoading}

@@ -34,6 +34,7 @@ const GeneralWithTagsCardsSection = forwardRef(
         limitTagsForMobile={limitTagsForMobile}
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
+        className="lp-section lp-general-with-tags-cards-section"
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}

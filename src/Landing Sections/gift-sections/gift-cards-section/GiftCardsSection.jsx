@@ -26,7 +26,7 @@ const GiftsSection = forwardRef((props, ref) => {
   const isMobile = useDetectMobile();
 
   return (
-    <RegulatTitleSectionWrapper ref={ref}>
+    <RegulatTitleSectionWrapper ref={ref} className="lp-section lp-gift-cards-section">
       <div className="regular-title">
         <div className="regular-title-text">
           {isDefinedNotEmptyString(icon) && <i className={icon} />}
