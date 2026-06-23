@@ -259,6 +259,7 @@ const SalesCampaignCard = forwardRef((props, ref) => {
           uuid={shopUuid}
           //   onSelect={(e) => navigate(`/shop/${shopUuid}`)}
           onClick={() => onSelectShop(shopUuid)}
+          LinkComponent={LinkComponent}
         />
       </ContentWrapper>
     </Wrapper>

@@ -41,7 +41,6 @@ const ProfileItem = (props) => {
   return (
     <StyledProfileItem
       onClick={(e) => {
-        e?.preventDefault();
         e.stopPropagation();
 
         if (hasPermission === true) onClick?.();
