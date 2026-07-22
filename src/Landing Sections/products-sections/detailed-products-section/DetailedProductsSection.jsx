@@ -44,7 +44,6 @@ const DetailedProductsSection = forwardRef((props, ref) => {
     componentName,
     LinkComponent,
     urgentText,
-    freeShippingText,
   } = props;
 
   const isMobile = useDetectMobile();
@@ -96,7 +95,6 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 LinkComponent={LinkComponent}
                 activeSalesPackages={x?.activeSalesPackages}
                 urgentText={urgentText}
-                freeShippingText={freeShippingText}
                 hasFreeShipping={x?.hasFreeShipping}
               />
             ))
@@ -144,7 +142,6 @@ const DetailedProductsSection = forwardRef((props, ref) => {
                 LinkComponent={LinkComponent}
                 activeSalesPackages={x?.activeSalesPackages}
                 urgentText={urgentText}
-                freeShippingText={freeShippingText}
                 hasFreeShipping={x?.hasFreeShipping}
               />
             ))}

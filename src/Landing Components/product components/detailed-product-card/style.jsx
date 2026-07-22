@@ -120,33 +120,30 @@ export const Wrapper = styled.a`
   }
 
   & .campaign-badges {
-    /* Rendered below the image (above the title), ekupi-style, with text
-       labels next to the icons. */
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
     display: flex;
-    gap: 0.375rem;
+    gap: 0.25rem;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: flex-start;
-    margin-top: 0.5rem;
     z-index: 1;
+    width: max-content;
+    max-width: 7rem;
   }
 
   & .campaign-badge {
     width: fit-content;
-    min-height: 1.5rem;
-    border-radius: 0.5rem;
+    height: 1.5rem;
+    border-radius: 0.25rem;
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    justify-content: center;
     color: white;
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: 1;
-    padding-inline: 0.375rem;
+    font-size: 1rem;
+    padding-inline: 0.15rem;
 
     i {
-      font-size: 1rem;
-
       ::before {
         margin-inline: 0;
       }
@@ -167,10 +164,6 @@ export const Wrapper = styled.a`
 
   & .campaign-badge-includegifts {
     background-color: #8b5cf6;
-  }
-
-  & .campaign-badge-newcollection {
-    background-color: #f59e0b;
   }
 
   & .campaign-badge-urgent {
@@ -275,6 +268,7 @@ export const ImageWrapper = styled.div`
 
     &:hover {
       transform: scale(1.05);
+      background-color: white;
     }
 
     i {
