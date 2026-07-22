@@ -27,10 +27,10 @@ export const Container = styled.div`
 `}
 
   @media ${down("S")} {
+    /* Keep the card (border / radius / shadow) on mobile so the text and
+       image read as one unified visual, with the image flush at the bottom
+       of the card (see design). */
     flex-direction: column;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
 
     & img {
       max-width: 100%;
