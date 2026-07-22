@@ -70,7 +70,6 @@ const DetailedProductCard = forwardRef((props, ref) => {
     onSelectCard = () => {},
     activeSalesPackages,
     urgentText = "Urgent",
-    freeShippingText = "",
     LinkComponent,
     hasFreeShipping,
   } = props;
@@ -324,7 +323,6 @@ const DetailedProductCard = forwardRef((props, ref) => {
           {shouldShowFreeShipping && (
             <div className="campaign-badge campaign-badge-freeshipping">
               <Icon icon={SalesPackageIcons?.FREESHIPPING} sizeInUnits="1rem" />
-              {freeShippingText && <span>{freeShippingText}</span>}
             </div>
           )}
 
@@ -344,11 +342,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
                 />
               )}
 
-              {packageType?.salesPackageCode === "Urgent" ? (
-                <>{urgentText}</>
-              ) : (
-                packageType?.label && <span>{packageType.label}</span>
-              )}
+              {packageType?.salesPackageCode === "Urgent" && <>{urgentText}</>}
             </div>
           ))}
         </div>
