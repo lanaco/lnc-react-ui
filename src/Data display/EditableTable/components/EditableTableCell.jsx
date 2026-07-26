@@ -96,6 +96,16 @@ const EditableTableCell = (props) => {
     }
   }, [focused]);
 
+  // Value of this cell. Null / undefined row values are tolerated, both for the
+  // cell itself and for the nested object when the column uses an objectAccessor.
+  const getCellValue = () => {
+    var cellValue = RowData?.[Column.accessor];
+
+    if (Column?.objectAccessor) return cellValue?.[Column.objectAccessor];
+
+    return cellValue;
+  };
+
   const getWidth = () => {
     if (Column && Column.width) {
       return Column.width + "%";
@@ -148,12 +158,8 @@ const EditableTableCell = (props) => {
       ...themeProps,
       debounceTime: 0,
       ...Column.inputProps,
-      value: Column?.objectAccessor
-        ? RowData[Column.accessor][Column?.objectAccessor]
-        : RowData[Column.accessor],
-      defaultChecked: Column?.objectAccessor
-        ? RowData[Column.accessor][Column?.objectAccessor]
-        : RowData[Column.accessor],
+      value: getCellValue(),
+      defaultChecked: getCellValue(),
       focused: focused,
       onChange: standardOnChange,
       onBlur: (e) => onSetFocus(e, false),
@@ -191,11 +197,11 @@ const EditableTableCell = (props) => {
         inputComponent = (
           <Dropdown
             {...inputProps}
-            value={Column.inputProps.options.find((x) =>
-              x.value === Column?.objectAccessor
-                ? RowData[Column.accessor][Column?.objectAccessor]
-                : RowData[Column.accessor],
-            )}
+            value={
+              (Column.inputProps?.options || []).find(
+                (x) => x?.value === getCellValue(),
+              ) || null
+            }
             onChange={dropdownOnChange}
             ref={inputRef}
           />
@@ -233,11 +239,7 @@ const EditableTableCell = (props) => {
         <Column.editComponent
           ref={inputRef}
           tabIndex={calculateTabIndex()}
-          value={
-            Column?.objectAccessor
-              ? RowData[Column.accessor][Column?.objectAccessor]
-              : RowData[Column.accessor]
-          }
+          value={getCellValue()}
           onChange={(event, value, id) => {
             onChange(event, value, RowIndex, Index, Column, RowData, id);
           }}
@@ -264,18 +266,12 @@ const EditableTableCell = (props) => {
           {Column.readonlyComponent ? (
             <Column.readonlyComponent
               rowData={RowData}
-              value={
-                Column?.objectAccessor
-                  ? RowData[Column.accessor][Column?.objectAccessor]
-                  : RowData[Column.accessor]
-              }
-              fullValue={RowData[Column.accessor]}
+              value={getCellValue()}
+              fullValue={RowData?.[Column.accessor]}
               disabled={true}
             />
-          ) : Column?.objectAccessor ? (
-            RowData[Column.accessor][Column?.objectAccessor]
           ) : (
-            RowData[Column.accessor]
+            getCellValue()
           )}
         </DefaultCellContent>
       );
