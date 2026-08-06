@@ -46,6 +46,12 @@ const ScrollableSectionV3 = forwardRef(
       ? children
       : children?.slice(index, index + itemsPerView);
 
+    const gridColumns = Math.min(numOfSlides, Math.max(1, numOfItems));
+    const tabletGridColumns = Math.min(
+      tabletNumOfSlides ?? 2,
+      Math.max(1, numOfItems),
+    );
+
     const scrollToRight = (e) => {
       e?.target?.blur();
 
@@ -87,8 +93,8 @@ const ScrollableSectionV3 = forwardRef(
         </div>
         <Content
           key={`scrollable-section__content-${index}`}
-          numOfColumns={numOfSlides}
-          tabletNumOfColumns={tabletNumOfSlides}
+          numOfColumns={gridColumns}
+          tabletNumOfColumns={tabletGridColumns}
           {...(!isMobile && {
             animate: {
               x: 0,

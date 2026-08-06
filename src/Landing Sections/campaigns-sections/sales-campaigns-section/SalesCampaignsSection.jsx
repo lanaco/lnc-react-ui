@@ -49,13 +49,21 @@ const SalesCampaignsSection = forwardRef(
   ) => {
     const isMobile = useDetectMobile();
 
+    const isSingleItem = items?.length === 1;
+    const showItemlessBanner =
+      isSingleItem && !isMobile && !!itemlessImageUrl;
+    // 1 or 2 items => wide cards with image on the side (horizontal)
+    const isHorizontalCard = items?.length <= 2;
+    // exactly 3 items => vertical 3-up grid with a smaller (landscape) cover image
+    const isThreeUp = !isMobile && items?.length === 3;
+
     const memoizedItems = useMemo(() => {
       let components = items?.map((item, index) => (
         <MemoizedCampaignItemRecommended
           key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
           className={`campaign-item ${
-            items?.length === 1 ? "horizontal-campaign-item" : ""
-          }`}
+            isHorizontalCard ? "horizontal-campaign-item" : ""
+          } ${isThreeUp ? "three-up-campaign-item" : ""}`}
           coverPhoto={getImage(
             item?.coverPhoto,
             item?.uuid || item?.campaignUuid,
@@ -100,7 +108,7 @@ const SalesCampaignsSection = forwardRef(
         />
       ));
 
-      if (items?.length < 4 && !isMobile && itemlessImageUrl) {
+      if (showItemlessBanner) {
         return [
           ...components,
           <ItemlessBanner
@@ -114,7 +122,7 @@ const SalesCampaignsSection = forwardRef(
       }
 
       return components;
-    }, [items]);
+    }, [items, isMobile, itemlessImageUrl]);
 
     return (
       <SuspenseSalesCampaign
@@ -130,7 +138,7 @@ const SalesCampaignsSection = forwardRef(
           showNavigation={showNavigation}
           hasNextPage={hasNextPage}
           handleFetchNextPage={handleFetchNextPage}
-          className={`lp-section lp-sales-campaigns-section${items?.length < 4 && !isMobile ? " itemless" : ""}`}
+          className={`lp-section lp-sales-campaigns-section${showItemlessBanner ? " itemless" : ""}`}
         >
           {memoizedItems}
         </ScrollableSectionV3>
