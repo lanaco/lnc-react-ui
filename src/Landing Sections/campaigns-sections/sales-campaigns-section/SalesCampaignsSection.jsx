@@ -63,7 +63,7 @@ const SalesCampaignsSection = forwardRef(
           key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
           className={`campaign-item ${
             isHorizontalCard ? "horizontal-campaign-item" : ""
-          } ${isThreeUp ? "three-up-campaign-item" : ""}`}
+          }`}
           coverPhoto={getImage(
             item?.coverPhoto,
             item?.uuid || item?.campaignUuid,
@@ -138,7 +138,7 @@ const SalesCampaignsSection = forwardRef(
           showNavigation={showNavigation}
           hasNextPage={hasNextPage}
           handleFetchNextPage={handleFetchNextPage}
-          className={`lp-section lp-sales-campaigns-section${showItemlessBanner ? " itemless" : ""}`}
+          className={`lp-section lp-sales-campaigns-section${showItemlessBanner ? " itemless" : ""}${isThreeUp ? " three-up" : ""}`}
         >
           {memoizedItems}
         </ScrollableSectionV3>
