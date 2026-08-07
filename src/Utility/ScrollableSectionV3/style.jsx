@@ -34,6 +34,31 @@ export const Container = styled.div`
     }
   }
 
+  /* Exactly 3 items: keep the same card size as the 4-up layout, but center the row
+     so the leftover space is split on both sides instead of dumped on the right. */
+  &.three-up {
+    & .scrollable-section__content {
+      display: flex;
+      justify-content: center;
+
+      & > * {
+        flex: 0 0 calc((100% - 4.5rem) / 4);
+        max-width: calc((100% - 4.5rem) / 4);
+      }
+    }
+
+    @media ${only("M")} {
+      & .scrollable-section__content {
+        display: grid;
+
+        & > * {
+          flex: initial;
+          max-width: none;
+        }
+      }
+    }
+  }
+
   & .scrollable-section__navigation {
     display: flex;
     align-items: flex-start;

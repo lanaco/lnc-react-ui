@@ -57,13 +57,6 @@ export const ImageWrapper = styled.div`
   position: relative;
   overflow: hidden;
 
-  /* Only the 3-up layout caps the cover image to a landscape banner (not a big square).
-     1-2 items (horizontal) and 4+ items keep their original image sizing. */
-  .three-up-campaign-item & {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-  }
-
   & img {
     max-width: 100%;
     min-width: 100%;
