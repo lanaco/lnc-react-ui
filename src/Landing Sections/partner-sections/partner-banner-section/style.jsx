@@ -26,6 +26,7 @@ export const Container = styled.div`
     max-width: 50rem;
 
     & .section__title {
+      margin: 0;
       color: var(--white, #fff);
       font-weight: 600;
       font-size: 2rem;

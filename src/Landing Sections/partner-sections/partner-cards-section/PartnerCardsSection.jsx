@@ -40,9 +40,9 @@ const PartnerCardsSection = forwardRef(
             />
           )}
           {title && (
-            <div className="section__title">
+            <h2 className="section__title">
               <span>{title}</span>
-            </div>
+            </h2>
           )}
           {description && (
             <div className="section__description">{description}</div>

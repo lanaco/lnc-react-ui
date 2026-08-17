@@ -12,6 +12,7 @@ export const Container = styled.div`
   }
 
   & .section__title {
+    margin: 0;
     color: var(--gray-950, #14161a);
     font-weight: 600;
     font-size: 1.5rem;
