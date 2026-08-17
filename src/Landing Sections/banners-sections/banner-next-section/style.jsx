@@ -44,6 +44,7 @@ export const Container = styled.div`
       gap: 0.5rem;
 
       & .section__title {
+        margin: 0;
         ${truncateTextInRows(3)}
         color: #000;
         font-weight: 600;

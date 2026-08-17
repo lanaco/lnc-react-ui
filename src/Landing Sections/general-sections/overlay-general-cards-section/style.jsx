@@ -9,6 +9,7 @@ export const Container = styled.div`
   gap: 1.5rem;
 
   & .section__title {
+    margin: 0;
     color: var(--gray-950, #14161a);
     font-size: 1.5rem;
     font-style: normal;

@@ -103,9 +103,9 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     <Container ref={ref} limit={limit} className="lp-section lp-detailed-products-infinitive-section">
       <div className="section__heading">
         {isDefinedNotEmptyString(title) && (
-          <div className="section__title">
+          <h2 className="section__title">
             {isDefinedNotEmptyString(icon) && <i className={icon} />} {title}
-          </div>
+          </h2>
         )}
         {isDefinedNotEmptyString(viewAllbuttonLink) &&
           isDefinedNotEmptyString(viewAllButonText) &&

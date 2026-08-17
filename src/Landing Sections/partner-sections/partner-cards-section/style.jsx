@@ -17,6 +17,7 @@ export const Container = styled.div`
     gap: 0.75rem;
 
     & .section__title {
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
