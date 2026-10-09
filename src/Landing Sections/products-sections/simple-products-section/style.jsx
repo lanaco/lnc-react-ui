@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { down } from "../../../_utils/breakpoints";
+import { mobileHorizontalScroll } from "../../../_utils/utils";
 
 export const GridWrapper = styled.div`
   display: grid;
@@ -36,32 +37,21 @@ export const GridWrapper = styled.div`
     }
   }
 
-  /* Mobile (≤767px) – title full width above, 2-col product grid below */
+  /* Mobile (≤767px) – title full width above, horizontal scroll row of
+     products below. The cards are wrapped in .simple-products__mobile-row
+     (rendered only on mobile) so the text block does not scroll with them. */
   @media ${down("S")} {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 
     & .text-block-v1 {
-      grid-column: 1 / -1;
-      grid-row: 1;
       max-width: unset;
-      margin: 0 0 1rem 0;
-      align-self: stretch;
+      margin: 0;
     }
 
-    & .simple-product-card:nth-of-type(1),
-    & .simple-product-card:nth-of-type(n + 2) {
-      grid-column: auto;
-      grid-row: auto;
-      max-width: unset;
-      min-width: unset;
-      width: unset;
+    & .simple-products__mobile-row {
+      ${mobileHorizontalScroll("10.5rem")}
     }
-  }
-
-  /* Small phones (≤480px) – single column */
-  @media ${down("XS")} {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
   }
 `;

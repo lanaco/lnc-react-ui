@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 import { down } from "../../../_utils/breakpoints";
+import { mobileHorizontalScroll } from "../../../_utils/utils";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -31,9 +32,9 @@ export const Wrapper = styled.div`
       font-size: 1.375rem;
     }
 
+    /* Mobile: horizontal scroll row instead of a 2-column grid. */
     & .wrapper__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
+      ${mobileHorizontalScroll("11rem")}
     }
   }
 
@@ -41,10 +42,6 @@ export const Wrapper = styled.div`
     & .wrapper__title {
       font-size: 1.375rem;
       font-style: semibold;
-    }
-
-    & .wrapper__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 `;

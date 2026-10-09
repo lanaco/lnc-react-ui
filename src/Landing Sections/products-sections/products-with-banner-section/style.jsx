@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { down } from "../../../_utils/breakpoints";
+import { mobileHorizontalScroll } from "../../../_utils/utils";
 
 export const ProductsBannerWrapper = styled.div`
   width: 100%;
@@ -45,13 +46,8 @@ export const GridWrapper = styled.div`
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  /* Mobile: horizontal scroll row instead of a stacked grid. */
   @media ${down("S")} {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  @media ${down("XS")} {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    ${mobileHorizontalScroll("18rem")}
   }
 `;
