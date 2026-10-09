@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { down } from "../../../_utils/breakpoints";
+import { mobileHorizontalScroll } from "../../../_utils/utils";
 
 export const GridWrapper = styled.div`
   padding: 1.75rem 3rem;
@@ -32,10 +33,6 @@ export const GridWrapper = styled.div`
     background-color: var(--danger-600, #e11d48);
   }
 
-  & .show-more {
-    grid-column: 1 / 3;
-  }
-
   & .product-card {
     max-width: ${(p) =>
       `calc(${100 / p.desktopCols}% - ${
@@ -66,10 +63,16 @@ export const GridWrapper = styled.div`
     gap: 1.5rem;
   }
 
+  /* Mobile: every card in one horizontal scroll row. The row is a separate
+     element (.urgent-products__mobile-row) so overflow-x does not clip the
+     absolutely positioned .urgent-tag on the wrapper. */
   @media ${down("S")} {
-    grid-template-columns: repeat(2, 1fr);
+    display: block;
     padding: 2rem 1.25rem;
-    gap: 1.19rem;
+
+    & .urgent-products__mobile-row {
+      ${mobileHorizontalScroll("8.875rem")}
+    }
 
     & .product-card {
       & img {
@@ -77,10 +80,5 @@ export const GridWrapper = styled.div`
         height: 100%;
       }
     }
-  }
-
-  @media ${down("XS")} {
-    display: flex;
-    flex-direction: column;
   }
 `;

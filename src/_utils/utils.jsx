@@ -568,3 +568,33 @@ export const calcDaysUntil = (targetDate) => {
 
   return Math.ceil(diffMs / dayMs);
 };
+
+/**
+ * Mobile horizontal scroll row: turns a card grid into a single swipeable
+ * row with scroll-snap and a hidden scrollbar. Direct children are the cards
+ * and get a fixed width so the next card peeks in.
+ * Use inside a `@media ${down("S")}` block.
+ */
+export const mobileHorizontalScroll = (cardWidth = "17.5rem") => `
+  display: flex;
+  flex-wrap: nowrap;
+  grid-template-columns: none;
+  gap: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > * {
+    flex: 0 0 auto;
+    width: ${cardWidth};
+    min-width: ${cardWidth};
+    max-width: ${cardWidth};
+    scroll-snap-align: start;
+  }
+`;

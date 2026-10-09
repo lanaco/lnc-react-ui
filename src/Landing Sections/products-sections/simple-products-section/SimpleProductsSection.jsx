@@ -87,7 +87,11 @@ const SimpleProductsSection = forwardRef((props, ref) => {
           onButtonAction={onButtonAction}
           className="text-block-v1"
         />
-        {memoizedProducts}
+        {isMobile === true ? (
+          <div className="simple-products__mobile-row">{memoizedProducts}</div>
+        ) : (
+          memoizedProducts
+        )}
       </GridWrapper>
     </SuspenseSimpleProducts>
   );

@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, useState, memo, useMemo } from "react";
+import { forwardRef, memo, useMemo } from "react";
 import { GridWrapper } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
-import Button from "../../../General/Button/Button";
 import DetailedProductCard from "../../../Landing Components/product components/detailed-product-card";
 import SuspenseDetailedProductCard from "../../../Landing Components/skeleton-components/product/detailed-product-card";
 
@@ -13,11 +12,8 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
   const {
     items,
     limit = 5,
-    limitMobile = 4,
     onSelectCard = () => {},
     title = "Urgent sale",
-    showLessText = "Show less",
-    showMoreText = "Show more",
     isLoading = false,
     getImage = () => {},
     negotiableText,
@@ -31,15 +27,11 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
 
   const isMobile = useDetectMobile();
 
-  const [showAll, setShowAll] = useState(false);
-
   const memoizedProducts = useMemo(() => {
     return (
       <>
         {isMobile === true
-          ? items
-              ?.slice(0, showAll === true ? items?.length : limitMobile)
-              ?.map((x, index) => (
+          ? items?.map((x, index) => (
                 <MemoizedProductCard
                   key={index}
                   sellerName={x?.sellerName}
@@ -130,7 +122,7 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
             ))}
       </>
     );
-  }, [items, isMobile, limit, limitMobile, showAll]);
+  }, [items, isMobile, limit]);
 
   return (
     <SuspenseDetailedProductCard
@@ -142,20 +134,10 @@ const UrgentSaleProductsSection = forwardRef((props, ref) => {
           <i className="mng mng-lnc-bolt-filled" />
           <span>{title}</span>
         </div>{" "}
-        {memoizedProducts}{" "}
-        {isMobile === true && limitMobile < items?.length && !isLoading && (
-          <Button
-            className="show-more"
-            btnType="basic"
-            type="button"
-            color="neutral"
-            onClick={(e) => {
-              e?.target?.blur();
-              setShowAll(!showAll);
-            }}
-          >
-            {showAll === true ? showLessText : showMoreText}
-          </Button>
+        {isMobile === true ? (
+          <div className="urgent-products__mobile-row">{memoizedProducts}</div>
+        ) : (
+          memoizedProducts
         )}
       </GridWrapper>
     </SuspenseDetailedProductCard>
