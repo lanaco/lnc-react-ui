@@ -140,6 +140,7 @@ export default defineConfig({
         resolve(__dirname, "src/Utility/Pagination/Pagination.jsx"),
         //--------------------------------------------------------------------
         resolve(__dirname, "src/ThemeProvider/ThemeProvider.jsx"),
+        resolve(__dirname, "src/_utils/DetectMobileContext.jsx"),
         //--------------------------------------------------------------------
         resolve(
           __dirname,

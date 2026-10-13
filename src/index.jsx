@@ -260,5 +260,9 @@ export {
 
 export { useScreenSize, useIsMobile } from "./_utils/utils";
 export { default as useDetectMobile } from "./_utils/useDetectMobile";
+export {
+  default as DetectMobileProvider,
+  DetectMobileContext,
+} from "./_utils/DetectMobileContext";
 
 //=============================================================================================
