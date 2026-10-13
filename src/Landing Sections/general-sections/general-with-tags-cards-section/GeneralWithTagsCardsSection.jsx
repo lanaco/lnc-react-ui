@@ -5,6 +5,7 @@ import { forwardRef } from "react";
 import GeneralWithTagsCardTag from "../../../Landing Components/general-components/general-with-tags-card/tag";
 import GeneralWithTagsCard from "../../../Landing Components/general-components/general-with-tags-card/card";
 import { Wrapper } from "./style";
+import CategoryCardsVariant from "./CategoryCardsVariant";
 import SuspenseFieldOfInterestsWithTagsTag from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-with-tags/tags";
 import SuspenseFieldOfInterestsWithTagsCard from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-with-tags/cards";
 
@@ -23,10 +24,25 @@ const GeneralWithTagsCardsSection = forwardRef(
       onSelectCard = () => {},
       isLoadingTags = false,
       isLoadingCards = false,
-      LinkComponent
+      LinkComponent,
+      variant = "default",
     },
     ref
   ) => {
+    if (variant === "categoryCards") {
+      return (
+        <CategoryCardsVariant
+          ref={ref}
+          title={title}
+          items={items}
+          onSelectCard={onSelectCard}
+          LinkComponent={LinkComponent}
+        />
+      );
+    }
+
+    const hasOptions = Array.isArray(options) && options.length > 0;
+
     return (
       <Wrapper
         ref={ref}
@@ -60,23 +76,25 @@ const GeneralWithTagsCardsSection = forwardRef(
             ))}
           </div>
         </SuspenseFieldOfInterestsWithTagsCard>
-        <SuspenseFieldOfInterestsWithTagsTag
-          isLoading={isLoadingTags}
-          keyPrefix="general-with-tags-cards-tag"
-        >
-          <div className="wrapper__tags">
-            {options?.map((tag, idx) => (
-              <GeneralWithTagsCardTag
-                key={`general-with-tags-card-tag__${idx + 1}`}
-                icon={tag?.icon}
-                title={tag?.title}
-                onSelectCard={() => onSelectTag?.(tag)}
-                selectAction={tag?.selectAction}
-                LinkComponent={LinkComponent}
-              />
-            ))}
-          </div>
-        </SuspenseFieldOfInterestsWithTagsTag>
+        {(isLoadingTags || hasOptions) && (
+          <SuspenseFieldOfInterestsWithTagsTag
+            isLoading={isLoadingTags}
+            keyPrefix="general-with-tags-cards-tag"
+          >
+            <div className="wrapper__tags">
+              {options.map((tag, idx) => (
+                <GeneralWithTagsCardTag
+                  key={`general-with-tags-card-tag__${idx + 1}`}
+                  icon={tag?.icon}
+                  title={tag?.title}
+                  onSelectCard={() => onSelectTag?.(tag)}
+                  selectAction={tag?.selectAction}
+                  LinkComponent={LinkComponent}
+                />
+              ))}
+            </div>
+          </SuspenseFieldOfInterestsWithTagsTag>
+        )}
       </Wrapper>
     );
   }

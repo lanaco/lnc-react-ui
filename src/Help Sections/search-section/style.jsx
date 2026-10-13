@@ -6,11 +6,13 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 6rem;
 
   & .section__left {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    min-width: 0;
 
     &.search {
       gap: 0.75rem;
@@ -59,7 +61,8 @@ export const Container = styled.div`
     & .section__tags {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
 
       & .section__suggested {
         color: var(--neutral-900, #0c1520);
@@ -68,11 +71,15 @@ export const Container = styled.div`
         font-weight: 400;
         line-height: 1rem;
         letter-spacing: 0.025rem;
+        margin-right: 0.75rem;
       }
     }
   }
 
   & .section__right {
+    flex-shrink: 0;
+    max-width: 100%;
+
     & video {
       border-radius: 1rem;
       overflow: hidden;
@@ -82,11 +89,17 @@ export const Container = styled.div`
 
   @media ${down("S")} {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 
     & .section__left {
       width: 100%;
       text-align: center;
+      align-items: center;
+
+      & .section__tags {
+        width: 100%;
+        justify-content: center;
+      }
 
       & .section__suggested {
         display: none;
@@ -94,6 +107,10 @@ export const Container = styled.div`
     }
 
     & .section__text-input {
+      width: 100%;
+    }
+
+    & .section__right {
       width: 100%;
     }
   }

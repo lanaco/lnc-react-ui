@@ -65,6 +65,7 @@ export const TagWrapper = styled.div`
   padding: 0 0.75rem 0 0.75rem;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   background: var(--neutral-95004, rgba(20, 22, 26, 0.04));
   border-radius: 999px;
   min-width: 2.75rem;
@@ -76,10 +77,12 @@ export const TagWrapper = styled.div`
   }
 
   & .wrapper__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.75rem;
     color: var(--gray-950, #14161a);
     border-radius: 999px;
-    margin-left: -0.5rem;
 
     & i {
       width: auto;
@@ -97,6 +100,7 @@ export const TagWrapper = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 1.5rem;
+    white-space: nowrap;
   }
 
   &.active {
@@ -113,5 +117,6 @@ export const TagWrapper = styled.div`
 
   @media ${down("S")} {
     min-width: fit-content;
+    flex-shrink: 0;
   }
 `;

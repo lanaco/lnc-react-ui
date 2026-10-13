@@ -1,6 +1,17 @@
 import styled from "@emotion/styled";
 import { down } from "../../../_utils/breakpoints";
 
+// backgroundColor is typically a gradient overlay layered over the image
+// (WebFrontend OverlayGeneralCard.astro parity).
+const bgLayers = (backgroundColor, image) => {
+  const overlay =
+    backgroundColor && backgroundColor !== "none" ? backgroundColor : null;
+  return (
+    [overlay, image ? `url("${image}")` : null].filter(Boolean).join(", ") ||
+    "none"
+  );
+};
+
 export const Container = styled.a`
   text-decoration: none;
   color: var(--gray-950);
@@ -13,7 +24,7 @@ export const Container = styled.a`
   cursor: pointer;
   width: 100%;
   min-width: 0;
-  background: ${(p) => p?.backgroundColor}, url("${(p) => p?.backgroundImage}");
+  background: ${(p) => bgLayers(p?.backgroundColor, p?.backgroundImage)};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -67,6 +78,13 @@ export const Container = styled.a`
   }
 
   @media ${down("S")} {
+    ${(p) =>
+      p?.backgroundImageMobile
+        ? `background: ${bgLayers(p?.backgroundColor, p.backgroundImageMobile)};
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;`
+        : ""}
     padding: 2rem;
     min-height: 17.5rem;
     height: auto;

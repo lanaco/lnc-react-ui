@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  width: 100%;
 
   & .wrapper__heading {
     display: flex;
@@ -25,7 +26,8 @@ export const Wrapper = styled.div`
     }
 
     & .wrapper__subtitle {
-      color: var(---gray-600, #676e79);
+      color: var(--gray-600, #676e79);
+      text-align: center;
       font-size: 0.875rem;
       font-style: normal;
       font-weight: 400;
@@ -36,9 +38,11 @@ export const Wrapper = styled.div`
 
   & .wrapper__tags {
     display: flex;
-    justify-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     gap: 0.75rem;
+    width: 100%;
   }
 
   & .wrapper__cards {
@@ -60,9 +64,14 @@ export const Wrapper = styled.div`
     gap: 1rem;
 
     & .wrapper__tags {
-      overflow-x: scroll;
+      flex-wrap: nowrap;
+      overflow-x: auto;
       justify-content: flex-start;
       width: 100%;
+
+      & > * {
+        flex-shrink: 0;
+      }
 
       -webkit-overflow-scrolling: touch;
       ::-webkit-scrollbar {
@@ -78,6 +87,13 @@ export const Wrapper = styled.div`
         /* Safari and Chrome */
       }
     }
+
+    ${(p) =>
+      p?.cardVariant === "legacy"
+        ? ""
+        : `& .wrapper__cards {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }`}
   }
 
   @media ${down("XS")} {

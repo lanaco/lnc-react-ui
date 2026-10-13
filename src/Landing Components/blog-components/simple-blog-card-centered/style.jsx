@@ -22,15 +22,28 @@ export const Wrapper = styled.a`
   min-height: 22.5rem;
   align-items: center;
 
-  & button {
+  /* Span-like bordered "button" (a real <button> can't live inside <a>). */
+  & .simple-blog-card-centered__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: fit-content;
-    margin-top: 1.5rem;
+    margin-top: auto;
+    min-height: 2.25rem;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--gray-300, #bcc4cf);
+    background: transparent;
     color: var(--gray-950, #14161a);
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
     line-height: 1.25rem;
     letter-spacing: -0.09px;
+  }
+
+  &:hover .simple-blog-card-centered__button {
+    background: var(--gray-100, #f3f6fb);
   }
 
   & img {
@@ -51,6 +64,7 @@ export const TextWrapper = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
   color: var(--gray-950, #14161a);
 
@@ -68,6 +82,7 @@ export const TextWrapper = styled.div`
     font-weight: 400;
     line-height: 1.25rem;
     letter-spacing: 0.0156rem;
+    color: var(--gray-700, #4e555f);
     ${truncateTextInRows(3)}
   }
 `;

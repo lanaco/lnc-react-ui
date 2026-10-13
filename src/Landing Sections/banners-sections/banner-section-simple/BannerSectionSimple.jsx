@@ -14,6 +14,7 @@ const BannerSectionSimple = forwardRef((props, ref) => {
     buttonLink,
     onButtonAction = () => {},
     imageUrl,
+    imageUrlMobile,
     imagePosition = "right",
     hideImageForMobile = false,
     sectionHeight = "12.65625rem",
@@ -24,9 +25,30 @@ const BannerSectionSimple = forwardRef((props, ref) => {
     backgroundColor,
     hasBorder = false,
     headerImageUrl,
+    headerImageUrlMobile,
   } = props;
 
   const isMobile = useDetectMobile();
+
+  const showImage =
+    isDefined(imageUrl) &&
+    imageUrl !== "" &&
+    !(hideImageForMobile === true && isMobile === true);
+
+  const renderImage = () =>
+    showImage && (
+      <picture className="banner-picture">
+        {imageUrlMobile && (
+          <source media="(max-width: 767px)" srcSet={imageUrlMobile} />
+        )}
+        <img
+          src={imageUrl}
+          className="banner-image"
+          alt={title || ""}
+          loading="lazy"
+        />
+      </picture>
+    );
 
   return (
     <Container
@@ -36,41 +58,50 @@ const BannerSectionSimple = forwardRef((props, ref) => {
       imgW={imageWidth}
       imgHMob={imageHeightMobile}
       hasBorder={hasBorder}
-      className="lp-section lp-bnr-section lp-banner-section-simple banner-section-simple-lnc"
+      className={`lp-section lp-bnr-section lp-banner-section-simple banner-section-simple-lnc${
+        hideImageForMobile ? " hide-image-mobile" : ""
+      }`}
     >
       {headerImageUrl && (
-        <img src={headerImageUrl} className="header-image" alt="Header image" />
+        <picture className="header-picture">
+          {headerImageUrlMobile && (
+            <source media="(max-width: 767px)" srcSet={headerImageUrlMobile} />
+          )}
+          <img
+            src={headerImageUrl}
+            className="header-image"
+            alt="Header image"
+            loading="lazy"
+          />
+        </picture>
       )}
-      {imagePosition !== "right" &&
-        !(hideImageForMobile === true && isMobile === true) && (
-          <img src={imageUrl} className="banner-image" />
-        )}
+      {imagePosition === "left" && renderImage()}
       <Wrapper
         isHorizontalContent={isHorizontalContent}
         smallPadding={smallPadding}
         hasHeaderImage={isDefined(headerImageUrl)}
+        className="banner-section-simple-content"
       >
         <ContainerHeader>
-          <div className="header-title">{title}</div>
-          <div className="header-subitle">{subtitle}</div>
+          {title && <div className="header-title">{title}</div>}
+          {subtitle && <div className="header-subtitle">{subtitle}</div>}
         </ContainerHeader>
-        <Button
-          size="medium"
-          color="neutral"
-          type="button"
-          className="header-button"
-          onClick={(e) => {
-            e?.target?.blur();
-            onButtonAction(buttonLink);
-          }}
-        >
-          {buttonText}
-        </Button>
-      </Wrapper>
-      {imagePosition === "right" &&
-        !(hideImageForMobile === true && isMobile === true) && (
-          <img src={imageUrl} className="banner-image" />
+        {buttonText && (
+          <Button
+            size="medium"
+            color="neutral"
+            type="button"
+            className="header-button"
+            onClick={(e) => {
+              e?.target?.blur();
+              onButtonAction(buttonLink);
+            }}
+          >
+            {buttonText}
+          </Button>
         )}
+      </Wrapper>
+      {imagePosition !== "left" && renderImage()}
     </Container>
   );
 });

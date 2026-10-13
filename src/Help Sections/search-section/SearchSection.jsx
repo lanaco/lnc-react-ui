@@ -23,7 +23,7 @@ const SearchSection = forwardRef(
     ref,
   ) => {
     return (
-      <Container ref={ref}>
+      <Container ref={ref} className="lp-section lp-search-section">
         {includeSearch ? (
           <div className="section__left search">
             <div>{title && <div className="section__title">{title}</div>}</div>
@@ -39,10 +39,12 @@ const SearchSection = forwardRef(
               }
               color="neutral"
             />
-            <div className="section__tags">
-              <div className="section__suggested">{suggestedText}</div>
-              <SearchSectionTags tags={tags} />
-            </div>
+            {tags?.length > 0 && (
+              <div className="section__tags">
+                <div className="section__suggested">{suggestedText}</div>
+                <SearchSectionTags tags={tags} />
+              </div>
+            )}
           </div>
         ) : (
           <div className="section__left">
@@ -52,9 +54,11 @@ const SearchSection = forwardRef(
                 <div className="section__description">{description}</div>
               )}
             </div>
-            <div className="section__tags">
-              <SearchSectionTags tags={tags} />
-            </div>
+            {tags?.length > 0 && (
+              <div className="section__tags">
+                <SearchSectionTags tags={tags} />
+              </div>
+            )}
           </div>
         )}
         <div className="section__right">

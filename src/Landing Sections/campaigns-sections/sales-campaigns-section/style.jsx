@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import ScrollableSectionV3 from "../../../Utility/ScrollableSectionV3";
 import { down } from "../../../_utils/breakpoints";
 import { getBorderRadiusValueWithUnits } from "../../../_utils/utils";
 
@@ -84,6 +85,29 @@ export const CampaignCardContainer = styled.div`
 
     & .campaign__user {
       margin-top: 1rem;
+    }
+  }
+`;
+
+/**
+ * ScrollableSectionV3 with the web SalesCampaignsSection mobile rules
+ * enforced in CSS as well (title 1.375rem / 1.75rem, no nav arrows on
+ * mobile), so it also holds when the mobile flag and the viewport disagree.
+ */
+export const StyledScrollableSection = styled(ScrollableSectionV3)`
+  & .scrollable-section__title .title__text {
+    margin: 0;
+    letter-spacing: -0.0294rem;
+  }
+
+  @media ${down("S")} {
+    & .scrollable-section__header .scrollable-section__title .title__text {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+    }
+
+    & .scrollable-section__navigation {
+      display: none;
     }
   }
 `;

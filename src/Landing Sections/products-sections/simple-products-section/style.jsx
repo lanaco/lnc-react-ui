@@ -1,57 +1,68 @@
 import styled from "@emotion/styled";
 import { down } from "../../../_utils/breakpoints";
-import { mobileHorizontalScroll } from "../../../_utils/utils";
+import { DARK_BACKGROUND, hiddenScrollbar } from "../_shared";
 
-export const GridWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+const GAP = "1.25rem";
+
+const cardBasis = (count, gap = GAP) =>
+  `calc((100% - ${count - 1} * ${gap}) / ${count})`;
+
+export const Section = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
 
-  & .text-block-v1 {
-    grid-column: 1 / 4;
-    max-width: 27rem;
-    margin: auto;
-  }
+  ${(p) =>
+    p.darkMode
+      ? `
+    background: ${DARK_BACKGROUND};
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+  `
+      : ""}
 
-  /* Tablet (768–1024px) – text 3/4 left, 1 card top-right, 4 equal product cols below */
-  @media ${down("M")} {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-
-    & .text-block-v1 {
-      grid-column: 1 / 4;
-      grid-row: 1;
-      max-width: unset;
-      margin: 0;
-      align-self: start;
-    }
-
-    & .simple-product-card:nth-of-type(1) {
-      grid-column: 4;
-      grid-row: 1;
-    }
-
-    & .simple-product-card:nth-of-type(n + 2) {
-      grid-column: span 1;
-      grid-row: auto;
-    }
-  }
-
-  /* Mobile (≤767px) – title full width above, horizontal scroll row of
-     products below. The cards are wrapped in .simple-products__mobile-row
-     (rendered only on mobile) so the text block does not scroll with them. */
-  @media ${down("S")} {
+  & .simple-products__row {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    gap: ${GAP};
+    scroll-behavior: smooth;
+    ${hiddenScrollbar}
+  }
 
-    & .text-block-v1 {
-      max-width: unset;
-      margin: 0;
+  & .simple-products__row > .simple-product-card,
+  & .simple-products__row > .end-cta {
+    flex: 0 0 ${(p) => cardBasis(p.limit || 6)};
+    min-width: 0;
+  }
+
+  @media ${down("M")} {
+    & .simple-products__row > .simple-product-card,
+    & .simple-products__row > .end-cta {
+      flex-basis: ${cardBasis(4)};
+    }
+  }
+
+  @media ${down("S")} {
+    ${(p) => (p.darkMode ? "padding: 1rem;" : "")}
+
+    & .simple-products__row {
+      gap: 1rem;
+      scroll-snap-type: x mandatory;
     }
 
-    & .simple-products__mobile-row {
-      ${mobileHorizontalScroll("10.5rem")}
+    & .simple-products__row > .simple-product-card {
+      flex: 0 0 auto;
+      width: 10.5rem;
+      min-width: 10.5rem;
+      scroll-snap-align: start;
+    }
+
+    & .simple-products__row > .end-cta {
+      flex: 0 0 auto;
     }
   }
 `;
+
+// Kept for backward compatibility (was the old grid wrapper export).
+export const GridWrapper = Section;

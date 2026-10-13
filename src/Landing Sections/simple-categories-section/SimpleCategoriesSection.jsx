@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
-import { GridWrapper } from "./style";
+import { GridWrapper, SectionWrapper } from "./style";
 import useDetectMobile from "../../_utils/useDetectMobile";
 import { isDefinedNotEmptyString } from "../../_utils/utils";
-import { RegulatTitleSectionWrapper } from "../style";
 import Button from "../../General/Button/Button";
 import CategorySimpleCard from "../../Landing Components/category-components/category-simple-card/CategorySimpleCard";
 import SuspenseSimpleCategories from "../../Landing Components/skeleton-components/general/simple-categories";
@@ -14,6 +13,9 @@ const MemoizedCategoryCard = memo(CategorySimpleCard);
 const SimpleCategoriesSection = forwardRef((props, ref) => {
   const {
     icon,
+    iconColor = "var(--danger-600, #e53a35)",
+    badge,
+    showMoreAtEnd = false,
     title = "Shop by category",
     items,
     buttonText = "Shop now",
@@ -27,6 +29,10 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
   } = props;
 
   const isMobile = useDetectMobile();
+  const hasButton =
+    isDefinedNotEmptyString(buttonText) && isDefinedNotEmptyString(buttonLink);
+  const hasEndCta = showMoreAtEnd && hasButton;
+  const EndCtaComponent = LinkComponent || "a";
 
   const memoizedProducts = useMemo(() => {
     return (
@@ -60,17 +66,27 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
               ))}
       </>
     );
-  }, [items]);
+  }, [items, isMobile, limit]);
 
   return (
-    <RegulatTitleSectionWrapper ref={ref} className="lp-section lp-simple-categories-section">
+    <SectionWrapper ref={ref} className="lp-section lp-simple-categories-section">
       <div className="regular-title">
         <div className="regular-title-text">
-          {isDefinedNotEmptyString(icon) && <i className={icon} />}
-          <span>{title}</span>
+          {isDefinedNotEmptyString(icon) && (
+            <i className={icon} style={{ color: iconColor }} />
+          )}
+          {isDefinedNotEmptyString(title) && (
+            <span className="section__title">{title}</span>
+          )}
+          {isDefinedNotEmptyString(badge) && (
+            <span className="title-badge">
+              <i className="mng-lnc-percentage" />
+              {badge}
+            </span>
+          )}
         </div>
-        {isDefinedNotEmptyString(buttonText) &&
-          isDefinedNotEmptyString(buttonLink) &&
+        {hasButton &&
+          !showMoreAtEnd &&
           !isLoading && (
             <Button
               type="button"
@@ -91,9 +107,25 @@ const SimpleCategoriesSection = forwardRef((props, ref) => {
         isLoading={isLoading}
         keyPrefix="simple-categories-skeleton"
       >
-        <GridWrapper limit={limit}>{memoizedProducts}</GridWrapper>
+        <GridWrapper limit={limit}>
+          {memoizedProducts}
+          {hasEndCta && (
+            <EndCtaComponent
+              className="end-cta"
+              onClick={() => onButtonAction(buttonLink)}
+              {...(LinkComponent
+                ? { to: `/${buttonLink}` }
+                : { href: `/${buttonLink}` })}
+            >
+              <span>{buttonText}</span>
+              <span className="end-cta__icon">
+                <i className="mng-lnc-arrow--right" />
+              </span>
+            </EndCtaComponent>
+          )}
+        </GridWrapper>
       </SuspenseSimpleCategories>
-    </RegulatTitleSectionWrapper>
+    </SectionWrapper>
   );
 });
 

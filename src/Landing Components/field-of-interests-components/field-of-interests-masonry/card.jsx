@@ -32,12 +32,14 @@ const FieldOfInterestsMasonryCard = forwardRef(
         className={className}
         onClick={onSelectCard}
         as={Component}
-        {...(LinkComponent ? { to: `/${link}` } : { href: `/${link}` })}
+        {...(LinkComponent
+          ? { to: `/${link}` }
+          : { href: isDefined(link) ? `/${link}` : undefined })}
       >
         {isDefined(imageComponent) ? (
           imageComponent
         ) : (
-          <img src={image} className="wrapper__image" />
+          <img src={image} alt={title || ""} className="wrapper__image" />
         )}
         <div className="wrapper__content">
           {title && <div className="wrapper__title">{title}</div>}

@@ -4,9 +4,23 @@ import { forwardRef } from "react";
 
 import FieldOfInterestsWithTagsCardTag from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/tag";
 import FieldOfInterestsWithTagsCard from "../../../Landing Components/field-of-interests-components/field-of-interests-with-tags-card/card";
+import FieldOfInterestsMasonryCard from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/card";
+import { isDefined, isDefinedNotEmptyString } from "../../../_utils/utils";
 import { Wrapper } from "./style";
 import SuspenseFieldOfInterestsWithTagsCard from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-with-tags/cards";
 import SuspenseFieldOfInterestsWithTagsTag from "../../../Landing Components/skeleton-components/field-of-interests/field-of-interests-with-tags/tags";
+
+// Cards link via their own `link` field (like the masonry card / web). When a
+// card has no `link`, fall back to the legacy product URL built from uuid.
+const getCardLink = (card) => {
+  if (isDefined(card?.link)) return card.link;
+  if (isDefined(card?.uuid)) {
+    return `product/${
+      isDefinedNotEmptyString(card?.nameSlug) ? `${card.nameSlug}-` : ""
+    }${card.uuid}`;
+  }
+  return undefined;
+};
 
 const FieldOfInterestsWithTagsCardsSection = forwardRef(
   (
@@ -25,7 +39,12 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
       activeColor,
       onSelectTag = () => {},
       onSelectCard = () => {},
-      LinkComponent
+      LinkComponent,
+      // "masonry" (default): same card design as the web / masonry section
+      // (natural-height image, description hidden on mobile).
+      // "legacy": the previous square-cropped product-style card.
+      cardVariant = "masonry",
+      className,
     },
     ref
   ) => {
@@ -36,7 +55,10 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
         limitTagsForMobile={limitTagsForMobile}
         limitCards={limit}
         limitCardsForMobile={limitForMobile}
-        className="lp-section lp-field-of-interests-with-tags-cards-section"
+        cardVariant={cardVariant}
+        className={`lp-section lp-field-of-interests-with-tags-cards-section${
+          className ? ` ${className}` : ""
+        }`}
       >
         <div className="wrapper__heading">
           {title && <div className="wrapper__title">{title}</div>}
@@ -60,23 +82,37 @@ const FieldOfInterestsWithTagsCardsSection = forwardRef(
           </div>
         </SuspenseFieldOfInterestsWithTagsTag>
         <SuspenseFieldOfInterestsWithTagsCard
-          isLoading={isLoadingTags}
+          isLoading={isLoadingTags || isLoadingCards}
           keyPrefix="field-of-interests-with-tags-card"
         >
           <div className="wrapper__cards">
-            {items?.map((card, idx) => (
-              <FieldOfInterestsWithTagsCard
-                key={`field-of-interests-with-tags-card__${idx + 1}`}
-                image={card?.image}
-                imageComponent={card?.imageComponent}
-                name={card?.title}
-                description={card?.description}
-                onSelectCard={() => onSelectCard?.(card)}
-                uuid={card?.uuid}
-                nameSlug={card?.nameSlug}
-                LinkComponent={LinkComponent}
-              />
-            ))}
+            {items?.map((card, idx) =>
+              cardVariant === "legacy" ? (
+                <FieldOfInterestsWithTagsCard
+                  key={`field-of-interests-with-tags-card__${idx + 1}`}
+                  image={card?.image}
+                  imageComponent={card?.imageComponent}
+                  name={card?.title}
+                  description={card?.description}
+                  onSelectCard={() => onSelectCard?.(card)}
+                  uuid={card?.uuid}
+                  nameSlug={card?.nameSlug}
+                  LinkComponent={LinkComponent}
+                />
+              ) : (
+                <FieldOfInterestsMasonryCard
+                  key={`field-of-interests-with-tags-card__${idx + 1}`}
+                  image={card?.image}
+                  imageComponent={card?.imageComponent}
+                  title={card?.title}
+                  description={card?.description}
+                  onSelectCard={() => onSelectCard?.(card)}
+                  className="wrapper__card"
+                  link={getCardLink(card)}
+                  LinkComponent={LinkComponent}
+                />
+              )
+            )}
           </div>
         </SuspenseFieldOfInterestsWithTagsCard>
       </Wrapper>

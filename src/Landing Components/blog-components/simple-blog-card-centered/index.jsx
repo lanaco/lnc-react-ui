@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import { forwardRef, useRef } from "react";
 import { TextWrapper, Wrapper } from "./style";
-import Button from "../../../General/Button/Button";
 import ProductImageWrapper from "../../product-img-wrapper";
 
 const SimpleBlogCardCentered = forwardRef((props, ref) => {
@@ -36,19 +36,12 @@ const SimpleBlogCardCentered = forwardRef((props, ref) => {
     >
       <ProductImageWrapper src={image} />
       <TextWrapper>
-        <div className="text-wr-title">{title}</div>
-        <div className="text-wr">{text}</div>
+        {title && <div className="text-wr-title">{title}</div>}
+        {text && <div className="text-wr">{text}</div>}
       </TextWrapper>
-      <Button
-        borderRadius="curved"
-        color="gray"
-        type="button"
-        btnType="outline"
-        onClick={handleCardClick}
-        size="medium"
-      >
-        {buttonText}
-      </Button>
+      {buttonText && (
+        <span className="simple-blog-card-centered__button">{buttonText}</span>
+      )}
     </Wrapper>
   );
 });

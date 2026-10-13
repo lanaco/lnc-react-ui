@@ -4,7 +4,9 @@ import { down } from "../../../_utils/breakpoints";
 
 export const TagsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
+  align-items: center;
   align-content: center;
 
   & .tags__item {
@@ -15,7 +17,8 @@ export const TagsContainer = styled.div`
     font-weight: 400;
     line-height: 1rem;
     letter-spacing: 0.025rem;
-    padding: 0.5rem;
+    border-radius: 999px;
+    padding: 0.5rem 0.75rem;
 
     &:hover {
       background: var(--gray-200, #e4e9f0);
@@ -28,21 +31,10 @@ export const TagsContainer = styled.div`
 
   @media ${down("S")} {
     width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
+    justify-content: center;
 
-    -webkit-overflow-scrolling: touch;
-    ::-webkit-scrollbar {
-      -webkit-appearance: none;
-    }
-    -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
-    scrollbar-width: none;
-    /* Firefox */
-
-    &::-webkit-scrollbar {
-      display: none;
-      /* Safari and Chrome */
+    & .tags__item {
+      padding: 0.5rem 0.75rem;
     }
   }
 `;
@@ -54,19 +46,43 @@ export const PlayButtonContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  max-width: 31.25rem;
+  max-width: min(31.25rem, 100%);
   max-height: 18.75rem;
   border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
 
   & .section__thumbnail {
+    display: block;
     width: 100%;
     height: 100%;
-    max-width: 31.25rem;
+    max-width: min(31.25rem, 100%);
     max-height: 18.75rem;
     border-radius: 1rem;
+    object-fit: cover;
   }
 
   & .section__play {
     position: absolute;
+  }
+`;
+
+export const VideoContainer = styled.div`
+  width: 31.25rem;
+  max-width: 100%;
+  height: 18.75rem;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  & video {
+    border-radius: 1rem;
+    object-fit: cover;
+  }
+
+  @media ${down("S")} {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 3;
+    max-height: 18.75rem;
   }
 `;

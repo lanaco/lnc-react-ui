@@ -15,6 +15,8 @@ const GiftCard = forwardRef((props, ref) => {
     LinkComponent,
   } = props;
   const Component = LinkComponent || "a";
+  const hasPrice =
+    price !== null && price !== undefined && price !== "" && !!currency;
 
   return (
     <ExternalWrapper
@@ -31,11 +33,11 @@ const GiftCard = forwardRef((props, ref) => {
           })}
     >
       <CardWrapper>
-        <div className="price-tag">
-          {price &&
-            currency &&
-            `${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
-        </div>
+        {hasPrice && (
+          <div className="price-tag">
+            {`${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
+          </div>
+        )}
         <img src={image} />
       </CardWrapper>
       <div className="text-wrap">{text}</div>
