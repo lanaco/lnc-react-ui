@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { forwardRef, useRef } from "react";
@@ -15,6 +16,7 @@ const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
     metadata,
     link,
     LinkComponent,
+    className = "",
   } = props;
   const Component = LinkComponent || "a";
 
@@ -29,18 +31,20 @@ const SimpleBlogCardHorizontal = forwardRef((props, ref) => {
       ref={cardRef}
       name={metadata?.name}
       data-accessor={metadata?.accessor}
-      className="blog-card"
+      className={`blog-card ${className}`.trim()}
       onClick={handleCardClick}
       to={`/${link}`}
       as={Component}
       {...(LinkComponent ? { to: `/${link}` } : { href: `/${link}` })}
     >
       <TextWrapper>
-        <div className="text-wr-title">{title}</div>
-        <div className="text-wr">{text}</div>
-        <Link color="gray" onClick={handleCardClick}>
-          {buttonText}
-        </Link>
+        {title && <div className="text-wr-title">{title}</div>}
+        {text && <div className="text-wr">{text}</div>}
+        {buttonText && (
+          <Link color="gray" onClick={handleCardClick}>
+            {buttonText}
+          </Link>
+        )}
       </TextWrapper>
       <ProductImageWrapper src={imageUrl} />
     </Wrapper>

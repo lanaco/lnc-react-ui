@@ -3,6 +3,7 @@
 import { forwardRef } from "react";
 import Button from "../../../General/Button/Button";
 import { Container } from "./style";
+import { isDefinedNotEmptyString } from "../../../_utils/utils";
 
 const OverlayGeneralCard = forwardRef(
   (
@@ -11,6 +12,7 @@ const OverlayGeneralCard = forwardRef(
       description,
       buttonText,
       imageUrl,
+      imageUrlMobile,
       backgroundColor = "none",
       handleSelectCard = () => {},
       handleButtonAction = () => {},
@@ -25,6 +27,7 @@ const OverlayGeneralCard = forwardRef(
       <Container
         ref={ref}
         backgroundImage={imageUrl}
+        backgroundImageMobile={imageUrlMobile}
         backgroundColor={backgroundColor}
         onClick={handleSelectCard}
         as={Component}
@@ -42,18 +45,20 @@ const OverlayGeneralCard = forwardRef(
             <div className="section__description">{description}</div>
           )}
         </div>
-        <Button
-          text={buttonText}
-          onClick={(e) => {
-            e?.preventDefault();
-            e?.stopPropagation();
+        {isDefinedNotEmptyString(buttonText) && (
+          <Button
+            text={buttonText}
+            onClick={(e) => {
+              e?.preventDefault();
+              e?.stopPropagation();
 
-            handleButtonAction();
-          }}
-          borderRadius="regular"
-          color="gray"
-          className="section__action"
-        />
+              handleButtonAction();
+            }}
+            borderRadius="regular"
+            color="gray"
+            className="section__action"
+          />
+        )}
       </Container>
     );
   },

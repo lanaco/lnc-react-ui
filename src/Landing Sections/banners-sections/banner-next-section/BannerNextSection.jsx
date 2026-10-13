@@ -13,6 +13,7 @@ const BannerNextSection = forwardRef(
       title,
       description,
       imageUrl,
+      imageUrlMobile,
       backgroundColor = "white",
       buttonText,
       buttonLink,
@@ -27,7 +28,12 @@ const BannerNextSection = forwardRef(
         <div className="section__left">
           {imageUrl && (
             <div className="section__image">
-              <img src={imageUrl} alt="Banner next image" loading="lazy" />
+              <picture className="section__picture">
+                {imageUrlMobile && (
+                  <source media="(max-width: 767px)" srcSet={imageUrlMobile} />
+                )}
+                <img src={imageUrl} alt="Banner next image" loading="lazy" />
+              </picture>
             </div>
           )}
         </div>

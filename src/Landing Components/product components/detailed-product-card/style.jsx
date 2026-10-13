@@ -22,10 +22,9 @@ export const Wrapper = styled.a`
     width: 0;
   }
   & .seller {
-    text-transform: uppercase;
     ${truncateText()}
-    color: var(--gray-500);
-    font-size: 0.625rem;
+    color: var(--gray-600, #676e79);
+    font-size: 0.75rem;
     font-weight: 400;
   }
 

@@ -26,14 +26,11 @@ const CalorieCalculator = forwardRef((props, ref) => {
     activityLevelText,
     goalText,
     goals,
-    title = "Daily calorie calculator",
-    subtitle = "Lorem ipsum dolor sit amet",
-    list = [
-      "Ovdje može pisati zašto je bitno da znamo kolika nam je dnevna kalorijska potreba.",
-      "Ovdje može pisati zašto je bitno da znamo kolikanam je dnevna kalorijska potreba.",
-      "From certified dealers from all over Europe",
-    ],
-    buttonText = "Calculate calorie needs",
+    // No filler defaults: CMS fields that are empty render nothing.
+    title,
+    subtitle,
+    list = [],
+    buttonText,
   } = props;
 
   const [activeStep, setActiveStep] = useState(1);
@@ -62,20 +59,28 @@ const CalorieCalculator = forwardRef((props, ref) => {
 
   return (
     <Wrapper ref={ref}>
-      <ContainerHeader>
-        <div className="header-title">{title}</div>
-        <div className="header-subtitle">{subtitle}</div>
-      </ContainerHeader>
+      {(title || subtitle) && (
+        <ContainerHeader>
+          {title && <div className="header-title">{title}</div>}
+          {subtitle && <div className="header-subtitle">{subtitle}</div>}
+        </ContainerHeader>
+      )}
       {activeStep === 1 && (
-        <BannerSectionWithList
-          //   title={"Daily calorie calculator"}
-          //   subtitle={"Lorem ipsum dolor"}
-          buttonText={buttonText}
-          onButtonAction={() => {
-            setActiveStep(2);
-          }}
-          list={list}
-        />
+        <div
+          className={`calorie-calculator__intro${
+            buttonText ? "" : " calorie-calculator__intro--no-button"
+          }`}
+        >
+          <BannerSectionWithList
+            //   title={"Daily calorie calculator"}
+            //   subtitle={"Lorem ipsum dolor"}
+            buttonText={buttonText}
+            onButtonAction={() => {
+              setActiveStep(2);
+            }}
+            list={(list || []).filter(Boolean)}
+          />
+        </div>
       )}
       {activeStep === 2 && (
         <CalorieCalculating

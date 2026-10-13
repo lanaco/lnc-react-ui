@@ -21,11 +21,13 @@ const MasonryGeneralCardsSection = forwardRef(
   ) => {
     return (
       <RegularTitleSectionWrapper ref={ref} className="lp-section lp-general-section lp-masonry-general-cards-section">
-        <div className="regular-title">
-          <div className="regular-title-text">
-            <span>{title}</span>
+        {title && (
+          <div className="regular-title">
+            <div className="regular-title-text">
+              <h2 className="section__title">{title}</h2>
+            </div>
           </div>
-        </div>
+        )}
         <SuspenseMasonryGeneralCards
           isLoading={isLoading}
           keyPrefix="masonry-general-cards-skeleton"

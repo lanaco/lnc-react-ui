@@ -1,14 +1,22 @@
 import styled from "@emotion/styled";
-import { down } from "../../../_utils/breakpoints";
+import { down, only } from "../../../_utils/breakpoints";
+
+const GAP = "2rem";
+
+const cardMax = (count, gap = GAP) =>
+  `calc((100% - ${count - 1} * ${gap}) / ${count})`;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
 
   & .section__heading {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   & .section__title {
@@ -34,15 +42,19 @@ export const Container = styled.div`
     }
   }
 
+  /* auto-fit + a computed max track width (same as the web): fewer items than
+     \`limit\` stay packed at their normal width instead of stretching. */
   & .section__items {
     display: grid;
-    grid-template-columns: ${(p) => `repeat(${p.limit},  minmax(0, 1fr))`};
-    gap: 2rem;
+    grid-template-columns: ${(p) =>
+      `repeat(auto-fit, minmax(0, ${cardMax(p.limit || 4)}))`};
+    justify-content: flex-start;
+    gap: ${GAP};
   }
 
-  @media ${down("M")} {
+  @media ${only("M")} {
     & .section__items {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(0, ${cardMax(6)}));
     }
   }
 
@@ -69,24 +81,33 @@ export const Container = styled.div`
   @media ${down("S")} {
     gap: 1.25rem;
 
+    & .section__title {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+    }
+
     & .section__items {
       display: flex;
       gap: 1rem;
       overflow-x: auto;
-
       -webkit-overflow-scrolling: touch;
-      ::-webkit-scrollbar {
-        -webkit-appearance: none;
-      }
       -ms-overflow-style: none;
-      /* Internet Explorer 10+ */
       scrollbar-width: none;
-      /* Firefox */
 
       &::-webkit-scrollbar {
         display: none;
-        /* Safari and Chrome */
       }
+
+      & > .product-card {
+        flex: 0 0 auto;
+        width: 8.875rem;
+        min-width: 8.875rem;
+      }
+    }
+
+    /* Like the web: no load-more control on mobile, the row just scrolls. */
+    & .section__show-more {
+      display: none;
     }
   }
 `;

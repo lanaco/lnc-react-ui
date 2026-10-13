@@ -352,6 +352,8 @@ export default defineConfig({
           __dirname,
           "src/Landing Sections/banners-sections/banner-next-section/BannerNextSection.jsx",
         ),
+        resolve(__dirname, "src/Landing Sections/banners-sections/timer-section/TimerSection.jsx"),
+        resolve(__dirname, "src/Landing Sections/custom-sections/seo-text-section/SeoTextSection.jsx"),
         resolve(
           __dirname,
           "src/Landing Sections/partner-sections/partner-cards-section/PartnerCardsSection.jsx",

@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, useLayoutEffect } from "react";
+import { forwardRef, useLayoutEffect, useRef } from "react";
 
-import { isDefinedNotEmptyString } from "../../../_utils/utils";
 import FieldOfInterestsMasonryTag from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/tag";
 import FieldOfInterestsMasonry from "../../../Landing Components/field-of-interests-components/field-of-interests-masonry/card";
 import { Wrapper } from "./style";
@@ -30,61 +29,98 @@ const FieldOfInterestsMasonrySection = forwardRef(
     },
     ref,
   ) => {
+    // Own ref to the cards grid. Never query the global `document` or listen
+    // on the global `window`: the section may be rendered through a portal
+    // into an iframe (e.g. backoffice mobile preview), where those globals
+    // belong to the parent app.
+    const gridRef = useRef(null);
+
     useLayoutEffect(() => {
-      if (!isDefinedNotEmptyString(className)) {
+      const grid = gridRef.current;
+      if (!grid) {
         return;
       }
 
-      const applyMasonry = () => {
-        const grid = document?.querySelector(`.${className} .wrapper__cards`);
-        const items = grid?.querySelectorAll(".wrapper__card");
+      const view = grid.ownerDocument?.defaultView;
+      let isDisposed = false;
 
-        items?.forEach((item) => {
-          const itemHeight = item.getBoundingClientRect().height;
-          const rowSpan = Math.ceil((itemHeight + 10) / 20);
-          item.style.gridRowEnd = `span ${rowSpan}`;
+      const applyMasonry = () => {
+        if (isDisposed) return;
+
+        const cards = grid.querySelectorAll(".wrapper__card");
+        let bottom = 0;
+
+        cards.forEach((card) => {
+          const cardHeight = card.getBoundingClientRect().height;
+          const rowSpan = Math.ceil((cardHeight + 10) / 20);
+          card.style.gridRowEnd = `span ${rowSpan}`;
         });
 
-        const lastItem = items?.[items?.length - 1];
-        if (lastItem) {
-          const bottom = lastItem.offsetTop + lastItem.offsetHeight;
+        cards.forEach((card) => {
+          bottom = Math.max(bottom, card.offsetTop + card.offsetHeight);
+        });
+
+        if (cards.length > 0) {
           grid.style.height = `${bottom}px`;
+        } else {
+          grid.style.height = "";
         }
       };
 
-      const grid = document?.querySelector(`.${className} .wrapper__cards`);
-      const imgs = grid?.querySelectorAll(".wrapper__image");
+      // Run once every image in the grid has either loaded or failed (a
+      // broken image must not block the layout forever).
+      const imgs = Array.from(grid.querySelectorAll("img"));
+      const pending = imgs.filter((img) => !img.complete);
+      let settled = 0;
 
-      let imgsLoaded = 0;
-
-      if (imgs?.length === 0) {
-        applyMasonry();
-      } else {
-        imgs?.forEach((img) => {
-          if (img.complete) {
-            imgsLoaded++;
-          } else {
-            img.addEventListener("load", () => {
-              imgsLoaded++;
-
-              if (imgsLoaded === imgs?.length) {
-                applyMasonry();
-              }
-            });
-          }
-        });
-
-        if (imgsLoaded === imgs?.length) {
+      const onImageSettled = () => {
+        settled++;
+        if (settled === pending.length) {
           applyMasonry();
         }
+      };
+
+      pending.forEach((img) => {
+        img.addEventListener("load", onImageSettled);
+        img.addEventListener("error", onImageSettled);
+      });
+
+      if (pending.length === 0) {
+        applyMasonry();
       }
 
-      window.addEventListener("resize", applyMasonry);
+      // Re-apply when the grid's width changes (that is what changes card
+      // heights). Prefer a ResizeObserver from the grid's own window; fall
+      // back to that window's resize event.
+      let resizeObserver;
+      let lastWidth = grid.getBoundingClientRect().width;
+
+      const ResizeObserverCtor = view?.ResizeObserver;
+      if (typeof ResizeObserverCtor === "function") {
+        resizeObserver = new ResizeObserverCtor((entries) => {
+          const width = entries?.[0]?.contentRect?.width;
+          if (width === undefined || width === lastWidth) return;
+          lastWidth = width;
+          applyMasonry();
+        });
+        resizeObserver.observe(grid);
+      } else {
+        view?.addEventListener("resize", applyMasonry);
+      }
 
       return () => {
-        window.removeEventListener("resize", applyMasonry);
+        isDisposed = true;
+        pending.forEach((img) => {
+          img.removeEventListener("load", onImageSettled);
+          img.removeEventListener("error", onImageSettled);
+        });
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+        } else {
+          view?.removeEventListener("resize", applyMasonry);
+        }
       };
-    }, [className, items]);
+    }, [items]);
 
     return (
       <Wrapper
@@ -118,7 +154,7 @@ const FieldOfInterestsMasonrySection = forwardRef(
             </div>
           </div>
         </SuspenseFieldOfInterestsMasonryTag>
-        <div className="wrapper__cards">
+        <div className="wrapper__cards" ref={gridRef}>
           {items?.map((card, idx) => (
             <FieldOfInterestsMasonry
               key={`field-of-interests-with-tags-card__${idx + 1}`}

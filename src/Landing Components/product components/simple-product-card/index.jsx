@@ -17,6 +17,7 @@ const SimpleProductCard = forwardRef((props, ref) => {
     uuid,
     title,
     price = 0,
+    sellingPrice,
     currency,
     isNegotiable,
     isFree,
@@ -32,6 +33,18 @@ const SimpleProductCard = forwardRef((props, ref) => {
   } = props;
   const Component = LinkComponent || "a";
   const productCardRef = useRef();
+
+  // Same rule as the web card: prefer sellingPrice, fall back to price, and
+  // render no chip at all when there is nothing to show.
+  const displayPrice = sellingPrice ?? price;
+  const priceLabel =
+    displayPrice > 0 && currency && isNegotiable !== true && isFree !== true
+      ? `${formatPrice(displayPrice)} ${GetCurrencySymbol(currency)}`
+      : isNegotiable
+        ? negotiableText
+        : isFree
+          ? freeText
+          : null;
 
   return (
     <Wrapper
@@ -53,22 +66,16 @@ const SimpleProductCard = forwardRef((props, ref) => {
             }${uuid}`,
           })}
     >
-      {isDefined(imageComponent) ? (
-        imageComponent
-      ) : (
-        <ProductImageWrapper src={image} />
-      )}
+      <div className="img-wrapper">
+        {isDefined(imageComponent) ? (
+          imageComponent
+        ) : (
+          <ProductImageWrapper src={image} alt={title} loading="lazy" />
+        )}
+      </div>
       <div className="text-block">
-        <div className="title-simple-product-card">{title}</div>
-        <div className="price-chip">
-          {price > 0 &&
-            currency &&
-            isNegotiable !== true &&
-            isFree !== true &&
-            `${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
-          {isNegotiable && negotiableText}
-          {isFree && freeText}
-        </div>
+        {priceLabel && <span className="price-chip">{priceLabel}</span>}
+        <span className="title-simple-product-card">{title}</span>
       </div>
     </Wrapper>
   );

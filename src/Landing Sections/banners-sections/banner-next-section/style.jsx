@@ -8,9 +8,10 @@ export const Container = styled.div`
   align-items: center;
 
   border-radius: 0.75rem;
-  border: 1px solid var(--gray-95008);
+  border: 1px solid var(--gray-95008, rgba(20, 22, 26, 0.08));
+  overflow: hidden;
 
-  background: ${(p) => p?.backgroundColor};
+  background: ${(p) => p?.backgroundColor || "white"};
 
   /* drop-shadow */
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
@@ -21,6 +22,10 @@ export const Container = styled.div`
 
     & .section__image {
       height: 100%;
+
+      & .section__picture {
+        display: contents;
+      }
 
       & img {
         height: 100%;
@@ -68,6 +73,8 @@ export const Container = styled.div`
     }
 
     & .section__action {
+      flex-shrink: 0;
+      padding: 0 1.5rem;
       font-weight: 500;
       font-size: 0.875rem;
       leading-trim: none;
@@ -88,6 +95,11 @@ export const Container = styled.div`
     }
   }
 
+  @media ${down("M")} {
+    border: none;
+    box-shadow: none;
+  }
+
   @media ${down("S")} {
     flex-direction: column;
 
@@ -105,6 +117,12 @@ export const Container = styled.div`
 
     & .section__right {
       flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+
+      & .section__action {
+        align-self: flex-start;
+      }
     }
   }
 `;

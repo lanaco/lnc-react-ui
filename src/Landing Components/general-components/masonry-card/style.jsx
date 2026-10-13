@@ -57,11 +57,15 @@ export const Wrapper = styled.a`
     object-fit: cover;
     border-radius: 0.75rem;
     mix-blend-mode: multiply;
-    transition: var(--transiton, all 0.2s ease);
+    transition: transform 0.2s ease;
+  }
 
-    &:hover {
-      transform: scale(1.2);
-    }
+  &:hover .wrapper__image {
+    transform: scale(1.2);
+  }
+
+  & .wrapper__image--mobile {
+    display: none;
   }
 
   & .wrapper__image--skeleton {
@@ -69,6 +73,10 @@ export const Wrapper = styled.a`
     height: 30rem;
     border-radius: 0.75rem;
     background-color: ${linearGradientAnimation("-90deg")};
+  }
+
+  &:hover .wrapper__text .text__action {
+    background-color: var(--gray-200, #e4e9f0);
   }
 
   & .wrapper__text {
@@ -105,7 +113,7 @@ export const Wrapper = styled.a`
     }
 
     & .text__description {
-      color: var(--white);
+      color: var(--white, #fff);
       font-size: 0.875rem;
       font-style: normal;
       font-weight: 400;
@@ -114,16 +122,20 @@ export const Wrapper = styled.a`
     }
 
     & .text__action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.25rem;
+      padding: 0 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
       background-color: var(--white, #fff);
       color: var(--neutral-600, #0f2a46);
       border: 1px solid var(--gray-200, #e4e9f0);
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
         0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      transition: var(--transiton, all 0.2s ease);
-
-      &:hover {
-        background-color: var(--gray-200, #e4e9f0);
-      }
+      transition: background-color 0.2s ease;
     }
 
     & .text__title--skeleton {
@@ -144,12 +156,17 @@ export const Wrapper = styled.a`
       width: 9rem;
     }
   }
-  cursor: pointer;
-
   @media ${down("S")} {
     & .wrapper__image {
-      height: 100%;
-      max-height: 14.5rem;
+      height: 14.5rem;
+    }
+
+    & .wrapper__image--desktop {
+      display: none;
+    }
+
+    & .wrapper__image--mobile {
+      display: block;
     }
   }
 `;

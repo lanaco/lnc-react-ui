@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { down } from "../../../_utils/breakpoints";
+import { mobileHorizontalScroll } from "../../../_utils/utils";
 
 export const RegularTitleSectionWrapper = styled.div`
   display: flex;
@@ -25,6 +26,16 @@ export const RegularTitleSectionWrapper = styled.div`
     }
   }
 
+  & .section__title {
+    margin: 0;
+    color: var(--gray-950, #14161a);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    letter-spacing: -0.0294rem;
+  }
+
   @media ${down("S")} {
     & .regular-title {
       font-size: 1.375rem;
@@ -33,25 +44,29 @@ export const RegularTitleSectionWrapper = styled.div`
         justify-content: center;
       }
     }
+
+    & .section__title {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+    }
   }
 `;
 
 export const GridWrapper = styled.div`
   display: grid;
-  grid-template-columns: ${() => `repeat(12,  minmax(0, 1fr))`};
-
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: 15rem 15rem;
-  grid-column-gap: 1.25rem;
-  grid-row-gap: 1.25rem;
+  gap: 1.25rem;
   height: 30rem;
   max-height: 30rem;
 
+  /* Mobile: one horizontal scroll row of 11rem cards (web parity). */
   @media ${down("S")} {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+    ${mobileHorizontalScroll("11rem")}
     width: 100%;
-    height: 100%;
-    max-height: 100%;
+    height: auto;
+    max-height: none;
+    /* overflow-x: auto also clips vertically - keep room for the shadow. */
+    padding-block: 0.25rem 0.75rem;
   }
 `;

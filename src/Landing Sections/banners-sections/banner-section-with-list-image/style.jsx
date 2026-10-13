@@ -11,7 +11,12 @@ export const Container = styled.div`
     width: fit-content;
   }
 
+  & .banner-sec-listimg-picture {
+    display: contents;
+  }
+
   & img {
+    flex-shrink: 0;
     object-fit: cover;
     max-width: ${(p) => p.imgW || "33.39346rem"};
     min-width: ${(p) => p.imgW || "33.39346rem"};
@@ -48,6 +53,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   flex: 1;
   flex-direction: column;
+  min-width: 0;
 
   @media ${down("S")} {
     padding: 1rem 1rem 1.25rem 1rem;
@@ -98,10 +104,11 @@ export const ListWrapper = styled.div`
     font-weight: 500;
     line-height: 1.25rem;
     letter-spacing: -0.0056rem;
+    gap: 0.5rem;
 
     & .mng {
       font-size: 1.25rem;
-      color: var(--info-600, #6d28d9);
+      color: var(--primary-500, #ff7621);
     }
   }
 `;

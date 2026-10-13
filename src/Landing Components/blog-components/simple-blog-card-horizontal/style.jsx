@@ -28,6 +28,7 @@ export const Wrapper = styled.a`
     max-height: 3.3125rem;
     border-radius: 0.75rem;
     object-fit: cover;
+    flex-shrink: 0;
   }
 
   & a {
@@ -39,6 +40,8 @@ export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
   color: var(--gray-950, #14161a);
 
   & .text-wr-title {

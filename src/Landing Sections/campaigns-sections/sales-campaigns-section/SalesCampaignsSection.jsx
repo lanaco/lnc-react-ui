@@ -3,7 +3,7 @@
 /* eslint-disable react/display-name */
 import { forwardRef, memo, useMemo } from "react";
 import SalesCampaignCard from "../../../Landing Components/campaigns-components/sales-campaign-card/SalesCampaignCard";
-import ScrollableSectionV3 from "../../../Utility/ScrollableSectionV3";
+import { StyledScrollableSection } from "./style";
 import useDetectMobile from "../../../_utils/useDetectMobile";
 import ItemlessBanner from "../../../Landing Components/general-components/itemless-banner";
 import SuspenseSalesCampaign from "../../../Landing Components/skeleton-components/general/sales-campaign";
@@ -57,17 +57,34 @@ const SalesCampaignsSection = forwardRef(
     // exactly 3 items => vertical 3-up grid with a smaller (landscape) cover image
     const isThreeUp = !isMobile && items?.length === 3;
 
+    // Accept the raw API field names too (what the web dispatcher reads) as
+    // fallbacks for the names this component has always used.
+    const normalizedItems = useMemo(
+      () =>
+        (items || []).map((item) => ({
+          ...item,
+          coverPhoto: item?.coverPhoto ?? item?.coverImage,
+          campaignUuid: item?.campaignUuid ?? item?.uuid,
+          shopUuid: item?.shopUuid ?? item?.sellerUuid,
+          shopName: item?.shopName ?? item?.sellerName,
+          shopCategory: item?.shopCategory ?? item?.sellerCategory,
+          profileImage: item?.profileImage ?? item?.sellerImage ?? item?.shopImage,
+          name: item?.name ?? item?.title,
+        })),
+      [items],
+    );
+
     const memoizedItems = useMemo(() => {
-      let components = items?.map((item, index) => (
+      let components = normalizedItems.map((item, index) => (
         <MemoizedCampaignItemRecommended
           key={`campaign__item__${index}__${item?.startDate}___${item?.endDate}`}
           className={`campaign-item ${
             isHorizontalCard ? "horizontal-campaign-item" : ""
           }`}
-          coverPhoto={getImage(
-            item?.coverPhoto,
-            item?.uuid || item?.campaignUuid,
-          )}
+          coverPhoto={
+            getImage(item?.coverPhoto, item?.uuid || item?.campaignUuid) ||
+            item?.coverPhoto
+          }
           description={item?.description}
           endDate={item?.endDate}
           salesPackages={item?.salesPackages}
@@ -122,14 +139,15 @@ const SalesCampaignsSection = forwardRef(
       }
 
       return components;
-    }, [items, isMobile, itemlessImageUrl]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [normalizedItems, isMobile, itemlessImageUrl]);
 
     return (
       <SuspenseSalesCampaign
         isLoading={isLoading}
         keyPrefix="sales-campaign-skeleton"
       >
-        <ScrollableSectionV3
+        <StyledScrollableSection
           key={`sales-campaign-section__${isMobile}`}
           icon={icon}
           title={title}
@@ -141,7 +159,7 @@ const SalesCampaignsSection = forwardRef(
           className={`lp-section lp-sales-campaigns-section${showItemlessBanner ? " itemless" : ""}${isThreeUp ? " three-up" : ""}`}
         >
           {memoizedItems}
-        </ScrollableSectionV3>
+        </StyledScrollableSection>
       </SuspenseSalesCampaign>
     );
   },

@@ -21,7 +21,7 @@ const OverlayGeneralCardsSection = forwardRef(
   ) => {
     return (
       <Container ref={ref} numOfColumns={numOfColumns} className="lp-section lp-overlay-general-cards-section">
-        <h2 className="section__title">{title}</h2>
+        {title && <h2 className="section__title">{title}</h2>}
         <SuspenseBlogsSectionDetailed
           isLoading={isLoading}
           keyPrefix="overlay-general-cards-skeleton"
@@ -33,6 +33,7 @@ const OverlayGeneralCardsSection = forwardRef(
                 title={item?.title}
                 description={item?.description}
                 imageUrl={item?.imageUrl}
+                imageUrlMobile={item?.imageUrlMobile}
                 buttonText={item?.buttonText}
                 backgroundColor={item?.backgroundColor}
                 handleSelectCard={() => onSelectCard(item)}

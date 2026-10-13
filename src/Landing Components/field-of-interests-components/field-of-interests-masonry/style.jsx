@@ -5,7 +5,7 @@ import { truncateText, truncateTextInRows } from "../../../_utils/utils";
 
 export const Wrapper = styled.a`
   text-decoration: none;
-  color: var(--gray-950);
+  color: var(--gray-950, #14161a);
   display: flex;
   width: 100%;
   height: fit-content;
@@ -16,6 +16,7 @@ export const Wrapper = styled.a`
   border-radius: 0.75rem;
   border: 1px solid var(--neutral-9508, rgba(20, 22, 26, 0.08));
   background: var(--white, #fff);
+  overflow: hidden;
 
   &:hover {
     cursor: pointer;
@@ -27,6 +28,7 @@ export const Wrapper = styled.a`
   & .wrapper__image {
     width: 100%;
     height: auto;
+    display: block;
     border-radius: 0.75rem 0.75rem 0 0;
   }
 
@@ -90,6 +92,7 @@ export const TagWrapper = styled.div`
     height: 2.75rem;
     padding: 0.5rem;
     align-items: center;
+    justify-content: center;
     font-size: 1.75rem;
     color: var(--gray-950, #14161a);
     background: var(--neutral-95004, rgba(20, 22, 26, 0.04));
@@ -125,6 +128,7 @@ export const TagWrapper = styled.div`
   @media ${down("S")} {
     max-width: unset;
     min-width: unset;
+    height: auto;
     flex-direction: row;
     align-items: center;
     gap: 0.25rem;
@@ -146,7 +150,7 @@ export const TagWrapper = styled.div`
     & .wrapper__icon {
       display: flex;
       width: 1.25rem;
-      width: 1.25rem;
+      height: auto;
       padding: 0;
       align-items: center;
       font-size: 1.25rem;

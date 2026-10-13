@@ -11,6 +11,7 @@ const BannerSectionWithListImage = forwardRef((props, ref) => {
     buttonText,
     list,
     imageUrl,
+    imageUrlMobile,
     imageHeight,
     imageWidth,
     imageHeightMobile,
@@ -32,33 +33,45 @@ const BannerSectionWithListImage = forwardRef((props, ref) => {
     >
       <Wrapper className="banner-sec-listimg-wrapper">
         <ContainerHeader>
-          <div className="header-title">{title}</div>
-          <div className="header-subitle">{subtitle}</div>
+          {title && <div className="header-title">{title}</div>}
+          {subtitle && <div className="header-subtitle">{subtitle}</div>}
         </ContainerHeader>
-        <ListWrapper lassName="banner-sec-listimg-list">
-          {list?.map((x, index) => (
-            <Fragment key={index}>
-              <div className="list-item">
-                <i className="mng mng-lnc-checkmark--filled" />
-                <span>{x}</span>
-              </div>
-            </Fragment>
-          ))}
-        </ListWrapper>
-        <Button
-          size="medium"
-          color="neutral"
-          type="button"
-          btnType="outline"
-          onClick={(e) => {
-            e?.target?.blur();
-            onButtonAction(buttonLink);
-          }}
-        >
-          {buttonText}
-        </Button>
+        {list?.length > 0 && (
+          <ListWrapper className="banner-sec-listimg-list">
+            {list.map((x, index) => (
+              <Fragment key={index}>
+                <div className="list-item">
+                  <i className="mng mng-lnc-checkmark--filled" aria-hidden="true" />
+                  <span>{x}</span>
+                </div>
+              </Fragment>
+            ))}
+          </ListWrapper>
+        )}
+        {buttonText && (
+          <Button
+            size="medium"
+            color="neutral"
+            type="button"
+            btnType="outline"
+            className="banner-sec-listimg-button"
+            onClick={(e) => {
+              e?.target?.blur();
+              onButtonAction(buttonLink);
+            }}
+          >
+            {buttonText}
+          </Button>
+        )}
       </Wrapper>
-      <img src={imageUrl} />
+      {imageUrl && (
+        <picture className="banner-sec-listimg-picture">
+          {imageUrlMobile && (
+            <source media="(max-width: 767px)" srcSet={imageUrlMobile} />
+          )}
+          <img src={imageUrl} alt={title || ""} loading="lazy" />
+        </picture>
+      )}
     </Container>
   );
 });

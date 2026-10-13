@@ -25,7 +25,9 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     onButtonAction = () => {},
     getImage = () => {},
     viewAllbuttonLink,
-    viewAllButonText = "View all",
+    viewAllButonText,
+    viewAllButtonLink,
+    viewAllButtonText,
     negotiableText,
     freeText,
     loadMoreButtonIcon = "angle-down",
@@ -47,7 +49,13 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
     optionLabel = "label",
     optionValue = "value",
     optionCode = "code",
+    tradeText,
+    quantityText,
   } = props;
+
+  // Correctly spelled props win; the legacy misspelled ones keep working.
+  const viewAllLink = viewAllButtonLink ?? viewAllbuttonLink;
+  const viewAllText = viewAllButtonText ?? viewAllButonText ?? "View all";
 
   const isMobile = useDetectMobile();
 
@@ -62,13 +70,13 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         image={x?.image}
         sellerUuid={x?.sellerUuid}
         uuid={x?.uuid}
-        sponsored={x?.sponsored}
+        sponsored={x?.sponsored ?? x?.isSponsored}
         imageComponent={x?.imageComponent}
         onSelectCard={(e, cardRef) =>
           onSelectCard({ uuid: x?.uuid, nameSlug: x?.nameSlug, cardRef })
         }
         nameSlug={x?.nameSlug}
-        imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || null}
+        imageUrl={getImage(x?.image, x?.uuid, x?.sellerUuid) || x?.image || null}
         isFree={x?.isFree}
         isNegotiable={x?.isNegotiable}
         negotiableText={negotiableText}
@@ -80,6 +88,9 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         hasQuantities={x?.hasQuantities}
         status={x?.status}
         trade={x?.trade}
+        exchangeAcceptable={x?.exchangeAcceptable}
+        tradeText={tradeText}
+        quantityText={quantityText}
         sponsoredText={sponsoredText}
         onBookmark={onBookmark}
         actionComponent={actionComponent}
@@ -97,18 +108,23 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
         hasFreeShipping={x?.hasFreeShipping}
       />
     ));
-  }, [items]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items, negotiableText, freeText, tradeText, quantityText, sponsoredText]);
 
   return (
-    <Container ref={ref} limit={limit} className="lp-section lp-detailed-products-infinitive-section">
+    <Container
+      ref={ref}
+      limit={limit}
+      className="lp-section lp-detailed-products-infinitive-section"
+    >
       <div className="section__heading">
         {isDefinedNotEmptyString(title) && (
           <h2 className="section__title">
             {isDefinedNotEmptyString(icon) && <i className={icon} />} {title}
           </h2>
         )}
-        {isDefinedNotEmptyString(viewAllbuttonLink) &&
-          isDefinedNotEmptyString(viewAllButonText) &&
+        {isDefinedNotEmptyString(viewAllLink) &&
+          isDefinedNotEmptyString(viewAllText) &&
           !isLoading && (
             <Button
               type="button"
@@ -117,12 +133,12 @@ const DetailedProductsInfinitiveSection = forwardRef((props, ref) => {
               onClick={(e) => {
                 e?.target?.blur();
 
-                onButtonAction(viewAllbuttonLink);
+                onButtonAction(viewAllLink);
               }}
               borderRadius="curved"
               className="section__view-all"
             >
-              {viewAllButonText}
+              {viewAllText}
             </Button>
           )}
       </div>

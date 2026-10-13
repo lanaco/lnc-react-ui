@@ -44,6 +44,7 @@ const DetailedProductCard = forwardRef((props, ref) => {
     imageUrl,
     location,
     sponsored,
+    isSponsored,
     imageComponent,
     freeText = "Free",
     negotiableText = "Negotiable",
@@ -53,6 +54,9 @@ const DetailedProductCard = forwardRef((props, ref) => {
     condition,
     quantity,
     trade,
+    exchangeAcceptable,
+    tradeText = "Trade",
+    quantityText = "{{count}} in stock",
     sponsoredText,
     forCart,
     forOrder,
@@ -242,6 +246,31 @@ const DetailedProductCard = forwardRef((props, ref) => {
     );
   };
 
+  // `trade` is the (already translated) label; `exchangeAcceptable` is the raw
+  // API flag accepted as an alias - a boolean `true` renders `tradeText`.
+  const tradeSource = isDefined(trade) ? trade : exchangeAcceptable;
+  const tradeLabel =
+    tradeSource === true
+      ? tradeText
+      : isDefinedNotEmptyString(tradeSource)
+        ? tradeSource
+        : null;
+
+  // Same rule as the web mapping: stock text only for products that track
+  // quantities, are not expired and do not have 0 left. A raw number is
+  // formatted with `quantityText`; a pre-formatted string is shown as-is
+  // unless the product explicitly has no quantities.
+  const quantityLabel = (() => {
+    if (hasQuantities === false) return null;
+    if (typeof quantity === "number") {
+      if (hasQuantities !== true || quantity === 0 || status === "Expired") {
+        return null;
+      }
+      return `${quantityText}`.replace("{{count}}", quantity);
+    }
+    return isDefinedNotEmptyString(quantity) ? quantity : null;
+  })();
+
   const renderOtherTags = () => {
     return (
       <>
@@ -251,26 +280,26 @@ const DetailedProductCard = forwardRef((props, ref) => {
           </Badge>
         )}
 
-        {quantity && (
+        {quantityLabel && (
           <Badge key="detailed-products-section-tag__quantity" className="tag">
-            {quantity}
+            {quantityLabel}
           </Badge>
         )}
-        {trade && (
+        {tradeLabel && (
           <Badge key="detailed-products-section-tag__trade" className="tag">
-            {trade}
+            {tradeLabel}
           </Badge>
         )}
       </>
     );
   };
 
-  const newPrice =
-    price > 0 &&
-    currency &&
-    isNegotiable !== true &&
-    isFree !== true &&
-    price !== sellingPrice;
+  // Same price rule as the web card: a discount (selling price below the
+  // full price) shows the red selling price + struck-through full price;
+  // otherwise the selling price, then negotiable / free, then the plain price.
+  const canShowPrice = !!currency && isNegotiable !== true && isFree !== true;
+  const hasDiscount = canShowPrice && sellingPrice > 0 && price > sellingPrice;
+  const mainPrice = sellingPrice > 0 ? sellingPrice : price;
   const hasFreeShippingPackage = activeSalesPackages?.some(
     (item) => item?.salesPackageCode === "FreeShipping",
   );
@@ -349,9 +378,11 @@ const DetailedProductCard = forwardRef((props, ref) => {
       )}
 
       <div className="wrapper-card-1">
-        <div className="seller" title={sellerName}>
-          {sellerName}
-        </div>
+        {isDefinedNotEmptyString(sellerName) && (
+          <div className="seller" title={sellerName}>
+            {sellerName}
+          </div>
+        )}
         <div className="card-title">{name}</div>
       </div>
       <div
@@ -382,26 +413,23 @@ const DetailedProductCard = forwardRef((props, ref) => {
       </div>
 
       <div className="wrapper-card-2">
-        <div className={`price-text ${newPrice ? "new-price" : ""}`}>
-          {sellingPrice > 0 &&
-            currency &&
-            isNegotiable !== true &&
-            isFree !== true && (
-              <div>
-                {`${formatPrice(sellingPrice)} ${GetCurrencySymbol(currency)}`}
-              </div>
-            )}
-          {newPrice && (
-            <div className={`${sellingPrice > 0 ? "full-price" : ""}`}>
+        <div className={`price-text ${hasDiscount ? "new-price" : ""}`}>
+          {canShowPrice && mainPrice > 0 && (
+            <div>
+              {`${formatPrice(mainPrice)} ${GetCurrencySymbol(currency)}`}
+            </div>
+          )}
+          {hasDiscount && (
+            <div className="full-price">
               {`${formatPrice(price)} ${GetCurrencySymbol(currency)}`}
             </div>
           )}
           {isNegotiable && negotiableText}
-          {isFree && freeText}
+          {isFree && !isNegotiable && freeText}
         </div>
         <div className="location-text">{location}</div>
       </div>
-      {sponsored === true && <SponsoredLine sponsoredText={sponsoredText} />}
+      {(sponsored === true || isSponsored === true) && <SponsoredLine sponsoredText={sponsoredText} />}
     </Wrapper>
   );
 });

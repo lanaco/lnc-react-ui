@@ -7,8 +7,38 @@ export const Wrapper = styled.div`
   width: 100%;
   gap: 2.25rem;
 
+  /* Step 1 (intro) - matches the web's calorie calculator intro. */
+  & .calorie-calculator__intro .lp-banner-section-with-list {
+    padding-bottom: 1.38rem;
+
+    & .list-item {
+      gap: 0.375rem;
+    }
+
+    & button {
+      background: var(--neutral-600, #0f2a46);
+      color: var(--white, #fff);
+
+      &:hover {
+        background: #1c4569;
+      }
+    }
+  }
+
+  & .calorie-calculator__intro--no-button .header-button {
+    display: none;
+  }
+
   @media ${down("S")} {
     gap: 2rem;
+
+    & .calorie-calculator__intro .lp-banner-section-with-list {
+      padding-bottom: 1.38rem;
+
+      & .list-item {
+        gap: 0;
+      }
+    }
   }
 `;
 
@@ -20,17 +50,24 @@ export const ContainerHeader = styled.div`
   gap: 0.25rem;
 
   & .header-title {
+    color: var(--gray-950, #14161a);
     font-size: 1.5rem;
     font-weight: 600;
+    line-height: 2rem;
   }
 
   & .header-subtitle {
     color: var(--gray-600, #676e79);
     font-size: 1rem;
     font-weight: 500;
+    line-height: 1.5rem;
   }
 
   @media ${down("S")} {
+    & .header-title {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+    }
   }
 `;
 

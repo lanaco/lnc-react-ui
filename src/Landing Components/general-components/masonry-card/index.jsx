@@ -2,7 +2,6 @@
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
-import Button from "../../../General/Button/Button";
 import { Wrapper } from "./style.jsx";
 import { useTheme } from "@emotion/react";
 import { isDefinedNotEmptyString } from "../../../_utils/utils.jsx";
@@ -12,6 +11,7 @@ const LandingPageMasonryGeneralCard = forwardRef(
     {
       title,
       imageUrl,
+      imageUrlMobile,
       description,
       buttonText,
       onSelectCard = () => {},
@@ -27,45 +27,49 @@ const LandingPageMasonryGeneralCard = forwardRef(
   ) => {
     const Component = LinkComponent || "a";
     const theme = useTheme();
+    const link = `/${buttonLink || ""}`;
 
     return (
-      <>
-        {/* <LandingPageMasonryGeneralCardSkeleton /> */}
-        <Wrapper
-          ref={ref}
-          theme={theme}
-          className={className}
-          position={position}
-          backgroundColor={backgroundColor}
-          onClick={onSelectCard}
-          as={Component}
-          borderColor={borderColor}
-          {...(LinkComponent
-            ? {
-                to: `/${buttonLink}`,
-              }
-            : {
-                href: `/${buttonLink}`,
-              })}
-        >
-          <img src={imageUrl} className="wrapper__image" loading="lazy"/>
-          <div className="wrapper__text">
-            {tag && <div className="text__tag">{tag}</div>}
+      <Wrapper
+        ref={ref}
+        theme={theme}
+        className={["masonry-card", className].filter(Boolean).join(" ")}
+        position={position}
+        backgroundColor={backgroundColor}
+        onClick={onSelectCard}
+        as={Component}
+        borderColor={borderColor}
+        {...(LinkComponent ? { to: link } : { href: link })}
+      >
+        {imageUrl && (
+          <>
+            <img
+              src={imageUrl}
+              alt={title || ""}
+              className="wrapper__image wrapper__image--desktop"
+              loading="lazy"
+            />
+            <img
+              src={imageUrlMobile || imageUrl}
+              alt={title || ""}
+              className="wrapper__image wrapper__image--mobile"
+              loading="lazy"
+            />
+          </>
+        )}
+        <div className="wrapper__text">
+          {tag && <div className="text__tag">{tag}</div>}
+          {isDefinedNotEmptyString(title) && (
             <div className="text__title">{title}</div>
-            {isDefinedNotEmptyString(description) && (
-              <div className="text__description">{description}</div>
-            )}
-            {isDefinedNotEmptyString(buttonText) && (
-              <Button
-                text={buttonText}
-                // onClick={() => onSelectCard}
-                className="text__action"
-                color="gray"
-              />
-            )}
-          </div>
-        </Wrapper>
-      </>
+          )}
+          {isDefinedNotEmptyString(description) && (
+            <div className="text__description">{description}</div>
+          )}
+          {isDefinedNotEmptyString(buttonText) && (
+            <span className="text__action">{buttonText}</span>
+          )}
+        </div>
+      </Wrapper>
     );
   },
 );

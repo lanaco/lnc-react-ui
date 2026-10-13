@@ -1,19 +1,32 @@
 import styled from "@emotion/styled";
-import { down } from "../../../_utils/breakpoints";
+import { down, only } from "../../../_utils/breakpoints";
 import { mobileHorizontalScroll } from "../../../_utils/utils";
+import {
+  DARK_BACKGROUND,
+  detailedCardDarkOverrides,
+  hiddenScrollbar,
+} from "../_shared";
+
+const cardMax = (count, gap) => `calc((100% - ${count - 1} * ${gap}) / ${count})`;
 
 export const GridWrapper = styled.div`
-  padding: 1.75rem 3rem;
-  display: grid;
-  grid-template-columns: ${(p) => `repeat(${p.limit || 5},  minmax(0, 1fr))`};
+  --h-padding: ${(p) => (p.darkMode ? "1.25rem" : "3rem")};
+  --card-gap: ${(p) => (p.darkMode ? "1.5rem" : "2.97rem")};
 
-  gap: 2.97rem;
-
-  border: 1.5px solid var(--danger-600, #e11d48);
-  background-color: var(--danger-50, #fff1f2);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.75rem var(--h-padding);
+  border: 1.5px solid
+    ${(p) => (p.darkMode ? "transparent" : "var(--danger-600, #e11d48)")};
+  background-color: ${(p) =>
+    p.darkMode ? DARK_BACKGROUND : "var(--danger-50, #fff1f2)"};
   border-radius: 0.75rem;
-  position: relative;
+
+  ${(p) => (p.darkMode ? detailedCardDarkOverrides : "")}
 
   & .urgent-tag {
     position: absolute;
@@ -33,12 +46,38 @@ export const GridWrapper = styled.div`
     background-color: var(--danger-600, #e11d48);
   }
 
-  & .product-card {
-    max-width: ${(p) =>
-      `calc(${100 / p.desktopCols}% - ${
-        ((p.desktopCols - 1) * p.columnGapRem) / p.desktopCols
-      }rem)`};
+  /* auto-fit + a computed max track width (same as the web) so fewer items
+     than \`limit\` stay packed instead of stretching / leaving gaps. */
+  & .urgent-products__grid {
+    display: grid;
+    grid-template-columns: ${(p) =>
+      `repeat(auto-fit, minmax(0, ${cardMax(p.limit || 5, "var(--card-gap)")}))`};
+    justify-content: flex-start;
+    gap: var(--card-gap);
+  }
 
+  /* scrollHorizontal: breaks out of the side padding so the scroll buttons
+     sit on the border, like the web. */
+  & .urgent-products__viewport {
+    margin-inline: calc(-1 * var(--h-padding));
+    width: calc(100% + 2 * var(--h-padding));
+  }
+
+  & .urgent-products__scroll-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--card-gap);
+    padding-left: var(--h-padding);
+    scroll-behavior: smooth;
+    ${hiddenScrollbar}
+
+    & > .product-card {
+      flex: 0 0 ${(p) => cardMax(p.limit || 5, "var(--card-gap)")};
+      min-width: 0;
+    }
+  }
+
+  & .product-card {
     animation-duration: 0.2s;
     animation-name: animate-fade;
     animation-delay: 0.2s;
@@ -57,18 +96,29 @@ export const GridWrapper = styled.div`
     }
   }
 
-  @media ${down("M")} {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding: 2rem 2rem;
-    gap: 1.5rem;
+  @media ${only("M")} {
+    --h-padding: 2rem;
+    --card-gap: 1.5rem;
+    padding: 2rem;
+
+    & .urgent-products__grid {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(0, ${cardMax(3, "1.5rem")})
+      );
+    }
+
+    & .urgent-products__scroll-row > .product-card {
+      flex-basis: ${cardMax(3, "1.5rem")};
+    }
   }
 
   /* Mobile: every card in one horizontal scroll row. The row is a separate
      element (.urgent-products__mobile-row) so overflow-x does not clip the
      absolutely positioned .urgent-tag on the wrapper. */
   @media ${down("S")} {
-    display: block;
     padding: 2rem 1.25rem;
+    gap: 1.19rem;
 
     & .urgent-products__mobile-row {
       ${mobileHorizontalScroll("8.875rem")}
