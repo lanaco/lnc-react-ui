@@ -45,6 +45,9 @@ const SimpleProductsSection = forwardRef((props, ref) => {
     getImage = () => {},
     negotiableText,
     freeText,
+    freeShippingText,
+    giftText,
+    newCollectionText,
     componentName,
     LinkComponent,
     darkMode = false,
@@ -88,12 +91,26 @@ const SimpleProductsSection = forwardRef((props, ref) => {
           imageComponent={x?.imageComponent}
           negotiableText={negotiableText}
           freeText={freeText}
+          freeShippingText={freeShippingText}
+          giftText={giftText}
+          newCollectionText={newCollectionText}
+          hasFreeShipping={x?.hasFreeShipping}
+          activeSalesPackages={x?.activeSalesPackages}
           metadata={{ name: componentName, accessor: x?.accessor }}
           LinkComponent={LinkComponent}
         />
       )),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [visibleItems, negotiableText, freeText, componentName, LinkComponent],
+    [
+      visibleItems,
+      negotiableText,
+      freeText,
+      freeShippingText,
+      giftText,
+      newCollectionText,
+      componentName,
+      LinkComponent,
+    ],
   );
 
   return (

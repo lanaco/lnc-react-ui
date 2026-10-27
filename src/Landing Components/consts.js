@@ -128,4 +128,5 @@ export const SalesPackageIcons = {
   FREEQUANTITY: " mng-lnc-3d-software",
   INCLUDEGIFTS: " mng-lnc-gift",
   FREESHIPPING: " mng-lnc-delivery--parcel",
+  NEWCOLLECTION: " mng-lnc-new",
 };
